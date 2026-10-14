@@ -9,3 +9,7 @@
 *.gif binary
 *.webp binary
 *.cmd text eol=crlf
+
+# 网站图片与 PDF 随仓库交付；Git LFS 保存原始二进制内容，避免普通 Git 历史膨胀。
+assets/** filter=lfs diff=lfs merge=lfs -text
+downloads/*.pdf filter=lfs diff=lfs merge=lfs -text

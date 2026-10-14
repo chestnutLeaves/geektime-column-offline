@@ -10,6 +10,20 @@
 
 已有完整网站文件时，可以直接部署，不需要先执行任何 Python 脚本，也不需要构建 Docker 镜像。
 
+**仓库包含全部已整理的图片和 5 份 PDF，使用 Git LFS 随版本一起保存，不需要另找资源包。** 首次下载代码的电脑需安装 Git 和 Git LFS，然后执行：
+
+```bash
+git lfs install
+git clone git@codeup.aliyun.com:yuping/personal/project/geektime-column-offline.git
+cd geektime-column-offline
+git lfs pull
+git lfs fsck
+```
+
+如果已经克隆过旧版本，在仓库中执行 `git pull --ff-only` 和 `git lfs pull` 即可补齐资源。Git LFS 只用于代码获取和维护，静态服务器运行网站不依赖它。没有安装 Git LFS 的客户端可能只取得资源指针；不要直接部署这些指针文件。完整获取方法见 [仓库与资源获取](docs/deployment.md#仓库与资源获取)。
+
+文件下载完成后部署：
+
 1. 在服务器或面板中创建静态网站，使用 Nginx 等静态文件服务器。
 2. 将下面这些文件和目录复制到网站根目录，保持相对位置不变。
 3. 设置默认首页为 `index.html`，通过网站地址访问。
@@ -31,7 +45,7 @@
 - 只发布上面的内容；`scripts/`、`data/`、`.git/` 等维护目录不需要上传。
 - Nginx 应加载标准 `mime.types`，使 HTML 返回 `text/html`。配置可参考 [docker/nginx.conf](docker/nginx.conf)。
 - 站内链接使用 `/courses/...` 等根路径，应部署在域名根路径；部署到 `/项目名/` 等子路径前需要适配链接。
-- 当前本地项目已包含整理出的图片和 PDF。但 `assets/` 和 PDF 被 Git 忽略，**只从 Git 克隆不能获得全部资源**，需要补齐后再发布，见 [资源包管理](docs/deployment.md#git-仓库和独立资源)。
+- `assets/` 和 `downloads/` 中的资源必须与 HTML 一起发布，不能只上传页面；上面的完整克隆步骤会获取这些文件。
 
 **以后更新网站：直接替换发布目录中的相应静态文件，不需要打包镜像。** 如果改的是作者 JSON 或页面模板，先按第三部分在开发电脑上生成 HTML，再上传生成结果。
 
@@ -153,8 +167,8 @@ lianglianglee-library/
 ├─ articles/                  独立技术文章 HTML 与技术文章目录
 ├─ geektime/                  单文件专栏合集 HTML 和兼容入口
 ├─ relationships/             生活文章 HTML 与目录
-├─ downloads/                 PDF 文件和下载页；PDF 不进入 Git
-├─ assets/                    文章图片与附件；不进入 Git
+├─ downloads/                 PDF 文件和下载页；PDF 通过 Git LFS 随仓库保存
+├─ assets/                    文章图片与附件；通过 Git LFS 随仓库保存
 ├─ static/                    CSS、JavaScript，包括搜索、排序、最近阅读
 ├─ ui/                        首页生成模板；不是部署必需文件
 ├─ data/                      页面生成、核验、资源恢复所需的维护资料
@@ -176,8 +190,8 @@ lianglianglee-library/
 ├─ .dev/                      本地预览进程编号与日志
 ├─ exports/                   按需导出的资源包、Docker 镜像文件
 ├─ .git/                      本地 Git 版本管理数据，不部署
-├─ .gitignore                 排除大资源、缓存、日志和导出包
-├─ .gitattributes             文件类型与换行策略，保持 HTML 校验一致
+├─ .gitignore                 排除镜像归档、缓存、日志和可再生成的导出包
+├─ .gitattributes             文件类型、换行策略和图片/PDF 的 Git LFS 规则
 ├─ .dockerignore              限定 Docker 构建时可读取的项目文件
 ├─ Dockerfile                 镜像构建配置：Nginx 加公开静态文件
 ├─ compose.yaml               本机容器启动配置：端口、重启、临时目录等
@@ -190,7 +204,7 @@ lianglianglee-library/
 
 `.cache/`、`.dev/`、`exports/` 等目录按需产生，不必预先创建，也不进入 Git。`data/manifests/` 和 `data/provenance/snapshots/` 属于维护输入，不是临时缓存。普通静态部署仅需要第一部分列出的公开文件。
 
-图片、PDF、镜像和导出包独立管理，不要用 `git add -f` 放入普通 Git 历史。完整站点约 4.24 GiB，当前没有提供 GitHub Pages 自动部署配置。
+图片与 PDF 均纳入仓库，Git LFS 管理的资源约 4.00 GiB；生成的 Docker 镜像、重复资源导出包和本地运行缓存不提交。完整站点约 4.24 GiB，部署前应确认资源下载完成。当前没有提供 GitHub Pages 自动部署配置。
 
 仍有 11 个原始图片 URL 未恢复，尚未完成与源站的全部正文、资源在线逐项核验，见 [内容来源与校验](docs/provenance.md)。第三方文章和图片的权利归原作者或权利人；本项目不重新授予这些内容的使用权，见 [NOTICE](NOTICE.md)。
 

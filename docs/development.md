@@ -11,7 +11,7 @@
 | `scripts/refresh_layout.py` | 更新阅读页外壳，保护正文并更新页面清单哈希 |
 | `scripts/verify_site.py` | 检查所有公开网页的内部链接，可加 `--url` 检查 HTTP |
 | `scripts/verify_integrity.py` | 检查 6,300 篇文章和资源字节是否匹配清单 |
-| `scripts/resources.py` | 独立资源包检查、导入、导出 |
+| `scripts/resources.py` | 图片/PDF 完整性检查，以及可选离线资源包导入、导出 |
 | `scripts/public_paths.py` | 预览、校验工具使用的网站白名单 |
 
 `scripts/common.py`、`ui_common.py` 和 `course_metadata.py` 是这些入口共用的模块，不需要逐个执行。
@@ -68,6 +68,10 @@ python scripts/verify_integrity.py --project .
 - 镜像导出：`export_image.py`。
 
 图片修复工具只在发现具体问题后使用。在线核验默认低频请求，HTTP 403、429 和失败响应不计为核验成功。历史的一次性换行修复工具及旧交付报告生成器未放入新项目，当前生成器已经固定 UTF-8 与 LF。
+
+## 图片和 PDF 版本管理
+
+`assets/**` 和 `downloads/*.pdf` 随项目提交，使用 Git LFS 保存原始文件。首次获取项目需准备 Git LFS，并完成 `git lfs pull`；正常克隆后的资源无需另找下载地址。修改这些文件后，正常提交推送即可，LFS 会一并上传对应对象。生成镜像和重复导出包仍不提交。
 
 ## 检查与报告
 

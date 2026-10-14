@@ -9,28 +9,53 @@
 
 只有修改作者 JSON、页面模板或共用外壳等生成输入时，才需要先在开发电脑上重新生成相应 HTML。修改 CSS、JavaScript 无需运行生成脚本。Docker 镜像也可因 Nginx 配置或基础镜像更新而重新构建，不限于内容变化。
 
-## Git 仓库和独立资源
+## 仓库与资源获取
 
-根目录的 HTML、`static/`、模板、脚本、JSON 清单和必要证据均可进入 Git。`assets/` 和 `downloads/` 中的 PDF 体积较大，由 `.gitignore` 排除；下载页 `downloads/index.html` 仍保留在 Git。
+仓库保存 HTML、CSS、JavaScript、维护资料，以及全部已整理的图片和 PDF。`assets/**` 和 `downloads/*.pdf` 使用 Git LFS 管理，下载页 `downloads/index.html` 仍是普通 Git 文件。资源共 23,627 个，约 4.00 GiB；完整工作目录约 4.24 GiB。
 
-本机这份项目已经复制了完整资源。以后从 Git 克隆时，图片和 PDF 需要通过与当前 `data/manifests/resources.jsonl` 匹配的资源包补齐。不要把“只克隆仓库”与“已获得完整离线阅读包”混为一谈。
+获取代码的电脑先安装 Git 和 Git LFS。安装方式参见 [Git LFS 官方网站](https://git-lfs.com/)；Linux 可使用对应发行版的包管理器安装 `git-lfs`。在用于克隆的终端执行：
 
-在拥有完整资源的项目中按需导出：
+```bash
+git lfs install
+git clone git@codeup.aliyun.com:yuping/personal/project/geektime-column-offline.git
+cd geektime-column-offline
+git lfs pull
+git lfs fsck
+```
+
+正常配置 Git LFS 后，克隆会自动获取资源；显式执行 `git lfs pull` 可确保未下载完或曾跳过的文件补齐。已有旧版本仓库则执行：
+
+```bash
+git lfs install --local
+git pull --ff-only
+git lfs pull
+git lfs fsck
+```
+
+`git lfs fsck` 核对大文件对象；需要与网站清单逐项核对时，在开发电脑运行 `python scripts/resources.py check`。Python 校验是可选维护步骤，不是线上运行依赖。
+
+不要在跳过 LFS 下载后直接部署，也不要把体积很小、内容以 `version https://git-lfs.github.com/spec/v1` 开头的指针文件当成图片或 PDF。如果仅下载了网页端的源码压缩包，不能默认其中已经包含 LFS 原始资源；以以上完整克隆和校验流程为准。
+
+完成下载后，将公开文件复制到静态服务器，或从完整工作目录构建 Docker 镜像。目标静态服务器只处理普通文件，不需要安装 Git LFS、Python 或 Node.js。镜像内同样包含真实图片和 PDF，不依赖外部资源包。
+
+Codeup 支持 Git LFS 文件的上传、下载和版本关联，参见 [Codeup Git LFS 功能简介](https://help.aliyun.com/zh/yunxiao/user-guide/codeup-git-lfs-feature-introduction)。
+
+### 可选资源包备份
+
+独立资源包仅用于备份或无 Git 环境的离线搬运，不再是正常克隆部署的必经步骤。在完整项目中可按需导出：
 
 ```powershell
 python scripts/resources.py export exports/resources.zip
 ```
 
-在另一个克隆项目中导入：
+需要从备份恢复时：
 
 ```powershell
 python scripts/resources.py import resources.zip
 python scripts/resources.py check
 ```
 
-工具使用 ZIP64，支持大于 4 GiB 的资源包；导出时不再压缩已压缩图片。导入先校验全部文件名、大小和 SHA-256，再安装文件。清单不一致、资源损坏或包含额外文件的包会被拒绝。导入需要临时磁盘空间，约等于资源包解压后的大小。
-
-本次目录整理没有导出资源包或 Docker 镜像。`exports/` 只在执行导出命令后创建，导出结果不进入 Git。
+工具使用 ZIP64，支持大于 4 GiB 的资源包；导入先核验全部文件名、大小和 SHA-256，再安装文件。资源包必须与当前 `data/manifests/resources.jsonl` 匹配。`exports/` 中的重复导出包和生成镜像不进入 Git。
 
 ## 普通静态服务器
 
@@ -138,8 +163,10 @@ docker run -d --name lianglianglee-library --restart unless-stopped -p 8080:80 l
 
 参考：[Docker 镜像导出](https://docs.docker.com/reference/cli/docker/image/save/)、[镜像导入及压缩包支持](https://docs.docker.com/reference/cli/docker/image/load/)、[镜像平台与 CPU 架构](https://docs.docker.com/build/building/multi-platform/)。
 
-## GitHub 使用边界
+## 版本管理与托管边界
 
-上传仓库前检查 `.gitignore` 是否生效，尤其是 `assets/`、PDF、`.cache/`、`.dev/` 和 `exports/`。当前配置保留根目录入口及文章 HTML，不把大资源放入普通 Git 历史。
+图片和 PDF 是项目运行所需文件，必须随提交推送到 Codeup 的 Git LFS 存储。正常 `git push` 会先上传 LFS 对象，再更新 Git 分支；两部分都成功后才算交付完成。不要移除 `.gitattributes` 中的 LFS 规则，也不要只推送指针而跳过实际资源上传。
 
-完整站点约 4.24 GiB。当前不提供 GitHub Pages 自动部署配置；其容量和项目子路径与本项目默认部署方式不匹配。GitHub 托管源码与服务器托管完整阅读站是两个独立步骤。
+`.gitignore` 继续排除 `.cache/`、`.dev/`、`exports/`、镜像目录及 `.tar`、`.tar.gz` 等生成镜像归档。维护资源时正常 `git add`、`git commit`、`git push` 即可，无需强制添加图片或 PDF。
+
+完整站点约 4.24 GiB。当前不提供 GitHub Pages 自动部署配置；如需迁移其他托管平台，需同时迁移 Git LFS 对象并核对容量和根路径支持。
