@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>08  读写分离：如何集成分库分表+数据库主从架构？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/index.html">ShardingSphere 核心原理精讲-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">36 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>ShardingSphere 核心原理精讲-完</strong><ul><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/00%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%AD%A6%E4%B9%A0%E4%B8%80%E6%AC%BE%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%EF%BC%9F.html">00 如何正确学习一款分库分表开源框架？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/01%20%20%E4%BB%8E%E7%90%86%E8%AE%BA%E5%88%B0%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%9C%9F%E6%AD%A3%E8%90%BD%E5%9C%B0%EF%BC%9F.html">01  从理论到实践：如何让分库分表真正落地？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/02%20%20%E9%A1%B6%E7%BA%A7%E9%A1%B9%E7%9B%AE%EF%BC%9AShardingSphere%20%E6%98%AF%E4%B8%80%E6%AC%BE%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%20Apache%20%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%EF%BC%9F.html">02  顶级项目：ShardingSphere 是一款什么样的 Apache 开源软件？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/03%20%20%E8%A7%84%E8%8C%83%E5%85%BC%E5%AE%B9%EF%BC%9AJDBC%20%E8%A7%84%E8%8C%83%E4%B8%8E%20ShardingSphere%20%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">03  规范兼容：JDBC 规范与 ShardingSphere 是什么关系？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/04%20%20%E5%BA%94%E7%94%A8%E9%9B%86%E6%88%90%EF%BC%9A%E5%9C%A8%E4%B8%9A%E5%8A%A1%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%BD%BF%E7%94%A8%20ShardingSphere%20%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">04  应用集成：在业务系统中使用 ShardingSphere 的方式有哪些？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/05%20%20%E9%85%8D%E7%BD%AE%E9%A9%B1%E5%8A%A8%EF%BC%9AShardingSphere%20%E4%B8%AD%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F.html">05  配置驱动：ShardingSphere 中的配置体系是如何设计的？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/06%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%BA%93%E3%80%81%E5%88%86%E8%A1%A8%E3%80%81%E5%88%86%E5%BA%93%2B%E5%88%86%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  数据分片：如何实现分库、分表、分库+分表以及强制路由？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/07%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%BA%93%E3%80%81%E5%88%86%E8%A1%A8%E3%80%81%E5%88%86%E5%BA%93%2B%E5%88%86%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  数据分片：如何实现分库、分表、分库+分表以及强制路由？（下）</a></li><li><a class="active" aria-current="page" href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/08%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%2B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%EF%BC%9F.html">08  读写分离：如何集成分库分表+数据库主从架构？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/09%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E4%B8%8E%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">09  分布式事务：如何使用强一致性事务与柔性事务？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/10%20%20%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AE%89%E5%85%A8%E8%AE%BF%E9%97%AE%EF%BC%9F.html">10  数据脱敏：如何确保敏感数据的安全访问？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/11%20%20%E7%BC%96%E6%8E%92%E6%B2%BB%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%EF%BC%9F.html">11  编排治理：如何实现分布式环境下的动态配置管理？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/12%20%20%E4%BB%8E%E5%BA%94%E7%94%A8%E5%88%B0%E5%8E%9F%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E9%98%85%E8%AF%BB%20ShardingSphere%20%E6%BA%90%E7%A0%81%EF%BC%9F.html">12  从应用到原理：如何高效阅读 ShardingSphere 源码？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/13%20%20%E5%BE%AE%E5%86%85%E6%A0%B8%E6%9E%B6%E6%9E%84%EF%BC%9AShardingSphere%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%89%A9%E5%B1%95%E6%80%A7%EF%BC%9F.html">13  微内核架构：ShardingSphere 如何实现系统的扩展性？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/14%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%EF%BC%9AShardingSphere%20%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%9F.html">14  分布式主键：ShardingSphere 中有哪些分布式主键实现方式？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/15%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">15  解析引擎：SQL 解析流程应该包括哪些核心阶段？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/16%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">16  解析引擎：SQL 解析流程应该包括哪些核心阶段？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/17%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E6%A0%B8%E5%BF%83%E7%B1%BB%20ShardingRouter%20%E7%9A%84%E8%BF%90%E4%BD%9C%E6%9C%BA%E5%88%B6%EF%BC%9F.html">17  路由引擎：如何理解分片路由核心类 ShardingRouter 的运作机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/18%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E7%9A%84%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E5%92%8C%E5%B9%BF%E6%92%AD%E8%B7%AF%E7%94%B1%EF%BC%9F.html">18  路由引擎：如何实现数据访问的分片路由和广播路由？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/19%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E8%B7%AF%E7%94%B1%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%9B%86%E6%88%90%E5%A4%9A%E7%A7%8D%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%E5%92%8C%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%EF%BC%9F.html">19  路由引擎：如何在路由过程中集成多种路由策略和路由算法？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/20%20%20%E6%94%B9%E5%86%99%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%20SQL%20%E6%94%B9%E5%86%99%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%EF%BC%9F.html">20  改写引擎：如何理解装饰器模式下的 SQL 改写实现机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/21%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%88%86%E7%89%87%E7%8E%AF%E5%A2%83%E4%B8%8B%20SQL%20%E6%89%A7%E8%A1%8C%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%8A%BD%E8%B1%A1%EF%BC%9F.html">21  执行引擎：分片环境下 SQL 执行的整体流程应该如何进行抽象？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/22%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%20ShardingSphere%20%E4%B8%AD%E7%9A%84%20Executor%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">22  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/23%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%20ShardingSphere%20%E4%B8%AD%E7%9A%84%20Executor%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">23  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/24%20%20%E5%BD%92%E5%B9%B6%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BD%92%E5%B9%B6%E7%9A%84%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E7%AE%80%E5%8D%95%E5%BD%92%E5%B9%B6%E7%AD%96%E7%95%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%EF%BC%9F.html">24  归并引擎：如何理解数据归并的类型以及简单归并策略的实现过程？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/25%20%20%E5%BD%92%E5%B9%B6%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%B5%81%E5%BC%8F%E5%BD%92%E5%B9%B6%E5%92%8C%E5%86%85%E5%AD%98%E5%BD%92%E5%B9%B6%E5%9C%A8%E5%A4%8D%E6%9D%82%E5%BD%92%E5%B9%B6%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%9F.html">25  归并引擎：如何理解流式归并和内存归并在复杂归并场景下的应用方式？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/26%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E6%99%AE%E9%80%9A%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%92%8C%E5%88%86%E7%89%87%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%88%86%E5%88%AB%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">26  读写分离：普通主从架构和分片主从架构分别是如何实现的？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/27%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%20ShardingSphere%20%E4%B8%AD%E5%AF%B9%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%8A%BD%E8%B1%A1%E8%BF%87%E7%A8%8B%EF%BC%9F.html">27  分布式事务：如何理解 ShardingSphere 中对分布式事务的抽象过程？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/28%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">28  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/29%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">29  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/30%20%20%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%94%B9%E5%86%99%E5%BC%95%E6%93%8E%E5%AE%9E%E7%8E%B0%E4%BD%8E%E4%BE%B5%E5%85%A5%E6%80%A7%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%E6%96%B9%E6%A1%88%EF%BC%9F.html">30  数据脱敏：如何基于改写引擎实现低侵入性数据脱敏方案？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/31%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E7%9A%84%E5%8A%A8%E6%80%81%E5%8C%96%E7%AE%A1%E7%90%86%EF%BC%9F.html">31 配置中心：如何基于配置中心实现配置信息的动态化管理？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/32%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E7%86%94%E6%96%AD%E6%9C%BA%E5%88%B6%EF%BC%9F.html">32 注册中心：如何基于注册中心实现数据库访问熔断机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/33%20%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20Hook%20%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%20OpenTracing%20%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9F.html">33 链路跟踪：如何基于 Hook 机制以及 OpenTracing 协议实现数据访问链路跟踪？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/34%20%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%8C%E6%88%90%20ShardingSphere%20%E5%86%85%E6%A0%B8%E4%B8%8E%20Spring%2BSpringBoot%20%E7%9A%84%E6%97%A0%E7%BC%9D%E6%95%B4%E5%90%88%EF%BC%9F.html">34 系统集成：如何完成 ShardingSphere 内核与 Spring+SpringBoot 的无缝整合？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/35%20%E7%BB%93%E8%AF%AD%EF%BC%9AShardingSphere%20%E6%80%BB%E7%BB%93%E5%8F%8A%E5%B1%95%E6%9C%9B.html">35 结语：ShardingSphere 总结及展望</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/08%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%2B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="08  读写分离：如何集成分库分表+数据库主从架构？" id="title">08  读写分离：如何集成分库分表+数据库主从架构？</h1>
+<div><p>为了应对高并发场景下的数据库访问需求，读写分离架构是现代数据库架构的一个重要组成部分。今天，我就和你一起来学习 ShardingSphere 中所提供的读写分离机制，以及这一机制如何与前面介绍的分库分表和强制路由整合在一起使用。</p>
+<h3 id="shardingsphere-中的读写分离">ShardingSphere 中的读写分离</h3>
+<p>为了应对数据库读写分离，ShardingSphere 所提供的解决方案还是依赖于强大的配置体系。为了更好地理解这些读写分离相关的配置，我们有必要对读写分离与主从架构有一定的了解。</p>
+<h4 id="读写分离与主从架构">读写分离与主从架构</h4>
+<p>目前，大部分的主流关系型数据库都提供了主从架构的实现方案，通过配置两台或多台数据库的主从关系，可以将一台数据库服务器的数据更新自动同步到另一台服务器上。而<strong>应用程序可以利用数据库的这一功能，实现数据的读写分离，从而改善数据库的负载压力。</strong></p>
+<p><img alt="image.png" src="/assets/f54b602eebd4a69520406a20.png"/></p>
+<p>可以看到，<strong>所谓的读写分离，实际上就是将写操作路由到主数据库，而将读操作路由到从数据库</strong>。对于互联网应用而言，读取数据的需求远远大于写入数据的需求，所以从数据库一般都是多台。当然，对于复杂度较高的系统架构而言，主库的数量同样也可以是多台。</p>
+<h4 id="读写分离与-shardingsphere">读写分离与 ShardingSphere</h4>
+<p>就 ShardingSphere 而言，<strong>支持主从架构下的读写分离是一项核心功能</strong>。目前 ShardingSphere 支持单主库、多从库的主从架构来完成分片环境下的读写分离，暂时不支持多主库的应用场景。</p>
+<p>在数据库主从架构中，因为从库一般会有多台，所以当执行一条面向从库的 SQL 语句时，我们需要实现一套负载均衡机制来完成对目标从库的路由。ShardingSphere 默认提供了随机（Random）和轮询（RoundRobin）这两种负载均衡算法来完成这一目标。</p>
+<p>另一方面，由于主库和从库之间存在一定的同步时延和数据不一致情况，所以在有些场景下，我们可能更希望从主库中获取最新数据。ShardingSphere 同样考虑到了这方面需求，开发人员可以通过 Hint 机制来实现对主库的强制路由。</p>
+<h4 id="配置读写分离">配置读写分离</h4>
+<p>实现读写分离要做的还是配置工作。<strong>通过配置，我们的目标是获取支持读写分离的 MasterSlaveDataSource</strong>，而 MasterSlaveDataSource 的创建依赖于 MasterSlaveDataSourceFactory 工厂类：</p>
+<pre><code>public final class MasterSlaveDataSourceFactory {
+    
+    public static DataSource createDataSource(final Map&lt;String, DataSource&gt; dataSourceMap, final MasterSlaveRuleConfiguration masterSlaveRuleConfig, final Properties props) throws SQLException {
+        return new MasterSlaveDataSource(dataSourceMap, new MasterSlaveRule(masterSlaveRuleConfig), props);
+    }
+}
+</code></pre>
+<p>在上面这段代码中，我们可以看到 createDataSource 方法中传入了三个参数，除了熟悉的 dataSourceMap 和 props 之外，还有一个 MasterSlaveRuleConfiguration，而这个 MasterSlaveRuleConfiguration 包含了所有我们需要配置的读写分离信息：</p>
+<pre><code>public class MasterSlaveRuleConfiguration implements RuleConfiguration {
+    //读写分离数据源名称
+    private final String name;
+    //主库数据源名称
+    private final String masterDataSourceName;
+    //从库数据源名称列表
+    private final List&lt;String&gt; slaveDataSourceNames;
+    //从库负载均衡算法
+	private final LoadBalanceStrategyConfiguration loadBalanceStrategyConfiguration;
+	…
+}
+</code></pre>
+<p>从 MasterSlaveRuleConfiguration 类所定义的变量中不难看出，<strong>我们需要配置读写分离数据源名称、主库数据源名称、从库数据源名称列表以及从库负载均衡算法这四个配置项</strong>，仅此而已。</p>
+<h3 id="系统改造-如何实现读写分离">系统改造：如何实现读写分离？</h3>
+<p>在掌握了读写分离的基本概念以及相关配置项之后，我们回到案例，看如何在单库单表架构中引入读写分离机制。</p>
+<p>第一步，仍然是设置用于实现读写分离的数据源。为了演示一主多从架构，我们初始化了一个主数据源 dsmaster 以及两个从数据源 dsslave0 和 dsslave1：</p>
+<pre><code>spring.shardingsphere.datasource.names=dsmaster,dsslave0,dsslave1 
+spring.shardingsphere.datasource.dsmaster.type=com.alibaba.druid.pool.DruidDataSource
+spring.shardingsphere.datasource.dsmaster.driver-class-name=com.mysql.jdbc.Driver
+spring.shardingsphere.datasource.dsmaster.url=jdbc:mysql://localhost:3306/dsmaster
+spring.shardingsphere.datasource.dsmaster.username=root
+spring.shardingsphere.datasource.dsmaster.password=root 
+spring.shardingsphere.datasource.dsslave0.type=com.alibaba.druid.pool.DruidDataSource
+spring.shardingsphere.datasource.dsslave0.driver-class-name=com.mysql.jdbc.Driver
+spring.shardingsphere.datasource.dsslave0.url=jdbc:mysql://localhost:3306/dsslave0
+spring.shardingsphere.datasource.dsslave0.username=root
+spring.shardingsphere.datasource.dsslave0.password=root 
+spring.shardingsphere.datasource.dsslave1.type=com.alibaba.druid.pool.DruidDataSource
+spring.shardingsphere.datasource.dsslave1.driver-class-name=com.mysql.jdbc.Driver
+spring.shardingsphere.datasource.dsslave1.url=jdbc:mysql://localhost:3306/dsslave1?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8
+spring.shardingsphere.datasource.dsslave1.username=root
+spring.shardingsphere.datasource.dsslave1.password=root
+</code></pre>
+<p>有了数据源之后，我们需要设置 MasterSlaveRuleConfiguration 类中所指定的 4 个配置项，这里负载均衡算法设置的是 random，也就是使用的随机算法：</p>
+<pre><code>spring.shardingsphere.masterslave.name=health_ms
+spring.shardingsphere.masterslave.master-data-source-name=dsmaster
+spring.shardingsphere.masterslave.slave-data-source-names=dsslave0,dsslave1 
+spring.shardingsphere.masterslave.load-balance-algorithm-type=random
+</code></pre>
+<p>现在我们来插入 User 对象，从控制台的日志中可以看到，ShardingSphere 执行的路由类型是 master-slave ，而具体 SQL 的执行是发生在 dsmaster 主库中：</p>
+<pre><code>2020-05-25 19:58:08.721  INFO 4392 --- [           main] ShardingSphere-SQL                       : Rule Type: master-slave
+2020-05-25 19:58:08.721  INFO 4392 --- [           main] ShardingSphere-SQL                       : SQL: INSERT INTO user (user_id, user_name) VALUES (?, ?) ::: DataSources: dsmaster
+Insert User:1
+2020-05-25 19:58:08.721  INFO 4392 --- [           main] ShardingSphere-SQL                       : Rule Type: master-slave
+2020-05-25 19:58:08.721  INFO 4392 --- [           main] ShardingSphere-SQL                       : SQL: INSERT INTO user (user_id, user_name) VALUES (?, ?) ::: DataSources: dsmaster
+Insert User:2
+…
+</code></pre>
+<p>然后，我们再对 User 对象执行查询操作并获取 SQL 执行日志：</p>
+<pre><code>2020-05-25 20:00:33.066  INFO 3364 --- [main] ShardingSphere-SQL : Rule Type: master-slave
+2020-05-25 20:00:33.066  INFO 3364 --- [main] ShardingSphere-SQL : SQL : SELECT * FROM user; ::: DataSources: dsslave0
+</code></pre>
+<p>可以看到，这里用到的 DataSource 是 dsslave0，也就是说查询操作发生在 dsslave0 从库中。由于设置的是随机负载均衡策略，当我们多次执行查询操作时，目标 DataSource 会在 dsslave0 和 dsslave1 之间交替出现。</p>
+<h3 id="系统改造-如何实现读写分离-分库分表">系统改造：如何实现读写分离+分库分表？</h3>
+<p>我们同样可以在分库分表的基础上添加读写分离功能。这时候，我们需要设置两个主数据源 dsmaster0 和 dsmaster1，然后针对每个主数据源分别设置两个从数据源：</p>
+<pre><code>spring.shardingsphere.datasource.names=dsmaster0,dsmaster1,dsmaster0-slave0,dsmaster0-slave1,dsmaster1-slave0,dsmaster1-slave1
+</code></pre>
+<p>这时候的库分片策略 default-database-strategy 同样分别指向 dsmaster0 和 dsmaster1 这两个主数据源：</p>
+<pre><code>spring.shardingsphere.sharding.default-database-strategy.inline.sharding-column=user_id
+spring.shardingsphere.sharding.default-database-strategy.inline.algorithm-expression=dsmaster$-&gt;{user_id % 2} 
+</code></pre>
+<p>而对于表分片策略而言，我们还是使用在 07 课时中介绍的分片方式进行设置：</p>
+<pre><code>spring.shardingsphere.sharding.tables.health_record.actual-data-nodes=dsmaster$-&gt;{0..1}.health_record$-&gt;{0..1}
+spring.shardingsphere.sharding.tables.health_record.table-strategy.inline.sharding-column=record_id
+spring.shardingsphere.sharding.tables.health_record.table-strategy.inline.algorithm-expression=health_record$-&gt;{record_id % 2}
+</code></pre>
+<p>完成这些设置之后，同样需要设置两个主数据源对应的配置项：</p>
+<pre><code>spring.shardingsphere.sharding.master-slave-rules.dsmaster0.master-data-source-name=dsmaster0
+spring.shardingsphere.sharding.master-slave-rules.dsmaster0.slave-data-source-names=dsmaster0-slave0, dsmaster0-slave1
+spring.shardingsphere.sharding.master-slave-rules.dsmaster1.master-data-source-name=dsmaster1
+spring.shardingsphere.sharding.master-slave-rules.dsmaster1.slave-data-source-names=dsmaster1-slave0, dsmaster1-slave1
+</code></pre>
+<p>这样，我们就在分库分表的基础上添加了对读写分离的支持。ShardingSphere 所提供的强大配置体系使得开发人员可以在原有配置的基础上添加新的配置项，而不需要对原有配置做过多调整。</p>
+<h3 id="系统改造-如何实现读写分离下的强制路由">系统改造：如何实现读写分离下的强制路由？</h3>
+<p>在上个课时中我们介绍了强制路由，在这个基础上，我将给出如何基于 Hint，完成读写分离场景下的主库强制路由方案。</p>
+<p>要想实现主库强制路由，我们还是要使用 HintManager。HintManager 专门提供了一个 setMasterRouteOnly 方法，用于将 SQL 强制路由到主库中。我们把这个方法也封装在 HintManagerHelper 帮助类中：</p>
+<pre><code>public class HintManagerHelper { 
+    static void initializeHintManagerForMaster(final HintManager hintManager) {
+       hintManager.setMasterRouteOnly();
+    }
+}
+</code></pre>
+<p>现在，我们在业务代码中加入主库强制路由的功能，下面这段代码演示了这个过程：</p>
+<pre><code>    @Override
+    public void processWithHintValueMaster() throws SQLException, IOException {
+       DataSource dataSource = DataSourceHelper.getDataSourceForMaster();
+       try (HintManager hintManager = HintManager.getInstance();
+              Connection connection = dataSource.getConnection();
+              Statement statement = connection.createStatement()) {
+           HintManagerHelper.initializeHintManagerForMaster(hintManager); 
+           ResultSet result = statement.executeQuery("select user_id, user_name from user");
+           
+           while (result.next()) {
+              System.out.println(result.getLong(1) + ": " + result.getString(2));
+            }
+       }      
+    }
+</code></pre>
+<p>执行这段代码，可以在控制台日志中获取执行的结果：</p>
+<pre><code>2020-05-25 22:06:17.166  INFO 16680 --- [           main] ShardingSphere-SQL                       : Rule Type: master-slave
+2020-05-25 22:06:17.166  INFO 16680 --- [           main] ShardingSphere-SQL                       : SQL: select user_id, user_name from user ::: DataSources: dsmaster
+1: user_1
+2: user_2
+…
+</code></pre>
+<p>显然，这里的路由类型是 master-slave，而执行 SQL 的 DataSource 只有 dsmaster，也就是说，我们完成了针对主库的强制路由。</p>
+<h3 id="小结">小结</h3>
+<p>继续承接上一课时的内容，今天我们讲解 ShardingSphere 中的读写分离机制。在日常开发过程中，读写分离是应对高并发数据访问的一种有效技术手段。而在ShardingSphere中，读写分离既可以单独使用，也可以和分库组合在一起使用。ShardingSphere的另一个强大之处还在于提供了针对主库的强制路由机制，这在需要确保获取主库最新数据的场景下非常有用。</p>
+<p>这里给你留一道思考题：如果我们想要在主从架构中只访问主库中的数据，在 ShardingSphere 中有什么方法可以做到这一点？</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

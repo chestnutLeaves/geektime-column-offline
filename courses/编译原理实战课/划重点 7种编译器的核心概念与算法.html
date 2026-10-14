@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>划重点 7种编译器的核心概念与算法 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">编译原理实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">53 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理实战课</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E8%BF%99%E9%97%A8%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE%EF%BC%9F.html">00 学习指南 如何学习这门编译原理实战课？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%9C%A8%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%AD%E6%B8%B8%E5%8E%86.html">00 开篇词 在真实世界的编译器中游历</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E7%BC%96%E8%AF%91%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B%E9%83%BD%E6%82%84%E6%82%84%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85%EF%BC%9F.html">01 编译的全过程都悄悄做了哪些事情？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E7%94%A8%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9E%84%E9%80%A0%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA.html">02 词法分析：用两种方式构造有限自动机</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%9F%BA%E6%9C%AC%E5%8A%9F%E5%92%8C%E4%B8%A4%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF.html">03 语法分析：两个基本功和两种算法思路</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%9A%E8%AE%A9%E7%A8%8B%E5%BA%8F%E7%AC%A6%E5%90%88%E8%AF%AD%E4%B9%89%E8%A7%84%E5%88%99.html">04 语义分析：让程序符合语义规则</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%BD%A0%E6%9C%89%E5%8F%91%E8%A8%80%E6%9D%83.html">05 运行时机制：程序如何运行，你有发言权</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E4%B8%8D%E6%98%AF%E5%8F%AA%E6%9C%89%E4%B8%80%E5%89%AF%E9%9D%A2%E5%AD%94.html">06 中间代码：不是只有一副面孔</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E8%B7%9F%E7%BC%96%E8%AF%91%E5%99%A8%E5%81%9A%E6%9C%8B%E5%8F%8B%EF%BC%8C%E8%AE%A9%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E9%A3%9E%E8%B5%B7%E6%9D%A5.html">07 代码优化：跟编译器做朋友，让你的代码飞起来</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%9F.html">08 代码生成：如何实现机器相关的优化？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/09%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%89%8B%E5%86%99%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%EF%BC%9F.html">09 Java编译器（一）：手写的编译器有什么优势？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/10%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%BF%98%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Java编译器（二）：语法分析之后，还要做些什么？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/11%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%B1%9E%E6%80%A7%E5%88%86%E6%9E%90%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90.html">11 Java编译器（三）：属性分析和数据流分析</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/12%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%8E%BB%E9%99%A4%E8%AF%AD%E6%B3%95%E7%B3%96%E5%92%8C%E7%94%9F%E6%88%90%E5%AD%97%E8%8A%82%E7%A0%81.html">12 Java编译器（四）：去除语法糖和生成字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/13%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%8A%A8%E6%89%8B%E4%BF%AE%E6%94%B9Graal%E7%BC%96%E8%AF%91%E5%99%A8.html">13 Java JIT编译器（一）：动手修改Graal编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/14%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASea%20of%20Nodes%E4%B8%BA%E4%BD%95%E5%A6%82%E6%AD%A4%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">14 Java JIT编译器（二）：Sea of Nodes为何如此强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/15%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%8E%A2%E7%A9%B6%E5%86%85%E8%81%94%E5%92%8C%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%E7%9A%84%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86.html">15 Java JIT编译器（三）：探究内联和逃逸分析的算法原理</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/16%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9AGraal%E7%9A%84%E5%90%8E%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">16 Java JIT编译器（四）：Graal的后端是如何工作的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/17%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">17 Python编译器（一）：如何用工具生成编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/18%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E4%BB%8EAST%E5%88%B0%E5%AD%97%E8%8A%82%E7%A0%81.html">18 Python编译器（二）：从AST到字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/19%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6.html">19 Python编译器（三）：运行时机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/20%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E6%9E%90%E5%92%8C%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.html">20 JavaScript编译器（一）：V8的解析和编译过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/21%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E9%87%8A%E5%99%A8%E5%92%8C%E4%BC%98%E5%8C%96%E7%BC%96%E8%AF%91%E5%99%A8.html">21 JavaScript编译器（二）：V8的解释器和优化编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/22%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E6%80%A7%E8%83%BD%E5%BE%88%E9%AB%98%EF%BC%9F.html">22 Julia编译器（一）：如何让动态语言性能很高？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/23%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8LLVM%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E5%90%8E%E7%AB%AF%E5%8A%9F%E8%83%BD%EF%BC%9F.html">23 Julia编译器（二）：如何利用LLVM的优化和后端功能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/24%20Go%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A%E6%8A%8A%E5%AE%83%E5%BD%93%E4%BD%9C%E6%95%99%E7%A7%91%E4%B9%A6%E5%90%A7.html">24 Go语言编译器：把它当作教科书吧</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/25%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%A7%A3%E6%9E%90%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.html">25 MySQL编译器（一）：解析一条SQL语句的执行过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/26%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E5%A6%82%E4%BD%95%E5%B8%AE%E4%BD%A0%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%A7%E8%83%BD%EF%BC%9F.html">26 MySQL编译器（二）：编译技术如何帮你提升数据库性能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E8%AF%BE%E5%89%8D%E5%AF%BC%E8%AF%BB%EF%BC%9A%E5%AD%A6%E4%B9%A0%E7%8E%B0%E4%BB%A3%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF.html">27 课前导读：学习现代语言设计的正确姿势</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%89%8D%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E4%B9%9F%E6%9C%89%E4%BA%BA%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%AD%A6.html">28 前端总结：语言设计也有人机工程学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E4%B8%AD%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%8D%E9%81%97%E4%BD%99%E5%8A%9B%E5%9C%B0%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96.html">29 中端总结：不遗余力地进行代码优化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E5%85%85%E5%88%86%E5%8F%91%E6%8C%A5%E7%A1%AC%E4%BB%B6%E7%9A%84%E8%83%BD%E5%8A%9B.html">30 后端总结：充分发挥硬件的能力</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E0%E5%88%B0%E8%AF%AD%E8%A8%80%E7%BA%A7%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96.html">31 运行时（一）：从0到语言级的虚拟化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/32%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E6%80%A7%E6%9C%89%E5%85%B3%E5%90%97%EF%BC%9F.html">32 运行时（二）：垃圾收集与语言的特性有关吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">33 并发中的编译技术（一）：如何从语言层面支持线程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E5%8D%8F%E7%A8%8B%EF%BC%9F.html">34 并发中的编译技术（二）：如何从语言层面支持协程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/35%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9AErlang%E8%AF%AD%E8%A8%80%E5%8E%89%E5%AE%B3%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">35 并发中的编译技术（三）：Erlang语言厉害在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/36%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">36 高级特性（一）：揭秘元编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">37 高级特性（二）：揭秘泛型编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%9F.html">38 综合实现（一）：如何实现面向对象编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%9F.html">39 综合实现（二）：如何实现函数式编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/40%20%E6%88%90%E6%9E%9C%E6%A3%80%E9%AA%8C%EF%BC%9A%E6%96%B9%E8%88%9F%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%BC%98%E5%8A%BF%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">40 成果检验：方舟编译器的优势在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%901%20%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E9%9C%80%E8%A6%81%E4%BD%A0%E6%88%91%E5%85%B7%E5%A4%87%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%B4%A0%E8%B4%A8%EF%BC%9F.html">不定期加餐1 远程办公，需要你我具备什么样的素质？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%902%20%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%98%AF%E8%AE%AD%E7%BB%83%E5%BF%83%E7%90%86%E7%B4%A0%E8%B4%A8%E7%9A%84%E8%BF%87%E7%A8%8B.html">不定期加餐2 学习技术的过程，其实是训练心理素质的过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%903%20%E8%BF%99%E5%87%A0%E5%B9%B4%EF%BC%8C%E6%89%93%E5%8A%A8%E6%88%91%E7%9A%84%E4%B8%A4%E6%9C%AC%E5%A5%BD%E4%B9%A6.html">不定期加餐3 这几年，打动我的两本好书</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%904%20%E4%BB%8E%E8%BA%AB%E8%BE%B9%E7%9A%84%E7%89%9B%E4%BA%BA%E8%BA%AB%E4%B8%8A%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E7%A7%80%E5%93%81%E8%B4%A8.html">不定期加餐4 从身边的牛人身上，我学到的一些优秀品质</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%905%20%E5%80%9F%E5%8A%A9%E5%AE%9E%E4%BE%8B%EF%BC%8C%E6%8E%A2%E7%A9%B6C%2B%2B%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6.html">不定期加餐5 借助实例，探究C++编译器的内部机制</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%88%92%E9%87%8D%E7%82%B9%207%E7%A7%8D%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">划重点 7种编译器的核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%9C%9F%E6%9C%AB%E7%AD%94%E7%96%91%E4%B8%8E%E6%80%BB%E7%BB%93%20%E5%86%8D%E6%AC%A1%E5%AE%A1%E8%A7%86%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%9A%84%E4%BD%9C%E7%94%A8.html">期末答疑与总结 再次审视学习编译原理的作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%20%E5%A6%82%E4%BD%95%E5%90%83%E9%80%8F7%E7%A7%8D%E7%9C%9F%E5%AE%9E%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">热点问题答疑 如何吃透7种真实的编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%98%93%E6%98%8A%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8D%E6%AD%A2%E6%9C%89Bug%E5%92%8C%E5%8A%A0%E7%8F%AD%EF%BC%8C%E8%BF%98%E6%9C%89%E8%AF%97%E5%92%8C%E8%BF%9C%E6%96%B9.html">用户故事 易昊：程序员不止有Bug和加班，还有诗和远方</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%9F%A5%E8%AF%86%E5%9C%B0%E5%9B%BE%20%E4%B8%80%E8%B5%B7%E6%9D%A5%E5%A4%8D%E4%B9%A0%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">知识地图 一起来复习编译技术核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%AE%9E%E6%88%98%E6%98%AF%E5%94%AF%E4%B8%80%E6%A0%87%E5%87%86%EF%BC%81.html">结束语 实战是唯一标准！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%88%92%E9%87%8D%E7%82%B9%207%E7%A7%8D%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="划重点 7种编译器的核心概念与算法" id="title">划重点 7种编译器的核心概念与算法</h1>
+<div><p>你好，我是编辑王惠。</p>
+<p>阶段性的总结复习和验证成果是非常重要的。所以，在8月7日到8月12日这为期一周的期中复习时间里，我们先来巩固一下“真实编译器解析篇”中的重点知识。你可以通过学习委员朱英达总结梳理的<strong>划重点内容，以及涵盖了关键知识点的7张思维导图</strong>，来回顾7种语言编译器的核心概念与算法。</p>
+<p>另外，宫老师还精心策划了10道考试题，让你能在行至半程之时，做好自检，及时发现知识漏洞，到时候一起来挑战一下吧！</p>
+<p>在期中复习周的最后，我还会邀请一位优秀的同学来做一次学习分享。通过他的学习故事，你也可以借此对照一下自己的编译原理学习之路。</p>
+<p>好，下面我们就一起来复习这些核心的编译原理概念与算法知识吧。</p>
+<hr/>
+<h2 id="java编译器-javac">Java编译器（javac）</h2>
+<p>Java是一种广泛使用的计算机编程语言，主要应用于企业级Web应用开发、大型分布式系统以及移动应用开发（Android）。到现在，Java已经是一门非常成熟的语言了，而且它也在不断进化、与时俱进，泛型、函数式编程、模块化等特性陆续都增加了进来。与此同时，Java的编译器和虚拟机中所采用的技术，也比 20 年前发生了天翻地覆的变化。</p>
+<p>Java的字节码编译器（javac）是用Java编写的，它实现了自举。启动Java编译器需要Java虚拟机（默认是HotSpot虚拟机，使用C++编写）作为宿主环境。</p>
+<p>javac编译器的编译过程，主要涉及到了这样一些关键概念和核心算法：</p>
+<ul>
+<li>词法分析阶段：基于有限自动机的理论实现。在处理标识符与关键字重叠的问题上，采用了先都作为标识符识别出来，然后再把其中的关键词挑出来的方式。</li>
+<li>语法分析阶段：使用了自顶向下的递归下降算法、LL(k)方式以及多Token预读；处理左递归问题时，采用了标准的改写文法的方法；处理二元表达式时，采用了自底向上的运算符优先级解析器。</li>
+<li>语义分析阶段：会分为多个小的阶段，且并不是顺序执行的，而是各阶段交织在一起。</li>
+<li>语义分析阶段主要包含：ENTER（建立符号表）、PROCESS（处理注解）、ATTR（属性分析）、FLOW（数据流分析）、TRANSTYPES（处理泛型）、TRANSPATTERNS（处理模式匹配）、UNLAMBDA（处理 Lambda）和 LOWER（处理其他所有的语法糖，比如内部类、foreach 循环等）、GENERATE 阶段（生成字节码）等。在ATTR和FLOW这两个阶段，编译器完成了主要的语义检查工作。</li>
+<li>注意：生成字节码是一个比较机械的过程，编译器只需要对 AST 进行深度优先的遍历即可。在这个过程中会用到前几个阶段形成的属性信息，特别是类型信息。</li>
+</ul>
+<p><img alt="" src="/assets/3ab4b4a1412a3f727189c92e.jpg"/></p>
+<p>参考资料：</p>
+<ol>
+<li>关于注解的官方教程，参考<a href="https://docs.oracle.com/javase/tutorial/java/annotations/" target="_blank">这个链接</a>。</li>
+<li>关于数据流分析的理论性内容，参考龙书（Compilers Principles, Techniques and Tools）第二版的9.2和9.3节。也可以参考《编译原理之美》 的第<a href="https://time.geekbang.org/column/article/155338" target="_blank">27</a>、<a href="https://time.geekbang.org/column/article/156878" target="_blank">28</a>讲，那里进行了比较直观的讲述。</li>
+<li>关于半格这个数学工具，可以参考龙书第二版的9.3.1部分，也可以参考《编译原理之美》的<a href="https://time.geekbang.org/column/article/156878" target="_blank">第28讲</a>。</li>
+<li>Java语言规范第六章，参考<a href="https://docs.oracle.com/javase/specs/jvms/se13/html/jvms-6.html" target="_blank">Java虚拟机指令集</a>。</li>
+</ol>
+<h2 id="java-jit编译器-graal">Java JIT编译器（Graal）</h2>
+<p>对于编译目标为机器码的Java后端的编译器来说，主要可以分AOT和JIT两类：如果是在运行前一次性生成，就叫做提前编译（AOT）；如果是在运行时按需生成机器码，就叫做即时编译（JIT）。Java以及基于JVM的语言，都受益于JVM的JIT编译器。</p>
+<p>在<a href="https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html" target="_blank">JDK的源代码</a>中，你能找到src/hotspot目录，这是 JVM 的运行时：HotSpot虚拟机，它是用C++编写的，其中就包括JIT编译器。</p>
+<p>Graal是Oracle公司推出的一个完全用Java语言编写的JIT编译器。Graal编译器有两个特点：内存安全（相比C++实现的Java JIT编译器而言）；与Java配套的各种工具（比如ID）更友好、更丰富。</p>
+<p>Java JIT编译器的编译过程，主要涉及到了这样一些关键概念和核心算法：</p>
+<ul>
+<li>分层编译：C0（解释器）、C1（客户端编译器）、C2（服务端编译器）。不同阶段的代码优化激进的程度不同，且存在C2降级回C1的逆优化。</li>
+<li>IR采用了“节点之海（Sea of Nodes）”，整合了控制流图与数据流图，符合 SSA 格式，有利于优化算法的编写和维护。</li>
+<li>两个重要的优化算法：内联优化和逃逸分析。</li>
+<li>几个重要的数据结构：HIR（硬件无关的IR）、LIR（硬件相关的IR）、CFG（控制流图）。</li>
+<li>寄存器分配算法：LinearScan。</li>
+</ul>
+<p><strong>金句摘录：“编译器开发的真正的工作量，都在中后端。”</strong></p>
+<p><img alt="" src="/assets/77d7c1adc954c7c140f2ca38.jpg"/></p>
+<p>参考资料：</p>
+<ol>
+<li>GraalVM项目的<a href="https://www.graalvm.org/" target="_blank">官方网站</a>；Graal的<a href="https://github.com/oracle/graal" target="_blank">Github地址</a>；Graal项目的<a href="https://github.com/oracle/graal/blob/master/docs/Publications.md" target="_blank">出版物</a>。</li>
+<li>基于图的IR的必读论文：程序依赖图-<a href="https://www.cs.utexas.edu/users/less/reading/spring00/ferrante.pdf" target="_blank">J. Ferrante, K. J. Ottenstein, and J. D. Warren. The program dependence graph and its use in optimization</a>. July 1987；Click的论文-<a href="https://www.oracle.com/technetwork/java/javase/tech/c2-ir95-150110.pdf" target="_blank">A Simple Graph-Based Intermediate Representation</a>；介绍Graal IR的论文-<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.726.5496&amp;rep=rep1&amp;type=pdf" target="_blank">Graal IR: An Extensible Declarative Intermediate Representation</a>。</li>
+<li>关于优化算法：多态内联-<a href="http://extras.springer.com/2000/978-3-540-67660-7/papers/1628/16280258.pdf" target="_blank">Inlining of Virtual Methods</a>；逃逸分析-<a href="https://www.cc.gatech.edu/~harrold/6340/cs6340_fall2009/Readings/choi99escape.pdf" target="_blank">Escape Analysis for Java</a>；部分逃逸分析-<a href="http://www.ssw.uni-linz.ac.at/Research/Papers/Stadler14/Stadler2014-CGO-PEA.pdf" target="_blank">Partial Escape Analysis and Scalar Replacement for Java</a>。</li>
+</ol>
+<h2 id="python编译器-cpython">Python编译器（CPython）</h2>
+<p>Python诞生于上个世纪90年代初，作者是荷兰计算机程序员吉多·范罗苏姆（Guido van Rossum）。Python语言的特点是：自身语法简单，容易掌握，强调一件事情只能用一种方法去做；具备丰富的现代语言特性，如OOP、FP等；其实现机制决定了易于集成C++扩展，不仅便于利用一些已有的、经典开源的高性能的C/C++库，同时也可以很方便地编写自己的C++扩展，实现一些高性能模块。</p>
+<p>另外，Python使用了pgen这样的生成编译器的工具。pgen能够基于语法规则生成解析表（Parse Table），供语法分析程序使用。你可以通过修改规则文件来修改Python语言的语法，pgen能给你生成新的语法解析器。它是把EBNF转化成一个NFA，然后再把这个NFA转换成DFA。基于这个DFA，在读取Token的时候，编译器就知道如何做状态迁移，并生成解析树。Python用的是 LL(1) 算法。</p>
+<p>CPython编译器编译器的编译过程，主要涉及到了这样一些关键概念和核心算法：</p>
+<ul>
+<li>语法分析：首先是生成CST（Concret Syntax Tree，具体语法树），接着生成AST（抽象语法树）。CST的特点是完全基于源程序结构构建出树结构，它比AST啰嗦，但更精确地反映了语法推导的过程。而AST的特点是去掉了树结构上繁杂冗余的树枝节点，更简明扼要，更准确地表达了程序的结构。</li>
+<li>语义分析：Python通过一个建立符号表的过程来做相关的语义分析，包括做引用消解等。Python语言使用变量的特点是不存在变量声明，每个变量都是赋值即声明，因此在给一个变量赋值时需要检查作用域，确认当前操作是给全局的变量赋值，还是在局部给声明新变量。</li>
+<li>生成字节码：这个工作实际上包含了生成 CFG、为每个基本块生成指令，以及把指令汇编成字节码，并生成 PyCodeObject 对象的过程。另外，生成的字节码在最后放到解释器里执行之前，编译器还会再做一步窥孔优化工作。</li>
+<li>运行时机制：Python的运行时设计的核心，就是PyObject对象，Python对象所有的特性都是从PyObject的设计中延伸出来的。其虚拟机采用了栈机的架构。</li>
+</ul>
+<p><img alt="" src="/assets/b4cdd98eabefa7ddb70c5715.jpg"/></p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://www.python.org/" target="_blank">python.org网站</a>：下载<a href="https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz" target="_blank">3.8.1版本的源代码</a>。</li>
+<li>GDB的安装和配置：参考<a href="https://github.com/RichardGong/CompilersInPractice/edit/master/python/GDB.md" target="_blank">这篇文章</a>。</li>
+<li>Python的<a href="https://devguide.python.org/" target="_blank">开发者指南</a>网站。</li>
+<li>pgen的工具程序：<a href="https://github.com/python/cpython/blob/3.9/Parser/pgen/pgen.py" target="_blank">Parser/pgen</a>。-
+注：由于CPython最新的Master分支上的代码调整，此处pgen的链接地址调整为CPython3.9版本分支上的pgen相关代码。</li>
+<li>Python的<a href="https://docs.python.org/zh-cn/3/library/dis.html#python-bytecode-instructions" target="_blank">字节码的说明</a>。</li>
+<li>Python的<a href="https://docs.python.org/3.8/library/stdtypes.html" target="_blank">内置类型</a>。</li>
+</ol>
+<h2 id="javascript编译器-v8">JavaScript编译器（V8）</h2>
+<p>V8是谷歌公司在2008年推出的一款JavaScript编译器，主要由C++编写而成。V8主要应用于Chrome浏览器，后来也被开源社区中诸如Node.js等项目所使用。其最为突出的特点就是“快”，由于JavaScript是在浏览器下载完页面后马上编译并执行，它对编译速度有更高的要求。因此，V8采用了一系列技术手段优化编译和启动阶段运行速度。</p>
+<p>在设计上，V8结合了分阶段懒解析、空间换时间等设计思路，突出了解析、启动阶段运行的时间开销。</p>
+<ul>
+<li>对源代码的Parse，进行了流（Stream）化处理，也就是边下载边解析。</li>
+<li>预解析（PreParse）处理，也就是所谓懒解析最核心的设计思想，每个JS函数只有被执行的时候才会解析函数体的内部逻辑。</li>
+</ul>
+<p>另外，V8的很多地方体现出了与Java编译器异曲同工之处。比如，它将JavaScript源代码的编译，分为了由Ignition字节码解释执行和TurboFan的JIT编译机器代码执行两部分组成，类似于Java编译器的字节码解释执行和Graal优化编译后执行两阶段；TurboFan编译器的IR也采用了Sea of Nodes，这一点类似于Java的Graal编译器，且也涉及到了内联优化和逃逸分析算法。</p>
+<p>其运行方式分为两类：</p>
+<ul>
+<li>常规情况下，Ignition字节码解释执行；</li>
+<li>编译器判定热点代码，TurboFan JIT编译成机器码执行，并且TurboFan会依赖一些Ignition解释执行过程中的运行时数据，来进行进一步优化，使机器码尽可能高效。</li>
+</ul>
+<p>因为JavaScript是动态类型语言，因此对函数参数类型的推断以及针对性优化是一个V8的核心技术。V8涉及到的其他优化算法有：</p>
+<ul>
+<li>隐藏类（Hidden Class）。相同“形状”的JS对象会被以同一个隐藏类维护其数据结构。</li>
+<li>内联缓存（Inline Caching）。针对隐藏类查找属性值时的指针偏移量，进行内联缓存，这属于结合隐藏类技术做进一步性能的优化。</li>
+</ul>
+<p><img alt="" src="/assets/f80b5ebeb1af1347d4fd7bde.jpg"/></p>
+<p>参考资料：</p>
+<ol>
+<li>V8项目的<a href="https://v8.dev/" target="_blank">官网</a>，以及V8的源代码-<a href="https://v8.dev/docs/build" target="_blank">官方文档</a>。</li>
+<li>了解V8的解析器为什么速度非常快：<a href="https://v8.dev/blog/scanner" target="_blank">Blazingly fast parsing, part 1: optimizing the scanner</a>；<a href="https://v8.dev/blog/preparser" target="_blank">Blazingly fast parsing, part 2: lazy parsing</a>。</li>
+<li>了解Ignition的设计：<a href="https://docs.google.com/document/d/11T2CRex9hXxoJwbYqVQ32yIPMh0uouUZLdyrtmMoL44/mobilebasic" target="_blank">Ignition Design Doc</a>，宫老师在Github上也放了一个<a href="https://github.com/RichardGong/CompilersInPractice/blob/master/v8/Ignition%20Design%20Doc.pdf" target="_blank">拷贝</a>。</li>
+<li>了解Ignition的字节码：<a href="https://medium.com/dailyjs/understanding-v8s-bytecode-317d46c94775" target="_blank">Understanding V8’s bytecode</a>。</li>
+<li>V8的指针压缩技术：<a href="https://v8.dev/blog/pointer-compression" target="_blank">Pointer Compression in V8</a>。</li>
+<li>介绍V8基于推理的优化机制：<a href="https://ponyfoo.com/articles/an-introduction-to-speculative-optimization-in-v8" target="_blank">An Introduction to Speculative Optimization in V8</a>。</li>
+<li>关于Ignition字节码做优化的论文：<a href="https://docs.google.com/document/d/1wW_VkkIwhAAgAxLYM0wvoTEkq8XykibDIikGpWH7l1I/edit?ts=570d7131#heading=h.6jz9dj3bnr8t" target="_blank">Register equivalence optimization</a>，宫老师在Github上也放了一份<a href="https://github.com/RichardGong/CompilersInPractice/blob/master/v8/Ignition_%20Register%20Equivalence%20Optimization.pdf" target="_blank">拷贝</a>。</li>
+</ol>
+<h2 id="julia的编译器">Julia的编译器</h2>
+<p>Julia语言最初发行于2012年，其最初是为了满足高性能数值分析和计算科学的需要而设计的。Julia同时兼具了静态编译型和动态解释型语言的优点：一方面它的性能很高，可以跟Java和C语言媲美；另一方面，它又是动态类型的，编写程序时不需要指定类型。</p>
+<p>Julia编译器的特点是：</p>
+<ul>
+<li>作为动态类型语言，却能拥有静态类型语言的执行速度，最关键的原因是使用了LLVM作为编译器后端，针对动态类型的变量，在运行时由编译器JIT编译生成多个版本的目标代码，保证程序的高性能；</li>
+<li>由C、C++、Lisp和Julia四种语言开发而成，编译器前端主要采用Lisp实现；</li>
+<li>考虑到对函数式编程的支持，有别于面向对象编程的“单一分派”，Julia的编译器提供了“多重分派”的功能。</li>
+</ul>
+<p>Julia编译器的编译过程，主要涉及到了这样一些关键概念和核心算法：</p>
+<ul>
+<li>Julia的编译器也是采用了递归下降算法来实现语法分析。</li>
+<li>其内部IR采用了SSA格式，主要作用是完成类型推断和内联优化。</li>
+<li>Julia的IR会被转化成LLVM的IR，从而进一步利用LLVM的功能。在转换过程中，会用Julia的内建函数，这些内建函数代表了Julia语言中抽象度比较高的运算功能。</li>
+</ul>
+<p><img alt="" src="/assets/5ffccb960550fa489ebdf778.jpg"/></p>
+<p>参考资料：</p>
+<ol>
+<li>LLVM的<a href="https://llvm.org/" target="_blank">官网</a>，以及LLVM的<a href="https://github.com/llvm/llvm-project" target="_blank">源代码</a>。</li>
+<li>Julia的开发者文档中有对如何使用LLVM的介绍：<a href="https://docs.julialang.org/en/v1/devdocs/llvm/" target="_blank">Working with LLVM</a>。</li>
+<li>对LLVM中的各种Pass的介绍：<a href="https://llvm.org/docs/Passes.html" target="_blank">LLVM’s Analysis and Transform Passes</a>。</li>
+<li>《编译原理之美》的<a href="https://time.geekbang.org/column/article/153192" target="_blank">第25讲</a>和<a href="https://time.geekbang.org/column/article/154438" target="_blank">第26讲</a>：宫老师对LLVM后端及其命令行工具做了介绍，并且还手工调用LLVM的API，示范了针对不同的语法结构（比如if结构）应该如何生成LLVM IR，最后即时编译并运行。你可以参考一下。</li>
+</ol>
+<h2 id="go语言编译器-gc">Go语言编译器（gc）</h2>
+<p>Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言，又名Golang。Go广泛应用于Google的产品以及许多其他组织和开源项目，其创建的初衷就是主要面向于部署于大量服务器之间的分布式程序，也就是我们今天所说的“云”。因此，Go的主要优势聚焦于服务端高并发场景。</p>
+<p>Go语言编译器的特点是：</p>
+<ul>
+<li>gc编译器除了少量标准库的内容是用汇编写的以外，其绝大部分逻辑，都是用Go语言本身写的，因此实现了较为完整的自举（Bootstraping），从前端到后端的整个流程都使用Go语言实现，在编程语言中是较为罕见的；</li>
+<li>教科书级别的设计，源代码完全自举、代码干净利索，因此非常适合作为学习参考。</li>
+</ul>
+<p>Go语言编译器的编译过程，主要涉及到了这样一些关键概念和核心算法：</p>
+<ul>
+<li>编译器前端：gc编译器的词法分析和语法分析使用的都是非常经典、传统的算法，如手写的递归下降算法、处理二元表达式时使用操作符优先级算法。</li>
+<li>中间代码阶段：SSA格式的IR；基于CFG的IR，利于“死代码”的发现与删除；多遍（Pass）的优化框架。</li>
+<li>机器码生成阶段：线性扫描算法；官方的gc编译器并没做指令重排，这是基于编译过程中时间开销的考虑。</li>
+</ul>
+<p><img alt="" src="/assets/8eda7bf80fe891033dbf2ae9.jpg"/></p>
+<p>参考资料：</p>
+<ol>
+<li>介绍gc编译器的主要结构：<a href="https://github.com/golang/go/blob/release-branch.go1.14/src/cmd/compile/README.md" target="_blank">Introduction to the Go compiler</a>官方文档。</li>
+<li>介绍gc编译器的SSA：<a href="https://github.com/golang/go/blob/release-branch.go1.14/src/cmd/compile/internal/ssa/README.md" target="_blank">Introduction to the Go compiler’s SSA backend</a>官方文档。</li>
+<li>Go compiler internals: adding a new statement to Go - <a href="https://eli.thegreenplace.net/2019/go-compiler-internals-adding-a-new-statement-to-go-part-1/" target="_blank">Part 1</a>、<a href="https://eli.thegreenplace.net/2019/go-compiler-internals-adding-a-new-statement-to-go-part-2/" target="_blank">Part2</a>。在这两篇博客里，作者做了一个实验：如果往Go里面增加一条新的语法规则，需要做哪些事情。我们能够很好地、贯穿性地了解一个编译器的方法。</li>
+<li>介绍gc编译器的SSA优化规则描述语言的细节：<a href="https://quasilyte.dev/blog/post/go_ssa_rules/" target="_blank">Go compiler: SSA optimization rules description language</a>。</li>
+<li>介绍Go汇编的细节：<a href="https://github.com/teh-cmc/go-internals/blob/master/chapter1_assembly_primer/README.md" target="_blank">A Primer on Go Assembly</a>和<a href="https://golang.org/doc/asm" target="_blank">A Quick Guide to Go’s Assembler</a>。gc编译器采用的汇编语言是它自己的一种格式，是“伪汇编”。</li>
+</ol>
+<h2 id="mysql的编译器">MySQL的编译器</h2>
+<p>MySQL是一个开放源码的关系数据库管理系统，原开发者为瑞典的MySQL AB公司，后几经辗转，目前归属于Oracle旗下产品。在过去，MySQL性能高、成本低、可靠性好，因此成为了最流行的开源数据库。SQL可以称得上是最成功的DSL（特定领域语言）之一，MySQL中的SQL解析模块则是这门DSL的非常具有可参考性的一个实现。MySQL使用C++编写，有少量几个代码文件是用C语言编写的。</p>
+<p>MySQL的编译器的特点是：</p>
+<ul>
+<li>SQL作为DSL中最具有代表性的一种语言，学习它的编译器的实现，可以为我们自己设计面向业务的DSL提供参考。</li>
+<li>手写的词法分析、用工具（bison，GNU的yacc）生成的语法分析。</li>
+<li>基于LALR处理二元表达式。</li>
+<li>中后端优化方面：MySQL是解释执行，并没有做太多的机器相关优化；在机器无关优化方面，除了一些编译领域传统的优化技术之外，还做了一些针对数据库特定场景的优化方式。</li>
+</ul>
+<p>MySQL的编译器的编译过程，主要涉及到了这样一些关键概念和核心算法：</p>
+<p><strong>词法分析和语法分析</strong></p>
+<ul>
+<li>词法分析：手写的词法分析器。</li>
+<li>语法分析：由bison生成。bison是一种基于EBNF生成语法分析程序的工具，可视为GNU版的yacc。</li>
+<li>bison支持的语法分析算法：LALR算法。</li>
+</ul>
+<p><strong>语义分析</strong></p>
+<ul>
+<li>MySQL中一些重要的数据结构：THD线程对象、Table_ident对象。</li>
+<li>上下文处理：基于contextualize的上下文处理。</li>
+<li>基于数据库“业务逻辑”的引用消解：库名、表名、列名、入口、查找和作用域（子查询）</li>
+</ul>
+<p><strong>机器无关优化</strong></p>
+<ul>
+<li>典型的优化：常量传播、死代码消除、常量折叠。</li>
+<li>针对数据库场景的优化：产生执行计划、生成JOIN对象。</li>
+</ul>
+<p><strong>机器相关优化</strong></p>
+<ul>
+<li>MySQL实际上对表达式是解释执行，所以并没有真正意义上做任何机器相关优化。</li>
+<li>列举了PG另一种类似MySQL的DB，有通过LLVM的JIT优化。</li>
+</ul>
+<p><img alt="" src="/assets/7ad34e29c02e671ebbdf6642.jpg"/></p>
+<p>参考资料：</p>
+<ol>
+<li>下载<a href="https://github.com/mysql/mysql-server" target="_blank">MySQL的源代码</a>；跟踪MySQL的执行过程，要用Debug模式编译MySQL，具体步骤可以参考这篇<a href="https://dev.mysql.com/doc/internals/en/cmake.html" target="_blank">开发者文档</a>。</li>
+<li>MySQL的内行手册：<a href="https://dev.mysql.com/doc/internals/en/" target="_blank">MySQL Internals Manual</a>。它能给我们提供一些重要的信息，但文档内容经常跟源代码的版本不同步，比如介绍源代码的目录结构的信息就过时了。需要注意一下。</li>
+<li>bison的<a href="http://www.gnu.org/software/bison/manual/" target="_blank">手册</a>。</li>
+<li>如果要加深对MySQL内部机制的了解，宫老师推荐了两本书：OReilly的《Understanding MySQL Internals》，以及《Expert MySQL》。</li>
+</ol>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

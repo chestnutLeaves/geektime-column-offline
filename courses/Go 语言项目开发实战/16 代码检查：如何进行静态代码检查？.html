@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16 代码检查：如何进行静态代码检查？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/index.html">Go 语言项目开发实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">60 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Go 语言项目开发实战</strong><ul><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%200%20%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BC%81%E4%B8%9A%E7%BA%A7%20Go%20%E5%BA%94%E7%94%A8.html">00 开篇词 从 0 开始搭建一个企业级 Go 应用</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/01%20IAM%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0%EF%BC%9A%E6%88%91%E4%BB%AC%E8%A6%81%E5%AE%9E%E7%8E%B0%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%20Go%20%E9%A1%B9%E7%9B%AE%EF%BC%9F.html">01 IAM系统概述：我们要实现什么样的 Go 项目？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/02%20%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84%20Go%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%9F.html">02 环境准备：如何安装和配置一个基本的 Go 开发环境？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/03%20%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%20IAM%20%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">03 项目部署：如何快速部署 IAM 系统？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/04%20%E8%A7%84%E8%8C%83%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%9D%82%E4%B9%B1%E6%97%A0%E7%AB%A0%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%EF%BC%9F.html">04 规范设计（上）：项目开发杂乱无章，如何规范？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/05%20%E8%A7%84%E8%8C%83%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9Acommit%20%E4%BF%A1%E6%81%AF%E9%A3%8E%E6%A0%BC%E8%BF%A5%E5%BC%82%E3%80%81%E9%9A%BE%E4%BB%A5%E9%98%85%E8%AF%BB%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%EF%BC%9F.html">05 规范设计（下）：commit 信息风格迥异、难以阅读，如何规范？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/06%20%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E4%B8%80%E4%B8%AA%E5%8F%AF%E7%BB%B4%E6%8A%A4%E3%80%81%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%EF%BC%9F.html">06 目录结构设计：如何组织一个可维护、可扩展的代码目录？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/07%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%90%88%E7%90%86%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">07 工作流设计：如何设计合理的多人开发模式？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/08%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%20Go%20%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B%EF%BC%9F.html">08 研发流程设计（上）：如何设计 Go 项目的开发流程？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/09%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%BA%94%E7%94%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F.html">09 研发流程设计（下）：如何管理应用的生命周期？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/10%20%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%EF%BC%9A%E6%80%8E%E4%B9%88%E5%86%99%E5%87%BA%E4%BC%98%E9%9B%85%E7%9A%84%20Go%20%E9%A1%B9%E7%9B%AE%EF%BC%9F.html">10 设计方法：怎么写出优雅的 Go 项目？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/11%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.html">11 设计模式：Go常用设计模式概述</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/12%20API%20%E9%A3%8E%E6%A0%BC%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1RESTful%20API%EF%BC%9F.html">12 API 风格（上）：如何设计RESTful API？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/13%20API%20%E9%A3%8E%E6%A0%BC%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ARPC%20API%E4%BB%8B%E7%BB%8D.html">13 API 风格（下）：RPC API介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/14%20%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84Makefile%EF%BC%9F.html">14 项目管理：如何编写高质量的Makefile？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/15%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E5%AE%9E%E6%88%98%EF%BC%9AIAM%E9%A1%B9%E7%9B%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E7%9A%84%EF%BC%9F.html">15 研发流程实战：IAM项目是如何进行研发流程管理的？</a></li><li><a class="active" aria-current="page" href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/16%20%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9F.html">16 代码检查：如何进行静态代码检查？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/17%20API%20%E6%96%87%E6%A1%A3%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%20Swagger%20API%20%E6%96%87%E6%A1%A3%20%EF%BC%9F.html">17 API 文档：如何生成 Swagger API 文档 ？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/18%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E5%A5%97%E7%A7%91%E5%AD%A6%E7%9A%84%E9%94%99%E8%AF%AF%E7%A0%81%EF%BC%9F.html">18 错误处理（上）：如何设计一套科学的错误码？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/19%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E9%94%99%E8%AF%AF%E5%8C%85%EF%BC%9F.html">19 错误处理（下）：如何设计错误包？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/20%20%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%97%A5%E5%BF%97%E5%8C%85%E5%B9%B6%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97%EF%BC%9F.html">20 日志处理（上）：如何设计日志包并记录日志？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/21%20%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BB%8E%200%20%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97%E5%8C%85.html">21 日志处理（下）：手把手教你从 0 编写一个日志包</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/22%20%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E4%B8%89%E5%89%91%E5%AE%A2%EF%BC%9APflag%E3%80%81Viper%E3%80%81Cobra%20%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html">22 应用构建三剑客：Pflag、Viper、Cobra 核心功能介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/23%20%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BC%98%E7%A7%80%E7%9A%84%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6%EF%BC%9F.html">23 应用构建实战：如何构建一个优秀的企业应用框架？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/24%20Web%20%E6%9C%8D%E5%8A%A1%EF%BC%9AWeb%20%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">24 Web 服务：Web 服务核心功能有哪些，如何实现？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/25%20%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%EF%BC%9F.html">25 认证机制：应用程序如何进行访问认证？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/26%20IAM%E9%A1%B9%E7%9B%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%E5%8A%9F%E8%83%BD%E7%9A%84%EF%BC%9F.html">26 IAM项目是如何设计和实现访问认证功能的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/27%20%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%EF%BC%9A5%E5%A4%A7%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%B5%84%E6%BA%90%E6%8E%88%E6%9D%83%E7%9A%84%EF%BC%9F.html">27 权限模型：5大权限模型是如何进行资源授权的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/28%20%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%80%9A%E8%BF%87iam-apiserver%E8%AE%BE%E8%AE%A1%EF%BC%8C%E7%9C%8BWeb%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9E%84%E5%BB%BA.html">28 控制流（上）：通过iam-apiserver设计，看Web服务的构建</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/29%20%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9Aiam-apiserver%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E8%AE%B2%E8%A7%A3.html">29 控制流（下）：iam-apiserver服务核心功能实现讲解</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/30%20ORM%EF%BC%9ACURD%20%E7%A5%9E%E5%99%A8%20GORM%20%E5%8C%85%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%9E%E6%88%98.html">30 ORM：CURD 神器 GORM 包介绍及实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/31%20%E6%95%B0%E6%8D%AE%E6%B5%81%EF%BC%9A%E9%80%9A%E8%BF%87iam-authz-server%E8%AE%BE%E8%AE%A1%EF%BC%8C%E7%9C%8B%E6%95%B0%E6%8D%AE%E6%B5%81%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1.html">31 数据流：通过iam-authz-server设计，看数据流服务的设计</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/32%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%A4%84%E7%90%86%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%A7%E7%94%9F%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F.html">32 数据处理：如何高效处理应用程序产生的数据？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/33%20%20SDK%20%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%87%BA%E4%B8%80%E4%B8%AA%E4%BC%98%E7%A7%80%E7%9A%84%20Go%20SDK%EF%BC%9F.html">33  SDK 设计（上）：如何设计出一个优秀的 Go SDK？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/34%20SDK%20%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AIAM%E9%A1%B9%E7%9B%AEGo%20SDK%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0.html">34 SDK 设计（下）：IAM项目Go SDK设计和实现</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/35%20%E6%95%88%E7%8E%87%E7%A5%9E%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%9F.html">35 效率神器：如何设计和实现一个命令行客户端工具？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/36%20%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%20Go%20%E8%AF%AD%E8%A8%80%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%92%8C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F.html">36 代码测试（上）：如何编写 Go 语言单元测试和性能测试用例？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/37%20%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%85%B6%E4%BB%96%E6%B5%8B%E8%AF%95%E7%B1%BB%E5%9E%8B%E5%8F%8A%20IAM%20%E6%B5%8B%E8%AF%95%E4%BB%8B%E7%BB%8D.html">37 代码测试（下）：Go 语言其他测试类型及 IAM 测试介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/38%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%20Go%20%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">38 性能分析（上）：如何分析 Go 语言代码的性能？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/39%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AAPI%20Server%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%92%8C%E8%B0%83%E4%BC%98%E5%AE%9E%E6%88%98.html">39 性能分析（下）：API Server性能测试和调优实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/40%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E3%80%81%E9%AB%98%E5%8F%AF%E7%94%A8%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D.html">40 软件部署实战（上）：部署方案及负载均衡、高可用组件介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/41%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9AIAM%20%E7%B3%BB%E7%BB%9F%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">41 软件部署实战（中）：IAM 系统生产环境部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/42%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AIAM%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA%E3%80%81%E6%B0%B4%E5%B9%B3%E6%89%A9%E7%BC%A9%E5%AE%B9%E5%AE%9E%E6%88%98.html">42 软件部署实战（下）：IAM系统安全加固、水平扩缩容实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/43%20%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.html">43 技术演进（上）：虚拟化技术演进之路</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/44%20%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E5%92%8C%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.html">44 技术演进（下）：软件架构和应用生命周期技术演进之路</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/45%20%E5%9F%BA%E4%BA%8EKubernetes%E7%9A%84%E4%BA%91%E5%8E%9F%E7%94%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">45 基于Kubernetes的云原生架构设计</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/46%20%E5%A6%82%E4%BD%95%E5%88%B6%E4%BD%9CDocker%E9%95%9C%E5%83%8F%EF%BC%9F.html">46 如何制作Docker镜像？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/47%20%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99Kubernetes%E8%B5%84%E6%BA%90%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%EF%BC%9F.html">47 如何编写Kubernetes资源定义文件？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/48%20IAM%20%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">48 IAM 容器化部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/49%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AHelm%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html">49 服务编排（上）：Helm服务编排基础知识</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/50%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%9F%BA%E4%BA%8EHelm%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">50 服务编排（下）：基于Helm的服务编排部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/51%20%E5%9F%BA%E4%BA%8E%20GitHub%20Actions%20%E7%9A%84%20CI%20%E5%AE%9E%E6%88%98.html">51 基于 GitHub Actions 的 CI 实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Go%20Modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86%E5%85%A8%E8%AE%B2.html">特别放送 Go Modules依赖包管理全讲</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Go%20Modules%E5%AE%9E%E6%88%98.html">特别放送 Go Modules实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20IAM%E6%8E%92%E9%9A%9C%E6%8C%87%E5%8D%97.html">特别放送 IAM排障指南</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BD%9C%E4%B8%9A%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0.html">特别放送 分布式作业系统设计和实现</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%BB%99%E4%BD%A0%E4%B8%80%E4%BB%BDGo%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84Makefile%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95.html">特别放送 给你一份Go项目中最常用的Makefile核心语法</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%BB%99%E4%BD%A0%E4%B8%80%E4%BB%BD%E6%B8%85%E6%99%B0%E3%80%81%E5%8F%AF%E7%9B%B4%E6%8E%A5%E5%A5%97%E7%94%A8%E7%9A%84Go%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.html">特别放送 给你一份清晰、可直接套用的Go编码规范</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%9B%B4%E6%92%AD%E5%8A%A0%E9%A4%90%20%E5%A6%82%E4%BD%95%E4%BB%8E%E5%B0%8F%E7%99%BD%E8%BF%9B%E9%98%B6%E6%88%90%20Go%20%E8%AF%AD%E8%A8%80%E4%B8%93%E5%AE%B6%EF%BC%9F.html">直播加餐 如何从小白进阶成 Go 语言专家？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%A6%82%E4%BD%95%E8%AE%A9%E8%87%AA%E5%B7%B1%E7%9A%84%20Go%20%E7%A0%94%E5%8F%91%E4%B9%8B%E8%B7%AF%E8%B5%B0%E5%BE%97%E6%9B%B4%E8%BF%9C%EF%BC%9F.html">结束语 如何让自己的 Go 研发之路走得更远？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/16%20%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="16 代码检查：如何进行静态代码检查？" id="title">16 代码检查：如何进行静态代码检查？</h1>
+<div><p>你好，我是孔令飞。上一讲中，我在讲代码开发的具体步骤时，提到了静态代码检查，今天我就来详细讲讲如何执行静态代码检查。</p>
+<p>在做Go项目开发的过程中，我们肯定需要对Go代码做静态代码检查。虽然Go命令提供了go vet和go tool vet，但是它们检查的内容还不够全面，我们需要一种更加强大的静态代码检查工具。</p>
+<p>其实，Go生态中有很多这样的工具，也不乏一些比较优秀的。今天我想给你介绍的golangci-lint，是目前使用最多，也最受欢迎的静态代码检查工具，我们的IAM实战项目也用到了它。</p>
+<p>接下来，我就从golangci-lint的优点、golangci-lint提供的命令和选项、golangci-lint的配置这三个方面来向你介绍下它。在你了解这些基础知识后，我会带着你使用golangci-lint进行静态代码检查，让你熟悉操作，在这个基础上，再把我使用golangci-lint时总结的一些经验技巧分享给你。</p>
+<h2 id="为什么选择golangci-lint做静态代码检查">为什么选择golangci-lint做静态代码检查？</h2>
+<p>选择golangci-lint，是因为它具有其他静态代码检查工具不具备的一些优点。在我看来，它的核心优点至少有这些：</p>
+<ul>
+<li>速度非常快：golangci-lint是基于gometalinter开发的，但是平均速度要比gometalinter快5倍。golangci-lint速度快的原因有三个：可以并行检查代码；可以复用go build缓存；会缓存分析结果。</li>
+<li>可配置：支持YAML格式的配置文件，让检查更灵活，更可控。</li>
+<li>IDE集成：可以集成进多个主流的IDE，例如 VS Code、GNU Emacs、Sublime Text、Goland等。</li>
+<li>linter聚合器：1.41.1版本的golangci-lint集成了76个linter，不需要再单独安装这76个linter。并且golangci-lint还支持自定义linter。</li>
+<li>最小的误报数：golangci-lint调整了所集成linter的默认设置，大幅度减少了误报。</li>
+<li>良好的输出：输出的结果带有颜色、代码行号和linter标识，易于查看和定位。</li>
+</ul>
+<p>下图是一个golangci-lint的检查结果：</p>
+<p><img alt="" src="/assets/82efcac45f3219e10b8d75fb.png"/></p>
+<p>你可以看到，输出的检查结果中包括如下信息：</p>
+<ul>
+<li>检查出问题的源码文件、行号和错误行内容。</li>
+<li>出问题的原因，也就是打印出不符合检查规则的原因。</li>
+<li>报错的linter。</li>
+</ul>
+<p>通过查看golangci-lint的输出结果，可以准确地定位到报错的位置，快速弄明白报错的原因，方便开发者修复。</p>
+<p>除了上述优点之外，在我看来golangci-lint还有一个非常大的优点：<strong>当前更新迭代速度很快，不断有新的linter被集成到golangci-lint中。</strong>有这么全的linter为你的代码保驾护航，你在交付代码时肯定会更有自信。</p>
+<p>目前，有很多公司/项目使用了golangci-lint工具作为静态代码检查工具，例如 Google、Facebook、Istio、Red Hat OpenShift等。</p>
+<h2 id="golangci-lint提供了哪些命令和选项">golangci-lint提供了哪些命令和选项？</h2>
+<p>在使用之前，首先需要<strong>安装golangci-lint</strong>。golangci-lint的安装方法也很简单，你只需要执行以下命令，就可以安装了。</p>
+<pre><code>$ go get github.com/golangci/golangci-lint/cmd/<a class="__cf_email__" data-cfemail="3c5b53505d525b5f5511505552487c4a0d12080d120d" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>
+$ golangci-lint version # 输出 golangci-lint 版本号，说明安装成功
+golangci-lint has version v1.39.0 built from (unknown, mod sum: "h1:aAUjdBxARwkGLd5PU0vKuym281f2rFOyqh3GB4nXcq8=") on (unknown)
+</code></pre>
+<p>这里注意，为了避免安装失败，强烈建议你安装golangci-lint releases page中的指定版本，例如 v1.41.1。</p>
+<p>另外，还建议你定期更新 golangci-lint 的版本，因为该项目正在被积极开发并不断改进。</p>
+<p>安装之后，就可以使用了。我们可以通过执行 <code>golangci-lint -h</code> 查看其用法，golangci-lint支持的<strong>子命令</strong>见下表：</p>
+<p><img alt="" src="/assets/7d6a8462e3fd9aeadef4cede.png"/></p>
+<p>此外，golangci-lint还支持一些<strong>全局选项</strong>。全局选项是指适用于所有子命令的选项，golangci-lint支持的全局选项如下：</p>
+<p><img alt="" src="/assets/117075b17e51ecb54389f7d7.png"/></p>
+<p>接下来，我就详细介绍下golangci-lint支持的核心子命令：run、cache、completion、config、linters。</p>
+<h3 id="run命令">run命令</h3>
+<p>run命令执行golangci-lint，对代码进行检查，是golangci-lint最为核心的一个命令。run没有子命令，但有很多选项。run命令的具体使用方法，我会在讲解如何执行静态代码检查的时候详细介绍。</p>
+<h3 id="cache命令">cache命令</h3>
+<p>cache命令用来进行缓存控制，并打印缓存的信息。它包含两个子命令：</p>
+<ul>
+<li>clean用来清除cache，当我们觉得cache的内容异常，或者cache占用空间过大时，可以通过<code>golangci-lint cache clean</code>清除cache。</li>
+<li>status用来打印cache的状态，比如cache的存放目录和cache的大小，例如：</li>
+</ul>
+<pre><code>$ golangci-lint cache status
+Dir: /home/colin/.cache/golangci-lint
+Size: 773.4KiB
+</code></pre>
+<h3 id="completion命令">completion命令</h3>
+<p>completion命令包含4个子命令bash、fish、powershell和zsh，分别用来输出bash、fish、powershell和zsh的自动补全脚本。</p>
+<p>下面是一个配置bash自动补全的示例：</p>
+<pre><code>$ golangci-lint completion bash &gt; ~/.golangci-lint.bash
+$ echo "source '$HOME/.golangci-lint.bash'" &gt;&gt; ~/.bashrc
+$ source ~/.bashrc
+</code></pre>
+<p>执行完上面的命令，键入如下命令，即可自动补全子命令：</p>
+<pre><code>$ golangci-lint comp&lt;TAB&gt;
+</code></pre>
+<p>上面的命令行会自动补全为<code>golangci-lint completion</code> 。</p>
+<h3 id="config命令">config命令</h3>
+<p>config命令可以打印golangci-lint当前使用的配置文件路径，例如：</p>
+<pre><code>$ golangci-lint config path
+.golangci.yaml
+</code></pre>
+<h3 id="linters命令">linters命令</h3>
+<p>linters命令可以打印出golangci-lint所支持的linter，并将这些linter分成两类，分别是配置为启用的linter和配置为禁用的linter，例如：</p>
+<pre><code>$ golangci-lint linters
+Enabled by your configuration linters:
+...
+deadcode: Finds unused code [fast: true, auto-fix: false]
+...
+Disabled by your configuration linters:
+exportloopref: checks for pointers to enclosing loop variables [fast: true, auto-fix: false]
+...
+</code></pre>
+<p>上面我介绍了golangci-lint提供的命令，接下来，我们再来看下golangci-lint的配置。</p>
+<h2 id="golangci-lint配置">golangci-lint配置</h2>
+<p>和其他linter相比，golangci-lint一个非常大的优点是使用起来非常灵活，这要得益于它对自定义配置的支持。</p>
+<p>golangci-lint支持两种配置方式，分别是命令行选项和配置文件。如果bool/string/int的选项同时在命令行选项和配置文件中被指定，命令行的选项就会覆盖配置文件中的选项。如果是slice类型的选项，则命令行和配置中的配置会进行合并。</p>
+<p><code>golangci-lint run</code> 支持很多<strong>命令行选项</strong>，可通过<code>golangci-lint run -h</code>查看，这里选择一些比较重要的选项进行介绍，见下表：</p>
+<p><img alt="" src="/assets/340e8d381205ee437728c59c.jpg"/></p>
+<p>此外，我们还可以通过golangci-lint<strong>配置文件</strong>进行配置，默认的配置文件名为.golangci.yaml、.golangci.toml、.golangci.json，可以通过<code>-c</code>选项指定配置文件名。通过配置文件，可以实现下面几类功能：</p>
+<ul>
+<li>golangci-lint本身的一些选项，比如超时、并发，是否检查<code>*_test.go</code>文件等。</li>
+<li>配置需要忽略的文件和文件夹。</li>
+<li>配置启用哪些linter，禁用哪些linter。</li>
+<li>配置输出格式。</li>
+<li>golangci-lint支持很多linter，其中有些linter支持一些配置项，这些配置项可以在配置文件中配置。</li>
+<li>配置符合指定正则规则的文件可以忽略的linter。</li>
+<li>设置错误严重级别，像日志一样，检查错误也是有严重级别的。</li>
+</ul>
+<p>更详细的配置内容，你可以参考<a href="https://golangci-lint.run/usage/configuration/" target="_blank">Configuration</a>。另外，你也可以参考IAM项目的golangci-lint配置<a href="https://github.com/marmotedu/iam/blob/master/.golangci.yaml" target="_blank">.golangci.yaml</a>。.golangci.yaml里面的一些配置，我建议你一定要设置，具体如下：</p>
+<pre><code>run:
+  skip-dirs: # 设置要忽略的目录
+    - util
+    - .*~
+    - api/swagger/docs
+  skip-files: # 设置不需要检查的go源码文件，支持正则匹配，这里建议包括：_test.go
+    - ".*\\.my\\.go$"
+    - _test.go
+linters-settings:
+  errcheck:
+    check-type-assertions: true # 这里建议设置为true，如果确实不需要检查，可以写成`num, _ := strconv.Atoi(numStr)`
+    check-blank: false
+  gci:
+    # 将以`github.com/marmotedu/iam`开头的包放在第三方包后面
+    local-prefixes: github.com/marmotedu/iam
+  godox:
+    keywords: # 建议设置为BUG、FIXME、OPTIMIZE、HACK
+      - BUG
+      - FIXME
+      - OPTIMIZE
+      - HACK
+  goimports:
+    # 设置哪些包放在第三方包后面，可以设置多个包，逗号隔开
+    local-prefixes: github.com/marmotedu/iam
+  gomoddirectives: # 设置允许在go.mod中replace的包
+    replace-local: true
+    replace-allow-list:
+      - github.com/coreos/etcd
+      - google.golang.org/grpc
+      - github.com/marmotedu/api
+      - github.com/marmotedu/component-base
+      - github.com/marmotedu/marmotedu-sdk-go
+  gomodguard: # 下面是根据需要选择可以使用的包和版本，建议设置
+    allowed:
+      modules:
+        - gorm.io/gorm
+        - gorm.io/driver/mysql
+        - k8s.io/klog
+      domains: # List of allowed module domains
+        - google.golang.org
+        - gopkg.in
+        - golang.org
+        - github.com
+        - go.uber.org
+    blocked:
+      modules:
+        - github.com/pkg/errors:
+            recommendations:
+              - github.com/marmotedu/errors
+            reason: "`github.com/marmotedu/errors` is the log package used by marmotedu projects."
+      versions:
+        - github.com/MakeNowJust/heredoc:
+            version: "&gt; 2.0.9"
+            reason: "use the latest version"
+      local_replace_directives: false
+  lll:
+    line-length: 240 # 这里可以设置为240，240一般是够用的
+  importas: # 设置包的alias，根据需要设置
+    jwt: github.com/appleboy/gin-jwt/v2         
+    metav1: github.com/marmotedu/component-base/pkg/meta/v1
+</code></pre>
+<p>需要注意的是，golangci-lint不建议使用 <code>enable-all: true</code> 选项，为了尽可能使用最全的linters，我们可以使用以下配置：</p>
+<pre><code>linters: 
+  disable-all: true  
+  enable: # enable下列出 &lt;期望的所有linters&gt;
+    - typecheck
+    - ... 
+</code></pre>
+<p><code>&lt;期望的所有linters&gt; = &lt;golangci-lint支持的所有linters&gt; - &lt;不期望执行的linters&gt;</code>，我们可以通过执行以下命令来获取：</p>
+<pre><code>$ ./scripts/print_enable_linters.sh
+    - asciicheck
+    - bodyclose
+    - cyclop
+    - deadcode
+    - ...
+</code></pre>
+<p>将以上输出结果替换掉.golangci.yaml配置文件中的 <code>linters.enable</code> 部分即可。</p>
+<p>上面我们介绍了与golangci-lint相关的一些基础知识，接下来我就给你详细展示下，如何使用golangci-lint进行静态代码检查。</p>
+<h2 id="如何使用golangci-lint进行静态代码检查">如何使用golangci-lint进行静态代码检查？</h2>
+<p>要对代码进行静态检查，只需要执行 <code>golangci-lint run</code> 命令即可。接下来，我会先给你介绍5种常见的golangci-lint使用方法。</p>
+<ol>
+<li>对当前目录及子目录下的所有Go文件进行静态代码检查：</li>
+</ol>
+<pre><code>$ golangci-lint run
+</code></pre>
+<p>命令等效于<code>golangci-lint run ./...</code>。</p>
+<ol>
+<li>对指定的Go文件或者指定目录下的Go文件进行静态代码检查：</li>
+</ol>
+<pre><code>$ golangci-lint run dir1 dir2/... dir3/file1.go
+</code></pre>
+<p>这里需要你注意：上述命令不会检查dir1下子目录的Go文件，如果想递归地检查一个目录，需要在目录后面追加<code>/...</code>，例如：<code>dir2/...</code>。</p>
+<ol>
+<li>根据指定配置文件，进行静态代码检查：</li>
+</ol>
+<pre><code>$ golangci-lint run -c .golangci.yaml ./...
+</code></pre>
+<ol>
+<li>运行指定的linter：</li>
+</ol>
+<p>golangci-lint可以在不指定任何配置文件的情况下运行，这会运行默认启用的linter，你可以通过<code>golangci-lint help linters</code>查看它。</p>
+<p>你可以传入参数<code>-E/--enable</code>来使某个linter可用，也可以使用<code>-D/--disable</code>参数来使某个linter不可用。下面的示例仅仅启用了errcheck linter：</p>
+<pre><code>$ golangci-lint run --no-config --disable-all -E errcheck ./...
+</code></pre>
+<p>这里你需要注意，默认情况下，golangci-lint会从当前目录一层层往上寻找配置文件名<code>.golangci.yaml</code>、<code>.golangci.toml</code>、<code>.golangci.json</code>直到根（/）目录。如果找到，就以找到的配置文件作为本次运行的配置文件，所以为了防止读取到未知的配置文件，可以用 <code>--no-config</code> 参数使golangci-lint不读取任何配置文件。</p>
+<ol>
+<li>禁止运行指定的liner：</li>
+</ol>
+<p>如果我们想禁用某些linter，可以使用<code>-D</code>选项。</p>
+<pre><code>$ golangci-lint run --no-config -D godot,errcheck
+</code></pre>
+<p>在使用golangci-lint进行代码检查时，可能会有很多误报。所谓的误报，其实是我们希望golangci-lint的一些linter能够容忍某些issue。那么如何尽可能减少误报呢？golangci-lint也提供了一些途径，我建议你使用下面这三种：</p>
+<ul>
+<li>在命令行中添加<code>-e</code>参数，或者在配置文件的<code>issues.exclude</code>部分设置要排除的检查错误。你也可以使用<code>issues.exclude-rules</code>来配置哪些文件忽略哪些linter。</li>
+<li>通过<code>run.skip-dirs</code>、<code>run.skip-files</code>或者<code>issues.exclude-rules</code>配置项，来忽略指定目录下的所有Go文件，或者指定的Go文件。</li>
+<li>通过在Go源码文件中添加<code>//nolint</code>注释，来忽略指定的代码行。</li>
+</ul>
+<p>因为golangci-lint设置了很多linters，对于一个大型项目，启用所有的linter会检查出很多问题，并且每个项目对linter检查的粒度要求也不一样，所以glangci-lint<strong>使用nolint标记来开关某些检查项</strong>，不同位置的nolint标记效果也会不一样。接下来我想向你介绍nolint的几种用法。</p>
+<ol>
+<li>忽略某一行所有linter的检查</li>
+</ol>
+<pre><code>var bad_name int //nolint
+</code></pre>
+<ol>
+<li>忽略某一行指定linter的检查，可以指定多个linter，用逗号 <code>,</code> 隔开。</li>
+</ol>
+<pre><code>var bad_name int //nolint:golint,unused
+</code></pre>
+<ol>
+<li>忽略某个代码块的检查。</li>
+</ol>
+<pre><code>//nolint
+func allIssuesInThisFunctionAreExcluded() *string {
+  // ...
+}
+
+//nolint:govet
+var (
+  a int
+  b int
+)
+</code></pre>
+<ol>
+<li>忽略某个文件的指定linter检查。</li>
+</ol>
+<p>在package xx 上面一行添加<code>//nolint</code>注释。</p>
+<pre><code>//nolint:unparam
+package pkg
+...
+</code></pre>
+<p>在使用nolint的过程中，有3个地方需要你注意。</p>
+<p>首先，如果启用了nolintlint，你就需要在<code>//nolint</code>后面添加nolint的原因<code>// xxxx</code>。</p>
+<p>其次，你使用的应该是<code>//nolint</code>而不是<code>// nolint</code>。因为根据Go的规范，需要程序读取的注释//后面不应该有空格。</p>
+<p>最后，如果要忽略所有linter，可以用<code>//nolint</code>；如果要忽略某个指定的linter，可以用<code>//nolint:&lt;linter1&gt;,&lt;linter2&gt;</code>。</p>
+<h2 id="golangci-lint使用技巧">golangci-lint使用技巧</h2>
+<p>我在使用golangci-lint时，总结了一些经验技巧，放在这里供你参考，希望能够帮助你更好地使用golangci-lint。</p>
+<p><strong>技巧1：第一次修改，可以按目录修改。</strong></p>
+<p>如果你第一次使用golangci-lint检查你的代码，一定会有很多错误。为了减轻修改的压力，可以按目录检查代码并修改。这样可以有效减少失败条数，减轻修改压力。</p>
+<p>当然，如果错误太多，一时半会儿改不完，想以后慢慢修改或者干脆不修复存量的issues，那么你可以使用golangci-lint的 <code>--new-from-rev</code> 选项，只检查新增的code，例如：</p>
+<pre><code>$ golangci-lint run --new-from-rev=HEAD~1
+</code></pre>
+<p><strong>技巧2：按文件修改，减少文件切换次数，提高修改效率。</strong></p>
+<p>如果有很多检查错误，涉及很多文件，建议先修改一个文件，这样就不用来回切换文件。可以通过grep过滤出某个文件的检查失败项，例如：</p>
+<pre><code>$ golangci-lint run ./...|grep pkg/storage/redis_cluster.go
+pkg/storage/redis_cluster.go:16:2: "github.com/go-redis/redis/v7" imported but not used (typecheck)
+pkg/storage/redis_cluster.go:82:28: undeclared name: `redis` (typecheck)
+pkg/storage/redis_cluster.go:86:14: undeclared name: `redis` (typecheck)
+...
+</code></pre>
+<p><strong>技巧3：把linters-setting.lll.line-length设置得大一些。</strong></p>
+<p>在Go项目开发中，为了易于阅读代码，通常会将变量名/函数/常量等命名得有意义，这样很可能导致每行的代码长度过长，很容易超过<code>lll</code> linter设置的默认最大长度80。这里建议将<code>linters-setting.lll.line-length</code>设置为120/240。</p>
+<p><strong>技巧4：尽可能多地使用golangci-lint提供的linter。</strong></p>
+<p>golangci-lint集成了很多linters，可以通过如下命令查看：</p>
+<pre><code>$ golangci-lint linters
+Enabled by your configuration linters:
+deadcode: Finds unused code [fast: true, auto-fix: false]
+...
+varcheck: Finds unused global variables and constants [fast: true, auto-fix: false]
+
+Disabled by your configuration linters:
+asciicheck: Simple linter to check that your code does not contain non-ASCII identifiers [fast: true, auto-fix: false]
+...
+wsl: Whitespace Linter - Forces you to use empty lines! [fast: true, auto-fix: false]
+</code></pre>
+<p>这些linter分为两类，一类是默认启用的，另一类是默认禁用的。每个linter都有两个属性：</p>
+<ul>
+<li>fast：true/false，如果为true，说明该linter可以缓存类型信息，支持快速检查。因为第一次缓存了这些信息，所以后续的运行会非常快。</li>
+<li>auto-fix：true/false，如果为true说明该linter支持自动修复发现的错误；如果为false说明不支持自动修复。</li>
+</ul>
+<p>如果配置了golangci-lint配置文件，则可以通过命令<code>golangci-lint help linters</code>查看在当前配置下启用和禁用了哪些linter。golangci-lint也支持自定义linter插件，具体你可以参考：<a href="https://golangci-lint.run/contributing/new-linters" target="_blank">New linters</a>。</p>
+<p>在使用golangci-lint的时候，我们要尽可能多的使用linter。使用的linter越多，说明检查越严格，意味着代码越规范，质量越高。如果时间和精力允许，建议打开golangci-lint提供的所有linter。</p>
+<p><strong>技巧5：每次修改代码后，都要执行golangci-lint。</strong></p>
+<p>每次修改完代码后都要执行golangci-lint，一方面可以及时修改不规范的地方，另一方面可以减少错误堆积，减轻后面的修改压力。</p>
+<p><strong>技巧6：建议在根目录下放一个通用的golangci-lint配置文件。</strong></p>
+<p>在<code>/</code>目录下存放通用的golangci-lint配置文件，可以让你不用为每一个项目都配置golangci-lint。当你需要为某个项目单独配置golangci-lint时，只需在该项目根目录下增加一个项目级别的golangci-lint配置文件即可。</p>
+<h2 id="总结">总结</h2>
+<p>Go项目开发中，对代码进行静态代码检查是必要的操作。当前有很多优秀的静态代码检查工具，但golangci-lint因为具有检查速度快、可配置、少误报、内置了大量linter等优点，成为了目前最受欢迎的静态代码检查工具。</p>
+<p>golangci-lint功能非常强大，支持诸如run、cache、completion、linters等命令。其中最常用的是run命令，run命令可以通过以下方式来进行静态代码检查：</p>
+<pre><code>$ golangci-lint run #  对当前目录及子目录下的所有Go文件进行静态代码检查
+$ golangci-lint run dir1 dir2/... dir3/file1.go # 对指定的Go文件或者指定目录下的Go文件进行静态代码检查
+$ golangci-lint run -c .golangci.yaml ./... # 根据指定配置文件，进行静态代码检查
+$ golangci-lint run --no-config --disable-all -E errcheck ./... # 运行指定的 errcheck linter
+$ golangci-lint run --no-config -D godot,errcheck # 禁止运行指定的godot,errcheck liner
+</code></pre>
+<p>此外，golangci-lint还支持 <code>//nolint</code> 、<code>//nolint:golint,unused</code> 等方式来减少误报。</p>
+<p>最后，我分享了一些自己使用golangci-lint时总结的经验。例如：第一次修改，可以按目录修改；按文件修改，减少文件切换次数，提高修改效率；尽可能多地使用golangci-lint提供的linter。希望这些建议对你使用golangci-lint有一定帮助。</p>
+<h2 id="课后练习">课后练习</h2>
+<ol>
+<li>执行<code>golangci-lint linters</code>命令，查看golangci-lint支持哪些linter，以及这些linter的作用。</li>
+<li>思考下，如何在golangci-lint中集成自定义的linter。</li>
+</ol>
+<p>如果遇到任何疑问，欢迎你在留言区与我交流讨论，我们下一讲见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

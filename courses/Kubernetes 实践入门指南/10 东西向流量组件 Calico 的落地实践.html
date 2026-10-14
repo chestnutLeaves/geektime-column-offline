@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 东西向流量组件 Calico 的落地实践 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/index.html">Kubernetes 实践入门指南</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">25 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kubernetes 实践入门指南</strong><ul><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/00%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E8%A6%81%E5%AD%A6%E4%B9%A0%20Kubernetes%20%E6%8A%80%E6%9C%AF.html">00 为什么我们要学习 Kubernetes 技术</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/01%20%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%20Kubernetes%20%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6.html">01 重新认识 Kubernetes 的核心组件</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/02%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Kubernets%20%E7%9A%84%E7%BC%96%E6%8E%92%E5%AF%B9%E8%B1%A1.html">02 深入理解 Kubernets 的编排对象</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/03%20DevOps%20%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">03 DevOps 场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/04%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">04 微服务应用场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/05%20%E8%A7%A3%E5%86%B3%20K8s%20%E8%90%BD%E5%9C%B0%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA%E6%8F%90%E7%82%BC.html">05 解决 K8s 落地难题的方法论提炼</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/06%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E6%A0%B8%E5%BF%83%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86%E6%8E%8C%E6%8F%A1.html">06 练习篇：K8s 核心实践知识掌握</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/07%20%E5%AE%B9%E5%99%A8%E5%BC%95%E6%93%8E%20containerd%20%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">07 容器引擎 containerd 落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/08%20K8s%20%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7%20kubeadm%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">08 K8s 集群安装工具 kubeadm 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/09%20%E5%8D%97%E5%8C%97%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20IPVS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">09 南北向流量组件 IPVS 的落地实践</a></li><li><a class="active" aria-current="page" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/10%20%E4%B8%9C%E8%A5%BF%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20Calico%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">10 东西向流量组件 Calico 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/11%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%20DNS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">11 服务发现 DNS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/12%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">12 练习篇：K8s 集群配置测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/13%20%E7%90%86%E8%A7%A3%E5%AF%B9%E6%96%B9%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AF%B9%E8%B1%A1%20Ingress%20%E5%92%8C%20Service.html">13 理解对方暴露服务的对象 Ingress 和 Service</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/14%20%E5%BA%94%E7%94%A8%E7%BD%91%E5%85%B3%20OpenResty%20%E5%AF%B9%E6%8E%A5%20K8s%20%E5%AE%9E%E8%B7%B5.html">14 应用网关 OpenResty 对接 K8s 实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/15%20Service%20%E5%B1%82%E5%BC%95%E6%B5%81%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">15 Service 层引流技术实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/16%20Cilium%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">16 Cilium 容器网络的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/17%20%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E7%9A%84%E4%BC%98%E9%9B%85%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E5%AE%9E%E8%B7%B5.html">17 应用流量的优雅无损切换实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/18%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9A%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E6%8A%80%E6%9C%AF%E6%B5%8B%E9%AA%8C.html">18 练习篇：应用流量无损切换技术测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/19%20%E4%BD%BF%E7%94%A8%20Rook%20%E6%9E%84%E5%BB%BA%E7%94%9F%E4%BA%A7%E5%8F%AF%E7%94%A8%E5%AD%98%E5%82%A8%E7%8E%AF%E5%A2%83%E5%AE%9E%E8%B7%B5.html">19 使用 Rook 构建生产可用存储环境实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/20%20%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8%E7%9A%84%E9%BB%98%E8%AE%A4%E7%89%B9%E6%80%A7%E8%90%BD%E5%9C%B0%E5%88%86%E6%9E%90.html">20 有状态应用的默认特性落地分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/21%20%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20MySQL%20%E9%9B%86%E7%BE%A4%E5%B7%A5%E5%85%B7%20Vitess%20%E5%AE%9E%E8%B7%B5%E5%88%86%E6%9E%90.html">21 案例：分布式 MySQL 集群工具 Vitess 实践分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/22%20%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%20PV%E3%80%81PVC%E3%80%81Storage%20Classes%20%E7%9A%84%E7%AE%A1%E7%90%86%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">22 存储对象 PV、PVC、Storage Classes 的管理落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/23%20K8s%20%E9%9B%86%E7%BE%A4%E4%B8%AD%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E7%81%BE%E5%A4%87%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">23 K8s 集群中存储对象灾备的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/24%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">24 练习篇：K8s 集群配置测验</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/10%20%E4%B8%9C%E8%A5%BF%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20Calico%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="10 东西向流量组件 Calico 的落地实践" id="title">10 东西向流量组件 Calico 的落地实践</h1>
+<div><p>Kubernetes 网络并没有原生的方案，它从一开始就给我们送来了一个选择题。到底选哪种网络方案才是最佳的方案呢？网络问题一直让社区用户很困惑，以至于在早期，不同场景下的方案如雨后春笋般涌现出来。其中比较优秀的就是今天选择给大家介绍的网络组件 Calico。这里我们要强调的是，Calico 方案并不是唯一方案，我们在社区仍然能看到很多优秀的方案比如 Cilium、OvS、Contiv、Flannel 等，至于选择它来讲解东西向流量的组件落地，实在是当前国内业界大部分的方案都是以 Cailico 实践为主，介绍它可以起到一个案例示范的作用。</p>
+<h3 id="容器网络路由的原理">容器网络路由的原理</h3>
+<p>众所周知容器原生网络模型基于单机的 veth 虚拟网桥实现，无法跨主机互联互通。如果想让容器跨主机互联互通，需要支持以下 3 点：</p>
+<ol>
+<li>网络控制面需要保证容器 IP 的唯一性</li>
+<li>两个容器需要放在一个数据平面</li>
+<li>需要工具来自动解决容器网络地址转换</li>
+</ol>
+<p>这里我们通过一个原生网络路由的例子来帮助大家理解容器网络互联互通的基本原理：</p>
+<p><img alt="9-1-hosts-container-network" src="/assets/acb25d439217ade55226626a.png"/></p>
+<p>图：Docker 19.03.12 版本直接路由模式图例</p>
+<h4 id="分别对主机-1-和主机-2-上的-docker0-进行配置-重启-docker-服务生效"><strong>分别对主机 1 和主机 2 上的 docker0 进行配置，重启 docker 服务生效</strong></h4>
+<p>编辑主机 1 上的 <code>/etc/docker/daemon.json</code> 文件，添加内容：<code>"bip" : "ip/netmask"</code>。</p>
+<pre><code>{
+  "bip": "172.17.1.252/24"
+}
+
+</code></pre>
+<p>编辑主机 2 上的 <code>/etc/docker/daemon.json</code> 文件，添加内容：<code>"bip" : "ip/netmask"</code>。</p>
+<pre><code>{
+  "bip": "172.17.2.252/24"
+}
+
+</code></pre>
+<p>主机 1 和主机 2 上均执行如下命令，重启 Docker 服务以使修改后的 docker0 网段生效。</p>
+<pre><code>systemctl restart docker
+
+</code></pre>
+<h4 id="添加路由规则"><strong>添加路由规则</strong></h4>
+<p>主机 1 上添加路由规则如下：</p>
+<pre><code>route add -net 172.17.2.0/24 gw 172.26.15.215
+
+</code></pre>
+<p>主机 2 上添加路由规则如下：</p>
+<pre><code>route add -net 172.17.1.0/24 gw 172.26.14.120
+
+</code></pre>
+<p>理论上配置完路由后应该从主机 1 可以连接到主机 2 的 docker0，实际场景下因为交换机会检查 docker0 的 mac 地址，并把这个非法的地址下的数据包直接 DROP 掉，让跨主机的容器无法想通，但这个并不妨碍我们理解原理。Calico 网络路由原理和以上示范静态路由原理是一致的，那么它是如何实现连通的呢？</p>
+<p>安装 Calico 后，主机上检查如下：</p>
+<pre><code class="language-bash">### 主机 1 上的
+vxlan.calico: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1410 qdisc noqueue state UNKNOWN group default
+link/ether 66:18:b6:89:bd:6f brd ff:ff:ff:ff:ff:ff 
+inet 192.168.206.0/32 brd 192.168.206.0 scope global vxlan.calico 
+
+### 主机 2 上的
+vxlan.calico: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1410 qdisc noqueue state UNKNOWN group default
+link/ether 66:85:17:26:23:b1 brd ff:ff:ff:ff:ff:ff
+inet 192.168.49.0/32 brd 192.168.49.0 scope global vxlan.calico
+
+</code></pre>
+<p>对比可以知道，和上面范例中分配 IP 段一样，Calico 也是为每台主机分配固定的 IP 段保证容器网络 IP 不冲突。我们再来看下路由规则：</p>
+<pre><code class="language-bash">root@ip-172-26-8-126:~# route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         172.26.0.1      0.0.0.0         UG    100    0        0 eth0
+172.26.0.0      0.0.0.0         255.255.240.0   U     0      0        0 eth0
+172.26.0.1      0.0.0.0         255.255.255.255 UH    100    0        0 eth0
+192.168.49.1    0.0.0.0         255.255.255.255 UH    0      0        0 cali3f1b566e6d6
+192.168.49.2    0.0.0.0         255.255.255.255 UH    0      0        0 cali408c6db5188
+192.168.206.0   172.26.5.8      255.255.255.192 UG    0      0        0 eth0
+
+root@ip-172-26-5-8:~# route -n 
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         172.26.0.1      0.0.0.0         UG    100    0        0 eth0             
+172.26.0.0      0.0.0.0         255.255.240.0   U     0      0        0 eth0             
+172.26.0.1      0.0.0.0         255.255.255.255 UH    100    0        0 eth0             
+192.168.49.0    172.26.8.126    255.255.255.192 UG    0      0        0 eth0             
+192.168.206.1   0.0.0.0         255.255.255.255 UH    0      0        0 cali517a7f7f853
+192.168.206.3   0.0.0.0         255.255.255.255 UH    0      0        0 cali8d8ae1f64d9
+192.168.206.4   0.0.0.0         255.255.255.255 UH    0      0        0 cali99a5d6c4e2d
+192.168.206.5   0.0.0.0         255.255.255.255 UH    0      0        0 cali3b6d130f2eb
+192.168.206.6   0.0.0.0         255.255.255.255 UH    0      0        0 calid8aeffc724c
+
+</code></pre>
+<p>两台主机路由表上都做了对方 IP 的路由信息。</p>
+<p>我们通过部署容器来测试网络连通性：</p>
+<pre><code class="language-bash">root@ip-172-26-5-8:~# cat pingtest-deployment.yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingtest-deployment
+  labels:
+    app: pingtest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pingtest
+  template:
+    metadata:
+      labels:
+        app: pingtest
+    spec:
+      containers:
+      - name: pingtest
+        image: busybox
+        args: ["sleep", "infinity"]
+
+root@ip-172-26-5-8:~# kubectl apply -f pingtest-deployment.yaml 
+
+root@ip-172-26-5-8:~# kubectl get pod -l app=pingtest -o wide
+NAME                                   READY   STATUS        RESTARTS   AGE     IP              NODE              NOMINATED NODE   READINESS GATES
+pingtest-deployment-6dcb8d6c77-8ntqf   1/1     Running       0          10m     192.168.49.4    ip-172-26-8-126   &lt;none&gt;           &lt;none&gt;
+pingtest-deployment-6dcb8d6c77-l5hq2   1/1     Running       0          10m     192.168.49.5    ip-172-26-8-126   &lt;none&gt;           &lt;none&gt;
+pingtest-deployment-6dcb8d6c77-6fcdn   1/1     Running       0          6m48s   192.168.206.7   ip-172-26-5-8     &lt;none&gt;           &lt;none&gt;
+
+</code></pre>
+<p>因为最新的 Calico 默认配置的模式是 vxlanMode 模式，你没有修改路由器的权限，所以需要修改 ipipMode 为 Always。</p>
+<pre><code class="language-json">root@ip-172-26-12-198:~# cat pool.json 
+{
+  "kind": "IPPoolList",
+  "apiVersion": "projectcalico.org/v3",
+  "metadata": {
+    "resourceVersion": "2306"
+  },
+  "items": [
+    {
+      "kind": "IPPool",
+      "apiVersion": "projectcalico.org/v3",
+      "metadata": {
+        "name": "default-ipv4-ippool",
+        "uid": "0ba1e107-0582-4b7b-b99f-f7105525e987",
+        "resourceVersion": "763",
+        "creationTimestamp": "2020-08-10T16:59:28Z"
+      },
+      "spec": {
+        "cidr": "192.168.0.0/16",
+        "vxlanMode": "Never",
+        "ipipMode": "Always",
+        "natOutgoing": true,
+        "blockSize": 26,
+        "nodeSelector": "all()"
+      }
+    }
+  ]
+}
+
+</code></pre>
+<p>修改后在命令行下查看路由规则的办法，确认虚拟网络走了 tunnel 网卡口：</p>
+<pre><code>root@ip-172-26-12-198:~# ip route
+default via 172.26.0.1 dev eth0 proto dhcp src 172.26.12.198 metric 100 
+172.26.0.0/20 dev eth0 proto kernel scope link src 172.26.12.198 
+172.26.0.1 dev eth0 proto dhcp scope link src 172.26.12.198 metric 100 
+192.168.31.0 via 172.26.5.10 dev tunl0 proto bird onlink 
+192.168.31.0/26 via 172.26.5.10 dev eth0 proto 80 onlink 
+192.168.31.1 via 172.26.5.10 dev tunl0 proto bird onlink 
+192.168.31.3 via 172.26.5.10 dev tunl0 proto bird onlink 
+192.168.31.4 via 172.26.5.10 dev tunl0 proto bird onlink 
+192.168.31.5 via 172.26.5.10 dev tunl0 proto bird onlink 
+192.168.31.7 via 172.26.5.10 dev tunl0 proto bird onlink 
+192.168.31.64/26 via 172.26.5.10 dev tunl0 proto bird onlink 
+192.168.41.137 dev calie486eacd845 scope link 
+192.168.41.138 dev calif383cce9723 scope link 
+192.168.41.139 dev calia4f3d6b96e0 scope link 
+192.168.41.140 dev cali391d55f6fc3 scope link 
+192.168.41.141 dev cali981dc37e1ca scope link 
+192.168.41.142 dev calic0a72d40721 scope link 
+192.168.41.143 dev calicfb8f80c8c5 scope link 
+blackhole 192.168.41.192/26 proto bird 
+192.168.41.193 dev calia6f4721616e scope link 
+
+</code></pre>
+<p>通过 kubectl exec 可以进入 Pod 容器进行连通性测试：</p>
+<pre><code class="language-bash">root@ip-172-26-12-198:~# kubectl get po -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE   IP               NODE               NOMINATED NODE   READINESS GATES
+pingtest-deployment-6dcb8d6c77-95vrw   1/1     Running   0          23m   192.168.41.139   ip-172-26-12-198   &lt;none&gt;           &lt;none&gt;
+pingtest-deployment-6dcb8d6c77-p4cqx   1/1     Running   0          23m   192.168.41.140   ip-172-26-12-198   &lt;none&gt;           &lt;none&gt;
+pingtest-deployment-6dcb8d6c77-kfmhp   1/1     Running   0          23m   192.168.41.137   ip-172-26-12-198   &lt;none&gt;           &lt;none&gt;
+pingtest-deployment-6dcb8d6c77-w582x   1/1     Running   0          23m   192.168.41.141   ip-172-26-12-198   &lt;none&gt;           &lt;none&gt;
+pingtest-deployment-6dcb8d6c77-ts9fh   1/1     Running   0          23m   192.168.41.138   ip-172-26-12-198   &lt;none&gt;           &lt;none&gt;
+pingtest-deployment-6dcb8d6c77-ppt2n   1/1     Running   0          22m   192.168.41.142   ip-172-26-12-198   &lt;none&gt;           &lt;none&gt;
+pingtest-deployment-6dcb8d6c77-qw46c   1/1     Running   0          22m   192.168.41.143   ip-172-26-12-198   &lt;none&gt;           &lt;none&gt;
+pingtest-deployment-6dcb8d6c77-972zw   1/1     Running   0          22m   192.168.31.7     ip-172-26-5-10     &lt;none&gt;           &lt;none&gt;
+root@ip-172-26-12-198:~# kubectl exec -it pingtest-deployment-6dcb8d6c77-972zw -- sh
+/ # ping 192.168.41.138
+PING 192.168.41.138 (192.168.41.138): 56 data bytes
+64 bytes from 192.168.41.138: seq=0 ttl=62 time=0.449 ms
+64 bytes from 192.168.41.138: seq=1 ttl=62 time=0.501 ms
+
+</code></pre>
+<h3 id="calico-网络的性能">Calico 网络的性能</h3>
+<pre><code class="language-bash">sh-4.4# iperf3 -s
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+
+Accepted connection from 172.26.5.10, port 53246
+[  5] local 192.168.31.68 port 5201 connected to 172.26.5.10 port 53248
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-1.00   sec  2.42 GBytes  20.8 Gbits/sec
+[  5]   1.00-2.00   sec  3.07 GBytes  26.4 Gbits/sec
+[  5]   2.00-3.00   sec  2.83 GBytes  24.3 Gbits/sec
+[  5]   3.00-4.00   sec  3.05 GBytes  26.2 Gbits/sec
+[  5]   4.00-5.00   sec  3.12 GBytes  26.8 Gbits/sec
+[  5]   5.00-6.00   sec  2.87 GBytes  24.7 Gbits/sec
+[  5]   6.00-7.00   sec  3.02 GBytes  26.0 Gbits/sec
+[  5]   7.00-8.00   sec  3.04 GBytes  26.1 Gbits/sec
+[  5]   8.00-9.00   sec  3.08 GBytes  26.5 Gbits/sec
+[  5]   9.00-10.00  sec  2.93 GBytes  25.2 Gbits/sec
+[  5]  10.00-10.04  sec   104 MBytes  24.6 Gbits/sec
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-10.04  sec  29.5 GBytes  25.3 Gbits/sec                  receiver
+
+</code></pre>
+<p>在规模配置在 10 台以下的情况下，容器传输效率依赖主机网卡性能，结果说明性能不差。</p>
+<h3 id="总结">总结</h3>
+<p>Calico 作为业内常用的方案，它的好处就是灵活配置。因为它有 BGP 协议支持，可以跨数据中心的互联互通。从实践角度来看，它具备复杂场景下灵活配置的特点，所以也在业界主流比较推荐。当然这里我们的目的并不是推荐 Calico，我们仍然需要依据你当前集群的具体需要来规划，让容器网络能更方便的使用。</p>
+<p>参考文章：</p>
+<ul>
+<li><a href="https://docs.docker.com/network/bridge/" target="_blank">https://docs.docker.com/network/bridge/</a></li>
+<li><a href="https://www.tecmint.com/test-network-throughput-in-linux/" target="_blank">https://www.tecmint.com/test-network-throughput-in-linux/</a></li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

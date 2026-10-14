@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>44 如何构建自己的Flutter混合开发框架（二）？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Flutter核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">47 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Flutter核心技术与实战</strong><ul><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E4%B8%80%E4%BD%8D%E5%A4%A7%E5%89%8D%E7%AB%AF%E4%BB%8E%E4%B8%9A%E8%80%85%E9%83%BD%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%B9%A0Flutter%EF%BC%9F.html">00 开篇词 为什么每一位大前端从业者都应该学习Flutter？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BAFlutter%E5%B7%A5%E7%A8%8B%E7%8E%AF%E5%A2%83.html">01 预习篇 · 从0开始搭建Flutter工程环境</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20Dart%E8%AF%AD%E8%A8%80%E6%A6%82%E8%A7%88.html">02 预习篇 · Dart语言概览</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%96%B9%E6%A1%88%E7%9A%84%E5%8E%86%E5%8F%B2%E5%8F%91%E5%B1%95%E9%80%BB%E8%BE%91.html">03 深入理解跨平台方案的历史发展逻辑</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20Flutter%E5%8C%BA%E5%88%AB%E4%BA%8E%E5%85%B6%E4%BB%96%E6%96%B9%E6%A1%88%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">04 Flutter区别于其他方案的关键技术是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E4%BB%8E%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%85%A5%E6%89%8B%EF%BC%8C%E4%BD%93%E4%BC%9AFlutter%E4%BB%A3%E7%A0%81%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E5%9C%A8%E5%8E%9F%E7%94%9F%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%84.html">05 从标准模板入手，体会Flutter代码是如何运行在原生系统上的</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E4%B8%8E%E7%B1%BB%E5%9E%8B%E5%8F%98%E9%87%8F%EF%BC%9ADart%E6%98%AF%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E4%BF%A1%E6%81%AF%E7%9A%84%EF%BC%9F.html">06 基础语法与类型变量：Dart是如何表示信息的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E5%87%BD%E6%95%B0%E3%80%81%E7%B1%BB%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%9ADart%E6%98%AF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BF%A1%E6%81%AF%E7%9A%84%EF%BC%9F.html">07 函数、类与运算符：Dart是如何处理信息的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%EF%BC%9A%E6%8E%8C%E6%8F%A1Dart%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7.html">08 综合案例：掌握Dart核心特性</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20Widget%EF%BC%8C%E6%9E%84%E5%BB%BAFlutter%E7%95%8C%E9%9D%A2%E7%9A%84%E5%9F%BA%E7%9F%B3.html">09 Widget，构建Flutter界面的基石</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20Widget%E4%B8%AD%E7%9A%84State%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Widget中的State到底是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E6%8F%90%E5%88%B0%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%8C%E6%88%91%E4%BB%AC%E6%98%AF%E5%9C%A8%E8%AF%B4%E4%BB%80%E4%B9%88%EF%BC%9F.html">11 提到生命周期，我们是在说什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E7%BB%8F%E5%85%B8%E6%8E%A7%E4%BB%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%96%87%E6%9C%AC%E3%80%81%E5%9B%BE%E7%89%87%E5%92%8C%E6%8C%89%E9%92%AE%E5%9C%A8Flutter%E4%B8%AD%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F.html">12 经典控件（一）：文本、图片和按钮在Flutter中怎么用？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E7%BB%8F%E5%85%B8%E6%8E%A7%E4%BB%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AUITableView_ListView%E5%9C%A8Flutter%E4%B8%AD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">13 经典控件（二）：UITableView_ListView在Flutter中是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E7%BB%8F%E5%85%B8%E5%B8%83%E5%B1%80%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E5%AD%90%E6%8E%A7%E4%BB%B6%E5%9C%A8%E7%88%B6%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%8E%92%E7%89%88%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%9F.html">14 经典布局：如何定义子控件在父容器中排版的位置？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20%E7%BB%84%E5%90%88%E4%B8%8E%E8%87%AA%E7%BB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E9%80%89%E7%94%A8%E4%BD%95%E7%A7%8D%E6%96%B9%E5%BC%8F%E8%87%AA%E5%AE%9A%E4%B9%89Widget%EF%BC%9F.html">15 组合与自绘，我该选用何种方式自定义Widget？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E4%BB%8E%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F%E8%AF%B4%E8%B5%B7%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9A%E5%88%B6%E4%B8%8D%E5%90%8C%E9%A3%8E%E6%A0%BC%E7%9A%84App%E4%B8%BB%E9%A2%98%EF%BC%9F.html">16 从夜间模式说起，如何定制不同风格的App主题？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9B%BE%E7%89%87%E3%80%81%E9%85%8D%E7%BD%AE%E5%92%8C%E5%AD%97%E4%BD%93%E5%9C%A8Flutter%E4%B8%AD%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F.html">17 依赖管理（一）：图片、配置和字体在Flutter中怎么用？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BB%84%E4%BB%B6%E5%BA%93%E5%9C%A8Flutter%E4%B8%AD%E8%A6%81%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%EF%BC%9F.html">18 依赖管理（二）：第三方组件库在Flutter中要如何管理？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%BA%8B%E4%BB%B6%E8%AF%A5%E5%A6%82%E4%BD%95%E5%93%8D%E5%BA%94%EF%BC%9F.html">19 用户交互事件该如何响应？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E5%85%B3%E4%BA%8E%E8%B7%A8%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BD%A0%E5%8F%AA%E9%9C%80%E8%A6%81%E8%AE%B0%E4%BD%8F%E8%BF%99%E4%B8%89%E6%8B%9B.html">20 关于跨组件传递数据，你只需要记住这三招</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%AF%BC%E8%88%AA%EF%BC%8CFlutter%E6%98%AF%E8%BF%99%E6%A0%B7%E5%AE%9E%E7%8E%B0%E9%A1%B5%E9%9D%A2%E5%88%87%E6%8D%A2%E7%9A%84.html">21 路由与导航，Flutter是这样实现页面切换的</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E5%A6%82%E4%BD%95%E6%9E%84%E9%80%A0%E7%82%AB%E9%85%B7%E7%9A%84%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%EF%BC%9F.html">22 如何构造炫酷的动画效果？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81UI%E8%BF%90%E8%A1%8C%E6%B5%81%E7%95%85%EF%BC%9F.html">23 单线程模型怎么保证UI运行流畅？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20HTTP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B8%8EJSON%E8%A7%A3%E6%9E%90.html">24 HTTP网络编程与JSON解析</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96.html">25 本地存储与数据库的使用和优化</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E5%A6%82%E4%BD%95%E5%9C%A8Dart%E5%B1%82%E5%85%BC%E5%AE%B9Android_iOS%E5%B9%B3%E5%8F%B0%E7%89%B9%E5%AE%9A%E5%AE%9E%E7%8E%B0%EF%BC%9F%EF%BC%88%E4%B8%80%EF%BC%89.html">26 如何在Dart层兼容Android_iOS平台特定实现？（一）</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E5%A6%82%E4%BD%95%E5%9C%A8Dart%E5%B1%82%E5%85%BC%E5%AE%B9Android_iOS%E5%B9%B3%E5%8F%B0%E7%89%B9%E5%AE%9A%E5%AE%9E%E7%8E%B0%EF%BC%9F%EF%BC%88%E4%BA%8C%EF%BC%89.html">27 如何在Dart层兼容Android_iOS平台特定实现？（二）</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E5%9C%A8%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8%E4%B8%AD%E6%B7%B7%E7%BC%96Flutter%E5%B7%A5%E7%A8%8B%EF%BC%9F.html">28 如何在原生应用中混编Flutter工程？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%EF%BC%8C%E8%AF%A5%E7%94%A8%E4%BD%95%E7%A7%8D%E6%96%B9%E6%A1%88%E7%AE%A1%E7%90%86%E5%AF%BC%E8%88%AA%E6%A0%88%EF%BC%9F.html">29 混合开发，该用何种方案管理导航栈？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%81%9A%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F.html">30 为什么需要做状态管理，怎么做？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%94%9F%E6%8E%A8%E9%80%81%E8%83%BD%E5%8A%9B%EF%BC%9F.html">31 如何实现原生推送能力？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E9%80%82%E9%85%8D%E5%9B%BD%E9%99%85%E5%8C%96%EF%BC%8C%E9%99%A4%E4%BA%86%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%88%91%E4%BB%AC%E8%BF%98%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88_.html">32 适配国际化，除了多语言我们还需要注意什么_</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%A6%82%E4%BD%95%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8C%E5%88%86%E8%BE%A8%E7%8E%87%E7%9A%84%E6%89%8B%E6%9C%BA%E5%B1%8F%E5%B9%95%EF%BC%9F.html">33 如何适配不同分辨率的手机屏幕？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Flutter%E7%9A%84%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">34 如何理解Flutter的编译模式？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20Hot%20Reload%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E5%88%B0%E7%9A%84%EF%BC%9F.html">35 Hot Reload是怎么做到的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BC%98%E5%8C%96%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95%E6%95%88%E7%8E%87%EF%BC%9F.html">36 如何通过工具链优化开发调试效率？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B%E5%B9%B6%E4%BC%98%E5%8C%96Flutter%20App%E7%9A%84%E6%95%B4%E4%BD%93%E6%80%A7%E8%83%BD%E8%A1%A8%E7%8E%B0%EF%BC%9F.html">37 如何检测并优化Flutter App的整体性能表现？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%8F%90%E9%AB%98%E4%BA%A4%E4%BB%98%E8%B4%A8%E9%87%8F%EF%BC%9F.html">38 如何通过自动化测试提高交付质量？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20%E7%BA%BF%E4%B8%8A%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E8%AF%A5%E5%A6%82%E4%BD%95%E5%81%9A%E5%A5%BD%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7%E4%B8%8E%E4%BF%A1%E6%81%AF%E9%87%87%E9%9B%86%EF%BC%9F.html">39 线上出现问题，该如何做好异常捕获与信息采集？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E8%A1%A1%E9%87%8FFlutter%20App%E7%BA%BF%E4%B8%8A%E8%B4%A8%E9%87%8F%EF%BC%8C%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8%E8%BF%99%E4%B8%89%E4%B8%AA%E6%8C%87%E6%A0%87.html">40 衡量Flutter App线上质量，我们需要关注这三个指标</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E7%BB%84%E4%BB%B6%E5%8C%96%E5%92%8C%E5%B9%B3%E5%8F%B0%E5%8C%96%EF%BC%8C%E8%AF%A5%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E5%90%88%E7%90%86%E7%A8%B3%E5%AE%9A%E7%9A%84Flutter%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%EF%BC%9F.html">41 组件化和平台化，该如何组织合理稳定的Flutter工程结构？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%9A%84Flutter%20App%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83%E7%8E%AF%E5%A2%83%EF%BC%9F.html">42 如何构建高效的Flutter App打包发布环境？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/43%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Flutter%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9F.html">43 如何构建自己的Flutter混合开发框架（一）？</a></li><li><a class="active" aria-current="page" href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/44%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Flutter%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9F.html">44 如何构建自己的Flutter混合开发框架（二）？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%20%20%E6%B8%A9%E6%95%85%E8%80%8C%E7%9F%A5%E6%96%B0%EF%BC%8C%E4%B8%8E%E4%BD%A0%E8%AF%B4%E8%AF%B4%E4%B8%93%E6%A0%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E6%80%9D%E8%80%83%E9%A2%98.html">特别放送   温故而知新，与你说说专栏的那些思考题</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%8B%BF%E7%95%8F%E9%9A%BE%EF%BC%8C%E5%8B%BF%E8%BD%BB%E7%95%A5.html">结束语 勿畏难，勿轻略</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/44%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Flutter%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="44 如何构建自己的Flutter混合开发框架（二）？" id="title">44 如何构建自己的Flutter混合开发框架（二）？</h1>
+<div><p>你好，我是陈航。</p>
+<p>在上一篇文章中，我从工程架构与工作模式两个层面，与你介绍了设计Flutter混合框架需要关注的基本设计原则，即确定分工边界。</p>
+<p>在工程架构维度，由于Flutter模块作为原生工程的一个业务依赖，其运行环境是由原生工程提供的，因此我们需要将它们各自抽象为对应技术栈的依赖管理方式，以分层依赖的方式确定二者的边界。</p>
+<p>而在工作模式维度，考虑到Flutter模块开发是原生开发的上游，因此我们只需要从其构建产物的过程入手，抽象出开发过程中的关键节点和高频节点，以命令行的形式进行统一管理。构建产物是Flutter模块的输出，同时也是原生工程的输入，一旦产物完成构建，我们就可以接入原生开发的工作流了。</p>
+<p>可以看到，在Flutter混合框架中，Flutter模块与原生工程是相互依存、互利共赢的关系：</p>
+<ul>
+<li>Flutter跨平台开发效率高，渲染性能和多端体验一致性好，因此在分工上主要专注于实现应用层的独立业务（页面）的渲染闭环；</li>
+<li>而原生开发稳定性高，精细化控制力强，底层基础能力丰富，因此在分工上主要专注于提供整体应用架构，为Flutter模块提供稳定的运行环境及对应的基础能力支持。</li>
+</ul>
+<p>那么，在原生工程中为Flutter模块提供基础能力支撑的过程中，面对跨技术栈的依赖管理，我们该遵循何种原则呢？对于Flutter模块及其依赖的原生插件们，我们又该如何以标准的原生工程依赖形式进行组件封装呢？</p>
+<p>在今天的文章中，我就通过一个典型案例，与你讲述这两个问题的解决办法。</p>
+<h2 id="原生插件依赖管理原则">原生插件依赖管理原则</h2>
+<p>在前面<a href="https://time.geekbang.org/column/article/127601" target="_blank">第26</a>和<a href="https://time.geekbang.org/column/article/132818" target="_blank">31篇</a>文章里，我与你讲述了为Flutter应用中的Dart代码提供原生能力支持的两种方式，即：在原生工程中的Flutter应用入口注册原生代码宿主回调的轻量级方案，以及使用插件工程进行独立拆分封装的工程化解耦方案。</p>
+<p>无论使用哪种方式，Flutter应用工程都为我们提供了一体化的标准解决方案，能够在集成构建时自动管理原生代码宿主及其相应的原生依赖，因此我们只需要在应用层使用pubspec.yaml文件去管理Dart的依赖。</p>
+<p>但<strong>对于混合工程而言，依赖关系的管理则会复杂一些</strong>。这是因为，与Flutter应用工程有着对原生组件简单清晰的单向依赖关系不同，混合工程对原生组件的依赖关系是多向的：Flutter模块工程会依赖原生组件，而原生工程的组件之间也会互相依赖。</p>
+<p>如果继续让Flutter的工具链接管原生组件的依赖关系，那么整个工程就会陷入不稳定的状态之中。因此，对于混合工程的原生依赖，Flutter模块并不做介入，完全交由原生工程进行统一管理。而Flutter模块工程对原生工程的依赖，体现在依赖原生代码宿主提供的底层基础能力的原生插件上。</p>
+<p>接下来，我就以网络通信这一基础能力为例，与你展开说明原生工程与Flutter模块工程之间应该如何管理依赖关系。</p>
+<h2 id="网络插件依赖管理实践">网络插件依赖管理实践</h2>
+<p>在第24篇文章“<a href="https://time.geekbang.org/column/article/121163" target="_blank">HTTP网络编程与JSON解析</a>”中，我与你介绍了在Flutter中，我们可以通过HttpClient、http与dio这三种通信方式，实现与服务端的数据交换。</p>
+<p>但在混合工程中，考虑到其他原生组件也需要使用网络通信能力，所以通常是由原生工程来提供网络通信功能的。因为这样不仅可以在工程架构层面实现更合理的功能分治，还可以统一整个App内数据交换的行为。比如，在网络引擎中为接口请求增加通用参数，或者是集中拦截错误等。</p>
+<p>关于原生网络通信功能，目前市面上有很多优秀的第三方开源SDK，比如iOS的AFNetworking和Alamofire、Android的OkHttp和Retrofit等。考虑到AFNetworking和OkHttp在各自平台的社区活跃度相对最高，因此我就以它俩为例，与你演示混合工程的原生插件管理方法。</p>
+<h2 id="网络插件接口封装">网络插件接口封装</h2>
+<p>要想搞清楚如何管理原生插件，我们需要先使用方法通道来建立Dart层与原生代码宿主之间的联系。</p>
+<p>原生工程为Flutter模块提供原生代码能力，我们同样需要使用Flutter插件工程来进行封装。关于这部分内容，我在第<a href="https://time.geekbang.org/column/article/132818" target="_blank">31</a>和<a href="https://time.geekbang.org/column/article/141164" target="_blank">39</a>篇文章中，已经分别为你演示了推送插件和数据上报插件的封装方法，你也可以再回过头来复习下相关内容。所以，今天我就不再与你过多介绍通用的流程和固定的代码声明部分了，而是重点与你讲述与接口相关的实现细节。</p>
+<p><strong>首先，我们来看看Dart代码部分。</strong></p>
+<p>对于插件工程的Dart层代码而言，由于它仅仅是原生工程的代码宿主代理，所以这一层的接口设计比较简单，只需要提供一个可以接收请求URL和参数，并返回接口响应数据的方法doRequest即可：</p>
+<pre><code>class FlutterPluginNetwork {
+  ...
+  static Future&lt;String&gt; doRequest(url,params)  async {
+    //使用方法通道调用原生接口doRequest，传入URL和param两个参数
+    final String result = await _channel.invokeMethod('doRequest', {
+      "url": url,
+      "param": params,
+    });
+    return result;
+  }
+}
+</code></pre>
+<p>Dart层接口封装搞定了，我们再来看看<strong>接管真实网络调用的Android和iOS代码宿主如何响应Dart层的接口调用</strong>。</p>
+<p>我刚刚与你提到过，原生代码宿主提供的基础通信能力是基于AFNetworking（iOS）和OkHttp（Android）做的封装，所以为了在原生代码中使用它们，我们<strong>首先</strong>需要分别在flutter_plugin_network.podspec和build.gradle文件中将工程对它们的依赖显式地声明出来：</p>
+<p>在flutter_plugin_network.podspec文件中，声明工程对AFNetworking的依赖：</p>
+<pre><code>Pod::Spec.new do |s|
+  ...
+  s.dependency 'AFNetworking'
+end
+</code></pre>
+<p>在build.gradle文件中，声明工程对OkHttp的依赖：</p>
+<pre><code>dependencies {
+    implementation "com.squareup.okhttp3:okhttp:4.2.0"
+}
+</code></pre>
+<p><strong>然后</strong>，我们需要在原生接口FlutterPluginNetworkPlugin类中，完成例行的初始化插件实例、绑定方法通道工作。</p>
+<p>最后，我们还需要在方法通道中取出对应的URL和query参数，为doRequest分别提供AFNetworking和OkHttp的实现版本。</p>
+<p>对于iOS的调用而言，由于AFNetworking的网络调用对象是AFHTTPSessionManager类，所以我们需要这个类进行实例化，并定义其接口返回的序列化方式（本例中为字符串）。然后剩下的工作就是用它去发起网络请求，使用方法通道通知Dart层执行结果了：</p>
+<pre><code>@implementation FlutterPluginNetworkPlugin
+...
+//方法通道回调
+- (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
+    //响应doRequest方法调用
+    if ([@"doRequest" isEqualToString:call.method]) {
+        //取出query参数和URL
+        NSDictionary *arguments = call.arguments[@"param"];
+        NSString *url = call.arguments[@"url"];
+        [self doRequest:url withParams:arguments andResult:result];
+    } else {
+        //其他方法未实现
+        result(FlutterMethodNotImplemented);
+    }
+}
+//处理网络调用
+- (void)doRequest:(NSString *)url withParams:(NSDictionary *)params andResult:(FlutterResult)result {
+    //初始化网络调用实例
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //定义数据序列化方式为字符串
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableDictionary *newParams = [params mutableCopy];
+    //增加自定义参数
+    newParams[@"ppp"] = @"yyyy";
+    //发起网络调用
+    [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //取出响应数据，响应Dart调用
+        NSString *string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        result(string);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //通知Dart调用失败
+        result([FlutterError errorWithCode:@"Error" message:error.localizedDescription details:nil]);
+    }];
+}
+@end
+</code></pre>
+<p>Android的调用也类似，OkHttp的网络调用对象是OkHttpClient类，所以我们同样需要这个类进行实例化。OkHttp的默认序列化方式已经是字符串了，所以我们什么都不用做，只需要URL参数加工成OkHttp期望的格式，然后就是用它去发起网络请求，使用方法通道通知Dart层执行结果了：</p>
+<pre><code>public class FlutterPluginNetworkPlugin implements MethodCallHandler {
+  ...
+  @Override
+  //方法通道回调
+  public void onMethodCall(MethodCall call, Result result) {
+    //响应doRequest方法调用
+    if (call.method.equals("doRequest")) {
+      //取出query参数和URL
+      HashMap param = call.argument("param");
+      String url = call.argument("url");
+      doRequest(url,param,result);
+    } else {
+      //其他方法未实现
+      result.notImplemented();
+    }
+  }
+  //处理网络调用
+  void doRequest(String url, HashMap&lt;String, String&gt; param, final Result result) {
+    //初始化网络调用实例
+    OkHttpClient client = new OkHttpClient();
+    //加工URL及query参数
+    HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+    for (String key : param.keySet()) {
+      String value = param.get(key);
+      urlBuilder.addQueryParameter(key,value);
+    }
+    //加入自定义通用参数
+    urlBuilder.addQueryParameter("ppp", "yyyy");
+    String requestUrl = urlBuilder.build().toString();
+
+    //发起网络调用
+    final Request request = new Request.Builder().url(requestUrl).build();
+    client.newCall(request).enqueue(new Callback() {
+      @Override
+      public void onFailure(Call call, final IOException e) {
+        //切换至主线程，通知Dart调用失败
+        registrar.activity().runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            result.error("Error", e.toString(), null);
+          }
+        });
+      }
+      
+      @Override
+      public void onResponse(Call call, final Response response) throws IOException {
+        //取出响应数据
+        final String content = response.body().string();
+        //切换至主线程，响应Dart调用
+        registrar.activity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+              result.success(content);
+            }
+        });
+      }
+    });
+  }
+}
+</code></pre>
+<p>需要注意的是，<strong>由于方法通道是非线程安全的，所以原生代码与Flutter之间所有的接口调用必须发生在主线程。</strong>而OktHtp在处理网络请求时，由于涉及非主线程切换，所以需要调用runOnUiThread方法以确保回调过程是在UI线程中执行的，否则应用可能会出现奇怪的Bug，甚至是Crash。</p>
+<p>有些同学可能会比较好奇，<strong>为什么doRequest的Android实现需要手动切回UI线程，而iOS实现则不需要呢？</strong>这其实是因为doRequest的iOS实现背后依赖的AFNetworking，已经在数据回调接口时为我们主动切换了UI线程，所以我们自然不需要重复再做一次了。</p>
+<p>在完成了原生接口封装之后，Flutter工程所需的网络通信功能的接口实现，就全部搞定了。</p>
+<h2 id="flutter模块工程依赖管理">Flutter模块工程依赖管理</h2>
+<p>通过上面这些步骤，我们以插件的形式提供了原生网络功能的封装。接下来，我们就需要在Flutter模块工程中使用这个插件，并提供对应的构建产物封装，提供给原生工程使用了。这部分内容主要包括以下3大部分：</p>
+<ul>
+<li>第一，如何使用FlutterPluginNetworkPlugin插件，也就是模块工程功能如何实现；</li>
+<li>第二，模块工程的iOS构建产物应该如何封装，也就是原生iOS工程如何管理Flutter模块工程的依赖；</li>
+<li>第三，模块工程的Android构建产物应该如何封装，也就是原生Android工程如何管理Flutter模块工程的依赖。</li>
+</ul>
+<p>接下来，我们具体看看每部分应该如何实现。</p>
+<h2 id="模块工程功能实现">模块工程功能实现</h2>
+<p>为了使用FlutterPluginNetworkPlugin插件实现与服务端的数据交换能力，我们首先需要在pubspec.yaml文件中，将工程对它的依赖显示地声明出来：</p>
+<pre><code>flutter_plugin_network:
+    git:
+      url: https://github.com/cyndibaby905/44_flutter_plugin_network.git
+</code></pre>
+<p>然后，我们还得在main.dart文件中为它提供一个触发入口。在下面的代码中，我们在界面上展示了一个RaisedButton按钮，并在其点击回调函数时，使用FlutterPluginNetwork插件发起了一次网络接口调用，并把网络返回的数据打印到了控制台上：</p>
+<pre><code>RaisedButton(
+  child: Text("doRequest"),
+  //点击按钮发起网络请求，打印数据
+  onPressed:()=&gt;FlutterPluginNetwork.doRequest("https://jsonplaceholder.typicode.com/posts", {'userId':'2'}).then((s)=&gt;print('Result:$s')),
+)
+</code></pre>
+<p>运行这段代码，点击doRequest按钮，观察控制台输出，可以看到，接口返回的数据信息能够被正常打印，证明Flutter模块的功能表现是完全符合预期的。</p>
+<p><img alt="" src="/assets/05d0d49f6f16bab86fd52ce3.png"/></p>
+<p>图1 Flutter模块工程运行示例</p>
+<h2 id="构建产物应该如何封装">构建产物应该如何封装？</h2>
+<p>我们都知道，模块工程的Android构建产物是aar，iOS构建产物是Framework。而在第<a href="https://time.geekbang.org/column/article/129754" target="_blank">28</a>和<a href="https://time.geekbang.org/column/article/144156" target="_blank">42</a>篇文章中，我与你介绍了不带插件依赖的模块工程构建产物的两种封装方案，即手动封装方案与自动化封装方案。这两种封装方案，最终都会输出同样的组织形式（Android是aar，iOS则是带podspec的Framework封装组件）。</p>
+<p>如果你已经不熟悉这两种封装方式的具体操作步骤了，可以再复习下这两篇文章的相关内容。接下来，我重点与你讲述的问题是：<strong>如果我们的模块工程存在插件依赖，封装过程是否有区别呢？</strong></p>
+<p>答案是，对于模块工程本身而言，这个过程没有区别；但对于模块工程的插件依赖来说，我们需要主动告诉原生工程，哪些依赖是需要它去管理的。</p>
+<p>由于Flutter模块工程把所有原生的依赖都交给了原生工程去管理，因此其构建产物并不会携带任何原生插件的封装实现，所以我们需要遍历模块工程所使用的原生依赖组件们，为它们逐一生成插件代码对应的原生组件封装。</p>
+<p>在第18篇文章“<a href="https://time.geekbang.org/column/article/114180" target="_blank">依赖管理（二）：第三方组件库在Flutter中要如何管理？</a>”中，我与你介绍了Flutter工程管理第三方依赖的实现机制，其中.packages文件存储的是依赖的包名与系统缓存中的包文件路径。</p>
+<p>类似的，插件依赖也有一个类似的文件进行统一管理，即<strong>.flutter-plugins</strong>。我们可以通过这个文件，找到对应的插件名字（本例中即为flutter_plugin_network）及缓存路径：</p>
+<pre><code>flutter_plugin_network=/Users/hangchen/Documents/flutter/.pub-cache/git/44_flutter_plugin_network-9b4472aa46cf20c318b088573a30bc32c6961777/
+</code></pre>
+<p>插件缓存本身也可以被视为一个Flutter模块工程，所以我们可以采用与模块工程类似的办法，为它生成对应的原生组件封装。</p>
+<p>对于iOS而言，这个过程相对简单些，所以我们先来看看模块工程的iOS构建产物封装过程。</p>
+<h3 id="ios构建产物应该如何封装">iOS构建产物应该如何封装？</h3>
+<p>在插件工程的ios目录下，为我们提供了带podspec文件的源码组件，podspec文件提供了组件的声明（及其依赖），因此我们可以把这个目录下的文件拷贝出来，连同Flutter模块组件一起放到原生工程中的专用目录，并写到Podfile文件里。</p>
+<p>原生工程会识别出组件本身及其依赖，并按照声明的依赖关系依次遍历，自动安装：</p>
+<pre><code>#Podfile
+target 'iOSDemo' do
+  pod 'Flutter', :path =&gt; 'Flutter'
+  pod 'flutter_plugin_network', :path =&gt; 'flutter_plugin_network'
+end
+</code></pre>
+<p>然后，我们就可以像使用不带插件依赖的模块工程一样，把它引入到原生工程中，为其设置入口，在FlutterViewController中展示Flutter模块的页面了。</p>
+<p>不过需要注意的是，由于FlutterViewController并不感知这个过程，因此不会主动初始化项目中的插件，所以我们还需要在入口处手动将工程里所有的插件依次声明出来：</p>
+<pre><code>//AppDelegate.m:
+@implementation AppDelegate
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    //初始化Flutter入口
+    FlutterViewController *vc = [[FlutterViewController alloc]init];
+    //初始化插件
+    [FlutterPluginNetworkPlugin registerWithRegistrar:[vc registrarForPlugin:@"FlutterPluginNetworkPlugin"]];
+    //设置路由标识符
+    [vc setInitialRoute:@"defaultRoute"]; 
+    self.window.rootViewController = vc;
+    [self.window makeKeyAndVisible];
+    return YES;
+}
+</code></pre>
+<p>在Xcode中运行这段代码，点击doRequest按钮，可以看到，接口返回的数据信息能够被正常打印，证明我们已经可以在原生iOS工程中顺利的使用Flutter模块了。</p>
+<p><img alt="" src="/assets/91ea2714da5c6183078cf28f.png"/></p>
+<p>图2 原生iOS工程运行示例</p>
+<p>我们再来看看模块工程的Android构建产物应该如何封装。</p>
+<h3 id="android构建产物应该如何封装">Android构建产物应该如何封装？</h3>
+<p>与iOS的插件工程组件在ios目录类似，Android的插件工程组件在android目录。对于iOS的插件工程，我们可以直接将源码组件提供给原生工程，但对于Andriod的插件工程来说，我们只能将aar组件提供给原生工程，所以我们不仅需要像iOS操作步骤那样进入插件的组件目录，还需要借助构建命令，为插件工程生成aar：</p>
+<pre><code>cd android
+./gradlew flutter_plugin_network:assRel
+</code></pre>
+<p>命令执行完成之后，aar就生成好了。aar位于android/build/outputs/aar目录下，我们打开插件缓存对应的路径，提取出对应的aar（本例中为flutter_plugin_network-debug.aar）就可以了。</p>
+<p>我们把生成的插件aar，连同Flutter模块aar一起放到原生工程的libs目录下，最后在build.gradle文件里将它显式地声明出来，就完成了插件工程的引入。</p>
+<pre><code>//build.gradle
+dependencies {
+    ...
+    implementation(name: 'flutter-debug', ext: 'aar')
+    implementation(name: 'flutter_plugin_network-debug', ext: 'aar')
+    implementation "com.squareup.okhttp3:okhttp:4.2.0"
+    ...
+}
+</code></pre>
+<p>然后，我们就可以在原生工程中为其设置入口，在FlutterView中展示Flutter页面，愉快地使用Flutter模块带来的高效开发和高性能渲染能力了：</p>
+<pre><code>//MainActivity.java
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        View FlutterView = Flutter.createView(this, getLifecycle(), "defaultRoute"); 
+        setContentView(FlutterView);
+    }
+}
+</code></pre>
+<p>不过<strong>需要注意的是</strong>，与iOS插件工程的podspec能够携带组件依赖不同，Android插件工程的封装产物aar本身不携带任何配置信息。所以，如果插件工程本身存在原生依赖（像flutter_plugin_network依赖OkHttp这样），我们是无法通过aar去告诉原生工程其所需的原生依赖的。</p>
+<p>面对这种情况，我们需要在原生工程中的build.gradle文件里手动地将插件工程的依赖（即OkHttp）显示地声明出来。</p>
+<pre><code>//build.gradle
+dependencies {
+    ...
+    implementation(name: 'flutter-debug', ext: 'aar')
+    implementation(name: 'flutter_plugin_network-debug', ext: 'aar')
+    implementation "com.squareup.okhttp3:okhttp:4.2.0"
+    ...
+}
+</code></pre>
+<p><strong>至此，将模块工程及其插件依赖封装成原生组件的全部工作就完成了，原生工程可以像使用一个普通的原生组件一样，去使用Flutter模块组件的功能了。</strong></p>
+<p>在Android Studio中运行这段代码，并点击doRequest按钮，可以看到，我们可以在原生Android工程中正常使用Flutter封装的页面组件了。</p>
+<p><img alt="" src="/assets/a2a301f3bb4f7c1306a9a8bc.png"/></p>
+<p>图3 原生Android工程运行示例</p>
+<p>当然，考虑到手动封装模块工程及其构建产物的过程，繁琐且容易出错，我们可以把这些步骤抽象成命令行脚本，并把它部署到Travis上。这样在Travis检测到代码变更之后，就会自动将Flutter模块的构建产物封装成原生工程期望的组件格式了。</p>
+<p>关于这部分内容，你可以参考我在<a href="https://github.com/cyndibaby905/44_flutter_module_demo" target="_blank">flutter_module_demo</a>里的<a href="https://github.com/cyndibaby905/44_flutter_module_demo/blob/master/generate_aars.sh" target="_blank">generate_aars.sh</a>与<a href="https://github.com/cyndibaby905/44_flutter_module_demo/blob/master/generate_pods.sh" target="_blank">generate_pods.sh</a>实现。如果关于这部分内容有任何问题，都可以直接留言给我。</p>
+<h2 id="总结">总结</h2>
+<p>好了，关于Flutter混合开发框架的依赖管理部分我们就讲到这里。接下来，我们一起总结下今天的主要内容吧。</p>
+<p>Flutter模块工程的原生组件封装形式是aar（Android）和Framework（Pod）。与纯Flutter应用工程能够自动管理插件的原生依赖不同，这部分工作在模块工程中是完全交给原生工程去管理的。因此，我们需要查找记录了插件名称及缓存路径映射关系的.flutter-plugins文件，提取出每个插件所对应的原生组件封装，集成到原生工程中。</p>
+<p>从今天的分享可以看出，对于有着插件依赖的Android组件封装来说，由于aar本身并不携带任何配置信息，因此其操作以手工为主：我们不仅要执行构建命令依次生成插件对应的aar，还需要将插件自身的原生依赖拷贝至原生工程，其步骤相对iOS组件封装来说要繁琐一些。</p>
+<p>为了解决这一问题，业界出现了一种名为<a href="https://github.com/adwiv/android-fat-aar" target="_blank">fat-aar</a>的打包手段，它能够将模块工程本身，及其相关的插件依赖统一打包成一个大的aar，从而省去了依赖遍历和依赖声明的过程，实现了更好的功能自治性。但这种解决方案存在一些较为明显的不足：</p>
+<ul>
+<li>依赖冲突问题。如果原生工程与插件工程都引用了同样的原生依赖组件（OkHttp），则原生工程的组件引用其依赖时会产生合并冲突，因此在发布时必须手动去掉原生工程的组件依赖。</li>
+<li>嵌套依赖问题。fat-aar只会处理embedded关键字指向的这层一级依赖，而不会处理再下一层的依赖。因此，对于依赖关系复杂的插件支持，我们仍需要手动处理依赖问题。</li>
+<li>Gradle版本限制问题。fat-aar方案对Gradle插件版本有限制，且实现方式并不是官方设计考虑的点，加之Gradle API变更较快，所以存在后续难以维护的问题。</li>
+<li>其他未知问题。fat-aar项目已经不再维护了，最近一次更新还是2年前，在实际项目中使用“年久失修”的项目存在较大的风险。</li>
+</ul>
+<p>考虑到这些因素，fat-aar并不是管理插件工程依赖的好的解决方案，所以<strong>我们最好还是得老老实实地去遍历插件依赖，以持续交付的方式自动化生成aar。</strong></p>
+<p>我把今天分享涉及知识点打包上传到了GitHub中，你可以把<a href="https://github.com/cyndibaby905/44_flutter_plugin_network" target="_blank">插件工程</a>、<a href="https://github.com/cyndibaby905/44_flutter_module_demo" target="_blank">Flutter模块工程</a>、<a href="https://github.com/cyndibaby905/44_AndroidDemo" target="_blank">原生Android</a>和<a href="https://github.com/cyndibaby905/44_iOSDemo" target="_blank">iOS工程</a>下载下来，查看其Travis持续交付配置文件的构建执行命令，体会在混合框架中如何管理跨技术栈的组件依赖。</p>
+<h2 id="思考题">思考题</h2>
+<p>最后，我给你留一道思考题吧。</p>
+<p>原生插件的开发是一个需要Dart层代码封装，以及原生Android、iOS代码层实现的长链路过程。如果需要支持的基础能力较多，开发插件的过程就会变得繁琐且容易出错。我们都知道Dart是不支持反射的，但是原生代码可以。我们是否可以利用原生的反射去实现插件定义的标准化呢？</p>
+<p>提示：在Dart层调用不存在的接口（或未实现的接口），可以通过noSuchMethod方法进行统一处理。</p>
+<pre><code>class FlutterPluginDemo {
+  //方法通道
+  static const MethodChannel _channel =
+      const MethodChannel('flutter_plugin_demo');
+  //当调用不存在接口时，Dart会交由该方法进行统一处理
+  @override
+  Future&lt;dynamic&gt; noSuchMethod(Invocation invocation) {
+    //从字符串Symbol("methodName")中取出方法名
+    String methodName = invocation.memberName.toString().substring(8, string.length - 2);
+    //参数
+    dynamic args = invocation.positionalArguments;
+    print('methodName:$methodName');
+    print('args:$args');
+    return methodTemplate(methodName, args);
+  }
+  
+  //某未实现的方法
+  Future&lt;dynamic&gt; someMethodNotImplemented();
+  //某未实现的带参数方法
+  Future&lt;dynamic&gt; someMethodNotImplementedWithParameter(param);
+}
+</code></pre>
+<p>欢迎你在评论区给我留言分享你的观点，我会在下一篇文章中等待你！感谢你的收听，也欢迎你把这篇文章分享给更多的朋友一起阅读。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

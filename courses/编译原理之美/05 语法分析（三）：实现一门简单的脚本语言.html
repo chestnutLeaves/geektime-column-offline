@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>05 语法分析（三）：实现一门简单的脚本语言 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/index.html">编译原理之美</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">43 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理之美</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%EF%BC%9F.html">00 开篇词 为什么你要学习编译原理？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/01%20%E7%90%86%E8%A7%A3%E4%BB%A3%E7%A0%81%EF%BC%9A%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF.html">01 理解代码：编译器的前端技术</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/02%20%E6%AD%A3%E5%88%99%E6%96%87%E6%B3%95%E5%92%8C%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8.html">02 正则文法和有限自动机：纯手工打造词法分析器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E5%85%AC%E5%BC%8F%E8%AE%A1%E7%AE%97%E5%99%A8.html">03 语法分析（一）：纯手工打造公式计算器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/04%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%A7%A3%E5%86%B3%E4%BA%8C%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E9%9A%BE%E7%82%B9.html">04 语法分析（二）：解决二元表达式中的难点</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/05%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%97%A8%E7%AE%80%E5%8D%95%E7%9A%84%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80.html">05 语法分析（三）：实现一门简单的脚本语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/06%20%E7%BC%96%E8%AF%91%E5%99%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%94%A8Antlr%E7%94%9F%E6%88%90%E8%AF%8D%E6%B3%95%E3%80%81%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8.html">06 编译器前端工具（一）：用Antlr生成词法、语法分析器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/07%20%E7%BC%96%E8%AF%91%E5%99%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%94%A8Antlr%E9%87%8D%E6%9E%84%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80.html">07 编译器前端工具（二）：用Antlr重构脚本语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/08%20%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E7%94%9F%E5%AD%98%E6%9C%9F%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%87%BD%E6%95%B0.html">08 作用域和生存期：实现块作用域和函数</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/09%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%9A%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%92%8C%E6%96%B9%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85.html">09 面向对象：实现数据和方法的封装</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/10%20%E9%97%AD%E5%8C%85%EF%BC%9A%20%E7%90%86%E8%A7%A3%E4%BA%86%E5%8E%9F%E7%90%86%EF%BC%8C%E5%AE%83%E5%B0%B1%E4%B8%8D%E5%8F%8D%E7%9B%B4%E8%A7%89%E4%BA%86.html">10 闭包： 理解了原理，它就不反直觉了</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/11%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E5%AE%8C%E5%96%84%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">11 语义分析（上）：如何建立一个完善的类型系统？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/12%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9B%B8%E5%85%B3%E6%83%85%E5%86%B5%E7%9A%84%E5%A4%84%E7%90%86%EF%BC%9F.html">12 语义分析（下）：如何做上下文相关情况的处理？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/13%20%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%90%E8%A1%8C%E6%9C%9F%E7%9A%84%E5%8A%A8%E6%80%81%E7%89%B9%E6%80%A7.html">13 继承和多态：面向对象运行期的动态特性</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/14%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%8F%E6%98%8E%E5%9C%B0%E6%94%AF%E6%8C%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%EF%BC%9F.html">14 前端技术应用（一）：如何透明地支持数据库分库分表？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/15%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E6%8A%A5%E8%A1%A8%E5%B7%A5%E5%85%B7%EF%BC%9F.html">15 前端技术应用（二）：如何设计一个报表工具？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/16%20NFA%E5%92%8CDFA%EF%BC%9A%E5%A6%82%E4%BD%95%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B7%A5%E5%85%B7%EF%BC%9F.html">16 NFA和DFA：如何自己实现一个正则表达式工具？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/17%20First%E5%92%8CFollow%E9%9B%86%E5%90%88%EF%BC%9A%E7%94%A8LL%E7%AE%97%E6%B3%95%E6%8E%A8%E6%BC%94%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B.html">17 First和Follow集合：用LL算法推演一个实例</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/18%20%E7%A7%BB%E8%BF%9B%E5%92%8C%E8%A7%84%E7%BA%A6%EF%BC%9A%E7%94%A8LR%E7%AE%97%E6%B3%95%E6%8E%A8%E6%BC%94%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B.html">18 移进和规约：用LR算法推演一个实例</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/19%20%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%9A%E5%AF%B9%E4%BA%8E%E5%B7%A6%E9%80%92%E5%BD%92%E7%9A%84%E8%AF%AD%E6%B3%95%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E6%8E%A8%E5%AF%BC%E4%B8%8D%E6%98%AF%E5%B7%A6%E9%80%92%E5%BD%92%E7%9A%84%EF%BC%9F.html">19 案例总结与热点问题答疑：对于左递归的语法，为什么我的推导不是左递归的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/20%20%E9%AB%98%E6%95%88%E8%BF%90%E8%A1%8C%EF%BC%9A%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF.html">20 高效运行：编译器的后端技术</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/21%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%AA%81%E7%A0%B4%E7%8E%B0%E8%B1%A1%E7%9C%8B%E6%9C%AC%E8%B4%A8%EF%BC%8C%E9%80%8F%E8%BF%87%E8%AF%AD%E6%B3%95%E7%9C%8B%E8%BF%90%E8%A1%8C%E6%97%B6.html">21 运行时机制：突破现象看本质，透过语法看运行时</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/22%20%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%B6%E5%AE%9E%E4%B8%8D%E9%9A%BE%E5%AD%A6.html">22 生成汇编代码（一）：汇编语言其实不难学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/23%20%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8A%8A%E8%84%9A%E6%9C%AC%E7%BC%96%E8%AF%91%E6%88%90%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6.html">23 生成汇编代码（二）：把脚本编译成可执行文件</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/24%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E5%85%BC%E5%AE%B9%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%AD%E8%A8%80%E5%92%8C%E7%A1%AC%E4%BB%B6.html">24 中间代码：兼容不同的语言和硬件</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/25%20%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF%E7%9A%84%E9%87%8D%E7%94%A8%EF%BC%9ALLVM%E4%B8%8D%E4%BB%85%E4%BB%85%E8%AE%A9%E4%BD%A0%E9%AB%98%E6%95%88.html">25 后端技术的重用：LLVM不仅仅让你高效</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/26%20%E7%94%9F%E6%88%90IR%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%9D%99%E6%80%81%E7%BC%96%E8%AF%91%E7%9A%84%E8%AF%AD%E8%A8%80.html">26 生成IR：实现静态编译的语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/27%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%AF%94%E4%BB%96%E7%9A%84%E6%9B%B4%E9%AB%98%E6%95%88%EF%BC%9F.html">27 代码优化：为什么你的代码比他的更高效？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/28%20%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90%EF%BC%9A%E4%BD%A0%E5%86%99%E7%9A%84%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%AE%83%E6%9B%B4%E6%87%82.html">28 数据流分析：你写的程序，它更懂</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/29%20%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%82%E5%BA%94%E5%90%84%E7%A7%8D%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9F.html">29 目标代码的生成和优化（一）：如何适应各种硬件架构？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/30%20%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%82%E5%BA%94%E5%90%84%E7%A7%8D%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9F.html">30 目标代码的生成和优化（二）：如何适应各种硬件架构？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/31%20%E5%86%85%E5%AD%98%E8%AE%A1%E7%AE%97%EF%BC%9A%E5%AF%B9%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%81%9A%E8%AE%A1%E7%AE%97%EF%BC%8C%E5%88%B0%E5%BA%95%E5%8F%AF%E4%BB%A5%E6%9C%89%E5%A4%9A%E5%BF%AB%EF%BC%9F.html">31 内存计算：对海量数据做计算，到底可以有多快？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/32%20%E5%AD%97%E8%8A%82%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Spring%E6%8A%80%E6%9C%AF%E5%BE%88%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">32 字节码生成：为什么Spring技术很强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/33%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%9A%E8%83%BD%E5%90%A6%E4%B8%8D%E5%81%9C%E4%B8%8B%E6%95%B4%E4%B8%AA%E4%B8%96%E7%95%8C%EF%BC%9F.html">33 垃圾收集：能否不停下整个世界？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/34%20%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BC%98%E5%8C%96%EF%BC%9A%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E4%BD%9C%E7%94%A8.html">34 运行时优化：即时编译的原理和作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/35%20%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%9A%E5%90%8E%E7%AB%AF%E9%83%A8%E5%88%86%E7%9C%9F%E7%9A%84%E6%AF%94%E5%89%8D%E7%AB%AF%E9%83%A8%E5%88%86%E9%9A%BE%E5%90%97%EF%BC%9F.html">35 案例总结与热点问题答疑：后端部分真的比前端部分难吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/36%20%E5%BD%93%E5%89%8D%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%AF%B9%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E7%9A%84%E5%BD%B1%E5%93%8D.html">36 当前技术的发展趋势以及其对编译技术的影响</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/37%20%20%E4%BA%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BC%9A%E5%A6%82%E4%BD%95%E6%94%B9%E5%8F%98%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">37  云编程：云计算会如何改变编程模式？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/38%20%E5%85%83%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%B8%80%E8%BE%B9%E5%86%99%E7%A8%8B%E5%BA%8F%EF%BC%8C%E4%B8%80%E8%BE%B9%E5%86%99%E8%AF%AD%E8%A8%80.html">38 元编程：一边写程序，一边写语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E5%8A%A0%E9%A4%90%20%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A8%8B%E4%B8%8E%E6%A0%88%E5%B8%A7%E7%AE%A1%E7%90%86.html">加餐 汇编代码编程与栈帧管理</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E5%9B%A0%E4%B8%BA%E7%83%AD%E7%88%B1%EF%BC%8C%E6%89%80%E4%BB%A5%E5%9D%9A%E6%8C%81.html">用户故事 因为热爱，所以坚持</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%AC%AC%E4%BA%8C%E5%AD%A3%E5%9B%9E%E5%BD%92%20%E8%BF%99%E6%AC%A1%EF%BC%8C%E6%88%91%E4%BB%AC%E4%B8%80%E8%B5%B7%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8.html">第二季回归 这次，我们一起实战解析真实世界的编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80%EF%BC%8C%E6%8E%A8%E5%8A%A8%E8%BF%99%E4%B8%AA%E4%B8%96%E7%95%8C%E7%9A%84%E6%BC%94%E5%8C%96.html">结束语 用程序语言，推动这个世界的演化</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/05%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%97%A8%E7%AE%80%E5%8D%95%E7%9A%84%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="05 语法分析（三）：实现一门简单的脚本语言" id="title">05 语法分析（三）：实现一门简单的脚本语言</h1>
+<div><p>前两节课结束后，我们已经掌握了表达式的解析，并通过一个简单的解释器实现了公式的计算。但这个解释器还是比较简单的，看上去还不大像一门语言。那么如何让它支持更多的功能，更像一门脚本语言呢？本节课，我会带你寻找答案。</p>
+<p>我将继续带你实现一些功能，比如：</p>
+<ul>
+<li>支持变量声明和初始化语句，就像“int age” “int age = 45”和“int age = 17+8+20”；</li>
+<li>支持赋值语句“age = 45”；</li>
+<li>在表达式中可以使用变量，例如“age + 10 *2”；</li>
+<li>实现一个命令行终端，能够读取输入的语句并输出结果。</li>
+</ul>
+<p>实现这些功能之后，我们的成果会更像一个脚本解释器。而且在这个过程中，我还会带你巩固语法分析中的递归下降算法，和你一起讨论“回溯”这个特征，让你对递归下降算法的特征理解得更加全面。</p>
+<p>不过，为了实现这些新的语法，我们首先要把它们用语法规则描述出来。</p>
+<h2 id="增加所需要的语法规则">增加所需要的语法规则</h2>
+<p>首先，一门脚本语言是要支持语句的，比如变量声明语句、赋值语句等等。单独一个表达式，也可以视为语句，叫做“表达式语句”。你在终端里输入2+3；，就能回显出5来，这就是表达式作为一个语句在执行。按照我们的语法，无非是在表达式后面多了个分号而已。C语言和Java都会采用分号作为语句结尾的标识，我们也可以这样写。</p>
+<p>我们用扩展巴科斯范式（EBNF）写出下面的语法规则：</p>
+<pre><code>programm: statement+;  
+
+statement
+: intDeclaration
+| expressionStatement
+| assignmentStatement
+;
+</code></pre>
+<p><strong>变量声明语句</strong>以int开头，后面跟标识符，然后有可选的初始化部分，也就是一个等号和一个表达式，最后再加分号：</p>
+<pre><code>intDeclaration : 'int' Id ( '=' additiveExpression)? ';';
+</code></pre>
+<p><strong>表达式语句</strong>目前只支持加法表达式，未来可以加其他的表达式，比如条件表达式，它后面同样加分号：</p>
+<pre><code>expressionStatement : additiveExpression ';';
+</code></pre>
+<p><strong>赋值语句</strong>是标识符后面跟着等号和一个表达式，再加分号：</p>
+<pre><code>assignmentStatement : Identifier '=' additiveExpression ';';
+</code></pre>
+<p>为了在表达式中可以使用变量，我们还需要把primaryExpression改写，除了包含整型字面量以外，还要包含标识符和用括号括起来的表达式：</p>
+<pre><code>primaryExpression : Identifier| IntLiteral | '(' additiveExpression ')';
+</code></pre>
+<p>这样，我们就把想实现的语法特性，都用语法规则表达出来了。接下来，我们就一步一步实现这些特性。</p>
+<h2 id="让脚本语言支持变量">让脚本语言支持变量</h2>
+<p>之前实现的公式计算器只支持了数字字面量的运算，如果能在表达式中用上变量，会更有用，比如能够执行下面两句：</p>
+<pre><code>int age = 45;
+age + 10 * 2;
+</code></pre>
+<p>这两个语句里面的语法特性包含了变量声明、给变量赋值，以及在表达式里引用变量。为了给变量赋值，我们必须在脚本语言的解释器中开辟一个存储区，记录不同的变量和它们的值：</p>
+<pre><code>private HashMap&lt;String, Integer&gt; variables = new HashMap&lt;String, Integer&gt;();
+</code></pre>
+<p>我们简单地用了一个HashMap作为变量存储区。在变量声明语句和赋值语句里，都可以修改这个变量存储区中的数据，而获取变量值可以采用下面的代码：</p>
+<pre><code>if (variables.containsKey(varName)) {
+    Integer value = variables.get(varName);  //获取变量值
+    if (value != null) {
+        result = value;                      //设置返回值
+    } else {                                 //有这个变量，没有值
+        throw new Exception("variable " + varName + " has not been set any value");
+    }
+}
+else{ //没有这个变量。
+    throw new Exception("unknown variable: " + varName);
+}
+</code></pre>
+<p>通过这样的一个简单的存储机制，我们就能支持变量了。当然，这个存储机制可能过于简单了，我们后面讲到作用域的时候，这么简单的存储机制根本不够。不过目前我们先这么用着，以后再考虑改进它。</p>
+<h2 id="解析赋值语句">解析赋值语句</h2>
+<p>接下来，我们来解析赋值语句，例如“age = age + 10 * 2；”：</p>
+<pre><code>private SimpleASTNode assignmentStatement(TokenReader tokens) throws Exception {
+    SimpleASTNode node = null;
+    Token token = tokens.peek();    //预读，看看下面是不是标识符
+    if (token != null &amp;&amp; token.getType() == TokenType.Identifier) {
+        token = tokens.read();      //读入标识符
+        node = new SimpleASTNode(ASTNodeType.AssignmentStmt, token.getText());
+        token = tokens.peek();      //预读，看看下面是不是等号
+        if (token != null &amp;&amp; token.getType() == TokenType.Assignment) {
+            tokens.read();          //取出等号
+            SimpleASTNode child = additive(tokens);
+            if (child == null) {    //出错，等号右面没有一个合法的表达式
+                throw new Exception("invalide assignment statement, expecting an expression");
+            }
+            else{
+                node.addChild(child);   //添加子节点
+                token = tokens.peek();  //预读，看看后面是不是分号
+                if (token != null &amp;&amp; token.getType() == TokenType.SemiColon) {
+                    tokens.read();      //消耗掉这个分号
+
+                } else {            //报错，缺少分号
+                    throw new Exception("invalid statement, expecting semicolon");
+                }
+            }
+        }
+        else {
+            tokens.unread();    //回溯，吐出之前消化掉的标识符
+            node = null;
+        }
+    }
+    return node;
+}
+</code></pre>
+<p>为了方便你理解，我来解读一下上面这段代码的逻辑：</p>
+<blockquote>
+<p>我们既然想要匹配一个赋值语句，那么首先应该看看第一个Token是不是标识符。如果不是，那么就返回null，匹配失败。如果第一个Token确实是标识符，我们就把它消耗掉，接着看后面跟着的是不是等号。如果不是等号，那证明我们这个不是一个赋值语句，可能是一个表达式什么的。那么我们就要回退刚才消耗掉的Token，就像什么都没有发生过一样，并且返回null。回退的时候调用的方法就是unread()。-
+如果后面跟着的确实是等号，那么在继续看后面是不是一个表达式，表达式后面跟着的是不是分号。如果不是，就报错就好了。这样就完成了对赋值语句的解析。</p>
+</blockquote>
+<p>利用上面的代码，我们还可以改造一下变量声明语句中对变量初始化的部分，让它在初始化的时候支持表达式，因为这个地方跟赋值语句很像，例如“int newAge = age + 10 * 2；”。</p>
+<h2 id="理解递归下降算法中的回溯">理解递归下降算法中的回溯</h2>
+<p>不知道你有没有发现，我在设计语法规则的过程中，其实故意设计了一个陷阱，这个陷阱能帮我们更好地理解递归下降算法的一个特点：<strong>回溯。</strong>理解这个特点能帮助你更清晰地理解递归下降算法的执行过程，从而再去想办法优化它。</p>
+<p>考虑一下age = 45；这个语句。肉眼看过去，你马上知道它是个赋值语句，但是当我们用算法去做模式匹配时，就会发生一些特殊的情况。看一下我们对statement语句的定义：</p>
+<pre><code>statement
+: intDeclaration
+| expressionStatement
+| assignmentStatement
+;
+</code></pre>
+<p>我们首先尝试intDeclaration，但是age = 45；语句不是以int开头的，所以这个尝试会返回null。然后我们接着尝试expressionStatement，看一眼下面的算法：</p>
+<pre><code>private SimpleASTNode expressionStatement() throws Exception {
+        int pos = tokens.getPosition();  //记下初始位置
+        SimpleASTNode node = additive(); //匹配加法规则
+        if (node != null) {
+            Token token = tokens.peek();
+            if (token != null &amp;&amp; token.getType() == TokenType.SemiColon) {   //要求一定以分号结尾
+                tokens.read();
+            } else {
+                node = null;
+                tokens.setPosition(pos); // 回溯
+            }
+        }
+        return node;
+    }
+</code></pre>
+<p>出现了什么情况呢？age = 45；语句最左边是一个标识符。根据我们的语法规则，标识符是一个合法的addtiveExpresion，因此additive()函数返回一个非空值。接下来，后面应该扫描到一个分号才对，但是显然不是，标识符后面跟的是等号，这证明模式匹配失败。</p>
+<p>失败了该怎么办呢？我们的算法一定要把Token流的指针拨回到原来的位置，就像一切都没发生过一样。因为我们不知道addtive()这个函数往下尝试了多少步，因为它可能是一个很复杂的表达式，消耗掉了很多个Token，所以我们必须记下算法开始时候的位置，并在失败时回到这个位置。<strong>尝试一个规则不成功之后，恢复到原样，再去尝试另外的规则，这个现象就叫做“回溯”。</strong></p>
+<p>因为有可能需要回溯，所以递归下降算法有时会做一些无用功。在assignmentStatement的算法中，我们就通过unread()，回溯了一个Token。而在expressionStatement中，我们不确定要回溯几步，只好提前记下初始位置。匹配expressionStatement失败后，算法去尝试匹配assignmentStatement。这次获得了成功。</p>
+<p>试探和回溯的过程，是递归下降算法的一个典型特征。通过上面的例子，你应该对这个典型特征有了更清晰的理解。递归下降算法虽然简单，但它通过试探和回溯，却总是可以把正确的语法匹配出来，这就是它的强大之处。当然，缺点是回溯会拉低一点儿效率。但我们可以在这个基础上进行改进和优化，实现带有预测分析的递归下降，以及非递归的预测分析。有了对递归下降算法的清晰理解，我们去学习其他的语法分析算法的时候，也会理解得更快。</p>
+<p>我们接着再讲回溯牵扯出的另一个问题：<strong>什么时候该回溯，什么时候该提示语法错误？</strong></p>
+<p>大家在阅读示例代码的过程中，应该发现里面有一些错误处理的代码，并抛出了异常。比如在赋值语句中，如果等号后面没有成功匹配一个加法表达式，我们认为这个语法是错的。因为在我们的语法中，等号后面只能跟表达式，没有别的可能性。</p>
+<pre><code>token = tokens.read();          //读出等号
+node = additive();    //匹配一个加法表达式
+if (node == null) {
+    //等号右边一定需要有另一个表达式  
+    throw new Exception("invalide assignment expression, expecting an additive expression");
+}
+</code></pre>
+<p>你可能会意识到一个问题，当我们在算法中匹配不成功的时候，我们前面说的是应该回溯呀，应该再去尝试其他可能性呀，为什么在这里报错了呢？换句话说，什么时候该回溯，什么时候该提示这里发生了语法错误呢？</p>
+<p>其实这两种方法最后的结果是一样的。我们提示语法错误的时候，是说我们知道已经没有其他可能的匹配选项了，不需要浪费时间去回溯。就比如，在我们的语法中，等号后面必然跟表达式，否则就一定是语法错误。你在这里不报语法错误，等试探完其他所有选项后，还是需要报语法错误。所以说，提前报语法错误，实际上是我们写算法时的一种优化。</p>
+<p>在写编译程序的时候，我们不仅仅要能够解析正确的语法，还要尽可能针对语法错误提供友好的提示，帮助用户迅速定位错误。错误定位越是准确、提示越是友好，我们就越喜欢它。</p>
+<p>好了，到目前为止，已经能够能够处理几种不同的语句，如变量声明语句，赋值语句、表达式语句，那么我们把所有这些成果放到一起，来体会一下使用自己的脚本语言的乐趣吧！</p>
+<p>我们需要一个交互式的界面来输入程序，并执行程序，这个交互式的界面就叫做<strong>REPL。</strong></p>
+<h2 id="实现一个简单的repl">实现一个简单的REPL</h2>
+<p>脚本语言一般都会提供一个命令行窗口，让你输入一条一条的语句，马上解释执行它，并得到输出结果，比如Node.js、Python等都提供了这样的界面。<strong>这个输入、执行、打印的循环过程就叫做REPL（Read-Eval-Print Loop）。</strong>你可以在REPL中迅速试验各种语句，REPL即时反馈的特征会让你乐趣无穷。所以，即使是非常资深的程序员，也会经常用REPL来验证自己的一些思路，它相当于一个语言的PlayGround（游戏场），是个必不可少的工具。</p>
+<p>在SimpleScript.java中，我们也实现了一个简单的REPL。基本上就是从终端一行行的读入代码，当遇到分号的时候，就解释执行，代码如下：</p>
+<pre><code>SimpleParser parser = new SimpleParser();
+SimpleScript script = new SimpleScript();
+BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));   //从终端获取输入
+
+String scriptText = "";
+System.out.print("\n&gt;");   //提示符
+
+while (true) {             //无限循环
+    try {
+        String line = reader.readLine().trim(); //读入一行
+        if (line.equals("exit();")) {   //硬编码退出条件
+            System.out.println("good bye!");
+            break;
+        }
+        scriptText += line + "\n";
+        if (line.endsWith(";")) { //如果没有遇到分号的话，会再读一行
+            ASTNode tree = parser.parse(scriptText); //语法解析
+            if (verbose) {
+                parser.dumpAST(tree, "");
+            }
+          
+            script.evaluate(tree, ""); //对AST求值，并打印
+
+            System.out.print("\n&gt;");   //显示一个提示符
+
+            scriptText = "";
+        }
+
+    } catch (Exception e) { //如果发现语法错误，报错，然后可以继续执行
+        System.out.println(e.getLocalizedMessage());
+        System.out.print("\n&gt;");   //提示符
+        scriptText = "";
+    } 
+}
+</code></pre>
+<p>运行java craft.SimpleScript，你就可以在终端里尝试各种语句了。如果是正确的语句，系统马上会反馈回结果。如果是错误的语句，REPL还能反馈回错误信息，并且能够继续处理下面的语句。我们前面添加的处理语法错误的代码，现在起到了作用！下面是在我电脑上的运行情况：</p>
+<p><img alt="" src="/assets/8c833e14de00e2e6da034423.jpg"/></p>
+<p>如果你用java craft.SimpleScript -v启动REPL，则进入Verbose模式，它还会每次打印出AST，你可以尝试一下。</p>
+<p>退出REPL需要在终端输入ctl+c，或者调用exit()函数。我们目前的解释器并没有支持函数，所以我们是在REPL里硬编码来实现exit()函数的。后面的课程里，我会带你真正地实现函数特性。</p>
+<p>我希望你能编译一下这个程序，好好的玩一玩它，然后再修改一下源代码，增加一些你感兴趣的特性。我们学习跟打游戏一样，好玩、有趣才能驱动我们不停地学下去，一步步升级打怪。我个人觉得，我们作为软件工程师，拿出一些时间来写点儿有趣的东西作为消遣，乐趣和成就感也是很高的，况且还能提高水平。</p>
+<h2 id="课程小结">课程小结</h2>
+<p>本节课我们通过对三种语句的支持，实现了一个简单的脚本语言。REPL运行代码的时候，你会有一种真真实实的感觉，这确实是一门脚本语言了，虽然它没做性能的优化，但你运行的时候也还觉得挺流畅。</p>
+<p>学完这讲以后，你也能找到了一点感觉：Shell脚本也好，PHP也好，JavaScript也好，Python也好，其实都可以这样写出来。</p>
+<p>回顾过去几讲，你已经可以分析词法、语法、进行计算，还解决了左递归、优先级、结合性的问题。甚至，你还能处理语法错误，让脚本解释器不会因为输入错误而崩溃。</p>
+<p>想必这个时候你已经开始相信我的承诺了：<strong>每个人都可以写一个编译器。</strong>这其实也是我最想达到的效果。相信自己，只要你不给自己设限，不设置玻璃天花板，其实你能够做出很多让自己惊讶、让自己骄傲的成就。</p>
+<p><strong>收获对自己的信心，掌握编译技术，将是你学习这门课程后最大的收获！</strong></p>
+<h2 id="一课一思">一课一思</h2>
+<p>本节课，我们设计了一个可能导致递归下降算法中回溯的情景。在你的计算机语言中，有哪些语法在运用递归下降算法的时候，也是会导致回溯的？</p>
+<p>如果你还想进一步挑战自己，可以琢磨一下，递归下降算法的回溯，会导致多少计算时间的浪费？跟代码长度是线性关系还是指数关系？我们在后面梳理算法的时候，会涉及到这个问题。</p>
+<p>欢迎在留言区里分享你的发现，与大家一起讨论。最后，感谢你的阅读，如果这篇文章让你有所收获，也欢迎你将它分享给更多的朋友。</p>
+<p>另外，第2讲到第5讲的代码，都在代码库中的lab子目录的craft子目录下，代码库在<a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/lab/craft/SimpleScript.java" target="_blank">码云</a>和<a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/lab/craft/SimpleScript.java" target="_blank">GitHub</a>上都有，希望你能下载玩一玩。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 Widget中的State到底是什么？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Flutter核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">47 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Flutter核心技术与实战</strong><ul><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E4%B8%80%E4%BD%8D%E5%A4%A7%E5%89%8D%E7%AB%AF%E4%BB%8E%E4%B8%9A%E8%80%85%E9%83%BD%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%B9%A0Flutter%EF%BC%9F.html">00 开篇词 为什么每一位大前端从业者都应该学习Flutter？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BAFlutter%E5%B7%A5%E7%A8%8B%E7%8E%AF%E5%A2%83.html">01 预习篇 · 从0开始搭建Flutter工程环境</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20Dart%E8%AF%AD%E8%A8%80%E6%A6%82%E8%A7%88.html">02 预习篇 · Dart语言概览</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%96%B9%E6%A1%88%E7%9A%84%E5%8E%86%E5%8F%B2%E5%8F%91%E5%B1%95%E9%80%BB%E8%BE%91.html">03 深入理解跨平台方案的历史发展逻辑</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20Flutter%E5%8C%BA%E5%88%AB%E4%BA%8E%E5%85%B6%E4%BB%96%E6%96%B9%E6%A1%88%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">04 Flutter区别于其他方案的关键技术是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E4%BB%8E%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%85%A5%E6%89%8B%EF%BC%8C%E4%BD%93%E4%BC%9AFlutter%E4%BB%A3%E7%A0%81%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E5%9C%A8%E5%8E%9F%E7%94%9F%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%84.html">05 从标准模板入手，体会Flutter代码是如何运行在原生系统上的</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E4%B8%8E%E7%B1%BB%E5%9E%8B%E5%8F%98%E9%87%8F%EF%BC%9ADart%E6%98%AF%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E4%BF%A1%E6%81%AF%E7%9A%84%EF%BC%9F.html">06 基础语法与类型变量：Dart是如何表示信息的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E5%87%BD%E6%95%B0%E3%80%81%E7%B1%BB%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%9ADart%E6%98%AF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BF%A1%E6%81%AF%E7%9A%84%EF%BC%9F.html">07 函数、类与运算符：Dart是如何处理信息的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%EF%BC%9A%E6%8E%8C%E6%8F%A1Dart%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7.html">08 综合案例：掌握Dart核心特性</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20Widget%EF%BC%8C%E6%9E%84%E5%BB%BAFlutter%E7%95%8C%E9%9D%A2%E7%9A%84%E5%9F%BA%E7%9F%B3.html">09 Widget，构建Flutter界面的基石</a></li><li><a class="active" aria-current="page" href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20Widget%E4%B8%AD%E7%9A%84State%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Widget中的State到底是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E6%8F%90%E5%88%B0%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%8C%E6%88%91%E4%BB%AC%E6%98%AF%E5%9C%A8%E8%AF%B4%E4%BB%80%E4%B9%88%EF%BC%9F.html">11 提到生命周期，我们是在说什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E7%BB%8F%E5%85%B8%E6%8E%A7%E4%BB%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%96%87%E6%9C%AC%E3%80%81%E5%9B%BE%E7%89%87%E5%92%8C%E6%8C%89%E9%92%AE%E5%9C%A8Flutter%E4%B8%AD%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F.html">12 经典控件（一）：文本、图片和按钮在Flutter中怎么用？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E7%BB%8F%E5%85%B8%E6%8E%A7%E4%BB%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AUITableView_ListView%E5%9C%A8Flutter%E4%B8%AD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">13 经典控件（二）：UITableView_ListView在Flutter中是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E7%BB%8F%E5%85%B8%E5%B8%83%E5%B1%80%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E5%AD%90%E6%8E%A7%E4%BB%B6%E5%9C%A8%E7%88%B6%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%8E%92%E7%89%88%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%9F.html">14 经典布局：如何定义子控件在父容器中排版的位置？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20%E7%BB%84%E5%90%88%E4%B8%8E%E8%87%AA%E7%BB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E9%80%89%E7%94%A8%E4%BD%95%E7%A7%8D%E6%96%B9%E5%BC%8F%E8%87%AA%E5%AE%9A%E4%B9%89Widget%EF%BC%9F.html">15 组合与自绘，我该选用何种方式自定义Widget？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E4%BB%8E%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F%E8%AF%B4%E8%B5%B7%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9A%E5%88%B6%E4%B8%8D%E5%90%8C%E9%A3%8E%E6%A0%BC%E7%9A%84App%E4%B8%BB%E9%A2%98%EF%BC%9F.html">16 从夜间模式说起，如何定制不同风格的App主题？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9B%BE%E7%89%87%E3%80%81%E9%85%8D%E7%BD%AE%E5%92%8C%E5%AD%97%E4%BD%93%E5%9C%A8Flutter%E4%B8%AD%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F.html">17 依赖管理（一）：图片、配置和字体在Flutter中怎么用？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BB%84%E4%BB%B6%E5%BA%93%E5%9C%A8Flutter%E4%B8%AD%E8%A6%81%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%EF%BC%9F.html">18 依赖管理（二）：第三方组件库在Flutter中要如何管理？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%BA%8B%E4%BB%B6%E8%AF%A5%E5%A6%82%E4%BD%95%E5%93%8D%E5%BA%94%EF%BC%9F.html">19 用户交互事件该如何响应？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E5%85%B3%E4%BA%8E%E8%B7%A8%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BD%A0%E5%8F%AA%E9%9C%80%E8%A6%81%E8%AE%B0%E4%BD%8F%E8%BF%99%E4%B8%89%E6%8B%9B.html">20 关于跨组件传递数据，你只需要记住这三招</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%AF%BC%E8%88%AA%EF%BC%8CFlutter%E6%98%AF%E8%BF%99%E6%A0%B7%E5%AE%9E%E7%8E%B0%E9%A1%B5%E9%9D%A2%E5%88%87%E6%8D%A2%E7%9A%84.html">21 路由与导航，Flutter是这样实现页面切换的</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E5%A6%82%E4%BD%95%E6%9E%84%E9%80%A0%E7%82%AB%E9%85%B7%E7%9A%84%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%EF%BC%9F.html">22 如何构造炫酷的动画效果？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81UI%E8%BF%90%E8%A1%8C%E6%B5%81%E7%95%85%EF%BC%9F.html">23 单线程模型怎么保证UI运行流畅？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20HTTP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B8%8EJSON%E8%A7%A3%E6%9E%90.html">24 HTTP网络编程与JSON解析</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96.html">25 本地存储与数据库的使用和优化</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E5%A6%82%E4%BD%95%E5%9C%A8Dart%E5%B1%82%E5%85%BC%E5%AE%B9Android_iOS%E5%B9%B3%E5%8F%B0%E7%89%B9%E5%AE%9A%E5%AE%9E%E7%8E%B0%EF%BC%9F%EF%BC%88%E4%B8%80%EF%BC%89.html">26 如何在Dart层兼容Android_iOS平台特定实现？（一）</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E5%A6%82%E4%BD%95%E5%9C%A8Dart%E5%B1%82%E5%85%BC%E5%AE%B9Android_iOS%E5%B9%B3%E5%8F%B0%E7%89%B9%E5%AE%9A%E5%AE%9E%E7%8E%B0%EF%BC%9F%EF%BC%88%E4%BA%8C%EF%BC%89.html">27 如何在Dart层兼容Android_iOS平台特定实现？（二）</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E5%9C%A8%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8%E4%B8%AD%E6%B7%B7%E7%BC%96Flutter%E5%B7%A5%E7%A8%8B%EF%BC%9F.html">28 如何在原生应用中混编Flutter工程？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%EF%BC%8C%E8%AF%A5%E7%94%A8%E4%BD%95%E7%A7%8D%E6%96%B9%E6%A1%88%E7%AE%A1%E7%90%86%E5%AF%BC%E8%88%AA%E6%A0%88%EF%BC%9F.html">29 混合开发，该用何种方案管理导航栈？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%81%9A%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F.html">30 为什么需要做状态管理，怎么做？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%94%9F%E6%8E%A8%E9%80%81%E8%83%BD%E5%8A%9B%EF%BC%9F.html">31 如何实现原生推送能力？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E9%80%82%E9%85%8D%E5%9B%BD%E9%99%85%E5%8C%96%EF%BC%8C%E9%99%A4%E4%BA%86%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%88%91%E4%BB%AC%E8%BF%98%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88_.html">32 适配国际化，除了多语言我们还需要注意什么_</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%A6%82%E4%BD%95%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8C%E5%88%86%E8%BE%A8%E7%8E%87%E7%9A%84%E6%89%8B%E6%9C%BA%E5%B1%8F%E5%B9%95%EF%BC%9F.html">33 如何适配不同分辨率的手机屏幕？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Flutter%E7%9A%84%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">34 如何理解Flutter的编译模式？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20Hot%20Reload%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E5%88%B0%E7%9A%84%EF%BC%9F.html">35 Hot Reload是怎么做到的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BC%98%E5%8C%96%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95%E6%95%88%E7%8E%87%EF%BC%9F.html">36 如何通过工具链优化开发调试效率？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B%E5%B9%B6%E4%BC%98%E5%8C%96Flutter%20App%E7%9A%84%E6%95%B4%E4%BD%93%E6%80%A7%E8%83%BD%E8%A1%A8%E7%8E%B0%EF%BC%9F.html">37 如何检测并优化Flutter App的整体性能表现？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%8F%90%E9%AB%98%E4%BA%A4%E4%BB%98%E8%B4%A8%E9%87%8F%EF%BC%9F.html">38 如何通过自动化测试提高交付质量？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20%E7%BA%BF%E4%B8%8A%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E8%AF%A5%E5%A6%82%E4%BD%95%E5%81%9A%E5%A5%BD%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7%E4%B8%8E%E4%BF%A1%E6%81%AF%E9%87%87%E9%9B%86%EF%BC%9F.html">39 线上出现问题，该如何做好异常捕获与信息采集？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E8%A1%A1%E9%87%8FFlutter%20App%E7%BA%BF%E4%B8%8A%E8%B4%A8%E9%87%8F%EF%BC%8C%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8%E8%BF%99%E4%B8%89%E4%B8%AA%E6%8C%87%E6%A0%87.html">40 衡量Flutter App线上质量，我们需要关注这三个指标</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E7%BB%84%E4%BB%B6%E5%8C%96%E5%92%8C%E5%B9%B3%E5%8F%B0%E5%8C%96%EF%BC%8C%E8%AF%A5%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E5%90%88%E7%90%86%E7%A8%B3%E5%AE%9A%E7%9A%84Flutter%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%EF%BC%9F.html">41 组件化和平台化，该如何组织合理稳定的Flutter工程结构？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%9A%84Flutter%20App%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83%E7%8E%AF%E5%A2%83%EF%BC%9F.html">42 如何构建高效的Flutter App打包发布环境？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/43%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Flutter%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9F.html">43 如何构建自己的Flutter混合开发框架（一）？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/44%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Flutter%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9F.html">44 如何构建自己的Flutter混合开发框架（二）？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%20%20%E6%B8%A9%E6%95%85%E8%80%8C%E7%9F%A5%E6%96%B0%EF%BC%8C%E4%B8%8E%E4%BD%A0%E8%AF%B4%E8%AF%B4%E4%B8%93%E6%A0%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E6%80%9D%E8%80%83%E9%A2%98.html">特别放送   温故而知新，与你说说专栏的那些思考题</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%8B%BF%E7%95%8F%E9%9A%BE%EF%BC%8C%E5%8B%BF%E8%BD%BB%E7%95%A5.html">结束语 勿畏难，勿轻略</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20Widget%E4%B8%AD%E7%9A%84State%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="10 Widget中的State到底是什么？" id="title">10 Widget中的State到底是什么？</h1>
+<div><p>你好，我是陈航。</p>
+<p>通过上一篇文章，我们已经深入理解了Widget是Flutter构建界面的基石，也认识了Widget、Element、RenderObject是如何互相配合，实现图形渲染工作的。Flutter在底层做了大量的渲染优化工作，使得我们只需要通过组合、嵌套不同类型的Widget，就可以构建出任意功能、任意复杂度的界面。</p>
+<p>同时，我们通过前面的学习，也已经了解到Widget有StatelessWidget和StatefulWidget两种类型。StatefulWidget应对有交互、需要动态变化视觉效果的场景，而StatelessWidget则用于处理静态的、无状态的视图展示。StatefulWidget的场景已经完全覆盖了StatelessWidget，因此我们在构建界面时，往往会大量使用StatefulWidget来处理静态的视图展示需求，看起来似乎也没什么问题。</p>
+<p>那么，StatelessWidget存在的必要性在哪里？StatefulWidget是否是Flutter中的万金油？在今天这篇文章中，我将着重和你介绍这两种类型的区别，从而帮你更好地理解Widget，掌握不同类型Widget的正确使用时机。</p>
+<h2 id="ui编程范式">UI编程范式</h2>
+<p>要想理解StatelessWidget与StatefulWidget的使用场景，我们首先需要了解，在Flutter中，如何调整一个控件（Widget）的展示样式，即UI编程范式。</p>
+<p>如果你有过原生系统（Android、iOS）或原生JavaScript开发经验的话，应该知道视图开发是命令式的，需要精确地告诉操作系统或浏览器用何种方式去做事情。比如，如果我们想要变更界面的某个文案，则需要找到具体的文本控件并调用它的控件方法命令，才能完成文字变更。</p>
+<p>下述代码分别展示了在Android、iOS及原生Javascript中，如何将一个文本控件的展示文案更改为Hello World：</p>
+<pre><code>// Android设置某文本控件展示文案为Hello World
+TextView textView = (TextView) findViewById(R.id.txt);
+textView.setText("Hello World");
+
+// iOS设置某文本控件展示文案为Hello World
+UILabel *label = (UILabel *)[self.view viewWithTag:1234];
+label.text = @"Hello World";
+
+// 原生JavaScript设置某文本控件展示文案为Hello World
+document.querySelector("#demo").innerHTML = "Hello World!";
+</code></pre>
+<p>与此不同的是，<strong>Flutter的视图开发是声明式的，其核心设计思想就是将视图和数据分离，这与React的设计思路完全一致</strong>。</p>
+<p>对我们来说，如果要实现同样的需求，则要稍微麻烦点：除了设计好Widget布局方案之外，还需要提前维护一套文案数据集，并为需要变化的Widget绑定数据集中的数据，使Widget根据这个数据集完成渲染。</p>
+<p>但是，当需要变更界面的文案时，我们只要改变数据集中的文案数据，并通知Flutter框架触发Widget的重新渲染即可。这样一来，开发者将无需再精确关注UI编程中的各个过程细节，只要维护好数据集即可。比起命令式的视图开发方式需要挨个设置不同组件（Widget）的视觉属性，这种方式要便捷得多。</p>
+<p><strong>总结来说，命令式编程强调精确控制过程细节；而声明式编程强调通过意图输出结果整体。</strong>对应到Flutter中，意图是绑定了组件状态的State，结果则是重新渲染后的组件。在Widget的生命周期内，应用到State中的任何更改都将强制Widget重新构建。</p>
+<p>其中，对于组件完成创建后就无需变更的场景，状态的绑定是可选项。这里“可选”就区分出了Widget的两种类型，即：StatelessWidget不带绑定状态，而StatefulWidget带绑定状态。<strong>当你所要构建的用户界面不随任何状态信息的变化而变化时，需要选择使用StatelessWidget，反之则选用StatefulWidget。</strong>前者一般用于静态内容的展示，而后者则用于存在交互反馈的内容呈现中。</p>
+<p>接下来，我分别和你介绍StatelessWidget和StatefulWidget，从源码分析它们的区别，并总结一些关于Widget选型的基本原则。</p>
+<h2 id="statelesswidget">StatelessWidget</h2>
+<p>在Flutter中，Widget采用由父到子、自顶向下的方式进行构建，父Widget控制着子Widget的显示样式，其样式配置由父Widget在构建时提供。</p>
+<p>用这种方式构建出的Widget，有些（比如Text、Container、Row、Column等）在创建时，除了这些配置参数之外不依赖于任何其他信息，换句话说，它们一旦创建成功就不再关心、也不响应任何数据变化进行重绘。在Flutter中，<strong>这样的Widget被称为StatelessWidget（无状态组件）</strong>。</p>
+<p>这里有一张StatelessWidget的示意图，如下所示：</p>
+<p><img alt="" src="/assets/008d3bd851b79cb86ea167ce.png"/></p>
+<p>图1 StatelessWidget 示意图</p>
+<p>接下来，我以Text的部分源码为例，和你说明StatelessWidget的构建过程。</p>
+<pre><code>class Text extends StatelessWidget {     
+  //构造方法及属性声明部分
+  const Text(this.data, {
+    Key key,
+    this.textAlign,
+    this.textDirection,
+    //其他参数
+    ...
+  }) : assert(data != null),
+     textSpan = null,
+     super(key: key);
+     
+  final String data;
+  final TextAlign textAlign;
+  final TextDirection textDirection;
+  //其他属性
+  ...
+  
+  @override
+  Widget build(BuildContext context) {
+    ...
+    Widget result = RichText(
+       //初始化配置
+       ...
+      )
+    );
+    ...
+    return result;
+  }
+}
+</code></pre>
+<p>可以看到，在构造方法将其属性列表赋值后，build方法随即将子组件RichText通过其属性列表（如文本data、对齐方式textAlign、文本展示方向textDirection等）初始化后返回，之后Text内部不再响应外部数据的变化。</p>
+<p>那么，什么场景下应该使用StatelessWidget呢？</p>
+<p>这里，我有一个简单的判断规则：<strong>父Widget是否能通过初始化参数完全控制其UI展示效果？</strong>如果能，那么我们就可以使用StatelessWidget来设计构造函数接口了。</p>
+<p>我准备了两个简单的小例子，来帮助你理解这个判断规则。</p>
+<p>第一个小例子是，我需要创建一个自定义的弹窗控件，把使用App过程中出现的一些错误信息提示给用户。这个组件的父Widget，能够完全在子Widget初始化时将组件所需要的样式信息和错误提示信息传递给它，也就意味着父Widget通过初始化参数就能完全控制其展示效果。所以，我可以采用继承StatelessWidget的方式，来进行组件自定义。</p>
+<p>第二个小例子是，我需要定义一个计数器按钮，用户每次点击按钮后，按钮颜色都会随之加深。可以看到，这个组件的父Widget只能控制子Widget初始的样式展示效果，而无法控制在交互过程中发生的颜色变化。所以，我无法通过继承StatelessWidget的方式来自定义组件。那么，这个时候就轮到StatefulWidget出场了。</p>
+<h2 id="statefulwidget">StatefulWidget</h2>
+<p>与StatelessWidget相对应的，有一些Widget（比如Image、Checkbox）的展示，除了父Widget初始化时传入的静态配置之外，还需要处理用户的交互（比如，用户点击按钮）或其内部数据的变化（比如，网络数据回包），并体现在UI上。</p>
+<p>换句话说，这些Widget创建完成后，还需要关心和响应数据变化来进行重绘。在Flutter中，<strong>这一类Widget被称为StatefulWidget（有状态组件）</strong>。这里有一张StatefulWidget的示意图，如下所示：</p>
+<p><img alt="" src="/assets/8cf545e052c9cfd4918ed1ae.png"/></p>
+<p>图2 StatefulWidget 示意图</p>
+<p>看到这里，你可能有点困惑了。因为，我在上一篇文章“Widget，构建Flutter界面的基石”中和你分享到，Widget是不可变的，发生变化时需要销毁重建，所以谈不上状态。那么，这到底是怎么回事呢？</p>
+<p>其实，StatefulWidget是以State类代理Widget构建的设计方式实现的。接下来，我就以Image的部分源码为例，和你说明StatefulWidget的构建过程，来帮助你理解这个知识点。</p>
+<p>和上面提到的Text一样，Image类的构造函数会接收要被这个类使用的属性参数。然而，不同的是，Image类并没有build方法来创建视图，而是通过createState方法创建了一个类型为_ImageState的state对象，然后由这个对象负责视图的构建。</p>
+<p>这个state对象持有并处理了Image类中的状态变化，所以我就以_imageInfo属性为例来和你展开说明。</p>
+<p>_imageInfo属性用来给Widget加载真实的图片，一旦State对象通过_handleImageChanged方法监听到_imageInfo属性发生了变化，就会立即调用_ImageState类的setState方法通知Flutter框架：“我这儿的数据变啦，请使用更新后的_imageInfo数据重新加载图片！”。而，Flutter框架则会标记视图状态，更新UI。</p>
+<pre><code>class Image extends StatefulWidget {
+  //构造方法及属性声明部分
+  const Image({
+    Key key,
+    @required this.image,
+    //其他参数
+  }) : assert(image != null),
+       super(key: key);
+
+  final ImageProvider image;
+  //其他属性
+  ...
+  
+  @override
+  _ImageState createState() =&gt; _ImageState();
+  ...
+}
+
+class _ImageState extends State&lt;Image&gt; {
+  ImageInfo _imageInfo;
+  //其他属性
+  ...
+
+  void _handleImageChanged(ImageInfo imageInfo, bool synchronousCall) {
+    setState(() {
+      _imageInfo = imageInfo;
+    });
+  }
+  ...
+  @override
+  Widget build(BuildContext context) {
+    final RawImage image = RawImage(
+      image: _imageInfo?.image,
+      //其他初始化配置
+      ...
+    );
+    return image;
+  }
+ ...
+}
+</code></pre>
+<p>可以看到，在这个例子中，Image以一种动态的方式运行：监听变化，更新视图。与StatelessWidget通过父Widget完全控制UI展示不同，StatefulWidget的父Widget仅定义了它的初始化状态，而其自身视图运行的状态则需要自己处理，并根据处理情况即时更新UI展示。</p>
+<p>好了，至此我们已经通过StatelessWidget与StatefulWidget的源码，理解了这两种类型的Widget。这时，你可能会问，既然StatefulWidget不仅可以响应状态变化，又能展示静态UI，那么StatelessWidget这种只能展示静态UI的Widget，还有存在的必要吗？</p>
+<h2 id="statefulwidget不是万金油-要慎用">StatefulWidget不是万金油，要慎用</h2>
+<p>对于UI框架而言，同样的展示效果一般可以通过多种控件实现。从定义来看，StatefulWidget仿佛是万能的，替代StatelessWidget看起来合情合理。于是StatefulWidget的滥用，也容易因此变得顺理成章，难以避免。</p>
+<p>但事实是，StatefulWidget的滥用会直接影响Flutter应用的渲染性能。</p>
+<p>接下来，在今天这篇文章的最后，我就再带你回顾一下Widget的更新机制，来帮你意识到完全使用StatefulWidget的代价：</p>
+<blockquote>
+<p>Widget是不可变的，更新则意味着销毁+重建（build）。StatelessWidget是静态的，一旦创建则无需更新；而对于StatefulWidget来说，在State类中调用setState方法更新数据，会触发视图的销毁和重建，也将间接地触发其每个子Widget的销毁和重建。</p>
+</blockquote>
+<p>那么，这意味着什么呢？</p>
+<p>如果我们的根布局是一个StatefulWidget，在其State中每调用一次更新UI，都将是一整个页面所有Widget的销毁和重建。</p>
+<p>在上一篇文章中，我们了解到，虽然Flutter内部通过Element层可以最大程度地降低对真实渲染视图的修改，提高渲染效率，而不是销毁整个RenderObject树重建。但，大量Widget对象的销毁重建是无法避免的。如果某个子Widget的重建涉及到一些耗时操作，那页面的渲染性能将会急剧下降。</p>
+<p>因此，<strong>正确评估你的视图展示需求，避免无谓的StatefulWidget使用，是提高Flutter应用渲染性能最简单也是最直接的手段</strong>。</p>
+<p>在接下来的第29篇文章“为什么需要做状态管理，怎么做？”中，我会继续带你学习StatefulWidget常见的几种状态管理方法，与你更为具体地介绍在不同场景中，该选用何种Widget的基本原则。这些原则，你都可以根据实际需要应用到后续工作中。</p>
+<h2 id="总结">总结</h2>
+<p>好了，今天关于StatelessWidget与StatefulWidget的介绍，我们就到这里了。我们一起来回顾下今天的主要知识点。</p>
+<p>首先，我带你了解了Flutter基于声明式的UI编程范式，并通过阅读两个典型Widget（Text与Image）源码的方式，与你一起学习了StatelessWidget与StatefulWidget的基本设计思路。</p>
+<p>由于Widget采用由父到子、自顶向下的方式进行构建，因此在自定义组件时，我们可以根据父Widget是否能通过初始化参数完全控制其UI展示效果的基本原则，来判断究竟是继承StatelessWidget还是StatefulWidget。</p>
+<p>然后，针对StatefulWidget的“万金油”误区，我带你重新回顾了Widget的UI更新机制。尽管Flutter会通过Element层去最大程度降低对真实渲染视图的修改，但大量的Widget销毁重建无法避免，因此避免StatefulWidget的滥用，是最简单、直接地提升应用渲染性能的手段。</p>
+<p>需要注意的是，除了我们主动地通过State刷新UI之外，在一些特殊场景下，Widget的build方法有可能会执行多次。因此，我们不应该在这个方法内部，放置太多有耗时的操作。而关于这个build方法在哪些场景下会执行，以及为什么会执行多次，我会在下一篇文章“提到生命周期，我们是在说什么？”中，与你一起详细分析。</p>
+<h2 id="思考题">思考题</h2>
+<p>Flutter工程应用模板是计数器示例应用Demo，这个Demo的根节点是一个StatelessWidget。请在保持原有功能的情况下，将这个Demo改造为根节点为StatefulWidget的App。你能通过数据打点，得出这两种方式的性能差异吗？</p>
+<p>欢迎你在评论区给我留言分享你的观点，我会在下一篇文章中等待你！感谢你的收听，也欢迎你把这篇文章分享给更多的朋友一起阅读。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

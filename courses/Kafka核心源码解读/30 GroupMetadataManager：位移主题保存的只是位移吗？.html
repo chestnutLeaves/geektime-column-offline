@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>30 GroupMetadataManager：位移主题保存的只是位移吗？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/index.html">Kafka核心源码解读</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">42 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kafka核心源码解读</strong><ul><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E5%AF%BC%E8%AF%BB%20%E6%9E%84%E5%BB%BAKafka%E5%B7%A5%E7%A8%8B%E5%92%8C%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E3%80%81Scala%E8%AF%AD%E8%A8%80%E7%83%AD%E8%BA%AB.html">00 导读 构建Kafka工程和源码阅读环境、Scala语言热身</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E9%98%85%E8%AF%BB%E6%BA%90%E7%A0%81%EF%BC%8C%E9%80%90%E6%B8%90%E6%88%90%E4%BA%86%E8%81%8C%E4%B8%9A%E8%BF%9B%E9%98%B6%E9%81%93%E8%B7%AF%E4%B8%8A%E7%9A%84%E2%80%9C%E5%BF%85%E9%80%89%E9%A1%B9%E2%80%9D.html">00 开篇词  阅读源码，逐渐成了职业进阶道路上的“必选项”</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E9%87%8D%E7%A3%85%E5%8A%A0%E9%A4%90%20%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8Scala%E8%AF%AD%E8%A8%80.html">00 重磅加餐 带你快速入门Scala语言</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/01%20%E6%97%A5%E5%BF%97%E6%AE%B5%EF%BC%9A%E4%BF%9D%E5%AD%98%E6%B6%88%E6%81%AF%E6%96%87%E4%BB%B6%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">01 日志段：保存消息文件的对象是怎么实现的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/02%20%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%97%A5%E5%BF%97%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BD%E6%97%A5%E5%BF%97%E6%AE%B5%E7%9A%84%EF%BC%9F.html">02 日志（上）：日志究竟是如何加载日志段的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/03%20%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82Log%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C.html">03 日志（下）：彻底搞懂Log对象的常见操作</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/04%20%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%94%B9%E8%BF%9B%E7%9A%84%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%E5%9C%A8Kafka%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BA%94%E7%94%A8.html">04 索引（上）：改进的二分查找算法在Kafka索引的应用</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/05%20%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BD%8D%E7%A7%BB%E7%B4%A2%E5%BC%95%E5%92%8C%E6%97%B6%E9%97%B4%E6%88%B3%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">05 索引（下）：位移索引和时间戳索引的区别是什么？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/06%20%E8%AF%B7%E6%B1%82%E9%80%9A%E9%81%93%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0Kafka%E8%AF%B7%E6%B1%82%E9%98%9F%E5%88%97%EF%BC%9F.html">06 请求通道：如何实现Kafka请求队列？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/07%20SocketServer%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AKafka%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E5%BA%94%E7%94%A8NIO%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E7%9A%84%EF%BC%9F.html">07 SocketServer（上）：Kafka到底是怎么应用NIO实现网络通信的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/08%20SocketServer%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E8%AF%B7%E6%B1%82%E8%BF%98%E8%A6%81%E5%8C%BA%E5%88%86%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%9F.html">08 SocketServer（中）：请求还要区分优先级？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/09%20SocketServer%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E5%85%A8%E6%B5%81%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html">09 SocketServer（下）：请求处理全流程源码分析</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/10%20KafkaApis%EF%BC%9AKafka%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E6%BA%90%E7%A0%81%E5%85%A5%E5%8F%A3%EF%BC%8C%E6%B2%A1%E6%9C%89%E4%B9%8B%E4%B8%80.html">10 KafkaApis：Kafka最重要的源码入口，没有之一</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/11%20Controller%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9AController%E9%83%BD%E4%BF%9D%E5%AD%98%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%9C%E8%A5%BF%EF%BC%9F%E6%9C%89%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81%EF%BC%9F.html">11 Controller元数据：Controller都保存有哪些东西？有几种状态？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/12%20ControllerChannelManager%EF%BC%9AController%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81%EF%BC%9F.html">12 ControllerChannelManager：Controller如何管理请求发送？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/13%20ControllerEventManager%EF%BC%9A%E5%8F%98%E8%BA%AB%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%90%8E%E7%9A%84Controller%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BA%8B%E4%BB%B6%EF%BC%9F.html">13 ControllerEventManager：变身单线程后的Controller如何处理事件？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/14%20Controller%E9%80%89%E4%B8%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">14 Controller选举是怎么实现的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/15%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Controller%E5%9C%A8Kafka%E9%9B%86%E7%BE%A4%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F.html">15 如何理解Controller在Kafka集群中的作用？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/16%20TopicDeletionManager%EF%BC%9A%20Topic%E6%98%AF%E6%80%8E%E4%B9%88%E8%A2%AB%E5%88%A0%E9%99%A4%E7%9A%84%EF%BC%9F.html">16 TopicDeletionManager： Topic是怎么被删除的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/17%20ReplicaStateMachine%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%89%AF%E6%9C%AC%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">17 ReplicaStateMachine：揭秘副本状态机实现原理</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/18%20PartitionStateMachine%EF%BC%9A%E5%88%86%E5%8C%BA%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">18 PartitionStateMachine：分区状态转换如何实现？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/19%20TimingWheel%EF%BC%9A%E6%8E%A2%E7%A9%B6Kafka%E5%AE%9A%E6%97%B6%E5%99%A8%E8%83%8C%E5%90%8E%E7%9A%84%E9%AB%98%E6%95%88%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95.html">19 TimingWheel：探究Kafka定时器背后的高效时间轮算法</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/20%20DelayedOperation%EF%BC%9ABroker%E6%98%AF%E6%80%8E%E4%B9%88%E5%BB%B6%E6%97%B6%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84%EF%BC%9F.html">20 DelayedOperation：Broker是怎么延时处理请求的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/21%20AbstractFetcherThread%EF%BC%9A%E6%8B%89%E5%8F%96%E6%B6%88%E6%81%AF%E5%88%86%E5%87%A0%E6%AD%A5%EF%BC%9F.html">21 AbstractFetcherThread：拉取消息分几步？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/22%20ReplicaFetcherThread%EF%BC%9AFollower%E5%A6%82%E4%BD%95%E6%8B%89%E5%8F%96Leader%E6%B6%88%E6%81%AF%EF%BC%9F.html">22 ReplicaFetcherThread：Follower如何拉取Leader消息？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/23%20ReplicaManager%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%BF%85%E9%A1%BB%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E7%B1%BB%E5%AE%9A%E4%B9%89%E5%92%8C%E6%A0%B8%E5%BF%83%E5%AD%97%E6%AE%B5.html">23 ReplicaManager（上）：必须要掌握的副本管理类定义和核心字段</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/24%20ReplicaManager%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%AF%BB%E5%86%99%E5%89%AF%E6%9C%AC%E7%9A%84%EF%BC%9F.html">24 ReplicaManager（中）：副本管理器是如何读写副本的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/25%20ReplicaManager%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%89%AF%E6%9C%AC%E7%9A%84%EF%BC%9F.html">25 ReplicaManager（下）：副本管理器是如何管理副本的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/26%20MetadataCache%EF%BC%9ABroker%E6%98%AF%E6%80%8E%E4%B9%88%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0%E5%85%83%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E7%9A%84%EF%BC%9F.html">26 MetadataCache：Broker是怎么异步更新元数据缓存的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/27%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9F.html">27 消费者组元数据（上）：消费者组都有哪些元数据？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/28%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AKafka%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E8%BF%99%E4%BA%9B%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9F.html">28 消费者组元数据（下）：Kafka如何管理这些元数据？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/29%20GroupMetadataManager%EF%BC%9A%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E4%B8%AA%E4%BB%80%E4%B9%88%E4%B8%9C%E8%A5%BF%EF%BC%9F.html">29 GroupMetadataManager：组元数据管理器是个什么东西？</a></li><li><a class="active" aria-current="page" href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/30%20GroupMetadataManager%EF%BC%9A%E4%BD%8D%E7%A7%BB%E4%B8%BB%E9%A2%98%E4%BF%9D%E5%AD%98%E7%9A%84%E5%8F%AA%E6%98%AF%E4%BD%8D%E7%A7%BB%E5%90%97%EF%BC%9F.html">30 GroupMetadataManager：位移主题保存的只是位移吗？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/31%20GroupMetadataManager%EF%BC%9A%E6%9F%A5%E8%AF%A2%E4%BD%8D%E7%A7%BB%E6%97%B6%EF%BC%8C%E4%B8%8D%E7%94%A8%E8%AF%BB%E5%8F%96%E4%BD%8D%E7%A7%BB%E4%B8%BB%E9%A2%98%EF%BC%9F.html">31 GroupMetadataManager：查询位移时，不用读取位移主题？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/32%20GroupCoordinator%EF%BC%9A%E5%9C%A8Rebalance%E4%B8%AD%EF%BC%8CCoordinator%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%88%90%E5%91%98%E5%85%A5%E7%BB%84%EF%BC%9F.html">32 GroupCoordinator：在Rebalance中，Coordinator如何处理成员入组？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/33%20GroupCoordinator%EF%BC%9A%E5%9C%A8Rebalance%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%BB%84%E5%90%8C%E6%AD%A5%EF%BC%9F.html">33 GroupCoordinator：在Rebalance中，如何进行组同步？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%B8%80%EF%BC%89%E7%BB%8F%E5%85%B8%E7%9A%84Kafka%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">特别放送（一）经典的Kafka学习资料有哪些？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%B8%89%EF%BC%89%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%BA%A6%E8%BF%87%E6%97%A5%E5%B8%B8%E4%B8%80%E5%A4%A9%E7%9A%84%EF%BC%9F.html">特别放送（三）我是怎么度过日常一天的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%8F%82%E4%B8%8E%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E7%9A%84%E5%85%A8%E9%83%A8%E6%B5%81%E7%A8%8B.html">特别放送（二）一篇文章带你了解参与开源社区的全部流程</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%BA%94%EF%BC%89%20Kafka%20%E7%A4%BE%E5%8C%BA%E7%9A%84%E9%87%8D%E7%A3%85%E5%8A%9F%E8%83%BD%EF%BC%9A%E7%A7%BB%E9%99%A4%20ZooKeeper%20%E4%BE%9D%E8%B5%96.html">特别放送（五） Kafka 社区的重磅功能：移除 ZooKeeper 依赖</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E5%9B%9B%EF%BC%8920%E9%81%93%E7%BB%8F%E5%85%B8%E7%9A%84Kafka%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AF%A6%E8%A7%A3.html">特别放送（四）20道经典的Kafka面试题详解</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%88%91%E4%BB%AC%E6%89%8D%E5%88%9A%E4%B8%8A%E8%B7%AF%E5%91%A2.html">结束语 源码学习，我们才刚上路呢</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/30%20GroupMetadataManager%EF%BC%9A%E4%BD%8D%E7%A7%BB%E4%B8%BB%E9%A2%98%E4%BF%9D%E5%AD%98%E7%9A%84%E5%8F%AA%E6%98%AF%E4%BD%8D%E7%A7%BB%E5%90%97%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="30 GroupMetadataManager：位移主题保存的只是位移吗？" id="title">30 GroupMetadataManager：位移主题保存的只是位移吗？</h1>
+<div><p>你好，我是胡夕。今天，我们学习位移主题管理的源码。</p>
+<p>位移主题，即<strong>consumer_offsets，是Kafka的两大内部主题之一（另一个内部主题是管理Kafka事务的，名字是</strong>transaction_state，用于保存Kafka事务的状态信息）。</p>
+<p>Kafka创建位移主题的目的，是<strong>保存消费者组的注册消息和提交位移消息</strong>。前者保存能够标识消费者组的身份信息；后者保存消费者组消费的进度信息。在Kafka源码中，GroupMetadataManager类定义了操作位移主题消息类型以及操作位移主题的方法。该主题下都有哪些消息类型，是我们今天学习的重点。</p>
+<p>说到位移主题，你是否对它里面的消息内容感到很好奇呢？我见过很多人直接使用kafka-console-consumer命令消费该主题，想要知道里面保存的内容，可输出的结果却是一堆二进制乱码。其实，如果你不阅读今天的源码，是无法知晓如何通过命令行工具查询该主题消息的内容的。因为这些知识只包含在源码中，官方文档并没有涉及到。</p>
+<p>好了，我不卖关子了。简单来说，你在运行kafka-console-consumer命令时，必须指定<code>--formatter "kafka.coordinator.group.GroupMetadataManager\$OffsetsMessageFormatter"</code>，才能查看提交的位移消息数据。类似地，你必须指定GroupMetadataMessageFormatter，才能读取消费者组的注册消息数据。</p>
+<p>今天，我们就来学习位移主题下的这两大消息类型。除此之外，我还会给你介绍消费者组是如何寻找自己的Coordinator的。毕竟，对位移主题进行读写的前提，就是要能找到正确的Coordinator所在。</p>
+<h2 id="消息类型">消息类型</h2>
+<p>位移主题有两类消息：<strong>消费者组注册消息</strong>（Group Metadata）和<strong>消费者组的已提交位移消息</strong>（Offset Commit）。很多人以为，位移主题里面只保存消费者组位移，这是错误的！它还保存了消费者组的注册信息，或者说是消费者组的元数据。这里的元数据，主要是指消费者组名称以及成员分区消费分配方案。</p>
+<p>在分别介绍这两类消息的实现代码之前，我们先看下Kafka为它们定义的公共服务代码。毕竟它们是这两类消息都会用到的代码组件。这些公共代码主要由两部分组成：GroupTopicPartition类和BaseKey接口。</p>
+<p>我们首先来看POJO类<strong>GroupTopicPartition</strong>。它的作用是封装&lt;消费者组名，主题，分区号&gt;的三元组，代码如下：</p>
+<pre><code>case class GroupTopicPartition(group: String, topicPartition: TopicPartition) {
+  def this(group: String, topic: String, partition: Int) =
+    this(group, new TopicPartition(topic, partition))
+  // toString方法......
+}
+</code></pre>
+<p>显然，这个类就是一个数据容器类。我们后面在学习已提交位移消息时，还会看到它的身影。</p>
+<p>其次是<strong>BaseKey接口，</strong>它表示位移主题的两类消息的Key类型。强调一下，无论是该主题下的哪类消息，都必须定义Key。这里的BaseKey接口，定义的就是这两类消息的Key类型。我们看下它的代码：</p>
+<pre><code>trait BaseKey{
+  def version: Short  // 消息格式版本
+  def key: Any        // 消息key
+}
+</code></pre>
+<p>这里的version是Short型的消息格式版本。随着Kafka代码的不断演进，位移主题的消息格式也在不断迭代，因此，这里出现了版本号的概念。至于key字段，它保存的是实际的Key值。在Scala中，Any类型类似于Java中的Object类，表示该值可以是任意类型。稍后讲到具体的消息类型时，你就会发现，这两类消息的Key类型其实是不同的数据类型。</p>
+<p>好了，基础知识铺垫完了，有了对GroupTopicPartition和BaseKey的理解，你就能明白，位移主题的具体消息类型是如何构造Key的。</p>
+<p>接下来，我们开始学习具体消息类型的实现代码，包括注册消息、提交位移消息和Tombstone消息。由于消费者组必须要先向Coordinator组件注册，然后才能提交位移，所以我们先阅读注册消息的代码。</p>
+<h3 id="注册消息">注册消息</h3>
+<p>所谓的注册消息，就是指消费者组向位移主题写入注册类的消息。该类消息的写入时机有两个。</p>
+<ul>
+<li><strong>所有成员都加入组后</strong>：Coordinator向位移主题写入注册消息，只是该消息不含分区消费分配方案；</li>
+<li><strong>Leader成员发送方案给Coordinator后</strong>：当Leader成员将分区消费分配方案发给Coordinator后，Coordinator写入携带分配方案的注册消息。</li>
+</ul>
+<p>我们首先要知道，注册消息的Key是如何定义，以及如何被封装到消息里的。</p>
+<p>Key的定义在GroupMetadataKey类代码中：</p>
+<pre><code>case class GroupMetadataKey(version: Short, key: String) extends BaseKey {
+  override def toString: String = key
+}
+</code></pre>
+<p>该类的key字段是一个字符串类型，保存的是消费者组的名称。可见，<strong>注册消息的Key就是消费者组名</strong>。</p>
+<p>GroupMetadataManager对象有个groupMetadataKey方法，负责将注册消息的Key转换成字节数组，用于后面构造注册消息。这个方法的代码如下：</p>
+<pre><code>def groupMetadataKey(group: String): Array[Byte] = {
+  val key = new Struct(CURRENT_GROUP_KEY_SCHEMA)
+  key.set(GROUP_KEY_GROUP_FIELD, group)
+  // 构造一个ByteBuffer对象，容纳version和key数据
+  val byteBuffer = ByteBuffer.allocate(2 /* version */ + key.sizeOf)
+  byteBuffer.putShort(CURRENT_GROUP_KEY_SCHEMA_VERSION)
+  key.writeTo(byteBuffer)
+  byteBuffer.array()
+}
+</code></pre>
+<p>该方法首先会接收消费者组名，构造ByteBuffer对象，然后，依次向Buffer写入Short型的消息格式版本以及消费者组名，最后，返回该Buffer底层的字节数组。</p>
+<p>你不用关心这里的格式版本变量以及Struct类型都是怎么实现的，因为它们不是我们理解位移主题内部原理的关键。你需要掌握的，是<strong>注册消息的Key和Value都是怎么定义的</strong>。</p>
+<p>接下来，我们就来了解下消息体Value的代码实现。既然有groupMetadataKey方法，那么，源码也提供了相应的groupMetadataValue方法。它的目的是<strong>将消费者组重要的元数据写入到字节数组</strong>。我们看下它的代码实现：</p>
+<pre><code>def groupMetadataValue(
+  groupMetadata: GroupMetadata,  // 消费者组元数据对象
+  assignment: Map[String, Array[Byte]], // 分区消费分配方案
+  apiVersion: ApiVersion // Kafka API版本号
+): Array[Byte] = {
+  // 确定消息格式版本以及格式结构
+  val (version, value) = {
+    if (apiVersion &lt; KAFKA_0_10_1_IV0)
+      (0.toShort, new Struct(GROUP_METADATA_VALUE_SCHEMA_V0))
+    else if (apiVersion &lt; KAFKA_2_1_IV0)
+      (1.toShort, new Struct(GROUP_METADATA_VALUE_SCHEMA_V1))
+    else if (apiVersion &lt; KAFKA_2_3_IV0)
+      (2.toShort, new Struct(GROUP_METADATA_VALUE_SCHEMA_V2))
+    else
+      (3.toShort, new Struct(GROUP_METADATA_VALUE_SCHEMA_V3))
+  }
+  // 依次写入消费者组主要的元数据信息
+  // 包括协议类型、Generation ID、分区分配策略和Leader成员ID
+  value.set(PROTOCOL_TYPE_KEY, groupMetadata.protocolType.getOrElse(""))
+  value.set(GENERATION_KEY, groupMetadata.generationId)
+  value.set(PROTOCOL_KEY, groupMetadata.protocolName.orNull)
+  value.set(LEADER_KEY, groupMetadata.leaderOrNull)
+  // 写入最近一次状态变更时间戳
+  if (version &gt;= 2)
+    value.set(CURRENT_STATE_TIMESTAMP_KEY, groupMetadata.currentStateTimestampOrDefault)
+  // 写入各个成员的元数据信息
+  // 包括成员ID、client.id、主机名以及会话超时时间
+  val memberArray = groupMetadata.allMemberMetadata.map { memberMetadata =&gt;
+    val memberStruct = value.instance(MEMBERS_KEY)
+    memberStruct.set(MEMBER_ID_KEY, memberMetadata.memberId)
+    memberStruct.set(CLIENT_ID_KEY, memberMetadata.clientId)
+    memberStruct.set(CLIENT_HOST_KEY, memberMetadata.clientHost)
+    memberStruct.set(SESSION_TIMEOUT_KEY, memberMetadata.sessionTimeoutMs)
+    // 写入Rebalance超时时间
+    if (version &gt; 0)
+      memberStruct.set(REBALANCE_TIMEOUT_KEY, memberMetadata.rebalanceTimeoutMs)
+    // 写入用于静态消费者组管理的Group Instance ID
+    if (version &gt;= 3)
+      memberStruct.set(GROUP_INSTANCE_ID_KEY, memberMetadata.groupInstanceId.orNull)
+    // 必须定义分区分配策略，否则抛出异常
+    val protocol = groupMetadata.protocolName.orNull
+    if (protocol == null)
+      throw new IllegalStateException("Attempted to write non-empty group metadata with no defined protocol")
+    // 写入成员消费订阅信息
+    val metadata = memberMetadata.metadata(protocol)
+    memberStruct.set(SUBSCRIPTION_KEY, ByteBuffer.wrap(metadata))
+    val memberAssignment = assignment(memberMetadata.memberId)
+    assert(memberAssignment != null)
+    // 写入成员消费分配信息
+    memberStruct.set(ASSIGNMENT_KEY, ByteBuffer.wrap(memberAssignment))
+    memberStruct
+  }
+  value.set(MEMBERS_KEY, memberArray.toArray)
+  // 向Buffer依次写入版本信息和以上写入的元数据信息
+  val byteBuffer = ByteBuffer.allocate(2 /* version */ + value.sizeOf)
+  byteBuffer.putShort(version)
+  value.writeTo(byteBuffer)
+  // 返回Buffer底层的字节数组
+  byteBuffer.array()
+}
+</code></pre>
+<p>代码比较长，我结合一张图来帮助你理解这个方法的执行逻辑。</p>
+<p><img alt="" src="/assets/e6c673cb66855312c58fa46c.jpg"/></p>
+<p>第1步，代码根据传入的apiVersion字段，确定要使用哪个格式版本，并创建对应版本的结构体（Struct）来保存这些元数据。apiVersion的取值是Broker端参数inter.broker.protocol.version的值。你打开Kafka官网的话，就可以看到，这个参数的值永远指向当前最新的Kafka版本。</p>
+<p>第2步，代码依次向结构体写入消费者组的协议类型（Protocol Type）、Generation ID、分区分配策略（Protocol Name）和Leader成员ID。在学习GroupMetadata时，我说过，对于普通的消费者组而言，协议类型就是”consumer”字符串，分区分配策略可能是”range”“round-robin”等。之后，代码还会为格式版本≥2的结构体，写入消费者组状态最近一次变更的时间戳。</p>
+<p>第3步，遍历消费者组的所有成员，为每个成员构建专属的结构体对象，并依次向结构体写入成员的ID、Client ID、主机名以及会话超时时间信息。对于格式版本≥0的结构体，代码要写入成员配置的Rebalance超时时间，而对于格式版本≥3的结构体，代码还要写入用于静态消费者组管理的Group Instance ID。待这些都做完之后，groupMetadataValue方法必须要确保消费者组选出了分区分配策略，否则就抛出异常。再之后，方法依次写入成员消费订阅信息和成员消费分配信息。</p>
+<p>第4步，代码向Buffer依次写入版本信息和刚刚说到的写入的元数据信息，并返回Buffer底层的字节数组。至此，方法逻辑结束。</p>
+<p>关于注册消息Key和Value的内容，我就介绍完了。为了帮助你更直观地理解注册消息到底包含了什么数据，我再用一张图向你展示一下它们的构成。</p>
+<p><img alt="" src="/assets/33a06d8fcee220f3403211fa.jpg"/></p>
+<p>这张图完整地总结了groupMetadataKey和groupMetadataValue方法要生成的注册消息内容。灰色矩形中的字段表示可选字段，有可能不会包含在Value中。</p>
+<h3 id="已提交位移消息">已提交位移消息</h3>
+<p>接下来，我们再学习一下提交位移消息的Key和Value构成。</p>
+<p>OffsetKey类定义了提交位移消息的Key值，代码如下：</p>
+<pre><code>case class OffsetKey(version: Short, key: GroupTopicPartition) extends BaseKey {
+  override def toString: String = key.toString
+}
+</code></pre>
+<p>可见，这类消息的Key是一个GroupTopicPartition类型，也就是&lt;消费者组名，主题，分区号&gt;三元组。</p>
+<p>offsetCommitKey方法负责将这个三元组转换成字节数组，用于后续构造提交位移消息。</p>
+<pre><code>def offsetCommitKey(
+  group: String,  // 消费者组名
+  topicPartition: TopicPartition // 主题 + 分区号
+): Array[Byte] = {
+  // 创建结构体，依次写入消费者组名、主题和分区号
+  val key = new Struct(CURRENT_OFFSET_KEY_SCHEMA)
+  key.set(OFFSET_KEY_GROUP_FIELD, group)
+  key.set(OFFSET_KEY_TOPIC_FIELD, topicPartition.topic)
+  key.set(OFFSET_KEY_PARTITION_FIELD, topicPartition.partition)
+  // 构造ByteBuffer，写入格式版本和结构体
+  val byteBuffer = ByteBuffer.allocate(2 /* version */ + key.sizeOf)
+  byteBuffer.putShort(CURRENT_OFFSET_KEY_SCHEMA_VERSION)
+  key.writeTo(byteBuffer)
+  // 返回字节数组
+  byteBuffer.array()
+}
+</code></pre>
+<p>该方法接收三元组中的数据，然后创建一个结构体对象，依次写入消费者组名、主题和分区号。接下来，构造ByteBuffer，写入格式版本和结构体，最后返回它底层的字节数组。</p>
+<p>说完了Key，我们看下Value的定义。</p>
+<p>offsetCommitValue方法决定了Value中都有哪些元素，我们一起看下它的代码。这里，我只列出了最新版本对应的结构体对象，其他版本要写入的元素大同小异，课下你可以阅读下其他版本的结构体内容，也就是我省略的if分支下的代码。</p>
+<pre><code>def offsetCommitValue(offsetAndMetadata: OffsetAndMetadata,
+                      apiVersion: ApiVersion): Array[Byte] = {
+  // 确定消息格式版本以及创建对应的结构体对象
+  val (version, value) = {
+    if (......) {
+      ......
+    } else {
+      val value = new Struct(OFFSET_COMMIT_VALUE_SCHEMA_V3)
+      // 依次写入位移值、Leader Epoch值、自定义元数据以及时间戳
+      value.set(
+        OFFSET_VALUE_OFFSET_FIELD_V3, offsetAndMetadata.offset)
+      value.set(OFFSET_VALUE_LEADER_EPOCH_FIELD_V3,
+ offsetAndMetadata.leaderEpoch.orElse(RecordBatch.NO_PARTITION_LEADER_EPOCH))
+      value.set(OFFSET_VALUE_METADATA_FIELD_V3, offsetAndMetadata.metadata)
+      value.set(OFFSET_VALUE_COMMIT_TIMESTAMP_FIELD_V3, offsetAndMetadata.commitTimestamp)
+(3, value)
+    }
+  }
+  // 构建ByteBuffer，写入消息格式版本和结构体
+  val byteBuffer = ByteBuffer.allocate(2 /* version */ + value.sizeOf)
+  byteBuffer.putShort(version.toShort)
+  value.writeTo(byteBuffer)
+  // 返回ByteBuffer底层字节数组
+  byteBuffer.array()
+}
+</code></pre>
+<p>offsetCommitValue方法首先确定消息格式版本以及创建对应的结构体对象。对于当前最新版本V3而言，结构体的元素包括位移值、Leader Epoch值、自定义元数据和时间戳。如果我们使用Java Consumer API的话，那么，在提交位移时，这个自定义元数据一般是空。</p>
+<p>接下来，构建ByteBuffer，写入消息格式版本和结构体。</p>
+<p>最后，返回ByteBuffer底层字节数组。</p>
+<p>与注册消息的消息体相比，提交位移消息的Value要简单得多。我再用一张图展示一下提交位移消息的Key、Value构成。</p>
+<p><img alt="" src="/assets/cb337d502a6f03aeb08cd7bb.jpg"/></p>
+<h3 id="tombstone消息">Tombstone消息</h3>
+<p>关于位移主题，Kafka源码中还存在一类消息，那就是Tombstone消息。其实，它并没有任何稀奇之处，就是Value为null的消息。因此，注册消息和提交位移消息都有对应的Tombstone消息。这个消息的主要作用，是让Kafka识别哪些Key对应的消息是可以被删除的，有了它，Kafka就能保证，内部位移主题不会持续增加磁盘占用空间。</p>
+<p>你可以看下下面两行代码，它们分别表示两类消息对应的Tombstone消息。</p>
+<pre><code>// 提交位移消息对应的Tombstone消息 
+tombstones += new SimpleRecord(timestamp, commitKey, null)
+// 注册消息对应的Tombstone消息 
+tombstones += new SimpleRecord(timestamp, groupMetadataKey, null)
+</code></pre>
+<p>无论是哪类消息，<strong>它们的Value字段都是null</strong>。一旦注册消息中出现了Tombstone消息，就表示Kafka可以将该消费者组元数据从位移主题中删除；一旦提交位移消息中出现了Tombstone，就表示Kafka能够将该消费者组在某主题分区上的位移提交数据删除。</p>
+<h2 id="如何确定coordinator">如何确定Coordinator？</h2>
+<p>接下来，我们要再学习一下位移主题和消费者组Coordinator之间的关系。<strong>Coordinator组件是操作位移主题的唯一组件，它在内部对位移主题进行读写操作</strong>。</p>
+<p>每个Broker在启动时，都会启动Coordinator组件，但是，一个消费者组只能被一个Coordinator组件所管理。Kafka是如何确定哪台Broker上的Coordinator组件为消费者组服务呢？答案是，位移主题某个特定分区Leader副本所在的Broker被选定为指定消费者组的Coordinator。</p>
+<p>那么，这个特定分区是怎么计算出来的呢？我们来看GroupMetadataManager类的partitionFor方法代码：</p>
+<pre><code>def partitionFor(groupId: String): Int = Utils.abs(groupId.hashCode) % groupMetadataTopicPartitionCount
+</code></pre>
+<p>看到了吧，消费者组名哈希值与位移主题分区数求模的绝对值结果，就是该消费者组要写入位移主题的目标分区。</p>
+<p>假设位移主题默认是50个分区，我们的消费者组名是“testgroup”，因此，Math.abs(“testgroup”.hashCode % 50)的结果是27，那么，目标分区号就是27。也就是说，这个消费者组的注册消息和提交位移消息都会写入到位移主题的分区27中，而分区27的Leader副本所在的Broker，就成为该消费者组的Coordinator。</p>
+<h2 id="总结">总结</h2>
+<p>Kafka内部位移主题，是Coordinator端用来保存和记录消费者组信息的重要工具。具体而言，消费者组信息包括消费者组元数据以及已提交位移，它们分别对应于我们今天讲的位移主题中的注册消息和已提交位移消息。前者定义了消费者组的元数据信息，包括组名、成员列表和分区消费分配方案；后者则是消费者组各个成员提交的位移值。这两部分信息共同构成了位移主题的消息类型。</p>
+<p>除了消息类型，我还介绍了消费者组确定Coordinator端的代码。明白了这一点，下次你的消费者组成员出现问题的时候，你就会知道，要去哪台Broker上去查找相应的日志了。</p>
+<p>我们来回顾一下这节课的重点。</p>
+<ul>
+<li>位移主题：即__consumer_offsets。该主题是内部主题，默认有50个分区，Kafka负责将其创建出来，因此你不需要亲自执行创建主题操作。</li>
+<li>消息类型：位移主题分为注册消息和已提交位移消息。</li>
+<li>Tombstone消息：Value为null的位移主题消息，用于清除消费者组已提交的位移值和注册信息。</li>
+<li>Coordinator确认原则：消费者组名的哈希值与位移主题分区数求模的绝对值，即为目标分区，目标分区Leader副本所在的Broker即为Coordinator。</li>
+</ul>
+<p><img alt="" src="/assets/7f32260198cb07ea031330b4.jpg"/></p>
+<p>定义了消息格式，明确了Coordinator，下一步，就是Coordinator对位移主题进行读写操作了。具体来说，就是构建今天我们所学的两类消息，并将其序列化成字节数组，写入到位移主题，以及从位移主题中读取出字节数组，并反序列化成对应的消息类型。下节课，我们一起研究下这个问题。</p>
+<h2 id="课后讨论">课后讨论</h2>
+<p>请你根据今天的内容，用kafka-console-consumer脚本去读取一下你线上环境中位移主题的已提交位移消息，并结合readOffsetMessageValue方法的源码，说一下输出中的每个字段都是什么含义。</p>
+<p>欢迎在留言区写下你的思考和答案，跟我交流讨论，也欢迎你把今天的内容分享给你的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>02 RocketMQ 核心概念扫盲篇 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">RocketMQ 实战与进阶（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">30 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>RocketMQ 实战与进阶（完）</strong><ul><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E6%90%AD%E5%BB%BA%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E7%AF%87.html">01 搭建学习环境准备篇</a></li><li><a class="active" aria-current="page" href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/02%20RocketMQ%20%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%89%AB%E7%9B%B2%E7%AF%87.html">02 RocketMQ 核心概念扫盲篇</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%20API%20%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.html">03 消息发送 API 详解与版本变迁说明</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/04%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E8%B0%88%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81.html">04 结合实际应用场景谈消息发送</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/05%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.html">05 消息发送核心参数与工作原理详解</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/06%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">06 消息发送常见错误与解决方案</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/07%20%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E4%BD%BF%E7%94%A8%E5%8F%8A%E6%96%B9%E6%A1%88%E9%80%89%E5%9E%8B%E6%80%9D%E8%80%83.html">07 事务消息使用及方案选型思考</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%20API%20%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.html">08 消息消费 API 与版本变迁说明</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/09%20DefaultMQPushConsumer%20%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">09 DefaultMQPushConsumer 核心参数与工作原理</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/10%20DefaultMQPushConsumer%20%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">10 DefaultMQPushConsumer 使用示例与注意事项</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/11%20DefaultLitePullConsumer%20%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%AE%9E%E6%88%98.html">11 DefaultLitePullConsumer 核心参数与实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E5%86%8D%E8%81%8A%20DefaultLitePullConsumer%20%E7%9A%84%E4%BD%BF%E7%94%A8.html">12 结合实际场景再聊 DefaultLitePullConsumer 的使用</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E3%80%81%E6%B6%88%E6%81%AF%E8%BF%87%E6%BB%A4%E5%AE%9E%E6%88%98.html">13 结合实际场景顺序消费、消息过滤实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/14%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%A7%AF%E5%8E%8B%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98.html">14 消息消费积压问题排查实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/15%20RocketMQ%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%AE%9E%E6%88%98.html">15 RocketMQ 常用命令实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/16%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E6%91%B8%E9%AB%98.html">16 RocketMQ 集群性能摸高</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/17%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98.html">17 RocketMQ 集群性能调优</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/18%20RocketMQ%20%E9%9B%86%E7%BE%A4%E5%B9%B3%E6%BB%91%E8%BF%90%E7%BB%B4.html">18 RocketMQ 集群平滑运维</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/19%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%B8%80%EF%BC%89.html">19 RocketMQ 集群监控（一）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/20%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%BA%8C%EF%BC%89.html">20 RocketMQ 集群监控（二）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/21%20RocketMQ%20%E9%9B%86%E7%BE%A4%E5%91%8A%E8%AD%A6.html">21 RocketMQ 集群告警</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/22%20RocketMQ%20%E9%9B%86%E7%BE%A4%E8%B8%A9%E5%9D%91%E8%AE%B0.html">22 RocketMQ 集群踩坑记</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/23%20%E6%B6%88%E6%81%AF%E8%BD%A8%E8%BF%B9%E3%80%81ACL%20%E4%B8%8E%E5%A4%9A%E5%89%AF%E6%9C%AC%E6%90%AD%E5%BB%BA.html">23 消息轨迹、ACL 与多副本搭建</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/24%20RocketMQ-Console%20%E5%B8%B8%E7%94%A8%E9%A1%B5%E9%9D%A2%E6%8C%87%E6%A0%87%E8%8E%B7%E5%8F%96%E9%80%BB%E8%BE%91.html">24 RocketMQ-Console 常用页面指标获取逻辑</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/25%20RocketMQ%20Nameserver%20%E8%83%8C%E5%90%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5.html">25 RocketMQ Nameserver 背后的设计理念</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/26%20Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98.html">26 Java 并发编程实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/27%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">27 从 RocketMQ 学基于文件的编程模式（一）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/28%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">28 从 RocketMQ 学基于文件的编程模式（二）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/29%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%20Netty%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7.html">29 从 RocketMQ 学 Netty 网络编程技巧</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/30%20RocketMQ%20%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E6%88%91%E8%A7%81.html">30 RocketMQ 学习方法之我见</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/02%20RocketMQ%20%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%89%AB%E7%9B%B2%E7%AF%87.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="02 RocketMQ 核心概念扫盲篇" id="title">02 RocketMQ 核心概念扫盲篇</h1>
+<div><p>在正式进入 RocketMQ 的学习之前，我觉得有必要梳理一下 RocketMQ 核心概念，为大家学习 RocketMQ 打下牢固的基础。</p>
+<h3 id="rocketmq-部署架构">RocketMQ 部署架构</h3>
+<p><img alt="1" src="/assets/a0452f76955732092d2afc74.png"/></p>
+<p>在 RocketMQ 主要的组件如下。</p>
+<p><strong>NameServer</strong></p>
+<p>NameServer 集群，Topic 的路由注册中心，为客户端根据 Topic 提供路由服务，从而引导客户端向 Broker 发送消息。NameServer 之间的节点不通信。路由信息在 NameServer 集群中数据一致性采取的最终一致性。</p>
+<p><strong>Broker</strong></p>
+<p>消息存储服务器，分为两种角色：Master 与 Slave，上图中呈现的就是 2 主 2 从的部署架构，在 RocketMQ 中，主服务承担读写操作，从服务器作为一个备份，当主服务器存在压力时，从服务器可以承担读服务（消息消费）。所有 Broker，包含 Slave 服务器每隔 30s 会向 NameServer 发送心跳包，心跳包中会包含存在在 Broker 上所有的 Topic 的路由信息。</p>
+<p><strong>Client</strong></p>
+<p>消息客户端，包括 Producer（消息发送者）和 Consumer（消费消费者）。客户端在同一时间只会连接一台 NameServer，只有在连接出现异常时才会向尝试连接另外一台。客户端每隔 30s 向 NameServer 发起 Topic 的路由信息查询。</p>
+<blockquote>
+<p>温馨提示：NameServer 是在内存中存储 Topic 的路由信息，持久化 Topic 路由信息的地方是在 Broker 中，即 <code>${ROCKETMQ_HOME}/store/config/topics.json</code>。</p>
+</blockquote>
+<p>在 RocketMQ 4.5.0 版本后引入了多副本机制，即一个复制组（m-s）可以演变为基于 Raft 协议的复制组，复制组内部使用 Raft 协议保证 Broker 节点数据的强一致性，该部署架构在金融行业用的比较多。</p>
+<h3 id="消息订阅模型">消息订阅模型</h3>
+<p>在 RocketMQ 的消息消费模式采用的是发布与订阅模式。</p>
+<ul>
+<li>Topic：一类消息的集合，消息发送者将一类消息发送到一个主题中，例如订单模块将订单发送到 order_topic 中，而用户登录时，将登录事件发送到 user_login_topic 中。</li>
+<li>ConsumerGroup：消息消费组，一个消费单位的“群体”，消费组首先在启动时需要订阅需要消费的 Topic。一个 Topic 可以被多个消费组订阅，同样一个消费组也可以订阅多个主题。一个消费组拥有多个消费者。</li>
+</ul>
+<p><strong>术语解释起来有点枯燥晦涩，接下来我举例来阐述。</strong></p>
+<p>例如我们在开发一个订单系统，其中有一个子系统：order-service-app，在该项目中会创建一个消费组 order_consumer 来订阅 order_topic，并且基于分布式部署，order-service-app 的部署情况如下：</p>
+<p><img alt="2" src="/assets/cc939fd295c46ffd19582e24.png"/></p>
+<p>即 order-service-app 部署了 3 台服务器，每一个 JVM 进程可以看做是消费组 order_consumer 消费组的其中一个消费者。</p>
+<h4 id="消费模式"><strong>消费模式</strong></h4>
+<p>那这三个消费者如何来分工来共同消费 order_topic 中的消息呢？</p>
+<p>在 RocketMQ 中支持广播模式与集群模式。</p>
+<ul>
+<li><strong>广播模式</strong>：一个消费组内的所有消费者每一个都会处理 Topic 中的每一条消息，通常用于刷新内存缓存。</li>
+<li><strong>集群模式</strong>：一个消费组内的所有消费者共同消费一个 Topic 中的消息，即分工协作，一个消费者消费一部分数据，启动负载均衡。</li>
+</ul>
+<p>集群模式是非常普遍的模式，符合分布式架构的基本理念，即横向扩容，当前消费者如果无法快速及时处理消息时，可以通过增加消费者的个数横向扩容，快速提高消费能力，及时处理挤压的消息。</p>
+<h4 id="消费队列负载算法与重平衡机制"><strong>消费队列负载算法与重平衡机制</strong></h4>
+<p>那集群模式下，消费者是如何来分配消息的呢？</p>
+<p>例如上面实例中 order_topic 有 16 个队列，那一个拥有 3 个消费者的消费组如何来分配队列中。</p>
+<p><strong>在 MQ 领域有一个不成文的约定：同一个消费者同一时间可以分配多个队列，但一个队列同一时间只会分配给一个消费者。</strong></p>
+<p><strong>RocketMQ 提供了众多的队列负载算法</strong>，其中最常用的两种平均分配算法。</p>
+<ul>
+<li>AllocateMessageQueueAveragely：平均分配</li>
+<li>AllocateMessageQueueAveragelyByCircle：轮流平均分配</li>
+</ul>
+<p>为了说明这两种分配算法的分配规则，现在对 16 个队列，进行编号，用 q0~q15 表示，消费者用 c0~c2 表示。</p>
+<p>AllocateMessageQueueAveragely 分配算法的队列负载机制如下：</p>
+<ul>
+<li>c0：q0 q1 q2 q3 q4 q5</li>
+<li>c1：q6 q7 q8 q9 q10</li>
+<li>c2：q11 q12 q13 q14 q15</li>
+</ul>
+<p>其算法的特点是用总数除以消费者个数，余数按消费者顺序分配给消费者，故 c0 会多分配一个队列，而且队列分配是连续的。</p>
+<p>AllocateMessageQueueAveragelyByCircle 分配算法的队列负载机制如下：</p>
+<ul>
+<li>c0：q0 q3 q6 q9 q12 q15</li>
+<li>c1：q1 q4 q7 q10 q13</li>
+<li>c2：q2 q5 q8 q11 q14</li>
+</ul>
+<p>该分配算法的特点就是轮流一个一个分配。</p>
+<blockquote>
+<p>温馨提示：如果 Topic 的队列个数小于消费者的个数，那有些消费者无法分配到消息。在 RocketMQ 中一个 Topic 的队列数直接决定了最大消费者的个数，但 Topic 队列个数的增加对 RocketMQ 的性能不会产生影响。</p>
+</blockquote>
+<p>在实际过程中，对主题进行扩容（增加队列个数）或者对消费者进行扩容、缩容是一件非常寻常的事情，那如果新增一个消费者，该消费者消费哪些队列呢？这就涉及到消息消费队列的重新分配，即<strong>消费队列重平衡机制</strong>。</p>
+<p>在 RocketMQ 客户端中会每隔 20s 去查询当前 Topic 的所有队列、消费者的个数，运用队列负载算法进行重新分配，然后与上一次的分配结果进行对比，如果发生了变化，则进行队列重新分配；如果没有发生变化，则忽略。</p>
+<p>例如采取的分配算法如下图所示，现在增加一个消费者 c3，那队列的分布情况是怎样的呢？</p>
+<p><img alt="3" src="/assets/b4da15b54549174ad423ca96.png"/></p>
+<p>根据新的分配算法，其队列最终的情况如下：</p>
+<ul>
+<li>c0：q0 q1 q2 q3</li>
+<li>c1：q4 q5 q6 q7</li>
+<li>c2：q8 q9 q10 q11</li>
+<li>c3：q12 q13 q14 q15</li>
+</ul>
+<p>上述整个过程无需应用程序干预，由 RocketMQ 完成。大概的做法就是将将原先分配给自己但这次不属于的队列进行丢弃，新分配的队列则创建新的拉取任务。</p>
+<h4 id="消费进度"><strong>消费进度</strong></h4>
+<p>消费者消费一条消息后需要记录消费的位置，这样在消费端重启的时候，继续从上一次消费的位点开始进行处理新的消息。在 RocketMQ 中，消息消费位点的存储是以消费组为单位的。</p>
+<p><strong>集群模式</strong>下，消息消费进度存储在 Broker 端，<code>${ROCKETMQ_HOME}/store/config/consumerOffset.json</code> 是其具体的存储文件，其中内容截图如下：</p>
+<p><img alt="4" src="/assets/d409b04a6f91b1f8d6e67861.png"/></p>
+<p>可见消费进度的 Key 为 topic@consumeGroup，然后每一个队列一个偏移量。</p>
+<p><strong>广播模式</strong>的消费进度文件存储在用户的主目录，默认文件全路劲名：<code>${USER_HOME}/.rocketmq_offsets</code>。</p>
+<h4 id="消费模型"><strong>消费模型</strong></h4>
+<p>RocketMQ 提供了并发消费、顺序消费两种消费模型。</p>
+<ul>
+<li><strong>并发消费</strong>：对一个队列中消息，每一个消费者内部都会创建一个线程池，对队列中的消息多线程处理，即偏移量大的消息比偏移量小的消息有可能先消费。</li>
+<li><strong>顺序消费</strong>：在某一项场景，例如 MySQL binlog 场景，需要消息按顺序进行消费。在 RocketMQ 中提供了基于队列的顺序消费模型，即尽管一个消费组中的消费者会创建一个多线程，但针对同一个 Queue，会加锁。</li>
+</ul>
+<p>温馨提示：并发消费模型中，消息消费失败默认会重试 16 次，每一次的间隔时间不一样；而顺序消费，如果一条消息消费失败，则会一直消费，直到消费成功。故在顺序消费的使用过程中，应用程序需要区分系统异常、业务异常，如果是不符合业务规则导致的异常，则重试多少次都无法消费成功，这个时候一定要告警机制，及时进行人为干预，否则消费会积压。</p>
+<h3 id="事务消息">事务消息</h3>
+<p>事务消息并不是为了解决分布式事务，而是提供消息发送与业务落库的一致性，其实现原理就是一次分布式事务的具体运用，请看如下示例：</p>
+<p><img alt="5" src="/assets/ccf8f96f3da9449b1c8d8c3d.png"/></p>
+<p>上述伪代码中，将订单存储关系型数据库中和将消息发送到 MQ 这是两个不同介质的两个操作，如果能保证消息发送、数据库存储这两个操作要么同时成功，要么同时失败，RocketMQ 为了解决该问题引入了<strong>事务消息</strong>。</p>
+<blockquote>
+<p>温馨提示，本篇主要目的是让大家知晓各个术语的概念，由于事务消息的使用，将在该专栏的后续文章中详细介绍。</p>
+</blockquote>
+<h3 id="定时消息">定时消息</h3>
+<p>开源版本的 RocketMQ 目前并不支持任意精度的定时消息。所谓的定时消息就是将消息发送到 Broker，但消费端不会立即消费，而是要到指定延迟时间后才能被消费端消费。</p>
+<p>RocketMQ 目前支持指定级别的延迟，其延迟级别如下：</p>
+<pre><code>1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h
+
+</code></pre>
+<h3 id="消息过滤">消息过滤</h3>
+<p>消息过滤是指消费端可以根据某些条件对一个 Topic 中的消息进行过滤，即只消费一个主题下满足过滤条件的消息。</p>
+<p>RocketMQ 目前主要的过滤机制是基于 Tag 的过滤与基于消息属性的过滤，基于消息属性的过滤支持 SQL92 表达式，对消息进行过滤。</p>
+<h3 id="小结">小结</h3>
+<p>本文的主要目的是介绍 RocketMQ 常见的术语，例如 NameServer、Broker、主题、消费组、消费者、队列负载算法、队列重平衡机制、并发消费、顺序消费、消费进度存储、定时消息、事务消息、消息过滤等基本概念，为后续的实战系列打下坚实基础。</p>
+<p>从下一篇开始，将正式开始 RocketMQ 之旅，开始学习消息发送。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>11 面向对象（上）：从生活中的类比说起 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Python核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Python核心技术与实战</strong><ul><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%E5%B7%A5%E7%A8%8B%E7%9A%84%E8%A7%92%E5%BA%A6%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python.html">00 开篇词 从工程的角度深入理解Python</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%E5%A6%82%E4%BD%95%E9%80%90%E6%AD%A5%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%88%90%E4%B8%BAPython%E9%AB%98%E6%89%8B%EF%BC%9F.html">01 如何逐步突破，成为Python高手？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20Jupyter%20Notebook%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%8E%B0%E4%BB%A3Python%E7%9A%84%E5%BF%85%E5%AD%A6%E6%8A%80%E6%9C%AF%EF%BC%9F.html">02 Jupyter Notebook为什么是现代Python的必学技术？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%EF%BC%8C%E5%88%B0%E5%BA%95%E7%94%A8%E5%93%AA%E4%B8%80%E4%B8%AA%EF%BC%9F.html">03 列表和元组，到底用哪一个？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20%E5%AD%97%E5%85%B8%E3%80%81%E9%9B%86%E5%90%88%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F.html">04 字典、集合，你真的了解吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2.html">05 深入浅出字符串</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20Python%20%E2%80%9C%E9%BB%91%E7%AE%B1%E2%80%9D%EF%BC%9A%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA.html">06 Python “黑箱”：输入与输出</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E4%BF%AE%E7%82%BC%E5%9F%BA%E6%9C%AC%E5%8A%9F%EF%BC%9A%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%BE%AA%E7%8E%AF.html">07 修炼基本功：条件与循环</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9F.html">08 异常处理：如何提高程序的稳定性？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%E4%B8%8D%E5%8F%AF%E6%88%96%E7%BC%BA%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0.html">09 不可或缺的自定义函数</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%E7%AE%80%E7%BA%A6%E4%B8%8D%E7%AE%80%E5%8D%95%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0.html">10 简约不简单的匿名函数</a></li><li><a class="active" aria-current="page" href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E7%B1%BB%E6%AF%94%E8%AF%B4%E8%B5%B7.html">11 面向对象（上）：从生活中的类比说起</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9F.html">12 面向对象（下）：如何实现一个搜索引擎？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E6%90%AD%E5%BB%BA%E7%A7%AF%E6%9C%A8%EF%BC%9APython%20%E6%A8%A1%E5%9D%97%E5%8C%96.html">13 搭建积木：Python 模块化</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%E7%9A%84%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">14 答疑（一）：列表和元组的内部实现是怎样的？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20Python%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%AF%94%E8%BE%83%E3%80%81%E6%8B%B7%E8%B4%9D.html">15 Python对象的比较、拷贝</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E5%80%BC%E4%BC%A0%E9%80%92%EF%BC%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92or%E5%85%B6%E4%BB%96%EF%BC%8CPython%E9%87%8C%E5%8F%82%E6%95%B0%E6%98%AF%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E7%9A%84%EF%BC%9F.html">16 值传递，引用传递or其他，Python里参数是如何传递的？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%E5%BC%BA%E5%A4%A7%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8.html">17 强大的装饰器</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20metaclass%EF%BC%8C%E6%98%AF%E6%BD%98%E5%A4%9A%E6%8B%89%E9%AD%94%E7%9B%92%E8%BF%98%E6%98%AF%E9%98%BF%E6%8B%89%E4%B8%81%E7%A5%9E%E7%81%AF%EF%BC%9F.html">18 metaclass，是潘多拉魔盒还是阿拉丁神灯？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8.html">19 深入理解迭代器和生成器</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E6%8F%AD%E7%A7%98%20Python%20%E5%8D%8F%E7%A8%8B.html">20 揭秘 Python 协程</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20Python%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8BFutures.html">21 Python并发编程之Futures</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8BAsyncio.html">22 并发编程之Asyncio</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%87%82Python%20GIL%EF%BC%88%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81%EF%BC%89%E5%90%97%EF%BC%9F.html">23 你真的懂Python GIL（全局解释器锁）吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20%E5%B8%A6%E4%BD%A0%E8%A7%A3%E6%9E%90%20Python%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6.html">24 带你解析 Python 垃圾回收机制</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AGIL%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%E5%91%A2%EF%BC%9F.html">25 答疑（二）：GIL与多线程是什么关系呢？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E6%B4%BB%E9%83%BD%E6%9D%A5%E4%B8%8D%E5%8F%8A%E5%B9%B2%E4%BA%86%EF%BC%8C%E8%BF%98%E6%9C%89%E7%A9%BA%E6%B3%A8%E6%84%8F%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%EF%BC%9F%EF%BC%81.html">26 活都来不及干了，还有空注意代码风格？！</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E5%AD%A6%E4%BC%9A%E5%90%88%E7%90%86%E5%88%86%E8%A7%A3%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E5%8F%AF%E8%AF%BB%E6%80%A7.html">27 学会合理分解代码，提高代码可读性</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E5%90%88%E7%90%86%E5%88%A9%E7%94%A8assert%EF%BC%9F.html">28 如何合理利用assert？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E5%B7%A7%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8%E5%92%8CWith%E8%AF%AD%E5%8F%A5%E7%B2%BE%E7%AE%80%E4%BB%A3%E7%A0%81.html">29 巧用上下文管理器和With语句精简代码</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E7%9C%9F%E7%9A%84%E6%9C%89%E5%BF%85%E8%A6%81%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%90%97%EF%BC%9F.html">30 真的有必要写单元测试吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20pdb%20%26%20cProfile%EF%BC%9A%E8%B0%83%E8%AF%95%E5%92%8C%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E7%9A%84%E6%B3%95%E5%AE%9D.html">31 pdb &amp; cProfile：调试和性能分析的法宝</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F%EF%BC%9F.html">32 答疑（三）：如何选择合适的异常处理方式？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%B8%A6%E4%BD%A0%E5%88%9D%E6%8E%A2%E9%87%8F%E5%8C%96%E4%B8%96%E7%95%8C.html">33 带你初探量化世界</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20RESTful%20%26%20Socket%EF%BC%9A%E6%90%AD%E5%BB%BA%E4%BA%A4%E6%98%93%E6%89%A7%E8%A1%8C%E5%B1%82%E6%A0%B8%E5%BF%83.html">34 RESTful &amp; Socket：搭建交易执行层核心</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20RESTful%20%26%20Socket%EF%BC%9A%E8%A1%8C%E6%83%85%E6%95%B0%E6%8D%AE%E5%AF%B9%E6%8E%A5%E5%92%8C%E6%8A%93%E5%8F%96.html">35 RESTful &amp; Socket：行情数据对接和抓取</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20Pandas%20%26%20Numpy%EF%BC%9A%E7%AD%96%E7%95%A5%E4%B8%8E%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F.html">36 Pandas &amp; Numpy：策略与回测系统</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20Kafka%20%26%20ZMQ%EF%BC%9A%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E6%B5%81%E6%B0%B4%E7%BA%BF.html">37 Kafka &amp; ZMQ：自动化交易流水线</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20MySQL%EF%BC%9A%E6%97%A5%E5%BF%97%E5%92%8C%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F.html">38 MySQL：日志和数据存储系统</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20Django%EF%BC%9A%E6%90%AD%E5%BB%BA%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0.html">39 Django：搭建监控平台</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E6%80%BB%E7%BB%93%EF%BC%9APython%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%A8%E6%99%AF.html">40 总结：Python中的数据结构与算法全景</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E4%BA%92%E8%81%94%E7%BD%91%E5%85%AC%E5%8F%B8%E7%9A%84%E5%B7%A5%E4%BD%9C%E4%BD%93%E9%AA%8C.html">41 硅谷一线互联网公司的工作体验</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E7%BB%86%E6%95%B0%E6%8A%80%E6%9C%AF%E7%A0%94%E5%8F%91%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">42 细数技术研发的注意事项</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/43%20Q%26A%EF%BC%9A%E8%81%8A%E4%B8%80%E8%81%8A%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E5%92%8C%E9%80%89%E6%8B%A9.html">43 Q&amp;A：聊一聊职业发展和选择</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%20%E5%B8%A6%E4%BD%A0%E4%B8%8A%E6%89%8BSWIG%EF%BC%9A%E4%B8%80%E4%BB%BD%E6%B8%85%E6%99%B0%E5%A5%BD%E7%94%A8%E7%9A%84SWIG%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97.html">加餐 带你上手SWIG：一份清晰好用的SWIG编程实践指南</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%A4%96%E7%9A%84%E5%87%A0%E7%82%B9%E6%88%90%E9%95%BF%E5%BB%BA%E8%AE%AE.html">结束语 技术之外的几点成长建议</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E7%B1%BB%E6%AF%94%E8%AF%B4%E8%B5%B7.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="11 面向对象（上）：从生活中的类比说起" id="title">11 面向对象（上）：从生活中的类比说起</h1>
+<div><p>你好，我是景霄。</p>
+<p>很多朋友最开始学编程的时候，是从 C++ 或者 JAVA 语言入手的。他们好不容易磕磕绊绊地搞懂了最基本的数据类型、赋值判断和循环，却又迎面撞上了 OOP (object oriented programming) 的大墙，一头扎进公有私有保护、多重继承、多态派生、纯函数、抽象类、友元函数等一堆专有名词的汪洋大海中找不到彼岸，于是就放弃了进阶之路。</p>
+<p>相比之下，Python 是一门相对友好的语言，它在创立之初就鼓励命令交互式的轻量级编程。理论上，Python 的命令式语言是<a href="https://zh.wikipedia.org/wiki/%E5%9C%96%E9%9D%88%E5%AE%8C%E5%82%99%E6%80%A7" target="_blank">图灵完备</a>的, 也就是说命令式语言，理论上可以做到其他任何语言能够做到的所有的事情，甚至进一步，仅仅依靠汇编语言的 MOV 指令，就能实现<a href="http://stedolan.net/research/mov.pdf" target="_blank">图灵完备编程</a>。</p>
+<p>那么为什么不这样做呢？其实，“上古时代”的程序员就是这么做的，可是随着程序功能复杂性的逐步提升，以及需求的不断迭代，很多老旧的代码修改起来麻烦无比，牵一发而动全身，根本无法迭代和维护，甚至只能推倒重来，这也是很多古老的代码被称为“屎山”的原因。</p>
+<p>传统的命令式语言有无数重复性代码，虽然函数的诞生减缓了许多重复性，但随着计算机的发展，只有函数依然不够，需要把更加抽象的概念引入计算机才能缓解（而不是解决）这个问题，于是 OOP 应运而生。</p>
+<p>Python 在 1989 年被一位程序员打发时间创立之后，一步步攻城掠地飞速发展，从最基础的脚本程序，到后来可以编写系统程序、大型工程、数据科学运算、人工智能，早已脱离了当初的设计，因此一些其他语言的优秀设计之处依然需要引入。我们必须花费一定的代价掌握面向对象编程，才能跨越学习道路中的瓶颈期，走向下一步。</p>
+<p>接下来，我将用两节课来讲解面向对象编程，从基础到实战。第一讲，我将带你快速但清晰地疏通最基础的知识，确保你能够迅速领略面向对象的基本思想；第二讲，我们从零开始写一个搜索引擎，将前面所学知识融会贯通。</p>
+<p>这些内容可能和你以往看到的所有教程都不太一样，我会尽可能从一个初学者的角度来审视这些难点。同时我们面向实战、面向工程，不求大而全，但是对最核心的思想会有足够的勾勒。我可以保证内容清晰易懂，但想要真正掌握，仍要求你能用心去阅读和思考。真正的提高，永远要靠自己才能做到。</p>
+<h2 id="对象-你找到了吗">对象，你找到了吗？</h2>
+<p>我们先来学习，面向对象编程中最基本的概念。</p>
+<p>为了方便你理解其中的抽象概念，我先打个比方带你感受一下。生物课上，我们学过“界门纲目科属种”的概念，核心思想是科学家们根据各种动植物、微生物的相似之处，将其分化为不同的类型方便研究。生活中我们也是如此，习惯对身边的事物进行分类：</p>
+<ul>
+<li>猫和狗都是动物；</li>
+<li>直线和圆都是平面几何的图形；</li>
+<li>《哈利波特》和《冰与火之歌》（即《权力的游戏》）都是小说。</li>
+</ul>
+<p>自然，同一类事物便会有着相似的特性：</p>
+<ul>
+<li>动物会动；</li>
+<li>平面图形有面积和周长；</li>
+<li>小说也都有相应的作者和大致情节等各种元素。</li>
+</ul>
+<p>那回到我们的Python上，又对应哪些内容呢？这里，我们先来看一段最基本的 Python 面向对象的应用代码，不要被它的长度吓到，你无需立刻看懂所有代码，跟着节奏来，我会一点点为你剖析。</p>
+<pre><code>class Document():
+    def __init__(self, title, author, context):
+        print('init function called')
+        self.title = title
+        self.author = author
+        self.__context = context # __开头的属性是私有属性
+
+    def get_context_length(self):
+        return len(self.__context)
+
+    def intercept_context(self, length):
+        self.__context = self.__context[:length]
+
+harry_potter_book = Document('Harry Potter', 'J. K. Rowling', '... Forever Do not believe any thing is capable of thinking independently ...')
+
+print(harry_potter_book.title)
+print(harry_potter_book.author)
+print(harry_potter_book.get_context_length())
+
+harry_potter_book.intercept_context(10)
+
+print(harry_potter_book.get_context_length())
+
+print(harry_potter_book.__context)
+
+########## 输出 ##########
+
+init function called
+Harry Potter
+J. K. Rowling
+77
+10
+
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+&lt;ipython-input-5-b4d048d75003&gt; in &lt;module&gt;()
+     22 print(harry_potter_book.get_context_length())
+     23 
+---&gt; 24 print(harry_potter_book.__context)
+
+AttributeError: 'Document' object has no attribute '__context'
+</code></pre>
+<p>参照着这段代码，我先来简单解释几个概念。</p>
+<ul>
+<li>类：一群有着相似性的事物的集合，这里对应 Python 的 class。</li>
+<li>对象：集合中的一个事物，这里对应由 class 生成的某一个 object，比如代码中的 harry_potter_book。</li>
+<li>属性：对象的某个静态特征，比如上述代码中的 title、author 和 __context。</li>
+<li>函数：对象的某个动态能力，比如上述代码中的 intercept_context ()函数。</li>
+</ul>
+<p>当然，这样的说法既不严谨，也不充分，但如果你对面向对象编程完全不了解，它们可以让你迅速有一个直观的了解。</p>
+<p>这里我想多说两句。回想起当年参加数学竞赛时，我曾和一个大佬交流数学的学习，我清楚记得我们对数学有着相似的观点：很多数学概念非常抽象，如果纯粹从数理逻辑而不是更高的角度去解题，很容易陷入僵局；而具体、直观的想象和类比，才是迅速打开数学大门的钥匙。虽然这些想象和类比不严谨也不充分，很多时候甚至是错误或者异想天开的，但它们确实能帮我们快速找到正确的大门。</p>
+<p>就像很多人都有过的一个疑惑，“学霸是怎样想到这个答案的？”。德国数学家克莱因曾说过，“推进数学的，主要是那些有卓越直觉的人，而不是以严格的证明方法见长的人。”编程世界同样如此，如果你不满足于只做一个CRUD“码农”，而是想成为一个优秀的工程师，那就一定要积极锻炼直觉思考和快速类比的能力，尤其是在找不到 bug 的时候。这才是编程学习中能给人最快进步的方法和路径。</p>
+<p>言归正传，继续回到我们的主题，还是通过刚刚那段代码，我想再给类下一个更为严谨的定义。</p>
+<p><strong>类，一群有着相同属性和函数的对象的集合。</strong></p>
+<p>虽然有循环论证之嫌（lol），但是反复强调，还是希望你能对面向对象的最基础的思想，有更真实的了解。清楚记住这一点后，接下来，我们来具体解读刚刚这段代码。为了方便你的阅读学习，我把它重新放在了这段文字下方。</p>
+<pre><code>class Document():
+    def __init__(self, title, author, context):
+        print('init function called')
+        self.title = title
+        self.author = author
+        self.__context = context # __开头的属性是私有属性
+
+    def get_context_length(self):
+        return len(self.__context)
+
+    def intercept_context(self, length):
+        self.__context = self.__context[:length]
+
+harry_potter_book = Document('Harry Potter', 'J. K. Rowling', '... Forever Do not believe any thing is capable of thinking independently ...')
+
+print(harry_potter_book.title)
+print(harry_potter_book.author)
+print(harry_potter_book.get_context_length())
+
+harry_potter_book.intercept_context(10)
+
+print(harry_potter_book.get_context_length())
+
+print(harry_potter_book.__context)
+
+########## 输出 ##########
+
+init function called
+Harry Potter
+J. K. Rowling
+77
+10
+
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+&lt;ipython-input-5-b4d048d75003&gt; in &lt;module&gt;()
+     22 print(harry_potter_book.get_context_length())
+     23 
+---&gt; 24 print(harry_potter_book.__context)
+
+AttributeError: 'Document' object has no attribute '__context'
+</code></pre>
+<p>可以看到，class Document 定义了 Document 类，再往下能看到它有三个函数，这三个函数即为 Document 类的三个函数。</p>
+<p>其中，<strong>init</strong> 表示构造函数，意即一个对象生成时会被自动调用的函数。我们能看到， <code>harry_potter_book = Document(...)</code>这一行代码被执行的时候，<code>'init function called'</code>字符串会被打印出来。而 get_context_length()和 intercept_context()则为类的普通函数，我们调用它们来对对象的属性做一些事情。</p>
+<p>class Document 还有三个属性，title、author和 __context 分别表示标题、作者和内容，通过构造函数传入。这里代码很直观，我们可以看到， intercept_context 能修改对象 harry_potter_book 的 __context 属性。</p>
+<p>这里唯一需要强调的一点是，如果一个属性以 __ （注意，此处有两个_） 开头，我们就默认这个属性是私有属性。私有属性，是指不希望在类的函数之外的地方被访问和修改的属性。所以，你可以看到，title 和 author 能够很自由地被打印出来，但是 <code>print(harry_potter_book.__context)</code>就会报错。</p>
+<h2 id="老师-能不能再给力点">老师，能不能再给力点？</h2>
+<p>掌握了最基础的概念，其实我们已经能做很多很多的事情了。不过，在工程实践中，随着复杂度继续提升，你可能会想到一些问题：</p>
+<ul>
+<li>如何在一个类中定义一些常量，每个对象都可以方便访问这些常量而不用重新构造？</li>
+<li>如果一个函数不涉及到访问修改这个类的属性，而放到类外面有点不恰当，怎么做才能更优雅呢？</li>
+<li>既然类是一群相似的对象的集合，那么可不可以是一群相似的类的集合呢？</li>
+</ul>
+<p>前两个问题很好解决，不过，它们涉及到一些常用的代码规范，这里我放了一段代码示例。同样的，你无需一口气读完这段代码，跟着我的节奏慢慢学习即可。</p>
+<pre><code>class Document():
+    
+    WELCOME_STR = 'Welcome! The context for this book is {}.'
+    
+    def __init__(self, title, author, context):
+        print('init function called')
+        self.title = title
+        self.author = author
+        self.__context = context
+    
+    # 类函数
+    @classmethod
+    def create_empty_book(cls, title, author):
+        return cls(title=title, author=author, context='nothing')
+    
+    # 成员函数
+    def get_context_length(self):
+        return len(self.__context)
+    
+    # 静态函数
+    @staticmethod
+    def get_welcome(context):
+        return Document.WELCOME_STR.format(context)
+
+
+empty_book = Document.create_empty_book('What Every Man Thinks About Apart from Sex', 'Professor Sheridan Simove')
+
+
+print(empty_book.get_context_length())
+print(empty_book.get_welcome('indeed nothing'))
+
+########## 输出 ##########
+
+init function called
+7
+Welcome! The context for this book is indeed nothing.
+</code></pre>
+<p>第一个问题，在 Python 的类里，你只需要和函数并列地声明并赋值，就可以实现这一点，例如这段代码中的 WELCOME_STR。一种很常规的做法，是用全大写来表示常量，因此我们可以在类中使用 self.WELCOME_STR ，或者在类外使用 Entity.WELCOME_STR ，来表达这个字符串。</p>
+<p>而针对第二个问题，我们提出了类函数、成员函数和静态函数三个概念。它们其实很好理解，前两者产生的影响是动态的，能够访问或者修改对象的属性；而静态函数则与类没有什么关联，最明显的特征便是，静态函数的第一个参数没有任何特殊性。</p>
+<p>具体来看这几种函数。一般而言，静态函数可以用来做一些简单独立的任务，既方便测试，也能优化代码结构。静态函数还可以通过在函数前一行加上 @staticmethod 来表示，代码中也有相应的示例。这其实使用了装饰器的概念，我们会在后面的章节中详细讲解。</p>
+<p>而类函数的第一个参数一般为 cls，表示必须传一个类进来。类函数最常用的功能是实现不同的 <strong>init</strong> 构造函数，比如上文代码中，我们使用 create_empty_book 类函数，来创造新的书籍对象，其 context 一定为 <code>'nothing'</code>。这样的代码，就比你直接构造要清晰一些。类似的，类函数需要装饰器 @classmethod 来声明。</p>
+<p>成员函数则是我们最正常的类的函数，它不需要任何装饰器声明，第一个参数 self 代表当前对象的引用，可以通过此函数，来实现想要的查询/修改类的属性等功能。</p>
+<h2 id="继承-是每个富二代的梦想">继承，是每个富二代的梦想</h2>
+<p>接下来，我们来看第三个问题，既然类是一群相似的对象的集合，那么可不可以是一群相似的类的集合呢？</p>
+<p>答案是，当然可以。只要抽象得好，类可以描述成任何事物的集合。当然你要小心、严谨地去定义它，不然一不小心就会引起<a href="https://en.wikipedia.org/wiki/Russell%27s_paradox" target="_blank">第三次数学危机</a> XD。</p>
+<p>类的继承，顾名思义，指的是一个类既拥有另一个类的特征，也拥有不同于另一个类的独特特征。在这里的第一个类叫做子类，另一个叫做父类，特征其实就是类的属性和函数。</p>
+<pre><code>class Entity():
+    def __init__(self, object_type):
+        print('parent class init called')
+        self.object_type = object_type
+    
+    def get_context_length(self):
+        raise Exception('get_context_length not implemented')
+    
+    def print_title(self):
+        print(self.title)
+
+class Document(Entity):
+    def __init__(self, title, author, context):
+        print('Document class init called')
+        Entity.__init__(self, 'document')
+        self.title = title
+        self.author = author
+        self.__context = context
+    
+    def get_context_length(self):
+        return len(self.__context)
+    
+class Video(Entity):
+    def __init__(self, title, author, video_length):
+        print('Video class init called')
+        Entity.__init__(self, 'video')
+        self.title = title
+        self.author = author
+        self.__video_length = video_length
+    
+    def get_context_length(self):
+        return self.__video_length
+
+harry_potter_book = Document('Harry Potter(Book)', 'J. K. Rowling', '... Forever Do not believe any thing is capable of thinking independently ...')
+harry_potter_movie = Video('Harry Potter(Movie)', 'J. K. Rowling', 120)
+
+print(harry_potter_book.object_type)
+print(harry_potter_movie.object_type)
+
+harry_potter_book.print_title()
+harry_potter_movie.print_title()
+
+print(harry_potter_book.get_context_length())
+print(harry_potter_movie.get_context_length())
+
+########## 输出 ##########
+
+Document class init called
+parent class init called
+Video class init called
+parent class init called
+document
+video
+Harry Potter(Book)
+Harry Potter(Movie)
+77
+120
+</code></pre>
+<p>我们同样结合代码来学习这些概念。在这段代码中，Document 和 Video 它们有相似的地方，都有相应的标题、作者和内容等属性。我们可以从中抽象出一个叫做 Entity 的类，来作为它俩的父类。</p>
+<p>首先需要注意的是构造函数。每个类都有构造函数，继承类在生成对象的时候，是不会自动调用父类的构造函数的，因此你必须在 <strong>init</strong>()函数中显式调用父类的构造函数。它们的执行顺序是 子类的构造函数 -&gt; 父类的构造函数。</p>
+<p>其次需要注意父类 get_context_length()函数。如果使用 Entity 直接生成对象，调用 get_context_length()函数，就会 raise error 中断程序的执行。这其实是一种很好的写法，叫做函数重写，可以使子类必须重新写一遍 get_context_length()函数，来覆盖掉原有函数。</p>
+<p>最后需要注意到 print_title()函数，这个函数定义在父类中，但是子类的对象可以毫无阻力地使用它来打印 title，这也就体现了继承的优势：减少重复的代码，降低系统的熵值（即复杂度）。</p>
+<p>到这里，你对继承就有了比较详细的了解了，面向对象编程也可以说已经入门了。当然，如果你想达到更高的层次，大量练习编程，学习更多的细节知识，都是必不可少的。</p>
+<p>最后，我想再为你扩展一下抽象函数和抽象类，我同样会用一段代码来辅助讲解。</p>
+<pre><code>from abc import ABCMeta, abstractmethod
+
+class Entity(metaclass=ABCMeta):
+    @abstractmethod
+    def get_title(self):
+        pass
+
+    @abstractmethod
+    def set_title(self, title):
+        pass
+
+class Document(Entity):
+    def get_title(self):
+        return self.title
+    
+    def set_title(self, title):
+        self.title = title
+
+document = Document()
+document.set_title('Harry Potter')
+print(document.get_title())
+
+entity = Entity()
+
+########## 输出 ##########
+
+Harry Potter
+
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-7-266b2aa47bad&gt; in &lt;module&gt;()
+     21 print(document.get_title())
+     22 
+---&gt; 23 entity = Entity()
+     24 entity.set_title('Test')
+
+TypeError: Can't instantiate abstract class Entity with abstract methods get_title, set_title
+</code></pre>
+<p>你应该发现了，Entity 本身是没有什么用的，只需拿来定义 Document 和 Video 的一些基本元素就够了。不过，万一你不小心生成 Entity 的对象该怎么办呢？为了防止这样的手误，必须要介绍一下抽象类。</p>
+<p>抽象类是一种特殊的类，它生下来就是作为父类存在的，一旦对象化就会报错。同样，抽象函数定义在抽象类之中，子类必须重写该函数才能使用。相应的抽象函数，则是使用装饰器 @abstractmethod 来表示。</p>
+<p>我们可以看到，代码中<code>entity = Entity()</code>直接报错，只有通过 Document 继承 Entity 才能正常使用。</p>
+<p>这其实正是软件工程中一个很重要的概念，定义接口。大型工程往往需要很多人合作开发，比如在 Facebook 中，在 idea 提出之后，开发组和产品组首先会召开产品设计会，PM（Product Manager，产品经理） 写出产品需求文档，然后迭代；TL（Team Leader，项目经理）编写开发文档，开发文档中会定义不同模块的大致功能和接口、每个模块之间如何协作、单元测试和集成测试、线上灰度测试、监测和日志等等一系列开发流程。</p>
+<p>抽象类就是这么一种存在，它是一种自上而下的设计风范，你只需要用少量的代码描述清楚要做的事情，定义好接口，然后就可以交给不同开发人员去开发和对接。</p>
+<h2 id="总结">总结</h2>
+<p>到目前为止，我们一直在强调一件事情：面向对象编程是软件工程中重要的思想。正如动态规划是算法中的重要思想一样，它不是某一种非常具体的技术，而是一种综合能力的体现，是将大型工程解耦化、模块化的重要方法。在实践中要多想，尤其是抽象地想，才能更快掌握这个技巧。</p>
+<p>回顾一下今天的内容，我希望你能自己回答下面两个问题，作为今天内容的总结，写在留言区里。</p>
+<p>第一个问题，面向对象编程四要素是什么？它们的关系又是什么？</p>
+<p>第二个问题，讲了这么久的继承，继承究竟是什么呢？你能用三个字表达出来吗？</p>
+<blockquote>
+<p>这里不开玩笑，Facebook 很多 Launch Doc （上线文档）中要求用五个单词总结你的文档，因为你的文档不仅仅是你的团队要看，往上走甚至会到 VP 或者 CTO 那里，你需要言简意赅，让他们快速理解你想要表达的意思。</p>
+</blockquote>
+<h2 id="思考题">思考题</h2>
+<p>最后，再给你留一道思考题。既然你能通过继承一个类，来获得父类的函数和属性，那么你能继承两个吗？答案自是能的，这就叫做多重继承。那么问题来了。</p>
+<p>我们使用单一继承的时候，构造函数的执行顺序很好确定，即子类-&gt;父类-&gt;爷类-&gt;… 的链式关系。不过，多重继承的时候呢？比如下面这个例子。</p>
+<pre><code> ---&gt;B---
+A-      --&gt;D
+ ---&gt;C---
+</code></pre>
+<p>这种继承方式，叫做菱形继承，BC 继承了 A，然后 D 继承了 BC，创造一个 D 的对象。那么，构造函数调用顺序又是怎样的呢？</p>
+<p>欢迎在留言区写下你的答案想法，与我讨论，也欢迎你把这篇文章分享给你的同事、朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

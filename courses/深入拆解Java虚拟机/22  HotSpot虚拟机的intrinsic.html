@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>22  HotSpot虚拟机的intrinsic · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/index.html">深入拆解Java虚拟机</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">39 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入拆解Java虚拟机</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E8%A6%81%E5%AD%A6%E4%B9%A0Java%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9F.html">00 开篇词  为什么我们要学习Java虚拟机？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/01%20%20Java%E4%BB%A3%E7%A0%81%E6%98%AF%E6%80%8E%E4%B9%88%E8%BF%90%E8%A1%8C%E7%9A%84%EF%BC%9F.html">01  Java代码是怎么运行的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/02%20%20Java%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B.html">02  Java的基本类型</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/03%20%20Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%AF%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BDJava%E7%B1%BB%E7%9A%84.html">03  Java虚拟机是如何加载Java类的</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/04%20%20JVM%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">04  JVM是如何执行方法调用的？（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/05%20%20JVM%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">05  JVM是如何执行方法调用的？（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/06%20%20JVM%E6%98%AF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8%E7%9A%84%EF%BC%9F.html">06  JVM是如何处理异常的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/07%20%20JVM%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%B0%84%E7%9A%84%EF%BC%9F.html">07  JVM是如何实现反射的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/08%20%20JVM%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0invokedynamic%E7%9A%84%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">08  JVM是怎么实现invokedynamic的？（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/09%20%20JVM%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0invokedynamic%E7%9A%84%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">09  JVM是怎么实现invokedynamic的？（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/10%20%20Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.html">10  Java对象的内存布局</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/11%20%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%88%E4%B8%8A%EF%BC%89.html">11  垃圾回收（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/12%20%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%88%E4%B8%8B%EF%BC%89.html">12  垃圾回收（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/13%20%20Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html">13  Java内存模型</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/14%20%20Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0synchronized%E7%9A%84%EF%BC%9F.html">14  Java虚拟机是怎么实现synchronized的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/15%20%20Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B8%8EJava%E7%BC%96%E8%AF%91%E5%99%A8.html">15  Java语法糖与Java编译器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/16%20%20%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%EF%BC%88%E4%B8%8A%EF%BC%89.html">16  即时编译（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/17%20%20%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%EF%BC%88%E4%B8%8B%EF%BC%89.html">17  即时编译（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/18%20%20%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%B8%AD%E9%97%B4%E8%A1%A8%E8%BE%BE%E5%BD%A2%E5%BC%8F.html">18  即时编译器的中间表达形式</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/19%20%20Java%E5%AD%97%E8%8A%82%E7%A0%81%EF%BC%88%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%89.html">19  Java字节码（基础篇）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/20%20%20%E6%96%B9%E6%B3%95%E5%86%85%E8%81%94%EF%BC%88%E4%B8%8A%EF%BC%89.html">20  方法内联（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/21%20%20%E6%96%B9%E6%B3%95%E5%86%85%E8%81%94%EF%BC%88%E4%B8%8B%EF%BC%89.html">21  方法内联（下）</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/22%20%20HotSpot%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84intrinsic.html">22  HotSpot虚拟机的intrinsic</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/23%20%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90.html">23  逃逸分析</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/24%20%20%E5%AD%97%E6%AE%B5%E8%AE%BF%E9%97%AE%E7%9B%B8%E5%85%B3%E4%BC%98%E5%8C%96.html">24  字段访问相关优化</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/25%20%20%E5%BE%AA%E7%8E%AF%E4%BC%98%E5%8C%96.html">25  循环优化</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/26%20%20%E5%90%91%E9%87%8F%E5%8C%96.html">26  向量化</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/27%20%20%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8.html">27  注解处理器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/28%20%20%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6JMH%EF%BC%88%E4%B8%8A%EF%BC%89.html">28  基准测试框架JMH（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/29%20%20%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6JMH%EF%BC%88%E4%B8%8B%EF%BC%89.html">29  基准测试框架JMH（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/30%20%20Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7%EF%BC%88%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%AF%87%EF%BC%89.html">30  Java虚拟机的监控及诊断工具（命令行篇）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/31%20%20Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7%EF%BC%88GUI%E7%AF%87%EF%BC%89.html">31  Java虚拟机的监控及诊断工具（GUI篇）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/32%20%20JNI%E7%9A%84%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6.html">32  JNI的运行机制</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/33%20%20Java%20Agent%E4%B8%8E%E5%AD%97%E8%8A%82%E7%A0%81%E6%B3%A8%E5%85%A5.html">33  Java Agent与字节码注入</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/34%20%20Graal%EF%BC%9A%E7%94%A8Java%E7%BC%96%E8%AF%91Java.html">34  Graal：用Java编译Java</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/35%20%20Truffle%EF%BC%9A%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%A1%86%E6%9E%B6.html">35  Truffle：语言实现框架</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/36%20%20SubstrateVM%EF%BC%9AAOT%E7%BC%96%E8%AF%91%E6%A1%86%E6%9E%B6.html">36  SubstrateVM：AOT编译框架</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%B0%BE%E5%A3%B0%E4%B8%A8%E9%81%93%E9%98%BB%E4%B8%94%E9%95%BF%EF%BC%8C%E5%8A%AA%E5%8A%9B%E5%8A%A0%E9%A4%90.html.html">尾声丨道阻且长，努力加餐.html</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%B7%A5%E5%85%B7%E7%AF%87%20%20%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D.html">工具篇  常用工具介绍</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/22%20%20HotSpot%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84intrinsic.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="22  HotSpot虚拟机的intrinsic" id="title">22  HotSpot虚拟机的intrinsic</h1>
+<div><p>前不久，有同学问我，<code>String.indexOf</code>方法和自己实现的<code>indexOf</code>方法在字节码层面上差不多，为什么执行效率却有天壤之别呢？今天我们就来看一看。</p>
+<pre><code>public int indexOf(String str) {
+    if (coder() == str.coder()) {
+        return isLatin1() ? StringLatin1.indexOf(value, str.value)
+                          : StringUTF16.indexOf(value, str.value);
+    }
+    if (coder() == LATIN1) {  // str.coder == UTF16
+        return -1;
+    }
+    return StringUTF16.indexOfLatin1(value, str.value);
+}
+</code></pre>
+<p>为了解答这个问题，我们来读一下<code>String.indexOf</code>方法的源代码（上面的代码截取自 Java 10.0.2）。</p>
+<blockquote>
+<p>在 Java 9 之前，字符串是用 char 数组来存储的，主要为了支持非英文字符。然而，大多数 Java 程序中的字符串都是由 Latin1 字符组成的。也就是说每个字符仅需占据一个字节，而使用 char 数组的存储方式将极大地浪费内存空间。</p>
+<p>Java 9 引入了 Compact Strings[1] 的概念，当字符串仅包含 Latin1 字符时，使用一个字节代表一个字符的编码格式，使得内存使用效率大大提高。</p>
+</blockquote>
+<p>假设我们调用<code>String.indexOf</code>方法的调用者以及参数均为只包含 Latin1 字符的字符串，那么该方法的关键在于对<code>StringLatin1.indexOf</code>方法的调用。</p>
+<p>下面我列举了<code>StringLatin1.indexOf</code>方法的源代码。你会发现，它并没有使用特别高明的算法，唯一值得注意的便是方法声明前的<code>@HotSpotIntrinsicCandidate</code>注解。</p>
+<pre><code>@HotSpotIntrinsicCandidate
+public static int indexOf(byte[] value, byte[] str) {
+    if (str.length == 0) {
+        return 0;
+    }
+    if (value.length == 0) {
+        return -1;
+    }
+    return indexOf(value, value.length, str, str.length, 0);
+}
+ 
+@HotSpotIntrinsicCandidate
+public static int indexOf(byte[] value, int valueCount, byte[] str, int strCount, int fromIndex) {
+    byte first = str[0];
+    int max = (valueCount - strCount);
+    for (int i = fromIndex; i &lt;= max; i++) {
+        // Look for first character.
+        if (value[i] != first) {
+            while (++i &lt;= max &amp;&amp; value[i] != first);
+        }
+        // Found first character, now look at the rest of value
+        if (i &lt;= max) {
+            int j = i + 1;
+            int end = j + strCount - 1;
+            for (int k = 1; j &lt; end &amp;&amp; value[j] == str[k]; j++, k++);
+            if (j == end) {
+                // Found whole string.
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+</code></pre>
+<p>在 HotSpot 虚拟机中，所有被该注解标注的方法都是 HotSpot intrinsic。对这些方法的调用，会被 HotSpot 虚拟机替换成高效的指令序列。而原本的方法实现则会被忽略掉。</p>
+<p>换句话说，HotSpot 虚拟机将为标注了<code>@HotSpotIntrinsicCandidate</code>注解的方法额外维护一套高效实现。如果 Java 核心类库的开发者更改了原本的实现，那么虚拟机中的高效实现也需要进行相应的修改，以保证程序语义一致。</p>
+<p>需要注意的是，其他虚拟机未必维护了这些 intrinsic 的高效实现，它们可以直接使用原本的较为低效的 JDK 代码。同样，不同版本的 HotSpot 虚拟机所实现的 intrinsic 数量也大不相同。通常越新版本的 Java，其 intrinsic 数量越多。</p>
+<p>你或许会产生这么一个疑问：为什么不直接在源代码中使用这些高效实现呢？</p>
+<p>这是因为高效实现通常依赖于具体的 CPU 指令，而这些 CPU 指令不好在 Java 源程序中表达。再者，换了一个体系架构，说不定就没有对应的 CPU 指令，也就无法进行 intrinsic 优化了。</p>
+<p>下面我们便来看几个具体的例子。</p>
+<h2 id="intrinsic-与-cpu-指令">intrinsic 与 CPU 指令</h2>
+<p>在文章开头的例子中，<code>StringLatin1.indexOf</code>方法将在一个字符串（byte 数组）中查找另一个字符串（byte 数组），并且返回命中时的索引值，或者 -1（未命中）。</p>
+<p>“恰巧”的是，X86_64 体系架构的 SSE4.2 指令集就包含一条指令 PCMPESTRI，让它能够在 16 字节以下的字符串中，查找另一个 16 字节以下的字符串，并且返回命中时的索引值。</p>
+<p>因此，HotSpot 虚拟机便围绕着这一指令，开发出 X86_64 体系架构上的高效实现，并替换原本对<code>StringLatin1.indexOf</code>方法的调用。</p>
+<p>另外一个例子则是整数加法的溢出处理。一般我们在做整数加法时，需要考虑结果是否会溢出，并且在溢出的情况下作出相应的处理，以保证程序的正确性。</p>
+<p>Java 核心类库提供了一个<code>Math.addExact</code>方法。它将接收两个 int 值（或 long 值）作为参数，并返回这两个 int 值的和。当这两个 int 值之和溢出时，该方法将抛出<code>ArithmeticException</code>异常。</p>
+<pre><code>@HotSpotIntrinsicCandidate
+public static int addExact(int x, int y) {
+    int r = x + y;
+    // HD 2-12 Overflow iff both arguments have the opposite sign of the result
+    if (((x ^ r) &amp; (y ^ r)) &lt; 0) {
+        throw new ArithmeticException("integer overflow");
+    }
+    return r;
+}
+</code></pre>
+<p>在 Java 层面判断 int 值之和是否溢出比较费事。我们需要分别比较两个 int 值与它们的和的符号是否不同。如果都不同，那么我们便认为这两个 int 值之和溢出。对应的实现便是两个异或操作，一个与操作，以及一个比较操作。</p>
+<p>在 X86_64 体系架构中，大部分计算指令都会更新状态寄存器（FLAGS register），其中就有表示指令结果是否溢出的溢出标识位（overflow flag）。因此，我们只需在加法指令之后比较溢出标志位，便可以知道 int 值之和是否溢出了。对应的伪代码如下所示：</p>
+<pre><code>public static int addExact(int x, int y) {
+    int r = x + y;
+    jo LABEL_OVERFLOW; // jump if overflow flag set
+    return r;
+    LABEL_OVERFLOW:
+      throw new ArithmeticException("integer overflow");
+      // or deoptimize
+}
+</code></pre>
+<p>最后一个例子则是<code>Integer.bitCount</code>方法，它将统计所输入的 int 值的二进制形式中有多少个 1。</p>
+<pre><code>@HotSpotIntrinsicCandidate
+public static int bitCount(int i) {
+    // HD, Figure 5-2
+    i = i - ((i &gt;&gt;&gt; 1) &amp; 0x55555555);
+    i = (i &amp; 0x33333333) + ((i &gt;&gt;&gt; 2) &amp; 0x33333333);
+    i = (i + (i &gt;&gt;&gt; 4)) &amp; 0x0f0f0f0f;
+    i = i + (i &gt;&gt;&gt; 8);
+    i = i + (i &gt;&gt;&gt; 16);
+    return i &amp; 0x3f;
+}
+</code></pre>
+<p>我们可以看到，<code>Integer.bitCount</code>方法的实现还是很巧妙的，但是它需要的计算步骤也比较多。在 X86_64 体系架构中，我们仅需要一条指令<code>popcnt</code>，便可以直接统计出 int 值中 1 的个数。</p>
+<h2 id="intrinsic-与方法内联">intrinsic 与方法内联</h2>
+<p>HotSpot 虚拟机中，intrinsic 的实现方式分为两种。</p>
+<p>一种是独立的桩程序。它既可以被解释执行器利用，直接替换对原方法的调用；也可以被即时编译器所利用，它把代表对原方法的调用的 IR 节点，替换为对这些桩程序的调用的 IR 节点。以这种形式实现的 intrinsic 比较少，主要包括<code>Math</code>类中的一些方法。</p>
+<p>另一种则是特殊的编译器 IR 节点。显然，这种实现方式仅能够被即时编译器所利用。</p>
+<p>在编译过程中，即时编译器会将对原方法的调用的 IR 节点，替换成特殊的 IR 节点，并参与接下来的优化过程。最终，即时编译器的后端将根据这些特殊的 IR 节点，生成指定的 CPU 指令。大部分的 intrinsic 都是通过这种方式实现的。</p>
+<p>这个替换过程是在方法内联时进行的。当即时编译器碰到方法调用节点时，它将查询目标方法是不是 intrinsic。</p>
+<p>如果是，则插入相应的特殊 IR 节点；如果不是，则进行原本的内联工作。（即判断是否需要内联目标方法的方法体，并在需要内联的情况下，将目标方法的 IR 图纳入当前的编译范围之中。）</p>
+<p>也就是说，如果方法调用的目标方法是 intrinsic，那么即时编译器会直接忽略原目标方法的字节码，甚至根本不在乎原目标方法是否有字节码。即便是 native 方法，只要它被标记为 intrinsic，即时编译器便能够将之 “ 内联 ” 进来，并插入特殊的 IR 节点。</p>
+<p>事实上，不少被标记为 intrinsic 的方法都是 native 方法。原本对这些 native 方法的调用需要经过 JNI（Java Native Interface），其性能开销十分巨大。但是，经过即时编译器的 intrinsic 优化之后，这部分 JNI 开销便直接消失不见，并且最终的结果也十分高效。</p>
+<p>举个例子，我们可以通过<code>Thread.currentThread</code>方法来获取当前线程。这是一个 native 方法，同时也是一个 HotSpot intrinsic。在 X86_64 体系架构中，R13 寄存器存放着当前线程的指针。因此，对该方法的调用将被即时编译器替换为一个特殊 IR 节点，并最终生成读取 R13 寄存器指令。</p>
+<h2 id="已有-intrinsic-简介">已有 intrinsic 简介</h2>
+<p>最新版本的 HotSpot 虚拟机定义了三百多个 intrinsic。</p>
+<p>在这三百多个 intrinsic 中，有三成以上是<code>Unsafe</code>类的方法。不过，我们一般不会直接使用<code>Unsafe</code>类的方法，而是通过<code>java.util.concurrent</code>包来间接使用。</p>
+<p>举个例子，<code>Unsafe</code>类中经常会被用到的便是<code>compareAndSwap</code>方法（Java 9+ 更名为<code>compareAndSet</code>或<code>compareAndExchange</code>方法）。在 X86_64 体系架构中，对这些方法的调用将被替换为<code>lock cmpxchg</code>指令，也就是原子性更新指令。</p>
+<p>除了<code>Unsafe</code>类的方法之外，HotSpot 虚拟机中的 intrinsic 还包括下面的几种。</p>
+<ol>
+<li><code>StringBuilder</code>和<code>StringBuffer</code>类的方法。HotSpot 虚拟机将优化利用这些方法构造字符串的方式，以尽量减少需要复制内存的情况。</li>
+<li><code>String</code>类、<code>StringLatin1</code>类、<code>StringUTF16</code>类和<code>Arrays</code>类的方法。HotSpot 虚拟机将使用 SIMD 指令（single instruction multiple data，即用一条指令处理多个数据）对这些方法进行优化。
+举个例子，<code>Arrays.equals(byte[], byte[])</code>方法原本是逐个字节比较，在使用了 SIMD 指令之后，可以放入 16 字节的 XMM 寄存器中（甚至是 64 字节的 ZMM 寄存器中）批量比较。</li>
+<li>基本类型的包装类、<code>Object</code>类、<code>Math</code>类、<code>System</code>类中各个功能性方法，反射 API、<code>MethodHandle</code>类中与调用机制相关的方法，压缩、加密相关方法。这部分 intrinsic 则比较简单，这里就不详细展开了。如果你有感兴趣的，可以自行查阅资料，或者在文末留言。</li>
+</ol>
+<p>如果你想知道 HotSpot 虚拟机定义的所有 intrinsic，那么你可以直接查阅 OpenJDK 代码 [2]。（该链接是 Java 12 的 intrinsic 列表。Java 8 的 intrinsic 列表可以查阅这一链接 [3]。）</p>
+<h2 id="总结与实践">总结与实践</h2>
+<p>今天我介绍了 HotSpot 虚拟机中的 intrinsic。</p>
+<p>HotSpot 虚拟机将对标注了<code>@HotSpotIntrinsicCandidate</code>注解的方法的调用，替换为直接使用基于特定 CPU 指令的高效实现。这些方法我们便称之为 intrinsic。</p>
+<p>具体来说，intrinsic 的实现有两种。一是不大常见的桩程序，可以在解释执行或者即时编译生成的代码中使用。二是特殊的 IR 节点。即时编译器将在方法内联过程中，将对 intrinsic 的调用替换为这些特殊的 IR 节点，并最终生成指定的 CPU 指令。</p>
+<p>HotSpot 虚拟机定义了三百多个 intrinsic。其中比较特殊的有<code>Unsafe</code>类的方法，基本上使用 java.util.concurrent 包便会间接使用到<code>Unsafe</code>类的 intrinsic。除此之外，<code>String</code>类和<code>Arrays</code>类中的 intrinsic 也比较特殊。即时编译器将为之生成非常高效的 SIMD 指令。</p>
+<p>今天的实践环节，你可以体验一下<code>Integer.bitCount</code> intrinsic 带来的性能提升。</p>
+<pre><code>// time java Foo
+public class Foo {
+  public static int bitCount(int i) {
+    // HD, Figure 5-2
+    i = i - ((i &gt;&gt;&gt; 1) &amp; 0x55555555);
+    i = (i &amp; 0x33333333) + ((i &gt;&gt;&gt; 2) &amp; 0x33333333);
+    i = (i + (i &gt;&gt;&gt; 4)) &amp; 0x0f0f0f0f;
+    i = i + (i &gt;&gt;&gt; 8);
+    i = i + (i &gt;&gt;&gt; 16);
+    return i &amp; 0x3f;
+  }
+  public static void main(String[] args) {
+    int sum = 0;
+    for (int i = Integer.MIN_VALUE; i &lt; Integer.MAX_VALUE; i++) {
+      sum += bitCount(i); // In a second run, replace with Integer.bitCount
+    }
+    System.out.println(sum);
+  }
+}
+</code></pre>
+<p>[1] <a href="http://openjdk.java.net/jeps/254" target="_blank">http://openjdk.java.net/jeps/254</a>
+[2] <a href="http://hg.openjdk.java.net/jdk/hs/file/46dc568d6804/src/hotspot/share/classfile/vmSymbols.hpp#l727" target="_blank">http://hg.openjdk.java.net/jdk/hs/file/46dc568d6804/src/hotspot/share/classfile/vmSymbols.hpp#l727</a>
+[3] <a href="http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/2af8917ffbee/src/share/vm/classfile/vmSymbols.hpp#l647" target="_blank">http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/2af8917ffbee/src/share/vm/classfile/vmSymbols.hpp#l647</a></p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

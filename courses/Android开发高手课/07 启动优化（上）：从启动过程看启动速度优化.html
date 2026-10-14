@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>07 启动优化（上）：从启动过程看启动速度优化 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/index.html">Android开发高手课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">61 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Android开发高手课</strong><ul><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E5%AF%BC%E8%AF%BB%20%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9F.html">00 导读 如何打造高质量的应用？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E7%84%A6%E8%99%91%E7%9A%84%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E8%80%85%E8%AF%A5%E5%A6%82%E4%BD%95%E7%A0%B4%E5%B1%80%EF%BC%9F.html">00 开篇词 焦虑的移动开发者该如何破局？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/01%20%E5%B4%A9%E6%BA%83%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%85%B3%E4%BA%8E%E2%80%9C%E5%B4%A9%E6%BA%83%E2%80%9D%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">01 崩溃优化（上）：关于“崩溃”那些事儿</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/02%20%E5%B4%A9%E6%BA%83%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B4%A9%E6%BA%83%E4%BA%86%EF%BC%8C%E4%BD%A0%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E5%8E%BB%E5%88%86%E6%9E%90%EF%BC%9F.html">02 崩溃优化（下）：应用崩溃了，你应该如何去分析？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/03%20%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A4GB%E5%86%85%E5%AD%98%E6%97%B6%E4%BB%A3%EF%BC%8C%E5%86%8D%E8%B0%88%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.html">03 内存优化（上）：4GB内存时代，再谈内存优化</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/04%20%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%E8%BF%99%E4%BB%B6%E4%BA%8B%EF%BC%8C%E5%BA%94%E8%AF%A5%E4%BB%8E%E5%93%AA%E9%87%8C%E7%9D%80%E6%89%8B%EF%BC%9F.html">04 内存优化（下）：内存优化这件事，应该从哪里着手？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/05%20%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BD%A0%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%8D%A1%E9%A1%BF%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95.html">05 卡顿优化（上）：你要掌握的卡顿分析方法</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/06%20%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E5%BA%94%E7%94%A8%E5%8D%A1%E9%A1%BF%EF%BC%9F.html">06 卡顿优化（下）：如何监控应用卡顿？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/06%E8%A1%A5%E5%85%85%E7%AF%87%20%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%EF%BC%9A%E5%8D%A1%E9%A1%BF%E7%8E%B0%E5%9C%BA%E4%B8%8E%E5%8D%A1%E9%A1%BF%E5%88%86%E6%9E%90.html">06补充篇 卡顿优化：卡顿现场与卡顿分析</a></li><li><a class="active" aria-current="page" href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/07%20%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B%E7%9C%8B%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96.html">07 启动优化（上）：从启动过程看启动速度优化</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/08%20%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BC%98%E5%8C%96%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E7%9A%84%E8%BF%9B%E9%98%B6%E6%96%B9%E6%B3%95.html">08 启动优化（下）：优化启动速度的进阶方法</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/09%20I_O%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%BF%85%E5%A4%87%E7%9A%84I_O%E4%BC%98%E5%8C%96%E7%9F%A5%E8%AF%86.html">09 I_O优化（上）：开发工程师必备的I_O优化知识</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/10%20I_O%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E4%B8%8D%E5%90%8CI_O%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 I_O优化（中）：不同I_O方式的使用场景是什么？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/11%20I_O%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E7%BA%BF%E4%B8%8AI_O%E6%93%8D%E4%BD%9C%EF%BC%9F.html">11 I_O优化（下）：如何监控线上I_O操作？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/12%20%E5%AD%98%E5%82%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%B8%B8%E8%A7%81%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">12 存储优化（上）：常见的数据存储方法有哪些？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/13%20%E5%AD%98%E5%82%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9F.html">13 存储优化（中）：如何优化数据存储？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/14%20%E5%AD%98%E5%82%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93SQLite%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96.html">14 存储优化（下）：数据库SQLite的使用和优化</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/15%20%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%BF%85%E5%A4%87%E7%9A%84%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%E7%9F%A5%E8%AF%86.html">15 网络优化（上）：移动开发工程师必备的网络优化知识</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/16%20%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%A4%8D%E6%9D%82%E5%A4%9A%E5%8F%98%E7%9A%84%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C%E8%AF%A5%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%EF%BC%9F.html">16 网络优化（中）：复杂多变的移动网络该如何优化？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/17%20%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B8%8B%E7%BD%91%E7%BB%9C%E8%AF%A5%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%EF%BC%9F.html">17 网络优化（下）：大数据下网络该如何监控？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/18%20%E8%80%97%E7%94%B5%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%94%B5%E9%87%8F%E4%BC%98%E5%8C%96%E7%9A%84%E6%BC%94%E8%BF%9B%E7%9C%8B%E8%80%97%E7%94%B5%E5%88%86%E6%9E%90.html">18 耗电优化（上）：从电量优化的演进看耗电分析</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/19%20%E8%80%97%E7%94%B5%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%80%97%E7%94%B5%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E4%B8%8E%E7%BA%BF%E4%B8%8A%E7%9B%91%E6%8E%A7.html">19 耗电优化（下）：耗电的优化方法与线上监控</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/20%20UI%20%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AUI%20%E6%B8%B2%E6%9F%93%E7%9A%84%E5%87%A0%E4%B8%AA%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5.html">20 UI 优化（上）：UI 渲染的几个关键概念</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/21%20UI%20%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%20UI%20%E6%B8%B2%E6%9F%93%EF%BC%9F.html">21 UI 优化（下）：如何优化 UI 渲染？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/22%20%E5%8C%85%E4%BD%93%E7%A7%AF%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E5%AE%89%E8%A3%85%E5%8C%85%E5%A4%A7%E5%B0%8F%EF%BC%9F.html">22 包体积优化（上）：如何减少安装包大小？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/23%20%E5%8C%85%E4%BD%93%E7%A7%AF%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E7%9A%84%E8%BF%9B%E9%98%B6%E5%AE%9E%E8%B7%B5.html">23 包体积优化（下）：资源优化的进阶实践</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/24%20%E6%83%B3%E6%88%90%E4%B8%BAAndroid%E9%AB%98%E6%89%8B%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E5%85%88%E6%90%9E%E5%AE%9A%E8%BF%99%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98.html">24 想成为Android高手，你需要先搞定这三个问题</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/25%20%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E7%BB%84%E7%BB%87%E4%B8%8E%E4%B8%AA%E4%BA%BA%E7%9A%84%E7%A0%94%E5%8F%91%E6%95%88%E8%83%BD%EF%BC%9F.html">25 如何提升组织与个人的研发效能？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/26%20%E5%85%B3%E4%BA%8E%E7%BC%96%E8%AF%91%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E4%BA%86%E8%A7%A3%E4%BB%80%E4%B9%88%EF%BC%9F.html">26 关于编译，你需要了解什么？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/27%20%E7%BC%96%E8%AF%91%E6%8F%92%E6%A1%A9%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9AAspectJ%E3%80%81ASM%E3%80%81ReDex.html">27 编译插桩的三种方法：AspectJ、ASM、ReDex</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/28%20%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B8%8EAI%EF%BC%8C%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E6%B5%8B%E8%AF%95%EF%BC%9F.html">28 大数据与AI，如何高效地测试？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/29%20%E4%BB%8E%E6%AF%8F%E6%9C%88%E5%88%B0%E6%AF%8F%E5%A4%A9%EF%BC%8C%E5%A6%82%E4%BD%95%E7%BB%99%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E6%8F%90%E9%80%9F%EF%BC%9F.html">29 从每月到每天，如何给版本发布提速？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/30%20%E6%95%B0%E6%8D%AE%E8%AF%84%E4%BC%B0%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84%E4%B8%8A%E6%8A%A5%E7%BB%84%E4%BB%B6%EF%BC%9F.html">30 数据评估（上）：如何实现高可用的上报组件？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/31%20%E6%95%B0%E6%8D%AE%E8%AF%84%E4%BC%B0%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%EF%BC%9F.html">31 数据评估（下）：什么是大数据平台？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/32%20%E7%BA%BF%E4%B8%8A%E7%96%91%E9%9A%BE%E9%97%AE%E9%A2%98%E8%AF%A5%E5%A6%82%E4%BD%95%E6%8E%92%E6%9F%A5%E5%92%8C%E8%B7%9F%E8%B8%AA%EF%BC%9F.html">32 线上疑难问题该如何排查和跟踪？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/33%20%E5%81%9A%E4%B8%80%E5%90%8D%E6%9C%89%E9%AB%98%E5%BA%A6%E7%9A%84%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88.html">33 做一名有高度的移动开发工程师</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/34%20%E8%81%8A%E8%81%8A%E9%87%8D%E6%9E%84%EF%BC%9A%E4%BC%98%E7%A7%80%E7%9A%84%E6%9E%B6%E6%9E%84%E9%83%BD%E6%98%AF%E6%BC%94%E8%BF%9B%E8%80%8C%E6%9D%A5%E7%9A%84.html">34 聊聊重构：优秀的架构都是演进而来的</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/35%20Native%20Hook%20%E6%8A%80%E6%9C%AF%EF%BC%8C%E5%A4%A9%E4%BD%BF%E8%BF%98%E6%98%AF%E9%AD%94%E9%AC%BC%EF%BC%9F.html">35 Native Hook 技术，天使还是魔鬼？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/36%20%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%BC%80%E5%8F%91%E7%9A%84%E7%8E%B0%E7%8A%B6%E4%B8%8E%E5%BA%94%E7%94%A8.html">36 跨平台开发的现状与应用</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/37%20%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E6%96%B0%E5%A4%A7%E9%99%86%EF%BC%9A%E5%B7%A5%E4%BD%9C%E4%B8%89%E5%B9%B4%E5%8D%8A%EF%BC%8C%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E8%BD%AC%E5%9E%8B%E6%89%8B%E6%B8%B8%E5%BC%80%E5%8F%91.html">37 移动开发新大陆：工作三年半，移动开发转型手游开发</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/38%20%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E6%96%B0%E5%A4%A7%E9%99%86%EF%BC%9AAndroid%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91.html">38 移动开发新大陆：Android音视频开发</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/39%20%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E6%96%B0%E5%A4%A7%E9%99%86%EF%BC%9A%20%E8%BE%B9%E7%BC%98%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%9A%84%E8%B6%8B%E5%8A%BF.html">39 移动开发新大陆： 边缘智能计算的趋势</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/40%20%E5%8A%A8%E6%80%81%E5%8C%96%E5%AE%9E%E8%B7%B5%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E6%96%B9%E6%A1%88%EF%BC%9F.html">40 动态化实践，如何选择适合自己的方案？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/41%20%E8%81%8A%E8%81%8AFlutter%EF%BC%8C%E9%9D%A2%E5%AF%B9%E5%B1%82%E5%87%BA%E4%B8%8D%E7%A9%B7%E7%9A%84%E6%96%B0%E6%8A%80%E6%9C%AF%E8%AF%A5%E5%A6%82%E4%BD%95%E8%B7%9F%E8%BF%9B%EF%BC%9F.html">41 聊聊Flutter，面对层出不穷的新技术该如何跟进？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/42%20Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97.html">42 Android开发高手课学习心得</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/Android%20JVM%20TI%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3%EF%BC%88%E5%86%85%E5%90%AB%E7%A6%8F%E5%88%A9%E5%BD%A9%E8%9B%8B%EF%BC%89.html">Android JVM TI机制详解（内含福利彩蛋）</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/Android%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E2%80%9C%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97%E2%80%9D.html">Android工程师的“面试指南”</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/Native%E4%B8%8B%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E8%B0%83%E7%94%A8%E6%A0%88%EF%BC%9F.html">Native下如何获取调用栈？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E4%B8%93%E6%A0%8F%E5%AD%A6%E5%BE%97%E8%8B%A6%EF%BC%9F%E5%8F%AF%E8%83%BD%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E4%B8%80%E4%BB%BD%E9%85%8D%E5%A5%97%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95.html">专栏学得苦？可能你还需要一份配套学习书单</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E4%B8%93%E6%A0%8F%E5%AD%A6%E5%BE%97%E8%8B%A6%EF%BC%9F%E5%8F%AF%E8%83%BD%E6%98%AF%E6%96%B9%E6%B3%95%E6%B2%A1%E6%89%BE%E5%AF%B9.html">专栏学得苦？可能是方法没找对</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E8%B7%AF%20%E8%AE%BE%E8%AE%A1%E8%83%BD%E5%8A%9B%E7%9A%84%E6%8F%90%E5%8D%87%E9%80%94%E5%BE%84.html">程序员修炼之路 设计能力的提升途径</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20ASM%E6%8F%92%E6%A1%A9%E5%BC%BA%E5%8C%96%E7%BB%83%E4%B9%A0.html">练习Sample跑起来 ASM插桩强化练习</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E5%94%AF%E9%B9%BF%E5%90%8C%E5%AD%A6%E7%9A%84%E7%BB%83%E4%B9%A0%E6%89%8B%E8%AE%B0%20%E7%AC%AC1%E8%BE%91.html">练习Sample跑起来 唯鹿同学的练习手记 第1辑</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E5%94%AF%E9%B9%BF%E5%90%8C%E5%AD%A6%E7%9A%84%E7%BB%83%E4%B9%A0%E6%89%8B%E8%AE%B0%20%E7%AC%AC2%E8%BE%91.html">练习Sample跑起来 唯鹿同学的练习手记 第2辑</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E5%94%AF%E9%B9%BF%E5%90%8C%E5%AD%A6%E7%9A%84%E7%BB%83%E4%B9%A0%E6%89%8B%E8%AE%B0%20%E7%AC%AC3%E8%BE%91.html">练习Sample跑起来 唯鹿同学的练习手记 第3辑</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%E7%AC%AC1%E6%9C%9F.html">练习Sample跑起来 热点问题答疑第1期</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%E7%AC%AC2%E6%9C%9F.html">练习Sample跑起来 热点问题答疑第2期</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%E7%AC%AC3%E6%9C%9F.html">练习Sample跑起来 热点问题答疑第3期</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%E7%AC%AC4%E6%9C%9F.html">练习Sample跑起来 热点问题答疑第4期</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E7%9A%84%E4%BB%8A%E5%A4%A9%E5%92%8C%E6%98%8E%E5%A4%A9.html">结束语 移动开发的今天和明天</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E8%81%8A%E8%81%8AFramework%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95.html">聊聊Framework的学习方法</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/07%20%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B%E7%9C%8B%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="07 启动优化（上）：从启动过程看启动速度优化" id="title">07 启动优化（上）：从启动过程看启动速度优化</h1>
+<div><blockquote>
+<p>在超市排队结账，扫码支付启动十几秒都还没完成，只能换一个工具支付？</p>
+<p>想买本书充实一下，页面刷出来时候十几秒都不能操作，那就换一个应用购买？</p>
+</blockquote>
+<p>用户如果想打开一个应用，就一定要经过“启动”这个步骤。启动时间的长短，不只是用户体验的问题，对于淘宝、京东这些应用来说，会直接影响留存和转化等核心数据。对研发人员来说，启动速度是我们的“门面”，它清清楚楚可以被所有人看到，我们都希望自己应用的启动速度可以秒杀所有竞争对手。</p>
+<p>那启动过程究竟会出现哪些问题？我们应该怎么去优化和监控应用的启动速度呢？今天我们一起来看看这些问题该如何解决。</p>
+<h2 id="启动分析">启动分析</h2>
+<p>在真正动手开始优化之前，我们应该先搞清楚从用户点击图标开始，整个启动过程经过哪几个关键阶段，又会给用户带来哪些体验问题。</p>
+<p><strong>1. 启动过程分析</strong></p>
+<p><img alt="" src="/assets/ea19fe440a7086543aceaab0.png"/></p>
+<p>我以微信为例，用户从桌面点击图标开始，会经过4个关键阶段。</p>
+<ul>
+<li><p><strong>T1预览窗口显示</strong>。系统在拉起微信进程之前，会先根据微信的Theme属性创建预览窗口。当然如果我们禁用预览窗口或者将预览窗口指定为透明，用户在这段时间依然看到的是桌面。</p></li>
+<li><p><strong>T2闪屏显示</strong>。在微信进程和闪屏窗口页面创建完毕，并且完成一系列inflate view、onmeasure、onlayout等准备工作后，用户终于可以看到熟悉的“小地球”。</p></li>
+<li><p><strong>T3主页显示</strong>。在完成主窗口创建和页面显示的准备工作后，用户可以看到微信的主界面。</p></li>
+<li><p><strong>T4界面可操作</strong>。在启动完成后，微信会有比较多的工作需要继续执行，例如聊天和朋友圈界面的预加载、小程序框架和进程的准备等。在这些工作完成后，用户才可以真正开始愉快地聊天。</p></li>
+</ul>
+<p><strong>2. 启动问题分析</strong></p>
+<p>从启动流程的4个关键阶段，我们可以推测出用户启动过程会遇到的3个问题。这3个问题其实也是大多数应用在启动时可能会遇到的。</p>
+<ul>
+<li>问题1：点击图标很久都不响应</li>
+</ul>
+<p>如果我们禁用了预览窗口或者指定了透明的皮肤，那用户点击了图标之后，需要T2时间才能真正看到应用闪屏。对于用户体验来说，点击了图标，过了几秒还是停留在桌面，看起来就像没有点击成功，这在中低端机中更加明显。</p>
+<ul>
+<li>问题2：首页显示太慢</li>
+</ul>
+<p>现在应用启动流程越来越复杂，闪屏广告、热修复框架、插件化框架、大前端框架，所有准备工作都需要集中在启动阶段完成。上面说的T3首页显示时间对于中低端机来说简直就是噩梦，经常会达到十几秒的时间。</p>
+<ul>
+<li>问题3：首页显示后无法操作。</li>
+</ul>
+<p>既然首页显示那么慢，那我能不能把尽量多的工作都通过异步化延后执行呢？很多应用的确就是这么做的，但这会造成两种后果：要么首页会出现白屏，要么首页出来后用户根本无法操作。</p>
+<p>很多应用把启动结束时间的统计放到首页刚出现的时候，这对用户是不负责任的。看到一个首页，但是停住十几秒都不能滑动，这对用户来说完全没有意义。<strong>启动优化不能过于KPI化，要从用户的真实体验出发，要着眼从点击图标到用户可操作的整个过程。</strong></p>
+<h2 id="启动优化">启动优化</h2>
+<p>启动速度优化的方法和卡顿优化基本相同，不过因为启动实在是太重要了，我们会更加“精打细算”。我们希望启动期间加载的每个功能和业务都是必须的，它们的实现都是经过“千锤百炼”的，特别是在中低端机上面的表现。</p>
+<p><strong>1. 优化工具</strong></p>
+<p>“工欲善其事必先利其器”，我们需要先找到一款适合做启动优化分析的工具。</p>
+<p>你可以先回忆一下“卡顿优化”提到的几种工具。Traceview性能损耗太大，得出的结果并不真实；Nanoscope非常真实，不过暂时只支持Nexus 6P和x86模拟器，无法针对中低端机做测试；Simpleperf的火焰图并不适合做启动流程分析；systrace可以很方便地追踪关键系统调用的耗时情况，但是不支持应用程序代码的耗时分析。</p>
+<p>综合来看，在卡顿优化中提到“systrace + 函数插桩”似乎是比较理想的方案，而且它还可以看到系统的一些关键事件，例如GC、System Server、CPU调度等。</p>
+<p>我们可以通过下面的命令，可以查看手机支持哪些systrace类型。不同的系统支持的类型有所差别，其中Dalvik、sched、ss、app都是我们比较关心的。</p>
+<pre><code>python systrace.py --list-categories
+</code></pre>
+<p>通过插桩，我们可以看到应用主线程和其他线程的函数调用流程。它的实现原理非常简单，就是将下面的两个函数分别插入到每个方法的入口和出口。</p>
+<pre><code>class Trace {
+  public static void i(String tag) {
+    Trace.beginSection(name);
+  }
+
+
+  public static void o() {
+      Trace.endSection();
+  }
+}
+</code></pre>
+<p>当然这里面有非常多的细节需要考虑，比如怎么样降低插桩对性能的影响、哪些函数需要被排除掉。最终改良版的systrace性能损耗在一倍以内，基本可以反映真实的启动流程。函数插桩后的效果如下，你也可以参考课后练习的Sample。</p>
+<pre><code>class Test {
+  public void test() {
+    Trace.i("Test.test()");
+    //原来的工作
+    Trace.o()；
+  }
+}
+</code></pre>
+<p><strong>只有准确的数据评估才能指引优化的方向，这一步是非常非常重要的。我见过太多同学在没有充分评估或者评估使用了错误的方法，最终得到了错误的方向。辛辛苦苦一两个月，最后发现根本达不到预期的效果。</strong></p>
+<p><strong>2. 优化方式</strong></p>
+<p>在拿到整个启动流程的全景图之后，我们可以清楚地看到这段时间内系统、应用各个进程和线程的运行情况，现在我们要开始真正开始“干活”了。</p>
+<p>具体的优化方式，我把它们分为闪屏优化、业务梳理、业务优化、线程优化、GC优化和系统调用优化。</p>
+<ul>
+<li>闪屏优化</li>
+</ul>
+<p>今日头条把预览窗口实现成闪屏的效果，这样用户只需要很短的时间就可以看到“预览闪屏”。这种完全“跟手”的感觉在高端机上体验非常好，但对于中低端机，会把总的的闪屏时间变得更长。</p>
+<p>如果点击图标没有响应，用户主观上会认为是手机系统响应比较慢。所以<strong>我比较推荐的做法是，只在Android 6.0或者Android 7.0以上才启用“预览闪屏”方案，让手机性能好的用户可以有更好的体验</strong>。</p>
+<p>微信做的另外一个优化是合并闪屏和主页面的Activity，减少一个Activity会给线上带来100毫秒左右的优化。但是如果这样做的话，管理时会非常复杂，特别是有很多例如PWA、扫一扫这样的第三方启动流程的时候。</p>
+<ul>
+<li>业务梳理</li>
+</ul>
+<p>我们首先需要梳理清楚当前启动过程正在运行的每一个模块，哪些是一定需要的、哪些可以砍掉、哪些可以懒加载。我们也可以根据业务场景来决定不同的启动模式，例如通过扫一扫启动只需要加载需要的几个模块即可。对于中低端机器，我们要学会降级，学会推动产品经理做一些功能取舍。但是需要注意的是，<strong>懒加载要防止集中化，否则容易出现首页显示后用户无法操作的情形</strong>。</p>
+<ul>
+<li>业务优化</li>
+</ul>
+<p>通过梳理之后，剩下的都是启动过程一定要用的模块。这个时候，我们只能硬着头皮去做进一步的优化。优化前期需要“抓大放小”，先看看主线程究竟慢在哪里。最理想是通过算法进行优化，例如一个数据解密操作需要1秒，通过算法优化之后变成10毫秒。退而求其次，我们要考虑这些任务是不是可以通过异步线程预加载实现，<strong>但需要注意的是过多的线程预加载会让我们的逻辑变得更加复杂。</strong></p>
+<p>业务优化做到后面，会发现一些架构和历史包袱会拖累我们前进的步伐。比较常见的是一些事件会被各个业务模块监听，大量的回调导致很多工作集中执行，部分框架初始化“太厚”，例如一些插件化框架，启动过程各种反射、各种Hook，整个耗时至少几百毫秒。还有一些历史包袱又非常沉重，而且“牵一发动全身”，改动风险比较大。但是我想说，如果有合适的时机，我们依然需要勇敢去偿还这些“历史债务”。</p>
+<ul>
+<li>线程优化</li>
+</ul>
+<p>线程优化就像做填空题和解锁题，我们希望能把所有的时间片都利用上，因此主线程和各个线程都是一直满载的。当然我们也希望每个线程都开足马力向前跑，而不是作为接力棒。<strong>所以线程的优化主要在于减少CPU调度带来的波动，让应用的启动时间更加稳定。</strong></p>
+<p>从具体的做法来看，线程的优化一方面是控制线程数量，线程数量太多会相互竞争CPU资源，因此要有统一的线程池，并且根据机器性能来控制数量。</p>
+<p>线程切换的数据我们可以通过卡顿优化中学到的sched文件查看，这里特别需要注意nr_involuntary_switches被动切换的次数。</p>
+<pre><code>proc/[pid]/sched:
+  nr_voluntary_switches：     
+  主动上下文切换次数，因为线程无法获取所需资源导致上下文切换，最普遍的是IO。    
+  nr_involuntary_switches：   
+  被动上下文切换次数，线程被系统强制调度导致上下文切换，例如大量线程在抢占CPU。
+</code></pre>
+<p>另一方面是检查线程间的锁。为了提高启动过程任务执行的速度，有一次我们把主线程内的一个耗时任务放到线程中并发执行，但是发现这样做根本没起作用。仔细检查后发现线程内部会持有一个锁，主线程很快就有其他任务因为这个锁而等待。通过systrace可以看到锁等待的事件，我们需要排查这些等待是否可以优化，特别是防止主线程出现长时间的空转。</p>
+<p><img alt="" src="/assets/453433f56ce600cf76706cee.png"/></p>
+<p>特别是现在有很多启动框架，会使用Pipeline机制，根据业务优先级规定业务初始化时机。比如微信内部使用的<a href="http://mp.weixin.qq.com/s/6Q818XA5FaHd7jJMFBG60w" target="_blank">mmkernel</a>、阿里最近开源的<a href="https://github.com/alibaba/alpha" target="_blank">Alpha</a>启动框架，它们为各个任务建立依赖关系，最终构成一个有向无环图。对于可以并发的任务，会通过线程池最大程度提升启动速度。如果任务的依赖关系没有配置好，很容易出现下图这种情况，即主线程会一直等待taskC结束，空转2950毫秒。</p>
+<p><img alt="" src="/assets/862e3c89e64817c928602bd9.png"/></p>
+<ul>
+<li>GC优化</li>
+</ul>
+<p>在启动过程，要尽量减少GC的次数，避免造成主线程长时间的卡顿，特别是对Dalvik来说，我们可以通过systrace单独查看整个启动过程GC的时间。</p>
+<pre><code>python systrace.py dalvik -b 90960 -a com.sample.gc
+</code></pre>
+<p>对于GC各个事件的具体含义，你可以参考<a href="https://developer.android.com/studio/profile/investigate-ram?hl=zh-cn" target="_blank">《调查RAM使用情况》</a>。</p>
+<p><img alt="" src="/assets/986b54c8f79f6fc78221ab9e.png"/></p>
+<p>不知道你是否还记得我在“内存优化”中提到Debug.startAllocCounting，我们也可以使用它来监控启动过程总GC的耗时情况，特别是阻塞式同步GC的总次数和耗时。</p>
+<pre><code>// GC使用的总耗时，单位是毫秒
+Debug.getRuntimeStat("art.gc.gc-time");
+// 阻塞式GC的总耗时
+Debug.getRuntimeStat("art.gc.blocking-gc-time");
+</code></pre>
+<p>如果我们发现主线程出现比较多的GC同步等待，那就需要通过Allocation工具做进一步的分析。启动过程避免进行大量的字符串操作，特别是序列化跟反序列化过程。一些频繁创建的对象，例如网络库和图片库中的Byte数组、Buffer可以复用。如果一些模块实在需要频繁创建对象，可以考虑移到Native实现。</p>
+<p>Java对象的逃逸也很容易引起GC问题，我们在写代码的时候比较容易忽略这个点。我们应该保证对象生命周期尽量的短，在栈上就进行销毁。</p>
+<ul>
+<li>系统调用优化</li>
+</ul>
+<p>通过systrace的System Service类型，我们可以看到启动过程System Server的CPU工作情况。在启动过程，我们尽量不要做系统调用，例如PackageManagerService操作、Binder调用等待。</p>
+<p>在启动过程也不要过早地拉起应用的其他进程，System Server和新的进程都会竞争CPU资源。特别是系统内存不足的时候，当我们拉起一个新的进程，可能会成为“压死骆驼的最后一根稻草”。它可能会触发系统的low memory killer机制，导致系统杀死和拉起（保活）大量的进程，从而影响前台进程的CPU。</p>
+<p>讲个实践的案例，之前我们的一个程序在启动过程会拉起下载和视频播放进程，改为按需拉起后，线上启动时间提高了3%，对于1GB以下的低端机优化，整个启动时间可以优化5%～8%，效果还是非常明显的。</p>
+<h2 id="总结">总结</h2>
+<p>今天我们首先学习了启动的整个流程，其中比较关键的是4个阶段。在这4个阶段中，用户可能会出现“点击图标很久都不响应“”首页显示太慢“和”首页显示后无法操作“这3个问题。</p>
+<p>接着我们学习了启动优化和监控的一些常规方法。针对不同的业务场景、不同性能的机器，需要采用不同的策略。<strong>有些知识点似乎比较“浅尝辄止”，我更希望你能够通过学习和实践将它们丰富起来。</strong></p>
+<p>我讲到的大部分内容都是跟业务相关，业务的梳理和优化也是最快出成果的。不过这个过程我们要学会取舍，你可能遇到过，很多产品经理为了提升自己负责的模块的数据，总会逼迫开发做各种各样的预加载。但是大家都想快，最后的结果就是代码一团糟，肯定都快不起来。</p>
+<p>比如只有1%用户使用的功能，却让所有用户都做预加载。面对这种情况，我们要狠下心来，只留下那些真正不能删除的业务，或者通过场景化直接找到那1%的用户。跟产品经理PK可能不是那么容易，关键在于数据。<strong>我们需要证明启动优化带来整体留存、转化的正向价值，是大于某个业务取消预加载带来的负面影响</strong>。</p>
+<p>启动优化是性能优化工作非常重要的一环，今天的课后作业是，在你过去的工作中，曾经针对启动做过哪些优化，最终效果又是怎样的呢？请你在留言区分享一下今天学习、练习的收获与心得。</p>
+<h2 id="课后练习">课后练习</h2>
+<p>“工欲善其事必先利其器”，我多次提到“systrace + 函数插桩”是一个非常不错的卡顿排查工具，那么通过今天的<a href="https://github.com/AndroidAdvanceWithGeektime/Chapter07" target="_blank">Sample</a>，我们一起来看一下它是如何实现的。需要注意的是Sample选择了ASM插桩的方式，感兴趣的同学可以课后学习一下它的使用方法，在后续我们也会有关于插桩的专门课程。</p>
+<p>我们可以将Sample运用到自己的应用中，虽然它过滤了大部分的函数，但是我们还是需要注意白名单的配置。例如log、加解密等在底层非常频繁调用的函数，都要在白名单中配置过滤掉，不然可能会出现类似下面这样大量的毛刺。</p>
+<p><img alt="" src="/assets/35113e2d71dd921f07461814.png"/></p>
+<p>欢迎你点击“请朋友读”，把今天的内容分享给好友，邀请他一起学习。最后别忘了在评论区提交今天的作业，我也为认真完成作业的同学准备了丰厚的“学习加油礼包”，期待与你一起切磋进步哦。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

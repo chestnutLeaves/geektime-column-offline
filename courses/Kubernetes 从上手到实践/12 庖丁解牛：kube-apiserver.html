@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12 庖丁解牛：kube-apiserver · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/index.html">Kubernetes 从上手到实践</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kubernetes 从上手到实践</strong><ul><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/01%20%20%E5%BC%80%E7%AF%87%EF%BC%9A%20Kubernetes%20%E6%98%AF%E4%BB%80%E4%B9%88%E4%BB%A5%E5%8F%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AE%83.html">01  开篇： Kubernetes 是什么以及为什么需要它</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/02%20%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">02 初步认识：Kubernetes 基础概念</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/03%20%E5%AE%8F%E8%A7%82%E8%AE%A4%E8%AF%86%EF%BC%9A%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.html">03 宏观认识：整体架构</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/04%20%E6%90%AD%E5%BB%BA%20Kubernetes%20%E9%9B%86%E7%BE%A4%20-%20%E6%9C%AC%E5%9C%B0%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA.html">04 搭建 Kubernetes 集群 - 本地快速搭建</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/05%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%20Kubernetes%20%E9%9B%86%E7%BE%A4%20-%20%E7%94%9F%E4%BA%A7%E5%8F%AF%E7%94%A8.html">05 动手实践：搭建一个 Kubernetes 集群 - 生产可用</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/06%20%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%EF%BC%9A%E5%88%9D%E8%AF%86%20kubectl.html">06 集群管理：初识 kubectl</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/07%20%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%EF%BC%9A%E4%BB%A5%20Redis%20%E4%B8%BA%E4%BE%8B-%E9%83%A8%E7%BD%B2%E5%8F%8A%E8%AE%BF%E9%97%AE.html">07 集群管理：以 Redis 为例-部署及访问</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/08%20%E5%AE%89%E5%85%A8%E9%87%8D%E7%82%B9%20%E8%AE%A4%E8%AF%81%E5%92%8C%E6%8E%88%E6%9D%83.html">08 安全重点 认证和授权</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/09%20%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83%EF%BC%9A%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE.html">09 应用发布：部署实际项目</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/10%20%E5%BA%94%E7%94%A8%E7%AE%A1%E7%90%86%EF%BC%9A%E5%88%9D%E8%AF%86%20Helm.html">10 应用管理：初识 Helm</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/11%20%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%A5%20Helm%20%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE.html">11 部署实践：以 Helm 部署项目</a></li><li><a class="active" aria-current="page" href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/12%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Akube-apiserver.html">12 庖丁解牛：kube-apiserver</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/13%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Aetcd.html">13 庖丁解牛：etcd</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/14%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Acontroller-manager.html">14 庖丁解牛：controller-manager</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/15%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Akube-scheduler.html">15 庖丁解牛：kube-scheduler</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/16%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Akubelet.html">16 庖丁解牛：kubelet</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/17%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Akube-proxy.html">17 庖丁解牛：kube-proxy</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/18%20%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9AContainer%20Runtime%20%EF%BC%88Docker%EF%BC%89.html">18  庖丁解牛：Container Runtime （Docker）</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/19%20Troubleshoot.html">19 Troubleshoot</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/20%20%E6%89%A9%E5%B1%95%E5%A2%9E%E5%BC%BA%EF%BC%9ADashboard.html">20 扩展增强：Dashboard</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/21%20%E6%89%A9%E5%B1%95%E5%A2%9E%E5%BC%BA%EF%BC%9ACoreDNS.html">21 扩展增强：CoreDNS</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/22%20%E6%9C%8D%E5%8A%A1%E5%A2%9E%E5%BC%BA%EF%BC%9AIngress.html">22 服务增强：Ingress</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/23%20%E7%9B%91%E6%8E%A7%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%AF%B9%20K8S%20%E9%9B%86%E7%BE%A4%E8%BF%9B%E8%A1%8C%E7%9B%91%E6%8E%A7.html">23 监控实践：对 K8S 集群进行监控</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/24%20%E6%80%BB%E7%BB%93.html">24 总结</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/12%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Akube-apiserver.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12 庖丁解牛：kube-apiserver" id="title">12 庖丁解牛：kube-apiserver</h1>
+<div><h2 id="整体概览">整体概览</h2>
+<pre><code>+----------------------------------------------------------+          
+| Master                                                   |          
+|              +-------------------------+                 |          
+|     +-------&gt;|        API Server       |&lt;--------+       |          
+|     |        |                         |         |       |          
+|     v        +-------------------------+         v       |          
+|   +----------------+     ^      +--------------------+   |          
+|   |                |     |      |                    |   |          
+|   |   Scheduler    |     |      | Controller Manager |   |          
+|   |                |     |      |                    |   |          
+|   +----------------+     v      +--------------------+   |          
+| +------------------------------------------------------+ |          
+| |                                                      | |          
+| |                Cluster state store                   | |          
+| |                                                      | |          
+| +------------------------------------------------------+ |          
++----------------------------------------------------------+          
+</code></pre>
+<p>在第 3 节《宏观认识：整体架构》 中，我们初次认识到了 <code>kube-apiserver</code> 的存在（以下内容中将统一称之为 <code>kube-apiserver</code>），知道了它作为集群的统一入口，接收来自外部的信号和请求，并将一些信息存储至 <code>etcd</code> 中。</p>
+<p>但这只是一种很模糊的说法，本节我们来具体看看 <code>kube-apiserver</code> 的关键功能以及它的工作原理。</p>
+<p>注意：本节所有的源码均以 <code>v1.11.3</code> 为准 commit id <code>a4529464e4629c21224b3d52edfe0ea91b072862</code>。</p>
+<h2 id="rest-api-server">REST API Server</h2>
+<p>先来说下 <code>kube-apiserver</code> 作为整个集群的入口，接受外部的信号和请求所应该具备的基本功能。</p>
+<p>首先，它对外提供接口，可处理来自客户端（无论我们在用的 <code>kubeclt</code> 或者 <code>curl</code> 或者其他语言实现的客户端）的请求，并作出响应。</p>
+<p>在第 5 节搭建集群时，我们提到要先去检查 <code>6443</code> 端口是否被占用。这样检查的原因在于 <code>kube-apiserver</code> 有个 <code>--secure-port</code> 的参数，通过这个参数来配置它将要监听在哪个端口，默认情况下是 <code>6443</code>。</p>
+<p>当然，它还有另一个参数 <code>--insecure-port</code> ，这个参数可将 <code>kube-apiserver</code> 绑定到其指定的端口上，且通过该端口访问时无需认证。</p>
+<p>在生产环境中，建议将其设置为 <code>0</code> 以禁用该功能。另外，这个参数也已经被标记为废弃，将在之后版本中移除。如果未禁用该功能，建议通过防火墙策略禁止从外部访问该端口。该端口会绑定在 <code>--insecure-bind-address</code> 参数所设置的地址上，默认为 <code>127.0.0.1</code>。</p>
+<p>那么 <code>secure</code> 和 <code>insecure</code> 最主要的区别是什么呢？ 这就引出来了 <code>kube-apiserver</code> 作为 API Server 的一个最主要功能：认证。</p>
+<h3 id="认证-authentication">认证（Authentication）</h3>
+<p>在第 8 节《认证和授权》中，我们已经讲过认证相关的机制。这里，我们以最简单的获取集群版本号为例。</p>
+<p>通常，我们使用 <code>kubeclt version</code> 来获取集群和当前客户端的版本号。</p>
+<pre><code>master $ kubectl version
+Client Version: version.Info{Major:"1", Minor:"11", GitVersion:"v1.11.3", GitCommit:"a4529464e4629c21224b3d52edfe0ea91b072862", GitTreeState:"clean", BuildDate:"2018-09-09T18:02:47Z", GoVersion:"go1.10.3", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"11", GitVersion:"v1.11.3", GitCommit:"a4529464e4629c21224b3d52edfe0ea91b072862", GitTreeState:"clean", BuildDate:"2018-09-09T17:53:03Z", GoVersion:"go1.10.3", Compiler:"gc", Platform:"linux/amd64"}
+</code></pre>
+<p>获取集群版本号的时候，其实也是向 <code>kube-apiserver</code> 发送了一个请求进行查询的，我们可以通过传递 <code>-v</code> 参数来改变 log level 。</p>
+<pre><code>master $ kubectl version -v 8
+I1202 03:15:06.360838   13581 loader.go:359] Config loaded from file /root/.kube/config
+I1202 03:15:06.362106   13581 round_trippers.go:383] GET https://172.17.0.99:6443/version?timeout=32s
+I1202 03:15:06.362130   13581 round_trippers.go:390] Request Headers:
+I1202 03:15:06.362139   13581 round_trippers.go:393]     Accept: application/json, */*
+I1202 03:15:06.362146   13581 round_trippers.go:393]     User-Agent: kubectl/v1.11.3 (linux/amd64) kubernetes/a452946
+I1202 03:15:06.377653   13581 round_trippers.go:408] Response Status: 200 OK in 15 milliseconds
+I1202 03:15:06.377678   13581 round_trippers.go:411] Response Headers:
+I1202 03:15:06.377686   13581 round_trippers.go:414]     Content-Type: application/json
+I1202 03:15:06.377693   13581 round_trippers.go:414]     Content-Length: 263
+I1202 03:15:06.377699   13581 round_trippers.go:414]     Date: Sun, 02 Dec 2018 03:15:06 GMT
+I1202 03:15:06.379314   13581 request.go:897] Response Body: {
+  "major": "1",
+  "minor": "11",
+  "gitVersion": "v1.11.3",
+  "gitCommit": "a4529464e4629c21224b3d52edfe0ea91b072862",
+  "gitTreeState": "clean",
+  "buildDate": "2018-09-09T17:53:03Z",
+  "goVersion": "go1.10.3",
+  "compiler": "gc",
+  "platform": "linux/amd64"
+}
+Client Version: version.Info{Major:"1", Minor:"11", GitVersion:"v1.11.3", GitCommit:"a4529464e4629c21224b3d52edfe0ea91b072862", GitTreeState:"clean", BuildDate:"2018-09-09T18:02:47Z", GoVersion:"go1.10.3", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"11", GitVersion:"v1.11.3", GitCommit:"a4529464e4629c21224b3d52edfe0ea91b072862", GitTreeState:"clean", BuildDate:"2018-09-09T17:53:03Z", GoVersion:"go1.10.3", Compiler:"gc", Platform:"linux/amd64"}
+</code></pre>
+<p>通过日志就可以很明显看到，首先会加载 <code>$HOME/.kube/config</code> 下的配置，获的集群地址，进而请求 <code>/version</code> 接口，最后格式化输出。</p>
+<p>我们使用 <code>curl</code> 去请求同样的接口：</p>
+<pre><code>master $ curl -k https://172.17.0.99:6443/version
+{
+  "major": "1",
+  "minor": "11",
+  "gitVersion": "v1.11.3",
+  "gitCommit": "a4529464e4629c21224b3d52edfe0ea91b072862",
+  "gitTreeState": "clean",
+  "buildDate": "2018-09-09T17:53:03Z",
+  "goVersion": "go1.10.3",
+  "compiler": "gc",
+  "platform": "linux/amd64"
+}
+</code></pre>
+<p>得到了相同的结果。你可能会有些奇怪，使用 <code>curl -k</code> 相当于忽略了认证的过程，为何还能拿到正确的信息。别急，我们来看下一个例子：</p>
+<pre><code>master $ kubectl get ns  -v 8
+I1202 03:25:40.607886   16620 loader.go:359] Config loaded from file /root/.kube/config
+I1202 03:25:40.608862   16620 loader.go:359] Config loaded from file /root/.kube/config
+I1202 03:25:40.611187   16620 loader.go:359] Config loaded from file /root/.kube/config
+I1202 03:25:40.622737   16620 loader.go:359] Config loaded from file /root/.kube/config
+I1202 03:25:40.623495   16620 round_trippers.go:383] GET https://172.17.0.99:6443/api/v1/namespaces?limit=500
+I1202 03:25:40.623650   16620 round_trippers.go:390] Request Headers:
+I1202 03:25:40.623730   16620 round_trippers.go:393]     Accept: application/json;as=Table;v=v1beta1;g=meta.k8s.io, application/json
+I1202 03:25:40.623820   16620 round_trippers.go:393]     User-Agent: kubectl/v1.11.3 (linux/amd64) kubernetes/a452946
+I1202 03:25:40.644280   16620 round_trippers.go:408] Response Status: 200 OK in 20 milliseconds
+I1202 03:25:40.644308   16620 round_trippers.go:411] Response Headers:
+I1202 03:25:40.644327   16620 round_trippers.go:414]     Content-Type: application/json
+I1202 03:25:40.644334   16620 round_trippers.go:414]     Content-Length: 2061
+I1202 03:25:40.644338   16620 round_trippers.go:414]     Date: Sun, 02 Dec 2018 03:25:40 GMT
+I1202 03:25:40.644398   16620 request.go:897] Response Body: {"kind":"Table","apiVersion":"meta.k8s.io/v1beta1","metadata":{"selfLink":"/api/v1/namespaces","resourceVersion":"3970"},"columnDefinitions":[{"name":"Name","type":"string","format":"name","description":"Name must be unique within anamespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names","priority":0},{"name":"Status","type":"string","format":"","description":"The status of the namespace","priority":0},{"name":"Age","type":"string","format":"","description":"CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. [truncated 1037 chars]
+I1202 03:25:40.645111   16620 get.go:443] no kind is registered for the type v1beta1.Table
+NAME          STATUS    AGE
+default       Active    45m
+kube-public   Active    45m
+kube-system   Active    45m
+</code></pre>
+<p>使用 <code>curl</code> 去请求：</p>
+<pre><code>master $ curl -k  https://172.17.0.99:6443/api/v1/namespaces
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {
+
+  },
+  "status": "Failure",
+  "message": "namespaces is forbidden: User \"system:anonymous\" cannot list namespaces at the cluster scope",
+  "reason": "Forbidden",
+  "details": {
+    "kind": "namespaces"
+  },
+  "code": 403
+}
+</code></pre>
+<p>看到这里，应该就很明显了，当前忽略掉认证过程的 <code>curl</code> 被判定为 <code>system:anonymous</code> 用户，而此用户不具备列出 <code>namespace</code> 的权限。</p>
+<p>那我们是否有其他办法使用 <code>curl</code> 获取资源呢？ 当然有，使用 <code>kubectl proxy</code> 可以在本地和集群之间创建一个代理，就像这样：</p>
+<pre><code>master $ kubectl proxy &amp;
+[1] 22205
+master $ Starting to serve on 127.0.0.1:8001
+
+master $ curl http://127.0.0.1:8001/api/v1/namespaces
+{
+  "kind": "NamespaceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces",
+    "resourceVersion": "5363"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "default",
+        "selfLink": "/api/v1/namespaces/default",
+        "uid": "a5124131-f5db-11e8-9237-0242ac110063",
+        "resourceVersion": "4",
+        "creationTimestamp": "2018-12-02T02:40:35Z"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "metadata": {
+        "name": "kube-public",
+        "selfLink": "/api/v1/namespaces/kube-public",
+        "uid": "a5153f73-f5db-11e8-9237-0242ac110063",
+        "resourceVersion": "10",
+        "creationTimestamp": "2018-12-02T02:40:35Z"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "metadata": {
+        "name": "kube-system",
+        "selfLink": "/api/v1/namespaces/kube-system",
+        "uid": "a514ad25-f5db-11e8-9237-0242ac110063",
+        "resourceVersion": "9",
+        "creationTimestamp": "2018-12-02T02:40:35Z"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    }
+  ]
+}
+</code></pre>
+<p>可以看到已经能正确的获取资源了，这是因为 <code>kubectl proxy</code> 使用了 <code>$HOME/.kube/config</code> 中的配置。</p>
+<p>在 <code>staging/src/k8s.io/client-go/tools/clientcmd/loader.go</code> 中，有一个名为 <code>LoadFromFile</code> 的函数用来提供加载配置文件的功能。</p>
+<pre><code>func LoadFromFile(filename string) (*clientcmdapi.Config, error) {
+	kubeconfigBytes, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	config, err := Load(kubeconfigBytes)
+	if err != nil {
+		return nil, err
+	}
+	glog.V(6).Infoln("Config loaded from file", filename)
+
+	// set LocationOfOrigin on every Cluster, User, and Context
+	for key, obj := range config.AuthInfos {
+		obj.LocationOfOrigin = filename
+		config.AuthInfos[key] = obj
+	}
+	for key, obj := range config.Clusters {
+		obj.LocationOfOrigin = filename
+		config.Clusters[key] = obj
+	}
+	for key, obj := range config.Contexts {
+		obj.LocationOfOrigin = filename
+		config.Contexts[key] = obj
+	}
+
+	if config.AuthInfos == nil {
+		config.AuthInfos = map[string]*clientcmdapi.AuthInfo{}
+	}
+	if config.Clusters == nil {
+		config.Clusters = map[string]*clientcmdapi.Cluster{}
+	}
+	if config.Contexts == nil {
+		config.Contexts = map[string]*clientcmdapi.Context{}
+	}
+
+	return config, nil
+}
+</code></pre>
+<p>逻辑其实很简单，读取指定的文件（一般在调用此函数前，都会先去检查是否有 <code>KUBECONFIG</code> 的环境变量或 <code>--kubeconfig</code>，如果没有才会使用默认的 <code>$HOME/.kube/config</code> 作为文件名）。</p>
+<p>从以上的例子中，使用当前配置的用户可以获取资源，而 <code>system:anonymous</code> 不可以。可以得出 <code>kube-apiserver</code> 又一个重要的功能：授权。</p>
+<h3 id="授权-authorization">授权（Authorization）</h3>
+<p>在第 8 节中，我们也已经讲过，K8S 支持多种授权机制，现在多数都在使用 <code>RBAC</code> ，我们之前使用 <code>kubeadm</code> 创建集群时，默认会开启 <code>RBAC</code>。如何创建权限可控的用户在第 8 节也已经说过。所以本节中不过多赘述了，直接看授权后的处理逻辑。</p>
+<h3 id="准入控制-admission-control">准入控制（Admission Control）</h3>
+<p>在请求进来时，会先经过认证、授权接下来会进入准入控制环节。准入控制和前两项内容不同，它不只是关注用户和行为，它还会处理请求的内容。不过它对读操作无效。</p>
+<p>准入控制与我们前面说提到的认证、授权插件类似，支持同时开启多个。在 <code>v1.11.3</code> 中，默认开启的准入控制插件有：</p>
+<pre><code>NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeClaimResize,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota,Priority
+</code></pre>
+<p>相关的代码可查看 <code>pkg/kubeapiserver/options/plugins.go</code></p>
+<pre><code>func DefaultOffAdmissionPlugins() sets.String {
+	defaultOnPlugins := sets.NewString(
+		lifecycle.PluginName,                //NamespaceLifecycle
+		limitranger.PluginName,              //LimitRanger
+		serviceaccount.PluginName,           //ServiceAccount
+		setdefault.PluginName,               //DefaultStorageClass
+		resize.PluginName,                   //PersistentVolumeClaimResize
+		defaulttolerationseconds.PluginName, //DefaultTolerationSeconds
+		mutatingwebhook.PluginName,          //MutatingAdmissionWebhook
+		validatingwebhook.PluginName,        //ValidatingAdmissionWebhook
+		resourcequota.PluginName,            //ResourceQuota
+	)
+
+	if utilfeature.DefaultFeatureGate.Enabled(features.PodPriority) {
+		defaultOnPlugins.Insert(podpriority.PluginName) //PodPriority
+	}
+
+	return sets.NewString(AllOrderedPlugins...).Difference(defaultOnPlugins)
+}
+</code></pre>
+<p>在这里写了一些默认开启的配置。事实上，在早之前，<code>PersistentVolumeClaimResize</code> 默认是不开启的，并且开启了 <code>PersistentVolumeLabel</code>，对于移除 <code>Persistentvolumelabel</code> 感兴趣的朋友可以参考下 <a href="https://github.com/kubernetes/kubernetes/issues/52617" target="_blank">Remove the PersistentVolumeLabel Admission Controller</a> 。</p>
+<p>这里对几个比较常见的插件做下说明：</p>
+<ul>
+<li>NamespaceLifecycle：它可以保证正在终止的 <code>Namespace</code> 不允许创建对象，不允许请求不存在的 <code>Namespace</code> 以及保证默认的 <code>default</code>, <code>kube-system</code> 之类的命名空间不被删除。核心的代码是：</li>
+</ul>
+<pre><code>  if a.GetOperation() == admission.Delete &amp;&amp; a.GetKind().GroupKind() == v1.SchemeGroupVersion.WithKind("Namespace").GroupKind() &amp;&amp; l.immortalNamespaces.Has(a.GetName()) {
+  	return errors.NewForbidden(a.GetResource().GroupResource(), a.GetName(), fmt.Errorf("this namespace may not be deleted"))
+  }
+</code></pre>
+<p>如果删除默认的 <code>Namespace</code> 则会得到下面的异常：</p>
+<pre><code>  master $ kubectl delete ns kube-system
+  Error from server (Forbidden): namespaces "kube-system" is forbidden: this namespace may not be deleted
+  master $ kubectl delete ns kube-public
+  Error from server (Forbidden): namespaces "kube-public" is forbidden: this namespace may not be deleted
+  master $ kubectl delete ns default
+  Error from server (Forbidden): namespaces "default" is forbidden: this namespace may not be deleted
+</code></pre>
+<ul>
+<li><p>LimitRanger：为 <code>Pod</code> 设置默认请求资源的限制。</p></li>
+<li><p>ServiceAccount：可按照预设规则创建 <code>Serviceaccount</code> 。比如都有统一的前缀：<code>system:serviceaccount:</code>。</p></li>
+<li><p>DefaultStorageClass：为 <code>PVC</code> 设置默认 <code>StorageClass</code>。</p></li>
+<li><p>DefaultTolerationSeconds：设置 <code>Pod</code> 的默认 forgiveness toleration 为 5 分钟。这个可能常会看到。</p></li>
+<li><p>MutatingAdmissionWebhook 和 ValidatingAdmissionWebhook：这两个都是通过 Webhook 验证或者修改请求，唯一的区别是一个是顺序进行，一个是并行进行的。</p></li>
+<li><p>ResourceQuota：限制 <code>Pod</code> 请求配额。</p></li>
+<li><p>AlwaysPullImages：总是拉取镜像。</p></li>
+<li><p>AlwaysAdmit：总是接受所有请求。</p></li>
+</ul>
+<h3 id="处理请求">处理请求</h3>
+<p>前面已经说到，一个请求依次会经过认证，授权，准入控制等环节，当这些环节都已经通过后，该请求便到了 <code>kube-apiserver</code> 的实际处理逻辑中了。</p>
+<p>其实和普通的 Web server 类似，<code>kube-apiserver</code> 提供了 <code>restful</code> 的接口，增删改查等基本功能都基本类似。这里先暂时不再深入。</p>
+<h2 id="总结">总结</h2>
+<p>通过本节，我们学习到了 <code>kube-apiserver</code> 的基本工作逻辑，各类 API 请求先后通过认证，授权，准入控制等一系列环节后，进入到 <code>kube-apiserver</code> 的 <code>Registry</code> 进行相关逻辑处理。</p>
+<p>至于需要进行持久化或者需要与后端存储交互的部分，我们在下节会介绍 <code>etcd</code> 到时再看 K8S 是如何将后端存储抽象化，从 <code>etcd</code> v2 升级至 v3 的。</p>
+<p><code>kube-apiserver</code> 包含的东西有很多，当你在终端下执行 <code>./kube-apiserver -h</code> 时，会发现有大量的参数。</p>
+<p>这些参数除了认证，授权，准入控制相关功能外，还有审计，证书，存储等配置。主体功能、原理了解后，这些参数也就会比较容易配置了。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

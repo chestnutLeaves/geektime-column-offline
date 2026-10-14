@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>20 有状态应用的默认特性落地分析 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/index.html">Kubernetes 实践入门指南</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">25 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kubernetes 实践入门指南</strong><ul><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/00%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E8%A6%81%E5%AD%A6%E4%B9%A0%20Kubernetes%20%E6%8A%80%E6%9C%AF.html">00 为什么我们要学习 Kubernetes 技术</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/01%20%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%20Kubernetes%20%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6.html">01 重新认识 Kubernetes 的核心组件</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/02%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Kubernets%20%E7%9A%84%E7%BC%96%E6%8E%92%E5%AF%B9%E8%B1%A1.html">02 深入理解 Kubernets 的编排对象</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/03%20DevOps%20%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">03 DevOps 场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/04%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">04 微服务应用场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/05%20%E8%A7%A3%E5%86%B3%20K8s%20%E8%90%BD%E5%9C%B0%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA%E6%8F%90%E7%82%BC.html">05 解决 K8s 落地难题的方法论提炼</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/06%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E6%A0%B8%E5%BF%83%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86%E6%8E%8C%E6%8F%A1.html">06 练习篇：K8s 核心实践知识掌握</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/07%20%E5%AE%B9%E5%99%A8%E5%BC%95%E6%93%8E%20containerd%20%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">07 容器引擎 containerd 落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/08%20K8s%20%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7%20kubeadm%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">08 K8s 集群安装工具 kubeadm 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/09%20%E5%8D%97%E5%8C%97%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20IPVS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">09 南北向流量组件 IPVS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/10%20%E4%B8%9C%E8%A5%BF%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20Calico%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">10 东西向流量组件 Calico 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/11%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%20DNS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">11 服务发现 DNS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/12%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">12 练习篇：K8s 集群配置测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/13%20%E7%90%86%E8%A7%A3%E5%AF%B9%E6%96%B9%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AF%B9%E8%B1%A1%20Ingress%20%E5%92%8C%20Service.html">13 理解对方暴露服务的对象 Ingress 和 Service</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/14%20%E5%BA%94%E7%94%A8%E7%BD%91%E5%85%B3%20OpenResty%20%E5%AF%B9%E6%8E%A5%20K8s%20%E5%AE%9E%E8%B7%B5.html">14 应用网关 OpenResty 对接 K8s 实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/15%20Service%20%E5%B1%82%E5%BC%95%E6%B5%81%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">15 Service 层引流技术实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/16%20Cilium%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">16 Cilium 容器网络的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/17%20%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E7%9A%84%E4%BC%98%E9%9B%85%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E5%AE%9E%E8%B7%B5.html">17 应用流量的优雅无损切换实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/18%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9A%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E6%8A%80%E6%9C%AF%E6%B5%8B%E9%AA%8C.html">18 练习篇：应用流量无损切换技术测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/19%20%E4%BD%BF%E7%94%A8%20Rook%20%E6%9E%84%E5%BB%BA%E7%94%9F%E4%BA%A7%E5%8F%AF%E7%94%A8%E5%AD%98%E5%82%A8%E7%8E%AF%E5%A2%83%E5%AE%9E%E8%B7%B5.html">19 使用 Rook 构建生产可用存储环境实践</a></li><li><a class="active" aria-current="page" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/20%20%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8%E7%9A%84%E9%BB%98%E8%AE%A4%E7%89%B9%E6%80%A7%E8%90%BD%E5%9C%B0%E5%88%86%E6%9E%90.html">20 有状态应用的默认特性落地分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/21%20%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20MySQL%20%E9%9B%86%E7%BE%A4%E5%B7%A5%E5%85%B7%20Vitess%20%E5%AE%9E%E8%B7%B5%E5%88%86%E6%9E%90.html">21 案例：分布式 MySQL 集群工具 Vitess 实践分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/22%20%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%20PV%E3%80%81PVC%E3%80%81Storage%20Classes%20%E7%9A%84%E7%AE%A1%E7%90%86%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">22 存储对象 PV、PVC、Storage Classes 的管理落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/23%20K8s%20%E9%9B%86%E7%BE%A4%E4%B8%AD%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E7%81%BE%E5%A4%87%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">23 K8s 集群中存储对象灾备的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/24%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">24 练习篇：K8s 集群配置测验</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/20%20%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8%E7%9A%84%E9%BB%98%E8%AE%A4%E7%89%B9%E6%80%A7%E8%90%BD%E5%9C%B0%E5%88%86%E6%9E%90.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="20 有状态应用的默认特性落地分析" id="title">20 有状态应用的默认特性落地分析</h1>
+<div><p>一直以来跑在 Kubernetes 的应用都是无状态的应用，所有数据都是不落盘的，应用死掉之后，应用状态也不复存在，比如 Nginx 作为反向代理的场景。如果你的应用涉及业务逻辑，一般都会涉及把数据在本地放一份。如果应用实例死掉了可以再拉起一个新应用实例继续服务当前的连接请求。那么有状态应用在 Kubernetes 场景下又有哪些特性需要我们记住呢？请随着笔者的章节一步一步了解它。</p>
+<h3 id="statefulset-对象">StatefulSet 对象</h3>
+<p>当我们使用 Deployment 对象部署应用容器实例的时候，一定会注意到 Pod 实例后缀总是带有随机字符串，这是无状态应用区分实例的一种策略。现实应用中，对于分布式系统的编排，随机的字符串标识是无法应用的。它要求在启动 Pod 之前，就能明确标记应用实例，这个场景下 StatefulSet 对象应景而生。如下 Pod 例子中显示顺序索引如下：</p>
+<pre><code class="language-bash">kubectl get pods -l app=nginx
+NAME      READY     STATUS    RESTARTS   AGE
+web-0     1/1       Running   0          1m
+web-1     1/1       Running   0          1m
+
+</code></pre>
+<p>当你在终端中把所有 Pod 删掉后，StatefulSet 会自动重启它们：</p>
+<pre><code class="language-bash">kubectl delete pod -l app=nginx
+pod "web-0" deleted
+pod "web-1" deleted
+
+kubectl get pod -w -l app=nginx
+NAME      READY     STATUS              RESTARTS   AGE
+web-0     0/1       ContainerCreating   0          0s
+NAME      READY     STATUS    RESTARTS   AGE
+web-0     1/1       Running   0          2s
+web-1     0/1       Pending   0         0s
+web-1     0/1       Pending   0         0s
+web-1     0/1       ContainerCreating   0         0s
+web-1     1/1       Running   0         34s
+
+</code></pre>
+<p>使用 <code>kubectl exec</code> 和 <code>kubectl run</code> 查看 Pod 的主机名和集群内部的 DNS 项如下：</p>
+<pre><code class="language-bash">for i in 0 1; do kubectl exec web-$i -- sh -c 'hostname'; done
+web-0
+web-1
+
+kubectl run -i --tty --image busybox:1.28 dns-test --restart=Never --rm /bin/sh
+nslookup web-0.nginx
+Server:    10.0.0.10
+Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      web-0.nginx
+Address 1: 10.244.1.7
+
+nslookup web-1.nginx
+Server:    10.0.0.10
+Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      web-1.nginx
+Address 1: 10.244.2.8
+
+</code></pre>
+<p>Pod 的序号、主机名、SRV 条目和记录名称都没有改变，但和 Pod 相关联的 IP 地址却发生了变更。这个现象说明即使是有状态的容器实例，它的 IP 也是变化的。因为传统遗留的系统很多，很多遗留系统在迁到云原生平台的时候期望能固定 Pod IP，虽然从场景上来讲合理。但毕竟这是遗留系统的设计，它已经不是云原生架构推荐的设计方式了，所以默认 Kubernetes 是没有这个特性的。如果想支持这个特性，就需要在 CNI 上做好扩展才行。开源网络方案 Calico 就提供这种特性，请参考：</p>
+<pre><code># 配置 ipam
+cat /etc/cni/net.d/10-calico.conflist
+
+# 配置 ipam, 这个 cni plugin 将解析指定的注解来配置 IP
+        "ipam": {
+              "type": "calico-ipam"
+          },
+
+# 在 Pod 对象中加上注解
+annotations:
+      "cni.projectcalico.org/ipAddrs": "[\"192.168.0.1\"]"
+
+</code></pre>
+<p>以下是腾讯云提供的注解例子来支持固定 IP 特性：</p>
+<pre><code>apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    tke.cloud.tencent.com/enable-static-ip: "true"
+  labels:
+    k8s-app: busybox
+  name: busybox
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: busybox
+      qcloud-app: busybox
+  serviceName: ""
+  template:
+    metadata:
+      annotations:
+        tke.cloud.tencent.com/vpc-ip-claim-delete-policy: Never
+      creationTimestamp: null
+      labels:
+        k8s-app: busybox
+        qcloud-app: busybox
+    spec:
+      containers:
+      - args:
+        - "10000000000"
+        command:
+        - sleep
+        image: busybox
+        imagePullPolicy: Always
+        name: busybox
+        resources:
+          limits:
+            tke.cloud.tencent.com/eni-ip: "1"
+          requests:
+            tke.cloud.tencent.com/eni-ip: "1"
+
+</code></pre>
+<h3 id="有状态存储">有状态存储</h3>
+<p>StatefulSet 大部分情况下还会挂盘启动。因为 Kubernetes 从 1.13 版本开始已经全面拥抱 CSI 接口标准，默认流程主要是先创建 StorageClass, 然后使用 PersistentVolumeClaim 对象动态申请存储资源。底层 PersistentVolume 对象会驱动 StorageClass 调用指定的存储驱动来创建存储设备。因为每个存储驱动的设计复杂度也不太一样，建议读者可以先从 NFS 存储开始不断积累经验。</p>
+<p>很多读者误以为有了 StatefulSet 加上 PersistentVolume 之后，可以应对所有有状态应用的部署情况。我的实践经验分享是很多情况下，你需要针对每种应用的部署方式配置合适的特性才能真正保证有状态应用的运行。因为这种复杂度，所以业界才推出了 Operator 框架来为复杂的应用提供一键部署的管理控制器。你留心分解这些控制器后发现，它们无非是对 Pod 特性的拼装组合。所以不要被表明的例子所迷惑，对于有状态应用的部署，你需要详细了解架构布局的方式，然后在结合 Kubernetes 提供的特性来支持。</p>
+<p>默认情况下，Kubernetes 可以把 StatefulSet 的 Pods 部署在相同节点上，如果有两个服务并存于相同的节点上并且该节点发生故障时，你的服务就会受到影响。所以当你期望服务可以尽可能减少停服时间，就应该配置 podAntiAffinity。</p>
+<p>比如获取 zk Stateful Set 中的 Pods 的节点：</p>
+<pre><code class="language-bash">for i in 0 1 2; do kubectl get pod zk-$i --template {{.spec.nodeName}}; echo ""; done
+
+kubernetes-minion-group-cxpk
+kubernetes-minion-group-a5aq
+kubernetes-minion-group-2g2d
+
+</code></pre>
+<p>zk StatefulSe 中所有的 Pods 都被部署在不同的节点。</p>
+<p>这是因为 zk StatefulSet 中的 Pods 指定了 PodAntiAffinity：</p>
+<pre><code class="language-yaml">      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - zk
+              topologyKey: "kubernetes.io/hostname"
+
+</code></pre>
+<p>请灵活运用这个技巧来应对高容错的应用场景。</p>
+<h3 id="有状态更新策略">有状态更新策略</h3>
+<p>默认 StatefulSet 的更新策略是使用 spec.updateStrategy 字段进行配置。spec.updateStrategy.type 字段接受 OnDelete 或 RollingUpdate 作为值。默认 OnDelete 可防止控制器自动更新其 Pod。您必须手动删除 Pod，以使控制器创建新 Pod 来反映您的更改。另外一种策略是 RollingUpdate 实现 StatefulSet 中的 Pod 的自动滚动更新。RollingUpdate 使控制器删除并重新创建其每个 Pod，并且一次只能处理一个 Pod。在更新的 Pod 运行并就绪之后，控制器才会更新其上一个 Pod。StatefulSet 控制器以反向顺序更新所有 Pod，同时遵循 StatefulSet 保证规则。</p>
+<p>显然 RollingUpdate 默认更新策略需要很长时间才能更新完毕。如果需要更灵活的特性，可以借助开源的扩展插件来增强 StatefulSet 的特性，如采用 OpenKruise 调度器。其中我想介绍的一个特性就是原地升级的策略：In-Place Pod Update Strategy。</p>
+<pre><code class="language-yaml">apiVersion: apps.kruise.io/v1alpha1
+kind: StatefulSet
+spec:
+  # ...
+  podManagementPolicy: Parallel
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      podUpdatePolicy: InPlaceIfPossible
+      inPlaceUpdateStrategy:
+        gracePeriodSeconds: 10
+
+</code></pre>
+<p>StatefulSet 增加了 podUpdatePolicy 来允许用户指定重建升级还是原地升级。</p>
+<ul>
+<li>ReCreate：控制器会删除旧 Pod 和它的 PVC，然后用新版本重新创建出来。</li>
+<li>InPlaceIfPossible：控制器会优先尝试原地升级 Pod，如果不行再采用重建升级。目前，只有修改 <code>spec.template.metadata.*</code> 和 <code>spec.template.spec.containers[x].image</code> 这些字段才可以走原地升级。</li>
+<li>InPlaceOnly：控制器只允许采用原地升级。因此，用户只能修改上一条中的限制字段，如果尝试修改其他字段会被 Kruise 拒绝。</li>
+</ul>
+<p>我们在一套业务环境中更新最多的就是镜像版本，所以这个需求特别适合云原生体系中的日常应用运维操作。</p>
+<p><strong>更重要的是</strong>，使用 InPlaceIfPossible 或 InPlaceOnly 策略，必须要增加一个 InPlaceUpdateReady readinessGate，用来在原地升级的时候控制器将 Pod 设置为 NotReady。一个完整的案例参考：</p>
+<pre><code class="language-yaml">apiVersion: apps.kruise.io/v1alpha1
+kind: StatefulSet
+metadata:
+  name: sample
+spec:
+  replicas: 3
+  serviceName: fake-service
+  selector:
+    matchLabels:
+      app: sample
+  template:
+    metadata:
+      labels:
+        app: sample
+    spec:
+      readinessGates:
+         # A new condition that ensures the pod remains at NotReady state while the in-place update is happening
+      - conditionType: InPlaceUpdateReady
+      containers:
+      - name: main
+        image: nginx:alpine
+  podManagementPolicy: Parallel # allow parallel updates, works together with maxUnavailable
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # Do in-place update if possible, currently only image update is supported for in-place update
+      podUpdatePolicy: InPlaceIfPossible
+      # Allow parallel updates with max number of unavailable instances equals to 2
+      maxUnavailable: 2
+
+</code></pre>
+<p>OpenKruise 调度器还提供了很多其它对象的扩展，如果你有兴趣可以作为扩展去关注，这里不在赘述。</p>
+<h3 id="总结">总结</h3>
+<p>有状态应用一般都是多个不通类型的镜像组合而成的，不可能像 Nginx 一样只要构建一个镜像，然后使用 Deployment 对象就水平扩展了。在早期部署有状态应用的过程中，大家只看到了用 YAML 部署容器的便利性，并没有有效地认清楚 Kubernetes 的不足。虽然针对应用部署出来了 Helm 管理工具，但是仍然是针对单个应用的部署会简单很多，多个应用的部署例子基本上都是玩具类型的示范，不能当成生产可用的范例。从真实的运维场景出发，目前比较合适的生产范例，仍然需要采用 Operator 来自建自己的部署框架。当然，开源可参考的 Operator 也开始多了起来，这在一定程度上可以起到示范的作用。</p>
+<p>从有状态应用的特性出发，我们首先关心的标识唯一性，Kubernetes 是通过 StatefulSet 保证的。从应用健壮性来讲，一定要采用 PodAntiAffinity。更新策略默认是手工删除，滚动更新是串行一个一个更新，时间会很长。为了提高效率，可以采用开源扩展的调度器来增强业务可操作下，笔者认为原地更新的策略是当前最实用的一个策略。</p>
+<h3 id="参考文章">参考文章</h3>
+<ul>
+<li><a href="https://docs.projectcalico.org/networking/use-specific-ip" target="_blank">https://docs.projectcalico.org/networking/use-specific-ip</a></li>
+<li><a href="https://intl.cloud.tencent.com/zh/document/product/457/35249" target="_blank">https://intl.cloud.tencent.com/zh/document/product/457/35249</a></li>
+<li><a href="https://openkruise.io/zh-cn/docs/advanced_statefulset.html" target="_blank">https://openkruise.io/zh-cn/docs/advanced_statefulset.html</a></li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

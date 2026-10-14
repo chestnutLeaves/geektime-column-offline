@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>02 词法分析：用两种方式构造有限自动机 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">编译原理实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">53 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理实战课</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E8%BF%99%E9%97%A8%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE%EF%BC%9F.html">00 学习指南 如何学习这门编译原理实战课？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%9C%A8%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%AD%E6%B8%B8%E5%8E%86.html">00 开篇词 在真实世界的编译器中游历</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E7%BC%96%E8%AF%91%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B%E9%83%BD%E6%82%84%E6%82%84%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85%EF%BC%9F.html">01 编译的全过程都悄悄做了哪些事情？</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E7%94%A8%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9E%84%E9%80%A0%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA.html">02 词法分析：用两种方式构造有限自动机</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%9F%BA%E6%9C%AC%E5%8A%9F%E5%92%8C%E4%B8%A4%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF.html">03 语法分析：两个基本功和两种算法思路</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%9A%E8%AE%A9%E7%A8%8B%E5%BA%8F%E7%AC%A6%E5%90%88%E8%AF%AD%E4%B9%89%E8%A7%84%E5%88%99.html">04 语义分析：让程序符合语义规则</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%BD%A0%E6%9C%89%E5%8F%91%E8%A8%80%E6%9D%83.html">05 运行时机制：程序如何运行，你有发言权</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E4%B8%8D%E6%98%AF%E5%8F%AA%E6%9C%89%E4%B8%80%E5%89%AF%E9%9D%A2%E5%AD%94.html">06 中间代码：不是只有一副面孔</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E8%B7%9F%E7%BC%96%E8%AF%91%E5%99%A8%E5%81%9A%E6%9C%8B%E5%8F%8B%EF%BC%8C%E8%AE%A9%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E9%A3%9E%E8%B5%B7%E6%9D%A5.html">07 代码优化：跟编译器做朋友，让你的代码飞起来</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%9F.html">08 代码生成：如何实现机器相关的优化？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/09%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%89%8B%E5%86%99%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%EF%BC%9F.html">09 Java编译器（一）：手写的编译器有什么优势？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/10%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%BF%98%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Java编译器（二）：语法分析之后，还要做些什么？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/11%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%B1%9E%E6%80%A7%E5%88%86%E6%9E%90%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90.html">11 Java编译器（三）：属性分析和数据流分析</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/12%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%8E%BB%E9%99%A4%E8%AF%AD%E6%B3%95%E7%B3%96%E5%92%8C%E7%94%9F%E6%88%90%E5%AD%97%E8%8A%82%E7%A0%81.html">12 Java编译器（四）：去除语法糖和生成字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/13%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%8A%A8%E6%89%8B%E4%BF%AE%E6%94%B9Graal%E7%BC%96%E8%AF%91%E5%99%A8.html">13 Java JIT编译器（一）：动手修改Graal编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/14%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASea%20of%20Nodes%E4%B8%BA%E4%BD%95%E5%A6%82%E6%AD%A4%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">14 Java JIT编译器（二）：Sea of Nodes为何如此强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/15%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%8E%A2%E7%A9%B6%E5%86%85%E8%81%94%E5%92%8C%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%E7%9A%84%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86.html">15 Java JIT编译器（三）：探究内联和逃逸分析的算法原理</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/16%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9AGraal%E7%9A%84%E5%90%8E%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">16 Java JIT编译器（四）：Graal的后端是如何工作的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/17%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">17 Python编译器（一）：如何用工具生成编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/18%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E4%BB%8EAST%E5%88%B0%E5%AD%97%E8%8A%82%E7%A0%81.html">18 Python编译器（二）：从AST到字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/19%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6.html">19 Python编译器（三）：运行时机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/20%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E6%9E%90%E5%92%8C%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.html">20 JavaScript编译器（一）：V8的解析和编译过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/21%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E9%87%8A%E5%99%A8%E5%92%8C%E4%BC%98%E5%8C%96%E7%BC%96%E8%AF%91%E5%99%A8.html">21 JavaScript编译器（二）：V8的解释器和优化编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/22%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E6%80%A7%E8%83%BD%E5%BE%88%E9%AB%98%EF%BC%9F.html">22 Julia编译器（一）：如何让动态语言性能很高？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/23%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8LLVM%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E5%90%8E%E7%AB%AF%E5%8A%9F%E8%83%BD%EF%BC%9F.html">23 Julia编译器（二）：如何利用LLVM的优化和后端功能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/24%20Go%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A%E6%8A%8A%E5%AE%83%E5%BD%93%E4%BD%9C%E6%95%99%E7%A7%91%E4%B9%A6%E5%90%A7.html">24 Go语言编译器：把它当作教科书吧</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/25%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%A7%A3%E6%9E%90%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.html">25 MySQL编译器（一）：解析一条SQL语句的执行过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/26%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E5%A6%82%E4%BD%95%E5%B8%AE%E4%BD%A0%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%A7%E8%83%BD%EF%BC%9F.html">26 MySQL编译器（二）：编译技术如何帮你提升数据库性能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E8%AF%BE%E5%89%8D%E5%AF%BC%E8%AF%BB%EF%BC%9A%E5%AD%A6%E4%B9%A0%E7%8E%B0%E4%BB%A3%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF.html">27 课前导读：学习现代语言设计的正确姿势</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%89%8D%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E4%B9%9F%E6%9C%89%E4%BA%BA%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%AD%A6.html">28 前端总结：语言设计也有人机工程学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E4%B8%AD%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%8D%E9%81%97%E4%BD%99%E5%8A%9B%E5%9C%B0%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96.html">29 中端总结：不遗余力地进行代码优化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E5%85%85%E5%88%86%E5%8F%91%E6%8C%A5%E7%A1%AC%E4%BB%B6%E7%9A%84%E8%83%BD%E5%8A%9B.html">30 后端总结：充分发挥硬件的能力</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E0%E5%88%B0%E8%AF%AD%E8%A8%80%E7%BA%A7%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96.html">31 运行时（一）：从0到语言级的虚拟化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/32%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E6%80%A7%E6%9C%89%E5%85%B3%E5%90%97%EF%BC%9F.html">32 运行时（二）：垃圾收集与语言的特性有关吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">33 并发中的编译技术（一）：如何从语言层面支持线程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E5%8D%8F%E7%A8%8B%EF%BC%9F.html">34 并发中的编译技术（二）：如何从语言层面支持协程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/35%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9AErlang%E8%AF%AD%E8%A8%80%E5%8E%89%E5%AE%B3%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">35 并发中的编译技术（三）：Erlang语言厉害在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/36%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">36 高级特性（一）：揭秘元编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">37 高级特性（二）：揭秘泛型编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%9F.html">38 综合实现（一）：如何实现面向对象编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%9F.html">39 综合实现（二）：如何实现函数式编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/40%20%E6%88%90%E6%9E%9C%E6%A3%80%E9%AA%8C%EF%BC%9A%E6%96%B9%E8%88%9F%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%BC%98%E5%8A%BF%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">40 成果检验：方舟编译器的优势在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%901%20%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E9%9C%80%E8%A6%81%E4%BD%A0%E6%88%91%E5%85%B7%E5%A4%87%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%B4%A0%E8%B4%A8%EF%BC%9F.html">不定期加餐1 远程办公，需要你我具备什么样的素质？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%902%20%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%98%AF%E8%AE%AD%E7%BB%83%E5%BF%83%E7%90%86%E7%B4%A0%E8%B4%A8%E7%9A%84%E8%BF%87%E7%A8%8B.html">不定期加餐2 学习技术的过程，其实是训练心理素质的过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%903%20%E8%BF%99%E5%87%A0%E5%B9%B4%EF%BC%8C%E6%89%93%E5%8A%A8%E6%88%91%E7%9A%84%E4%B8%A4%E6%9C%AC%E5%A5%BD%E4%B9%A6.html">不定期加餐3 这几年，打动我的两本好书</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%904%20%E4%BB%8E%E8%BA%AB%E8%BE%B9%E7%9A%84%E7%89%9B%E4%BA%BA%E8%BA%AB%E4%B8%8A%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E7%A7%80%E5%93%81%E8%B4%A8.html">不定期加餐4 从身边的牛人身上，我学到的一些优秀品质</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%905%20%E5%80%9F%E5%8A%A9%E5%AE%9E%E4%BE%8B%EF%BC%8C%E6%8E%A2%E7%A9%B6C%2B%2B%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6.html">不定期加餐5 借助实例，探究C++编译器的内部机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%88%92%E9%87%8D%E7%82%B9%207%E7%A7%8D%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">划重点 7种编译器的核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%9C%9F%E6%9C%AB%E7%AD%94%E7%96%91%E4%B8%8E%E6%80%BB%E7%BB%93%20%E5%86%8D%E6%AC%A1%E5%AE%A1%E8%A7%86%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%9A%84%E4%BD%9C%E7%94%A8.html">期末答疑与总结 再次审视学习编译原理的作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%20%E5%A6%82%E4%BD%95%E5%90%83%E9%80%8F7%E7%A7%8D%E7%9C%9F%E5%AE%9E%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">热点问题答疑 如何吃透7种真实的编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%98%93%E6%98%8A%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8D%E6%AD%A2%E6%9C%89Bug%E5%92%8C%E5%8A%A0%E7%8F%AD%EF%BC%8C%E8%BF%98%E6%9C%89%E8%AF%97%E5%92%8C%E8%BF%9C%E6%96%B9.html">用户故事 易昊：程序员不止有Bug和加班，还有诗和远方</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%9F%A5%E8%AF%86%E5%9C%B0%E5%9B%BE%20%E4%B8%80%E8%B5%B7%E6%9D%A5%E5%A4%8D%E4%B9%A0%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">知识地图 一起来复习编译技术核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%AE%9E%E6%88%98%E6%98%AF%E5%94%AF%E4%B8%80%E6%A0%87%E5%87%86%EF%BC%81.html">结束语 实战是唯一标准！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E7%94%A8%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9E%84%E9%80%A0%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="02 词法分析：用两种方式构造有限自动机" id="title">02 词法分析：用两种方式构造有限自动机</h1>
+<div><p>你好，我是宫文学。</p>
+<p>上一讲，我带你把整个编译过程走了一遍。这样，你就知道了编译过程的整体步骤，每一步是做什么的，以及为什么要这么做。</p>
+<p>进一步地，你就可以研究一下每个环节具体是如何实现的、有哪些难点、有哪些理论和算法。通过这个过程，你不仅可以了解每个环节的原理，还能熟悉一些专有词汇。这样一来，你在读编译原理领域的相关资料时，就会更加顺畅了。</p>
+<p>不过，编译过程中涉及的算法和原理有些枯燥，所以我会用尽量通俗、直观的方式来给你解读，让你更容易接受。</p>
+<p>本讲，我主要跟你讨论一下词法分析（Lexical Analysis）这个环节。通过这节课，你可以掌握词法分析这个阶段是如何把字符串识别成一个个Token的。进而，你还会学到如何实现一个正则表达式工具，从而实现任意的词法解析。</p>
+<h2 id="词法分析的原理">词法分析的原理</h2>
+<p>首先，我们来了解一下词法分析的原理。</p>
+<p>通过上一讲，你已经很熟悉词法分析的任务了：输入的是字符串，输出的是Token串。所以，词法分析器在英文中一般叫做Tokenizer。</p>
+<p><img alt="" src="/assets/24f93b862c81169b94d3a150.jpg"/></p>
+<p>图1：把字符串转换为Token（注意：其中的空白字符，代表空格、tab、回车和换行符，EOF是文件结束符）</p>
+<p>但具体如何实现呢？这里要有一个计算模型，叫做<strong>有限自动机</strong>（Finite-state Automaton，FSA），或者叫做有限状态自动机（Finite-state Machine，FSM）。</p>
+<p>有限自动机这个名字，听上去可能比较陌生。但大多数程序员，肯定都接触过另一个词：<strong>状态机</strong>。假设你要做一个电商系统，那么订单状态的迁移，就是一个状态机。</p>
+<p><img alt="" src="/assets/515597a0159ac703b32e05bd.jpg"/></p>
+<p>图2：状态机的例子（订单的状态和迁移过程）</p>
+<p>有限自动机就是这样的状态机，它的状态数量是有限的。当它收到一个新字符的时候，会导致状态的迁移。比如说，下面的这个状态机能够区分标识符和数字字面量。</p>
+<p><img alt="" src="/assets/10f356db8c601af4eda61fa0.jpg"/></p>
+<p>图3：一个能够识别标识符和数字字面量的有限自动机</p>
+<p>在这样一个状态机里，我用单线圆圈表示临时状态，双线圆圈表示接受状态。接受状态就是一个合格的Token，比如图3中的状态1（数字字面量）和状态2（标识符）。当这两个状态遇到空白字符的时候，就可以记下一个Token，并回到初始态（状态0），开始识别其他Token。</p>
+<p>可以看出，<strong>词法分析的过程，其实就是对一个字符串进行模式匹配的过程。</strong>说起字符串的模式匹配，你能想到什么工具吗？对的，<strong>正则表达式工具</strong>。</p>
+<p>大多数语言，以及一些操作系统的命令，都带有正则表达式工具，来帮助你匹配合适的字符串。比如下面的这个Linux命令，可以用来匹配所有包含“sa”“sb” … “sh”字符串的进程。</p>
+<pre><code>ps -ef | grep 's[a-h]'
+</code></pre>
+<p>在这个命令里，“<strong>s[a-h]</strong>”是用来描述匹配规则的，我们把它叫做一个<strong>正则表达式</strong>。</p>
+<p>同样地，正则表达式也可以用来描述词法规则。这种描述方法，我们叫做<strong>正则文法</strong>（Regular Grammar）。比如，数字字面量和标识符的正则文法描述是这样的：</p>
+<pre><code>IntLiteral : [0-9]+;          //至少有一个数字
+Id : [A-Za-z][A-Za-z0-9]*;    //以字母开头，后面可以是字符或数字
+</code></pre>
+<p>与普通的正则表达式工具不同的是，词法分析器要用到很多个词法规则，每个词法规则都采用<strong>“Token类型: 正则表达式”</strong>这样一种格式，用于匹配一种Token。</p>
+<p>然而，当我们采用了多条词法规则的时候，有可能会出现词法规则冲突的情况。比如说，int关键字其实也是符合标识符的词法规则的。</p>
+<pre><code>Int : int;   //int关键字
+For : for;   //for关键字
+Id : [A-Za-z][A-Za-z0-9]*; //以字母开头，后面可以是字符或数字
+</code></pre>
+<p>所以，词法规则里面要有优先级，比如排在前面的词法规则优先级更高。这样的话，我们就能够设计出区分int关键字和标识符的有限自动机了，可以画成下面的样子。其中，状态1、2和3都是标识符，而状态4则是int关键字。</p>
+<p><img alt="" src="/assets/42db9bb25b7c8ec758955968.jpg"/></p>
+<p>图4：一个能够识别int关键字和标识符的有限自动机</p>
+<h2 id="从正则表达式生成有限自动机">从正则表达式生成有限自动机</h2>
+<p>现在，你已经了解了如何构造有限自动机，以及如何处理词法规则的冲突。基本上，你就可以按照上面的思路来手写词法分析器了。但你可能觉得，这样手写词法分析器的步骤太繁琐了，<strong>我们能否只写出词法规则，就自动生成相对应的有限自动机呢？</strong></p>
+<p>当然是可以的，实际上，正则表达式工具就是这么做的。此外，词法分析器生成工具lex（及GNU版本的flex）也能够基于规则自动生成词法分析器。</p>
+<p>它的具体实现思路是这样的：<strong>把一个正则表达式翻译成NFA，然后把NFA转换成DFA。</strong>对不起，我这里又引入了两个新的术语：NFA和DFA。</p>
+<p>先说说<strong>DFA</strong>，它是“Deterministic Finite Automaton”的缩写，即<strong>确定的有限自动机</strong>。它的特点是：该状态机在任何一个状态，基于输入的字符，都能做一个确定的状态转换。前面例子中的有限自动机，都属于DFA。</p>
+<p>再说说<strong>NFA</strong>，它是“Nondeterministic Finite Automaton”的缩写，即<strong>不确定的有限自动机</strong>。它的特点是：该状态机中存在某些状态，针对某些输入，不能做一个确定的转换。</p>
+<p>这又细分成两种情况：</p>
+<ol>
+<li>对于一个输入，它有两个状态可以转换。</li>
+<li>存在ε转换的情况，也就是没有任何字符输入的情况下，NFA也可以从一个状态迁移到另一个状态。</li>
+</ol>
+<p>比如，“a[a-zA-Z0-9]*bc”这个正则表达式，对字符串的要求是以a开头，以bc结尾，a和bc之间可以有任意多个字母或数字。可以看到，在图5中，状态1的节点输入b时，这个状态是有两条路径可以选择的：一条是迁移到状态2，另一条是仍然保持在状态1。所以，这个有限自动机是一个NFA。</p>
+<p><img alt="" src="/assets/7b6e3aa1714f6eeb24bc91ab.jpg"/></p>
+<p>图5：一个NFA的例子，识别“a[a-zA-Z0-9]*bc”的自动机</p>
+<p>这个NFA还有引入ε转换的画法，如图6所示，它跟图5的画法是等价的。实际上，图6表示的NFA可以用我们下面马上要讲到的算法，通过正则表达式自动生成出来。</p>
+<p><img alt="" src="/assets/3abbd50df0608cc93eae28ce.jpg"/></p>
+<p>图6：另一个NFA的例子，同样能识别“a[a-zA-Z0-9]*bc”，其中有ε转换</p>
+<p>需要注意的是，无论是NFA还是DFA，都等价于正则表达式。也就是说，<strong>所有的正则表达式都能转换成NFA或DFA；而所有的NFA或DFA，也都能转换成正则表达式。</strong></p>
+<p>理解了NFA和DFA以后，接下来我再大致说一下算法。</p>
+<p>首先，一个正则表达式可以机械地翻译成一个NFA。它的翻译方法如下：</p>
+<ul>
+<li><strong>识别字符i的NFA。</strong></li>
+</ul>
+<p>当接受字符i的时候，引发一个转换，状态图的边上标注i。其中，第一个状态（i，initial）是初始状态，第二个状态(f，final)是接受状态。</p>
+<p><img alt="" src="/assets/32d18d1947048c593041238c.jpg"/></p>
+<p>图7：识别i的NFA</p>
+<ul>
+<li><strong>转换“s|t”这样的正则表达式。</strong></li>
+</ul>
+<p>它的意思是，或者s，或者t，二者选一。s和t本身是两个子表达式，我们可以增加两个新的状态：开始状态和接受状态。然后，用ε转换分别连接代表s和t的子图。它的含义也比较直观，要么走上面这条路径，那就是s，要么走下面这条路径，那就是t：</p>
+<p><img alt="" src="/assets/856a7cc6caeb94dea2de3e8a.jpg"/></p>
+<p>图8：识别s|t的NFA</p>
+<ul>
+<li><strong>转换“st”这样的正则表达式。</strong></li>
+</ul>
+<p>s之后接着出现t，转换规则是把s的开始状态变成st整体的开始状态，把t的结束状态变成st整体的结束状态，并且把s的结束状态和t的开始状态合二为一。这样就把两个子图衔接了起来，走完s接着走t。</p>
+<p><img alt="" src="/assets/2f440b82047c63e53dd74955.jpg"/></p>
+<p>图9：识别st的NFA</p>
+<ul>
+<li><strong>对于“?”“*”和“+”这样的符号，它们的意思是可以重复0次、0到多次、1到多次，转换时要增加额外的状态和边</strong>。以“s*”为例，我们可以做下面的转换：</li>
+</ul>
+<p><img alt="" src="/assets/086c8ad20650b78c979c29fe.jpg"/></p>
+<p>图10：识别s*的NFA</p>
+<p>你能看出，它可以从i直接到f，也就是对s匹配0次，也可以在s的起止节点上循环多次。</p>
+<p>如果是“s+”，那就没有办法跳过s，s至少要经过一次：</p>
+<p><img alt="" src="/assets/cdb4569b4151cf14d1bdd9af.jpg"/></p>
+<p>图11：识别s+的NFA</p>
+<p>通过这样的转换，所有的正则表达式，都可以转换为一个NFA。</p>
+<p>基于NFA，你仍然可以实现一个词法分析器，只不过算法会跟基于DFA的不同：当某个状态存在一条以上的转换路径的时候，你要先尝试其中的一条；如果匹配不上，再退回来，尝试其他路径。这种试探不成功再退回来的过程，叫做<strong>回溯（Backtracking）</strong>。</p>
+<p>小提示：下一讲的<strong>递归下降算法</strong>里，也会出现回溯现象，你可以对照着理解。</p>
+<p>基于NFA，你也可以写一个正则表达式工具。实际上，我在示例程序中已经写了一个简单的正则表达式工具，使用了<a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/lab/16-18/src/main/java/play/parser/Regex.java" target="_blank">Regex.java</a>中的<strong>regexToNFA方法</strong>。如下所示，我用了一个测试用的正则表达式，它能识别int关键字、标识符和数字字面量。在示例程序中，这个正则表达式首先被表示为一个内部的树状数据结构，然后可以转换成NFA。</p>
+<pre><code>int | [a-zA-Z][a-zA-Z0-9]* | [0-9]*
+</code></pre>
+<p>示例程序也会将生成的NFA打印输出，下面的输出结果中列出了所有的状态，以及每个状态到其他状态的转换，比如“0 ε -&gt; 2”的意思是从状态0通过 ε 转换，到达状态2 ：</p>
+<pre><code>NFA states:
+0	ε -&gt; 2
+	ε -&gt; 8
+	ε -&gt; 14
+2	i -&gt; 3
+3	n -&gt; 5
+5	t -&gt; 7
+7	ε -&gt; 1
+1	(end)
+	acceptable
+8	[a-z]|[A-Z] -&gt; 9
+9	ε -&gt; 10
+	ε -&gt; 13
+10	[0-9]|[a-z]|[A-Z] -&gt; 11
+11	ε -&gt; 10
+	ε -&gt; 13
+13	ε -&gt; 1
+14	[0-9] -&gt; 15
+15	ε -&gt; 14
+	ε -&gt; 1
+</code></pre>
+<p>我用图片来直观展示一下输出结果，分为上、中、下三条路径，你能清晰地看出解析int关键字、标识符和数字字面量的过程：</p>
+<p><img alt="" src="/assets/d44bb7246fd34fc5652fea4b.jpg"/></p>
+<p>图12：由算法自动生成的NFA</p>
+<p><strong>那么生成NFA之后，我们要如何利用它，来识别某个字符串是否符合这个NFA代表的正则表达式呢？</strong></p>
+<p>还是以图12为例，当我们解析“intA”这个字符串时，首先选择最上面的路径进行匹配，匹配完int这三个字符以后，来到状态7，若后面没有其他字符，就可以到达接受状态1，返回匹配成功的信息。</p>
+<p><strong>可实际上，int后面是有A的，所以第一条路径匹配失败。</strong>失败之后不能直接返回“匹配失败”的结果，因为还有其他路径，所以我们要回溯到状态0，去尝试第二条路径，在第二条路径中，我们尝试成功了。</p>
+<p>运行Regex.java中的<strong>matchWithNFA()方法</strong>，你可以用NFA来做正则表达式的匹配。其中，在匹配“intA”时，你会看到它的回溯过程：</p>
+<pre><code>NFA matching: 'intA'
+trying state : 0, index =0
+trying state : 2, index =0    //先走第一条路径，即int关键字这个路径
+trying state : 3, index =1
+trying state : 5, index =2
+trying state : 7, index =3
+trying state : 1, index =3    //到了末尾，发现还有字符'A'没有匹配上
+trying state : 8, index =0    //回溯，尝试第二条路径，即标识符
+trying state : 9, index =1
+trying state : 10, index =1   //在10和11这里循环多次
+trying state : 11, index =2
+trying state : 10, index =2
+trying state : 11, index =3
+trying state : 10, index =3
+true
+</code></pre>
+<p><strong>从中你可以看到用NFA算法的特点</strong>：因为存在多条可能的路径，所以需要试探和回溯，在比较极端的情况下，回溯次数会非常多，性能会变得非常差。特别是当处理类似“s*”这样的语句时，因为s可以重复0到无穷次，所以在匹配字符串时，可能需要尝试很多次。</p>
+<p>NFA的运行可能导致大量的回溯，<strong>那么能否将NFA转换成DFA，让字符串的匹配过程更简单呢？</strong>如果能的话，那整个过程都可以自动化，从正则表达式到NFA，再从NFA到DFA。</p>
+<p>方法是有的，这个算法就是<strong>子集构造法</strong>。不过我这里就不展开介绍了，如果你想继续深入学习的话，可以去看看本讲最后给出的参考资料。</p>
+<p>总之，只要有了准确的正则表达式，是可以根据算法自动生成对字符串进行匹配的程序的，这就是正则表达式工具的基本原理，也是有些工具（比如ANTLR和flex）能够自动给你生成一个词法分析器的原理。</p>
+<h2 id="课程小结">课程小结</h2>
+<p>本讲涵盖了词法分析所涉及的主要知识点。词法分析跟你日常使用的正则表达式关系很密切，你可以用正则表达式来表示词法规则。</p>
+<p>在实际的编译器中，词法分析器一般都是手写的，依据的基本原理就是构造有限自动机。不过有一些地方也会用手工编码的方式做一些优化（如javac编译器），有些编译器会做用一些特别的技巧来提升解析速度（如JavaScript的V8编译器），你在后面的课程中会看到。</p>
+<p>基于正则表达式构造NFA，再去进行模式匹配，是一个很好的算法思路，它不仅仅可以用于做词法分析，其实还可以用于解决其他问题（比如做语法分析），值得你去做举一反三的思考。</p>
+<p><img alt="" src="/assets/f433108a5e5a01cddecff9f7.jpg"/></p>
+<h2 id="一课一思">一课一思</h2>
+<p>你可以试着写出识别整型字面量和浮点型字面量的词法规则，手工构造一个有限自动机。</p>
+<p>欢迎在留言区谈谈你的实践体会，也欢迎你把今天的内容分享给更多的朋友。</p>
+<h2 id="参考资料">参考资料</h2>
+<p>关于从NFA转DFA的算法，你可以参考_Compilers - Principles, Techniques &amp; Tools_（龙书，第2版）第3.7.1节，或者《编译原理之美》的<a href="https://time.geekbang.org/column/article/137286" target="_blank">第16讲</a>。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

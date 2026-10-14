@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>21 代码重复：搞定代码重复的三个绝招 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/index.html">Java 业务开发常见错误 100 例</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java 业务开发常见错误 100 例</strong><ul><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9C%9F%E7%9A%84%E4%BC%9A%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E5%9D%91%EF%BC%9F.html">00 开篇词 业务代码真的会有这么多坑？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/01%20%E4%BD%BF%E7%94%A8%E4%BA%86%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%BA%93%EF%BC%8C%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%B0%B1%E9%AB%98%E6%9E%95%E6%97%A0%E5%BF%A7%E4%BA%86%E5%90%97%EF%BC%9F.html">01 使用了并发工具类库，线程安全就高枕无忧了吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/02%20%E4%BB%A3%E7%A0%81%E5%8A%A0%E9%94%81%EF%BC%9A%E4%B8%8D%E8%A6%81%E8%AE%A9%E2%80%9C%E9%94%81%E2%80%9D%E4%BA%8B%E6%88%90%E4%B8%BA%E7%83%A6%E5%BF%83%E4%BA%8B.html">02 代码加锁：不要让“锁”事成为烦心事</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/03%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E6%9C%80%E5%B8%B8%E7%94%A8%E4%B9%9F%E6%9C%80%E5%AE%B9%E6%98%93%E7%8A%AF%E9%94%99%E7%9A%84%E7%BB%84%E4%BB%B6.html">03 线程池：业务代码最常用也最容易犯错的组件</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/04%20%E8%BF%9E%E6%8E%A5%E6%B1%A0%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%B8%AE%E4%BA%86%E5%80%92%E5%BF%99.html">04 连接池：别让连接池帮了倒忙</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/05%20HTTP%E8%B0%83%E7%94%A8%EF%BC%9A%E4%BD%A0%E8%80%83%E8%99%91%E5%88%B0%E8%B6%85%E6%97%B6%E3%80%81%E9%87%8D%E8%AF%95%E3%80%81%E5%B9%B6%E5%8F%91%E4%BA%86%E5%90%97%EF%BC%9F.html">05 HTTP调用：你考虑到超时、重试、并发了吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/06%202%E6%88%90%E7%9A%84%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9A%84Spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%8C%E5%8F%AF%E8%83%BD%E9%83%BD%E6%B2%A1%E5%A4%84%E7%90%86%E6%AD%A3%E7%A1%AE.html">06 2成的业务代码的Spring声明式事务，可能都没处理正确</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/07%20%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E5%B9%B6%E4%B8%8D%E6%98%AF%E4%B8%87%E8%83%BD%E8%8D%AF.html">07 数据库索引：索引并不是万能药</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/08%20%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98%EF%BC%9A%E7%A8%8B%E5%BA%8F%E9%87%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%BD%A0%E5%B0%B1%E6%98%AF%E4%BD%A0%EF%BC%9F.html">08 判等问题：程序里如何确定你就是你？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/09%20%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%EF%BC%9A%E6%B3%A8%E6%84%8F%E7%B2%BE%E5%BA%A6%E3%80%81%E8%88%8D%E5%85%A5%E5%92%8C%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98.html">09 数值计算：注意精度、舍入和溢出问题</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/10%20%E9%9B%86%E5%90%88%E7%B1%BB%EF%BC%9A%E5%9D%91%E6%BB%A1%E5%9C%B0%E7%9A%84List%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C.html">10 集合类：坑满地的List列表操作</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/11%20%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A%E7%9A%84null%E5%92%8C%E6%81%BC%E4%BA%BA%E7%9A%84%E7%A9%BA%E6%8C%87%E9%92%88.html">11 空值处理：分不清楚的null和恼人的空指针</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/12%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%87%AA%E5%B7%B1%E5%9C%A8%E5%87%BA%E9%97%AE%E9%A2%98%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%98%E4%B8%BA%E7%9E%8E%E5%AD%90.html">12 异常处理：别让自己在出问题的时候变为瞎子</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/13%20%E6%97%A5%E5%BF%97%EF%BC%9A%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95%E7%9C%9F%E6%B2%A1%E4%BD%A0%E6%83%B3%E8%B1%A1%E7%9A%84%E9%82%A3%E4%B9%88%E7%AE%80%E5%8D%95.html">13 日志：日志记录真没你想象的那么简单</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/14%20%E6%96%87%E4%BB%B6IO%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E6%AD%A3%E7%A1%AE%E7%9A%84%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%B9%B6%E9%9D%9E%E6%98%93%E4%BA%8B.html">14 文件IO：实现高效正确的文件读写并非易事</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/15%20%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9A%E4%B8%80%E6%9D%A5%E4%B8%80%E5%9B%9E%E4%BD%A0%E8%BF%98%E6%98%AF%E5%8E%9F%E6%9D%A5%E7%9A%84%E4%BD%A0%E5%90%97%EF%BC%9F.html">15 序列化：一来一回你还是原来的你吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/16%20%E7%94%A8%E5%A5%BDJava%208%E7%9A%84%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%EF%BC%8C%E5%B0%91%E8%B8%A9%E4%B8%80%E4%BA%9B%E2%80%9C%E8%80%81%E4%B8%89%E6%A0%B7%E2%80%9D%E7%9A%84%E5%9D%91.html">16 用好Java 8的日期时间类，少踩一些“老三样”的坑</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/17%20%E5%88%AB%E4%BB%A5%E4%B8%BA%E2%80%9C%E8%87%AA%E5%8A%A8%E6%8C%A1%E2%80%9D%E5%B0%B1%E4%B8%8D%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0OOM.html">17 别以为“自动挡”就不可能出现OOM</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/18%20%E5%BD%93%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E5%92%8C%E6%B3%9B%E5%9E%8B%E9%81%87%E5%88%B0OOP%E6%97%B6%EF%BC%8C%E4%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91%EF%BC%9F.html">18 当反射、注解和泛型遇到OOP时，会有哪些坑？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/19%20Spring%E6%A1%86%E6%9E%B6%EF%BC%9AIoC%E5%92%8CAOP%E6%98%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%A0%B8%E5%BF%83.html">19 Spring框架：IoC和AOP是扩展的核心</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/20%20Spring%E6%A1%86%E6%9E%B6%EF%BC%9A%E6%A1%86%E6%9E%B6%E5%B8%AE%E6%88%91%E4%BB%AC%E5%81%9A%E4%BA%86%E5%BE%88%E5%A4%9A%E5%B7%A5%E4%BD%9C%E4%B9%9F%E5%B8%A6%E6%9D%A5%E4%BA%86%E5%A4%8D%E6%9D%82%E5%BA%A6.html">20 Spring框架：框架帮我们做了很多工作也带来了复杂度</a></li><li><a class="active" aria-current="page" href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/21%20%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%EF%BC%9A%E6%90%9E%E5%AE%9A%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BB%9D%E6%8B%9B.html">21 代码重复：搞定代码重复的三个绝招</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/22%20%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%B3%BB%E7%BB%9F%E9%97%B4%E5%AF%B9%E8%AF%9D%E7%9A%84%E8%AF%AD%E8%A8%80%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%BB%9F%E4%B8%80.html">22 接口设计：系统间对话的语言，一定要统一</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/23%20%E7%BC%93%E5%AD%98%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%94%A6%E4%B8%8A%E6%B7%BB%E8%8A%B1%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%90%BD%E4%BA%95%E4%B8%8B%E7%9F%B3.html">23 缓存设计：缓存可以锦上添花也可以落井下石</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/24%20%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%86%99%E5%AE%8C%EF%BC%8C%E5%B0%B1%E6%84%8F%E5%91%B3%E7%9D%80%E7%94%9F%E4%BA%A7%E5%B0%B1%E7%BB%AA%E4%BA%86%EF%BC%9F.html">24 业务代码写完，就意味着生产就绪了？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/25%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E5%A5%BD%E7%94%A8%EF%BC%8C%E4%BD%86%E9%9D%9E%E5%B8%B8%E5%AE%B9%E6%98%93%E7%94%A8%E9%94%99.html">25 异步处理好用，但非常容易用错</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/26%20%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9ANoSQL%E4%B8%8ERDBMS%E5%A6%82%E4%BD%95%E5%8F%96%E9%95%BF%E8%A1%A5%E7%9F%AD%E3%80%81%E7%9B%B8%E8%BE%85%E7%9B%B8%E6%88%90%EF%BC%9F.html">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/27%20%E6%95%B0%E6%8D%AE%E6%BA%90%E5%A4%B4%EF%BC%9A%E4%BB%BB%E4%BD%95%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E4%B8%9C%E8%A5%BF%E9%83%BD%E4%B8%8D%E5%8F%AF%E4%BF%A1%E4%BB%BB.html">27 数据源头：任何客户端的东西都不可信任</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/28%20%E5%AE%89%E5%85%A8%E5%85%9C%E5%BA%95%EF%BC%9A%E6%B6%89%E5%8F%8A%E9%92%B1%E6%97%B6%EF%BC%8C%E5%BF%85%E9%A1%BB%E8%80%83%E8%99%91%E9%98%B2%E5%88%B7%E3%80%81%E9%99%90%E9%87%8F%E5%92%8C%E9%98%B2%E9%87%8D.html">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/29%20%E6%95%B0%E6%8D%AE%E5%92%8C%E4%BB%A3%E7%A0%81%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%B0%B1%E6%98%AF%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%B0%B1%E6%98%AF%E4%BB%A3%E7%A0%81.html">29 数据和代码：数据就是数据，代码就是代码</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/30%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E4%BC%A0%E8%BE%93%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%EF%BC%9F.html">30 如何正确保存和传输敏感数据？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/31%20%E5%8A%A0%E9%A4%901%EF%BC%9A%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E8%AF%BE%E7%A8%8B%E4%B8%ADJava%208%E7%9A%84%E9%82%A3%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E4%B8%80%EF%BC%89.html">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/32%20%E5%8A%A0%E9%A4%902%EF%BC%9A%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E8%AF%BE%E7%A8%8B%E4%B8%ADJava%208%E7%9A%84%E9%82%A3%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E4%BA%8C%EF%BC%89.html">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/33%20%E5%8A%A0%E9%A4%903%EF%BC%9A%E5%AE%9A%E4%BD%8D%E5%BA%94%E7%94%A8%E9%97%AE%E9%A2%98%EF%BC%8C%E6%8E%92%E9%94%99%E5%A5%97%E8%B7%AF%E5%BE%88%E9%87%8D%E8%A6%81.html">33 加餐3：定位应用问题，排错套路很重要</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/34%20%E5%8A%A0%E9%A4%904%EF%BC%9A%E5%88%86%E6%9E%90%E5%AE%9A%E4%BD%8DJava%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E5%A5%BD%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89.html">34 加餐4：分析定位Java问题，一定要用好这些工具（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/35%20%E5%8A%A0%E9%A4%905%EF%BC%9A%E5%88%86%E6%9E%90%E5%AE%9A%E4%BD%8DJava%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E5%A5%BD%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89.html">35 加餐5：分析定位Java问题，一定要用好这些工具（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/36%20%E5%8A%A0%E9%A4%906%EF%BC%9A%E8%BF%9915%E5%B9%B4%E6%9D%A5%EF%BC%8C%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E5%92%8C%E8%8B%B1%E8%AF%AD%E7%9A%84%EF%BC%9F.html">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/37%20%E5%8A%A0%E9%A4%907%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E6%88%90%E9%95%BF28%E8%AE%A1.html">37 加餐7：程序员成长28计</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/38%20%E5%8A%A0%E9%A4%908%EF%BC%9AJava%E7%A8%8B%E5%BA%8F%E4%BB%8E%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%81%E7%A7%BB%E5%88%B0Kubernetes%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91.html">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%B8%80%EF%BC%89.html">答疑篇：代码篇思考题集锦（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%B8%89%EF%BC%89.html">答疑篇：代码篇思考题集锦（三）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%BA%8C%EF%BC%89.html">答疑篇：代码篇思考题集锦（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%8A%A0%E9%A4%90%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：加餐篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%AE%89%E5%85%A8%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：安全篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E8%AE%BE%E8%AE%A1%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：设计篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%86%99%E4%BB%A3%E7%A0%81%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E5%B0%BD%E9%87%8F%E9%81%BF%E5%85%8D%E8%B8%A9%E5%9D%91%EF%BC%9F.html">结束语 写代码时，如何才能尽量避免踩坑？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/21%20%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%EF%BC%9A%E6%90%9E%E5%AE%9A%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BB%9D%E6%8B%9B.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="21 代码重复：搞定代码重复的三个绝招" id="title">21 代码重复：搞定代码重复的三个绝招</h1>
+<div><p>今天，我来和你聊聊搞定代码重复的三个绝招。</p>
+<p>业务同学抱怨业务开发没有技术含量，用不到设计模式、Java 高级特性、OOP，平时写代码都在堆 CRUD，个人成长无从谈起。每次面试官问到“请说说平时常用的设计模式”，都只能答单例模式，因为其他设计模式的确是听过但没用过；对于反射、注解之类的高级特性，也只是知道它们在写框架的时候非常常用，但自己又不写框架代码，没有用武之地。</p>
+<p>其实，我认为不是这样的。设计模式、OOP 是前辈们在大型项目中积累下来的经验，通过这些方法论来改善大型项目的可维护性。反射、注解、泛型等高级特性在框架中大量使用的原因是，框架往往需要以同一套算法来应对不同的数据结构，而这些特性可以帮助减少重复代码，提升项目可维护性。</p>
+<p>在我看来，可维护性是大型项目成熟度的一个重要指标，而提升可维护性非常重要的一个手段就是减少代码重复。那为什么这样说呢？</p>
+<p>如果多处重复代码实现完全相同的功能，很容易修改一处忘记修改另一处，造成 Bug；</p>
+<p>有一些代码并不是完全重复，而是相似度很高，修改这些类似的代码容易改（复制粘贴）错，把原本有区别的地方改为了一样。</p>
+<p>今天，我就从业务代码中最常见的三个需求展开，和你聊聊如何使用 Java 中的一些高级特性、设计模式，以及一些工具消除重复代码，才能既优雅又高端。通过今天的学习，也希望改变你对业务代码没有技术含量的看法。</p>
+<h2 id="利用工厂模式-模板方法模式-消除-if-else-和重复代码">利用工厂模式 + 模板方法模式，消除 if…else 和重复代码</h2>
+<p>假设要开发一个购物车下单的功能，针对不同用户进行不同处理：</p>
+<p>普通用户需要收取运费，运费是商品价格的 10%，无商品折扣；</p>
+<p>VIP 用户同样需要收取商品价格 10% 的快递费，但购买两件以上相同商品时，第三件开始享受一定折扣；</p>
+<p>内部用户可以免运费，无商品折扣。</p>
+<p>我们的目标是实现三种类型的购物车业务逻辑，把入参 Map 对象（Key 是商品 ID，Value 是商品数量），转换为出参购物车类型 Cart。</p>
+<p>先实现针对普通用户的购物车处理逻辑：</p>
+<pre><code class="language-java">//购物车
+@Data
+public class Cart {
+
+    //商品清单
+    private List&lt;Item&gt; items = new ArrayList&lt;&gt;();
+    
+    //总优惠
+    private BigDecimal totalDiscount;
+
+    //商品总价
+    private BigDecimal totalItemPrice;
+
+    //总运费
+    private BigDecimal totalDeliveryPrice;
+
+    //应付总价
+    private BigDecimal payPrice;
+
+}
+
+//购物车中的商品
+@Data
+public class Item {
+
+    //商品ID
+    private long id;
+
+    //商品数量
+    private int quantity;
+
+    //商品单价
+    private BigDecimal price;
+
+    //商品优惠
+    private BigDecimal couponPrice;
+
+    //商品运费
+    private BigDecimal deliveryPrice;
+
+}
+
+//普通用户购物车处理
+public class NormalUserCart {
+
+    public Cart process(long userId, Map&lt;Long, Integer&gt; items) {
+        Cart cart = new Cart();
+        //把Map的购物车转换为Item列表
+        List&lt;Item&gt; itemList = new ArrayList&lt;&gt;();
+        items.entrySet().stream().forEach(entry -&gt; {
+            Item item = new Item();
+            item.setId(entry.getKey());
+            item.setPrice(Db.getItemPrice(entry.getKey()));
+            item.setQuantity(entry.getValue());
+            itemList.add(item);
+        });
+        cart.setItems(itemList);
+        //处理运费和商品优惠
+        itemList.stream().forEach(item -&gt; {
+            //运费为商品总价的10%
+            item.setDeliveryPrice(item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())).multiply(new BigDecimal("0.1")));
+            //无优惠
+            item.setCouponPrice(BigDecimal.ZERO);
+        });
+
+        //计算商品总价
+        cart.setTotalItemPrice(cart.getItems().stream().map(item -&gt; item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()))).reduce(BigDecimal.ZERO, BigDecimal::add));
+
+        //计算运费总价
+        cart.setTotalDeliveryPrice(cart.getItems().stream().map(Item::getDeliveryPrice).reduce(BigDecimal.ZERO, BigDecimal::add));
+
+        //计算总优惠
+        cart.setTotalDiscount(cart.getItems().stream().map(Item::getCouponPrice).reduce(BigDecimal.ZERO, BigDecimal::add));
+
+        //应付总价=商品总价+运费总价-总优惠
+        cart.setPayPrice(cart.getTotalItemPrice().add(cart.getTotalDeliveryPrice()).subtract(cart.getTotalDiscount()));
+        return cart;
+    }
+}
+</code></pre>
+<p>然后实现针对 VIP 用户的购物车逻辑。与普通用户购物车逻辑的不同在于，VIP 用户能享受同类商品多买的折扣。所以，这部分代码只需要额外处理多买折扣部分：</p>
+<pre><code class="language-java">public class VipUserCart {
+    public Cart process(long userId, Map&lt;Long, Integer&gt; items) {
+        ...
+
+        itemList.stream().forEach(item -&gt; {
+
+            //运费为商品总价的10%
+            item.setDeliveryPrice(item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())).multiply(new BigDecimal("0.1")));
+            //购买两件以上相同商品，第三件开始享受一定折扣
+            if (item.getQuantity() &gt; 2) {
+                item.setCouponPrice(item.getPrice()
+                        .multiply(BigDecimal.valueOf(100 - Db.getUserCouponPercent(userId)).divide(new BigDecimal("100")))
+                       .multiply(BigDecimal.valueOf(item.getQuantity() - 2)));
+            } else {
+                item.setCouponPrice(BigDecimal.ZERO);
+            }
+        });
+        ...
+        return cart;
+    }
+}
+</code></pre>
+<p>最后是免运费、无折扣的内部用户，同样只是处理商品折扣和运费时的逻辑差异：</p>
+<pre><code class="language-java">public class InternalUserCart {
+
+    public Cart process(long userId, Map&lt;Long, Integer&gt; items) {
+        ...
+        itemList.stream().forEach(item -&gt; {
+            //免运费
+            item.setDeliveryPrice(BigDecimal.ZERO);
+            //无优惠
+            item.setCouponPrice(BigDecimal.ZERO);
+        });
+        ...
+        return cart;
+    }
+}
+</code></pre>
+<p>对比一下代码量可以发现，三种购物车 70% 的代码是重复的。原因很简单，虽然不同类型用户计算运费和优惠的方式不同，但整个购物车的初始化、统计总价、总运费、总优惠和支付价格的逻辑都是一样的。</p>
+<p>正如我们开始时提到的，代码重复本身不可怕，可怕的是漏改或改错。比如，写 VIP 用户购物车的同学发现商品总价计算有 Bug，不应该是把所有 Item 的 price 加在一起，而是应该把所有 Item 的 price*quantity 加在一起。这时，他可能会只修改 VIP 用户购物车的代码，而忽略了普通用户、内部用户的购物车中，重复的逻辑实现也有相同的 Bug。</p>
+<p>有了三个购物车后，我们就需要根据不同的用户类型使用不同的购物车了。如下代码所示，使用三个 if 实现不同类型用户调用不同购物车的 process 方法：</p>
+<pre><code class="language-java">@GetMapping("wrong")
+public Cart wrong(@RequestParam("userId") int userId) {
+
+    //根据用户ID获得用户类型
+    String userCategory = Db.getUserCategory(userId);
+
+    //普通用户处理逻辑
+    if (userCategory.equals("Normal")) {
+        NormalUserCart normalUserCart = new NormalUserCart();
+        return normalUserCart.process(userId, items);
+    }
+
+    //VIP用户处理逻辑
+    if (userCategory.equals("Vip")) {
+        VipUserCart vipUserCart = new VipUserCart();
+        return vipUserCart.process(userId, items);
+    }
+
+    //内部用户处理逻辑
+    if (userCategory.equals("Internal")) {
+        InternalUserCart internalUserCart = new InternalUserCart();
+        return internalUserCart.process(userId, items);
+    }
+    return null;
+}
+</code></pre>
+<p>电商的营销玩法是多样的，以后势必还会有更多用户类型，需要更多的购物车。我们就只能不断增加更多的购物车类，一遍一遍地写重复的购物车逻辑、写更多的 if 逻辑吗？</p>
+<p>当然不是，相同的代码应该只在一处出现！</p>
+<p>如果我们熟记抽象类和抽象方法的定义的话，这时或许就会想到，是否可以把重复的逻辑定义在抽象类中，三个购物车只要分别实现不同的那份逻辑呢？</p>
+<p>其实，这个模式就是模板方法模式。我们在父类中实现了购物车处理的流程模板，然后把需要特殊处理的地方留空白也就是留抽象方法定义，让子类去实现其中的逻辑。由于父类的逻辑不完整无法单独工作，因此需要定义为抽象类。</p>
+<p>如下代码所示，AbstractCart 抽象类实现了购物车通用的逻辑，额外定义了两个抽象方法让子类去实现。其中，processCouponPrice 方法用于计算商品折扣，processDeliveryPrice 方法用于计算运费。</p>
+<pre><code class="language-java">public abstract class AbstractCart {
+
+    //处理购物车的大量重复逻辑在父类实现
+    public Cart process(long userId, Map&lt;Long, Integer&gt; items) {
+
+        Cart cart = new Cart();
+        List&lt;Item&gt; itemList = new ArrayList&lt;&gt;();
+        items.entrySet().stream().forEach(entry -&gt; {
+            Item item = new Item();
+            item.setId(entry.getKey());
+            item.setPrice(Db.getItemPrice(entry.getKey()));
+            item.setQuantity(entry.getValue());
+            itemList.add(item);
+        });
+        cart.setItems(itemList);
+        //让子类处理每一个商品的优惠
+        itemList.stream().forEach(item -&gt; {
+            processCouponPrice(userId, item);
+            processDeliveryPrice(userId, item);
+        });
+        //计算商品总价
+        cart.setTotalItemPrice(cart.getItems().stream().map(item -&gt; item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()))).reduce(BigDecimal.ZERO, BigDecimal::add));
+
+        //计算总运费
+        cart.setTotalDeliveryPrice(cart.getItems().stream().map(Item::getDeliveryPrice).reduce(BigDecimal.ZERO, BigDecimal::add));
+
+        //计算总折扣
+        cart.setTotalDiscount(cart.getItems().stream().map(Item::getCouponPrice).reduce(BigDecimal.ZERO, BigDecimal::add));
+
+        //计算应付价格
+        cart.setPayPrice(cart.getTotalItemPrice().add(cart.getTotalDeliveryPrice()).subtract(cart.getTotalDiscount()));
+
+        return cart;
+    }
+
+    //处理商品优惠的逻辑留给子类实现
+    protected abstract void processCouponPrice(long userId, Item item);
+
+    //处理配送费的逻辑留给子类实现
+    protected abstract void processDeliveryPrice(long userId, Item item);
+}
+</code></pre>
+<p>有了这个抽象类，三个子类的实现就非常简单了。普通用户的购物车 NormalUserCart，实现的是 0 优惠和 10% 运费的逻辑：</p>
+<pre><code class="language-java">@Service(value = "NormalUserCart")
+public class NormalUserCart extends AbstractCart {
+
+    @Override
+    protected void processCouponPrice(long userId, Item item) {
+        item.setCouponPrice(BigDecimal.ZERO);
+    }
+
+    @Override
+    protected void processDeliveryPrice(long userId, Item item) {
+        item.setDeliveryPrice(item.getPrice()
+                .multiply(BigDecimal.valueOf(item.getQuantity()))
+                .multiply(new BigDecimal("0.1")));
+    }
+}
+</code></pre>
+<p>VIP 用户的购物车 VipUserCart，直接继承了 NormalUserCart，只需要修改多买优惠策略：</p>
+<pre><code class="language-java">@Service(value = "VipUserCart")
+public class VipUserCart extends NormalUserCart {
+
+    @Override
+    protected void processCouponPrice(long userId, Item item) {
+        if (item.getQuantity() &gt; 2) {
+            item.setCouponPrice(item.getPrice()
+                    .multiply(BigDecimal.valueOf(100 - Db.getUserCouponPercent(userId)).divide(new BigDecimal("100")))
+                    .multiply(BigDecimal.valueOf(item.getQuantity() - 2)));
+        } else {
+            item.setCouponPrice(BigDecimal.ZERO);
+        }
+    }
+}
+</code></pre>
+<p>内部用户购物车 InternalUserCart 是最简单的，直接设置 0 运费和 0 折扣即可：</p>
+<pre><code class="language-java">@Service(value = "InternalUserCart")
+public class InternalUserCart extends AbstractCart {
+
+    @Override
+    protected void processCouponPrice(long userId, Item item) {
+        item.setCouponPrice(BigDecimal.ZERO);
+    }
+
+    @Override
+    protected void processDeliveryPrice(long userId, Item item) {
+        item.setDeliveryPrice(BigDecimal.ZERO);
+    }
+}
+</code></pre>
+<p>抽象类和三个子类的实现关系图，如下所示：</p>
+<p><img alt="img" src="/assets/0824a41aa92ed49d4fb86208.png"/></p>
+<p>是不是比三个独立的购物车程序简单了很多呢？接下来，我们再看看如何能避免三个 if 逻辑。</p>
+<p>或许你已经注意到了，定义三个购物车子类时，我们在 @Service 注解中对 Bean 进行了命名。既然三个购物车都叫 XXXUserCart，那我们就可以把用户类型字符串拼接 UserCart 构成购物车 Bean 的名称，然后利用 Spring 的 IoC 容器，通过 Bean 的名称直接获取到 AbstractCart，调用其 process 方法即可实现通用。</p>
+<p>其实，这就是工厂模式，只不过是借助 Spring 容器实现罢了：</p>
+<pre><code class="language-java">@GetMapping("right")
+public Cart right(@RequestParam("userId") int userId) {
+    String userCategory = Db.getUserCategory(userId);
+    AbstractCart cart = (AbstractCart) applicationContext.getBean(userCategory + "UserCart");
+    return cart.process(userId, items);
+}
+</code></pre>
+<p>试想， 之后如果有了新的用户类型、新的用户逻辑，是不是完全不用对代码做任何修改，只要新增一个 XXXUserCart 类继承 AbstractCart，实现特殊的优惠和运费处理逻辑就可以了？</p>
+<p>这样一来，我们就利用工厂模式 + 模板方法模式，不仅消除了重复代码，还避免了修改既有代码的风险。这就是设计模式中的开闭原则：对修改关闭，对扩展开放。</p>
+<h2 id="利用注解-反射消除重复代码">利用注解 + 反射消除重复代码</h2>
+<p>是不是有点兴奋了，业务代码居然也能 OOP 了。我们再看一个三方接口的调用案例，同样也是一个普通的业务逻辑。</p>
+<p>假设银行提供了一些 API 接口，对参数的序列化有点特殊，不使用 JSON，而是需要我们把参数依次拼在一起构成一个大字符串。</p>
+<p>按照银行提供的 API 文档的顺序，把所有参数构成定长的数据，然后拼接在一起作为整个字符串。</p>
+<p>因为每一种参数都有固定长度，未达到长度时需要做填充处理：</p>
+<p>字符串类型的参数不满长度部分需要以下划线右填充，也就是字符串内容靠左；</p>
+<p>数字类型的参数不满长度部分以 0 左填充，也就是实际数字靠右；</p>
+<p>货币类型的表示需要把金额向下舍入 2 位到分，以分为单位，作为数字类型同样进行左填充。</p>
+<p>对所有参数做 MD5 操作作为签名（为了方便理解，Demo 中不涉及加盐处理）。</p>
+<p>比如，创建用户方法和支付方法的定义是这样的：</p>
+<p><img alt="img" src="/assets/862bba23a48446c564733385.jpg"/></p>
+<p><img alt="img" src="/assets/912d489d08742dbecbfaebb7.jpg"/></p>
+<p>代码很容易实现，直接根据接口定义实现填充操作、加签名、请求调用操作即可：</p>
+<pre><code class="language-java">public class BankService {
+
+    //创建用户方法
+    public static String createUser(String name, String identity, String mobile, int age) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        //字符串靠左，多余的地方填充_
+        stringBuilder.append(String.format("%-10s", name).replace(' ', '_'));
+        //字符串靠左，多余的地方填充_
+        stringBuilder.append(String.format("%-18s", identity).replace(' ', '_'));
+        //数字靠右，多余的地方用0填充
+        stringBuilder.append(String.format("%05d", age));
+        //字符串靠左，多余的地方用_填充
+        stringBuilder.append(String.format("%-11s", mobile).replace(' ', '_'));
+        //最后加上MD5作为签名
+        stringBuilder.append(DigestUtils.md2Hex(stringBuilder.toString()));
+        return Request.Post("http://localhost:45678/reflection/bank/createUser")
+                .bodyString(stringBuilder.toString(), ContentType.APPLICATION_JSON)
+                .execute().returnContent().asString();
+    }
+    //支付方法
+    public static String pay(long userId, BigDecimal amount) throws IOException {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        //数字靠右，多余的地方用0填充
+        stringBuilder.append(String.format("%020d", userId));
+
+        //金额向下舍入2位到分，以分为单位，作为数字靠右，多余的地方用0填充
+        stringBuilder.append(String.format("%010d", amount.setScale(2, RoundingMode.DOWN).multiply(new BigDecimal("100")).longValue()));
+
+        //最后加上MD5作为签名
+        stringBuilder.append(DigestUtils.md2Hex(stringBuilder.toString()));
+
+        return Request.Post("http://localhost:45678/reflection/bank/pay")
+                .bodyString(stringBuilder.toString(), ContentType.APPLICATION_JSON)
+                .execute().returnContent().asString();
+    }
+}
+</code></pre>
+<p>可以看到，这段代码的重复粒度更细：</p>
+<p>三种标准数据类型的处理逻辑有重复，稍有不慎就会出现 Bug；</p>
+<p>处理流程中字符串拼接、加签和发请求的逻辑，在所有方法重复；</p>
+<p>实际方法的入参的参数类型和顺序，不一定和接口要求一致，容易出错；</p>
+<p>代码层面针对每一个参数硬编码，无法清晰地进行核对，如果参数达到几十个、上百个，出错的概率极大。</p>
+<p>那应该如何改造这段代码呢？没错，就是要用注解和反射！</p>
+<p>使用注解和反射这两个武器，就可以针对银行请求的所有逻辑均使用一套代码实现，不会出现任何重复。</p>
+<p>要实现接口逻辑和逻辑实现的剥离，首先需要以 POJO 类（只有属性没有任何业务逻辑的数据类）的方式定义所有的接口参数。比如，下面这个创建用户 API 的参数：</p>
+<pre><code class="language-java">@Data
+public class CreateUserAPI {
+
+    private String name;
+    private String identity;
+    private String mobile;
+    private int age;
+}
+</code></pre>
+<p>有了接口参数定义，我们就能通过自定义注解为接口和所有参数增加一些元数据。如下所示，我们定义一个接口 API 的注解 BankAPI，包含接口 URL 地址和接口说明：</p>
+<pre><code class="language-java">@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+@Documented
+@Inherited
+public @interface BankAPI {
+
+    String desc() default "";
+    String url() default "";
+}
+</code></pre>
+<p>然后，我们再定义一个自定义注解 @BankAPIField，用于描述接口的每一个字段规范，包含参数的次序、类型和长度三个属性：</p>
+<pre><code class="language-java">@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+@Documented
+@Inherited
+public @interface BankAPIField {
+
+    int order() default -1;
+    int length() default -1;
+    String type() default "";
+}
+</code></pre>
+<p>接下来，注解就可以发挥威力了。</p>
+<p>如下所示，我们定义了 CreateUserAPI 类描述创建用户接口的信息，通过为接口增加 @BankAPI 注解，来补充接口的 URL 和描述等元数据；通过为每一个字段增加 @BankAPIField 注解，来补充参数的顺序、类型和长度等元数据：</p>
+<pre><code class="language-java">@BankAPI(url = "/bank/createUser", desc = "创建用户接口")
+@Data
+public class CreateUserAPI extends AbstractAPI {
+
+    @BankAPIField(order = 1, type = "S", length = 10)
+    private String name;
+
+    @BankAPIField(order = 2, type = "S", length = 18)
+    private String identity;
+
+    @BankAPIField(order = 4, type = "S", length = 11) //注意这里的order需要按照API表格中的顺序
+    private String mobile;
+
+    @BankAPIField(order = 3, type = "N", length = 5)
+    private int age;
+}
+</code></pre>
+<p>另一个 PayAPI 类也是类似的实现：</p>
+<pre><code class="language-java">@BankAPI(url = "/bank/pay", desc = "支付接口")
+@Data
+public class PayAPI extends AbstractAPI {
+
+    @BankAPIField(order = 1, type = "N", length = 20)
+    private long userId;
+
+    @BankAPIField(order = 2, type = "M", length = 10)
+    private BigDecimal amount;
+}
+</code></pre>
+<p>这 2 个类继承的 AbstractAPI 类是一个空实现，因为这个案例中的接口并没有公共数据可以抽象放到基类。</p>
+<p>通过这 2 个类，我们可以在几秒钟内完成和 API 清单表格的核对。理论上，如果我们的核心翻译过程（也就是把注解和接口 API 序列化为请求需要的字符串的过程）没问题，只要注解和表格一致，API 请求的翻译就不会有任何问题。</p>
+<p>以上，我们通过注解实现了对 API 参数的描述。接下来，我们再看看反射如何配合注解实现动态的接口参数组装：</p>
+<p>第 3 行代码中，我们从类上获得了 BankAPI 注解，然后拿到其 URL 属性，后续进行远程调用。</p>
+<p>第 6~9 行代码，使用 stream 快速实现了获取类中所有带 BankAPIField 注解的字段，并把字段按 order 属性排序，然后设置私有字段反射可访问。</p>
+<p>第 12~38 行代码，实现了反射获取注解的值，然后根据 BankAPIField 拿到的参数类型，按照三种标准进行格式化，将所有参数的格式化逻辑集中在了这一处。</p>
+<p>第 41~48 行代码，实现了参数加签和请求调用。</p>
+<pre><code class="language-java">private static String remoteCall(AbstractAPI api) throws IOException {
+
+    //从BankAPI注解获取请求地址
+    BankAPI bankAPI = api.getClass().getAnnotation(BankAPI.class);
+    bankAPI.url();
+
+    StringBuilder stringBuilder = new StringBuilder();
+    Arrays.stream(api.getClass().getDeclaredFields()) //获得所有字段
+            .filter(field -&gt; field.isAnnotationPresent(BankAPIField.class)) //查找标记了注解的字段
+            .sorted(Comparator.comparingInt(a -&gt; a.getAnnotation(BankAPIField.class).order())) //根据注解中的order对字段排序
+            .peek(field -&gt; field.setAccessible(true)) //设置可以访问私有字段
+            .forEach(field -&gt; {
+                //获得注解
+                BankAPIField bankAPIField = field.getAnnotation(BankAPIField.class);
+                Object value = "";
+                try {
+                    //反射获取字段值
+                    value = field.get(api);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                //根据字段类型以正确的填充方式格式化字符串
+                switch (bankAPIField.type()) {
+                    case "S": {
+                        stringBuilder.append(String.format("%-" + bankAPIField.length() + "s", value.toString()).replace(' ', '_'));
+                        break;
+                    }
+                    case "N": {
+                        stringBuilder.append(String.format("%" + bankAPIField.length() + "s", value.toString()).replace(' ', '0'));
+                        break;
+                    }
+                    case "M": {
+                        if (!(value instanceof BigDecimal))
+                            throw new RuntimeException(String.format("{} 的 {} 必须是BigDecimal", api, field));
+                        stringBuilder.append(String.format("%0" + bankAPIField.length() + "d", ((BigDecimal) value).setScale(2, RoundingMode.DOWN).multiply(new BigDecimal("100")).longValue()));
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            });
+    //签名逻辑
+    stringBuilder.append(DigestUtils.md2Hex(stringBuilder.toString()));
+    String param = stringBuilder.toString();
+    long begin = System.currentTimeMillis();
+    //发请求
+    String result = Request.Post("http://localhost:45678/reflection" + bankAPI.url())
+            .bodyString(param, ContentType.APPLICATION_JSON)
+            .execute().returnContent().asString();
+    log.info("调用银行API {} url:{} 参数:{} 耗时:{}ms", bankAPI.desc(), bankAPI.url(), param, System.currentTimeMillis() - begin);
+    return result;
+
+}
+</code></pre>
+<p>可以看到，所有处理参数排序、填充、加签、请求调用的核心逻辑，都汇聚在了 remoteCall 方法中。有了这个核心方法，BankService 中每一个接口的实现就非常简单了，只是参数的组装，然后调用 remoteCall 即可。</p>
+<pre><code class="language-java">//创建用户方法
+public static String createUser(String name, String identity, String mobile, int age) throws IOException {
+
+    CreateUserAPI createUserAPI = new CreateUserAPI();
+
+    createUserAPI.setName(name);
+
+    createUserAPI.setIdentity(identity);
+
+    createUserAPI.setAge(age);
+
+    createUserAPI.setMobile(mobile);
+
+    return remoteCall(createUserAPI);
+}
+
+//支付方法
+public static String pay(long userId, BigDecimal amount) throws IOException {
+
+    PayAPI payAPI = new PayAPI();
+
+    payAPI.setUserId(userId);
+
+    payAPI.setAmount(amount);
+
+    return remoteCall(payAPI);
+}
+</code></pre>
+<p>其实，许多涉及类结构性的通用处理，都可以按照这个模式来减少重复代码。反射给予了我们在不知晓类结构的时候，按照固定的逻辑处理类的成员；而注解给了我们为这些成员补充元数据的能力，使得我们利用反射实现通用逻辑的时候，可以从外部获得更多我们关心的数据。</p>
+<h2 id="利用属性拷贝工具消除重复代码">利用属性拷贝工具消除重复代码</h2>
+<p>最后，我们再来看一种业务代码中经常出现的代码逻辑，实体之间的转换复制。</p>
+<p>对于三层架构的系统，考虑到层之间的解耦隔离以及每一层对数据的不同需求，通常每一层都会有自己的 POJO 作为数据实体。比如，数据访问层的实体一般叫作 DataObject 或 DO，业务逻辑层的实体一般叫作 Domain，表现层的实体一般叫作 Data Transfer Object 或 DTO。</p>
+<p>这里我们需要注意的是，如果手动写这些实体之间的赋值代码，同样容易出错。</p>
+<p>对于复杂的业务系统，实体有几十甚至几百个属性也很正常。就比如 ComplicatedOrderDTO 这个数据传输对象，描述的是一个订单中的几十个属性。如果我们要把这个 DTO 转换为一个类似的 DO，复制其中大部分的字段，然后把数据入库，势必需要进行很多属性映射赋值操作。就像这样，密密麻麻的代码是不是已经让你头晕了？</p>
+<pre><code class="language-java">ComplicatedOrderDTO orderDTO = new ComplicatedOrderDTO();
+
+ComplicatedOrderDO orderDO = new ComplicatedOrderDO();
+
+orderDO.setAcceptDate(orderDTO.getAcceptDate());
+
+orderDO.setAddress(orderDTO.getAddress());
+
+orderDO.setAddressId(orderDTO.getAddressId());
+
+orderDO.setCancelable(orderDTO.isCancelable());
+
+orderDO.setCommentable(orderDTO.isComplainable()); //属性错误
+
+orderDO.setComplainable(orderDTO.isCommentable()); //属性错误
+
+orderDO.setCancelable(orderDTO.isCancelable());
+
+orderDO.setCouponAmount(orderDTO.getCouponAmount());
+
+orderDO.setCouponId(orderDTO.getCouponId());
+
+orderDO.setCreateDate(orderDTO.getCreateDate());
+
+orderDO.setDirectCancelable(orderDTO.isDirectCancelable());
+
+orderDO.setDeliverDate(orderDTO.getDeliverDate());
+
+orderDO.setDeliverGroup(orderDTO.getDeliverGroup());
+
+orderDO.setDeliverGroupOrderStatus(orderDTO.getDeliverGroupOrderStatus());
+
+orderDO.setDeliverMethod(orderDTO.getDeliverMethod());
+
+orderDO.setDeliverPrice(orderDTO.getDeliverPrice());
+
+orderDO.setDeliveryManId(orderDTO.getDeliveryManId());
+
+orderDO.setDeliveryManMobile(orderDO.getDeliveryManMobile()); //对象错误
+
+orderDO.setDeliveryManName(orderDTO.getDeliveryManName());
+
+orderDO.setDistance(orderDTO.getDistance());
+
+orderDO.setExpectDate(orderDTO.getExpectDate());
+
+orderDO.setFirstDeal(orderDTO.isFirstDeal());
+
+orderDO.setHasPaid(orderDTO.isHasPaid());
+
+orderDO.setHeadPic(orderDTO.getHeadPic());
+
+orderDO.setLongitude(orderDTO.getLongitude());
+
+orderDO.setLatitude(orderDTO.getLongitude()); //属性赋值错误
+
+orderDO.setMerchantAddress(orderDTO.getMerchantAddress());
+
+orderDO.setMerchantHeadPic(orderDTO.getMerchantHeadPic());
+
+orderDO.setMerchantId(orderDTO.getMerchantId());
+
+orderDO.setMerchantAddress(orderDTO.getMerchantAddress());
+
+orderDO.setMerchantName(orderDTO.getMerchantName());
+
+orderDO.setMerchantPhone(orderDTO.getMerchantPhone());
+
+orderDO.setOrderNo(orderDTO.getOrderNo());
+
+orderDO.setOutDate(orderDTO.getOutDate());
+
+orderDO.setPayable(orderDTO.isPayable());
+
+orderDO.setPaymentAmount(orderDTO.getPaymentAmount());
+
+orderDO.setPaymentDate(orderDTO.getPaymentDate());
+
+orderDO.setPaymentMethod(orderDTO.getPaymentMethod());
+
+orderDO.setPaymentTimeLimit(orderDTO.getPaymentTimeLimit());
+
+orderDO.setPhone(orderDTO.getPhone());
+
+orderDO.setRefundable(orderDTO.isRefundable());
+
+orderDO.setRemark(orderDTO.getRemark());
+
+orderDO.setStatus(orderDTO.getStatus());
+
+orderDO.setTotalQuantity(orderDTO.getTotalQuantity());
+
+orderDO.setUpdateTime(orderDTO.getUpdateTime());
+
+orderDO.setName(orderDTO.getName());
+
+orderDO.setUid(orderDTO.getUid());
+</code></pre>
+<p>如果不是代码中有注释，你能看出其中的诸多问题吗？</p>
+<p>如果原始的 DTO 有 100 个字段，我们需要复制 90 个字段到 DO 中，保留 10 个不赋值，最后应该如何校验正确性呢？数数吗？即使数出有 90 行代码，也不一定正确，因为属性可能重复赋值。</p>
+<p>有的时候字段命名相近，比如 complainable 和 commentable，容易搞反（第 7 和第 8 行），或者对两个目标字段重复赋值相同的来源字段（比如第 28 行）</p>
+<p>明明要把 DTO 的值赋值到 DO 中，却在 set 的时候从 DO 自己取值（比如第 20 行），导致赋值无效。</p>
+<p>这段代码并不是我随手写出来的，而是一个真实案例。有位同学就像代码中那样把经纬度赋值反了，因为落库的字段实在太多了。这个 Bug 很久都没发现，直到真正用到数据库中的经纬度做计算时，才发现一直以来都存错了。</p>
+<p>修改方法很简单，可以使用类似 BeanUtils 这种 Mapping 工具来做 Bean 的转换，copyProperties 方法还允许我们提供需要忽略的属性：</p>
+<pre><code class="language-java">ComplicatedOrderDTO orderDTO = new ComplicatedOrderDTO();
+ComplicatedOrderDO orderDO = new ComplicatedOrderDO();
+BeanUtils.copyProperties(orderDTO, orderDO, "id");
+return orderDO;
+</code></pre>
+<h2 id="重点回顾">重点回顾</h2>
+<p>正所谓“常在河边走哪有不湿鞋”，重复代码多了总有一天会出错。今天，我从几个最常见的维度，和你分享了几个实际业务场景中可能出现的重复问题，以及消除重复的方式。</p>
+<p>第一种代码重复是，有多个并行的类实现相似的代码逻辑。我们可以考虑提取相同逻辑在父类中实现，差异逻辑通过抽象方法留给子类实现。使用类似的模板方法把相同的流程和逻辑固定成模板，保留差异的同时尽可能避免代码重复。同时，可以使用 Spring 的 IoC 特性注入相应的子类，来避免实例化子类时的大量 if…else 代码。</p>
+<p>第二种代码重复是，使用硬编码的方式重复实现相同的数据处理算法。我们可以考虑把规则转换为自定义注解，作为元数据对类或对字段、方法进行描述，然后通过反射动态读取这些元数据、字段或调用方法，实现规则参数和规则定义的分离。也就是说，把变化的部分也就是规则的参数放入注解，规则的定义统一处理。</p>
+<p>第三种代码重复是，业务代码中常见的 DO、DTO、VO 转换时大量字段的手动赋值，遇到有上百个属性的复杂类型，非常非常容易出错。我的建议是，不要手动进行赋值，考虑使用 Bean 映射工具进行。此外，还可以考虑采用单元测试对所有字段进行赋值正确性校验。</p>
+<p>最后，我想说的是，我会把代码重复度作为评估一个项目质量的重要指标，如果一个项目几乎没有任何重复代码，那么它内部的抽象一定是非常好的。在做项目重构的时候，你也可以以消除重复为第一目标去考虑实现。</p>
+<p>今天用到的代码，我都放在了 GitHub 上，你可以点击这个链接查看。</p>
+<h2 id="思考与讨论">思考与讨论</h2>
+<p>除了模板方法设计模式是减少重复代码的一把好手，观察者模式也常用于减少代码重复（并且是松耦合方式）。Spring 也提供了类似工具（点击这里查看），你能想到有哪些应用场景吗？</p>
+<p>关于 Bean 属性复制工具，除了最简单的 Spring 的 BeanUtils 工具类的使用，你还知道哪些对象映射类库吗？它们又有什么功能呢？</p>
+<p>你还有哪些消除重复代码的心得和方法吗？我是朱晔，欢迎在评论区与我留言分享你的想法，也欢迎你把今天的内容分享给你的朋友或同事，一起交流。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

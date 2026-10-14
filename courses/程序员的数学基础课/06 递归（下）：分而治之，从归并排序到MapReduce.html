@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>06 递归（下）：分而治之，从归并排序到MapReduce · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/index.html">程序员的数学基础课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">57 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>程序员的数学基础课</strong><ul><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/01%20%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%9A%E4%B8%8D%E4%BA%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%BA%90%E5%A4%B4%EF%BC%8C%E4%BD%A0%E5%AD%A6%E4%BB%80%E4%B9%88%E7%BC%96%E7%A8%8B.html">01 二进制：不了解计算机的源头，你学什么编程</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/02%20%E4%BD%99%E6%95%B0%EF%BC%9A%E5%8E%9F%E6%9D%A5%E5%8F%96%E4%BD%99%E6%93%8D%E4%BD%9C%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF%E4%B8%AA%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0.html">02 余数：原来取余操作本身就是个哈希函数</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/03%20%E8%BF%AD%E4%BB%A3%E6%B3%95%EF%BC%9A%E4%B8%8D%E7%94%A8%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E5%B8%A6%E5%87%BD%E6%95%B0%EF%BC%8C%E4%BD%A0%E4%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E5%B9%B3%E6%96%B9%E6%A0%B9%EF%BC%9F.html">03 迭代法：不用编程语言的自带函数，你会如何计算平方根？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/04%20%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%8F%90%E5%8D%87%E4%BB%A3%E7%A0%81%E7%9A%84%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87%EF%BC%9F.html">04 数学归纳法：如何用数学归纳提升代码的运行效率？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/05%20%E9%80%92%E5%BD%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%B3%9B%E5%8C%96%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%EF%BC%8C%E5%A6%82%E4%BD%95%E5%B0%86%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%AE%80%E5%8D%95%E5%8C%96%EF%BC%9F.html">05 递归（上）：泛化数学归纳，如何将复杂问题简单化？</a></li><li><a class="active" aria-current="page" href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/06%20%E9%80%92%E5%BD%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B%EF%BC%8C%E4%BB%8E%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E5%88%B0MapReduce.html">06 递归（下）：分而治之，从归并排序到MapReduce</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/07%20%E6%8E%92%E5%88%97%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E4%BC%9A%E2%80%9C%E7%94%B0%E5%BF%8C%E8%B5%9B%E9%A9%AC%E2%80%9D%EF%BC%9F.html">07 排列：如何让计算机学会“田忌赛马”？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/08%20%E7%BB%84%E5%90%88%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E6%8E%92%E4%B8%96%E7%95%8C%E6%9D%AF%E7%9A%84%E8%B5%9B%E7%A8%8B%EF%BC%9F.html">08 组合：如何让计算机安排世界杯的赛程？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/09%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%9F%BA%E4%BA%8E%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%E7%9A%84%E6%9F%A5%E8%AF%A2%E6%8E%A8%E8%8D%90%EF%BC%9F.html">09 动态规划（上）：如何实现基于编辑距离的查询推荐？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/10%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E6%B1%82%E5%BE%97%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B%E5%B9%B6%E8%BF%9B%E8%A1%8C%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">10 动态规划（下）：如何求得状态转移方程并进行编程实现？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/11%20%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E9%AB%98%E6%95%88%E7%8E%87%E5%9C%B0%E6%9F%A5%E5%AD%97%E5%85%B8%EF%BC%9F.html">11 树的深度优先搜索（上）：如何才能高效率地查字典？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/12%20%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E9%AB%98%E6%95%88%E7%8E%87%E5%9C%B0%E6%9F%A5%E5%AD%97%E5%85%B8%EF%BC%9F.html">12 树的深度优先搜索（下）：如何才能高效率地查字典？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/13%20%E6%A0%91%E7%9A%84%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BA%BA%E9%99%85%E5%85%B3%E7%B3%BB%E7%9A%84%E5%85%AD%E5%BA%A6%E7%90%86%E8%AE%BA%E6%98%AF%E7%9C%9F%E7%9A%84%E5%90%97%EF%BC%9F.html">13 树的广度优先搜索（上）：人际关系的六度理论是真的吗？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/14%20%E6%A0%91%E7%9A%84%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8C%E5%90%91%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E7%9A%84%E6%95%88%E7%8E%87%E6%9B%B4%E9%AB%98%EF%BC%9F.html">14 树的广度优先搜索（下）：为什么双向广度优先搜索的效率更高？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/15%20%E4%BB%8E%E6%A0%91%E5%88%B0%E5%9B%BE%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E4%BC%9A%E7%9C%8B%E5%9C%B0%E5%9B%BE%EF%BC%9F.html">15 从树到图：如何让计算机学会看地图？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/16%20%E6%97%B6%E9%97%B4%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD%E6%98%AF%E5%90%A6%E5%8F%AA%E6%98%AF%E2%80%9C%E7%BA%B8%E4%B8%8A%E8%B0%88%E5%85%B5%E2%80%9D%EF%BC%9F.html">16 时间和空间复杂度（上）：优化性能是否只是“纸上谈兵”？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/17%20%E6%97%B6%E9%97%B4%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%85%AD%E4%B8%AA%E6%B3%95%E5%88%99%E8%BF%9B%E8%A1%8C%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90%EF%BC%9F.html">17 时间和空间复杂度（下）：如何使用六个法则进行复杂度分析？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/18%20%E6%80%BB%E7%BB%93%E8%AF%BE%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%81%E7%BC%96%E7%A8%8B%E8%AF%AD%E5%8F%A5%E5%92%8C%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E4%BD%93%E7%8E%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E6%95%B0%E5%AD%A6%E6%80%9D%E6%83%B3%EF%BC%9F.html">18 总结课：数据结构、编程语句和基础算法体现了哪些数学思想？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/19%20%E6%A6%82%E7%8E%87%E5%92%8C%E7%BB%9F%E8%AE%A1%EF%BC%9A%E7%BC%96%E7%A8%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%A6%82%E7%8E%87%E5%92%8C%E7%BB%9F%E8%AE%A1%EF%BC%9F.html">19 概率和统计：编程为什么需要概率和统计？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/20%20%E6%A6%82%E7%8E%87%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%AE%E4%BD%A0%E7%90%86%E8%A7%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E3%80%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%92%8C%E6%9C%9F%E6%9C%9B%E5%80%BC.html">20 概率基础（上）：一篇文章帮你理解随机变量、概率分布和期望值</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/21%20%E6%A6%82%E7%8E%87%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B3%95%E5%88%99%EF%BC%8C%E8%BF%99%E4%BA%9B%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F%E7%A9%B6%E7%AB%9F%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F.html">21 概率基础（下）：联合概率、条件概率和贝叶斯法则，这些概率公式究竟能做什么？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/22%20%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E4%BC%9A%E8%87%AA%E5%8A%A8%E5%88%86%E7%B1%BB%EF%BC%9F.html">22 朴素贝叶斯：如何让计算机学会自动分类？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/23%20%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86%E7%89%B9%E5%AE%9A%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B0%E9%97%BB%EF%BC%9F.html">23 文本分类：如何区分特定类型的新闻？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/24%20%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99%E5%92%8C%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E5%81%87%E8%AE%BE%E7%AE%80%E5%8C%96%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">24 语言模型：如何使用链式法则和马尔科夫假设简化概率模型？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/25%20%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%BB%8EPageRank%E5%88%B0%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%EF%BC%8C%E8%83%8C%E5%90%8E%E6%98%AF%E4%BB%80%E4%B9%88%E6%A8%A1%E5%9E%8B%E5%9C%A8%E6%94%AF%E6%92%91%EF%BC%9F.html">25 马尔科夫模型：从PageRank到语音识别，背后是什么模型在支撑？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/26%20%E4%BF%A1%E6%81%AF%E7%86%B5%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%8C%E6%B5%8B%E5%87%BA%E4%BD%A0%E5%AF%B9%E5%BA%94%E7%9A%84%E6%AD%A6%E4%BE%A0%E4%BA%BA%E7%89%A9%EF%BC%9F.html">26 信息熵：如何通过几个问题，测出你对应的武侠人物？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/27%20%E5%86%B3%E7%AD%96%E6%A0%91%EF%BC%9A%E4%BF%A1%E6%81%AF%E5%A2%9E%E7%9B%8A%E3%80%81%E5%A2%9E%E7%9B%8A%E6%AF%94%E7%8E%87%E5%92%8C%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E7%9A%84%E8%BF%90%E7%94%A8.html">27 决策树：信息增益、增益比率和基尼指数的运用</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/28%20%E7%86%B5%E3%80%81%E4%BF%A1%E6%81%AF%E5%A2%9E%E7%9B%8A%E5%92%8C%E5%8D%A1%E6%96%B9%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE%E5%85%B3%E9%94%AE%E7%89%B9%E5%BE%81%EF%BC%9F.html">28 熵、信息增益和卡方：如何寻找关键特征？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/29%20%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%A0%87%E5%87%86%E5%8C%96%EF%BC%9A%E5%90%84%E7%A7%8D%E7%89%B9%E5%BE%81%E5%A6%82%E4%BD%95%E7%BB%BC%E5%90%88%E6%89%8D%E6%98%AF%E6%9C%80%E5%90%88%E7%90%86%E7%9A%84%EF%BC%9F.html">29 归一化和标准化：各种特征如何综合才是最合理的？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/30%20%E7%BB%9F%E8%AE%A1%E6%84%8F%E4%B9%89%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E9%AA%8C%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BD%A0%E7%9A%84A_B%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%B7%A7%E5%90%88%EF%BC%9F.html">30 统计意义（上）：如何通过显著性检验，判断你的A_B测试结果是不是巧合？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/31%20%E7%BB%9F%E8%AE%A1%E6%84%8F%E4%B9%89%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E9%AA%8C%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BD%A0%E7%9A%84A_B%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%B7%A7%E5%90%88%EF%BC%9F.html">31 统计意义（下）：如何通过显著性检验，判断你的A_B测试结果是不是巧合？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/32%20%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1%E7%AF%87%E7%AD%94%E7%96%91%E5%92%8C%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E6%AC%A0%E6%8B%9F%E5%90%88%E5%92%8C%E8%BF%87%E6%8B%9F%E5%90%88%EF%BC%9F.html">32 概率统计篇答疑和总结：为什么会有欠拟合和过拟合？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/33%20%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%EF%BC%9A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%88%B0%E5%BA%95%E9%83%BD%E8%AE%B2%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">33 线性代数：线性代数到底都讲了些什么？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/34%20%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%90%86%E8%A7%A3%E7%8E%B0%E5%AE%9E%E4%BA%8B%E7%89%A9%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F.html">34 向量空间模型：如何让计算机理解现实事物之间的关系？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/35%20%E6%96%87%E6%9C%AC%E6%A3%80%E7%B4%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%A4%84%E7%90%86%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%EF%BC%9F.html">35 文本检索：如何让计算机处理自然语言？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/36%20%E6%96%87%E6%9C%AC%E8%81%9A%E7%B1%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%87%E6%BB%A4%E5%86%97%E4%BD%99%E7%9A%84%E6%96%B0%E9%97%BB%EF%BC%9F.html">36 文本聚类：如何过滤冗余的新闻？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/37%20%E7%9F%A9%E9%98%B5%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C%E8%BF%9B%E8%A1%8CPageRank%E8%AE%A1%E7%AE%97%EF%BC%9F.html">37 矩阵（上）：如何使用矩阵操作进行PageRank计算？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/38%20%E7%9F%A9%E9%98%B5%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C%E8%BF%9B%E8%A1%8C%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E6%8E%A8%E8%8D%90%EF%BC%9F.html">38 矩阵（下）：如何使用矩阵操作进行协同过滤推荐？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/39%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83%E6%B1%82%E8%A7%A3%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%EF%BC%9F.html">39 线性回归（上）：如何使用高斯消元求解线性方程组？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/40%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E8%BF%9B%E8%A1%8C%E7%9B%B4%E7%BA%BF%E6%8B%9F%E5%90%88%EF%BC%9F.html">40 线性回归（中）：如何使用最小二乘法进行直线拟合？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/41%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E8%BF%9B%E8%A1%8C%E6%95%88%E6%9E%9C%E9%AA%8C%E8%AF%81%EF%BC%9F.html">41 线性回归（下）：如何使用最小二乘法进行效果验证？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/42%20PCA%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5%E6%9D%A5%E9%99%8D%E7%BB%B4%EF%BC%9F.html">42 PCA主成分分析（上）：如何利用协方差矩阵来降维？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/43%20PCA%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%AE%A1%E7%AE%97%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5%E7%9A%84%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F%EF%BC%9F.html">43 PCA主成分分析（下）：为什么要计算协方差矩阵的特征值和特征向量？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/44%20%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8C%96%E6%8E%98%E6%BD%9C%E5%9C%A8%E7%9A%84%E8%AF%AD%E4%B9%89%E5%85%B3%E7%B3%BB%EF%BC%9F.html">44 奇异值分解：如何挖掘潜在的语义关系？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/45%20%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%AF%87%E7%AD%94%E7%96%91%E5%92%8C%E6%80%BB%E7%BB%93%EF%BC%9A%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E7%9A%84%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">45 线性代数篇答疑和总结：矩阵乘法的几何意义是什么？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/46%20%E7%BC%93%E5%AD%98%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%93%88%E5%B8%8C%E8%A1%A8%E5%92%8C%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E8%AE%BF%E9%97%AE%EF%BC%9F.html">46 缓存系统：如何通过哈希表和队列实现高效访问？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/47%20%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E5%92%8C%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4%E6%A8%A1%E5%9E%8B%EF%BC%8C%E6%89%93%E9%80%A0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9F.html">47 搜索引擎（上）：如何通过倒排索引和向量空间模型，打造一个简单的搜索引擎？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/48%20%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%88%86%E7%B1%BB%EF%BC%8C%E8%AE%A9%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E6%9B%B4%E7%9B%B8%E5%85%B3%EF%BC%9F.html">48 搜索引擎（下）：如何通过查询的分类，让电商平台的搜索结果更相关？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/49%20%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%9F%BA%E4%BA%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%EF%BC%9F.html">49 推荐系统（上）：如何实现基于相似度的协同过滤？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/50%20%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87SVD%E5%88%86%E6%9E%90%E7%94%A8%E6%88%B7%E5%92%8C%E7%89%A9%E5%93%81%E7%9A%84%E7%9F%A9%E9%98%B5%EF%BC%9F.html">50 推荐系统（下）：如何通过SVD分析用户和物品的矩阵？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/51%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8%E7%AF%87%E7%AD%94%E7%96%91%E5%92%8C%E6%80%BB%E7%BB%93%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%B8%AA%E6%80%A7%E5%8C%96%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">51 综合应用篇答疑和总结：如何进行个性化用户画像的设计？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E5%AF%BC%E8%AF%BB%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E5%AD%A6%E6%95%B0%E5%AD%A6%EF%BC%9F.html">导读：程序员应该怎么学数学？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BD%9C%E4%B8%BA%E7%A8%8B%E5%BA%8F%E5%91%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E5%BA%94%E8%AF%A5%E5%AD%A6%E5%A5%BD%E6%95%B0%E5%AD%A6%EF%BC%9F.html">开篇词 作为程序员，为什么你应该学好数学？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E6%95%B0%E5%AD%A6%E4%B8%93%E6%A0%8F%E8%AF%BE%E5%A4%96%E5%8A%A0%E9%A4%90%EF%BC%88%E4%B8%80%EF%BC%89%20%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%8F%8D%E7%A0%81%E5%92%8C%E8%A1%A5%E7%A0%81%EF%BC%9F.html">数学专栏课外加餐（一） 我们为什么需要反码和补码？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E6%95%B0%E5%AD%A6%E4%B8%93%E6%A0%8F%E8%AF%BE%E5%A4%96%E5%8A%A0%E9%A4%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9C%80%E8%A6%81%E8%AF%BB%E5%93%AA%E4%BA%9B%E6%95%B0%E5%AD%A6%E4%B9%A6%EF%BC%9F.html">数学专栏课外加餐（三）：程序员需要读哪些数学书？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E6%95%B0%E5%AD%A6%E4%B8%93%E6%A0%8F%E8%AF%BE%E5%A4%96%E5%8A%A0%E9%A4%90%EF%BC%88%E4%BA%8C%EF%BC%89%20%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%9A%84%E4%B8%89%E4%B8%AA%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B.html">数学专栏课外加餐（二） 位操作的三个应用实例</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%BB%8E%E6%95%B0%E5%AD%A6%E5%88%B0%E7%BC%96%E7%A8%8B%EF%BC%8C%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E5%BE%88%E9%95%BF%E7%9A%84%E9%93%BE%E6%9D%A1.html">结束语 从数学到编程，本身就是一个很长的链条</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/06%20%E9%80%92%E5%BD%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B%EF%BC%8C%E4%BB%8E%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E5%88%B0MapReduce.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="06 递归（下）：分而治之，从归并排序到MapReduce" id="title">06 递归（下）：分而治之，从归并排序到MapReduce</h1>
+<div><p>你好，我是黄申。</p>
+<p>上一节，我解释了如何使用递归，来处理迭代法中比较复杂的数值计算。说到这里，你可能会问了，有些迭代法并不是简单的数值计算，而要通过迭代的过程进行一定的操作，过程更加复杂，需要考虑很多中间数据的匹配或者保存。例如我们之前介绍的用二分查找进行数据匹配，或者我们今天将要介绍的归并排序中的数据排序等等。那么，这种情况下，还可以用递归吗？具体又该如何来实现呢？</p>
+<p>我们可以先分析一下，这些看似很复杂的问题，是否可以简化为某些更小的、更简单的子问题来解决，这是一般思路。如果可以，那就意味着我们仍然可以使用递归的核心思想，将复杂的问题逐步简化成最基本的情况来求解。因此，今天我会从归并排序开始，延伸到多台机器的并行处理，详细讲讲递归思想在“分而治之”这个领域的应用。</p>
+<h2 id="归并排序中的分治思想">归并排序中的分治思想</h2>
+<p>首先，我们来看，如何使用递归编程解决数字的排序问题。</p>
+<p>对一堆杂乱无序的数字，按照从小到大或者从大到小的规则进行排序，这是计算机领域非常经典，也非常流行的问题。小到Excel电子表格，大到搜索引擎，都需要对一堆数字进行排序。因此，计算机领域的前辈们研究排序问题已经很多年了，也提出了许多优秀的算法，比如归并排序、快速排序、堆排序等等。其中，归并排序和快速排序都很好地体现了分治的思想，今天我来说说其中之一的<strong>归并排序</strong>（merge sort）。</p>
+<p>很明显，归并排序算法的核心就是“归并”，也就是把两个有序的数列合并起来，形成一个更大的有序数列。</p>
+<p>假设我们需要按照从小到大的顺序，合并两个有序数列A和B。这里我们需要开辟一个新的存储空间C，用于保存合并后的结果。</p>
+<p>我们首先比较两个数列的第一个数，如果A数列的第一个数小于B数列的第一个数，那么就先取出A数列的第一个数放入C，并把这个数从A数列里删除。如果是B的第一个数更小，那么就先取出B数列的第一个数放入C，并把它从B数列里删除。</p>
+<p>以此类推，直到A和B里所有的数都被取出来并放入C。如果到某一步，A或B数列为空，那直接将另一个数列的数据依次取出放入C就可以了。这种操作，可以保证两个有序的数列A和B合并到C之后，C数列仍然是有序的。</p>
+<p>为了你能更好地理解，我举个例子说明一下，这是合并有序数组{1, 2, 5, 8}和{3, 4, 6}的过程。</p>
+<p><img alt="" src="/assets/95db0719fb52cf26ea7fff62.jpg"/></p>
+<p>为了保证得到有序的C数列，我们必须保证参与合并的A和B也是有序的。可是，等待排序的数组一开始都是乱序的，如果无法保证这点，那归并又有什么意义呢？</p>
+<p>还记得上一篇说的递归吗？这里我们就可以利用递归的思想，把问题不断简化，也就是把数列不断简化，一直简化到只剩1个数。1个数本身就是有序的，对吧？</p>
+<p>好了，现在剩下的疑惑就是，每一次如何简化问题呢？最简单的想法是，我们将长度为n的数列，每次简化为长度为n-1的数列，直至长度为1。不过，这样的处理没有并行性，要进行n-1次的归并操作，效率就会很低。</p>
+<p><img alt="" src="/assets/09000cd9d60dbb7fb30c291b.jpg"/></p>
+<p>所以，我们可以在归并排序中引入了<strong>分而治之</strong>（Divide and Conquer）的思想。<strong>分而治之，我们通常简称为分治。它的思想就是，将一个复杂的问题，分解成两个甚至多个规模相同或类似的子问题，然后对这些子问题再进一步细分，直到最后的子问题变得很简单，很容易就能被求解出来，这样这个复杂的问题就求解出来了</strong>。</p>
+<p>归并排序通过分治的思想，把长度为n的数列，每次简化为两个长度为n/2的数列。这更有利于计算机的并行处理，只需要log2n次归并。</p>
+<p><img alt="" src="/assets/dd16b9b428e6f934346d2f4d.jpg"/></p>
+<p>我们把归并和分治的思想结合起来，这其实就是归并排序算法。这种算法每次把数列进行二等分，直到唯一的数字，也就是最基本的有序数列。然后从这些最基本的有序数列开始，两两合并有序的数列，直到所有的数字都参与了归并排序。</p>
+<p>我用一个包含0～9这10个数字的数组，给你详细讲解一下归并排序的过程。</p>
+<ul>
+<li><p>假设初始的数组为{7, 6, 2, 4, 1, 9, 3, 8, 0, 5}，我们要对它进行从小到大的排序。</p></li>
+<li><p>第一次分解后，变成两个数组{7, 6, 2, 4, 1}和{9, 3, 8, 0, 5}。</p></li>
+<li><p>然后，我们将{7, 6, 2, 4, 1}分解为{7, 6}和{2, 4, 1}，将{9, 3, 8, 0, 5}分解为{9, 3}和{8, 0, 5}。</p></li>
+<li><p>如果细分后的组仍然多于一个数字，我们就重复上述分解的步骤，直到每个组只包含一个数字。到这里，这些其实都是递归的嵌套调用过程。</p></li>
+<li><p>然后，我们要开始进行合并了。我们可以将{4, 1}分解为{4}和{1}。现在无法再细分了，我们开始合并。在合并的过程中进行排序，所以合并的结果为{1,4}。合并后的结果将返回当前函数的调用者，这就是函数返回的过程。</p></li>
+<li><p>重复上述合并的过程，直到完成整个数组的排序，得到{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}。</p></li>
+</ul>
+<p>为了方便你的理解，我画了张图，给你解释整个归并排序的过程。</p>
+<p><img alt="" src="/assets/b56c8fd75a0d572305496e32.jpg"/></p>
+<p>说到这里，我想问你，这个归并排序、分治和递归到底是什么关系呢？用一句话简单地说就是，<strong>归并排序使用了分治的思想，而这个过程需要使用递归来实现。</strong></p>
+<p>归并排序算法用分治的思想把数列不断地简化，直到每个数列仅剩下一个单独的数，然后再使用归并逐步合并有序的数列，从而达到将整个数列进行排序的目的。而这个归并排序，正好可以使用递归的方式来实现。为什么这么说？首先，我们来看看这张图，分治的过程是不是和递归的过程一致呢？</p>
+<p><img alt="" src="/assets/2721b46825e32f7e2d830db3.jpg"/></p>
+<p>分治的过程可以通过递归来表达，因此，归并排序最直观的实现方式就是递归。所以，我们从递归的步骤出发，来看归并排序如何实现。</p>
+<p>我们假设n=k-1的时候，我们已经对较小的两组数进行了排序。那我们只要在n=k的时候，将这两组数合并起来，并且保证合并后的数组仍然是有序的就行了。</p>
+<p>所以，在递归的每次嵌套调用中，代码都将一组数分解成更小的两组，然后将这两个小组的排序交给下一次的嵌套调用。而本次调用只需要关心，如何将排好序的两个小组进行合并。</p>
+<p>在初始状态，也就是n=1的时候，对于排序的案例而言，只包含单个数字的分组。由于分组里只有一个数字，所以它已经是排好序的了，之后就可以开始递归调用的返回阶段。我这里画了张图，便于你的理解。</p>
+<p><img alt="" src="/assets/32e23cb1ddce5fe599e020d7.jpg"/></p>
+<p>你现在应该已经明白了归并排序的基本过程，最难的已经过去了，编写代码实现就不难了。我这里给出示范性代码，你可以参考看看。</p>
+<pre><code>import java.util.Arrays;
+
+public class Lesson6_1 {
+	
+	/**
+    * @Description:	使用函数的递归（嵌套）调用，实现归并排序（从小到大）
+    * @param to_sort-等待排序的数组
+    * @return int[]-排序后的数组
+    */
+	
+	public static int[] merge_sort(int[] to_sort) {
+		
+		if (to_sort == null) return new int[0];
+		
+		// 如果分解到只剩一个数，返回该数
+		if (to_sort.length == 1) return to_sort;
+		
+		// 将数组分解成左右两半
+		int mid = to_sort.length / 2;
+		int[] left = Arrays.copyOfRange(to_sort, 0, mid);
+		int[] right = Arrays.copyOfRange(to_sort, mid, to_sort.length);
+		
+		// 嵌套调用，对两半分别进行排序
+		left = merge_sort(left);
+		right = merge_sort(right);
+		
+		// 合并排序后的两半
+		int[] merged = merge(left, right);
+		
+		return merged;
+		
+	}
+   
+
+}
+</code></pre>
+<p>这里要注意一下，在归并的步骤中，由于递归的调用确保了被合并的两个较小的数组是有序的，所以我们无需比较组内的数字，只需要比较组间的数字就行了。</p>
+<p>这个合并过程具体的实现代码是这样的：</p>
+<pre><code>/**
+    * @Description: 合并两个已经排序完毕的数组（从小到大）
+    * @param a-第一个数组，b-第二个数组
+    * @return int[]-合并后的数组
+    */
+    
+    public static int[] merge(int[] a, int[] b) {
+     
+     if (a == null)  a = new int[0];
+     if (b == null) b = new int[0];
+     
+     int[] merged_one = new int[a.length + b.length];
+     
+     int mi = 0, ai = 0, bi = 0;
+     
+     // 轮流从两个数组中取出较小的值，放入合并后的数组中
+     while (ai &lt; a.length &amp;&amp; bi &lt; b.length) {
+      
+      if (a[ai] &lt;= b[bi]) {
+       merged_one[mi] = a[ai];
+       ai ++;
+      } else {
+       merged_one[mi] = b[bi];
+       bi ++;
+      }
+      
+      mi ++;
+      
+     }
+     
+     // 将某个数组内剩余的数字放入合并后的数组中
+     if (ai &lt; a.length) {
+      for (int i = ai; i &lt; a.length; i++) {
+       merged_one[mi] = a[i];
+       mi ++;
+      }
+     } else {
+      for (int i = bi; i &lt; b.length; i++) {
+       merged_one[mi] = b[i];
+       mi ++;
+      }
+     }
+     
+     return merged_one;
+     
+    }
+</code></pre>
+<p>上述两段代码的结合，就是归并排序的递归实现。你可以用这段代码进行测试：</p>
+<pre><code>public static void main(String[] args) {
+  
+  int[] to_sort = {3434, 3356, 67, 12334, 878667, 387};
+  int[] sorted = Lesson6_1.merge_sort(to_sort);
+  
+  for (int i = 0; i &lt; sorted.length; i++) {
+   System.out.println(sorted[i]);
+  }
+ }
+</code></pre>
+<h2 id="分布式系统中的分治思想">分布式系统中的分治思想</h2>
+<p>聊到这里，你应该已经了解归并排序算法是如何运作的了，也对分而治之的思想有了认识。不过，分而治之更有趣的应用其实是在分布式系统中。</p>
+<p>例如，当需要排序的数组很大（比如达到1024GB的时候），我们没法把这些数据都塞入一台普通机器的内存里。该怎么办呢？有一个办法，我们可以把这个超级大的数据集，分解为多个更小的数据集（比如16GB或者更小），然后分配到多台机器，让它们并行地处理。</p>
+<p>等所有机器处理完后，中央服务器再进行结果的合并。由于多个小任务间不会相互干扰，可以同时处理，这样会大大增加处理的速度，减少等待时间。</p>
+<p>在单台机器上实现归并排序的时候，我们只需要在递归函数内，实现数据分组以及合并就行了。而在多个机器之间分配数据的时候，递归函数内除了分组及合并，还要负责把数据分发到某台机器上。</p>
+<p><img alt="" src="/assets/4b2c6f5dbaa2a244958225ca.jpg"/></p>
+<p>在这个框架图中，你应该可以看到，分布式集群中的数据切分和合并，同单台机器上归并排序的过程是一样的，因此也是使用了分治的思想。从理论的角度来看，上面这个图很容易理解。不过在实际运用中，有个地方需要注意一下。</p>
+<p>上图中的父结点，例如机器1、2、3，它们都没有被分配排序的工作，只是在子结点的排序完成后进行有序数组的合并，因此集群的性能没有得到充分利用。那么，另一种可能的数据切分方式是，每台机器拿出一半的数据给另一台机器处理，而自己来完成剩下一半的数据。</p>
+<p><img alt="" src="/assets/7864f16d5d68e7a7413a39bf.jpg"/></p>
+<p>如果分治的时候，只进行一次问题切分，那么上述层级型的分布式架构就可以转化为类似MapReduce的架构。我画出了MapReduce的主要步骤，你可以看看，这里面有哪些步骤体现了分治的思想？</p>
+<p><img alt="" src="/assets/56ccc41918c3e377a26b3314.jpg"/></p>
+<p>这里面主要有三个步骤用到了分治的思想。</p>
+<h3 id="1-数据分割和映射">1. 数据分割和映射</h3>
+<p>分割是指将数据源进行切分，并将分片发送到Mapper上。映射是指Mapper根据应用的需求，将内容按照键-值的匹配，存储到哈希结构中。这两个步骤将大的数据集合切分为更小的数据集，降低了每台机器节点的负载，因此和分治中的问题分解类似。不过，MapReduce采用了哈希映射来分配数据，而普通的分治或递归不一定需要。</p>
+<h3 id="2-归约">2.归约</h3>
+<p>归约是指接受到的一组键值配对，如果是键内容相同的配对，就将它们的值归并。这和本机的递归调用后返回结果的过程类似。不过，由于哈希映射的关系，MapReduce还需要洗牌的步骤，也就是将键-值的配对不断地发给对应的Reducer进行归约。普通的分治或递归不一定需要洗牌的步骤。</p>
+<h3 id="3-合并">3.合并</h3>
+<p>为了提升洗牌阶段的效率，可以选择减少发送到归约阶段的键-值配对。具体做法是在数据映射和洗牌之间，加入合并的过程，在每个Mapper节点上先进行一次本地的归约。然后只将合并的结果发送到洗牌和归约阶段。这和本机的递归调用后返回结果的过程类似。</p>
+<p>说了这么多，你现在对分治应该有比较深入的理解了。实际上，分治主要就是用在将复杂问题转化为若干个规模相当的小问题上。分治思想通常包括问题的细分和结果的合并，正好对应于递归编程的函数嵌套调用和函数结果的返回。细分后的问题交给嵌套调用的函数去解决，而结果合并之后交由函数进行返回。所以，分治问题适合使用递归来实现。同时，分治的思想也可以帮助我们设计分布式系统和并行计算，细分后的问题交给不同的机器来处理，而其中的某些机器专门负责收集来自不同机器的处理结果，完成结果的合并。</p>
+<h2 id="小结">小结</h2>
+<p>这两节我们学习了递归法。递归采用了和数学归纳法类似的思想，但是它用的是逆向递推，化繁为简，把复杂的问题逐步简化。再加上分治原理，我们就可以更有效地把问题细分，进行并行化的处理。</p>
+<p>而计算机编程中的函数嵌套调用，正好对应了数学中递归的逆向递推，所以你只要弄明白了数学递推式，就能非常容易的写出对应的递归编码。这是为什么递归在编程领域有着非常广泛的应用。不过，需要注意的是，递归编程在没有开始返回结果之前，保存了大量的中间结果，所以比较消耗系统资源。这也是一般的编程语言都会限制递归的深度（也就是嵌套的次数）的原因。</p>
+<p><img alt="" src="/assets/dafc336869eb247e3837d3cf.jpg"/></p>
+<h2 id="思考题">思考题</h2>
+<p>你有没有想过，在归并排序的时候，为什么每次都将原有的数组分解为两组，而不是更多组呢？如果分为更多组，是否可行？</p>
+<p>欢迎在留言区交作业，并写下你今天的学习笔记。你可以点击“请朋友读”，把今天的内容分享给你的好友，和他一起精进。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

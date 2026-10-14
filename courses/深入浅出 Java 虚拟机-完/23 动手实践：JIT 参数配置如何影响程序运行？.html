@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>23 动手实践：JIT 参数配置如何影响程序运行？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/index.html">深入浅出 Java 虚拟机-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">27 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入浅出 Java 虚拟机-完</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9AJVM%EF%BC%8C%E4%B8%80%E5%9D%97%E9%9A%BE%E5%95%83%E7%9A%84%E9%AA%A8%E5%A4%B4.html">00 开篇词：JVM，一块难啃的骨头</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/01%20%E4%B8%80%E6%8E%A2%E7%A9%B6%E7%AB%9F%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%20JVM%EF%BC%9F%E5%AE%83%E5%A4%84%E5%9C%A8%E4%BB%80%E4%B9%88%E4%BD%8D%E7%BD%AE%EF%BC%9F.html">01 一探究竟：为什么需要 JVM？它处在什么位置？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/02%20%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E4%BD%A0%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8E%8C%E6%8F%A1%E7%9A%84%20JVM%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html">02 大厂面试题：你不得不掌握的 JVM 内存管理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/03%20%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E4%BB%8E%E8%A6%86%E7%9B%96%20JDK%20%E7%9A%84%E7%B1%BB%E5%BC%80%E5%A7%8B%E6%8E%8C%E6%8F%A1%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6.html">03 大厂面试题：从覆盖 JDK 的类开始掌握类的加载机制</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/04%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E6%A0%88%E5%B8%A7%E7%9C%8B%E5%AD%97%E8%8A%82%E7%A0%81%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%20JVM%20%E4%B8%AD%E8%BF%9B%E8%A1%8C%E6%B5%81%E8%BD%AC%E7%9A%84.html">04 动手实践：从栈帧看字节码是如何在 JVM 中进行流转的</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/05%20%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E5%BE%97%E5%BF%83%E5%BA%94%E6%89%8B%E5%BA%94%E5%AF%B9%20OOM%20%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87.html">05 大厂面试题：得心应手应对 OOM 的疑难杂症</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/06%20%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%EF%BC%9A%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">06 深入剖析：垃圾回收你真的了解吗？（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/07%20%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%EF%BC%9A%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">07 深入剖析：垃圾回收你真的了解吗？（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/08%20%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E6%9C%89%E4%BA%86%20G1%20%E8%BF%98%E9%9C%80%E8%A6%81%E5%85%B6%E4%BB%96%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%90%97%EF%BC%9F.html">08 大厂面试题：有了 G1 还需要其他垃圾回收器吗？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/09%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BC%B0%E7%AE%97%E5%92%8C%E8%B0%83%E4%BC%98.html">09 案例实战：亿级流量高并发下如何进行估算和调优</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/10%20%E7%AC%AC09%E8%AE%B2%EF%BC%9A%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E9%9D%A2%E5%AF%B9%E7%AA%81%E5%A6%82%E5%85%B6%E6%9D%A5%E7%9A%84%20GC%20%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%B8%8B%E6%89%8B%E8%A7%A3%E5%86%B3.html">10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/11%20%E7%AC%AC10%E8%AE%B2%EF%BC%9A%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%87%AA%E5%B7%B1%E6%A8%A1%E6%8B%9F%20JVM%20%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%9C%BA%E6%99%AF.html">11 第10讲：动手实践：自己模拟 JVM 内存溢出场景</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/12%20%E7%AC%AC11%E8%AE%B2%EF%BC%9A%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E4%B8%8D%E8%A6%81%E6%85%8C%EF%BC%8C%E8%BD%BB%E6%9D%BE%E6%90%9E%E5%AE%9A%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F.html">12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/13%20%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20MAT%20%E6%89%BE%E5%88%B0%E9%97%AE%E9%A2%98%E5%8F%91%E7%94%9F%E7%9A%84%E6%A0%B9%E6%9C%AC%E5%8E%9F%E5%9B%A0.html">13 工具进阶：如何利用 MAT 找到问题发生的根本原因</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/14%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%AE%A9%E9%9D%A2%E8%AF%95%E5%AE%98%E5%88%AE%E7%9B%AE%E7%9B%B8%E7%9C%8B%E7%9A%84%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98%E6%8E%92%E6%9F%A5.html">14 动手实践：让面试官刮目相看的堆外内存排查</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/15%20%E9%A2%84%E8%AD%A6%E4%B8%8E%E8%A7%A3%E5%86%B3%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20GC%20%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98.html">15 预警与解决：深入浅出 GC 监控与调优</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/16%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%80%E4%B8%AA%E9%AB%98%E6%AD%BB%E4%BA%A1%E7%8E%87%E7%9A%84%E6%8A%A5%E8%A1%A8%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BC%98%E5%8C%96%E4%B9%8B%E8%B7%AF.html">16 案例分析：一个高死亡率的报表系统的优化之路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/17%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%90%8E%EF%BC%8C%E6%88%91%E7%9A%84%E5%BA%94%E7%94%A8%E5%B4%A9%E6%BA%83%E4%BA%86.html">17 案例分析：分库分表后，我的应用崩溃了</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/18%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E5%AD%97%E8%8A%82%E7%A0%81%E7%9C%8B%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0.html">18 动手实践：从字节码看方法调用的底层实现</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/19%20%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E4%B8%8D%E8%A6%81%E6%90%9E%E6%B7%B7%20JMM%20%E4%B8%8E%20JVM.html">19 大厂面试题：不要搞混 JMM 与 JVM</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E5%AD%97%E8%8A%82%E7%A0%81%E7%9C%8B%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0.html">20 动手实践：从字节码看并发编程的底层实现</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/21%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%B8%8D%E4%B8%BA%E4%BA%BA%E7%86%9F%E7%9F%A5%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4.html">21 动手实践：不为人熟知的字节码指令</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/22%20%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Java%20Agent%20%E6%8A%80%E6%9C%AF%E5%AF%B9%E5%AD%97%E8%8A%82%E7%A0%81%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%94%B9.html">22 深入剖析：如何使用 Java Agent 技术对字节码进行修改</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/23%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9AJIT%20%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%EF%BC%9F.html">23 动手实践：JIT 参数配置如何影响程序运行？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/24%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%A4%A7%E5%9E%8B%E9%A1%B9%E7%9B%AE%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%E8%B0%83%E4%BC%98%EF%BC%9F.html">24 案例分析：大型项目如何进行性能瓶颈调优？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/25%20%E6%9C%AA%E6%9D%A5%EF%BC%9AJVM%20%E7%9A%84%E5%8E%86%E5%8F%B2%E4%B8%8E%E5%B1%95%E6%9C%9B.html">25 未来：JVM 的历史与展望</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/26%20%E7%A6%8F%E5%88%A9%EF%BC%9A%E5%B8%B8%E8%A7%81%20JVM%20%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A1%A5%E5%85%85.html">26 福利：常见 JVM 面试题补充</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/23%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9AJIT%20%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="23 动手实践：JIT 参数配置如何影响程序运行？" id="title">23 动手实践：JIT 参数配置如何影响程序运行？</h1>
+<div><p>本课时我们主要分享一个实践案例，JIT 参数配置是如何影响程序运行的。</p>
+<p>我们在前面的课时中介绍了很多字节码指令，这也是 Java 能够跨平台的保证。程序在运行的时候，这些指令会按照顺序解释执行，但是，这种解释执行的方式是非常低效的，它需要把字节码先<strong>翻译</strong>成机器码，才能往下执行。另外，字节码是 Java 编译器做的一次初级优化，许多代码可以满足语法分析，但还有很大的优化空间。</p>
+<p>所以，为了提高热点代码的执行效率，在运行时，虚拟机将会把这些代码编译成与本地平台相关的机器码，并进行各种层次的优化。完成这个任务的编译器，就称为<strong>即时编译器</strong>（Just In Time Compiler），简称 <strong>JIT 编译器</strong>。</p>
+<p>热点代码，就是那些被频繁调用的代码，比如调用次数很高或者在 for 循环里的那些代码。这些再次编译后的机器码会被缓存起来，以备下次使用，但对于那些执行次数很少的代码来说，这种编译动作就纯属浪费。</p>
+<p>在第 14 课时我们提到了参数“-XX:ReservedCodeCacheSize”，用来限制 CodeCache 的大小。也就是说，JIT 编译后的代码都会放在 CodeCache 里。</p>
+<p>如果这个空间不足，JIT 就无法继续编译，编译执行会变成解释执行，性能会降低一个数量级。同时，JIT 编译器会一直尝试去优化代码，从而造成了 CPU 占用上升。</p>
+<p><img alt="img" src="/assets/639cd561c9b3cfcc0a20e5fc.jpg"/></p>
+<h2 id="jitwatch">JITWatch</h2>
+<p>在开始之前，我们首先介绍一个观察 JIT 执行过程的图形化工具：JITWatch，这个工具非常好用，可以解析 JIT 的日志并友好地展示出来。<a href="https://github.com/AdoptOpenJDK/jitwatch" target="_blank">项目地址请点击这里查看</a>。</p>
+<p>下载之后，进入解压目录，执行 ant 即可编译出执行文件。</p>
+<h3 id="产生-jit-日志">产生 JIT 日志</h3>
+<p>我们观察下面的一段代码，这段代码没有什么意义，而且写得很烂。在 test 函数中循环 cal 函数 1 千万次，在 cal 函数中，还有一些冗余的上锁操作和赋值操作，这些操作在解释执行的时候，会加重 JVM 的负担。</p>
+<pre><code>public class JITDemo {
+    Integer a = 1000;
+
+    public void setA(Integer a) {
+        this.a = a;    }
+
+    public Integer getA() {
+        return this.a;
+    }
+
+    public Integer cal(int num) {
+        synchronized (new Object()) {
+            Integer a = getA();
+            int b = a * 10;
+            b = a * 100;
+            return b + num;
+        }
+    }
+
+    public int test() {
+        synchronized (new Object()) {
+            int total = 0;
+            int count = 100_000_00;
+            for (int i = 0; i &lt; count; i++) {
+                total += cal(i);
+                if (i % 1000 == 0) {
+                    System.out.println(i * 1000);
+                }
+            }
+            return total;
+        }
+    }
+
+    public static void main(String[] args) {
+        JITDemo demo = new JITDemo();
+        int total = demo.test();
+</code></pre>
+<p>在方法执行的时候，我们加上一系列参数，用来打印 JIT 最终生成的机器码，执行命令如下所示：</p>
+<pre><code>$JAVA_HOME_13/bin/java -server -XX:+UnlockDiagnosticVMOptions -XX:+TraceClassLoading  -XX:+PrintAssembly -XX:+LogCompilation -XX:LogFile=jitdemo.log JITDemo
+</code></pre>
+<p>执行的过程，会输入到 jitdemo.log 文件里，接下来我们分析这个文件。</p>
+<h3 id="使用">使用</h3>
+<p><img alt="img" src="/assets/c8f50c79f09b5a51c07b5b77.jpg"/></p>
+<p>单击 open log 按钮，打开我们生成的日志文件。</p>
+<p><img alt="img" src="/assets/1296d588c6c874f7c1a6dcfc.jpg"/></p>
+<p>单击 config 按钮，加入要分析的源代码目录和字节码目录。确认后，单击 start 按钮进行分析。</p>
+<p>在右侧找到我们的 test 方法，聚焦光标后，将弹出我们要分析的主要界面。</p>
+<p><img alt="img" src="/assets/74ec0825220fc147ead5e444.jpg"/></p>
+<p>在同一个界面上，我们能够看到源代码、字节码、机器码的对应关系。在右上角，还有 C2/OSR/Level4 这样的字样，可以单击切换。</p>
+<p>单击上图中的 Chain 按钮，还会弹出一个依赖链界面，该界面显示了哪些方法已经被编译了、哪些被内联、哪些是通过普通的方法调用运行的。</p>
+<p><img alt="img" src="/assets/fb2635cbabb7426d16e5076b.jpg"/></p>
+<p>使用 JITWatch 可以看到，调用了 1 千万次的 for 循环代码，已经被 C2 进行编译了。</p>
+<p><img alt="img" src="/assets/fcdadb245e822e396138f6a6.jpg"/></p>
+<h2 id="编译层次">编译层次</h2>
+<p>HotSpot 虚拟机包含多个即时编译器，有 C1、C2 和 Graal，采用的是分层编译的模式。使用 jstack 获得的线程信息，经常能看到它们的身影。</p>
+<p>实验性质的 Graal 可以通过追加 JVM 参数进行开启，命令行如下：</p>
+<pre><code>$JAVA_HOME_13/bin/java -server -XX:+UnlockDiagnosticVMOptions -XX:+TraceClassLoading
+  -XX:+PrintAssembly -XX:+LogCompilation -XX:+UnlockExperimentalVMOptions
+   -XX:+UseJVMCICompiler -XX:LogFile=jitdemo.log JITDemo
+</code></pre>
+<p>不同层次的编译器会产生不一样的效果，机器码也会不同，我们仅看 C1、C2 的一些特点。</p>
+<p>JIT 编译方式有两种：一种是编译方法，另一种是编译循环。分层编译将 JVM 的执行状态分为了五个层次：</p>
+<ul>
+<li>字节码的解释执行；</li>
+<li>执行不带 profiling 的 C1 代码；</li>
+<li>执行仅带方法调用次数，以及循环执行次数 profiling 的 C1 代码；</li>
+<li>执行带所有 profiling 的 C1 代码；</li>
+<li>执行 C2 代码。</li>
+</ul>
+<p>其中，profiling 指的是运行时的程序执行状态数据，比如循环调用的次数、方法调用的次数、分支跳转次数、类型转换次数等。JDK 中的 hprof 工具就是一种 profiler。</p>
+<p>在不启用分层编译的情况下，当方法的调用次数和循环回边的次数总和，超过由参数 -XX:CompileThreshold 指定的阈值时，便会触发即时编译；当启用分层编译时，这个参数将会失效，会采用动态调整的方式进行。</p>
+<p>常见的优化方法有以下几种：</p>
+<ul>
+<li>公共子表达式消除</li>
+<li>数组范围检查消除</li>
+<li>方法内联</li>
+<li>逃逸分析</li>
+</ul>
+<p>我们重点看一下方法内联和逃逸分析。</p>
+<h2 id="方法内联">方法内联</h2>
+<p>在第 17 课时里，我们可以看到方法调用的开销是比较大的，尤其是在调用量非常大的情况下。拿简单的 getter/setter 方法来说，这种方法在 Java 代码中大量存在，我们在访问的时候，需要创建相应的栈帧，访问到需要的字段后，再弹出栈帧，恢复原程序的执行。</p>
+<p>如果能够把这些对象的访问和操作，纳入到目标方法的调用范围之内，就少了一次方法调用，速度就能得到提升，这就是方法内联的概念。</p>
+<p>C2 编译器会在解析字节码的过程中完成方法内联。内联后的代码和调用方法的代码，会组成新的机器码，存放在 CodeCache 区域里。</p>
+<p>在 JDK 的源码里，有很多被 <strong>@ForceInline</strong> 注解的方法，这些方法会在执行的时候被强制进行内联；而被 <strong>@DontInline</strong> 注解的方法，则始终不会被内联，比如下面的一段代码。</p>
+<p>java.lang.ClassLoader 的 getClassLoader 方法将会被强制内联。</p>
+<pre><code>@CallerSensitive
+    @ForceInline // to ensure Reflection.getCallerClass optimization
+    public ClassLoader getClassLoader() {
+        ClassLoader cl = getClassLoader0();
+        if (cl == null)
+            return null;
+        SecurityManager sm = System.getSecurityManager();
+        if (sm != null) {
+            ClassLoader.checkClassLoaderPermission(cl, Reflection.getCallerClass());
+        }
+        return cl;
+}
+</code></pre>
+<p>方法内联的过程是非常智能的，内联后的代码，会按照一定规则进行再次优化。最终的机器码，在保证逻辑正确的前提下，可能和我们推理的完全不一样。在非常小的概率下，JIT 会出现 Bug，这时候可以关闭问题方法的内联，或者直接关闭 JIT 的优化，保持解释执行。实际上，这种 Bug 我从来没碰到过。</p>
+<pre><code>-XX:CompileCommand=exclude,com/lagou/Test,test
+</code></pre>
+<p>上面的参数，表示 com.lagou.Test 的 test 方法将不会进行 JIT 编译，一直解释执行。</p>
+<p>另外，C2 支持的内联层次不超过 9 层，太高的话，CodeCache 区域会被挤爆，这个阈值可以通过 -XX:MaxInlineLevel 进行调整。相似的，编译后的代码超过一定大小也不会再内联，这个参数由 -XX:InlineSmallCode 进行调整。</p>
+<p>有非常多的参数，被用来控制对内联方法的选择，整体来说，短小精悍的小方法更容易被优化。</p>
+<p>这和我们在日常中的编码要求是一致的：代码块精简，逻辑清晰的代码，更容易获得优化的空间。</p>
+<p><img alt="img" src="/assets/65e04ab766a1dfa2a9e81119.jpg"/></p>
+<p>我们使用 JITWatch 再看一下对于 getA() 方法的调用，将鼠标悬浮在字节码指令上，可以看到方法已经被内联了。</p>
+<h2 id="逃逸分析">逃逸分析</h2>
+<p>逃逸分析（Escape Analysis）是目前 JVM 中比较前沿的优化技术。通过逃逸分析，JVM 能够分析出一个新的对象使用范围，从而决定是否要将这个对象分配到堆上。</p>
+<p>使用 -XX:+DoEscapeAnalysis 参数可以开启逃逸分析，逃逸分析现在是 JVM 的默认行为，这个参数可以忽略。</p>
+<p>JVM 判断新创建的对象是否逃逸的依据有：</p>
+<ul>
+<li>对象被赋值给堆中对象的字段和类的静态变量；</li>
+<li>对象被传进了不确定的代码中去运行。</li>
+</ul>
+<p>举个例子，在代码 1 中，虽然 map 是一个局部变量，但是它通过 return 语句返回，其他外部方法可能会使用它，这就是方法逃逸。另外，如果被其他线程引用或者赋值，则成为线程逃逸。</p>
+<p>代码 2，用完 Map 之后就直接销毁了，我们就可以说 map 对象没有逃逸。</p>
+<p>代码1：</p>
+<pre><code>public Map fig(){
+    Map map = new HashMap();
+    ...
+    return map;
+}
+</code></pre>
+<p>代码2：</p>
+<pre><code>public void fig(){
+    Map map = new HashMap();
+    ...
+}
+</code></pre>
+<p>那逃逸分析有什么好处呢？</p>
+<ul>
+<li><strong>同步省略</strong>，如果一个对象被发现只能从一个线程被访问到，那么对于这个对象的操作可以不考虑同步。</li>
+<li><strong>栈上分配</strong>，如果一个对象在子程序中被分配，那么指向该对象的指针永远不会逃逸，对象有可能会被优化为栈分配。</li>
+<li><strong>分离对象或标量替换</strong>，有的对象可能不需要作为一个连续的内存结构存在也可以被访问到，那么对象的部分（或全部）可以不存储在内存，而是存储在 CPU 寄存器中。标量是指无法再分解的数据类型，比如原始数据类型及 reference 类型。</li>
+</ul>
+<p><img alt="img" src="/assets/1a8a57e2a43406e172ee95a2.jpg"/></p>
+<p>再来看一下 JITWatch 对 synchronized 代码块的分析。根据提示，由于逃逸分析了解到新建的锁对象 Object 并没有逃逸出方法 cal，它将会在栈上直接分配。</p>
+<p>查看 C2 编译后的机器码，发现并没有同步代码相关的生成。这是因为 JIT 在分析之后，发现针对 new Object() 这个对象并没有发生线程竞争的情况，则会把这部分的同步直接给优化掉。我们在代码层次做了一些无用功，字节码无法发现它，而 JIT 智能地找到了它并进行了优化。</p>
+<p>因此，并不是所有的对象或者数组都会在堆上分配。由于 JIT 的存在，如果发现某些对象没有逃逸出方法，那么就有可能被优化成栈分配。</p>
+<h2 id="intrinsic">intrinsic</h2>
+<p>另外一个不得不提的技术点那就是 intrinsic，这来源于一道面试题：为什么 String 类的 indexOf 方法，比我们使用相同代码实现的方法，执行效率要高得多？</p>
+<p>在翻看 JDK 的源码时，能够看到很多地方使用了 <strong>HotSpotIntrinsicCandidate</strong> 注解。比如 StringBuffer 的 append 方法：</p>
+<pre><code> @Override
+@HotSpotIntrinsicCandidate
+public synchronized StringBuffer append(char c) {
+        toStringCache = null;
+        super.append(c);
+        return this;
+}
+</code></pre>
+<p>被 @HotSpotIntrinsicCandidate 标注的方法，在 HotSpot 中都有一套高效的实现，该高效实现基于 CPU 指令，运行时，HotSpot 维护的高效实现会替代 JDK 的源码实现，从而获得更高的效率。</p>
+<p>上面的问题中，我们往下跟踪实现，可以发现 StringLatin1 类中的 indexOf 方法，同样适用了 HotSpotIntrinsicCandidate 注解，原因也就在于此。</p>
+<pre><code>@HotSpotIntrinsicCandidate
+    public static int indexOf(byte[] value, byte[] str) {
+        if (str.length == 0) {
+            return 0;
+        }
+        if (value.length == 0) {
+            return -1;
+        }
+        return indexOf(value, value.length, str, str.length, 0);
+    }
+
+    @HotSpotIntrinsicCandidate
+    public static int indexOf(byte[] value, int valueCount, byte[] str, int strCount, int fromIndex) {
+        byte first = str[0];
+</code></pre>
+<p><img alt="img" src="/assets/cc81b4042c0cc75957518efc.jpg"/></p>
+<p>JDK 中这种方法有接近 400 个，可以在 IDEA 中使用 <strong>Find Usages</strong> 找到它们。</p>
+<h2 id="小结">小结</h2>
+<p>JIT 是现代 JVM 主要的优化点，能够显著地增加程序的执行效率，从解释执行到最高层次的 C2，一个数量级的性能提升也是有可能的。但即时编译的过程是非常缓慢的，耗时间也费空间，所以这些优化操作会和解释执行同时进行。</p>
+<p>一般，方法首先会被解释执行，然后被 3 层的 C1 编译，最后被 4 层的 C2 编译，这个过程也不是一蹴而就的。</p>
+<p>常用的优化手段，有公共子表达式消除、数组范围检查消除、方法内联、逃逸分析等。</p>
+<p>其中，方法内联通过将短小精悍的代码融入到调用方法的执行逻辑里，来减少方法调用上的开支；逃逸分析通过分析变量的引用范围，对象可能会使用栈上分配的方式来减少 GC 的压力，或者使用标量替换来获取更多的优化。</p>
+<p>这个过程的执行细节并不是那么“确定”，在不同的 JVM 中，甚至在不同的 HotSpot 版本中，效果也不尽相同。</p>
+<p>使用 JITWatch 工具，能够看到字节码和机器码的对应关系，以及执行过程中的一系列优化操作。若想要了解这个工具的更多功能，<a href="https://github.com/AdoptOpenJDK/jitwatch/wiki" target="_blank">可以点击这里参考 wiki</a>。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

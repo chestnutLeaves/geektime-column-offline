@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12 异常处理：别让自己在出问题的时候变为瞎子 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/index.html">Java 业务开发常见错误 100 例</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java 业务开发常见错误 100 例</strong><ul><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9C%9F%E7%9A%84%E4%BC%9A%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E5%9D%91%EF%BC%9F.html">00 开篇词 业务代码真的会有这么多坑？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/01%20%E4%BD%BF%E7%94%A8%E4%BA%86%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%BA%93%EF%BC%8C%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%B0%B1%E9%AB%98%E6%9E%95%E6%97%A0%E5%BF%A7%E4%BA%86%E5%90%97%EF%BC%9F.html">01 使用了并发工具类库，线程安全就高枕无忧了吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/02%20%E4%BB%A3%E7%A0%81%E5%8A%A0%E9%94%81%EF%BC%9A%E4%B8%8D%E8%A6%81%E8%AE%A9%E2%80%9C%E9%94%81%E2%80%9D%E4%BA%8B%E6%88%90%E4%B8%BA%E7%83%A6%E5%BF%83%E4%BA%8B.html">02 代码加锁：不要让“锁”事成为烦心事</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/03%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E6%9C%80%E5%B8%B8%E7%94%A8%E4%B9%9F%E6%9C%80%E5%AE%B9%E6%98%93%E7%8A%AF%E9%94%99%E7%9A%84%E7%BB%84%E4%BB%B6.html">03 线程池：业务代码最常用也最容易犯错的组件</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/04%20%E8%BF%9E%E6%8E%A5%E6%B1%A0%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%B8%AE%E4%BA%86%E5%80%92%E5%BF%99.html">04 连接池：别让连接池帮了倒忙</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/05%20HTTP%E8%B0%83%E7%94%A8%EF%BC%9A%E4%BD%A0%E8%80%83%E8%99%91%E5%88%B0%E8%B6%85%E6%97%B6%E3%80%81%E9%87%8D%E8%AF%95%E3%80%81%E5%B9%B6%E5%8F%91%E4%BA%86%E5%90%97%EF%BC%9F.html">05 HTTP调用：你考虑到超时、重试、并发了吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/06%202%E6%88%90%E7%9A%84%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9A%84Spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%8C%E5%8F%AF%E8%83%BD%E9%83%BD%E6%B2%A1%E5%A4%84%E7%90%86%E6%AD%A3%E7%A1%AE.html">06 2成的业务代码的Spring声明式事务，可能都没处理正确</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/07%20%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E5%B9%B6%E4%B8%8D%E6%98%AF%E4%B8%87%E8%83%BD%E8%8D%AF.html">07 数据库索引：索引并不是万能药</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/08%20%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98%EF%BC%9A%E7%A8%8B%E5%BA%8F%E9%87%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%BD%A0%E5%B0%B1%E6%98%AF%E4%BD%A0%EF%BC%9F.html">08 判等问题：程序里如何确定你就是你？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/09%20%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%EF%BC%9A%E6%B3%A8%E6%84%8F%E7%B2%BE%E5%BA%A6%E3%80%81%E8%88%8D%E5%85%A5%E5%92%8C%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98.html">09 数值计算：注意精度、舍入和溢出问题</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/10%20%E9%9B%86%E5%90%88%E7%B1%BB%EF%BC%9A%E5%9D%91%E6%BB%A1%E5%9C%B0%E7%9A%84List%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C.html">10 集合类：坑满地的List列表操作</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/11%20%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A%E7%9A%84null%E5%92%8C%E6%81%BC%E4%BA%BA%E7%9A%84%E7%A9%BA%E6%8C%87%E9%92%88.html">11 空值处理：分不清楚的null和恼人的空指针</a></li><li><a class="active" aria-current="page" href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/12%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%87%AA%E5%B7%B1%E5%9C%A8%E5%87%BA%E9%97%AE%E9%A2%98%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%98%E4%B8%BA%E7%9E%8E%E5%AD%90.html">12 异常处理：别让自己在出问题的时候变为瞎子</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/13%20%E6%97%A5%E5%BF%97%EF%BC%9A%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95%E7%9C%9F%E6%B2%A1%E4%BD%A0%E6%83%B3%E8%B1%A1%E7%9A%84%E9%82%A3%E4%B9%88%E7%AE%80%E5%8D%95.html">13 日志：日志记录真没你想象的那么简单</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/14%20%E6%96%87%E4%BB%B6IO%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E6%AD%A3%E7%A1%AE%E7%9A%84%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%B9%B6%E9%9D%9E%E6%98%93%E4%BA%8B.html">14 文件IO：实现高效正确的文件读写并非易事</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/15%20%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9A%E4%B8%80%E6%9D%A5%E4%B8%80%E5%9B%9E%E4%BD%A0%E8%BF%98%E6%98%AF%E5%8E%9F%E6%9D%A5%E7%9A%84%E4%BD%A0%E5%90%97%EF%BC%9F.html">15 序列化：一来一回你还是原来的你吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/16%20%E7%94%A8%E5%A5%BDJava%208%E7%9A%84%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%EF%BC%8C%E5%B0%91%E8%B8%A9%E4%B8%80%E4%BA%9B%E2%80%9C%E8%80%81%E4%B8%89%E6%A0%B7%E2%80%9D%E7%9A%84%E5%9D%91.html">16 用好Java 8的日期时间类，少踩一些“老三样”的坑</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/17%20%E5%88%AB%E4%BB%A5%E4%B8%BA%E2%80%9C%E8%87%AA%E5%8A%A8%E6%8C%A1%E2%80%9D%E5%B0%B1%E4%B8%8D%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0OOM.html">17 别以为“自动挡”就不可能出现OOM</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/18%20%E5%BD%93%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E5%92%8C%E6%B3%9B%E5%9E%8B%E9%81%87%E5%88%B0OOP%E6%97%B6%EF%BC%8C%E4%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91%EF%BC%9F.html">18 当反射、注解和泛型遇到OOP时，会有哪些坑？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/19%20Spring%E6%A1%86%E6%9E%B6%EF%BC%9AIoC%E5%92%8CAOP%E6%98%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%A0%B8%E5%BF%83.html">19 Spring框架：IoC和AOP是扩展的核心</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/20%20Spring%E6%A1%86%E6%9E%B6%EF%BC%9A%E6%A1%86%E6%9E%B6%E5%B8%AE%E6%88%91%E4%BB%AC%E5%81%9A%E4%BA%86%E5%BE%88%E5%A4%9A%E5%B7%A5%E4%BD%9C%E4%B9%9F%E5%B8%A6%E6%9D%A5%E4%BA%86%E5%A4%8D%E6%9D%82%E5%BA%A6.html">20 Spring框架：框架帮我们做了很多工作也带来了复杂度</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/21%20%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%EF%BC%9A%E6%90%9E%E5%AE%9A%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BB%9D%E6%8B%9B.html">21 代码重复：搞定代码重复的三个绝招</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/22%20%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%B3%BB%E7%BB%9F%E9%97%B4%E5%AF%B9%E8%AF%9D%E7%9A%84%E8%AF%AD%E8%A8%80%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%BB%9F%E4%B8%80.html">22 接口设计：系统间对话的语言，一定要统一</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/23%20%E7%BC%93%E5%AD%98%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%94%A6%E4%B8%8A%E6%B7%BB%E8%8A%B1%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%90%BD%E4%BA%95%E4%B8%8B%E7%9F%B3.html">23 缓存设计：缓存可以锦上添花也可以落井下石</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/24%20%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%86%99%E5%AE%8C%EF%BC%8C%E5%B0%B1%E6%84%8F%E5%91%B3%E7%9D%80%E7%94%9F%E4%BA%A7%E5%B0%B1%E7%BB%AA%E4%BA%86%EF%BC%9F.html">24 业务代码写完，就意味着生产就绪了？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/25%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E5%A5%BD%E7%94%A8%EF%BC%8C%E4%BD%86%E9%9D%9E%E5%B8%B8%E5%AE%B9%E6%98%93%E7%94%A8%E9%94%99.html">25 异步处理好用，但非常容易用错</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/26%20%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9ANoSQL%E4%B8%8ERDBMS%E5%A6%82%E4%BD%95%E5%8F%96%E9%95%BF%E8%A1%A5%E7%9F%AD%E3%80%81%E7%9B%B8%E8%BE%85%E7%9B%B8%E6%88%90%EF%BC%9F.html">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/27%20%E6%95%B0%E6%8D%AE%E6%BA%90%E5%A4%B4%EF%BC%9A%E4%BB%BB%E4%BD%95%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E4%B8%9C%E8%A5%BF%E9%83%BD%E4%B8%8D%E5%8F%AF%E4%BF%A1%E4%BB%BB.html">27 数据源头：任何客户端的东西都不可信任</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/28%20%E5%AE%89%E5%85%A8%E5%85%9C%E5%BA%95%EF%BC%9A%E6%B6%89%E5%8F%8A%E9%92%B1%E6%97%B6%EF%BC%8C%E5%BF%85%E9%A1%BB%E8%80%83%E8%99%91%E9%98%B2%E5%88%B7%E3%80%81%E9%99%90%E9%87%8F%E5%92%8C%E9%98%B2%E9%87%8D.html">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/29%20%E6%95%B0%E6%8D%AE%E5%92%8C%E4%BB%A3%E7%A0%81%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%B0%B1%E6%98%AF%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%B0%B1%E6%98%AF%E4%BB%A3%E7%A0%81.html">29 数据和代码：数据就是数据，代码就是代码</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/30%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E4%BC%A0%E8%BE%93%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%EF%BC%9F.html">30 如何正确保存和传输敏感数据？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/31%20%E5%8A%A0%E9%A4%901%EF%BC%9A%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E8%AF%BE%E7%A8%8B%E4%B8%ADJava%208%E7%9A%84%E9%82%A3%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E4%B8%80%EF%BC%89.html">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/32%20%E5%8A%A0%E9%A4%902%EF%BC%9A%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E8%AF%BE%E7%A8%8B%E4%B8%ADJava%208%E7%9A%84%E9%82%A3%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E4%BA%8C%EF%BC%89.html">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/33%20%E5%8A%A0%E9%A4%903%EF%BC%9A%E5%AE%9A%E4%BD%8D%E5%BA%94%E7%94%A8%E9%97%AE%E9%A2%98%EF%BC%8C%E6%8E%92%E9%94%99%E5%A5%97%E8%B7%AF%E5%BE%88%E9%87%8D%E8%A6%81.html">33 加餐3：定位应用问题，排错套路很重要</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/34%20%E5%8A%A0%E9%A4%904%EF%BC%9A%E5%88%86%E6%9E%90%E5%AE%9A%E4%BD%8DJava%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E5%A5%BD%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89.html">34 加餐4：分析定位Java问题，一定要用好这些工具（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/35%20%E5%8A%A0%E9%A4%905%EF%BC%9A%E5%88%86%E6%9E%90%E5%AE%9A%E4%BD%8DJava%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E5%A5%BD%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89.html">35 加餐5：分析定位Java问题，一定要用好这些工具（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/36%20%E5%8A%A0%E9%A4%906%EF%BC%9A%E8%BF%9915%E5%B9%B4%E6%9D%A5%EF%BC%8C%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E5%92%8C%E8%8B%B1%E8%AF%AD%E7%9A%84%EF%BC%9F.html">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/37%20%E5%8A%A0%E9%A4%907%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E6%88%90%E9%95%BF28%E8%AE%A1.html">37 加餐7：程序员成长28计</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/38%20%E5%8A%A0%E9%A4%908%EF%BC%9AJava%E7%A8%8B%E5%BA%8F%E4%BB%8E%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%81%E7%A7%BB%E5%88%B0Kubernetes%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91.html">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%B8%80%EF%BC%89.html">答疑篇：代码篇思考题集锦（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%B8%89%EF%BC%89.html">答疑篇：代码篇思考题集锦（三）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%BA%8C%EF%BC%89.html">答疑篇：代码篇思考题集锦（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%8A%A0%E9%A4%90%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：加餐篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%AE%89%E5%85%A8%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：安全篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E8%AE%BE%E8%AE%A1%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：设计篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%86%99%E4%BB%A3%E7%A0%81%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E5%B0%BD%E9%87%8F%E9%81%BF%E5%85%8D%E8%B8%A9%E5%9D%91%EF%BC%9F.html">结束语 写代码时，如何才能尽量避免踩坑？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/12%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%87%AA%E5%B7%B1%E5%9C%A8%E5%87%BA%E9%97%AE%E9%A2%98%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%98%E4%B8%BA%E7%9E%8E%E5%AD%90.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12 异常处理：别让自己在出问题的时候变为瞎子" id="title">12 异常处理：别让自己在出问题的时候变为瞎子</h1>
+<div><p>今天，我来和你聊聊异常处理容易踩的坑。</p>
+<p>应用程序避免不了出异常，捕获和处理异常是考验编程功力的一个精细活。一些业务项目中，我曾看到开发同学在开发业务逻辑时不考虑任何异常处理，项目接近完成时再采用“流水线”的方式进行异常处理，也就是统一为所有方法打上 try…catch…捕获所有异常记录日志，有些技巧的同学可能会使用 AOP 来进行类似的“统一异常处理”。</p>
+<p>其实，这种处理异常的方式非常不可取。那么今天，我就和你分享下不可取的原因、与异常处理相关的坑和最佳实践。</p>
+<h2 id="捕获和处理异常容易犯的错">捕获和处理异常容易犯的错</h2>
+<p>“统一异常处理”方式正是我要说的第一个错：不在业务代码层面考虑异常处理，仅在框架层面粗犷捕获和处理异常。</p>
+<p>为了理解错在何处，我们先来看看大多数业务应用都采用的三层架构：</p>
+<p>Controller 层负责信息收集、参数校验、转换服务层处理的数据适配前端，轻业务逻辑；</p>
+<p>Service 层负责核心业务逻辑，包括各种外部服务调用、访问数据库、缓存处理、消息处理等；</p>
+<p>Repository 层负责数据访问实现，一般没有业务逻辑。</p>
+<p><img alt="img" src="/assets/322e3aa7a816eeaaee331181.png"/></p>
+<p>每层架构的工作性质不同，且从业务性质上异常可能分为业务异常和系统异常两大类，这就决定了很难进行统一的异常处理。我们从底向上看一下三层架构：</p>
+<p>Repository 层出现异常或许可以忽略，或许可以降级，或许需要转化为一个友好的异常。如果一律捕获异常仅记录日志，很可能业务逻辑已经出错，而用户和程序本身完全感知不到。</p>
+<p>Service 层往往涉及数据库事务，出现异常同样不适合捕获，否则事务无法自动回滚。此外 Service 层涉及业务逻辑，有些业务逻辑执行中遇到业务异常，可能需要在异常后转入分支业务流程。如果业务异常都被框架捕获了，业务功能就会不正常。</p>
+<p>如果下层异常上升到 Controller 层还是无法处理的话，Controller 层往往会给予用户友好提示，或是根据每一个 API 的异常表返回指定的异常类型，同样无法对所有异常一视同仁。</p>
+<p>因此，我不建议在框架层面进行异常的自动、统一处理，尤其不要随意捕获异常。但，框架可以做兜底工作。如果异常上升到最上层逻辑还是无法处理的话，可以以统一的方式进行异常转换，比如通过 @RestControllerAdvice + @ExceptionHandler，来捕获这些“未处理”异常：</p>
+<p>对于自定义的业务异常，以 Warn 级别的日志记录异常以及当前 URL、执行方法等信息后，提取异常中的错误码和消息等信息，转换为合适的 API 包装体返回给 API 调用方；</p>
+<p>对于无法处理的系统异常，以 Error 级别的日志记录异常和上下文信息（比如 URL、参数、用户 ID）后，转换为普适的“服务器忙，请稍后再试”异常信息，同样以 API 包装体返回给调用方。</p>
+<p>比如，下面这段代码的做法：</p>
+<pre><code class="language-java">@RestControllerAdvice
+@Slf4j
+public class RestControllerExceptionHandler {
+
+    private static int GENERIC_SERVER_ERROR_CODE = 2000;
+
+    private static String GENERIC_SERVER_ERROR_MESSAGE = "服务器忙，请稍后再试";
+
+    @ExceptionHandler
+    public APIResponse handle(HttpServletRequest req, HandlerMethod method, Exception ex) {
+
+        if (ex instanceof BusinessException) {
+            BusinessException exception = (BusinessException) ex;
+            log.warn(String.format("访问 %s -&gt; %s 出现业务异常！", req.getRequestURI(), method.toString()), ex);
+            return new APIResponse(false, null, exception.getCode(), exception.getMessage());
+        } else {
+            log.error(String.format("访问 %s -&gt; %s 出现系统异常！", req.getRequestURI(), method.toString()), ex);
+            return new APIResponse(false, null, GENERIC_SERVER_ERROR_CODE, GENERIC_SERVER_ERROR_MESSAGE);
+        }
+    }
+}
+</code></pre>
+<p>出现运行时系统异常后，异常处理程序会直接把异常转换为 JSON 返回给调用方：</p>
+<p><img alt="img" src="/assets/f2bbf20f37dc86dbd34d0a25.png"/></p>
+<p>要做得更好，你可以把相关出入参、用户信息在脱敏后记录到日志中，方便出现问题时根据上下文进一步排查。</p>
+<p>第二个错，捕获了异常后直接生吞。在任何时候，我们捕获了异常都不应该生吞，也就是直接丢弃异常不记录、不抛出。这样的处理方式还不如不捕获异常，因为被生吞掉的异常一旦导致 Bug，就很难在程序中找到蛛丝马迹，使得 Bug 排查工作难上加难。</p>
+<p>通常情况下，生吞异常的原因，可能是不希望自己的方法抛出受检异常，只是为了把异常“处理掉”而捕获并生吞异常，也可能是想当然地认为异常并不重要或不可能产生。但不管是什么原因，不管是你认为多么不重要的异常，都不应该生吞，哪怕是一个日志也好。</p>
+<p>第三个错，丢弃异常的原始信息。我们来看两个不太合适的异常处理方式，虽然没有完全生吞异常，但也丢失了宝贵的异常信息。</p>
+<p>比如有这么一个会抛出受检异常的方法 readFile：</p>
+<pre><code class="language-java">private void readFile() throws IOException {
+  Files.readAllLines(Paths.get("a_file"));
+}
+</code></pre>
+<p>像这样调用 readFile 方法，捕获异常后，完全不记录原始异常，直接抛出一个转换后异常，导致出了问题不知道 IOException 具体是哪里引起的：</p>
+<pre><code class="language-java">@GetMapping("wrong1")
+public void wrong1(){
+
+    try {
+        readFile();
+    } catch (IOException e) {
+        //原始异常信息丢失  
+        throw new RuntimeException("系统忙请稍后再试");
+    }
+}
+</code></pre>
+<p>或者是这样，只记录了异常消息，却丢失了异常的类型、栈等重要信息：</p>
+<pre><code class="language-java">catch (IOException e) {
+    //只保留了异常消息，栈没有记录
+    log.error("文件读取错误, {}", e.getMessage());
+    throw new RuntimeException("系统忙请稍后再试");
+}
+</code></pre>
+<p>留下的日志是这样的，看完一脸茫然，只知道文件读取错误的文件名，至于为什么读取错误、是不存在还是没权限，完全不知道。</p>
+<pre><code class="language-log">[12:57:19.746] [http-nio-45678-exec-1] [ERROR] [.g.t.c.e.d.HandleExceptionController:35  ] - 文件读取错误, a_file
+</code></pre>
+<p>这两种处理方式都不太合理，可以改为如下方式：</p>
+<pre><code class="language-java">catch (IOException e) {
+    log.error("文件读取错误", e);
+    throw new RuntimeException("系统忙请稍后再试");
+}
+</code></pre>
+<p>或者，把原始异常作为转换后新异常的 cause，原始异常信息同样不会丢：</p>
+<pre><code class="language-java">catch (IOException e) {
+    throw new RuntimeException("系统忙请稍后再试", e);
+}
+</code></pre>
+<p>其实，JDK 内部也会犯类似的错。之前我遇到一个使用 JDK10 的应用偶发启动失败的案例，日志中可以看到出现类似的错误信息：</p>
+<pre><code class="language-log">Caused by: java.lang.SecurityException: Couldn't parse jurisdiction policy files in: unlimited
+  at java.base/javax.crypto.JceSecurity.setupJurisdictionPolicies(JceSecurity.java:355)
+  at java.base/javax.crypto.JceSecurity.access$000(JceSecurity.java:73)
+  at java.base/javax.crypto.JceSecurity$1.run(JceSecurity.java:109)
+  at java.base/javax.crypto.JceSecurity$1.run(JceSecurity.java:106)
+  at java.base/java.security.AccessController.doPrivileged(Native Method)
+  at java.base/javax.crypto.JceSecurity.&lt;clinit&gt;(JceSecurity.java:105)
+  ... 20 more
+</code></pre>
+<p>查看 JDK JceSecurity 类 setupJurisdictionPolicies 方法源码，发现异常 e 没有记录，也没有作为新抛出异常的 cause，当时读取文件具体出现什么异常（权限问题又或是 IO 问题）可能永远都无法知道了，对问题定位造成了很大困扰：</p>
+<p><img alt="img" src="/assets/cd6a53ef9a0177ad91142f37.png"/></p>
+<p>第四个错，抛出异常时不指定任何消息。我见过一些代码中的偷懒做法，直接抛出没有 message 的异常：</p>
+<pre><code class="language-java">throw new RuntimeException();
+</code></pre>
+<p>这么写的同学可能觉得永远不会走到这个逻辑，永远不会出现这样的异常。但，这样的异常却出现了，被 ExceptionHandler 拦截到后输出了下面的日志信息：</p>
+<pre><code class="language-log">[13:25:18.031] [http-nio-45678-exec-3] [ERROR] [c.e.d.RestControllerExceptionHandler:24  ] - 访问 /handleexception/wrong3 -&gt; org.geekbang.time.commonmistakes.exception.demo1.HandleExceptionController#wrong3(String) 出现系统异常！
+java.lang.RuntimeException: null
+...
+</code></pre>
+<p>这里的 null 非常容易引起误解。按照空指针问题排查半天才发现，其实是异常的 message 为空。</p>
+<p>总之，如果你捕获了异常打算处理的话，除了通过日志正确记录异常原始信息外，通常还有三种处理模式：</p>
+<p>转换，即转换新的异常抛出。对于新抛出的异常，最好具有特定的分类和明确的异常消息，而不是随便抛一个无关或没有任何信息的异常，并最好通过 cause 关联老异常。</p>
+<p>重试，即重试之前的操作。比如远程调用服务端过载超时的情况，盲目重试会让问题更严重，需要考虑当前情况是否适合重试。</p>
+<p>恢复，即尝试进行降级处理，或使用默认值来替代原始数据。</p>
+<p>以上，就是通过 catch 捕获处理异常的一些最佳实践。</p>
+<h2 id="小心-finally-中的异常">小心 finally 中的异常</h2>
+<p>有些时候，我们希望不管是否遇到异常，逻辑完成后都要释放资源，这时可以使用 finally 代码块而跳过使用 catch 代码块。</p>
+<p>但要千万小心 finally 代码块中的异常，因为资源释放处理等收尾操作同样也可能出现异常。比如下面这段代码，我们在 finally 中抛出一个异常：</p>
+<pre><code class="language-java">@GetMapping("wrong")
+public void wrong() {
+    try {
+        log.info("try");
+        //异常丢失
+        throw new RuntimeException("try");
+    } finally {
+        log.info("finally");
+        throw new RuntimeException("finally");
+    }
+}
+</code></pre>
+<p>最后在日志中只能看到 finally 中的异常，虽然 try 中的逻辑出现了异常，但却被 finally 中的异常覆盖了。这是非常危险的，特别是 finally 中出现的异常是偶发的，就会在部分时候覆盖 try 中的异常，让问题更不明显：</p>
+<pre><code class="language-log">[13:34:42.247] [http-nio-45678-exec-1] [ERROR] [.a.c.c.C.[.[.[/].[dispatcherServlet]:175 ] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.RuntimeException: finally] with root cause
+java.lang.RuntimeException: finally
+</code></pre>
+<p>至于异常为什么被覆盖，原因也很简单，因为一个方法无法出现两个异常。修复方式是，finally 代码块自己负责异常捕获和处理：</p>
+<pre><code class="language-java">@GetMapping("right")
+public void right() {
+    try {
+        log.info("try");
+        throw new RuntimeException("try");
+    } finally {
+        log.info("finally");
+        try {
+            throw new RuntimeException("finally");
+        } catch (Exception ex) {
+            log.error("finally", ex);
+        }
+    }
+}
+</code></pre>
+<p>或者可以把 try 中的异常作为主异常抛出，使用 addSuppressed 方法把 finally 中的异常附加到主异常上：</p>
+<pre><code class="language-java">@GetMapping("right2")
+public void right2() throws Exception {
+    Exception e = null;
+    try {
+        log.info("try");
+        throw new RuntimeException("try");
+    } catch (Exception ex) {
+        e = ex;
+    } finally {
+        log.info("finally");
+        try {
+            throw new RuntimeException("finally");
+        } catch (Exception ex) {
+            if (e!= null) {
+                e.addSuppressed(ex);
+            } else {
+                e = ex;
+            }
+        }
+    }
+    throw e;
+}
+</code></pre>
+<p>运行方法可以得到如下异常信息，其中同时包含了主异常和被屏蔽的异常：</p>
+<pre><code class="language-log">java.lang.RuntimeException: try
+  at org.geekbang.time.commonmistakes.exception.finallyissue.FinallyIssueController.right2(FinallyIssueController.java:69)
+  at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+  ...
+  Suppressed: java.lang.RuntimeException: finally
+    at org.geekbang.time.commonmistakes.exception.finallyissue.FinallyIssueController.right2(FinallyIssueController.java:75)
+    ... 54 common frames omitted
+</code></pre>
+<p>其实这正是 try-with-resources 语句的做法，对于实现了 AutoCloseable 接口的资源，建议使用 try-with-resources 来释放资源，否则也可能会产生刚才提到的，释放资源时出现的异常覆盖主异常的问题。比如如下我们定义一个测试资源，其 read 和 close 方法都会抛出异常：</p>
+<pre><code class="language-java">public class TestResource implements AutoCloseable {
+
+    public void read() throws Exception{
+        throw new Exception("read error");
+    }
+
+    @Override
+    public void close() throws Exception {
+        throw new Exception("close error");
+    }
+}
+</code></pre>
+<p>使用传统的 try-finally 语句，在 try 中调用 read 方法，在 finally 中调用 close 方法：</p>
+<pre><code class="language-java">@GetMapping("useresourcewrong")
+public void useresourcewrong() throws Exception {
+
+    TestResource testResource = new TestResource();
+    try {
+        testResource.read();
+    } finally {
+        testResource.close();
+    }
+}
+</code></pre>
+<p>可以看到，同样出现了 finally 中的异常覆盖了 try 中异常的问题：</p>
+<pre><code class="language-log">java.lang.Exception: close error
+  at org.geekbang.time.commonmistakes.exception.finallyissue.TestResource.close(TestResource.java:10)
+  at org.geekbang.time.commonmistakes.exception.finallyissue.FinallyIssueController.useresourcewrong(FinallyIssueController.java:27)
+</code></pre>
+<p>而改为 try-with-resources 模式之后：</p>
+<pre><code class="language-java">@GetMapping("useresourceright")
+public void useresourceright() throws Exception {
+    try (TestResource testResource = new TestResource()){
+        testResource.read();
+    }
+}
+</code></pre>
+<p>try 和 finally 中的异常信息都可以得到保留：</p>
+<pre><code class="language-java">java.lang.Exception: read error
+  at org.geekbang.time.commonmistakes.exception.finallyissue.TestResource.read(TestResource.java:6)
+  ...
+  Suppressed: java.lang.Exception: close error
+    at org.geekbang.time.commonmistakes.exception.finallyissue.TestResource.close(TestResource.java:10)
+    at org.geekbang.time.commonmistakes.exception.finallyissue.FinallyIssueController.useresourceright(FinallyIssueController.java:35)
+    ... 54 common frames omitted
+</code></pre>
+<h2 id="千万别把异常定义为静态变量">千万别把异常定义为静态变量</h2>
+<p>既然我们通常会自定义一个业务异常类型，来包含更多的异常信息，比如异常错误码、友好的错误提示等，那就需要在业务逻辑各处，手动抛出各种业务异常来返回指定的错误码描述（比如对于下单操作，用户不存在返回 2001，商品缺货返回 2002 等）。</p>
+<p>对于这些异常的错误代码和消息，我们期望能够统一管理，而不是散落在程序各处定义。这个想法很好，但稍有不慎就可能会出现把异常定义为静态变量的坑。</p>
+<p>我在救火排查某项目生产问题时，遇到了一件非常诡异的事情：我发现异常堆信息显示的方法调用路径，在当前入参的情况下根本不可能产生，项目的业务逻辑又很复杂，就始终没往异常信息是错的这方面想，总觉得是因为某个分支流程导致业务没有按照期望的流程进行。</p>
+<p>经过艰难的排查，最终定位到原因是把异常定义为了静态变量，导致异常栈信息错乱，类似于定义一个 Exceptions 类来汇总所有的异常，把异常存放在静态字段中：</p>
+<pre><code class="language-java">public class Exceptions {
+    public static BusinessException ORDEREXISTS = new BusinessException("订单已经存在", 3001);
+...
+}
+</code></pre>
+<p>把异常定义为静态变量会导致异常信息固化，这就和异常的栈一定是需要根据当前调用来动态获取相矛盾。</p>
+<p>我们写段代码来模拟下这个问题：定义两个方法 createOrderWrong 和 cancelOrderWrong 方法，它们内部都会通过 Exceptions 类来获得一个订单不存在的异常；先后调用两个方法，然后抛出。</p>
+<pre><code class="language-java">@GetMapping("wrong")
+public void wrong() {
+
+    try {
+        createOrderWrong();
+    } catch (Exception ex) {
+        log.error("createOrder got error", ex);
+    }
+
+    try {
+        cancelOrderWrong();
+    } catch (Exception ex) {
+        log.error("cancelOrder got error", ex);
+    }
+
+}
+
+private void createOrderWrong() {
+    //这里有问题
+    throw Exceptions.ORDEREXISTS;
+}
+
+private void cancelOrderWrong() {
+    //这里有问题
+    throw Exceptions.ORDEREXISTS;
+}
+</code></pre>
+<p>运行程序后看到如下日志，cancelOrder got error 的提示对应了 createOrderWrong 方法。显然，cancelOrderWrong 方法在出错后抛出的异常，其实是 createOrderWrong 方法出错的异常：</p>
+<pre><code class="language-log">[14:05:25.782] [http-nio-45678-exec-1] [ERROR] [.c.e.d.PredefinedExceptionController:25  ] - cancelOrder got error
+org.geekbang.time.commonmistakes.exception.demo2.BusinessException: 订单已经存在
+  at org.geekbang.time.commonmistakes.exception.demo2.Exceptions.&lt;clinit&gt;(Exceptions.java:5)
+  at org.geekbang.time.commonmistakes.exception.demo2.PredefinedExceptionController.createOrderWrong(PredefinedExceptionController.java:50)
+  at org.geekbang.time.commonmistakes.exception.demo2.PredefinedExceptionController.wrong(PredefinedExceptionController.java:18)
+</code></pre>
+<p>修复方式很简单，改一下 Exceptions 类的实现，通过不同的方法把每一种异常都 new 出来抛出即可：</p>
+<pre><code class="language-java">public class Exceptions {
+
+    public static BusinessException orderExists(){
+        return new BusinessException("订单已经存在", 3001);
+    }
+}
+</code></pre>
+<h2 id="提交线程池的任务出了异常会怎么样">提交线程池的任务出了异常会怎么样？</h2>
+<p>在第 3 讲介绍线程池时我提到，线程池常用作异步处理或并行处理。那么，把任务提交到线程池处理，任务本身出现异常时会怎样呢？</p>
+<p>我们来看一个例子：提交 10 个任务到线程池异步处理，第 5 个任务抛出一个 RuntimeException，每个任务完成后都会输出一行日志：</p>
+<pre><code class="language-java">@GetMapping("execute")
+public void execute() throws InterruptedException {
+
+    String prefix = "test";
+    ExecutorService threadPool = Executors.newFixedThreadPool(1, new ThreadFactoryBuilder().setNameFormat(prefix+"%d").get());
+
+    //提交10个任务到线程池处理，第5个任务会抛出运行时异常
+    IntStream.rangeClosed(1, 10).forEach(i -&gt; threadPool.execute(() -&gt; {
+        if (i == 5) throw new RuntimeException("error");
+        log.info("I'm done : {}", i);
+    }));
+
+    threadPool.shutdown();
+    threadPool.awaitTermination(1, TimeUnit.HOURS);
+}
+</code></pre>
+<p>观察日志可以发现两点：</p>
+<pre><code class="language-java">...
+[14:33:55.990] [test0] [INFO ] [e.d.ThreadPoolAndExceptionController:26  ] - I'm done : 4
+Exception in thread "test0" java.lang.RuntimeException: error
+  at org.geekbang.time.commonmistakes.exception.demo3.ThreadPoolAndExceptionController.lambda$null$0(ThreadPoolAndExceptionController.java:25)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+  at java.lang.Thread.run(Thread.java:748)
+[14:33:55.990] [test1] [INFO ] [e.d.ThreadPoolAndExceptionController:26  ] - I'm done : 6
+...
+</code></pre>
+<p>任务 1 到 4 所在的线程是 test0，任务 6 开始运行在线程 test1。由于我的线程池通过线程工厂为线程使用统一的前缀 test 加上计数器进行命名，因此从线程名的改变可以知道因为异常的抛出老线程退出了，线程池只能重新创建一个线程。如果每个异步任务都以异常结束，那么线程池可能完全起不到线程重用的作用。</p>
+<p>因为没有手动捕获异常进行处理，ThreadGroup 帮我们进行了未捕获异常的默认处理，向标准错误输出打印了出现异常的线程名称和异常信息。显然，这种没有以统一的错误日志格式记录错误信息打印出来的形式，对生产级代码是不合适的，ThreadGroup 的相关源码如下所示：</p>
+<pre><code class="language-java">public void uncaughtException(Thread t, Throwable e) {
+        if (parent != null) {
+            parent.uncaughtException(t, e);
+        } else {
+            Thread.UncaughtExceptionHandler ueh =
+                Thread.getDefaultUncaughtExceptionHandler();
+            if (ueh != null) {
+                ueh.uncaughtException(t, e);
+            } else if (!(e instanceof ThreadDeath)) {
+                System.err.print("Exception in thread \""
+                                 \+ t.getName() + "\" ");
+                e.printStackTrace(System.err);
+            }
+        }
+    }
+</code></pre>
+<p>修复方式有 2 步：</p>
+<p>以 execute 方法提交到线程池的异步任务，最好在任务内部做好异常处理；</p>
+<p>设置自定义的异常处理程序作为保底，比如在声明线程池时自定义线程池的未捕获异常处理程序：</p>
+<pre><code class="language-java">new ThreadFactoryBuilder()
+  .setNameFormat(prefix+"%d")
+  .setUncaughtExceptionHandler((thread, throwable)-&gt; log.error("ThreadPool {} got exception", thread, throwable))
+  .get()
+</code></pre>
+<p>或者设置全局的默认未捕获异常处理程序：</p>
+<pre><code class="language-java">static {
+    Thread.setDefaultUncaughtExceptionHandler((thread, throwable)-&gt; log.error("Thread {} got exception", thread, throwable));
+}
+</code></pre>
+<p>通过线程池 ExecutorService 的 execute 方法提交任务到线程池处理，如果出现异常会导致线程退出，控制台输出中可以看到异常信息。那么，把 execute 方法改为 submit，线程还会退出吗，异常还能被处理程序捕获到吗？</p>
+<p>修改代码后重新执行程序可以看到如下日志，说明线程没退出，异常也没记录被生吞了：</p>
+<pre><code class="language-log">[15:44:33.769] [test0] [INFO ] [e.d.ThreadPoolAndExceptionController:47  ] - I'm done : 1
+[15:44:33.770] [test0] [INFO ] [e.d.ThreadPoolAndExceptionController:47  ] - I'm done : 2
+[15:44:33.770] [test0] [INFO ] [e.d.ThreadPoolAndExceptionController:47  ] - I'm done : 3
+[15:44:33.770] [test0] [INFO ] [e.d.ThreadPoolAndExceptionController:47  ] - I'm done : 4
+[15:44:33.770] [test0] [INFO ] [e.d.ThreadPoolAndExceptionController:47  ] - I'm done : 6
+[15:44:33.770] [test0] [INFO ] [e.d.ThreadPoolAndExceptionController:47  ] - I'm done : 7
+[15:44:33.770] [test0] [INFO ] [e.d.ThreadPoolAndExceptionController:47  ] - I'm done : 8
+[15:44:33.771] [test0] [INFO ] [e.d.ThreadPoolAndExceptionController:47  ] - I'm done : 9
+[15:44:33.771] [test0] [INFO ] [e.d.ThreadPoolAndExceptionController:47  ] - I'm done : 10
+</code></pre>
+<p>为什么会这样呢？</p>
+<p>查看 FutureTask 源码可以发现，在执行任务出现异常之后，异常存到了一个 outcome 字段中，只有在调用 get 方法获取 FutureTask 结果的时候，才会以 ExecutionException 的形式重新抛出异常：</p>
+<pre><code class="language-java">public void run() {
+...
+    try {
+        Callable&lt;V&gt; c = callable;
+        if (c != null &amp;&amp; state == NEW) {
+            V result;
+            boolean ran;
+            try {
+                result = c.call();
+                ran = true;
+            } catch (Throwable ex) {
+                result = null;
+                ran = false;
+                setException(ex);
+            }
+...
+}
+
+protected void setException(Throwable t) {
+    if (UNSAFE.compareAndSwapInt(this, stateOffset, NEW, COMPLETING)) {
+        outcome = t;
+        UNSAFE.putOrderedInt(this, stateOffset, EXCEPTIONAL); // final state
+        finishCompletion();
+    }
+}
+
+public V get() throws InterruptedException, ExecutionException {
+    int s = state;
+    if (s &lt;= COMPLETING)
+        s = awaitDone(false, 0L);
+    return report(s);
+}
+
+private V report(int s) throws ExecutionException {
+    Object x = outcome;
+    if (s == NORMAL)
+        return (V)x;
+    if (s &gt;= CANCELLED)
+        throw new CancellationException();
+    throw new ExecutionException((Throwable)x);
+}
+</code></pre>
+<p>修改后的代码如下所示，我们把 submit 返回的 Future 放到了 List 中，随后遍历 List 来捕获所有任务的异常。这么做确实合乎情理。既然是以 submit 方式来提交任务，那么我们应该关心任务的执行结果，否则应该以 execute 来提交任务：</p>
+<pre><code class="language-java">List&lt;Future&gt; tasks = IntStream.rangeClosed(1, 10).mapToObj(i -&gt; threadPool.submit(() -&gt; {
+    if (i == 5) throw new RuntimeException("error");
+    log.info("I'm done : {}", i);
+})).collect(Collectors.toList());
+
+tasks.forEach(task-&gt; {
+    try {
+        task.get();
+    } catch (Exception e) {
+        log.error("Got exception", e);
+    }
+});
+</code></pre>
+<p>执行这段程序可以看到如下的日志输出：</p>
+<pre><code class="language-log">[15:44:13.543] [http-nio-45678-exec-1] [ERROR] [e.d.ThreadPoolAndExceptionController:69  ] - Got exception
+java.util.concurrent.ExecutionException: java.lang.RuntimeException: error
+</code></pre>
+<h2 id="重点回顾">重点回顾</h2>
+<p>在今天的文章中，我介绍了处理异常容易犯的几个错和最佳实践。</p>
+<p>第一，注意捕获和处理异常的最佳实践。首先，不应该用 AOP 对所有方法进行统一异常处理，异常要么不捕获不处理，要么根据不同的业务逻辑、不同的异常类型进行精细化、针对性处理；其次，处理异常应该杜绝生吞，并确保异常栈信息得到保留；最后，如果需要重新抛出异常的话，请使用具有意义的异常类型和异常消息。</p>
+<p>第二，务必小心 finally 代码块中资源回收逻辑，确保 finally 代码块不出现异常，内部把异常处理完毕，避免 finally 中的异常覆盖 try 中的异常；或者考虑使用 addSuppressed 方法把 finally 中的异常附加到 try 中的异常上，确保主异常信息不丢失。此外，使用实现了 AutoCloseable 接口的资源，务必使用 try-with-resources 模式来使用资源，确保资源可以正确释放，也同时确保异常可以正确处理。</p>
+<p>第三，虽然在统一的地方定义收口所有的业务异常是一个不错的实践，但务必确保异常是每次 new 出来的，而不能使用一个预先定义的 static 字段存放异常，否则可能会引起栈信息的错乱。</p>
+<p>第四，确保正确处理了线程池中任务的异常，如果任务通过 execute 提交，那么出现异常会导致线程退出，大量的异常会导致线程重复创建引起性能问题，我们应该尽可能确保任务不出异常，同时设置默认的未捕获异常处理程序来兜底；如果任务通过 submit 提交意味着我们关心任务的执行结果，应该通过拿到的 Future 调用其 get 方法来获得任务运行结果和可能出现的异常，否则异常可能就被生吞了。</p>
+<p>今天用到的代码，我都放在了 GitHub 上，你可以点击这个链接查看。</p>
+<h2 id="思考与讨论">思考与讨论</h2>
+<p>关于在 finally 代码块中抛出异常的坑，如果在 finally 代码块中返回值，你觉得程序会以 try 或 catch 中返回值为准，还是以 finally 中的返回值为准呢？</p>
+<p>对于手动抛出的异常，不建议直接使用 Exception 或 RuntimeException，通常建议复用 JDK 中的一些标准异常，比如IllegalArgumentException、IllegalStateException、UnsupportedOperationException，你能说说它们的适用场景，并列出更多常用异常吗？</p>
+<p>不知道针对异常处理，你还遇到过什么坑，还有什么最佳实践的心得吗？我是朱晔，欢迎在评论区与我留言分享，也欢迎你把这篇文章分享给你的朋友或同事，一起交流。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

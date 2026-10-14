@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16 数据结构：Vec_T_、&amp;[T]、Box_[T]_ ，你真的了解集合容器么？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/index.html">陈天 · Rust 编程第一课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">63 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>陈天 · Rust 编程第一课</strong><ul><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E8%AE%A9Rust%E6%88%90%E4%B8%BA%E4%BD%A0%E7%9A%84%E4%B8%8B%E4%B8%80%E9%97%A8%E4%B8%BB%E5%8A%9B%E8%AF%AD%E8%A8%80.html">00 开篇词 让Rust成为你的下一门主力语言</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/01%20%E5%86%85%E5%AD%98%EF%BC%9A%E5%80%BC%E6%94%BE%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%94%BE%E6%A0%88%E4%B8%8A%EF%BC%8C%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98.html">01 内存：值放堆上还是放栈上，这是一个问题</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/02%20%E4%B8%B2%E8%AE%B2%EF%BC%9A%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91%E4%B8%AD%EF%BC%8C%E9%82%A3%E4%BA%9B%E4%BD%A0%E9%9C%80%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html">02 串讲：编程开发中，那些你需要掌握的基本概念</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/03%20%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84%EF%BC%9A%E4%BB%8E%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AARust%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%A7%8B%EF%BC%81.html">03 初窥门径：从你的第一个Rust程序开始！</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/04%20get%20hands%20dirty%EF%BC%9A%E6%9D%A5%E5%86%99%E4%B8%AA%E5%AE%9E%E7%94%A8%E7%9A%84CLI%E5%B0%8F%E5%B7%A5%E5%85%B7.html">04 get hands dirty：来写个实用的CLI小工具</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/05%20get%20hands%20dirty%EF%BC%9A%E5%81%9A%E4%B8%80%E4%B8%AA%E5%9B%BE%E7%89%87%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9C%89%E5%A4%9A%E9%9A%BE%EF%BC%9F.html">05 get hands dirty：做一个图片服务器有多难？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/06%20get%20hands%20dirty%EF%BC%9ASQL%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7%E6%80%8E%E4%B9%88%E4%B8%80%E9%B1%BC%E5%A4%9A%E5%90%83%EF%BC%9F.html">06 get hands dirty：SQL查询工具怎么一鱼多吃？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/07%20%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E5%80%BC%E7%9A%84%E7%94%9F%E6%9D%80%E5%A4%A7%E6%9D%83%E5%88%B0%E5%BA%95%E5%9C%A8%E8%B0%81%E6%89%8B%E4%B8%8A%EF%BC%9F.html">07 所有权：值的生杀大权到底在谁手上？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/08%20%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E5%80%BC%E7%9A%84%E5%80%9F%E7%94%A8%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">08 所有权：值的借用是如何工作的？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/09%20%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%80%BC%E5%8F%AF%E4%BB%A5%E6%9C%89%E5%A4%9A%E4%B8%AA%E6%89%80%E6%9C%89%E8%80%85%E4%B9%88%EF%BC%9F.html">09 所有权：一个值可以有多个所有者么？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/10%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9A%E4%BD%A0%E5%88%9B%E5%BB%BA%E7%9A%84%E5%80%BC%E7%A9%B6%E7%AB%9F%E8%83%BD%E6%B4%BB%E5%A4%9A%E4%B9%85%EF%BC%9F.html">10 生命周期：你创建的值究竟能活多久？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/11%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9A%E4%BB%8E%E5%88%9B%E5%BB%BA%E5%88%B0%E6%B6%88%E4%BA%A1%EF%BC%8C%E5%80%BC%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.html">11 内存管理：从创建到消亡，值都经历了什么？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/12%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9ARust%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">12 类型系统：Rust的类型系统有什么特点？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/13%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8trait%E6%9D%A5%E5%AE%9A%E4%B9%89%E6%8E%A5%E5%8F%A3%EF%BC%9F.html">13 类型系统：如何使用trait来定义接口？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/14%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84trait%EF%BC%9F.html">14 类型系统：有哪些必须掌握的trait？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/15%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E8%BF%99%E4%BA%9B%E6%B5%93%E7%9C%89%E5%A4%A7%E7%9C%BC%E7%9A%84%E7%BB%93%E6%9E%84%E7%AB%9F%E7%84%B6%E9%83%BD%E6%98%AF%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%EF%BC%9F.html">15 数据结构：这些浓眉大眼的结构竟然都是智能指针？</a></li><li><a class="active" aria-current="page" href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/16%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9AVec_T_%E3%80%81%26%5BT%5D%E3%80%81Box_%5BT%5D_%20%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E9%9B%86%E5%90%88%E5%AE%B9%E5%99%A8%E4%B9%88%EF%BC%9F.html">16 数据结构：Vec_T_、&amp;[T]、Box_[T]_ ，你真的了解集合容器么？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/17%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A0%B8%E5%BF%83%E9%83%A8%E4%BB%B6%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%8C%E5%86%85%E5%AD%98%E5%A6%82%E4%BD%95%E5%B8%83%E5%B1%80%EF%BC%9F.html">17 数据结构：软件系统核心部件哈希表，内存如何布局？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/18%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Rust%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BC%97%E4%B8%8D%E5%90%8C%EF%BC%9F.html">18 错误处理：为什么Rust的错误处理与众不同？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/19%20%E9%97%AD%E5%8C%85%EF%BC%9AFnOnce%E3%80%81FnMut%E5%92%8CFn%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E7%B1%BB%E5%9E%8B%EF%BC%9F.html">19 闭包：FnOnce、FnMut和Fn，为什么有这么多类型？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/20%204%20Steps%20%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9B%B4%E5%A5%BD%E5%9C%B0%E9%98%85%E8%AF%BBRust%E6%BA%90%E7%A0%81%EF%BC%9F.html">20 4 Steps ：如何更好地阅读Rust源码？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/21%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%881%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B.html">21 阶段实操（1）：构建一个简单的KV server-基本流程</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/22%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%882%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B.html">22 阶段实操（2）：构建一个简单的KV server-基本流程</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/23%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%9E%E6%88%98%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%EF%BC%9F.html">23 类型系统：如何在实战中使用泛型编程？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/24%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%9E%E6%88%98%E4%B8%AD%E4%BD%BF%E7%94%A8trait%20object%EF%BC%9F.html">24 类型系统：如何在实战中使用trait object？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/25%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9B%B4%E7%BB%95trait%E6%9D%A5%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%9E%B6%E6%9E%84%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">25 类型系统：如何围绕trait来设计和架构系统？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/26%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%883%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E9%AB%98%E7%BA%A7trait%E6%8A%80%E5%B7%A7.html">26 阶段实操（3）：构建一个简单的KV server-高级trait技巧</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/27%20%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E6%9C%89%E7%9A%84Rust%E5%BA%93%E5%8F%AF%E4%BB%A5%E4%B8%BA%E6%88%91%E6%89%80%E7%94%A8%EF%BC%9F.html">27 生态系统：有哪些常有的Rust库可以为我所用？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/28%20%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Rust%E5%A4%84%E7%90%86%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%EF%BC%9F.html">28 网络开发（上）：如何使用Rust处理网络请求？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/29%20%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Rust%E5%A4%84%E7%90%86%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%EF%BC%9F.html">29 网络开发（下）：如何使用Rust处理网络请求？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/30%20Unsafe%20Rust%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8C%2B%2B%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E5%BC%80Rust%EF%BC%9F.html">30 Unsafe Rust：如何用C++的方式打开Rust？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/31%20FFI%EF%BC%9ARust%E5%A6%82%E4%BD%95%E5%92%8C%E4%BD%A0%E7%9A%84%E8%AF%AD%E8%A8%80%E6%9E%B6%E8%B5%B7%E6%B2%9F%E9%80%9A%E6%A1%A5%E6%A2%81%EF%BC%9F.html">31 FFI：Rust如何和你的语言架起沟通桥梁？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/32%20%E5%AE%9E%E6%93%8D%E9%A1%B9%E7%9B%AE%EF%BC%9A%E4%BD%BF%E7%94%A8PyO3%E5%BC%80%E5%8F%91Python3%E6%A8%A1%E5%9D%97.html">32 实操项目：使用PyO3开发Python3模块</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8Eatomics%E5%88%B0Channel%EF%BC%8CRust%E9%83%BD%E6%8F%90%E4%BE%9B%E4%BA%86%E4%BB%80%E4%B9%88%E5%B7%A5%E5%85%B7%EF%BC%9F.html">33 并发处理（上）：从atomics到Channel，Rust都提供了什么工具？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BB%8Eatomics%E5%88%B0Channel%EF%BC%8CRust%E9%83%BD%E6%8F%90%E4%BE%9B%E4%BA%86%E4%BB%80%E4%B9%88%E5%B7%A5%E5%85%B7%EF%BC%9F.html">34 并发处理（下）：从atomics到Channel，Rust都提供了什么工具？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/35%20%E5%AE%9E%E6%93%8D%E9%A1%B9%E7%9B%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84MPSC%20channel%EF%BC%9F.html">35 实操项目：如何实现一个基本的MPSC channel？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/36%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%884%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E7%BD%91%E7%BB%9C%E5%A4%84%E7%90%86.html">36 阶段实操（4）：构建一个简单的KV server-网络处理</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/37%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%885%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8.html">37 阶段实操（5）：构建一个简单的KV server-网络安全</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/38%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%EF%BC%9AFuture%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%AE%83%E5%92%8Casync_await%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">38 异步处理：Future是什么？它和async_await是什么关系？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/39%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%EF%BC%9Aasync_await%E5%86%85%E9%83%A8%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">39 异步处理：async_await内部是怎么实现的？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/40%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%BC%82%E6%AD%A5IO%EF%BC%9F.html">40 异步处理：如何处理异步IO？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/41%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%886%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86.html">41 阶段实操（6）：构建一个简单的KV server-异步处理</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/42%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%887%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%A6%82%E4%BD%95%E5%81%9A%E5%A4%A7%E7%9A%84%E9%87%8D%E6%9E%84%EF%BC%9F.html">42 阶段实操（7）：构建一个简单的KV server-如何做大的重构？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/43%20%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%EF%BC%9A%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E4%B8%8B%E7%9A%84%E4%B8%80%E4%B8%AARust%E9%A1%B9%E7%9B%AE%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E8%A6%81%E7%B4%A0%EF%BC%9F.html">43 生产环境：真实世界下的一个Rust项目包含哪些要素？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/44%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E5%A6%82%E4%BD%95%E6%89%93%E4%BA%A4%E9%81%93%EF%BC%9F.html">44 数据处理：应用程序和数据如何打交道？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/45%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%888%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E9%85%8D%E7%BD%AE_%E6%B5%8B%E8%AF%95_%E7%9B%91%E6%8E%A7_CI_CD.html">45 阶段实操（8）：构建一个简单的KV server-配置_测试_监控_CI_CD</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/46%20%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8Rust%E6%9E%B6%E6%9E%84%E5%A4%8D%E6%9D%82%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">46 软件架构：如何用Rust架构复杂系统？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20Rust2021%E7%89%88%E6%AC%A1%E9%97%AE%E4%B8%96%E4%BA%86%EF%BC%81.html">加餐 Rust2021版次问世了！</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E4%BB%A3%E7%A0%81%E5%8D%B3%E6%95%B0%E6%8D%AE%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%AE%8F%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%EF%BC%9F.html">加餐 代码即数据：为什么我们需要宏编程能力？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%AE%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E7%94%A8%E6%9C%80%E2%80%9C%E7%AC%A8%E2%80%9D%E7%9A%84%E6%96%B9%E5%BC%8F%E6%92%B0%E5%86%99%E5%AE%8F.html">加餐 宏编程（上）：用最“笨”的方式撰写宏</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%AE%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E7%94%A8%20syn_quote%20%E4%BC%98%E9%9B%85%E5%9C%B0%E6%9E%84%E5%BB%BA%E5%AE%8F.html">加餐 宏编程（下）：用 syn_quote 优雅地构建宏</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%84%9A%E6%98%A7%E4%B9%8B%E5%B7%85%EF%BC%9A%E4%BD%A0%E7%9A%84Rust%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html">加餐 愚昧之巅：你的Rust学习常见问题汇总</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%9C%9F%E4%B8%AD%E6%B5%8B%E8%AF%95%EF%BC%9A%E5%8F%82%E8%80%83%E5%AE%9E%E7%8E%B0%E8%AE%B2%E8%A7%A3.html">加餐 期中测试：参考实现讲解</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%9C%9F%E4%B8%AD%E6%B5%8B%E8%AF%95%EF%BC%9A%E6%9D%A5%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84grep%E5%91%BD%E4%BB%A4%E8%A1%8C.html">加餐 期中测试：来写一个简单的grep命令行</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%BF%99%E4%B8%AA%E4%B8%93%E6%A0%8F%E4%BD%A0%E5%8F%AF%E4%BB%A5%E6%80%8E%E4%B9%88%E5%AD%A6%EF%BC%8C%E4%BB%A5%E5%8F%8ARust%E6%98%AF%E5%90%A6%E5%80%BC%E5%BE%97%E5%AD%A6%EF%BC%9F.html">加餐 这个专栏你可以怎么学，以及Rust是否值得学？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E5%9C%BA%20%E5%BC%80%E6%82%9F%E4%B9%8B%E5%9D%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9ARust%E7%9A%84%E7%8E%B0%E7%8A%B6%E3%80%81%E6%9C%BA%E9%81%87%E4%B8%8E%E6%8C%91%E6%88%98.html">大咖助场 开悟之坡（上）：Rust的现状、机遇与挑战</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E5%9C%BA%20%E5%BC%80%E6%82%9F%E4%B9%8B%E5%9D%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ARust%E7%9A%84%E7%8E%B0%E7%8A%B6%E3%80%81%E6%9C%BA%E9%81%87%E4%B8%8E%E6%8C%91%E6%88%98.html">大咖助场 开悟之坡（下）：Rust的现状、机遇与挑战</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%89%B9%E5%88%AB%E7%AD%96%E5%88%92%20%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%90%AC%E5%90%AC%E8%AF%BE%E4%BB%A3%E8%A1%A8%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4.html">特别策划 学习锦囊（一）：听听课代表们怎么说</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%89%B9%E5%88%AB%E7%AD%96%E5%88%92%20%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%90%AC%E5%90%AC%E8%AF%BE%E4%BB%A3%E8%A1%A8%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4.html">特别策划 学习锦囊（三）：听听课代表们怎么说</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%89%B9%E5%88%AB%E7%AD%96%E5%88%92%20%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%90%AC%E5%90%AC%E8%AF%BE%E4%BB%A3%E8%A1%A8%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4.html">特别策划 学习锦囊（二）：听听课代表们怎么说</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E7%BB%9D%E6%9C%9B%E4%B9%8B%E8%B0%B7%EF%BC%9A%E6%94%B9%E5%8F%98%E4%BB%8E%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%A7%8B.html">用户故事 绝望之谷：改变从学习开始</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E8%AF%AD%E8%A8%80%E4%B8%8D%E4%BB%85%E6%98%AF%E5%B7%A5%E5%85%B7%EF%BC%8C%E8%BF%98%E6%98%AF%E6%80%9D%E7%BB%B4%E6%96%B9%E5%BC%8F.html">用户故事 语言不仅是工具，还是思维方式</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%B0%B8%E7%BB%AD%E4%B9%8B%E5%8E%9F%EF%BC%9ARust%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%A6%82%E4%BD%95%E6%8C%81%E7%BB%AD%E7%B2%BE%E8%BF%9B%EF%BC%9F.html">结束语 永续之原：Rust学习，如何持续精进？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/16%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9AVec_T_%E3%80%81%26%5BT%5D%E3%80%81Box_%5BT%5D_%20%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E9%9B%86%E5%90%88%E5%AE%B9%E5%99%A8%E4%B9%88%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="16 数据结构：Vec_T_、&amp;[T]、Box_[T]_ ，你真的了解集合容器么？" id="title">16 数据结构：Vec_T_、&amp;[T]、Box_[T]_ ，你真的了解集合容器么？</h1>
+<div><p>16｜数据结构：Vec<t>、&amp;[T]、Box&lt;[T]&gt; ，你真的了解集合容器么？</t></p>
+<p>你好，我是陈天。今天来学集合容器。</p>
+<p>现在我们接触到了越来越多的数据结构，我把 Rust 中主要的数据结构从原生类型、容器类型和系统相关类型几个维度整理一下，你可以数数自己掌握了哪些。-
+<img alt="" src="/assets/f8190ad36fcc632bbd908906.jpg"/>-
+可以看到，容器占据了数据结构的半壁江山。</p>
+<p>提到容器，很可能你首先会想到的就是数组、列表这些可以遍历的容器，但其实<strong>只要把某种特定的数据封装在某个数据结构中</strong>，这个数据结构就是一个容器。比如 Option<t>，它是一个包裹了 T 存在或不存在的容器，而Cow 是一个封装了内部数据 B 或被借用或拥有所有权的容器。</t></p>
+<p>对于容器的两小类，到目前为止，像 Cow 这样，为特定目的而产生的容器我们已经介绍了不少，包括 Box、Rc、Arc、RefCell、还没讲到的 Option 和 Result 等。</p>
+<p>今天我们来详细讲讲另一类，集合容器。</p>
+<h2 id="集合容器">集合容器</h2>
+<p>集合容器，顾名思义，就是把一系列拥有相同类型的数据放在一起，统一处理，比如：</p>
+<ul>
+<li>我们熟悉的字符串 String、数组 [T; n]、列表 Vec<t>和哈希表 HashMap<k, v="">等；</k,></t></li>
+<li>虽然到处在使用，但还并不熟悉的切片 slice；</li>
+<li>在其他语言中使用过，但在 Rust 中还没有用过的循环缓冲区 VecDeque<t>、双向列表 LinkedList<t> 等。</t></t></li>
+</ul>
+<p>这些集合容器有很多共性，比如可以被遍历、可以进行 map-reduce 操作、可以从一种类型转换成另一种类型等等。</p>
+<p>我们会选取两类典型的集合容器：切片和哈希表，深入解读，理解了这两类容器，其它的集合容器设计思路都差不多，并不难学习。今天先介绍切片以及和切片相关的容器，下一讲我们学习哈希表。</p>
+<h2 id="切片究竟是什么">切片究竟是什么？</h2>
+<p>在 Rust 里，切片是描述一组属于同一类型、长度不确定的、在内存中连续存放的数据结构，用 [T] 来表述。因为长度不确定，所以切片是个 DST（Dynamically Sized Type）。</p>
+<p>切片一般只出现在数据结构的定义中，不能直接访问，在使用中主要用以下形式：</p>
+<ul>
+<li>&amp;[T]：表示一个只读的切片引用。</li>
+<li>&amp;mut [T]：表示一个可写的切片引用。</li>
+<li>Box&lt;[T]&gt;：一个在堆上分配的切片。</li>
+</ul>
+<p>怎么理解切片呢？我打个比方，<strong>切片之于具体的数据结构，就像数据库中的视图之于表</strong>。你可以把它看成一种工具，让我们可以统一访问行为相同、结构类似但有些许差异的类型。</p>
+<p>来看下面的<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=73d5c0dd98f17a31a8e9bf914eb5ea2f" target="_blank">代码</a>，辅助理解：</p>
+<pre><code>fn main() {
+    let arr = [1, 2, 3, 4, 5];
+    let vec = vec![1, 2, 3, 4, 5];
+    let s1 = &amp;arr[..2];
+    let s2 = &amp;vec[..2];
+    println!("s1: {:?}, s2: {:?}", s1, s2);
+
+    // &amp;[T] 和 &amp;[T] 是否相等取决于长度和内容是否相等
+    assert_eq!(s1, s2);
+    // &amp;[T] 可以和 Vec&lt;T&gt;/[T;n] 比较，也会看长度和内容
+    assert_eq!(&amp;arr[..], vec);
+    assert_eq!(&amp;vec[..], arr);
+}
+</code></pre>
+<p>对于 array 和 vector，虽然是不同的数据结构，一个放在栈上，一个放在堆上，但它们的切片是类似的；而且对于相同内容数据的相同切片，比如 &amp;arr[1…3] 和 &amp;vec[1…3]，这两者是等价的。除此之外，切片和对应的数据结构也可以直接比较，这是因为它们之间实现了 PartialEq trait（<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#impl-PartialEq%3C%26%27_%20%5BU%5D%3E" target="_blank">源码参考资料</a>）。</p>
+<p>下图比较清晰地呈现了切片和数据之间的关系：<img alt="" src="/assets/73bef317efe04ad686944bd9.jpg"/></p>
+<p>另外在 Rust 下，切片日常中都是使用引用 &amp;[T]，所以很多同学容易搞不清楚 &amp;[T] 和 &amp;Vec<t> 的区别。我画了张图，帮助你更好地理解它们的关系：<img alt="" src="/assets/faa98ee413721e3cebfa56d0.jpg"/></t></p>
+<p>在使用的时候，支持切片的具体数据类型，你可以根据需要，解引用转换成切片类型。比如 Vec<t> 和 [T; n] 会转化成为 &amp;[T]，这是因为 Vec<t> 实现了 Deref trait，而 array 内建了到 &amp;[T] 的解引用。我们可以写一段代码验证这一行为（<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=984d9ee43c82f3774798f16c9176761e" target="_blank">代码</a>）：</t></t></p>
+<pre><code>use std::fmt;
+fn main() {
+    let v = vec![1, 2, 3, 4];
+
+    // Vec 实现了 Deref，&amp;Vec&lt;T&gt; 会被自动解引用为 &amp;[T]，符合接口定义
+    print_slice(&amp;v);
+    // 直接是 &amp;[T]，符合接口定义
+    print_slice(&amp;v[..]);
+
+    // &amp;Vec&lt;T&gt; 支持 AsRef&lt;[T]&gt;
+    print_slice1(&amp;v);
+    // &amp;[T] 支持 AsRef&lt;[T]&gt;
+    print_slice1(&amp;v[..]);
+    // Vec&lt;T&gt; 也支持 AsRef&lt;[T]&gt;
+    print_slice1(v);
+
+    let arr = [1, 2, 3, 4];
+    // 数组虽没有实现 Deref，但它的解引用就是 &amp;[T]
+    print_slice(&amp;arr);
+    print_slice(&amp;arr[..]);
+    print_slice1(&amp;arr);
+    print_slice1(&amp;arr[..]);
+    print_slice1(arr);
+}
+
+// 注意下面的泛型函数的使用
+fn print_slice&lt;T: fmt::Debug&gt;(s: &amp;[T]) {
+    println!("{:?}", s);
+}
+
+fn print_slice1&lt;T, U&gt;(s: T)
+where
+    T: AsRef&lt;[U]&gt;,
+    U: fmt::Debug,
+{
+    println!("{:?}", s.as_ref());
+}
+</code></pre>
+<p>这也就意味着，通过解引用，这几个和切片有关的数据结构都会获得切片的所有能力，包括：binary_search、chunks、concat、contains、start_with、end_with、group_by、iter、join、sort、split、swap 等一系列丰富的功能，感兴趣的同学可以看<a href="https://doc.rust-lang.org/std/primitive.slice.html" target="_blank">切片的文档</a>。</p>
+<h2 id="切片和迭代器-iterator">切片和迭代器 Iterator</h2>
+<p>迭代器可以说是切片的孪生兄弟。<strong>切片是集合数据的视图，而迭代器定义了对集合数据的各种各样的访问操作</strong>。</p>
+<p>通过切片的 <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.iter" target="_blank">iter() 方法</a>，我们可以生成一个迭代器，对切片进行迭代。</p>
+<p>在[第12讲]Rust类型推导已经见过了 iterator trait（用 <code>collect</code> 方法把过滤出来的数据形成新列表）。iterator trait 有大量的方法，但绝大多数情况下，我们只需要定义它的关联类型 Item 和 next() 方法。</p>
+<ul>
+<li><p>Item 定义了每次我们从迭代器中取出的数据类型；</p></li>
+<li><p>next() 是从迭代器里取下一个值的方法。当一个迭代器的 next() 方法返回 None 时，表明迭代器中没有数据了。</p>
+<p>#[must_use = “iterators are lazy and do nothing unless consumed”]
+pub trait Iterator {</p>
+<pre><code>type Item;
+fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
+// 大量缺省的方法，包括 size_hint, count, chain, zip, map, 
+// filter, for_each, skip, take_while, flat_map, flatten
+// collect, partition 等
+	... 
+</code></pre>
+<p>}</p></li>
+</ul>
+<p>看一个例子，对 Vec<t> 使用 iter() 方法，并进行各种 map/filter/take 操作。在函数式编程语言中，这样的写法很常见，代码的可读性很强。Rust 也支持这种写法（<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=64917cb8aae8e8476a8fdf21c81d6810" target="_blank">代码</a>）：</t></p>
+<pre><code>fn main() {
+    // 这里 Vec&lt;T&gt; 在调用 iter() 时被解引用成 &amp;[T]，所以可以访问 iter()
+    let result = vec![1, 2, 3, 4]
+        .iter()
+        .map(|v| v * v)
+        .filter(|v| *v &lt; 16)
+        .take(1)
+        .collect::&lt;Vec&lt;_&gt;&gt;();
+
+    println!("{:?}", result);
+}
+</code></pre>
+<p>需要注意的是 Rust 下的迭代器是个懒接口（lazy interface），也就是说<strong>这段代码直到运行到 collect 时才真正开始执行，之前的部分不过是在不断地生成新的结构</strong>，来累积处理逻辑而已。你可能好奇，这是怎么做到的呢？</p>
+<p>在 VS Code 里，如果你使用了 rust-analyzer 插件，就可以发现这一奥秘：-
+<img alt="" src="/assets/206aa25bad78efc30a7d24cd.png"/></p>
+<p>原来，Iterator 大部分方法都返回一个实现了 Iterator 的数据结构，所以可以这样一路链式下去，在 Rust 标准库中，这些数据结构被称为 <a href="https://doc.rust-lang.org/src/core/iter/adapters/mod.rs.html" target="_blank">Iterator Adapter</a>。比如上面的 map 方法，它返回 Map 结构，而 Map 结构实现了 Iterator（<a href="https://doc.rust-lang.org/src/core/iter/adapters/map.rs.html#93-133" target="_blank">源码</a>）。</p>
+<p>整个过程是这样的（链接均为源码资料）：</p>
+<ul>
+<li>在 collect() 执行的时候，它实际<a href="https://doc.rust-lang.org/src/core/iter/traits/iterator.rs.html#1744-1749" target="_blank">试图使用 FromIterator 从迭代器中构建一个集合类型</a>，这会不断调用 next() 获取下一个数据；</li>
+<li>此时的 Iterator 是 Take，Take 调自己的 next()，也就是它会<a href="https://doc.rust-lang.org/src/core/iter/adapters/take.rs.html#34-41" target="_blank">调用 Filter 的 next()</a>；</li>
+<li>Filter 的 next() 实际上<a href="https://doc.rust-lang.org/src/core/iter/adapters/filter.rs.html#55-57" target="_blank">调用自己内部的 iter 的 find()</a>，此时内部的 iter 是 Map，find() 会<a href="https://doc.rust-lang.org/src/core/iter/traits/iterator.rs.html#2312-2325" target="_blank">使用 try_fold()</a>，它会<a href="https://doc.rust-lang.org/src/core/iter/traits/iterator.rs.html#2382-2406" target="_blank">继续调用 next()</a>，也就是 Map 的 next()；</li>
+<li>Map 的 next() 会<a href="https://doc.rust-lang.org/src/core/iter/adapters/map.rs.html#100-102" target="_blank">调用其内部的 iter 取 next() 然后执行 map 函数</a>。而此时内部的 iter 来自 Vec<i32>。</i32></li>
+</ul>
+<p>所以，只有在 collect() 时，才触发代码一层层调用下去，并且调用会根据需要随时结束。这段代码中我们使用了 take(1)，整个调用链循环一次，就能满足 take(1) 以及所有中间过程的要求，所以它只会循环一次。</p>
+<p>你可能会有疑惑：这种函数式编程的写法，代码是漂亮了，然而这么多无谓的函数调用，性能肯定很差吧？毕竟，函数式编程语言的一大恶名就是性能差。</p>
+<p>这个你完全不用担心， Rust 大量使用了 inline 等优化技巧，这样非常清晰友好的表达方式，性能和 C 语言的 for 循环差别不大。如果你对性能对比感兴趣，可以去最后的参考资料区看看。</p>
+<p>介绍完是什么，按惯例我们就要上代码实际使用一下了。不过迭代器是非常重要的一个功能，基本上每种语言都有对迭代器的完整支持，所以只要你之前用过，对此应该并不陌生，大部分的方法，你一看就能明白是在做什么。所以这里就不再额外展示，等你遇到具体需求时，可以翻 <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html" target="_blank">Iterator 的文档</a>查阅。</p>
+<p>如果标准库中的功能还不能满足你的需求，你可以看看 <a href="https://docs.rs/itertools/0.10.1/itertools/trait.Itertools.html" target="_blank">itertools</a>，它是和 Python 下 itertools 同名且功能类似的工具，提供了大量额外的 adapter。可以看一个简单的例子（<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=b32253334d886a5ccd263f9870fb8a3d" target="_blank">代码</a>）：</p>
+<pre><code>use itertools::Itertools;
+
+fn main() {
+    let err_str = "bad happened";
+    let input = vec![Ok(21), Err(err_str), Ok(7)];
+    let it = input
+        .into_iter()
+        .filter_map_ok(|i| if i &gt; 10 { Some(i * 2) } else { None });
+    // 结果应该是：vec![Ok(42), Err(err_str)]
+    println!("{:?}", it.collect::&lt;Vec&lt;_&gt;&gt;());
+}
+</code></pre>
+<p>在实际开发中，我们可能从一组 Future 中汇聚出一组结果，里面有成功执行的结果，也有失败的错误信息。如果想对成功的结果进一步做 filter/map，那么标准库就无法帮忙了，就需要用 itertools 里的 filter_map_ok()。</p>
+<h2 id="特殊的切片-str">特殊的切片：&amp;str</h2>
+<p>好，学完了普通的切片 &amp;[T]，我们来看一种特殊的切片：&amp;str。之前讲过，String 是一个特殊的 Vec<u8>，所以在 String 上做切片，也是一个特殊的结构 &amp;str。</u8></p>
+<p>对于 String、&amp;String、&amp;str，很多人也经常分不清它们的区别，我们在之前的一篇加餐中简单聊了这个问题，在上一讲智能指针中，也对比过String和&amp;str。对于&amp;String 和 &amp;str，如果你理解了上文中 &amp;Vec<t> 和 &amp;[T] 的区别，那么它们也是一样的：<img alt="" src="/assets/9c731aed04cba895768e89e5.jpg"/></t></p>
+<p><strong>String 在解引用时，会转换成 &amp;str</strong>。可以用下面的代码验证（<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=fc4ceb67d2da2e99e11c390f4ce6317d" target="_blank">代码</a>）：</p>
+<pre><code>use std::fmt;
+fn main() {
+    let s = String::from("hello");
+    // &amp;String 会被解引用成 &amp;str
+    print_slice(&amp;s);
+    // &amp;s[..] 和 s.as_str() 一样，都会得到 &amp;str
+    print_slice(&amp;s[..]);
+
+    // String 支持 AsRef&lt;str&gt;
+    print_slice1(&amp;s);
+    print_slice1(&amp;s[..]);
+    print_slice1(s.clone());
+
+    // String 也实现了 AsRef&lt;[u8]&gt;，所以下面的代码成立
+    // 打印出来是 [104, 101, 108, 108, 111]
+    print_slice2(&amp;s);
+    print_slice2(&amp;s[..]);
+    print_slice2(s);
+}
+
+fn print_slice(s: &amp;str) {
+    println!("{:?}", s);
+}
+
+fn print_slice1&lt;T: AsRef&lt;str&gt;&gt;(s: T) {
+    println!("{:?}", s.as_ref());
+}
+
+fn print_slice2&lt;T, U&gt;(s: T)
+where
+    T: AsRef&lt;[U]&gt;,
+    U: fmt::Debug,
+{
+    println!("{:?}", s.as_ref());
+}
+</code></pre>
+<p>有同学会有疑问：那么字符的列表和字符串有什么关系和区别？我们直接写一段代码来看看：</p>
+<pre><code>use std::iter::FromIterator;
+
+fn main() {
+    let arr = ['h', 'e', 'l', 'l', 'o'];
+    let vec = vec!['h', 'e', 'l', 'l', 'o'];
+    let s = String::from("hello");
+    let s1 = &amp;arr[1..3];
+    let s2 = &amp;vec[1..3];
+    // &amp;str 本身就是一个特殊的 slice
+    let s3 = &amp;s[1..3];
+    println!("s1: {:?}, s2: {:?}, s3: {:?}", s1, s2, s3);
+
+    // &amp;[char] 和 &amp;[char] 是否相等取决于长度和内容是否相等
+    assert_eq!(s1, s2);
+    // &amp;[char] 和 &amp;str 不能直接对比，我们把 s3 变成 Vec&lt;char&gt;
+    assert_eq!(s2, s3.chars().collect::&lt;Vec&lt;_&gt;&gt;());
+    // &amp;[char] 可以通过迭代器转换成 String，String 和 &amp;str 可以直接对比
+    assert_eq!(String::from_iter(s2), s3);
+}
+</code></pre>
+<p>可以看到，字符列表可以通过迭代器转换成 String，String 也可以通过 chars() 函数转换成字符列表，如果不转换，二者不能比较。</p>
+<p>下图我把数组、列表、字符串以及它们的切片放在一起比较，可以帮你更好地理解它们的区别：<img alt="" src="/assets/bb5f2214bc82120fc8c65502.jpg"/></p>
+<h2 id="切片的引用和堆上的切片-它们是一回事么">切片的引用和堆上的切片，它们是一回事么？</h2>
+<p>开头我们讲过，切片主要有三种使用方式：切片的只读引用 &amp;[T]、切片的可变引用 &amp;mut [T] 以及 Box&lt;[T]&gt;。刚才已经详细学习了只读切片 &amp;[T]，也和其他各种数据结构进行了对比帮助理解，可变切片 &amp;mut [T] 和它类似，不必介绍。</p>
+<p>现在我们来看看 Box&lt;[T]&gt;。</p>
+<p>Box&lt;[T]&gt; 是一个比较有意思的存在，它和 Vec<t> 有一点点差别：Vec<t> 有额外的 capacity，可以增长；<strong>而 Box&lt;[T]&gt; 一旦生成就固定下来，没有 capacity，也无法增长</strong>。</t></t></p>
+<p>Box&lt;[T]&gt;和切片的引用&amp;[T] 也很类似：它们都是在栈上有一个包含长度的胖指针，指向存储数据的内存位置。区别是：Box&lt;[T]&gt; 只会指向堆，&amp;[T] 指向的位置可以是栈也可以是堆；此外，Box&lt;[T]&gt; 对数据具有所有权，而 &amp;[T] 只是一个借用。<img alt="" src="/assets/f898767d505f69e4c85e08a8.jpg"/></p>
+<p>那么如何产生 Box&lt;[T]&gt; 呢？目前可用的接口就只有一个：从已有的 Vec<t> 中转换。我们看代码：</t></p>
+<pre><code>use std::ops::Deref;
+
+fn main() {
+    let mut v1 = vec![1, 2, 3, 4];
+    v1.push(5);
+    println!("cap should be 8: {}", v1.capacity());
+
+    // 从 Vec&lt;T&gt; 转换成 Box&lt;[T]&gt;，此时会丢弃多余的 capacity
+    let b1 = v1.into_boxed_slice();
+    let mut b2 = b1.clone();
+
+    let v2 = b1.into_vec();
+    println!("cap should be exactly 5: {}", v2.capacity());
+
+    assert!(b2.deref() == v2);
+
+    // Box&lt;[T]&gt; 可以更改其内部数据，但无法 push
+    b2[0] = 2;
+    // b2.push(6);
+    println!("b2: {:?}", b2);
+
+    // 注意 Box&lt;[T]&gt; 和 Box&lt;[T; n]&gt; 并不相同
+    let b3 = Box::new([2, 2, 3, 4, 5]);
+    println!("b3: {:?}", b3);
+
+    // b2 和 b3 相等，但 b3.deref() 和 v2 无法比较
+    assert!(b2 == b3);
+    // assert!(b3.deref() == v2);
+}
+</code></pre>
+<p>运行代码可以看到，Vec<t> 可以通过 into_boxed_slice() 转换成 Box&lt;[T]&gt;，Box&lt;[T]&gt; 也可以通过 into_vec() 转换回 Vec<t>。</t></t></p>
+<p>这两个转换都是很轻量的转换，只是变换一下结构，不涉及数据的拷贝。区别是，当 Vec<t> 转换成 Box&lt;[T]&gt; 时，没有使用到的容量就会被丢弃，所以整体占用的内存可能会降低。而且Box&lt;[T]&gt; 有一个很好的特性是，不像 Box&lt;[T;n]&gt; 那样在编译时就要确定大小，它可以在运行期生成，以后大小不会再改变。</t></p>
+<p>所以，<strong>当我们需要在堆上创建固定大小的集合数据，且不希望自动增长，那么，可以先创建 Vec<t>，再转换成 Box&lt;[T]&gt;</t></strong>。tokio 在提供 broadcast channel 时，就使用了 Box&lt;[T]&gt; 这个特性，你感兴趣的话，可以自己看看<a href="https://github.com/tokio-rs/tokio/blob/master/tokio/src/sync/broadcast.rs#L447" target="_blank">源码</a>。</p>
+<h2 id="小结">小结</h2>
+<p>我们讨论了切片以及和切片相关的主要数据类型。切片是一个很重要的数据类型，你可以着重理解它存在的意义，以及使用方式。</p>
+<p>今天学完相信你也看到了，围绕着切片有很多数据结构，而<strong>切片将它们抽象成相同的访问方式，实现了在不同数据结构之上的同一抽象</strong>，这种方法很值得我们学习。此外，当我们构建自己的数据结构时，如果它内部也有连续排列的等长的数据结构，可以考虑 AsRef 或者 Deref 到切片。</p>
+<p>下图描述了切片和数组 [T;n]、列表 Vec<t>、切片引用 &amp;[T] /&amp;mut [T]，以及在堆上分配的切片 Box&lt;[T]&gt; 之间的关系。建议你花些时间理解这张图，也可以用相同的方式去总结学到的其他有关联的数据结构。-
+<img alt="" src="/assets/5aff50bc14c13739406950f9.jpg"/></t></p>
+<p>下一讲我们继续学习哈希表……</p>
+<h3 id="思考题">思考题</h3>
+<p>1.在讲 &amp;str 时，里面的 print_slice1 函数，如果写成这样可不可以？你可以尝试一下，然后说明理由。</p>
+<pre><code>// fn print_slice1&lt;T: AsRef&lt;str&gt;&gt;(s: T) {
+//    println!("{:?}", s.as_ref());
+// }
+
+fn print_slice1&lt;T, U&gt;(s: T)
+where
+    T: AsRef&lt;U&gt;,
+    U: fmt::Debug,
+{
+    println!("{:?}", s.as_ref());
+}
+</code></pre>
+<p>2.类似 itertools，你可以试着开发一个新的 Iterator trait IteratorExt，为其提供 window_count 函数，使其可以做下图中的动作（<a href="https://rxjs.dev/api/operators/windowCount" target="_blank">来源</a>）：-
+<img alt="" src="/assets/4561028e29f3235968354b4b.png"/></p>
+<p>感谢你的阅读，如果你觉得有收获，也欢迎你分享给你身边的朋友，邀他一起讨论。你已经完成了Rust学习的第16次打卡啦，我们下节课见。</p>
+<h3 id="参考资料-rust-的-iterator-究竟有多快">参考资料：Rust 的 Iterator 究竟有多快？</h3>
+<p>当使用 Iterator 提供的这种函数式编程风格的时候，我们往往会担心性能。虽然我告诉你 Rust 大量使用 inline 来优化，但你可能还心存疑惑。</p>
+<p>下面的代码和截图来自一个 Youtube 视频：<a href="https://youtu.be/-hGbMp0sBvM?t=913" target="_blank">Sharing code between iOS &amp; Android with Rust</a>，演讲者通过在使用 Iterator 处理一个很大的图片，比较 Rust/Swift/Kotlin native/C 这几种语言的性能。你也可以看到在处理迭代器时， Rust 代码和 Kotlin 或者 Swift 代码非常类似。</p>
+<p><img alt="" src="/assets/915ac781c051b235b51778a5.png" title="Rust/Kotlin 代码"/></p>
+<p><img alt="" src="/assets/03416901b7b3911e1e1fde57.png" title="Swift 代码"/></p>
+<p>运行结果，在函数式编程方式下（C 没有函数式编程支持，所以直接使用了 for 循环），Rust 和 C 几乎相当在1s 左右，C 比 Rust 快 20%，Swift 花了 11.8s，而 Kotlin native 直接超时：-
+<img alt="" src="/assets/1e03294d1b136a6f321d39eb.png"/></p>
+<p>所以 Rust 在对函数式编程，尤其是 Iterator 上的优化，还是非常不错的。这里面除了 inline 外，Rust 闭包的优异性能也提供了很多支持（未来我们会讲为什么）。在使用时，你完全不用担心性能。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

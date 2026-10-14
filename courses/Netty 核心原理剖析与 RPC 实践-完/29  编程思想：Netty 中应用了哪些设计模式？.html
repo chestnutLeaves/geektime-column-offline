@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>29  编程思想：Netty 中应用了哪些设计模式？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/index.html">Netty 核心原理剖析与 RPC 实践-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">32 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Netty 核心原理剖析与 RPC 实践-完</strong><ul><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/00%20%E5%AD%A6%E5%A5%BD%20Netty%EF%BC%8C%E6%98%AF%E4%BD%A0%E4%BF%AE%E7%82%BC%20Java%20%E5%86%85%E5%8A%9F%E7%9A%84%E5%BF%85%E7%BB%8F%E4%B9%8B%E8%B7%AF.html">00 学好 Netty，是你修炼 Java 内功的必经之路</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/01%20%20%E5%88%9D%E8%AF%86%20Netty%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%20Netty%20%E8%BF%99%E4%B9%88%E6%B5%81%E8%A1%8C%EF%BC%9F.html">01  初识 Netty：为什么 Netty 这么流行？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/02%20%20%E7%BA%B5%E8%A7%88%E5%85%A8%E5%B1%80%EF%BC%9A%E6%8A%8A%E6%8F%A1%20Netty%20%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%84%89%E7%BB%9C.html">02  纵览全局：把握 Netty 整体架构脉络</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/03%20%20%E5%BC%95%E5%AF%BC%E5%99%A8%E4%BD%9C%E7%94%A8%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%90%AF%E5%8A%A8%E9%83%BD%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">03  引导器作用：客户端和服务端启动都要做些什么？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/04%20%E4%BA%8B%E4%BB%B6%E8%B0%83%E5%BA%A6%E5%B1%82%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%20EventLoop%20%E6%98%AF%20Netty%20%E7%9A%84%E7%B2%BE%E9%AB%93%EF%BC%9F.html">04 事件调度层：为什么 EventLoop 是 Netty 的精髓？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/05%20%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%B1%82%EF%BC%9APipeline%20%E5%A6%82%E4%BD%95%E5%8D%8F%E8%B0%83%E5%90%84%E7%B1%BB%20Handler%20%EF%BC%9F.html">05  服务编排层：Pipeline 如何协调各类 Handler ？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/06%20%20%E7%B2%98%E5%8C%85%E6%8B%86%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8C%85%EF%BC%9F.html">06  粘包拆包问题：如何获取一个完整的网络包？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/07%20%20%E6%8E%A5%E5%A4%B4%E6%9A%97%E8%AF%AD%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20Netty%20%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8D%8F%E8%AE%AE%E9%80%9A%E4%BF%A1%EF%BC%9F.html">07  接头暗语：如何利用 Netty 实现自定义协议通信？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/08%20%20%E5%BC%80%E7%AE%B1%E5%8D%B3%E7%94%A8%EF%BC%9ANetty%20%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E8%A7%A3%E7%A0%81%E5%99%A8%EF%BC%9F.html">08  开箱即用：Netty 支持哪些常用的解码器？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/09%20%20%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9AwriteAndFlush%20%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%E5%89%96%E6%9E%90.html">09  数据传输：writeAndFlush 处理流程剖析</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/10%20%20%E5%8F%8C%E5%88%83%E5%89%91%EF%BC%9A%E5%90%88%E7%90%86%E7%AE%A1%E7%90%86%20Netty%20%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98.html">10  双刃剑：合理管理 Netty 堆外内存</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/11%20%20%E5%8F%A6%E8%B5%B7%E7%82%89%E7%81%B6%EF%BC%9ANetty%20%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E8%BD%BD%E4%BD%93%20ByteBuf%20%E8%AF%A6%E8%A7%A3.html">11  另起炉灶：Netty 数据传输载体 ByteBuf 详解</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/12%20%20%E4%BB%96%E5%B1%B1%E4%B9%8B%E7%9F%B3%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%99%A8%20jemalloc%20%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86.html">12  他山之石：高性能内存分配器 jemalloc 基本原理</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/13%20%20%E4%B8%BE%E4%B8%80%E5%8F%8D%E4%B8%89%EF%BC%9ANetty%20%E9%AB%98%E6%80%A7%E8%83%BD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89.html">13  举一反三：Netty 高性能内存管理设计（上）</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/14%20%20%E4%B8%BE%E4%B8%80%E5%8F%8D%E4%B8%89%EF%BC%9ANetty%20%E9%AB%98%E6%80%A7%E8%83%BD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89.html">14  举一反三：Netty 高性能内存管理设计（下）</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/15%20%20%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%AF%B9%E8%B1%A1%E5%9B%9E%E6%94%B6%E7%AB%99%EF%BC%9ARecycler%20%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90.html">15  轻量级对象回收站：Recycler 对象池技术解析</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/16%20%20IO%20%E5%8A%A0%E9%80%9F%EF%BC%9A%E4%B8%8E%E4%BC%97%E4%B8%8D%E5%90%8C%E7%9A%84%20Netty%20%E9%9B%B6%E6%8B%B7%E8%B4%9D%E6%8A%80%E6%9C%AF.html">16  IO 加速：与众不同的 Netty 零拷贝技术</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/17%20%20%E6%BA%90%E7%A0%81%E7%AF%87%EF%BC%9A%E4%BB%8E%20Linux%20%E5%87%BA%E5%8F%91%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.html">17  源码篇：从 Linux 出发深入剖析服务端启动流程</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/18%20%20%E6%BA%90%E7%A0%81%E7%AF%87%EF%BC%9A%E8%A7%A3%E5%AF%86%20Netty%20Reactor%20%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.html">18  源码篇：解密 Netty Reactor 线程模型</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/19%20%20%E6%BA%90%E7%A0%81%E7%AF%87%EF%BC%9A%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9C%A8%20Netty%20%E4%B8%AD%E7%9A%84%E6%97%85%E7%A8%8B.html">19  源码篇：一个网络请求在 Netty 中的旅程</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/20%20%20%E6%8A%80%E5%B7%A7%E7%AF%87%EF%BC%9ANetty%20%E7%9A%84%20FastThreadLocal%20%E7%A9%B6%E7%AB%9F%E6%AF%94%20ThreadLocal%20%E5%BF%AB%E5%9C%A8%E5%93%AA%E5%84%BF%EF%BC%9F.html">20  技巧篇：Netty 的 FastThreadLocal 究竟比 ThreadLocal 快在哪儿？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/21%20%20%E6%8A%80%E5%B7%A7%E7%AF%87%EF%BC%9A%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86%E7%A5%9E%E5%99%A8%E4%B9%8B%E6%97%B6%E9%97%B4%E8%BD%AE%20HashedWheelTimer.html">21  技巧篇：延迟任务处理神器之时间轮 HashedWheelTimer</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/22%20%20%E6%8A%80%E5%B7%A7%E7%AF%87%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E6%97%A0%E9%94%81%E9%98%9F%E5%88%97%20Mpsc%20Queue.html">22  技巧篇：高性能无锁队列 Mpsc Queue</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/23%20%20%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E9%AB%98%E6%80%A7%E8%83%BD%E5%88%86%E5%B8%83%E5%BC%8F%20RPC%20%E6%A1%86%E6%9E%B6.html">23  架构设计：如何实现一个高性能分布式 RPC 框架</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/24%20%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E4%B8%8E%E8%AE%A2%E9%98%85%EF%BC%9A%E6%90%AD%E5%BB%BA%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E6%B6%88%E8%B4%B9%E8%80%85%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6.html">24  服务发布与订阅：搭建生产者和消费者的基础框架</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/25%20%20%E8%BF%9C%E7%A8%8B%E9%80%9A%E4%BF%A1%EF%BC%9A%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1%E4%BB%A5%E5%8F%8A%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9A%84%E5%AE%9E%E7%8E%B0.html">25  远程通信：通信协议设计以及编解码的实现</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/26%20%20%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9C%BA%E5%88%B6%E7%9A%84%E5%AE%9E%E7%8E%B0.html">26  服务治理：服务发现与负载均衡机制的实现</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/27%20%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%EF%BC%9A%E4%B8%BA%E7%94%A8%E6%88%B7%E5%B1%8F%E8%94%BD%20RPC%20%E8%B0%83%E7%94%A8%E7%9A%84%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82.html">27  动态代理：为用户屏蔽 RPC 调用的底层细节</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/28%20%20%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93%EF%BC%9ARPC%20%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93%E4%B8%8E%E8%BF%9B%E9%98%B6%E5%BB%B6%E4%BC%B8.html">28  实战总结：RPC 实战总结与进阶延伸</a></li><li><a class="active" aria-current="page" href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/29%20%20%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9ANetty%20%E4%B8%AD%E5%BA%94%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">29  编程思想：Netty 中应用了哪些设计模式？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/30%20%20%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93%EF%BC%9ANetty%20%E5%9C%A8%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.html">30  实践总结：Netty 在项目开发中的一些最佳实践</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/31%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E6%8A%80%E6%9C%AF%E6%88%90%E9%95%BF%E4%B9%8B%E8%B7%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB.html">31 结束语  技术成长之路：如何打造自己的技术体系</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/29%20%20%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9ANetty%20%E4%B8%AD%E5%BA%94%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="29  编程思想：Netty 中应用了哪些设计模式？" id="title">29  编程思想：Netty 中应用了哪些设计模式？</h1>
+<div><p>设计模式的运用是面试过程中常考的，学习设计模式切勿死记硬背，结合优秀项目的源码去理解设计模式的使用会事半功倍。Netty 源码中运用了大量的设计模式，常见的设计模式在 Netty 源码中都有所体现。本节课我们便一起梳理 Netty 源码中所包含的设计模式，希望能帮助你更深入地了解 Netty 的设计精髓，并可以结合 Netty 源码向面试官讲述你对设计模式的理解。</p>
+<h3 id="单例模式">单例模式</h3>
+<p>单例模式是最常见的设计模式，它可以保证全局只有一个实例，避免线程安全问题。单例模式有很多种实现方法，其中我比较推荐三种最佳实践：<strong>双重检验锁</strong>、<strong>静态内部类方式</strong>、<strong>饿汉方式</strong>和<strong>枚举方式</strong>，其中双重检验锁和静态内部类方式属于懒汉式单例，饿汉方式和枚举方式属于饿汉式单例。</p>
+<h4 id="双重检验锁">双重检验锁</h4>
+<p>在多线程环境下，为了提高实例初始化的性能，不是每次获取实例时在方法上加锁，而是当实例未创建时才会加锁，如下所示：</p>
+<pre><code>public class SingletonTest {
+
+    private SingletonTest instance;
+
+    public static SingletonTest getInstance() {
+
+        if (instance == null) {
+
+            synchronized (this) {
+
+                if (instance == null) {
+
+                    instance = new SingletonTest();
+
+                }
+
+            }
+
+        }
+
+        return instance;
+
+    }
+
+}
+</code></pre>
+<h4 id="静态内部类方式">静态内部类方式</h4>
+<p>静态内部类方式实现单例巧妙地利用了 Java 类加载机制，保证其在多线程环境下的线程安全性。当一个类被加载时，其静态内部类是不会被同时加载的，只有第一次被调用时才会初始化，而且我们不能通过反射的方式获取内部的属性。由此可见，静态内部类方式实现单例更加安全，可以防止被反射入侵。具体实现方式如下：</p>
+<pre><code>public class SingletonTest {
+
+    private SingletonTest() {
+
+    }
+
+    public static Singleton getInstance() {
+
+        return SingletonInstance.instance;
+
+    }
+
+    private static class SingletonInstance {
+
+        private static final Singleton instance = new Singleton();
+
+    }
+
+}
+</code></pre>
+<h4 id="饿汉方式">饿汉方式</h4>
+<p>饿汉式实现单例非常简单，类加载的时候就创建出实例。饿汉方式使用私有构造函数实现全局单个实例的初始化，并使用 public static final 加以修饰，实现延迟加载和保证线程安全性。实现方式如下所示：</p>
+<pre><code>public class SingletonTest {
+
+    private static Singleton instance = new Singleton();
+
+    private Singleton() {
+
+    }
+
+    public static Singleton getInstance() {
+
+        return instance;
+
+    }
+
+}
+</code></pre>
+<h4 id="枚举方式">枚举方式</h4>
+<p>枚举方式是一种天然的单例实现，在项目开发中枚举方式是非常推荐使用的。它能够保证序列化和反序列化过程中实例的唯一性，而且不用担心线程安全问题。枚举方式实现单例如下所示：</p>
+<pre><code>public enum SingletonTest {
+
+    SERVICE_A {
+
+        @Override
+
+        protected void hello() {
+
+            System.out.println("hello, service A");
+
+        }
+
+    },
+
+    SERVICE_B {
+
+        @Override
+
+        protected void hello() {
+
+            System.out.println("hello, service B");
+
+        }
+
+    };
+
+    protected abstract void hello();
+
+}
+</code></pre>
+<p>在《源码篇：解密 Netty Reactor 的线程模型》课程中，我们介绍了 NioEventLoop 的核心原理。NioEventLoop 通过核心方法 select() 不断轮询注册的 I/O 事件，Netty 提供了选择策略 SelectStrategy 对象，它用于控制 select 循环行为，包含 CONTINUE、SELECT、BUSY_WAIT 三种策略。SelectStrategy 对象的默认实现就是使用的饿汉式单例，源码如下：</p>
+<pre><code>final class DefaultSelectStrategy implements SelectStrategy {
+
+    static final SelectStrategy INSTANCE = new DefaultSelectStrategy();
+
+    private DefaultSelectStrategy() { }
+
+    @Override
+
+    public int calculateStrategy(IntSupplier selectSupplier, boolean hasTasks) throws Exception {
+
+        return hasTasks ? selectSupplier.get() : SelectStrategy.SELECT;
+
+    }
+
+}
+</code></pre>
+<p>此外 Netty 中还有不少饿汉方式实现单例的实践，例如 MqttEncoder、ReadTimeoutException 等。</p>
+<h3 id="工厂方法模式">工厂方法模式</h3>
+<p>工厂模式封装了对象创建的过程，使用者不需要关心对象创建的细节。在需要生成复杂对象的场景下，都可以使用工厂模式实现。工厂模式分为三种：<strong>简单工厂模式</strong>、<strong>工厂方法模式</strong>和<strong>抽象工厂模式</strong>。</p>
+<ul>
+<li><strong>简单工厂模式</strong>。定义一个工厂类，根据参数类型返回不同类型的实例。适用于对象实例类型不多的场景，如果对象实例类型太多，每增加一种类型就要在工厂类中增加相应的创建逻辑，这是违背开放封闭原则的。</li>
+<li><strong>工厂方法模式</strong>。简单工厂模式的升级版，不再是提供一个统一的工厂类来创建所有对象的实例，而是每种类型的对象实例都对应不同的工厂类，每个具体的工厂类只能创建一个类型的对象实例。</li>
+<li><strong>抽象工厂模式</strong>。较少使用，适用于创建多个产品的场景。如果按照工厂方法模式的实现思路，需要在具体工厂类中实现多个工厂方法，是非常不友好的。抽象工厂模式就是把这些工厂方法单独剥离到抽象工厂类中，然后创建工厂对象并通过组合的方式来获取工厂方法。</li>
+</ul>
+<p>Netty 中使用的就是工厂方法模式，这也是项目开发中最常用的一种工厂模式。工厂方法模式如何使用呢？我们先来看个简单的例子：</p>
+<pre><code>public class TSLAFactory implements CarFactory {
+
+    @Override
+
+    public Car createCar() {
+
+        return new TSLA();
+
+    }
+
+}
+
+public class BMWFactory implements CarFactory {
+
+    @Override
+
+    public Car createCar() {
+
+        return new BMW();
+
+    }
+
+}
+</code></pre>
+<p>Netty 在创建 Channel 的时候使用的就是工厂方法模式，因为服务端和客户端的 Channel 是不一样的。Netty 将反射和工厂方法模式结合在一起，只使用一个工厂类，然后根据传入的 Class 参数来构建出对应的 Channel，不需要再为每一种 Channel 类型创建一个工厂类。具体源码实现如下：</p>
+<pre><code>public class ReflectiveChannelFactory&lt;T extends Channel&gt; implements ChannelFactory&lt;T&gt; {
+
+    private final Constructor&lt;? extends T&gt; constructor;
+
+    public ReflectiveChannelFactory(Class&lt;? extends T&gt; clazz) {
+
+        ObjectUtil.checkNotNull(clazz, "clazz");
+
+        try {
+
+            this.constructor = clazz.getConstructor();
+
+        } catch (NoSuchMethodException e) {
+
+            throw new IllegalArgumentException("Class " + StringUtil.simpleClassName(clazz) +
+
+                    " does not have a public non-arg constructor", e);
+
+        }
+
+    }
+
+    @Override
+
+    public T newChannel() {
+
+        try {
+
+            return constructor.newInstance();
+
+        } catch (Throwable t) {
+
+            throw new ChannelException("Unable to create Channel from class " + constructor.getDeclaringClass(), t);
+
+        }
+
+    }
+
+    @Override
+
+    public String toString() {
+
+        return StringUtil.simpleClassName(ReflectiveChannelFactory.class) +
+
+                '(' + StringUtil.simpleClassName(constructor.getDeclaringClass()) + ".class)";
+
+    }
+
+}
+</code></pre>
+<p>虽然通过反射技术可以有效地减少工厂类的数据量，但是反射相比直接创建工厂类有性能损失，所以对于性能敏感的场景，应当谨慎使用反射。</p>
+<h3 id="责任链模式">责任链模式</h3>
+<p>想必学完本专栏的前面课程后，责任链模式大家应该再熟悉不过了，自然而然联想到 ChannlPipeline 和 ChannelHandler。ChannlPipeline 内部是由一组 ChannelHandler 实例组成的，内部通过双向链表将不同的 ChannelHandler 链接在一起，如下图所示。</p>
+<p><img alt="Drawing 0.png" src="/assets/4527de3d00b1f0a7a52049c1.png"/></p>
+<p>对于 Netty 中责任链模式的实现，也遵循了责任链模式的四个基本要素：</p>
+<h4 id="责任处理器接口">责任处理器接口</h4>
+<p>ChannelHandler 对应的就是责任处理器接口，ChannelHandler 有两个重要的子接口：ChannelInboundHandler和ChannelOutboundHandler，分别拦截入站和出站的各种 I/O 事件。</p>
+<h4 id="动态创建责任链-添加-删除责任处理器">动态创建责任链，添加、删除责任处理器</h4>
+<p>ChannelPipeline 负责创建责任链，其内部采用双向链表实现，ChannelPipeline 的内部结构定义如下所示：</p>
+<pre><code>public class DefaultChannelPipeline implements ChannelPipeline {
+
+    static final InternalLogger logger = InternalLoggerFactory.getInstance(DefaultChannelPipeline.class);
+
+    private static final String HEAD_NAME = generateName0(HeadContext.class);
+
+    private static final String TAIL_NAME = generateName0(TailContext.class);
+
+    // 省略其他代码
+
+    final AbstractChannelHandlerContext head; // 头结点
+
+    final AbstractChannelHandlerContext tail; // 尾节点
+
+    private final Channel channel;
+
+    private final ChannelFuture succeededFuture;
+
+    private final VoidChannelPromise voidPromise;
+
+    private final boolean touch = ResourceLeakDetector.isEnabled();
+
+    
+
+    // 省略其他代码
+
+}
+</code></pre>
+<p>ChannelPipeline 提供了一系列 add 和 remove 相关接口用于动态添加和删除 ChannelHandler 处理器，如下所示：</p>
+<p><img alt="Drawing 1.png" src="/assets/c55f5e7a095a5d6956da98d0.png"/></p>
+<h4 id="上下文">上下文</h4>
+<p>从 ChannelPipeline 内部结构定义可以看出，ChannelHandlerContext 负责保存责任链节点上下文信息。ChannelHandlerContext 是对 ChannelHandler 的封装，每个 ChannelHandler 都对应一个 ChannelHandlerContext，实际上 ChannelPipeline 维护的是与 ChannelHandlerContext 的关系。</p>
+<h4 id="责任传播和终止机制">责任传播和终止机制</h4>
+<p>ChannelHandlerContext 提供了 fire 系列的方法用于事件传播，如下所示：</p>
+<p><img alt="Drawing 2.png" src="/assets/48b1c6c0c0d4ca314f40bc55.png"/></p>
+<p>以 ChannelInboundHandlerAdapter 的 channelRead 方法为例，ChannelHandlerContext 会默认调用 fireChannelRead 方法将事件默认传递到下一个处理器。如果我们重写了 ChannelInboundHandlerAdapter 的 channelRead 方法，并且没有调用 fireChannelRead 进行事件传播，那么表示此次事件传播已终止。</p>
+<h3 id="观察者模式">观察者模式</h3>
+<p>观察者模式有两个角色：观察者和被观察。被观察者发布消息，观察者订阅消息，没有订阅的观察者是收不到消息的。首先我们通过一个简单的例子看下观察者模式的是如何实现的。</p>
+<pre><code>// 被观察者
+
+public interface Observable {
+
+    void registerObserver(Observer observer);
+
+    void removeObserver(Observer observer);
+
+    void notifyObservers(String message);
+
+}
+
+// 观察者
+
+public interface Observer {
+
+    void notify(String message);
+
+}
+
+// 默认被观察者实现
+
+public class DefaultObservable implements Observable {
+
+    private final List&lt;Observer&gt; observers = new ArrayList&lt;&gt;();
+
+    @Override
+
+    public void registerObserver(Observer observer) {
+
+        observers.add(observer);
+
+    }
+
+    @Override
+
+    public void removeObserver(Observer observer) {
+
+        observers.remove(observer);
+
+    }
+
+    @Override
+
+    public void notifyObservers(String message) {
+
+        for (Observer observer : observers) {
+
+            observer.notify(message);
+
+        }
+
+    }
+
+}
+</code></pre>
+<p>Netty 中观察者模式的运用非常多，但是并没有以上示例代码这么直观，我们平时经常使用的ChannelFuture#addListener 接口就是观察者模式的实现。我们先来看下 ChannelFuture 使用的示例：</p>
+<pre><code>ChannelFuture channelFuture = channel.writeAndFlush(object);
+
+channelFuture.addListener(future -&gt; {
+
+    if (future.isSuccess()) {
+
+        // do something
+
+    } else {
+
+        // do something
+
+    }
+
+});
+</code></pre>
+<p>addListener 方法会将添加监听器添加到 ChannelFuture 当中，并在 ChannelFuture 执行完毕的时候立刻通知已经注册的监听器。所以 ChannelFuture 是被观察者，addListener 方法用于添加观察者。</p>
+<h3 id="建造者模式">建造者模式</h3>
+<p>建造者模式非常简单，通过链式调用来设置对象的属性，在对象属性繁多的场景下非常有用。建造者模式的优势就是可以像搭积木一样自由选择需要的属性，并不是强绑定的。对于使用者来说，必须清楚需要设置哪些属性，在不同场景下可能需要的属性也是不一样的。</p>
+<p>Netty 中 ServerBootStrap 和 Bootstrap 引导器是最经典的建造者模式实现，在构建过程中需要设置非常多的参数，例如配置线程池 EventLoopGroup、设置 Channel 类型、注册 ChannelHandler、设置 Channel 参数、端口绑定等。ServerBootStrap 引导器的具体使用可以参考《引导器作用：客户端和服务端启动都要做些什么？》课程，在此我就不多作赘述了。</p>
+<h3 id="策略模式">策略模式</h3>
+<p>策略模式针对同一个问题提供多种策略的处理方式，这些策略之间可以相互替换，在一定程度上提高了系统的灵活性。策略模式非常符合开闭原则，使用者在不修改现有系统的情况下选择不同的策略，而且便于扩展增加新的策略。</p>
+<p>Netty 在多处地方使用了策略模式，例如 EventExecutorChooser 提供了不同的策略选择 NioEventLoop，newChooser() 方法会根据线程池的大小是否是 2 的幂次，以此来动态的选择取模运算的方式，从而提高性能。EventExecutorChooser 源码实现如下所示：</p>
+<pre><code>public final class DefaultEventExecutorChooserFactory implements EventExecutorChooserFactory {
+
+    public static final DefaultEventExecutorChooserFactory INSTANCE = new DefaultEventExecutorChooserFactory();
+
+    private DefaultEventExecutorChooserFactory() { }
+
+    @SuppressWarnings("unchecked")
+
+    @Override
+
+    public EventExecutorChooser newChooser(EventExecutor[] executors) {
+
+        if (isPowerOfTwo(executors.length)) {
+
+            return new PowerOfTwoEventExecutorChooser(executors);
+
+        } else {
+
+            return new GenericEventExecutorChooser(executors);
+
+        }
+
+    }
+
+    
+
+    // 省略其他代码
+
+}
+</code></pre>
+<h3 id="装饰者模式">装饰者模式</h3>
+<p>装饰器模式是对被装饰类的功能增强，在不修改被装饰类的前提下，能够为被装饰类添加新的功能特性。当我们需要为一个类扩展功能时会使用装饰器模式，但是该模式的缺点是需要增加额外的代码。我们先通过一个简单的例子学习下装饰器模式应当如何使用，如下所示：</p>
+<pre><code>public interface Shape {
+
+    void draw();
+
+}
+
+class Circle implements Shape {
+
+    @Override
+
+    public void draw() {
+
+        System.out.print("draw a circle.");
+
+    }
+
+}
+
+abstract class ShapeDecorator implements Shape {
+
+    protected Shape shapeDecorated;
+
+    public ShapeDecorator(Shape shapeDecorated) {
+
+        this.shapeDecorated = shapeDecorated;
+
+    }
+
+    public void draw() {
+
+        shapeDecorated.draw();
+
+    }
+
+}
+
+class FillReadColorShapeDecorator extends ShapeDecorator {
+
+    public FillReadColorShapeDecorator(Shape shapeDecorated) {
+
+        super(shapeDecorated);
+
+    }
+
+    @Override
+
+    public void draw() {
+
+        shapeDecorated.draw();
+
+        fillColor();
+
+    }
+
+    private void fillColor() {
+
+        System.out.println("Fill Read Color.");
+
+    }
+
+}
+</code></pre>
+<p>我们创建了一个 Shape 接口的抽象装饰类 ShapeDecorator，并维护 Shape 原始对象，FillReadColorShapeDecorator 是用于装饰 ShapeDecorator 的实体类，它不对 draw() 方法做任何修改，而是直接调用 Shape 对象原有的 draw() 方法，然后再调用 fillColor() 方法进行颜色填充。</p>
+<p>下面我们再来看一下 Netty 中 WrappedByteBuf 是如何装饰 ByteBuf 的，源码如下所示：</p>
+<pre><code>class WrappedByteBuf extends ByteBuf {
+
+    protected final ByteBuf buf;
+
+    protected WrappedByteBuf(ByteBuf buf) {
+
+        if (buf == null) {
+
+            throw new NullPointerException("buf");
+
+        }
+
+        this.buf = buf;
+
+    }
+
+    @Override
+
+    public final boolean hasMemoryAddress() {
+
+        return buf.hasMemoryAddress();
+
+    }
+
+    @Override
+
+    public final long memoryAddress() {
+
+        return buf.memoryAddress();
+
+    }
+
+    
+
+    // 省略其他代码
+
+}
+</code></pre>
+<p>WrappedByteBuf 是所有 ByteBuf 装饰器的基类，它并没有什么特别的，也是在构造函数里传入了原始的 ByteBuf 实例作为被装饰者。WrappedByteBuf 有两个子类 UnreleasableByteBuf 和 SimpleLeakAwareByteBuf，它们是真正实现对 ByteBuf 的功能增强，例如 UnreleasableByteBuf 类的 release() 方法是直接返回 false 表示不可被释放，源码实现如下所示。</p>
+<pre><code>final class UnreleasableByteBuf extends WrappedByteBuf {
+
+    private SwappedByteBuf swappedBuf;
+
+    UnreleasableByteBuf(ByteBuf buf) {
+
+        super(buf instanceof UnreleasableByteBuf ? buf.unwrap() : buf);
+
+    }
+
+    @Override
+
+    public boolean release() {
+
+        return false;
+
+    }
+
+    // 省略其他代码
+
+}
+</code></pre>
+<p>不知道你会不会有一个疑问，装饰器模式和代理模式都是实现目标类增强，他们有什么区别吗？装饰器模式和代理模式的实现确实是非常相似的，都需要维护原始的目标对象，装饰器模式侧重于为目标类增加新的功能，代理模式更侧重于在现有功能的基础上进行扩展。</p>
+<h3 id="总结">总结</h3>
+<p>学习设计模式切勿死记硬背，不仅要吸收设计模式的思想，还要理解为什么使用该设计模式。锻炼代码设计能力比较好的办法就是读优秀框架的源码，Netty 就是一个非常丰富的学习资源。我们需要了解源码中设计模式的使用场景，不断吸收消化，并能够做到在项目开发中学以致用。</p>
+<p>本节课所介绍的设计模式在 Netty 中并不能涵盖所有，还有很多等待我们去挖掘。留一个课后任务，学习以下设计模式在 Netty 中的运用。</p>
+<ul>
+<li>模板方法模式：ServerBootStrap 和 Bootstrap 的 init 过程实现；</li>
+<li>迭代器模式：CompositeByteBuf；</li>
+<li>适配器模式：ScheduledFutureTask。</li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

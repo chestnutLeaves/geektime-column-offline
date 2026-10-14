@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>08 查询：DSL查询之全文搜索详解 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/index.html">ElasticSearch知识体系详解</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">21 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>ElasticSearch知识体系详解</strong><ul><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/01%20%E8%AE%A4%E7%9F%A5%EF%BC%9AElasticSearch%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">01 认知：ElasticSearch基础概念</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/02%20%E8%AE%A4%E7%9F%A5%EF%BC%9AElastic%20Stack%E7%94%9F%E6%80%81%E5%92%8C%E5%9C%BA%E6%99%AF%E6%96%B9%E6%A1%88.html">02 认知：Elastic Stack生态和场景方案</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/03%20%E5%AE%89%E8%A3%85%EF%BC%9AElasticSearch%E5%92%8CKibana%E5%AE%89%E8%A3%85.html">03 安装：ElasticSearch和Kibana安装</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/04%20%E5%85%A5%E9%97%A8%EF%BC%9A%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%81%9A%E5%90%88%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html">04 入门：查询和聚合的基础使用</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/05%20%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86%E8%AF%A6%E8%A7%A3.html">05 索引：索引管理详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/06%20%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E6%A8%A1%E6%9D%BF%28Index%20Template%29%E8%AF%A6%E8%A7%A3.html">06 索引：索引模板(Index Template)详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/07%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8B%E5%A4%8D%E5%90%88%E6%9F%A5%E8%AF%A2%E8%AF%A6%E8%A7%A3.html">07 查询：DSL查询之复合查询详解</a></li><li><a class="active" aria-current="page" href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/08%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8B%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E8%AF%A6%E8%A7%A3.html">08 查询：DSL查询之全文搜索详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/09%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8BTerm%E8%AF%A6%E8%A7%A3.html">09 查询：DSL查询之Term详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/10%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BBucket%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">10 聚合：聚合查询之Bucket聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/11%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BMetric%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">11 聚合：聚合查询之Metric聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/12%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BPipline%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">12 聚合：聚合查询之Pipline聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/13%20%E5%8E%9F%E7%90%86%EF%BC%9A%E4%BB%8E%E5%9B%BE%E8%A7%A3%E6%9E%84%E7%AD%91%E5%AF%B9ES%E5%8E%9F%E7%90%86%E7%9A%84%E5%88%9D%E6%AD%A5%E8%AE%A4%E7%9F%A5.html">13 原理：从图解构筑对ES原理的初步认知</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/14%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85%E5%92%8C%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84.html">14 原理：ES原理知识点补充和整体结构</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/15%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E4%B9%8B%E7%B4%A2%E5%BC%95%E6%96%87%E6%A1%A3%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3.html">15 原理：ES原理之索引文档流程详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/16%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E4%B9%8B%E8%AF%BB%E5%8F%96%E6%96%87%E6%A1%A3%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3.html">16 原理：ES原理之读取文档流程详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/17%20%E4%BC%98%E5%8C%96%EF%BC%9AElasticSearch%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E8%AF%A6%E8%A7%A3.html">17 优化：ElasticSearch性能优化详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/18%20%E5%A4%A7%E5%8E%82%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%85%BE%E8%AE%AF%E4%B8%87%E4%BA%BF%E7%BA%A7%20Elasticsearch%20%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">18 大厂实践：腾讯万亿级 Elasticsearch 技术实践</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/19%20%E8%B5%84%E6%96%99%EF%BC%9AAwesome%20Elasticsearch.html">19 资料：Awesome Elasticsearch</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/20%20WrapperQuery.html">20 WrapperQuery</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/21%20%E5%A4%87%E4%BB%BD%E5%92%8C%E8%BF%81%E7%A7%BB.html">21 备份和迁移</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/08%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8B%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E8%AF%A6%E8%A7%A3.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="08 查询：DSL查询之全文搜索详解" id="title">08 查询：DSL查询之全文搜索详解</h1>
+<div><h2 id="写在前面-谈谈如何从官网学习">写在前面:谈谈如何从官网学习</h2>
+<p>提示</p>
+<p>很多读者在看官方文档学习时存在一个误区，以DSL中full text查询为例，其实内容是非常多的， 没有取舍/没重点去阅读， 要么需要花很多时间，要么头脑一片浆糊。所以这里重点谈谈我的理解。@pdai</p>
+<p>一些理解：</p>
+<ul>
+<li>第一点：<strong>全局观</strong>，即我们现在学习内容在整个体系的哪个位置？</li>
+</ul>
+<p>如下图，可以很方便的帮助你构筑这种体系</p>
+<p><img alt="img" src="/assets/0a0c444bfd5baa0d9404cbfb.png"/></p>
+<ul>
+<li>第二点： <strong>分类别</strong>，从上层理解，而不是本身</li>
+</ul>
+<p>比如Full text Query中，我们只需要把如下的那么多点分为3大类，你的体系能力会大大提升</p>
+<p><img alt="img" src="/assets/02ecb1ae7ad1a73042fae552.png"/></p>
+<ul>
+<li>第三点： <strong>知识点还是API</strong>？ API类型的是可以查询的，只需要知道大致有哪些功能就可以了。</li>
+</ul>
+<p><img alt="img" src="/assets/7625069a09af4cb0a4936d7b.png"/></p>
+<h2 id="match类型">Match类型</h2>
+<blockquote>
+<p>第一类：match 类型</p>
+</blockquote>
+<h3 id="match-查询的步骤">match 查询的步骤</h3>
+<p>在(指定字段查询)中我们已经介绍了match查询。</p>
+<ul>
+<li><strong>准备一些数据</strong></li>
+</ul>
+<p>这里我们准备一些数据，通过实例看match 查询的步骤</p>
+<pre><code class="language-bash">PUT /test-dsl-match
+{ "settings": { "number_of_shards": 1 }} 
+
+POST /test-dsl-match/_bulk
+{ "index": { "_id": 1 }}
+{ "title": "The quick brown fox" }
+{ "index": { "_id": 2 }}
+{ "title": "The quick brown fox jumps over the lazy dog" }
+{ "index": { "_id": 3 }}
+{ "title": "The quick brown fox jumps over the quick dog" }
+{ "index": { "_id": 4 }}
+{ "title": "Brown fox brown dog" }
+</code></pre>
+<ul>
+<li><strong>查询数据</strong></li>
+</ul>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+    "query": {
+        "match": {
+            "title": "QUICK!"
+        }
+    }
+}
+</code></pre>
+<p>Elasticsearch 执行上面这个 match 查询的步骤是：</p>
+<ol>
+<li><strong>检查字段类型</strong> 。</li>
+</ol>
+<p>标题 title 字段是一个 string 类型（ analyzed ）已分析的全文字段，这意味着查询字符串本身也应该被分析。</p>
+<ol>
+<li><strong>分析查询字符串</strong> 。</li>
+</ol>
+<p>将查询的字符串 QUICK! 传入标准分析器中，输出的结果是单个项 quick 。因为只有一个单词项，所以 match 查询执行的是单个底层 term 查询。</p>
+<ol>
+<li><strong>查找匹配文档</strong> 。</li>
+</ol>
+<p>用 term 查询在倒排索引中查找 quick 然后获取一组包含该项的文档，本例的结果是文档：1、2 和 3 。</p>
+<ol>
+<li><strong>为每个文档评分</strong> 。</li>
+</ol>
+<p>用 term 查询计算每个文档相关度评分 _score ，这是种将词频（term frequency，即词 quick 在相关文档的 title 字段中出现的频率）和反向文档频率（inverse document frequency，即词 quick 在所有文档的 title 字段中出现的频率），以及字段的长度（即字段越短相关度越高）相结合的计算方式。</p>
+<ul>
+<li><strong>验证结果</strong></li>
+</ul>
+<p><img alt="img" src="/assets/3c36b8bf728c33a91dd08421.png"/></p>
+<h3 id="match多个词深入">match多个词深入</h3>
+<p>我们在上文中复合查询中已经使用了match多个词，比如“Quick pets”； 这里我们通过例子带你更深入理解match多个词</p>
+<ul>
+<li><strong>match多个词的本质</strong></li>
+</ul>
+<p>查询多个词”BROWN DOG!”</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+    "query": {
+        "match": {
+            "title": "BROWN DOG"
+        }
+    }
+}
+</code></pre>
+<p><img alt="img" src="/assets/392e624cc0cd0614a0be20b8.png"/></p>
+<p>因为 match 查询必须查找两个词（ [“brown”,“dog”] ），它在内部实际上先执行两次 term 查询，然后将两次查询的结果合并作为最终结果输出。为了做到这点，它将两个 term 查询包入一个 bool 查询中，</p>
+<p>所以上述查询的结果，和如下语句查询结果是等同的</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "title": "brown"
+          }
+        },
+        {
+          "term": {
+            "title": "dog"
+          }
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<p><img alt="img" src="/assets/1c0820203d0c92e226514512.png"/></p>
+<ul>
+<li><strong>match多个词的逻辑</strong></li>
+</ul>
+<p>上面等同于should（任意一个满足），是因为 match还有一个operator参数，默认是or, 所以对应的是should。</p>
+<p>所以上述查询也等同于</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "match": {
+      "title": {
+        "query": "BROWN DOG",
+        "operator": "or"
+      }
+    }
+  }
+}
+</code></pre>
+<p>那么我们如果是需要and操作呢，即同时满足呢？</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "match": {
+      "title": {
+        "query": "BROWN DOG",
+        "operator": "and"
+      }
+    }
+  }
+}
+</code></pre>
+<p>等同于</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "title": "brown"
+          }
+        },
+        {
+          "term": {
+            "title": "dog"
+          }
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<p><img alt="img" src="/assets/0b65c20c0fe3389034f96e80.png"/></p>
+<h3 id="控制match的匹配精度">控制match的匹配精度</h3>
+<p>如果用户给定 3 个查询词，想查找只包含其中 2 个的文档，该如何处理？将 operator 操作符参数设置成 and 或者 or 都是不合适的。</p>
+<p>match 查询支持 minimum_should_match 最小匹配参数，这让我们可以指定必须匹配的词项数用来表示一个文档是否相关。我们可以将其设置为某个具体数字，更常用的做法是将其设置为一个百分数，因为我们无法控制用户搜索时输入的单词数量：</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "match": {
+      "title": {
+        "query":                "quick brown dog",
+        "minimum_should_match": "75%"
+      }
+    }
+  }
+}
+</code></pre>
+<p>当给定百分比的时候， minimum_should_match 会做合适的事情：在之前三词项的示例中， 75% 会自动被截断成 66.6% ，即三个里面两个词。无论这个值设置成什么，至少包含一个词项的文档才会被认为是匹配的。</p>
+<p><img alt="img" src="/assets/93486bee76b2b6730c8b7d0e.png"/></p>
+<p>当然也等同于</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        { "match": { "title": "quick" }},
+        { "match": { "title": "brown"   }},
+        { "match": { "title": "dog"   }}
+      ],
+      "minimum_should_match": 2 
+    }
+  }
+}
+</code></pre>
+<p><img alt="img" src="/assets/e679dd92b19d0f2b74203ac3.png"/></p>
+<h3 id="其它match类型">其它match类型</h3>
+<ul>
+<li><strong>match_pharse</strong></li>
+</ul>
+<p>match_phrase在前文中我们已经有了解，我们再看下另外一个例子。</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": {
+        "query": "quick brown"
+      }
+    }
+  }
+}
+</code></pre>
+<p><img alt="img" src="/assets/fc2ecbdf41213fdc4e213636.png"/></p>
+<p>很多人对它仍然有误解的，比如如下例子：</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": {
+        "query": "quick brown f"
+      }
+    }
+  }
+}
+</code></pre>
+<p>这样的查询是查不出任何数据的，因为前文中我们知道了match本质上是对term组合，match_phrase本质是连续的term的查询，所以f并不是一个分词，不满足term查询，所以最终查不出任何内容了。</p>
+<p><img alt="img" src="/assets/a91acb389c9dfade92409c84.png"/></p>
+<ul>
+<li><strong>match_pharse_prefix</strong></li>
+</ul>
+<p>那有没有可以查询出<code>quick brown f</code>的方式呢？ELasticSearch在match_phrase基础上提供了一种可以查最后一个词项是前缀的方法，这样就可以查询<code>quick brown f</code>了</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "match_phrase_prefix": {
+      "title": {
+        "query": "quick brown f"
+      }
+    }
+  }
+}
+</code></pre>
+<p><img alt="img" src="/assets/68a7080d5e97b9b14131759e.png"/></p>
+<p>(ps: prefix的意思不是整个text的开始匹配，而是最后一个词项满足term的prefix查询而已)</p>
+<ul>
+<li><strong>match_bool_prefix</strong></li>
+</ul>
+<p>除了match_phrase_prefix，ElasticSearch还提供了match_bool_prefix查询</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "match_bool_prefix": {
+      "title": {
+        "query": "quick brown f"
+      }
+    }
+  }
+}
+</code></pre>
+<p><img alt="img" src="/assets/507b4e5106ffc8ab800ab9ea.png"/></p>
+<p>它们两种方式有啥区别呢？match_bool_prefix本质上可以转换为：</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "bool" : {
+      "should": [
+        { "term": { "title": "quick" }},
+        { "term": { "title": "brown" }},
+        { "prefix": { "title": "f"}}
+      ]
+    }
+  }
+}
+</code></pre>
+<p>所以这样你就能理解，match_bool_prefix查询中的quick,brown,f是无序的。</p>
+<ul>
+<li><strong>multi_match</strong></li>
+</ul>
+<p>如果我们期望一次对多个字段查询，怎么办呢？ElasticSearch提供了multi_match查询的方式</p>
+<pre><code class="language-bash">{
+  "query": {
+    "multi_match" : {
+      "query":    "Will Smith",
+      "fields": [ "title", "*_name" ] 
+    }
+  }
+}
+</code></pre>
+<p><code>*</code>表示前缀匹配字段。</p>
+<h2 id="query-string类型">query string类型</h2>
+<blockquote>
+<p>第二类：query string 类型</p>
+</blockquote>
+<h3 id="query-string">query_string</h3>
+<p>此查询使用语法根据运算符（例如AND或）来解析和拆分提供的查询字符串NOT。然后查询在返回匹配的文档之前独立分析每个拆分的文本。</p>
+<p>可以使用该query_string查询创建一个复杂的搜索，其中包括通配符，跨多个字段的搜索等等。尽管用途广泛，但查询是严格的，如果查询字符串包含任何无效语法，则返回错误。</p>
+<p>例如：</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "query_string": {
+      "query": "(lazy dog) OR (brown dog)",
+      "default_field": "title"
+    }
+  }
+}
+</code></pre>
+<p>这里查询结果，你需要理解本质上查询这四个分词（term）or的结果而已，所以doc 3和4也在其中</p>
+<p><img alt="img" src="/assets/19a4bd35815ccda4641876dd.png"/></p>
+<p>对构筑知识体系已经够了，但是它其实还有很多参数和用法，更多请参考<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html" target="_blank">官网</a></p>
+<h3 id="query-string-simple">query_string_simple</h3>
+<p>该查询使用一种简单的语法来解析提供的查询字符串并将其拆分为基于特殊运算符的术语。然后查询在返回匹配的文档之前独立分析每个术语。</p>
+<p>尽管其语法比query_string查询更受限制 ，但<strong>simple_query_string 查询不会针对无效语法返回错误。而是，它将忽略查询字符串的任何无效部分</strong>。</p>
+<p>举例：</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "simple_query_string" : {
+        "query": "\"over the\" + (lazy | quick) + dog",
+        "fields": ["title"],
+        "default_operator": "and"
+    }
+  }
+}
+</code></pre>
+<p><img alt="img" src="/assets/ed66e5baa11b5dff2ba7d104.png"/></p>
+<p>更多请参考<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html" target="_blank">官网</a></p>
+<h2 id="interval类型">Interval类型</h2>
+<blockquote>
+<p>第三类：interval类型</p>
+</blockquote>
+<p>Intervals是时间间隔的意思，本质上将多个规则按照顺序匹配。</p>
+<p>比如：</p>
+<pre><code class="language-bash">GET /test-dsl-match/_search
+{
+  "query": {
+    "intervals" : {
+      "title" : {
+        "all_of" : {
+          "ordered" : true,
+          "intervals" : [
+            {
+              "match" : {
+                "query" : "quick",
+                "max_gaps" : 0,
+                "ordered" : true
+              }
+            },
+            {
+              "any_of" : {
+                "intervals" : [
+                  { "match" : { "query" : "jump over" } },
+                  { "match" : { "query" : "quick dog" } }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p><img alt="img" src="/assets/afe5948c1319bbb16c051a6e.png"/></p>
+<p>因为interval之间是可以组合的，所以它可以表现的很复杂。更多请参考<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-intervals-query.html" target="_blank">官网</a></p>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/full-text-queries.html#full-text-queries" target="_blank">https://www.elastic.co/guide/en/elasticsearch/reference/current/full-text-queries.html#full-text-queries</a></p>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/match-multi-word.html" target="_blank">https://www.elastic.co/guide/cn/elasticsearch/guide/current/match-multi-word.html</a></p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

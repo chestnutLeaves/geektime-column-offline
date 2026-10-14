@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>19  Transporter 层核心实现：编解码与线程模型一文打尽（上） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/index.html">Dubbo源码解读与实战-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">50 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Dubbo源码解读与实战-完</strong><ul><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E6%B7%B1%E5%85%A5%E6%8E%8C%E6%8F%A1%20Dubbo%20%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8F%90%E5%8D%87%E4%BD%A0%E7%9A%84%E8%81%8C%E5%9C%BA%E7%AB%9E%E4%BA%89%E5%8A%9B.html">00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/01%20%20Dubbo%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%9A%E5%8D%83%E9%87%8C%E4%B9%8B%E8%A1%8C%EF%BC%8C%E5%A7%8B%E4%BA%8E%E8%B6%B3%E4%B8%8B.html">01  Dubbo 源码环境搭建：千里之行，始于足下</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/02%20Dubbo%20%E7%9A%84%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BA%BF%EF%BC%9A%E6%8A%93%E4%BD%8F%20URL%EF%BC%8C%E5%B0%B1%E7%90%86%E8%A7%A3%E4%BA%86%E5%8D%8A%E4%B8%AA%20Dubbo.html">02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/03%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8A%EF%BC%89.html">03  Dubbo SPI 精析，接口实现两极反转（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/04%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8B%EF%BC%89.html">04  Dubbo SPI 精析，接口实现两极反转（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/05%20%20%E6%B5%B7%E9%87%8F%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E8%BD%AE%E6%90%9E%E5%AE%9A.html">05  海量定时任务，一个时间轮搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/07%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/08%20%20%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0.html">08  代理模式与常见实现</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/09%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">09  Netty 入门，用它做网络编程都说好（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/10%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">10  Netty 入门，用它做网络编程都说好（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/11%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">11  简易版 RPC 框架实现（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/12%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">12  简易版 RPC 框架实现（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/13%20%20%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%EF%BC%9A%E9%99%8D%E4%BD%8E%20ZooKeeper%20%E5%8E%8B%E5%8A%9B%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5.html">13  本地缓存：降低 ZooKeeper 压力的一个常用手段</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/14%20%20%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%E6%98%AF%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BF%9D%E8%AF%81.html">14  重试机制是网络操作的基本保证</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/15%20%20ZooKeeper%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E8%B7%B5.html">15  ZooKeeper 注册中心实现，官方推荐注册中心实践</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/16%20%20Dubbo%20Serialize%20%E5%B1%82%EF%BC%9A%E5%A4%9A%E7%A7%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AE%97%E6%B3%95%EF%BC%8C%E6%80%BB%E6%9C%89%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E4%BD%A0.html">16  Dubbo Serialize 层：多种序列化算法，总有一款适合你</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/17%20%20Dubbo%20Remoting%20%E5%B1%82%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E5%88%86%E6%9E%90%EF%BC%9A%E8%BF%99%E5%B1%85%E7%84%B6%E6%98%AF%E4%B8%80%E5%A5%97%E5%85%BC%E5%AE%B9%E6%89%80%E6%9C%89%20NIO%20%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/18%20%20Buffer%20%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%9A%E6%88%91%E4%BB%AC%E4%B8%8D%E7%94%9F%E4%BA%A7%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AA%E6%98%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E6%90%AC%E8%BF%90%E5%B7%A5.html">18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工</a></li><li><a class="active" aria-current="page" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/19%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/20%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">20  Transporter 层核心实现：编解码与线程模型一文打尽（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/21%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/22%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/23%20%20%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D%EF%BC%8CRPC%20%E5%B1%82%E9%AA%A8%E6%9E%B6%E6%A2%B3%E7%90%86.html">23  核心接口介绍，RPC 层骨架梳理</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/24%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/25%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/26%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8A%EF%BC%89.html">26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/27%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8B%EF%BC%89.html">27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/28%20%20%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%AE%80%E5%8D%95%E5%8C%96%EF%BC%8C%E4%BB%A3%E7%90%86%E5%B8%AE%E4%BD%A0%E9%9A%90%E8%97%8F%E4%BA%86%E5%A4%9A%E5%B0%91%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82%EF%BC%9F.html">28  复杂问题简单化，代理帮你隐藏了多少底层细节？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/29%20%20%E5%8A%A0%E9%A4%90%EF%BC%9AHTTP%20%E5%8D%8F%E8%AE%AE%20%2B%20JSON-RPC%EF%BC%8CDubbo%20%E8%B7%A8%E8%AF%AD%E8%A8%80%E5%B0%B1%E6%98%AF%E5%A6%82%E6%AD%A4%E7%AE%80%E5%8D%95.html">29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/30%20%20Filter%20%E6%8E%A5%E5%8F%A3%EF%BC%8C%E6%89%A9%E5%B1%95%20Dubbo%20%E6%A1%86%E6%9E%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5%E6%8C%87%E5%8C%97.html">30  Filter 接口，扩展 Dubbo 框架的常用手段指北</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/31%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E6%BD%9C%20Directory%20%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8E%A2%E7%A7%98%E6%9C%8D%E5%8A%A1%E7%9B%AE%E5%BD%95%E7%8E%84%E6%9C%BA.html">31  加餐：深潜 Directory 实现，探秘服务目录玄机</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/32%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8A%EF%BC%89.html">32  路由机制：请求到底怎么走，它说了算（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/33%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8B%EF%BC%89.html">33  路由机制：请求到底怎么走，它说了算（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/34%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%88%9D%E6%8E%A2%20Dubbo%20%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">34  加餐：初探 Dubbo 动态配置的那些事儿</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/35%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8A%EF%BC%89.html">35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/36%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8B%EF%BC%89.html">36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/37%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8A%EF%BC%89.html">37  集群容错：一个好汉三个帮（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/38%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8B%EF%BC%89.html">38  集群容错：一个好汉三个帮（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/39%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%A4%9A%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%8D%E7%94%A8%E6%80%95%EF%BC%8CMerger%20%E5%90%88%E5%B9%B6%E5%99%A8%E6%9D%A5%E5%B8%AE%E5%BF%99.html">39  加餐：多个返回值不用怕，Merger 合并器来帮忙</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/40%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%A8%A1%E6%8B%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%EF%BC%8CMock%20%E6%9C%BA%E5%88%B6%E5%B8%AE%E4%BD%A0%E6%90%9E%E5%AE%9A.html">40  加餐：模拟远程调用，Mock 机制帮你搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/41%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E4%B8%80%E9%94%AE%E9%80%9A%E5%85%B3%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E5%85%A8%E6%B5%81%E7%A8%8B.html">41  加餐：一键通关服务发布全流程</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/42%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E6%B5%81%E7%A8%8B%E5%85%A8%E8%A7%A3%E6%9E%90.html">42  加餐：服务引用流程全解析</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/43%20%20%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9A%E6%96%B0%E7%89%88%E6%9C%AC%E6%96%B0%E6%96%B9%E6%A1%88.html">43  服务自省设计方案：新版本新方案</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/44%20%20%E5%85%83%E6%95%B0%E6%8D%AE%E6%96%B9%E6%A1%88%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E6%95%B0%E6%8D%AE%E9%87%8F%E8%86%A8%E8%83%80%EF%BC%9F.html">44  元数据方案深度剖析，如何避免注册中心数据量膨胀？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/45%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8A%EF%BC%89.html">45  加餐：深入服务自省方案中的服务发布订阅（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/46%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8B%EF%BC%89.html">46  加餐：深入服务自省方案中的服务发布订阅（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/47%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8A%EF%BC%89.html">47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/48%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8B%EF%BC%89.html">48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/49%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E8%AE%A4%E7%9C%9F%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BC%A9%E5%B0%8F%E5%B7%AE%E8%B7%9D.html">49 结束语  认真学习，缩小差距</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/19%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8A%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="19  Transporter 层核心实现：编解码与线程模型一文打尽（上）" id="title">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）</h1>
+<div><p>在第 17 课时中，我们详细介绍了 dubbo-remoting-api 模块中 Transporter 相关的核心抽象接口，本课时将继续介绍 dubbo-remoting-api 模块的其他内容。这里我们依旧从 Transporter 层的 RemotingServer、Client、Channel、ChannelHandler 等核心接口出发，介绍这些核心接口的实现。</p>
+<h3 id="abstractpeer-抽象类">AbstractPeer 抽象类</h3>
+<p>首先，我们来看 AbstractPeer 这个抽象类，它同时实现了 Endpoint 接口和 ChannelHandler 接口，如下图所示，它也是 AbstractChannel、AbstractEndpoint 抽象类的父类。</p>
+<p><img alt="Drawing 0.png" src="/assets/615dbd8e9ea1bed2b9646ae5.png"/></p>
+<p>AbstractPeer 继承关系</p>
+<blockquote>
+<p>Netty 中也有 ChannelHandler、Channel 等接口，但无特殊说明的情况下，这里的接口指的都是 Dubbo 中定义的接口。如果涉及 Netty 中的接口，会进行特殊说明。</p>
+</blockquote>
+<p>AbstractPeer 中有四个字段：一个是表示该端点自身的 URL 类型的字段，还有两个 Boolean 类型的字段（closing 和 closed）用来记录当前端点的状态，这三个字段都与 Endpoint 接口相关；第四个字段指向了一个 ChannelHandler 对象，AbstractPeer 对 ChannelHandler 接口的所有实现，都是委托给了这个 ChannelHandler 对象。从上面的继承关系图中，我们可以得出这样一个结论：AbstractChannel、AbstractServer、AbstractClient 都是要关联一个 ChannelHandler 对象的。</p>
+<h3 id="abstractendpoint-抽象类">AbstractEndpoint 抽象类</h3>
+<p>我们顺着上图的继承关系继续向下看，AbstractEndpoint 继承了 AbstractPeer 这个抽象类。AbstractEndpoint 中维护了一个 Codec2 对象（codec 字段）和两个超时时间（timeout 字段和 connectTimeout 字段），在 AbstractEndpoint 的构造方法中会根据传入的 URL 初始化这三个字段：</p>
+<pre><code>public AbstractEndpoint(URL url, ChannelHandler handler) {
+
+    super(url, handler); // 调用父类AbstractPeer的构造方法
+
+    // 根据URL中的codec参数值，确定此处具体的Codec2实现类
+
+    this.codec = getChannelCodec(url);
+
+    // 根据URL中的timeout参数确定timeout字段的值，默认1000
+
+    this.timeout = url.getPositiveParameter(TIMEOUT_KEY,
+
+         DEFAULT_TIMEOUT);
+
+    // 根据URL中的connect.timeout参数确定connectTimeout字段的值，默认3000
+
+    this.connectTimeout = url.getPositiveParameter(
+
+    Constants.CONNECT_TIMEOUT_KEY, Constants.DEFAULT_CONNECT_TIMEOUT);
+
+}
+</code></pre>
+<p>在[第 17 课时]介绍 Codec2 接口的时候提到它是一个 SPI 扩展点，这里的 AbstractEndpoint.getChannelCodec() 方法就是基于 Dubbo SPI 选择其扩展实现的，具体实现如下：</p>
+<pre><code>protected static Codec2 getChannelCodec(URL url) {
+
+    // 根据URL的codec参数获取扩展名
+
+    String codecName = url.getParameter(Constants.CODEC_KEY, "telnet");
+
+    if (ExtensionLoader.getExtensionLoader(Codec2.class).hasExtension(codecName)) { // 通过ExtensionLoader加载并实例化Codec2的具体扩展实现
+
+        return ExtensionLoader.getExtensionLoader(Codec2.class).getExtension(codecName);
+
+    } else { // Codec2接口不存在相应的扩展名，就尝试从Codec这个老接口的扩展名中查找，目前Codec接口已经废弃了，所以省略这部分逻辑
+
+    }
+
+}
+</code></pre>
+<p>另外，AbstractEndpoint 还实现了 Resetable 接口（只有一个 reset() 方法需要实现），虽然 AbstractEndpoint 中的 reset() 方法比较长，但是逻辑非常简单，就是根据传入的 URL 参数重置 AbstractEndpoint 的三个字段。下面是重置 codec 字段的代码片段，还是调用 getChannelCodec() 方法实现的：</p>
+<pre><code>public void reset(URL url) {
+
+    // 检测当前AbstractEndpoint是否已经关闭(略)
+
+    // 省略重置timeout、connectTimeout两个字段的逻辑
+
+    try {
+
+        if (url.hasParameter(Constants.CODEC_KEY)) {
+
+            this.codec = getChannelCodec(url);
+
+        }
+
+    } catch (Throwable t) {
+
+        logger.error(t.getMessage(), t);
+
+    }
+
+}
+</code></pre>
+<h3 id="server-继承路线分析">Server 继承路线分析</h3>
+<p>AbstractServer 和 AbstractClient 都实现了 AbstractEndpoint 抽象类，我们先来看 AbstractServer 的实现。AbstractServer 在继承了 AbstractEndpoint 的同时，还实现了 RemotingServer 接口，如下图所示：</p>
+<p><img alt="Drawing 1.png" src="/assets/b4531b9d470220bdda850145.png"/></p>
+<p>AbstractServer 继承关系图</p>
+<p><strong>AbstractServer 是对服务端的抽象，实现了服务端的公共逻辑</strong>。AbstractServer 的核心字段有下面几个。</p>
+<ul>
+<li>localAddress、bindAddress（InetSocketAddress 类型）：分别对应该 Server 的本地地址和绑定的地址，都是从 URL 中的参数中获取。bindAddress 默认值与 localAddress 一致。</li>
+<li>accepts（int 类型）：该 Server 能接收的最大连接数，从 URL 的 accepts 参数中获取，默认值为 0，表示没有限制。</li>
+<li>executorRepository（ExecutorRepository 类型）：负责管理线程池，后面我们会深入介绍 ExecutorRepository 的具体实现。</li>
+<li>executor（ExecutorService 类型）：当前 Server 关联的线程池，由上面的 ExecutorRepository 创建并管理。</li>
+</ul>
+<p>在 AbstractServer 的构造方法中会根据传入的 URL初始化上述字段，并调用 doOpen() 这个抽象方法完成该 Server 的启动，具体实现如下：</p>
+<pre><code>public AbstractServer(URL url, ChannelHandler handler) {
+
+    super(url, handler); // 调用父类的构造方法
+
+    // 根据传入的URL初始化localAddress和bindAddress
+
+    localAddress = getUrl().toInetSocketAddress();
+
+    String bindIp = getUrl().getParameter(Constants.BIND_IP_KEY, getUrl().getHost());
+
+    int bindPort = getUrl().getParameter(Constants.BIND_PORT_KEY, getUrl().getPort());
+
+    if (url.getParameter(ANYHOST_KEY, false) || NetUtils.isInvalidLocalHost(bindIp)) {
+
+        bindIp = ANYHOST_VALUE;
+
+    }
+
+    bindAddress = new InetSocketAddress(bindIp, bindPort);
+
+    // 初始化accepts等字段
+
+    this.accepts = url.getParameter(ACCEPTS_KEY, DEFAULT_ACCEPTS);
+
+    this.idleTimeout = url.getParameter(IDLE_TIMEOUT_KEY, DEFAULT_IDLE_TIMEOUT);
+
+    try {
+
+        doOpen(); // 调用doOpen()这个抽象方法，启动该Server
+
+    } catch (Throwable t) {
+
+        throw new RemotingException("...");
+
+    }
+
+    // 获取该Server关联的线程池
+
+    executor = executorRepository.createExecutorIfAbsent(url);
+
+}
+</code></pre>
+<h4 id="executorrepository">ExecutorRepository</h4>
+<p>在继续分析 AbstractServer 的具体实现类之前，我们先来了解一下 ExecutorRepository 这个接口。</p>
+<p>ExecutorRepository 负责创建并管理 Dubbo 中的线程池，该接口虽然是个 SPI 扩展点，但是只有一个默认实现—— DefaultExecutorRepository。在该默认实现中维护了一个 ConcurrentMap<string, concurrentmap<integer,="" executorservice="">&gt; 集合（data 字段）缓存已有的线程池，第一层 Key 值表示线程池属于 Provider 端还是 Consumer 端，第二层 Key 值表示线程池关联服务的端口。</string,></p>
+<p>DefaultExecutorRepository.createExecutorIfAbsent() 方法会根据 URL 参数创建相应的线程池并缓存在合适的位置，具体实现如下：</p>
+<pre><code>public synchronized ExecutorService createExecutorIfAbsent(URL url) {
+
+    // 根据URL中的side参数值决定第一层key
+
+    String componentKey = EXECUTOR_SERVICE_COMPONENT_KEY;
+
+    if (CONSUMER_SIDE.equalsIgnoreCase(url.getParameter(SIDE_KEY))) {
+
+        componentKey = CONSUMER_SIDE; 
+
+    }
+
+    Map&lt;Integer, ExecutorService&gt; executors = data.computeIfAbsent(componentKey, k -&gt; new ConcurrentHashMap&lt;&gt;());
+
+    // 根据URL中的port值确定第二层key
+
+    Integer portKey = url.getPort();
+
+    ExecutorService executor = executors.computeIfAbsent(portKey, k -&gt; createExecutor(url));
+
+    // 如果缓存中相应的线程池已关闭，则同样需要调用createExecutor()方法
+
+    // 创建新的线程池，并替换掉缓存中已关闭的线程持，这里省略这段逻辑
+
+    return executor;
+
+}
+</code></pre>
+<p>在 createExecutor() 方法中，会通过 Dubbo SPI 查找 ThreadPool 接口的扩展实现，并调用其 getExecutor() 方法创建线程池。ThreadPool 接口被 @SPI 注解修饰，默认使用 FixedThreadPool 实现，但是 ThreadPool 接口中的 getExecutor() 方法被 @Adaptive 注解修饰，动态生成的适配器类会优先根据 URL 中的 threadpool 参数选择 ThreadPool 的扩展实现。ThreadPool 接口的实现类如下图所示：</p>
+<p><img alt="Drawing 2.png" src="/assets/3324886b58aa32f0e16ce7a2.png"/></p>
+<p>ThreadPool 继承关系图</p>
+<p>不同实现会根据 URL 参数创建不同特性的线程池，这里以<strong>CacheThreadPool</strong>为例进行分析：</p>
+<pre><code>public Executor getExecutor(URL url) {
+
+    String name = url.getParameter(THREAD_NAME_KEY, DEFAULT_THREAD_NAME);
+
+    // 核心线程数量
+
+    int cores = url.getParameter(CORE_THREADS_KEY, DEFAULT_CORE_THREADS);
+
+    // 最大线程数量
+
+    int threads = url.getParameter(THREADS_KEY, Integer.MAX_VALUE);
+
+    // 缓冲队列的最大长度
+
+    int queues = url.getParameter(QUEUES_KEY, DEFAULT_QUEUES);
+
+    // 非核心线程的最大空闲时长，当非核心线程空闲时间超过该值时，会被回收
+
+    int alive = url.getParameter(ALIVE_KEY, DEFAULT_ALIVE);
+
+    // 下面就是依赖JDK的ThreadPoolExecutor创建指定特性的线程池并返回
+
+    return new ThreadPoolExecutor(cores, threads, alive, TimeUnit.MILLISECONDS,
+
+            queues == 0 ? new SynchronousQueue&lt;Runnable&gt;() :
+
+                    (queues &lt; 0 ? new LinkedBlockingQueue&lt;Runnable&gt;()
+
+                            : new LinkedBlockingQueue&lt;Runnable&gt;(queues)),
+
+            new NamedInternalThreadFactory(name, true), new AbortPolicyWithReport(name, url));
+
+}
+</code></pre>
+<p>再简单说一下其他 ThreadPool 实现创建的线程池。</p>
+<ul>
+<li><strong>LimitedThreadPool</strong>：与 CacheThreadPool 一样，可以指定核心线程数、最大线程数以及缓冲队列长度。区别在于，LimitedThreadPool 创建的线程池的非核心线程不会被回收。</li>
+<li><strong>FixedThreadPool</strong>：核心线程数和最大线程数一致，且不会被回收。</li>
+</ul>
+<p>上述三种类型的线程池都是基于 JDK ThreadPoolExecutor 线程池，在核心线程全部被占用的时候，会优先将任务放到缓冲队列中缓存，在缓冲队列满了之后，才会尝试创建新线程来处理任务。</p>
+<p>EagerThreadPool 创建的线程池是 EagerThreadPoolExecutor（继承了 JDK 提供的 ThreadPoolExecutor），使用的队列是 TaskQueue（继承了LinkedBlockingQueue）。该线程池与 ThreadPoolExecutor 不同的是：在线程数没有达到最大线程数的前提下，EagerThreadPoolExecutor 会优先创建线程来执行任务，而不是放到缓冲队列中；当线程数达到最大值时，EagerThreadPoolExecutor 会将任务放入缓冲队列，等待空闲线程。</p>
+<p>EagerThreadPoolExecutor 覆盖了 ThreadPoolExecutor 中的两个方法：execute() 方法和 afterExecute() 方法，具体实现如下，我们可以看到其中维护了一个 submittedTaskCount 字段（AtomicInteger 类型），用来记录当前在线程池中的任务总数（正在线程中执行的任务数+队列中等待的任务数）。</p>
+<pre><code>public void execute(Runnable command) {
+
+    // 任务提交之前，递增submittedTaskCount
+
+    submittedTaskCount.incrementAndGet(); 
+
+    try {
+
+        super.execute(command); // 提交任务
+
+    } catch (RejectedExecutionException rx) {
+
+        final TaskQueue queue = (TaskQueue) super.getQueue();
+
+        try {
+
+            // 任务被拒绝之后，会尝试再次放入队列中缓存，等待空闲线程执行
+
+            if (!queue.retryOffer(command, 0, TimeUnit.MILLISECONDS)) {
+
+                // 再次入队被拒绝，则队列已满，无法执行任务
+
+                // 递减submittedTaskCount
+
+                submittedTaskCount.decrementAndGet();
+
+                throw new RejectedExecutionException("Queue capacity is full.", rx);
+
+            }
+
+        } catch (InterruptedException x) {
+
+            // 再次入队列异常，递减submittedTaskCount
+
+            submittedTaskCount.decrementAndGet();
+
+            throw new RejectedExecutionException(x);
+
+        }
+
+    } catch (Throwable t) { // 任务提交异常，递减submittedTaskCount
+
+        submittedTaskCount.decrementAndGet();
+
+        throw t;
+
+    }
+
+}
+
+protected void afterExecute(Runnable r, Throwable t) {
+
+    // 任务指定结束，递减submittedTaskCount
+
+    submittedTaskCount.decrementAndGet(); 
+
+}
+</code></pre>
+<p>看到这里，你可能会有些疑惑：没有看到优先创建线程执行任务的逻辑啊。其实重点在关联的 TaskQueue 实现中，它覆盖了 LinkedBlockingQueue.offer() 方法，会判断线程池的 submittedTaskCount 值是否已经达到最大线程数，如果未超过，则会返回 false，迫使线程池创建新线程来执行任务。示例代码如下：</p>
+<pre><code>public boolean offer(Runnable runnable) {
+
+    // 获取当前线程池中的活跃线程数
+
+    int currentPoolThreadSize = executor.getPoolSize();
+
+    // 当前有线程空闲，直接将任务提交到队列中，空闲线程会直接从中获取任务执行
+
+    if (executor.getSubmittedTaskCount() &lt; currentPoolThreadSize) {
+
+        return super.offer(runnable);
+
+    }
+
+    // 当前没有空闲线程，但是还可以创建新线程，则返回false，迫使线程池创建
+
+    // 新线程来执行任务
+
+    if (currentPoolThreadSize &lt; executor.getMaximumPoolSize()) {
+
+        return false;
+
+    }
+
+    // 当前线程数已经达到上限，只能放到队列中缓存了
+
+    return super.offer(runnable);
+
+}
+</code></pre>
+<p>线程池最后一个相关的小细节是 AbortPolicyWithReport ，它继承了 ThreadPoolExecutor.AbortPolicy，覆盖的 rejectedExecution 方法中会输出包含线程池相关信息的 WARN 级别日志，然后进行 dumpJStack() 方法，最后才会抛出RejectedExecutionException 异常。</p>
+<p>我们回到 Server 的继承线上，下面来看基于 Netty 4 实现的 NettyServer，它继承了前文介绍的 AbstractServer，实现了 doOpen() 方法和 doClose() 方法。这里重点看 doOpen() 方法，如下所示：</p>
+<pre><code>protected void doOpen() throws Throwable {
+
+    // 创建ServerBootstrap
+
+    bootstrap = new ServerBootstrap(); 
+
+    // 创建boss EventLoopGroup
+
+    bossGroup = NettyEventLoopFactory.eventLoopGroup(1, "NettyServerBoss");
+
+    // 创建worker EventLoopGroup
+
+    workerGroup = NettyEventLoopFactory.eventLoopGroup(
+
+            getUrl().getPositiveParameter(IO_THREADS_KEY, Constants.DEFAULT_IO_THREADS),
+
+            "NettyServerWorker");
+
+    // 创建NettyServerHandler，它是一个Netty中的ChannelHandler实现，
+
+    // 不是Dubbo Remoting层的ChannelHandler接口的实现
+
+    final NettyServerHandler nettyServerHandler = new NettyServerHandler(getUrl(), this);
+
+    // 获取当前NettyServer创建的所有Channel，这里的channels集合中的
+
+    // Channel不是Netty中的Channel对象，而是Dubbo Remoting层的Channel对象
+
+    channels = nettyServerHandler.getChannels();
+
+    // 初始化ServerBootstrap，指定boss和worker EventLoopGroup
+
+    bootstrap.group(bossGroup, workerGroup)
+
+            .channel(NettyEventLoopFactory.serverSocketChannelClass())
+
+            .option(ChannelOption.SO_REUSEADDR, Boolean.TRUE)
+
+            .childOption(ChannelOption.TCP_NODELAY, Boolean.TRUE)
+
+            .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+
+            .childHandler(new ChannelInitializer&lt;SocketChannel&gt;() {
+
+                @Override
+
+                protected void initChannel(SocketChannel ch) throws Exception {
+
+                    // 连接空闲超时时间
+
+                    int idleTimeout = UrlUtils.getIdleTimeout(getUrl());
+
+                    // NettyCodecAdapter中会创建Decoder和Encoder
+
+                    NettyCodecAdapter adapter = new NettyCodecAdapter(getCodec(), getUrl(), NettyServer.this);
+
+                    ch.pipeline()
+
+                            // 注册Decoder和Encoder
+
+                            .addLast("decoder", adapter.getDecoder())
+
+                            .addLast("encoder", adapter.getEncoder())
+
+                            // 注册IdleStateHandler
+
+                            .addLast("server-idle-handler", new IdleStateHandler(0, 0, idleTimeout, MILLISECONDS))
+
+                            // 注册NettyServerHandler
+
+                            .addLast("handler", nettyServerHandler);
+
+                }
+
+            });
+
+    // 绑定指定的地址和端口
+
+    ChannelFuture channelFuture = bootstrap.bind(getBindAddress());
+
+    channelFuture.syncUninterruptibly(); // 等待bind操作完成
+
+    channel = channelFuture.channel();
+
+}
+</code></pre>
+<p>看完 NettyServer 实现的 doOpen() 方法之后，你会发现它和简易版 RPC 框架中启动一个 Netty 的 Server 端基本流程类似：初始化 ServerBootstrap、创建 Boss EventLoopGroup 和 Worker EventLoopGroup、创建 ChannelInitializer 指定如何初始化 Channel 上的 ChannelHandler 等一系列 Netty 使用的标准化流程。</p>
+<p>其实在 Transporter 这一层看，功能的不同其实就是注册在 Channel 上的 ChannelHandler 不同，通过 doOpen() 方法得到的 Server 端结构如下：</p>
+<p><img alt="5.png" src="/assets/d75b41bd1d8553453ca256d9.png"/></p>
+<p>NettyServer 模型</p>
+<h4 id="核心-channelhandler">核心 ChannelHandler</h4>
+<p>下面我们来逐个看看这四个 ChannelHandler 的核心功能。</p>
+<p>首先是<strong>decoder 和 encoder</strong>，它们都是 NettyCodecAdapter 的内部类，如下图所示，分别继承了 Netty 中的 ByteToMessageDecoder 和 MessageToByteEncoder：</p>
+<p><img alt="Drawing 4.png" src="/assets/dd2ca980724eb705a9ee8454.png"/></p>
+<p>还记得 AbstractEndpoint 抽象类中的 codec 字段（Codec2 类型）吗？InternalDecoder 和 InternalEncoder 会将真正的编解码功能委托给 NettyServer 关联的这个 Codec2 对象去处理，这里以 InternalDecoder 为例进行分析：</p>
+<pre><code>private class InternalDecoder extends ByteToMessageDecoder {
+
+    protected void decode(ChannelHandlerContext ctx, ByteBuf input, List&lt;Object&gt; out) throws Exception {
+
+        // 将ByteBuf封装成统一的ChannelBuffer
+
+        ChannelBuffer message = new NettyBackedChannelBuffer(input);
+
+        // 拿到关联的Channel
+
+        NettyChannel channel = NettyChannel.getOrAddChannel(ctx.channel(), url, handler);
+
+        do {
+
+            // 记录当前readerIndex的位置
+
+            int saveReaderIndex = message.readerIndex();
+
+            // 委托给Codec2进行解码
+
+            Object msg = codec.decode(channel, message);
+
+            // 当前接收到的数据不足一个消息的长度，会返回NEED_MORE_INPUT，
+
+            // 这里会重置readerIndex，继续等待接收更多的数据
+
+            if (msg == Codec2.DecodeResult.NEED_MORE_INPUT) {
+
+                message.readerIndex(saveReaderIndex);
+
+                break;
+
+            } else {
+
+                if (msg != null) { // 将读取到的消息传递给后面的Handler处理
+
+                    out.add(msg);
+
+                }
+
+            }
+
+        } while (message.readable());
+
+    }
+
+}
+</code></pre>
+<p>你是不是发现 InternalDecoder 的实现与我们简易版 RPC 的 Decoder 实现非常相似呢？</p>
+<p>InternalEncoder 的具体实现就不再展开讲解了，你若感兴趣可以翻看源码进行研究和分析。</p>
+<p>接下来是<strong>IdleStateHandler</strong>，它是 Netty 提供的一个工具型 ChannelHandler，用于定时心跳请求的功能或是自动关闭长时间空闲连接的功能。它的原理到底是怎样的呢？在 IdleStateHandler 中通过 lastReadTime、lastWriteTime 等几个字段，记录了最近一次读/写事件的时间，IdleStateHandler 初始化的时候，会创建一个定时任务，定时检测当前时间与最后一次读/写时间的差值。如果超过我们设置的阈值（也就是上面 NettyServer 中设置的 idleTimeout），就会触发 IdleStateEvent 事件，并传递给后续的 ChannelHandler 进行处理。后续 ChannelHandler 的 userEventTriggered() 方法会根据接收到的 IdleStateEvent 事件，决定是关闭长时间空闲的连接，还是发送心跳探活。</p>
+<p>最后来看<strong>NettyServerHandler</strong>，它继承了 ChannelDuplexHandler，这是 Netty 提供的一个同时处理 Inbound 数据和 Outbound 数据的 ChannelHandler，从下面的继承图就能看出来。</p>
+<p><img alt="Drawing 5.png" src="/assets/35c5a58b24f9ea3066d8c0cc.png"/></p>
+<p>NettyServerHandler 继承关系图</p>
+<p>在 NettyServerHandler 中有 channels 和 handler 两个核心字段。</p>
+<ul>
+<li>channels（Map<string,channel>集合）：记录了当前 Server 创建的所有 Channel，从下图中可以看到，连接创建（触发 channelActive() 方法）、连接断开（触发 channelInactive()方法）会操作 channels 集合进行相应的增删。</string,channel></li>
+</ul>
+<p><img alt="Drawing 6.png" src="/assets/c91a4398de2679088bfb90fd.png"/></p>
+<ul>
+<li>handler（ChannelHandler 类型）：NettyServerHandler 内几乎所有方法都会触发该 Dubbo ChannelHandler 对象（如下图）。</li>
+</ul>
+<p><img alt="Drawing 7.png" src="/assets/cbf89de097144ca58f29feb5.png"/></p>
+<p>这里以 write() 方法为例进行简单分析：</p>
+<pre><code>public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
+
+    super.write(ctx, msg, promise); // 将发送的数据继续向下传递
+
+    // 并不影响消息的继续发送，只是触发sent()方法进行相关的处理，这也是方法
+
+    // 名称是动词过去式的原因，可以仔细体会一下。其他方法可能没有那么明显，
+
+    // 这里以write()方法为例进行说明
+
+    NettyChannel channel = NettyChannel.getOrAddChannel(ctx.channel(), url, handler);
+
+    handler.sent(channel, msg);
+
+}
+</code></pre>
+<p>在 NettyServer 创建 NettyServerHandler 的时候，可以看到下面的这行代码：</p>
+<pre><code>final NettyServerHandler nettyServerHandler = new NettyServerHandler(getUrl(), this);
+</code></pre>
+<p>其中第二个参数传入的是 NettyServer 这个对象，你可以追溯一下 NettyServer 的继承结构，会发现它的最顶层父类 AbstractPeer 实现了 ChannelHandler，并且将所有的方法委托给其中封装的 ChannelHandler 对象，如下图所示：</p>
+<p><img alt="Drawing 8.png" src="/assets/7ebb0a892a640518b41229cf.png"/></p>
+<p>也就是说，NettyServerHandler 会将数据委托给这个 ChannelHandler。</p>
+<p>到此为止，Server 这条继承线就介绍完了。你可以回顾一下，从 AbstractPeer 开始往下，一路继承下来，NettyServer 拥有了 Endpoint、ChannelHandler 以及RemotingServer多个接口的能力，关联了一个 ChannelHandler 对象以及 Codec2 对象，并最终将数据委托给这两个对象进行处理。所以，上层调用方只需要实现 ChannelHandler 和 Codec2 这两个接口就可以了。</p>
+<p><img alt="6.png" src="/assets/6cf633d8920ce5343d71cfdd.png"/></p>
+<h3 id="总结">总结</h3>
+<p>本课时重点介绍了 Dubbo Transporter 层中 Server 相关的实现。</p>
+<p>首先，我们介绍了 AbstractPeer 这个最顶层的抽象类，了解了 Server、Client 和 Channel 的公共属性。接下来，介绍了 AbstractEndpoint 抽象类，它提供了编解码等 Server 和 Client 所需的公共能力。最后，我们深入分析了 AbstractServer 抽象类以及基于 Netty 4 实现的 NettyServer，同时，还深入剖析了涉及的各种组件，例如，ExecutorRepository、NettyServerHandler 等。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

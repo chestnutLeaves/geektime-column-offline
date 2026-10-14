@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04 连接池：别让连接池帮了倒忙 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/index.html">Java 业务开发常见错误 100 例</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java 业务开发常见错误 100 例</strong><ul><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9C%9F%E7%9A%84%E4%BC%9A%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E5%9D%91%EF%BC%9F.html">00 开篇词 业务代码真的会有这么多坑？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/01%20%E4%BD%BF%E7%94%A8%E4%BA%86%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%BA%93%EF%BC%8C%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%B0%B1%E9%AB%98%E6%9E%95%E6%97%A0%E5%BF%A7%E4%BA%86%E5%90%97%EF%BC%9F.html">01 使用了并发工具类库，线程安全就高枕无忧了吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/02%20%E4%BB%A3%E7%A0%81%E5%8A%A0%E9%94%81%EF%BC%9A%E4%B8%8D%E8%A6%81%E8%AE%A9%E2%80%9C%E9%94%81%E2%80%9D%E4%BA%8B%E6%88%90%E4%B8%BA%E7%83%A6%E5%BF%83%E4%BA%8B.html">02 代码加锁：不要让“锁”事成为烦心事</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/03%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E6%9C%80%E5%B8%B8%E7%94%A8%E4%B9%9F%E6%9C%80%E5%AE%B9%E6%98%93%E7%8A%AF%E9%94%99%E7%9A%84%E7%BB%84%E4%BB%B6.html">03 线程池：业务代码最常用也最容易犯错的组件</a></li><li><a class="active" aria-current="page" href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/04%20%E8%BF%9E%E6%8E%A5%E6%B1%A0%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%B8%AE%E4%BA%86%E5%80%92%E5%BF%99.html">04 连接池：别让连接池帮了倒忙</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/05%20HTTP%E8%B0%83%E7%94%A8%EF%BC%9A%E4%BD%A0%E8%80%83%E8%99%91%E5%88%B0%E8%B6%85%E6%97%B6%E3%80%81%E9%87%8D%E8%AF%95%E3%80%81%E5%B9%B6%E5%8F%91%E4%BA%86%E5%90%97%EF%BC%9F.html">05 HTTP调用：你考虑到超时、重试、并发了吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/06%202%E6%88%90%E7%9A%84%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9A%84Spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%8C%E5%8F%AF%E8%83%BD%E9%83%BD%E6%B2%A1%E5%A4%84%E7%90%86%E6%AD%A3%E7%A1%AE.html">06 2成的业务代码的Spring声明式事务，可能都没处理正确</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/07%20%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E5%B9%B6%E4%B8%8D%E6%98%AF%E4%B8%87%E8%83%BD%E8%8D%AF.html">07 数据库索引：索引并不是万能药</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/08%20%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98%EF%BC%9A%E7%A8%8B%E5%BA%8F%E9%87%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%BD%A0%E5%B0%B1%E6%98%AF%E4%BD%A0%EF%BC%9F.html">08 判等问题：程序里如何确定你就是你？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/09%20%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%EF%BC%9A%E6%B3%A8%E6%84%8F%E7%B2%BE%E5%BA%A6%E3%80%81%E8%88%8D%E5%85%A5%E5%92%8C%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98.html">09 数值计算：注意精度、舍入和溢出问题</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/10%20%E9%9B%86%E5%90%88%E7%B1%BB%EF%BC%9A%E5%9D%91%E6%BB%A1%E5%9C%B0%E7%9A%84List%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C.html">10 集合类：坑满地的List列表操作</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/11%20%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A%E7%9A%84null%E5%92%8C%E6%81%BC%E4%BA%BA%E7%9A%84%E7%A9%BA%E6%8C%87%E9%92%88.html">11 空值处理：分不清楚的null和恼人的空指针</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/12%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%87%AA%E5%B7%B1%E5%9C%A8%E5%87%BA%E9%97%AE%E9%A2%98%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%98%E4%B8%BA%E7%9E%8E%E5%AD%90.html">12 异常处理：别让自己在出问题的时候变为瞎子</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/13%20%E6%97%A5%E5%BF%97%EF%BC%9A%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95%E7%9C%9F%E6%B2%A1%E4%BD%A0%E6%83%B3%E8%B1%A1%E7%9A%84%E9%82%A3%E4%B9%88%E7%AE%80%E5%8D%95.html">13 日志：日志记录真没你想象的那么简单</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/14%20%E6%96%87%E4%BB%B6IO%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E6%AD%A3%E7%A1%AE%E7%9A%84%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%B9%B6%E9%9D%9E%E6%98%93%E4%BA%8B.html">14 文件IO：实现高效正确的文件读写并非易事</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/15%20%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9A%E4%B8%80%E6%9D%A5%E4%B8%80%E5%9B%9E%E4%BD%A0%E8%BF%98%E6%98%AF%E5%8E%9F%E6%9D%A5%E7%9A%84%E4%BD%A0%E5%90%97%EF%BC%9F.html">15 序列化：一来一回你还是原来的你吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/16%20%E7%94%A8%E5%A5%BDJava%208%E7%9A%84%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%EF%BC%8C%E5%B0%91%E8%B8%A9%E4%B8%80%E4%BA%9B%E2%80%9C%E8%80%81%E4%B8%89%E6%A0%B7%E2%80%9D%E7%9A%84%E5%9D%91.html">16 用好Java 8的日期时间类，少踩一些“老三样”的坑</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/17%20%E5%88%AB%E4%BB%A5%E4%B8%BA%E2%80%9C%E8%87%AA%E5%8A%A8%E6%8C%A1%E2%80%9D%E5%B0%B1%E4%B8%8D%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0OOM.html">17 别以为“自动挡”就不可能出现OOM</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/18%20%E5%BD%93%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E5%92%8C%E6%B3%9B%E5%9E%8B%E9%81%87%E5%88%B0OOP%E6%97%B6%EF%BC%8C%E4%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91%EF%BC%9F.html">18 当反射、注解和泛型遇到OOP时，会有哪些坑？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/19%20Spring%E6%A1%86%E6%9E%B6%EF%BC%9AIoC%E5%92%8CAOP%E6%98%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%A0%B8%E5%BF%83.html">19 Spring框架：IoC和AOP是扩展的核心</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/20%20Spring%E6%A1%86%E6%9E%B6%EF%BC%9A%E6%A1%86%E6%9E%B6%E5%B8%AE%E6%88%91%E4%BB%AC%E5%81%9A%E4%BA%86%E5%BE%88%E5%A4%9A%E5%B7%A5%E4%BD%9C%E4%B9%9F%E5%B8%A6%E6%9D%A5%E4%BA%86%E5%A4%8D%E6%9D%82%E5%BA%A6.html">20 Spring框架：框架帮我们做了很多工作也带来了复杂度</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/21%20%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%EF%BC%9A%E6%90%9E%E5%AE%9A%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BB%9D%E6%8B%9B.html">21 代码重复：搞定代码重复的三个绝招</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/22%20%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%B3%BB%E7%BB%9F%E9%97%B4%E5%AF%B9%E8%AF%9D%E7%9A%84%E8%AF%AD%E8%A8%80%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%BB%9F%E4%B8%80.html">22 接口设计：系统间对话的语言，一定要统一</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/23%20%E7%BC%93%E5%AD%98%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%94%A6%E4%B8%8A%E6%B7%BB%E8%8A%B1%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%90%BD%E4%BA%95%E4%B8%8B%E7%9F%B3.html">23 缓存设计：缓存可以锦上添花也可以落井下石</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/24%20%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%86%99%E5%AE%8C%EF%BC%8C%E5%B0%B1%E6%84%8F%E5%91%B3%E7%9D%80%E7%94%9F%E4%BA%A7%E5%B0%B1%E7%BB%AA%E4%BA%86%EF%BC%9F.html">24 业务代码写完，就意味着生产就绪了？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/25%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E5%A5%BD%E7%94%A8%EF%BC%8C%E4%BD%86%E9%9D%9E%E5%B8%B8%E5%AE%B9%E6%98%93%E7%94%A8%E9%94%99.html">25 异步处理好用，但非常容易用错</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/26%20%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9ANoSQL%E4%B8%8ERDBMS%E5%A6%82%E4%BD%95%E5%8F%96%E9%95%BF%E8%A1%A5%E7%9F%AD%E3%80%81%E7%9B%B8%E8%BE%85%E7%9B%B8%E6%88%90%EF%BC%9F.html">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/27%20%E6%95%B0%E6%8D%AE%E6%BA%90%E5%A4%B4%EF%BC%9A%E4%BB%BB%E4%BD%95%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E4%B8%9C%E8%A5%BF%E9%83%BD%E4%B8%8D%E5%8F%AF%E4%BF%A1%E4%BB%BB.html">27 数据源头：任何客户端的东西都不可信任</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/28%20%E5%AE%89%E5%85%A8%E5%85%9C%E5%BA%95%EF%BC%9A%E6%B6%89%E5%8F%8A%E9%92%B1%E6%97%B6%EF%BC%8C%E5%BF%85%E9%A1%BB%E8%80%83%E8%99%91%E9%98%B2%E5%88%B7%E3%80%81%E9%99%90%E9%87%8F%E5%92%8C%E9%98%B2%E9%87%8D.html">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/29%20%E6%95%B0%E6%8D%AE%E5%92%8C%E4%BB%A3%E7%A0%81%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%B0%B1%E6%98%AF%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%B0%B1%E6%98%AF%E4%BB%A3%E7%A0%81.html">29 数据和代码：数据就是数据，代码就是代码</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/30%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E4%BC%A0%E8%BE%93%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%EF%BC%9F.html">30 如何正确保存和传输敏感数据？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/31%20%E5%8A%A0%E9%A4%901%EF%BC%9A%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E8%AF%BE%E7%A8%8B%E4%B8%ADJava%208%E7%9A%84%E9%82%A3%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E4%B8%80%EF%BC%89.html">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/32%20%E5%8A%A0%E9%A4%902%EF%BC%9A%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E8%AF%BE%E7%A8%8B%E4%B8%ADJava%208%E7%9A%84%E9%82%A3%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E4%BA%8C%EF%BC%89.html">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/33%20%E5%8A%A0%E9%A4%903%EF%BC%9A%E5%AE%9A%E4%BD%8D%E5%BA%94%E7%94%A8%E9%97%AE%E9%A2%98%EF%BC%8C%E6%8E%92%E9%94%99%E5%A5%97%E8%B7%AF%E5%BE%88%E9%87%8D%E8%A6%81.html">33 加餐3：定位应用问题，排错套路很重要</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/34%20%E5%8A%A0%E9%A4%904%EF%BC%9A%E5%88%86%E6%9E%90%E5%AE%9A%E4%BD%8DJava%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E5%A5%BD%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89.html">34 加餐4：分析定位Java问题，一定要用好这些工具（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/35%20%E5%8A%A0%E9%A4%905%EF%BC%9A%E5%88%86%E6%9E%90%E5%AE%9A%E4%BD%8DJava%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E5%A5%BD%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89.html">35 加餐5：分析定位Java问题，一定要用好这些工具（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/36%20%E5%8A%A0%E9%A4%906%EF%BC%9A%E8%BF%9915%E5%B9%B4%E6%9D%A5%EF%BC%8C%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E5%92%8C%E8%8B%B1%E8%AF%AD%E7%9A%84%EF%BC%9F.html">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/37%20%E5%8A%A0%E9%A4%907%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E6%88%90%E9%95%BF28%E8%AE%A1.html">37 加餐7：程序员成长28计</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/38%20%E5%8A%A0%E9%A4%908%EF%BC%9AJava%E7%A8%8B%E5%BA%8F%E4%BB%8E%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%81%E7%A7%BB%E5%88%B0Kubernetes%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91.html">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%B8%80%EF%BC%89.html">答疑篇：代码篇思考题集锦（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%B8%89%EF%BC%89.html">答疑篇：代码篇思考题集锦（三）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%BA%8C%EF%BC%89.html">答疑篇：代码篇思考题集锦（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%8A%A0%E9%A4%90%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：加餐篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%AE%89%E5%85%A8%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：安全篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E8%AE%BE%E8%AE%A1%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：设计篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%86%99%E4%BB%A3%E7%A0%81%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E5%B0%BD%E9%87%8F%E9%81%BF%E5%85%8D%E8%B8%A9%E5%9D%91%EF%BC%9F.html">结束语 写代码时，如何才能尽量避免踩坑？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/04%20%E8%BF%9E%E6%8E%A5%E6%B1%A0%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%B8%AE%E4%BA%86%E5%80%92%E5%BF%99.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="04 连接池：别让连接池帮了倒忙" id="title">04 连接池：别让连接池帮了倒忙</h1>
+<div><p>今天，我们来聊聊使用连接池需要注意的问题。</p>
+<p>在上一讲，我们学习了使用线程池需要注意的问题。今天，我再与你说说另一种很重要的池化技术，即连接池。</p>
+<p>我先和你说说连接池的结构。连接池一般对外提供获得连接、归还连接的接口给客户端使用，并暴露最小空闲连接数、最大连接数等可配置参数，在内部则实现连接建立、连接心跳保持、连接管理、空闲连接回收、连接可用性检测等功能。连接池的结构示意图，如下所示：</p>
+<p><img alt="img" src="/assets/874850ea36ccf356d9e916eb.png"/></p>
+<p>业务项目中经常会用到的连接池，主要是数据库连接池、Redis 连接池和 HTTP 连接池。所以，今天我就以这三种连接池为例，和你聊聊使用和配置连接池容易出错的地方。</p>
+<h2 id="注意鉴别客户端-sdk-是否基于连接池">注意鉴别客户端 SDK 是否基于连接池</h2>
+<p>在使用三方客户端进行网络通信时，我们首先要确定客户端 SDK 是否是基于连接池技术实现的。我们知道，TCP 是面向连接的基于字节流的协议：</p>
+<p>面向连接，意味着连接需要先创建再使用，创建连接的三次握手有一定开销；</p>
+<p>基于字节流，意味着字节是发送数据的最小单元，TCP 协议本身无法区分哪几个字节是完整的消息体，也无法感知是否有多个客户端在使用同一个 TCP 连接，TCP 只是一个读写数据的管道。</p>
+<p>如果客户端 SDK 没有使用连接池，而直接是 TCP 连接，那么就需要考虑每次建立 TCP 连接的开销，并且因为 TCP 基于字节流，在多线程的情况下对同一连接进行复用，可能会产生线程安全问题。</p>
+<p>我们先看一下涉及 TCP 连接的客户端 SDK，对外提供 API 的三种方式。在面对各种三方客户端的时候，只有先识别出其属于哪一种，才能理清楚使用方式。</p>
+<p>连接池和连接分离的 API：有一个 XXXPool 类负责连接池实现，先从其获得连接 XXXConnection，然后用获得的连接进行服务端请求，完成后使用者需要归还连接。通常，XXXPool 是线程安全的，可以并发获取和归还连接，而 XXXConnection 是非线程安全的。对应到连接池的结构示意图中，XXXPool 就是右边连接池那个框，左边的客户端是我们自己的代码。</p>
+<p>内部带有连接池的 API：对外提供一个 XXXClient 类，通过这个类可以直接进行服务端请求；这个类内部维护了连接池，SDK 使用者无需考虑连接的获取和归还问题。一般而言，XXXClient 是线程安全的。对应到连接池的结构示意图中，整个 API 就是蓝色框包裹的部分。</p>
+<p>非连接池的 API：一般命名为 XXXConnection，以区分其是基于连接池还是单连接的，而不建议命名为 XXXClient 或直接是 XXX。直接连接方式的 API 基于单一连接，每次使用都需要创建和断开连接，性能一般，且通常不是线程安全的。对应到连接池的结构示意图中，这种形式相当于没有右边连接池那个框，客户端直接连接服务端创建连接。</p>
+<p>虽然上面提到了 SDK 一般的命名习惯，但不排除有一些客户端特立独行，因此在使用三方 SDK 时，一定要先查看官方文档了解其最佳实践，或是在类似 Stackoverflow 的网站搜索 XXX threadsafe/singleton 字样看看大家的回复，也可以一层一层往下看源码，直到定位到原始 Socket 来判断 Socket 和客户端 API 的对应关系。</p>
+<p>明确了 SDK 连接池的实现方式后，我们就大概知道了使用 SDK 的最佳实践：</p>
+<p>如果是分离方式，那么连接池本身一般是线程安全的，可以复用。每次使用需要从连接池获取连接，使用后归还，归还的工作由使用者负责。</p>
+<p>如果是内置连接池，SDK 会负责连接的获取和归还，使用的时候直接复用客户端。</p>
+<p>如果 SDK 没有实现连接池（大多数中间件、数据库的客户端 SDK 都会支持连接池），那通常不是线程安全的，而且短连接的方式性能不会很高，使用的时候需要考虑是否自己封装一个连接池。</p>
+<p>接下来，我就以 Java 中用于操作 Redis 最常见的库 Jedis 为例，从源码角度分析下 Jedis 类到底属于哪种类型的 API，直接在多线程环境下复用一个连接会产生什么问题，以及如何用最佳实践来修复这个问题。</p>
+<p>首先，向 Redis 初始化 2 组数据，Key=a、Value=1，Key=b、Value=2：</p>
+<pre><code class="language-java">@PostConstruct
+public void init() {
+
+    try (Jedis jedis = new Jedis("127.0.0.1", 6379)) {
+        Assert.isTrue("OK".equals(jedis.set("a", "1")), "set a = 1 return OK");
+        Assert.isTrue("OK".equals(jedis.set("b", "2")), "set b = 2 return OK");
+    }
+}
+</code></pre>
+<p>然后，启动两个线程，共享操作同一个 Jedis 实例，每一个线程循环 1000 次，分别读取 Key 为 a 和 b 的 Value，判断是否分别为 1 和 2：</p>
+<pre><code class="language-java">Jedis jedis = new Jedis("127.0.0.1", 6379);
+
+new Thread(() -&gt; {
+    for (int i = 0; i &lt; 1000; i++) {
+        String result = jedis.get("a");
+        if (!result.equals("1")) {
+            log.warn("Expect a to be 1 but found {}", result);
+            return;
+        }
+    }
+
+}).start();
+
+new Thread(() -&gt; {
+    for (int i = 0; i &lt; 1000; i++) {
+        String result = jedis.get("b");
+        if (!result.equals("2")) {
+            log.warn("Expect b to be 2 but found {}", result);
+            return;
+        }
+    }
+}).start();
+
+TimeUnit.SECONDS.sleep(5);
+</code></pre>
+<p>执行程序多次，可以看到日志中出现了各种奇怪的异常信息，有的是读取 Key 为 b 的 Value 读取到了 1，有的是流非正常结束，还有的是连接关闭异常：</p>
+<pre><code class="language-log">//错误1
+[14:56:19.069] [Thread-28] [WARN ] [.t.c.c.redis.JedisMisreuseController:45  ] - Expect b to be 2 but found 1
+
+//错误2
+redis.clients.jedis.exceptions.JedisConnectionException: Unexpected end of stream.
+  at redis.clients.jedis.util.RedisInputStream.ensureFill(RedisInputStream.java:202)
+  at redis.clients.jedis.util.RedisInputStream.readLine(RedisInputStream.java:50)
+  at redis.clients.jedis.Protocol.processError(Protocol.java:114)
+  at redis.clients.jedis.Protocol.process(Protocol.java:166)
+  at redis.clients.jedis.Protocol.read(Protocol.java:220)
+  at redis.clients.jedis.Connection.readProtocolWithCheckingBroken(Connection.java:318)
+  at redis.clients.jedis.Connection.getBinaryBulkReply(Connection.java:255)
+  at redis.clients.jedis.Connection.getBulkReply(Connection.java:245)
+  at redis.clients.jedis.Jedis.get(Jedis.java:181)
+  at org.geekbang.time.commonmistakes.connectionpool.redis.JedisMisreuseController.lambda$wrong$1(JedisMisreuseController.java:43)
+  at java.lang.Thread.run(Thread.java:748)
+
+//错误3
+java.io.IOException: Socket Closed
+  at java.net.AbstractPlainSocketImpl.getOutputStream(AbstractPlainSocketImpl.java:440)
+  at java.net.Socket$3.run(Socket.java:954)
+  at java.net.Socket$3.run(Socket.java:952)
+  at java.security.AccessController.doPrivileged(Native Method)
+  at java.net.Socket.getOutputStream(Socket.java:951)
+  at redis.clients.jedis.Connection.connect(Connection.java:200)
+  ... 7 more
+</code></pre>
+<p>让我们分析一下 Jedis 类的源码，搞清楚其中缘由吧。</p>
+<pre><code class="language-java">public class Jedis extends BinaryJedis implements JedisCommands, MultiKeyCommands,
+    AdvancedJedisCommands, ScriptingCommands, BasicCommands, ClusterCommands, SentinelCommands, ModuleCommands {
+
+}
+
+public class BinaryJedis implements BasicCommands, BinaryJedisCommands, MultiKeyBinaryCommands,
+    AdvancedBinaryJedisCommands, BinaryScriptingCommands, Closeable {
+
+  protected Client client = null;
+
+      ...
+
+}
+
+public class Client extends BinaryClient implements Commands {
+
+}
+
+public class BinaryClient extends Connection {
+
+}
+
+public class Connection implements Closeable {
+
+  private Socket socket;
+
+  private RedisOutputStream outputStream;
+
+  private RedisInputStream inputStream;
+
+}
+</code></pre>
+<p>可以看到，Jedis 继承了 BinaryJedis，BinaryJedis 中保存了单个 Client 的实例，Client 最终继承了 Connection，Connection 中保存了单个 Socket 的实例，和 Socket 对应的两个读写流。因此，一个 Jedis 对应一个 Socket 连接。类图如下：</p>
+<p><img alt="img" src="/assets/9d1baf9ee2d0f8a77698e0fc.png"/></p>
+<p>BinaryClient 封装了各种 Redis 命令，其最终会调用基类 Connection 的方法，使用 Protocol 类发送命令。看一下 Protocol 类的 sendCommand 方法的源码，可以发现其发送命令时是直接操作 RedisOutputStream 写入字节。</p>
+<p>我们在多线程环境下复用 Jedis 对象，其实就是在复用 RedisOutputStream。如果多个线程在执行操作，那么既无法确保整条命令以一个原子操作写入 Socket，也无法确保写入后、读取前没有其他数据写到远端：</p>
+<pre><code class="language-java">private static void sendCommand(final RedisOutputStream os, final byte[] command,
+
+    final byte[]... args) {
+
+  try {
+
+    os.write(ASTERISK_BYTE);
+    os.writeIntCrLf(args.length + 1);
+    os.write(DOLLAR_BYTE);
+    os.writeIntCrLf(command.length);
+    os.write(command);
+    os.writeCrLf();
+
+    for (final byte[] arg : args) {
+      os.write(DOLLAR_BYTE);
+      os.writeIntCrLf(arg.length);
+      os.write(arg);
+      os.writeCrLf();
+    }
+  } catch (IOException e) {
+    throw new JedisConnectionException(e);
+  }
+}
+</code></pre>
+<p>看到这里我们也可以理解了，为啥多线程情况下使用 Jedis 对象操作 Redis 会出现各种奇怪的问题。</p>
+<p>比如，写操作互相干扰，多条命令相互穿插的话，必然不是合法的 Redis 命令，那么 Redis 会关闭客户端连接，导致连接断开；又比如，线程 1 和 2 先后写入了 get a 和 get b 操作的请求，Redis 也返回了值 1 和 2，但是线程 2 先读取了数据 1 就会出现数据错乱的问题。</p>
+<p>修复方式是，使用 Jedis 提供的另一个线程安全的类 JedisPool 来获得 Jedis 的实例。JedisPool 可以声明为 static 在多个线程之间共享，扮演连接池的角色。使用时，按需使用 try-with-resources 模式从 JedisPool 获得和归还 Jedis 实例。</p>
+<pre><code class="language-java">private static JedisPool jedisPool = new JedisPool("127.0.0.1", 6379);
+
+new Thread(() -&gt; {
+    try (Jedis jedis = jedisPool.getResource()) {
+        for (int i = 0; i &lt; 1000; i++) {
+            String result = jedis.get("a");
+            if (!result.equals("1")) {
+                log.warn("Expect a to be 1 but found {}", result);
+                return;
+            }
+        }
+    }
+}).start();
+
+new Thread(() -&gt; {
+    try (Jedis jedis = jedisPool.getResource()) {
+        for (int i = 0; i &lt; 1000; i++) {
+            String result = jedis.get("b");
+            if (!result.equals("2")) {
+                log.warn("Expect b to be 2 but found {}", result);
+                return;
+            }
+        }
+    }
+}).start();
+</code></pre>
+<p>这样修复后，代码不再有线程安全问题了。此外，我们最好通过 shutdownhook，在程序退出之前关闭 JedisPool：</p>
+<pre><code class="language-java">@PostConstruct
+public void init() {
+
+    Runtime.getRuntime().addShutdownHook(new Thread(() -&gt; {
+        jedisPool.close();
+    }));
+
+}
+</code></pre>
+<p>看一下 Jedis 类 close 方法的实现可以发现，如果 Jedis 是从连接池获取的话，那么 close 方法会调用连接池的 return 方法归还连接：</p>
+<pre><code class="language-java">public class Jedis extends BinaryJedis implements JedisCommands, MultiKeyCommands,
+    AdvancedJedisCommands, ScriptingCommands, BasicCommands, ClusterCommands, SentinelCommands, ModuleCommands {
+
+  protected JedisPoolAbstract dataSource = null;
+
+  @Override
+  public void close() {
+
+    if (dataSource != null) {
+      JedisPoolAbstract pool = this.dataSource;
+      this.dataSource = null;
+      if (client.isBroken()) {
+        pool.returnBrokenResource(this);
+      } else {
+        pool.returnResource(this);
+      }
+    } else {
+      super.close();
+    }
+  }
+}
+</code></pre>
+<p>如果不是，则直接关闭连接，其最终调用 Connection 类的 disconnect 方法来关闭 TCP 连接：</p>
+<pre><code class="language-java">public void disconnect() {
+
+  if (isConnected()) {
+    try {
+      outputStream.flush();
+      socket.close();
+    } catch (IOException ex) {
+      broken = true;
+      throw new JedisConnectionException(ex);
+    } finally {
+      IOUtils.closeQuietly(socket);
+    }
+  }
+}
+</code></pre>
+<p>可以看到，Jedis 可以独立使用，也可以配合连接池使用，这个连接池就是 JedisPool。我们再看看 JedisPool 的实现。</p>
+<pre><code class="language-java">public class JedisPool extends JedisPoolAbstract {
+
+  @Override
+  public Jedis getResource() {
+
+    Jedis jedis = super.getResource()
+    jedis.setDataSource(this);
+    return jedis;
+
+  }
+
+  @Override
+  protected void returnResource(final Jedis resource) {
+
+    if (resource != null) {
+      try {
+        resource.resetState();
+        returnResourceObject(resource);
+      } catch (Exception e) {
+        returnBrokenResource(resource);
+        throw new JedisException("Resource is returned to the pool as broken", e);
+      }
+    }
+  }
+}
+
+public class JedisPoolAbstract extends Pool&lt;Jedis&gt; {
+
+}
+
+public abstract class Pool&lt;T&gt; implements Closeable {
+  protected GenericObjectPool&lt;T&gt; internalPool;
+
+}
+</code></pre>
+<p>JedisPool 的 getResource 方法在拿到 Jedis 对象后，将自己设置为了连接池。连接池 JedisPool，继承了 JedisPoolAbstract，而后者继承了抽象类 Pool，Pool 内部维护了 Apache Common 的通用池 GenericObjectPool。JedisPool 的连接池就是基于 GenericObjectPool 的。</p>
+<p>看到这里我们了解了，Jedis 的 API 实现是我们说的三种类型中的第一种，也就是连接池和连接分离的 API，JedisPool 是线程安全的连接池，Jedis 是非线程安全的单一连接。知道了原理之后，我们再使用 Jedis 就胸有成竹了。</p>
+<h2 id="使用连接池务必确保复用">使用连接池务必确保复用</h2>
+<p>在介绍线程池的时候我们强调过，池一定是用来复用的，否则其使用代价会比每次创建单一对象更大。对连接池来说更是如此，原因如下：</p>
+<p>创建连接池的时候很可能一次性创建了多个连接，大多数连接池考虑到性能，会在初始化的时候维护一定数量的最小连接（毕竟初始化连接池的过程一般是一次性的），可以直接使用。如果每次使用连接池都按需创建连接池，那么很可能你只用到一个连接，但是创建了 N 个连接。</p>
+<p>连接池一般会有一些管理模块，也就是连接池的结构示意图中的绿色部分。举个例子，大多数的连接池都有闲置超时的概念。连接池会检测连接的闲置时间，定期回收闲置的连接，把活跃连接数降到最低（闲置）连接的配置值，减轻服务端的压力。一般情况下，闲置连接由独立线程管理，启动了空闲检测的连接池相当于还会启动一个线程。此外，有些连接池还需要独立线程负责连接保活等功能。因此，启动一个连接池相当于启动了 N 个线程。</p>
+<p>除了使用代价，连接池不释放，还可能会引起线程泄露。接下来，我就以 Apache HttpClient 为例，和你说说连接池不复用的问题。</p>
+<p>首先，创建一个 CloseableHttpClient，设置使用 PoolingHttpClientConnectionManager 连接池并启用空闲连接驱逐策略，最大空闲时间为 60 秒，然后使用这个连接来请求一个会返回 OK 字符串的服务端接口：</p>
+<pre><code class="language-java">@GetMapping("wrong1")
+public String wrong1() {
+
+    CloseableHttpClient client = HttpClients.custom()
+            .setConnectionManager(new PoolingHttpClientConnectionManager())
+            .evictIdleConnections(60, TimeUnit.SECONDS).build();
+
+    try (CloseableHttpResponse response = client.execute(new HttpGet("http://127.0.0.1:45678/httpclientnotreuse/test"))) {
+        return EntityUtils.toString(response.getEntity());
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return null;
+}
+</code></pre>
+<p>访问这个接口几次后查看应用线程情况，可以看到有大量叫作 Connection evictor 的线程，且这些线程不会销毁：</p>
+<p><img alt="img" src="/assets/0ad633e521c732b2e847c7b9.png"/></p>
+<p>对这个接口进行几秒的压测（压测使用 wrk，1 个并发 1 个连接）可以看到，已经建立了三千多个 TCP 连接到 45678 端口（其中有 1 个是压测客户端到 Tomcat 的连接，大部分都是 HttpClient 到 Tomcat 的连接）：</p>
+<p><img alt="img" src="/assets/df630a9776ac311288a998ac.png"/></p>
+<p>好在有了空闲连接回收的策略，60 秒之后连接处于 CLOSE_WAIT 状态，最终彻底关闭。</p>
+<p><img alt="img" src="/assets/3ab219f61711fce76d10bbf3.png"/></p>
+<p>这 2 点证明，CloseableHttpClient 属于第二种模式，即内部带有连接池的 API，其背后是连接池，最佳实践一定是复用。</p>
+<p>复用方式很简单，你可以把 CloseableHttpClient 声明为 static，只创建一次，并且在 JVM 关闭之前通过 addShutdownHook 钩子关闭连接池，在使用的时候直接使用 CloseableHttpClient 即可，无需每次都创建。</p>
+<p>首先，定义一个 right 接口来实现服务端接口调用：</p>
+<pre><code class="language-java">private static CloseableHttpClient httpClient = null;
+
+static {
+
+    //当然，也可以把CloseableHttpClient定义为Bean，然后在@PreDestroy标记的方法内close这个HttpClient
+    httpClient = HttpClients.custom().setMaxConnPerRoute(1).setMaxConnTotal(1).evictIdleConnections(60, TimeUnit.SECONDS).build();
+
+    Runtime.getRuntime().addShutdownHook(new Thread(() -&gt; {
+        try {
+            httpClient.close();
+        } catch (IOException ignored) {
+        }
+    }));
+}
+
+@GetMapping("right")
+public String right() {
+
+    try (CloseableHttpResponse response = httpClient.execute(new HttpGet("http://127.0.0.1:45678/httpclientnotreuse/test"))) {
+        return EntityUtils.toString(response.getEntity());
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return null;
+}
+</code></pre>
+<p>然后，重新定义一个 wrong2 接口，修复之前按需创建 CloseableHttpClient 的代码，每次用完之后确保连接池可以关闭：</p>
+<pre><code class="language-java">@GetMapping("wrong2")
+public String wrong2() {
+
+    try (CloseableHttpClient client = HttpClients.custom()
+            .setConnectionManager(new PoolingHttpClientConnectionManager())
+            .evictIdleConnections(60, TimeUnit.SECONDS).build();
+
+         CloseableHttpResponse response = client.execute(new HttpGet("http://127.0.0.1:45678/httpclientnotreuse/test"))) {
+            return EntityUtils.toString(response.getEntity());
+        } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return null;
+}
+</code></pre>
+<p>使用 wrk 对 wrong2 和 right 两个接口分别压测 60 秒，可以看到两种使用方式性能上的差异，每次创建连接池的 QPS 是 337，而复用连接池的 QPS 是 2022：</p>
+<p><img alt="img" src="/assets/b37dac1727a95c2e13a6c14d.png"/></p>
+<p>如此大的性能差异显然是因为 TCP 连接的复用。你可能注意到了，刚才定义连接池时，我将最大连接数设置为 1。所以，复用连接池方式复用的始终应该是同一个连接，而新建连接池方式应该是每次都会创建新的 TCP 连接。</p>
+<p>接下来，我们通过网络抓包工具 Wireshark 来证实这一点。</p>
+<p>如果调用 wrong2 接口每次创建新的连接池来发起 HTTP 请求，从 Wireshark 可以看到，每次请求服务端 45678 的客户端端口都是新的。这里我发起了三次请求，程序通过 HttpClient 访问服务端 45678 的客户端端口号，分别是 51677、51679 和 51681：</p>
+<p><img alt="img" src="/assets/bfa37e6dfd2e2271f129bb90.png"/></p>
+<p>也就是说，每次都是新的 TCP 连接，放开 HTTP 这个过滤条件也可以看到完整的 TCP 握手、挥手的过程：</p>
+<p><img alt="img" src="/assets/080c7a5c0a7c9cab3b140d64.png"/></p>
+<p>而复用连接池方式的接口 right 的表现就完全不同了。可以看到，第二次 HTTP 请求 #41 的客户端端口 61468 和第一次连接 #23 的端口是一样的，Wireshark 也提示了整个 TCP 会话中，当前 #41 请求是第二次请求，前一次是 #23，后面一次是 #75：</p>
+<p><img alt="img" src="/assets/93bf4b3d084ea8fe7c745126.png"/></p>
+<p>只有 TCP 连接闲置超过 60 秒后才会断开，连接池会新建连接。你可以尝试通过 Wireshark 观察这一过程。</p>
+<p>接下来，我们就继续聊聊连接池的配置问题。</p>
+<h2 id="连接池的配置不是一成不变的">连接池的配置不是一成不变的</h2>
+<p>为方便根据容量规划设置连接处的属性，连接池提供了许多参数，包括最小（闲置）连接、最大连接、闲置连接生存时间、连接生存时间等。其中，最重要的参数是最大连接数，它决定了连接池能使用的连接数量上限，达到上限后，新来的请求需要等待其他请求释放连接。</p>
+<p>但，最大连接数不是设置得越大越好。如果设置得太大，不仅仅是客户端需要耗费过多的资源维护连接，更重要的是由于服务端对应的是多个客户端，每一个客户端都保持大量的连接，会给服务端带来更大的压力。这个压力又不仅仅是内存压力，可以想一下如果服务端的网络模型是一个 TCP 连接一个线程，那么几千个连接意味着几千个线程，如此多的线程会造成大量的线程切换开销。</p>
+<p>当然，连接池最大连接数设置得太小，很可能会因为获取连接的等待时间太长，导致吞吐量低下，甚至超时无法获取连接。</p>
+<p>接下来，我们就模拟下压力增大导致数据库连接池打满的情况，来实践下如何确认连接池的使用情况，以及有针对性地进行参数优化。</p>
+<p>首先，定义一个用户注册方法，通过 @Transactional 注解为方法开启事务。其中包含了 500 毫秒的休眠，一个数据库事务对应一个 TCP 连接，所以 500 多毫秒的时间都会占用数据库连接：</p>
+<pre><code class="language-java">@Transactional
+
+public User register(){
+
+    User user=new User();
+    user.setName("new-user-"+System.currentTimeMillis());
+    userRepository.save(user);
+
+    try {
+        TimeUnit.MILLISECONDS.sleep(500);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    return user;
+}
+</code></pre>
+<p>随后，修改配置文件启用 register-mbeans，使 Hikari 连接池能通过 JMX MBean 注册连接池相关统计信息，方便观察连接池：</p>
+<pre><code class="language-properties">spring.datasource.hikari.register-mbeans=true
+</code></pre>
+<p>启动程序并通过 JConsole 连接进程后，可以看到默认情况下最大连接数为 10：</p>
+<p><img alt="img" src="/assets/433cdb0e867b6004c70c36a0.png"/></p>
+<p>使用 wrk 对应用进行压测，可以看到连接数一下子从 0 到了 10，有 20 个线程在等待获取连接：</p>
+<p><img alt="img" src="/assets/e1c0af17d57be223ef109216.png"/></p>
+<p>不久就出现了无法获取数据库连接的异常，如下所示：</p>
+<pre><code class="language-log">[15:37:56.156] [http-nio-45678-exec-15] [ERROR] [.a.c.c.C.[.[.[/].[dispatcherServlet]:175 ] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.DataAccessResourceFailureException: unable to obtain isolated JDBC connection; nested exception is org.hibernate.exception.JDBCConnectionException: unable to obtain isolated JDBC connection] with root cause
+java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30000ms.
+</code></pre>
+<p>从异常信息中可以看到，数据库连接池是 HikariPool，解决方式很简单，修改一下配置文件，调整数据库连接池最大连接参数到 50 即可。</p>
+<pre><code class="language-properties">spring.datasource.hikari.maximum-pool-size=50
+</code></pre>
+<p>然后，再观察一下这个参数是否适合当前压力，满足需求的同时也不占用过多资源。从监控来看这个调整是合理的，有一半的富余资源，再也没有线程需要等待连接了：</p>
+<p><img alt="img" src="/assets/123b5c99963ed60dfafb58fe.png"/></p>
+<p>在这个 Demo 里，我知道压测大概能对应使用 25 左右的并发连接，所以直接把连接池最大连接设置为了 50。在真实情况下，只要数据库可以承受，你可以选择在遇到连接超限的时候先设置一个足够大的连接数，然后观察最终应用的并发，再按照实际并发数留出一半的余量来设置最终的最大连接。</p>
+<p>其实，看到错误日志后再调整已经有点儿晚了。更合适的做法是，对类似数据库连接池的重要资源进行持续检测，并设置一半的使用量作为报警阈值，出现预警后及时扩容。</p>
+<p>在这里我是为了演示，才通过 JConsole 查看参数配置后的效果，生产上需要把相关数据对接到指标监控体系中持续监测。</p>
+<p>这里要强调的是，修改配置参数务必验证是否生效，并且在监控系统中确认参数是否生效、是否合理。之所以要“强调”，是因为这里有坑。</p>
+<p>我之前就遇到过这样一个事故。应用准备针对大促活动进行扩容，把数据库配置文件中 Druid 连接池最大连接数 maxActive 从 50 提高到了 100，修改后并没有通过监控验证，结果大促当天应用因为连接池连接数不够爆了。</p>
+<p>经排查发现，当时修改的连接数并没有生效。原因是，应用虽然一开始使用的是 Druid 连接池，但后来框架升级了，把连接池替换为了 Hikari 实现，原来的那些配置其实都是无效的，修改后的参数配置当然也不会生效。</p>
+<p>所以说，对连接池进行调参，一定要眼见为实。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>今天，我以三种业务代码最常用的 Redis 连接池、HTTP 连接池、数据库连接池为例，和你探讨了有关连接池实现方式、使用姿势和参数配置的三大问题。</p>
+<p>客户端 SDK 实现连接池的方式，包括池和连接分离、内部带有连接池和非连接池三种。要正确使用连接池，就必须首先鉴别连接池的实现方式。比如，Jedis 的 API 实现的是池和连接分离的方式，而 Apache HttpClient 是内置连接池的 API。</p>
+<p>对于使用姿势其实就是两点，一是确保连接池是复用的，二是尽可能在程序退出之前显式关闭连接池释放资源。连接池设计的初衷就是为了保持一定量的连接，这样连接可以随取随用。从连接池获取连接虽然很快，但连接池的初始化会比较慢，需要做一些管理模块的初始化以及初始最小闲置连接。一旦连接池不是复用的，那么其性能会比随时创建单一连接更差。</p>
+<p>最后，连接池参数配置中，最重要的是最大连接数，许多高并发应用往往因为最大连接数不够导致性能问题。但，最大连接数不是设置得越大越好，够用就好。需要注意的是，针对数据库连接池、HTTP 连接池、Redis 连接池等重要连接池，务必建立完善的监控和报警机制，根据容量规划及时调整参数配置。</p>
+<p>今天用到的代码，我都放在了 GitHub 上，你可以点击这个链接查看。</p>
+<h2 id="思考与讨论">思考与讨论</h2>
+<p>有了连接池之后，获取连接是从连接池获取，没有足够连接时连接池会创建连接。这时，获取连接操作往往有两个超时时间：一个是从连接池获取连接的最长等待时间，通常叫作请求连接超时 connectRequestTimeout 或连接等待超时 connectWaitTimeout；一个是连接池新建 TCP 连接三次握手的连接超时，通常叫作连接超时 connectTimeout。针对 JedisPool、Apache HttpClient 和 Hikari 数据库连接池，你知道如何设置这 2 个参数吗？</p>
+<p>对于带有连接池的 SDK 的使用姿势，最主要的是鉴别其内部是否实现了连接池，如果实现了连接池要尽量复用 Client。对于 NoSQL 中的 MongoDB 来说，使用 MongoDB Java 驱动时，MongoClient 类应该是每次都创建还是复用呢？你能否在官方文档中找到答案呢？</p>
+<p>关于连接池，你还遇到过什么坑吗？我是朱晔，欢迎在评论区与我留言分享，也欢迎你把这篇文章分享给你的朋友或同事，一起交流。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

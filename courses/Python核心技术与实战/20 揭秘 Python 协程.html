@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>20 揭秘 Python 协程 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Python核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Python核心技术与实战</strong><ul><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%E5%B7%A5%E7%A8%8B%E7%9A%84%E8%A7%92%E5%BA%A6%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python.html">00 开篇词 从工程的角度深入理解Python</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%E5%A6%82%E4%BD%95%E9%80%90%E6%AD%A5%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%88%90%E4%B8%BAPython%E9%AB%98%E6%89%8B%EF%BC%9F.html">01 如何逐步突破，成为Python高手？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20Jupyter%20Notebook%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%8E%B0%E4%BB%A3Python%E7%9A%84%E5%BF%85%E5%AD%A6%E6%8A%80%E6%9C%AF%EF%BC%9F.html">02 Jupyter Notebook为什么是现代Python的必学技术？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%EF%BC%8C%E5%88%B0%E5%BA%95%E7%94%A8%E5%93%AA%E4%B8%80%E4%B8%AA%EF%BC%9F.html">03 列表和元组，到底用哪一个？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20%E5%AD%97%E5%85%B8%E3%80%81%E9%9B%86%E5%90%88%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F.html">04 字典、集合，你真的了解吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2.html">05 深入浅出字符串</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20Python%20%E2%80%9C%E9%BB%91%E7%AE%B1%E2%80%9D%EF%BC%9A%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA.html">06 Python “黑箱”：输入与输出</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E4%BF%AE%E7%82%BC%E5%9F%BA%E6%9C%AC%E5%8A%9F%EF%BC%9A%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%BE%AA%E7%8E%AF.html">07 修炼基本功：条件与循环</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9F.html">08 异常处理：如何提高程序的稳定性？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%E4%B8%8D%E5%8F%AF%E6%88%96%E7%BC%BA%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0.html">09 不可或缺的自定义函数</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%E7%AE%80%E7%BA%A6%E4%B8%8D%E7%AE%80%E5%8D%95%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0.html">10 简约不简单的匿名函数</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E7%B1%BB%E6%AF%94%E8%AF%B4%E8%B5%B7.html">11 面向对象（上）：从生活中的类比说起</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9F.html">12 面向对象（下）：如何实现一个搜索引擎？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E6%90%AD%E5%BB%BA%E7%A7%AF%E6%9C%A8%EF%BC%9APython%20%E6%A8%A1%E5%9D%97%E5%8C%96.html">13 搭建积木：Python 模块化</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%E7%9A%84%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">14 答疑（一）：列表和元组的内部实现是怎样的？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20Python%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%AF%94%E8%BE%83%E3%80%81%E6%8B%B7%E8%B4%9D.html">15 Python对象的比较、拷贝</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E5%80%BC%E4%BC%A0%E9%80%92%EF%BC%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92or%E5%85%B6%E4%BB%96%EF%BC%8CPython%E9%87%8C%E5%8F%82%E6%95%B0%E6%98%AF%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E7%9A%84%EF%BC%9F.html">16 值传递，引用传递or其他，Python里参数是如何传递的？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%E5%BC%BA%E5%A4%A7%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8.html">17 强大的装饰器</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20metaclass%EF%BC%8C%E6%98%AF%E6%BD%98%E5%A4%9A%E6%8B%89%E9%AD%94%E7%9B%92%E8%BF%98%E6%98%AF%E9%98%BF%E6%8B%89%E4%B8%81%E7%A5%9E%E7%81%AF%EF%BC%9F.html">18 metaclass，是潘多拉魔盒还是阿拉丁神灯？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8.html">19 深入理解迭代器和生成器</a></li><li><a class="active" aria-current="page" href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E6%8F%AD%E7%A7%98%20Python%20%E5%8D%8F%E7%A8%8B.html">20 揭秘 Python 协程</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20Python%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8BFutures.html">21 Python并发编程之Futures</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8BAsyncio.html">22 并发编程之Asyncio</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%87%82Python%20GIL%EF%BC%88%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81%EF%BC%89%E5%90%97%EF%BC%9F.html">23 你真的懂Python GIL（全局解释器锁）吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20%E5%B8%A6%E4%BD%A0%E8%A7%A3%E6%9E%90%20Python%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6.html">24 带你解析 Python 垃圾回收机制</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AGIL%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%E5%91%A2%EF%BC%9F.html">25 答疑（二）：GIL与多线程是什么关系呢？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E6%B4%BB%E9%83%BD%E6%9D%A5%E4%B8%8D%E5%8F%8A%E5%B9%B2%E4%BA%86%EF%BC%8C%E8%BF%98%E6%9C%89%E7%A9%BA%E6%B3%A8%E6%84%8F%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%EF%BC%9F%EF%BC%81.html">26 活都来不及干了，还有空注意代码风格？！</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E5%AD%A6%E4%BC%9A%E5%90%88%E7%90%86%E5%88%86%E8%A7%A3%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E5%8F%AF%E8%AF%BB%E6%80%A7.html">27 学会合理分解代码，提高代码可读性</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E5%90%88%E7%90%86%E5%88%A9%E7%94%A8assert%EF%BC%9F.html">28 如何合理利用assert？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E5%B7%A7%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8%E5%92%8CWith%E8%AF%AD%E5%8F%A5%E7%B2%BE%E7%AE%80%E4%BB%A3%E7%A0%81.html">29 巧用上下文管理器和With语句精简代码</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E7%9C%9F%E7%9A%84%E6%9C%89%E5%BF%85%E8%A6%81%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%90%97%EF%BC%9F.html">30 真的有必要写单元测试吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20pdb%20%26%20cProfile%EF%BC%9A%E8%B0%83%E8%AF%95%E5%92%8C%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E7%9A%84%E6%B3%95%E5%AE%9D.html">31 pdb &amp; cProfile：调试和性能分析的法宝</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F%EF%BC%9F.html">32 答疑（三）：如何选择合适的异常处理方式？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%B8%A6%E4%BD%A0%E5%88%9D%E6%8E%A2%E9%87%8F%E5%8C%96%E4%B8%96%E7%95%8C.html">33 带你初探量化世界</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20RESTful%20%26%20Socket%EF%BC%9A%E6%90%AD%E5%BB%BA%E4%BA%A4%E6%98%93%E6%89%A7%E8%A1%8C%E5%B1%82%E6%A0%B8%E5%BF%83.html">34 RESTful &amp; Socket：搭建交易执行层核心</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20RESTful%20%26%20Socket%EF%BC%9A%E8%A1%8C%E6%83%85%E6%95%B0%E6%8D%AE%E5%AF%B9%E6%8E%A5%E5%92%8C%E6%8A%93%E5%8F%96.html">35 RESTful &amp; Socket：行情数据对接和抓取</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20Pandas%20%26%20Numpy%EF%BC%9A%E7%AD%96%E7%95%A5%E4%B8%8E%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F.html">36 Pandas &amp; Numpy：策略与回测系统</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20Kafka%20%26%20ZMQ%EF%BC%9A%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E6%B5%81%E6%B0%B4%E7%BA%BF.html">37 Kafka &amp; ZMQ：自动化交易流水线</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20MySQL%EF%BC%9A%E6%97%A5%E5%BF%97%E5%92%8C%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F.html">38 MySQL：日志和数据存储系统</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20Django%EF%BC%9A%E6%90%AD%E5%BB%BA%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0.html">39 Django：搭建监控平台</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E6%80%BB%E7%BB%93%EF%BC%9APython%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%A8%E6%99%AF.html">40 总结：Python中的数据结构与算法全景</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E4%BA%92%E8%81%94%E7%BD%91%E5%85%AC%E5%8F%B8%E7%9A%84%E5%B7%A5%E4%BD%9C%E4%BD%93%E9%AA%8C.html">41 硅谷一线互联网公司的工作体验</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E7%BB%86%E6%95%B0%E6%8A%80%E6%9C%AF%E7%A0%94%E5%8F%91%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">42 细数技术研发的注意事项</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/43%20Q%26A%EF%BC%9A%E8%81%8A%E4%B8%80%E8%81%8A%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E5%92%8C%E9%80%89%E6%8B%A9.html">43 Q&amp;A：聊一聊职业发展和选择</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%20%E5%B8%A6%E4%BD%A0%E4%B8%8A%E6%89%8BSWIG%EF%BC%9A%E4%B8%80%E4%BB%BD%E6%B8%85%E6%99%B0%E5%A5%BD%E7%94%A8%E7%9A%84SWIG%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97.html">加餐 带你上手SWIG：一份清晰好用的SWIG编程实践指南</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%A4%96%E7%9A%84%E5%87%A0%E7%82%B9%E6%88%90%E9%95%BF%E5%BB%BA%E8%AE%AE.html">结束语 技术之外的几点成长建议</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E6%8F%AD%E7%A7%98%20Python%20%E5%8D%8F%E7%A8%8B.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="20 揭秘 Python 协程" id="title">20 揭秘 Python 协程</h1>
+<div><p>你好，我是景霄。</p>
+<p>上一节课的最后，我们留下一个小小的悬念：生成器在 Python 2 中还扮演了一个重要角色，就是用来实现 Python 协程。</p>
+<p>那么首先你要明白，什么是协程？</p>
+<p>协程是实现并发编程的一种方式。一说并发，你肯定想到了多线程/多进程模型，没错，多线程/多进程，正是解决并发问题的经典模型之一。最初的互联网世界，多线程/多进程在服务器并发中，起到举足轻重的作用。</p>
+<p>随着互联网的快速发展，你逐渐遇到了 C10K 瓶颈，也就是同时连接到服务器的客户达到了一万个。于是很多代码跑崩了，进程上下文切换占用了大量的资源，线程也顶不住如此巨大的压力，这时， NGINX 带着事件循环出来拯救世界了。</p>
+<p>如果将多进程/多线程类比为起源于唐朝的藩镇割据，那么事件循环，就是宋朝加强的中央集权制。事件循环启动一个统一的调度器，让调度器来决定一个时刻去运行哪个任务，于是省却了多线程中启动线程、管理线程、同步锁等各种开销。同一时期的 NGINX，在高并发下能保持低资源低消耗高性能，相比 Apache 也支持更多的并发连接。</p>
+<p>再到后来，出现了一个很有名的名词，叫做回调地狱（callback hell），手撸过 JavaScript 的朋友肯定知道我在说什么。我们大家惊喜地发现，这种工具完美地继承了事件循环的优越性，同时还能提供 async / await 语法糖，解决了执行性和可读性共存的难题。于是，协程逐渐被更多人发现并看好，也有越来越多的人尝试用 Node.js 做起了后端开发。（讲个笑话，JavaScript 是一门编程语言。）</p>
+<p>回到我们的 Python。使用生成器，是 Python 2 开头的时代实现协程的老方法了，Python 3.7 提供了新的基于 asyncio 和 async / await 的方法。我们这节课，同样的，跟随时代，抛弃掉不容易理解、也不容易写的旧的基于生成器的方法，直接来讲新方法。</p>
+<p>我们先从一个爬虫实例出发，用清晰的讲解思路，带你结合实战来搞懂这个不算特别容易理解的概念。之后，我们再由浅入深，直击协程的核心。</p>
+<h2 id="从一个爬虫说起">从一个爬虫说起</h2>
+<p>爬虫，就是互联网的蜘蛛，在搜索引擎诞生之时，与其一同来到世上。爬虫每秒钟都会爬取大量的网页，提取关键信息后存储在数据库中，以便日后分析。爬虫有非常简单的 Python 十行代码实现，也有 Google 那样的全球分布式爬虫的上百万行代码，分布在内部上万台服务器上，对全世界的信息进行嗅探。</p>
+<p>话不多说，我们先看一个简单的爬虫例子：</p>
+<pre><code>import time
+
+def crawl_page(url):
+    print('crawling {}'.format(url))
+    sleep_time = int(url.split('_')[-1])
+    time.sleep(sleep_time)
+    print('OK {}'.format(url))
+
+def main(urls):
+    for url in urls:
+        crawl_page(url)
+
+%time main(['url_1', 'url_2', 'url_3', 'url_4'])
+
+########## 输出 ##########
+
+crawling url_1
+OK url_1
+crawling url_2
+OK url_2
+crawling url_3
+OK url_3
+crawling url_4
+OK url_4
+Wall time: 10 s
+</code></pre>
+<p>（注意：本节的主要目的是协程的基础概念，因此我们简化爬虫的 scrawl_page 函数为休眠数秒，休眠时间取决于 url 最后的那个数字。）</p>
+<p>这是一个很简单的爬虫，main() 函数执行时，调取 crawl_page() 函数进行网络通信，经过若干秒等待后收到结果，然后执行下一个。</p>
+<p>看起来很简单，但你仔细一算，它也占用了不少时间，五个页面分别用了 1 秒到 4 秒的时间，加起来一共用了 10 秒。这显然效率低下，该怎么优化呢？</p>
+<p>于是，一个很简单的思路出现了——我们这种爬取操作，完全可以并发化。我们就来看看使用协程怎么写。</p>
+<pre><code>import asyncio
+
+async def crawl_page(url):
+    print('crawling {}'.format(url))
+    sleep_time = int(url.split('_')[-1])
+    await asyncio.sleep(sleep_time)
+    print('OK {}'.format(url))
+
+async def main(urls):
+    for url in urls:
+        await crawl_page(url)
+
+%time asyncio.run(main(['url_1', 'url_2', 'url_3', 'url_4']))
+
+########## 输出 ##########
+
+crawling url_1
+OK url_1
+crawling url_2
+OK url_2
+crawling url_3
+OK url_3
+crawling url_4
+OK url_4
+Wall time: 10 s
+</code></pre>
+<p>看到这段代码，你应该发现了，在 Python 3.7 以上版本中，使用协程写异步程序非常简单。</p>
+<p>首先来看 import asyncio，这个库包含了大部分我们实现协程所需的魔法工具。</p>
+<p>async 修饰词声明异步函数，于是，这里的 crawl_page 和 main 都变成了异步函数。而调用异步函数，我们便可得到一个协程对象（coroutine object）。</p>
+<p>举个例子，如果你 <code>print(crawl_page(''))</code>，便会输出<code>&lt;coroutine object crawl_page at 0x000002BEDF141148&gt;</code>，提示你这是一个 Python 的协程对象，而并不会真正执行这个函数。</p>
+<p>再来说说协程的执行。执行协程有多种方法，这里我介绍一下常用的三种。</p>
+<p>首先，我们可以通过 await 来调用。await 执行的效果，和 Python 正常执行是一样的，也就是说程序会阻塞在这里，进入被调用的协程函数，执行完毕返回后再继续，而这也是 await 的字面意思。代码中 <code>await asyncio.sleep(sleep_time)</code> 会在这里休息若干秒，<code>await crawl_page(url)</code> 则会执行 crawl_page() 函数。</p>
+<p>其次，我们可以通过 asyncio.create_task() 来创建任务，这个我们下节课会详细讲一下，你先简单知道即可。</p>
+<p>最后，我们需要 asyncio.run 来触发运行。asyncio.run 这个函数是 Python 3.7 之后才有的特性，可以让 Python 的协程接口变得非常简单，你不用去理会事件循环怎么定义和怎么使用的问题（我们会在下面讲）。一个非常好的编程规范是，asyncio.run(main()) 作为主程序的入口函数，在程序运行周期内，只调用一次 asyncio.run。</p>
+<p>这样，你就大概看懂了协程是怎么用的吧。不妨试着跑一下代码，欸，怎么还是 10 秒？</p>
+<p>10 秒就对了，还记得上面所说的，await 是同步调用，因此， crawl_page(url) 在当前的调用结束之前，是不会触发下一次调用的。于是，这个代码效果就和上面完全一样了，相当于我们用异步接口写了个同步代码。</p>
+<p>现在又该怎么办呢？</p>
+<p>其实很简单，也正是我接下来要讲的协程中的一个重要概念，任务（Task）。老规矩，先看代码。</p>
+<pre><code>import asyncio
+
+async def crawl_page(url):
+    print('crawling {}'.format(url))
+    sleep_time = int(url.split('_')[-1])
+    await asyncio.sleep(sleep_time)
+    print('OK {}'.format(url))
+
+async def main(urls):
+    tasks = [asyncio.create_task(crawl_page(url)) for url in urls]
+    for task in tasks:
+        await task
+
+%time asyncio.run(main(['url_1', 'url_2', 'url_3', 'url_4']))
+
+########## 输出 ##########
+
+crawling url_1
+crawling url_2
+crawling url_3
+crawling url_4
+OK url_1
+OK url_2
+OK url_3
+OK url_4
+Wall time: 3.99 s
+</code></pre>
+<p>你可以看到，我们有了协程对象后，便可以通过 <code>asyncio.create_task</code> 来创建任务。任务创建后很快就会被调度执行，这样，我们的代码也不会阻塞在任务这里。所以，我们要等所有任务都结束才行，用<code>for task in tasks: await task</code> 即可。</p>
+<p>这次，你就看到效果了吧，结果显示，运行总时长等于运行时间最长的爬虫。</p>
+<p>当然，你也可以想一想，这里用多线程应该怎么写？而如果需要爬取的页面有上万个又该怎么办呢？再对比下协程的写法，谁更清晰自是一目了然。</p>
+<p>其实，对于执行 tasks，还有另一种做法：</p>
+<pre><code>import asyncio
+
+async def crawl_page(url):
+    print('crawling {}'.format(url))
+    sleep_time = int(url.split('_')[-1])
+    await asyncio.sleep(sleep_time)
+    print('OK {}'.format(url))
+
+async def main(urls):
+    tasks = [asyncio.create_task(crawl_page(url)) for url in urls]
+    await asyncio.gather(*tasks)
+
+%time asyncio.run(main(['url_1', 'url_2', 'url_3', 'url_4']))
+
+########## 输出 ##########
+
+crawling url_1
+crawling url_2
+crawling url_3
+crawling url_4
+OK url_1
+OK url_2
+OK url_3
+OK url_4
+Wall time: 4.01 s
+</code></pre>
+<p>这里的代码也很好理解。唯一要注意的是，<code>*tasks</code> 解包列表，将列表变成了函数的参数；与之对应的是， <code>** dict</code> 将字典变成了函数的参数。</p>
+<p>另外，<code>asyncio.create_task</code>，<code>asyncio.run</code> 这些函数都是 Python 3.7 以上的版本才提供的，自然，相比于旧接口它们也更容易理解和阅读。</p>
+<h2 id="解密协程运行时">解密协程运行时</h2>
+<p>说了这么多，现在，我们不妨来深入代码底层看看。有了前面的知识做基础，你应该很容易理解这两段代码。</p>
+<pre><code>import asyncio
+
+async def worker_1():
+    print('worker_1 start')
+    await asyncio.sleep(1)
+    print('worker_1 done')
+
+async def worker_2():
+    print('worker_2 start')
+    await asyncio.sleep(2)
+    print('worker_2 done')
+
+async def main():
+    print('before await')
+    await worker_1()
+    print('awaited worker_1')
+    await worker_2()
+    print('awaited worker_2')
+
+%time asyncio.run(main())
+
+########## 输出 ##########
+
+before await
+worker_1 start
+worker_1 done
+awaited worker_1
+worker_2 start
+worker_2 done
+awaited worker_2
+Wall time: 3 s
+</code></pre>
+<pre><code>import asyncio
+
+async def worker_1():
+    print('worker_1 start')
+    await asyncio.sleep(1)
+    print('worker_1 done')
+
+async def worker_2():
+    print('worker_2 start')
+    await asyncio.sleep(2)
+    print('worker_2 done')
+
+async def main():
+    task1 = asyncio.create_task(worker_1())
+    task2 = asyncio.create_task(worker_2())
+    print('before await')
+    await task1
+    print('awaited worker_1')
+    await task2
+    print('awaited worker_2')
+
+%time asyncio.run(main())
+
+########## 输出 ##########
+
+before await
+worker_1 start
+worker_2 start
+worker_1 done
+awaited worker_1
+worker_2 done
+awaited worker_2
+Wall time: 2.01 s
+</code></pre>
+<p>不过，第二个代码，到底发生了什么呢？为了让你更详细了解到协程和线程的具体区别，这里我详细地分析了整个过程。步骤有点多，别着急，我们慢慢来看。</p>
+<ol>
+<li><code>asyncio.run(main())</code>，程序进入 main() 函数，事件循环开启；</li>
+<li>task1 和 task2 任务被创建，并进入事件循环等待运行；运行到 print，输出 <code>'before await'</code>；</li>
+<li>await task1 执行，用户选择从当前的主任务中切出，事件调度器开始调度 worker_1；</li>
+<li>worker_1 开始运行，运行 print 输出<code>'worker_1 start'</code>，然后运行到 <code>await asyncio.sleep(1)</code>， 从当前任务切出，事件调度器开始调度 worker_2；</li>
+<li>worker_2 开始运行，运行 print 输出 <code>'worker_2 start'</code>，然后运行 <code>await asyncio.sleep(2)</code> 从当前任务切出；</li>
+<li>以上所有事件的运行时间，都应该在 1ms 到 10ms 之间，甚至可能更短，事件调度器从这个时候开始暂停调度；</li>
+<li>一秒钟后，worker_1 的 sleep 完成，事件调度器将控制权重新传给 task_1，输出 <code>'worker_1 done'</code>，task_1 完成任务，从事件循环中退出；</li>
+<li>await task1 完成，事件调度器将控制器传给主任务，输出 <code>'awaited worker_1'</code>，·然后在 await task2 处继续等待；</li>
+<li>两秒钟后，worker_2 的 sleep 完成，事件调度器将控制权重新传给 task_2，输出 <code>'worker_2 done'</code>，task_2 完成任务，从事件循环中退出；</li>
+<li>主任务输出 <code>'awaited worker_2'</code>，协程全任务结束，事件循环结束。</li>
+</ol>
+<p>接下来，我们进阶一下。如果我们想给某些协程任务限定运行时间，一旦超时就取消，又该怎么做呢？再进一步，如果某些协程运行时出现错误，又该怎么处理呢？同样的，来看代码。</p>
+<pre><code>import asyncio
+
+async def worker_1():
+    await asyncio.sleep(1)
+    return 1
+
+async def worker_2():
+    await asyncio.sleep(2)
+    return 2 / 0
+
+async def worker_3():
+    await asyncio.sleep(3)
+    return 3
+
+async def main():
+    task_1 = asyncio.create_task(worker_1())
+    task_2 = asyncio.create_task(worker_2())
+    task_3 = asyncio.create_task(worker_3())
+
+    await asyncio.sleep(2)
+    task_3.cancel()
+
+    res = await asyncio.gather(task_1, task_2, task_3, return_exceptions=True)
+    print(res)
+
+%time asyncio.run(main())
+
+########## 输出 ##########
+
+[1, ZeroDivisionError('division by zero'), CancelledError()]
+Wall time: 2 s
+</code></pre>
+<p>你可以看到，worker_1 正常运行，worker_2 运行中出现错误，worker_3 执行时间过长被我们 cancel 掉了，这些信息会全部体现在最终的返回结果 res 中。</p>
+<p>不过要注意<code>return_exceptions=True</code>这行代码。如果不设置这个参数，错误就会完整地 throw 到我们这个执行层，从而需要 try except 来捕捉，这也就意味着其他还没被执行的任务会被全部取消掉。为了避免这个局面，我们将 return_exceptions 设置为 True 即可。</p>
+<p>到这里，发现了没，线程能实现的，协程都能做到。那就让我们温习一下这些知识点，用协程来实现一个经典的生产者消费者模型吧。</p>
+<pre><code>import asyncio
+import random
+
+async def consumer(queue, id):
+    while True:
+        val = await queue.get()
+        print('{} get a val: {}'.format(id, val))
+        await asyncio.sleep(1)
+
+async def producer(queue, id):
+    for i in range(5):
+        val = random.randint(1, 10)
+        await queue.put(val)
+        print('{} put a val: {}'.format(id, val))
+        await asyncio.sleep(1)
+
+async def main():
+    queue = asyncio.Queue()
+
+    consumer_1 = asyncio.create_task(consumer(queue, 'consumer_1'))
+    consumer_2 = asyncio.create_task(consumer(queue, 'consumer_2'))
+
+    producer_1 = asyncio.create_task(producer(queue, 'producer_1'))
+    producer_2 = asyncio.create_task(producer(queue, 'producer_2'))
+
+    await asyncio.sleep(10)
+    consumer_1.cancel()
+    consumer_2.cancel()
+    
+    await asyncio.gather(consumer_1, consumer_2, producer_1, producer_2, return_exceptions=True)
+
+%time asyncio.run(main())
+
+########## 输出 ##########
+
+producer_1 put a val: 5
+producer_2 put a val: 3
+consumer_1 get a val: 5
+consumer_2 get a val: 3
+producer_1 put a val: 1
+producer_2 put a val: 3
+consumer_2 get a val: 1
+consumer_1 get a val: 3
+producer_1 put a val: 6
+producer_2 put a val: 10
+consumer_1 get a val: 6
+consumer_2 get a val: 10
+producer_1 put a val: 4
+producer_2 put a val: 5
+consumer_2 get a val: 4
+consumer_1 get a val: 5
+producer_1 put a val: 2
+producer_2 put a val: 8
+consumer_1 get a val: 2
+consumer_2 get a val: 8
+Wall time: 10 s
+</code></pre>
+<h2 id="实战-豆瓣近日推荐电影爬虫">实战：豆瓣近日推荐电影爬虫</h2>
+<p>最后，进入今天的实战环节——实现一个完整的协程爬虫。</p>
+<p>任务描述：<a href="https://movie.douban.com/cinema/later/beijing/" target="_blank">https://movie.douban.com/cinema/later/beijing/</a> 这个页面描述了北京最近上映的电影，你能否通过 Python 得到这些电影的名称、上映时间和海报呢？这个页面的海报是缩小版的，我希望你能从具体的电影描述页面中抓取到海报。</p>
+<p>听起来难度不是很大吧？我在下面给出了同步版本的代码和协程版本的代码，通过运行时间和代码写法的对比，希望你能对协程有更深的了解。（注意：为了突出重点、简化代码，这里我省略了异常处理。）</p>
+<p>不过，在参考我给出的代码之前，你是不是可以自己先动手写一下、跑一下呢？</p>
+<pre><code>import requests
+from bs4 import BeautifulSoup
+
+def main():
+    url = "https://movie.douban.com/cinema/later/beijing/"
+    init_page = requests.get(url).content
+    init_soup = BeautifulSoup(init_page, 'lxml')
+
+    all_movies = init_soup.find('div', id="showing-soon")
+    for each_movie in all_movies.find_all('div', class_="item"):
+        all_a_tag = each_movie.find_all('a')
+        all_li_tag = each_movie.find_all('li')
+
+        movie_name = all_a_tag[1].text
+        url_to_fetch = all_a_tag[1]['href']
+        movie_date = all_li_tag[0].text
+
+        response_item = requests.get(url_to_fetch).content
+        soup_item = BeautifulSoup(response_item, 'lxml')
+        img_tag = soup_item.find('img')
+
+        print('{} {} {}'.format(movie_name, movie_date, img_tag['src']))
+
+%time main()
+
+########## 输出 ##########
+
+阿拉丁 05月24日 https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2553992741.jpg
+龙珠超：布罗利 05月24日 https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2557371503.jpg
+五月天人生无限公司 05月24日 https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2554324453.jpg
+... ...
+直播攻略 06月04日 https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2555957974.jpg
+Wall time: 56.6 s
+</code></pre>
+<pre><code>import asyncio
+import aiohttp
+
+from bs4 import BeautifulSoup
+
+async def fetch_content(url):
+    async with aiohttp.ClientSession(
+        headers=header, connector=aiohttp.TCPConnector(ssl=False)
+    ) as session:
+        async with session.get(url) as response:
+            return await response.text()
+
+async def main():
+    url = "https://movie.douban.com/cinema/later/beijing/"
+    init_page = await fetch_content(url)
+    init_soup = BeautifulSoup(init_page, 'lxml')
+
+    movie_names, urls_to_fetch, movie_dates = [], [], []
+
+    all_movies = init_soup.find('div', id="showing-soon")
+    for each_movie in all_movies.find_all('div', class_="item"):
+        all_a_tag = each_movie.find_all('a')
+        all_li_tag = each_movie.find_all('li')
+
+        movie_names.append(all_a_tag[1].text)
+        urls_to_fetch.append(all_a_tag[1]['href'])
+        movie_dates.append(all_li_tag[0].text)
+
+    tasks = [fetch_content(url) for url in urls_to_fetch]
+    pages = await asyncio.gather(*tasks)
+
+    for movie_name, movie_date, page in zip(movie_names, movie_dates, pages):
+        soup_item = BeautifulSoup(page, 'lxml')
+        img_tag = soup_item.find('img')
+
+        print('{} {} {}'.format(movie_name, movie_date, img_tag['src']))
+
+%time asyncio.run(main())
+
+########## 输出 ##########
+
+阿拉丁 05月24日 https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2553992741.jpg
+龙珠超：布罗利 05月24日 https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2557371503.jpg
+五月天人生无限公司 05月24日 https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2554324453.jpg
+... ...
+直播攻略 06月04日 https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2555957974.jpg
+Wall time: 4.98 s
+</code></pre>
+<h2 id="总结">总结</h2>
+<p>到这里，今天的主要内容就讲完了。今天我用了较长的篇幅，从一个简单的爬虫开始，到一个真正的爬虫结束，在中间穿插讲解了 Python 协程最新的基本概念和用法。这里带你简单复习一下。</p>
+<ul>
+<li>协程和多线程的区别，主要在于两点，一是协程为单线程；二是协程由用户决定，在哪些地方交出控制权，切换到下一个任务。</li>
+<li>协程的写法更加简洁清晰，把async / await 语法和 create_task 结合来用，对于中小级别的并发需求已经毫无压力。</li>
+<li>写协程程序的时候，你的脑海中要有清晰的事件循环概念，知道程序在什么时候需要暂停、等待 I/O，什么时候需要一并执行到底。</li>
+</ul>
+<p>最后的最后，请一定不要轻易炫技。多线程模型也一定有其优点，一个真正牛逼的程序员，应该懂得，在什么时候用什么模型能达到工程上的最优，而不是自觉某个技术非常牛逼，所有项目创造条件也要上。技术是工程，而工程则是时间、资源、人力等纷繁复杂的事情的折衷。</p>
+<h2 id="思考题">思考题</h2>
+<p>最后给你留一个思考题。协程怎么实现回调函数呢？欢迎留言和我讨论，也欢迎你把这篇文章分享给你的同事朋友，我们一起交流，一起进步。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

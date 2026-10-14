@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>11 设计模式：Go常用设计模式概述 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/index.html">Go 语言项目开发实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">60 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Go 语言项目开发实战</strong><ul><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%200%20%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BC%81%E4%B8%9A%E7%BA%A7%20Go%20%E5%BA%94%E7%94%A8.html">00 开篇词 从 0 开始搭建一个企业级 Go 应用</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/01%20IAM%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0%EF%BC%9A%E6%88%91%E4%BB%AC%E8%A6%81%E5%AE%9E%E7%8E%B0%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%20Go%20%E9%A1%B9%E7%9B%AE%EF%BC%9F.html">01 IAM系统概述：我们要实现什么样的 Go 项目？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/02%20%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84%20Go%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%9F.html">02 环境准备：如何安装和配置一个基本的 Go 开发环境？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/03%20%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%20IAM%20%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">03 项目部署：如何快速部署 IAM 系统？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/04%20%E8%A7%84%E8%8C%83%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%9D%82%E4%B9%B1%E6%97%A0%E7%AB%A0%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%EF%BC%9F.html">04 规范设计（上）：项目开发杂乱无章，如何规范？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/05%20%E8%A7%84%E8%8C%83%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9Acommit%20%E4%BF%A1%E6%81%AF%E9%A3%8E%E6%A0%BC%E8%BF%A5%E5%BC%82%E3%80%81%E9%9A%BE%E4%BB%A5%E9%98%85%E8%AF%BB%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%EF%BC%9F.html">05 规范设计（下）：commit 信息风格迥异、难以阅读，如何规范？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/06%20%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E4%B8%80%E4%B8%AA%E5%8F%AF%E7%BB%B4%E6%8A%A4%E3%80%81%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%EF%BC%9F.html">06 目录结构设计：如何组织一个可维护、可扩展的代码目录？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/07%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%90%88%E7%90%86%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">07 工作流设计：如何设计合理的多人开发模式？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/08%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%20Go%20%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B%EF%BC%9F.html">08 研发流程设计（上）：如何设计 Go 项目的开发流程？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/09%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%BA%94%E7%94%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F.html">09 研发流程设计（下）：如何管理应用的生命周期？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/10%20%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%EF%BC%9A%E6%80%8E%E4%B9%88%E5%86%99%E5%87%BA%E4%BC%98%E9%9B%85%E7%9A%84%20Go%20%E9%A1%B9%E7%9B%AE%EF%BC%9F.html">10 设计方法：怎么写出优雅的 Go 项目？</a></li><li><a class="active" aria-current="page" href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/11%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.html">11 设计模式：Go常用设计模式概述</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/12%20API%20%E9%A3%8E%E6%A0%BC%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1RESTful%20API%EF%BC%9F.html">12 API 风格（上）：如何设计RESTful API？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/13%20API%20%E9%A3%8E%E6%A0%BC%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ARPC%20API%E4%BB%8B%E7%BB%8D.html">13 API 风格（下）：RPC API介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/14%20%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84Makefile%EF%BC%9F.html">14 项目管理：如何编写高质量的Makefile？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/15%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E5%AE%9E%E6%88%98%EF%BC%9AIAM%E9%A1%B9%E7%9B%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E7%9A%84%EF%BC%9F.html">15 研发流程实战：IAM项目是如何进行研发流程管理的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/16%20%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9F.html">16 代码检查：如何进行静态代码检查？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/17%20API%20%E6%96%87%E6%A1%A3%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%20Swagger%20API%20%E6%96%87%E6%A1%A3%20%EF%BC%9F.html">17 API 文档：如何生成 Swagger API 文档 ？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/18%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E5%A5%97%E7%A7%91%E5%AD%A6%E7%9A%84%E9%94%99%E8%AF%AF%E7%A0%81%EF%BC%9F.html">18 错误处理（上）：如何设计一套科学的错误码？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/19%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E9%94%99%E8%AF%AF%E5%8C%85%EF%BC%9F.html">19 错误处理（下）：如何设计错误包？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/20%20%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%97%A5%E5%BF%97%E5%8C%85%E5%B9%B6%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97%EF%BC%9F.html">20 日志处理（上）：如何设计日志包并记录日志？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/21%20%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BB%8E%200%20%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97%E5%8C%85.html">21 日志处理（下）：手把手教你从 0 编写一个日志包</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/22%20%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E4%B8%89%E5%89%91%E5%AE%A2%EF%BC%9APflag%E3%80%81Viper%E3%80%81Cobra%20%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html">22 应用构建三剑客：Pflag、Viper、Cobra 核心功能介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/23%20%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BC%98%E7%A7%80%E7%9A%84%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6%EF%BC%9F.html">23 应用构建实战：如何构建一个优秀的企业应用框架？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/24%20Web%20%E6%9C%8D%E5%8A%A1%EF%BC%9AWeb%20%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">24 Web 服务：Web 服务核心功能有哪些，如何实现？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/25%20%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%EF%BC%9F.html">25 认证机制：应用程序如何进行访问认证？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/26%20IAM%E9%A1%B9%E7%9B%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%E5%8A%9F%E8%83%BD%E7%9A%84%EF%BC%9F.html">26 IAM项目是如何设计和实现访问认证功能的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/27%20%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%EF%BC%9A5%E5%A4%A7%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%B5%84%E6%BA%90%E6%8E%88%E6%9D%83%E7%9A%84%EF%BC%9F.html">27 权限模型：5大权限模型是如何进行资源授权的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/28%20%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%80%9A%E8%BF%87iam-apiserver%E8%AE%BE%E8%AE%A1%EF%BC%8C%E7%9C%8BWeb%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9E%84%E5%BB%BA.html">28 控制流（上）：通过iam-apiserver设计，看Web服务的构建</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/29%20%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9Aiam-apiserver%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E8%AE%B2%E8%A7%A3.html">29 控制流（下）：iam-apiserver服务核心功能实现讲解</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/30%20ORM%EF%BC%9ACURD%20%E7%A5%9E%E5%99%A8%20GORM%20%E5%8C%85%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%9E%E6%88%98.html">30 ORM：CURD 神器 GORM 包介绍及实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/31%20%E6%95%B0%E6%8D%AE%E6%B5%81%EF%BC%9A%E9%80%9A%E8%BF%87iam-authz-server%E8%AE%BE%E8%AE%A1%EF%BC%8C%E7%9C%8B%E6%95%B0%E6%8D%AE%E6%B5%81%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1.html">31 数据流：通过iam-authz-server设计，看数据流服务的设计</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/32%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%A4%84%E7%90%86%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%A7%E7%94%9F%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F.html">32 数据处理：如何高效处理应用程序产生的数据？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/33%20%20SDK%20%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%87%BA%E4%B8%80%E4%B8%AA%E4%BC%98%E7%A7%80%E7%9A%84%20Go%20SDK%EF%BC%9F.html">33  SDK 设计（上）：如何设计出一个优秀的 Go SDK？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/34%20SDK%20%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AIAM%E9%A1%B9%E7%9B%AEGo%20SDK%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0.html">34 SDK 设计（下）：IAM项目Go SDK设计和实现</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/35%20%E6%95%88%E7%8E%87%E7%A5%9E%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%9F.html">35 效率神器：如何设计和实现一个命令行客户端工具？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/36%20%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%20Go%20%E8%AF%AD%E8%A8%80%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%92%8C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F.html">36 代码测试（上）：如何编写 Go 语言单元测试和性能测试用例？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/37%20%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%85%B6%E4%BB%96%E6%B5%8B%E8%AF%95%E7%B1%BB%E5%9E%8B%E5%8F%8A%20IAM%20%E6%B5%8B%E8%AF%95%E4%BB%8B%E7%BB%8D.html">37 代码测试（下）：Go 语言其他测试类型及 IAM 测试介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/38%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%20Go%20%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">38 性能分析（上）：如何分析 Go 语言代码的性能？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/39%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AAPI%20Server%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%92%8C%E8%B0%83%E4%BC%98%E5%AE%9E%E6%88%98.html">39 性能分析（下）：API Server性能测试和调优实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/40%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E3%80%81%E9%AB%98%E5%8F%AF%E7%94%A8%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D.html">40 软件部署实战（上）：部署方案及负载均衡、高可用组件介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/41%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9AIAM%20%E7%B3%BB%E7%BB%9F%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">41 软件部署实战（中）：IAM 系统生产环境部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/42%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AIAM%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA%E3%80%81%E6%B0%B4%E5%B9%B3%E6%89%A9%E7%BC%A9%E5%AE%B9%E5%AE%9E%E6%88%98.html">42 软件部署实战（下）：IAM系统安全加固、水平扩缩容实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/43%20%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.html">43 技术演进（上）：虚拟化技术演进之路</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/44%20%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E5%92%8C%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.html">44 技术演进（下）：软件架构和应用生命周期技术演进之路</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/45%20%E5%9F%BA%E4%BA%8EKubernetes%E7%9A%84%E4%BA%91%E5%8E%9F%E7%94%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">45 基于Kubernetes的云原生架构设计</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/46%20%E5%A6%82%E4%BD%95%E5%88%B6%E4%BD%9CDocker%E9%95%9C%E5%83%8F%EF%BC%9F.html">46 如何制作Docker镜像？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/47%20%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99Kubernetes%E8%B5%84%E6%BA%90%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%EF%BC%9F.html">47 如何编写Kubernetes资源定义文件？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/48%20IAM%20%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">48 IAM 容器化部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/49%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AHelm%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html">49 服务编排（上）：Helm服务编排基础知识</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/50%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%9F%BA%E4%BA%8EHelm%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">50 服务编排（下）：基于Helm的服务编排部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/51%20%E5%9F%BA%E4%BA%8E%20GitHub%20Actions%20%E7%9A%84%20CI%20%E5%AE%9E%E6%88%98.html">51 基于 GitHub Actions 的 CI 实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Go%20Modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86%E5%85%A8%E8%AE%B2.html">特别放送 Go Modules依赖包管理全讲</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Go%20Modules%E5%AE%9E%E6%88%98.html">特别放送 Go Modules实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20IAM%E6%8E%92%E9%9A%9C%E6%8C%87%E5%8D%97.html">特别放送 IAM排障指南</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BD%9C%E4%B8%9A%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0.html">特别放送 分布式作业系统设计和实现</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%BB%99%E4%BD%A0%E4%B8%80%E4%BB%BDGo%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84Makefile%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95.html">特别放送 给你一份Go项目中最常用的Makefile核心语法</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%BB%99%E4%BD%A0%E4%B8%80%E4%BB%BD%E6%B8%85%E6%99%B0%E3%80%81%E5%8F%AF%E7%9B%B4%E6%8E%A5%E5%A5%97%E7%94%A8%E7%9A%84Go%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.html">特别放送 给你一份清晰、可直接套用的Go编码规范</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%9B%B4%E6%92%AD%E5%8A%A0%E9%A4%90%20%E5%A6%82%E4%BD%95%E4%BB%8E%E5%B0%8F%E7%99%BD%E8%BF%9B%E9%98%B6%E6%88%90%20Go%20%E8%AF%AD%E8%A8%80%E4%B8%93%E5%AE%B6%EF%BC%9F.html">直播加餐 如何从小白进阶成 Go 语言专家？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%A6%82%E4%BD%95%E8%AE%A9%E8%87%AA%E5%B7%B1%E7%9A%84%20Go%20%E7%A0%94%E5%8F%91%E4%B9%8B%E8%B7%AF%E8%B5%B0%E5%BE%97%E6%9B%B4%E8%BF%9C%EF%BC%9F.html">结束语 如何让自己的 Go 研发之路走得更远？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/11%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="11 设计模式：Go常用设计模式概述" id="title">11 设计模式：Go常用设计模式概述</h1>
+<div><p>你好，我是孔令飞，今天我们来聊聊Go项目开发中常用的设计模式。</p>
+<p>在软件开发中，经常会遇到各种各样的编码场景，这些场景往往重复发生，因此具有典型性。针对这些典型场景，我们可以自己编码解决，也可以采取更为省时省力的方式：直接采用设计模式。</p>
+<p>设计模式是啥呢？简单来说，就是将软件开发中需要重复性解决的编码场景，按最佳实践的方式抽象成一个模型，模型描述的解决方法就是设计模式。使用设计模式，可以使代码更易于理解，保证代码的重用性和可靠性。</p>
+<p>在软件领域，GoF（四人帮，全拼 Gang of Four）首次系统化提出了3大类、共25种可复用的经典设计方案，来解决常见的软件设计问题，为可复用软件设计奠定了一定的理论基础。</p>
+<p>从总体上说，这些设计模式可以分为创建型模式、结构型模式、行为型模式3大类，用来完成不同的场景。这一讲，我会介绍几个在Go项目开发中比较常用的设计模式，帮助你用更加简单快捷的方法应对不同的编码场景。其中，简单工厂模式、抽象工厂模式和工厂方法模式都属于工厂模式，我会把它们放在一起讲解。</p>
+<p><img alt="" src="/assets/35bc47d4f3fcdeaefa3c0cde.png"/></p>
+<h2 id="创建型模式">创建型模式</h2>
+<p>首先来看创建型模式（Creational Patterns），它提供了一种<strong>在创建对象的同时隐藏创建逻辑</strong>的方式，而不是使用 new 运算符直接实例化对象。</p>
+<p>这种类型的设计模式里，单例模式和工厂模式（具体包括简单工厂模式、抽象工厂模式和工厂方法模式三种）在Go项目开发中比较常用。我们先来看单例模式。</p>
+<h3 id="单例模式">单例模式</h3>
+<p>单例模式（Singleton Pattern），是<strong>最简单的一个模式</strong>。在Go中，单例模式指的是全局只有一个实例，并且它负责创建自己的对象。单例模式不仅有利于减少内存开支，还有减少系统性能开销、防止多个实例产生冲突等优点。</p>
+<p>因为单例模式保证了实例的全局唯一性，而且只被初始化一次，所以比较适合<strong>全局共享一个实例，且只需要被初始化一次的场景</strong>，例如数据库实例、全局配置、全局任务池等。</p>
+<p>单例模式又分为<strong>饿汉方式</strong>和<strong>懒汉方式</strong>。饿汉方式指全局的单例实例在包被加载时创建，而懒汉方式指全局的单例实例在第一次被使用时创建。你可以看到，这种命名方式非常形象地体现了它们不同的特点。</p>
+<p>接下来，我就来分别介绍下这两种方式。先来看<strong>饿汉方式</strong>。</p>
+<p>下面是一个饿汉方式的单例模式代码：</p>
+<pre><code>package singleton
+
+type singleton struct {
+}
+
+var ins *singleton = &amp;singleton{}
+
+func GetInsOr() *singleton {
+    return ins
+}
+</code></pre>
+<p>你需要注意，因为实例是在包被导入时初始化的，所以如果初始化耗时，会导致程序加载时间比较长。</p>
+<p><strong>懒汉方式是开源项目中使用最多的</strong>，但它的缺点是非并发安全，在实际使用时需要加锁。以下是懒汉方式不加锁的一个实现：</p>
+<pre><code>package singleton
+
+type singleton struct {
+}
+
+var ins *singleton
+
+func GetInsOr() *singleton {
+    if ins == nil {
+        ins = &amp;singleton{}
+    }
+    
+    return ins
+}
+</code></pre>
+<p>可以看到，在创建ins时，如果 <code>ins==nil</code>，就会再创建一个ins实例，这时候单例就会有多个实例。</p>
+<p>为了解决懒汉方式非并发安全的问题，需要对实例进行加锁，下面是带检查锁的一个实现：</p>
+<pre><code>import "sync"
+
+type singleton struct {
+}
+
+var ins *singleton
+var mu sync.Mutex
+
+func GetIns() *singleton {
+	if ins == nil {
+		mu.Lock()
+		if ins == nil {
+			ins = &amp;singleton{}
+		}
+        mu.Unlock()
+	}
+	return ins
+}
+</code></pre>
+<p>上述代码只有在创建时才会加锁，既提高了代码效率，又保证了并发安全。</p>
+<p>除了饿汉方式和懒汉方式，在Go开发中，还有一种更优雅的实现方式，我建议你采用这种方式，代码如下：</p>
+<pre><code>package singleton
+
+import (
+    "sync"
+)
+
+type singleton struct {
+}
+
+var ins *singleton
+var once sync.Once
+
+func GetInsOr() *singleton {
+    once.Do(func() {
+        ins = &amp;singleton{}
+    })
+    return ins
+}
+</code></pre>
+<p>使用<code>once.Do</code>可以确保ins实例全局只被创建一次，once.Do函数还可以确保当同时有多个创建动作时，只有一个创建动作在被执行。</p>
+<p>另外，IAM应用中大量使用了单例模式，如果你想了解更多单例模式的使用方式，可以直接查看IAM项目代码。IAM中单例模式有 <a href="https://github.com/colin404test/iam/blob/IAMTAG/internal/authzserver/store/store.go#L45" target="_blank">GetStoreInsOr</a>、<a href="https://github.com/colin404test/iam/blob/IAMTAG/internal/apiserver/store/etcd/etcd.go#L83" target="_blank">GetEtcdFactoryOr</a>、<a href="https://github.com/colin404test/iam/blob/IAMTAG/internal/apiserver/store/mysql/mysql.go#L55" target="_blank">GetMySQLFactoryOr</a>、<a href="https://github.com/colin404test/iam/blob/IAMTAG/internal/apiserver/api/v1/cache/cache.go#L33" target="_blank">GetCacheInsOr</a>等。</p>
+<h3 id="工厂模式">工厂模式</h3>
+<p>工厂模式（Factory Pattern）是面向对象编程中的常用模式。在Go项目开发中，你可以通过使用多种不同的工厂模式，来使代码更简洁明了。Go中的结构体，可以理解为面向对象编程中的类，例如 Person结构体（类）实现了Greet方法。</p>
+<pre><code>type Person struct {
+  Name string
+  Age int
+}
+
+func (p Person) Greet() {
+  fmt.Printf("Hi! My name is %s", p.Name)
+}
+</code></pre>
+<p>有了Person“类”，就可以创建Person实例。我们可以通过简单工厂模式、抽象工厂模式、工厂方法模式这三种方式，来创建一个Person实例。</p>
+<p>这三种工厂模式中，<strong>简单工厂模式</strong>是最常用、最简单的。它就是一个接受一些参数，然后返回Person实例的函数：</p>
+<pre><code>type Person struct {
+  Name string
+  Age int
+}
+
+func (p Person) Greet() {
+  fmt.Printf("Hi! My name is %s", p.Name)
+}
+
+func NewPerson(name string, age int) *Person {
+  return &amp;Person{
+    Name: name,
+    Age: age,
+  }
+}
+</code></pre>
+<p>和<code>p：=＆Person {}</code>这种创建实例的方式相比，简单工厂模式可以确保我们创建的实例具有需要的参数，进而保证实例的方法可以按预期执行。例如，通过<code>NewPerson</code>创建Person实例时，可以确保实例的name和age属性被设置。</p>
+<p>再来看<strong>抽象工厂模式，</strong>它和简单工厂模式的唯一区别，就是它返回的是接口而不是结构体。</p>
+<p>通过返回接口，可以<strong>在你不公开内部实现的情况下，让调用者使用你提供的各种功能</strong>，例如：</p>
+<pre><code>type Person interface {
+  Greet()
+}
+
+type person struct {
+  name string
+  age int
+}
+
+func (p person) Greet() {
+  fmt.Printf("Hi! My name is %s", p.name)
+}
+
+// Here, NewPerson returns an interface, and not the person struct itself
+func NewPerson(name string, age int) Person {
+  return person{
+    name: name,
+    age: age,
+  }
+}
+</code></pre>
+<p>上面这个代码，定义了一个不可导出的结构体<code>person</code>，在通过NewPerson创建实例的时候返回的是接口，而不是结构体。</p>
+<p>通过返回接口，我们还可以<strong>实现多个工厂函数，来返回不同的接口实现</strong>，例如：</p>
+<pre><code>// We define a Doer interface, that has the method signature
+// of the `http.Client` structs `Do` method
+type Doer interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+
+// This gives us a regular HTTP client from the `net/http` package
+func NewHTTPClient() Doer {
+	return &amp;http.Client{}
+}
+
+type mockHTTPClient struct{}
+
+func (*mockHTTPClient) Do(req *http.Request) (*http.Response, error) {
+	// The `NewRecorder` method of the httptest package gives us
+	// a new mock request generator
+	res := httptest.NewRecorder()
+
+	// calling the `Result` method gives us
+	// the default empty *http.Response object
+	return res.Result(), nil
+}
+
+// This gives us a mock HTTP client, which returns
+// an empty response for any request sent to it
+func NewMockHTTPClient() Doer {
+	return &amp;mockHTTPClient{}
+}
+</code></pre>
+<p><code>NewHTTPClient</code>和<code>NewMockHTTPClient</code>都返回了同一个接口类型Doer，这使得二者可以互换使用。当你想测试一段调用了Doer接口Do方法的代码时，这一点特别有用。因为你可以使用一个Mock的HTTP客户端，从而避免了调用真实外部接口可能带来的失败。</p>
+<p>来看个例子，假设我们想测试下面这段代码：</p>
+<pre><code>func QueryUser(doer Doer) error {
+	req, err := http.NewRequest("Get", "http://iam.api.marmotedu.com:8080/v1/secrets", nil)
+	if err != nil {
+		return err
+	}
+
+	_, err := doer.Do(req)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+</code></pre>
+<p>其测试用例为：</p>
+<pre><code>func TestQueryUser(t *testing.T) {
+	doer := NewMockHTTPClient()
+	if err := QueryUser(doer); err != nil {
+		t.Errorf("QueryUser failed, err: %v", err)
+	}
+}
+</code></pre>
+<p>另外，在使用简单工厂模式和抽象工厂模式返回实例对象时，都可以返回指针。例如，简单工厂模式可以这样返回实例对象：</p>
+<pre><code>return &amp;Person{
+  Name: name,
+  Age: age
+}
+</code></pre>
+<p>抽象工厂模式可以这样返回实例对象：</p>
+<pre><code>return &amp;person{
+  name: name,
+  age: age
+}
+</code></pre>
+<p>在实际开发中，我建议返回非指针的实例，因为我们主要是想通过创建实例，调用其提供的方法，而不是对实例做更改。如果需要对实例做更改，可以实现<code>SetXXX</code>的方法。通过返回非指针的实例，可以确保实例的属性，避免属性被意外/任意修改。</p>
+<p>在<strong>简单工厂模式</strong>中，依赖于唯一的工厂对象，如果我们需要实例化一个产品，就要向工厂中传入一个参数，获取对应的对象；如果要增加一种产品，就要在工厂中修改创建产品的函数。这会导致耦合性过高，这时我们就可以使用<strong>工厂方法模式</strong>。</p>
+<p>在<strong>工厂方法模式</strong>中，依赖工厂函数，我们可以通过实现工厂函数来创建多种工厂，将对象创建从由一个对象负责所有具体类的实例化，变成由一群子类来负责对具体类的实例化，从而将过程解耦。</p>
+<p>下面是<strong>工厂方法模式</strong>的一个代码实现：</p>
+<pre><code>type Person struct {
+	name string
+	age int
+}
+
+func NewPersonFactory(age int) func(name string) Person {
+	return func(name string) Person {
+		return Person{
+			name: name,
+			age: age,
+		}
+	}
+}
+</code></pre>
+<p>然后，我们可以使用此功能来创建具有默认年龄的工厂：</p>
+<pre><code>newBaby := NewPersonFactory(1)
+baby := newBaby("john")
+
+newTeenager := NewPersonFactory(16)
+teen := newTeenager("jill")
+</code></pre>
+<h2 id="结构型模式">结构型模式</h2>
+<p>我已经向你介绍了单例模式、工厂模式这两种创建型模式，接下来我们来看结构型模式（Structural Patterns），它的特点是<strong>关注类和对象的组合</strong>。这一类型里，我想详细讲讲策略模式和模板模式。</p>
+<h3 id="策略模式">策略模式</h3>
+<p>策略模式（Strategy Pattern）定义一组算法，将每个算法都封装起来，并且使它们之间可以互换。</p>
+<p>在什么时候，我们需要用到策略模式呢？</p>
+<p>在项目开发中，我们经常要根据不同的场景，采取不同的措施，也就是不同的<strong>策略</strong>。比如，假设我们需要对a、b 这两个整数进行计算，根据条件的不同，需要执行不同的计算方式。我们可以把所有的操作都封装在同一个函数中，然后通过 <code>if ... else ...</code> 的形式来调用不同的计算方式，这种方式称之为<strong>硬编码</strong>。</p>
+<p>在实际应用中，随着功能和体验的不断增长，我们需要经常添加/修改策略，这样就需要不断修改已有代码，不仅会让这个函数越来越难维护，还可能因为修改带来一些bug。所以为了解耦，需要使用策略模式，定义一些独立的类来封装不同的算法，每一个类封装一个具体的算法（即策略）。</p>
+<p>下面是一个实现策略模式的代码：</p>
+<pre><code>package strategy
+
+// 策略模式
+
+// 定义一个策略类
+type IStrategy interface {
+	do(int, int) int
+}
+
+// 策略实现：加
+type add struct{}
+
+func (*add) do(a, b int) int {
+	return a + b
+}
+
+// 策略实现：减
+type reduce struct{}
+
+func (*reduce) do(a, b int) int {
+	return a - b
+}
+
+// 具体策略的执行者
+type Operator struct {
+	strategy IStrategy
+}
+
+// 设置策略
+func (operator *Operator) setStrategy(strategy IStrategy) {
+	operator.strategy = strategy
+}
+
+// 调用策略中的方法
+func (operator *Operator) calculate(a, b int) int {
+	return operator.strategy.do(a, b)
+}
+</code></pre>
+<p>在上述代码中，我们定义了策略接口 IStrategy，还定义了 add 和 reduce 两种策略。最后定义了一个策略执行者，可以设置不同的策略，并执行，例如：</p>
+<pre><code>func TestStrategy(t *testing.T) {
+	operator := Operator{}
+
+	operator.setStrategy(&amp;add{})
+	result := operator.calculate(1, 2)
+	fmt.Println("add:", result)
+
+	operator.setStrategy(&amp;reduce{})
+	result = operator.calculate(2, 1)
+	fmt.Println("reduce:", result)
+}
+</code></pre>
+<p>可以看到，我们可以随意更换策略，而不影响Operator的所有实现。</p>
+<h3 id="模板模式">模板模式</h3>
+<p>模板模式 (Template Pattern)定义一个操作中算法的骨架，而将一些步骤延迟到子类中。这种方法让子类在不改变一个算法结构的情况下，就能重新定义该算法的某些特定步骤。</p>
+<p>简单来说，模板模式就是将一个类中能够公共使用的方法放置在抽象类中实现，将不能公共使用的方法作为抽象方法，强制子类去实现，这样就做到了将一个类作为一个模板，让开发者去填充需要填充的地方。</p>
+<p>以下是模板模式的一个实现：</p>
+<pre><code>package template
+
+import "fmt"
+
+type Cooker interface {
+	fire()
+	cooke()
+	outfire()
+}
+
+// 类似于一个抽象类
+type CookMenu struct {
+}
+
+func (CookMenu) fire() {
+	fmt.Println("开火")
+}
+
+// 做菜，交给具体的子类实现
+func (CookMenu) cooke() {
+}
+
+func (CookMenu) outfire() {
+	fmt.Println("关火")
+}
+
+// 封装具体步骤
+func doCook(cook Cooker) {
+	cook.fire()
+	cook.cooke()
+	cook.outfire()
+}
+
+type XiHongShi struct {
+	CookMenu
+}
+
+func (*XiHongShi) cooke() {
+	fmt.Println("做西红柿")
+}
+
+type ChaoJiDan struct {
+	CookMenu
+}
+
+func (ChaoJiDan) cooke() {
+	fmt.Println("做炒鸡蛋")
+}
+</code></pre>
+<p>这里来看下测试用例：</p>
+<pre><code>func TestTemplate(t *testing.T) {
+	// 做西红柿
+	xihongshi := &amp;XiHongShi{}
+	doCook(xihongshi)
+
+	fmt.Println("\n=====&gt; 做另外一道菜")
+	// 做炒鸡蛋
+	chaojidan := &amp;ChaoJiDan{}
+	doCook(chaojidan)
+
+}
+</code></pre>
+<h2 id="行为型模式">行为型模式</h2>
+<p>然后，让我们来看最后一个类别，行为型模式（Behavioral Patterns），它的特点是关注<strong>对象之间的通信</strong>。这一类别的设计模式中，我们会讲到代理模式和选项模式。</p>
+<h3 id="代理模式">代理模式</h3>
+<p>代理模式 (Proxy Pattern)，可以为另一个对象提供一个替身或者占位符，以控制对这个对象的访问。</p>
+<p>以下代码是一个代理模式的实现：</p>
+<pre><code>package proxy
+
+import "fmt"
+
+type Seller interface {
+	sell(name string)
+}
+
+// 火车站
+type Station struct {
+	stock int //库存
+}
+
+func (station *Station) sell(name string) {
+	if station.stock &gt; 0 {
+		station.stock--
+		fmt.Printf("代理点中：%s买了一张票,剩余：%d \n", name, station.stock)
+	} else {
+		fmt.Println("票已售空")
+	}
+
+}
+
+// 火车代理点
+type StationProxy struct {
+	station *Station // 持有一个火车站对象
+}
+
+func (proxy *StationProxy) sell(name string) {
+	if proxy.station.stock &gt; 0 {
+		proxy.station.stock--
+		fmt.Printf("代理点中：%s买了一张票,剩余：%d \n", name, proxy.station.stock)
+	} else {
+		fmt.Println("票已售空")
+	}
+}
+</code></pre>
+<p>上述代码中，StationProxy代理了Station，代理类中持有被代理类对象，并且和被代理类对象实现了同一接口。</p>
+<h3 id="选项模式">选项模式</h3>
+<p>选项模式（Options Pattern）也是Go项目开发中经常使用到的模式，例如，grpc/grpc-go的<a href="https://github.com/grpc/grpc-go/blob/v1.37.0/server.go#L514" target="_blank">NewServer</a>函数，uber-go/zap包的<a href="https://github.com/uber-go/zap/blob/v1.16.0/logger.go#L65" target="_blank">New</a>函数都用到了选项模式。使用选项模式，我们可以创建一个带有默认值的struct变量，并选择性地修改其中一些参数的值。</p>
+<p>在Python语言中，创建一个对象时，可以给参数设置默认值，这样在不传入任何参数时，可以返回携带默认值的对象，并在需要时修改对象的属性。这种特性可以大大简化开发者创建一个对象的成本，尤其是在对象拥有众多属性时。</p>
+<p>而在Go语言中，因为不支持给参数设置默认值，为了既能够创建带默认值的实例，又能够创建自定义参数的实例，不少开发者会通过以下两种方法来实现：</p>
+<p>第一种方法，我们要分别开发两个用来创建实例的函数，一个可以创建带默认值的实例，一个可以定制化创建实例。</p>
+<pre><code>package options
+
+import (
+	"time"
+)
+
+const (
+	defaultTimeout = 10
+	defaultCaching = false
+)
+
+type Connection struct {
+	addr    string
+	cache   bool
+	timeout time.Duration
+}
+
+// NewConnect creates a connection.
+func NewConnect(addr string) (*Connection, error) {
+	return &amp;Connection{
+		addr:    addr,
+		cache:   defaultCaching,
+		timeout: defaultTimeout,
+	}, nil
+}
+
+// NewConnectWithOptions creates a connection with options.
+func NewConnectWithOptions(addr string, cache bool, timeout time.Duration) (*Connection, error) {
+	return &amp;Connection{
+		addr:    addr,
+		cache:   cache,
+		timeout: timeout,
+	}, nil
+}
+</code></pre>
+<p>使用这种方式，创建同一个Connection实例，却要实现两个不同的函数，实现方式很不优雅。</p>
+<p>另外一种方法相对优雅些。我们需要创建一个带默认值的选项，并用该选项创建实例：</p>
+<pre><code>package options
+
+import (
+	"time"
+)
+
+const (
+	defaultTimeout = 10
+	defaultCaching = false
+)
+
+type Connection struct {
+	addr    string
+	cache   bool
+	timeout time.Duration
+}
+
+type ConnectionOptions struct {
+	Caching bool
+	Timeout time.Duration
+}
+
+func NewDefaultOptions() *ConnectionOptions {
+	return &amp;ConnectionOptions{
+		Caching: defaultCaching,
+		Timeout: defaultTimeout,
+	}
+}
+
+// NewConnect creates a connection with options.
+func NewConnect(addr string, opts *ConnectionOptions) (*Connection, error) {
+	return &amp;Connection{
+		addr:    addr,
+		cache:   opts.Caching,
+		timeout: opts.Timeout,
+	}, nil
+}
+</code></pre>
+<p>使用这种方式，虽然只需要实现一个函数来创建实例，但是也有缺点：为了创建Connection实例，每次我们都要创建ConnectionOptions，操作起来比较麻烦。</p>
+<p>那么有没有更优雅的解决方法呢？答案当然是有的，就是使用选项模式来创建实例。以下代码通过选项模式实现上述功能：</p>
+<pre><code>package options
+
+import (
+	"time"
+)
+
+type Connection struct {
+	addr    string
+	cache   bool
+	timeout time.Duration
+}
+
+const (
+	defaultTimeout = 10
+	defaultCaching = false
+)
+
+type options struct {
+	timeout time.Duration
+	caching bool
+}
+
+// Option overrides behavior of Connect.
+type Option interface {
+	apply(*options)
+}
+
+type optionFunc func(*options)
+
+func (f optionFunc) apply(o *options) {
+	f(o)
+}
+
+func WithTimeout(t time.Duration) Option {
+	return optionFunc(func(o *options) {
+		o.timeout = t
+	})
+}
+
+func WithCaching(cache bool) Option {
+	return optionFunc(func(o *options) {
+		o.caching = cache
+	})
+}
+
+// Connect creates a connection.
+func NewConnect(addr string, opts ...Option) (*Connection, error) {
+	options := options{
+		timeout: defaultTimeout,
+		caching: defaultCaching,
+	}
+
+	for _, o := range opts {
+		o.apply(&amp;options)
+	}
+
+	return &amp;Connection{
+		addr:    addr,
+		cache:   options.caching,
+		timeout: options.timeout,
+	}, nil
+}
+</code></pre>
+<p>在上面的代码中，首先我们定义了<code>options</code>结构体，它携带了timeout、caching两个属性。接下来，我们通过<code>NewConnect</code>创建了一个连接，<code>NewConnect</code>函数中先创建了一个带有默认值的<code>options</code>结构体变量，并通过调用</p>
+<pre><code>for _, o := range opts {
+    o.apply(&amp;options)
+}
+</code></pre>
+<p>来修改所创建的<code>options</code>结构体变量。</p>
+<p>需要修改的属性，是在<code>NewConnect</code>时，通过Option类型的选项参数传递进来的。可以通过<code>WithXXX</code>函数来创建Option类型的选项参数：WithTimeout、WithCaching。</p>
+<p>Option类型的选项参数需要实现<code>apply(*options)</code>函数，结合WithTimeout、WithCaching函数的返回值和optionFunc的apply方法实现，可以知道<code>o.apply(&amp;options)</code>其实就是把WithTimeout、WithCaching传入的参数赋值给options结构体变量，以此动态地设置options结构体变量的属性。</p>
+<p>这里还有一个好处：我们可以在apply函数中自定义赋值逻辑，例如<code>o.timeout = 100 * t</code>。通过这种方式，我们会有更大的灵活性来设置结构体的属性。</p>
+<p>选项模式有很多优点，例如：支持传递多个参数，并且在参数发生变化时保持兼容性；支持任意顺序传递参数；支持默认值；方便扩展；通过WithXXX的函数命名，可以使参数意义更加明确，等等。</p>
+<p>不过，为了实现选项模式，我们增加了很多代码，所以在开发中，要根据实际场景选择是否使用选项模式。选项模式通常适用于以下场景：</p>
+<ul>
+<li>结构体参数很多，创建结构体时，我们期望创建一个携带默认值的结构体变量，并选择性修改其中一些参数的值。</li>
+<li>结构体参数经常变动，变动时我们又不想修改创建实例的函数。例如：结构体新增一个retry参数，但是又不想在NewConnect入参列表中添加<code>retry int</code>这样的参数声明。</li>
+</ul>
+<p>如果结构体参数比较少，可以慎重考虑要不要采用选项模式。</p>
+<h2 id="总结">总结</h2>
+<p>设计模式，是业界沉淀下来的针对特定场景的最佳解决方案。在软件领域，GoF首次系统化提出了3大类设计模式：创建型模式、结构型模式、行为型模式。</p>
+<p>这一讲，我介绍了Go项目开发中6种常用的设计模式。每种设计模式解决某一类场景，我给你总结成了一张表格，你可以根据自己的需要进行选择。</p>
+<p><img alt="" src="/assets/9946406b59656b5de7e40a24.png"/></p>
+<h2 id="课后练习">课后练习</h2>
+<ol>
+<li>你当前开发的项目中，哪些可以用单例模式、工厂模式、选项模式来重新实现呢？如果有的话，我建议你试着重写下这部分代码。</li>
+<li>除了这一讲我们学习的 6 种设计模式之外，你还用过其他的设计模式吗？欢迎你在留言区和我分享下你的经验，或者你踩过的坑。</li>
+</ol>
+<p>欢迎你在留言区与我交流讨论，我们下一讲见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

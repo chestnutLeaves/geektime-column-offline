@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>23 Host容器：Tomcat如何实现热部署和热加载？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/index.html">深入拆解Tomcat  Jetty</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">44 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入拆解Tomcat  Jetty</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20Java%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%88%90%E9%95%BF%EF%BC%9F.html">00 开篇词 Java程序员如何快速成长？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/01%20Web%E5%AE%B9%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84.html">01 Web容器学习路径</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/02%20HTTP%E5%8D%8F%E8%AE%AE%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A.html">02 HTTP协议必知必会</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/03%20%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8.html">03 你应该知道的Servlet规范和Servlet容器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/04%20%E5%AE%9E%E6%88%98%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E5%92%8C%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AAServlet.html">04 实战：纯手工打造和运行一个Servlet</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/05%20Tomcat%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%C2%A0%E8%BF%9E%E6%8E%A5%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F.html">05 Tomcat系统架构（上）： 连接器是如何设计的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/06%20Tomcat%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%81%8A%E8%81%8A%E5%A4%9A%E5%B1%82%E5%AE%B9%E5%99%A8%E7%9A%84%E8%AE%BE%E8%AE%A1.html">06 Tomcat系统架构（下）：聊聊多层容器的设计</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/07%20Tomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%94%AE%E5%BC%8F%E5%90%AF%E5%81%9C%EF%BC%9F.html">07 Tomcat如何实现一键式启停？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/08%20Tomcat%E7%9A%84%E2%80%9C%E9%AB%98%E5%B1%82%E4%BB%AC%E2%80%9D%E9%83%BD%E8%B4%9F%E8%B4%A3%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F.html">08 Tomcat的“高层们”都负责做什么？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/09%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E6%9E%B6%E6%9E%84%E7%89%B9%E7%82%B9%E4%B9%8BConnector%E7%BB%84%E4%BB%B6.html">09 比较：Jetty架构特点之Connector组件</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/10%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E6%9E%B6%E6%9E%84%E7%89%B9%E7%82%B9%E4%B9%8BHandler%E7%BB%84%E4%BB%B6.html">10 比较：Jetty架构特点之Handler组件</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/11%20%E6%80%BB%E7%BB%93%EF%BC%9A%E4%BB%8ETomcat%E5%92%8CJetty%E4%B8%AD%E6%8F%90%E7%82%BC%E7%BB%84%E4%BB%B6%E5%8C%96%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83.html">11 总结：从Tomcat和Jetty中提炼组件化设计规范</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/12%20%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BC%98%E5%8C%96%E5%B9%B6%E6%8F%90%E9%AB%98Tomcat%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6.html">12 实战：优化并提高Tomcat启动速度</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/13%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%881%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E6%BA%90%E7%A0%81%EF%BC%9F.html">13 热点问题答疑（1）：如何学习源码？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/14%20NioEndpoint%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%9D%9E%E9%98%BB%E5%A1%9EI_O%EF%BC%9F.html">14 NioEndpoint组件：Tomcat如何实现非阻塞I_O？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/15%20Nio2Endpoint%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5I_O%EF%BC%9F.html">15 Nio2Endpoint组件：Tomcat如何实现异步I_O？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/16%20AprEndpoint%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%20APR%E6%8F%90%E9%AB%98I_O%E6%80%A7%E8%83%BD%E7%9A%84%E7%A7%98%E5%AF%86.html">16 AprEndpoint组件：Tomcat APR提高I_O性能的秘密</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/17%20Executor%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%89%A9%E5%B1%95Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">17 Executor组件：Tomcat如何扩展Java线程池？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/18%20%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81WebSocket%EF%BC%9F.html">18 新特性：Tomcat如何支持WebSocket？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/19%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E7%9A%84%E7%BA%BF%E7%A8%8B%E7%AD%96%E7%95%A5EatWhatYouKill.html">19 比较：Jetty的线程策略EatWhatYouKill</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/20%20%E6%80%BB%E7%BB%93%EF%BC%9ATomcat%E5%92%8CJetty%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF.html">20 总结：Tomcat和Jetty中的对象池技术</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/21%20%E6%80%BB%E7%BB%93%EF%BC%9ATomcat%E5%92%8CJetty%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E3%80%81%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8B%E9%81%93.html">21 总结：Tomcat和Jetty的高性能、高并发之道</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/22%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%882%EF%BC%89%EF%BC%9A%E5%86%85%E6%A0%B8%E5%A6%82%E4%BD%95%E9%98%BB%E5%A1%9E%E4%B8%8E%E5%94%A4%E9%86%92%E8%BF%9B%E7%A8%8B%EF%BC%9F.html">22 热点问题答疑（2）：内核如何阻塞与唤醒进程？</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/23%20Host%E5%AE%B9%E5%99%A8%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%83%AD%E9%83%A8%E7%BD%B2%E5%92%8C%E7%83%AD%E5%8A%A0%E8%BD%BD%EF%BC%9F.html">23 Host容器：Tomcat如何实现热部署和热加载？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/24%20Context%E5%AE%B9%E5%99%A8%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%9C%BA%E5%88%B6%EF%BC%9F.html">24 Context容器（上）：Tomcat如何打破双亲委托机制？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/25%20Context%E5%AE%B9%E5%99%A8%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E9%9A%94%E7%A6%BBWeb%E5%BA%94%E7%94%A8%EF%BC%9F.html">25 Context容器（中）：Tomcat如何隔离Web应用？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/26%20Context%E5%AE%B9%E5%99%A8%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0Servlet%E8%A7%84%E8%8C%83%EF%BC%9F.html">26 Context容器（下）：Tomcat如何实现Servlet规范？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/27%20%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E5%BC%82%E6%AD%A5Servlet%EF%BC%9F.html">27 新特性：Tomcat如何支持异步Servlet？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/28%20%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9ASpring%20Boot%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8C%E5%BC%8F%E7%9A%84Tomcat%E5%92%8CJetty%EF%BC%9F.html">28 新特性：Spring Boot如何使用内嵌式的Tomcat和Jetty？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/29%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%85%B7%E6%9C%89%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF%E7%9A%84%E8%B4%A3%E4%BB%BB%E9%93%BE%EF%BC%9F.html">29 比较：Jetty如何实现具有上下文信息的责任链？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/30%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%883%EF%BC%89%EF%BC%9ASpring%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">30 热点问题答疑（3）：Spring框架中的设计模式</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/31%20Logger%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%8F%8A%E5%AE%9E%E6%88%98.html">31 Logger组件：Tomcat的日志框架及实战</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/32%20Manager%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E7%9A%84Session%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90.html">32 Manager组件：Tomcat的Session管理机制解析</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/33%20Cluster%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E7%9A%84%E9%9B%86%E7%BE%A4%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86.html">33 Cluster组件：Tomcat的集群通信原理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/34%20JVM%20GC%E5%8E%9F%E7%90%86%E5%8F%8A%E8%B0%83%E4%BC%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF.html">34 JVM GC原理及调优的基本思路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/35%20%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7Tomcat%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">35 如何监控Tomcat的性能？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/36%20Tomcat%20I_O%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%B9%B6%E5%8F%91%E8%B0%83%E4%BC%98.html">36 Tomcat I_O和线程池的并发调优</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/37%20Tomcat%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90%E5%8F%8A%E8%B0%83%E4%BC%98.html">37 Tomcat内存溢出的原因分析及调优</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/38%20Tomcat%E6%8B%92%E7%BB%9D%E8%BF%9E%E6%8E%A5%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90%E5%8F%8A%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96.html">38 Tomcat拒绝连接原因分析及网络优化</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/39%20Tomcat%E8%BF%9B%E7%A8%8B%E5%8D%A0%E7%94%A8CPU%E8%BF%87%E9%AB%98%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">39 Tomcat进程占用CPU过高怎么办？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/40%20%E8%B0%88%E8%B0%88Jetty%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E7%9A%84%E6%80%9D%E8%B7%AF.html">40 谈谈Jetty性能调优的思路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/41%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%884%EF%BC%89%EF%BC%9A%20Tomcat%E5%92%8CJetty%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%EF%BC%9F.html">41 热点问题答疑（4）： Tomcat和Jetty有哪些不同？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%A6%82%E4%BD%95%E6%8C%81%E7%BB%AD%E4%BF%9D%E6%8C%81%E5%AF%B9%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%85%B4%E8%B6%A3%EF%BC%9F.html">特别放送 如何持续保持对学习的兴趣？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E9%9D%99%E4%B8%8B%E5%BF%83%E6%9D%A5%EF%BC%8C%E5%93%81%E5%91%B3%E7%BB%8F%E5%85%B8.html">结束语 静下心来，品味经典</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/23%20Host%E5%AE%B9%E5%99%A8%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%83%AD%E9%83%A8%E7%BD%B2%E5%92%8C%E7%83%AD%E5%8A%A0%E8%BD%BD%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="23 Host容器：Tomcat如何实现热部署和热加载？" id="title">23 Host容器：Tomcat如何实现热部署和热加载？</h1>
+<div><p>从这一期我们开始学习Tomcat的容器模块，来聊一聊各容器组件实现的功能，主要有热部署热加载、类加载机制以及Servlet规范的实现。最后还会谈到Spring Boot是如何与Web容器进行交互的。</p>
+<p>今天我们首先来看热部署和热加载。要在运行的过程中升级Web应用，如果你不想重启系统，实现的方式有两种：热加载和热部署。</p>
+<p>那如何实现热部署和热加载呢？它们跟类加载机制有关，具体来说就是：</p>
+<ul>
+<li>热加载的实现方式是Web容器启动一个后台线程，定期检测类文件的变化，如果有变化，就重新加载类，在这个过程中不会清空Session ，一般用在开发环境。</li>
+<li>热部署原理类似，也是由后台线程定时检测Web应用的变化，但它会重新加载整个Web应用。这种方式会清空Session，比热加载更加干净、彻底，一般用在生产环境。</li>
+</ul>
+<p>今天我们来学习一下Tomcat是如何用后台线程来实现热加载和热部署的。Tomcat通过开启后台线程，使得各个层次的容器组件都有机会完成一些周期性任务。我们在实际工作中，往往也需要执行一些周期性的任务，比如监控程序周期性拉取系统的健康状态，就可以借鉴这种设计。</p>
+<h2 id="tomcat的后台线程">Tomcat的后台线程</h2>
+<p>要说开启后台线程做周期性的任务，有经验的同学马上会想到线程池中的ScheduledThreadPoolExecutor，它除了具有线程池的功能，还能够执行周期性的任务。Tomcat就是通过它来开启后台线程的：</p>
+<pre><code>bgFuture = exec.scheduleWithFixedDelay(
+              new ContainerBackgroundProcessor(),//要执行的Runnable
+              backgroundProcessorDelay, //第一次执行延迟多久
+              backgroundProcessorDelay, //之后每次执行间隔多久
+              TimeUnit.SECONDS);        //时间单位
+</code></pre>
+<p>上面的代码调用了scheduleWithFixedDelay方法，传入了四个参数，第一个参数就是要周期性执行的任务类ContainerBackgroundProcessor，它是一个Runnable，同时也是ContainerBase的内部类，ContainerBase是所有容器组件的基类，我们来回忆一下容器组件有哪些，有Engine、Host、Context和Wrapper等，它们具有父子关系。</p>
+<p><strong>ContainerBackgroundProcessor实现</strong></p>
+<p>我们接来看ContainerBackgroundProcessor具体是如何实现的。</p>
+<pre><code>protected class ContainerBackgroundProcessor implements Runnable {
+
+    @Override
+    public void run() {
+        //请注意这里传入的参数是"宿主类"的实例
+        processChildren(ContainerBase.this);
+    }
+
+    protected void processChildren(Container container) {
+        try {
+            //1. 调用当前容器的backgroundProcess方法。
+            container.backgroundProcess();
+            
+            //2. 遍历所有的子容器，递归调用processChildren，
+            //这样当前容器的子孙都会被处理            
+            Container[] children = container.findChildren();
+            for (int i = 0; i &lt; children.length; i++) {
+            //这里请你注意，容器基类有个变量叫做backgroundProcessorDelay，如果大于0，表明子容器有自己的后台线程，无需父容器来调用它的processChildren方法。
+                if (children[i].getBackgroundProcessorDelay() &lt;= 0) {
+                    processChildren(children[i]);
+                }
+            }
+        } catch (Throwable t) { ... }
+</code></pre>
+<p>上面的代码逻辑也是比较清晰的，首先ContainerBackgroundProcessor是一个Runnable，它需要实现run方法，它的run很简单，就是调用了processChildren方法。这里有个小技巧，它把“宿主类”，也就是<strong>ContainerBase的类实例当成参数传给了run方法</strong>。</p>
+<p>而在processChildren方法里，就做了两步：调用当前容器的backgroundProcess方法，以及递归调用子孙的backgroundProcess方法。请你注意backgroundProcess是Container接口中的方法，也就是说所有类型的容器都可以实现这个方法，在这个方法里完成需要周期性执行的任务。</p>
+<p>这样的设计意味着什么呢？我们只需要在顶层容器，也就是Engine容器中启动一个后台线程，那么这个线程<strong>不但会执行Engine容器的周期性任务，它还会执行所有子容器的周期性任务</strong>。</p>
+<p><strong>backgroundProcess方法</strong></p>
+<p>上述代码都是在基类ContainerBase中实现的，那具体容器类需要做什么呢？其实很简单，如果有周期性任务要执行，就实现backgroundProcess方法；如果没有，就重用基类ContainerBase的方法。ContainerBase的backgroundProcess方法实现如下：</p>
+<pre><code>public void backgroundProcess() {
+
+    //1.执行容器中Cluster组件的周期性任务
+    Cluster cluster = getClusterInternal();
+    if (cluster != null) {
+        cluster.backgroundProcess();
+    }
+    
+    //2.执行容器中Realm组件的周期性任务
+    Realm realm = getRealmInternal();
+    if (realm != null) {
+        realm.backgroundProcess();
+   }
+   
+   //3.执行容器中Valve组件的周期性任务
+    Valve current = pipeline.getFirst();
+    while (current != null) {
+       current.backgroundProcess();
+       current = current.getNext();
+    }
+    
+    //4. 触发容器的"周期事件"，Host容器的监听器HostConfig就靠它来调用
+    fireLifecycleEvent(Lifecycle.PERIODIC_EVENT, null);
+}
+</code></pre>
+<p>从上面的代码可以看到，不仅每个容器可以有周期性任务，每个容器中的其他通用组件，比如跟集群管理有关的Cluster组件、跟安全管理有关的Realm组件都可以有自己的周期性任务。</p>
+<p>我在前面的专栏里提到过，容器之间的链式调用是通过Pipeline-Valve机制来实现的，从上面的代码你可以看到容器中的Valve也可以有周期性任务，并且被ContainerBase统一处理。</p>
+<p>请你特别注意的是，在backgroundProcess方法的最后，还触发了容器的“周期事件”。我们知道容器的生命周期事件有初始化、启动和停止等，那“周期事件”又是什么呢？它跟生命周期事件一样，是一种扩展机制，你可以这样理解：</p>
+<p>又一段时间过去了，容器还活着，你想做点什么吗？如果你想做点什么，就创建一个监听器来监听这个“周期事件”，事件到了我负责调用你的方法。</p>
+<p>总之，有了ContainerBase中的后台线程和backgroundProcess方法，各种子容器和通用组件不需要各自弄一个后台线程来处理周期性任务，这样的设计显得优雅和整洁。</p>
+<h2 id="tomcat热加载">Tomcat热加载</h2>
+<p>有了ContainerBase的周期性任务处理“框架”，作为具体容器子类，只需要实现自己的周期性任务就行。而Tomcat的热加载，就是在Context容器中实现的。Context容器的backgroundProcess方法是这样实现的：</p>
+<pre><code>public void backgroundProcess() {
+
+    //WebappLoader周期性的检查WEB-INF/classes和WEB-INF/lib目录下的类文件
+    Loader loader = getLoader();
+    if (loader != null) {
+        loader.backgroundProcess();        
+    }
+    
+    //Session管理器周期性的检查是否有过期的Session
+    Manager manager = getManager();
+    if (manager != null) {
+        manager.backgroundProcess();
+    }
+    
+    //周期性的检查静态资源是否有变化
+    WebResourceRoot resources = getResources();
+    if (resources != null) {
+        resources.backgroundProcess();
+    }
+    
+    //调用父类ContainerBase的backgroundProcess方法
+    super.backgroundProcess();
+}
+</code></pre>
+<p>从上面的代码我们看到Context容器通过WebappLoader来检查类文件是否有更新，通过Session管理器来检查是否有Session过期，并且通过资源管理器来检查静态资源是否有更新，最后还调用了父类ContainerBase的backgroundProcess方法。</p>
+<p>这里我们要重点关注，WebappLoader是如何实现热加载的，它主要是调用了Context容器的reload方法，而Context的reload方法比较复杂，总结起来，主要完成了下面这些任务：</p>
+<ol>
+<li>停止和销毁Context容器及其所有子容器，子容器其实就是Wrapper，也就是说Wrapper里面Servlet实例也被销毁了。</li>
+<li>停止和销毁Context容器关联的Listener和Filter。</li>
+<li>停止和销毁Context下的Pipeline和各种Valve。</li>
+<li>停止和销毁Context的类加载器，以及类加载器加载的类文件资源。</li>
+<li>启动Context容器，在这个过程中会重新创建前面四步被销毁的资源。</li>
+</ol>
+<p>在这个过程中，类加载器发挥着关键作用。一个Context容器对应一个类加载器，类加载器在销毁的过程中会把它加载的所有类也全部销毁。Context容器在启动过程中，会创建一个新的类加载器来加载新的类文件。</p>
+<p>在Context的reload方法里，并没有调用Session管理器的destroy方法，也就是说这个Context关联的Session是没有销毁的。你还需要注意的是，Tomcat的热加载默认是关闭的，你需要在conf目录下的context.xml文件中设置reloadable参数来开启这个功能，像下面这样：</p>
+<pre><code>&lt;Context reloadable="true"/&gt;
+</code></pre>
+<h2 id="tomcat热部署">Tomcat热部署</h2>
+<p>我们再来看看热部署，热部署跟热加载的本质区别是，热部署会重新部署Web应用，原来的Context对象会整个被销毁掉，因此这个Context所关联的一切资源都会被销毁，包括Session。</p>
+<p>那么Tomcat热部署又是由哪个容器来实现的呢？应该不是由Context，因为热部署过程中Context容器被销毁了，那么这个重担就落在Host身上了，因为它是Context的父容器。</p>
+<p>跟Context不一样，Host容器并没有在backgroundProcess方法中实现周期性检测的任务，而是通过监听器HostConfig来实现的，HostConfig就是前面提到的“周期事件”的监听器，那“周期事件”达到时，HostConfig会做什么事呢？</p>
+<pre><code>public void lifecycleEvent(LifecycleEvent event) {
+    // 执行check方法。
+    if (event.getType().equals(Lifecycle.PERIODIC_EVENT)) {
+        check();
+    } 
+}
+</code></pre>
+<p>它执行了check方法，我们接着来看check方法里做了什么。</p>
+<pre><code>protected void check() {
+
+    if (host.getAutoDeploy()) {
+        // 检查这个Host下所有已经部署的Web应用
+        DeployedApplication[] apps =
+            deployed.values().toArray(new DeployedApplication[0]);
+            
+        for (int i = 0; i &lt; apps.length; i++) {
+            //检查Web应用目录是否有变化
+            checkResources(apps[i], false);
+        }
+
+        //执行部署
+        deployApps();
+    }
+}
+</code></pre>
+<p>其实HostConfig会检查webapps目录下的所有Web应用：</p>
+<ul>
+<li>如果原来Web应用目录被删掉了，就把相应Context容器整个销毁掉。</li>
+<li>是否有新的Web应用目录放进来了，或者有新的WAR包放进来了，就部署相应的Web应用。</li>
+</ul>
+<p>因此HostConfig做的事情都是比较“宏观”的，它不会去检查具体类文件或者资源文件是否有变化，而是检查Web应用目录级别的变化。</p>
+<h2 id="本期精华">本期精华</h2>
+<p>今天我们学习Tomcat的热加载和热部署，它们的目的都是在不重启Tomcat的情况下实现Web应用的更新。</p>
+<p>热加载的粒度比较小，主要是针对类文件的更新，通过创建新的类加载器来实现重新加载。而热部署是针对整个Web应用的，Tomcat会将原来的Context对象整个销毁掉，再重新创建Context容器对象。</p>
+<p>热加载和热部署的实现都离不开后台线程的周期性检查，Tomcat在基类ContainerBase中统一实现了后台线程的处理逻辑，并在顶层容器Engine启动后台线程，这样子容器组件甚至各种通用组件都不需要自己去创建后台线程，这样的设计显得优雅整洁。</p>
+<h2 id="课后思考">课后思考</h2>
+<p>为什么Host容器不通过重写backgroundProcess方法来实现热部署呢？</p>
+<p>不知道今天的内容你消化得如何？如果还有疑问，请大胆的在留言区提问，也欢迎你把你的课后思考和心得记录下来，与我和其他同学一起讨论。如果你觉得今天有所收获，欢迎你把它分享给你的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>17 为什么能成为更好的Web服务器？动态处理请求和响应是关键 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/index.html">OpenResty从入门到实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">52 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>OpenResty从入门到实战</strong><ul><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20OpenResty%EF%BC%8C%E4%B8%BA%E4%BD%A0%E6%89%93%E5%BC%80%E9%AB%98%E6%80%A7%E8%83%BD%E5%BC%80%E5%8F%91%E7%9A%84%E5%A4%A7%E9%97%A8.html">00 开篇词 OpenResty，为你打开高性能开发的大门</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/01%20%E5%88%9D%E6%8E%A2OpenResty%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7.html">01 初探OpenResty的三大特性</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/02%20%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E4%BD%A0%E7%9A%84%E2%80%9Chello%20world%E2%80%9D%EF%BC%9F.html">02 如何写出你的“hello world”？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/03%20%E6%8F%AA%E5%87%BA%E9%9A%90%E8%97%8F%E5%9C%A8%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E5%AD%90%E9%A1%B9%E7%9B%AE.html">03 揪出隐藏在背后的那些子项目</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/04%20%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%EF%BC%9F%E4%BB%8E%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7luarocks%E5%92%8Copm%E8%AF%B4%E8%B5%B7.html">04 如何管理第三方包？从包管理工具luarocks和opm说起</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/05%20%5B%E8%A7%86%E9%A2%91%5Dopm%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%AF%BB.html">05 [视频]opm项目导读</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/06%20OpenResty%20%E4%B8%AD%E7%94%A8%E5%88%B0%E7%9A%84%20NGINX%20%E7%9F%A5%E8%AF%86.html">06 OpenResty 中用到的 NGINX 知识</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/07%20%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%20Lua.html">07 带你快速上手 Lua</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/08%20LuaJIT%E5%88%86%E6%94%AF%E5%92%8C%E6%A0%87%E5%87%86Lua%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">08 LuaJIT分支和标准Lua有什么不同？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/09%20%E4%B8%BA%E4%BB%80%E4%B9%88%20lua-resty-core%20%E6%80%A7%E8%83%BD%E6%9B%B4%E9%AB%98%E4%B8%80%E4%BA%9B%EF%BC%9F.html">09 为什么 lua-resty-core 性能更高一些？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/10%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E6%AD%BB%E7%A9%B4%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8%20NYI%20%EF%BC%9F.html">10 JIT编译器的死穴：为什么要避免使用 NYI ？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/11%20%E5%89%96%E6%9E%90Lua%E5%94%AF%E4%B8%80%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84table%E5%92%8Cmetatable%E7%89%B9%E6%80%A7.html">11 剖析Lua唯一的数据结构table和metatable特性</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/12%20%E9%AB%98%E6%89%8B%E7%A7%98%E8%AF%80%EF%BC%9A%E8%AF%86%E5%88%ABLua%E7%9A%84%E7%8B%AC%E6%9C%89%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9D%91.html">12 高手秘诀：识别Lua的独有概念和坑</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/13%20%5B%E8%A7%86%E9%A2%91%5D%E5%AE%9E%E6%88%98%EF%BC%9A%E5%9F%BA%E4%BA%8EFFI%E5%AE%9E%E7%8E%B0%E7%9A%84lua-resty-lrucache.html">13 [视频]实战：基于FFI实现的lua-resty-lrucache</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ALua%20%E8%A7%84%E5%88%99%E5%92%8C%20NGINX%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BA%A7%E7%94%9F%E5%86%B2%E7%AA%81%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">14 答疑（一）：Lua 规则和 NGINX 配置文件产生冲突怎么办？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/15%20OpenResty%20%E5%92%8C%E5%88%AB%E7%9A%84%E5%BC%80%E5%8F%91%E5%B9%B3%E5%8F%B0%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">15 OpenResty 和别的开发平台有什么不同？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/16%20%E7%A7%92%E6%9D%80%E5%A4%A7%E5%A4%9A%E6%95%B0%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%88%A9%E5%99%A8%EF%BC%9A%E6%96%87%E6%A1%A3%E5%92%8C%E6%B5%8B%E8%AF%95%E6%A1%88%E4%BE%8B.html">16 秒杀大多数开发问题的两个利器：文档和测试案例</a></li><li><a class="active" aria-current="page" href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/17%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E6%88%90%E4%B8%BA%E6%9B%B4%E5%A5%BD%E7%9A%84Web%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%E5%8A%A8%E6%80%81%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94%E6%98%AF%E5%85%B3%E9%94%AE.html">17 为什么能成为更好的Web服务器？动态处理请求和响应是关键</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/18%20worker%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%B3%95%E5%AE%9D%EF%BC%9A%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8Bshared%20dict.html">18 worker间的通信法宝：最重要的数据结构之shared dict</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/19%20OpenResty%20%E7%9A%84%E6%A0%B8%E5%BF%83%E5%92%8C%E7%B2%BE%E9%AB%93%EF%BC%9Acosocket.html">19 OpenResty 的核心和精髓：cosocket</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/20%20%E8%B6%85%E8%B6%8A%20Web%20%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9A%E7%89%B9%E6%9D%83%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">20 超越 Web 服务器：特权进程和定时任务</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/21%20%E5%B8%A6%E4%BD%A0%E7%8E%A9%E8%BD%AC%E6%97%B6%E9%97%B4%E3%80%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%AD%89%E5%B8%B8%E7%94%A8API.html">21 带你玩转时间、正则表达式等常用API</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/22%20%5B%E8%A7%86%E9%A2%91%5D%E4%BB%8E%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%AF%B4%E8%B5%B7%EF%BC%8C%E6%8E%A2%E5%AF%BBAPI%E6%80%A7%E8%83%BD%E5%92%8C%E5%AE%89%E5%85%A8%E7%9A%84%E5%B9%B3%E8%A1%A1.html">22 [视频]从一个安全漏洞说起，探寻API性能和安全的平衡</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/23%20%5B%E8%A7%86%E9%A2%91%5D%E5%AF%BC%E8%AF%BBlua-resty-requests%EF%BC%9A%E4%BC%98%E7%A7%80%E7%9A%84lua-resty-_%E6%98%AF%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E7%9A%84%EF%BC%9F.html">23 [视频]导读lua-resty-requests：优秀的lua-resty-_是如何编写的？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/24%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A4%84%E7%90%86%E5%9B%9B%E5%B1%82%E6%B5%81%E9%87%8F%EF%BC%8C%E5%AE%9E%E7%8E%B0Memcached%20Server.html">24 实战：处理四层流量，实现Memcached Server</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/25%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%89%B9%E6%9D%83%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%9D%83%E9%99%90%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">25 答疑（二）：特权进程的权限到底是什么？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/26%20%E4%BB%A3%E7%A0%81%E8%B4%A1%E7%8C%AE%E8%80%85%E7%9A%84%E6%8B%A6%E8%B7%AF%E8%99%8E%EF%BC%9Atest__nginx%20%E7%AE%80%E4%BB%8B.html">26 代码贡献者的拦路虎：test__nginx 简介</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/27%20test__nginx%20%E5%8C%85%E7%BD%97%E4%B8%87%E8%B1%A1%E7%9A%84%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95.html">27 test__nginx 包罗万象的测试方法</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/28%20test__nginx%20%E8%BF%98%E5%8F%AF%E4%BB%A5%E8%BF%99%E6%A0%B7%E7%94%A8%EF%BC%9F.html">28 test__nginx 还可以这样用？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/29%20%E6%9C%80%E5%AE%B9%E6%98%93%E5%A4%B1%E5%87%86%E7%9A%84%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%EF%BC%9F%E4%BD%A0%E9%9C%80%E8%A6%81%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7%E7%95%8C%E7%9A%84%E2%80%9C%E6%82%8D%E9%A9%AC%E2%80%9Dwrk.html">29 最容易失准的性能测试？你需要压测工具界的“悍马”wrk</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/30%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%89%EF%BC%89%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E6%B5%8B%E8%AF%95%E7%9A%84%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%EF%BC%9F.html">30 答疑（三）如何搭建测试的网络结构？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/31%20%E6%80%A7%E8%83%BD%E4%B8%8B%E9%99%8D10%E5%80%8D%E7%9A%84%E7%9C%9F%E5%87%B6%EF%BC%9A%E9%98%BB%E5%A1%9E%E5%87%BD%E6%95%B0.html">31 性能下降10倍的真凶：阻塞函数</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/32%20%E8%AE%A9%E4%BA%BA%E5%8F%88%E6%81%A8%E5%8F%88%E7%88%B1%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C.html">32 让人又恨又爱的字符串操作</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/33%20%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%8710%E5%80%8D%E7%9A%84%E7%A7%98%E8%AF%80%EF%BC%9A%E5%BF%85%E9%A1%BB%E7%94%A8%E5%A5%BD%20table.html">33 性能提升10倍的秘诀：必须用好 table</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/34%20%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%9AOpenResty%E7%BC%96%E7%A0%81%E6%8C%87%E5%8D%97.html">34 特别放送：OpenResty编码指南</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/35%20%5B%E8%A7%86%E9%A2%91%5D%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9Aingress-nginx%E4%B8%AD%E7%9A%84%E5%87%A0%E4%B8%AAPR%E8%A7%A3%E8%AF%BB.html">35 [视频]实际项目中的性能优化：ingress-nginx中的几个PR解读</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/36%20%E7%9B%98%E7%82%B9OpenResty%E7%9A%84%E5%90%84%E7%A7%8D%E8%B0%83%E8%AF%95%E6%89%8B%E6%AE%B5.html">36 盘点OpenResty的各种调试手段</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/37%20systemtap-toolkit%E5%92%8Cstapxx%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%95%B0%E6%8D%AE%E6%90%9E%E5%AE%9A%E2%80%9C%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87%E2%80%9D%EF%BC%9F.html">37 systemtap-toolkit和stapxx：如何用数据搞定“疑难杂症”？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/38%20%5B%E8%A7%86%E9%A2%91%5D%E5%B7%A7%E7%94%A8wrk%E5%92%8C%E7%81%AB%E7%84%B0%E5%9B%BE%EF%BC%8C%E7%A7%91%E5%AD%A6%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88.html">38 [视频]巧用wrk和火焰图，科学定位性能瓶颈</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/39%20%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%85%B3%E9%94%AE%EF%BC%9Ashared%20dict%20%E7%BC%93%E5%AD%98%E5%92%8C%20lru%20%E7%BC%93%E5%AD%98.html">39 高性能的关键：shared dict 缓存和 lru 缓存</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/40%20%E7%BC%93%E5%AD%98%E4%B8%8E%E9%A3%8E%E6%9A%B4%E5%B9%B6%E5%AD%98%EF%BC%8C%E8%B0%81%E8%AF%B4%E7%BC%93%E5%AD%98%E9%A3%8E%E6%9A%B4%E4%B8%8D%E5%8F%AF%E9%81%BF%E5%85%8D%EF%BC%9F.html">40 缓存与风暴并存，谁说缓存风暴不可避免？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/41%20lua-resty-_%20%E5%B0%81%E8%A3%85%EF%BC%8C%E8%AE%A9%E4%BD%A0%E8%BF%9C%E7%A6%BB%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E4%B9%8B%E7%97%9B.html">41 lua-resty-_ 封装，让你远离多级缓存之痛</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/42%20%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%E7%AA%81%E5%8F%91%E6%B5%81%E9%87%8F%EF%BC%9A%E6%BC%8F%E6%A1%B6%E5%92%8C%E4%BB%A4%E7%89%8C%E6%A1%B6%E7%9A%84%E6%A6%82%E5%BF%B5.html">42 如何应对突发流量：漏桶和令牌桶的概念</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/43%20%E7%81%B5%E6%B4%BB%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E9%99%90%E6%B5%81%E9%99%90%E9%80%9F%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%B2%A1%E6%9C%89%E9%82%A3%E4%B9%88%E9%9A%BE.html">43 灵活实现动态限流限速，其实没有那么难</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/44%20OpenResty%20%E7%9A%84%E6%9D%80%E6%89%8B%E9%94%8F%EF%BC%9A%E5%8A%A8%E6%80%81.html">44 OpenResty 的杀手锏：动态</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/45%20%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8F%90%E7%9A%84%E8%83%BD%E5%8A%9B%E5%A4%96%E5%BB%B6%EF%BC%9AOpenResty%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93.html">45 不得不提的能力外延：OpenResty常用的第三方库</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/46%20%E7%AD%94%E7%96%91%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%85%B1%E4%BA%AB%E5%AD%97%E5%85%B8%E7%9A%84%E7%BC%93%E5%AD%98%E6%98%AF%E5%BF%85%E9%A1%BB%E7%9A%84%E5%90%97%EF%BC%9F.html">46 答疑（四）：共享字典的缓存是必须的吗？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/47%20%E5%BE%AE%E6%9C%8D%E5%8A%A1API%E7%BD%91%E5%85%B3%E6%90%AD%E5%BB%BA%E4%B8%89%E6%AD%A5%E6%9B%B2%EF%BC%88%E4%B8%80%EF%BC%89.html">47 微服务API网关搭建三步曲（一）</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/48%20%E5%BE%AE%E6%9C%8D%E5%8A%A1API%E7%BD%91%E5%85%B3%E6%90%AD%E5%BB%BA%E4%B8%89%E6%AD%A5%E6%9B%B2%EF%BC%88%E4%BA%8C%EF%BC%89.html">48 微服务API网关搭建三步曲（二）</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/49%20%E5%BE%AE%E6%9C%8D%E5%8A%A1API%E7%BD%91%E5%85%B3%E6%90%AD%E5%BB%BA%E4%B8%89%E6%AD%A5%E6%9B%B2%EF%BC%88%E4%B8%89%EF%BC%89.html">49 微服务API网关搭建三步曲（三）</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/50%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%BC%95%E5%85%A5%20OpenResty%EF%BC%9F.html">50 答疑（五）：如何在工作中引入 OpenResty？</a></li><li><a href="/courses/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E8%A1%8C%E7%99%BE%E9%87%8C%E8%80%85%E5%8D%8A%E4%B9%9D%E5%8D%81.html">结束语 行百里者半九十</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/OpenResty%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/17%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E6%88%90%E4%B8%BA%E6%9B%B4%E5%A5%BD%E7%9A%84Web%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%E5%8A%A8%E6%80%81%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94%E6%98%AF%E5%85%B3%E9%94%AE.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="17 为什么能成为更好的Web服务器？动态处理请求和响应是关键" id="title">17 为什么能成为更好的Web服务器？动态处理请求和响应是关键</h1>
+<div><p>你好，我是温铭。经过前面内容的铺垫后， 相信你已经对 OpenResty 的概念和如何学习它有了基本的认识。今天这节课，我们来看一下 OpenResty 如何处理终端请求和响应。</p>
+<p>虽然 OpenResty 是基于 NGINX 的 Web 服务器，但它与 NGINX 却有本质的不同：NGINX 由静态的配置文件驱动，而 OpenResty 是由 Lua API 驱动的，所以能提供更多的灵活性和可编程性。</p>
+<p>下面，就让我来带你领略 Lua API 带来的好处吧。</p>
+<h2 id="api-分类">API 分类</h2>
+<p>首先我们要知道，OpenResty 的 API 主要分为下面几个大类：</p>
+<ul>
+<li>处理请求和响应；</li>
+<li>SSL 相关；</li>
+<li>shared dict；</li>
+<li>cosocket；</li>
+<li>处理四层流量；</li>
+<li>process 和 worker；</li>
+<li>获取 NGINX 变量和配置；</li>
+<li>字符串、时间、编解码等通用功能。</li>
+</ul>
+<p>这里，我建议你同时打开 OpenResty 的 Lua API 文档，对照着其中的 <a href="https://github.com/openresty/lua-nginx-module/#nginx-api-for-lua" target="_blank">API 列表</a> ，看看是否能和这个分类联系起来。</p>
+<p>OpenResty 的 API 不仅仅存在于 lua-nginx-module 项目中，也存在于 lua-resty-core 项目中，比如 ngx.ssl、ngx.base64、ngx.errlog、ngx.process、ngx.re.split、ngx.resp.add_header、ngx.balancer、ngx.semaphore、ngx.ocsp 这些 API 。</p>
+<p>而对于不在 lua-nginx-module 项目中的 API，你需要单独 require 才能使用。举个例子，比如你想使用 split 这个字符串分割函数，就需要按照下面的方法来调用：</p>
+<pre><code>$ resty -e 'local ngx_re = require "ngx.re"
+ local res, err = ngx_re.split("a,b,c,d", ",", nil, {pos = 5})
+ print(res)
+ '
+</code></pre>
+<p>当然，这可能会给你带来一个困惑：在 lua-nginx-module 项目中，明明有 ngx.re.sub、ngx.re.find 等好几个 ngx.re 开头的 API，为什么单单是 ngx.re.split 这个 API ，需要 require 后才能使用呢？</p>
+<p>事实上，在前面 lua-resty-core 章节中，我们也提到过，OpenResty 新的 API 都是通过 FFI 的方式在 <code>lua-rety-core</code> 仓库中实现的，所以难免就会存在这种割裂感。自然，我也很期待lua-nginx-module 和 lua-resty-core 这两个项目以后可以合并，彻底解决此类问题。</p>
+<h2 id="请求">请求</h2>
+<p>接下来，我们具体了解下OpenResty 是如何处理终端请求和响应的。先来看下处理请求的 API，不过，以 ngx.req 开头的 API 有 20 多个，该怎么下手呢？</p>
+<p>我们知道，HTTP 请求报文由三部分组成：请求行、请求头和请求体，所以下面我就按照这三部分来对 API 做介绍。</p>
+<h3 id="请求行">请求行</h3>
+<p>首先是请求行，HTTP 的请求行中包含请求方法、URI 和 HTTP 协议版本。在 NGINX 中，你可以通过内置变量的方式，来获取其中的值；而在 OpenResty 中对应的则是 <code>ngx.var.*</code> 这个 API。我们来看两个例子。</p>
+<ul>
+<li><code>$scheme</code> 这个内置变量，在 NGINX 中代表协议的名字，是 “http” 或者 “https”；而在 OpenResty 中，你可以通过 <code>ngx.var.scheme</code> 来返回同样的值。</li>
+<li><code>$request_method</code> 代表的是请求的方法，“GET”、“POST” 等；而在 OpenResty 中，你可以通过 <code>ngx.var. request_method</code> 来返回同样的值。</li>
+</ul>
+<p>至于完整的 NGINX 内置变量列表，你可以访问 NGINX 的官方文档来获取：<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#variables" target="_blank">http://nginx.org/en/docs/http/ngx_http_core_module.html#variables</a>。</p>
+<p>那么问题就来了：既然可以通过<code>ngx.var.*</code> 这种返回变量值的方法，来得到请求行中的数据，为什么 OpenResty 还要单独提供针对请求行的 API 呢？</p>
+<p>这其实是很多方面因素的综合考虑结果：</p>
+<ul>
+<li>首先是对性能的考虑。<code>ngx.var</code> 的效率不高，不建议反复读取；</li>
+<li>也有对程序友好的考虑，<code>ngx.var</code> 返回的是字符串，而非 Lua 对象，遇到获取 args 这种可能返回多个值的情况，就不好处理了；</li>
+<li>另外是对灵活性的考虑，绝大部分的 <code>ngx.var</code> 是只读的，只有很少数的变量是可写的，比如 <code>$args</code> 和 <code>limit_rate</code>，可很多时候，我们会有修改 method、URI 和 args 的需求。</li>
+</ul>
+<p>所以， OpenResty 提供了多个专门操作请求行的 API，它们可以对请求行进行改写，以便后续的重定向等操作。</p>
+<p>我们先来看下，如何通过 API 来获取 HTTP 协议版本号。OpenResty 的 API <code>ngx.req.http_version</code> 和 NGINX 的 <code>$server_protocol</code> 变量的作用一样，都是返回 HTTP 协议的版本号。不过这个 API 的返回值是数字格式，而非字符串，可能的值是 2.0、1.0、1.1 和 0.9，如果结果不在这几个值的范围内，就会返回 nil。</p>
+<p>再来看下获取请求行中的请求方法。刚才我们提到过，<code>ngx.req.get_method</code> 和 NGINX 的 <code>$request_method</code> 变量的作用、返回值一样，都是字符串格式的方法名。</p>
+<p>但是，改写当前 HTTP 请求方法的 API，也就是 <code>ngx.req.set_method</code>，它接受的参数格式却并非字符串，而是内置的数字常量。比如，下面的代码，把请求方法改写为 POST：</p>
+<pre><code>ngx.req.set_method(ngx.HTTP_POST)
+</code></pre>
+<p>为了验证 <code>ngx.HTTP_POST</code> 这个内置常量，确实是数字而非字符串，你可以打印出它的值，看输出是否为 8：</p>
+<pre><code>$ resty -e 'print(ngx.HTTP_POST)'
+</code></pre>
+<p>这样一来，get 方法的返回值为字符串，而set 方法的输入值却是数字，就很容易让你在写代码的时候想当然了。如果是 set 时候传值混淆的情况还好，API 会崩溃报出 500 的错误；但如果是下面这种判断逻辑的代码：</p>
+<pre><code>if (ngx.req.get_method() == ngx.HTTP_POST) then
+    -- do something
+ end
+</code></pre>
+<p>这种代码是可以正常运行的，不会报出任何错误，甚至在 code review 时也很难发现。不幸的是，我就犯过类似的错误，对此记忆犹新：当时已经经过了两轮 code review，还有不完整的测试案例尝试覆盖，然而，最终还是因为线上环境异常才追踪到了这里。</p>
+<p>碰到这类情况，除了自己多小心，或者再多一层封装外，并没有什么有效的方法来解决。平常你在设计自己的业务 API 时，也可以多做一些这方面的考虑，尽量保持 get、set 方法的参数格式一致，即使这会牺牲一些性能。</p>
+<p>另外，在改写请求行的方法中，还有 <code>ngx.req.set_uri</code> 和 <code>ngx.req.set_uri_args</code> 这两个 API，可以用来改写 uri 和 args。我们来看下这个 NGINX 配置：</p>
+<pre><code> rewrite ^ /foo?a=3? break;
+</code></pre>
+<p>那么，如何用等价的 Lua API 来解决呢？答案就是下面这两行代码。</p>
+<pre><code>ngx.req.set_uri_args("a=3")
+ngx.req.set_uri("/foo")
+</code></pre>
+<p>其实，如果你看过官方文档，就会发现 <code>ngx.req.set_uri</code> 还有第二个参数：jump，默认是 false。如果设置为 true，就等同于把 rewrite 指令的 flag 设置为 <code>last</code>，而非上面示例中的 <code>break</code>。</p>
+<p>不过，我个人并不喜欢 rewrite 指令的 flag 配置，看不懂也记不住，远没有代码来的直观和好维护。</p>
+<h3 id="请求头">请求头</h3>
+<p>再来看下和请求头有关的 API。我们知道，HTTP 的请求头是 <code>key : value</code> 格式的，比如：</p>
+<pre><code>Accept: text/css,*/*;q=0.1
+Accept-Encoding: gzip, deflate, br
+</code></pre>
+<p>在OpenResty 中，你可以使用 <code>ngx.req.get_headers</code> 来解析和获取请求头，返回值的类型则是 table：</p>
+<pre><code>local h, err = ngx.req.get_headers()
+
+  if err == "truncated" then
+      -- one can choose to ignore or reject the current request here
+  end
+
+  for k, v in pairs(h) do
+      ...
+  end
+</code></pre>
+<p>这里默认返回前 100 个 header，如果请求头超过了 100 个，就会返回 <code>truncated</code> 的错误信息，由开发者自己决定如何处理。你可能会好奇为什么会有这样的处理，这一点先留个悬念，在后面安全漏洞的章节中我会提到。</p>
+<p>不过，需要注意的是，OpenResty 并没有提供获取某一个指定请求头的 API，也就是没有 <code>ngx.req.header['host']</code> 这种形式。如果你有这样的需求，那就需要借助 NGINX 的变量 <code>$http_xxx</code> 来实现了，那么在 OpenResty 中，就是 <code>ngx.var.http_xxx</code> 这样的获取方式。</p>
+<p>看完了获取请求头，我们再来看看应该如何改写和删除请求头，这两种操作的 API 其实都很直观：</p>
+<pre><code>ngx.req.set_header("Content-Type", "text/css")
+ngx.req.clear_header("Content-Type")
+</code></pre>
+<p>当然，官方文档中也提到了其他方法来删除请求头，比如把 header 的值设置为 nil等，但为了代码更加清晰的考虑，我还是推荐统一用 <code>clear_header</code> 来操作。</p>
+<h3 id="请求体">请求体</h3>
+<p>最后来看请求体。出于性能考虑，OpenResty 不会主动读取请求体的内容，除非你在 nginx.conf 中强制开启了 <code>lua_need_request_body</code> 指令。此外，对于比较大的请求体，OpenResty 会把内容保存在磁盘的临时文件中，所以读取请求体的完整流程是下面这样的：</p>
+<pre><code>ngx.req.read_body()
+local data = ngx.req.get_body_data()
+if not data then
+    local tmp_file = ngx.req.get_body_file()
+     -- io.open(tmp_file)
+     -- ...
+ end
+</code></pre>
+<p>这段代码中有读取磁盘文件的 IO 阻塞操作。你应该根据实际情况来调整 <code>client_body_buffer_size</code> 配置的大小（64 位系统下默认是 16 KB），尽量减少阻塞的操作；你也可以把 <code>client_body_buffer_size</code> 和 <code>client_max_body_size</code> 配置成一样的，完全在内存中来处理，当然，这取决于你内存的大小和处理的并发请求数。</p>
+<p>另外，请求体也可以被改写，<code>ngx.req.set_body_data</code> 和 <code>ngx.req.set_body_file</code> 这两个API，分别接受字符串和本地磁盘文件做为输入参数，来完成请求体的改写。不过，这类操作并不常见，你可以查看文档来获取更详细的内容。</p>
+<h2 id="响应">响应</h2>
+<p>处理完请求后，我们就需要发送响应返回给客户端了。和请求报文一样，响应报文也由几个部分组成，即状态行、响应头和响应体。同样的，接下来我会按照这三部分来介绍相应的API。</p>
+<h3 id="状态行">状态行</h3>
+<p>状态行中，我们主要关注的是状态码。在默认情况下，返回的 HTTP 状态码是 200，也就是 OpenResty 中内置的常量 <code>ngx.HTTP_OK</code>。但在代码的世界中，处理异常情况的代码总是占比最多的。</p>
+<p>如果你检测了请求报文，发现这是一个恶意的请求，那么你需要终止请求:</p>
+<pre><code> ngx.exit(ngx.HTTP_BAD_REQUEST)
+</code></pre>
+<p>不过，OpenResty 的 HTTP 状态码中，有一个特别的常量：<code>ngx.OK</code>。当 <code>ngx.exit(ngx.OK)</code> 时，请求会退出当前处理阶段，进入下一个阶段，而不是直接返回给客户端。</p>
+<p>当然，你也可以选择不退出，只使用 <code>ngx.status</code> 来改写状态码，比如下面这样的写法：</p>
+<pre><code>ngx.status = ngx.HTTP_FORBIDDEN
+</code></pre>
+<p>如果你想了解更多的状态码常量，可以从<a href="https://github.com/openresty/lua-nginx-module/#http-status-constants" target="_blank">文档</a>中查询到。</p>
+<h3 id="响应头">响应头</h3>
+<p>说到响应头，其实，你有两种方法来设置它。第一种是最简单的：</p>
+<pre><code>ngx.header.content_type = 'text/plain'
+ngx.header["X-My-Header"] = 'blah blah'
+ngx.header["X-My-Header"] = nil -- 删除
+</code></pre>
+<p>这里的 ngx.header 保存了响应头的信息，可以读取、修改和删除。</p>
+<p>第二种设置响应头的方法是 <code>ngx_resp.add_header</code> ，来自 lua-resty-core 仓库，它可以增加一个头信息，用下面的方法来调用：</p>
+<pre><code>local ngx_resp = require "ngx.resp"
+ngx_resp.add_header("Foo", "bar")
+</code></pre>
+<p>与第一种方法的不同之处在于，add header 不会覆盖已经存在的同名字段。</p>
+<h3 id="响应体">响应体</h3>
+<p>最后看下响应体，在 OpenResty 中，你可以使用 <code>ngx.say</code> 和 <code>ngx.print</code> 来输出响应体：</p>
+<pre><code>ngx.say('hello, world')
+</code></pre>
+<p>这两个 API 的功能是一致的，唯一的不同在于， <code>ngx.say</code> 会在最后多一个换行符。</p>
+<p>为了避免字符串拼接的低效，<code>ngx.say / ngx.print</code> 不仅支持字符串作为参数，也支持数组格式：</p>
+<pre><code>$ resty -e 'ngx.say({"hello", ", ", "world"})'
+ hello, world
+</code></pre>
+<p>这样在 Lua 层面就跳过了字符串的拼接，把这个它不擅长的事情丢给了 C 函数去处理。</p>
+<h2 id="写在最后">写在最后</h2>
+<p>到此，让我们回顾下今天的内容。我们按照请求报文和响应报文的内容，依次介绍了与之相关的 OpenResty API。你可以看得出来，和 NGINX 的指令相比，OpenResty API更加灵活和强大。</p>
+<p>那么，在你处理 HTTP 请求时，OpenResty 提供的 Lua API 是否足够满足你的需求呢？欢迎留言一起探讨，也欢迎你把这篇文章分享给你的同事、朋友，我们一起交流，一起进步。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

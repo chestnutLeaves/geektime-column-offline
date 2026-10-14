@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>06 XSS：当你“被发送”了一条微博时，到底发生了什么？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/index.html">安全攻防技能30讲</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">39 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>安全攻防技能30讲</strong><ul><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%88%AB%E8%AF%B4%E4%BD%A0%E6%B2%A1%E8%A2%AB%E5%AE%89%E5%85%A8%E5%9B%B0%E6%89%B0%E8%BF%87.html">00 开篇词 别说你没被安全困扰过</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/01%20%E5%AE%89%E5%85%A8%E7%9A%84%E6%9C%AC%E8%B4%A8%EF%BC%9A%E6%95%B0%E6%8D%AE%E8%A2%AB%E7%AA%83%E5%8F%96%E5%90%8E%EF%BC%8C%E4%BD%A0%E8%83%BD%E6%84%8F%E8%AF%86%E5%88%B0%E9%97%AE%E9%A2%98%E6%9D%A5%E6%BA%90%E5%90%97%EF%BC%9F.html">01 安全的本质：数据被窃取后，你能意识到问题来源吗？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/02%20%E5%AE%89%E5%85%A8%E5%8E%9F%E5%88%99%EF%BC%9A%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E4%B8%8A%E6%89%8B%E8%A7%A3%E5%86%B3%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%EF%BC%9F.html">02 安全原则：我们应该如何上手解决安全问题？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/03%20%E5%AF%86%E7%A0%81%E5%AD%A6%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E5%AF%86%E7%A0%81%E5%8F%98%E5%BE%97%E2%80%9C%E4%B8%8D%E5%8F%AF%E8%A7%81%E2%80%9D%EF%BC%9F.html">03 密码学基础：如何让你的密码变得“不可见”？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/04%20%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%EF%BC%9A%E9%99%A4%E4%BA%86%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%EF%BC%8C%E6%88%91%E4%BB%AC%E8%BF%98%E8%83%BD%E6%80%8E%E4%B9%88%E5%81%9A%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%EF%BC%9F.html">04 身份认证：除了账号密码，我们还能怎么做身份认证？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/05%20%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%89%E5%8F%96%E4%B8%80%E4%B8%AA%E5%90%88%E9%80%82%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BF%9D%E6%8A%A4%E6%96%B9%E6%A1%88%EF%BC%9F.html">05 访问控制：如何选取一个合适的数据保护方案？</a></li><li><a class="active" aria-current="page" href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/06%20XSS%EF%BC%9A%E5%BD%93%E4%BD%A0%E2%80%9C%E8%A2%AB%E5%8F%91%E9%80%81%E2%80%9D%E4%BA%86%E4%B8%80%E6%9D%A1%E5%BE%AE%E5%8D%9A%E6%97%B6%EF%BC%8C%E5%88%B0%E5%BA%95%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.html">06 XSS：当你“被发送”了一条微博时，到底发生了什么？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/07%20SQL%E6%B3%A8%E5%85%A5%EF%BC%9A%E6%98%8E%E6%98%8E%E8%AE%BE%E7%BD%AE%E4%BA%86%E5%BC%BA%E5%AF%86%E7%A0%81%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E8%A2%AB%E5%88%AB%E4%BA%BA%E7%99%BB%E5%BD%95%EF%BC%9F.html">07 SQL注入：明明设置了强密码，为什么还会被别人登录？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/08%20CSRF_SSRF%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%81%BF%E5%85%8D%E4%BA%86XSS%EF%BC%8C%E8%BF%98%E6%98%AF%E2%80%9C%E8%A2%AB%E5%8F%91%E9%80%81%E2%80%9D%E4%BA%86%E4%B8%80%E6%9D%A1%E5%BE%AE%E5%8D%9A%EF%BC%9F.html">08 CSRF_SSRF：为什么避免了XSS，还是“被发送”了一条微博？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/09%20%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%EF%BC%9A%E4%BD%BF%E7%94%A8%E4%BA%86%E7%BC%96%E8%AF%91%E5%9E%8B%E8%AF%AD%E8%A8%80%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E4%BC%9A%E8%A2%AB%E6%B3%A8%E5%85%A5%EF%BC%9F.html">09 反序列化漏洞：使用了编译型语言，为什么还是会被注入？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/10%20%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%BB%91%E5%AE%A2%E4%BC%9A%E7%9F%A5%E9%81%93%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E9%80%BB%E8%BE%91%EF%BC%9F.html">10 信息泄露：为什么黑客会知道你的代码逻辑？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/11%20%E6%8F%92%E4%BB%B6%E6%BC%8F%E6%B4%9E%EF%BC%9A%E6%88%91%E7%9A%84%E4%BB%A3%E7%A0%81%E7%9C%8B%E8%B5%B7%E6%9D%A5%E5%BE%88%E5%AE%89%E5%85%A8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%87%BA%E7%8E%B0%E6%BC%8F%E6%B4%9E%EF%BC%9F.html">11 插件漏洞：我的代码看起来很安全，为什么还会出现漏洞？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/13%20Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%EF%BC%9A%E5%A4%9A%E4%BA%BA%E5%85%B1%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%88%AB%E4%BA%BA%E5%B9%B2%E2%80%9C%E5%9D%8F%E4%BA%8B%E2%80%9D%EF%BC%9F.html">13 Linux系统安全：多人共用服务器，如何防止别人干“坏事”？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/14%20%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%EF%BC%9A%E5%92%8C%E5%88%AB%E4%BA%BA%E5%85%B1%E7%94%A8Wi-Fi%E6%97%B6%EF%BC%8C%E4%BD%A0%E7%9A%84%E4%BF%A1%E6%81%AF%E4%BC%9A%E8%A2%AB%E7%AA%83%E5%8F%96%E5%90%97%EF%BC%9F.html">14 网络安全：和别人共用Wi-Fi时，你的信息会被窃取吗？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/15%20Docker%E5%AE%89%E5%85%A8%EF%BC%9A%E5%9C%A8%E8%99%9A%E6%8B%9F%E7%9A%84%E7%8E%AF%E5%A2%83%E4%B8%AD%EF%BC%8C%E5%B0%B1%E4%B8%8D%E7%94%A8%E8%80%83%E8%99%91%E5%AE%89%E5%85%A8%E4%BA%86%E5%90%97%EF%BC%9F.html">15 Docker安全：在虚拟的环境中，就不用考虑安全了吗？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/16%20%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E5%85%A8%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%A2%AB%E9%BB%91%E5%AE%A2%E6%8B%96%E5%8F%96%E7%9A%84%EF%BC%9F.html">16 数据库安全：数据库中的数据是如何被黑客拖取的？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/17%20%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%89%E5%85%A8%EF%BC%9A%E4%B8%8A%E7%99%BE%E4%B8%AA%E5%88%86%E5%B8%83%E5%BC%8F%E8%8A%82%E7%82%B9%EF%BC%8C%E4%B8%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%E2%80%9C%E5%86%85%E5%A5%B8%E2%80%9D%E5%90%97%EF%BC%9F.html">17 分布式安全：上百个分布式节点，不会出现“内奸”吗？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/18%20%E5%AE%89%E5%85%A8%E6%A0%87%E5%87%86%E5%92%8C%E6%A1%86%E6%9E%B6%EF%BC%9A%E6%80%8E%E6%A0%B7%E4%BE%9D%E2%80%9C%E8%91%AB%E8%8A%A6%E2%80%9D%E7%94%BB%E5%87%BA%E5%A5%BD%E2%80%9C%E7%93%A2%E2%80%9D%EF%BC%9F.html">18 安全标准和框架：怎样依“葫芦”画出好“瓢”？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/19%20%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%9A%E5%A6%82%E4%BD%95%E5%92%8C%E9%BB%91%E5%AE%A2%E2%80%9C%E5%88%92%E6%B8%85%E7%95%8C%E9%99%90%E2%80%9D%EF%BC%9F.html">19 防火墙：如何和黑客“划清界限”？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/20%20WAF%EF%BC%9A%E5%A6%82%E4%BD%95%E4%B8%BA%E6%BC%8F%E6%B4%9E%E7%99%BE%E5%87%BA%E7%9A%84Web%E5%BA%94%E7%94%A8%E4%BF%9D%E9%A9%BE%E6%8A%A4%E8%88%AA%EF%BC%9F.html">20 WAF：如何为漏洞百出的Web应用保驾护航？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/21%20IDS%EF%BC%9A%E5%BD%93%E9%BB%91%E5%AE%A2%E7%BB%95%E8%BF%87%E4%BA%86%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%8C%E4%BD%A0%E8%AF%A5%E5%A6%82%E4%BD%95%E5%8F%91%E7%8E%B0%EF%BC%9F.html">21 IDS：当黑客绕过了防火墙，你该如何发现？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/22%20RASP%EF%BC%9A%E5%86%99%E8%A7%84%E5%88%99%E5%86%99%E5%BE%97%E7%83%A6%E4%BA%86%EF%BC%9F%E5%B0%9D%E8%AF%95%E4%B8%80%E4%B8%8B%E6%9B%B4%E5%BA%95%E5%B1%82%E7%9A%84IDS.html">22 RASP：写规则写得烦了？尝试一下更底层的IDS</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/23%20SIEM%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%AE%A1%E7%90%86%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E8%BF%90%E8%90%A5%EF%BC%9F.html">23 SIEM：一个人管理好几个安全工具，如何高效运营？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/24%20SDL%EF%BC%9A%E6%80%8E%E6%A0%B7%E6%89%8D%E8%83%BD%E5%86%99%E5%87%BA%E6%9B%B4%E2%80%9C%E5%AE%89%E5%85%A8%E2%80%9D%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%9F.html">24 SDL：怎样才能写出更“安全”的代码？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/25%20%E4%B8%9A%E5%8A%A1%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%EF%BC%9A%E5%AF%B9%E6%AF%94%E5%9F%BA%E7%A1%80%E5%AE%89%E5%85%A8%EF%BC%8C%E4%B8%9A%E5%8A%A1%E5%AE%89%E5%85%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%EF%BC%9F.html">25 业务安全体系：对比基础安全，业务安全有哪些不同？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/26%20%E4%BA%A7%E5%93%81%E5%AE%89%E5%85%A8%E6%96%B9%E6%A1%88%EF%BC%9A%E5%A6%82%E4%BD%95%E9%99%8D%E4%BD%8E%E4%B8%9A%E5%8A%A1%E5%AF%B9%E9%BB%91%E7%81%B0%E4%BA%A7%E7%9A%84%E8%AF%B1%E6%83%91%EF%BC%9F.html">26 产品安全方案：如何降低业务对黑灰产的诱惑？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/27%20%E9%A3%8E%E6%8E%A7%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E6%B5%B7%E9%87%8F%E4%B8%9A%E5%8A%A1%E6%95%B0%E6%8D%AE%E4%B8%AD%EF%BC%8C%E6%8C%96%E6%8E%98%E9%BB%91%E7%81%B0%E4%BA%A7%EF%BC%9F.html">27 风控系统：如何从海量业务数据中，挖掘黑灰产？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/28%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%A6%82%E4%BD%95%E6%95%99%E4%BC%9A%E6%9C%BA%E5%99%A8%E8%AF%86%E5%88%AB%E9%BB%91%E7%81%B0%E4%BA%A7%EF%BC%9F.html">28 机器学习：如何教会机器识别黑灰产？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/29%20%E8%AE%BE%E5%A4%87%E6%8C%87%E7%BA%B9%EF%BC%9A%E9%9D%A2%E5%AF%B9%E5%90%84%E7%A7%8D%E8%99%9A%E6%8B%9F%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%8A%97%EF%BC%9F.html">29 设备指纹：面对各种虚拟设备，如何进行对抗？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/30%20%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5%EF%BC%9A%E2%80%9C%E9%BB%91%E7%81%B0%E4%BA%A7%E2%80%9D%E6%89%93%E4%BA%86%E5%8F%88%E6%9D%A5%EF%BC%8C%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%A4%84%E7%BD%AE%EF%BC%9F.html">30 安全运营：“黑灰产”打了又来，如何正确处置？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/%E5%8A%A0%E9%A4%901%20%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E5%86%85%E9%83%A8%E5%91%98%E5%B7%A5%E6%B3%84%E9%9C%B2%E5%95%86%E4%B8%9A%E6%9C%BA%E5%AF%86%EF%BC%9F.html">加餐1 数据安全：如何防止内部员工泄露商业机密？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/%E5%8A%A0%E9%A4%902%20%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E4%B8%80%E4%B8%AA%E5%8F%AF%E4%BF%A1%E7%9A%84%E5%89%8D%E7%AB%AF%E7%8E%AF%E5%A2%83%EF%BC%9F.html">加餐2 前端安全：如何打造一个可信的前端环境？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/%E5%8A%A0%E9%A4%903%20%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%EF%BC%9A%E5%BA%94%E8%81%98%E5%AE%89%E5%85%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%8C%E6%88%91%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88%EF%BC%9F.html">加餐3 职业发展：应聘安全工程师，我需要注意什么？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/%E5%8A%A0%E9%A4%904%20%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF%EF%BC%9A%E5%AD%A6%E4%B9%A0%E5%AE%89%E5%85%A8%EF%BC%8C%E5%93%AA%E4%BA%9B%E8%B5%84%E6%BA%90%E6%88%91%E5%BF%85%E9%A1%BB%E8%A6%81%E7%9F%A5%E9%81%93%EF%BC%9F.html">加餐4 个人成长：学习安全，哪些资源我必须要知道？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/%E5%8A%A0%E9%A4%905%20%20%E5%AE%89%E5%85%A8%E6%96%B0%E6%8A%80%E6%9C%AF%EF%BC%9AIoT%E3%80%81IPv6%E3%80%81%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%AD%E7%9A%84%E5%AE%89%E5%85%A8%E6%96%B0%E9%97%AE%E9%A2%98.html">加餐5  安全新技术：IoT、IPv6、区块链中的安全新问题</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/%E6%A8%A1%E5%9D%97%E4%B8%B2%E8%AE%B2%EF%BC%88%E4%B8%80%EF%BC%89Web%E5%AE%89%E5%85%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AF%84%E4%BC%B0%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E5%92%8C%E8%B5%84%E4%BA%A7%E6%95%B0%E6%8D%AE%E9%9D%A2%E4%B8%B4%E7%9A%84%E5%A8%81%E8%83%81%EF%BC%9F.html">模块串讲（一）Web安全：如何评估用户数据和资产数据面临的威胁？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/%E6%A8%A1%E5%9D%97%E4%B8%B2%E8%AE%B2%EF%BC%88%E4%B8%89%EF%BC%89%E5%AE%89%E5%85%A8%E9%98%B2%E5%BE%A1%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%92%8C%E8%A7%84%E5%88%92%E5%85%AC%E5%8F%B8%E7%9A%84%E5%AE%89%E5%85%A8%E9%98%B2%E5%BE%A1%E4%BD%93%E7%B3%BB%EF%BC%9F.html">模块串讲（三）安全防御工具：如何选择和规划公司的安全防御体系？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/%E6%A8%A1%E5%9D%97%E4%B8%B2%E8%AE%B2%EF%BC%88%E4%BA%8C%EF%BC%89Linux%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E5%A4%A7%E8%8C%83%E5%9B%B4%E6%8F%90%E9%AB%98%E5%B9%B3%E5%8F%B0%E5%AE%89%E5%85%A8%E6%80%A7%EF%BC%9F.html">模块串讲（二）Linux系统和应用安全：如何大范围提高平台安全性？</a></li><li><a href="/courses/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%9C%A8%E4%B8%8E%E9%BB%91%E5%AE%A2%E7%9A%84%E6%88%98%E5%BD%B9%E4%B8%AD%EF%BC%8C%E6%88%91%E4%BB%AC%E9%83%BD%E6%98%AF%E7%9B%9F%E5%8F%8B%EF%BC%81.html">结束语 在与黑客的战役中，我们都是盟友！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%8A%80%E8%83%BD30%E8%AE%B2/06%20XSS%EF%BC%9A%E5%BD%93%E4%BD%A0%E2%80%9C%E8%A2%AB%E5%8F%91%E9%80%81%E2%80%9D%E4%BA%86%E4%B8%80%E6%9D%A1%E5%BE%AE%E5%8D%9A%E6%97%B6%EF%BC%8C%E5%88%B0%E5%BA%95%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="06 XSS：当你“被发送”了一条微博时，到底发生了什么？" id="title">06 XSS：当你“被发送”了一条微博时，到底发生了什么？</h1>
+<div><p>你好，我是何为舟。</p>
+<p>在前面的课程中，我们重点讲解了安全的一些基础知识，更多地是从宏观的层面上来谈论安全。但<strong>安全不是一个靠宏观指导就能够落地的东西</strong>。因此，接下来我会结合真实案例中的各种安全问题，来介绍具体的安全防护手段和工具。今天，我们就先从最基础的Web安全开始。</p>
+<p>在Web安全这个模块中，我们所谈论的Web，是指所有基于HTTP或者其他超文本传输协议（RPC等）开发的应用，包括：网页、App、API接口等等。这类应用的共同点是：通过HTTP等文本协议，在客户端和服务端之间进行数据交换。客户端需要将服务端传出的数据展示渲染出来，服务端需要将客户端传入的数据进行对应的处理。而Web安全所涉及的正是这些应用中存在的各类安全问题。</p>
+<p>背景介绍完了，下面我们进入今天的正题。</p>
+<p>基于前面安全基础知识的学习，你现在通过了面试官的考核，成功进入了这家公司。某一天，公司的网页应用中发生了一件事。</p>
+<p>有很多用户发送了同样类型的内容，而且这些内容都是一个带有诱惑性的问题和一个可以点击的链接。这些用户全部反馈说，这不是他们自己发的。前端开发表示，用户内容都是后端产生的，他不负责。后端开发表示，这些内容都是用户自己提交上来的，他也不负责。正当大家议论纷纷的时候，你作为学习过安全专栏的人，敏锐地发现了问题的原因：这是黑客发起了XSS攻击。</p>
+<p>这个事情的原型，其实是2011年微博真实出现的一次安全事件。整个事件的核心问题，其实出在这个可以点击的链接上。在这个事件中，黑客并不需要入侵到微博服务器中，只要用户点击了这个链接，就会“被发送”这样的博文。</p>
+<p>这就是著名的XSS攻击所能够实现的效果。那么，XSS攻击究竟是怎么产生的呢？我们究竟该如何防护呢？今天我就带你来了解这个网页中最经典的XSS攻击。</p>
+<h2 id="xss攻击是如何产生的">XSS攻击是如何产生的？</h2>
+<p>首先，我们来看，XSS攻击是如何产生的。作为最普遍的网页语言，HTML非常灵活，你可以在任意时候对HTML进行修改。但是，这种灵活性也给了黑客可趁之机：通过给定异常的输入，黑客可以在你的浏览器中，插入一段恶意的JavaScript脚本，从而窃取你的隐私信息或者仿冒你进行操作。这就是<strong>XSS攻击</strong>（Cross-Site Scripting，跨站脚本攻击）的原理。</p>
+<p>你现在应该对XSS有了一个大致的了解，除此之外，你还需要了解三种XSS攻击，它们分别是：反射型XSS、基于DOM的XSS以及持久型XSS。下面我们一一来看。</p>
+<h3 id="1-反射型xss">1.反射型XSS</h3>
+<p>假设现在有一个搜索网页，当你输入任意一个关键词，并点击“搜索”按钮之后，这个网页就会给你展示“你搜索的结果内容是：XXX”。</p>
+<p><img alt="" src="/assets/3efcd7b8f35e15e264ccfa0f.jpg"/></p>
+<p>我们以PHP为例，这个网页的服务端实现逻辑如下所示：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;body&gt;
+		&lt;form role="search" action="" method="GET"&gt;
+			&lt;input type="text" name="search" placeholder="请输入要搜索的内容"&gt;
+	        &lt;button type="submit"&gt;搜索&lt;/button&gt;
+	    &lt;/form&gt;
+		&lt;?php
+			if (isset($_GET['search']) &amp;&amp; !empty($_GET['search'])) {
+				$search = $_GET['search'];
+				echo "&lt;h3&gt;你搜索的结果内容是：" . $search . "&lt;/h3&gt;";
+			}
+		?&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<p>我们可以看到，这段代码的逻辑是将搜索框输入的内容，拼接成字符串，然后填充到最终的HTML中。而且这个过程中没有任何的过滤措施，如果黑客想要对这个过程发起攻击，他会输入下面这行代码：</p>
+<pre><code>&lt;/h3&gt;&lt;script&gt;alert('xss');&lt;/script&gt;&lt;h3&gt;
+</code></pre>
+<p>黑客输入这段字符后，网页会弹出一个告警框（我自己测试的时候，发现部分浏览器，如Safari不会弹出告警框，这是因为浏览器自身提供了一定的XSS保护功能）。</p>
+<p><img alt="" src="/assets/25ab255857cede9812df492b.jpg"/></p>
+<p>通过查看网页的源码，可以发现，这中间多了一段JavaScript的脚本：</p>
+<p><img alt="" src="/assets/5497f3efd4d041b27bdaf0a3.jpg"/></p>
+<p>这就是我们所说的反射型XSS攻击的过程。其实它攻击的原理很简单。我们可以总结一下，即通过开头的<code>&lt;/h3&gt;</code>和结尾的<code>&lt;h3&gt;</code>，将原本的<code>&lt;h3&gt;</code>标签进行闭合，然后中间通过<code>&lt;script&gt;</code>标签插入JavaScript代码并执行，就完成了整个反射型XSS的流程。</p>
+<p>你可以注意一下浏览器的地址：<a href="http://localhost/index.php?search=%3C%2Fh3%3E%3Cscript%3Ealert%28%27xss%27%29%3B%3C%2Fscript%3E%3Ch3%3E" target="_blank">http://localhost/index.php?search=&lt;%2Fh3&gt;&lt;script&gt;alert(&amp;lsquo;xss&amp;rsquo;)%3B&amp;lt;%2Fscript&amp;gt;&lt;h3&gt;&lt;/a&gt; 。实际上，任何人只要点击了这个链接，就会执行一段黑客定义的JavaScript脚本。所以，我们经常说，不要点击任何未知的链接。&lt;/p&gt;
+
+&lt;p&gt;反射型XSS的总体流程我总结了一下，你可以看下面这张图。黑客诱导你点击了某个链接，这个链接提供的服务，可能就是上述的搜索功能。网页在解析到链接的参数后，执行正常的搜索逻辑，但是因为漏洞，网页中被填入了黑客定义的脚本。使得用户的浏览器，最终执行的是黑客的脚本。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="assets/2038a101862a4859816eff90e474b141.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;h3 id="2-基于dom的xss"&gt;2.基于DOM的XSS&lt;/h3&gt;
+
+&lt;p&gt;在上面的例子中我们可以看到，反射型XSS产生在前后端一体的网页应用中，服务端逻辑会改变最终的网页代码。但是，目前更流行的其实是前后端分离，这样网页的代码不会受服务端影响。那么，这样是不是就安全了呢？&lt;/p&gt;
+
+&lt;p&gt;显然不是的。尽管服务端无法改变网页代码，但网页本身的JavaScript仍然可以改变。而黑客只要利用了这一点，同样能够在网页中插入自己的脚本。这也就是所谓的基于DOM的XSS漏洞。&lt;/p&gt;
+
+&lt;p&gt;对于上述搜索功能，通过前后端分离，它的源码就变成了下面这样：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html&amp;gt;
+	&amp;lt;body&amp;gt;
+		&amp;lt;form role=&amp;quot;search&amp;quot; action=&amp;quot;&amp;quot; method=&amp;quot;GET&amp;quot;&amp;gt;
+			&amp;lt;input type=&amp;quot;text&amp;quot; name=&amp;quot;search&amp;quot; placeholder=&amp;quot;请输入要搜索的内容&amp;quot;&amp;gt;
+	        &amp;lt;button type=&amp;quot;submit&amp;quot;&amp;gt;搜索&amp;lt;/button&amp;gt;
+	    &amp;lt;/form&amp;gt;
+	    &amp;lt;script&amp;gt;
+	    	var search = location.search.substring(8);
+	    	document.write('你搜索的结果内容是：' + decodeURIComponent(search));
+	    &amp;lt;/script&amp;gt;
+	&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这段代码能够实现和之前的PHP代码相同的逻辑：当你在搜索框点击搜索关键词之后，网页会展示你输入的关键词。只不过，HTML是通过JavaScript脚本修改&lt;a href="https://baike.baidu.com/item/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/1033822?fromtitle=DOM&amp;amp;fromid=50288&amp;amp;fr=aladdin" target="_blank"&gt;DOM&lt;/a&gt;来实现这个功能的。&lt;/p&gt;
+
+&lt;p&gt;那么和上述例子一样，在基于DOM的XSS中，黑客也可以通过插入一段&lt;code&gt;&amp;lt;script&amp;gt;alert('xss');&amp;lt;/script&amp;gt;&lt;/code&gt;来执行指定的JavaScript脚本。基于DOM的XSS总体流程如下图所示。可以看到，这个流程其实和反射型XSS一致，只是不需要经过服务端了而已。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="assets/b174288179624c39a6391171a2d88ce6.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;h3 id="3-持久型xss"&gt;3.持久型XSS&lt;/h3&gt;
+
+&lt;p&gt;你可以回想一下，当你在网页中搜索一个关键词时，实际上与这个关键词相关的所有搜索结果都会被展示出来。一旦这些搜索结果中，包含黑客提供的某个恶意JavaScript脚本，那么只要我们浏览了这个网页，就有可能会执行这些脚本。这就是持久型XSS。因为这些恶意的搜索结果，会长期保存在服务端数据库中，所以它又叫作存储型XSS。在应用中，存储用户的输入并对它们进行展示的地方，都可能出现持久型XSS。比如：搜索结果、评论、博文等等。&lt;/p&gt;
+
+&lt;p&gt;有了前面的铺垫，持久型XSS的产生过程就很好理解了，具体我就不细说了，我还是把总体流程画了一张图，你可以仔细看看。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="assets/198335ab580142469fba17a22a85399a.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;相比前面两种XSS攻击来说，持久型XSS往往具备更强的危害性。因为对于一个反射型或者基于DOM的XSS来说，需要黑客诱导用户点击恶意的URL，才能够成功地在用户浏览器上执行JavaScript脚本。这对黑客在诱导用户操作方面的能力提出了考验：并不是所有的用户都是小白，一些有经验的用户会在点击链接前进行一定的考虑。&lt;/p&gt;
+
+&lt;p&gt;而持久型XSS则不同，它是将恶意的JavaScript脚本写入到了正常的服务端数据库中，因此，只要用户正常的使用业务功能，就会被注入JavaScript脚本。所以说，持久型XSS在传播速度和传播范围上，会远远超出其他类型的XSS。&lt;/p&gt;
+
+&lt;h2 id="通过xss攻击-黑客能做什么"&gt;通过XSS攻击，黑客能做什么？&lt;/h2&gt;
+
+&lt;p&gt;我们知道，这3种XSS攻击，都是因为黑客在用户的浏览器中执行了恶意的JavaScript脚本。那么执行这些JavaScript脚本有什么样的危害呢？我把这些危害总结了一下，可以分为下面几种。&lt;/p&gt;
+
+&lt;h3 id="1-窃取cookie"&gt;1.窃取Cookie&lt;/h3&gt;
+
+&lt;p&gt;从上面的例子中，我们可以看到，黑客可以窃取用户的Cookie。因为黑客注入的JavaScript代码是运行在server.com这个域名下的，因此，黑客可以在JavaScript中通过document.cookie获得Cookie信息。&lt;/p&gt;
+
+&lt;p&gt;另外，需要我们注意的是，受&lt;a href="https://baike.baidu.com/item/%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5/3927875?fr=aladdin" target="_blank"&gt;SOP&lt;/a&gt;（Same Origin Policy，同源策略）保护，我们在server.com中是无法直接向hacker.com发送GET或者POST请求的。这也是为什么，在上面的例子中，我们需要通过window.location来执行跳转操作，间接地将Cookie信息发送出去。除了window.location之外，我们还可以通过加载JavaScript文件、图片等方式，向attacker.com发送带有Cookie的GET请求。&lt;/p&gt;
+
+&lt;h3 id="2-未授权操作"&gt;2.未授权操作&lt;/h3&gt;
+
+&lt;p&gt;除了窃取敏感信息以外，黑客还可以利用JavaScript的特性，直接代替用户在HTML进行各类操作。&lt;/p&gt;
+
+&lt;p&gt;在文章开头，我们提到的微博XSS攻击事件中，黑客就利用JavaScript脚本，让用户发送了一个微博，微博中同时还带有反射型XSS的链接。这样一来，每个点击链接的用户都会通过微博的形式，诱导更多的用户点击链接，一传十、十传百，造成大范围的传播。&lt;/p&gt;
+
+&lt;h3 id="3-按键记录和钓鱼"&gt;3.按键记录和钓鱼&lt;/h3&gt;
+
+&lt;p&gt;窃取Cookie和未授权操作都是我们很容易想到的危害，除此之外，JavaScript还能做什么呢？&lt;/p&gt;
+
+&lt;p&gt;JavaScript的功能十分强大，它还能够记录用户在浏览器中的大部分操作。比如：鼠标的轨迹、键盘输入的信息等。也就是说，你输入的账号名和密码，都可以被JavaScript记录下来，从而被黑客获取到。&lt;/p&gt;
+
+&lt;p&gt;另外，即使某个存在XSS漏洞的页面不具备任何输入框，黑客还可以通过修改DOM，伪造一个登录框，来诱导用户在本不需要登录的页面，去输入自己的用户名和密码。这也是“钓鱼”的一种形式，在这个过程中用户访问的域名是完全正常的，只是页面被篡改了，所以具备更高的迷惑性。&lt;/p&gt;
+
+&lt;h2 id="如何进行xss防护"&gt;如何进行XSS防护？&lt;/h2&gt;
+
+&lt;p&gt;认识到XSS的危害之后，作为开发人员，我们最应该掌握的是，如何避免在开发过程中出现XSS漏洞。接下来我们就来看一看，具体有哪些防护方法。&lt;/p&gt;
+
+&lt;h3 id="1-验证输入or验证输出"&gt;1.验证输入OR验证输出&lt;/h3&gt;
+
+&lt;p&gt;防护的核心原则是：&lt;strong&gt;一切用户输入皆不可信&lt;/strong&gt;。你的第一反应一定是，这很好实现啊，当接收到用户的输入时，我们就进行验证，这不就做到了吗？实际上并不是这么简单的，我们还是通过搜索这个例子来看。在用户点击“搜索”按钮之后，如果我们马上对他输入的内容进行验证，这样就会产生两个问题。&lt;/p&gt;
+
+&lt;p&gt;1.你将无法保存用户的原始输入信息。这样一来，当出现了Bug或者想要对黑客行为进行溯源时，你只能“推断”，而不能准确地获取用户的原始输入。&lt;/p&gt;
+
+&lt;p&gt;2.用户的内容可能会被多种语言获取和使用，提前编码或者处理，将产生未知的问题。比如，在旧版本的PHP中，就存在“&lt;a href="https://www.php.net/manual/en/security.magicquotes.php" target="_blank"&gt;magic quotes&lt;/a&gt;”的漏洞，因为PHP无法处理某些编码的字符而导致崩溃。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;因此，我更推荐在需要输出的时候去进行验证&lt;/strong&gt;，即当需要展示的时候，我们再对内容进行验证，这样我们就能够根据不同的环境去采取不同的保护方案了。&lt;/p&gt;
+
+&lt;p&gt;在HTML中，常见的XSS注入点我已经总结好了，你可以看下面这个表格：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="assets/abb275911a5644d187312a90b1d9f5e5.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;h3 id="2-编码"&gt;2.编码&lt;/h3&gt;
+
+&lt;p&gt;现在，我们已经理解了，&lt;strong&gt;XSS防护的核心原则就是验证&lt;/strong&gt;，那具体该怎么去做验证呢？我认为，我们可以优先采用编码的方式来完成。所谓编码，就是将部分浏览器识别的关键词进行转换（比如&amp;lt;和&amp;gt;），从而避免浏览器产生误解。对于客户端来说，编码意味着，使用JavaScript提供的功能对用户内容进行处理。具体的方法我也总结了一下，你可以看这个表格。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="assets/9ad1227fd8374c6b80360c519c3b5a17.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;对于最后一个注入点，即在JavaScript中进行注入，目前还没有内置的编码方式来对它提供保护。你当然可以通过诸如URL编码等方式进行编码，但这有可能对应用的自身逻辑产生影响。因此，JavaScript中的注入并不适合通过编码来进行保护。&lt;/p&gt;
+
+&lt;h3 id="3-检测和过滤"&gt;3.检测和过滤&lt;/h3&gt;
+
+&lt;p&gt;但是，在很多时候，编码会对网页实际的展现效果产生影响。比如，原本用户可能想展示一个1&amp;gt;0，却被编码展示成了1&amp;amp;gt0。尽管网络环境安全了，却对用户造成了困扰。那么，我们还可以采取哪些方法进行验证呢？接下来我就为你介绍一下检测和过滤。&lt;/p&gt;
+
+&lt;p&gt;首先，我们需要对用户的内容进行检测。在这里，我们可以采用黑名单和白名单的规则。黑名单往往是我们最直接想到的方法：既然黑客要插入&lt;code&gt;&amp;lt;javascript&amp;gt;&lt;/code&gt;标签，那么我们就检测用户内容中是否存在&lt;code&gt;&amp;lt;javascript&amp;gt;&lt;/code&gt;标签就好了。&lt;/p&gt;
+
+&lt;p&gt;但是，黑客的攻击方法是无穷无尽的。你检测了&lt;code&gt;&amp;lt;javascript&amp;gt;&lt;/code&gt;，黑客就可以改成&lt;code&gt;&amp;lt;JavaScript&amp;gt;&lt;/code&gt;（因为HTML标签对大小写不敏感），甚至有些时候还能够编码成&lt;code&gt;&amp;amp;#106;avascript&lt;/code&gt;等等。另外，HTML5的发展速度很快，总是有新的标签被开发出来，这些新标签中也可能包含新的注入点。因此，黑名单的更新和维护过程，是需要我们和黑客进行长期对抗的过程&lt;/p&gt;
+
+&lt;p&gt;所以，在检测中，&lt;strong&gt;我更推荐使用白名单的规则&lt;/strong&gt;。因为白名单的规则比较简单，并且十分有效。比如，在只输入一个分数的地方，规定只有整型变量是合法的。这样一来，你就能够检测出99.99%的攻击行为了。&lt;/p&gt;
+
+&lt;p&gt;说完了检测，那当发现某个用户的内容可能存在XSS攻击脚本时，我们该怎么处理呢？这个时候，处理选项有两个：拒绝或者过滤。毫无疑问，拒绝是最安全的选项。一旦你发现可能的XSS攻击脚本，只要不将这段用户内容展现出来，就能避免可能的攻击行为。&lt;/p&gt;
+
+&lt;p&gt;但是，拒绝会阻碍用户的使用流程，从用户体验的角度上来考虑的话，过滤会更被用户所接受。上面提到的编码就属于一种过滤的方式。除此之外，我们也可以直接对敏感字符进行替换删除等。需要注意的是，在替换的时候，一定不能采取黑名单的形式（比如：将javascript进行删除，那黑客就可以通过JavaScript来绕过），而是&lt;strong&gt;应该采取白名单的形式&lt;/strong&gt;（比如，除了div之外的标签全部删除）。&lt;/p&gt;
+
+&lt;p&gt;同样地，&lt;strong&gt;过滤的流程也必须彻底&lt;/strong&gt;。比如，我看到过有人采用下面这行字符串来过滤javascript标签：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$str=str_replace('&amp;lt;javascript&amp;gt;','',$str);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但黑客只需要将str的值变成&lt;code&gt;&amp;lt;java&amp;lt;javascript&amp;gt;script&amp;gt;&lt;/code&gt;就可以了，因为&lt;code&gt;str_replace('&amp;lt;javascript&amp;gt;','','&amp;lt;java&amp;lt;javascript&amp;gt;script&amp;gt;')&lt;/code&gt;的结果就是&lt;code&gt;&amp;lt;javascript&amp;gt;&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id="4-csp"&gt;4.CSP&lt;/h3&gt;
+
+&lt;p&gt;面对XSS这样一个很普遍的问题，W3C提出了CSP（Content Security Policy，内容安全策略）来提升Web的安全性。所谓CSP，就是在服务端返回的HTTP header里面添加一个Content-Security-Policy选项，然后定义资源的白名单域名。浏览器就会识别这个字段，并限制对非白名单资源的访问。&lt;/p&gt;
+
+&lt;p&gt;配置样例如下所示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Content-Security-Policy:default-src ‘none’; script-src ‘self’; 
+connect-src ‘self’; img-src ‘self’; style-src ‘self’;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那我们为什么要限制外域资源的访问呢？这是因为XSS通常会受到长度的限制，导致黑客无法提交一段完整的JavaScript代码。为了解决这个问题，黑客会采取引用一个外域JavaScript资源的方式来进行注入。除此之外，限制了外域资源的访问，也就限制了黑客通过资源请求的方式，绕过SOP发送GET请求。目前，CSP还是受到了大部分浏览器支持的，只要用户使用的是最新的浏览器，基本都能够得到很好的保护。&lt;/p&gt;
+
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;好了，我们讲了XSS的攻击类型、会产生的影响，以及如何对它进行防护。下面我来带你总结回顾一下，你要掌握的重点内容。&lt;/p&gt;
+
+&lt;p&gt;简单来说，XSS就是利用Web漏洞，在用户的浏览器中执行黑客定义的JavaScript脚本，这样一种攻击方式。根据攻击方式的不同，可以分为：反射型XSS、基于DOM的XSS和持久型XSS。通过在用户的浏览器中注入脚本，黑客可以通过各种方式，采集到用户的敏感信息，包括：Cookie、按键记录、密码等。&lt;/p&gt;
+
+&lt;p&gt;预防XSS主要通过对用户内容的验证来完成。首先，我推荐在需要展示用户内容的时候去进行验证，而不是当用户输入的时候就去验证。在验证过程中，我们优先采用编码的方式来完成。如果编码影响到了业务的正常功能，我们就可以采用白名单的检测和过滤方式来进行验证。除此之外，我们可以根据业务需要，配置合适的CSP规则，这也能在很大程度上降低XSS产生的影响。&lt;/p&gt;
+
+&lt;p&gt;另外，在这里，我把本节课的重点内容梳理了一个脑图。你可以根据它来查漏补缺，加深印象。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="assets/29a7e99b912b470baaa70a7c58393cad.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;h2 id="思考题"&gt;思考题&lt;/h2&gt;
+
+&lt;p&gt;好了，通过今天的学习，相信你已经了解了什么是XSS攻击。你可以试着分析一下，文章开头提到的事件中，黑客是利用哪种类型的XSS发起的攻击呢？我们应该怎么进行防御呢？&lt;/p&gt;
+
+&lt;p&gt;另外，在事件中我也描述了开发“甩锅”的场景：前端也好、后端也好，开发人员都不认为是自己的问题。那么，你认为出现这种安全事件，应该由谁来“背锅”呢？是开发、运维还是安全负责人呢？&lt;/p&gt;
+
+&lt;p&gt;欢迎留言和我分享你的思考和疑惑，也欢迎你把文章分享给你的朋友。我们下一讲再见！&lt;/p&gt;
+&lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;div id="prePage" style="float: left"&gt;
+
+                            &lt;/div&gt;
+                            &lt;div id="nextPage" style="float: right"&gt;
+
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="copyright"&gt;
+                &lt;hr /&gt;
+                &lt;p&gt;© 2019 - 2023 &lt;a href="mailto:lll941107@gmail.com" target="_blank"&gt;Liangliang Lee&lt;/a&gt;.
+                    Powered by &lt;a href="https://github.com/gin-gonic/gin" target="_blank"&gt;gin&lt;/a&gt; and &lt;a
+                        href="https://github.com/kaiiiz/hexo-theme-book" target="_blank"&gt;hexo-theme-book&lt;/a&gt;.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;a class="off-canvas-overlay" onclick="hide_canvas()"&gt;&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"&gt;&lt;/script&gt;
+&lt;script src="/static/index.js"&gt;&lt;/script&gt;
+&lt;script&gt;(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'8f144376ce8d9508',t:'MTczNDA3NTE4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/static/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&amp;&amp;(document.onreadystatechange=e,c())}}}})();&lt;/script&gt;</a></p></div></div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

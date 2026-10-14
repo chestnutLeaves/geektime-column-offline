@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>29  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（下） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/index.html">ShardingSphere 核心原理精讲-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">36 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>ShardingSphere 核心原理精讲-完</strong><ul><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/00%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%AD%A6%E4%B9%A0%E4%B8%80%E6%AC%BE%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%EF%BC%9F.html">00 如何正确学习一款分库分表开源框架？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/01%20%20%E4%BB%8E%E7%90%86%E8%AE%BA%E5%88%B0%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%9C%9F%E6%AD%A3%E8%90%BD%E5%9C%B0%EF%BC%9F.html">01  从理论到实践：如何让分库分表真正落地？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/02%20%20%E9%A1%B6%E7%BA%A7%E9%A1%B9%E7%9B%AE%EF%BC%9AShardingSphere%20%E6%98%AF%E4%B8%80%E6%AC%BE%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%20Apache%20%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%EF%BC%9F.html">02  顶级项目：ShardingSphere 是一款什么样的 Apache 开源软件？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/03%20%20%E8%A7%84%E8%8C%83%E5%85%BC%E5%AE%B9%EF%BC%9AJDBC%20%E8%A7%84%E8%8C%83%E4%B8%8E%20ShardingSphere%20%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">03  规范兼容：JDBC 规范与 ShardingSphere 是什么关系？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/04%20%20%E5%BA%94%E7%94%A8%E9%9B%86%E6%88%90%EF%BC%9A%E5%9C%A8%E4%B8%9A%E5%8A%A1%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%BD%BF%E7%94%A8%20ShardingSphere%20%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">04  应用集成：在业务系统中使用 ShardingSphere 的方式有哪些？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/05%20%20%E9%85%8D%E7%BD%AE%E9%A9%B1%E5%8A%A8%EF%BC%9AShardingSphere%20%E4%B8%AD%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F.html">05  配置驱动：ShardingSphere 中的配置体系是如何设计的？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/06%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%BA%93%E3%80%81%E5%88%86%E8%A1%A8%E3%80%81%E5%88%86%E5%BA%93%2B%E5%88%86%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  数据分片：如何实现分库、分表、分库+分表以及强制路由？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/07%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%BA%93%E3%80%81%E5%88%86%E8%A1%A8%E3%80%81%E5%88%86%E5%BA%93%2B%E5%88%86%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  数据分片：如何实现分库、分表、分库+分表以及强制路由？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/08%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%2B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%EF%BC%9F.html">08  读写分离：如何集成分库分表+数据库主从架构？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/09%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E4%B8%8E%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">09  分布式事务：如何使用强一致性事务与柔性事务？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/10%20%20%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AE%89%E5%85%A8%E8%AE%BF%E9%97%AE%EF%BC%9F.html">10  数据脱敏：如何确保敏感数据的安全访问？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/11%20%20%E7%BC%96%E6%8E%92%E6%B2%BB%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%EF%BC%9F.html">11  编排治理：如何实现分布式环境下的动态配置管理？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/12%20%20%E4%BB%8E%E5%BA%94%E7%94%A8%E5%88%B0%E5%8E%9F%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E9%98%85%E8%AF%BB%20ShardingSphere%20%E6%BA%90%E7%A0%81%EF%BC%9F.html">12  从应用到原理：如何高效阅读 ShardingSphere 源码？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/13%20%20%E5%BE%AE%E5%86%85%E6%A0%B8%E6%9E%B6%E6%9E%84%EF%BC%9AShardingSphere%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%89%A9%E5%B1%95%E6%80%A7%EF%BC%9F.html">13  微内核架构：ShardingSphere 如何实现系统的扩展性？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/14%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%EF%BC%9AShardingSphere%20%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%9F.html">14  分布式主键：ShardingSphere 中有哪些分布式主键实现方式？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/15%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">15  解析引擎：SQL 解析流程应该包括哪些核心阶段？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/16%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">16  解析引擎：SQL 解析流程应该包括哪些核心阶段？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/17%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E6%A0%B8%E5%BF%83%E7%B1%BB%20ShardingRouter%20%E7%9A%84%E8%BF%90%E4%BD%9C%E6%9C%BA%E5%88%B6%EF%BC%9F.html">17  路由引擎：如何理解分片路由核心类 ShardingRouter 的运作机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/18%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E7%9A%84%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E5%92%8C%E5%B9%BF%E6%92%AD%E8%B7%AF%E7%94%B1%EF%BC%9F.html">18  路由引擎：如何实现数据访问的分片路由和广播路由？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/19%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E8%B7%AF%E7%94%B1%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%9B%86%E6%88%90%E5%A4%9A%E7%A7%8D%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%E5%92%8C%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%EF%BC%9F.html">19  路由引擎：如何在路由过程中集成多种路由策略和路由算法？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/20%20%20%E6%94%B9%E5%86%99%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%20SQL%20%E6%94%B9%E5%86%99%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%EF%BC%9F.html">20  改写引擎：如何理解装饰器模式下的 SQL 改写实现机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/21%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%88%86%E7%89%87%E7%8E%AF%E5%A2%83%E4%B8%8B%20SQL%20%E6%89%A7%E8%A1%8C%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%8A%BD%E8%B1%A1%EF%BC%9F.html">21  执行引擎：分片环境下 SQL 执行的整体流程应该如何进行抽象？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/22%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%20ShardingSphere%20%E4%B8%AD%E7%9A%84%20Executor%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">22  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/23%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%20ShardingSphere%20%E4%B8%AD%E7%9A%84%20Executor%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">23  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/24%20%20%E5%BD%92%E5%B9%B6%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BD%92%E5%B9%B6%E7%9A%84%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E7%AE%80%E5%8D%95%E5%BD%92%E5%B9%B6%E7%AD%96%E7%95%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%EF%BC%9F.html">24  归并引擎：如何理解数据归并的类型以及简单归并策略的实现过程？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/25%20%20%E5%BD%92%E5%B9%B6%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%B5%81%E5%BC%8F%E5%BD%92%E5%B9%B6%E5%92%8C%E5%86%85%E5%AD%98%E5%BD%92%E5%B9%B6%E5%9C%A8%E5%A4%8D%E6%9D%82%E5%BD%92%E5%B9%B6%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%9F.html">25  归并引擎：如何理解流式归并和内存归并在复杂归并场景下的应用方式？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/26%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E6%99%AE%E9%80%9A%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%92%8C%E5%88%86%E7%89%87%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%88%86%E5%88%AB%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">26  读写分离：普通主从架构和分片主从架构分别是如何实现的？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/27%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%20ShardingSphere%20%E4%B8%AD%E5%AF%B9%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%8A%BD%E8%B1%A1%E8%BF%87%E7%A8%8B%EF%BC%9F.html">27  分布式事务：如何理解 ShardingSphere 中对分布式事务的抽象过程？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/28%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">28  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（上）</a></li><li><a class="active" aria-current="page" href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/29%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">29  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/30%20%20%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%94%B9%E5%86%99%E5%BC%95%E6%93%8E%E5%AE%9E%E7%8E%B0%E4%BD%8E%E4%BE%B5%E5%85%A5%E6%80%A7%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%E6%96%B9%E6%A1%88%EF%BC%9F.html">30  数据脱敏：如何基于改写引擎实现低侵入性数据脱敏方案？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/31%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E7%9A%84%E5%8A%A8%E6%80%81%E5%8C%96%E7%AE%A1%E7%90%86%EF%BC%9F.html">31 配置中心：如何基于配置中心实现配置信息的动态化管理？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/32%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E7%86%94%E6%96%AD%E6%9C%BA%E5%88%B6%EF%BC%9F.html">32 注册中心：如何基于注册中心实现数据库访问熔断机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/33%20%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20Hook%20%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%20OpenTracing%20%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9F.html">33 链路跟踪：如何基于 Hook 机制以及 OpenTracing 协议实现数据访问链路跟踪？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/34%20%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%8C%E6%88%90%20ShardingSphere%20%E5%86%85%E6%A0%B8%E4%B8%8E%20Spring%2BSpringBoot%20%E7%9A%84%E6%97%A0%E7%BC%9D%E6%95%B4%E5%90%88%EF%BC%9F.html">34 系统集成：如何完成 ShardingSphere 内核与 Spring+SpringBoot 的无缝整合？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/35%20%E7%BB%93%E8%AF%AD%EF%BC%9AShardingSphere%20%E6%80%BB%E7%BB%93%E5%8F%8A%E5%B1%95%E6%9C%9B.html">35 结语：ShardingSphere 总结及展望</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/29%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="29  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（下）" id="title">29  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（下）</h1>
+<div><p>在上一课时中，我们针对 ShardingSphere 中支持强一致性事务的 XAShardingTransactionManager 的部分内容进行了详细的展开，今天我们继续讲解该类的剩余内容，同时也会介绍支持柔性事务的 SeataATShardingTransactionManager。</p>
+<h3 id="xashardingtransactionmanager">XAShardingTransactionManager</h3>
+<p>关于 XAShardingTransactionManager，上一讲中我们介绍了 XADataSource、XAConnection 和 XATransactionDataSource 等核心类。</p>
+<p>接下来，我们在上一讲的基础上给出 XATransactionManager 和 ShardingConnection 类的实现过程。</p>
+<h4 id="1-xatransactionmanager">1.XATransactionManager</h4>
+<p>让我们先回到 XAShardingTransactionManager。我们已经在前面介绍了 XAShardingTransactionManager 中的变量，接下来看一下它所实现的方法，首先是如下所示的 init 方法：</p>
+<pre><code>public void init(final DatabaseType databaseType, final Collection&lt;ResourceDataSource&gt; resourceDataSources) {
+        for (ResourceDataSource each : resourceDataSources) {
+           //创建XATransactionDataSource并进行缓存
+            cachedDataSources.put(each.getOriginalName(), new XATransactionDataSource(databaseType, each.getUniqueResourceName(), each.getDataSource(), xaTransactionManager));
+        }
+       //初始化XATransactionManager
+        xaTransactionManager.init();
+}
+</code></pre>
+<p>上述方法根据传入的 ResourceDataSource 构建了 XATransactionDataSource 并放入缓存中，同时对通过 SPI 机制创建的 XATransactionManager 也执行了它的 init 方法进行初始化。</p>
+<p>XAShardingTransactionManager 的 getTransactionType、isInTransaction 和 getConnection 方法都比较简单，如下所示：</p>
+<pre><code>@Override
+public TransactionType getTransactionType() {
+        return TransactionType.XA;
+}
+
+@Override
+public boolean isInTransaction() {
+        return Status.STATUS_NO_TRANSACTION != xaTransactionManager.getTransactionManager().getStatus();
+}
+	 
+@Override
+public Connection getConnection(final String dataSourceName) throws SQLException {
+        try {
+            return cachedDataSources.get(dataSourceName).getConnection();
+        } catch (final SystemException | RollbackException ex) {
+            throw new SQLException(ex);
+        }
+}
+</code></pre>
+<p>而与事务操作相关的 begin、commit 和 rollback 方法的实现同样比较简单，都是直接委托保存在 XATransactionManager 中的 TransactionManager 进行完成，如下所示：</p>
+<pre><code>@Override
+public void begin() {
+        xaTransactionManager.getTransactionManager().begin();
+}
+
+@Override
+public void commit() {
+        xaTransactionManager.getTransactionManager().commit();
+}
+
+@Override
+public void rollback() {
+        xaTransactionManager.getTransactionManager().rollback();
+}
+</code></pre>
+<p>至此，sharding-transaction-xa-core 工程中的所有内容都已经介绍完毕。让我们转到 sharding-transaction-xa-atomikos-manager 工程，看看 AtomikosTransactionManager 的实现，这也是 ShardingSphere 中关于 TransactionManager 的默认实现。</p>
+<p>而在此之前，让我们先来看一下代表资源的 AtomikosXARecoverableResource 的实现，如下所示：</p>
+<pre><code>public final class AtomikosXARecoverableResource extends JdbcTransactionalResource {
+
+    private final String resourceName;
+
+    AtomikosXARecoverableResource(final String serverName, final XADataSource xaDataSource) {
+        super(serverName, xaDataSource);
+        resourceName = serverName;
+    }
+
+    @Override
+    public boolean usesXAResource(final XAResource xaResource) {
+        return resourceName.equals(((SingleXAResource) xaResource).getResourceName());
+    }
+}
+</code></pre>
+<p>可以看到，这里的 usesXAResource 方法实际上就是通过基于对 SingleXAResource 的 ResourceName 进行比对来确定是否在使用资源，这也是为什么要设计包装了 XAResource 的 SingleXAResource 类的原因。</p>
+<p>AtomikosTransactionManager 中使用了 AtomikosXARecoverableResource，其实现过程如下所示：</p>
+<pre><code>public final class AtomikosTransactionManager implements XATransactionManager {
+
+    private final UserTransactionManager transactionManager = new UserTransactionManager();
+
+    private final UserTransactionService userTransactionService = new UserTransactionServiceImp();
+
+    @Override
+    public void init() {
+        userTransactionService.init();
+    }
+
+    @Override
+    public void registerRecoveryResource(final String dataSourceName, final XADataSource xaDataSource) {
+        userTransactionService.registerResource(new AtomikosXARecoverableResource(dataSourceName, xaDataSource));
+    }
+
+    @Override
+    public void removeRecoveryResource(final String dataSourceName, final XADataSource xaDataSource) {
+        userTransactionService.removeResource(new AtomikosXARecoverableResource(dataSourceName, xaDataSource));
+    }
+
+    @Override
+    @SneakyThrows
+    public void enlistResource(final SingleXAResource xaResource) {
+        transactionManager.getTransaction().enlistResource(xaResource);
+    }
+
+    @Override
+    public TransactionManager getTransactionManager() {
+        return transactionManager;
+    }
+
+    @Override
+    public void close() {
+        userTransactionService.shutdown(true);
+    }
+}
+</code></pre>
+<p>上述方法本质上都是对 Atomikos 的 UserTransactionManager 和 UserTransactionService 的简单调用，注意到 Atomikos 的 UserTransactionManager 实现了 TransactionManager 接口，封装了所有 TransactionManager 需要完成的工作。</p>
+<p>看完 sharding-transaction-xa-atomikos-manager 工程之后，我们来到另一个 sharding-transaction-xa-bitronix-manager 工程，该工程提供了基于 bitronix 的 XATransactionManager 实现方案，即 BitronixXATransactionManager 类：</p>
+<pre><code>public final class BitronixXATransactionManager implements XATransactionManager {
+
+    private final BitronixTransactionManager bitronixTransactionManager = TransactionManagerServices.getTransactionManager();
+
+    @Override
+    public void init() {
+    }
+
+    @SneakyThrows
+    @Override
+    public void registerRecoveryResource(final String dataSourceName, final XADataSource xaDataSource) {
+        ResourceRegistrar.register(new BitronixRecoveryResource(dataSourceName, xaDataSource));
+    }
+
+    @SneakyThrows
+    @Override
+    public void removeRecoveryResource(final String dataSourceName, final XADataSource xaDataSource) {
+        ResourceRegistrar.unregister(new BitronixRecoveryResource(dataSourceName, xaDataSource));
+    }
+
+    @SneakyThrows
+    @Override
+    public void enlistResource(final SingleXAResource singleXAResource) {
+        bitronixTransactionManager.getTransaction().enlistResource(singleXAResource);
+    }
+
+    @Override
+    public TransactionManager getTransactionManager() {
+        return bitronixTransactionManager;
+    }
+
+    @Override
+    public void close() {
+        bitronixTransactionManager.shutdown();
+    }
+}
+</code></pre>
+<p>对上述代码的理解也依赖与对 bitronix 框架的熟悉程度，整个封装过程简单明了。我们无意对 bitronix 框架做过多展开，而是更多关注于 ShardingSphere 中对 XATransactionManager 的抽象过程。</p>
+<p>作为总结，我们在上一课时的基础上，进一步梳理了 XA 两阶段提交相关的核心类之间的关系，如下图所示：</p>
+<p><img alt="image.png" src="/assets/4a322073f5fccd6fe3eb872c.png"/></p>
+<h4 id="2-shardingconnection">2.ShardingConnection</h4>
+<p>上图展示了整个流程的源头是在 ShardingConnection 类。我们在 ShardingConnection 的构造函数中发现了创建 ShardingTransactionManager 的过程，如下所示：</p>
+<pre><code>shardingTransactionManager = runtimeContext.getShardingTransactionManagerEngine().getTransactionManager(transactionType);
+</code></pre>
+<p>在 ShardingConnection 的多处代码中都用到了上面所创建的 shardingTransactionManager 对象。例如，用于获取连接的 createConnection 方法：</p>
+<pre><code>@Override
+protected Connection createConnection(final String dataSourceName, final DataSource dataSource) throws SQLException {
+        return isInShardingTransaction() ? shardingTransactionManager.getConnection(dataSourceName) : dataSource.getConnection();
+}
+</code></pre>
+<p>用于判断是否是在同一个事务中的 isInShardingTransaction 方法：</p>
+<pre><code>private boolean isInShardingTransaction() {
+        return null != shardingTransactionManager &amp;&amp; shardingTransactionManager.isInTransaction();
+}
+</code></pre>
+<p>以及如下所示的 setAutoCommit 方法完成了对 autoCommit 的处理：</p>
+<pre><code>@Override
+public void setAutoCommit(final boolean autoCommit) throws SQLException {
+        if (TransactionType.LOCAL == transactionType) {
+            super.setAutoCommit(autoCommit);
+            return;
+        }
+        if (autoCommit &amp;&amp; !shardingTransactionManager.isInTransaction() || !autoCommit &amp;&amp; shardingTransactionManager.isInTransaction()) {
+            return;
+        }
+        if (autoCommit &amp;&amp; shardingTransactionManager.isInTransaction()) {
+            shardingTransactionManager.commit();
+            return;
+        }
+        if (!autoCommit &amp;&amp; !shardingTransactionManager.isInTransaction()) {
+            closeCachedConnections();
+            shardingTransactionManager.begin();
+        }
+}
+</code></pre>
+<p>在上述方法中，可以看到当事务类型为本地事务时，直接调用 ShardingConnection 的父类 AbstractConnectionAdapter 中的 setAutoCommit 方法完成本地事务的自动提交处理。</p>
+<p>而当 autoCommit 为 true 且运行在事务中时，会调用 shardingTransactionManager.commit() 方法完成提交；而当 autoCommit 为 false 且当前不在事务中时，会调用 shardingTransactionManager.begin() 方法启动事务。</p>
+<p>最后的 commit 和 rollback 的处理方式与 setAutoCommit 类似，都是根据事务类型来决定是否要进行分布式提交和回滚，如下所示：</p>
+<pre><code>@Override
+public void commit() throws SQLException {
+        if (TransactionType.LOCAL == transactionType) {
+            super.commit();
+        } else {
+            shardingTransactionManager.commit();
+        }
+}
+
+@Override
+public void rollback() throws SQLException {
+        if (TransactionType.LOCAL == transactionType) {
+            super.rollback();
+        } else {
+            shardingTransactionManager.rollback();
+        }
+}
+</code></pre>
+<p>我们在上一课时中提到，ShardingSphere 在提供了两阶段提交的 XA 协议实现方案的同时，也实现了柔性事务。</p>
+<p>在介绍完 XAShardingTransactionManager 之后，我们继续来看基于 Seata 框架的柔性事务 TransactionManager 实现类 SeataATShardingTransactionManager。</p>
+<h3 id="seataatshardingtransactionmanager">SeataATShardingTransactionManager</h3>
+<p>因为 SeataATShardingTransactionManager 完全采用阿里巴巴的 Seata 框架来提供分布式事务特性，而不是遵循类似 XA 这样的开发规范，所以在代码实现上比 XAShardingTransactionManager 的类层结构要简单很多，把复杂性都屏蔽在了框架的内部。</p>
+<p>要想集成 Seata，我们首先需要初始化 TMClient 和 RMClient 这两个客户端对象，在 Seata 内部，这两个客户端之间会基于 RPC 的方式进行通信。</p>
+<p>所以，ShardingSphere 在 XAShardingTransactionManager 中的 init 方法中实现了一个 initSeataRPCClient 方法来初始化这两个客户端对象，如下所示：</p>
+<pre><code>//根据 seata.conf 配置文件创建配置对象
+private final FileConfiguration configuration = new FileConfiguration("seata.conf"); 
+private void initSeataRPCClient() {
+        String applicationId = configuration.getConfig("client.application.id");
+        Preconditions.checkNotNull(applicationId, "please config application id within seata.conf file");
+        String transactionServiceGroup = configuration.getConfig("client.transaction.service.group", "default");
+        TMClient.init(applicationId, transactionServiceGroup);
+        RMClient.init(applicationId, transactionServiceGroup);
+}
+</code></pre>
+<p>回想我们在“09 | 分布式事务：如何使用强一致事务与柔性事务？”中关于 Seata 使用方式的介绍，不难理解这里通过 seata.conf 配置文件中所配置的 application.id 和 transaction.service.group 这两个配置项来执行初始化操作。</p>
+<p>同时，对于 Seata 而言，它也提供了一套构建在 JDBC 规范之上的实现策略，这点和“03 | 规范兼容：JDBC 规范与 ShardingSphere 是什么关系？”中介绍的 ShardingSphere 与 JDBC 规范之间的兼容性类似。</p>
+<p>而在命名上，Seata 更为直接明了，使用 DataSourceProxy 和 ConnectionProxy 这种代理对象。以 DataSourceProxy 为例，我们可以梳理它的类层结构如下：</p>
+<p><img alt="image" src="/assets/b5549217421f7c6268cec004.png"/></p>
+<p>可以看到 DataSourceProxy 实现了自己定义的 Resource 接口，然后继承了抽象类 AbstractDataSourceProxy，而后者则实现了 JDBC 中的 DataSource 接口。</p>
+<p>所以，在我们初始化 Seata 框架时，同样需要根据输入的 DataSource 对象来构建 DataSourceProxy，并通过 DataSourceProxy 获取 ConnectionProxy。SeataATShardingTransactionManager 类中的相关代码如下所示：</p>
+<pre><code>@Override
+public void init(final DatabaseType databaseType, final Collection&lt;ResourceDataSource&gt; resourceDataSources) {
+     //初始化 Seata 客户端
+     initSeataRPCClient();
+     //创建 DataSourceProxy 并放入到 Map 中
+     for (ResourceDataSource each : resourceDataSources) {
+            dataSourceMap.put(each.getOriginalName(), new DataSourceProxy(each.getDataSource()));
+     }
+}
+
+@Override
+public Connection getConnection(final String dataSourceName) throws SQLException {
+         //根据 DataSourceProxy 获取 ConnectionProxy
+     return dataSourceMap.get(dataSourceName).getConnection();
+}
+</code></pre>
+<p>介绍完初始化工作之后，我们来看 SeataATShardingTransactionManager 中提供了事务开启和提交相关的入口。在 Seata 中，GlobalTransaction 是一个核心接口，封装了面向用户操作层的分布式事务访问入口，该接口的定义如下所示，可以从方法命名上直接看出对应的操作含义：</p>
+<pre><code>public interface GlobalTransaction {
+    void begin() throws TransactionException;
+    void begin(int timeout) throws TransactionException;
+    void begin(int timeout, String name) throws TransactionException;
+    void commit() throws TransactionException;
+    void rollback() throws TransactionException;
+    GlobalStatus getStatus() throws TransactionException;
+    String getXid();
+}
+</code></pre>
+<p>ShardingSphere 作为 GlobalTransaction 的用户层，同样基于 GlobalTransaction 接口来完成分布式事务操作。但 ShardingSphere 并没有直接使用这一层，而是设计了一个 SeataTransactionHolder 类，保存着线程安全的 GlobalTransaction 对象。</p>
+<p>SeataTransactionHolder 类位于 sharding-transaction-base-seata-at 工程中，定义如下：</p>
+<pre><code>final class SeataTransactionHolder {
+
+    private static final ThreadLocal&lt;GlobalTransaction&gt; CONTEXT = new ThreadLocal&lt;&gt;();
+
+    static void set(final GlobalTransaction transaction) {
+        CONTEXT.set(transaction);
+    } 
+    static GlobalTransaction get() {
+        return CONTEXT.get();
+    }
+
+    static void clear() {
+        CONTEXT.remove();
+    }
+}
+</code></pre>
+<p>可以看到这里使用了 ThreadLocal 工具类来确保对 GlobalTransaction 访问的线程安全性。</p>
+<p>接下来的问题是，如何判断当前操作是否处于一个全局事务中呢？</p>
+<p>在 Seata 中，存在一个上下文对象 RootContex，该类就是用来保存参与者和发起者之间传播的 Xid。当事务发起者开启全局事务后，会将 Xid 填充到 RootContext 里；然后 Xid 将沿着服务调用链一直传播，进而填充到每个事务参与者进程的 RootContext 里；事务参与者发现 RootContext 中存在 Xid 时，就可以知道自己处于全局事务中。</p>
+<p>基于这层原理，我们只需要采用如下所示的判断方法就能得出是否处于全局事务中的结论：</p>
+<pre><code>@Override
+public boolean isInTransaction() {
+        return null != RootContext.getXID();
+}
+</code></pre>
+<p>同时，Seata 也提供了一个针对全局事务的上下文类 GlobalTransactionContext，通过这个上下文类，我们可以使用 getCurrent 方法来获取一个 GlobalTransaction对象，或者通过 getCurrentOrCreate 方法在无法获取 GlobalTransaction 对象时新建一个。</p>
+<p>讲到这里，我们就不难理解 SeataATShardingTransactionManager 中 begin 方法的实现过程了，如下所示：</p>
+<pre><code>@Override
+@SneakyThrows
+public void begin() {
+        SeataTransactionHolder.set(GlobalTransactionContext.getCurrentOrCreate());
+        SeataTransactionHolder.get().begin();
+        SeataTransactionBroadcaster.collectGlobalTxId();
+}
+</code></pre>
+<p>这里通过 GlobalTransactionContext.getCurrentOrCreate() 方法创建了一个 GlobalTransaction，然后将其保存到了 SeataTransactionHolder 中。接着从 SeataTransactionHolder 中获取一个 GlobalTransaction，并调用 begin 方法启动事务。</p>
+<p>注意到这里还有一个 SeataTransactionBroadcaster 类，该类就是用来保存 Seata 全局 Xid 的一个容器类。我们会在事务启动时收集全局 Xid 并进行保存，而在事务提交或回滚时清空这些 Xid。</p>
+<p>所以，如下所示的 commit、rollback 和 close 方法的实现过程就都变得容易理解了：</p>
+<pre><code>@Override
+public void commit() {
+        try {
+            SeataTransactionHolder.get().commit();
+        } finally {
+            SeataTransactionBroadcaster.clear();
+            SeataTransactionHolder.clear();
+        }
+}
+
+@Override
+public void rollback() {
+        try {
+            SeataTransactionHolder.get().rollback();
+        } finally {
+            SeataTransactionBroadcaster.clear();
+            SeataTransactionHolder.clear();
+        }
+}
+
+@Override
+public void close() {
+        dataSourceMap.clear();
+        SeataTransactionHolder.clear();
+        TmRpcClient.getInstance().destroy();
+        RmRpcClient.getInstance().destroy();
+}
+</code></pre>
+<p>sharding-transaction-base-seata-at 工程中的代码实际上就只有这些内容，这些内容也构成了在 ShardingSphere中 集成 Seata 框架的实现过程。</p>
+<h3 id="从源码解析到日常开发">从源码解析到日常开发</h3>
+<p>今天的内容给出了在应用程序中如何集成 Seata 分布式事务框架的详细过程，ShardingSphere 为我们提供了一种模版实现。在日常开发过程中，如果我们想要在业务代码中集成 Seata，就可以参考 SeataTransactionHolder、SeataATShardingTransactionManager 等核心类中的代码，而不需要做太多的修改。</p>
+<h3 id="小结与预告">小结与预告</h3>
+<p>本课时是 ShardingSphere 分布式事务的最后一讲，我们介绍完了 XAShardingTransactionManager 的剩余部分内容，以及 SeataATShardingTransactionManager 的完整实现。</p>
+<p>回顾上一课时内容，我们发现理解 XAShardingTransactionManager 的难点在于，从 ShardingConnection 到底层 JDBC 规范的整个集成和兼容过程。而对于 XAShardingTransactionManager 而言，我们需要对 Seata 框架本身有一定的了解，才能更好地理解今天的内容。</p>
+<p>这里给你留一道思考题：如果让你实现对 Seata 框架的集成，你需要做哪些核心步骤？欢迎你在留言区与大家讨论，我将逐一点评解答。</p>
+<p>介绍完分布式事务之后，我们将进入“ShardingSphere 中编排治理方面的源码解析”模块，从下一课时开始，我将要介绍数据脱敏模块的实现原理。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

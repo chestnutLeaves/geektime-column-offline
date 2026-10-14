@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16  解析引擎：SQL 解析流程应该包括哪些核心阶段？（下） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/index.html">ShardingSphere 核心原理精讲-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">36 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>ShardingSphere 核心原理精讲-完</strong><ul><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/00%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%AD%A6%E4%B9%A0%E4%B8%80%E6%AC%BE%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%EF%BC%9F.html">00 如何正确学习一款分库分表开源框架？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/01%20%20%E4%BB%8E%E7%90%86%E8%AE%BA%E5%88%B0%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%9C%9F%E6%AD%A3%E8%90%BD%E5%9C%B0%EF%BC%9F.html">01  从理论到实践：如何让分库分表真正落地？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/02%20%20%E9%A1%B6%E7%BA%A7%E9%A1%B9%E7%9B%AE%EF%BC%9AShardingSphere%20%E6%98%AF%E4%B8%80%E6%AC%BE%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%20Apache%20%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%EF%BC%9F.html">02  顶级项目：ShardingSphere 是一款什么样的 Apache 开源软件？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/03%20%20%E8%A7%84%E8%8C%83%E5%85%BC%E5%AE%B9%EF%BC%9AJDBC%20%E8%A7%84%E8%8C%83%E4%B8%8E%20ShardingSphere%20%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">03  规范兼容：JDBC 规范与 ShardingSphere 是什么关系？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/04%20%20%E5%BA%94%E7%94%A8%E9%9B%86%E6%88%90%EF%BC%9A%E5%9C%A8%E4%B8%9A%E5%8A%A1%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%BD%BF%E7%94%A8%20ShardingSphere%20%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">04  应用集成：在业务系统中使用 ShardingSphere 的方式有哪些？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/05%20%20%E9%85%8D%E7%BD%AE%E9%A9%B1%E5%8A%A8%EF%BC%9AShardingSphere%20%E4%B8%AD%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F.html">05  配置驱动：ShardingSphere 中的配置体系是如何设计的？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/06%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%BA%93%E3%80%81%E5%88%86%E8%A1%A8%E3%80%81%E5%88%86%E5%BA%93%2B%E5%88%86%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  数据分片：如何实现分库、分表、分库+分表以及强制路由？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/07%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%BA%93%E3%80%81%E5%88%86%E8%A1%A8%E3%80%81%E5%88%86%E5%BA%93%2B%E5%88%86%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  数据分片：如何实现分库、分表、分库+分表以及强制路由？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/08%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%2B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%EF%BC%9F.html">08  读写分离：如何集成分库分表+数据库主从架构？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/09%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E4%B8%8E%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">09  分布式事务：如何使用强一致性事务与柔性事务？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/10%20%20%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AE%89%E5%85%A8%E8%AE%BF%E9%97%AE%EF%BC%9F.html">10  数据脱敏：如何确保敏感数据的安全访问？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/11%20%20%E7%BC%96%E6%8E%92%E6%B2%BB%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%EF%BC%9F.html">11  编排治理：如何实现分布式环境下的动态配置管理？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/12%20%20%E4%BB%8E%E5%BA%94%E7%94%A8%E5%88%B0%E5%8E%9F%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E9%98%85%E8%AF%BB%20ShardingSphere%20%E6%BA%90%E7%A0%81%EF%BC%9F.html">12  从应用到原理：如何高效阅读 ShardingSphere 源码？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/13%20%20%E5%BE%AE%E5%86%85%E6%A0%B8%E6%9E%B6%E6%9E%84%EF%BC%9AShardingSphere%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%89%A9%E5%B1%95%E6%80%A7%EF%BC%9F.html">13  微内核架构：ShardingSphere 如何实现系统的扩展性？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/14%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%EF%BC%9AShardingSphere%20%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%9F.html">14  分布式主键：ShardingSphere 中有哪些分布式主键实现方式？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/15%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">15  解析引擎：SQL 解析流程应该包括哪些核心阶段？（上）</a></li><li><a class="active" aria-current="page" href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/16%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">16  解析引擎：SQL 解析流程应该包括哪些核心阶段？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/17%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E6%A0%B8%E5%BF%83%E7%B1%BB%20ShardingRouter%20%E7%9A%84%E8%BF%90%E4%BD%9C%E6%9C%BA%E5%88%B6%EF%BC%9F.html">17  路由引擎：如何理解分片路由核心类 ShardingRouter 的运作机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/18%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E7%9A%84%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E5%92%8C%E5%B9%BF%E6%92%AD%E8%B7%AF%E7%94%B1%EF%BC%9F.html">18  路由引擎：如何实现数据访问的分片路由和广播路由？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/19%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E8%B7%AF%E7%94%B1%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%9B%86%E6%88%90%E5%A4%9A%E7%A7%8D%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%E5%92%8C%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%EF%BC%9F.html">19  路由引擎：如何在路由过程中集成多种路由策略和路由算法？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/20%20%20%E6%94%B9%E5%86%99%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%20SQL%20%E6%94%B9%E5%86%99%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%EF%BC%9F.html">20  改写引擎：如何理解装饰器模式下的 SQL 改写实现机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/21%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%88%86%E7%89%87%E7%8E%AF%E5%A2%83%E4%B8%8B%20SQL%20%E6%89%A7%E8%A1%8C%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%8A%BD%E8%B1%A1%EF%BC%9F.html">21  执行引擎：分片环境下 SQL 执行的整体流程应该如何进行抽象？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/22%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%20ShardingSphere%20%E4%B8%AD%E7%9A%84%20Executor%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">22  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/23%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%20ShardingSphere%20%E4%B8%AD%E7%9A%84%20Executor%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">23  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/24%20%20%E5%BD%92%E5%B9%B6%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BD%92%E5%B9%B6%E7%9A%84%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E7%AE%80%E5%8D%95%E5%BD%92%E5%B9%B6%E7%AD%96%E7%95%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%EF%BC%9F.html">24  归并引擎：如何理解数据归并的类型以及简单归并策略的实现过程？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/25%20%20%E5%BD%92%E5%B9%B6%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%B5%81%E5%BC%8F%E5%BD%92%E5%B9%B6%E5%92%8C%E5%86%85%E5%AD%98%E5%BD%92%E5%B9%B6%E5%9C%A8%E5%A4%8D%E6%9D%82%E5%BD%92%E5%B9%B6%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%9F.html">25  归并引擎：如何理解流式归并和内存归并在复杂归并场景下的应用方式？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/26%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E6%99%AE%E9%80%9A%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%92%8C%E5%88%86%E7%89%87%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%88%86%E5%88%AB%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">26  读写分离：普通主从架构和分片主从架构分别是如何实现的？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/27%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%20ShardingSphere%20%E4%B8%AD%E5%AF%B9%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%8A%BD%E8%B1%A1%E8%BF%87%E7%A8%8B%EF%BC%9F.html">27  分布式事务：如何理解 ShardingSphere 中对分布式事务的抽象过程？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/28%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">28  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/29%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">29  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/30%20%20%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%94%B9%E5%86%99%E5%BC%95%E6%93%8E%E5%AE%9E%E7%8E%B0%E4%BD%8E%E4%BE%B5%E5%85%A5%E6%80%A7%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%E6%96%B9%E6%A1%88%EF%BC%9F.html">30  数据脱敏：如何基于改写引擎实现低侵入性数据脱敏方案？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/31%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E7%9A%84%E5%8A%A8%E6%80%81%E5%8C%96%E7%AE%A1%E7%90%86%EF%BC%9F.html">31 配置中心：如何基于配置中心实现配置信息的动态化管理？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/32%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E7%86%94%E6%96%AD%E6%9C%BA%E5%88%B6%EF%BC%9F.html">32 注册中心：如何基于注册中心实现数据库访问熔断机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/33%20%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20Hook%20%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%20OpenTracing%20%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9F.html">33 链路跟踪：如何基于 Hook 机制以及 OpenTracing 协议实现数据访问链路跟踪？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/34%20%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%8C%E6%88%90%20ShardingSphere%20%E5%86%85%E6%A0%B8%E4%B8%8E%20Spring%2BSpringBoot%20%E7%9A%84%E6%97%A0%E7%BC%9D%E6%95%B4%E5%90%88%EF%BC%9F.html">34 系统集成：如何完成 ShardingSphere 内核与 Spring+SpringBoot 的无缝整合？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/35%20%E7%BB%93%E8%AF%AD%EF%BC%9AShardingSphere%20%E6%80%BB%E7%BB%93%E5%8F%8A%E5%B1%95%E6%9C%9B.html">35 结语：ShardingSphere 总结及展望</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/16%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="16  解析引擎：SQL 解析流程应该包括哪些核心阶段？（下）" id="title">16  解析引擎：SQL 解析流程应该包括哪些核心阶段？（下）</h1>
+<div><p>我们知道整个 SQL 解析引擎可以分成三个阶段（如下图所示），上一课时我们主要介绍了 ShardingSphere 中 SQL 解析引擎的第一个阶段，那么今天我将承接上一课时，继续讲解 ShardingSphere 中 SQL 解析流程中剩余的两个阶段。</p>
+<p><img alt="Drawing 0.png" src="/assets/575ae13c9d730d7ba689ec1f.png"/></p>
+<h3 id="sql-解析引擎的三大阶段">SQL 解析引擎的三大阶段</h3>
+<p>在 SQL 解析引擎的第一阶段中，我们详细介绍了 ShardingSphere 生成 SQL 抽象语法树的过程，并引出了 SQLStatementRule 规则类。今天我们将基于这个规则类来分析如何提取 SQLSegment 以及如何填充 SQL 语句的实现机制。</p>
+<h4 id="1-第二阶段-提取-sql-片段">1.第二阶段：提取 SQL 片段</h4>
+<p>要理解 SQLStatementRule，就需要先介绍 ParseRuleRegistry 类。从命名上看，该类就是一个规则注册表，保存着各种解析规则信息。ParseRuleRegistry 类中的核心变量包括如下所示的三个 Loader 类：</p>
+<pre><code>	private final ExtractorRuleDefinitionEntityLoader extractorRuleLoader = new ExtractorRuleDefinitionEntityLoader(); 
+     
+    private final FillerRuleDefinitionEntityLoader fillerRuleLoader = new FillerRuleDefinitionEntityLoader(); 
+     
+    private final SQLStatementRuleDefinitionEntityLoader statementRuleLoader = new SQLStatementRuleDefinitionEntityLoader(); 
+</code></pre>
+<p>从命名上可以看到这三个 Loader 类分别处理对 SQLStatementRule、ExtractorRule 和 FillerRule 这三种规则定义的加载。</p>
+<p>我们先来看 SQLStatementRule，它们的定义位于 sql-statement-rule-definition.xml 配置文件中。我们以 Mysql 为例，这个配置文件位于 shardingsphere-sql-parser-mysql 工程中的 META-INF/parsing-rule-definition/mysql 目录下。我们截取该配置文件中的部分配置信息作为演示，如下所示：</p>
+<pre><code>&lt;sql-statement-rule-definition&gt; 
+    &lt;sql-statement-rule context="select" sql-statement-class="org.apache.shardingsphere.sql.parser.sql.statement.dml.SelectStatement" extractor-rule-refs="tableReferences, columns, selectItems, where, predicate, groupBy, orderBy, limit, subqueryPredicate, lock" /&gt; 
+    &lt;sql-statement-rule context="insert" sql-statement-class="org.apache.shardingsphere.sql.parser.sql.statement.dml.InsertStatement" extractor-rule-refs="table, columns, insertColumns, insertValues, setAssignments, onDuplicateKeyColumns" /&gt; 
+    &lt;sql-statement-rule context="update" sql-statement-class="org.apache.shardingsphere.sql.parser.sql.statement.dml.UpdateStatement" extractor-rule-refs="tableReferences, columns, setAssignments, where, predicate" /&gt; 
+    &lt;sql-statement-rule context="delete" sql-statement-class="org.apache.shardingsphere.sql.parser.sql.statement.dml.DeleteStatement" extractor-rule-refs="tables, columns, where, predicate" /&gt; 
+… 
+&lt;/sql-statement-rule-definition&gt; 
+</code></pre>
+<p>基于 ParseRuleRegistry 类进行规则获取和处理过程，涉及一大批实体对象以及用于解析 XML 配置文件的 JAXB 工具类的定义，内容虽多但并不复杂。核心类之间的关系如下图所示：</p>
+<p><img alt="Drawing 2.png" src="/assets/f010f2953de601ab1afc4c3d.png"/></p>
+<p>ParseRuleRegistry 类层结构图</p>
+<p>当获取规则之后，对于具体某种数据库类型的每条 SQL 而言，都会有一个 SQLStatementRule 对象。我们注意到每个 SQLStatementRule 都定义了一个“context”以及一个“sql-statement-class”。</p>
+<p>这里的 context 实际上就是通过 SQL 解析所生成的抽象语法树 SQLAST 中的 ParserRuleContext，包括 CreateTableContext、SelectContext 等各种 StatementContext。而针对每一种 context，都有专门的一个 SQLStatement 对象与之对应，那么这个 SQLStatement 究竟长什么样呢？我们来看一下。</p>
+<pre><code>public interface SQLStatement { 
+     
+    //获取参数个数 
+    int getParametersCount(); 
+     
+    //获取所有SQLSegment 
+    Collection&lt;SQLSegment&gt; getAllSQLSegments(); 
+     
+    //根据类型获取一个SQLSegment 
+    &lt;T extends SQLSegment&gt; Optional&lt;T&gt; findSQLSegment(Class&lt;T&gt; sqlSegmentType); 
+     
+    //根据类型获取一组SQLSegment 
+    &lt;T extends SQLSegment&gt; Collection&lt;T&gt; findSQLSegments(Class&lt;T&gt; sqlSegmentType); 
+} 
+</code></pre>
+<p>你可以看到，作为解析引擎最终产物的 SQLStatement ，实际上封装的是对 SQL 片段对象 SQLSegment 的获取操作。显然，对于每一个 ParserRuleContext 而言，我们最终就是构建了一个包含一组 SQLSegment 的 SQLStatement 对象，而这些 SQLSegment 的构建过程就是所谓的提取 SQLSegment 的过程。我们在配置文件中也明确看到了 SQLStatementRule 中对各种提取规则对象 ExtractorRule 的引用。</p>
+<p>在 ShardingSphere 中内置了一大批通用的 SQLSegment，包括查询选择项（SelectItems）、表信息（Table）、排序信息（OrderBy）、分组信息（GroupBy）以及分页信息（Limit）等。这些通用 SQLSegment 都有对应的 SQLSegmentExtractor，我们可以直接在 SQLStatementRule 中进行使用。</p>
+<p>另一方面，考虑到 SQL 方言的差异性，ShardingSphere 同样提供了针对各种数据库的 SQLSegment 的提取器定义。以 Mysql 为例，在其代码工程的 META-INF/parsing-rule-definition/mysql 目录下，存在一个 extractor-rule-definition.xml 配置文件，专门用来定义针对 Mysql 的各种 SQLSegmentExtractor，部分定义如下所示，作为一款适用于多数据库的中间件，这也是 ShardingSphere 应对 SQL 方言的实现机制之一。</p>
+<pre><code>&lt;extractor-rule-definition&gt; 
+    &lt;extractor-rule id="addColumnDefinition" extractor-class="org.apache.shardingsphere.sql.parser.core.extractor.ddl.MySQLAddColumnDefinitionExtractor" /&gt; 
+    &lt;extractor-rule id="modifyColumnDefinition" extractor-class="org.apache.shardingsphere.sql.parser.core.extractor.ddl.MySQLModifyColumnDefinitionExtractor" /&gt; 
+    … 
+&lt;/extractor-rule-definition&gt; 
+</code></pre>
+<p>现在，假设有这样一句 SQL：</p>
+<pre><code>SELECT task_id, task_name FROM health_task WHERE user_id = 'user1' AND record_id = 2  
+</code></pre>
+<p>通过解析，我们获取了如下所示的抽象语法树：</p>
+<p><img alt="Drawing 4.png" src="/assets/bc20170d2f126e3c3faff9c8.png"/></p>
+<p>抽象语法树示意图</p>
+<p>我们发现，对于上述抽象语法树中的某些节点（如 SELECT、FROM 和 WHERE）没有子节点，而对于如 FIELDS、TABLES 和 CONDITIONS 节点而言，本身也是一个树状结构。显然，这两种节点的提取规则应该是不一样的。</p>
+<p>因此，ShardingSphere 提供了两种 SQLSegmentExtractor，一种是针对单节点的 OptionalSQLSegmentExtractor；另一种是针对树状节点的 CollectionSQLSegmentExtractor。由于篇幅因素，这里以 TableExtractor 为例，展示如何提取 TableSegment 的过程，TableExtractor 的实现方法如下所示：</p>
+<pre><code>public final class TableExtractor implements OptionalSQLSegmentExtractor { 
+     
+    @Override 
+    public Optional&lt;TableSegment&gt; extract(final ParserRuleContext ancestorNode, final Map&lt;ParserRuleContext, Integer&gt; parameterMarkerIndexes) { 
+        //从Context中获取TableName节点 
+     Optional&lt;ParserRuleContext&gt; tableNameNode = ExtractorUtils.findFirstChildNode(ancestorNode, RuleName.TABLE_NAME); 
+        if (!tableNameNode.isPresent()) { 
+            return Optional.absent(); 
+        }         
+        //根据TableName节点构建TableSegment 
+        TableSegment result = getTableSegment(tableNameNode.get()); 
+        //设置表的别名 
+        setAlias(tableNameNode.get(), result); 
+        return Optional.of(result); 
+    } 
+     
+    private TableSegment getTableSegment(final ParserRuleContext tableNode) { 
+     //从Context中获取Name节点       
+        ParserRuleContext nameNode = ExtractorUtils.getFirstChildNode(tableNode, RuleName.NAME); 
+        //根据Name节点获取节点的起止位置以及节点内容 
+        TableSegment result = new TableSegment(nameNode.getStart().getStartIndex(), nameNode.getStop().getStopIndex(), nameNode.getText()); 
+        //从Context中获取表的Owner节点，如果有的话就设置Owner 
+        Optional&lt;ParserRuleContext&gt; ownerNode = ExtractorUtils.findFirstChildNodeNoneRecursive(tableNode, RuleName.OWNER); 
+        if (ownerNode.isPresent()) { 
+            result.setOwner(new SchemaSegment(ownerNode.get().getStart().getStartIndex(), ownerNode.get().getStop().getStopIndex(), ownerNode.get().getText())); 
+        } 
+        return result; 
+    } 
+     
+    private void setAlias(final ParserRuleContext tableNameNode, final TableSegment tableSegment) { 
+     //从Context中获取Alias节点，如果有的话就设置别名 
+     Optional&lt;ParserRuleContext&gt; aliasNode = ExtractorUtils.findFirstChildNode(tableNameNode.getParent(), RuleName.ALIAS); 
+        if (aliasNode.isPresent()) { 
+            tableSegment.setAlias(aliasNode.get().getText()); 
+        } 
+    } 
+} 
+</code></pre>
+<p>显然，语法树中的 Table 是一种单节点，所以 TableExtractor 继承自 OptionalSQLSegmentExtractor。对于 TableExtractor 而言，整个解析过程就是从 ParserRuleContext 中获取与表定义相关的各种节点，然后通过节点的起止位置以及节点内容来构建 TableSegment 对象。TableSegment 实现了 SQLSegment，其核心变量的定义也比较明确，如下所示：</p>
+<pre><code>public final class TableSegment implements SQLSegment, TableAvailable, OwnerAvailable&lt;SchemaSegment&gt;, AliasAvailable { 
+     
+    private final int startIndex;     
+    private final int stopIndex;   
+    private final String name;  
+    private final QuoteCharacter quoteCharacter; 
+    private SchemaSegment owner;  
+	private String alias; 
+       … 
+} 
+</code></pre>
+<p>现在，基于以上关于提取器以及提取操作的相关概念的理解，我们来看一下 SQLSegment 提取引擎 SQLSegmentsExtractorEngine 的实现，如下所示：</p>
+<pre><code>public final class SQLSegmentsExtractorEngine { 
+     
+    //用来提取SQLAST语法树中的SQL片段 
+    public Collection&lt;SQLSegment&gt; extract(final SQLAST ast) { 
+        Collection&lt;SQLSegment&gt; result = new LinkedList&lt;&gt;(); 
+         
+        //遍历提取器，从Context中提取对应类型的SQLSegment，比如TableSegment         
+        for (SQLSegmentExtractor each : ast.getSqlStatementRule().getExtractors()) {            
+            //单节点的场景，直接提取单一节点下的内容 
+            if (each instanceof OptionalSQLSegmentExtractor) { 
+                Optional&lt;? extends SQLSegment&gt; sqlSegment = ((OptionalSQLSegmentExtractor) each).extract(ast.getParserRuleContext(), ast.getParameterMarkerIndexes()); 
+                if (sqlSegment.isPresent()) { 
+                    result.add(sqlSegment.get()); 
+                } 
+                 
+            树状节点的场景，遍历提取节点下的所有子节点// 
+            } else if (each instanceof CollectionSQLSegmentExtractor) { 
+                result.addAll(((CollectionSQLSegmentExtractor) each).extract(ast.getParserRuleContext(), ast.getParameterMarkerIndexes())); 
+            } 
+        } 
+        return result; 
+    } 
+} 
+</code></pre>
+<p>显然，SQLSegmentsExtractorEngine 的作用就是针对某一条 SQL，遍历 SQLStatementRule 中所配置的提取器，然后从 Context 中提取对应类型的 SQLSegment，并最终存放在一个集合对象中进行返回。</p>
+<h4 id="2-第三阶段-填充-sql-语句">2.第三阶段：填充 SQL 语句</h4>
+<p>完成所有 SQLSegment 的提取之后，我们就来到了解析引擎的最后一个阶段，即填充 SQLStatement。所谓的<strong>填充过程</strong>，就是通过填充器 SQLSegmentFiller 为 SQLStatement 注入具体 SQLSegment 的过程。这点从 SQLSegmentFiller 接口定义中的各个参数就可以得到明确，如下所示：</p>
+<pre><code>public interface SQLSegmentFiller&lt;T extends SQLSegment&gt; { 
+     
+    void fill(T sqlSegment, SQLStatement sqlStatement); 
+} 
+</code></pre>
+<p>那么问题就来了，我们如何正确把握 SQLSegmentFiller、SQLSegment 和 SQLStatement 这三者之间的处理关系呢？我们先根据某个 SQLSegment 找到对应的 SQLSegmentFiller，这部分关系在 ShardingSphere 中同样是维护在一个 filler-rule-definition.xml 配置文件中，截取部分配置项如下所示：</p>
+<pre><code>&lt;filler-rule-definition&gt; 
+    &lt;filler-rule sql-segment-class="org.apache.shardingsphere.sql.parser.sql.segment.generic.TableSegment" filler-class="org.apache.shardingsphere.sql.parser.core.filler.impl.TableFiller" /&gt; 
+    &lt;filler-rule sql-segment-class="org.apache.shardingsphere.sql.parser.sql.segment.generic.SchemaSegment" filler-class="org.apache.shardingsphere.sql.parser.core.filler.impl.dal.SchemaFiller" /&gt; 
+	… 
+&lt;/filler-rule-definition&gt; 
+</code></pre>
+<p>显然，这里保存着 SQLSegment 与 SQLSegmentFiller 之间的对应关系。当然，对于不同的 SQL 方言，也同样可以维护自身的 filler-rule-definition.xml 文件。</p>
+<p>我们还是以与 TableSegment 对应的 TableFiller 为例，来分析一个 SQLSegmentFiller 的具体实现方法，TableFiller 类如下所示：</p>
+<pre><code>public final class TableFiller implements SQLSegmentFiller&lt;TableSegment&gt; { 
+     
+    @Override 
+    public void fill(final TableSegment sqlSegment, final SQLStatement sqlStatement) { 
+        if (sqlStatement instanceof TableSegmentAvailable) { 
+            ((TableSegmentAvailable) sqlStatement).setTable(sqlSegment); 
+        } else if (sqlStatement instanceof TableSegmentsAvailable) { 
+            ((TableSegmentsAvailable) sqlStatement).getTables().add(sqlSegment); 
+        } 
+    } 
+} 
+</code></pre>
+<p>这段代码在实现上采用了回调机制来完成对象的注入。在 ShardingSphere 中，基于回调的处理方式也非常普遍。本质上，回调解决了因为类与类之间的相互调用而造成的循环依赖问题，回调的实现策略通常采用了如下所示的类层结构：</p>
+<p><img alt="Drawing 6.png" src="/assets/9b5ca205697a07bbc804bd7d.png"/></p>
+<p>回调机制示意图</p>
+<p>TableFiller 中所依赖的 TableSegmentAvailable 和 TableSegmentsAvailable 接口就类似于上图中的 Callback 接口，具体的 SQLStatement 就是 Callback 的实现类，而 TableFiller 则是 Callback 的调用者。以 TableFiller 为例，我们注意到，如果对应的 SQLStatement 实现了这两个接口中的任意一个，那么就可以通过 TableFiller 注入对应的 TableSegment，从而完成 SQLSegment 的填充。</p>
+<p>这里以 TableSegmentAvailable 接口为例，它有一组实现类，如下所示：</p>
+<p><img alt="Drawing 8.png" src="/assets/393096d5a6381c613404e3c8.png"/></p>
+<p>TableSegmentAvailable实现类</p>
+<p>以上图中的 CreateTableStatement 为例，该类同时实现了 TableSegmentAvailable 和 IndexSegmentsAvailable 这两个回调接口，所以就可以同时操作 TableSegment 和 IndexSegment 这两个 SQLSegment。CreateTableStatement 类的实现如下所示：</p>
+<pre><code>public final class CreateTableStatement extends DDLStatement implements TableSegmentAvailable, IndexSegmentsAvailable { 
+     
+    private TableSegment table; 
+     
+    private final Collection&lt;ColumnDefinitionSegment&gt; columnDefinitions = new LinkedList&lt;&gt;(); 
+     
+    private final Collection&lt;IndexSegment&gt; indexes = new LinkedList&lt;&gt;(); 
+} 
+</code></pre>
+<p>至此，我们通过一个示例解释了与填充操作相关的各个类之间的协作关系，如下所示的类图展示了这种协作关系的整体结构。</p>
+<p><img alt="Drawing 9.png" src="/assets/5d4e6ada5c1603a3747a61f1.png"/></p>
+<p>SQLStatement类层结构图</p>
+<p>有了上图的基础，我们理解填充引擎 SQLStatementFillerEngine 就显得比较简单了，SQLStatementFillerEngine 类的实现如下所示：</p>
+<pre><code>public final class SQLStatementFillerEngine { 
+     
+    private final ParseRuleRegistry parseRuleRegistry;     
+    private final String databaseTypeName; 
+    
+    @SuppressWarnings("unchecked") 
+    @SneakyThrows 
+    public SQLStatement fill(final Collection&lt;SQLSegment&gt; sqlSegments, final int parameterMarkerCount, final SQLStatementRule rule) { 
+     //从SQLStatementRule中获取SQLStatement实例，如CreateTableStatement 
+     SQLStatement result = rule.getSqlStatementClass().newInstance(); 
+        //通过断言对SQLStatement的合法性进行校验 
+     Preconditions.checkArgument(result instanceof AbstractSQLStatement, "%s must extends AbstractSQLStatement", result.getClass().getName()); 
+         
+        //设置参数个数 
+        ((AbstractSQLStatement) result).setParametersCount(parameterMarkerCount); 
+       
+        //添加所有的SQLSegment到SQLStatement中 
+        result.getAllSQLSegments().addAll(sqlSegments); 
+         
+        //遍历填充对应类型的SQLSegment 
+        for (SQLSegment each : sqlSegments) { 
+         //根据数据库类型和SQLSegment找到对应的SQLSegmentFiller，并为SQLStatement填充SQLSegment 
+            //如通过TableSegment找到获取TableFiller，然后通过TableFiller为CreateTableStatement填充TableSegment 
+         Optional&lt;SQLSegmentFiller&gt; filler = parseRuleRegistry.findSQLSegmentFiller(databaseTypeName, each.getClass()); 
+            if (filler.isPresent()) {                
+              //利用SQLSegmentFiller来填充SQLStatement中的SQLSegment 
+                filler.get().fill(each, result); 
+            } 
+        } 
+        return result; 
+	}  
+} 
+</code></pre>
+<p>我们对 SQLStatementFillerEngine 中的核心代码都添加了注释，注意到这里通过数据库类型以及 SQLSegment 的类型，从规则注册表 ParseRuleRegistry 中获取了对应的 SQLSegmentFiller 并完成对 SQLStatement 的填充操作。</p>
+<p>至此，ShardingSphere 中 SQL 解析引擎的三大阶段介绍完毕。我们已经获取了目标 SQLStatement，为进行后续的路由等操作提供了基础。</p>
+<h3 id="从源码解析到日常开发">从源码解析到日常开发</h3>
+<p>通过对框架源代码的学习，一方面可以帮忙我们更好地理解该框架核心功能背后的实现原理；另一方面，我们也可以吸收这些优秀框架的设计思想和实现方法，从而更好地指导日常开发工作。在本文中，我们同样总结了一组设计和实现上的技巧。</p>
+<h4 id="1-设计模式的应用方式">1.设计模式的应用方式</h4>
+<p>在本文中，我们主要涉及了两种设计模式的应用场景，一种是工厂模式，另一种是外观模式。</p>
+<p><strong>工厂模式</strong>的应用比较简单，作用也比较直接。例如，SQLParseEngineFactory 工厂类用于创建 SQLParseEngine，而 SQLParserFactory 工厂类用于创建 SQLParser。</p>
+<p>相比工厂模式，<strong>外观类</strong>通常比较难识别和把握，因此，我们也花了一定篇幅介绍了 SQL 解析引擎中的外观类 SQLParseKernel，以及与 SQLParseEngine 之间的委托关系。</p>
+<h4 id="2-缓存的实现方式">2.缓存的实现方式</h4>
+<p>缓存在 ShardingSphere 中应用非常广泛，其实现方式也比较多样，在本文中，我们就接触到了两种缓存的实现方式。</p>
+<p>第一种是通过 ConcurrentHashMap 类来保存 SQLParseEngine 的实例，使用上比较简单。</p>
+<p>另一种则基于 Guava 框架中的 Cache 类构建了一个 SQLParseResultCache 来保存 SQLStatement 对象。Guava 中的 Cache 类初始化方法如下所示，我们可以通过 put 和 getIfPresent 等方法对缓存进行操作：</p>
+<pre><code>Cache&lt;String, SQLStatement&gt; cache = CacheBuilder.newBuilder().softValues().initialCapacity(2000).maximumSize(65535).build();     
+</code></pre>
+<h4 id="3-配置信息的两级管理机制">3.配置信息的两级管理机制</h4>
+<p>在 ShardingSphere 中，关于各种提取规则和填充规则的定义都放在了 XML 配置文件中，并采用了配置信息的两级管理机制。这种<strong>两级管理机制</strong>的设计思想在于，系统在提供了对各种通用规则默认实现的同时，也能够集成来自各种 SQL 方言的定制化规则，从而形成一套具有较高灵活性以及可扩展性的规则管理体系。</p>
+<h4 id="4-回调机制">4.回调机制</h4>
+<p>所谓<strong>回调</strong>，本质上就是一种<strong>双向调用模式</strong>，也就是说，被调用方在被调用的同时也会调用对方。在实现上，我们可以提取一个用于业务接口作为一种 Callback 接口，然后让具体的业务对象去实现这个接口。这样，当外部对象依赖于这个业务场景时，只需要依赖这个 Callback 接口，而不需要关心这个接口的具体实现类。</p>
+<p>这在软件设计和实现过程中是一种常见的消除业务对象和外部对象之间循环依赖的处理方式。ShardingSphere 中大量采用了这种实现方式来确保代码的可维护性，这非常值得我们学习。</p>
+<h3 id="小结">小结</h3>
+<p>作为 ShardingSphere 分片引擎的第一个核心组件，解析引擎的目的在于生成 SQLStatement 目标对象。而整个解析引擎分成三大阶段，即生成 SQL 抽象语法树、提取 SQL 片段以及使用这些片段来填充 SQL 语句。本文对解析引擎的整体结构以及这三个阶段进行了详细的讨论。</p>
+<p>最后给你留一道思考题：简要介绍 ShardingSphere 中 SQL 解析的各个阶段的输入和产出？欢迎你在留言区与大家讨论，我将一一点评解答。</p>
+<p>现在，我们已经获取了 SQLStatement，接下来就可以用来执行 SQL 路由操作，这就是下一课时内容。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

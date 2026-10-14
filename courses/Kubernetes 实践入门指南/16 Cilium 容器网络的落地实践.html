@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16 Cilium 容器网络的落地实践 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/index.html">Kubernetes 实践入门指南</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">25 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kubernetes 实践入门指南</strong><ul><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/00%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E8%A6%81%E5%AD%A6%E4%B9%A0%20Kubernetes%20%E6%8A%80%E6%9C%AF.html">00 为什么我们要学习 Kubernetes 技术</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/01%20%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%20Kubernetes%20%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6.html">01 重新认识 Kubernetes 的核心组件</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/02%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Kubernets%20%E7%9A%84%E7%BC%96%E6%8E%92%E5%AF%B9%E8%B1%A1.html">02 深入理解 Kubernets 的编排对象</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/03%20DevOps%20%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">03 DevOps 场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/04%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">04 微服务应用场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/05%20%E8%A7%A3%E5%86%B3%20K8s%20%E8%90%BD%E5%9C%B0%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA%E6%8F%90%E7%82%BC.html">05 解决 K8s 落地难题的方法论提炼</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/06%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E6%A0%B8%E5%BF%83%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86%E6%8E%8C%E6%8F%A1.html">06 练习篇：K8s 核心实践知识掌握</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/07%20%E5%AE%B9%E5%99%A8%E5%BC%95%E6%93%8E%20containerd%20%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">07 容器引擎 containerd 落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/08%20K8s%20%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7%20kubeadm%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">08 K8s 集群安装工具 kubeadm 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/09%20%E5%8D%97%E5%8C%97%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20IPVS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">09 南北向流量组件 IPVS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/10%20%E4%B8%9C%E8%A5%BF%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20Calico%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">10 东西向流量组件 Calico 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/11%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%20DNS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">11 服务发现 DNS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/12%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">12 练习篇：K8s 集群配置测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/13%20%E7%90%86%E8%A7%A3%E5%AF%B9%E6%96%B9%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AF%B9%E8%B1%A1%20Ingress%20%E5%92%8C%20Service.html">13 理解对方暴露服务的对象 Ingress 和 Service</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/14%20%E5%BA%94%E7%94%A8%E7%BD%91%E5%85%B3%20OpenResty%20%E5%AF%B9%E6%8E%A5%20K8s%20%E5%AE%9E%E8%B7%B5.html">14 应用网关 OpenResty 对接 K8s 实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/15%20Service%20%E5%B1%82%E5%BC%95%E6%B5%81%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">15 Service 层引流技术实践</a></li><li><a class="active" aria-current="page" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/16%20Cilium%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">16 Cilium 容器网络的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/17%20%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E7%9A%84%E4%BC%98%E9%9B%85%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E5%AE%9E%E8%B7%B5.html">17 应用流量的优雅无损切换实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/18%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9A%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E6%8A%80%E6%9C%AF%E6%B5%8B%E9%AA%8C.html">18 练习篇：应用流量无损切换技术测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/19%20%E4%BD%BF%E7%94%A8%20Rook%20%E6%9E%84%E5%BB%BA%E7%94%9F%E4%BA%A7%E5%8F%AF%E7%94%A8%E5%AD%98%E5%82%A8%E7%8E%AF%E5%A2%83%E5%AE%9E%E8%B7%B5.html">19 使用 Rook 构建生产可用存储环境实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/20%20%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8%E7%9A%84%E9%BB%98%E8%AE%A4%E7%89%B9%E6%80%A7%E8%90%BD%E5%9C%B0%E5%88%86%E6%9E%90.html">20 有状态应用的默认特性落地分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/21%20%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20MySQL%20%E9%9B%86%E7%BE%A4%E5%B7%A5%E5%85%B7%20Vitess%20%E5%AE%9E%E8%B7%B5%E5%88%86%E6%9E%90.html">21 案例：分布式 MySQL 集群工具 Vitess 实践分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/22%20%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%20PV%E3%80%81PVC%E3%80%81Storage%20Classes%20%E7%9A%84%E7%AE%A1%E7%90%86%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">22 存储对象 PV、PVC、Storage Classes 的管理落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/23%20K8s%20%E9%9B%86%E7%BE%A4%E4%B8%AD%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E7%81%BE%E5%A4%87%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">23 K8s 集群中存储对象灾备的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/24%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">24 练习篇：K8s 集群配置测验</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/16%20Cilium%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="16 Cilium 容器网络的落地实践" id="title">16 Cilium 容器网络的落地实践</h1>
+<div><p>随着越来越多的企业采用 Kubernetes，围绕多云、安全、可见性和可扩展性等新要求，可编程数据平面的需求用例范围越来越广。此外，服务网格和无服务器等新技术对 Kubernetes 底层提出了更多的定制化要求。这些新需求都有一些共同点：它们需要一个更可编程的数据平面，能够在不牺牲性能的情况下执行 Kubernetes 感知的网络数据操作。</p>
+<p>Cilium 项目通过引入扩展的伯克利数据包过滤器（eBPF）技术，在 Linux 内核内向网络栈暴露了可编程的钩子。使得网格数据包不需要在用户和内核空间之间来回切换就可以通过上下文快速进行数据交换操作。这是一种新型的网络范式，它也是 Cilium 容器网络项目的核心思想。</p>
+<p><img alt="14-1-cilium-cni" src="/assets/ce7a1f90ded3f3f8d69002c3.png"/></p>
+<h3 id="为什么需要落地-cilium-容器网络">为什么需要落地 Cilium 容器网络？</h3>
+<p>Kubernetes 的容器网络方案发展至今，一直是百家争鸣，各有特色。之前因为 CNI 网络方案不成熟，大家用起来都是战战兢兢，时刻提防容器网络给业务带来不可接受的效果，随即就把容器网络替换成主机网络。随着时间的磨砺，当前主流的容器网络方案如 Calico 等已经经历成百上千次生产环境的应用考验，大部分场景下都可以达到用户可以接受的网络性能指标。因为成功经验开始增多，用户也开始大规模启用容器网络的上线了。随着业务流量的引入越来越大，用户对 Kubernetes 网络的认知也趋于一致。大致分为两大类，一类是 Cluster IP，是一层反向代理的虚拟网络；一类是 Pod IP，是容器间交互数据的网络数据平面。对于反向代理虚拟网络的技术实现，早期 kube-proxy 是采用 iptables，后来引入 IPVS 也解决了大规模容器集群的网络编排的性能问题。这样的实现结构你从顶端俯瞰会明显感知到 Kubernetes 网络数据平台非常零散，并没有实现一套体系的网络策略编排和隔离。显然，这样的技术结构也无法引入数据可视化能力。这也是 Istio 服务网格引入后，通过增加 envoy sidecar 来实现网络流量可视化带来了机会。但是这种附加的边界网关毕竟又对流量增加了一层反向代理，让网络性能更慢了。Cilium 原生通过 eBPF 编排网络数据，让可视化更简单。</p>
+<p>Cilium 还有一个强项就是通过 eBPF 是可以自定义隔离策略的，这样就可以在非信任的主机环境编排更多的容器网络隔离成多租户环境，让用户不在担心数据的泄露，可以更专注在数据业务的连通性上。因为 eBPF 的可编程性，我们还能依据业务需求，增加各种定制化插件，让数据平台可以更加灵活安全。</p>
+<h3 id="cilium-cni-实现">Cilium CNI 实现</h3>
+<p>Cilium Agent、Cilium CLI Client 和 CNI Plugin 运行在集群中的每一个节点上（以守护进程的形式部署）。Cilium CNI 插件执行所有与网络管道有关的任务，如创建链接设备（veth 对），为容器分配 IP，配置 IP 地址，路由表，sysctl 参数等。Cilium Agent 编译 BPF 程序，并使内核在网络栈的关键点上运行这些程序。</p>
+<p>Cilium 提供两种联网模式：</p>
+<ul>
+<li>叠加网络（）Overlay）模式：Cilium 默认的网络模式。集群中的所有节点为一个网状的隧道，使用基于 udp 的封装协议。VXLAN（默认）或 Geneve （通用网络虚拟化封装）。在这种模式下，Cilium 可以自动形成一个覆盖网络，无需用户使用 kube-controller-manager 中的 <code>--allocate-node-cidrs</code> 选项进行任何配置。</li>
+<li>直接/本地路由模式：在这个配置中，Cilium 会把所有不针对另一个本地端点的数据包交给 linux 内核的路由子系统。这个设置需要一个额外的路由守护程序，如 Bird、Quagga、BGPD、Zebra 等，通过节点的 IP 向所有其他节点公布非本地节点分配的前缀。与 VxLAN 叠加相比，BGP 方案具有更好的性能，更重要的是，它使容器 IP 可路由化，无需任何额外的网状配置。</li>
+</ul>
+<p>Cilium 在主机网络空间上创建了三个虚拟接口：cilium*host、cilium*net 和 cilium*vxlan。Cilium Agent 在启动时创建一个名为“cilium*host -&gt; cilium*net”的 veth 对，并将 CIDR 的第一个 IP 地址设置为 cilium*host，然后作为 CIDR 的网关。CNI 插件会生成 BPF 规则，编译后注入内核，以解决 veth 对之间的连通问题。数据链路参考如下：</p>
+<p><img alt="14-2-cilium-cni-kube-impl" src="/assets/2d0f6cb54b4d32ffb0811828.png"/></p>
+<h3 id="落地安装实践">落地安装实践</h3>
+<p>因为 Cilium 对内核要求很高，本来我以为需要采用 Ubuntu 才可以安装，后来查阅文档发现，只要是 CentOS 7.x 之后就可以支持。安装步骤如下。</p>
+<ol>
+<li>先挂载 bpf 模块：</li>
+</ol>
+<pre><code>sudo mount bpffs -t bpf /sys/fs/bpf
+
+</code></pre>
+<ol>
+<li>修改 /etc/fstab 文件，在最后面加入如下配置：</li>
+</ol>
+<pre><code>bpffs                  /sys/fs/bpf             bpf     defaults 0 0
+
+</code></pre>
+<ol>
+<li>安装一套干净的 Kubernetes 系统，这里我采用 K3s 快速搭建：</li>
+</ol>
+<pre><code>export MASTER_IP=$(ip a |grep global | grep -v '10.0.2.15' | awk '{print $2}' | cut -f1 -d '/')
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--flannel-backend=none --no-flannel --node-ip=${MASTER_IP} --node-external-ip=${MASTER_IP} --bind-address=${MASTER_IP} --no-deploy servicelb --no-deploy traefik" sh -
+
+</code></pre>
+<ol>
+<li>在这之后，当你运行以下命令，你应该看到 local-path，metrics-server 和 coredns pods 处于 Pending 状态。这是正常的。</li>
+</ol>
+<pre><code>[root@dev-mng-temp ~]# kubectl get po -n kube-system
+NAME                                     READY   STATUS    RESTARTS   AGE
+coredns-7944c66d8d-xn96v                 0/1     Pending   0          3m2s
+local-path-provisioner-6d59f47c7-77bfz   0/1     Pending   0          3m2s
+metrics-server-7566d596c8-8bhrq          0/1     Pending   0          3m2s
+
+</code></pre>
+<ol>
+<li>安装 helm3：</li>
+</ol>
+<pre><code>sudo wget — no-check-certificate https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
+sudo tar -zxvf helm-v3.2.4-linux-amd64.tar.gz
+sudo mv linux-amd64/helm /usr/local/bin/helm
+
+</code></pre>
+<ol>
+<li>安装 Cilium 套件：</li>
+</ol>
+<pre><code># sudo helm repo add cilium https://helm.cilium.io/
+
+# sudo helm install cilium cilium/cilium --set global.device=eth0 --set global.tag="v1.8.1" \
+--set global.containerRuntime.integration="containerd" \
+--set global.containerRuntime.socketPath="/var/run/k3s/containerd/containerd.sock" \
+--set global.kubeProxyReplacement="strict" \
+--set global.hubble.enabled="true" \
+--set global.hubble.listenAddress=":4244" \
+--set global.hubble.metrics.enabled="{dns,drop,tcp,flow,port-distribution,icmp,http}" \
+--set global.hubble.relay.enabled="true" \
+--set global.hubble.ui.enabled="true" \
+--kubeconfig /etc/rancher/k3s/k3s.yaml --namespace kube-system
+
+NAME: cilium
+LAST DEPLOYED: Fri Oct  9 19:53:59 2020
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+You have successfully installed Cilium with Hubble Relay and Hubble UI.
+
+Your release version is 1.8.4.
+
+For any further help, visit https://docs.cilium.io/en/v1.8/gettinghelp
+
+</code></pre>
+<ol>
+<li>去掉 IPAM 特性：</li>
+</ol>
+<pre><code>kubectl edit configmap cilium-config -n kube-system
+
+### 把以下配置去掉
+  ipam: cluster-pool
+  k8s-require-ipv4-pod-cidr: "true"
+  k8s-require-ipv6-pod-cidr: "false"
+
+</code></pre>
+<p>稍等片刻，就可以看到 Cilium 相关的容器都启动起来了。Cilium 容器网络配置成功。</p>
+<ol>
+<li>修改 Hubble UI 控制台服务为 NodePort 模式：</li>
+</ol>
+<pre><code>sudo kubectl edit svc hubble-ui -n kube-system
+
+sudo kubectl get svc hubble-ui -n kube-system
+
+</code></pre>
+<p>然后就可以查看可视化数据平台，如下图：</p>
+<p><img alt="14-3-hubble-ui" src="/assets/157b6a4cd2d1dfe95627fd35.png"/></p>
+<h3 id="经验总结">经验总结</h3>
+<p>Cilium 网络方案从实际体验来看，已经可以满足常规容器网络需求。它的可视化控制台 Hubble 是对数据平面可视化的最原生实现，比 Istio 的方案显然要技高一筹。数据可视化这块让笔者有点意外，没有想到 eBPF 的编程能力可以这么强，为之后更多的插件功能带来更多期待。因为 cilium 技术太新，按照实践经验，笔者推荐大家在开发测试环境可以大胆使用起来，生产环境还要再等等，我相信在经过半年的磨砺，Cilium 应该会成为 Kubernetes 社区使用最多的容器网络方案。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

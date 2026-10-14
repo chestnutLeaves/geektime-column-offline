@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>27 代码优化：为什么你的代码比他的更高效？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/index.html">编译原理之美</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">43 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理之美</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%EF%BC%9F.html">00 开篇词 为什么你要学习编译原理？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/01%20%E7%90%86%E8%A7%A3%E4%BB%A3%E7%A0%81%EF%BC%9A%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF.html">01 理解代码：编译器的前端技术</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/02%20%E6%AD%A3%E5%88%99%E6%96%87%E6%B3%95%E5%92%8C%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8.html">02 正则文法和有限自动机：纯手工打造词法分析器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E5%85%AC%E5%BC%8F%E8%AE%A1%E7%AE%97%E5%99%A8.html">03 语法分析（一）：纯手工打造公式计算器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/04%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%A7%A3%E5%86%B3%E4%BA%8C%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E9%9A%BE%E7%82%B9.html">04 语法分析（二）：解决二元表达式中的难点</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/05%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%97%A8%E7%AE%80%E5%8D%95%E7%9A%84%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80.html">05 语法分析（三）：实现一门简单的脚本语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/06%20%E7%BC%96%E8%AF%91%E5%99%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%94%A8Antlr%E7%94%9F%E6%88%90%E8%AF%8D%E6%B3%95%E3%80%81%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8.html">06 编译器前端工具（一）：用Antlr生成词法、语法分析器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/07%20%E7%BC%96%E8%AF%91%E5%99%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%94%A8Antlr%E9%87%8D%E6%9E%84%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80.html">07 编译器前端工具（二）：用Antlr重构脚本语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/08%20%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E7%94%9F%E5%AD%98%E6%9C%9F%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%87%BD%E6%95%B0.html">08 作用域和生存期：实现块作用域和函数</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/09%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%9A%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%92%8C%E6%96%B9%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85.html">09 面向对象：实现数据和方法的封装</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/10%20%E9%97%AD%E5%8C%85%EF%BC%9A%20%E7%90%86%E8%A7%A3%E4%BA%86%E5%8E%9F%E7%90%86%EF%BC%8C%E5%AE%83%E5%B0%B1%E4%B8%8D%E5%8F%8D%E7%9B%B4%E8%A7%89%E4%BA%86.html">10 闭包： 理解了原理，它就不反直觉了</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/11%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E5%AE%8C%E5%96%84%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">11 语义分析（上）：如何建立一个完善的类型系统？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/12%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9B%B8%E5%85%B3%E6%83%85%E5%86%B5%E7%9A%84%E5%A4%84%E7%90%86%EF%BC%9F.html">12 语义分析（下）：如何做上下文相关情况的处理？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/13%20%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%90%E8%A1%8C%E6%9C%9F%E7%9A%84%E5%8A%A8%E6%80%81%E7%89%B9%E6%80%A7.html">13 继承和多态：面向对象运行期的动态特性</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/14%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%8F%E6%98%8E%E5%9C%B0%E6%94%AF%E6%8C%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%EF%BC%9F.html">14 前端技术应用（一）：如何透明地支持数据库分库分表？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/15%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E6%8A%A5%E8%A1%A8%E5%B7%A5%E5%85%B7%EF%BC%9F.html">15 前端技术应用（二）：如何设计一个报表工具？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/16%20NFA%E5%92%8CDFA%EF%BC%9A%E5%A6%82%E4%BD%95%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B7%A5%E5%85%B7%EF%BC%9F.html">16 NFA和DFA：如何自己实现一个正则表达式工具？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/17%20First%E5%92%8CFollow%E9%9B%86%E5%90%88%EF%BC%9A%E7%94%A8LL%E7%AE%97%E6%B3%95%E6%8E%A8%E6%BC%94%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B.html">17 First和Follow集合：用LL算法推演一个实例</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/18%20%E7%A7%BB%E8%BF%9B%E5%92%8C%E8%A7%84%E7%BA%A6%EF%BC%9A%E7%94%A8LR%E7%AE%97%E6%B3%95%E6%8E%A8%E6%BC%94%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B.html">18 移进和规约：用LR算法推演一个实例</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/19%20%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%9A%E5%AF%B9%E4%BA%8E%E5%B7%A6%E9%80%92%E5%BD%92%E7%9A%84%E8%AF%AD%E6%B3%95%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E6%8E%A8%E5%AF%BC%E4%B8%8D%E6%98%AF%E5%B7%A6%E9%80%92%E5%BD%92%E7%9A%84%EF%BC%9F.html">19 案例总结与热点问题答疑：对于左递归的语法，为什么我的推导不是左递归的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/20%20%E9%AB%98%E6%95%88%E8%BF%90%E8%A1%8C%EF%BC%9A%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF.html">20 高效运行：编译器的后端技术</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/21%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%AA%81%E7%A0%B4%E7%8E%B0%E8%B1%A1%E7%9C%8B%E6%9C%AC%E8%B4%A8%EF%BC%8C%E9%80%8F%E8%BF%87%E8%AF%AD%E6%B3%95%E7%9C%8B%E8%BF%90%E8%A1%8C%E6%97%B6.html">21 运行时机制：突破现象看本质，透过语法看运行时</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/22%20%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%B6%E5%AE%9E%E4%B8%8D%E9%9A%BE%E5%AD%A6.html">22 生成汇编代码（一）：汇编语言其实不难学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/23%20%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8A%8A%E8%84%9A%E6%9C%AC%E7%BC%96%E8%AF%91%E6%88%90%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6.html">23 生成汇编代码（二）：把脚本编译成可执行文件</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/24%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E5%85%BC%E5%AE%B9%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%AD%E8%A8%80%E5%92%8C%E7%A1%AC%E4%BB%B6.html">24 中间代码：兼容不同的语言和硬件</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/25%20%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF%E7%9A%84%E9%87%8D%E7%94%A8%EF%BC%9ALLVM%E4%B8%8D%E4%BB%85%E4%BB%85%E8%AE%A9%E4%BD%A0%E9%AB%98%E6%95%88.html">25 后端技术的重用：LLVM不仅仅让你高效</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/26%20%E7%94%9F%E6%88%90IR%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%9D%99%E6%80%81%E7%BC%96%E8%AF%91%E7%9A%84%E8%AF%AD%E8%A8%80.html">26 生成IR：实现静态编译的语言</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/27%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%AF%94%E4%BB%96%E7%9A%84%E6%9B%B4%E9%AB%98%E6%95%88%EF%BC%9F.html">27 代码优化：为什么你的代码比他的更高效？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/28%20%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90%EF%BC%9A%E4%BD%A0%E5%86%99%E7%9A%84%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%AE%83%E6%9B%B4%E6%87%82.html">28 数据流分析：你写的程序，它更懂</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/29%20%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%82%E5%BA%94%E5%90%84%E7%A7%8D%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9F.html">29 目标代码的生成和优化（一）：如何适应各种硬件架构？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/30%20%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%82%E5%BA%94%E5%90%84%E7%A7%8D%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9F.html">30 目标代码的生成和优化（二）：如何适应各种硬件架构？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/31%20%E5%86%85%E5%AD%98%E8%AE%A1%E7%AE%97%EF%BC%9A%E5%AF%B9%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%81%9A%E8%AE%A1%E7%AE%97%EF%BC%8C%E5%88%B0%E5%BA%95%E5%8F%AF%E4%BB%A5%E6%9C%89%E5%A4%9A%E5%BF%AB%EF%BC%9F.html">31 内存计算：对海量数据做计算，到底可以有多快？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/32%20%E5%AD%97%E8%8A%82%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Spring%E6%8A%80%E6%9C%AF%E5%BE%88%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">32 字节码生成：为什么Spring技术很强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/33%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%9A%E8%83%BD%E5%90%A6%E4%B8%8D%E5%81%9C%E4%B8%8B%E6%95%B4%E4%B8%AA%E4%B8%96%E7%95%8C%EF%BC%9F.html">33 垃圾收集：能否不停下整个世界？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/34%20%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BC%98%E5%8C%96%EF%BC%9A%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E4%BD%9C%E7%94%A8.html">34 运行时优化：即时编译的原理和作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/35%20%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%9A%E5%90%8E%E7%AB%AF%E9%83%A8%E5%88%86%E7%9C%9F%E7%9A%84%E6%AF%94%E5%89%8D%E7%AB%AF%E9%83%A8%E5%88%86%E9%9A%BE%E5%90%97%EF%BC%9F.html">35 案例总结与热点问题答疑：后端部分真的比前端部分难吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/36%20%E5%BD%93%E5%89%8D%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%AF%B9%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E7%9A%84%E5%BD%B1%E5%93%8D.html">36 当前技术的发展趋势以及其对编译技术的影响</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/37%20%20%E4%BA%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BC%9A%E5%A6%82%E4%BD%95%E6%94%B9%E5%8F%98%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">37  云编程：云计算会如何改变编程模式？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/38%20%E5%85%83%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%B8%80%E8%BE%B9%E5%86%99%E7%A8%8B%E5%BA%8F%EF%BC%8C%E4%B8%80%E8%BE%B9%E5%86%99%E8%AF%AD%E8%A8%80.html">38 元编程：一边写程序，一边写语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E5%8A%A0%E9%A4%90%20%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A8%8B%E4%B8%8E%E6%A0%88%E5%B8%A7%E7%AE%A1%E7%90%86.html">加餐 汇编代码编程与栈帧管理</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E5%9B%A0%E4%B8%BA%E7%83%AD%E7%88%B1%EF%BC%8C%E6%89%80%E4%BB%A5%E5%9D%9A%E6%8C%81.html">用户故事 因为热爱，所以坚持</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%AC%AC%E4%BA%8C%E5%AD%A3%E5%9B%9E%E5%BD%92%20%E8%BF%99%E6%AC%A1%EF%BC%8C%E6%88%91%E4%BB%AC%E4%B8%80%E8%B5%B7%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8.html">第二季回归 这次，我们一起实战解析真实世界的编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80%EF%BC%8C%E6%8E%A8%E5%8A%A8%E8%BF%99%E4%B8%AA%E4%B8%96%E7%95%8C%E7%9A%84%E6%BC%94%E5%8C%96.html">结束语 用程序语言，推动这个世界的演化</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/27%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%AF%94%E4%BB%96%E7%9A%84%E6%9B%B4%E9%AB%98%E6%95%88%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="27 代码优化：为什么你的代码比他的更高效？" id="title">27 代码优化：为什么你的代码比他的更高效？</h1>
+<div><p>在使用LLVM的过程中，你应该觉察到了，优化之后和优化之前的代码相差很大。代码优化之后，数量变少了，性能也更高了。而针对这个看起来很神秘的代码优化，我想问你一些问题：</p>
+<ul>
+<li>代码优化的目标是什么？除了性能上的优化，还有什么优化？</li>
+<li>代码优化可以在多大的范围内执行？是在一个函数内，还是可以针对整个应用程序？</li>
+<li>常见的代码优化场景有哪些？</li>
+</ul>
+<p>这些问题是代码优化的基本问题，很重要，我会用两节课的时间带你了解和掌握。</p>
+<p>当然了，代码优化是编译器后端的两大工作之一（另一个是代码生成），弄懂它，你就掌握了一大块后端技术。而学习代码优化的原理，然后通过LLVM实践一下，这样原理与实践相结合，会帮你早日弄懂代码优化。</p>
+<p>接下来，我带你概要地了解一下代码优化的目标、对象、范围和策略等内容。</p>
+<h2 id="了解代码优化的目标-对象-范围和策略">了解代码优化的目标、对象、范围和策略</h2>
+<ul>
+<li>代码优化的目标</li>
+</ul>
+<p>代码优化的目标，是优化程序对计算机资源的使用。我们平常最关心的就是CPU资源，最大效率地利用CPU资源可以提高程序的性能。代码优化有时候还会有其他目标，比如代码大小、内存占用大小、磁盘访问次数、网络通讯次数等等。</p>
+<ul>
+<li>代码优化的对象</li>
+</ul>
+<p>从代码优化的对象看，大多数的代码优化都是在IR上做的，而不是在前一阶段的AST和后一阶段汇编代码上进行的，为什么呢？</p>
+<p><strong>其实，在AST上也能做一些优化，</strong>比如在讲前端内容的时候，我们曾经会把一些不必要的AST层次削减掉（例如add-&gt;mul-&gt;pri-&gt;Int，每个父节点只有一个子节点，可以直接简化为一个Int节点），但它抽象层次太高，含有的硬件架构信息太少，难以执行很多优化算法。 <strong>在汇编代码上进行优化</strong>会让算法跟机器相关，当换一个目标机器的时候，还要重新编写优化代码。<strong>所以，在IR上是最合适的，</strong>它能尽量做到机器独立，同时又暴露出很多的优化机会。</p>
+<ul>
+<li>代码优化的范围</li>
+</ul>
+<p>从优化的范围看，分为本地优化、全局优化和过程间优化。</p>
+<p>优化通常针对一组指令，最常用也是最重要的指令组，就是基本块。基本块的特点是：每个基本块只能从入口进入，从最后一条指令退出，每条指令都会被顺序执行。因着这个特点，我们在做某些优化时会比较方便。比如，针对下面的基本块，我们可以很安全地把第3行的“y:=t+x”改成“y:= 3 * x”，因为t的赋值一定是在y的前面：</p>
+<pre><code>BB1:
+  t:=2 * x
+  y:=t + x
+  Goto BB2 
+</code></pre>
+<p>这种针对基本块的优化，我们叫做<strong>本地优化（Local Optimization）。</strong></p>
+<p><strong>那么另一个问题来了：</strong>我们能否把第二行的“t:=2 * x”也优化删掉呢？这取决于是否有别的代码会引用t。所以，我们需要进行更大范围的分析，才能决定是否把第二行优化掉。</p>
+<p>超越基本块的范围进行分析，我们需要用到<strong>控制流图（Control Flow Graph，CFG）。</strong>CFG是一种有向图，它体现了基本块之前的指令流转关系。如果从BB1的最后一条指令是跳转到BB2，那么从BB1到BB2就有一条边。一个函数（或过程）里如果包含多个基本块，可以表达为一个CFG。</p>
+<p><img alt="" src="/assets/f1c0f8fbbaf73cbfab856ff7.jpg"/></p>
+<p>如果通过分析CFG，我们发现t在其他地方没有被使用，就可以把第二行删掉。这种针对一个函数、基于CFG的优化，叫做<strong>全局优化（Global Optimization）。</strong></p>
+<p>比全局优化更大范围的优化，叫做<strong>过程间优化（Inter-procedural Optimization），</strong>它能跨越函数的边界，对多个函数之间的关系进行优化，而不是仅针对一个函数做优化。</p>
+<ul>
+<li>代码优化的策略</li>
+</ul>
+<p>最后，你不需要每次都把代码优化做彻底，因为做代码优化本身也需要消耗计算机的资源。所以，你需要权衡代码优化带来的好处和优化本身的开支这两个方面，然后确定做多少优化。比如，在浏览器里加载JavaScript的时候，JavaScript引擎一定会对JavaScript做优化，但如果优化消耗的时间太长，界面的响应会变慢，反倒影响用户使用页面的体验，所以JavaScript引擎做优化时要掌握合适的度或调整优化时机。</p>
+<p>接下来，我带你认识一些常见的代码优化的场景，这样可以让你对代码优化的认识更加直观，然后我们也可以将这部分知识作为后面讨论算法的基础。</p>
+<h2 id="一些优化的场景">一些优化的场景</h2>
+<ul>
+<li>代数优化（Algebraic Optimazation）</li>
+</ul>
+<p>代数优化是最简单的一种优化，当操作符是代数运算的时候，你可以根据学过的数学知识进行优化。</p>
+<p>比如“x:=x+0 ”这行代码，操作前后x没有任何变化，所以这样的代码可以删掉；又比如“x:=x*0” 可以简化成“x:=0”；对某些机器来说，移位运算的速度比乘法的快，那么“x:=x*8”可以优化成“x:=x&lt;”。</p>
+<ul>
+<li>常数折叠（Constant Folding）</li>
+</ul>
+<p>它是指，对常数的运算可以在编译时计算，比如 “x:= 20 * 3 ”可以优化成“x:=60”。另外，在if条件中，如果条件是一个常量，那就可以确定地取某个分支。比如：“If 2&gt;0 Goto BB2” 可以简化成“Goto BB2”就好了。</p>
+<ul>
+<li>删除不可达的基本块</li>
+</ul>
+<p>有些代码永远不可能被激活。比如在条件编译的场景中，我们会写这样的程序：“if(DEBUG) {…}”。如果编译时，DEBUG是一个常量false，那这个代码块就没必要编译了。</p>
+<ul>
+<li>删除公共子表达式（Common Subexpression Elimination）</li>
+</ul>
+<p>下面这两行代码，x和y右边的形式是一样的，如果这两行代码之间，a和b的值没有发生变化（比如采用SSA形式），那么x和y的值一定是一样的。</p>
+<pre><code>x := a + b
+y := a + b
+</code></pre>
+<p>那我们就可以让y等于x，从而减少了一次“a+b”的计算，这种优化叫做删除公共子表达式。</p>
+<pre><code>x := a + b
+y := x
+</code></pre>
+<ul>
+<li>拷贝传播（Copy Propagation）和常数传播（Constant Propagation）</li>
+</ul>
+<p>下面的示例代码中，第三行可以被替换成“z:= 2 * x”， 因为y的值就等于x，这叫做拷贝传播。</p>
+<pre><code>x := a + b
+y := x
+z := 2 * y
+</code></pre>
+<p>如果y := 10，常数10也可以传播下去，把最后一行替换成 z:= 2 * 10，这叫做常数传播。再做一次常数折叠，就变成 z:=20了。</p>
+<ul>
+<li>死代码删除（Ded code elimination）</li>
+</ul>
+<p>在上面的拷贝传播中，如果没有其他地方使用y变量了，那么第二行就是死代码，就可以删除掉，这种优化叫做死代码删除。</p>
+<p><strong>最后我强调一下，</strong>一个优化可能导致另一个优化，比如，拷贝传播导致y不再被使用，我们又可以进行死代码删除的优化。所以，一般进行多次优化、多次扫描。</p>
+<p>了解了优化的场景之后，你能直观地知道代码优化到底做了什么事情，不过知其然还要知其所以然，你还需要了解这些优化都是怎么实现的。</p>
+<h2 id="如何做本地优化">如何做本地优化</h2>
+<p>上面这些优化场景，可以用于本地优化、全局优化和过程间优化。这节课我们先看看如何做本地优化，因为它相对简单，学习难度较低，下节课再接着讨论全局优化。</p>
+<p>假设下面的代码是一个基本块（省略最后的终结指令）：</p>
+<pre><code>a := b
+c := a + b
+c := b
+d := a + b
+e := a + b
+</code></pre>
+<p>为了优化它们，我们的方法是计算一个“可用表达式（available expression）”的集合。可用表达式，是指存在一个变量，保存着某个表达式的值。</p>
+<p><strong>我们从上到下顺序计算这个集合：</strong></p>
+<p>1.一开始是空集。-
+2.经过第一行代码后，集合里增加了“a:=b”；-
+3.经过第二行代码后，增加了“c:=a+b”。-
+<strong>4.注意，</strong>在经过第三行代码以后，由于变量c的定义变了，所以“c:=a+b”不再可用，而是换成了“c:=b”。</p>
+<p><img alt="" src="/assets/75152c109ff64bf98f67b85d.jpg"/></p>
+<p>你能看到，代码“e:=a+b”，和集合中的“d:=a+b”等号右边部分是相同的，所以我们首先可以<strong>删除公共子表达式，</strong>优化成“e:=d”。变成下面这样：</p>
+<p><img alt="" src="/assets/614e7409d21035107f43fa1e.jpg"/></p>
+<p>然后，我们可以做一下<strong>拷贝传播，</strong>利用“a:=b”，把表达式中的多个a都替换成b。</p>
+<p><img alt="" src="/assets/ab476e7ac6b95a98b3e52e98.jpg"/></p>
+<p>到目前为止，a都被替换成了b，对e的计算也简化了，优化后的代码变成了下面这样：</p>
+<pre><code>a := b
+c := b + b
+c := b
+d := b + b
+e := d
+</code></pre>
+<p>观察一下这段代码，它似乎还存在可优化的空间，比如，会存在死代码，而我们可以将其删除。</p>
+<p>假设，在后序的基本块中，b和c仍然会被使用，但其他变量就不会再被用到了。那么，上面这5行代码哪行能被删除呢？这时，我们要做另一个分析：活跃性分析（Liveness Analysis）。</p>
+<p>我们说一个变量是活的，意思是它的值在改变前，会被其他代码读取。（对于SSA格式的IR，变量定义出来之后就不会再改变，所以你只要看后面的代码有没有使用这个变量的就可以了）我们会分析每个变量的活跃性，把死的变量删掉。</p>
+<p><strong>怎么做呢？</strong>我们这次还是要借助一个集合，不过这个集合是从后向前，倒序计算的。</p>
+<p><img alt="" src="/assets/9afe65ffa28e7a685c462ddb.jpg"/></p>
+<p>一开始集合里的元素是{b, c}，这是初始值，表示b和c会被后面的代码使用，所以它们是活的。</p>
+<ul>
+<li>扫描过“e := d”后，因为用到了d，所以d是活的，结果是{b, c, d}。</li>
+<li>再扫描“d := b + b”，用到了b，但集合里已经有b了；这里给d赋值了，已经满足了后面代码对d的要求，所以可以从集合里去掉d了，结果是{b，c}。</li>
+<li>再扫描“c := b”，从集合里去掉c，结果是{b}。</li>
+<li>继续扫描，一直到第一行，最后的集合仍然是{b}。</li>
+</ul>
+<p>现在，基于这个集合，我们就可以做死代码删除了。<strong>当给一个变量赋值时，它后面跟着的集合没有这个变量，说明它不被需要，就可以删掉了。</strong>图中标橙色的三行，都是死代码，都可以删掉。</p>
+<p><img alt="" src="/assets/28af26fc226f3d73d088c313.jpg"/></p>
+<p>删掉以后，只剩下了两行代码。<strong>注意，</strong>由于“ e := d”被删掉了，导致d也不再被需要，变成了死变量。</p>
+<p><img alt="" src="/assets/99d0136964fe9d15830727e9.jpg"/></p>
+<p>把变量d删掉以后，就剩下了一行代码“c := b”了。</p>
+<p><img alt="" src="/assets/8f428043f5142f47eff72b83.jpg"/></p>
+<p>到此为止，我们完成了整个的优化过程，5行代码优化成了1行代码，成果是很显著的！</p>
+<p><strong>我来带你总结一下这个优化过程：</strong></p>
+<ul>
+<li><p>我们首先做一个正向扫描，进行可用表达式分析，建立可用表达式的集合，然后参照这个集合替换公共子表达式，以及做拷贝传播。</p></li>
+<li><p>接着，我们做一个反向扫描，进行活跃性分析，建立活变量的集合，识别出死变量，并依据它删除给死变量赋值的代码。</p></li>
+<li><p>上述优化可能需要做不止一遍，才能得到最后的结果。</p></li>
+</ul>
+<p>这样看来，优化并不难吧？当然了，目前我们做的优化是基于一段顺序执行的代码，没有跳转，都是属于一个基本块的，属于本地优化。</p>
+<p>直观地理解了本地优化之后，我们可以把这种理解用<strong>更加形式化的方式表达出来，</strong>这样，你可以理解得更加透彻。本地优化中，可用表达式分析和活跃性分析，都可以看做是由下面4个元素构成的：</p>
+<ul>
+<li><p>D（方向）。是朝前还是朝后遍历。</p></li>
+<li><p>V（值）。代码的每一个地方都要计算出一个值。可用表达式分析和活跃性分析的值是一个集合，也有些分析的值并不是集合，在下一讲你会看到这样的例子。</p></li>
+<li><p>F（转换函数，对V进行转换）。比如，在做可用表达式分析的时候，遇到了“c := b”时，可用表达式的集合从{a := b, c := a + b}转换成了{a := b, c := b}。<strong>这里遵守的转换规则是：</strong>因为变量c被重新赋值了，那么就从集合里，把变量c原来的定义去掉，并把带有c的表达式都去掉，因为过去的c已经失效了，然后，把变量c新的定义加进去。</p></li>
+<li><p>I（初始值，是算法开始时V的取值）。做可用表达式分析的时候，初始值是空集。在做活跃性分析的时候，初始值是后面代码中还会访问的变量，也就是活变量。</p></li>
+</ul>
+<p>这样形式化以后，我们就可以按照这个模型来统一理解各种本地优化算法。接下来，我们来体验和熟悉一下LLVM的优化功能。</p>
+<h2 id="用llvm来演示优化功能">用LLVM来演示优化功能</h2>
+<p>在<a href="https://time.geekbang.org/column/article/153192" target="_blank">25讲</a>中，我们曾经用Clang命令带上O2参数来生成优化的IR：</p>
+<pre><code>clang -emit-llvm -S -O2 fun1.c -o fun1-O2.ll
+</code></pre>
+<p>实际上，LLVM还有一个单独的命令opt，来做代码优化。缺省情况下，它的输入和输出都是.bc文件，所以我们还要在.bc和.ll两种格式之间做转换。</p>
+<pre><code>clang -emit-llvm -S fun1.c -o fun1.ll  //生成LLVM IR
+llc fun1.ll -o fun1.bc                 //编译成字节码
+opt -O2 fun1.bc -o fun1-O2.bc          //做O2级的优化
+llvm-dis fun1-O2.bc -o fun1-O2.ll      //将字节码反编译成文本格式
+</code></pre>
+<p><strong>其中要注意的一点，</strong>是要把第一行命令生成的fun1.ll文件中的“optnone”这个属性去掉，因为这个它的意思是不要代码优化。</p>
+<p>我们还可以简化上述操作，给opt命令带上-S参数，直接对.ll文件进行优化：</p>
+<pre><code>opt -S -O2 fun1.ll -o fun1-O2.ll
+</code></pre>
+<p><strong>另外，我解释一下-O2参数：</strong>-O2代表的是二级优化，LLVM中定义了多个优化级别，基本上数字越大，所做的优化就越多。</p>
+<p>我们可以不使用笼统的优化级别，而是指定采用某个特别的优化算法，比如mem2reg算法，会把对内存的访问优化成尽量访问寄存器。</p>
+<pre><code>opt -S -mem2reg fun1.ll -o fun1-O2.ll
+</code></pre>
+<p>用opt –help命令，可以查看opt命令所支持的所有优化算法。</p>
+<p>对于常数折叠，在调用API生成IR的时候，LLVM缺省就会去做这个优化。比如下面这段代码，是返回2+3的值，但生成IR的时候直接变成了5，因为这种优化比较简单，不需要做复杂的分析：</p>
+<pre><code>Function * codegen_const_folding(){
+    //创建函数
+    FunctionType *funType = FunctionType::get(Type::getInt32Ty(TheContext), false);
+    Function *fun = Function::Create(funType, Function::ExternalLinkage, "const_folding", TheModule.get());
+
+    //创建一个基本块
+    BasicBlock *BB = BasicBlock::Create(TheContext, "", fun);
+    Builder.SetInsertPoint(BB);
+
+    Value * tmp1 = ConstantInt::get(TheContext, APInt(32, 2, true));
+    Value * tmp2 = ConstantInt::get(TheContext, APInt(32, 3, true));
+    Value * tmp3 =  Builder.CreateAdd(tmp1, tmp2);
+
+    Builder.CreateRet(tmp3);
+    return fun;
+}
+</code></pre>
+<p>生成的IR如下：</p>
+<pre><code>define i32 @const_folding() {
+  ret i32 5
+}
+</code></pre>
+<p><strong>你需要注意，</strong>很多优化算法，都是要基于寄存器变量来做，所以，我们通常都会先做一下-mem2reg优化。</p>
+<p>在LLVM中，做优化算法很方便，因为它采用的是SSA格式。具体来说，LLVM中定义了Value和User两个接口，它们体现了LLVM IR最强大的特性，即静态单赋值中的定义-使用链，这种定义-使用关系会被用到优化算法中。</p>
+<p>在<a href="https://time.geekbang.org/column/article/154438" target="_blank">26讲</a>中，我们已经讲过了Value类。</p>
+<p>如果一个类是从Value继承的，意味着它定义了一个值。另一个类是User类，函数和指令也是User类的子类，也就是说，在函数和指令中，可以使用别的地方定义的值。</p>
+<p><img alt="" src="/assets/1bad5f1cce8f2d2359d0a28c.jpg"/></p>
+<p><strong>这两个类是怎么帮助到优化算法中的呢？</strong></p>
+<p>在User中，可以访问所有它用到的Value，比如一个加法指令（%c = add nsw i32 %a, %b）用到了a和b这两个变量。</p>
+<p>而在Value中，可以访问所有使用这个值的User，比如给c赋值的这条指令。</p>
+<p>所以，你可以遍历一个Value的所有User，把它替换成另一个Value，这就是拷贝传播。</p>
+<p><strong>接下来，我们看看如何用程序实现IR的优化。</strong></p>
+<p>在LLVM内部，优化工作是通过一个个的Pass（遍）来实现的，它支持三种类型的Pass：</p>
+<ul>
+<li><p>一种是分析型的Pass（Analysis Passes），只是做分析，产生一些分析结果用于后序操作。</p></li>
+<li><p>一些是做代码转换的（Transform Passes），比如做公共子表达式删除。</p></li>
+<li><p>还有一类pass是工具型的，比如对模块做正确性验证。你可以查阅LLVM所支持的<a href="https://llvm.org/docs/Passes.html" target="_blank">各种Pass。</a></p></li>
+</ul>
+<p>下面的代码创建了一个PassManager，并添加了两个优化Pass：</p>
+<pre><code>// 创建一个PassManager
+TheFPM = std::make_unique&lt;legacy::FunctionPassManager&gt;(TheModule.get());
+
+// 窥孔优化和一些位计算优化
+TheFPM-&gt;add(createInstructionCombiningPass());
+
+// 表达式重关联
+TheFPM-&gt;add(createReassociatePass());
+
+TheFPM-&gt;doInitialization();
+</code></pre>
+<p>之后，再简单地调用PassManager的run()方法，就可以对代码进行优化：</p>
+<pre><code>TheFPM-&gt;run(*fun);
+</code></pre>
+<p>你可以查看本讲附带的代码，尝试自己编写一些示例程序，查看优化前和优化后的效果。</p>
+<h2 id="课程小结">课程小结</h2>
+<p>本节课，我带你学习了代码优化的原理，然后通过LLVM实践了一下，演示了优化功能，我希望你能记住几个关键点：</p>
+<p>1.代码优化分为本地优化、全局优化和过程间优化三个范围。有些优化对于这三个范围都是适用的，但也有一些优化算法是全局优化和过程间优化专有的。</p>
+<p>2.可用表达式分析和活跃性分析是本地优化时的两个关键算法。这些算法都是由扫描方向、值、转换函数和初始值这四个要素构成的。</p>
+<p>3.LLVM用pass来做优化，你可以通过命令行或程序来使用这些Pass。你也可以编写自己的Pass。</p>
+<p>最后，我建议你多编写一些测试代码，并用opt命令去查看它的优化效果，在这个过程中增加对代码优化的感性认识。</p>
+<h2 id="一课一思">一课一思</h2>
+<p>针对不同的领域（商业、科学计算、游戏等），代码优化的重点可能是不同的。针对你所熟悉的计算机语言和领域，你知道有哪些优化的需求？是采用什么技术实现的？欢迎在留言区分享你的观点。</p>
+<p>最后，感谢你的阅读，如果这篇文章有所收获，也欢迎你将它分享给更多的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

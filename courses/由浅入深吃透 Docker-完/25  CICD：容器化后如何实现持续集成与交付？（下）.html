@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>25  CICD：容器化后如何实现持续集成与交付？（下） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/index.html">由浅入深吃透 Docker-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">27 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>由浅入深吃透 Docker-完</strong><ul><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/00%20%E6%BA%AF%E6%9C%AC%E6%B1%82%E6%BA%90%EF%BC%8C%E5%90%83%E9%80%8F%20Docker%EF%BC%81.html">00 溯本求源，吃透 Docker！</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/01%20%20Docker%20%E5%AE%89%E8%A3%85%EF%BC%9A%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B%E5%B8%A6%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86.html">01  Docker 安装：入门案例带你了解容器技术原理</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/02%20%20%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%EF%BC%9A%E9%95%9C%E5%83%8F%E3%80%81%E5%AE%B9%E5%99%A8%E3%80%81%E4%BB%93%E5%BA%93%EF%BC%8C%E5%BD%BB%E5%BA%95%E6%8E%8C%E6%8F%A1%20Docker%20%E6%9E%B6%E6%9E%84%E6%A0%B8%E5%BF%83%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5.html">02  核心概念：镜像、容器、仓库，彻底掌握 Docker 架构核心设计理念</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/03%20%20%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8%EF%BC%9ADocker%20%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E4%BD%A0%E7%9A%84%E9%95%9C%E5%83%8F%EF%BC%9F.html">03  镜像使用：Docker 环境下如何配置你的镜像？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/04%20%20%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C%EF%BC%9A%E5%BE%97%E5%BF%83%E5%BA%94%E6%89%8B%E6%8E%8C%E6%8F%A1%20Docker%20%E5%AE%B9%E5%99%A8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html">04  容器操作：得心应手掌握 Docker 容器基本操作</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/05%20%20%E4%BB%93%E5%BA%93%E8%AE%BF%E9%97%AE%EF%BC%9A%E6%80%8E%E6%A0%B7%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%EF%BC%9F.html">05  仓库访问：怎样搭建属于你的私有仓库？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/06%20%20%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E7%94%9F%E4%BA%A7%E4%B8%AD%E7%BC%96%E5%86%99%E6%9C%80%E4%BC%98%20Dockerfile%EF%BC%9F.html">06  最佳实践：如何在生产中编写最优 Dockerfile？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/07%20%20Docker%20%E5%AE%89%E5%85%A8%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%86%85%E6%A0%B8%E7%9A%84%E5%BC%B1%E9%9A%94%E7%A6%BB%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E5%AE%89%E5%85%A8%E6%80%A7%EF%BC%9F.html">07  Docker 安全：基于内核的弱隔离系统如何保障安全性？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/08%20%20%E5%AE%B9%E5%99%A8%E7%9B%91%E6%8E%A7%EF%BC%9A%E5%AE%B9%E5%99%A8%E7%9B%91%E6%8E%A7%E5%8E%9F%E7%90%86%E5%8F%8A%20cAdvisor%20%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8.html">08  容器监控：容器监控原理及 cAdvisor 的安装与使用</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/09%20%20%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9E%84%E5%BB%BA%E5%AE%B9%E5%99%A8%E9%9C%80%E8%A6%81%20Namespace%20%EF%BC%9F.html">09  资源隔离：为什么构建容器需要 Namespace ？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/10%20%20%E8%B5%84%E6%BA%90%E9%99%90%E5%88%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20Cgroups%20%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%B5%84%E6%BA%90%E9%99%90%E5%88%B6%EF%BC%9F.html">10  资源限制：如何通过 Cgroups 机制实现资源限制？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/11%20%20%E7%BB%84%E4%BB%B6%E7%BB%84%E6%88%90%EF%BC%9A%E5%89%96%E6%9E%90%20Docker%20%E7%BB%84%E4%BB%B6%E4%BD%9C%E7%94%A8%E5%8F%8A%E5%85%B6%E5%BA%95%E5%B1%82%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">11  组件组成：剖析 Docker 组件作用及其底层工作原理</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/12%20%20%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%89%96%E6%9E%90%20Docker%20%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E5%8F%8A%20Libnetwork%20%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86.html">12  网络模型：剖析 Docker 网络实现及 Libnetwork 底层原理</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/13%20%20%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9A%E5%89%96%E6%9E%90%20Docker%20%E5%8D%B7%E4%B8%8E%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86.html">13  数据存储：剖析 Docker 卷与持久化数据存储的底层原理</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/14%20%20%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E9%A9%B1%E5%8A%A8%EF%BC%9AAUFS%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%8F%8A%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E7%9A%84%E6%9C%80%E4%BD%B3%E9%85%8D%E7%BD%AE.html">14  文件存储驱动：AUFS 文件系统原理及生产环境的最佳配置</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/15%20%20%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E9%A9%B1%E5%8A%A8%EF%BC%9ADevicemapper%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%8F%8A%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E7%9A%84%E6%9C%80%E4%BD%B3%E9%85%8D%E7%BD%AE.html">15  文件存储驱动：Devicemapper 文件系统原理及生产环境的最佳配置</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/16%20%20%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E9%A9%B1%E5%8A%A8%EF%BC%9AOverlayFS%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E5%8F%8A%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E7%9A%84%E6%9C%80%E4%BD%B3%E9%85%8D%E7%BD%AE.html">16  文件存储驱动：OverlayFS 文件系统原理及生产环境的最佳配置</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/17%20%20%E5%8E%9F%E7%90%86%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E4%BD%BF%E7%94%A8%20Golang%20%E5%BC%80%E5%8F%91%20Docker%EF%BC%88%E4%B8%8A%EF%BC%89.html">17  原理实践：自己动手使用 Golang 开发 Docker（上）</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/18%20%20%E5%8E%9F%E7%90%86%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E4%BD%BF%E7%94%A8%20Golang%20%E5%BC%80%E5%8F%91%20Docker%EF%BC%88%E4%B8%8B%EF%BC%89.html">18  原理实践：自己动手使用 Golang 开发 Docker（下）</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/19%20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Docker%20Compose%20%E8%A7%A3%E5%86%B3%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E4%BE%9D%E8%B5%96%EF%BC%9F.html">19  如何使用 Docker Compose 解决开发环境的依赖？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/20%20%20%E5%A6%82%E4%BD%95%E5%9C%A8%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%B8%AD%E4%BD%BF%E7%94%A8%20Docker%20Swarm%20%E8%B0%83%E5%BA%A6%E5%AE%B9%E5%99%A8%EF%BC%9F.html">20  如何在生产环境中使用 Docker Swarm 调度容器？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/21%20%20%E5%A6%82%E4%BD%95%E4%BD%BF%20Docker%20%E5%92%8C%20Kubernetes%20%E7%BB%93%E5%90%88%E5%8F%91%E6%8C%A5%E5%AE%B9%E5%99%A8%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%B7%E5%80%BC%EF%BC%9F.html">21  如何使 Docker 和 Kubernetes 结合发挥容器的最大价值？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/22%20%20%E5%A4%9A%E9%98%B6%E7%BA%A7%E6%9E%84%E5%BB%BA%EF%BC%9ADocker%20%E4%B8%8B%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%95%9C%E5%83%8F%E5%A4%9A%E9%98%B6%E7%BA%A7%E6%9E%84%E5%BB%BA%EF%BC%9F.html">22  多阶级构建：Docker 下如何实现镜像多阶级构建？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/23%20%20DevOps%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E5%90%8E%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20DevOps%20%E6%8F%90%E9%AB%98%E5%8D%8F%E4%BD%9C%E6%95%88%E8%83%BD%EF%BC%9F.html">23  DevOps：容器化后如何通过 DevOps 提高协作效能？</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/24%20%20CICD%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E5%90%8E%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E4%B8%8E%E4%BA%A4%E4%BB%98%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">24  CICD：容器化后如何实现持续集成与交付？（上）</a></li><li><a class="active" aria-current="page" href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/25%20%20CICD%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E5%90%8E%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E4%B8%8E%E4%BA%A4%E4%BB%98%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">25  CICD：容器化后如何实现持续集成与交付？（下）</a></li><li><a href="/courses/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/26%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E5%B1%95%E6%9C%9B%E6%9C%AA%E6%9D%A5%EF%BC%9ADocker%20%E7%9A%84%E7%A7%B0%E9%9C%B8%E4%B9%8B%E8%B7%AF.html">26 结束语  展望未来：Docker 的称霸之路</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%E5%90%83%E9%80%8F%20Docker-%E5%AE%8C/25%20%20CICD%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E5%90%8E%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E4%B8%8E%E4%BA%A4%E4%BB%98%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="25  CICD：容器化后如何实现持续集成与交付？（下）" id="title">25  CICD：容器化后如何实现持续集成与交付？（下）</h1>
+<div><p>上一讲，我介绍了 CI 和 CD 的相关概念，并且使用 Docker+Jenkins+GitLab 搭建了我们的 CI/CD 环境，今天我们就来使用已经构建好的环境来实际构建和部署一个应用。</p>
+<p>构建和部署一个应用的流程可以分为五部分。</p>
+<ol>
+<li>我们首先需要配置 GitLab SSH 访问公钥，使得我们可以直接通过 SSH 拉取或推送代码到 GitLab。</li>
+<li>接着将代码通过 SSH 上传到 GitLab。</li>
+<li>再在 Jenkins 创建构建任务，使得 Jenkins 可以成功拉取 GitLab 的代码并进行构建。</li>
+<li>然后配置代码变更自动构建流程，使得代码变更可以触发自动构建 Docker 镜像。</li>
+<li>最后配置自动部署流程，镜像构建完成后自动将镜像发布到测试或生产环境。</li>
+</ol>
+<p>接下来我们逐一操作。</p>
+<h3 id="1-配置-gitlab-ssh-访问公钥">1. 配置 GitLab SSH 访问公钥</h3>
+<p>为了能够让 Jenkins 顺利从 GitLab 拉取代码，我们需要先生成 ssh 密钥。我们可以使用 ssh-keygen 命令来生成 2048 位的 ras 密钥。在 Linux 上执行如下命令：</p>
+<pre><code>$ ssh-keygen -o -t rsa -b 2048 -C "<a class="__cf_email__" data-cfemail="cca9a1ada5a08ca9b4ada1bca0a9e2afa3a1" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>"
+
+# 输入上面命令后系统会提示我们密钥保存的位置等信息，只需要按回车即可。
+
+Generating public/private rsa key pair.
+
+Enter file in which to save the key (/home/centos/.ssh/id_rsa):
+
+Enter passphrase (empty for no passphrase):
+
+Enter same passphrase again:
+
+Your identification has been saved in /home/centos/.ssh/id_rsa.
+
+Your public key has been saved in /home/centos/.ssh/id_rsa.pub.
+
+The key fingerprint is:
+
+SHA256:A+d0NQQrjxV2h+zR3BQIJxT23puXoLi1RiTKJm16+rg <a class="__cf_email__" data-cfemail="76131b171f1a36130e171b061a135815191b" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>
+
+The key's randomart image is:
+
++---[RSA 2048]----+
+
+|          =XB=o+o|
+
+|         ..=B+o .|
+
+|      . + +. o   |
+
+|       = B .o .  |
+
+|      o S +  o . |
+
+|     . * .... . +|
+
+|      =  ..o   +.|
+
+|     ...  o..   .|
+
+|     E=. ...     |
+
++----[SHA256]-----+
+</code></pre>
+<p>执行完上述命令后 ，$HOME/.ssh/ 目录下会自动生成两个文件：id_rsa.pub 文件为公钥文件，id_rsa 文件为私钥文件。我们可以通过 cat 命令来查看公钥文件内容：</p>
+<pre><code>$ cat $HOME/.ssh/id_rsa.pub
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDljSlDNHnUr4ursYISKXK5j2mWTYnt100mvYeJCLpr6tpeSarGyr7FnTc6sLM721plU2xq0bqlFEU5/0SSvFdLTht7bcfm/Hf31EdAuIqZuy/guP06ijpidfX6lVDxLWx/sO3Wbj3t7xgj4sfCFTiv+OOFP0NxKr5wy+emojm6KIaXkhjbPeJDgph5bvluFnKAtesMUkdhceAdN9grE3nkBOnwWw6G4dCtbrKt2o9wSyzgkDwPjj2qjFhcE9571/61/Nr8v9iqSHvcb/d7WZ0Qq7a2LYds6hQkpBg2RCDDJA16fFVs8Q5eNCpDQwGG3IbhHMUwvpKDf0OYrS9iftc5 <a class="__cf_email__" data-cfemail="c6a3aba7afaa86a3bea7abb6aaa3e8a5a9ab" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>
+</code></pre>
+<p>然后将公钥文件拷贝到 GitLab 的个人设置 -&gt; SSH Keys 中，点击添加按钮，将我们的公钥添加到 GitLab 中。</p>
+<p><img alt="Drawing 0.png" src="/assets/c1e1736833ae5b56c92c8c9f.png"/></p>
+<h3 id="2-上传服务代码到-gitlab">2. 上传服务代码到 GitLab</h3>
+<p>这里，我使用 Golang 编写了一个 HTTP 服务，代码如下：</p>
+<pre><code>package main
+
+import (
+
+    "fmt"
+
+    "net/http"
+
+)
+
+func hello(w http.ResponseWriter, req *http.Request) {
+
+    fmt.Fprintf(w, "hello\n")
+
+}
+
+func headers(w http.ResponseWriter, req *http.Request) {
+
+    for name, headers := range req.Header {
+
+        for _, h := range headers {
+
+            fmt.Fprintf(w, "%v: %v\n", name, h)
+
+        }
+
+    }
+
+}
+
+func main() {
+
+    http.HandleFunc("/hello", hello)
+
+    http.HandleFunc("/headers", headers)
+
+    http.ListenAndServe(":8090", nil)
+
+}
+</code></pre>
+<p>然后编写一个 Dockerfile，利用多阶段构建将我们的 Go 编译，并将编译后的二进制文件拷贝到 scratch（scratch 是一个空镜像，用于构建其他镜像，体积非常小）的基础镜像中。Dockerfile 的内容如下：</p>
+<pre><code>FROM golang:1.14 as builder
+
+WORKDIR /go/src/github.com/wilhelmguo/devops-demo/
+
+COPY main.go .
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o /tmp/http-server .
+
+FROM scratch
+
+WORKDIR /root/
+
+COPY --from=builder /tmp/http-server .
+
+CMD ["./http-server"]
+</code></pre>
+<p>编写完 Go HTTP 文件和 Dockerfile 文件后，代码目录内容如下：</p>
+<pre><code>$ ls -lh
+
+total 24
+
+-rw-r--r--  1 root  root   243B Nov  3 22:03 Dockerfile
+
+-rw-r--r--  1 root  root    26B Nov  3 22:06 README.md
+
+-rw-r--r--  1 root  root   441B Nov  3 22:03 main.go
+</code></pre>
+<blockquote>
+<p>源码详见<a href="https://github.com/wilhelmguo/devops-demo" target="_blank">这里</a></p>
+</blockquote>
+<p>然后，我们在 GitLab 上创建一个 hello 项目，并将代码上传。</p>
+<p><img alt="Drawing 1.png" src="/assets/f3b17e4d0da7f9ddbfdfeb7f.png"/>
+<img alt="Drawing 2.png" src="/assets/c1c869ba06b128acfadc3777.png"/></p>
+<p>项目创建完成后，GitLab 会自动跳转到项目详情页面。</p>
+<p><img alt="Drawing 3.png" src="/assets/552325a9d626b86d2c0e3d2e.png"/></p>
+<h3 id="3-创建-jenkins-任务">3. 创建 Jenkins 任务</h3>
+<p>在 Jenkins 中添加一个自由风格的任务。</p>
+<p><img alt="Drawing 4.png" src="/assets/b774af19f8671c8447a6bb7e.png"/></p>
+<p>点击确定，然后到源码管理选择 Git，填写 GitLab 项目的 URL。此时 Jenkins 会提示没有访问 GitLab 的相关权限，我们需要点击添加按钮将私钥添加到 Jenkins 中用以鉴权。</p>
+<p><img alt="Drawing 5.png" src="/assets/cbbe86fee8c2ba4a1e27c49c.png"/></p>
+<blockquote>
+<p>由于部署 GitLab 的宿主机 ssh 默认端口为 22，为了避免与宿主机的 ssh 端口冲突，我们的 GitLab ssh 端口配置为 2222，因此 Jenkins 连接 GitLab 的 URL 中需要包含端口号 2222， 配置格式为 ssh://<a class="__cf_email__" data-cfemail="41262835017076736f73716f706f77" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>:2222/root/hello.git。</p>
+</blockquote>
+<p>选择添加的密钥类型为 “SSH Username with private key”，Username 设置为 jenkins，然后将私钥粘贴到 Private Key 输入框中，点击添加即可。</p>
+<p><img alt="Drawing 6.png" src="/assets/bf9c6b1bfc6ce910ef98b56a.png"/></p>
+<p>添加完成后，认证名称选择 jenkins 后，红色报错提示就会消失。这证明此时 Jenkins 和 GitLab 已经认证成功，可以成功从 GitLab 拉取代码了。</p>
+<p><img alt="Drawing 7.png" src="/assets/6444e802cd3eabf2f1a26c73.png"/></p>
+<p>下面我们使用 shell 脚本来构建我们的应用镜像，在构建中增加一个 Shell 类型的构建步骤，并且填入以下信息，将 USER 替换为目标镜像仓库的用户名，将 PASSWORD 替换为镜像仓库的密码。</p>
+<pre><code># 第一步，登录镜像仓库
+
+$ docker login -u {USER} -p  {PASSWORD}
+
+# 第二步，使用 docker build 命令构建镜像
+
+$ docker build -t lagoudocker/devops-demo . 
+
+# 第三步, 使用 docker push 命令推送镜像
+
+$ docker push lagoudocker/devops-demo 
+</code></pre>
+<p><img alt="Drawing 8.png" src="/assets/d2b30d309807716611171919.png"/></p>
+<p>完成后点击保存，此时任务已经成功添加到 Jenkins 中。回到任务首页，点击构建按钮即可开始构建。第一次构建需要下载依赖的基础镜像，这个过程可能比较慢。构建过程中，我们也可以点击控制台查看构建输出的内容：</p>
+<p><img alt="Drawing 9.png" src="/assets/4960f7206aeb12ca2b251413.png"/></p>
+<h3 id="4-配置自动构建">4. 配置自动构建</h3>
+<p>点击上一步创建的任务，点击配置进入任务配置界面，到构建触发器下勾选 GitLab 相关的选项，点击 Generate 按钮生成一个 GitLab 回调 Jenkins 的 token。记录下 Jenkins 的回调地址和生成的 token 信息。</p>
+<p><img alt="Drawing 10.png" src="/assets/57dd9216eb4e2f31b64f1faa.png"/></p>
+<p>在 GitLab 项目设置中，选择 Webhooks，将 Jenkins 的回调地址和 token 信息添加到 Webhooks 的配置中，点击添加即可。</p>
+<p><img alt="Drawing 11.png" src="/assets/bf223e3016ab56fd2266eac8.png"/></p>
+<p>后面我们的每次提交都会触发自动构建。</p>
+<p>为了实现根据 git 的 tag 自动构建相应版本的镜像，我们需要修改 Jenkins 构建步骤中的 shell 脚本为以下内容：</p>
+<pre><code># 需要推送的镜像名称
+
+IMAGE_NAME="lagoudocker/devops-demo" 
+
+# 获取当前构建的版本号
+
+GIT_VERSION=`git describe --always --tag`
+
+# 生成完整的镜像 URL 变量，用于构建和推送镜像
+
+REPOSITORY=docker.io/${IMAGE_NAME}:${GIT_VERSION} 
+
+# 构建Docker镜像 
+
+docker build -t $REPOSITORY -f Dockerfile . 
+
+# 登录镜像仓库，username 跟 password 为目标镜像仓库的用户名和密码
+
+docker login --username=xxxxx --password=xxxxxx docker.io
+
+# 推送 Docker 镜像到目标镜像仓库
+
+docker push $REPOSITORY 
+</code></pre>
+<p>好了，到此我们已经完成了 GitLab -&gt; Jenkins -&gt; Docker 镜像仓库的自动构建和推送。当我们推送代码到 GitLab 中时，会自动触发 Webhooks，然后 GitLab 会根据配置的 Webhooks 调用 Jenkins 开始构建镜像，镜像构建完成后自动将镜像上传到我们的镜像仓库。</p>
+<h3 id="5-配置自动部署">5. 配置自动部署</h3>
+<p>镜像构建完成后，我们还需要将镜像发布到测试或生产环境中将镜像运行起来。发布到环境的过程可以设置为自动发布，每当我们推送代码到 master 中时，即开始自动构建镜像，并将构建后的镜像发布到测试环境中。</p>
+<p>在镜像构建过程中，实际上 Jenkins 是通过执行我们编写的 shell 脚本完成的，要想实现镜像构建完成后自动在远程服务器上运行最新的镜像，我们需要借助一个 Jenkins 插件 Publish Over SSH，这个插件可以帮助我们自动登录远程服务器，并执行一段脚本将我们的服务启动。</p>
+<p>下面我们来实际操作下这个插件。</p>
+<p><strong>第一步，在 Jenkins 中安装 Publish Over SSH 插件。</strong> 在 Jenkins 系统管理，插件管理中，搜索 Publish Over SSH，然后点击安装并重启 Jenkins 服务。</p>
+<p><img alt="Drawing 12.png" src="/assets/5a4f50e4049ea94ce8c1b824.png"/></p>
+<p><strong>第二步，配置 Publish Over SSH 插件。</strong> 插件安装完成后，在 Jenkins 系统管理的系统设置下，找到 Publish Over SSH 功能模块，添加远程服务器节点，这里我使用密码验证的方式添加一台服务器。配置好后，我们可以使用测试按钮测试服务器是否可以正常连接，显示Success 代表服务器可以正常连接，测试连接成功后，点击保存按钮保存配置。</p>
+<p><img alt="Drawing 13.png" src="/assets/ee9884171d71c5120abf1f4f.png"/></p>
+<p><strong>第三步，修改之前 shell 任务中脚本，</strong> 添加部署相关的内容：</p>
+<pre><code># 需要推送的镜像名称
+
+IMAGE_NAME="lagoudocker/devops-demo" 
+
+# 获取当前构建的版本号
+
+GIT_VERSION=`git describe --always --tag`
+
+# 生成完整的镜像 URL 变量，用于构建和推送镜像
+
+REPOSITORY=docker.io/${IMAGE_NAME}:${GIT_VERSION} 
+
+# 构建Docker镜像 
+
+docker build -t $REPOSITORY -f Dockerfile . 
+
+# 登录镜像仓库，username 跟 password 为目标镜像仓库的用户名和密码
+
+docker login --username={USER} --password={PASSWORD} docker.io
+
+# 推送 Docker 镜像到目标镜像仓库
+
+docker push $REPOSITORY 
+
+mkdir -p ./shell &amp;&amp; echo \ 
+
+"docker login --username={USER} --password={PASSWORD} \n"\ 
+
+"docker pull $REPOSITORY\n"\ 
+
+"docker kill hello \n"\ 
+
+"docker run --rm --name=hello -p 8090:8090 -d $REPOSITORY" &gt;&gt; ./shell/release
+</code></pre>
+<p>我们在 docker push 命令后，增加一个输出 shell 脚本到 release 文件的命令，这个脚本会发送到远端的服务器上并执行，通过执行这个脚本文件可以在远端服务器上，拉取最新镜像并且重新启动容器。</p>
+<p><strong>第四步，配置远程执行。在 Jenkins 的 hello 项目中，点击配置，在执行步骤中点击添加Send files or execute commands over SSH</strong>的步骤，选择之前添加的服务器，并且按照以下内容填写相关信息。</p>
+<p><img alt="Drawing 14.png" src="/assets/11b9738601c23fe62f91d607.png"/></p>
+<ul>
+<li>Source file 就是我们要传递的 shell 脚本信息，这里填写我们上面生成的 shell 脚本文件即可。</li>
+<li>Remove prefix 是需要过滤的目录，这里我们填写 shell。</li>
+<li>Remote directory 为远程执行脚本的目录。</li>
+</ul>
+<p>最后点击保存，保存我们的配置即可。配置完成后，我们就完成了推送代码到 GitLab，Jenkins 自动构建镜像，之后推送镜像到镜像仓库，最后自动在远程服务器上拉取并重新部署容器。</p>
+<blockquote>
+<p>如果你是生产环境中使用的 Kubernetes 管理服务，可以在 Jenkins 中安装 Kubernetes 的插件，然后构建完成后直接发布镜像到 Kubernetes 集群中。</p>
+</blockquote>
+<h3 id="结语">结语</h3>
+<p>本课时我们使用 Go 开发了一个简单的 HTTP 服务，并将代码托管在了 GitLab 中。然后通过配置 GitLab 和 Jenkins 的相互调用，实现了推送代码到 GitLab 代码仓库自动触发构建镜像并将镜像推送到远程镜像仓库中，最后将最新版本镜像发布到远程服务器上。</p>
+<p>DevOps 是一个非常棒的指导思想，而 CI/CD 是整个 DevOps 流程中最重要的部分，目前 CI/CD 的市场已经非常成熟，CI/CD 的工具链也非常完善，因此，无论是小团队还是大团队，都有必要去学习和掌握 CI/CD，以便帮助我们改善团队的效能，一切可以自动化的流程，都应该尽量避免人工参与。</p>
+<p>那么，你知道如何使用 Jenkins 将构建后的镜像发布到 Kubernetes 中吗?</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

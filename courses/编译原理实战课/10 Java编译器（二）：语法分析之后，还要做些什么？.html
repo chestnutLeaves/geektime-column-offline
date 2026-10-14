@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 Java编译器（二）：语法分析之后，还要做些什么？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">编译原理实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">53 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理实战课</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E8%BF%99%E9%97%A8%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE%EF%BC%9F.html">00 学习指南 如何学习这门编译原理实战课？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%9C%A8%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%AD%E6%B8%B8%E5%8E%86.html">00 开篇词 在真实世界的编译器中游历</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E7%BC%96%E8%AF%91%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B%E9%83%BD%E6%82%84%E6%82%84%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85%EF%BC%9F.html">01 编译的全过程都悄悄做了哪些事情？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E7%94%A8%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9E%84%E9%80%A0%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA.html">02 词法分析：用两种方式构造有限自动机</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%9F%BA%E6%9C%AC%E5%8A%9F%E5%92%8C%E4%B8%A4%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF.html">03 语法分析：两个基本功和两种算法思路</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%9A%E8%AE%A9%E7%A8%8B%E5%BA%8F%E7%AC%A6%E5%90%88%E8%AF%AD%E4%B9%89%E8%A7%84%E5%88%99.html">04 语义分析：让程序符合语义规则</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%BD%A0%E6%9C%89%E5%8F%91%E8%A8%80%E6%9D%83.html">05 运行时机制：程序如何运行，你有发言权</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E4%B8%8D%E6%98%AF%E5%8F%AA%E6%9C%89%E4%B8%80%E5%89%AF%E9%9D%A2%E5%AD%94.html">06 中间代码：不是只有一副面孔</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E8%B7%9F%E7%BC%96%E8%AF%91%E5%99%A8%E5%81%9A%E6%9C%8B%E5%8F%8B%EF%BC%8C%E8%AE%A9%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E9%A3%9E%E8%B5%B7%E6%9D%A5.html">07 代码优化：跟编译器做朋友，让你的代码飞起来</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%9F.html">08 代码生成：如何实现机器相关的优化？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/09%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%89%8B%E5%86%99%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%EF%BC%9F.html">09 Java编译器（一）：手写的编译器有什么优势？</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/10%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%BF%98%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Java编译器（二）：语法分析之后，还要做些什么？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/11%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%B1%9E%E6%80%A7%E5%88%86%E6%9E%90%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90.html">11 Java编译器（三）：属性分析和数据流分析</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/12%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%8E%BB%E9%99%A4%E8%AF%AD%E6%B3%95%E7%B3%96%E5%92%8C%E7%94%9F%E6%88%90%E5%AD%97%E8%8A%82%E7%A0%81.html">12 Java编译器（四）：去除语法糖和生成字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/13%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%8A%A8%E6%89%8B%E4%BF%AE%E6%94%B9Graal%E7%BC%96%E8%AF%91%E5%99%A8.html">13 Java JIT编译器（一）：动手修改Graal编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/14%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASea%20of%20Nodes%E4%B8%BA%E4%BD%95%E5%A6%82%E6%AD%A4%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">14 Java JIT编译器（二）：Sea of Nodes为何如此强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/15%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%8E%A2%E7%A9%B6%E5%86%85%E8%81%94%E5%92%8C%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%E7%9A%84%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86.html">15 Java JIT编译器（三）：探究内联和逃逸分析的算法原理</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/16%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9AGraal%E7%9A%84%E5%90%8E%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">16 Java JIT编译器（四）：Graal的后端是如何工作的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/17%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">17 Python编译器（一）：如何用工具生成编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/18%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E4%BB%8EAST%E5%88%B0%E5%AD%97%E8%8A%82%E7%A0%81.html">18 Python编译器（二）：从AST到字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/19%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6.html">19 Python编译器（三）：运行时机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/20%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E6%9E%90%E5%92%8C%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.html">20 JavaScript编译器（一）：V8的解析和编译过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/21%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E9%87%8A%E5%99%A8%E5%92%8C%E4%BC%98%E5%8C%96%E7%BC%96%E8%AF%91%E5%99%A8.html">21 JavaScript编译器（二）：V8的解释器和优化编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/22%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E6%80%A7%E8%83%BD%E5%BE%88%E9%AB%98%EF%BC%9F.html">22 Julia编译器（一）：如何让动态语言性能很高？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/23%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8LLVM%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E5%90%8E%E7%AB%AF%E5%8A%9F%E8%83%BD%EF%BC%9F.html">23 Julia编译器（二）：如何利用LLVM的优化和后端功能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/24%20Go%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A%E6%8A%8A%E5%AE%83%E5%BD%93%E4%BD%9C%E6%95%99%E7%A7%91%E4%B9%A6%E5%90%A7.html">24 Go语言编译器：把它当作教科书吧</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/25%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%A7%A3%E6%9E%90%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.html">25 MySQL编译器（一）：解析一条SQL语句的执行过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/26%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E5%A6%82%E4%BD%95%E5%B8%AE%E4%BD%A0%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%A7%E8%83%BD%EF%BC%9F.html">26 MySQL编译器（二）：编译技术如何帮你提升数据库性能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E8%AF%BE%E5%89%8D%E5%AF%BC%E8%AF%BB%EF%BC%9A%E5%AD%A6%E4%B9%A0%E7%8E%B0%E4%BB%A3%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF.html">27 课前导读：学习现代语言设计的正确姿势</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%89%8D%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E4%B9%9F%E6%9C%89%E4%BA%BA%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%AD%A6.html">28 前端总结：语言设计也有人机工程学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E4%B8%AD%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%8D%E9%81%97%E4%BD%99%E5%8A%9B%E5%9C%B0%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96.html">29 中端总结：不遗余力地进行代码优化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E5%85%85%E5%88%86%E5%8F%91%E6%8C%A5%E7%A1%AC%E4%BB%B6%E7%9A%84%E8%83%BD%E5%8A%9B.html">30 后端总结：充分发挥硬件的能力</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E0%E5%88%B0%E8%AF%AD%E8%A8%80%E7%BA%A7%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96.html">31 运行时（一）：从0到语言级的虚拟化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/32%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E6%80%A7%E6%9C%89%E5%85%B3%E5%90%97%EF%BC%9F.html">32 运行时（二）：垃圾收集与语言的特性有关吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">33 并发中的编译技术（一）：如何从语言层面支持线程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E5%8D%8F%E7%A8%8B%EF%BC%9F.html">34 并发中的编译技术（二）：如何从语言层面支持协程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/35%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9AErlang%E8%AF%AD%E8%A8%80%E5%8E%89%E5%AE%B3%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">35 并发中的编译技术（三）：Erlang语言厉害在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/36%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">36 高级特性（一）：揭秘元编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">37 高级特性（二）：揭秘泛型编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%9F.html">38 综合实现（一）：如何实现面向对象编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%9F.html">39 综合实现（二）：如何实现函数式编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/40%20%E6%88%90%E6%9E%9C%E6%A3%80%E9%AA%8C%EF%BC%9A%E6%96%B9%E8%88%9F%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%BC%98%E5%8A%BF%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">40 成果检验：方舟编译器的优势在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%901%20%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E9%9C%80%E8%A6%81%E4%BD%A0%E6%88%91%E5%85%B7%E5%A4%87%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%B4%A0%E8%B4%A8%EF%BC%9F.html">不定期加餐1 远程办公，需要你我具备什么样的素质？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%902%20%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%98%AF%E8%AE%AD%E7%BB%83%E5%BF%83%E7%90%86%E7%B4%A0%E8%B4%A8%E7%9A%84%E8%BF%87%E7%A8%8B.html">不定期加餐2 学习技术的过程，其实是训练心理素质的过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%903%20%E8%BF%99%E5%87%A0%E5%B9%B4%EF%BC%8C%E6%89%93%E5%8A%A8%E6%88%91%E7%9A%84%E4%B8%A4%E6%9C%AC%E5%A5%BD%E4%B9%A6.html">不定期加餐3 这几年，打动我的两本好书</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%904%20%E4%BB%8E%E8%BA%AB%E8%BE%B9%E7%9A%84%E7%89%9B%E4%BA%BA%E8%BA%AB%E4%B8%8A%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E7%A7%80%E5%93%81%E8%B4%A8.html">不定期加餐4 从身边的牛人身上，我学到的一些优秀品质</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%905%20%E5%80%9F%E5%8A%A9%E5%AE%9E%E4%BE%8B%EF%BC%8C%E6%8E%A2%E7%A9%B6C%2B%2B%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6.html">不定期加餐5 借助实例，探究C++编译器的内部机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%88%92%E9%87%8D%E7%82%B9%207%E7%A7%8D%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">划重点 7种编译器的核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%9C%9F%E6%9C%AB%E7%AD%94%E7%96%91%E4%B8%8E%E6%80%BB%E7%BB%93%20%E5%86%8D%E6%AC%A1%E5%AE%A1%E8%A7%86%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%9A%84%E4%BD%9C%E7%94%A8.html">期末答疑与总结 再次审视学习编译原理的作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%20%E5%A6%82%E4%BD%95%E5%90%83%E9%80%8F7%E7%A7%8D%E7%9C%9F%E5%AE%9E%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">热点问题答疑 如何吃透7种真实的编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%98%93%E6%98%8A%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8D%E6%AD%A2%E6%9C%89Bug%E5%92%8C%E5%8A%A0%E7%8F%AD%EF%BC%8C%E8%BF%98%E6%9C%89%E8%AF%97%E5%92%8C%E8%BF%9C%E6%96%B9.html">用户故事 易昊：程序员不止有Bug和加班，还有诗和远方</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%9F%A5%E8%AF%86%E5%9C%B0%E5%9B%BE%20%E4%B8%80%E8%B5%B7%E6%9D%A5%E5%A4%8D%E4%B9%A0%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">知识地图 一起来复习编译技术核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%AE%9E%E6%88%98%E6%98%AF%E5%94%AF%E4%B8%80%E6%A0%87%E5%87%86%EF%BC%81.html">结束语 实战是唯一标准！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/10%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%BF%98%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="10 Java编译器（二）：语法分析之后，还要做些什么？" id="title">10 Java编译器（二）：语法分析之后，还要做些什么？</h1>
+<div><p>你好，我是宫文学。</p>
+<p>上一讲，我带你了解了Java语言编译器的词法分析和语法分析功能，这两项工作是每个编译器都必须要完成的。那么，根据<a href="https://time.geekbang.org/column/article/242479" target="_blank">第1讲</a>我对编译过程的介绍，接下来就应该是语义分析和生成IR了。对于javac编译器来说，生成IR，也就是字节码以后，编译器就完成任务了。也就是说，javac编译器基本上都是在实现一些前端的功能。</p>
+<p>不过，由于Java的语法特性很丰富，所以即使只是前端，它的编译功能也不少。那么，除了引用消解和类型检查这两项基础工作之外，你是否知道注解是在什么时候处理的呢？泛型呢？还有各种语法糖呢？</p>
+<p>所以，今天这一讲，我就带你把Java编译器的总体编译过程了解一遍。然后，我会把重点放在语义分析中的引用消解、符号表的建立和注解的处理上。当你学完以后，你就能真正理解以下这些问题了：</p>
+<ul>
+<li><strong>符号表是教科书上提到的一种数据结构，但它在Java编译器里是如何实现的？编译器如何建立符号表？</strong></li>
+<li><strong>引用消解会涉及到作用域，那么作用域在Java编译器里又是怎么实现的？</strong></li>
+<li><strong>在编译期是如何通过注解的方式生成新程序的？</strong></li>
+</ul>
+<p>为了方便你理解Java编译器内部的一些对象结构，我画了一些类图（如果你不习惯看类图的话，可以参考下面的图表说明，比如我用方框表示一个类，用小圆圈表示一个接口，几种线条分别代表继承关系、引用关系和接口实现）。</p>
+<p><img alt="" src="/assets/7c35a56d45ec081535fc9bd5.jpg"/></p>
+<p>图1 ：课程中用到的类图的图表说明</p>
+<p>在课程开始之前，我想提醒几点：建议你在一个良好的学习环境进入今天的学习，因为你需要一步步地，仔细地跟住我的脚步，避免在探索过程中迷路；除此之外，你的手边还需要一个电脑，这样随时可以查看我在文章中提到的源代码。</p>
+<h2 id="了解整个编译过程">了解整个编译过程</h2>
+<p>现在，你可以打开jdk.compiler模块中的<strong>com.sun.tools.javac.comp包</strong>对应的源代码目录。</p>
+<p>comp应该是Compile的缩写。这里面有一个com.sun.tools.javac.comp.CompileStates类，它的意思是编译状态。其中有一个枚举类型CompileState，里面列出了所有的编译阶段。</p>
+<p>你会看到，词法和语法分析只占了一个环节（PARSE），生成字节码占了一个环节，而剩下的8个环节都可以看作是语义分析工作（建立符号表、处理注解、属性计算、数据流分析、泛型处理、模式匹配处理、Lambda处理和去除其他语法糖）。</p>
+<pre><code>public enum CompileState {
+    INIT(0),          //初始化
+    PARSE(1),         //词法和语法分析 
+    ENTER(2),         //建立符号表
+    PROCESS(3),       //处理注解
+    ATTR(4),          //属性计算
+    FLOW(5),          //数据流分析
+    TRANSTYPES(6),    //去除语法糖：泛型处理
+    TRANSPATTERNS(7), //去除语法糖：模式匹配处理
+    UNLAMBDA(8),      //去除语法糖：LAMBDA处理(转换成方法)
+    LOWER(9),         //去除语法糖：内部类、foreach循环、断言等。
+    GENERATE(10);     //生成字节码
+    ...
+}
+</code></pre>
+<p>另外，你还可以打开<strong>com.sun.tools.javac.main.JavaCompiler</strong>的代码，看看它的<strong>compile()方法</strong>。去掉一些细节，你会发现这样的代码主干，从中能看出编译处理的步骤：</p>
+<pre><code>processAnnotations(                             //3：处理注解
+  enterTrees(stopIfError(CompileState.PARSE,    //2：建立符号表
+    initModules(stopIfError(CompileState.PARSE, 
+      parseFiles(sourceFileObjects))            //1：词法和语法分析
+    ))
+  ),classnames);
+
+...
+case SIMPLE:
+  generate(                                       //10：生成字节码
+    desugar(                                      //6~9：去除语法糖 
+      flow(                                       //5：数据流分析
+        attribute(todo))));                       //4：属性计算  
+</code></pre>
+<p>其中，PARSE阶段的成果就是生成一个AST，后续的语义分析阶段会基于它做进一步的处理：</p>
+<ul>
+<li><strong>enterTrees()</strong>：对应ENTER，这个阶段的主要工作是建立符号表。</li>
+<li><strong>processAnnotations()</strong>：对应PROCESS阶段，它的工作是处理注解。</li>
+<li><strong>attribute()</strong>：对应ATTR阶段，这个阶段是做属性计算，我会在下一讲中给你做详细的介绍。</li>
+<li><strong>flow()</strong>：对应FLOW阶段，主要是做数据流分析。我在<a href="https://time.geekbang.org/column/article/248770" target="_blank">第7讲</a>中就提到过数据流分析，那时候是用它来做代码优化。那么，难道在前端也需要做数据流分析吗？它会起到什么作用？这些问题的答案我也会在下一讲中为你揭晓。</li>
+<li><strong>desugar()</strong>：去除语法糖，其实这里包括了TRANSTYPES（处理泛型）、TRANSPATTERNS（处理模式匹配）、UNLAMBDA（处理Lambda）和LOWER（处理其他所有的语法糖，比如内部类、foreach循环等）四个阶段，我会在第12讲给你介绍。</li>
+<li><strong>generate()</strong>：生成字节码，对应了GENERATE阶段，这部分内容我也会在第12讲详细介绍。</li>
+</ul>
+<p>在今天这一讲，我会给你介绍前两个阶段的工作：建立符号表和处理注解。</p>
+<p>首先，我们来看看Enter阶段，也就是建立符号表的过程。</p>
+<h2 id="enter阶段-建立符号表">ENTER阶段：建立符号表</h2>
+<p>Enter阶段的主要代码在<strong>com.sun.tools.javac.comp.Enter类</strong>中。在这个阶段，会把程序中的各种符号加到符号表中。</p>
+<h3 id="建立符号表">建立符号表</h3>
+<p>在<a href="https://time.geekbang.org/column/article/246281" target="_blank">第5讲</a>中，我已经介绍了符号表的概念。符号表是一种数据结构，它保存了程序中所有的定义信息，也就是你定义的每个标识符，不管是变量、类型，还是方法、参数，在符号表里都有一个条目。</p>
+<p>那么，我们再深入看一下，什么是符号。</p>
+<p>其实，符号代表了一门语言的基础构成元素。在java.compiler模块中定义了Java语言的构成元素（Element），包括模块、包、类型、可执行元素、变量元素等。这其中的每个元素，都是一种符号。</p>
+<p><img alt="" src="/assets/03e6bd2da28140c539db9065.jpg"/></p>
+<p>图2：Java语言的基本构成元素</p>
+<p>而在jdk.compiler模块中，定义了这些元素的具体实现，也就是Symbol，符号。</p>
+<p><img alt="" src="/assets/9d27c803f650c6556f0b4b57.jpg"/></p>
+<p>图3：Symbol及其子类</p>
+<p>符号里记录了一些重要的属性信息，比如名称（name）、类型（type）、分类（kind）、所有者（owner）等，还有一些标记位，标志该符号是否是接口、是否是本地的、是否是私有的，等等，这些信息在语义分析和后续编译阶段都会使用。另外，不同的符号还有一些不同的属性信息，比如变量符号，会记录其常数值（constValue），这在常数折叠优化时会用到。</p>
+<p><strong>那么，Enter过程是怎样发生的呢？</strong>你可以看一下com.sun.tools.javac.comp.MemberEnter类中的 <strong>visitVarDef()方法</strong>。</p>
+<p>实际上，当看到一个方法使用visit开头的时候，你应该马上意识到，这个方法是被用于一个Visitor模式的调用中。也就是说，Enter过程是一个对AST的遍历过程，遍历的时候，会依次调用相应的visit方法。visitVarDef()是用于处理变量声明的。</p>
+<p>我们还以MyClass的编译为例来探索一下。MyClass有一个成员变量a，在Enter阶段，编译器就会为a建立符号。</p>
+<p>我们来看看它的创建过程：</p>
+<pre><code>public class MyClass {
+    public int a = 2+3;
+    public int foo(){
+        int b = a + 10;
+        return b;
+    }
+}
+</code></pre>
+<p>我从visitVarDef()中挑出了最重要的三行代码，需要你着重关注。</p>
+<pre><code>...
+//创建Symbol
+VarSymbol v = new VarSymbol(0, tree.name, vartype, enclScope.owner); 
+...
+tree.sym = v;       //关联到AST节点
+...
+enclScope.enter(v); //添加到Scope中
+...
+</code></pre>
+<p>第一行，是<strong>创建Symbol</strong>。</p>
+<p>第二行，是<strong>把Symbol关联到对应的AST节点</strong>（这里是变量声明的节点JCVaraibleDecl）。</p>
+<p>你可以看一下各个AST节点的定义，其中的类、方法、变量声明、编译单元，以及标识符，都带有一个sym成员变量，用来关联到一个符号。这样后续在遍历树的时候，你就很容易查到这个节点对应的Symbol了。</p>
+<p>不过你要注意，<strong>各种声明节点（类声明、方法声明等）对应的符号，是符号的定义。而标识符对应的Symbol，是对符号的引用。</strong>找到每个标识符对应的定义，就是语义分析中的一项重要工作：引用消解。不过，引用消解不是在Enter阶段完成的，而是在ATTR阶段。</p>
+<p>你在跟踪编译器运行的时候，可以在JCClassDecl等<strong>AST节点的sym变量上</strong>打个中断标记，这样你就会知道sym是什么时候被赋值的，从而也就了解了整个调用栈，这样会比较省事。</p>
+<p>延伸一句：当你调试一个大的系统时，选择好恰当的断点很重要，会让你事半功倍。</p>
+<p><img alt="" src="/assets/a7e1ccfff38a7f665b71a94b.jpg"/></p>
+<p>图4：一些重要的AST节点的属性和方法，其中多个AST节点中都有对Symbol的引用</p>
+<p>最后来看一下第三行代码，这行代码是<strong>把Symbol添加到Scope中</strong>。</p>
+<p>什么是Scope？Scope就是作用域。也就是说，在Enter过程中，作用域也被识别了出来，每个符号都是保存在相应的作用域中的。</p>
+<p>在<a href="https://time.geekbang.org/column/article/245754" target="_blank">第4讲</a>，我们曾经说过，符号表可以采用与作用域同构的带层次的表格。Java编译器就是这么实现的。符号被直接保存进了它所在的词法作用域。</p>
+<p>在具体实现上，Java的作用域所涉及的类比较多，我给你整理了一个类图，你可以参考一下：</p>
+<p><img alt="" src="/assets/d06534bf145a286466c5f63d.jpg"/></p>
+<p>图5：与Scope有关的类</p>
+<p>其中有几个关键的类和接口，需要给你介绍一下。</p>
+<p>首先是<strong>com.sun.tools.javac.code.Scope$ScopeImpl</strong>类：这是真正用来存放Symbol的容器类。通过next属性来指向上一级作用域，形成嵌套的树状结构。</p>
+<p><img alt="" src="/assets/5d1a00f73648b5fae4b16e96.jpg"/></p>
+<p>图6：AST中的作用域</p>
+<p>但是，在处理AST时，如何找到当前的作用域呢？这就需要一个辅助类：<strong>Env&lt; AttrContext&gt;</strong>。Env的意思是环境，用来保存编译过程中的一些上下文信息，其中就有当前节点所处的作用域（Env.info.scope）。下图展示的是在编译过程中，所使用的Env的情况，这些Env也构成了一个树状结构。</p>
+<p><img alt="" src="/assets/e588e56935d92a5aed3ed507.jpg"/></p>
+<p>图7：Env&lt; AttrContext&gt;构成的树状结构</p>
+<p>然后是<strong>com.sun.source.tree.Scope接口：</strong>这是对作用域的一个抽象，可以获取当前作用域中的元素、上一级作用域、上一级方法以及上一级类。</p>
+<p>好了，这就是与符号表有关的数据结构，后续的很多处理工作都要借助这个数据结构。比如，你可以思考一下，如何基于作用域来做引用消解？在下一讲，我会给你揭晓这个问题的答案。</p>
+<h3 id="两阶段的处理过程">两阶段的处理过程</h3>
+<p>前面讨论的是符号表的数据结构，以及建立符号表的大致过程。接下来，我们继续深究一下建立符号表算法的一个重要特点：<strong>Enter过程是分两个阶段完成的</strong>。</p>
+<p>你可以打开Enter类，看看Enter类的头注释，里面对这两个阶段做了说明。</p>
+<ol>
+<li>第一个阶段：只是扫描所有的类（包括内部类），建立类的符号，并添加到作用域中。但是每个类定义的细节并没有确定，包括类所实现的接口、它的父类，以及所使用的类型参数。类的内部细节也没有去扫描，包括其成员变量、方法，以及方法的内部实现。</li>
+<li>第二个阶段：确定一个类所缺失的所有细节信息，并加入到符号表中。</li>
+</ol>
+<p>这两个阶段，第一个阶段做整个程序的扫描，把所有的类都识别出来。而第二个阶段是在需要的时候才进行处理的。</p>
+<p>这里的问题是：<strong>为什么需要两个阶段？只用一个阶段不可以吗？</strong></p>
+<p>我借一个例子给你解释一下原因。你看看下面这段示例代码，在Enter过程中，编译器遍历了MyClass1的AST节点（JCClassDecl），并建立了一个ClassSymbol。但在遍历到它的成员变量a的时候，会发现它不认识a的类型MyClass2，因为MyClass2的声明是在后面的。</p>
+<pre><code>public class MyClass1{
+   MyClass2 a;  
+}
+class MyClass2{
+}
+</code></pre>
+<p>怎么办呢？我们只好分成两个阶段去完成扫描。在第一个阶段，我们为MyClass1和MyClass2都建立符号，并且都放到符号表中；第二阶段，我们再去进一步扫描MyClass1的内部成员的时候，就能为成员变量a标注正确的类型，也就是MyClass2。</p>
+<p>我在<a href="https://time.geekbang.org/column/article/245754" target="_blank">第4讲</a>中说过，语义分析的特点是上下文相关的。通过对比，你会发现，处理上下文相关情况和上下文无关情况的算法，它们是不一样的。</p>
+<p>语法解析算法处理的是上下文无关的情况，因此无论自顶向下还是自底向上，整个算法其实是线性执行的，它会不断地消化掉Token，最后产生AST。对于上下文相关的情况，算法就要复杂一些。对AST各个节点的处理，会出现相互依赖的情况，并且经常会出现环形依赖，因为两个类互相引用在Java语言里是很常见的。加上这些依赖关系以后，AST就变成了一张图。</p>
+<p>而语义分析算法，实质上就是对图的遍历算法。我们知道，图的遍历算法的复杂度是比较高的。编译器一般要采用一定的<strong>启发式（Heuristic）</strong>的算法，人为地找出代价较低的遍历方式。Java编译器里也采用了启发式的算法，我们尽量把对图的遍历简化为对树的遍历，这样工作起来就会简单得多。</p>
+<p>对AST的遍历采用了Visitor模式。下图中我列出了一些采用Visitor模式对AST进行处理的程序。Enter程序是其中的一个。</p>
+<p><img alt="" src="/assets/d3f4d3d9e3a113bf0b940c90.jpg"/></p>
+<p>图8：对AST进行处理的Visitor模式的部分程序</p>
+<p>所以，语义分析就是由各种对AST进行遍历的算法构成的。在跟踪Java编译器执行的过程中，你还会发现多个处理阶段之间经常发生交错。比如，对于方法体中声明的局部变量，它的符号不是在ENTER阶段创建的，而是在ATTR阶段又回过头来调用了与建立符号表有关的方法。你可以先想想这又是什么道理。这里留下一个伏笔，我会在下一讲中给你解答。</p>
+<h3 id="系统符号表">系统符号表</h3>
+<p>前面说的符号表，保存了用户编写的程序中的符号。可是，还有一些符号，是系统级的，可以在不同的程序之间共享，比如原始数据类型、java.lang.Object和java.lang.String等基础对象、缺省的模块名称、顶层的包名称等。</p>
+<p>Java编译器在Symtab类中保存这些系统级的符号。系统符号表在编译的早期就被初始化好，并用于后面的编译过程中。</p>
+<p>以上就是ENTER阶段的所有内容。接着，编译器就会进入下一个阶段：PROCESS阶段，也就是处理注解。</p>
+<h2 id="process阶段-处理注解">PROCESS阶段：处理注解</h2>
+<p>注解是Java语言中的一个重要特性，它是Java元编程能力的一个重要组成部分。所谓元编程，简单地说，就是用程序生成或修改程序的能力。</p>
+<p>Java的注解需要在编译期被解析出来。在Java编译器中，注解被看作是符号的元数据，所以你可以看一下SymbolMetadata类，它记录了附加在某个符号上的各种注解信息。</p>
+<p>然后呢，编译器可以在三个时机使用这些注解：一是在编译时，二是在类加载时，三是在类运行时。</p>
+<p>对于后两者，编译器需要做的工作比较简单，把注解内容解析出来，放到class文件中。这样的话，PROCESS阶段不需要做什么额外的工作。</p>
+<p>而有些注解是要在编译期就处理的，这些注解最后就没必要保存到class文件。因为它们的使命在编译阶段就完成了。</p>
+<p>那在编译阶段会利用注解做什么呢？最主要的用法，是根据注解动态生成程序，并且也被编译器编译。在后面探索Java的JIT编译器时，你会看到采用这种思路来生成程序的实例。你可以用简单的注解，就让注解处理程序生成很长的、充满“刻板代码”的程序。</p>
+<p>我写了一个非常简单的示例程序，来测试Java编译器处理注解的功能。该注解叫做HelloWorld：</p>
+<pre><code>@Retention(RetentionPolicy.SOURCE)  //注解用于编译期处理
+@Target(ElementType.TYPE)           //注解是针对类型的
+public @interface HelloWorld {
+}
+</code></pre>
+<p>针对这个注解，需要写一个注解处理程序。当编译器在处理该注解的时候，就会调用相应的注解处理程序。你可以看一下HelloWorldProcessor.java程序。它里面的主要逻辑是获取被注解的类的名称，比如说叫Foo，然后生成一个HelloFoo.java的程序。这个程序里有一个sayHello()方法，能够打印出“Hello Foo”。如果被注解的类是Bar，那就生成一个HelloBar.java，并且打印“Hello Bar”。</p>
+<p>我们看一下Foo的代码。你注意，这里面有一个很有意思的现象：在Foo里调用了HelloFoo，但HelloFoo其实当前并没有生成！</p>
+<pre><code>@HelloWorld
+public class Foo {
+    //HelloFoo类是处理完注解后才生成的。
+    static HelloFoo helloFoo = new HelloFoo();
+    public static void main(String args[]){
+        helloFoo.sayHello(); 
+    }
+}
+</code></pre>
+<p>你可以在命令行编译这三个程序。其中编译Foo的时候，要用-processor选项指定所采用的注解处理器。</p>
+<pre><code>javac HelloWorld.java    
+javac HelloWorldProcessor.java
+javac -processor HelloWorldProcessor Foo.java
+</code></pre>
+<p>在这个编译过程中，你会发现当前目录下生成了HelloFoo.java文件，并且在编译Foo.java之前就被编译了，这样在Foo里才能调用HelloFoo的方法。</p>
+<p>你可以在IDE里跟踪一下编译器对注解的处理过程。借此，你也可以注意一下编译器是如何管理编译顺序的，因为HelloFoo一定要在Foo之前被编译。</p>
+<p>扩展：Debug对注解的处理过程需要有一定的技巧，请参考我为你整理的<a href="https://github.com/RichardGong/CompilersInPractice/tree/master/javac" target="_blank">配置指南</a>。</p>
+<p>你会发现，在Enter之后，声明helloFoo这个成员变量的语句的vartype节点的类型是ErrorType，证明这个时候编译器是没有找到HelloFoo的定义的。</p>
+<p><img alt="" src="/assets/c663a814582aa071a71da0e5.jpg"/></p>
+<p>图9：在处理注解之前，还没有生成HelloFoo</p>
+<p>不过，在编译器处理完毕注解以后，HelloFoo就会被生成，Foo类的ENTER过程还会重走一遍，这个时候相关类型信息就正确了。</p>
+<h2 id="课程小结">课程小结</h2>
+<p>好了，本讲我们首先对Java的编译过程做了一个顶层的介绍，然后分析了ENTER和PROCESS阶段所做的工作。希望你能有以下收获：</p>
+<ol>
+<li>对前端编译过程可以有更加细致的了解，特别是对语义分析阶段，会划分成多个小阶段。由于语法分析的本质是对图做处理，所以实际执行过程不是简单地逐个阶段顺序执行，而是经常交织在一起，特别是ENTER阶段和ATTR阶段经常互相交错。</li>
+<li>ENTER阶段建立了符号表这样一个重要的数据结构。我们现在知道Java的符号表是按照作用域的结构建立的，而AST的每个节点都会对应某个作用域。</li>
+<li>PROCESSOR阶段完成了对注解的处理。你可以在代码里引用将要生成的类，做完注解处理后，这些类会被生成并编译，从而使得原来的程序能够找到正确的符号，不会报编译错误。</li>
+</ol>
+<p>在最后，为了帮你将今天的内容做一个梳理，我提供一张思维导图，供你参考，整理知识：</p>
+<p><img alt="" src="/assets/86ceb01d8c3b76cd01e2977b.jpg"/></p>
+<h2 id="一课一思">一课一思</h2>
+<p>在Java语言中，对于下面的示例代码，会产生几个作用域，你觉得它们分别是什么？</p>
+<pre><code>public class ScopeTest{
+    public int foo(int a){
+        if(a&gt;0){
+          //一些代码
+        } 
+        else{
+          //另一些代码
+        }
+    }
+}
+</code></pre>
+<p>欢迎在留言区分享你的答案，如果觉得有收获，也欢迎你把今天的内容分享给更多的朋友。</p>
+<h2 id="参考资料">参考资料</h2>
+<p>关于注解的官方教程，你可以参考<a href="https://docs.oracle.com/javase/tutorial/java/annotations/" target="_blank">这个链接</a>。</p>
+<h2 id="扩展知识">扩展知识</h2>
+<p>Java编译器的功能很多。如果你有精力，还可以探索一些有趣的细节功能，比如：你知道Java在编译阶段，会自动生成缺省的构造函数吗？</p>
+<p>ENTER的第二个阶段任务是由TypeEnter类来完成的，你可以查看一下这个类的说明。它内部划分成了4个小的阶段，每个阶段完成一个更小一点的任务。其中的<strong>MemberPhase阶段</strong>，会把类的成员都建立符号，但MemberPhase还会做一件有趣的事情，就是<strong>生成缺省的构造函数</strong>。</p>
+<p>为什么说这个细节很有趣呢？因为这是你第一次遇到在语义分析的过程中，还要对AST做修改。下面我们看看这个过程。</p>
+<p>首先，你需要重新回顾一下缺省构造函数的意思。</p>
+<p>在编写Java程序时，你可以不用写构造函数。对于下面这个MyClass5类，我们没有写构造函数，也能正常地实例化：</p>
+<pre><code>public class MyClass5{
+}
+</code></pre>
+<p>但在语义分析阶段，实际上编译器会修改AST，插入一个缺省构造函数（相当于下面的代码）。缺省的构造函数不带参数，并且调用父类的一个不带参数构造方法（对于MyClass5类来说，父类是java.lang.Object类，“super()”引用的就是Object类的不带参数的构造方法）。</p>
+<pre><code>public class MyClass3{
+    public MyClass3(){
+        super();
+    }  
+}
+</code></pre>
+<p>对应的AST如下，其中<strong>JCMethodDecl</strong>这棵子树，就是语义分析程序插入的。</p>
+<p><img alt="" src="/assets/ca8bc7a14dbb41611c12cf66.jpg"/></p>
+<p>图10：生成缺省构造函数之后的AST，以及关联的Symbol</p>
+<p>新插入的构造方法是以JCMethodDecl为根节点的一棵子树。对于这个JCMethodDecl节点，在属性标注做完以后，形成了下面的属性。</p>
+<ul>
+<li>名称：<code>&lt;init&gt;</code>。</li>
+<li>类型：()void，也就是没有参数，返回值为void。</li>
+<li>符号：生成了一个方法型的符号（sym属性），它的名称是<code>&lt;init&gt;</code>，如果调用sym.isConstructor()方法，返回true，也就是说，这个符号是一个构造方法。</li>
+</ul>
+<p>在这个缺省构造方法里，调用了“super();”这样一个语句，让父类有机会去做初始化工作，进而也让父类的父类有机会去做初始化工作，依次类推。</p>
+<p>“super()”语句的叶子节点是一个JCIndent节点，也就是标识符。这个标识符的名称是”super“，而符号（sym属性），则通过变量引用消解，指向了Object类的构造方法。</p>
+<p>最后，我们声明MyClass5类的时候，也并没有声明它继承自Object。这个信息也是自动推断出来的，并且会在类节点（JCClassDecl）的type属性中标注清楚。在图中你可以看到，type.supertype_field指向了Object这个类型。</p>
+<p>除了在自动生成的缺省构造函数里会调用super()，你还知道，当我们手写一个构造函数的时候，也可以在第一句里调用父类的一个构造方法（并且必须是在第一句）。</p>
+<pre><code>public class MyClass4 extends MyClass3{
+    public MyClass4(int a){
+        super(a);   //这句可以省略，编译器可以自动生成
+        ...
+    }  
+}
+</code></pre>
+<p>如果你不显式地调用super()，编译器也会自动加入这样的一个调用，并生成相应的AST。这个时候，父类和子类的构造方法的参数也必须一致。也就是说，如果子类的构造方法的签名是（int, String），那么父类也必须具备相同签名的一个构造方法，否则没有办法自动生成对父类构造方法的调用语句，编译器就会报错。<strong>我相信你很可能在编程时遇到过这种编译信息，不过现在你应该就能清晰地了解，为什么编译器会报这些类型的编译错误了。</strong></p>
+<p>总体来说，Java的编译器会根据需要加入一些AST节点，实现一些缺省的功能。其中包括缺省的构造方法、对父类构造方法的缺省调用，以及缺省的父类（Object）。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>37  集群容错：一个好汉三个帮（上） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/index.html">Dubbo源码解读与实战-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">50 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Dubbo源码解读与实战-完</strong><ul><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E6%B7%B1%E5%85%A5%E6%8E%8C%E6%8F%A1%20Dubbo%20%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8F%90%E5%8D%87%E4%BD%A0%E7%9A%84%E8%81%8C%E5%9C%BA%E7%AB%9E%E4%BA%89%E5%8A%9B.html">00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/01%20%20Dubbo%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%9A%E5%8D%83%E9%87%8C%E4%B9%8B%E8%A1%8C%EF%BC%8C%E5%A7%8B%E4%BA%8E%E8%B6%B3%E4%B8%8B.html">01  Dubbo 源码环境搭建：千里之行，始于足下</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/02%20Dubbo%20%E7%9A%84%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BA%BF%EF%BC%9A%E6%8A%93%E4%BD%8F%20URL%EF%BC%8C%E5%B0%B1%E7%90%86%E8%A7%A3%E4%BA%86%E5%8D%8A%E4%B8%AA%20Dubbo.html">02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/03%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8A%EF%BC%89.html">03  Dubbo SPI 精析，接口实现两极反转（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/04%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8B%EF%BC%89.html">04  Dubbo SPI 精析，接口实现两极反转（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/05%20%20%E6%B5%B7%E9%87%8F%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E8%BD%AE%E6%90%9E%E5%AE%9A.html">05  海量定时任务，一个时间轮搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/07%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/08%20%20%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0.html">08  代理模式与常见实现</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/09%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">09  Netty 入门，用它做网络编程都说好（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/10%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">10  Netty 入门，用它做网络编程都说好（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/11%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">11  简易版 RPC 框架实现（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/12%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">12  简易版 RPC 框架实现（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/13%20%20%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%EF%BC%9A%E9%99%8D%E4%BD%8E%20ZooKeeper%20%E5%8E%8B%E5%8A%9B%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5.html">13  本地缓存：降低 ZooKeeper 压力的一个常用手段</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/14%20%20%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%E6%98%AF%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BF%9D%E8%AF%81.html">14  重试机制是网络操作的基本保证</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/15%20%20ZooKeeper%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E8%B7%B5.html">15  ZooKeeper 注册中心实现，官方推荐注册中心实践</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/16%20%20Dubbo%20Serialize%20%E5%B1%82%EF%BC%9A%E5%A4%9A%E7%A7%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AE%97%E6%B3%95%EF%BC%8C%E6%80%BB%E6%9C%89%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E4%BD%A0.html">16  Dubbo Serialize 层：多种序列化算法，总有一款适合你</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/17%20%20Dubbo%20Remoting%20%E5%B1%82%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E5%88%86%E6%9E%90%EF%BC%9A%E8%BF%99%E5%B1%85%E7%84%B6%E6%98%AF%E4%B8%80%E5%A5%97%E5%85%BC%E5%AE%B9%E6%89%80%E6%9C%89%20NIO%20%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/18%20%20Buffer%20%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%9A%E6%88%91%E4%BB%AC%E4%B8%8D%E7%94%9F%E4%BA%A7%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AA%E6%98%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E6%90%AC%E8%BF%90%E5%B7%A5.html">18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/19%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/20%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">20  Transporter 层核心实现：编解码与线程模型一文打尽（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/21%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/22%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/23%20%20%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D%EF%BC%8CRPC%20%E5%B1%82%E9%AA%A8%E6%9E%B6%E6%A2%B3%E7%90%86.html">23  核心接口介绍，RPC 层骨架梳理</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/24%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/25%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/26%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8A%EF%BC%89.html">26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/27%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8B%EF%BC%89.html">27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/28%20%20%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%AE%80%E5%8D%95%E5%8C%96%EF%BC%8C%E4%BB%A3%E7%90%86%E5%B8%AE%E4%BD%A0%E9%9A%90%E8%97%8F%E4%BA%86%E5%A4%9A%E5%B0%91%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82%EF%BC%9F.html">28  复杂问题简单化，代理帮你隐藏了多少底层细节？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/29%20%20%E5%8A%A0%E9%A4%90%EF%BC%9AHTTP%20%E5%8D%8F%E8%AE%AE%20%2B%20JSON-RPC%EF%BC%8CDubbo%20%E8%B7%A8%E8%AF%AD%E8%A8%80%E5%B0%B1%E6%98%AF%E5%A6%82%E6%AD%A4%E7%AE%80%E5%8D%95.html">29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/30%20%20Filter%20%E6%8E%A5%E5%8F%A3%EF%BC%8C%E6%89%A9%E5%B1%95%20Dubbo%20%E6%A1%86%E6%9E%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5%E6%8C%87%E5%8C%97.html">30  Filter 接口，扩展 Dubbo 框架的常用手段指北</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/31%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E6%BD%9C%20Directory%20%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8E%A2%E7%A7%98%E6%9C%8D%E5%8A%A1%E7%9B%AE%E5%BD%95%E7%8E%84%E6%9C%BA.html">31  加餐：深潜 Directory 实现，探秘服务目录玄机</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/32%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8A%EF%BC%89.html">32  路由机制：请求到底怎么走，它说了算（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/33%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8B%EF%BC%89.html">33  路由机制：请求到底怎么走，它说了算（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/34%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%88%9D%E6%8E%A2%20Dubbo%20%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">34  加餐：初探 Dubbo 动态配置的那些事儿</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/35%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8A%EF%BC%89.html">35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/36%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8B%EF%BC%89.html">36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）</a></li><li><a class="active" aria-current="page" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/37%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8A%EF%BC%89.html">37  集群容错：一个好汉三个帮（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/38%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8B%EF%BC%89.html">38  集群容错：一个好汉三个帮（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/39%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%A4%9A%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%8D%E7%94%A8%E6%80%95%EF%BC%8CMerger%20%E5%90%88%E5%B9%B6%E5%99%A8%E6%9D%A5%E5%B8%AE%E5%BF%99.html">39  加餐：多个返回值不用怕，Merger 合并器来帮忙</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/40%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%A8%A1%E6%8B%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%EF%BC%8CMock%20%E6%9C%BA%E5%88%B6%E5%B8%AE%E4%BD%A0%E6%90%9E%E5%AE%9A.html">40  加餐：模拟远程调用，Mock 机制帮你搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/41%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E4%B8%80%E9%94%AE%E9%80%9A%E5%85%B3%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E5%85%A8%E6%B5%81%E7%A8%8B.html">41  加餐：一键通关服务发布全流程</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/42%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E6%B5%81%E7%A8%8B%E5%85%A8%E8%A7%A3%E6%9E%90.html">42  加餐：服务引用流程全解析</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/43%20%20%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9A%E6%96%B0%E7%89%88%E6%9C%AC%E6%96%B0%E6%96%B9%E6%A1%88.html">43  服务自省设计方案：新版本新方案</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/44%20%20%E5%85%83%E6%95%B0%E6%8D%AE%E6%96%B9%E6%A1%88%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E6%95%B0%E6%8D%AE%E9%87%8F%E8%86%A8%E8%83%80%EF%BC%9F.html">44  元数据方案深度剖析，如何避免注册中心数据量膨胀？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/45%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8A%EF%BC%89.html">45  加餐：深入服务自省方案中的服务发布订阅（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/46%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8B%EF%BC%89.html">46  加餐：深入服务自省方案中的服务发布订阅（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/47%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8A%EF%BC%89.html">47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/48%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8B%EF%BC%89.html">48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/49%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E8%AE%A4%E7%9C%9F%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BC%A9%E5%B0%8F%E5%B7%AE%E8%B7%9D.html">49 结束语  认真学习，缩小差距</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/37%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8A%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="37  集群容错：一个好汉三个帮（上）" id="title">37  集群容错：一个好汉三个帮（上）</h1>
+<div><p>你好，我是杨四正，今天我和你分享的主题是集群容错：一个好汉三个帮（上篇）。</p>
+<p>在前面的课时中，我们已经对 Directory、Router、LoadBalance 等概念进行了深入的剖析，本课时将重点分析 Cluster 接口的相关内容。</p>
+<p><strong>Cluster 接口提供了我们常说的集群容错功能。</strong></p>
+<p>集群中的单个节点有一定概率出现一些问题，例如，磁盘损坏、系统崩溃等，导致节点无法对外提供服务，因此在分布式 RPC 框架中，必须要重视这种情况。为了避免单点故障，我们的 Provider 通常至少会部署在两台服务器上，以集群的形式对外提供服务，对于一些负载比较高的服务，则需要部署更多 Provider 来抗住流量。</p>
+<p>在 Dubbo 中，通过 Cluster 这个接口把一组可供调用的 Provider 信息组合成为一个统一的 Invoker 供调用方进行调用。经过 Router 过滤、LoadBalance 选址之后，选中一个具体 Provider 进行调用，<strong>如果调用失败，则会按照集群的容错策略进行容错处理</strong>。</p>
+<p>Dubbo 默认内置了若干容错策略，并且每种容错策略都有自己独特的应用场景，我们可以<strong>通过配置选择不同的容错策略</strong>。如果这些内置容错策略不能满足需求，我们还可以<strong>通过自定义容错策略进行配置</strong>。</p>
+<p>了解了上述背景知识之后，下面我们就正式开始介绍 Cluster 接口。</p>
+<h3 id="cluster-接口与容错机制">Cluster 接口与容错机制</h3>
+<p>Cluster 的工作流程大致可以分为两步（如下图所示）：①<strong>创建 Cluster Invoker 实例</strong>（在 Consumer 初始化时，Cluster 实现类会创建一个 Cluster Invoker 实例，即下图中的 merge 操作）；②<strong>使用 Cluster Invoker 实例</strong>（在 Consumer 服务消费者发起远程调用请求的时候，Cluster Invoker 会依赖前面课时介绍的 Directory、Router、LoadBalance 等组件得到最终要调用的 Invoker 对象）。</p>
+<p><img alt="Lark20201201-164714.png" src="/assets/a0e12fa74081901eea54a0eb.png"/></p>
+<p>Cluster 核心流程图</p>
+<p>Cluster Invoker 获取 Invoker 的流程大致可描述为如下：</p>
+<ol>
+<li>通过 Directory 获取 Invoker 列表，以 RegistryDirectory 为例，会感知注册中心的动态变化，实时获取当前 Provider 对应的 Invoker 集合；</li>
+<li>调用 Router 的 route() 方法进行路由，过滤掉不符合路由规则的 Invoker 对象；</li>
+<li>通过 LoadBalance 从 Invoker 列表中选择一个 Invoker；</li>
+<li>ClusterInvoker 会将参数传给 LoadBalance 选择出的 Invoker 实例的 invoke 方法，进行真正的远程调用。</li>
+</ol>
+<p>这个过程是一个正常流程，没有涉及容错处理。Dubbo 中常见的容错方式有如下几个。</p>
+<ul>
+<li>Failover Cluster：失败自动切换。<strong>它是 Dubbo 的默认容错机制</strong>，在请求一个 Provider 节点失败的时候，自动切换其他 Provider 节点，默认执行 3 次，适合幂等操作。当然，重试次数越多，在故障容错的时候带给 Provider 的压力就越大，在极端情况下甚至可能造成雪崩式的问题。</li>
+<li>Failback Cluster：失败自动恢复。失败后记录到队列中，通过定时器重试。</li>
+<li>Failfast Cluster：快速失败。请求失败后返回异常，不进行任何重试。</li>
+<li>Failsafe Cluster：失败安全。请求失败后忽略异常，不进行任何重试。</li>
+<li>Forking Cluster：并行调用多个 Provider 节点，只要有一个成功就返回。</li>
+<li>Broadcast Cluster：广播多个 Provider 节点，只要有一个节点失败就失败。</li>
+<li>Available Cluster：遍历所有的 Provider 节点，找到每一个可用的节点，就直接调用。如果没有可用的 Provider 节点，则直接抛出异常。</li>
+<li>Mergeable Cluster：请求多个 Provider 节点并将得到的结果进行合并。</li>
+</ul>
+<p>下面我们再来看 Cluster 接口。Cluster 接口是一个扩展接口，通过 @SPI 注解的参数我们知道其使用的默认实现是 FailoverCluster，它只定义了一个 join() 方法，在其上添加了 @Adaptive 注解，会动态生成适配器类，其中会优先根据 Directory.getUrl() 方法返回的 URL 中的 cluster 参数值选择扩展实现，若无 cluster 参数则使用默认的 FailoverCluster 实现。Cluster 接口的具体定义如下所示：</p>
+<pre><code>@SPI(FailoverCluster.NAME)
+
+public interface Cluster {
+
+    @Adaptive
+
+    &lt;T&gt; Invoker&lt;T&gt; join(Directory&lt;T&gt; directory) throws RpcException;
+
+}
+</code></pre>
+<p>Cluster 接口的实现类如下图所示，分别对应前面提到的多种容错策略：</p>
+<p><img alt="Lark20201201-164718.png" src="/assets/51548e9ca87787dea1f3c594.png"/></p>
+<p>Cluster 接口继承关系</p>
+<p><strong>在每个 Cluster 接口实现中，都会创建对应的 Invoker 对象，这些都继承自 AbstractClusterInvoker 抽象类</strong>，如下图所示：</p>
+<p><img alt="Lark20201201-164728.png" src="/assets/30d81c619629ebd842978c3b.png"/></p>
+<p>AbstractClusterInvoker 继承关系图</p>
+<p>通过上面两张继承关系图我们可以看出，Cluster 接口和 Invoker 接口都会有相应的抽象实现类，这些抽象实现类都实现了一些公共能力。下面我们就来深入介绍 AbstractClusterInvoker 和 AbstractCluster 这两个抽象类。</p>
+<h3 id="abstractclusterinvoker">AbstractClusterInvoker</h3>
+<p>了解了 Cluster Invoker 的继承关系之后，我们首先来看 AbstractClusterInvoker，它有两点核心功能：一个是实现的 Invoker 接口，对 Invoker.invoke() 方法进行通用的抽象实现；另一个是实现通用的负载均衡算法。</p>
+<p>在 AbstractClusterInvoker.invoke() 方法中，会通过 Directory 获取 Invoker 列表，然后通过 SPI 初始化 LoadBalance，最后调用 doInvoke() 方法执行子类的逻辑。在 Directory.list() 方法返回 Invoker 集合之前，已经使用 Router 进行了一次筛选，你可以回顾前面[第 31 课时]对 RegistryDirectory 的分析。</p>
+<pre><code>public Result invoke(final Invocation invocation) throws RpcException {
+
+    // 检测当前Invoker是否已销毁
+
+    checkWhetherDestroyed(); 
+
+    // 将RpcContext中的attachment添加到Invocation中
+
+    Map&lt;String, Object&gt; contextAttachments = RpcContext.getContext().getObjectAttachments();
+
+    if (contextAttachments != null &amp;&amp; contextAttachments.size() != 0) {
+
+        ((RpcInvocation) invocation).addObjectAttachments(contextAttachments);
+
+    }
+
+    // 通过Directory获取Invoker对象列表，通过对RegistryDirectory的介绍我们知道，其中已经调用了Router进行过滤
+
+    List&lt;Invoker&lt;T&gt;&gt; invokers = list(invocation);
+
+    // 通过SPI加载LoadBalance
+
+    LoadBalance loadbalance = initLoadBalance(invokers, invocation);
+
+    RpcUtils.attachInvocationIdIfAsync(getUrl(), invocation);
+
+    // 调用doInvoke()方法，该方法是个抽象方法
+
+    return doInvoke(invocation, invokers, loadbalance);
+
+}
+
+protected List&lt;Invoker&lt;T&gt;&gt; list(Invocation invocation) throws RpcException {
+
+    return directory.list(invocation); // 调用Directory.list()方法
+
+}
+</code></pre>
+<p>下面我们来看一下 AbstractClusterInvoker 是如何按照不同的 LoadBalance 算法从 Invoker 集合中选取最终 Invoker 对象的。</p>
+<p>AbstractClusterInvoker 并没有简单粗暴地使用 LoadBalance.select() 方法完成负载均衡，而是做了进一步的封装，具体实现在 select() 方法中。在 select() 方法中会根据配置决定是否开启粘滞连接特性，如果开启了，则需要将上次使用的 Invoker 缓存起来，只要 Provider 节点可用就直接调用，不会再进行负载均衡。如果调用失败，才会重新进行负载均衡，并且排除已经重试过的 Provider 节点。</p>
+<pre><code>// 第一个参数是此次使用的LoadBalance实现，第二个参数Invocation是此次服务调用的上下文信息，
+
+// 第三个参数是待选择的Invoker集合，第四个参数用来记录负载均衡已经选出来、尝试过的Invoker集合
+
+protected Invoker&lt;T&gt; select(LoadBalance loadbalance, Invocation invocation, List&lt;Invoker&lt;T&gt;&gt; invokers, List&lt;Invoker&lt;T&gt;&gt; selected) throws RpcException {
+
+    if (CollectionUtils.isEmpty(invokers)) {
+
+        return null;
+
+    }
+
+    // 获取调用方法名
+
+    String methodName = invocation == null ? StringUtils.EMPTY_STRING : invocation.getMethodName();
+
+    // 获取sticky配置，sticky表示粘滞连接，所谓粘滞连接是指Consumer会尽可能地
+
+    // 调用同一个Provider节点，除非这个Provider无法提供服务
+
+    boolean sticky = invokers.get(0).getUrl()
+
+            .getMethodParameter(methodName, CLUSTER_STICKY_KEY, DEFAULT_CLUSTER_STICKY);
+
+    // 检测invokers列表是否包含sticky Invoker，如果不包含，
+
+    // 说明stickyInvoker代表的服务提供者挂了，此时需要将其置空
+
+    if (stickyInvoker != null &amp;&amp; !invokers.contains(stickyInvoker)) {
+
+        stickyInvoker = null;
+
+    }
+
+    // 如果开启了粘滞连接特性，需要先判断这个Provider节点是否已经重试过了
+
+    if (sticky &amp;&amp; stickyInvoker != null // 表示粘滞连接
+
+            &amp;&amp; (selected == null || !selected.contains(stickyInvoker)) // 表示stickyInvoker未重试过
+
+    ) {
+
+        // 检测当前stickyInvoker是否可用，如果可用，直接返回stickyInvoker
+
+        if (availablecheck &amp;&amp; stickyInvoker.isAvailable()) { 
+
+            return stickyInvoker;
+
+        }
+
+    }
+
+    // 执行到这里，说明前面的stickyInvoker为空，或者不可用
+
+    // 这里会继续调用doSelect选择新的Invoker对象
+
+    Invoker&lt;T&gt; invoker = doSelect(loadbalance, invocation, invokers, selected);
+
+    if (sticky) { // 是否开启粘滞，更新stickyInvoker字段
+
+        stickyInvoker = invoker;
+
+    }
+
+    return invoker;
+
+}
+</code></pre>
+<p>doSelect() 方法主要做了两件事：</p>
+<ul>
+<li>一是通过 LoadBalance 选择 Invoker 对象；</li>
+<li>二是如果选出来的 Invoker 不稳定或不可用，会调用 reselect() 方法进行重选。</li>
+</ul>
+<pre><code>private Invoker&lt;T&gt; doSelect(LoadBalance loadbalance, Invocation invocation,
+
+                            List&lt;Invoker&lt;T&gt;&gt; invokers, List&lt;Invoker&lt;T&gt;&gt; selected) throws RpcException {
+
+    // 判断是否需要进行负载均衡，Invoker集合为空，直接返回null
+
+    if (CollectionUtils.isEmpty(invokers)) {
+
+        return null;
+
+    }
+
+    if (invokers.size() == 1) { // 只有一个Invoker对象，直接返回即可
+
+        return invokers.get(0);
+
+    }
+
+    // 通过LoadBalance实现选择Invoker对象
+
+    Invoker&lt;T&gt; invoker = loadbalance.select(invokers, getUrl(), invocation);
+
+    // 如果LoadBalance选出的Invoker对象，已经尝试过请求了或不可用，则需要调用reselect()方法重选
+
+    if ((selected != null &amp;&amp; selected.contains(invoker)) // Invoker已经尝试调用过了，但是失败了
+
+            || (!invoker.isAvailable() &amp;&amp; getUrl() != null &amp;&amp; availablecheck) // Invoker不可用
+
+    ) {
+
+        try {
+
+            // 调用reselect()方法重选
+
+            Invoker&lt;T&gt; rInvoker = reselect(loadbalance, invocation, invokers, selected, availablecheck);
+
+            // 如果重选的Invoker对象不为空，则直接返回这个 rInvoker
+
+            if (rInvoker != null) {
+
+                invoker = rInvoker;
+
+            } else {
+
+                int index = invokers.indexOf(invoker);
+
+                try {
+
+                    // 如果重选的Invoker对象为空，则返回该Invoker的下一个Invoker对象
+
+                    invoker = invokers.get((index + 1) % invokers.size());
+
+                } catch (Exception e) {
+
+                    logger.warn("...");
+
+                }
+
+            }
+
+        } catch (Throwable t) {
+
+            logger.error("...");
+
+        }
+
+    }
+
+    return invoker;
+
+}
+</code></pre>
+<p><strong>reselect() 方法会重新进行一次负载均衡</strong>，首先对未尝试过的可用 Invokers 进行负载均衡，如果已经全部重试过了，则将尝试过的 Provider 节点过滤掉，然后在可用的 Provider 节点中重新进行负载均衡。</p>
+<pre><code>private Invoker&lt;T&gt; reselect(LoadBalance loadbalance, Invocation invocation,
+
+                            List&lt;Invoker&lt;T&gt;&gt; invokers, List&lt;Invoker&lt;T&gt;&gt; selected, boolean availablecheck) throws RpcException {
+
+    // 用于记录要重新进行负载均衡的Invoker集合
+
+    List&lt;Invoker&lt;T&gt;&gt; reselectInvokers = new ArrayList&lt;&gt;(
+
+            invokers.size() &gt; 1 ? (invokers.size() - 1) : invokers.size());
+
+    // 将不在selected集合中的Invoker过滤出来进行负载均衡
+
+    for (Invoker&lt;T&gt; invoker : invokers) {
+
+        if (availablecheck &amp;&amp; !invoker.isAvailable()) {
+
+            continue;
+
+        }
+
+        if (selected == null || !selected.contains(invoker)) {
+
+            reselectInvokers.add(invoker);
+
+        }
+
+    }
+
+    // reselectInvokers不为空时，才需要通过负载均衡组件进行选择
+
+    if (!reselectInvokers.isEmpty()) {
+
+        return loadbalance.select(reselectInvokers, getUrl(), invocation);
+
+    }
+
+    // 只能对selected集合中可用的Invoker再次进行负载均衡
+
+    if (selected != null) {
+
+        for (Invoker&lt;T&gt; invoker : selected) {
+
+            if ((invoker.isAvailable()) // available first
+
+                    &amp;&amp; !reselectInvokers.contains(invoker)) {
+
+                reselectInvokers.add(invoker);
+
+            }
+
+        }
+
+    }
+
+    if (!reselectInvokers.isEmpty()) {
+
+        return loadbalance.select(reselectInvokers, getUrl(), invocation);
+
+    }
+
+    return null;
+
+}
+</code></pre>
+<h3 id="abstractcluster">AbstractCluster</h3>
+<p>常用的 ClusterInvoker 实现都继承了 AbstractClusterInvoker 类型，对应的 Cluster 扩展实现都继承了 AbstractCluster 抽象类。<strong>AbstractCluster 抽象类的核心逻辑是在 ClusterInvoker 外层包装一层 ClusterInterceptor，从而实现类似切面的效果</strong>。</p>
+<p>下面是 ClusterInterceptor 接口的定义：</p>
+<pre><code>@SPI
+
+public interface ClusterInterceptor {
+
+    // 前置拦截方法
+
+    void before(AbstractClusterInvoker&lt;?&gt; clusterInvoker, Invocation invocation);
+
+    // 后置拦截方法
+
+    void after(AbstractClusterInvoker&lt;?&gt; clusterInvoker, Invocation invocation);
+
+    // 调用ClusterInvoker的invoke()方法完成请求
+
+    default Result intercept(AbstractClusterInvoker&lt;?&gt; clusterInvoker, Invocation invocation) throws RpcException {
+
+        return clusterInvoker.invoke(invocation);
+
+    }
+
+    // 这个Listener用来监听请求的正常结果以及异常
+
+    interface Listener {
+
+        void onMessage(Result appResponse, AbstractClusterInvoker&lt;?&gt; clusterInvoker, Invocation invocation);
+
+        void onError(Throwable t, AbstractClusterInvoker&lt;?&gt; clusterInvoker, Invocation invocation);
+
+    }
+
+}
+</code></pre>
+<p>在 AbstractCluster 抽象类的 join() 方法中，首先会调用 doJoin() 方法获取最终要调用的 Invoker 对象，doJoin() 是个抽象方法，由 AbstractCluster 子类根据具体的策略进行实现。之后，AbstractCluster.join() 方法会调用 buildClusterInterceptors() 方法加载 ClusterInterceptor 扩展实现类，对 Invoker 对象进行包装。具体实现如下：</p>
+<pre><code>private &lt;T&gt; Invoker&lt;T&gt; buildClusterInterceptors(AbstractClusterInvoker&lt;T&gt; clusterInvoker, String key) {
+
+    AbstractClusterInvoker&lt;T&gt; last = clusterInvoker;
+
+    // 通过SPI方式加载ClusterInterceptor扩展实现
+
+    List&lt;ClusterInterceptor&gt; interceptors = ExtensionLoader.getExtensionLoader(ClusterInterceptor.class).getActivateExtension(clusterInvoker.getUrl(), key);
+
+    if (!interceptors.isEmpty()) {
+
+        for (int i = interceptors.size() - 1; i &gt;= 0; i--) {
+
+            // 将InterceptorInvokerNode收尾连接到一起，形成调用链
+
+            final ClusterInterceptor interceptor = interceptors.get(i);
+
+            final AbstractClusterInvoker&lt;T&gt; next = last;
+
+            last = new InterceptorInvokerNode&lt;&gt;(clusterInvoker, interceptor, next);
+
+        }
+
+    }
+
+    return last;
+
+}
+
+@Override
+
+public &lt;T&gt; Invoker&lt;T&gt; join(Directory&lt;T&gt; directory) throws RpcException {
+
+    // 扩展名称由reference.interceptor参数确定
+
+    return buildClusterInterceptors(doJoin(directory), directory.getUrl().getParameter(REFERENCE_INTERCEPTOR_KEY));
+
+}
+</code></pre>
+<p><strong>InterceptorInvokerNode 会将底层的 AbstractClusterInvoker 对象以及关联的 ClusterInterceptor 对象封装到一起，还会维护一个 next 引用，指向下一个 InterceptorInvokerNode 对象</strong>。</p>
+<p>在 InterceptorInvokerNode.invoke() 方法中，会先调用 ClusterInterceptor 的前置逻辑，然后执行 intercept() 方法调用 AbstractClusterInvoker 的 invoke() 方法完成远程调用，最后执行 ClusterInterceptor 的后置逻辑。具体实现如下：</p>
+<pre><code>public Result invoke(Invocation invocation) throws RpcException {
+
+    Result asyncResult;
+
+    try {
+
+        interceptor.before(next, invocation); // 前置逻辑
+
+        // 执行invoke()方法完成远程调用
+
+        asyncResult = interceptor.intercept(next, invocation);
+
+    } catch (Exception e) {
+
+        if (interceptor instanceof ClusterInterceptor.Listener) {
+
+            // 出现异常时，会触发监听器的onError()方法
+
+            ClusterInterceptor.Listener listener = (ClusterInterceptor.Listener) interceptor;
+
+            listener.onError(e, clusterInvoker, invocation);
+
+        }
+
+        throw e;
+
+    } finally {
+
+        // 执行后置逻辑
+
+        interceptor.after(next, invocation);
+
+    }
+
+    return asyncResult.whenCompleteWithContext((r, t) -&gt; {
+
+        if (interceptor instanceof ClusterInterceptor.Listener) {
+
+            ClusterInterceptor.Listener listener = (ClusterInterceptor.Listener) interceptor;
+
+            if (t == null) {
+
+                // 正常返回时，会调用onMessage()方法触发监听器
+
+                listener.onMessage(r, clusterInvoker, invocation);
+
+            } else {
+
+                listener.onError(t, clusterInvoker, invocation);
+
+            }
+
+        }
+
+    });
+
+}
+</code></pre>
+<p>Dubbo 提供了两个 ClusterInterceptor 实现类，分别是 ConsumerContextClusterInterceptor 和 ZoneAwareClusterInterceptor，如下图所示：</p>
+<p><img alt="Lark20201201-164721.png" src="/assets/e8f4d76ecda7846a24ef83f1.png"/></p>
+<p>ClusterInterceptor 继承关系图</p>
+<p>在 ConsumerContextClusterInterceptor 的 before() 方法中，会在 RpcContext 中设置当前 Consumer 地址、此次调用的 Invoker 等信息，同时还会删除之前与当前线程绑定的 Server Context。在 after() 方法中，会删除本地 RpcContext 的信息。ConsumerContextClusterInterceptor 的具体实现如下：</p>
+<pre><code>public void before(AbstractClusterInvoker&lt;?&gt; invoker, Invocation invocation) {
+
+    // 获取当前线程绑定的RpcContext
+
+    RpcContext context = RpcContext.getContext();
+
+    // 设置Invoker、Consumer地址等信息 context.setInvocation(invocation).setLocalAddress(NetUtils.getLocalHost(), 0);
+
+    if (invocation instanceof RpcInvocation) {
+
+        ((RpcInvocation) invocation).setInvoker(invoker);
+
+    }
+
+    RpcContext.removeServerContext();
+
+}
+
+public void after(AbstractClusterInvoker&lt;?&gt; clusterInvoker, Invocation invocation) {
+
+    RpcContext.removeContext(true); // 删除本地RpcContext的信息
+
+}
+</code></pre>
+<p>ConsumerContextClusterInterceptor 同时继承了 ClusterInterceptor.Listener 接口，在其 onMessage() 方法中，会获取响应中的 attachments 并设置到 RpcContext 中的 SERVER_LOCAL 之中，具体实现如下：</p>
+<pre><code>public void onMessage(Result appResponse, AbstractClusterInvoker&lt;?&gt; invoker, Invocation invocation) {
+
+// 从AppResponse中获取attachment，并设置到SERVER_LOCAL这个RpcContext中    RpcContext.getServerContext().setObjectAttachments(appResponse.getObjectAttachments());
+
+}
+</code></pre>
+<p>介绍完 ConsumerContextClusterInterceptor，我们再来看 ZoneAwareClusterInterceptor。</p>
+<p>在 ZoneAwareClusterInterceptor 的 before() 方法中，会从 RpcContext 中获取多注册中心相关的参数并设置到 Invocation 中（主要是 registry_zone 参数和 registry_zone_force 参数，这两个参数的具体含义，在后面分析 ZoneAwareClusterInvoker 时详细介绍），ZoneAwareClusterInterceptor 的 after() 方法为空实现。ZoneAwareClusterInterceptor 的具体实现如下：</p>
+<pre><code>public void before(AbstractClusterInvoker&lt;?&gt; clusterInvoker, Invocation invocation) {
+
+    RpcContext rpcContext = RpcContext.getContext();
+
+    // 从RpcContext中获取registry_zone参数和registry_zone_force参数
+
+    String zone = (String) rpcContext.getAttachment(REGISTRY_ZONE);
+
+    String force = (String) rpcContext.getAttachment(REGISTRY_ZONE_FORCE);
+
+    // 检测用户是否提供了ZoneDetector接口的扩展实现
+
+    ExtensionLoader&lt;ZoneDetector&gt; loader = ExtensionLoader.getExtensionLoader(ZoneDetector.class);
+
+    if (StringUtils.isEmpty(zone) &amp;&amp; loader.hasExtension("default")) {
+
+        ZoneDetector detector = loader.getExtension("default");
+
+        zone = detector.getZoneOfCurrentRequest(invocation);
+
+        force = detector.isZoneForcingEnabled(invocation, zone);
+
+    }
+
+    // 将registry_zone参数和registry_zone_force参数设置到Invocation中
+
+    if (StringUtils.isNotEmpty(zone)) {
+
+        invocation.setAttachment(REGISTRY_ZONE, zone);
+
+    }
+
+    if (StringUtils.isNotEmpty(force)) {
+
+        invocation.setAttachment(REGISTRY_ZONE_FORCE, force);
+
+    }
+
+}
+</code></pre>
+<p><strong>需要注意的是，ZoneAwareClusterInterceptor 没有实现 ClusterInterceptor.Listener 接口，也就是不提供监听响应的功能。</strong></p>
+<h3 id="总结">总结</h3>
+<p>本课时我们主要介绍的是 Dubbo Cluster 层中容错机制相关的内容。首先，我们了解了集群容错机制的作用。然后，我们介绍了 Cluster 接口的定义以及其各个实现类的核心功能。之后，我们深入讲解了 AbstractClusterInvoker 的实现，其<strong>核心是实现了一套通用的负载均衡算法</strong>。最后，我们还分析了 AbstractCluster 抽象实现类以及其中涉及的 ClusterInterceptor 接口的内容。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

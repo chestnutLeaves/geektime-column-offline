@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>20 Kubernetes高级应用：如何优化业务场景使etcd能支撑上万节点集群？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">etcd实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">27 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>etcd实战课</strong><ul><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E8%A6%81%E5%AD%A6%E4%B9%A0etcd_.html">00 开篇词 为什么你要学习etcd_</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/01%20etcd%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Kubernetes%E4%BD%BF%E7%94%A8etcd%EF%BC%9F.html">01 etcd的前世今生：为什么Kubernetes使用etcd？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%EF%BC%9Aetcd%E4%B8%80%E4%B8%AA%E8%AF%BB%E8%AF%B7%E6%B1%82%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F.html">02 基础架构：etcd一个读请求是如何执行的？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%EF%BC%9Aetcd%E4%B8%80%E4%B8%AA%E5%86%99%E8%AF%B7%E6%B1%82%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F.html">03 基础架构：etcd一个写请求是如何执行的？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/04%20Raft%E5%8D%8F%E8%AE%AE%EF%BC%9Aetcd%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8%E3%80%81%E6%95%B0%E6%8D%AE%E5%BC%BA%E4%B8%80%E8%87%B4%E7%9A%84%EF%BC%9F.html">04 Raft协议：etcd如何实现高可用、数据强一致的？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E9%89%B4%E6%9D%83%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E6%8A%A4%E4%BD%A0%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%EF%BC%9F.html">05 鉴权：如何保护你的数据安全？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E7%A7%9F%E7%BA%A6%EF%BC%9A%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B%E4%BD%A0%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AD%98%E6%B4%BB%EF%BC%9F.html">06 租约：如何检测你的客户端存活？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/07%20MVCC%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%89%88%E6%9C%AC%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%EF%BC%9F.html">07 MVCC：如何实现多版本并发控制？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/08%20Watch%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%8F%98%E5%8C%96%E9%80%9A%E7%9F%A5%EF%BC%9F.html">08 Watch：如何高效获取数据变化通知？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%89%E5%85%A8%E5%9C%B0%E5%AE%9E%E7%8E%B0%E5%A4%9Akey%E6%93%8D%E4%BD%9C%EF%BC%9F.html">09 事务：如何安全地实现多key操作？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/10%20boltdb%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8%E4%BD%A0%E7%9A%84key-value%E6%95%B0%E6%8D%AE%EF%BC%9F.html">10 boltdb：如何持久化存储你的key-value数据？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E5%8E%8B%E7%BC%A9%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9B%9E%E6%94%B6%E6%97%A7%E7%89%88%E6%9C%AC%E6%95%B0%E6%8D%AE%EF%BC%9F.html">11 压缩：如何回收旧版本数据？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/12%20%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9F%BA%E4%BA%8ERaft%E5%AE%9E%E7%8E%B0%E7%9A%84etcd%E8%BF%98%E4%BC%9A%E5%87%BA%E7%8E%B0%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%80%E8%87%B4%EF%BC%9F.html">12 一致性：为什么基于Raft实现的etcd还会出现数据不一致？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/13%20db%E5%A4%A7%E5%B0%8F%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88etcd%E7%A4%BE%E5%8C%BA%E5%BB%BA%E8%AE%AEdb%E5%A4%A7%E5%B0%8F%E4%B8%8D%E8%B6%85%E8%BF%878G%EF%BC%9F.html">13 db大小：为什么etcd社区建议db大小不超过8G？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E5%BB%B6%E6%97%B6%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E7%9A%84etcd%E8%AF%B7%E6%B1%82%E4%BC%9A%E5%87%BA%E7%8E%B0%E8%B6%85%E6%97%B6%EF%BC%9F.html">14 延时：为什么你的etcd请求会出现超时？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/15%20%E5%86%85%E5%AD%98%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E7%9A%84etcd%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E9%82%A3%E4%B9%88%E9%AB%98%EF%BC%9F.html">15 内存：为什么你的etcd内存占用那么高？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/16%20%E6%80%A7%E8%83%BD%E5%8F%8A%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E5%8F%8A%E6%89%A9%E5%B1%95etcd%E6%80%A7%E8%83%BD%EF%BC%9F.html">16 性能及稳定性（上）：如何优化及扩展etcd性能？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/17%20%E6%80%A7%E8%83%BD%E5%8F%8A%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E5%8F%8A%E6%89%A9%E5%B1%95etcd%E6%80%A7%E8%83%BD_.html">17 性能及稳定性（下）：如何优化及扩展etcd性能_</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/18%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8ERaft%E4%BB%8E0%E5%88%B01%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%94%AF%E6%8C%81%E5%A4%9A%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E5%88%86%E5%B8%83%E5%BC%8FKV%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">18 实战：如何基于Raft从0到1构建一个支持多存储引擎分布式KV服务？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/19%20Kubernetes%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAPod%E8%83%8C%E5%90%8Eetcd%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.html">19 Kubernetes基础应用：创建一个Pod背后etcd发生了什么？</a></li><li><a class="active" aria-current="page" href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/20%20Kubernetes%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF%E4%BD%BFetcd%E8%83%BD%E6%94%AF%E6%92%91%E4%B8%8A%E4%B8%87%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4%EF%BC%9F.html">20 Kubernetes高级应用：如何优化业务场景使etcd能支撑上万节点集群？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/21%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9F%BA%E4%BA%8Eetcd%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E6%AF%94Redis%E9%94%81%E6%9B%B4%E5%AE%89%E5%85%A8%EF%BC%9F.html">21 分布式锁：为什么基于etcd实现分布式锁比Redis锁更安全？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/22%20%E9%85%8D%E7%BD%AE%E5%8F%8A%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%EF%BC%9A%E8%A7%A3%E6%9E%90etcd%E5%9C%A8API%20Gateway%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%BA%94%E7%94%A8.html">22 配置及服务发现：解析etcd在API Gateway开源项目中应用</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E9%80%89%E5%9E%8B%EF%BC%9Aetcd_ZooKeeper_Consul%E7%AD%89%E6%88%91%E4%BB%AC%E8%AF%A5%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%EF%BC%9F.html">23 选型：etcd_ZooKeeper_Consul等我们该如何选择？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E8%BF%90%E7%BB%B4%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E9%AB%98%E5%8F%AF%E9%9D%A0%E7%9A%84etcd%E9%9B%86%E7%BE%A4%E8%BF%90%E7%BB%B4%E4%BD%93%E7%B3%BB%EF%BC%9F.html">24 运维：如何构建高可靠的etcd集群运维体系？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E6%88%90%E5%91%98%E5%8F%98%E6%9B%B4%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9B%86%E7%BE%A4%E7%9C%8B%E8%B5%B7%E6%9D%A5%E6%AD%A3%E5%B8%B8%EF%BC%8C%E7%A7%BB%E9%99%A4%E8%8A%82%E7%82%B9%E5%8D%B4%E4%BC%9A%E5%A4%B1%E8%B4%A5%E5%91%A2%EF%BC%9F.html">特别放送 成员变更：为什么集群看起来正常，移除节点却会失败呢？</a></li><li><a href="/courses/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%90%9E%E6%87%82etcd%EF%BC%8C%E6%8E%8C%E6%8F%A1%E9%80%9A%E5%BE%80%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F%E4%B9%8B%E9%97%A8%E7%9A%84%E9%92%A5%E5%8C%99.html">结束语 搞懂etcd，掌握通往分布式存储系统之门的钥匙</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/etcd%E5%AE%9E%E6%88%98%E8%AF%BE/20%20Kubernetes%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF%E4%BD%BFetcd%E8%83%BD%E6%94%AF%E6%92%91%E4%B8%8A%E4%B8%87%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="20 Kubernetes高级应用：如何优化业务场景使etcd能支撑上万节点集群？" id="title">20 Kubernetes高级应用：如何优化业务场景使etcd能支撑上万节点集群？</h1>
+<div><p>你好，我是唐聪。</p>
+<p>你知道吗？ 虽然Kubernetes社区官网文档目前声称支持最大集群节点数为5000，但是云厂商已经号称支持15000节点的Kubernetes集群了，那么为什么一个小小的etcd能支撑15000节点Kubernetes集群呢？</p>
+<p>今天我就和你聊聊为了支撑15000节点，Kubernetes和etcd的做的一系列优化。我将重点和你分析Kubernetes针对etcd的瓶颈是如何从应用层采取一系列优化措施，去解决大规模集群场景中各个痛点。</p>
+<p>当你遇到etcd性能瓶颈时，希望这节课介绍的大规模Kubernetes集群的最佳实践经验和优化技术，能让你获得启发，帮助你解决类似问题。</p>
+<h2 id="大集群核心问题分析">大集群核心问题分析</h2>
+<p>在大规模Kubernetes集群中会遇到哪些问题呢？</p>
+<p>大规模Kubernetes集群的外在表现是节点数成千上万，资源对象数量高达几十万。本质是更频繁地查询、写入更大的资源对象。</p>
+<p>首先是查询相关问题。在大集群中最重要的就是如何最大程度地减少expensive request。因为对几十万级别的对象数量来说，按标签、namespace查询Pod，获取所有Node等场景时，很容易造成etcd和kube-apiserver OOM和丢包，乃至雪崩等问题发生。</p>
+<p>其次是写入相关问题。Kubernetes为了维持上万节点的心跳，会产生大量写请求。而按照我们基础篇介绍的etcd MVCC、boltdb、线性读等原理，etcd适用场景是读多写少，大量写请求可能会导致db size持续增长、写性能达到瓶颈被限速、影响读性能。</p>
+<p>最后是大资源对象相关问题。etcd适合存储较小的key-value数据，etcd本身也做了一系列硬限制，比如key的value大小默认不能超过1.5MB。</p>
+<p>本讲我就和你重点分析下Kubernetes是如何优化以上问题，以实现支撑上万节点的。以及我会简单和你讲下etcd针对Kubernetes场景做了哪些优化。</p>
+<h2 id="如何减少expensive-request">如何减少expensive request</h2>
+<p>首先是第一个问题，Kubernetes如何减少expensive request？</p>
+<p>在这个问题中，我将Kubernetes解决此问题的方案拆分成几个核心点和你分析。</p>
+<h3 id="分页">分页</h3>
+<p>首先List资源操作是个基本功能点。各个组件在启动的时候，都不可避免会产生List操作，从etcd获取集群资源数据，构建初始状态。因此优化的第一步就是要避免一次性读取数十万的资源操作。</p>
+<p>解决方案是Kubernetes List接口支持分页特性。分页特性依赖底层存储支持，早期的etcd v2并未支持分页被饱受诟病，非常容易出现kube-apiserver大流量、高负载等问题。在etcd v3中，实现了指定返回Limit数量的范围查询，因此也赋能kube-apiserver 对外提供了分页能力。</p>
+<p>如下所示，在List接口的ListOption结构体中，Limit和Continue参数就是为了实现分页特性而增加的。</p>
+<p>Limit表示一次List请求最多查询的对象数量，一般为500。如果实际对象数量大于Limit，kube-apiserver则会更新ListMeta的Continue字段，client发起的下一个List请求带上这个字段就可获取下一批对象数量。直到kube-apiserver返回空的Continue值，就获取完成了整个对象结果集。</p>
+<pre><code>// ListOptions is the query options to a standard REST 
+list call.
+type ListOptions struct {
+   ...
+   Limit int64 `json:"limit,omitempty" 
+protobuf:"varint,7,opt,name=limit"`
+   Continue string `json:"continue,omitempty" 
+protobuf:"bytes,8,opt,name=continue"`
+}
+</code></pre>
+<p>了解完kube-apiserver的分页特性后，我们接着往下看Continue字段具体含义，以及它是如何影响etcd查询结果的。</p>
+<p>我们知道etcd分页是通过范围查询和Limit实现，ListOption中的Limit对应etcd查询接口中的Limit参数。你可以大胆猜测下，Continue字段是不是跟查询的范围起始key相关呢？</p>
+<p>Continue字段的确包含查询范围的起始key，它本质上是个结构体，还包含APIVersion和ResourceVersion。你之所以看到的是一个奇怪字符串，那是因为kube-apiserver使用base64库对其进行了URL编码，下面是它的原始结构体。</p>
+<pre><code>type continueToken struct {
+   APIVersion      string `json:"v"`
+   ResourceVersion int64  `json:"rv"`
+   StartKey        string `json:"start"`
+}
+</code></pre>
+<p>当kube-apiserver收到带Continue的分页查询时，解析Continue，获取StartKey、ResourceVersion，etcd查询Range接口指定startKey，增加clienv3.WithRange、clientv3.WithLimit、clientv3.WithRev即可。</p>
+<p>当你通过分页多次查询Kubernetes资源对象，得到的最终结果集合与不带Limit查询结果是一致的吗？kube-apiserver是如何保证分页查询的一致性呢？ 这个问题我把它作为了思考题，我们一起讨论。</p>
+<h3 id="资源按namespace拆分">资源按namespace拆分</h3>
+<p>通过分页特性提供机制避免一次拉取大量资源对象后，接下来就是业务最佳实践上要避免同namespace存储大量资源，尽量将资源对象拆分到不同namespace下。</p>
+<p>为什么拆分到不同namespace下有助于提升性能呢?</p>
+<p>正如我在<a href="https://time.geekbang.org/column/article/347992" target="_blank">19</a>中所介绍的，Kubernetes资源对象存储在etcd中的key前缀包含namespace，因此它相当于是个高效的索引字段。etcd treeIndex模块从B-tree中匹配前缀时，可快速过滤出符合条件的key-value数据。</p>
+<p>Kubernetes社区承诺<a href="https://github.com/kubernetes/community/blob/master/sig-scalability/slos/slos.md" target="_blank">SLO</a>达标的前提是，你在使用Kubernetes集群过程中必须合理配置集群和使用扩展特性，并遵循<a href="https://github.com/kubernetes/community/blob/master/sig-scalability/configs-and-limits/thresholds.md" target="_blank">一系列条件限制</a>（比如同namespace下的Service数量不超过5000个）。</p>
+<h3 id="informer机制">Informer机制</h3>
+<p>各组件启动发起一轮List操作加载完初始状态数据后，就进入了控制器的一致性协调逻辑。在一致性协调逻辑中，在19讲Kubernetes 基础篇中，我和你介绍了Kubernetes使用的是Watch特性来获取数据变化通知，而不是List定时轮询，这也是减少List操作一大核心策略。</p>
+<p>Kubernetes社区在client-go项目中提供了一个通用的Informer组件来负责client与kube-apiserver进行资源和事件同步，显著降低了开发者使用Kubernetes API、开发高性能Kubernetes扩展组件的复杂度。</p>
+<p>Informer机制的Reflector封装了Watch、List操作，结合本地Cache、Indexer，实现了控制器加载完初始状态数据后，接下来的其他操作都只需要从本地缓存读取，极大降低了kube-apiserver和etcd的压力。</p>
+<p>下面是Kubernetes社区给出的一个控制器使用Informer机制的架构图。黄色部分是控制器相关基础组件，蓝色部分是client-go的Informer机制的组件，它由Reflector、Queue、Informer、Indexer、Thread safe store(Local Cache)组成。</p>
+<p><img alt="" src="/assets/4431c8f61bf23025649156a8.png"/></p>
+<p>Informer机制的基本工作流程如下：</p>
+<ul>
+<li>client启动或与kube-apiserver出现连接中断再次Watch时，报”too old resource version”等错误后，通过Reflector组件的List操作，从kube-apiserver获取初始状态数据，随后通过Watch机制实时监听数据变化。</li>
+<li>收到事件后添加到Delta FIFO队列，由Informer组件进行处理。</li>
+<li>Informer将delta FIFO队列中的事件转发给Indexer组件，Indexer组件将事件持久化存储在本地的缓存中。</li>
+<li>控制器开发者可通过Informer组件注册Add、Update、Delete事件的回调函数。Informer组件收到事件后会回调业务函数，比如典型的控制器使用场景，一般是将各个事件添加到WorkQueue中，控制器的各个协调goroutine从队列取出消息，解析key，通过key从Informer机制维护的本地Cache中读取数据。</li>
+</ul>
+<p>通过以上流程分析，你可以发现除了启动、连接中断等场景才会触发List操作，其他时候都是从本地Cache读取。</p>
+<p>那连接中断等场景为什么触发client List操作呢？</p>
+<h3 id="watch-bookmark机制">Watch bookmark机制</h3>
+<p>要搞懂这个问题，你得了解kube-apiserver Watch特性的原理。</p>
+<p>接下来我就和你介绍下Kubernetes的Watch特性。我们知道Kubernetes通过全局递增的Resource Version来实现增量数据同步逻辑，尽量避免连接中断等异常场景下client发起全量List同步操作。</p>
+<p>那么在什么场景下会触发全量List同步操作呢？这就取决于client请求的Resource Version以及kube-apiserver中是否还保存了相关的历史版本数据。</p>
+<p>在<a href="https://time.geekbang.org/column/article/341060" target="_blank">08</a>Watch特性中，我和你提到实现历史版本数据存储两大核心机制，滑动窗口和MVCC。与etcd v3使用MVCC机制不一样的是，Kubernetes采用的是滑动窗口机制。</p>
+<p>kube-apiserver的滑动窗口机制是如何实现的呢?</p>
+<p>它通过为每个类型资源（Pod,Node等）维护一个cyclic buffer，来存储最近的一系列变更事件实现。</p>
+<p>下面Kubernetes核心的watchCache结构体中的cache数组、startIndex、endIndex就是用来实现cyclic buffer的。滑动窗口中的第一个元素就是cache[startIndex%capacity]，最后一个元素则是cache[endIndex%capacity]。</p>
+<pre><code>// watchCache is a "sliding window" (with a limited capacity) of objects
+// observed from a watch.
+type watchCache struct {
+   sync.RWMutex
+
+   // Condition on which lists are waiting for the fresh enough
+   // resource version.
+   cond *sync.Cond
+
+   // Maximum size of history window.
+   capacity int
+
+   // upper bound of capacity since event cache has a dynamic size.
+   upperBoundCapacity int
+
+   // lower bound of capacity since event cache has a dynamic size.
+   lowerBoundCapacity int
+
+   // cache is used a cyclic buffer - its first element (with the smallest
+   // resourceVersion) is defined by startIndex, its last element is defined
+   // by endIndex (if cache is full it will be startIndex + capacity).
+   // Both startIndex and endIndex can be greater than buffer capacity -
+   // you should always apply modulo capacity to get an index in cache array.
+   cache      []*watchCacheEvent
+   startIndex int
+   endIndex   int
+
+   // store will effectively support LIST operation from the "end of cache
+   // history" i.e. from the moment just after the newest cached watched event.
+   // It is necessary to effectively allow clients to start watching at now.
+   // NOTE: We assume that &lt;store&gt; is thread-safe.
+   store cache.Indexer
+
+   // ResourceVersion up to which the watchCache is propagated.
+   resourceVersion uint64
+}
+</code></pre>
+<p>下面我以Pod资源的历史事件滑动窗口为例，和你聊聊它在什么场景可能会触发client全量List同步操作。</p>
+<p>如下图所示，kube-apiserver启动后，通过List机制，加载初始Pod状态数据，随后通过Watch机制监听最新Pod数据变化。当你不断对Pod资源进行增加、删除、修改后，携带新Resource Version（简称RV）的Pod事件就会不断被加入到cyclic buffer。假设cyclic buffer容量为100，RV1是最小的一个Watch事件的Resource Version，RV 100是最大的一个Watch事件的Resource Version。</p>
+<p>当版本号为RV101的Pod事件到达时，RV1就会被淘汰，kube-apiserver维护的Pod最小版本号就变成了RV2。然而在Kubernetes集群中，不少组件都只关心cyclic buffer中与自己相关的事件。</p>
+<p><img alt="" src="/assets/b025162da535796f890af536.png"/></p>
+<p>比如图中的kubelet只关注运行在自己节点上的Pod，假设只有RV1是它关心的Pod事件版本号，在未实现Watch bookmark特性之前，其他RV2到RV101的事件是不会推送给它的，因此它内存中维护的Resource Version依然是RV1。</p>
+<p>若此kubelet随后与kube-apiserver连接出现异常，它将使用版本号RV1发起Watch重连操作。但是kube-apsierver cyclic buffer中的Pod最小版本号已是RV2，因此会返回”too old resource version”错误给client，client只能发起List操作，在获取到最新版本号后，才能重新进入监听逻辑。</p>
+<p>那么我们能否定时将最新的版本号推送给各个client来解决以上问题呢?</p>
+<p>是的，这就是Kubernetes的Watch bookmark机制核心思想。即使队列中无client关注的更新事件，Informer机制的Reflector组件中Resource Version也需要更新。</p>
+<p>Watch bookmark机制通过新增一个bookmark类型的事件来实现的。kube-apiserver会通过定时器将各类型资源最新的Resource Version推送给kubelet等client，在client与kube-apiserver网络异常重连等场景，大大降低了client重建Watch的开销，减少了relist expensive request。</p>
+<h3 id="更高效的watch恢复机制">更高效的Watch恢复机制</h3>
+<p>虽然Kubernetes社区通过Watch bookmark机制缓解了client与kube-apiserver重连等场景下可能导致的relist expensive request操作，然而在kube-apiserver重启、滚动更新时，它依然还是有可能导致大量的relist操作，这是为什么呢？ 如何进一步减少kube-apiserver重启场景下的List操作呢？</p>
+<p>如下图所示，在kube-apiserver重启后，kubelet等client会立刻带上Resource Version发起重建Watch的请求。问题就在kube-apiserver重启后，watchCache中的cyclic buffer是空的，此时watchCache中的最小Resource Version(listResourceVersion)是etcd的最新全局版本号，也就是图中的RV200。</p>
+<p><img alt="" src="/assets/8208b418a32783775771cbe0.png"/></p>
+<p>在不少场景下，client请求重建Watch的Resource Version是可能小于listResourceVersion的。</p>
+<p>比如在上面的这个案例图中，集群内Pod稳定运行未发生变化，kubelet假设收到了最新的RV100事件。然而这个集群其他资源如ConfigMap，被管理员不断的修改，它就会导致导致etcd版本号新增，ConfigMap滑动窗口也会不断存储变更事件，从图中可以看到，它记录最大版本号为RV200。</p>
+<p>因此kube-apiserver重启后，client请求重建Pod Watch的Resource Version是RV100，而Pod watchCache中的滑动窗口最小Resource Version是RV200。很显然，RV100不在Pod watchCache所维护的滑动窗口中，kube-apiserver就会返回”too old resource version”错误给client，client只能发起relist expensive request操作同步最新数据。</p>
+<p>为了进一步降低kube-apiserver重启对client Watch中断的影响，Kubernetes在1.20版本中又进一步实现了<a href="https://github.com/kubernetes/enhancements/tree/master/keps/sig-api-machinery/1904-efficient-watch-resumption" target="_blank">更高效的Watch恢复机制</a>。它通过etcd Watch机制的Notify特性，实现了将etcd最新的版本号定时推送给kube-apiserver。kube-apiserver在将其转换成ResourceVersion后，再通过bookmark机制推送给client，避免了kube-apiserver重启后client可能发起的List操作。</p>
+<h2 id="如何控制db-size">如何控制db size</h2>
+<p>分析完Kubernetes如何减少expensive request，我们再看看Kubernetes是如何控制db size的。</p>
+<p>首先，我们知道Kubernetes的kubelet组件会每隔10秒上报一次心跳给kube-apiserver。</p>
+<p>其次，Node资源对象因为包含若干个镜像、数据卷等信息，导致Node资源对象会较大，一次心跳消息可能高达15KB以上。</p>
+<p>最后，etcd是基于COW(Copy-on-write)机制实现的MVCC数据库，每次修改都会产生新的key-value，若大量写入会导致db size持续增长。</p>
+<p>早期Kubernetes集群由于以上原因，当节点数成千上万时，kubelet产生的大量写请求就较容易造成db大小达到配额，无法写入。</p>
+<p>那么如何解决呢？</p>
+<p>本质上还是Node资源对象大的问题。实际上我们需要更新的仅仅是Node资源对象的心跳状态，而在etcd中我们存储的是整个Node资源对象，并未将心跳状态拆分出来。</p>
+<p>因此Kuberentes的解决方案就是将Node资源进行拆分，把心跳状态信息从Node对象中剥离出来，通过下面的Lease对象来描述它。</p>
+<pre><code>// Lease defines a lease concept.
+type Lease struct {
+   metav1.TypeMeta `json:",inline"`
+   metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+   Spec LeaseSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+}
+
+// LeaseSpec is a specification of a Lease.
+type LeaseSpec struct {
+   HolderIdentity *string `json:"holderIdentity,omitempty" protobuf:"bytes,1,opt,name=holderIdentity"`
+   LeaseDurationSeconds *int32 `json:"leaseDurationSeconds,omitempty" protobuf:"varint,2,opt,name=leaseDurationSeconds"`
+   AcquireTime *metav1.MicroTime `json:"acquireTime,omitempty" protobuf:"bytes,3,opt,name=acquireTime"`
+   RenewTime *metav1.MicroTime `json:"renewTime,omitempty" protobuf:"bytes,4,opt,name=renewTime"`
+   LeaseTransitions *int32 `json:"leaseTransitions,omitempty" protobuf:"varint,5,opt,name=leaseTransitions"`
+}
+</code></pre>
+<p>因为Lease对象非常小，更新的代价远小于Node对象，所以这样显著降低了kube-apiserver的CPU开销、etcd db size，Kubernetes 1.14版本后已经默认启用Node心跳切换到Lease API。</p>
+<h2 id="如何优化key-value大小">如何优化key-value大小</h2>
+<p>最后，我们再看看Kubernetes是如何解决etcd key-value大小限制的。</p>
+<p>在成千上万个节点的集群中，一个服务可能背后有上万个Pod。而服务对应的Endpoints资源含有大量的独立的endpoints信息，这会导致Endpoints资源大小达到etcd的value大小限制，etcd拒绝更新。</p>
+<p>另外，kube-proxy等组件会实时监听Endpoints资源，一个endpoint变化就会产生较大的流量，导致kube-apiserver等组件流量超大、出现一系列性能瓶颈。</p>
+<p>如何解决以上Endpoints资源过大的问题呢？</p>
+<p>答案依然是拆分、化大为小。Kubernetes社区设计了EndpointSlice概念，每个EndpointSlice最大支持保存100个endpoints，成功解决了key-value过大、变更同步导致流量超大等一系列瓶颈。</p>
+<h2 id="etcd优化">etcd优化</h2>
+<p>Kubernetes社区在解决大集群的挑战的同时，etcd社区也在不断优化、新增特性，提升etcd在Kubernetes场景下的稳定性和性能。这里我简单列举两个，一个是etcd并发读特性，一个是Watch特性的Notify机制。</p>
+<h3 id="并发读特性">并发读特性</h3>
+<p>通过以上介绍的各种机制、策略，虽然Kubernetes能大大缓解expensive read request问题，但是它并不是从本质上来解决问题的。</p>
+<p>为什么etcd无法支持大量的read expensive request呢？</p>
+<p>除了我们一直强调的容易导致OOM、大流量导致丢包外，etcd根本性瓶颈是在etcd 3.4版本之前，expensive read request会长时间持有MVCC模块的buffer读锁RLock。而写请求执行完后，需升级锁至Lock，expensive request导致写事务阻塞在升级锁过程中，最终导致写请求超时。</p>
+<p>为了解决此问题，etcd 3.4版本实现了并发读特性。核心解决方案是去掉了读写锁，每个读事务拥有一个buffer。在收到读请求创建读事务对象时，全量拷贝写事务维护的buffer到读事务buffer中。</p>
+<p>通过并发读特性，显著降低了List Pod和CRD等expensive read request对写性能的影响，延时不再突增、抖动。</p>
+<h3 id="改善watch-notify机制">改善Watch Notify机制</h3>
+<p>为了配合Kubernetes社区实现更高效的Watch恢复机制，etcd改善了Watch Notify机制，早期Notify消息发送间隔是固定的10分钟。</p>
+<p>在etcd 3.4.11版本中，新增了–experimental-watch-progress-notify-interval参数使Notify间隔时间可配置，最小支持为100ms，满足了Kubernetes业务场景的诉求。</p>
+<p>最后，你要注意的是，默认通过clientv3 Watch API创建的watcher是不会开启此特性的。你需要创建Watcher的时候，设置clientv3.WithProgressNotify选项，这样etcd server就会定时发送提醒消息给client，消息中就会携带etcd当前最新的全局版本号。</p>
+<h2 id="小结">小结</h2>
+<p>最后我们来小结下今天的内容。</p>
+<p>首先我和你剖析了大集群核心问题，即expensive request、db size、key-value大小。</p>
+<p>针对expensive request，我分别为你阐述了Kubernetes的分页机制、资源按namespace拆分部署策略、核心的Informer机制、优化client与kube-apiserver连接异常后的Watch恢复效率的bookmark机制、以及进一步优化kube-apiserver重建场景下Watch恢复效率的Notify机制。从这个问题优化思路中我们可以看到，优化无止境。从大方向到边界问题，Kubernetes社区一步步将expensive request降低到极致。</p>
+<p>针对db size和key-value大小，Kubernetes社区的解决方案核心思想是拆分，通过Lease和EndpointSlice资源对象成功解决了大规模集群过程遇到db size和key-value瓶颈。</p>
+<p>最后etcd社区也在努力提升、优化相关特性，etcd 3.4版本中的并发读特性和可配置化的Watch Notify间隔时间就是最典型的案例。自从etcd被redhat捐赠给CNCF后，etcd核心就围绕着Kubernetes社区展开工作，努力打造更快、更稳的etcd。</p>
+<h2 id="思考题">思考题</h2>
+<p>最后我给你留了两个思考题。</p>
+<p>首先，在Kubernetes集群中，当你通过分页API分批多次查询得到全量Node资源的时候，它能保证Node全量数据的完整性、一致性（所有节点时间点一致）吗？如果能，是如何保证的呢?</p>
+<p>其次，你在使用Kubernetes集群中是否有遇到一些稳定性、性能以及令你困惑的问题呢？欢迎留言和我一起讨论。</p>
+<p>感谢你的阅读，如果你认为这节课的内容有收获，也欢迎把它分享给你的朋友，谢谢。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

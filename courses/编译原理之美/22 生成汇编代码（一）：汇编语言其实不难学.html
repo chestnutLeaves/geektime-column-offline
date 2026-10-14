@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>22 生成汇编代码（一）：汇编语言其实不难学 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/index.html">编译原理之美</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">43 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理之美</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%EF%BC%9F.html">00 开篇词 为什么你要学习编译原理？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/01%20%E7%90%86%E8%A7%A3%E4%BB%A3%E7%A0%81%EF%BC%9A%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF.html">01 理解代码：编译器的前端技术</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/02%20%E6%AD%A3%E5%88%99%E6%96%87%E6%B3%95%E5%92%8C%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8.html">02 正则文法和有限自动机：纯手工打造词法分析器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E5%85%AC%E5%BC%8F%E8%AE%A1%E7%AE%97%E5%99%A8.html">03 语法分析（一）：纯手工打造公式计算器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/04%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%A7%A3%E5%86%B3%E4%BA%8C%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E9%9A%BE%E7%82%B9.html">04 语法分析（二）：解决二元表达式中的难点</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/05%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%97%A8%E7%AE%80%E5%8D%95%E7%9A%84%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80.html">05 语法分析（三）：实现一门简单的脚本语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/06%20%E7%BC%96%E8%AF%91%E5%99%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%94%A8Antlr%E7%94%9F%E6%88%90%E8%AF%8D%E6%B3%95%E3%80%81%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8.html">06 编译器前端工具（一）：用Antlr生成词法、语法分析器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/07%20%E7%BC%96%E8%AF%91%E5%99%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%94%A8Antlr%E9%87%8D%E6%9E%84%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80.html">07 编译器前端工具（二）：用Antlr重构脚本语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/08%20%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E7%94%9F%E5%AD%98%E6%9C%9F%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%87%BD%E6%95%B0.html">08 作用域和生存期：实现块作用域和函数</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/09%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%9A%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%92%8C%E6%96%B9%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85.html">09 面向对象：实现数据和方法的封装</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/10%20%E9%97%AD%E5%8C%85%EF%BC%9A%20%E7%90%86%E8%A7%A3%E4%BA%86%E5%8E%9F%E7%90%86%EF%BC%8C%E5%AE%83%E5%B0%B1%E4%B8%8D%E5%8F%8D%E7%9B%B4%E8%A7%89%E4%BA%86.html">10 闭包： 理解了原理，它就不反直觉了</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/11%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E5%AE%8C%E5%96%84%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">11 语义分析（上）：如何建立一个完善的类型系统？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/12%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9B%B8%E5%85%B3%E6%83%85%E5%86%B5%E7%9A%84%E5%A4%84%E7%90%86%EF%BC%9F.html">12 语义分析（下）：如何做上下文相关情况的处理？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/13%20%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%90%E8%A1%8C%E6%9C%9F%E7%9A%84%E5%8A%A8%E6%80%81%E7%89%B9%E6%80%A7.html">13 继承和多态：面向对象运行期的动态特性</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/14%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%8F%E6%98%8E%E5%9C%B0%E6%94%AF%E6%8C%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%EF%BC%9F.html">14 前端技术应用（一）：如何透明地支持数据库分库分表？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/15%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E6%8A%A5%E8%A1%A8%E5%B7%A5%E5%85%B7%EF%BC%9F.html">15 前端技术应用（二）：如何设计一个报表工具？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/16%20NFA%E5%92%8CDFA%EF%BC%9A%E5%A6%82%E4%BD%95%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B7%A5%E5%85%B7%EF%BC%9F.html">16 NFA和DFA：如何自己实现一个正则表达式工具？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/17%20First%E5%92%8CFollow%E9%9B%86%E5%90%88%EF%BC%9A%E7%94%A8LL%E7%AE%97%E6%B3%95%E6%8E%A8%E6%BC%94%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B.html">17 First和Follow集合：用LL算法推演一个实例</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/18%20%E7%A7%BB%E8%BF%9B%E5%92%8C%E8%A7%84%E7%BA%A6%EF%BC%9A%E7%94%A8LR%E7%AE%97%E6%B3%95%E6%8E%A8%E6%BC%94%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B.html">18 移进和规约：用LR算法推演一个实例</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/19%20%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%9A%E5%AF%B9%E4%BA%8E%E5%B7%A6%E9%80%92%E5%BD%92%E7%9A%84%E8%AF%AD%E6%B3%95%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E6%8E%A8%E5%AF%BC%E4%B8%8D%E6%98%AF%E5%B7%A6%E9%80%92%E5%BD%92%E7%9A%84%EF%BC%9F.html">19 案例总结与热点问题答疑：对于左递归的语法，为什么我的推导不是左递归的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/20%20%E9%AB%98%E6%95%88%E8%BF%90%E8%A1%8C%EF%BC%9A%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF.html">20 高效运行：编译器的后端技术</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/21%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%AA%81%E7%A0%B4%E7%8E%B0%E8%B1%A1%E7%9C%8B%E6%9C%AC%E8%B4%A8%EF%BC%8C%E9%80%8F%E8%BF%87%E8%AF%AD%E6%B3%95%E7%9C%8B%E8%BF%90%E8%A1%8C%E6%97%B6.html">21 运行时机制：突破现象看本质，透过语法看运行时</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/22%20%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%B6%E5%AE%9E%E4%B8%8D%E9%9A%BE%E5%AD%A6.html">22 生成汇编代码（一）：汇编语言其实不难学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/23%20%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8A%8A%E8%84%9A%E6%9C%AC%E7%BC%96%E8%AF%91%E6%88%90%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6.html">23 生成汇编代码（二）：把脚本编译成可执行文件</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/24%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E5%85%BC%E5%AE%B9%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%AD%E8%A8%80%E5%92%8C%E7%A1%AC%E4%BB%B6.html">24 中间代码：兼容不同的语言和硬件</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/25%20%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF%E7%9A%84%E9%87%8D%E7%94%A8%EF%BC%9ALLVM%E4%B8%8D%E4%BB%85%E4%BB%85%E8%AE%A9%E4%BD%A0%E9%AB%98%E6%95%88.html">25 后端技术的重用：LLVM不仅仅让你高效</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/26%20%E7%94%9F%E6%88%90IR%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%9D%99%E6%80%81%E7%BC%96%E8%AF%91%E7%9A%84%E8%AF%AD%E8%A8%80.html">26 生成IR：实现静态编译的语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/27%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%AF%94%E4%BB%96%E7%9A%84%E6%9B%B4%E9%AB%98%E6%95%88%EF%BC%9F.html">27 代码优化：为什么你的代码比他的更高效？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/28%20%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90%EF%BC%9A%E4%BD%A0%E5%86%99%E7%9A%84%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%AE%83%E6%9B%B4%E6%87%82.html">28 数据流分析：你写的程序，它更懂</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/29%20%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%82%E5%BA%94%E5%90%84%E7%A7%8D%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9F.html">29 目标代码的生成和优化（一）：如何适应各种硬件架构？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/30%20%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%82%E5%BA%94%E5%90%84%E7%A7%8D%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9F.html">30 目标代码的生成和优化（二）：如何适应各种硬件架构？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/31%20%E5%86%85%E5%AD%98%E8%AE%A1%E7%AE%97%EF%BC%9A%E5%AF%B9%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%81%9A%E8%AE%A1%E7%AE%97%EF%BC%8C%E5%88%B0%E5%BA%95%E5%8F%AF%E4%BB%A5%E6%9C%89%E5%A4%9A%E5%BF%AB%EF%BC%9F.html">31 内存计算：对海量数据做计算，到底可以有多快？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/32%20%E5%AD%97%E8%8A%82%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Spring%E6%8A%80%E6%9C%AF%E5%BE%88%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">32 字节码生成：为什么Spring技术很强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/33%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%9A%E8%83%BD%E5%90%A6%E4%B8%8D%E5%81%9C%E4%B8%8B%E6%95%B4%E4%B8%AA%E4%B8%96%E7%95%8C%EF%BC%9F.html">33 垃圾收集：能否不停下整个世界？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/34%20%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BC%98%E5%8C%96%EF%BC%9A%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E4%BD%9C%E7%94%A8.html">34 运行时优化：即时编译的原理和作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/35%20%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%9A%E5%90%8E%E7%AB%AF%E9%83%A8%E5%88%86%E7%9C%9F%E7%9A%84%E6%AF%94%E5%89%8D%E7%AB%AF%E9%83%A8%E5%88%86%E9%9A%BE%E5%90%97%EF%BC%9F.html">35 案例总结与热点问题答疑：后端部分真的比前端部分难吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/36%20%E5%BD%93%E5%89%8D%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%AF%B9%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E7%9A%84%E5%BD%B1%E5%93%8D.html">36 当前技术的发展趋势以及其对编译技术的影响</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/37%20%20%E4%BA%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BC%9A%E5%A6%82%E4%BD%95%E6%94%B9%E5%8F%98%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">37  云编程：云计算会如何改变编程模式？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/38%20%E5%85%83%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%B8%80%E8%BE%B9%E5%86%99%E7%A8%8B%E5%BA%8F%EF%BC%8C%E4%B8%80%E8%BE%B9%E5%86%99%E8%AF%AD%E8%A8%80.html">38 元编程：一边写程序，一边写语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E5%8A%A0%E9%A4%90%20%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A8%8B%E4%B8%8E%E6%A0%88%E5%B8%A7%E7%AE%A1%E7%90%86.html">加餐 汇编代码编程与栈帧管理</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E5%9B%A0%E4%B8%BA%E7%83%AD%E7%88%B1%EF%BC%8C%E6%89%80%E4%BB%A5%E5%9D%9A%E6%8C%81.html">用户故事 因为热爱，所以坚持</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%AC%AC%E4%BA%8C%E5%AD%A3%E5%9B%9E%E5%BD%92%20%E8%BF%99%E6%AC%A1%EF%BC%8C%E6%88%91%E4%BB%AC%E4%B8%80%E8%B5%B7%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8.html">第二季回归 这次，我们一起实战解析真实世界的编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80%EF%BC%8C%E6%8E%A8%E5%8A%A8%E8%BF%99%E4%B8%AA%E4%B8%96%E7%95%8C%E7%9A%84%E6%BC%94%E5%8C%96.html">结束语 用程序语言，推动这个世界的演化</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/22%20%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%B6%E5%AE%9E%E4%B8%8D%E9%9A%BE%E5%AD%A6.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="22 生成汇编代码（一）：汇编语言其实不难学" id="title">22 生成汇编代码（一）：汇编语言其实不难学</h1>
+<div><blockquote>
+<p>敲黑板：课程用的是GNU汇编器，macOS和Linux已内置，本文的汇编语言的写法是GNU汇编器规定的写法。Windows系统可安装MinGW或Linux虚拟机。</p>
+</blockquote>
+<p>对于静态编译型语言，比如C语言和Go语言，编译器后端的任务就是生成汇编代码，然后再由汇编器生成机器码，生成的文件叫目标文件，最后再使用链接器就能生成可执行文件或库文件了。</p>
+<p><img alt="" src="/assets/53440e345ea0c68b7d0edfec.jpg"/></p>
+<p>就算像JavaScript这样的解释执行的语言，也要在运行时利用类似的机制生成机器码，以便调高执行的速度。Java的字节码，在运行时通常也会通过JIT机制编译成机器码。<strong>而汇编语言是完成这些工作的基础。</strong></p>
+<p>对你来说，掌握汇编语言是十分有益的，因为哪怕掌握一小点儿汇编技能，就能应用到某项工作中，比如，在C语言里嵌入汇编，实现某个特殊功能；或者读懂某些底层类库或驱动程序的代码，因为它可能是用汇编写的。</p>
+<p>本节课，我先带你了解一下汇编语言，来个破冰之旅。然后在接下来的课程中再带你基于AST手工生成汇编代码，破除你对汇编代码的恐惧，了解编译期后端生成汇编代码的原理。</p>
+<p>以后，当你看到高级语言的代码，以及IR时，就可以想象出来它对应的汇编代码是什么样子，实现从上层到底层认知的贯通。</p>
+<h2 id="了解汇编语言">了解汇编语言</h2>
+<p>机器语言都是0101的二进制的数据，不适合我们阅读。而汇编语言，简单来说，是可读性更好的机器语言，基本上每条指令都可以直接翻译成一条机器码。</p>
+<p>跟你日常使用的高级语言相比，汇编语言的语法特别简单，但它要跟硬件（CPU和内存）打交道，我们来体会一下。</p>
+<p>计算机的处理器有很多不同的架构，比如x86-64、ARM、Power等，每种处理器的指令集都不相同，那也就意味着汇编语言不同。我们目前用的电脑，CPU一般是x86-64架构，是64位机。（如不做特别说明，本课程都是以x86-64架构作为例子的）。</p>
+<p>说了半天，汇编代码长什么样子呢？我用C语言写的例子来生成一下汇编代码。</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main(int argc, char* argv[]){
+    printf("Hello %s!\n", "Richard");
+    return 0;
+}
+</code></pre>
+<p>在macOS中输入下面的命令，其中的-S参数就是告诉编译器把源代码编译成汇编代码，而-O2参数告诉编译器进行2级优化，这样生成的汇编代码会短一些：</p>
+<pre><code>clang -S -O2 hello.c -o hello.s
+或者：
+gcc -S -O2 hello.c -o hello.s
+</code></pre>
+<p>生成的汇编代码是下面的样子：</p>
+<pre><code> .section    __TEXT,__text,regular,pure_instructions
+    .build_version macos, 10, 14    sdk_version 10, 14
+    .globl  _main                   ## -- Begin function main
+    .p2align    4, 0x90
+_main:                                  ## @main
+    .cfi_startproc
+## %bb.0:
+    pushq   %rbp
+    .cfi_def_cfa_offset 16
+    .cfi_offset %rbp, -16
+    movq    %rsp, %rbp
+    .cfi_def_cfa_register %rbp
+    leaq    L_.str(%rip), %rdi
+    leaq    L_.str.1(%rip), %rsi
+    xorl    %eax, %eax
+    callq   _printf
+    xorl    %eax, %eax
+    popq    %rbp
+    retq
+    .cfi_endproc
+                                        ## -- End function 
+    .section    __TEXT,__cstring,cstring_literals
+L_.str:                                 ## @.str
+    .asciz  "Hello %s!\n"
+
+L_.str.1:                               ## @.str.1
+    .asciz  "Richard"
+
+.subsections_via_symbols
+</code></pre>
+<p>你如果再打下面的命令，就会把这段汇编代码编译成可执行文件（在macOS或Linux执行as命令，就是调用了GNU的汇编器）：</p>
+<pre><code>as hello.s -o hello.o   //用汇编器编译成目标文件
+gcc hello.o -o hello   //链接成可执行文件 
+./hello                 //运行程序
+</code></pre>
+<p>以上面的代码为例，来看一下汇编语言的组成元素。<strong>这是汇编语言入门的基础，也是重点内容，在阅读时，你不需要死记硬背，而是要灵活掌握，</strong>比如CPU的指令特别多，我们记住常用的就行了，不太常用的可以去查手册。</p>
+<h4 id="1-汇编语言的组成元素">1.汇编语言的组成元素</h4>
+<p>这段代码里有<strong>指令、伪指令、标签和注释</strong>四种元素，每个元素单独占一行。</p>
+<p><strong>指令（instruction）是直接由CPU进行处理的命令，</strong>例如：</p>
+<pre><code>pushq   %rbp
+movq    %rsp, %rbp
+</code></pre>
+<p>其中，开头的一个单词是助记符（mnemonic），后面跟着的是操作数（operand），有多个操作数时以逗号分隔。第二行代码的意思是把数据从这里（源）拷贝到那里（目的），这跟“请倒杯咖啡给我”这样的自然语句是一样的，先是动词（倒），然后是动词的作用对象（咖啡），再就是目的地（给我）。</p>
+<p><strong>伪指令以“.”开头，末尾没有冒号“：”。</strong></p>
+<pre><code>.section    __TEXT,__text,regular,pure_instructions
+.globl  _main        
+.asciz  "Hello %s!\n"
+</code></pre>
+<p>伪指令是是辅助性的，汇编器在生成目标文件时会用到这些信息，但伪指令不是真正的CPU指令，就是写给汇编器的。每种汇编器的伪指令也不同，要查阅相应的手册。</p>
+<p><strong>标签以冒号“:”结尾，用于对伪指令生成的数据或指令做标记。</strong>例如L_.str: 标签是对一个字符串做了标记。其他代码可以访问标签，例如跳转到这个标签所标记的指令。</p>
+<pre><code>L_.str:                                 ## @.str
+    .asciz  "Hello %s!\n"
+</code></pre>
+<p>标签很有用，它可以代表一段代码或者常量的地址（也就是在代码区或静态数据区中的位置）。可一开始，我们没法知道这个地址的具体值，必须生成目标文件后，才能算出来。所以，标签会简化汇编代码的编写。</p>
+<p><strong>第四种元素，注释，以“#”号开头，这跟C语言中以//表示注释语句是一样的。</strong></p>
+<p>因为指令是汇编代码的主要部分，所以我们再把与指令有关的知识点展开讲解一下。</p>
+<h4 id="2-详细了解指令这个元素">2.详细了解指令这个元素</h4>
+<p>在代码中，助记符“movq”“xorl”中的“mov”和“xor”是指令，而“q”和“l”叫做后缀，表示操作数的位数。后缀一共有b, w, l, q四种，分别代表8位、16位、32位和64位。</p>
+<p><img alt="" src="/assets/ce5cc813b027327c42d44f0a.jpg"/></p>
+<p>比如，movq中的q代表操作数是8个字节，也就是64位的。movq就是把8字节从一个地方拷贝到另一个地方，而movl则是拷贝4个字节。</p>
+<p>而在指令中使用操作数，可以使用四种格式，它们分别是：<strong>立即数、寄存器、直接内存访问和间接内存访问。</strong></p>
+<p><strong>立即数以$开头，</strong> <strong>比如$40</strong>。（下面这行代码是把40这个数字拷贝到%eax寄存器）。</p>
+<pre><code>movl $40, %eax
+</code></pre>
+<p>除此之外，我们在指令中最常见到的就是对寄存器的访问，GNU的汇编器规定寄存器一定要以%开头。</p>
+<p><strong>直接内存访问：</strong>当我们在代码中看到操作数是一个数字时，它其实指的是内存地址。不要误以为它是一个数字，因为数字立即数必须以$开头。另外，汇编代码里的标签，也会被翻译成直接内存访问的地址。比如“callq _printf”中的“_printf”是一个函数入口的地址。汇编器帮我们计算出程序装载在内存时，每个字面量和过程的地址。</p>
+<p><strong>间接内存访问：</strong>带有括号，比如（%rbp），它是指%rbp寄存器的值所指向的地址。</p>
+<p>间接内存访问的完整形式是：</p>
+<blockquote>
+<p>偏移量（基址，索引值，字节数）这样的格式。</p>
+</blockquote>
+<p>其地址是：</p>
+<blockquote>
+<p>基址 + 索引值*字节数 + 偏移量</p>
+</blockquote>
+<p>举例来说：</p>
+<blockquote>
+<p>8(%rbp)，是比%rbp寄存器的值加8。-
+-8(%rbp)，是比%rbp寄存器的值减8。-
+（%rbp, %eax, 4）的值，等于%rbp + %eax*4。这个地址格式相当于访问C语言中的数组中的元素，数组元素是32位的整数，其索引值是%eax，而数组的起始位置是%rbp。其中字节数只能取1,2,4,8四个值。</p>
+</blockquote>
+<p>你现在应该对指令的格式有所了解了，接下来，我们再学几个常用的指令：</p>
+<p><strong>mov指令</strong></p>
+<pre><code>mov 寄存器|内存|立即数, 寄存器|内存
+</code></pre>
+<p>这个指令最常用到，用于在寄存器或内存之间传递数据，或者把立即数加载到内存或寄存器。mov指令的第一个参数是源，可以是寄存器、内存或立即数。第二个参数是目的地，可以是寄存器或内存。</p>
+<p><strong>lea指令，lea是“load effective address”的意思，装载有效地址。</strong></p>
+<pre><code>lea 源，目的
+</code></pre>
+<p>比如前面例子代码中的leaq指令，是把字符串的地址加载到%rdi寄存器。</p>
+<pre><code>leaq    L_.str(%rip), %rdi
+</code></pre>
+<p><strong>add指令是做加法运算，它可以采取下面的格式：</strong></p>
+<pre><code>add 立即数， 寄存器 
+add 寄存器， 寄存器 
+add 内存， 寄存器 
+add 立即数， 内存 
+add 寄存器， 内存
+</code></pre>
+<p>比如，典型的c=a+b这样一个算术运算可能是这样的：</p>
+<pre><code>movl -4(%rbp), %eax    #把%rbp-4的值拷贝到%eax
+addl -8(%rbp), %eax   #把%rbp-8地址的值加到%eax上
+movl %eax, -12(%rbp)   #把%eax的值写到内存地址%rbp-12
+</code></pre>
+<p>这三行代码，分别是操作a、b、c三个变量的地址。它们的地址分别比%rbp的值减4、减8、减12，因此a、b、c三个变量每个都是4个字节长，也就是32位，它们是紧挨着存放的，并且是从高地址向低地址延伸的，这是栈的特征。</p>
+<p><strong>除了add以外，其他算术运算的指令：</strong></p>
+<p><img alt="" src="/assets/d58bc480e040bc0c7f389ef4.jpg"/></p>
+<p><strong>与栈有关的操作：</strong></p>
+<p><img alt="" src="/assets/00578292a833b9c4a8c7fa50.jpg"/></p>
+<p><strong>跳转类：</strong></p>
+<p><img alt="" src="/assets/851ff7b41b399dd66714d746.jpg"/></p>
+<p><strong>过程调用：</strong></p>
+<p><img alt="" src="/assets/f591522212bbe188e30bd039.jpg"/></p>
+<p><strong>比较操作：</strong></p>
+<p><img alt="" src="/assets/eb6878cc288454e9daba34b4.jpg"/></p>
+<p>以上我列举的指令，是你在编写汇编代码时，经常会用到的，比较重要，会满足你编写简单汇编程序的需求，所以你需要重点关注。</p>
+<p>x86-64是复杂指令集的处理器，有非常多的指令，差不多有上千条，全部记住是比较难的。更好的办法，是记住主要的指令，其他指令在使用时去查<a href="https://software.intel.com/en-us/download/intel-64-and-ia-32-architectures-sdm-combined-volumes-1-2a-2b-2c-2d-3a-3b-3c-3d-and-4" target="_blank">Intel公司的手册</a>，在这里我就不举例了。</p>
+<h2 id="x86-64架构的寄存器">x86-64架构的寄存器</h2>
+<p>在汇编代码中，我们经常要使用各种以%开头的寄存器的符号。初学者阅读这些代码时，通常会有一些疑问：有几个寄存器可以用？我可以随便用它们吗？使用不当会不会造成错误？等等。所以，有必要让你熟悉一下这些寄存器，了解它们的使用方法。</p>
+<p>x86-64架构的CPU里有很多寄存器，我们在代码里最常用的是16个64位的通用寄存器，分别是：</p>
+<blockquote>
+<p>%rax，%rbx，%rcx，%rdx，%rsi，%rdi，%rbp，%rsp， %r8，%r9，%r10，%r11，%r12，%r13，%r14，%r15。</p>
+</blockquote>
+<p>这些寄存器在历史上有各自的用途，比如，rax中的“a”，是Accumulator(累加器)的意思，这个寄存器是累加寄存器。</p>
+<p>但随着技术的发展，这些寄存器基本上都成为了通用的寄存器，不限于某种特定的用途。但是，为了方便软件的编写，我们还是做了一些约定，给这些寄存器划分了用途。针对x86-64架构有多个调用约定（Calling Convention），包括微软的x64调用约定（Windows系统）、System V AMD64 ABI（Unix和Linux系统）等，下面的内容属于后者：</p>
+<ul>
+<li><p>%rax 除了其他用途外，通常在函数返回的时候，把返回值放在这里。</p></li>
+<li><p>%rsp 作为栈指针寄存器，指向栈顶。</p></li>
+<li><p>%rdi，%rsi，%rdx，%rcx，%r8，%r9 给函数传整型参数，依次对应第1参数到第6参数。超过6个参数怎么办？放在栈桢里，我们<a href="https://time.geekbang.org/column/article/146635" target="_blank">21讲</a>已经讲过了。</p></li>
+<li><p>如果程序要使用%rbx，%rbp，%r12，%r13，%r14，%r15 这几个寄存器，是由被调用者（Callee）负责保护的，也就是写到栈里，在返回的时候要恢复这些寄存器中原来的内容。其他寄存器的内容，则是由调用者（Caller）负责保护，如果不想这些寄存器中的内容被破坏，那么要自己保护起来。</p></li>
+</ul>
+<p>上面这些寄存器的名字都是64位的名字，对于每个寄存器，我们还可以只使用它的一部分，并且另起一个名字。比如对于%rax，如果使用它的前32位，就叫做%eax，前16位叫%ax，前8位（0到7位）叫%al，8到15位叫%ah。</p>
+<p><img alt="" src="/assets/cef9287976d53e66d48d64a7.jpg"/></p>
+<p>其他的寄存器也有这样的使用方式，当你在汇编代码中看到这些名称的时候，你就知道其实它们有可能在物理上是同一个寄存器。</p>
+<p><img alt="" src="/assets/2bb9e9cafd20ca72e4c19bc9.jpg"/></p>
+<p>除了通用寄存器以外，有可能的话，还要了解下面的寄存器和它们的用途，我们写汇编代码时也经常跟它们发生关联：</p>
+<ul>
+<li><p>8个80位的x87寄存器，用于做浮点计算；</p></li>
+<li><p>8个64位的MMX寄存器，用于MMX指令（即多媒体指令），这8个跟x87寄存器在物理上是相同的寄存器。在传递浮点数参数的时候，要用mmx寄存器。</p></li>
+<li><p>16个128位的SSE寄存器，用于SSE指令。我们将在应用篇里使用SSE指令，讲解SIMD的概念。</p></li>
+<li><p>指令寄存器，rip，保存指令地址。CPU总是根据这个寄存器来读取指令。</p></li>
+<li><p>flags（64位：rflags, 32位：eflags）寄存器：每个位用来标识一个状态。比如，它们会用于比较和跳转的指令，比如if语句翻译成的汇编代码，就会用它们来保存if条件的计算结果。</p></li>
+</ul>
+<p>总的来说，我们的汇编代码处处要跟寄存器打交道，正确和高效使用寄存器，是编译期后端的重要任务之一。</p>
+<h2 id="课程小结">课程小结</h2>
+<p>本节课，我讲解了汇编语言的一些基础知识，由于汇编语言的特点，涉及的知识点和细节比较多，在这个过程中，你无需死记硬背，只需要掌握几个重点内容：</p>
+<p>1.汇编语言是由指令、标签、伪指令和注释构成的。其中主要内容都是指令。指令包含一个该指令的助记符和操作数。操作数可以使用直接数、寄存器，以及用两种方式访问内存地址。</p>
+<p>2.汇编指令中会用到一些通用寄存器。这些寄存器除了用于计算以外，还可以根据调用约定帮助传递参数和返回值。使用寄存器时，要区分由调用者还是被调用者负责保护寄存器中原来的内容。</p>
+<p>另外，我们还要注意按照一定的规则维护和使用栈桢，<strong>这个知识点会在后面的加餐中展开来讲一个例子。</strong></p>
+<p>鉴于你可能是第一次使用汇编语言，所以我<strong>提供两个建议，让你快速上手汇编语言：</strong></p>
+<p>1.你可以用C语言写一些示例代码，然后用编译器生成汇编代码，看看能否看懂。</p>
+<p>2.模仿文稿中的例子，自己改写并运行你自己的汇编程序，这个过程中，你会发现真的没那么难。</p>
+<h2 id="一课一思">一课一思</h2>
+<p>你之前学习过或者在项目中使用过汇编语言吗？感受是什么呢？有什么经验和体会呢？欢迎在留言区分享你的经验与感受。</p>
+<p>最后，感谢你的阅读，如果这篇文章让你有所收获，也欢迎你将它分享给更多的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12 Java有几种文件拷贝方式？哪一种最高效？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/index.html">Java核心技术面试精讲</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">42 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java核心技术面试精讲</strong><ul><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%A5%E9%9D%A2%E8%AF%95%E9%A2%98%E4%B8%BA%E5%88%87%E5%85%A5%E7%82%B9%EF%BC%8C%E6%9C%89%E6%95%88%E6%8F%90%E5%8D%87%E4%BD%A0%E7%9A%84Java%E5%86%85%E5%8A%9F.html">00 开篇词 以面试题为切入点，有效提升你的Java内功</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/01%20%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9Java%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F.html">01 谈谈你对Java平台的理解？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/02%20Exception%E5%92%8CError%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">02 Exception和Error有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/03%20%E8%B0%88%E8%B0%88final%E3%80%81finally%E3%80%81%20finalize%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">03 谈谈final、finally、 finalize有什么不同？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/04%20%E5%BC%BA%E5%BC%95%E7%94%A8%E3%80%81%E8%BD%AF%E5%BC%95%E7%94%A8%E3%80%81%E5%BC%B1%E5%BC%95%E7%94%A8%E3%80%81%E5%B9%BB%E8%B1%A1%E5%BC%95%E7%94%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">04 强引用、软引用、弱引用、幻象引用有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/05%20String%E3%80%81StringBuffer%E3%80%81StringBuilder%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">05 String、StringBuffer、StringBuilder有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/06%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%98%AF%E5%9F%BA%E4%BA%8E%E4%BB%80%E4%B9%88%E5%8E%9F%E7%90%86%EF%BC%9F.html">06 动态代理是基于什么原理？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/07%20int%E5%92%8CInteger%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">07 int和Integer有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/08%20%E5%AF%B9%E6%AF%94Vector%E3%80%81ArrayList%E3%80%81LinkedList%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB%EF%BC%9F.html">08 对比Vector、ArrayList、LinkedList有何区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/09%20%E5%AF%B9%E6%AF%94Hashtable%E3%80%81HashMap%E3%80%81TreeMap%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">09 对比Hashtable、HashMap、TreeMap有什么不同？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/10%20%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%9B%86%E5%90%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84_%20ConcurrentHashMap%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%9F.html">10 如何保证集合是线程安全的_ ConcurrentHashMap如何实现高效地线程安全？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/11%20Java%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9BIO%E6%96%B9%E5%BC%8F%EF%BC%9F%20NIO%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%EF%BC%9F.html">11 Java提供了哪些IO方式？ NIO如何实现多路复用？</a></li><li><a class="active" aria-current="page" href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/12%20Java%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D%E6%96%B9%E5%BC%8F%EF%BC%9F%E5%93%AA%E4%B8%80%E7%A7%8D%E6%9C%80%E9%AB%98%E6%95%88%EF%BC%9F.html">12 Java有几种文件拷贝方式？哪一种最高效？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/13%20%E8%B0%88%E8%B0%88%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">13 谈谈接口和抽象类有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/14%20%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9F%A5%E9%81%93%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">14 谈谈你知道的设计模式？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/15%20synchronized%E5%92%8CReentrantLock%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%91%A2%EF%BC%9F.html">15 synchronized和ReentrantLock有什么区别呢？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/16%20synchronized%E5%BA%95%E5%B1%82%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E9%94%81%E7%9A%84%E5%8D%87%E7%BA%A7%E3%80%81%E9%99%8D%E7%BA%A7%EF%BC%9F.html">16 synchronized底层如何实现？什么是锁的升级、降级？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/17%20%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E4%B8%A4%E6%AC%A1%E8%B0%83%E7%94%A8start%28%29%E6%96%B9%E6%B3%95%E4%BC%9A%E5%87%BA%E7%8E%B0%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%EF%BC%9F.html">17 一个线程两次调用start()方法会出现什么情况？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/18%20%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8BJava%E7%A8%8B%E5%BA%8F%E4%BC%9A%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%EF%BC%9F%E5%A6%82%E4%BD%95%E5%AE%9A%E4%BD%8D%E3%80%81%E4%BF%AE%E5%A4%8D%EF%BC%9F.html">18 什么情况下Java程序会产生死锁？如何定位、修复？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/19%20Java%E5%B9%B6%E5%8F%91%E5%8C%85%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%EF%BC%9F.html">19 Java并发包提供了哪些并发工具类？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/20%20%E5%B9%B6%E5%8F%91%E5%8C%85%E4%B8%AD%E7%9A%84ConcurrentLinkedQueue%E5%92%8CLinkedBlockingQueue%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">20 并发包中的ConcurrentLinkedQueue和LinkedBlockingQueue有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/21%20Java%E5%B9%B6%E5%8F%91%E7%B1%BB%E5%BA%93%E6%8F%90%E4%BE%9B%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%EF%BC%9F%20%E5%88%86%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">21 Java并发类库提供的线程池有哪几种？ 分别有什么特点？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/22%20AtomicInteger%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%A7%E5%93%81%E4%BB%A3%E7%A0%81%E4%B8%AD%E5%BA%94%E7%94%A8CAS%E6%93%8D%E4%BD%9C%EF%BC%9F.html">22 AtomicInteger底层实现原理是什么？如何在自己的产品代码中应用CAS操作？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/23%20%E8%AF%B7%E4%BB%8B%E7%BB%8D%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">23 请介绍类加载过程，什么是双亲委派模型？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/24%20%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AAJava%E7%B1%BB%EF%BC%9F.html">24 有哪些方法可以在运行时动态生成一个Java类？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/25%20%E8%B0%88%E8%B0%88JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E7%9A%84%E5%88%92%E5%88%86%EF%BC%8C%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%9F%9F%E5%8F%AF%E8%83%BD%E5%8F%91%E7%94%9FOutOfMemoryError_.html">25 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError_</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/26%20%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E5%92%8C%E8%AF%8A%E6%96%ADJVM%E5%A0%86%E5%86%85%E5%92%8C%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%EF%BC%9F.html">26 如何监控和诊断JVM堆内和堆外内存使用？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/27%20Java%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">27 Java常见的垃圾收集器有哪些？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/28%20%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9A%84GC%E8%B0%83%E4%BC%98%E6%80%9D%E8%B7%AF_.html">28 谈谈你的GC调优思路_</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/29%20Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84happen-before%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">29 Java内存模型中的happen-before是什么？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/30%20Java%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E5%9C%A8Docker%E7%AD%89%E5%AE%B9%E5%99%A8%E7%8E%AF%E5%A2%83%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E9%97%AE%E9%A2%98%EF%BC%9F.html">30 Java程序运行在Docker等容器环境有哪些新问题？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/31%20%E4%BD%A0%E4%BA%86%E8%A7%A3Java%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%E5%90%97%EF%BC%9F.html">31 你了解Java应用开发中的注入攻击吗？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/32%20%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E5%AE%89%E5%85%A8%E7%9A%84Java%E4%BB%A3%E7%A0%81%EF%BC%9F.html">32 如何写出安全的Java代码？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/33%20%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%87%BA%E7%8E%B0%E6%98%8E%E6%98%BE%E2%80%9C%E5%8F%98%E6%85%A2%E2%80%9D%EF%BC%8C%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9A%84%E8%AF%8A%E6%96%AD%E6%80%9D%E8%B7%AF%EF%BC%9F.html">33 后台服务出现明显“变慢”，谈谈你的诊断思路？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/34%20%E6%9C%89%E4%BA%BA%E8%AF%B4%E2%80%9CLambda%E8%83%BD%E8%AE%A9Java%E7%A8%8B%E5%BA%8F%E6%85%A230%E5%80%8D%E2%80%9D%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%9F.html">34 有人说“Lambda能让Java程序慢30倍”，你怎么看？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/35%20JVM%E4%BC%98%E5%8C%96Java%E4%BB%A3%E7%A0%81%E6%97%B6%E9%83%BD%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.html">35 JVM优化Java代码时都做了什么？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/36%20%E8%B0%88%E8%B0%88MySQL%E6%94%AF%E6%8C%81%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%82%B2%E8%A7%82%E9%94%81%E5%92%8C%E4%B9%90%E8%A7%82%E9%94%81%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F.html">36 谈谈MySQL支持的事务隔离级别，以及悲观锁和乐观锁的原理和应用场景？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/37%20%E8%B0%88%E8%B0%88Spring%20Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F.html">37 谈谈Spring Bean的生命周期和作用域？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/38%20%E5%AF%B9%E6%AF%94Java%E6%A0%87%E5%87%86NIO%E7%B1%BB%E5%BA%93%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93Netty%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9B%B4%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%90%97%EF%BC%9F.html">38 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/39%20%E8%B0%88%E8%B0%88%E5%B8%B8%E7%94%A8%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8FID%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9FSnowflake%E6%98%AF%E5%90%A6%E5%8F%97%E5%86%AC%E4%BB%A4%E6%97%B6%E5%88%87%E6%8D%A2%E5%BD%B1%E5%93%8D%EF%BC%9F.html">39 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/%E5%91%A8%E6%9C%AB%E7%A6%8F%E5%88%A9%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9Java%E5%AD%A6%E4%B9%A0%E5%92%8C%E9%9D%A2%E8%AF%95%E7%9A%84%E7%9C%8B%E6%B3%95.html">周末福利 谈谈我对Java学习和面试的看法</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%80%E6%9C%AF%E6%B2%A1%E6%9C%89%E7%BB%88%E7%82%B9.html">结束语 技术没有终点</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/12%20Java%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D%E6%96%B9%E5%BC%8F%EF%BC%9F%E5%93%AA%E4%B8%80%E7%A7%8D%E6%9C%80%E9%AB%98%E6%95%88%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12 Java有几种文件拷贝方式？哪一种最高效？" id="title">12 Java有几种文件拷贝方式？哪一种最高效？</h1>
+<div><p>我在专栏上一讲提到，NIO不止是多路复用，NIO 2也不只是异步IO，今天我们来看看Java IO体系中，其他不可忽略的部分。</p>
+<p>今天我要问你的问题是，Java有几种文件拷贝方式？哪一种最高效？</p>
+<h2 id="典型回答">典型回答</h2>
+<p>Java有多种比较典型的文件拷贝实现方式，比如：</p>
+<p>利用java.io类库，直接为源文件构建一个FileInputStream读取，然后再为目标文件构建一个FileOutputStream，完成写入工作。</p>
+<pre><code class="language-java">    public static void copyFileByStream(File source, File dest) throws
+            IOException {
+        try (InputStream is = new FileInputStream(source);
+             OutputStream os = new FileOutputStream(dest);){
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) &gt; 0) {
+                os.write(buffer, 0, length);
+            }
+        }
+     }
+</code></pre>
+<p>或者，利用java.nio类库提供的transferTo或transferFrom方法实现。</p>
+<pre><code class="language-java">    public static void copyFileByChannel(File source, File dest) throws
+            IOException {
+        try (FileChannel sourceChannel = new FileInputStream(source)
+                .getChannel();
+             FileChannel targetChannel = new FileOutputStream(dest).getChannel
+                     ();){
+            for (long count = sourceChannel.size() ;count&gt;0 ;) {
+                long transferred = sourceChannel.transferTo(
+                        sourceChannel.position(), count, targetChannel);            sourceChannel.position(sourceChannel.position() + transferred);
+                count -= transferred;
+            }
+        }
+     }
+</code></pre>
+<p>当然，Java标准类库本身已经提供了几种Files.copy的实现。</p>
+<p>对于Copy的效率，这个其实与操作系统和配置等情况相关，总体上来说，NIO transferTo/From的方式<strong>可能更快</strong>，因为它更能利用现代操作系统底层机制，避免不必要拷贝和上下文切换。</p>
+<h2 id="考点分析">考点分析</h2>
+<p>今天这个问题，从面试的角度来看，确实是一个面试考察的点，针对我上面的典型回答，面试官还可能会从实践角度，或者IO底层实现机制等方面进一步提问。这一讲的内容从面试题出发，主要还是为了让你进一步加深对Java IO类库设计和实现的了解。</p>
+<p>从实践角度，我前面并没有明确说NIO transfer的方案一定最快，真实情况也确实未必如此。我们可以根据理论分析给出可行的推断，保持合理的怀疑，给出验证结论的思路，有时候面试官考察的就是如何将猜测变成可验证的结论，思考方式远比记住结论重要。</p>
+<p>从技术角度展开，下面这些方面值得注意：</p>
+<ul>
+<li><p>不同的copy方式，底层机制有什么区别？</p></li>
+<li><p>为什么零拷贝（zero-copy）可能有性能优势？</p></li>
+<li><p>Buffer分类与使用。</p></li>
+<li><p>Direct Buffer对垃圾收集等方面的影响与实践选择。</p></li>
+</ul>
+<p>接下来，我们一起来分析一下吧。</p>
+<h2 id="知识扩展">知识扩展</h2>
+<ol>
+<li>拷贝实现机制分析</li>
+</ol>
+<p>先来理解一下，前面实现的不同拷贝方法，本质上有什么明显的区别。</p>
+<p>首先，你需要理解用户态空间（User Space）和内核态空间（Kernel Space），这是操作系统层面的基本概念，操作系统内核、硬件驱动等运行在内核态空间，具有相对高的特权；而用户态空间，则是给普通应用和服务使用。你可以参考：<a href="https://en.wikipedia.org/wiki/User_space" target="_blank">https://en.wikipedia.org/wiki/User_space</a>。</p>
+<p>当我们使用输入输出流进行读写时，实际上是进行了多次上下文切换，比如应用读取数据时，先在内核态将数据从磁盘读取到内核缓存，再切换到用户态将数据从内核缓存读取到用户缓存。</p>
+<p>写入操作也是类似，仅仅是步骤相反，你可以参考下面这张图。</p>
+<p><img alt="" src="/assets/6ccdbadbdeaa60ff3f7c0501.png"/></p>
+<p>所以，这种方式会带来一定的额外开销，可能会降低IO效率。</p>
+<p>而基于NIO transferTo的实现方式，在Linux和Unix上，则会使用到零拷贝技术，数据传输并不需要用户态参与，省去了上下文切换的开销和不必要的内存拷贝，进而可能提高应用拷贝性能。注意，transferTo不仅仅是可以用在文件拷贝中，与其类似的，例如读取磁盘文件，然后进行Socket发送，同样可以享受这种机制带来的性能和扩展性提高。</p>
+<p>transferTo的传输过程是：</p>
+<p><img alt="" src="/assets/b356e4caceeccf41c25f4d9e.png"/></p>
+<ol>
+<li>Java IO/NIO源码结构</li>
+</ol>
+<p>前面我在典型回答中提了第三种方式，即Java标准库也提供了文件拷贝方法（java.nio.file.Files.copy）。如果你这样回答，就一定要小心了，因为很少有问题的答案是仅仅调用某个方法。从面试的角度，面试官往往会追问：既然你提到了标准库，那么它是怎么实现的呢？有的公司面试官以喜欢追问而出名，直到追问到你说不知道。</p>
+<p>其实，这个问题的答案还真不是那么直观，因为实际上有几个不同的copy方法。</p>
+<pre><code class="language-java">    public static Path copy(Path source, Path target, CopyOption... options)
+        throws IOException
+    
+
+    public static long copy(InputStream in, Path target, CopyOption... options)
+        throws IOException
+    
+
+    public static long copy(Path source, OutputStream out) 
+    throws IOException
+</code></pre>
+<p>可以看到，copy不仅仅是支持文件之间操作，没有人限定输入输出流一定是针对文件的，这是两个很实用的工具方法。</p>
+<p>后面两种copy实现，能够在方法实现里直接看到使用的是InputStream.transferTo()，你可以直接看源码，其内部实现其实是stream在用户态的读写；而对于第一种方法的分析过程要相对麻烦一些，可以参考下面片段。简单起见，我只分析同类型文件系统拷贝过程。</p>
+<pre><code class="language-java">    public static Path copy(Path source, Path target, CopyOption... options)
+        throws IOException
+     {
+        FileSystemProvider provider = provider(source);
+        if (provider(target) == provider) {
+            // same provider
+            provider.copy(source, target, options);//这是本文分析的路径
+        } else {
+            // different providers
+            CopyMoveHelper.copyToForeignTarget(source, target, options);
+        }
+        return target;
+    }
+</code></pre>
+<p>我把源码分析过程简单记录如下，JDK的源代码中，内部实现和公共API定义也不是可以能够简单关联上的，NIO部分代码甚至是定义为模板而不是Java源文件，在build过程自动生成源码，下面顺便介绍一下部分JDK代码机制和如何绕过隐藏障碍。</p>
+<ul>
+<li><p>首先，直接跟踪，发现FileSystemProvider只是个抽象类，阅读它的<a href="http://hg.openjdk.java.net/jdk/jdk/file/f84ae8aa5d88/src/java.base/share/classes/java/nio/file/spi/FileSystemProvider.java" target="_blank">源码</a>能够理解到，原来文件系统实际逻辑存在于JDK内部实现里，公共API其实是通过ServiceLoader机制加载一系列文件系统实现，然后提供服务。</p></li>
+<li><p>我们可以在JDK源码里搜索FileSystemProvider和nio，可以定位到<a href="http://hg.openjdk.java.net/jdk/jdk/file/f84ae8aa5d88/src/java.base/share/classes/sun/nio/fs" target="_blank">sun/nio/fs</a>，我们知道NIO底层是和操作系统紧密相关的，所以每个平台都有自己的部分特有文件系统逻辑。</p></li>
+</ul>
+<p><img alt="" src="/assets/ce18aecfc3c1bc04e12ebecc.png"/></p>
+<ul>
+<li><p>省略掉一些细节，最后我们一步步定位到UnixFileSystemProvider → UnixCopyFile.Transfer，发现这是个本地方法。</p></li>
+<li><p>最后，明确定位到<a href="http://hg.openjdk.java.net/jdk/jdk/file/f84ae8aa5d88/src/java.base/unix/native/libnio/fs/UnixCopyFile.c" target="_blank">UnixCopyFile.c</a>，其内部实现清楚说明竟然只是简单的用户态空间拷贝！</p></li>
+</ul>
+<p>所以，我们明确这个最常见的copy方法其实不是利用transferTo，而是本地技术实现的用户态拷贝。</p>
+<p>前面谈了不少机制和源码，我简单从实践角度总结一下，如何提高类似拷贝等IO操作的性能，有一些宽泛的原则：</p>
+<ul>
+<li><p>在程序中，使用缓存等机制，合理减少IO次数（在网络通信中，如TCP传输，window大小也可以看作是类似思路）。</p></li>
+<li><p>使用transferTo等机制，减少上下文切换和额外IO操作。</p></li>
+<li><p>尽量减少不必要的转换过程，比如编解码；对象序列化和反序列化，比如操作文本文件或者网络通信，如果不是过程中需要使用文本信息，可以考虑不要将二进制信息转换成字符串，直接传输二进制信息。</p></li>
+</ul>
+<ol>
+<li>掌握NIO Buffer</li>
+</ol>
+<p>我在上一讲提到Buffer是NIO操作数据的基本工具，Java为每种原始数据类型都提供了相应的Buffer实现（布尔除外），所以掌握和使用Buffer是十分必要的，尤其是涉及Direct Buffer等使用，因为其在垃圾收集等方面的特殊性，更要重点掌握。</p>
+<p><img alt="" src="/assets/be4c616f860649fc4206f107.png"/></p>
+<p>Buffer有几个基本属性：</p>
+<ul>
+<li><p>capacity，它反映这个Buffer到底有多大，也就是数组的长度。</p></li>
+<li><p>position，要操作的数据起始位置。</p></li>
+<li><p>limit，相当于操作的限额。在读取或者写入时，limit的意义很明显是不一样的。比如，读取操作时，很可能将limit设置到所容纳数据的上限；而在写入时，则会设置容量或容量以下的可写限度。</p></li>
+<li><p>mark，记录上一次postion的位置，默认是0，算是一个便利性的考虑，往往不是必须的。</p></li>
+</ul>
+<p>前面三个是我们日常使用最频繁的，我简单梳理下Buffer的基本操作：</p>
+<ul>
+<li><p>我们创建了一个ByteBuffer，准备放入数据，capacity当然就是缓冲区大小，而position就是0，limit默认就是capacity的大小。</p></li>
+<li><p>当我们写入几个字节的数据时，position就会跟着水涨船高，但是它不可能超过limit的大小。</p></li>
+<li><p>如果我们想把前面写入的数据读出来，需要调用flip方法，将position设置为0，limit设置为以前的position那里。</p></li>
+<li><p>如果还想从头再读一遍，可以调用rewind，让limit不变，position再次设置为0。</p></li>
+</ul>
+<p>更进一步的详细使用，我建议参考相关<a href="http://tutorials.jenkov.com/java-nio/buffers.html" target="_blank">教程</a>。</p>
+<ol>
+<li>Direct Buffer和垃圾收集</li>
+</ol>
+<p>我这里重点介绍两种特别的Buffer。</p>
+<ul>
+<li><p>Direct Buffer：如果我们看Buffer的方法定义，你会发现它定义了isDirect()方法，返回当前Buffer是否是Direct类型。这是因为Java提供了堆内和堆外（Direct）Buffer，我们可以以它的allocate或者allocateDirect方法直接创建。</p></li>
+<li><p>MappedByteBuffer：它将文件按照指定大小直接映射为内存区域，当程序访问这个内存区域时将直接操作这块儿文件数据，省去了将数据从内核空间向用户空间传输的损耗。我们可以使用<a href="https://docs.oracle.com/javase/9/docs/api/java/nio/channels/FileChannel.html#map-java.nio.channels.FileChannel.MapMode-long-long-" target="_blank">FileChannel.map</a>创建MappedByteBuffer，它本质上也是种Direct Buffer。</p></li>
+</ul>
+<p>在实际使用中，Java会尽量对Direct Buffer仅做本地IO操作，对于很多大数据量的IO密集操作，可能会带来非常大的性能优势，因为：</p>
+<ul>
+<li><p>Direct Buffer生命周期内内存地址都不会再发生更改，进而内核可以安全地对其进行访问，很多IO操作会很高效。</p></li>
+<li><p>减少了堆内对象存储的可能额外维护工作，所以访问效率可能有所提高。</p></li>
+</ul>
+<p>但是请注意，Direct Buffer创建和销毁过程中，都会比一般的堆内Buffer增加部分开销，所以通常都建议用于长期使用、数据较大的场景。</p>
+<p>使用Direct Buffer，我们需要清楚它对内存和JVM参数的影响。首先，因为它不在堆上，所以Xmx之类参数，其实并不能影响Direct Buffer等堆外成员所使用的内存额度，我们可以使用下面参数设置大小：</p>
+<pre><code>-XX:MaxDirectMemorySize=512M
+</code></pre>
+<p>从参数设置和内存问题排查角度来看，这意味着我们在计算Java可以使用的内存大小的时候，不能只考虑堆的需要，还有Direct Buffer等一系列堆外因素。如果出现内存不足，堆外内存占用也是一种可能性。</p>
+<p>另外，大多数垃圾收集过程中，都不会主动收集Direct Buffer，它的垃圾收集过程，就是基于我在专栏前面所介绍的Cleaner（一个内部实现）和幻象引用（PhantomReference）机制，其本身不是public类型，内部实现了一个Deallocator负责销毁的逻辑。对它的销毁往往要拖到full GC的时候，所以使用不当很容易导致OutOfMemoryError。</p>
+<p>对于Direct Buffer的回收，我有几个建议：</p>
+<ul>
+<li><p>在应用程序中，显式地调用System.gc()来强制触发。</p></li>
+<li><p>另外一种思路是，在大量使用Direct Buffer的部分框架中，框架会自己在程序中调用释放方法，Netty就是这么做的，有兴趣可以参考其实现（PlatformDependent0）。</p></li>
+<li><p>重复使用Direct Buffer。</p></li>
+</ul>
+<ol>
+<li>跟踪和诊断Direct Buffer内存占用？</li>
+</ol>
+<p>因为通常的垃圾收集日志等记录，并不包含Direct Buffer等信息，所以Direct Buffer内存诊断也是个比较头疼的事情。幸好，在JDK 8之后的版本，我们可以方便地使用Native Memory Tracking（NMT）特性来进行诊断，你可以在程序启动时加上下面参数：</p>
+<pre><code>    -XX:NativeMemoryTracking={summary|detail}
+</code></pre>
+<p>注意，激活NMT通常都会导致JVM出现5%~10%的性能下降，请谨慎考虑。</p>
+<p>运行时，可以采用下面命令进行交互式对比：</p>
+<pre><code>    // 打印NMT信息
+    jcmd &lt;pid&gt; VM.native_memory detail 
+    
+    // 进行baseline，以对比分配内存变化
+    jcmd &lt;pid&gt; VM.native_memory baseline
+    
+    // 进行baseline，以对比分配内存变化
+    jcmd &lt;pid&gt; VM.native_memory detail.diff
+</code></pre>
+<p>我们可以在Internal部分发现Direct Buffer内存使用的信息，这是因为其底层实际是利用unsafe_allocatememory。严格说，这不是JVM内部使用的内存，所以在JDK 11以后，其实它是归类在other部分里。</p>
+<p>JDK 9的输出片段如下，“+”表示的就是diff命令发现的分配变化：</p>
+<pre><code>    -Internal (reserved=679KB +4KB, committed=679KB +4KB)
+                  (malloc=615KB +4KB #1571 +4)
+                  (mmap: reserved=64KB, committed=64KB)
+</code></pre>
+<p><strong>注意</strong>：JVM的堆外内存远不止Direct Buffer，NMT输出的信息当然也远不止这些，我在专栏后面有综合分析更加具体的内存结构的主题。</p>
+<p>今天我分析了Java IO/NIO底层文件操作数据的机制，以及如何实现零拷贝的高性能操作，梳理了Buffer的使用和类型，并针对Direct Buffer的生命周期管理和诊断进行了较详细的分析。</p>
+<h2 id="一课一练">一课一练</h2>
+<p>关于今天我们讨论的题目你做到心中有数了吗？你可以思考下，如果我们需要在channel读取的过程中，将不同片段写入到相应的Buffer里面（类似二进制消息分拆成消息头、消息体等），可以采用NIO的什么机制做到呢？</p>
+<p>请你在留言区写写你对这个问题的思考，我会选出经过认真思考的留言，送给你一份学习鼓励金，欢迎你与我一起讨论。</p>
+<p>你的朋友是不是也在准备面试呢？你可以“请朋友读”，把今天的题目分享给好友，或许你能帮到他。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

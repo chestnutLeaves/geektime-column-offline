@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04 实战：纯手工打造和运行一个Servlet · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/index.html">深入拆解Tomcat  Jetty</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">44 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入拆解Tomcat  Jetty</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20Java%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%88%90%E9%95%BF%EF%BC%9F.html">00 开篇词 Java程序员如何快速成长？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/01%20Web%E5%AE%B9%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84.html">01 Web容器学习路径</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/02%20HTTP%E5%8D%8F%E8%AE%AE%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A.html">02 HTTP协议必知必会</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/03%20%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8.html">03 你应该知道的Servlet规范和Servlet容器</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/04%20%E5%AE%9E%E6%88%98%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E5%92%8C%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AAServlet.html">04 实战：纯手工打造和运行一个Servlet</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/05%20Tomcat%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%C2%A0%E8%BF%9E%E6%8E%A5%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F.html">05 Tomcat系统架构（上）： 连接器是如何设计的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/06%20Tomcat%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%81%8A%E8%81%8A%E5%A4%9A%E5%B1%82%E5%AE%B9%E5%99%A8%E7%9A%84%E8%AE%BE%E8%AE%A1.html">06 Tomcat系统架构（下）：聊聊多层容器的设计</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/07%20Tomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%94%AE%E5%BC%8F%E5%90%AF%E5%81%9C%EF%BC%9F.html">07 Tomcat如何实现一键式启停？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/08%20Tomcat%E7%9A%84%E2%80%9C%E9%AB%98%E5%B1%82%E4%BB%AC%E2%80%9D%E9%83%BD%E8%B4%9F%E8%B4%A3%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F.html">08 Tomcat的“高层们”都负责做什么？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/09%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E6%9E%B6%E6%9E%84%E7%89%B9%E7%82%B9%E4%B9%8BConnector%E7%BB%84%E4%BB%B6.html">09 比较：Jetty架构特点之Connector组件</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/10%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E6%9E%B6%E6%9E%84%E7%89%B9%E7%82%B9%E4%B9%8BHandler%E7%BB%84%E4%BB%B6.html">10 比较：Jetty架构特点之Handler组件</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/11%20%E6%80%BB%E7%BB%93%EF%BC%9A%E4%BB%8ETomcat%E5%92%8CJetty%E4%B8%AD%E6%8F%90%E7%82%BC%E7%BB%84%E4%BB%B6%E5%8C%96%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83.html">11 总结：从Tomcat和Jetty中提炼组件化设计规范</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/12%20%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BC%98%E5%8C%96%E5%B9%B6%E6%8F%90%E9%AB%98Tomcat%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6.html">12 实战：优化并提高Tomcat启动速度</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/13%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%881%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E6%BA%90%E7%A0%81%EF%BC%9F.html">13 热点问题答疑（1）：如何学习源码？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/14%20NioEndpoint%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%9D%9E%E9%98%BB%E5%A1%9EI_O%EF%BC%9F.html">14 NioEndpoint组件：Tomcat如何实现非阻塞I_O？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/15%20Nio2Endpoint%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5I_O%EF%BC%9F.html">15 Nio2Endpoint组件：Tomcat如何实现异步I_O？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/16%20AprEndpoint%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%20APR%E6%8F%90%E9%AB%98I_O%E6%80%A7%E8%83%BD%E7%9A%84%E7%A7%98%E5%AF%86.html">16 AprEndpoint组件：Tomcat APR提高I_O性能的秘密</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/17%20Executor%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%89%A9%E5%B1%95Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">17 Executor组件：Tomcat如何扩展Java线程池？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/18%20%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81WebSocket%EF%BC%9F.html">18 新特性：Tomcat如何支持WebSocket？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/19%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E7%9A%84%E7%BA%BF%E7%A8%8B%E7%AD%96%E7%95%A5EatWhatYouKill.html">19 比较：Jetty的线程策略EatWhatYouKill</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/20%20%E6%80%BB%E7%BB%93%EF%BC%9ATomcat%E5%92%8CJetty%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF.html">20 总结：Tomcat和Jetty中的对象池技术</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/21%20%E6%80%BB%E7%BB%93%EF%BC%9ATomcat%E5%92%8CJetty%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E3%80%81%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8B%E9%81%93.html">21 总结：Tomcat和Jetty的高性能、高并发之道</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/22%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%882%EF%BC%89%EF%BC%9A%E5%86%85%E6%A0%B8%E5%A6%82%E4%BD%95%E9%98%BB%E5%A1%9E%E4%B8%8E%E5%94%A4%E9%86%92%E8%BF%9B%E7%A8%8B%EF%BC%9F.html">22 热点问题答疑（2）：内核如何阻塞与唤醒进程？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/23%20Host%E5%AE%B9%E5%99%A8%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%83%AD%E9%83%A8%E7%BD%B2%E5%92%8C%E7%83%AD%E5%8A%A0%E8%BD%BD%EF%BC%9F.html">23 Host容器：Tomcat如何实现热部署和热加载？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/24%20Context%E5%AE%B9%E5%99%A8%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%9C%BA%E5%88%B6%EF%BC%9F.html">24 Context容器（上）：Tomcat如何打破双亲委托机制？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/25%20Context%E5%AE%B9%E5%99%A8%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E9%9A%94%E7%A6%BBWeb%E5%BA%94%E7%94%A8%EF%BC%9F.html">25 Context容器（中）：Tomcat如何隔离Web应用？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/26%20Context%E5%AE%B9%E5%99%A8%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0Servlet%E8%A7%84%E8%8C%83%EF%BC%9F.html">26 Context容器（下）：Tomcat如何实现Servlet规范？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/27%20%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E5%BC%82%E6%AD%A5Servlet%EF%BC%9F.html">27 新特性：Tomcat如何支持异步Servlet？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/28%20%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9ASpring%20Boot%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8C%E5%BC%8F%E7%9A%84Tomcat%E5%92%8CJetty%EF%BC%9F.html">28 新特性：Spring Boot如何使用内嵌式的Tomcat和Jetty？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/29%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%85%B7%E6%9C%89%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF%E7%9A%84%E8%B4%A3%E4%BB%BB%E9%93%BE%EF%BC%9F.html">29 比较：Jetty如何实现具有上下文信息的责任链？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/30%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%883%EF%BC%89%EF%BC%9ASpring%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">30 热点问题答疑（3）：Spring框架中的设计模式</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/31%20Logger%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%8F%8A%E5%AE%9E%E6%88%98.html">31 Logger组件：Tomcat的日志框架及实战</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/32%20Manager%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E7%9A%84Session%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90.html">32 Manager组件：Tomcat的Session管理机制解析</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/33%20Cluster%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E7%9A%84%E9%9B%86%E7%BE%A4%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86.html">33 Cluster组件：Tomcat的集群通信原理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/34%20JVM%20GC%E5%8E%9F%E7%90%86%E5%8F%8A%E8%B0%83%E4%BC%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF.html">34 JVM GC原理及调优的基本思路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/35%20%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7Tomcat%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">35 如何监控Tomcat的性能？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/36%20Tomcat%20I_O%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%B9%B6%E5%8F%91%E8%B0%83%E4%BC%98.html">36 Tomcat I_O和线程池的并发调优</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/37%20Tomcat%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90%E5%8F%8A%E8%B0%83%E4%BC%98.html">37 Tomcat内存溢出的原因分析及调优</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/38%20Tomcat%E6%8B%92%E7%BB%9D%E8%BF%9E%E6%8E%A5%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90%E5%8F%8A%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96.html">38 Tomcat拒绝连接原因分析及网络优化</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/39%20Tomcat%E8%BF%9B%E7%A8%8B%E5%8D%A0%E7%94%A8CPU%E8%BF%87%E9%AB%98%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">39 Tomcat进程占用CPU过高怎么办？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/40%20%E8%B0%88%E8%B0%88Jetty%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E7%9A%84%E6%80%9D%E8%B7%AF.html">40 谈谈Jetty性能调优的思路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/41%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%884%EF%BC%89%EF%BC%9A%20Tomcat%E5%92%8CJetty%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%EF%BC%9F.html">41 热点问题答疑（4）： Tomcat和Jetty有哪些不同？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%A6%82%E4%BD%95%E6%8C%81%E7%BB%AD%E4%BF%9D%E6%8C%81%E5%AF%B9%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%85%B4%E8%B6%A3%EF%BC%9F.html">特别放送 如何持续保持对学习的兴趣？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E9%9D%99%E4%B8%8B%E5%BF%83%E6%9D%A5%EF%BC%8C%E5%93%81%E5%91%B3%E7%BB%8F%E5%85%B8.html">结束语 静下心来，品味经典</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/04%20%E5%AE%9E%E6%88%98%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E5%92%8C%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AAServlet.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="04 实战：纯手工打造和运行一个Servlet" id="title">04 实战：纯手工打造和运行一个Servlet</h1>
+<div><p>作为Java程序员，我们可能已经习惯了使用IDE和Web框架进行开发，IDE帮我们做了编译、打包的工作，而Spring框架在背后帮我们实现了Servlet接口，并把Servlet注册到了Web容器，这样我们可能很少有机会接触到一些底层本质的东西，比如怎么开发一个Servlet？如何编译Servlet？如何在Web容器中跑起来？</p>
+<p>今天我们就抛弃IDE、拒绝框架，自己纯手工编写一个Servlet，并在Tomcat中运行起来。一方面进一步加深对Servlet的理解；另一方面，还可以熟悉一下Tomcat的基本功能使用。</p>
+<p>主要的步骤有：</p>
+<p>1.下载并安装Tomcat。-
+2.编写一个继承HttpServlet的Java类。-
+3.将Java类文件编译成Class文件。-
+4.建立Web应用的目录结构，并配置<code>web.xml</code>。-
+5.部署Web应用。-
+6.启动Tomcat。-
+7.浏览器访问验证结果。-
+8.查看Tomcat日志。</p>
+<p>下面你可以跟我一起一步步操作来完成整个过程。Servlet 3.0规范支持用注解的方式来部署Servlet，不需要在<code>web.xml</code>里配置，最后我会演示怎么用注解的方式来部署Servlet。</p>
+<p><strong>1. 下载并安装Tomcat</strong></p>
+<p>最新版本的Tomcat可以直接在<a href="https://tomcat.apache.org/download-90.cgi" target="_blank">官网</a>上下载，根据你的操作系统下载相应的版本，这里我使用的是Mac系统，下载完成后直接解压，解压后的目录结构如下。</p>
+<p><img alt="" src="/assets/e12b86cd326af9a827766774.png"/></p>
+<p>下面简单介绍一下这些目录：</p>
+<p>/bin：存放Windows或Linux平台上启动和关闭Tomcat的脚本文件。-
+/conf：存放Tomcat的各种全局配置文件，其中最重要的是<code>server.xml</code>。-
+/lib：存放Tomcat以及所有Web应用都可以访问的JAR文件。-
+/logs：存放Tomcat执行时产生的日志文件。-
+/work：存放JSP编译后产生的Class文件。-
+/webapps：Tomcat的Web应用目录，默认情况下把Web应用放在这个目录下。</p>
+<p><strong>2. 编写一个继承HttpServlet的Java类</strong></p>
+<p>我在专栏上一期提到，<code>javax.servlet</code>包提供了实现Servlet接口的GenericServlet抽象类。这是一个比较方便的类，可以通过扩展它来创建Servlet。但是大多数的Servlet都在HTTP环境中处理请求，因此Servlet规范还提供了HttpServlet来扩展GenericServlet并且加入了HTTP特性。我们通过继承HttpServlet类来实现自己的Servlet只需要重写两个方法：doGet和doPost。</p>
+<p>因此今天我们创建一个Java类去继承HttpServlet类，并重写doGet和doPost方法。首先新建一个名为<code>MyServlet.java</code>的文件，敲入下面这些代码：</p>
+<pre><code>import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class MyServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("MyServlet 在处理get（）请求...");
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=utf-8");
+        out.println("&lt;strong&gt;My Servlet!&lt;/strong&gt;&lt;br&gt;");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("MyServlet 在处理post（）请求...");
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=utf-8");
+        out.println("&lt;strong&gt;My Servlet!&lt;/strong&gt;&lt;br&gt;");
+    }
+
+}
+</code></pre>
+<p>这个Servlet完成的功能很简单，分别在doGet和doPost方法体里返回一段简单的HTML。</p>
+<p><strong>3. 将Java文件编译成Class文件</strong></p>
+<p>下一步我们需要把<code>MyServlet.java</code>文件编译成Class文件。你需要先安装JDK，这里我使用的是JDK 10。接着你需要把Tomcat lib目录下的<code>servlet-api.jar</code>拷贝到当前目录下，这是因为<code>servlet-api.jar</code>中定义了Servlet接口，而我们的Servlet类实现了Servlet接口，因此编译Servlet类需要这个JAR包。接着我们执行编译命令：</p>
+<pre><code>javac -cp ./servlet-api.jar MyServlet.java
+</code></pre>
+<p>编译成功后，你会在当前目录下找到一个叫<code>MyServlet.class</code>的文件。</p>
+<p><strong>4. 建立Web应用的目录结构</strong></p>
+<p>我们在上一期学到，Servlet是放到Web应用部署到Tomcat的，而Web应用具有一定的目录结构，所有我们按照要求建立Web应用文件夹，名字叫MyWebApp，然后在这个目录下建立子文件夹，像下面这样：</p>
+<pre><code>MyWebApp/WEB-INF/web.xml
+
+MyWebApp/WEB-INF/classes/MyServlet.class
+</code></pre>
+<p>然后在<code>web.xml</code>中配置Servlet，内容如下：</p>
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+  version="4.0"
+  metadata-complete="true"&gt;
+
+    &lt;description&gt; Servlet Example. &lt;/description&gt;
+    &lt;display-name&gt; MyServlet Example &lt;/display-name&gt;
+    &lt;request-character-encoding&gt;UTF-8&lt;/request-character-encoding&gt;
+
+    &lt;servlet&gt;
+      &lt;servlet-name&gt;myServlet&lt;/servlet-name&gt;
+      &lt;servlet-class&gt;MyServlet&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+      &lt;servlet-name&gt;myServlet&lt;/servlet-name&gt;
+      &lt;url-pattern&gt;/myservlet&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+&lt;/web-app&gt;
+</code></pre>
+<p>你可以看到在<code>web.xml</code>配置了Servlet的名字和具体的类，以及这个Servlet对应的URL路径。请你注意，<strong>servlet和servlet-mapping这两个标签里的servlet-name要保持一致。</strong></p>
+<p><strong>5. 部署Web应用</strong></p>
+<p>Tomcat应用的部署非常简单，将这个目录MyWebApp拷贝到Tomcat的安装目录下的webapps目录即可。</p>
+<p><strong>6. 启动Tomcat</strong></p>
+<p>找到Tomcat安装目录下的bin目录，根据操作系统的不同，执行相应的启动脚本。如果是Windows系统，执行<code>startup.bat</code>.；如果是Linux系统，则执行<code>startup.sh</code>。</p>
+<p><strong>7. 浏览访问验证结果</strong></p>
+<p>在浏览器里访问这个URL：<code>http://localhost:8080/MyWebApp/myservlet</code>，你会看到：</p>
+<pre><code>My Servlet!
+</code></pre>
+<p>这里需要注意，访问URL路径中的MyWebApp是Web应用的名字，<code>myservlet</code>是在<code>web.xml</code>里配置的Servlet的路径。</p>
+<p><strong>8. 查看Tomcat日志</strong></p>
+<p>打开Tomcat的日志目录，也就是Tomcat安装目录下的logs目录。Tomcat的日志信息分为两类 ：一是运行日志，它主要记录运行过程中的一些信息，尤其是一些异常错误日志信息 ；二是访问日志，它记录访问的时间、IP地址、访问的路径等相关信息。</p>
+<p>这里简要介绍各个文件的含义。</p>
+<ul>
+<li><code>catalina.***.log</code></li>
+</ul>
+<p>主要是记录Tomcat启动过程的信息，在这个文件可以看到启动的JVM参数以及操作系统等日志信息。</p>
+<ul>
+<li><code>catalina.out</code></li>
+</ul>
+<p><code>catalina.out</code>是Tomcat的标准输出（stdout）和标准错误（stderr），这是在Tomcat的启动脚本里指定的，如果没有修改的话stdout和stderr会重定向到这里。所以在这个文件里可以看到我们在<code>MyServlet.java</code>程序里打印出来的信息：</p>
+<blockquote>
+<p>MyServlet在处理get请求…</p>
+</blockquote>
+<ul>
+<li><code>localhost.**.log</code></li>
+</ul>
+<p>主要记录Web应用在初始化过程中遇到的未处理的异常，会被Tomcat捕获而输出这个日志文件。</p>
+<ul>
+<li><code>localhost_access_log.**.txt</code></li>
+</ul>
+<p>存放访问Tomcat的请求日志，包括IP地址以及请求的路径、时间、请求协议以及状态码等信息。</p>
+<ul>
+<li><code>manager.***.log/host-manager.***.log</code></li>
+</ul>
+<p>存放Tomcat自带的Manager项目的日志信息。</p>
+<p><strong>用注解的方式部署Servlet</strong></p>
+<p>为了演示用注解的方式来部署Servlet，我们首先修改Java代码，给Servlet类加上<strong>@WebServlet</strong>注解，修改后的代码如下。</p>
+<pre><code>import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/myAnnotationServlet")
+public class AnnotationServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+   System.out.println("AnnotationServlet 在处理get请求...");
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html; charset=utf-8");
+        out.println("&lt;strong&gt;Annotation Servlet!&lt;/strong&gt;&lt;br&gt;");
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("AnnotationServlet 在处理post请求...");
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html; charset=utf-8");
+        out.println("&lt;strong&gt;Annotation Servlet!&lt;/strong&gt;&lt;br&gt;");
+
+    }
+
+}  
+</code></pre>
+<p>这段代码里最关键的就是这个注解，它表明两层意思：第一层意思是AnnotationServlet这个Java类是一个Servlet，第二层意思是这个Servlet对应的URL路径是myAnnotationServlet。</p>
+<pre><code>@WebServlet("/myAnnotationServlet")
+</code></pre>
+<p>创建好Java类以后，同样经过编译，并放到MyWebApp的class目录下。这里要注意的是，你<strong>需要删除原来的web.xml</strong>，因为我们不需要<code>web.xml</code>来配置Servlet了。然后重启Tomcat，接下来我们验证一下这个新的AnnotationServlet有没有部署成功。在浏览器里输入：<code>http://localhost:8080/MyWebApp/myAnnotationServlet</code>，得到结果：</p>
+<pre><code>Annotation Servlet!
+</code></pre>
+<p>这说明我们的AnnotationServlet部署成功了。可以通过注解完成<code>web.xml</code>所有的配置功能，包括Servlet初始化参数以及配置Filter和Listener等。</p>
+<h2 id="本期精华">本期精华</h2>
+<p>通过今天的学习和实践，相信你掌握了如何通过扩展HttpServlet来实现自己的Servlet，知道了如何编译Servlet、如何通过<code>web.xml</code>来部署Servlet，同时还练习了如何启动Tomcat、如何查看Tomcat的各种日志，并且还掌握了如何通过注解的方式来部署Servlet。我相信通过专栏前面文章的学习加上今天的练习实践，一定会加深你对Servlet工作原理的理解。之所以我设置今天的实战练习，是希望你知道IDE和Web框架在背后为我们做了哪些事情，这对于我们排查问题非常重要，因为只有我们明白了IDE和框架在背后做的事情，一旦出现问题的时候，我们才能判断它们做得对不对，否则可能开发环境里的一个小问题就会折腾我们半天。</p>
+<h2 id="课后思考">课后思考</h2>
+<p>我在Servlet类里同时实现了doGet方法和doPost方法，从浏览器的网址访问默认访问的是doGet方法，今天的课后思考题是如何访问这个doPost方法。</p>
+<p>不知道今天的内容你消化得如何？如果还有疑问，请大胆的在留言区提问，也欢迎你把你的课后思考和心得记录下来，与我和其他同学一起讨论。如果你觉得今天有所收获，欢迎你把它分享给你的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

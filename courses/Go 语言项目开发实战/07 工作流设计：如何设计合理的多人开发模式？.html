@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>07 工作流设计：如何设计合理的多人开发模式？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/index.html">Go 语言项目开发实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">60 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Go 语言项目开发实战</strong><ul><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%200%20%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BC%81%E4%B8%9A%E7%BA%A7%20Go%20%E5%BA%94%E7%94%A8.html">00 开篇词 从 0 开始搭建一个企业级 Go 应用</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/01%20IAM%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0%EF%BC%9A%E6%88%91%E4%BB%AC%E8%A6%81%E5%AE%9E%E7%8E%B0%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%20Go%20%E9%A1%B9%E7%9B%AE%EF%BC%9F.html">01 IAM系统概述：我们要实现什么样的 Go 项目？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/02%20%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84%20Go%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%9F.html">02 环境准备：如何安装和配置一个基本的 Go 开发环境？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/03%20%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%20IAM%20%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">03 项目部署：如何快速部署 IAM 系统？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/04%20%E8%A7%84%E8%8C%83%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%9D%82%E4%B9%B1%E6%97%A0%E7%AB%A0%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%EF%BC%9F.html">04 规范设计（上）：项目开发杂乱无章，如何规范？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/05%20%E8%A7%84%E8%8C%83%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9Acommit%20%E4%BF%A1%E6%81%AF%E9%A3%8E%E6%A0%BC%E8%BF%A5%E5%BC%82%E3%80%81%E9%9A%BE%E4%BB%A5%E9%98%85%E8%AF%BB%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%EF%BC%9F.html">05 规范设计（下）：commit 信息风格迥异、难以阅读，如何规范？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/06%20%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E4%B8%80%E4%B8%AA%E5%8F%AF%E7%BB%B4%E6%8A%A4%E3%80%81%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%EF%BC%9F.html">06 目录结构设计：如何组织一个可维护、可扩展的代码目录？</a></li><li><a class="active" aria-current="page" href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/07%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%90%88%E7%90%86%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">07 工作流设计：如何设计合理的多人开发模式？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/08%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%20Go%20%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B%EF%BC%9F.html">08 研发流程设计（上）：如何设计 Go 项目的开发流程？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/09%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%BA%94%E7%94%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F.html">09 研发流程设计（下）：如何管理应用的生命周期？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/10%20%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%EF%BC%9A%E6%80%8E%E4%B9%88%E5%86%99%E5%87%BA%E4%BC%98%E9%9B%85%E7%9A%84%20Go%20%E9%A1%B9%E7%9B%AE%EF%BC%9F.html">10 设计方法：怎么写出优雅的 Go 项目？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/11%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.html">11 设计模式：Go常用设计模式概述</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/12%20API%20%E9%A3%8E%E6%A0%BC%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1RESTful%20API%EF%BC%9F.html">12 API 风格（上）：如何设计RESTful API？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/13%20API%20%E9%A3%8E%E6%A0%BC%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ARPC%20API%E4%BB%8B%E7%BB%8D.html">13 API 风格（下）：RPC API介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/14%20%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84Makefile%EF%BC%9F.html">14 项目管理：如何编写高质量的Makefile？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/15%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E5%AE%9E%E6%88%98%EF%BC%9AIAM%E9%A1%B9%E7%9B%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E7%9A%84%EF%BC%9F.html">15 研发流程实战：IAM项目是如何进行研发流程管理的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/16%20%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9F.html">16 代码检查：如何进行静态代码检查？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/17%20API%20%E6%96%87%E6%A1%A3%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%20Swagger%20API%20%E6%96%87%E6%A1%A3%20%EF%BC%9F.html">17 API 文档：如何生成 Swagger API 文档 ？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/18%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E5%A5%97%E7%A7%91%E5%AD%A6%E7%9A%84%E9%94%99%E8%AF%AF%E7%A0%81%EF%BC%9F.html">18 错误处理（上）：如何设计一套科学的错误码？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/19%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E9%94%99%E8%AF%AF%E5%8C%85%EF%BC%9F.html">19 错误处理（下）：如何设计错误包？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/20%20%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%97%A5%E5%BF%97%E5%8C%85%E5%B9%B6%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97%EF%BC%9F.html">20 日志处理（上）：如何设计日志包并记录日志？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/21%20%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BB%8E%200%20%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97%E5%8C%85.html">21 日志处理（下）：手把手教你从 0 编写一个日志包</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/22%20%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E4%B8%89%E5%89%91%E5%AE%A2%EF%BC%9APflag%E3%80%81Viper%E3%80%81Cobra%20%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html">22 应用构建三剑客：Pflag、Viper、Cobra 核心功能介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/23%20%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BC%98%E7%A7%80%E7%9A%84%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6%EF%BC%9F.html">23 应用构建实战：如何构建一个优秀的企业应用框架？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/24%20Web%20%E6%9C%8D%E5%8A%A1%EF%BC%9AWeb%20%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">24 Web 服务：Web 服务核心功能有哪些，如何实现？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/25%20%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%EF%BC%9F.html">25 认证机制：应用程序如何进行访问认证？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/26%20IAM%E9%A1%B9%E7%9B%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%E5%8A%9F%E8%83%BD%E7%9A%84%EF%BC%9F.html">26 IAM项目是如何设计和实现访问认证功能的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/27%20%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%EF%BC%9A5%E5%A4%A7%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%B5%84%E6%BA%90%E6%8E%88%E6%9D%83%E7%9A%84%EF%BC%9F.html">27 权限模型：5大权限模型是如何进行资源授权的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/28%20%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%80%9A%E8%BF%87iam-apiserver%E8%AE%BE%E8%AE%A1%EF%BC%8C%E7%9C%8BWeb%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9E%84%E5%BB%BA.html">28 控制流（上）：通过iam-apiserver设计，看Web服务的构建</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/29%20%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9Aiam-apiserver%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E8%AE%B2%E8%A7%A3.html">29 控制流（下）：iam-apiserver服务核心功能实现讲解</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/30%20ORM%EF%BC%9ACURD%20%E7%A5%9E%E5%99%A8%20GORM%20%E5%8C%85%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%9E%E6%88%98.html">30 ORM：CURD 神器 GORM 包介绍及实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/31%20%E6%95%B0%E6%8D%AE%E6%B5%81%EF%BC%9A%E9%80%9A%E8%BF%87iam-authz-server%E8%AE%BE%E8%AE%A1%EF%BC%8C%E7%9C%8B%E6%95%B0%E6%8D%AE%E6%B5%81%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1.html">31 数据流：通过iam-authz-server设计，看数据流服务的设计</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/32%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%A4%84%E7%90%86%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%A7%E7%94%9F%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F.html">32 数据处理：如何高效处理应用程序产生的数据？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/33%20%20SDK%20%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%87%BA%E4%B8%80%E4%B8%AA%E4%BC%98%E7%A7%80%E7%9A%84%20Go%20SDK%EF%BC%9F.html">33  SDK 设计（上）：如何设计出一个优秀的 Go SDK？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/34%20SDK%20%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AIAM%E9%A1%B9%E7%9B%AEGo%20SDK%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0.html">34 SDK 设计（下）：IAM项目Go SDK设计和实现</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/35%20%E6%95%88%E7%8E%87%E7%A5%9E%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%9F.html">35 效率神器：如何设计和实现一个命令行客户端工具？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/36%20%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%20Go%20%E8%AF%AD%E8%A8%80%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%92%8C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F.html">36 代码测试（上）：如何编写 Go 语言单元测试和性能测试用例？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/37%20%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%85%B6%E4%BB%96%E6%B5%8B%E8%AF%95%E7%B1%BB%E5%9E%8B%E5%8F%8A%20IAM%20%E6%B5%8B%E8%AF%95%E4%BB%8B%E7%BB%8D.html">37 代码测试（下）：Go 语言其他测试类型及 IAM 测试介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/38%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%20Go%20%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">38 性能分析（上）：如何分析 Go 语言代码的性能？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/39%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AAPI%20Server%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%92%8C%E8%B0%83%E4%BC%98%E5%AE%9E%E6%88%98.html">39 性能分析（下）：API Server性能测试和调优实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/40%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E3%80%81%E9%AB%98%E5%8F%AF%E7%94%A8%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D.html">40 软件部署实战（上）：部署方案及负载均衡、高可用组件介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/41%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9AIAM%20%E7%B3%BB%E7%BB%9F%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">41 软件部署实战（中）：IAM 系统生产环境部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/42%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AIAM%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA%E3%80%81%E6%B0%B4%E5%B9%B3%E6%89%A9%E7%BC%A9%E5%AE%B9%E5%AE%9E%E6%88%98.html">42 软件部署实战（下）：IAM系统安全加固、水平扩缩容实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/43%20%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.html">43 技术演进（上）：虚拟化技术演进之路</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/44%20%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E5%92%8C%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.html">44 技术演进（下）：软件架构和应用生命周期技术演进之路</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/45%20%E5%9F%BA%E4%BA%8EKubernetes%E7%9A%84%E4%BA%91%E5%8E%9F%E7%94%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">45 基于Kubernetes的云原生架构设计</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/46%20%E5%A6%82%E4%BD%95%E5%88%B6%E4%BD%9CDocker%E9%95%9C%E5%83%8F%EF%BC%9F.html">46 如何制作Docker镜像？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/47%20%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99Kubernetes%E8%B5%84%E6%BA%90%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%EF%BC%9F.html">47 如何编写Kubernetes资源定义文件？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/48%20IAM%20%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">48 IAM 容器化部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/49%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AHelm%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html">49 服务编排（上）：Helm服务编排基础知识</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/50%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%9F%BA%E4%BA%8EHelm%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">50 服务编排（下）：基于Helm的服务编排部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/51%20%E5%9F%BA%E4%BA%8E%20GitHub%20Actions%20%E7%9A%84%20CI%20%E5%AE%9E%E6%88%98.html">51 基于 GitHub Actions 的 CI 实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Go%20Modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86%E5%85%A8%E8%AE%B2.html">特别放送 Go Modules依赖包管理全讲</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Go%20Modules%E5%AE%9E%E6%88%98.html">特别放送 Go Modules实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20IAM%E6%8E%92%E9%9A%9C%E6%8C%87%E5%8D%97.html">特别放送 IAM排障指南</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BD%9C%E4%B8%9A%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0.html">特别放送 分布式作业系统设计和实现</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%BB%99%E4%BD%A0%E4%B8%80%E4%BB%BDGo%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84Makefile%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95.html">特别放送 给你一份Go项目中最常用的Makefile核心语法</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%BB%99%E4%BD%A0%E4%B8%80%E4%BB%BD%E6%B8%85%E6%99%B0%E3%80%81%E5%8F%AF%E7%9B%B4%E6%8E%A5%E5%A5%97%E7%94%A8%E7%9A%84Go%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.html">特别放送 给你一份清晰、可直接套用的Go编码规范</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%9B%B4%E6%92%AD%E5%8A%A0%E9%A4%90%20%E5%A6%82%E4%BD%95%E4%BB%8E%E5%B0%8F%E7%99%BD%E8%BF%9B%E9%98%B6%E6%88%90%20Go%20%E8%AF%AD%E8%A8%80%E4%B8%93%E5%AE%B6%EF%BC%9F.html">直播加餐 如何从小白进阶成 Go 语言专家？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%A6%82%E4%BD%95%E8%AE%A9%E8%87%AA%E5%B7%B1%E7%9A%84%20Go%20%E7%A0%94%E5%8F%91%E4%B9%8B%E8%B7%AF%E8%B5%B0%E5%BE%97%E6%9B%B4%E8%BF%9C%EF%BC%9F.html">结束语 如何让自己的 Go 研发之路走得更远？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/07%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%90%88%E7%90%86%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="07 工作流设计：如何设计合理的多人开发模式？" id="title">07 工作流设计：如何设计合理的多人开发模式？</h1>
+<div><p>你好，我是孔令飞。今天我们来聊聊如何设计合理的开发模式。</p>
+<p>一个企业级项目是由多人合作完成的，不同开发者在本地开发完代码之后，可能提交到同一个代码仓库，同一个开发者也可能同时开发几个功能特性。这种多人合作开发、多功能并行开发的特性如果处理不好，就会带来诸如丢失代码、合错代码、代码冲突等问题。</p>
+<p>所以，在编码之前，我们需要设计一个合理的开发模式。又因为目前开发者基本都是基于 Git 进行开发的，所以本节课，我会教你怎么基于 Git 设计出一个合理的开发模式。</p>
+<p>那么如何设计工作流呢？你可以根据需要，自己设计工作流，也可以采用业界沉淀下来的、设计好的、受欢迎的工作流。一方面，这些工作流经过长时间的实践，被证明是合理的；另一方面，采用一种被大家熟知且业界通用的工作流，会减少团队内部磨合的时间。在这一讲中，我会为你介绍4种受欢迎的工作流，你可以选择其中一种作为你的工作流设计。</p>
+<p>在使用 Git 开发时，有4种常用的工作流，也叫开发模式，按演进顺序分为集中式工作流、功能分支工作流、Git Flow 工作流和Forking 工作流。接下来，我会按演进顺序分别介绍这 4 种工作流。</p>
+<h2 id="集中式工作流">集中式工作流</h2>
+<p>我们先来看看集中式工作流，它是最简单的一种开发方式。集中式工作流的工作模式如下图所示：</p>
+<p><img alt="" src="/assets/4a34582bd53a717711a3e35b.png"/></p>
+<p>A、B、C 为 3 位开发者，每位开发者都在本地有一份远程仓库的拷贝：本地仓库。A、B、C 在本地的 master 分支开发完代码之后，将修改后的代码commit到远程仓库，如果有冲突就先解决本地的冲突再提交。在进行了一段时间的开发之后，远程仓库 master 分支的日志可能如下图所示：</p>
+<p><img alt="" src="/assets/1537223fccdc61f97aac3129.png"/></p>
+<p>集中式工作流是最简单的开发模式，但它的缺点也很明显：不同开发人员的提交日志混杂在一起，难以定位问题。如果同时开发多个功能，不同功能同时往 master 分支合并，代码之间也会相互影响，从而产生代码冲突。</p>
+<p>和其他工作流相比，集中式工作流程的代码管理较混乱，容易出问题，因此适合用在<strong>团队人数少、开发不频繁、不需要同时维护多个版本的小项目</strong>中。当我们想要并行开发多个功能时，这种工作流就不适用了，这时候怎么办呢？我们接下来看功能分支工作流。</p>
+<h2 id="功能分支工作流">功能分支工作流</h2>
+<p>功能分支工作流基于集中式工作流演进而来。在开发新功能时，基于 master 分支新建一个功能分支，在功能分支上进行开发，而不是直接在本地的 master 分支开发，开发完成之后合并到 master 分支，如下图所示：</p>
+<p><img alt="" src="/assets/eb99b5eaec486b27ee90ed7e.png"/></p>
+<p>相较于集中式工作流，这种工作流让不同功能在不同的分支进行开发，只在最后一步合并到master分支，不仅可以避免不同功能之间的相互影响，还可以使提交历史看起来更加简洁。</p>
+<p>还有，在合并到 master 分支时，需要提交 PR（pull request），而不是直接将代码 merge 到 master 分支。PR 流程不仅可以把分支代码提供给团队其他开发人员进行 CR（Code Review），还可以在 PR 页面讨论代码。通过 CR ，我们可以确保合并到 master 的代码是健壮的；通过 PR 页面的讨论，可以使开发者充分参与到代码的讨论中，有助于提高代码的质量，并且提供了一个代码变更的历史回顾途径。</p>
+<p>那么，功能分支工作流具体的开发流程是什么呢？我们一起来看下。</p>
+<ol>
+<li>基于 master 分支新建一个功能分支，功能分支可以取一些有意义的名字，便于理解，例如feature/rate-limiting。</li>
+</ol>
+<pre><code>$ git checkout -b feature/rate-limiting
+</code></pre>
+<ol>
+<li>在功能分支上进行代码开发，开发完成后 commit 到功能分支。</li>
+</ol>
+<pre><code>$ git add limit.go
+$ git commit -m "add rate limiting"
+</code></pre>
+<ol>
+<li>将本地功能分支代码 push 到远程仓库。</li>
+</ol>
+<pre><code>$ git push origin feature/rate-limiting
+</code></pre>
+<ol>
+<li>在远程仓库上创建 PR（例如：GitHub）。</li>
+</ol>
+<p>进入 GitHub 平台上的项目主页，点击 <strong>Compare &amp; pull request</strong> 提交 PR，如下图所示。</p>
+<p><img alt="" src="/assets/6b4c852097515a804f14a569.png"/></p>
+<p>点击 <strong>Compare &amp; pull request</strong> 后会进入 PR 页面，在该页面中可以根据需要填写评论，最后点击 <strong>Create pull request</strong> 提交 PR。</p>
+<ol>
+<li>代码管理员收到 PR 后，可以 CR 代码，CR 通过后，再点击 <strong>Merge pull request</strong> 将 PR 合并到 master，如下图所示。</li>
+</ol>
+<p><img alt="" src="/assets/68d9b7300b75bb4557fe0ce0.png"/></p>
+<p>图中的“Merge pull request” 提供了 3 种 merge 方法：</p>
+<ul>
+<li><strong>Create a merge commit：</strong>GitHub 的底层操作是 <code>git merge --no-ff</code>。feature 分支上所有的 commit 都会加到 master 分支上，并且会生成一个 merge commit。这种方式可以让我们清晰地知道是谁做了提交，做了哪些提交，回溯历史的时候也会更加方便。</li>
+<li><strong>Squash and merge</strong>：GitHub 的底层操作是 <code>git merge --squash</code>。<strong>Squash and merge</strong>会使该 pull request 上的所有 commit 都合并成一个commit ，然后加到master分支上，但原来的 commit 历史会丢失。如果开发人员在 feature 分支上提交的 commit 非常随意，没有规范，那么我们可以选择这种方法来丢弃无意义的 commit。但是在大型项目中，每个开发人员都应该是遵循 commit 规范的，因此我不建议你在团队开发中使用 Squash and merge。</li>
+<li><strong>Rebase and merge：</strong>GitHub 的底层操作是 <code>git rebase</code>。这种方式会将 pull request 上的所有提交历史按照原有顺序依次添加到 master 分支的头部（HEAD）。因为git rebase 有风险，在你不完全熟悉 Git 工作流时，我不建议merge时选择这个。</li>
+</ul>
+<p>通过分析每个方法的优缺点，在实际的项目开发中，我比较推荐你使用 <strong>Create a merge commit</strong> 方式。</p>
+<p>从刚才讲完的具体开发流程中，我们可以感受到，功能分支工作流上手比较简单，不仅能使你并行开发多个功能，还可以添加code review，从而保障代码质量。当然它也有缺点，就是无法给分支分配明确的目的，不利于团队配合。它适合用在<strong>开发团队相对固定、规模较小的项目</strong>中。接下来我们要讲的Git Flow 工作流以功能分支工作流为基础，较好地解决了上述问题。</p>
+<h2 id="git-flow-工作流">Git Flow 工作流</h2>
+<p>Git Flow 工作流是一个非常成熟的方案，也是非开源项目中最常用到的工作流。它定义了一个围绕项目发布的严格分支模型，通过为代码开发、发布和维护分配独立的分支来让项目的迭代流程更加顺畅，<strong>比较适合大型的项目或者迭代速度快的项目。</strong>接下来，我会通过介绍Git Flow的5种分支和工作流程，来给你讲解GIt Flow是如何工作的。</p>
+<h3 id="git-flow-的5种分支">Git Flow 的5种分支</h3>
+<p>Git Flow 中定义了 5 种分支，分别是 master、develop、feature、release和 hotfix。其中，master 和 develop 为常驻分支，其他为非常驻分支，不同的研发阶段会用到不同的分支。这5种分支的详细介绍见下表：</p>
+<p><img alt="" src="/assets/eccdc0fb9bd23349dda46868.png"/></p>
+<h3 id="git-flow-开发流程">Git Flow 开发流程</h3>
+<p>这里我们用一个实际的例子来演示下Git Flow 的开发流程。场景如下：</p>
+<p>a. 当前版本为：0.9.0。</p>
+<p>b. 需要新开发一个功能，使程序执行时向标准输出输出“hello world”字符串。</p>
+<p>c. 在开发阶段，线上代码有 Bug 需要紧急修复。</p>
+<p>假设我们的 Git 项目名为 gitflow-demo，项目目录下有 2 个文件，分别是 README.md 和 main.go，内容如下。</p>
+<pre><code>package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("callmainfunction")
+}
+</code></pre>
+<p>具体的开发流程有 12 步，你可以跟着以下步骤操作练习。</p>
+<ol>
+<li>创建一个常驻的分支：develop。</li>
+</ol>
+<pre><code>$ git checkout -b develop master
+</code></pre>
+<ol>
+<li>基于 develop 分支，新建一个功能分支：feature/print-hello-world。</li>
+</ol>
+<pre><code>$ git checkout -b feature/print-hello-world develop
+</code></pre>
+<ol>
+<li>feature/print-hello-world 分支中，在 main.go 文件中添加一行代码<code>fmt.Println("Hello")</code>，添加后的代码如下。</li>
+</ol>
+<pre><code>package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("callmainfunction")
+	fmt.Println("Hello")
+}
+</code></pre>
+<ol>
+<li>紧急修复 Bug。</li>
+</ol>
+<p>我们正处在新功能的开发中（只完成了 <code>fmt.Println("Hello")</code>而非 <code>fmt.Println("Hello World")</code>）突然线上代码发现了一个 Bug，我们要立即停止手上的工作，修复线上的 Bug，步骤如下。</p>
+<pre><code>$ git stash # 1. 开发工作只完成了一半，还不想提交，可以临时保存修改至堆栈区
+$ git checkout -b hotfix/print-error master # 2. 从 master 建立 hotfix 分支
+$ vi main.go # 3. 修复 bug，callmainfunction -&gt; call main function
+$ git commit -a -m 'fix print message error bug' # 4. 提交修复
+$ git checkout develop # 5. 切换到 develop 分支
+$ git merge --no-ff hotfix/print-error # 6. 把 hotfix 分支合并到 develop 分支
+$ git checkout master # 7. 切换到 master 分支
+$ git merge --no-ff hotfix/print-error # 8. 把 hotfix 分支合并到 master
+$ git tag -a v0.9.1 -m "fix log bug" # 9. master 分支打 tag
+$ go build -v . # 10. 编译代码，并将编译好的二进制更新到生产环境
+$ git branch -d hotfix/print-error # 11. 修复好后，删除 hotfix/xxx 分支
+$ git checkout feature/print-hello-world # 12. 切换到开发分支下
+$ git merge --no-ff develop # 13. 因为 develop 有更新，这里最好同步更新下
+$ git stash pop # 14. 恢复到修复前的工作状态
+</code></pre>
+<ol>
+<li>继续开发。</li>
+</ol>
+<p>在 main.go 中加入 <code>fmt.Println("Hello World")</code>。</p>
+<ol>
+<li>提交代码到 feature/print-hello-world 分支。</li>
+</ol>
+<pre><code>$ git commit -a -m "print 'hello world'"
+</code></pre>
+<ol>
+<li>在 feature/print-hello-world 分支上做 code review。</li>
+</ol>
+<p>首先，我们需要将 feature/print-hello-world push 到代码托管平台，例如 GitHub 上。</p>
+<pre><code>$ git push origin feature/print-hello-world
+</code></pre>
+<p>然后，我们在 GitHub 上，基于 feature/print-hello-world 创建 pull request，如下图所示。</p>
+<p><img alt="" src="/assets/78e96f6fdf2902e5df62a82f.png"/></p>
+<p>创建完 pull request 之后，我们就可以指定 Reviewers 进行 code review，如下图所示。</p>
+<p><img alt="" src="/assets/e788ead3858888f55c024018.png"/></p>
+<ol>
+<li>code review 通过后，由代码仓库 matainer 将功能分支合并到 develop 分支。</li>
+</ol>
+<pre><code>$ git checkout develop
+$ git merge --no-ff feature/print-hello-world
+</code></pre>
+<ol>
+<li>基于 develop 分支，创建 release 分支，测试代码。</li>
+</ol>
+<pre><code>$ git checkout -b release/1.0.0 develop
+$ go build -v . # 构建后，部署二进制文件，并测试
+</code></pre>
+<ol>
+<li>测试失败，因为我们要求打印“hello world”，但打印的是“Hello World”，修复的时候，</li>
+</ol>
+<p>我们直接在 release/1.0.0 分支修改代码，修改完成后，提交并编译部署。</p>
+<pre><code>$ git commit -a -m "fix bug"
+$ go build -v .
+</code></pre>
+<ol>
+<li>测试通过后，将功能分支合并到 master 分支和 develop 分支。</li>
+</ol>
+<pre><code>$ git checkout develop
+$ git merge --no-ff release/1.0.0
+$ git checkout master
+$ git merge --no-ff release/1.0.0
+$ git tag -a v1.0.0 -m "add print hello world" # master 分支打 tag
+</code></pre>
+<ol>
+<li>删除 feature/print-hello-world 分支，也可以选择性删除 release/1.0.0 分支。</li>
+</ol>
+<pre><code>$ git branch -d feature/print-hello-world
+</code></pre>
+<p>亲自操作一遍之后，你应该会更了解这种模式的优缺点。它的缺点，就是你刚才已经体会到的，它有一定的上手难度。不过Git Flow工作流还是有很多优点的：Git Flow工作流的每个分支分工明确，这可以最大程度减少它们之间的相互影响。因为可以创建多个分支，所以也可以并行开发多个功能。另外，和功能分支工作流一样，它也可以添加code review，保障代码质量。</p>
+<p>因此，Git Flow工作流比较<strong>适合开发团队相对固定，规模较大的项目</strong>。</p>
+<h2 id="forking-工作流">Forking 工作流</h2>
+<p>上面讲的Git Flow 是非开源项目中最常用的，而在开源项目中，最常用到的是Forking 工作流，例如 Kubernetes、Docker 等项目用的就是这种工作流。这里，我们先来了解下 fork 操作。</p>
+<p>fork 操作是在个人远程仓库新建一份目标远程仓库的副本，比如在 GitHub 上操作时，在项目的主页点击 fork 按钮（页面右上角），即可拷贝该目标远程仓库。Forking 工作流的流程如下图所示。</p>
+<p><img alt="" src="/assets/f2778298a61773c8e39f77f7.png"/></p>
+<p>假设开发者 A 拥有一个远程仓库，如果开发者 B 也想参与 A 项目的开发，B 可以 fork 一份 A 的远程仓库到自己的 GitHub 账号下。后续 B 可以在自己的项目进行开发，开发完成后，B 可以给 A 提交一个 PR。这时候 A 会收到通知，得知有新的 PR 被提交，A 会去查看 PR 并 code review。如果有问题，A 会直接在 PR 页面提交评论，B 看到评论后会做进一步的修改。最后 A 通过 B 的 PR 请求，将代码合并进了 A 的仓库。这样就完成了 A 代码仓库新特性的开发。如果有其他开发者想给 A 贡献代码，也会执行相同的操作。</p>
+<p>GitHub中的 Forking 工作流详细步骤共有6步（假设目标仓库为 gitflow-demo），你可以跟着以下步骤操作练习。</p>
+<ol>
+<li>Fork 远程仓库到自己的账号下。</li>
+</ol>
+<p>访问<a href="https://github.com/marmotedu/gitflow-demo" target="_blank">https://github.com/marmotedu/gitflow-demo</a> ，点击<strong>fork</strong>按钮。fork 后的仓库地址为：<a href="https://github.com/colin404fork/gitflow-demo" target="_blank">https://github.com/colin404fork/gitflow-demo</a> 。-</p>
+<ol>
+<li>克隆 fork 的仓库到本地。</li>
+</ol>
+<pre><code>$ git clone https://github.com/colin404fork/gitflow-demo
+$ cd gitflow-demo
+$ git remote add upstream https://github.com/marmotedu/gitflow-demo
+$ git remote set-url --push upstream no_push # Never push to upstream master
+$ git remote -v # Confirm that your remotes make sense
+origin	https://github.com/colin404fork/gitflow-demo (fetch)
+origin	https://github.com/colin404fork/gitflow-demo (push)
+upstream	https://github.com/marmotedu/gitflow-demo (fetch)
+upstream	https://github.com/marmotedu/gitflow-demo (push)
+</code></pre>
+<ol>
+<li>创建功能分支。</li>
+</ol>
+<p>首先，要同步本地仓库的 master 分支为最新的状态（跟 upstream master 分支一致）。</p>
+<pre><code>$ git fetch upstream
+$ git checkout master
+$ git rebase upstream/master
+</code></pre>
+<p>然后，创建功能分支。</p>
+<pre><code>$ git checkout -b feature/add-function
+</code></pre>
+<ol>
+<li>提交 commit。</li>
+</ol>
+<p>在 feature/add-function 分支上开发代码，开发完代码后，提交 commit。</p>
+<pre><code>$ git fetch upstream # commit 前需要再次同步 feature 跟 upstream/master
+$ git rebase upstream/master
+$ git add &lt;file&gt;
+$ git status
+$ git commit
+</code></pre>
+<p>分支开发完成后，可能会有一堆 commit，但是合并到主干时，我们往往希望只有一个（或最多两三个）commit，这可以使功能修改都放在一个或几个commit中，便于后面的阅读和维护。这个时候，我们可以用 git rebase 来合并和修改我们的 commit，操作如下：</p>
+<pre><code>$ git rebase -i origin/master
+</code></pre>
+<p>第5讲已经介绍过了<code>git rebase -i</code> 的使用方法 ，如果你有疑问可以再去看看，这里不再说明。</p>
+<p>还有另外一种合并 commit 的简便方法，就是先撤销过去 5 个 commit，然后再建一个新的：</p>
+<pre><code>$ git reset HEAD~5
+$ git add .
+$ git commit -am "Here's the bug fix that closes #28"
+$ git push --force
+</code></pre>
+<p>squash 和 fixup 命令，还可以当作命令行参数使用，自动合并 commit。</p>
+<pre><code>$ git commit --fixup
+$ git rebase -i --autosquash
+</code></pre>
+<ol>
+<li>push 功能分支到个人远程仓库。</li>
+</ol>
+<p>在完成了开发，并 commit 后，需要将功能分支 push 到个人远程代码仓库，代码如下：</p>
+<pre><code>$ git push -f origin feature/add-function
+</code></pre>
+<ol>
+<li>在个人远程仓库页面创建 pull request。</li>
+</ol>
+<p>提交到远程仓库以后，我们就可以创建 pull request，然后请求reviewers进行代码 review，确认后合并到 master。这里要注意，创建pull request时，base通常选择目标远程仓库的master分支。</p>
+<p>我们已经讲完了 Forking 工作流的具体步骤，你觉得它有什么优缺点呢？</p>
+<p>结合操作特点，我们来看看它的优点：Forking工作流中，项目远程仓库和开发者远程仓库完全独立，开发者通过提交 Pull Request 的方式给远程仓库贡献代码，项目维护者选择性地接受任何开发者的提交，通过这种方式，可以避免授予开发者项目远程仓库的权限，从而提高项目远程仓库的安全性，这也使得任意开发者都可以参与项目的开发。</p>
+<p>但Forking工作流也有局限性，就是对于职能分工明确且不对外开源的项目优势不大。</p>
+<p>Forking工作流比较适用于以下三种场景：（1）开源项目中；（2）开发者有衍生出自己的衍生版的需求；（3）开发者不固定，可能是任意一个能访问到项目的开发者。</p>
+<h2 id="总结">总结</h2>
+<p>这一讲中，我基于 Git 向你介绍了 4 种开发模式，现在跟我回顾一下吧。</p>
+<ul>
+<li>集中式工作流：开发者直接在本地 master 分支开发代码，开发完成后 push 到远端仓库 master 分支。</li>
+<li>功能分支工作流：开发者基于 master 分支创建一个新分支，在新分支进行开发，开发完成后合并到远端仓库 master 分支。</li>
+<li>Git Flow 工作流：Git Flow 工作流为不同的分支分配一个明确的角色，并定义分支之间什么时候、如何进行交互，比较适合大型项目的开发。</li>
+<li>Forking 工作流：开发者先 fork 项目到个人仓库，在个人仓库完成开发后，提交 pull request 到目标远程仓库，远程仓库 review 后，合并 pull request 到 master 分支。</li>
+</ul>
+<p>集中式工作流是最早的Git工作流，功能分支工作流以集中式工作流为基础，Git Flow 工作流又是以功能分支工作流为基础，Forking工作流在Git Flow 工作流基础上，解耦了个人远端仓库和项目远端仓库。</p>
+<p>每种开发模式各有优缺点，适用于不同的场景，我总结在下表中：</p>
+<p><img alt="" src="/assets/6422375832adedff41b7ad35.png"/></p>
+<p>总的来说，在选择工作流时，我的推荐如下：</p>
+<ul>
+<li>非开源项目采用 Git Flow 工作流。</li>
+<li>开源项目采用 Forking 工作流。</li>
+</ul>
+<p>因为这门课的实战项目对于项目开发者来说是一个偏大型的非开源项目，所以采用了Git Flow工作流。</p>
+<h2 id="课后练习">课后练习</h2>
+<ol>
+<li>请你新建立一个项目，并参考<strong>Git Flow开发流程</strong>，自己操作一遍，观察每一步的操作结果。</li>
+<li>请你思考下，在 Git Flow 工作流中，如果要临时解决一个 Bug，该如何操作代码仓库。</li>
+</ol>
+<p>期待在留言区看到你的思考和分享，我们下一讲见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

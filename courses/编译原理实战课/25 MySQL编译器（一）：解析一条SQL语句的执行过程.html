@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>25 MySQL编译器（一）：解析一条SQL语句的执行过程 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">编译原理实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">53 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理实战课</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E8%BF%99%E9%97%A8%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE%EF%BC%9F.html">00 学习指南 如何学习这门编译原理实战课？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%9C%A8%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%AD%E6%B8%B8%E5%8E%86.html">00 开篇词 在真实世界的编译器中游历</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E7%BC%96%E8%AF%91%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B%E9%83%BD%E6%82%84%E6%82%84%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85%EF%BC%9F.html">01 编译的全过程都悄悄做了哪些事情？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E7%94%A8%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9E%84%E9%80%A0%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA.html">02 词法分析：用两种方式构造有限自动机</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%9F%BA%E6%9C%AC%E5%8A%9F%E5%92%8C%E4%B8%A4%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF.html">03 语法分析：两个基本功和两种算法思路</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%9A%E8%AE%A9%E7%A8%8B%E5%BA%8F%E7%AC%A6%E5%90%88%E8%AF%AD%E4%B9%89%E8%A7%84%E5%88%99.html">04 语义分析：让程序符合语义规则</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%BD%A0%E6%9C%89%E5%8F%91%E8%A8%80%E6%9D%83.html">05 运行时机制：程序如何运行，你有发言权</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E4%B8%8D%E6%98%AF%E5%8F%AA%E6%9C%89%E4%B8%80%E5%89%AF%E9%9D%A2%E5%AD%94.html">06 中间代码：不是只有一副面孔</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E8%B7%9F%E7%BC%96%E8%AF%91%E5%99%A8%E5%81%9A%E6%9C%8B%E5%8F%8B%EF%BC%8C%E8%AE%A9%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E9%A3%9E%E8%B5%B7%E6%9D%A5.html">07 代码优化：跟编译器做朋友，让你的代码飞起来</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%9F.html">08 代码生成：如何实现机器相关的优化？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/09%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%89%8B%E5%86%99%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%EF%BC%9F.html">09 Java编译器（一）：手写的编译器有什么优势？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/10%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%BF%98%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Java编译器（二）：语法分析之后，还要做些什么？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/11%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%B1%9E%E6%80%A7%E5%88%86%E6%9E%90%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90.html">11 Java编译器（三）：属性分析和数据流分析</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/12%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%8E%BB%E9%99%A4%E8%AF%AD%E6%B3%95%E7%B3%96%E5%92%8C%E7%94%9F%E6%88%90%E5%AD%97%E8%8A%82%E7%A0%81.html">12 Java编译器（四）：去除语法糖和生成字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/13%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%8A%A8%E6%89%8B%E4%BF%AE%E6%94%B9Graal%E7%BC%96%E8%AF%91%E5%99%A8.html">13 Java JIT编译器（一）：动手修改Graal编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/14%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASea%20of%20Nodes%E4%B8%BA%E4%BD%95%E5%A6%82%E6%AD%A4%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">14 Java JIT编译器（二）：Sea of Nodes为何如此强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/15%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%8E%A2%E7%A9%B6%E5%86%85%E8%81%94%E5%92%8C%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%E7%9A%84%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86.html">15 Java JIT编译器（三）：探究内联和逃逸分析的算法原理</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/16%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9AGraal%E7%9A%84%E5%90%8E%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">16 Java JIT编译器（四）：Graal的后端是如何工作的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/17%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">17 Python编译器（一）：如何用工具生成编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/18%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E4%BB%8EAST%E5%88%B0%E5%AD%97%E8%8A%82%E7%A0%81.html">18 Python编译器（二）：从AST到字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/19%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6.html">19 Python编译器（三）：运行时机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/20%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E6%9E%90%E5%92%8C%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.html">20 JavaScript编译器（一）：V8的解析和编译过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/21%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E9%87%8A%E5%99%A8%E5%92%8C%E4%BC%98%E5%8C%96%E7%BC%96%E8%AF%91%E5%99%A8.html">21 JavaScript编译器（二）：V8的解释器和优化编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/22%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E6%80%A7%E8%83%BD%E5%BE%88%E9%AB%98%EF%BC%9F.html">22 Julia编译器（一）：如何让动态语言性能很高？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/23%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8LLVM%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E5%90%8E%E7%AB%AF%E5%8A%9F%E8%83%BD%EF%BC%9F.html">23 Julia编译器（二）：如何利用LLVM的优化和后端功能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/24%20Go%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A%E6%8A%8A%E5%AE%83%E5%BD%93%E4%BD%9C%E6%95%99%E7%A7%91%E4%B9%A6%E5%90%A7.html">24 Go语言编译器：把它当作教科书吧</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/25%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%A7%A3%E6%9E%90%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.html">25 MySQL编译器（一）：解析一条SQL语句的执行过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/26%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E5%A6%82%E4%BD%95%E5%B8%AE%E4%BD%A0%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%A7%E8%83%BD%EF%BC%9F.html">26 MySQL编译器（二）：编译技术如何帮你提升数据库性能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E8%AF%BE%E5%89%8D%E5%AF%BC%E8%AF%BB%EF%BC%9A%E5%AD%A6%E4%B9%A0%E7%8E%B0%E4%BB%A3%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF.html">27 课前导读：学习现代语言设计的正确姿势</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%89%8D%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E4%B9%9F%E6%9C%89%E4%BA%BA%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%AD%A6.html">28 前端总结：语言设计也有人机工程学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E4%B8%AD%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%8D%E9%81%97%E4%BD%99%E5%8A%9B%E5%9C%B0%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96.html">29 中端总结：不遗余力地进行代码优化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E5%85%85%E5%88%86%E5%8F%91%E6%8C%A5%E7%A1%AC%E4%BB%B6%E7%9A%84%E8%83%BD%E5%8A%9B.html">30 后端总结：充分发挥硬件的能力</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E0%E5%88%B0%E8%AF%AD%E8%A8%80%E7%BA%A7%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96.html">31 运行时（一）：从0到语言级的虚拟化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/32%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E6%80%A7%E6%9C%89%E5%85%B3%E5%90%97%EF%BC%9F.html">32 运行时（二）：垃圾收集与语言的特性有关吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">33 并发中的编译技术（一）：如何从语言层面支持线程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E5%8D%8F%E7%A8%8B%EF%BC%9F.html">34 并发中的编译技术（二）：如何从语言层面支持协程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/35%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9AErlang%E8%AF%AD%E8%A8%80%E5%8E%89%E5%AE%B3%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">35 并发中的编译技术（三）：Erlang语言厉害在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/36%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">36 高级特性（一）：揭秘元编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">37 高级特性（二）：揭秘泛型编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%9F.html">38 综合实现（一）：如何实现面向对象编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%9F.html">39 综合实现（二）：如何实现函数式编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/40%20%E6%88%90%E6%9E%9C%E6%A3%80%E9%AA%8C%EF%BC%9A%E6%96%B9%E8%88%9F%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%BC%98%E5%8A%BF%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">40 成果检验：方舟编译器的优势在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%901%20%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E9%9C%80%E8%A6%81%E4%BD%A0%E6%88%91%E5%85%B7%E5%A4%87%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%B4%A0%E8%B4%A8%EF%BC%9F.html">不定期加餐1 远程办公，需要你我具备什么样的素质？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%902%20%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%98%AF%E8%AE%AD%E7%BB%83%E5%BF%83%E7%90%86%E7%B4%A0%E8%B4%A8%E7%9A%84%E8%BF%87%E7%A8%8B.html">不定期加餐2 学习技术的过程，其实是训练心理素质的过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%903%20%E8%BF%99%E5%87%A0%E5%B9%B4%EF%BC%8C%E6%89%93%E5%8A%A8%E6%88%91%E7%9A%84%E4%B8%A4%E6%9C%AC%E5%A5%BD%E4%B9%A6.html">不定期加餐3 这几年，打动我的两本好书</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%904%20%E4%BB%8E%E8%BA%AB%E8%BE%B9%E7%9A%84%E7%89%9B%E4%BA%BA%E8%BA%AB%E4%B8%8A%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E7%A7%80%E5%93%81%E8%B4%A8.html">不定期加餐4 从身边的牛人身上，我学到的一些优秀品质</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%905%20%E5%80%9F%E5%8A%A9%E5%AE%9E%E4%BE%8B%EF%BC%8C%E6%8E%A2%E7%A9%B6C%2B%2B%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6.html">不定期加餐5 借助实例，探究C++编译器的内部机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%88%92%E9%87%8D%E7%82%B9%207%E7%A7%8D%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">划重点 7种编译器的核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%9C%9F%E6%9C%AB%E7%AD%94%E7%96%91%E4%B8%8E%E6%80%BB%E7%BB%93%20%E5%86%8D%E6%AC%A1%E5%AE%A1%E8%A7%86%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%9A%84%E4%BD%9C%E7%94%A8.html">期末答疑与总结 再次审视学习编译原理的作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%20%E5%A6%82%E4%BD%95%E5%90%83%E9%80%8F7%E7%A7%8D%E7%9C%9F%E5%AE%9E%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">热点问题答疑 如何吃透7种真实的编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%98%93%E6%98%8A%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8D%E6%AD%A2%E6%9C%89Bug%E5%92%8C%E5%8A%A0%E7%8F%AD%EF%BC%8C%E8%BF%98%E6%9C%89%E8%AF%97%E5%92%8C%E8%BF%9C%E6%96%B9.html">用户故事 易昊：程序员不止有Bug和加班，还有诗和远方</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%9F%A5%E8%AF%86%E5%9C%B0%E5%9B%BE%20%E4%B8%80%E8%B5%B7%E6%9D%A5%E5%A4%8D%E4%B9%A0%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">知识地图 一起来复习编译技术核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%AE%9E%E6%88%98%E6%98%AF%E5%94%AF%E4%B8%80%E6%A0%87%E5%87%86%EF%BC%81.html">结束语 实战是唯一标准！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/25%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%A7%A3%E6%9E%90%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="25 MySQL编译器（一）：解析一条SQL语句的执行过程" id="title">25 MySQL编译器（一）：解析一条SQL语句的执行过程</h1>
+<div><p>你好，我是宫文学。现在，就到了我们编译之旅的最后一站了，我们一起来探索一下MySQL编译器。</p>
+<p>数据库系统能够接受SQL语句，并返回数据查询的结果，或者对数据库中的数据进行修改，可以说几乎每个程序员都使用过它。</p>
+<p>而MySQL又是目前使用最广泛的数据库。所以，解析一下MySQL编译并执行SQL语句的过程，一方面能帮助你加深对数据库领域的编译技术的理解；另一方面，由于SQL是一种最成功的DSL（特定领域语言），所以理解了MySQL编译器的内部运作机制，也能加深你对所有使用数据操作类DSL的理解，比如文档数据库的查询语言。另外，解读SQL与它的运行时的关系，也有助于你在自己的领域成功地使用DSL技术。</p>
+<p><strong>那么，数据库系统是如何使用编译技术的呢？</strong>接下来，我就会花两讲的时间，带你进入到MySQL的内部，做一次全面的探秘。</p>
+<p>今天这一讲，我先带你了解一下如何跟踪MySQL的运行，了解它处理一个SQL语句的过程，以及MySQL在词法分析和语法分析方面的实现机制。</p>
+<p>好，让我们开始吧！</p>
+<h2 id="编译并调试mysql">编译并调试MySQL</h2>
+<p>按照惯例，你要下载<a href="https://github.com/mysql/mysql-server" target="_blank">MySQL的源代码</a>。我下载的是8.0版本的分支。</p>
+<p>源代码里的主要目录及其作用如下，我们需要分析的代码基本都在sql目录下，它包含了编译器和服务端的核心组件。</p>
+<p><img alt="" src="/assets/13864a90ec4a9367e0bacd68.jpg"/></p>
+<p>图1：MySQL的源代码包含的主要目录</p>
+<p>MySQL的源代码主要是.cc结尾的，也就是说，MySQL主要是用C++编写的。另外，也有少量几个代码文件是用C语言编写的。</p>
+<p>为了跟踪MySQL的执行过程，你要用Debug模式编译MySQL，具体步骤可以参考这篇<a href="https://dev.mysql.com/doc/internals/en/cmake.html" target="_blank">开发者文档</a>。</p>
+<p>如果你用单线程编译，大约需要1个小时。编译好以后，先初始化出一个数据库来：</p>
+<pre><code>./mysqld --initialize --user=mysql
+</code></pre>
+<p>这个过程会为root@localhost用户，生成一个缺省的密码。</p>
+<p>接着，运行MySQL服务器：</p>
+<pre><code>./mysqld &amp;
+</code></pre>
+<p>之后，通过客户端连接数据库服务器，这时我们就可以执行SQL了：</p>
+<pre><code>./mysql -uroot -p   #连接mysql server
+</code></pre>
+<p>最后，我们把GDB调试工具附加到mysqld进程上，就可以对它进行调试了。</p>
+<pre><code>gdb -p `pidof mysqld`  #pidof是一个工具，用于获取进程的id，你可以安装一下
+</code></pre>
+<p>提示：这一讲中，我是采用了一个CentOS 8的虚拟机来编译和调试MySQL。我也试过在macOS下编译，并用LLDB进行调试，也一样方便。</p>
+<p><strong>注意</strong>，你在调试程序的时候，有两个<strong>设置断点</strong>的好地方：</p>
+<ul>
+<li><strong>dispatch_command</strong>：在sql/sql_parse.cc文件里。在接受客户端请求的时候（比如一个SQL语句），会在这里集中处理。</li>
+<li><strong>my_message_sql</strong>：在sql/mysqld.cc文件里。当系统需要输出错误信息的时候，会在这里集中处理。</li>
+</ul>
+<p>这个时候，我们在MySQL的客户端输入一个查询命令，就可以从雇员表里查询姓和名了。在这个例子中，我采用的数据库是MySQL的一个<a href="https://github.com/datacharmer/test_db" target="_blank">示例数据库employees</a>，你可以根据它的文档来生成示例数据库。</p>
+<pre><code>mysql&gt; select first_name, last_name from employees;    #从mysql库的user表中查询信息
+</code></pre>
+<p>这个命令被mysqld接收到以后，就会触发断点，并停止执行。这个时候，客户端也会老老实实地停在那里，等候从服务端传回数据。即使你在后端跟踪代码的过程会花很长的时间，客户端也不会超时，一直在安静地等待。给我的感觉就是，MySQL对于调试程序还是很友好的。</p>
+<p>在GDB中输入bt命令，会打印出调用栈，这样你就能了解一个SQL语句，在MySQL中执行的完整过程。为了方便你理解和复习，这里我整理成了一个表格：</p>
+<p><img alt="" src="/assets/b3171ba3a5bcc09b7465e3e3.jpg"/></p>
+<p>我也把MySQL执行SQL语句时的一些重要程序入口记录了下来，这也需要你重点关注。它反映了执行SQL过程中的一些重要的处理阶段，包括语法分析、处理上下文、引用消解、优化和执行。你在这些地方都可以设置断点。</p>
+<p><img alt="" src="/assets/022ffa41f579750a47d0f037.jpg"/></p>
+<p>图2：MySQL执行SQL语句时的部分重要程序入口</p>
+<p>好了，现在你就已经做好准备，能够分析MySQL的内部实现机制了。不过，由于MySQL执行的是SQL语言，它跟我们前面分析的高级语言有所不同。所以，我们先稍微回顾一下SQL语言的特点。</p>
+<h2 id="sql语言-数据库领域的dsl">SQL语言：数据库领域的DSL</h2>
+<p>SQL是结构化查询语言（Structural Query Language）的英文缩写。举个例子，这是一个很简单的SQL语句：</p>
+<pre><code>select emp_no, first_name, last_name from employees;
+</code></pre>
+<p>其实在大部分情况下，SQL都是这样一个一个来做语句执行的。这些语句又分为DML（数据操纵语言）和DDL（数据定义语言）两类。前者是对数据的查询、修改和删除等操作，而后者是用来定义数据库和表的结构（又叫模式）。</p>
+<p>我们平常最多使用的是DML。而DML中，执行起来最复杂的是select语句。所以，在本讲，我都是用select语句来给你举例子。</p>
+<p>那么，SQL跟我们前面分析的高级语言相比有什么不同呢？</p>
+<p><strong>第一个特点：SQL是声明式（Declarative）的</strong>。这是什么意思呢？其实就是说，SQL语句能够表达它的计算逻辑，但它不需要描述控制流。</p>
+<p>高级语言一般都有控制流，也就是详细规定了实现一个功能的流程：先调用什么功能，再调用什么功能，比如if语句、循环语句等等。这种方式叫做<strong>命令式（imperative）编程</strong>。</p>
+<p>更深入一点，声明式编程说的是“要什么”，它不关心实现的过程；而命令式编程强调的是“如何做”。前者更接近人类社会的领域问题，而后者更接近计算机实现。</p>
+<p><strong>第二个特点：SQL是一种特定领域语言（DSL，Domain Specific Language），专门针对关系数据库这个领域的</strong>。SQL中的各个元素能够映射成关系代数中的操作术语，比如选择、投影、连接、笛卡尔积、交集、并集等操作。它采用的是表、字段、连接等要素，而不需要使用常见的高级语言的变量、类、函数等要素。</p>
+<p>所以，SQL就给其他DSL的设计提供了一个很好的参考：</p>
+<ul>
+<li><strong>采用声明式，更加贴近领域需求。</strong>比如，你可以设计一个报表的DSL，这个DSL只需要描述报表的特征，而不需要描述其实现过程。</li>
+<li><strong>采用特定领域的模型、术语，甚至是数学理论。</strong>比如，针对人工智能领域，你完全就可以用张量计算（力学概念）的术语来定义DSL。</li>
+</ul>
+<p>好了，现在我们分析了SQL的特点，从而也让你了解了DSL的一些共性特点。那么接下来，顺着MySQL运行的脉络，我们先来了解一下MySQL是如何做词法分析和语法分析的。</p>
+<h2 id="词法和语法分析">词法和语法分析</h2>
+<p>词法分析的代码是在sql/sql_lex.cc中，入口是MYSQLlex()函数。在sql/lex.h中，有一个symbols[]数组，它定义了各类关键字、操作符。</p>
+<p><strong>MySQL的词法分析器也是手写的，这给算法提供了一定的灵活性。</strong>比如，SQL语句中，Token的解析是跟当前使用的字符集有关的。使用不同的字符集，词法分析器所占用的字节数是不一样的，判断合法字符的依据也是不同的。而字符集信息，取决于当前的系统的配置。词法分析器可以根据这些配置信息，正确地解析标识符和字符串。</p>
+<p><strong>MySQL的语法分析器是用bison工具生成的，bison是一个语法分析器生成工具，它是GNU版本的yacc</strong>。bison支持的语法分析算法是LALR算法，而LALR是LR算法家族中的一员，它能够支持大部分常见的语法规则。bison的规则文件是sql/sql_yacc.yy，经过编译后会生成sql/sql_yacc.cc文件。</p>
+<p>sql_yacc.yy中，用你熟悉的EBNF格式定义了MySQL的语法规则。我节选了与select语句有关的规则，如下所示，从中你可以体会一下，SQL语句的语法是怎样被一层一层定义出来的：</p>
+<pre><code>select_stmt:
+          query_expression
+        | ...
+        | select_stmt_with_into
+        ;
+query_expression:
+          query_expression_body opt_order_clause opt_limit_clause
+        | with_clause query_expression_body opt_order_clause opt_limit_clause
+        | ...
+        ;
+query_expression_body:
+          query_primary
+        | query_expression_body UNION_SYM union_option query_primary
+        | ...
+        ;
+query_primary:
+          query_specification
+        | table_value_constructor
+        | explicit_table
+        ;
+query_specification:
+          ...
+        | SELECT_SYM             /*select关键字*/
+          select_options         /*distinct等选项*/
+          select_item_list       /*select项列表*/
+          opt_from_clause        /*可选：from子句*/
+          opt_where_clause       /*可选：where子句*/
+          opt_group_clause       /*可选：group子句*/
+          opt_having_clause      /*可选：having子句*/
+          opt_window_clause      /*可选：window子句*/
+        ;
+...
+</code></pre>
+<p>其中，query_expression就是一个最基础的select语句，它包含了SELECT关键字、字段列表、from子句、where子句等。</p>
+<p>你可以看一下select_options、opt_from_clause和其他几个以opt开头的规则，它们都是SQL语句的组成部分。opt是可选的意思，也就是它的产生式可能产生ε。</p>
+<pre><code>opt_from_clause:
+          /* Empty. */ 
+        | from_clause
+        ;
+
+</code></pre>
+<p>另外，你还可以看一下表达式部分的语法。在MySQL编译器当中，对于二元运算，你可以大胆地写成左递归的文法。因为它的语法分析的算法用的是LALR，这个算法能够自动处理左递归。</p>
+<p>一般研究表达式的时候，我们总是会关注编译器是如何处理结合性和优先级的。那么，bison是如何处理的呢？</p>
+<p>原来，bison里面有专门的规则，可以规定运算符的优先级和结合性。在sql_yacc.yy中，你会看到如下所示的规则片段：</p>
+<p><img alt="" src="/assets/2f21ac6a9360155c42a8d957.jpg"/></p>
+<p>你可以看一下bit_expr的产生式，它其实完全把加减乘数等运算符并列就行了。</p>
+<pre><code>bit_expr : 
+         ...
+         | bit_expr '+' bit_expr %prec '+'
+         | bit_expr '-' bit_expr %prec '-'
+         | bit_expr '*' bit_expr %prec '*'
+         | bit_expr '/' bit_expr %prec '/'
+         ...
+         | simple_expr
+</code></pre>
+<p>如果你只是用到加减乘除的运算，那就可以不用在产生式的后面加%prec这个标记。但由于加减乘除这几个还可以用在其他地方，比如“-a”可以用来表示把a取负值；减号可以用在一元表达式当中，这会比用在二元表达式中有更高的优先级。也就是说，为了区分同一个Token在不同上下文中的优先级，我们可以用%prec，来说明该优先级是<a href="https://www.gnu.org/software/bison/manual/html_node/Contextual-Precedence.html" target="_blank">上下文依赖</a>的。</p>
+<p>好了，在了解了词法分析器和语法分析器以后，我们接着来跟踪一下MySQL的执行，看看编译器所生成的解析树和AST是什么样子的。</p>
+<p>在sql_class.cc的sql_parser()方法中，编译器执行完解析程序之后，会返回解析树的根节点root，在GDB中通过p命令，可以逐步打印出整个解析树。你会看到，它的根节点是一个PT_select_stmt指针（见图3）。</p>
+<p>解析树的节点是在语法规则中规定的，这是一些C++的代码，它们会嵌入到语法规则中去。</p>
+<p>下面展示的这个语法规则就表明，编译器在解析完query_expression规则以后，要创建一个PT_query_expression的节点，其构造函数的参数分别是三个子规则所形成的节点。对于query_expression_body和query_primary这两个规则，它们会直接把子节点返回，因为它们都只有一个子节点。这样就会简化解析树，让它更像一棵AST。关于AST和解析树（也叫CST）的区别，我在解析Python的编译器中讲过了，你可以回忆一下。</p>
+<pre><code>query_expression:
+          query_expression_body
+          opt_order_clause
+          opt_limit_clause
+          {
+            $$ = NEW_PTN PT_query_expression($1, $2, $3); /*创建节点*/
+          }
+        | ...
+
+query_expression_body:
+          query_primary
+          {
+            $$ = $1;   /*直接返回query_primary的节点*/
+          }
+        | ...
+        
+query_primary:
+          query_specification
+          {
+            $$= $1;  /*直接返回query_specification的节点*/
+          }
+        | ...
+
+</code></pre>
+<p>最后，对于“select first_name, last_name from employees”这样一个简单的SQL语句，它所形成的解析树如下：</p>
+<p><img alt="" src="/assets/dc32e11e3a49875f94774145.jpg"/></p>
+<p>图3：示例SQL解析后生成的解析树</p>
+<p>而对于“select 2 + 3”这样一个做表达式计算的SQL语句，所形成的解析树如下。你会看到，它跟普通的高级语言的表达式的AST很相似：</p>
+<p><img alt="" src="/assets/417d7f890617280cc6fca8ca.jpg"/></p>
+<p>图4：“select 2 + 3”对应的解析树</p>
+<p>图4中的PT_query_expression等类，就是解析树的节点，它们都是Parse_tree_node的子类（PT是Parse Tree的缩写）。这些类主要定义在sql/parse_tree_nodes.h和parse_tree_items.h文件中。</p>
+<p>其中，Item代表了与“值”有关的节点，它的子类能够用于表示字段、常量和表达式等。你可以通过Item的val_int()、val_str()等方法获取它的值。</p>
+<p><img alt="" src="/assets/9278ef4ef12f9c84f794543a.jpg"/></p>
+<p>图5：解析树的树节点（部分）</p>
+<p>由于SQL是一个个单独的语句，所以select、insert、update等语句，它们都各自有不同的根节点，都是Parse_tree_root的子类。</p>
+<p><img alt="" src="/assets/3f37bd4fe2d3d580ebbe5fa0.jpg"/></p>
+<p>图6：解析树的根节点</p>
+<p>好了，现在你就已经了解了SQL的解析过程和它所生成的AST了。前面我说过，MySQL采用的是LALR算法，因此我们可以借助MySQL编译器，来加深一下对LR算法家族的理解。</p>
+<h2 id="重温lr算法">重温LR算法</h2>
+<p>你在阅读yacc.yy文件的时候，在注释里，你会发现如何跟踪语法分析器的执行过程的一些信息。</p>
+<p>你可以用下面的命令，带上“-debug”参数，来启动MySQL服务器：</p>
+<pre><code>mysqld --debug="d,parser_debug"
+</code></pre>
+<p>然后，你可以通过客户端执行一个简单的SQL语句：“select 2+3*5”。在终端，会输出语法分析的过程。这里我截取了一部分界面，通过这些输出信息，你能看出LR算法执行过程中的移进、规约过程，以及工作区内和预读的信息。</p>
+<p><img alt="" src="/assets/b57d760e15b2d87ac0cde16a.jpg"/></p>
+<p>我来给你简单地复现一下这个解析过程。</p>
+<p><strong>第1步，编译器处于状态0，并且预读了一个select关键字。</strong>你已经知道，LR算法是基于一个DFA的。在这里的输出信息中，你能看到某些状态的编号达到了一千多，所以这个DFA还是比较大的。</p>
+<p><strong>第2步，把select关键字移进工作区，并进入状态42。</strong>这个时候，编译器已经知道后面跟着的一定是一个select语句了，也就是会使用下面的语法规则：</p>
+<pre><code>query_specification:
+          ...
+        | SELECT_SYM             /*select关键字*/
+          select_options         /*distinct等选项*/
+          select_item_list       /*select项列表*/
+          opt_from_clause        /*可选：from子句*/
+          opt_where_clause       /*可选：where子句*/
+          opt_group_clause       /*可选：group子句*/
+          opt_having_clause      /*可选：having子句*/
+          opt_window_clause      /*可选：window子句*/
+        ;
+
+</code></pre>
+<p>为了给你一个直观的印象，这里我画了DFA的局部示意图（做了一定的简化），如下所示。你可以看到，在状态42，点符号位于“select”关键字之后、select_options之前。select_options代表了“distinct”这样的一些关键字，但也有可能为空。</p>
+<p><img alt="" src="/assets/5e39dc0a0eb83e0373b576c5.jpg"/></p>
+<p>图7：移进select后的DFA</p>
+<p><strong>第3步，因为预读到的Token是一个数字（NUM），这说明select_options产生式一定生成了一个ε，因为NUM是在select_options的Follow集合中。</strong></p>
+<p>这就是LALR算法的特点，它不仅会依据预读的信息来做判断，还要依据Follow集合中的元素。所以编译器做了一个规约，也就是让select_options为空。</p>
+<p>也就是，编译器依据“select_options-&gt;ε”做了一次规约，并进入了新的状态920。<strong>注意</strong>，状态42和920从DFA的角度来看，它们是同一个大状态。而DFA中包含了多个小状态，分别代表了不同的规约情况。</p>
+<p><img alt="" src="/assets/bd6f1f8bec06ef50f82052ac.jpg"/></p>
+<p>图8：基于“select_options-&gt;ε”规约后的DFA</p>
+<p><strong>你还需要注意</strong>，这个时候，老的状态都被压到了栈里，所以栈里会有0和42两个状态。栈里的这些状态，其实记录了推导的过程，让我们知道下一步要怎样继续去做推导。</p>
+<p><img alt="" src="/assets/5bbfd604ffe9d31b17fe9391.jpg"/></p>
+<p>图9：做完前3步之后，栈里的情况</p>
+<p><strong>第4步，移进NUM。</strong>这时又进入一个新状态720。</p>
+<p><img alt="" src="/assets/2f0046ea9002a579ff9dee4e.jpg"/></p>
+<p>图10：移进NUM后的DFA</p>
+<p>而旧的状态也会入栈，记录下推导路径：</p>
+<p><img alt="" src="/assets/8307d91e878395fbe0984450.jpg"/></p>
+<p>图11：移进NUM后栈的状态</p>
+<p><strong>第5~8步，依次依据NUM_literal-&gt;NUM、literal-&gt;NUM_literal、simple_expr-&gt;literal、bit_expr-&gt;simple_expr这四条产生式做规约。</strong>这时候，编译器预读的Token是+号，所以你会看到，图中的红点停在+号前。</p>
+<p><img alt="" src="/assets/ae6587a7d23d35a9381e0b38.jpg"/></p>
+<p>图12：第8步之后的DFA</p>
+<p><strong>第9~10步，移进+号和NUM</strong>。这个时候，状态又重新回到了720。这跟第4步进入的状态是一样的。</p>
+<p><img alt="" src="/assets/a69233f666588e3f39662af3.jpg"/></p>
+<p>图13：第10步之后的DFA</p>
+<p>而栈里的目前有5个状态，记录了完整的推导路径。</p>
+<p><img alt="" src="/assets/8c9a1adb5a5c90b106468c4a.jpg"/></p>
+<p>图14：第10步之后栈的状态</p>
+<p>到这里，其实你就已经了解了LR算法做移进和规约的思路了。不过你还可以继续往下研究。由于栈里保留了完整的推导路径，因此MySQL编译器最后会依次规约回来，把栈里的元素清空，并且形成一棵完整的AST。</p>
+<h2 id="课程小结">课程小结</h2>
+<p>这一讲，我带你初步探索了MySQL编译SQL语句的过程。你需要记住几个关键点：</p>
+<ul>
+<li><strong>掌握如何用GDB来跟踪MySQL的执行的方法</strong>。你要特别注意的是，我给你梳理的那些关键的程序入口，它是你理解MySQL运行过程的地图。</li>
+<li>SQL语言是<strong>面向关系数据库的一种DSL，它是声明式的</strong>，并采用了领域特定的模型和术语，可以为你设计自己的DSL提供启发。</li>
+<li><strong>MySQL的语法分析器是采用bison工具生成的</strong>。这至少说明，语法分析器生成工具是很有用的，连正式的数据库系统都在使用它，所以你也可以大胆地使用它，来提高你的工作效率。我在最后的参考资料中给出了bison的手册，希望你能自己阅读一下，做一些简单的练习，掌握bison这个工具。</li>
+<li>最后，<strong>你一定要知道LR算法的运行原理</strong>，知其所以然，这也会更加有助于你理解和用好工具。</li>
+</ul>
+<p>我依然把本讲的内容给你整理成了一张知识地图，供你参考和复习回顾：</p>
+<p><img alt="" src="/assets/63217f92376c44d260b60d96.jpg"/></p>
+<h2 id="一课一思">一课一思</h2>
+<p>我们今天讲到了DSL的概念。你能分享一下你的工作领域中的DSL吗？它们是否也是采用声明式的？里面用到了哪些特定领域的术语？欢迎在留言区分享。</p>
+<p>感谢你的阅读。如果有收获，欢迎你把今天的内容分享给更多的朋友。</p>
+<h2 id="参考资料">参考资料</h2>
+<ol>
+<li>MySQL的内行手册（<a href="https://dev.mysql.com/doc/internals/en/" target="_blank">MySQL Internals Manual</a>）能提供一些重要的信息。但我发现文档内容经常跟源代码的版本不同步，比如介绍源代码的目录结构的信息就过时了，你要注意这点。</li>
+<li>bison的<a href="http://www.gnu.org/software/bison/manual/" target="_blank">手册</a>。</li>
+</ol>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

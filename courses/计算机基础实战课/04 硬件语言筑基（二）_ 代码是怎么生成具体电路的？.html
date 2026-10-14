@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04 硬件语言筑基（二）_ 代码是怎么生成具体电路的？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">计算机基础实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">55 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>计算机基础实战课</strong><ul><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E7%BB%83%E5%A5%BD%E5%9F%BA%E6%9C%AC%E5%8A%9F%EF%BC%8C%E4%BC%98%E7%A7%80%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF%E7%AC%AC%E4%B8%80%E6%AD%A5.html">00 开篇词 练好基本功，优秀工程师成长第一步</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/01%20CISC%20%26%20RISC%EF%BC%9A%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5%EF%BC%8C%E4%BD%95%E8%87%B3%E4%BA%8E%E6%AD%A4.html">01 CISC &amp; RISC：从何而来，何至于此</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/02%20RISC%E7%89%B9%E6%80%A7%E4%B8%8E%E5%8F%91%E5%B1%95%EF%BC%9ARISC-V%E5%87%AD%E4%BB%80%E4%B9%88%E6%88%90%E4%B8%BA%E2%80%9C%E5%8D%8A%E5%AF%BC%E4%BD%93%E8%A1%8C%E4%B8%9A%E7%9A%84Linux%E2%80%9D%EF%BC%9F.html">02 RISC特性与发展：RISC-V凭什么成为“半导体行业的Linux”？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E7%A1%AC%E4%BB%B6%E8%AF%AD%E8%A8%80%E7%AD%91%E5%9F%BA%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%A1%AC%E4%BB%B6%E8%AF%AD%E8%A8%80%E5%BC%80%E5%90%AF%E6%89%8B%E5%86%99CPU%E4%B9%8B%E6%97%85.html">03 硬件语言筑基（一）：从硬件语言开启手写CPU之旅</a></li><li><a class="active" aria-current="page" href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E7%A1%AC%E4%BB%B6%E8%AF%AD%E8%A8%80%E7%AD%91%E5%9F%BA%EF%BC%88%E4%BA%8C%EF%BC%89_%20%E4%BB%A3%E7%A0%81%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%9F%E6%88%90%E5%85%B7%E4%BD%93%E7%94%B5%E8%B7%AF%E7%9A%84%EF%BC%9F.html">04 硬件语言筑基（二）_ 代码是怎么生成具体电路的？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E6%8C%87%E4%BB%A4%E6%9E%B6%E6%9E%84%EF%BC%9ARISC-V%E5%9C%A8CPU%E8%AE%BE%E8%AE%A1%E4%B8%8A%E5%88%B0%E5%BA%95%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8A%BF%EF%BC%9F.html">05 指令架构：RISC-V在CPU设计上到底有哪些优势？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%BF%B7%E4%BD%A0CPU%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%96%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0.html">06 手写CPU（一）：迷你CPU架构设计与取指令实现</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%87%E4%BB%A4%E8%AF%91%E7%A0%81%E6%A8%A1%E5%9D%97%EF%BC%9F.html">07 手写CPU（二）：如何实现指令译码模块？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%87%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9D%97%EF%BC%9F.html">08 手写CPU（三）：如何实现指令执行模块？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0CPU%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E8%AE%BF%E5%AD%98%E9%98%B6%E6%AE%B5%EF%BC%9F.html">09 手写CPU（四）：如何实现CPU流水线的访存阶段？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9ACPU%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%86%99%E5%9B%9E%E6%A8%A1%E5%9D%97%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">10 手写CPU（五）：CPU流水线的写回模块如何实现？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E6%88%91%E4%BB%AC%E7%9A%84CPU%E8%B7%91%E8%B5%B7%E6%9D%A5%EF%BC%9F.html">11 手写CPU（六）：如何让我们的CPU跑起来？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/12%20QEMU%EF%BC%9A%E6%94%AF%E6%8C%81RISC-V%E7%9A%84QEMU%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%EF%BC%9F.html">12 QEMU：支持RISC-V的QEMU如何构建？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/13%20%E5%B0%8F%E8%AF%95%E7%89%9B%E5%88%80%EF%BC%9A%E8%B7%91%E9%80%9ARISC-V%E5%B9%B3%E5%8F%B0%E7%9A%84Hello%20World%E7%A8%8B%E5%BA%8F.html">13 小试牛刀：跑通RISC-V平台的Hello World程序</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E8%B5%B0%E8%BF%9BC%E8%AF%AD%E8%A8%80%EF%BC%9A%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80%E6%80%8E%E6%A0%B7%E6%8A%BD%E8%B1%A1%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91%EF%BC%9F.html">14 走进C语言：高级语言怎样抽象执行逻辑？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/15%20C%E4%B8%8E%E6%B1%87%E7%BC%96%EF%BC%9A%E6%8F%AD%E7%A7%98C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E2%80%9C%E6%90%AC%E7%A0%96%E2%80%9D%E6%97%A5%E5%B8%B8.html">15 C与汇编：揭秘C语言编译器的“搬砖”日常</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/16%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%AE%97%E6%9C%AF%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">16 RISC-V指令精讲（一）：算术指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/17%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%AE%97%E6%9C%AF%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">17 RISC-V指令精讲（二）：算术指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/18%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">18 RISC-V指令精讲（三）：跳转指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/19%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">19 RISC-V指令精讲（四）：跳转指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/20%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E5%8E%9F%E5%AD%90%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">20 RISC-V指令精讲（五）：原子指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/21%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%8A%A0%E8%BD%BD%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">21 RISC-V指令精讲（六）：加载指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/22%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%B8%83%EF%BC%89%EF%BC%9A%E8%AE%BF%E5%AD%98%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">22 RISC-V指令精讲（七）：访存指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%EF%BC%9A%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%9C%B0%E5%9D%80%E7%9A%84%E4%B8%89%E7%A7%8D%E4%BA%A7%E7%94%9F%E6%96%B9%E5%BC%8F.html">23 内存地址空间：程序中地址的三种产生方式</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E8%99%9A%E5%AE%9E%E7%BB%93%E5%90%88%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98.html">24 虚实结合：虚拟内存和物理内存</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/25%20%E5%A0%86%26%E6%A0%88%EF%BC%9A%E5%A0%86%E4%B8%8E%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8.html">25 堆&amp;栈：堆与栈的区别和应用</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/26%20%E5%BB%B6%E8%BF%9F%E5%88%86%E9%85%8D%EF%BC%9A%E6%8F%90%E9%AB%98%E5%86%85%E5%AD%98%E5%88%A9%E7%94%A8%E7%8E%87%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6.html">26 延迟分配：提高内存利用率的三种机制</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E5%BA%94%E7%94%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9ALinux%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html">27 应用内存管理：Linux的应用与内存管理</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%B9%B6%E8%A1%8C%E6%89%A7%E8%A1%8C%EF%BC%9F.html">28 进程调度：应用为什么能并行执行？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E5%BA%94%E7%94%A8%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%AF%A6%E8%A7%A3Linux%E8%BF%9B%E7%A8%8BIPC.html">29 应用间通信（一）：详解Linux进程IPC</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%20%E5%BA%94%E7%94%A8%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%A6%E8%A7%A3Linux%E8%BF%9B%E7%A8%8BIPC.html">30  应用间通信（二）：详解Linux进程IPC</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E5%A4%96%E8%AE%BE%E9%80%9A%E4%BF%A1%EF%BC%9AIO%20Cache%E4%B8%8EIO%E8%B0%83%E5%BA%A6.html">31 外设通信：IO Cache与IO调度</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/32%20IO%E7%AE%A1%E7%90%86%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E5%A4%96%E8%AE%BE%EF%BC%9F.html">32 IO管理：Linux如何管理多个外设？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/33%20lotop%E4%B8%8Elostat%E5%91%BD%E4%BB%A4%EF%BC%9A%E8%81%8A%E8%81%8A%E5%91%BD%E4%BB%A4%E8%83%8C%E5%90%8E%E7%9A%84%E6%95%85%E4%BA%8B%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">33 lotop与lostat命令：聊聊命令背后的故事与工作原理</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E6%96%87%E4%BB%B6%E4%BB%93%E5%BA%93%EF%BC%9A%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html">34 文件仓库：初识文件与文件系统</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/35%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E5%AD%98%E6%94%BE%E6%96%87%E4%BB%B6%EF%BC%9F.html">35 Linux文件系统（一）：Linux如何存放文件？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/36%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E5%AD%98%E6%94%BE%E6%96%87%E4%BB%B6%EF%BC%9F.html">36 Linux文件系统（二）：Linux如何存放文件？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">37 浏览器原理（一）：浏览器为什么要用多进程模型？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%B8%B2%E6%9F%93%E8%AF%A6%E8%A7%A3.html">38 浏览器原理（二）：浏览器进程通信与网络渲染详解</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%EF%BC%9AV8%20%E6%89%A7%E8%A1%8C%20JS%20%E4%BB%A3%E7%A0%81%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B.html">39 源码解读：V8 执行 JS 代码的全过程</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/40%20%E5%86%85%E5%8A%9F%E5%BF%83%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%86%85%E6%A0%B8%E5%92%8C%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">40 内功心法（一）：内核和后端通用的设计思想有哪些？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/41%20%E5%86%85%E5%8A%9F%E5%BF%83%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%86%85%E6%A0%B8%E5%92%8C%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">41 内功心法（二）：内核和后端通用的设计思想有哪些？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/42%20%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%EF%BC%9A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E5%B7%A5%E5%85%B7eBPF%E5%92%8C%E8%B0%83%E4%BC%98%E6%96%B9%E6%B3%95.html">42 性能调优：性能调优工具eBPF和调优方法</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%85%88%E7%9D%B9%E4%B8%BA%E5%BF%AB%EF%BC%9A%E8%BF%B7%E4%BD%A0CPU%E9%A1%B9%E7%9B%AE%E6%95%88%E6%9E%9C%E6%BC%94%E7%A4%BA.html">先睹为快：迷你CPU项目效果演示</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9001%20%E4%BA%91%E8%AE%A1%E7%AE%97%E5%9F%BA%E7%A1%80%EF%BC%9A%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E6%90%AD%E5%BB%BA%E4%B8%80%E6%AC%BEIAAS%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0.html">加餐01 云计算基础：自己动手搭建一款IAAS虚拟化平台</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9002%20%E5%AD%A6%E4%B9%A0%E6%94%BB%E7%95%A5%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%26%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%8C%E7%A9%B6%E7%AB%9F%E6%80%8E%E4%B9%88%E5%AD%A6%EF%BC%9F.html">加餐02 学习攻略（一）：大数据&amp;云计算，究竟怎么学？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9003%20%E5%AD%A6%E4%B9%A0%E6%94%BB%E7%95%A5%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%26%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%8C%E7%A9%B6%E7%AB%9F%E6%80%8E%E4%B9%88%E5%AD%A6%EF%BC%9F.html">加餐03 学习攻略（二）：大数据&amp;云计算，究竟怎么学？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9004%20%E8%B0%88%E8%B0%88%E5%AE%B9%E5%99%A8%E4%BA%91%E4%B8%8E%E5%92%8CCaaS%E5%B9%B3%E5%8F%B0.html">加餐04 谈谈容器云与和CaaS平台</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9005%20%E5%88%86%E5%B8%83%E5%BC%8F%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%8E%E6%99%BA%E8%83%BDSaaS.html">加餐05 分布式微服务与智能SaaS</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%9B%BD%E5%BA%86%E7%AD%96%E5%88%9201%20%E7%9F%A5%E8%AF%86%E6%8C%91%E6%88%98%E8%B5%9B%EF%BC%9A%E6%A3%80%E9%AA%8C%E4%B8%80%E4%B8%8B%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C%E5%90%A7%EF%BC%81.html">国庆策划01 知识挑战赛：检验一下学习成果吧！</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%9B%BD%E5%BA%86%E7%AD%96%E5%88%9202%20%E6%9D%A5%E8%87%AA%E8%AF%BE%E4%BB%A3%E8%A1%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A.html">国庆策划02 来自课代表的学习锦囊</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%9B%BD%E5%BA%86%E7%AD%96%E5%88%9203%20%E6%8F%AD%E7%A7%98%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%93%8D%E4%BD%9C%E5%92%8C%E6%A0%88%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6.html">国庆策划03 揭秘代码优化操作和栈保护机制</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%20%E6%80%9D%E8%80%83%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%80%EF%BC%89.html">温故知新 思考题参考答案（一）</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%88%91%E6%98%AF%E6%80%8E%E6%A0%B7%E5%AD%A6%E4%B9%A0Verilog%E7%9A%84%EF%BC%9F.html">用户故事 我是怎样学习Verilog的？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%BF%83%E8%8B%A5%E6%9C%89%E6%89%80%E5%90%91%E5%BE%80%EF%BC%8C%E4%BD%95%E6%83%A7%E9%81%93%E9%98%BB%E4%B8%94%E9%95%BF.html">结束语 心若有所向往，何惧道阻且长</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E7%A1%AC%E4%BB%B6%E8%AF%AD%E8%A8%80%E7%AD%91%E5%9F%BA%EF%BC%88%E4%BA%8C%EF%BC%89_%20%E4%BB%A3%E7%A0%81%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%9F%E6%88%90%E5%85%B7%E4%BD%93%E7%94%B5%E8%B7%AF%E7%9A%84%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="04 硬件语言筑基（二）_ 代码是怎么生成具体电路的？" id="title">04 硬件语言筑基（二）_ 代码是怎么生成具体电路的？</h1>
+<div><p>你好，我是LMOS。</p>
+<p>上节课，我们学习了硬件描述语言Verilog的基础知识。今天我会带你一起用Verilog设计一个简单的电路模块。通过这节课，你不但能复习巩固上节课学到的硬件语言知识，还能在动手实践中体会代码是怎么生成具体电路的。</p>
+<h2 id="verilog代码编写">Verilog代码编写</h2>
+<p>如果你学过计算机组成原理的课程或图书，应该对ALU并不陌生。算术逻辑单元（Arithmetic&amp;logical Unit，ALU）是CPU的执行单元，是所有中央处理器的核心组成部分。</p>
+<p>利用Verilog，我们可以设计一个包含加、减、与、或、非等功能的简单ALU模块，代码如下：</p>
+<pre><code>module alu(a, b, cin, sel, y);
+  input [7:0] a, b;
+  input cin;
+  input [3:0] sel;
+  output [7:0] y;
+
+  reg [7:0] y;
+  reg [7:0] arithval;
+  reg [7:0] logicval;
+
+  // 算术执行单元
+  always @(a or b or cin or sel) begin
+    case (sel[2:0])
+      3'b000  : arithval = a;
+      3'b001  : arithval = a + 1;
+      3'b010  : arithval = a - 1;
+      3'b011  : arithval = b;
+      3'b100  : arithval = b + 1;
+      3'b101  : arithval = b - 1;
+      3'b110  : arithval = a + b;
+      default : arithval = a + b + cin;
+    endcase
+  end
+
+  // 逻辑处理单元
+  always @(a or b or sel) begin
+    case (sel[2:0])
+      3'b000  : logicval =  ~a;
+      3'b001  : logicval =  ~b;
+      3'b010  : logicval = a &amp; b;
+      3'b011  : logicval = a | b;
+      3'b100  : logicval =  ~((a &amp; b));
+      3'b101  : logicval =  ~((a | b));
+      3'b110  : logicval = a ^ b;
+      default : logicval =  ~(a ^ b);
+    endcase
+  end
+
+  // 输出选择单元
+  always @(arithval or logicval or sel) begin
+    case (sel[3])
+      1'b0    : y = arithval;
+      default : y = logicval;
+    endcase
+  end
+
+endmodule
+</code></pre>
+<p>通过上面的代码，我们实现了一个8位二进制的简单运算模块。其中，a和b是输入的两个8位二进制数，cin是a和b做加法运算时输入的进位值，4bit位宽的sel[3:0] 则是CPU中通常所说的指令操作码。</p>
+<p>在这个ALU模块中，逻辑功能代码我们把它分成三个部分，分别是运算单元、逻辑处理单元和输出选择单元。运算单元是根据输入指令的低三位sel[2:0]，来选择执行加减等运算。同理，逻辑处理单元执行与或非门等操作。最后，根据指令的最高位sel[3]，来选择Y输出的是加减运算单元结果，还是逻辑处理的结果。</p>
+<p>你还记得上节课的例子么？当时我们一起研究了一个4位10进制的计算器，里面用到了时钟设计。也就是说，这个计算器是通过时序逻辑实现的，所以always块中的赋值语言使用了非阻塞赋值“&lt;=”。</p>
+<pre><code>always@(posedge clk or negedge reset_n) begin
+  if(!reset_n) begin        		  		//复位时，计时归0
+      cnt_r        &lt;= 4'b0000 ;
+    end
+</code></pre>
+<p>而今天我们实现的ALU模块，用到的是组合逻辑，所以always块中使用阻塞赋值“=”。</p>
+<p>怎么区分阻塞赋值和非阻塞赋值呢？阻塞赋值对应的电路结构往往与触发沿没有关系，只与输入电平的变化有关；而非阻塞赋值对应的电路结构往往与触发沿有关系，只有在触发沿时，才有可能发生赋值的情况。</p>
+<p>另外，在前面8位二进制的代码里，算术执行单元和逻辑处理单元的两个always块是<strong>并行执行</strong>的。所以它们的运算结果几乎是同时出来，这里值得你好好理解一下。如果你没有发现两个块并行，可以暂停下来回顾一下。</p>
+<h2 id="如何通过仿真验证代码">如何通过仿真验证代码</h2>
+<p>就像我们开发软件，需要代码编译器和模拟器一样，Verilog这种硬件语言的代码，也需要运行验证。那怎么来运行验证呢？现在很多企业采用的是VCS—verilog仿真器或者是NC-verilog仿真器，这些工具都需要花重金去购买才能使用，普通人用起来成本太高了。</p>
+<p>除了重金购买这些EDA工具之外，我们还有更节约成本、也更容易学习入门的选择。<strong>我给你推荐两个轻量级开源软件，分别是Iverilog和GTKWave。</strong>Iverilog是一个对Verilog进行编译和仿真的工具，而GTKWave是一个查看仿真数据波形的工具。</p>
+<p>Iverilog运行于终端模式下，安装完成之后，我们就能通过Iverilog对verilog执行编译，再对生成的文件通过vvp命令执行仿真，配合GTKWave即可显示和查看图形化的波形。</p>
+<p>在Linux系统下安装Iverilog和GTKWave非常简单。以Ubuntu为例，我们通过apt-get就可以直接安装。</p>
+<blockquote>
+<p>安装Iverilog：sudo apt-get install iverilog-
+安装GTKWave：sudo apt-get install gtkwave</p>
+</blockquote>
+<p>安装完成之后，我们需要使用which命令查看安装路径，确认是否安装成功。</p>
+<blockquote>
+<p>which iverilog-
+which vvp-
+which gtkwave</p>
+</blockquote>
+<p>有了软件和Verilog代码。在运行仿真前，我们还需要设计一个重要的文件，即仿真激励文件，也就是TestBench。在仿真时，要把TestBench放在所设计模块的顶层，以便对模块进行系统性的例化调用。</p>
+<p>我们把TestBench放在设计模块的顶层，以便对模块进行系统性的例化，调用所设计的各个模块并对其进行仿真。</p>
+<p>针对上面的ALU模块，设计了一个给ALU产生运算指令和数据的TestBench，并且把ALU的运算结果打印出来，TestBench的代码如下：</p>
+<pre><code>`timescale 1 ns / 1 ns
+
+module alu_tb;
+  reg[7:0] a, b;
+  reg cin;
+  reg[3:0] sel;
+  wire[7:0] y;
+  integer idx;
+
+  //对alu模块进行例化，类似于软件程序中的函数调用
+  alu u_alu(.a(a), .b(b), .cin(cin), .sel(sel), .y(y));
+
+  initial 
+  begin
+    //给 a 和 b 赋初值
+    a = 8'h93;
+    b = 8'hA7;
+    for (idx = 0;  idx &lt;= 15;  idx = idx + 1) 
+    begin
+      // 循环产生运算指令 sel 的值
+      sel = idx;
+      // 当指令 sel = 7 时是加法操作，设定进位值cin=1
+      if (idx == 7)
+        cin = 1'b1;
+      else
+        cin = 1'b0;
+      //每产生一个指令延时10ns
+      #10
+      // 延时之后打印出运算结果
+      $display("%t: a=%h, b=%h, cin=%b, sel=%h, y=%h", $time, a, b, cin, sel, y);
+    end 
+  end
+
+initial
+begin
+  $dumpfile("wave.vcd");        //生成波形文件vcd的名称
+  $dumpvars(0, alu_tb);   		 //tb模块名称
+end
+
+endmodule
+</code></pre>
+<p>这里我要说明一下，TestBench是不可以综合成具体电路的，只用于仿真验证，但和上一节课介绍的可综合的Verilog代码语法类似。</p>
+<p>设计工作告一段落。我们终于可以打开终端开始跑仿真了。你需要在Verilog代码所在的文件目录下执行以下指令：</p>
+<blockquote>
+<p>iverilog -o wave -y ./ alu_tb.v alu.v-
+vvp -n wave -lxt2</p>
+</blockquote>
+<p>可以看到，运行结果输出如下：</p>
+<blockquote>
+<p>LXT2 info: dumpfile wave.vcd opened for output.-
+ 10: a=93, b=a7, cin=0, sel=0, y=93 //指令0：y = a;-
+ 20: a=93, b=a7, cin=0, sel=1, y=94 //指令1：y = a + 1;-
+ 30: a=93, b=a7, cin=0, sel=2, y=92 //指令2：y = a - 1;-
+ 40: a=93, b=a7, cin=0, sel=3, y=a7 //指令3：y = b;-
+ 50: a=93, b=a7, cin=0, sel=4, y=a8 //指令4：y = b + 1;-
+ 60: a=93, b=a7, cin=0, sel=5, y=a6 //指令5：y = b - 1;-
+ 70: a=93, b=a7, cin=0, sel=6, y=3a //指令6：y = a + b;-
+ 80: a=93, b=a7, cin=1, sel=7, y=3b //指令7：y = a + b + cin;-
+ 90: a=93, b=a7, cin=0, sel=8, y=6c //指令8：y = ~a;-
+ 100: a=93, b=a7, cin=0, sel=9, y=58 //指令9：y = ~b;-
+ 110: a=93, b=a7, cin=0, sel=a, y=83 //指令10：y = a &amp; b;-
+ 120: a=93, b=a7, cin=0, sel=b, y=b7 //指令11：y = a | b;-
+ 130: a=93, b=a7, cin=0, sel=c, y=7c //指令12：y = ~(a &amp; b);-
+ 140: a=93, b=a7, cin=0, sel=d, y=48 //指令13：y = ~(a | b);-
+ 150: a=93, b=a7, cin=0, sel=e, y=34 //指令14：y = a ^ b;-
+ 160: a=93, b=a7, cin=0, sel=f, y=cb //指令15：y = ~(a ^ b);</p>
+</blockquote>
+<p>有了运行结果，我们就可以打开GTKWave查看仿真波形了，这里需要在终端执行如下指令：</p>
+<blockquote>
+<p>gtkwave wave.vcd</p>
+</blockquote>
+<p><img alt="" src="/assets/f1b5badba83733b9407f2df9.jpg"/></p>
+<p>从打开的波形可以到，ALU模块输出的信号Y，这是根据输入指令sel和输入的数据a、b和cin的值，经过加减运算或者逻辑运算得到的。</p>
+<h2 id="代码是如何生成具体电路的">代码是如何生成具体电路的？</h2>
+<p>经过上面的仿真，从打印的结果上已经看到了我们设计的模块功能。而通过查看仿真波形，我们同样也能知道各个信号的跳变关系。</p>
+<p>但是，你可能还有个疑惑，不是说设计的Verilog语句，基本都会对应一份电路吗？怎样才能看到Verilog对应了哪些电路呢？</p>
+<p>别急，这就是我马上要讲的逻辑综合。通过逻辑综合，我们就能完成从Verilog代码到门级电路的转换。而逻辑综合的结果，就是把设计的Verilog代码，翻译成门级网表Netlist。</p>
+<p>逻辑综合需要基于特定的综合库，不同的库中，门电路基本标准单元（Standard Cell）的面积、时序参数是不一样的。所以，选用的综合库不一样，综合出来的电路在时序、面积上也不同。因此，哪怕采用同样的设计，选用台湾的台积电（TSMC）工艺和上海的中芯国际（SMIC）的工艺，最后生产出来的芯片性能也是有差异的。</p>
+<p>通常，工业界使用的逻辑综合工具有Synopsys的Design Compiler（DC），Cadence的 RTL Compiler，Synplicity的Synplify等。然而，这些EDA工具都被国外垄断了，且需要收取高昂的授权费用。</p>
+<p>为了降低学习门槛和费用，这里我们选择Yosys，它是一个轻量级开源综合工具。虽然功能上还达不到工业级的EDA工具，但是对于我们这门课的学习已经完全够用了。</p>
+<p><img alt="" src="/assets/66ae7df5b8a786f7545d7bf0.jpg"/>-
+如上图所示，利用Yosys软件，可以帮助我们把RTL代码层次的设计转换为逻辑门级的电路。</p>
+<p>好，我先大致带你了解下，这个软件怎么安装和使用。在Ubuntu中安装Yosys非常简单，在终端中依次执行以下命令即可：</p>
+<blockquote>
+<p>sudo add-apt-repository ppa:saltmakrell/ppa-
+sudo apt-get update-
+sudo apt-get install yosys</p>
+</blockquote>
+<p>完成了安装，我们就能使用Yosys，对上面设计的ALU模块做简单的综合了。</p>
+<p>直接在终端输入“yosys”，启动Yosys软件。启动成功后，我们通过后面这五条指令，就能得到到ALU的逻辑电路图文件了。</p>
+<p>第一步，在Yosys中读取Verilog文件。</p>
+<blockquote>
+<p>read_verilog alu.v</p>
+</blockquote>
+<p>第二步，使用后面的命令，检查模块例化结构。</p>
+<blockquote>
+<p>hierarchy -check</p>
+</blockquote>
+<p>接着是第三步，执行下一条命令，来完成高层次的逻辑综合。</p>
+<blockquote>
+<p>proc; opt; opt; fsm; memory; opt</p>
+</blockquote>
+<p>到了第四步，我们就可以用write_verilog生成网表文件。</p>
+<blockquote>
+<p>write_verilog alu_synth.v</p>
+</blockquote>
+<p>最后，我们再用下方的命令，输出综合后的逻辑图。</p>
+<blockquote>
+<p>show -format dot -prefix ./alu</p>
+</blockquote>
+<p>这一套动作完成后，我们终于迎来了收获成果的时刻。打开生成的alu.dot文件，我们就可以看到ALU模块的门级电路图了，如下所示：</p>
+<p><img alt="" src="/assets/5060797de9da866fe6d5cc74.jpg"/></p>
+<p>可以看到，这张图是由基本的and、or、not、add、sub、cmp、mux等电路单元组成。如果你还想进一步了解它们底层电路结构，可以自行查阅大学里学过的《数电》《模电》。</p>
+<p>当然，Yosys功能还不只这些，这里我只是做个简易的演示。更多其它功能，如果你感兴趣的话可以到<a href="https://yosyshq.net/yosys" target="_blank">官网</a>上学习。</p>
+<p>到这里，类似于CPU里面的核心单元ALU电路，我们就设计完成了。</p>
+<h2 id="总结回顾">总结回顾</h2>
+<p>今天我们一起了解了怎么把Verilog代码变为具体的电路。为了实现代码编写、验证和仿真的“一站式”体验。我还向你推荐了几个开源软件。我们来回顾一下这节课的重点。</p>
+<p>首先，我们用Verilog编写了一个类似CPU内部的ALU模块，该模块实现了加、减、与、或、非等基本运算功能。</p>
+<p>针对上面的ALU模块，我们还设计了一个用于产生运算指令和数据的TestBench，并且把ALU的运算结果打印出来。利用这个TestBench，可以验证ALU模块的功能是否正确。</p>
+<p>接下来，我们还用到了两个轻量级开源软件，分别是Iverilog和GTKWave。Iverilog是一个对Verilog进行编译和仿真的工具，GTKWave可以查看仿真数据波形的工具。利用这两个软件，我们完成了ALU模块的仿真和验证。</p>
+<p>此外，我还推荐了一款轻量级开源综合工具Yosys。通过这个工具，我们把上面设计的ALU模块综合出了具体的门级电路。</p>
+<p>感谢你耐心看到这里，我还给你准备了一张知识导图，总结今天所学的内容。</p>
+<p><img alt="图片" src="/assets/48fbd746be0aa45ae4c084dc.jpg"/></p>
+<h2 id="扩展阅读">扩展阅读</h2>
+<p>仅仅一两节课的内容，就想要把所有Verilog的相关知识学完是不可能的。因此，在课程之外，需要你去多搜索，多阅读，多动手编写Verilg代码，才能更好地掌握Verilog的相关知识，这里我精心为你整理了一些参考资料，供你按需取用：</p>
+<ol>
+<li>首先是硬件描述语言Verilog HDL的语言标准文件《IEEE Standard Verilog Hardware Description Language (1364-2001)》。-</li>
+<li>如果你对底层的基本电路还不熟悉，不妨复习一下大学所学的教材。这里我推荐由童诗白和华成英编写的《模拟电子技术基础》第四版，以及阎石编写的《数字电子技术基础》。-</li>
+<li>你要是想全面学习数字集成电路的设计、仿真验证、逻辑综合等相关知识，可以看看电子工业出版社出版的《Verilog HDL高级数字设计》。-</li>
+<li>最后，你要是真的想学芯片设计，从更深层次去理解数字电路设计，推荐阅读这本Mohit Arora撰写、李海东等人翻译的图书——《硬件架构的艺术——数字电路的设计方法与技术》。</li>
+</ol>
+<h2 id="思考题">思考题</h2>
+<p>既然用Verilog很容易就可以设计出芯片的数字电路，为什么我们国家还没有完全自主可控的高端CPU呢？</p>
+<p>期待你在留言区记录自己的学习收获或者疑问。如果这节课对你有帮助，也推荐你分享给更多朋友，我们一起来手写迷你CPU。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

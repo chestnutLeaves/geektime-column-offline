@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>47 案例篇：服务器总是时不时丢包，我该怎么办？（上） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/index.html">Linux性能优化实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">64 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Linux性能优化实战</strong><ul><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%88%AB%E5%86%8D%E8%AE%A9Linux%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E6%88%90%E4%B8%BA%E4%BD%A0%E7%9A%84%E7%BB%8A%E8%84%9A%E7%9F%B3.html">00 开篇词 别再让Linux性能问题成为你的绊脚石</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/01%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F.html">01 如何学习Linux性能优化？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/02%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E5%88%B0%E5%BA%95%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3%E2%80%9C%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD%E2%80%9D%EF%BC%9F.html">02 基础篇：到底应该怎么理解“平均负载”？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/03%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E7%BB%8F%E5%B8%B8%E8%AF%B4%E7%9A%84%20CPU%20%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">03 基础篇：经常说的 CPU 上下文切换是什么意思？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/04%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E7%BB%8F%E5%B8%B8%E8%AF%B4%E7%9A%84%20CPU%20%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">04 基础篇：经常说的 CPU 上下文切换是什么意思？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/05%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%9F%90%E4%B8%AA%E5%BA%94%E7%94%A8%E7%9A%84CPU%E4%BD%BF%E7%94%A8%E7%8E%87%E5%B1%85%E7%84%B6%E8%BE%BE%E5%88%B0100%25%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">05 基础篇：某个应用的CPU使用率居然达到100%，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/06%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9A%84%20CPU%20%E4%BD%BF%E7%94%A8%E7%8E%87%E5%BE%88%E9%AB%98%EF%BC%8C%E4%BD%86%E4%B8%BA%E5%95%A5%E5%8D%B4%E6%89%BE%E4%B8%8D%E5%88%B0%E9%AB%98%20CPU%20%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9F.html">06 案例篇：系统的 CPU 使用率很高，但为啥却找不到高 CPU 的应用？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/07%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%87%BA%E7%8E%B0%E5%A4%A7%E9%87%8F%E4%B8%8D%E5%8F%AF%E4%B8%AD%E6%96%AD%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">07 案例篇：系统中出现大量不可中断进程和僵尸进程怎么办？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/08%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%87%BA%E7%8E%B0%E5%A4%A7%E9%87%8F%E4%B8%8D%E5%8F%AF%E4%B8%AD%E6%96%AD%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">08 案例篇：系统中出现大量不可中断进程和僵尸进程怎么办？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/09%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3Linux%E8%BD%AF%E4%B8%AD%E6%96%AD%EF%BC%9F.html">09 基础篇：怎么理解Linux软中断？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/10%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BD%AF%E4%B8%AD%E6%96%ADCPU%E4%BD%BF%E7%94%A8%E7%8E%87%E5%8D%87%E9%AB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">10 案例篇：系统的软中断CPU使用率升高，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/11%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%85%E9%80%9F%E5%88%86%E6%9E%90%E5%87%BA%E7%B3%BB%E7%BB%9FCPU%E7%9A%84%E7%93%B6%E9%A2%88%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">11 套路篇：如何迅速分析出系统CPU的瓶颈在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/12%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9ACPU%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF.html">12 套路篇：CPU 性能优化的几个思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/13%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%97%A0%E6%B3%95%E6%A8%A1%E6%8B%9F%E5%87%BA%20RES%20%E4%B8%AD%E6%96%AD%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">13 答疑（一）：无法模拟出 RES 中断的问题，怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8perf%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90Java%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">14 答疑（二）：如何用perf工具分析Java程序？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/15%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%E5%86%85%E5%AD%98%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">15 基础篇：Linux内存是怎么工作的？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/16%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84Buffer%E5%92%8CCache%EF%BC%9F.html">16 基础篇：怎么理解内存中的Buffer和Cache？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/17%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87%EF%BC%9F.html">17 案例篇：如何利用系统缓存优化程序的运行效率？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/18%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E4%BA%86%EF%BC%8C%E6%88%91%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%A4%84%E7%90%86%EF%BC%9F.html">18 案例篇：内存泄漏了，我该如何定位和处理？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/19%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%B3%BB%E7%BB%9F%E7%9A%84Swap%E5%8F%98%E9%AB%98%E4%BA%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">19 案例篇：为什么系统的Swap变高了（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/20%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%B3%BB%E7%BB%9F%E7%9A%84Swap%E5%8F%98%E9%AB%98%E4%BA%86%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">20 案例篇：为什么系统的Swap变高了？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/21%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E2%80%9C%E5%BF%AB%E5%87%86%E7%8B%A0%E2%80%9D%E6%89%BE%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F.html">21 套路篇：如何“快准狠”找到系统内存的问题？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/22%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%A3%81%E7%9B%98%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">22 答疑（三）：文件系统与磁盘的区别是什么？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/23%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">23 基础篇：Linux 文件系统是怎么工作的？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/24%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E7%A3%81%E7%9B%98I_O%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%88%E4%B8%8A%EF%BC%89.html">24 基础篇：Linux 磁盘I_O是怎么工作的（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/25%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E7%A3%81%E7%9B%98I_O%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%88%E4%B8%8B%EF%BC%89.html">25 基础篇：Linux 磁盘I_O是怎么工作的（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/26%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%BE%E5%87%BA%E7%8B%82%E6%89%93%E6%97%A5%E5%BF%97%E7%9A%84%E2%80%9C%E5%86%85%E9%AC%BC%E2%80%9D%EF%BC%9F.html">26 案例篇：如何找出狂打日志的“内鬼”？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/27%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E7%A3%81%E7%9B%98I_O%E5%BB%B6%E8%BF%9F%E5%BE%88%E9%AB%98%EF%BC%9F.html">27 案例篇：为什么我的磁盘I_O延迟很高？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/28%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%80%E4%B8%AASQL%E6%9F%A5%E8%AF%A2%E8%A6%8115%E7%A7%92%EF%BC%8C%E8%BF%99%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">28 案例篇：一个SQL查询要15秒，这是怎么回事？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/29%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9ARedis%E5%93%8D%E5%BA%94%E4%B8%A5%E9%87%8D%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F.html">29 案例篇：Redis响应严重延迟，如何解决？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/30%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%85%E9%80%9F%E5%88%86%E6%9E%90%E5%87%BA%E7%B3%BB%E7%BB%9FI_O%E7%9A%84%E7%93%B6%E9%A2%88%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">30 套路篇：如何迅速分析出系统I_O的瓶颈在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/31%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%A3%81%E7%9B%98%20I_O%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF.html">31 套路篇：磁盘 I_O 性能优化的几个思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/32%20%E7%AD%94%E7%96%91%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E9%98%BB%E5%A1%9E%E3%80%81%E9%9D%9E%E9%98%BB%E5%A1%9E%20I_O%20%E4%B8%8E%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%20I_O%20%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB.html">32 答疑（四）：阻塞、非阻塞 I_O 与同步、异步 I_O 的区别和联系</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/33%20%E5%85%B3%E4%BA%8E%20Linux%20%E7%BD%91%E7%BB%9C%EF%BC%8C%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E8%BF%99%E4%BA%9B%EF%BC%88%E4%B8%8A%EF%BC%89.html">33 关于 Linux 网络，你必须知道这些（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/34%20%E5%85%B3%E4%BA%8E%20Linux%20%E7%BD%91%E7%BB%9C%EF%BC%8C%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E8%BF%99%E4%BA%9B%EF%BC%88%E4%B8%8B%EF%BC%89.html">34 关于 Linux 网络，你必须知道这些（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/35%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9AC10K%20%E5%92%8C%20C1000K%20%E5%9B%9E%E9%A1%BE.html">35 基础篇：C10K 和 C1000K 回顾</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/36%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AF%84%E4%BC%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%EF%BC%9F.html">36 套路篇：怎么评估系统的网络性能？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/37%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9ADNS%20%E8%A7%A3%E6%9E%90%E6%97%B6%E5%BF%AB%E6%97%B6%E6%85%A2%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">37 案例篇：DNS 解析时快时慢，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/38%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%20tcpdump%20%E5%92%8C%20Wireshark%20%E5%88%86%E6%9E%90%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%EF%BC%9F.html">38 案例篇：怎么使用 tcpdump 和 Wireshark 分析网络流量？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/39%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%BC%93%E8%A7%A3%20DDoS%20%E6%94%BB%E5%87%BB%E5%B8%A6%E6%9D%A5%E7%9A%84%E6%80%A7%E8%83%BD%E4%B8%8B%E9%99%8D%E9%97%AE%E9%A2%98%EF%BC%9F.html">39 案例篇：怎么缓解 DDoS 攻击带来的性能下降问题？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/40%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%BB%B6%E8%BF%9F%E5%8F%98%E5%A4%A7%E4%BA%86%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">40 案例篇：网络请求延迟变大了，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/41%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%20NAT%20%E6%80%A7%E8%83%BD%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">41 案例篇：如何优化 NAT 性能？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/42%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%20NAT%20%E6%80%A7%E8%83%BD%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">42 案例篇：如何优化 NAT 性能？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/43%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF%EF%BC%88%E4%B8%8A%EF%BC%89.html">43 套路篇：网络性能优化的几个思路（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/44%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF%EF%BC%88%E4%B8%8B%EF%BC%89.html">44 套路篇：网络性能优化的几个思路（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/45%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%94%B6%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BD%8D%E7%BD%AE%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">45 答疑（五）：网络收发过程中，缓冲区位置在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/46%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8%E5%8C%96%E5%90%8E%EF%BC%8C%E5%90%AF%E5%8A%A8%E6%85%A2%E4%BA%86%E5%BE%88%E5%A4%9A%EF%BC%9F.html">46 案例篇：为什么应用容器化后，启动慢了很多？</a></li><li><a class="active" aria-current="page" href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/47%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%BB%E6%98%AF%E6%97%B6%E4%B8%8D%E6%97%B6%E4%B8%A2%E5%8C%85%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">47 案例篇：服务器总是时不时丢包，我该怎么办？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/48%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%BB%E6%98%AF%E6%97%B6%E4%B8%8D%E6%97%B6%E4%B8%A2%E5%8C%85%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">48 案例篇：服务器总是时不时丢包，我该怎么办？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/49%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%86%85%E6%A0%B8%E7%BA%BF%E7%A8%8B%20CPU%20%E5%88%A9%E7%94%A8%E7%8E%87%E5%A4%AA%E9%AB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">49 案例篇：内核线程 CPU 利用率太高，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/50%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%8A%A8%E6%80%81%E8%BF%BD%E8%B8%AA%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">50 案例篇：动态追踪怎么用？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/51%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%8A%A8%E6%80%81%E8%BF%BD%E8%B8%AA%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">51 案例篇：动态追踪怎么用？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/52%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%90%9E%E5%90%90%E9%87%8F%E4%B8%8B%E9%99%8D%E5%BE%88%E5%8E%89%E5%AE%B3%EF%BC%8C%E6%80%8E%E4%B9%88%E5%88%86%E6%9E%90%EF%BC%9F.html">52 案例篇：服务吞吐量下降很厉害，怎么分析？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/53%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%E7%9A%84%E7%BB%BC%E5%90%88%E6%80%9D%E8%B7%AF.html">53 套路篇：系统监控的综合思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/54%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%BA%94%E7%94%A8%E7%9B%91%E6%8E%A7%E7%9A%84%E4%B8%80%E8%88%AC%E6%80%9D%E8%B7%AF.html">54 套路篇：应用监控的一般思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/55%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%88%86%E6%9E%90%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4.html">55 套路篇：分析性能问题的一般步骤</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/56%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%96%B9%E6%B3%95.html">56 套路篇：优化性能问题的一般方法</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/57%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9ALinux%20%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7%E9%80%9F%E6%9F%A5.html">57 套路篇：Linux 性能工具速查</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/58%20%E7%AD%94%E7%96%91%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%86%B7%E5%90%AF%E5%8A%A8%E5%A6%82%E4%BD%95%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%9F.html">58 答疑（六）：容器冷启动如何性能分析？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%EF%BC%88%E4%B8%80%EF%BC%89%20%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90%EF%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%92%8CLinux%20%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html">加餐（一） 书单推荐：性能优化和Linux 系统原理</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%EF%BC%88%E4%BA%8C%EF%BC%89%20%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90%EF%BC%9A%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%92%8C%20Linux%20%E5%86%85%E6%A0%B8%E5%AE%9E%E7%8E%B0.html">加餐（二） 书单推荐：网络原理和 Linux 内核实现</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E2%80%9C%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%20%E2%80%9D%EF%BC%8C%E4%B9%9F%E8%A6%81%E9%A1%BA%E5%88%A9%E6%8B%BF%E4%B8%8B%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%81.html">用户故事 “半路出家 ”，也要顺利拿下性能优化！</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E8%BF%90%E7%BB%B4%E5%92%8C%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4%EF%BC%9F.html">用户故事 运维和开发工程师们怎么说？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%84%BF%E4%BD%A0%E6%94%BB%E5%85%8B%E6%80%A7%E8%83%BD%E9%9A%BE%E5%85%B3.html">结束语 愿你攻克性能难关</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/47%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%BB%E6%98%AF%E6%97%B6%E4%B8%8D%E6%97%B6%E4%B8%A2%E5%8C%85%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="47 案例篇：服务器总是时不时丢包，我该怎么办？（上）" id="title">47 案例篇：服务器总是时不时丢包，我该怎么办？（上）</h1>
+<div><p>你好，我是倪朋飞。</p>
+<p>上一节，我们梳理了，应用程序容器化后性能下降的分析方法。一起先简单回顾下。</p>
+<p>容器利用 Linux 内核提供的命名空间技术，将不同应用程序的运行隔离起来，并用统一的镜像，来管理应用程序的依赖环境。这为应用程序的管理和维护，带来了极大的便捷性，并进一步催生了微服务、云原生等新一代技术架构。</p>
+<p>不过，虽说有很多优势，但容器化也会对应用程序的性能带来一定影响。比如，上一节我们一起分析的 Java 应用，就容易发生启动过慢、运行一段时间后 OOM 退出等问题。当你碰到这种问题时，不要慌，我们前面四大基础模块中的各种思路，都依然适用。</p>
+<p>实际上，我们专栏中的很多案例都在容器中运行。容器化后，应用程序会通过命名空间进行隔离。所以，你在分析时，不要忘了结合命名空间、cgroups、iptables 等来综合分析。比如：</p>
+<ul>
+<li><p>cgroups 会影响容器应用的运行；</p></li>
+<li><p>iptables 中的 NAT，会影响容器的网络性能；</p></li>
+<li><p>叠加文件系统，会影响应用的 I/O 性能等。</p></li>
+</ul>
+<p>关于 NAT 的影响，我在网络模块的 <a href="https://time.geekbang.org/column/article/83189" target="_blank">如何优化NAT性能</a> 文章中，已经为你介绍了很多优化思路。今天，我们一起来看另一种情况，也就是丢包的分析方法。</p>
+<p>所谓丢包，是指在网络数据的收发过程中，由于种种原因，数据包还没传输到应用程序中，就被丢弃了。这些被丢弃包的数量，除以总的传输包数，也就是我们常说的<strong>丢包率</strong>。丢包率是网络性能中最核心的指标之一。</p>
+<p>丢包通常会带来严重的性能下降，特别是对 TCP 来说，丢包通常意味着网络拥塞和重传，进而还会导致网络延迟增大、吞吐降低。</p>
+<p>接下来，我就以最常用的反向代理服务器 Nginx 为例，带你一起看看，如何分析网络丢包的问题。由于内容比较多，这个案例将分为上下两篇来讲解，今天我们先看第一部分内容。</p>
+<h2 id="案例准备">案例准备</h2>
+<p>今天的案例需要用到两台虚拟机，还是基于 Ubuntu 18.04，同样适用于其他的 Linux 系统。我使用的案例环境如下所示：</p>
+<ul>
+<li><p>机器配置：2 CPU，8GB 内存。</p></li>
+<li><p>预先安装 docker、curl、hping3 等工具，如 apt install docker.io curl hping3。</p></li>
+</ul>
+<p>这些工具，我们在前面的案例中已经多次使用，这里就不再重复介绍。</p>
+<p>现在，打开两个终端，分别登录到这两台虚拟机中，并安装上述工具。</p>
+<p>注意，以下所有命令都默认以 root 用户运行，如果你用普通用户身份登陆系统，请运行 sudo su root 命令，切换到 root 用户。</p>
+<blockquote>
+<p>如果安装过程有问题，你可以先上网搜索解决，实在解决不了的，记得在留言区向我提问。</p>
+</blockquote>
+<p>到这里，准备工作就完成了。接下来，我们正式进入操作环节。</p>
+<h2 id="案例分析">案例分析</h2>
+<p>我们今天要分析的案例是一个 Nginx 应用，如下图所示，hping3 和 curl 是 Nginx 的客户端。</p>
+<p><img alt="" src="/assets/a9d8fd0ca5c771c311a48b7b.png"/></p>
+<p>为了方便你运行，我已经把它打包成了一个 Docker 镜像，并推送到 Docker Hub 中。你可以直接按照下面的步骤来运行它。</p>
+<p>在终端一中执行下面的命令，启动 Nginx 应用，并在80端口监听。如果一切正常，你应该可以看到如下的输出：</p>
+<pre><code>$ docker run --name nginx --hostname nginx --privileged -p 80:80 -itd feisky/nginx:drop
+dae0202cc27e5082b282a6aeeb1398fcec423c642e63322da2a97b9ebd7538e0
+</code></pre>
+<p>然后，执行 docker ps 命令，查询容器的状态，你会发现容器已经处于运行状态（Up）了：</p>
+<pre><code>$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                NAMES
+dae0202cc27e        feisky/nginx:drop   "/start.sh"         4 minutes ago       Up 4 minutes        0.0.0.0:80-&gt;80/tcp   nginx
+</code></pre>
+<p>不过，从 docker ps 的输出，我们只能知道容器处于运行状态，至于 Nginx 是否可以正常处理外部请求，还需要进一步的确认。</p>
+<p>接着，我们切换到终端二中，执行下面的 hping3 命令，进一步验证 Nginx 是不是真的可以正常访问了。注意，这里我没有使用 ping，是因为 ping 基于 ICMP 协议，而 Nginx 使用的是 TCP 协议。</p>
+<pre><code># -c表示发送10个请求，-S表示使用TCP SYN，-p指定端口为80
+$ hping3 -c 10 -S -p 80 192.168.0.30
+HPING 192.168.0.30 (eth0 192.168.0.30): S set, 40 headers + 0 data bytes
+len=44 ip=192.168.0.30 ttl=63 DF id=0 sport=80 flags=SA seq=3 win=5120 rtt=7.5 ms
+len=44 ip=192.168.0.30 ttl=63 DF id=0 sport=80 flags=SA seq=4 win=5120 rtt=7.4 ms
+len=44 ip=192.168.0.30 ttl=63 DF id=0 sport=80 flags=SA seq=5 win=5120 rtt=3.3 ms
+len=44 ip=192.168.0.30 ttl=63 DF id=0 sport=80 flags=SA seq=7 win=5120 rtt=3.0 ms
+len=44 ip=192.168.0.30 ttl=63 DF id=0 sport=80 flags=SA seq=6 win=5120 rtt=3027.2 ms
+
+--- 192.168.0.30 hping statistic ---
+10 packets transmitted, 5 packets received, 50% packet loss
+round-trip min/avg/max = 3.0/609.7/3027.2 ms
+</code></pre>
+<p>从 hping3 的输出中，我们可以发现，发送了 10 个请求包，却只收到了 5 个回复，50% 的包都丢了。再观察每个请求的 RTT 可以发现，RTT 也有非常大的波动变化，小的时候只有 3ms，而大的时候则有 3s。</p>
+<p>根据这些输出，我们基本能判断，已经发生了丢包现象。可以猜测，3s 的 RTT ，很可能是因为丢包后重传导致的。那到底是哪里发生了丢包呢？</p>
+<p>排查之前，我们可以回忆一下 Linux 的网络收发流程，先从理论上分析，哪里有可能会发生丢包。你不妨拿出手边的笔和纸，边回忆边在纸上梳理，思考清楚再继续下面的内容。</p>
+<p>在这里，为了帮你理解网络丢包的原理，我画了一张图，你可以保存并打印出来使用：</p>
+<p><img alt="" src="/assets/a21b46cbf6447097f67c8742.png"/></p>
+<p>从图中你可以看出，可能发生丢包的位置，实际上贯穿了整个网络协议栈。换句话说，全程都有丢包的可能。比如我们从下往上看：</p>
+<ul>
+<li><p>在两台 VM 连接之间，可能会发生传输失败的错误，比如网络拥塞、线路错误等；</p></li>
+<li><p>在网卡收包后，环形缓冲区可能会因为溢出而丢包；</p></li>
+<li><p>在链路层，可能会因为网络帧校验失败、QoS 等而丢包；</p></li>
+<li><p>在 IP 层，可能会因为路由失败、组包大小超过 MTU 等而丢包；</p></li>
+<li><p>在传输层，可能会因为端口未监听、资源占用超过内核限制等而丢包；</p></li>
+<li><p>在套接字层，可能会因为套接字缓冲区溢出而丢包；</p></li>
+<li><p>在应用层，可能会因为应用程序异常而丢包；</p></li>
+<li><p>此外，如果配置了 iptables 规则，这些网络包也可能因为 iptables 过滤规则而丢包。</p></li>
+</ul>
+<p>当然，上面这些问题，还有可能同时发生在通信的两台机器中。不过，由于我们没对 VM2 做任何修改，并且 VM2 也只运行了一个最简单的 hping3 命令，这儿不妨假设它是没有问题的。</p>
+<p>为了简化整个排查过程，我们还可以进一步假设， VM1 的网络和内核配置也没问题。这样一来，有可能发生问题的位置，就都在容器内部了。</p>
+<p>现在我们切换回终端一，执行下面的命令，进入容器的终端中：</p>
+<pre><code>$ docker exec -it nginx bash
+root@nginx:/#
+</code></pre>
+<p>在这里简单说明一下，接下来的所有分析，前面带有 <em>root@nginx:/#</em> 的操作，都表示在容器中进行。</p>
+<blockquote>
+<p>注意：实际环境中，容器内部和外部都有可能发生问题。不过不要担心，容器内、外部的分析步骤和思路都是一样的，只不过要花更多的时间而已。</p>
+</blockquote>
+<p>那么， 接下来，我们就可以从协议栈中，逐层排查丢包问题。</p>
+<h3 id="链路层">链路层</h3>
+<p>首先，来看最底下的链路层。当缓冲区溢出等原因导致网卡丢包时，Linux 会在网卡收发数据的统计信息中，记录下收发错误的次数。</p>
+<p>你可以通过 ethtool 或者 netstat ，来查看网卡的丢包记录。比如，可以在容器中执行下面的命令，查看丢包情况：</p>
+<pre><code>root@nginx:/# netstat -i
+Kernel Interface table
+Iface      MTU    RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+eth0       100       31      0      0 0             8      0      0      0 BMRU
+lo       65536        0      0      0 0             0      0      0      0 LRU
+</code></pre>
+<p>输出中的 RX-OK、RX-ERR、RX-DRP、RX-OVR ，分别表示接收时的总包数、总错误数、进入Ring Buffer 后因其他原因（如内存不足）导致的丢包数以及 Ring Buffer 溢出导致的丢包数。</p>
+<p>TX-OK、TX-ERR、TX-DRP、TX-OVR 也代表类似的含义，只不过是指发送时对应的各个指标。</p>
+<blockquote>
+<p>注意，由于 Docker 容器的虚拟网卡，实际上是一对 veth pair，一端接入容器中用作 eth0，另一端在主机中接入 docker0 网桥中。veth 驱动并没有实现网络统计的功能，所以使用 ethtool -S 命令，无法得到网卡收发数据的汇总信息。</p>
+</blockquote>
+<p>从这个输出中，我们没有发现任何错误，说明容器的虚拟网卡没有丢包。不过要注意，如果用 tc 等工具配置了 QoS，那么 tc 规则导致的丢包，就不会包含在网卡的统计信息中。</p>
+<p>所以接下来，我们还要检查一下 eth0 上是否配置了 tc 规则，并查看有没有丢包。我们继续容器终端中，执行下面的 tc 命令，不过这次注意添加 -s 选项，以输出统计信息：</p>
+<pre><code>root@nginx:/# tc -s qdisc show dev eth0
+qdisc netem 800d: root refcnt 2 limit 1000 loss 30%
+ Sent 432 bytes 8 pkt (dropped 4, overlimits 0 requeues 0)
+ backlog 0b 0p requeues 0
+</code></pre>
+<p>从 tc 的输出中可以看到， eth0 上面配置了一个网络模拟排队规则（qdisc netem），并且配置了丢包率为 30%（loss 30%）。再看后面的统计信息，发送了 8 个包，但是丢了 4 个。</p>
+<p>看来，应该就是这里，导致 Nginx 回复的响应包，被 netem 模块给丢了。</p>
+<p>既然发现了问题，解决方法也就很简单了，直接删掉 netem 模块就可以了。我们可以继续在容器终端中，执行下面的命令，删除 tc 中的 netem 模块：</p>
+<pre><code>root@nginx:/# tc qdisc del dev eth0 root netem loss 30%
+</code></pre>
+<p>删除后，问题到底解决了没？我们切换到终端二中，重新执行刚才的 hping3 命令，看看现在还有没有问题：</p>
+<pre><code>$ hping3 -c 10 -S -p 80 192.168.0.30
+HPING 192.168.0.30 (eth0 192.168.0.30): S set, 40 headers + 0 data bytes
+len=44 ip=192.168.0.30 ttl=63 DF id=0 sport=80 flags=SA seq=0 win=5120 rtt=7.9 ms
+len=44 ip=192.168.0.30 ttl=63 DF id=0 sport=80 flags=SA seq=2 win=5120 rtt=1003.8 ms
+len=44 ip=192.168.0.30 ttl=63 DF id=0 sport=80 flags=SA seq=5 win=5120 rtt=7.6 ms
+len=44 ip=192.168.0.30 ttl=63 DF id=0 sport=80 flags=SA seq=6 win=5120 rtt=7.4 ms
+len=44 ip=192.168.0.30 ttl=63 DF id=0 sport=80 flags=SA seq=9 win=5120 rtt=3.0 ms
+
+--- 192.168.0.30 hping statistic ---
+10 packets transmitted, 5 packets received, 50% packet loss
+round-trip min/avg/max = 3.0/205.9/1003.8 ms
+</code></pre>
+<p>不幸的是，从 hping3 的输出中，我们可以看到，跟前面现象一样，还是 50% 的丢包；RTT 的波动也仍旧很大，从 3ms 到 1s。</p>
+<p>显然，问题还是没解决，丢包还在继续发生。不过，既然链路层已经排查完了，我们就继续向上层分析，看看网络层和传输层有没有问题。</p>
+<h3 id="网络层和传输层">网络层和传输层</h3>
+<p>我们知道，在网络层和传输层中，引发丢包的因素非常多。不过，其实想确认是否丢包，是非常简单的事，因为 Linux 已经为我们提供了各个协议的收发汇总情况。</p>
+<p>我们继续在容器终端中，执行下面的 netstat -s 命令，就可以看到协议的收发汇总，以及错误信息了：</p>
+<pre><code>root@nginx:/# netstat -s
+Ip:
+    Forwarding: 1					//开启转发
+    31 total packets received		//总收包数
+    0 forwarded						//转发包数
+    0 incoming packets discarded	//接收丢包数
+    25 incoming packets delivered	//接收的数据包数
+    15 requests sent out			//发出的数据包数
+Icmp:
+    0 ICMP messages received		//收到的ICMP包数
+    0 input ICMP message failed		//收到ICMP失败数
+    ICMP input histogram:
+    0 ICMP messages sent			//ICMP发送数
+    0 ICMP messages failed			//ICMP失败数
+    ICMP output histogram:
+Tcp:
+    0 active connection openings	//主动连接数
+    0 passive connection openings	//被动连接数
+    11 failed connection attempts	//失败连接尝试数
+    0 connection resets received	//接收的连接重置数
+    0 connections established		//建立连接数
+    25 segments received			//已接收报文数
+    21 segments sent out			//已发送报文数
+    4 segments retransmitted		//重传报文数
+    0 bad segments received			//错误报文数
+    0 resets sent					//发出的连接重置数
+Udp:
+    0 packets received
+    ...
+TcpExt:
+    11 resets received for embryonic SYN_RECV sockets	//半连接重置数
+    0 packet headers predicted
+    TCPTimeouts: 7		//超时数
+    TCPSynRetrans: 4	//SYN重传数
+	...
+</code></pre>
+<p>netstat 汇总了 IP、ICMP、TCP、UDP 等各种协议的收发统计信息。不过，我们的目的是排查丢包问题，所以这里主要观察的是错误数、丢包数以及重传数。</p>
+<p>根据上面的输出，你可以看到，只有 TCP 协议发生了丢包和重传，分别是：</p>
+<ul>
+<li><p>11 次连接失败重试（11 failed connection attempts）</p></li>
+<li><p>4 次重传（4 segments retransmitted）</p></li>
+<li><p>11 次半连接重置（11 resets received for embryonic SYN_RECV sockets）</p></li>
+<li><p>4 次 SYN 重传（TCPSynRetrans）</p></li>
+<li><p>7 次超时（TCPTimeouts）</p></li>
+</ul>
+<p>这个结果告诉我们，TCP 协议有多次超时和失败重试，并且主要错误是半连接重置。换句话说，主要的失败，都是三次握手失败。</p>
+<p>不过，虽然在这儿看到了这么多失败，但具体失败的根源还是无法确定。所以，我们还需要继续顺着协议栈来分析。接下来的几层又该如何分析呢？你不妨自己先来思考操作一下，下一节我们继续来一起探讨。</p>
+<h2 id="小结">小结</h2>
+<p>网络丢包，通常会带来严重的性能下降，特别是对 TCP 来说，丢包通常意味着网络拥塞和重传，进一步还会导致网络延迟增大、吞吐降低。</p>
+<p>今天的这个案例，我们学会了如何从链路层、网络层和传输层等入手，分析网络丢包的问题。不过，案例最后，我们还没有找出最终的性能瓶颈，下一节，我将继续为你讲解。</p>
+<h2 id="思考">思考</h2>
+<p>最后，给你留一个思考题，也是案例最后提到的问题。</p>
+<p>今天我们只分析了链路层、网络层以及传输层等。而根据 TCP/IP 协议栈和 Linux 网络收发原理，还有很多我们没分析到的地方。那么，接下来，我们又该如何分析，才能破获这个案例，找出“真凶”呢？</p>
+<p>欢迎在留言区和我讨论，也欢迎把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

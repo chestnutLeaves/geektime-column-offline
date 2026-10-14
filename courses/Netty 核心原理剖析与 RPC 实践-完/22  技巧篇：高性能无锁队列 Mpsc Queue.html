@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>22  技巧篇：高性能无锁队列 Mpsc Queue · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/index.html">Netty 核心原理剖析与 RPC 实践-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">32 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Netty 核心原理剖析与 RPC 实践-完</strong><ul><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/00%20%E5%AD%A6%E5%A5%BD%20Netty%EF%BC%8C%E6%98%AF%E4%BD%A0%E4%BF%AE%E7%82%BC%20Java%20%E5%86%85%E5%8A%9F%E7%9A%84%E5%BF%85%E7%BB%8F%E4%B9%8B%E8%B7%AF.html">00 学好 Netty，是你修炼 Java 内功的必经之路</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/01%20%20%E5%88%9D%E8%AF%86%20Netty%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%20Netty%20%E8%BF%99%E4%B9%88%E6%B5%81%E8%A1%8C%EF%BC%9F.html">01  初识 Netty：为什么 Netty 这么流行？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/02%20%20%E7%BA%B5%E8%A7%88%E5%85%A8%E5%B1%80%EF%BC%9A%E6%8A%8A%E6%8F%A1%20Netty%20%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%84%89%E7%BB%9C.html">02  纵览全局：把握 Netty 整体架构脉络</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/03%20%20%E5%BC%95%E5%AF%BC%E5%99%A8%E4%BD%9C%E7%94%A8%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%90%AF%E5%8A%A8%E9%83%BD%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">03  引导器作用：客户端和服务端启动都要做些什么？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/04%20%E4%BA%8B%E4%BB%B6%E8%B0%83%E5%BA%A6%E5%B1%82%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%20EventLoop%20%E6%98%AF%20Netty%20%E7%9A%84%E7%B2%BE%E9%AB%93%EF%BC%9F.html">04 事件调度层：为什么 EventLoop 是 Netty 的精髓？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/05%20%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%B1%82%EF%BC%9APipeline%20%E5%A6%82%E4%BD%95%E5%8D%8F%E8%B0%83%E5%90%84%E7%B1%BB%20Handler%20%EF%BC%9F.html">05  服务编排层：Pipeline 如何协调各类 Handler ？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/06%20%20%E7%B2%98%E5%8C%85%E6%8B%86%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8C%85%EF%BC%9F.html">06  粘包拆包问题：如何获取一个完整的网络包？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/07%20%20%E6%8E%A5%E5%A4%B4%E6%9A%97%E8%AF%AD%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20Netty%20%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8D%8F%E8%AE%AE%E9%80%9A%E4%BF%A1%EF%BC%9F.html">07  接头暗语：如何利用 Netty 实现自定义协议通信？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/08%20%20%E5%BC%80%E7%AE%B1%E5%8D%B3%E7%94%A8%EF%BC%9ANetty%20%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E8%A7%A3%E7%A0%81%E5%99%A8%EF%BC%9F.html">08  开箱即用：Netty 支持哪些常用的解码器？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/09%20%20%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9AwriteAndFlush%20%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%E5%89%96%E6%9E%90.html">09  数据传输：writeAndFlush 处理流程剖析</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/10%20%20%E5%8F%8C%E5%88%83%E5%89%91%EF%BC%9A%E5%90%88%E7%90%86%E7%AE%A1%E7%90%86%20Netty%20%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98.html">10  双刃剑：合理管理 Netty 堆外内存</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/11%20%20%E5%8F%A6%E8%B5%B7%E7%82%89%E7%81%B6%EF%BC%9ANetty%20%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E8%BD%BD%E4%BD%93%20ByteBuf%20%E8%AF%A6%E8%A7%A3.html">11  另起炉灶：Netty 数据传输载体 ByteBuf 详解</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/12%20%20%E4%BB%96%E5%B1%B1%E4%B9%8B%E7%9F%B3%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%99%A8%20jemalloc%20%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86.html">12  他山之石：高性能内存分配器 jemalloc 基本原理</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/13%20%20%E4%B8%BE%E4%B8%80%E5%8F%8D%E4%B8%89%EF%BC%9ANetty%20%E9%AB%98%E6%80%A7%E8%83%BD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89.html">13  举一反三：Netty 高性能内存管理设计（上）</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/14%20%20%E4%B8%BE%E4%B8%80%E5%8F%8D%E4%B8%89%EF%BC%9ANetty%20%E9%AB%98%E6%80%A7%E8%83%BD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89.html">14  举一反三：Netty 高性能内存管理设计（下）</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/15%20%20%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%AF%B9%E8%B1%A1%E5%9B%9E%E6%94%B6%E7%AB%99%EF%BC%9ARecycler%20%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90.html">15  轻量级对象回收站：Recycler 对象池技术解析</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/16%20%20IO%20%E5%8A%A0%E9%80%9F%EF%BC%9A%E4%B8%8E%E4%BC%97%E4%B8%8D%E5%90%8C%E7%9A%84%20Netty%20%E9%9B%B6%E6%8B%B7%E8%B4%9D%E6%8A%80%E6%9C%AF.html">16  IO 加速：与众不同的 Netty 零拷贝技术</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/17%20%20%E6%BA%90%E7%A0%81%E7%AF%87%EF%BC%9A%E4%BB%8E%20Linux%20%E5%87%BA%E5%8F%91%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.html">17  源码篇：从 Linux 出发深入剖析服务端启动流程</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/18%20%20%E6%BA%90%E7%A0%81%E7%AF%87%EF%BC%9A%E8%A7%A3%E5%AF%86%20Netty%20Reactor%20%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.html">18  源码篇：解密 Netty Reactor 线程模型</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/19%20%20%E6%BA%90%E7%A0%81%E7%AF%87%EF%BC%9A%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9C%A8%20Netty%20%E4%B8%AD%E7%9A%84%E6%97%85%E7%A8%8B.html">19  源码篇：一个网络请求在 Netty 中的旅程</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/20%20%20%E6%8A%80%E5%B7%A7%E7%AF%87%EF%BC%9ANetty%20%E7%9A%84%20FastThreadLocal%20%E7%A9%B6%E7%AB%9F%E6%AF%94%20ThreadLocal%20%E5%BF%AB%E5%9C%A8%E5%93%AA%E5%84%BF%EF%BC%9F.html">20  技巧篇：Netty 的 FastThreadLocal 究竟比 ThreadLocal 快在哪儿？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/21%20%20%E6%8A%80%E5%B7%A7%E7%AF%87%EF%BC%9A%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86%E7%A5%9E%E5%99%A8%E4%B9%8B%E6%97%B6%E9%97%B4%E8%BD%AE%20HashedWheelTimer.html">21  技巧篇：延迟任务处理神器之时间轮 HashedWheelTimer</a></li><li><a class="active" aria-current="page" href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/22%20%20%E6%8A%80%E5%B7%A7%E7%AF%87%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E6%97%A0%E9%94%81%E9%98%9F%E5%88%97%20Mpsc%20Queue.html">22  技巧篇：高性能无锁队列 Mpsc Queue</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/23%20%20%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E9%AB%98%E6%80%A7%E8%83%BD%E5%88%86%E5%B8%83%E5%BC%8F%20RPC%20%E6%A1%86%E6%9E%B6.html">23  架构设计：如何实现一个高性能分布式 RPC 框架</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/24%20%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E4%B8%8E%E8%AE%A2%E9%98%85%EF%BC%9A%E6%90%AD%E5%BB%BA%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E6%B6%88%E8%B4%B9%E8%80%85%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6.html">24  服务发布与订阅：搭建生产者和消费者的基础框架</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/25%20%20%E8%BF%9C%E7%A8%8B%E9%80%9A%E4%BF%A1%EF%BC%9A%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1%E4%BB%A5%E5%8F%8A%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9A%84%E5%AE%9E%E7%8E%B0.html">25  远程通信：通信协议设计以及编解码的实现</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/26%20%20%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9C%BA%E5%88%B6%E7%9A%84%E5%AE%9E%E7%8E%B0.html">26  服务治理：服务发现与负载均衡机制的实现</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/27%20%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%EF%BC%9A%E4%B8%BA%E7%94%A8%E6%88%B7%E5%B1%8F%E8%94%BD%20RPC%20%E8%B0%83%E7%94%A8%E7%9A%84%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82.html">27  动态代理：为用户屏蔽 RPC 调用的底层细节</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/28%20%20%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93%EF%BC%9ARPC%20%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93%E4%B8%8E%E8%BF%9B%E9%98%B6%E5%BB%B6%E4%BC%B8.html">28  实战总结：RPC 实战总结与进阶延伸</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/29%20%20%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9ANetty%20%E4%B8%AD%E5%BA%94%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">29  编程思想：Netty 中应用了哪些设计模式？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/30%20%20%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93%EF%BC%9ANetty%20%E5%9C%A8%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.html">30  实践总结：Netty 在项目开发中的一些最佳实践</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/31%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E6%8A%80%E6%9C%AF%E6%88%90%E9%95%BF%E4%B9%8B%E8%B7%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB.html">31 结束语  技术成长之路：如何打造自己的技术体系</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/22%20%20%E6%8A%80%E5%B7%A7%E7%AF%87%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E6%97%A0%E9%94%81%E9%98%9F%E5%88%97%20Mpsc%20Queue.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="22  技巧篇：高性能无锁队列 Mpsc Queue" id="title">22  技巧篇：高性能无锁队列 Mpsc Queue</h1>
+<div><p>在前面的源码课程中，NioEventLoop 线程以及时间轮 HashedWheelTimer 的任务队列中都出现了 Mpsc Queue 的身影。这又是 Netty 使用的什么 “黑科技” 呢？为什么不使用 JDK 原生的队列呢？Mpsc Queue 应该在什么场景下使用呢？今天这节课就让我们一起再来长长知识吧！</p>
+<h3 id="jdk-原生并发队列">JDK 原生并发队列</h3>
+<p>在介绍 Mpsc Queue 之前，我们先回顾下 JDK 原生队列的工作原理。JDK 并发队列按照实现方式可以分为阻塞队列和非阻塞队列两种类型，阻塞队列是基于锁实现的，非阻塞队列是基于 CAS 操作实现的。JDK 中包含多种阻塞和非阻塞的队列实现，如下图所示。</p>
+<p><img alt="图片1.png" src="/assets/8e64fd69ecae1aff07bb2b18.png"/></p>
+<p>队列是一种 FIFO（先进先出）的数据结构，JDK 中定义了 java.util.Queue 的队列接口，与 List、Set 接口类似，java.util.Queue 也继承于 Collection 集合接口。此外，JDK 还提供了一种双端队列接口 java.util.Deque，我们最常用的 LinkedList 就是实现了 Deque 接口。下面我们简单说说上图中的每个队列的特点，并给出一些对比和总结。</p>
+<h4 id="阻塞队列">阻塞队列</h4>
+<p>阻塞队列在队列为空或者队列满时，都会发生阻塞。阻塞队列自身是线程安全的，使用者无需关心线程安全问题，降低了多线程开发难度。阻塞队列主要分为以下几种：</p>
+<ul>
+<li><strong>ArrayBlockingQueue</strong>：最基础且开发中最常用的阻塞队列，底层采用数组实现的有界队列，初始化需要指定队列的容量。ArrayBlockingQueue 是如何保证线程安全的呢？它内部是使用了一个重入锁 ReentrantLock，并搭配 notEmpty、notFull 两个条件变量 Condition 来控制并发访问。从队列读取数据时，如果队列为空，那么会阻塞等待，直到队列有数据了才会被唤醒。如果队列已经满了，也同样会进入阻塞状态，直到队列有空闲才会被唤醒。</li>
+<li><strong>LinkedBlockingQueue</strong>：内部采用的数据结构是链表，队列的长度可以是有界或者无界的，初始化不需要指定队列长度，默认是 Integer.MAX_VALUE。LinkedBlockingQueue 内部使用了 takeLock、putLock两个重入锁 ReentrantLock，以及 notEmpty、notFull 两个条件变量 Condition 来控制并发访问。采用读锁和写锁的好处是可以避免读写时相互竞争锁的现象，所以相比于 ArrayBlockingQueue，LinkedBlockingQueue 的性能要更好。</li>
+<li><strong>PriorityBlockingQueue</strong>：采用最小堆实现的优先级队列，队列中的元素按照优先级进行排列，每次出队都是返回优先级最高的元素。PriorityBlockingQueue 内部是使用了一个 ReentrantLock 以及一个条件变量 Condition notEmpty 来控制并发访问，不需要 notFull 是因为 PriorityBlockingQueue 是无界队列，所以每次 put 都不会发生阻塞。PriorityBlockingQueue 底层的最小堆是采用数组实现的，当元素个数大于等于最大容量时会触发扩容，在扩容时会先释放锁，保证其他元素可以正常出队，然后使用 CAS 操作确保只有一个线程可以执行扩容逻辑。</li>
+<li><strong>DelayQueue</strong>，一种支持延迟获取元素的阻塞队列，常用于缓存、定时任务调度等场景。DelayQueue 内部是采用优先级队列 PriorityQueue 存储对象。DelayQueue 中的每个对象都必须实现 Delayed 接口，并重写 compareTo 和 getDelay 方法。向队列中存放元素的时候必须指定延迟时间，只有延迟时间已满的元素才能从队列中取出。</li>
+<li><strong>SynchronizedQueue</strong>，又称无缓冲队列。比较特别的是 SynchronizedQueue 内部不会存储元素。与 ArrayBlockingQueue、LinkedBlockingQueue 不同，SynchronizedQueue 直接使用 CAS 操作控制线程的安全访问。其中 put 和 take 操作都是阻塞的，每一个 put 操作都必须阻塞等待一个 take 操作，反之亦然。所以 SynchronizedQueue 可以理解为生产者和消费者配对的场景，双方必须互相等待，直至配对成功。在 JDK 的线程池 Executors.newCachedThreadPool 中就存在 SynchronousQueue 的运用，对于新提交的任务，如果有空闲线程，将重复利用空闲线程处理任务，否则将新建线程进行处理。</li>
+<li><strong>LinkedTransferQueue</strong>，一种特殊的无界阻塞队列，可以看作 LinkedBlockingQueues、SynchronousQueue（公平模式）、ConcurrentLinkedQueue 的合体。与 SynchronousQueue 不同的是，LinkedTransferQueue 内部可以存储实际的数据，当执行 put 操作时，如果有等待线程，那么直接将数据交给对方，否则放入队列中。与 LinkedBlockingQueues 相比，LinkedTransferQueue 使用 CAS 无锁操作进一步提升了性能。</li>
+</ul>
+<h4 id="非阻塞队列">非阻塞队列</h4>
+<p>说完阻塞队列，我们再来看下非阻塞队列。非阻塞队列不需要通过加锁的方式对线程阻塞，并发性能更好。JDK 中常用的非阻塞队列有以下几种：</p>
+<ul>
+<li><strong>ConcurrentLinkedQueue</strong>，它是一个采用双向链表实现的无界并发非阻塞队列，它属于 LinkedQueue 的安全版本。ConcurrentLinkedQueue 内部采用 CAS 操作保证线程安全，这是非阻塞队列实现的基础，相比 ArrayBlockingQueue、LinkedBlockingQueue 具备较高的性能。</li>
+<li><strong>ConcurrentLinkedDeque</strong>，也是一种采用双向链表结构的无界并发非阻塞队列。与 ConcurrentLinkedQueue 不同的是，ConcurrentLinkedDeque 属于双端队列，它同时支持 FIFO 和 FILO 两种模式，可以从队列的头部插入和删除数据，也可以从队列尾部插入和删除数据，适用于多生产者和多消费者的场景。</li>
+</ul>
+<p>至此，常见的队列类型我们已经介绍完了。我们在平时开发中使用频率最高的是 BlockingQueue。实现一个阻塞队列需要具备哪些基本功能呢？下面看 BlockingQueue 的接口，如下图所示。</p>
+<p><img alt="图片2.png" src="/assets/fd0bd2bd90082196324b2924.png"/></p>
+<p>我们可以通过下面一张表格，对上述 BlockingQueue 接口的具体行为进行归类。</p>
+<p><img alt="图片3.png" src="/assets/4f72f1ad1378b79855e33dce.png"/></p>
+<p>JDK 提供的并发队列已经能够满足我们大部分的需求，但是在大规模流量的高并发系统中，如果你对性能要求严苛，JDK 的非阻塞并发队列可选择面较少且性能并不够出色。如果你还是需要一个数组 + CAS 操作实现的无锁安全队列，有没有成熟的解决方案呢？Java 强大的生态总能给我们带来惊喜，一些第三方框架提供的高性能无锁队列已经可以满足我们的需求，其中非常出名的有 Disruptor 和 JCTools。</p>
+<p>Disruptor 是 LMAX 公司开发的一款高性能无锁队列，我们平时常称它为 RingBuffer，其设计初衷是为了解决内存队列的延迟问题。Disruptor 内部采用环形数组和 CAS 操作实现，性能非常优越。为什么 Disruptor 的性能会比 JDK 原生的无锁队列要好呢？环形数组可以复用内存，减少分配内存和释放内存带来的性能损耗。而且数组可以设置长度为 2 的次幂，直接通过位运算加快数组下标的定位速度。此外，Disruptor 还解决了伪共享问题，对 CPU Cache 更加友好。Disruptor 已经开源，详细可查阅 Github 地址 <a href="https://github.com/LMAX-Exchange/disruptor" target="_blank">https://github.com/LMAX-Exchange/disruptor</a>。</p>
+<p>JCTools 也是一个开源项目，Github 地址为 <a href="https://github.com/JCTools/JCTools" target="_blank">https://github.com/JCTools/JCTools</a>。JCTools 是适用于 JVM 并发开发的工具，主要提供了一些 JDK 确实的并发数据结构，例如非阻塞 Map、非阻塞 Queue 等。其中非阻塞队列可以分为四种类型，可以根据不同的场景选择使用。</p>
+<ul>
+<li>Spsc 单生产者单消费者；</li>
+<li>Mpsc 多生产者单消费者；</li>
+<li>Spmc 单生产者多消费者；</li>
+<li>Mpmc 多生产者多消费者。</li>
+</ul>
+<p>Netty 中直接引入了 JCTools 的 Mpsc Queue，相比于 JDK 原生的并发队列，Mpsc Queue 又有什么过人之处呢？接下来便开始我们今天要讨论的重点。</p>
+<h3 id="mpsc-queue-基础知识">Mpsc Queue 基础知识</h3>
+<p>Mpsc 的全称是 Multi Producer Single Consumer，多生产者单消费者。Mpsc Queue 可以保证多个生产者同时访问队列是线程安全的，而且同一时刻只允许一个消费者从队列中读取数据。Netty Reactor 线程中任务队列 taskQueue 必须满足多个生产者可以同时提交任务，所以 JCTools 提供的 Mpsc Queue 非常适合 Netty Reactor 线程模型。</p>
+<p>Mpsc Queue 有多种的实现类，例如 MpscArrayQueue、MpscUnboundedArrayQueue、MpscChunkedArrayQueue 等。我们先抛开一些提供特性功能的队列，聚焦在最基础的 MpscArrayQueue，回过头再学习其他类型的队列会事半功倍。</p>
+<p>首先我们看下 MpscArrayQueue 的继承关系，会发现相当复杂，如下图所示。</p>
+<p><img alt="图片4.png" src="/assets/640ebdef1c9e2942f3dd6430.png"/></p>
+<p>除了顶层 JDK 原生的 AbstractCollection、AbstractQueue，MpscArrayQueue 还继承了很多类似于 MpscXxxPad 以及 MpscXxxField 的类。我们可以发现一个很有意思的规律，每个有包含属性的类后面都会被 MpscXxxPad 类隔开。MpscXxxPad 到底起到什么作用呢？我们自顶向下，将所有类的字段合并在一起，看下 MpscArrayQueue 的整体结构。</p>
+<pre><code>// ConcurrentCircularArrayQueueL0Pad
+
+long p01, p02, p03, p04, p05, p06, p07;
+
+long p10, p11, p12, p13, p14, p15, p16, p17;
+
+// ConcurrentCircularArrayQueue
+
+protected final long mask;
+
+protected final E[] buffer;
+
+// MpmcArrayQueueL1Pad
+
+long p00, p01, p02, p03, p04, p05, p06, p07;
+
+long p10, p11, p12, p13, p14, p15, p16;
+
+// MpmcArrayQueueProducerIndexField
+
+private volatile long producerIndex;
+
+// MpscArrayQueueMidPad
+
+long p01, p02, p03, p04, p05, p06, p07;
+
+long p10, p11, p12, p13, p14, p15, p16, p17;
+
+// MpscArrayQueueProducerLimitField
+
+private volatile long producerLimit;
+
+// MpscArrayQueueL2Pad
+
+long p00, p01, p02, p03, p04, p05, p06, p07;
+
+long p10, p11, p12, p13, p14, p15, p16;
+
+// MpscArrayQueueConsumerIndexField
+
+protected long consumerIndex;
+
+// MpscArrayQueueL3Pad
+
+long p01, p02, p03, p04, p05, p06, p07;
+
+long p10, p11, p12, p13, p14, p15, p16, p17;
+</code></pre>
+<p>可以看出，MpscXxxPad 类中使用了大量 long 类型的变量，其命名没有什么特殊的含义，只是起到填充的作用。如果你也读过 Disruptor 的源码，会发现 Disruptor 也使用了类似的填充方法。Mpsc Queue 和 Disruptor 之所以填充这些无意义的变量，是为了解决伪共享（false sharing）问题。</p>
+<p>什么是伪共享呢？我们有必要补充这方面的基础知识。在计算机组成中，CPU 的运算速度比内存高出几个数量级，为了 CPU 能够更高效地与内存进行交互，在 CPU 和内存之间设计了多层缓存机制，如下图所示。</p>
+<p><img alt="Drawing 3.png" src="/assets/b558510d697480d44ab71555.png"/></p>
+<p>一般来说，CPU 会分为三级缓存，分别为<strong>L1 一级缓存</strong>、<strong>L2 二级缓存</strong>和<strong>L3 三级缓存</strong>。越靠近 CPU 的缓存，速度越快，但是缓存的容量也越小。所以从性能上来说，L1 &gt; L2 &gt; L3，容量方面 L1 &lt; L2 &lt; L3。CPU 读取数据时，首先会从 L1 查找，如果未命中则继续查找 L2，如果还未能命中则继续查找 L3，最后还没命中的话只能从内存中查找，读取完成后再将数据逐级放入缓存中。此外，多线程之间共享一份数据的时候，需要其中一个线程将数据写回主存，其他线程访问主存数据。</p>
+<p>由此可见，引入多级缓存是为了能够让 CPU 利用率最大化。如果你在做频繁的 CPU 运算时，需要尽可能将数据保持在缓存中。那么 CPU 从内存中加载数据的时候，是如何提高缓存的利用率的呢？这就涉及缓存行（Cache Line）的概念，Cache Line 是 CPU 缓存可操作的最小单位，CPU 缓存由若干个 Cache Line 组成。Cache Line 的大小与 CPU 架构有关，在目前主流的 64 位架构下，Cache Line 的大小通常为 64 Byte。Java 中一个 long 类型是 8 Byte，所以一个 Cache Line 可以存储 8 个 long 类型变量。CPU 在加载内存数据时，会将相邻的数据一同读取到 Cache Line 中，因为相邻的数据未来被访问的可能性最大，这样就可以避免 CPU 频繁与内存进行交互了。</p>
+<p>伪共享问题是如何发生的呢？它又会造成什么影响呢？我们使用下面这幅图进行讲解。
+<img alt="Drawing 4.png" src="/assets/7402c1aa217e7921b9727375.png"/></p>
+<p>假设变量 A、B、C、D 被加载到同一个 Cache Line，它们会被高频地修改。当线程 1 在 CPU Core1 中中对变量 A 进行修改，修改完成后 CPU Core1 会通知其他 CPU Core 该缓存行已经失效。然后线程 2 在 CPU Core2 中对变量 C 进行修改时，发现 Cache line 已经失效，此时 CPU Core1 会将数据重新写回内存，CPU Core2 再从内存中读取数据加载到当前 Cache line 中。</p>
+<p>由此可见，如果同一个 Cache line 被越多的线程修改，那么造成的写竞争就会越激烈，数据会频繁写入内存，导致性能浪费。题外话，多核处理器中，每个核的缓存行内容是如何保证一致的呢？有兴趣的同学可以深入学习下缓存一致性协议 MESI，具体可以参考 <a href="https://zh.wikipedia.org/wiki/MESI协议" target="_blank">https://zh.wikipedia.org/wiki/MESI%E5%8D%8F%E8%AE%AE</a>。</p>
+<p>对于伪共享问题，我们应该如何解决呢？Disruptor 和 Mpsc Queue 都采取了空间换时间的策略，让不同线程共享的对象加载到不同的缓存行即可。下面我们通过一个简单的例子进行说明。</p>
+<pre><code>public class FalseSharingPadding {
+
+    protected long p1, p2, p3, p4, p5, p6, p7;
+
+    protected volatile long value = 0L;
+
+    protected long p9, p10, p11, p12, p13, p14, p15;
+
+}
+</code></pre>
+<p>从上述代码中可以看出，变量 value 前后都填充了 7 个 long 类型的变量。这样不论在什么情况下，都可以保证在多线程访问 value 变量时，value 与其他不相关的变量处于不同的 Cache Line，如下图所示。</p>
+<p><img alt="图片7.png" src="/assets/96999cebabb24e03e9351e9e.png"/></p>
+<p>伪共享问题一般是非常隐蔽的，在实际开发的过程中，并不是项目中所有地方都需要花费大量的精力去优化伪共享问题。CPU Cache 的填充本身也是比较珍贵的，我们应该把精力聚焦在一些高性能的数据结构设计上，把资源用在刀刃上，使系统性能收益最大化。</p>
+<p>至此，我们知道 Mpsc Queue 为了解决伪共享问题填充了大量的 long 类型变量，造成源码不易阅读。因为变量填充只是为了提升 Mpsc Queue 的性能，与 Mpsc Queue 的主体功能无关。接下来我们先忽略填充变量，开始分析 Mpsc Queue 的基本实现原理。</p>
+<h3 id="mpsc-queue-源码分析">Mpsc Queue 源码分析</h3>
+<p>在开始源码学习之前，我们同样先看看 MpscArrayQueue 如何使用，示例代码如下：</p>
+<pre><code>public class MpscArrayQueueTest {
+
+    public static final MpscArrayQueue&lt;String&gt; MPSC_ARRAY_QUEUE = new MpscArrayQueue&lt;&gt;(2);
+
+    public static void main(String[] args) {
+
+        for (int i = 1; i &lt;= 2; i++) {
+
+            int index = i;
+
+            new Thread(() -&gt; MPSC_ARRAY_QUEUE.offer("data" + index), "thread" + index).start();
+
+        }
+
+        try {
+
+            Thread.sleep(1000L);
+
+            MPSC_ARRAY_QUEUE.add("data3"); // 入队操作，队列满则抛出异常
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+        System.out.println("队列大小：" + MPSC_ARRAY_QUEUE.size() + ", 队列容量：" + MPSC_ARRAY_QUEUE.capacity());
+
+        System.out.println("出队：" + MPSC_ARRAY_QUEUE.remove()); // 出队操作，队列为空则抛出异常
+
+        System.out.println("出队：" + MPSC_ARRAY_QUEUE.poll()); // 出队操作，队列为空则返回 NULL
+
+    }
+
+}
+</code></pre>
+<p>程序输出结果如下：</p>
+<pre><code>java.lang.IllegalStateException: Queue full
+
+	at java.util.AbstractQueue.add(AbstractQueue.java:98)
+
+	at MpscArrayQueueTest.main(MpscArrayQueueTest.java:17)
+
+队列大小：2, 队列容量：2
+
+出队：data1
+
+出队：data2
+
+Disconnected from the target VM, address: '127.0.0.1:58005', transport: 'socket'
+</code></pre>
+<p>说到底 MpscArrayQueue 终究还是是个队列，基本用法与 ArrayBlockingQueue 都是类似的，都离不开队列的基本操作：<strong>入队 offer()和出队 poll()</strong>。下面我们就入队 offer() 和出队 poll() 两个最重要的操作分别进行详细的讲解。</p>
+<h3 id="入队-offer">入队 offer</h3>
+<p>首先我们先回顾下 MpscArrayQueue 的重要属性：</p>
+<pre><code>// ConcurrentCircularArrayQueue
+
+protected final long mask; // 计算数组下标的掩码
+
+protected final E[] buffer; // 存放队列数据的数组
+
+// MpmcArrayQueueProducerIndexField
+
+private volatile long producerIndex; // 生产者的索引
+
+// MpscArrayQueueProducerLimitField
+
+private volatile long producerLimit; // 生产者索引的最大值
+
+// MpscArrayQueueConsumerIndexField
+
+protected long consumerIndex; // 消费者索引
+</code></pre>
+<p>看到 mask 变量，你现在是不是条件反射想到队列中数组的容量大小肯定是 2 的次幂。因为 Mpsc 是多生产者单消费者队列，所以 producerIndex、producerLimit 都是用 volatile 进行修饰的，其中一个生产者线程的修改需要对其他生产者线程可见。队列入队和出队时会如何操作上述这些属性呢？其中生产者和消费者的索引变量又有什么作用呢？带着这些问题我们开始阅读源码。</p>
+<p>首先跟进 offer() 方法的源码：</p>
+<pre><code>public boolean offer(E e) {
+
+    if (null == e) {
+
+        throw new NullPointerException();
+
+    } else {
+
+        long mask = this.mask;
+
+        long producerLimit = this.lvProducerLimit(); // 获取生产者索引最大限制
+
+        long pIndex;
+
+        long offset;
+
+        do {
+
+            pIndex = this.lvProducerIndex(); // 获取生产者索引
+
+            if (pIndex &gt;= producerLimit) {
+
+                offset = this.lvConsumerIndex(); // 获取消费者索引
+
+                producerLimit = offset + mask + 1L;
+
+                if (pIndex &gt;= producerLimit) {
+
+                    return false; // 队列已满
+
+                }
+
+                this.soProducerLimit(producerLimit); // 更新 producerLimit
+
+            }
+
+        } while(!this.casProducerIndex(pIndex, pIndex + 1L)); // CAS 更新生产者索引，更新成功则退出，说明当前生产者已经占领索引值
+
+        offset = calcElementOffset(pIndex, mask); // 计算生产者索引在数组中下标
+
+        UnsafeRefArrayAccess.soElement(this.buffer, offset, e); // 向数组中放入数据
+
+        return true;
+
+    }
+
+}
+</code></pre>
+<p>MpscArrayQueue 的 offer() 方法虽然比较简短，但是需要具备一些底层知识才能看得懂，先不用担心，我们一点点开始拆解。首先需要搞懂 producerIndex、producerLimit 以及 consumerIndex 之间的关系，这也是 MpscArrayQueue 中设计比较独特的地方。首先看下 lvProducerLimit() 方法的源码：</p>
+<pre><code>public MpscArrayQueueProducerLimitField(int capacity) {
+
+    super(capacity);
+
+    this.producerLimit = capacity;
+
+}
+
+protected final long lvProducerLimit() {
+
+    return producerLimit;
+
+}
+</code></pre>
+<p>在初始化状态，producerLimit 与队列的容量是相等的，对应到 MpscArrayQueueTest 代码示例中，producerLimit = capacity = 2，而 producerIndex = consumerIndex = 0。接下来 Thread1 和 Thread2 并发向 MpscArrayQueue 中存放数据，如下图所示。</p>
+<p><img alt="图片8.png" src="/assets/0a9dd370c62ca8e9bb00a506.png"/></p>
+<p>两个线程此时拿到的 producerIndex 都是 0，是小于 producerLimit 的。此时两个线程都会尝试使用 CAS 操作更新 producerIndex，其中必然有一个是成功的，另外一个是失败的。假设 Thread1 执行 CAS 操作成功，那么 Thread2 失败后就会重新更新 producerIndex。Thread1 更新后 producerIndex 的值为 1，由于 producerIndex 是 volatile 修饰的，更新后立刻对 Thread2 可见。这里有一点需要注意的是，当前线程更新后的值是被其他线程使用，当 Thread1 和 Thread2 都通过 CAS 抢占成功后，它们拿到的 pIndex 分别是 0 和 1。接下来就是根据 pIndex 进行位运算计算得到数组对应的下标，然后通过 UNSAFE.putOrderedObject() 方法将数据写入到数组中，源码如下所示。</p>
+<pre><code>public static &lt;E&gt; void soElement(E[] buffer, long offset, E e) {
+
+    UnsafeAccess.UNSAFE.putOrderedObject(buffer, offset, e);
+
+}
+</code></pre>
+<p>putOrderedObject() 和 putObject() 都可以用于更新对象的值，但是 putOrderedObject() 并不会立刻将数据更新到内存中，并把其他 Cache Line 置为失效。putOrderedObject() 使用的是 LazySet 延迟更新机制，所以性能方面 putOrderedObject() 要比 putObject() 高很多。</p>
+<p>Java 中有四种类型的内存屏障，分别为 LoadLoad、StoreStore、LoadStore 和 StoreLoad。putOrderedObject() 使用了 StoreStore Barrier，对于 Store1，StoreStore，Store2 这样的操作序列，在 Store2 进行写入之前，会保证 Store1 的写操作对其他处理器可见。</p>
+<p>LazySet 机制是有代价的，就是写操作结果有纳秒级的延迟，不会立刻被其他线程以及自身线程可见。因为在 Mpsc Queue 的使用场景中，多个生产者只负责写入数据，并没有写入之后立刻读取的需求，所以使用 LazySet 机制是没有问题的，只要 StoreStore Barrier 保证多线程写入的顺序即可。</p>
+<p>至此，offer() 的核心操作我们已经讲完了。现在我们继续把目光聚焦在 do-while 循环内的逻辑，为什么需要两次 if(pIndex &gt;= producerLimit) 判断呢？说明当生产者索引大于 producerLimit 阈值时，可能存在两种情况：producerLimit 缓存值过期了或者队列已经满了。所以此时我们需要读取最新的消费者索引 consumerIndex，之前读取过的数据位置都可以被重复使用，重新做一次 producerLimit 计算，然后再做一次 if(pIndex &gt;= producerLimit) 判断，如果生产者索引还是大于 producerLimit 阈值，说明队列的真的满了。</p>
+<p>因为生产者有多个线程，所以 MpscArrayQueue 采用了 UNSAFE.getLongVolatile() 方法保证获取消费者索引 consumerIndex 的准确性。getLongVolatile() 使用了 StoreLoad Barrier，对于 Store1，StoreLoad，Load2 的操作序列，在 Load2 以及后续的读取操作之前，都会保证 Store1 的写入操作对其他处理器可见。StoreLoad 是四种内存屏障开销最大的，现在你是不是可以体会到引入 producerLimit 的好处了呢？假设我们的消费速度和生产速度比较均衡的情况下，差不多走完一圈数组才需要获取一次消费者索引 consumerIndex，从而大幅度减少了 getLongVolatile() 操作的执行次数，性能提升是显著的。</p>
+<p>学习完 MpscArrayQueue 的入队 offer() 方法后，再来看出队 poll() 就会容易很多，我们继续向下看。</p>
+<h3 id="出队-poll">出队 poll</h3>
+<p>poll() 方法的作用是移除队列的首个元素并返回，如果队列为空则返回 NULL。我们看下 poll() 源码是如何实现的。</p>
+<pre><code>public E poll() {
+
+    long cIndex = this.lpConsumerIndex(); // 直接返回消费者索引 consumerIndex
+
+    long offset = this.calcElementOffset(cIndex); // 计算数组对应的偏移量
+
+    E[] buffer = this.buffer;
+
+    E e = UnsafeRefArrayAccess.lvElement(buffer, offset); // 取出数组中 offset 对应的元素
+
+    if (null == e) {
+
+        if (cIndex == this.lvProducerIndex()) { // 队列已满
+
+            return null;
+
+        }
+
+        do {
+
+            e = UnsafeRefArrayAccess.lvElement(buffer, offset); 
+
+        } while(e == null); // 等待生产者填充元素
+
+    }
+
+    UnsafeRefArrayAccess.spElement(buffer, offset, (Object)null); // 消费成功后将当前位置置为 NULL
+
+    this.soConsumerIndex(cIndex + 1L); // 更新 consumerIndex 到下一个位置
+
+    return e;
+
+}
+</code></pre>
+<p>因为只有一个消费者线程，所以整个 poll() 的过程没有 CAS 操作。poll() 方法核心思路是获取消费者索引 consumerIndex，然后根据 consumerIndex 计算得出数组对应的偏移量，然后将数组对应位置的元素取出并返回，最后将 consumerIndex 移动到环形数组下一个位置。</p>
+<p>获取消费者索引以及计算数组对应的偏移量的逻辑与 offer() 类似，在这里就不赘述了。下面直接看下如何取出数组中 offset 对应的元素，跟进 lvElement() 方法的源码。</p>
+<pre><code>public static &lt;E&gt; E lvElement(E[] buffer, long offset) {
+
+    return (E) UNSAFE.getObjectVolatile(buffer, offset);
+
+}
+</code></pre>
+<p>获取数组元素的时候同样使用了 UNSAFE 系列方法，getObjectVolatile() 方法则使用的是 LoadLoad  Barrier，对于 Load1，LoadLoad，Load2 操作序列，在 Load2 以及后续读取操作之前，会保证 Load1 的读取操作执行完毕，所以 getObjectVolatile() 方法可以保证每次读取数据都可以从内存中拿到最新值。</p>
+<p>与 offer() 相反，poll() 比较关注队列为空的情况。当调用 lvElement() 方法获取到的元素为 NULL 时，有两种可能的情况：队列为空或者生产者填充的元素还没有对消费者可见。如果消费者索引 consumerIndex 等于生产者 producerIndex，说明队列为空。只要两者不相等，消费者需要等待生产者填充数据完毕。</p>
+<p>当成功消费数组中的元素之后，需要把当前消费者索引 consumerIndex 的位置置为 NULL，然后把 consumerIndex 移动到数组下一个位置。逻辑比较简单，下面我们把 spElement() 和 soConsumerIndex() 方法放在一起看。</p>
+<pre><code>public static &lt;E&gt; void spElement(E[] buffer, long offset, E e) {
+
+    UNSAFE.putObject(buffer, offset, e);
+
+}
+
+protected void soConsumerIndex(long newValue) {
+
+    UNSAFE.putOrderedLong(this, C_INDEX_OFFSET, newValue);
+
+}
+</code></pre>
+<p>最后的更新操作我们又看到了 UNSAFE put 系列方法的运用，其中 putObject() 不会使用任何内存屏障，它会直接更新对象对应偏移量的值。而 putOrderedLong 与 putOrderedObject() 是一样的，都使用了 StoreStore Barrier，也是延迟更新 LazySet 机制，我们就不再赘述了。</p>
+<p>到此为止，MpscArrayQueue 入队和出队的核心源码已经分析完了。因为 JCTools 是服务于 JVM 的并发工具类，其中包含了很多黑科技的技巧，例如填充法解决伪共享问题、Unsafe 直接操作内存等，让我们对底层知识的掌握又更进一步。此外 JCTools 还提供了 MpscUnboundedArrayQueue、MpscChunkedArrayQueue 等其他具有特色功能的队列，有兴趣的话你可以课后自行研究，相信有了本节课的基础，再分析其他队列一定不会难倒你。</p>
+<h3 id="总结">总结</h3>
+<p>MpscArrayQueue 还只是 Jctools 中的冰山一角，其中蕴藏着丰富的技术细节，我们对 MpscArrayQueue 的知识点做一个简单的总结。</p>
+<ul>
+<li>通过大量填充 long 类型变量解决伪共享问题。</li>
+<li>环形数组的容量设置为 2 的次幂，可以通过位运算快速定位到数组对应下标。</li>
+<li>入队 offer() 操作中 producerLimit 的巧妙设计，大幅度减少了主动获取消费者索引 consumerIndex 的次数，性能提升显著。</li>
+<li>入队和出队操作中都大量使用了 UNSAFE 系列方法，针对生产者和消费者的场景不同，使用的 UNSAFE 方法也是不一样的。Jctools 在底层操作的运用上也是有的放矢，把性能发挥到极致。</li>
+</ul>
+<p>到此为止，我们源码解析的课程就告一段落了。Netty 还有很多黑科技等待我们去探索，希望通过前面 Netty 核心源码的学习，在今后深入研究 Netty 的道路上能够有所帮助。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

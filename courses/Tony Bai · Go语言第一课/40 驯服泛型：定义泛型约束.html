@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>40 驯服泛型：定义泛型约束 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/index.html">Tony Bai · Go语言第一课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">59 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Tony Bai · Go语言第一课</strong><ul><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E8%BF%99%E6%A0%B7%E5%85%A5%E9%97%A8Go%EF%BC%8C%E6%89%8D%E8%83%BD%E5%B0%91%E8%B5%B0%E5%BC%AF%E8%B7%AF.html">00 开篇词 这样入门Go，才能少走弯路</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/01%20%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F%EF%BC%9A%E4%BD%A0%E4%B8%8D%E5%BE%97%E4%B8%8D%E4%BA%86%E8%A7%A3%E7%9A%84Go%E7%9A%84%E5%8E%86%E5%8F%B2%E5%92%8C%E7%8E%B0%E7%8A%B6.html">01 前世今生：你不得不了解的Go的历史和现状</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/02%20%E6%8B%92%E7%BB%9D%E2%80%9CHello%20and%20Bye%E2%80%9D%EF%BC%9AGo%E8%AF%AD%E8%A8%80%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">02 拒绝“Hello and Bye”：Go语言的设计哲学是怎么一回事？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/03%20%E9%85%8D%E5%A5%BD%E7%8E%AF%E5%A2%83%EF%BC%9A%E9%80%89%E6%8B%A9%E4%B8%80%E7%A7%8D%E6%9C%80%E9%80%82%E5%90%88%E4%BD%A0%E7%9A%84Go%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95.html">03 配好环境：选择一种最适合你的Go安装方法</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/04%20%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84%EF%BC%9A%E4%B8%80%E4%B8%AAGo%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BB%93%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">04 初窥门径：一个Go程序的结构是怎样的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/05%20%E6%A0%87%E5%87%86%E5%85%88%E8%A1%8C%EF%BC%9AGo%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%B8%83%E5%B1%80%E6%A0%87%E5%87%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">05 标准先行：Go项目的布局标准是什么？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/06%20%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%E6%98%AF%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E5%8C%85%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E9%97%AE%E9%A2%98%E7%9A%84%EF%BC%9F.html">06 构建模式：Go是怎么解决包依赖管理问题的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/07%20%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%20Module%E7%9A%846%E7%B1%BB%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C.html">07 构建模式：Go Module的6类常规操作</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/08%20%E5%85%A5%E5%8F%A3%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8C%85%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A%E6%90%9E%E6%B8%85Go%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%E6%AC%A1%E5%BA%8F.html">08 入口函数与包初始化：搞清Go程序的执行次序</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/09%20%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%BB%83%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AAWeb%E6%9C%8D%E5%8A%A1%E5%B0%B1%E6%98%AF%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95.html">09 即学即练：构建一个Web服务就是这么简单</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/10%20%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E%EF%BC%9A%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80%E6%9C%89%E5%88%AB%E4%BA%8E%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E7%9A%84%E9%87%8D%E8%A6%81%E7%89%B9%E5%BE%81.html">10 变量声明：静态语言有别于动态语言的重要特征</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/11%20%E4%BB%A3%E7%A0%81%E5%9D%97%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%8F%98%E9%87%8F%E4%B8%8D%E4%BC%9A%E8%A2%AB%E9%81%AE%E8%94%BD%EF%BC%9F.html">11 代码块与作用域：如何保证变量不会被遮蔽？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/12%20%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9AGo%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E7%9A%84%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">12 基本数据类型：Go原生支持的数值类型有哪些？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/13%20%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Go%E8%A6%81%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B%EF%BC%9F.html">13 基本数据类型：为什么Go要原生支持字符串类型？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/14%20%E5%B8%B8%E9%87%8F%EF%BC%9AGo%E5%9C%A8%E2%80%9C%E5%B8%B8%E9%87%8F%E2%80%9D%E8%AE%BE%E8%AE%A1%E4%B8%8A%E7%9A%84%E5%88%9B%E6%96%B0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">14 常量：Go在“常量”设计上的创新有哪些？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/15%20%E5%90%8C%E6%9E%84%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%BB%8E%E5%AE%9A%E9%95%BF%E6%95%B0%E7%BB%84%E5%88%B0%E5%8F%98%E9%95%BF%E5%88%87%E7%89%87.html">15 同构复合类型：从定长数组到变长切片</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/16%20%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%8E%9F%E7%94%9Fmap%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">16 复合数据类型：原生map类型的实现机制是怎样的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/17%20%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E7%94%A8%E7%BB%93%E6%9E%84%E4%BD%93%E5%BB%BA%E7%AB%8B%E5%AF%B9%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E6%8A%BD%E8%B1%A1.html">17 复合数据类型：用结构体建立对真实世界的抽象</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/18%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9Aif%E7%9A%84%E2%80%9C%E5%BF%AB%E4%B9%90%E8%B7%AF%E5%BE%84%E2%80%9D%E5%8E%9F%E5%88%99.html">18 控制结构：if的“快乐路径”原则</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/19%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9AGo%E7%9A%84for%E5%BE%AA%E7%8E%AF%EF%BC%8C%E4%BB%85%E6%AD%A4%E4%B8%80%E7%A7%8D.html">19 控制结构：Go的for循环，仅此一种</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/20%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9AGo%E4%B8%AD%E7%9A%84switch%E8%AF%AD%E5%8F%A5%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8F%98%E5%8C%96%EF%BC%9F.html">20 控制结构：Go中的switch语句有哪些变化？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/21%20%E5%87%BD%E6%95%B0%EF%BC%9A%E8%AF%B7%E5%8F%AB%E6%88%91%E2%80%9C%E4%B8%80%E7%AD%89%E5%85%AC%E6%B0%91%E2%80%9D.html">21 函数：请叫我“一等公民”</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/22%20%E5%87%BD%E6%95%B0%EF%BC%9A%E6%80%8E%E4%B9%88%E7%BB%93%E5%90%88%E5%A4%9A%E8%BF%94%E5%9B%9E%E5%80%BC%E8%BF%9B%E8%A1%8C%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9F.html">22 函数：怎么结合多返回值进行错误处理？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/23%20%E5%87%BD%E6%95%B0%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AE%A9%E5%87%BD%E6%95%B0%E6%9B%B4%E7%AE%80%E6%B4%81%E5%81%A5%E5%A3%AE%EF%BC%9F.html">23 函数：怎么让函数更简洁健壮？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/24%20%E6%96%B9%E6%B3%95%EF%BC%9A%E7%90%86%E8%A7%A3%E2%80%9C%E6%96%B9%E6%B3%95%E2%80%9D%E7%9A%84%E6%9C%AC%E8%B4%A8.html">24 方法：理解“方法”的本质</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/25%20%E6%96%B9%E6%B3%95%EF%BC%9A%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88%E4%B8%8E%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9receiver%E7%B1%BB%E5%9E%8B%EF%BC%9F.html">25 方法：方法集合与如何选择receiver类型？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/26%20%E6%96%B9%E6%B3%95%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%B5%8C%E5%85%A5%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E2%80%9C%E7%BB%A7%E6%89%BF%E2%80%9D%EF%BC%9F.html">26 方法：如何用类型嵌入模拟实现“继承”？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/27%20%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%BB%83%EF%BC%9A%E8%B7%9F%E8%B8%AA%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E9%93%BE%EF%BC%8C%E7%90%86%E8%A7%A3%E4%BB%A3%E7%A0%81%E6%9B%B4%E7%9B%B4%E8%A7%82.html">27 即学即练：跟踪函数调用链，理解代码更直观</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/28%20%E6%8E%A5%E5%8F%A3%EF%BC%9A%E6%8E%A5%E5%8F%A3%E5%8D%B3%E5%A5%91%E7%BA%A6.html">28 接口：接口即契约</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/29%20%E6%8E%A5%E5%8F%A3%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88nil%E6%8E%A5%E5%8F%A3%E4%B8%8D%E7%AD%89%E4%BA%8Enil%EF%BC%9F.html">29 接口：为什么nil接口不等于nil？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/30%20%E6%8E%A5%E5%8F%A3%EF%BC%9AGo%E4%B8%AD%E6%9C%80%E5%BC%BA%E5%A4%A7%E7%9A%84%E9%AD%94%E6%B3%95.html">30 接口：Go中最强大的魔法</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/31%20%E5%B9%B6%E5%8F%91%EF%BC%9AGo%E7%9A%84%E5%B9%B6%E5%8F%91%E6%96%B9%E6%A1%88%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">31 并发：Go的并发方案实现方案是怎样的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/32%20%E5%B9%B6%E5%8F%91%EF%BC%9A%E8%81%8A%E8%81%8AGoroutine%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E5%8E%9F%E7%90%86.html">32 并发：聊聊Goroutine调度器的原理</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%EF%BC%9A%E5%B0%8Fchannel%E4%B8%AD%E8%95%B4%E5%90%AB%E5%A4%A7%E6%99%BA%E6%85%A7.html">33 并发：小channel中蕴含大智慧</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%EF%BC%9F.html">34 并发：如何使用共享变量？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/35%20%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%BB%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">35 即学即练：如何实现一个轻量级线程池？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/36%20%E6%89%93%E7%A8%B3%E6%A0%B9%E5%9F%BA%EF%BC%9A%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">36 打稳根基：怎么实现一个TCP服务器？（上）</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/37%20%E4%BB%A3%E7%A0%81%E6%93%8D%E7%BB%83%EF%BC%9A%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%EF%BC%88%E4%B8%AD%EF%BC%89.html">37 代码操练：怎么实现一个TCP服务器？（中）</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/38%20%E6%88%90%E6%9E%9C%E4%BC%98%E5%8C%96%EF%BC%9A%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">38 成果优化：怎么实现一个TCP服务器？（下）</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/39%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E4%BA%86%E8%A7%A3%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0.html">39 驯服泛型：了解类型参数</a></li><li><a class="active" aria-current="page" href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/40%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E5%AE%9A%E4%B9%89%E6%B3%9B%E5%9E%8B%E7%BA%A6%E6%9D%9F.html">40 驯服泛型：定义泛型约束</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/41%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E6%98%8E%E7%A1%AE%E4%BD%BF%E7%94%A8%E6%97%B6%E6%9C%BA.html">41 驯服泛型：明确使用时机</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%85%83%E6%97%A6%E5%BF%AB%E4%B9%90%20%E8%BF%99%E6%98%AF%E4%B8%80%E4%BB%BD%E6%9A%82%E6%97%B6%E5%81%9C%E6%9B%B4%E7%9A%84%E5%A3%B0%E6%98%8E.html">元旦快乐 这是一份暂时停更的声明</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E4%BD%9C%E4%B8%BAGo%20Module%E7%9A%84%E4%BD%9C%E8%80%85%EF%BC%8C%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B.html">加餐 作为Go Module的作者，你应该知道的几件事</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%A6%82%E4%BD%95%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E7%9A%84Go%20Module%EF%BC%9F.html">加餐 如何拉取私有的Go Module？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%88%91%E2%80%9C%E7%A7%81%E8%97%8F%E2%80%9D%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BC%98%E8%B4%A8%E4%B8%94%E6%9D%83%E5%A8%81%E7%9A%84Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99.html">加餐 我“私藏”的那些优质且权威的Go语言学习资料</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%81%8A%E8%81%8AGo%201.17%E7%89%88%E6%9C%AC%E7%9A%84%E9%82%A3%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7.html">加餐 聊聊Go 1.17版本的那些新特性</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%81%8A%E8%81%8AGo%E8%AF%AD%E8%A8%80%E7%9A%84%E6%8C%87%E9%92%88.html">加餐 聊聊Go语言的指针</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%81%8A%E8%81%8A%E6%9C%80%E8%BF%91%E5%A4%A7%E7%83%AD%E7%9A%84Go%E6%B3%9B%E5%9E%8B.html">加餐 聊聊最近大热的Go泛型</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%8F%B6%E5%89%91%E5%B3%B0%EF%BC%9AGo%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E7%82%B9.html">大咖助阵 叶剑峰：Go语言中常用的那些代码优化点</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%A4%A7%E6%98%8E%EF%BC%9AGo%E6%B3%9B%E5%9E%8B%EF%BC%8C%E6%B3%9B%E4%BA%86%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89%E5%AE%8C%E5%85%A8%E6%B3%9B.html">大咖助阵 大明：Go泛型，泛了，但没有完全泛</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%AD%94%E4%BB%A4%E9%A3%9E%EF%BC%9A%E4%BB%8E%E5%B0%8F%E7%99%BD%E5%88%B0%E2%80%9C%E8%80%81%E9%B8%9F%E2%80%9D%EF%BC%8C%E6%88%91%E7%9A%84Go%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E4%B9%8B%E8%B7%AF.html">大咖助阵 孔令飞：从小白到“老鸟”，我的Go语言进阶之路</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%BE%90%E7%A5%A5%E6%9B%A6%EF%BC%9A%E4%BB%8E%E9%94%80%E5%94%AE%E5%88%B0%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%8C%E6%88%91%E4%B8%8E%20Go%20%20%E7%9A%84%E6%95%85%E4%BA%8B.html">大咖助阵 徐祥曦：从销售到分布式存储工程师，我与 Go  的故事</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E6%9B%B9%E6%98%A5%E6%99%96%EF%BC%9A%E8%81%8A%E8%81%8A%20Go%20%E8%AF%AD%E8%A8%80%E7%9A%84%20GC%20%E5%AE%9E%E7%8E%B0.html">大咖助阵 曹春晖：聊聊 Go 语言的 GC 实现</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E6%B5%B7%E7%BA%B3%EF%BC%9A%E8%81%8A%E8%81%8A%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%B3%9B%E5%9E%8B.html">大咖助阵 海纳：聊聊语言中的类型系统与泛型</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E6%9C%9F%E4%B8%AD%E6%B5%8B%E8%AF%95%20%E4%B8%80%E8%B5%B7%E6%A3%80%E9%AA%8C%E4%B8%8B%E4%BD%A0%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C%E5%90%A7.html">期中测试 一起检验下你的学习成果吧</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E7%BD%97%E6%9D%B0%EF%BC%9A%E6%88%91%E7%9A%84Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF.html">用户故事 罗杰：我的Go语言学习之路</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%92%8C%E4%BD%A0%E4%B8%80%E8%B5%B7%E8%BF%8E%E6%8E%A5Go%E7%9A%84%E9%BB%84%E9%87%91%E5%8D%81%E5%B9%B4.html">结束语 和你一起迎接Go的黄金十年</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%BB%93%E8%AF%BE%E6%B5%8B%E8%AF%95%20%E5%BF%AB%E6%9D%A5%E6%A3%80%E9%AA%8C%E4%B8%8B%E4%BD%A0%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C%E5%90%A7%EF%BC%81.html">结课测试 快来检验下你的学习成果吧！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/40%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E5%AE%9A%E4%B9%89%E6%B3%9B%E5%9E%8B%E7%BA%A6%E6%9D%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="40 驯服泛型：定义泛型约束" id="title">40 驯服泛型：定义泛型约束</h1>
+<div><p>你好，我是Tony Bai。</p>
+<p>在上一讲中我们对Go泛型的实现方案<strong>“类型参数语法”</strong>做了较为全面的学习，我们掌握了泛型函数、泛型类型和泛型方法的定义和使用方法。不过还有一处语法点我们并没有重点说明，它就是用于声明类型参数的<strong>约束</strong>（constraint）。</p>
+<p>虽然泛型是开发人员表达“通用代码”的一种重要方式，但这并不意味着所有泛型代码对所有类型都适用。更多的时候，我们需要对泛型函数的类型参数以及泛型函数中的实现代码<strong>设置限制</strong>。泛型函数调用者只能传递满足限制条件的类型实参，泛型函数内部也只能以类型参数允许的方式使用这些类型实参值。在Go泛型语法中，我们使用<strong>类型参数约束</strong>（type parameter constraint）（以下简称<strong>约束</strong>）来表达这种限制条件。</p>
+<p>就像上一讲提到的，约束之于类型参数就好比函数参数列表中的类型之于参数：</p>
+<p><img alt="图片" src="/assets/94cc84758214f3b52137903f.jpg"/></p>
+<p>函数普通参数在函数实现代码中可以表现出来的性质与可以参与的运算由参数类型限制，而泛型函数的类型参数就由约束（constraint）来限制。</p>
+<p>2018年8月由伊恩·泰勒和罗伯特·格瑞史莫主写的Go泛型第一版设计方案中，Go引入了contract关键字来定义泛型类型参数的约束。但经过约两年的Go社区公示和讨论，在2020年6月末发布的泛型新设计方案中，Go团队又放弃了新引入的contract关键字，转而采用已有的interface类型来替代contract定义约束。这一改变得到了Go社区的大力支持。使用interface类型作为约束的定义方法能够最大程度地复用已有语法，并抑制语言引入泛型后的复杂度。</p>
+<p>但原有的interface语法尚不能满足定义约束的要求。所以，在Go泛型版本中，interface语法也得到了一些扩展，也正是这些扩展给那些刚刚入门Go泛型的Go开发者带去了一丝困惑，这也是约束被认为是Go泛型的一个难点的原因。</p>
+<p>在这一讲中，我们就聚焦于Go类型参数的约束，学习一下Go原生内置的约束、如何定义自己的约束、新引入的类型集合概念等。我们先来看一下Go语言的内置约束，从Go泛型中最宽松的约束：<strong>any</strong>开始。</p>
+<h3 id="最宽松的约束-any">最宽松的约束：any</h3>
+<p>无论是泛型函数还是泛型类型，其所有类型参数声明中都必须显式包含约束，即便你允许类型形参接受所有类型作为类型实参传入也是一样。那么我们如何表达“所有类型”这种约束呢？我们可以使用<strong>空接口类型</strong>（interface{}）来作为类型参数的约束：</p>
+<pre><code class="language-plain">func Print[T interface{}](sl []T) {
+    // ... ...
+}
+
+func doSomething[T1 interface{}, T2 interface{}, T3 interface{}](t1 T1, t2 T2, t3 T3) {
+    // ... ...
+}
+</code></pre>
+<p>不过使用interface{}作为约束至少有以下几点“不足”：</p>
+<ul>
+<li>如果存在多个这类约束时，泛型函数声明部分会显得很冗长，比如上面示例中的doSomething的声明部分；</li>
+<li>interface{}包含{}这样的符号，会让本已经很复杂的类型参数声明部分显得更加复杂；</li>
+<li>和comparable、Sortable、ordered这样的约束命名相比，interface{}作为约束的表意不那么直接。</li>
+</ul>
+<p>为此，Go团队在Go 1.18泛型落地的同时又引入了一个预定义标识符：<strong>any</strong>。any本质上是interface{}的一个类型别名：</p>
+<pre><code class="language-plain">// $GOROOT/src/builtin/buildin.go
+// any is an alias for interface{} and is equivalent to interface{} in all ways.
+type any = interface{}
+</code></pre>
+<p>这样，我们在泛型类型参数声明中就可以使用any替代interface{}，而上述interface{}作为类型参数约束的几点“不足”也随之被消除掉了。</p>
+<p>any约束的类型参数意味着可以接受所有类型作为类型实参。在函数体内，使用any约束的形参T可以用来做如下操作：</p>
+<ul>
+<li>声明变量；</li>
+<li>同类型赋值；</li>
+<li>将变量传给其他函数或从函数返回；</li>
+<li>取变量地址；</li>
+<li>转换或赋值给interface{}类型变量；</li>
+<li>用在类型断言或type switch中；</li>
+<li>作为复合类型中的元素类型；</li>
+<li>传递给预定义的函数，比如new。</li>
+</ul>
+<p>下面是any约束的类型参数执行这些操作的一个示例：</p>
+<pre><code class="language-plain">// any.go
+func doSomething[T1, T2 any](t1 T1, t2 T2) T1 {
+    var a T1        // 声明变量
+    var b T2
+    a, b = t1, t2   // 同类型赋值
+    _ = b
+
+    f := func(t T1) {
+    }
+    f(a)            // 传给其他函数
+
+    p := &amp;a         // 取变量地址
+    _ = p
+
+    var i interface{} = a  // 转换或赋值给interface{}类型变量
+    _ = i
+
+    c := new(T1)    // 传递给预定义函数
+    _ = c
+
+    f(a)            // 将变量传给其他函数
+
+    sl := make([]T1, 0, 10) // 作为复合类型中的元素类型
+    _ = sl
+
+    j, ok := i.(T1) // 用在类型断言中
+    _ = ok
+    _ = j
+
+    switch i.(type) { // 作为type switch中的case类型
+    case T1:
+    case T2:
+    }
+    return a        // 从函数返回
+}
+</code></pre>
+<p>但如果对any约束的类型参数进行了非上述允许的操作，比如相等性或不等性比较，那么Go编译器就会报错：</p>
+<pre><code class="language-plain">// any.go
+
+func doSomething[T1, T2 any](t1 T1, t2 T2) T1 {
+    var a T1 
+    if a == t1 { // 编译器报错：invalid operation: a == t1 (incomparable types in type set)
+    }
+    
+    if a != t1 { // 编译器报错：invalid operation: a != t1 (incomparable types in type set)
+    }
+    ... ...
+}
+</code></pre>
+<p>所以说，如果我们想在泛型函数体内部对类型参数声明的变量实施相等性（==）或不等性比较（!=）操作，我们就需要更换约束，这就引出了Go内置的另外一个预定义约束：<strong>comparable</strong>。</p>
+<h3 id="支持比较操作的内置约束-comparable">支持比较操作的内置约束：comparable</h3>
+<p>Go泛型提供了预定义的约束：comparable，其定义如下：</p>
+<pre><code class="language-plain">// $GOROOT/src/builtin/buildin.go
+
+// comparable is an interface that is implemented by all comparable types
+// (booleans, numbers, strings, pointers, channels, arrays of comparable types,
+// structs whose fields are all comparable types).
+// The comparable interface may only be used as a type parameter constraint,
+// not as the type of a variable.
+type comparable interface{ comparable }
+</code></pre>
+<p>不过从上述这行源码我们仍然无法直观看到comparable的实现细节，Go编译器会在编译期间判断某个类型是否实现了comparable接口。</p>
+<p>根据其注释说明，所有可比较的类型都实现了comparable这个接口，包括：布尔类型、数值类型、字符串类型、指针类型、channel类型、元素类型实现了comparable的数组和成员类型均实现了comparable接口的结构体类型。下面的例子可以让我们直观地看到这一点：</p>
+<pre><code class="language-plain">// comparable.go
+
+type foo struct {
+    a int
+    s string
+}
+
+type bar struct {
+    a  int
+    sl []string
+}
+
+func doSomething[T comparable](t T) T {
+    var a T
+    if a == t {
+    }
+    
+    if a != t {
+    }
+    return a
+}   
+    
+func main() {
+    doSomething(true)
+    doSomething(3)
+    doSomething(3.14)
+    doSomething(3 + 4i)
+    doSomething("hello")
+    var p *int
+    doSomething(p)
+    doSomething(make(chan int))
+    doSomething([3]int{1, 2, 3})
+    doSomething(foo{})
+    doSomething(bar{}) //  bar does not implement comparable
+}
+</code></pre>
+<p>我们看到，最后一行bar结构体类型因为内含不支持比较的切片类型，被Go编译器认为未实现comparable接口，但除此之外的其他类型作为类型实参都满足comparable约束的要求。</p>
+<p>此外还要注意，comparable虽然也是一个interface，但它不能像普通interface类型那样来用，比如下面代码会导致编译器报错：</p>
+<pre><code class="language-plain">var i comparable = 5 // 编译器错误：cannot use type comparable outside a type constraint: interface is (or embeds) comparable
+</code></pre>
+<p>从编译器的错误提示，我们看到：<strong>comparable只能用作修饰类型参数的约束</strong>。</p>
+<p>好了，学了两个内置约束了，下面我们再来看看如何自定义约束。</p>
+<h3 id="自定义约束">自定义约束</h3>
+<p>前面说过，Go泛型最终决定使用interface语法来定义约束。这样一来，<strong>凡是接口类型均可作为类型参数的约束</strong>。下面是一个使用普通接口类型作为类型参数约束的示例：</p>
+<pre><code class="language-plain">// stringify.go
+
+func Stringify[T fmt.Stringer](s []T) (ret []string) {
+    for _, v := range s {
+        ret = append(ret, v.String())
+    }
+    return ret
+}
+
+type MyString string
+
+func (s MyString) String() string {
+    return string(s)
+}
+
+func main() {
+    sl := Stringify([]MyString{"I", "love", "golang"})
+    fmt.Println(sl) // 输出：[I love golang]
+}
+</code></pre>
+<p>这个例子中，我们使用的是fmt.Stringer接口作为约束。一方面，这要求类型参数T的实参必须实现fmt.Stringer接口的所有方法；另一方面，泛型函数Stringify的实现代码中，声明的T类型实例（比如v）也仅被允许调用fmt.Stringer的String方法。</p>
+<p>这类<strong>基于行为（方法集合）定义的约束</strong>对于习惯了Go接口类型的开发者来说，是相对好理解的，定义和使用起来，与下面这样的以接口类型作为形参的普通Go函数相比，区别似乎不大：</p>
+<pre><code class="language-plain">func Stringify(s []fmt.Stringer) (ret []string) {
+    for _, v := range s {
+        ret = append(ret, v.String())
+    }
+    return ret
+}
+</code></pre>
+<p>但现在我想扩展一下上面stringify.go这个示例，将Stringify的语义改为只处理非零值的元素：</p>
+<pre><code class="language-plain">// stringify_without_zero.go
+
+func StringifyWithoutZero[T fmt.Stringer](s []T) (ret []string) {
+    var zero T
+    for _, v := range s {
+        if v == zero { // 编译器报错：invalid operation: v == zero (incomparable types in type set)
+            continue
+        }
+        ret = append(ret, v.String())
+    }
+    return ret
+}
+</code></pre>
+<p>我们看到，针对v的相等性判断导致了编译器报错，我们需要为类型参数赋予更多的能力，比如支持相等性和不等性比较。这让我们想起了我们刚刚学过的Go内置约束comparable，实现comparable的类型，便可以支持相等性和不等性判断操作了。</p>
+<p>我们知道，comparable虽然不能像普通接口类型那样声明变量，但它却可以作为类型嵌入到其他接口类型中，下面我们就扩展一下上面示例：</p>
+<pre><code class="language-plain">// stringify_new_without_zero.go
+type Stringer interface {
+    comparable
+    String() string
+}
+
+func StringifyWithoutZero[T Stringer](s []T) (ret []string) {
+    var zero T
+    for _, v := range s {
+        if v == zero {
+            continue
+        }
+        ret = append(ret, v.String())
+    }
+    return ret
+}
+
+type MyString string
+
+func (s MyString) String() string {
+    return string(s)
+}
+
+func main() {
+    sl := StringifyWithoutZero([]MyString{"I", "", "love", "", "golang"}) // 输出：[I love golang]
+    fmt.Println(sl)
+}
+</code></pre>
+<p>在这个示例里，我们自定义了一个Stringer接口类型作为约束。在该类型中，我们不仅定义了String方法，还嵌入了comparable，这样在泛型函数中，我们用Stringer约束的类型参数就具备了进行相等性和不等性比较的能力了！</p>
+<p>但我们的示例演进还没有完，现在相等性和不等性比较已经不能满足我们需求了，我们还要为之<strong>加上对排序行为的支持，</strong>并基于排序能力实现下面的StringifyLessThan泛型函数：</p>
+<pre><code class="language-plain">func StringifyLessThan[T Stringer](s []T, max T) (ret []string) {
+    var zero T
+    for _, v := range s {
+        if v == zero || v &gt;= max {
+            continue
+        }
+        ret = append(ret, v.String())
+    }
+    return ret
+}
+</code></pre>
+<p>但现在当我们编译上面StringifyLessThan函数时，我们会得到编译器的报错信息：“invalid operation: v &gt;= max (type parameter T is not comparable with &gt;=)”。Go编译器认为Stringer约束的类型参数T不具备排序比较能力。</p>
+<p>如果连排序比较性都无法支持，这将大大<strong>限制我们泛型函数的表达能力</strong>。但是Go又不支持运算符重载（operator overloading），不允许我们定义出下面这样的接口类型作为类型参数的约束：</p>
+<pre><code class="language-plain">type Stringer[T any] interface {
+    String() string
+    comparable
+	&gt;(t T) bool
+	&gt;=(t T) bool
+	&lt;(t T) bool
+	&lt;=(t T) bool
+}
+</code></pre>
+<p>那我们又该如何做呢？别担心，Go核心团队显然也想到了这一点，于是对Go接口类型声明语法做了扩展，<strong>支持在接口类型中放入类型元素（type element）信息</strong>，比如下面的ordered接口类型：</p>
+<pre><code class="language-plain">type ordered interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64 |
+	~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr |
+	~float32 | ~float64 | ~string
+}
+</code></pre>
+<p>在这个接口类型的声明中，我们没有看到任何方法，取而代之的是一组由竖线“|”分隔的、带着小尾巴“~”的类型列表。这个列表表示的是，以它们为底层类型（underlying type）的类型都满足ordered约束，都可以作为以ordered为约束的类型参数的类型实参，传入泛型函数。</p>
+<p>我们将其组合到我们声明的Stringer接口中，然后应用一下我们的StringifyLessThan函数：</p>
+<pre><code class="language-plain">type Stringer interface {
+    ordered
+    comparable
+    String() string
+}
+
+func main() {
+    sl := StringifyLessThan([]MyString{"I", "", "love", "", "golang"}, MyString("cpp")) // 输出：[I]
+    fmt.Println(sl)
+}
+</code></pre>
+<p>这回编译器没有报错，并且程序输出了预期的结果。</p>
+<p>好了，看了那么多例子，是时候正式对Go接口类型语法的扩展做一个说明了。下面是扩展后的接口类型定义的组成示意图：</p>
+<p><img alt="图片" src="/assets/b49e656669aba9e1fc334543.jpg"/></p>
+<p>我们看到，新的接口类型依然可以嵌入其他接口类型，满足组合的设计哲学；除了嵌入的其他接口类型外，其余的组成元素被称为接口元素（interface element）。</p>
+<p>接口元素也有两类，一类就是常规的方法元素（method element），每个方法元素对应一个方法原型；另一类则是此次扩展新增的类型元素（type element），即在接口类型中，我们可以放入一些类型信息，就像前面的ordered接口那样。</p>
+<p>类型元素可以是单个类型，也可以是一组由竖线“|”连接的类型，竖线“|”的含义是“并”，这样的一组类型被称为union element。无论是单个类型，还是union element中由“|”分隔的类型，如果类型中不带有“~”符号的类型就代表其自身；而带有“~”符号的类型则代表以该类型为底层类型(underlying type)的所有类型，这类带有“~”的类型也被称为approximation element，如下面示例：</p>
+<pre><code class="language-plain">type Ia interface {
+	int | string  // 仅代表int和string
+}
+
+type Ib interface {
+	~int | ~string  // 代表以int和string为底层类型的所有类型
+}
+</code></pre>
+<p>下图是类型元素的分解说明，供你参考：</p>
+<p><img alt="图片" src="/assets/c0bd36edb887e44492d631b0.jpg"/></p>
+<p>不过要注意的是：<strong>union element中不能包含带有方法元素的接口类型，也不能包含预定义的约束类型，如comparable</strong>。</p>
+<p>扩展后，Go将接口类型分成了两类，一类是基本接口类型（basic interface type），即其自身和其嵌入的接口类型都只包含方法元素，而不包含类型元素。基本接口类型不仅可以当做常规接口类型来用，即声明接口类型变量、接口类型变量赋值等，还可以作为泛型类型参数的约束。</p>
+<p>除此之外的非空接口类型都属于非基本接口类型，即直接或间接（通过嵌入其他接口类型）包含了类型元素的接口类型。这类接口类型仅可以用作泛型类型参数的约束，或被嵌入到其他仅作为约束的接口类型中，下面的代码就很直观地展示了这两种接口类型的特征：</p>
+<pre><code class="language-plain">type BasicInterface interface { // 基本接口类型
+    M1()
+}
+
+type NonBasicInterface interface { // 非基本接口类型
+    BasicInterface
+    ~int | ~string // 包含类型元素
+}
+
+type MyString string
+
+func (MyString) M1() {
+}  
+   
+func foo[T NonBasicInterface](a T) { // 非基本接口类型作为约束
+}  
+   
+func bar[T BasicInterface](a T) { // 基本接口类型作为约束
+}  
+   
+func main() {
+    var s = MyString("hello")
+    var bi BasicInterface = s // 基本接口类型支持常规用法
+    var nbi NonBasicInterface = s // 非基本接口不支持常规用法，导致编译器错误：cannot use type NonBasicInterface outside a type constraint: interface contains type constraints
+    bi.M1()
+    nbi.M1()
+    foo(s)
+    bar(s)           
+}
+</code></pre>
+<p>看到这里，你可能会觉得有问题了：基本接口类型，由于其仅包含方法元素，我们依旧可以基于之前讲过的<strong>方法集合，</strong>来确定一个类型是否实现了接口，以及是否可以作为类型实参传递给约束下的类型形参。但对于只能作为约束的非基本接口类型，既有方法元素，也有类型元素，我们如何判断一个类型是否满足约束，并作为类型实参传给类型形参呢？</p>
+<p>这时我们就要介绍Go泛型落地时引入的新概念：<strong>类型集合（type set）</strong>，类型集合将作为后续判断类型是否满足约束的基本手段。</p>
+<h3 id="类型集合-type-set">类型集合（type set）</h3>
+<p>类型集合（type set）的概念是Go核心团队在2021年4月<a href="https://github.com/golang/go/issues/45346" target="_blank">更新Go泛型设计方案时</a>引入的。在那一次方案变更中，原方案中用于接口类型中定义类型元素的type关键字被去除了，泛型相关语法得到了进一步的简化。</p>
+<p>一旦确定了一个接口类型的类型集合，类型集合中的元素就可以满足以该接口类型作为的类型约束，也就是可以将该集合中的元素作为类型实参传递给该接口类型约束的类型参数。</p>
+<p>那么类型集合究竟是怎么定义的呢？下面我们来看一下。</p>
+<p>结合Go泛型设计方案以及<a href="https://go.dev/ref/spec" target="_blank">Go语法规范</a>，我们可以这么来理解类型集合：</p>
+<ul>
+<li>每个类型都有一个类型集合；</li>
+<li>非接口类型的类型的类型集合中仅包含其自身，比如非接口类型T，它的类型集合为{T}，即集合中仅有一个元素且这唯一的元素就是它自身。</li>
+</ul>
+<p>但我们最终要搞懂的是用于定义约束的接口类型的类型集合，所以以上这两点都是在为下面接口类型的类型集合定义做铺垫，定义如下：</p>
+<ul>
+<li>空接口类型（any或interface{}）的类型集合是一个无限集合，该集合中的元素为所有非接口类型。这个与我们之前的认知也是一致的，所有非接口类型都实现了空接口类型；</li>
+<li>非空接口类型的类型集合则是其定义中<strong>接口元素的类型集合的交集</strong>（如下图）。</li>
+</ul>
+<p><img alt="图片" src="/assets/55f534363709e59da6278356.jpg"/></p>
+<p>由此可见，要想确定一个接口类型的类型集合，我们需要知道其中每个接口元素的类型集合。</p>
+<p>上面我们说过，接口元素可以是其他嵌入接口类型，可以是常规方法元素，也可以是类型元素。当接口元素为其他嵌入接口类型时，该接口元素的类型集合就为该嵌入接口类型的类型集合；而当接口元素为常规方法元素时，接口元素的类型集合就为该方法的类型集合。</p>
+<p>到这里你可能会很疑惑：<strong>一个方法也有自己的类型集合</strong>？</p>
+<p>是的。Go规定一个方法的类型集合为所有实现了该方法的非接口类型的集合，这显然也是一个无限集合，如下图所示：</p>
+<p><img alt="图片" src="/assets/718b988210c0d36b79548994.jpg"/></p>
+<p>通过方法元素的类型集合，我们也可以合理解释仅包含多个方法的常规接口类型的类型集合，那就是这些方法元素的类型集合的交集，即所有实现了这三个方法的类型所组成的集合。</p>
+<p>最后我们再来看看类型元素。类型元素的类型集合相对来说是最好理解的，每个类型元素的类型集合就是其表示的所有类型组成的集合。如果是~T形式，则集合中不仅包含T本身，还包含所有以T为底层类型的类型。如果使用Union element，则类型集合是所有竖线“|”连接的类型的类型集合的并集。</p>
+<p>讲了这么多，我们来做个稍复杂些的实例分析，我们来分析一下下面接口类型I的类型集合：</p>
+<pre><code class="language-plain">type Intf1 interface {
+    ~int | string
+	F1()
+	F2()
+}
+
+type Intf2 interface {
+	~int | ~float64
+}
+
+type I interface {
+    Intf1 
+    M1()
+    M2()
+    int | ~string | Intf2
+}
+</code></pre>
+<p>我们看到，接口类型I由四个接口元素组成，分别是Intf1、M1、M2和Union element “int | ~string | Intf2”，我们只要分别求出这四个元素的类型集合，再取一个交集即可。</p>
+<ul>
+<li><strong>Intf1的类型集合</strong></li>
+</ul>
+<p>Intf1是接口类型I的一个嵌入接口，它自身也是由三个接口元素组成，它的类型集合为这三个接口元素的交集，即{以int为底层类型的所有类型、string、实现了F1和F2方法的所有类型}。</p>
+<ul>
+<li><strong>M1和M2的类型集合</strong></li>
+</ul>
+<p>就像前面所说的，方法的类型集合是由所有实现该方法的类型组成的，因此M1的方法集合为{实现了M1的所有类型}，M2的方法集合为{实现了M2的所有类型}。</p>
+<ul>
+<li><strong>int | ~string | Intf2 的类型集合</strong></li>
+</ul>
+<p>这是一个类型元素，它的类型集合为int、~string和Intf2方法集合的并集。int类型集合就是{int}，~string的类型集合为{以string为底层类型的所有类型}，而Intf2的方法集合为{以int为底层类型的所有类型，以float64为底层类型的所有类型}。</p>
+<p>为了更好地说明最终类型集合是如何取得的，我们在下面再列一下各个接口元素的类型集合：</p>
+<ul>
+<li>Intf1的类型集合：{以int为底层类型的所有类型、string、实现了F1和F2方法的所有类型}；</li>
+<li>M1的类型集合：{实现了M1的所有类型}；</li>
+<li>M2的类型集合：{实现了M2的所有类型}；</li>
+<li>int | ~string | Intf2 的类型集合：{以 int 为底层类型的所有类型，以 float64 为底层类型的所有类型，以string为底层类型的所有类型}。</li>
+</ul>
+<p>接下来我们取一下上面集合的交集，也就是{以int为底层类型的且实现了F1、F2、M1、M2这个四个方法的所有类型}。</p>
+<p>现在我们用代码来验证一下：</p>
+<pre><code class="language-plain">// typeset.go
+
+func doSomething[T I](t T) {
+}
+
+type MyInt int
+
+func (MyInt) F1() {
+}
+func (MyInt) F2() {
+}
+func (MyInt) M1() {
+}
+func (MyInt) M2() {
+}
+
+func main() {
+    var a int = 11
+    //doSomething(a) //int does not implement I (missing F1 method)
+
+    var b = MyInt(a)
+    doSomething(b) // ok
+}
+</code></pre>
+<p>如上代码，我们定义了一个以int为底层类型的自定义类型MyInt并实现了四个方法，这样MyInt就满足了泛型函数doSomething中约束I的要求，可以作为类型实参传递。</p>
+<h3 id="简化版的约束形式">简化版的约束形式</h3>
+<p>在前面的讲解和示例中，泛型参数的约束都是一个完整的接口类型，要么是独立定义在泛型函数外面（比如下面代码中的I接口），要么以接口字面值的形式，直接放在类型参数列表中对类型参数进行约束，比如下面示例中doSomething2类型参数列表中的接口类型字面值：</p>
+<pre><code class="language-plain">type I interface { // 独立于泛型函数外面定义
+    ~int | ~string
+}
+
+func doSomething1[T I](t T)
+func doSomething2[T interface{~int | ~string}](t T) // 以接口类型字面值作为约束
+</code></pre>
+<p>但在<strong>约束对应的接口类型中仅有一个接口元素，且该元素为类型元素</strong>时，Go提供了简化版的约束形式，我们不必将约束独立定义为一个接口类型，比如上面的doSomething2可以简写为下面简化形式：</p>
+<pre><code class="language-plain">func doSomething2[T ~int | ~string](t T) // 简化版的约束形式
+</code></pre>
+<p>你看，这个简化版的约束形式就是去掉了interface关键字和外围的大括号，如果用一个一般形式来表述，那就是：</p>
+<pre><code class="language-plain">func doSomething[T interface {T1 | T2 | ... | Tn}](t T)
+
+等价于下面简化版的约束形式：
+
+func doSomething[T T1 | T2 | ... | Tn](t T) 
+</code></pre>
+<p>这种简化形式也可以理解为一种类型约束的语法糖。不过有一种情况要注意，那就是定义仅包含一个类型参数的泛型类型时，如果<strong>约束中仅有一个*int型类型元素</strong>，我们使用上述简化版形式就会有问题，比如：</p>
+<pre><code class="language-plain">type MyStruct [T * int]struct{} // 编译错误：undefined: T
+                                // 编译错误：int (type) is not an expression
+</code></pre>
+<p>当遇到这种情况时，Go编译器会将该语句理解为一个类型声明：MyStruct为新类型的名字，而其底层类型为[T * int]struct{}，即一个元素为空结构体类型的数组。</p>
+<p>那么怎么解决这个问题呢？目前有两种方案，一种是用完整形式的约束：</p>
+<pre><code class="language-plain">type MyStruct[T interface{*int}] struct{} 
+</code></pre>
+<p>另外一种则是在简化版约束的*int类型后面加上一个逗号：</p>
+<pre><code class="language-plain">type MyStruct[T *int,] struct{} 
+</code></pre>
+<p>最后我们再来说说与约束有关的类型推断。</p>
+<h3 id="约束的类型推断">约束的类型推断</h3>
+<p>在上一讲中，我们提到了在大多数情况下，我们都可以使用类型推断避免在调用泛型函数时显式传入类型实参，Go泛型可以根据泛型函数的实参推断出类型实参。但当我们遇到下面示例中的泛型函数时，光依靠函数类型实参的推断是无法完全推断出所有类型实参的：</p>
+<pre><code class="language-plain">func DoubleDefined[S ~[]E, E constraints.Integer](s S) S {
+</code></pre>
+<p>因为像DoubleDefined这样的泛型函数，其类型参数E在其常规参数列表中并未被用来声明输入参数，函数类型实参推断仅能根据传入的s的类型，推断出类型参数S的类型实参，E是无法推断出来的。</p>
+<p>所以为了进一步避免开发者显式传入类型实参，Go泛型支持了约束类型推断（constraint type inference），即基于一个已知的类型实参（已经由函数类型实参推断判断出来了），来推断其他类型参数的类型。</p>
+<p>我们还以上面DoubleDefined这个泛型函数为例，当通过实参推断得到类型S后，Go会尝试启动约束类型推断来推断类型参数E的类型。但你可能也看出来了，约束类型推断可成功应用的前提是<strong>S是由E所表示的</strong>。</p>
+<h3 id="小结">小结</h3>
+<p>好了，今天的课讲到这里就结束了，现在我们一起来回顾一下吧。</p>
+<p>这一讲我们聚焦在Go泛型的一个难点，约束上面。我们先从Go泛型内置的约束any和comparable入手，充分了解了约束对于泛型函数的类型参数以及泛型函数中的实现代码的限制与影响。然后，我们学习如何自定义约束，知道了因为Go不支持操作符重载，单纯依赖基于行为的接口类型(仅包含方法元素)作约束是无法满足泛型函数的要求的。这样我们进一步学习了Go接口类型的扩展语法：支持类型元素。</p>
+<p>既有方法元素，也有类型元素，对于作为约束的非基本接口类型，我们就不能像以前那样仅凭是否实现方法集合来判断是否实现了该接口，新的判定手段为<strong>类型集合</strong>。</p>
+<p>类型集合并没有改变什么，只是对哪些类型实现了某接口类型进行了重新解释。并且，类型集合不是一个运行时概念，我们目前还无法通过运行时反射直观看到一个接口类型的类型集合是什么！</p>
+<p>Go内置了像any、comparable的约束，后续随着Go核心团队在Go泛型使用上的经验的逐渐丰富，Go标准库中会增加更多可直接使用的约束。原计划在Go 1.18版本加入Go标准库的一些泛型约束的定义暂放在了<a href="https://github.com/golang/exp/blob/master/constraints/constraints.go" target="_blank">Go实验仓库</a>中，你可以自行参考。</p>
+<h3 id="思考题">思考题</h3>
+<p>在typeset.go那个示例中，如果将Intf1由：</p>
+<pre><code class="language-plain">type Intf1 interface {
+    ~int | string
+	F1()
+	F2()
+}
+</code></pre>
+<p>改为：</p>
+<pre><code class="language-plain">type Intf1 interface {
+    int | string
+	F1()
+	F2()
+}
+</code></pre>
+<p>那么接口类型I的类型集合变成了什么呢？请你思考一下。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

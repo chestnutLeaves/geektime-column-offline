@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>38  都说InnoDB好，那还要不要使用Memory引擎？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/index.html">MySQL实战45讲</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">48 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>MySQL实战45讲</strong><ul><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E8%BF%99%E4%B8%80%E6%AC%A1%EF%BC%8C%E8%AE%A9%E6%88%91%E4%BB%AC%E4%B8%80%E8%B5%B7%E6%9D%A5%E6%90%9E%E6%87%82MySQL.html">00 开篇词  这一次，让我们一起来搞懂MySQL</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/01%20%20%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%EF%BC%9A%E4%B8%80%E6%9D%A1SQL%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F.html">01  基础架构：一条SQL查询语句是如何执行的？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/02%20%20%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%EF%BC%9A%E4%B8%80%E6%9D%A1SQL%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F.html">02  日志系统：一条SQL更新语句是如何执行的？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/03%20%20%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E6%94%B9%E4%BA%86%E6%88%91%E8%BF%98%E7%9C%8B%E4%B8%8D%E8%A7%81%EF%BC%9F.html">03  事务隔离：为什么你改了我还看不见？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/04%20%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8A%EF%BC%89.html">04  深入浅出索引（上）</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/05%20%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8B%EF%BC%89.html">05  深入浅出索引（下）</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/06%20%20%E5%85%A8%E5%B1%80%E9%94%81%E5%92%8C%E8%A1%A8%E9%94%81%20%EF%BC%9A%E7%BB%99%E8%A1%A8%E5%8A%A0%E4%B8%AA%E5%AD%97%E6%AE%B5%E6%80%8E%E4%B9%88%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E9%98%BB%E7%A2%8D%EF%BC%9F.html">06  全局锁和表锁 ：给表加个字段怎么有这么多阻碍？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/07%20%20%E8%A1%8C%E9%94%81%E5%8A%9F%E8%BF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E5%87%8F%E5%B0%91%E8%A1%8C%E9%94%81%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9F.html">07  行锁功过：怎么减少行锁对性能的影响？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/08%20%20%E4%BA%8B%E5%8A%A1%E5%88%B0%E5%BA%95%E6%98%AF%E9%9A%94%E7%A6%BB%E7%9A%84%E8%BF%98%E6%98%AF%E4%B8%8D%E9%9A%94%E7%A6%BB%E7%9A%84%EF%BC%9F.html">08  事务到底是隔离的还是不隔离的？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/09%20%20%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%E5%92%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%EF%BC%9F.html">09  普通索引和唯一索引，应该怎么选择？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/10%20%20MySQL%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E6%97%B6%E5%80%99%E4%BC%9A%E9%80%89%E9%94%99%E7%B4%A2%E5%BC%95%EF%BC%9F.html">10  MySQL为什么有时候会选错索引？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/11%20%20%E6%80%8E%E4%B9%88%E7%BB%99%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E6%AE%B5%E5%8A%A0%E7%B4%A2%E5%BC%95%EF%BC%9F.html">11  怎么给字符串字段加索引？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/12%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84MySQL%E4%BC%9A%E2%80%9C%E6%8A%96%E2%80%9D%E4%B8%80%E4%B8%8B%EF%BC%9F.html">12  为什么我的MySQL会“抖”一下？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/13%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E6%8E%89%E4%B8%80%E5%8D%8A%EF%BC%8C%E8%A1%A8%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98%EF%BC%9F.html">13  为什么表数据删掉一半，表文件大小不变？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/14%20%20count%28%29%E8%BF%99%E4%B9%88%E6%85%A2%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">14  count()这么慢，我该怎么办？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/15%20%20%E7%AD%94%E7%96%91%E6%96%87%E7%AB%A0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%97%A5%E5%BF%97%E5%92%8C%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.html">15  答疑文章（一）：日志和索引相关问题</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/16%20%20%E2%80%9Corder%20by%E2%80%9D%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">16  “order by”是怎么工作的？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/17%20%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%9C%B0%E6%98%BE%E7%A4%BA%E9%9A%8F%E6%9C%BA%E6%B6%88%E6%81%AF%EF%BC%9F.html">17  如何正确地显示随机消息？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/18%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%BA%9BSQL%E8%AF%AD%E5%8F%A5%E9%80%BB%E8%BE%91%E7%9B%B8%E5%90%8C%EF%BC%8C%E6%80%A7%E8%83%BD%E5%8D%B4%E5%B7%AE%E5%BC%82%E5%B7%A8%E5%A4%A7%EF%BC%9F.html">18  为什么这些SQL语句逻辑相同，性能却差异巨大？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/19%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%8F%AA%E6%9F%A5%E4%B8%80%E8%A1%8C%E7%9A%84%E8%AF%AD%E5%8F%A5%EF%BC%8C%E4%B9%9F%E6%89%A7%E8%A1%8C%E8%BF%99%E4%B9%88%E6%85%A2%EF%BC%9F.html">19  为什么我只查一行的语句，也执行这么慢？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/20%20%20%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">20  幻读是什么，幻读有什么问题？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/21%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%8F%AA%E6%94%B9%E4%B8%80%E8%A1%8C%E7%9A%84%E8%AF%AD%E5%8F%A5%EF%BC%8C%E9%94%81%E8%BF%99%E4%B9%88%E5%A4%9A%EF%BC%9F.html">21  为什么我只改一行的语句，锁这么多？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/22%20%20MySQL%E6%9C%89%E5%93%AA%E4%BA%9B%E2%80%9C%E9%A5%AE%E9%B8%A9%E6%AD%A2%E6%B8%B4%E2%80%9D%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F.html">22  MySQL有哪些“饮鸩止渴”提高性能的方法？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/23%20%20MySQL%E6%98%AF%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%E7%9A%84%EF%BC%9F.html">23  MySQL是怎么保证数据不丢的？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/24%20%20MySQL%E6%98%AF%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E4%B8%BB%E5%A4%87%E4%B8%80%E8%87%B4%E7%9A%84%EF%BC%9F.html">24  MySQL是怎么保证主备一致的？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/25%20%20MySQL%E6%98%AF%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84%EF%BC%9F.html">25  MySQL是怎么保证高可用的？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/26%20%20%E5%A4%87%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BB%B6%E8%BF%9F%E5%A5%BD%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%97%B6%EF%BC%9F.html">26  备库为什么会延迟好几个小时？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/27%20%20%E4%B8%BB%E5%BA%93%E5%87%BA%E9%97%AE%E9%A2%98%E4%BA%86%EF%BC%8C%E4%BB%8E%E5%BA%93%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">27  主库出问题了，从库怎么办？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/28%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91%EF%BC%9F.html">28  读写分离有哪些坑？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/29%20%20%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E6%98%AF%E4%B8%8D%E6%98%AF%E5%87%BA%E9%97%AE%E9%A2%98%E4%BA%86%EF%BC%9F.html">29  如何判断一个数据库是不是出问题了？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/30%20%20%E7%AD%94%E7%96%91%E6%96%87%E7%AB%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%94%A8%E5%8A%A8%E6%80%81%E7%9A%84%E8%A7%82%E7%82%B9%E7%9C%8B%E5%8A%A0%E9%94%81.html">30  答疑文章（二）：用动态的观点看加锁</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/31%20%20%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E5%90%8E%E9%99%A4%E4%BA%86%E8%B7%91%E8%B7%AF%EF%BC%8C%E8%BF%98%E8%83%BD%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">31  误删数据后除了跑路，还能怎么办？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/32%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%9C%89kill%E4%B8%8D%E6%8E%89%E7%9A%84%E8%AF%AD%E5%8F%A5%EF%BC%9F.html">32  为什么还有kill不掉的语句？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/33%20%20%E6%88%91%E6%9F%A5%E8%BF%99%E4%B9%88%E5%A4%9A%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BC%9A%E4%B8%8D%E4%BC%9A%E6%8A%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E5%86%85%E5%AD%98%E6%89%93%E7%88%86%EF%BC%9F.html">33  我查这么多数据，会不会把数据库内存打爆？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/34%20%20%E5%88%B0%E5%BA%95%E5%8F%AF%E4%B8%8D%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8join%EF%BC%9F.html">34  到底可不可以使用join？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/35%20%20join%E8%AF%AD%E5%8F%A5%E6%80%8E%E4%B9%88%E4%BC%98%E5%8C%96%EF%BC%9F.html">35  join语句怎么优化？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/36%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%B4%E6%97%B6%E8%A1%A8%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%90%8D%EF%BC%9F.html">36  为什么临时表可以重名？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/37%20%20%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BC%9A%E4%BD%BF%E7%94%A8%E5%86%85%E9%83%A8%E4%B8%B4%E6%97%B6%E8%A1%A8%EF%BC%9F.html">37  什么时候会使用内部临时表？</a></li><li><a class="active" aria-current="page" href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/38%20%20%E9%83%BD%E8%AF%B4InnoDB%E5%A5%BD%EF%BC%8C%E9%82%A3%E8%BF%98%E8%A6%81%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8Memory%E5%BC%95%E6%93%8E%EF%BC%9F.html">38  都说InnoDB好，那还要不要使用Memory引擎？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/39%20%20%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E8%BF%9E%E7%BB%AD%E7%9A%84%EF%BC%9F.html">39  自增主键为什么不是连续的？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/40%20%20insert%E8%AF%AD%E5%8F%A5%E7%9A%84%E9%94%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%A4%9A%EF%BC%9F.html">40  insert语句的锁为什么这么多？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/41%20%20%E6%80%8E%E4%B9%88%E6%9C%80%E5%BF%AB%E5%9C%B0%E5%A4%8D%E5%88%B6%E4%B8%80%E5%BC%A0%E8%A1%A8%EF%BC%9F.html">41  怎么最快地复制一张表？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/42%20%20grant%E4%B9%8B%E5%90%8E%E8%A6%81%E8%B7%9F%E7%9D%80flush%20privileges%E5%90%97%EF%BC%9F.html">42  grant之后要跟着flush privileges吗？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/43%20%20%E8%A6%81%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%88%86%E5%8C%BA%E8%A1%A8%EF%BC%9F.html">43  要不要使用分区表？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/44%20%20%E7%AD%94%E7%96%91%E6%96%87%E7%AB%A0%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%AF%B4%E4%B8%80%E8%AF%B4%E8%BF%99%E4%BA%9B%E5%A5%BD%E9%97%AE%E9%A2%98.html">44  答疑文章（三）：说一说这些好问题</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/45%20%20%E8%87%AA%E5%A2%9Eid%E7%94%A8%E5%AE%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">45  自增id用完怎么办？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/%E6%88%91%E7%9A%84MySQL%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B.html">我的MySQL心路历程</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E7%82%B9%E7%BA%BF%E7%BD%91%E9%9D%A2%EF%BC%8C%E4%B8%80%E8%B5%B7%E6%9E%84%E5%BB%BAMySQL%E7%9F%A5%E8%AF%86%E7%BD%91%E7%BB%9C.html">结束语  点线网面，一起构建MySQL知识网络</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/MySQL%E5%AE%9E%E6%88%9845%E8%AE%B2/38%20%20%E9%83%BD%E8%AF%B4InnoDB%E5%A5%BD%EF%BC%8C%E9%82%A3%E8%BF%98%E8%A6%81%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8Memory%E5%BC%95%E6%93%8E%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="38  都说InnoDB好，那还要不要使用Memory引擎？" id="title">38  都说InnoDB好，那还要不要使用Memory引擎？</h1>
+<div><p>我在上一篇文章末尾留给你的问题是：两个 group by 语句都用了 order by null，为什么使用内存临时表得到的语句结果里，0 这个值在最后一行；而使用磁盘临时表得到的结果里，0 这个值在第一行？</p>
+<p>今天我们就来看看，出现这个问题的原因吧。</p>
+<h1 id="内存表的数据组织结构">内存表的数据组织结构</h1>
+<p>为了便于分析，我来把这个问题简化一下，假设有以下的两张表 t1 和 t2，其中表 t1 使用 Memory 引擎， 表 t2 使用 InnoDB 引擎。</p>
+<pre><code>create table t1(id int primary key, c int) engine=Memory;
+create table t2(id int primary key, c int) engine=innodb;
+insert into t1 values(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(0,0);
+insert into t2 values(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(0,0);
+</code></pre>
+<p>然后，我分别执行 select * from t1 和 select * from t2。</p>
+<p><img alt="img" src="/assets/90327c1a986b4113772cc042.png"/></p>
+<p>图 1 两个查询结果 -0 的位置</p>
+<p>可以看到，内存表 t1 的返回结果里面 0 在最后一行，而 InnoDB 表 t2 的返回结果里 0 在第一行。</p>
+<p>出现这个区别的原因，要从这两个引擎的主键索引的组织方式说起。</p>
+<p>表 t2 用的是 InnoDB 引擎，它的主键索引 id 的组织方式，你已经很熟悉了：InnoDB 表的数据就放在主键索引树上，主键索引是 B+ 树。所以表 t2 的数据组织方式如下图所示：</p>
+<p><img alt="img" src="/assets/e67da834b3d1af434c6fc27d.jpg"/></p>
+<p>图 2 表 t2 的数据组织</p>
+<p>主键索引上的值是有序存储的。在执行 select * 的时候，就会按照叶子节点从左到右扫描，所以得到的结果里，0 就出现在第一行。</p>
+<p>与 InnoDB 引擎不同，Memory 引擎的数据和索引是分开的。我们来看一下表 t1 中的数据内容。</p>
+<p><img alt="img" src="/assets/a6b5b4c795828c1e4ff52e1b.jpg"/></p>
+<p>图 3 表 t1 的数据组织</p>
+<p>可以看到，内存表的数据部分以数组的方式单独存放，而主键 id 索引里，存的是每个数据的位置。主键 id 是 hash 索引，可以看到索引上的 key 并不是有序的。</p>
+<p>在内存表 t1 中，当我执行 select * 的时候，走的是全表扫描，也就是顺序扫描这个数组。因此，0 就是最后一个被读到，并放入结果集的数据。</p>
+<p>可见，InnoDB 和 Memory 引擎的数据组织方式是不同的：</p>
+<ul>
+<li>InnoDB 引擎把数据放在主键索引上，其他索引上保存的是主键 id。这种方式，我们称之为<strong>索引组织表</strong>（Index Organizied Table）。</li>
+<li>而 Memory 引擎采用的是把数据单独存放，索引上保存数据位置的数据组织形式，我们称之为<strong>堆组织表</strong>（Heap Organizied Table）。</li>
+</ul>
+<p>从中我们可以看出，这两个引擎的一些典型不同：</p>
+<ol>
+<li>InnoDB 表的数据总是有序存放的，而内存表的数据就是按照写入顺序存放的；</li>
+<li>当数据文件有空洞的时候，InnoDB 表在插入新数据的时候，为了保证数据有序性，只能在固定的位置写入新值，而内存表找到空位就可以插入新值；</li>
+<li>数据位置发生变化的时候，InnoDB 表只需要修改主键索引，而内存表需要修改所有索引；</li>
+<li>InnoDB 表用主键索引查询时需要走一次索引查找，用普通索引查询的时候，需要走两次索引查找。而内存表没有这个区别，所有索引的“地位”都是相同的。</li>
+<li>InnoDB 支持变长数据类型，不同记录的长度可能不同；内存表不支持 Blob 和 Text 字段，并且即使定义了 varchar(N)，实际也当作 char(N)，也就是固定长度字符串来存储，因此内存表的每行数据长度相同。</li>
+</ol>
+<p>由于内存表的这些特性，每个数据行被删除以后，空出的这个位置都可以被接下来要插入的数据复用。比如，如果要在表 t1 中执行：</p>
+<pre><code>delete from t1 where id=5;
+insert into t1 values(10,10);
+select * from t1;
+</code></pre>
+<p>就会看到返回结果里，id=10 这一行出现在 id=4 之后，也就是原来 id=5 这行数据的位置。</p>
+<p>需要指出的是，表 t1 的这个主键索引是哈希索引，因此如果执行范围查询，比如</p>
+<pre><code>select * from t1 where id&lt;5;
+</code></pre>
+<p>是用不上主键索引的，需要走全表扫描。你可以借此再回顾下[第 4 篇文章]的内容。那如果要让内存表支持范围扫描，应该怎么办呢 ？</p>
+<h1 id="hash-索引和-b-tree-索引">hash 索引和 B-Tree 索引</h1>
+<p>实际上，内存表也是支 B-Tree 索引的。在 id 列上创建一个 B-Tree 索引，SQL 语句可以这么写：</p>
+<pre><code>alter table t1 add index a_btree_index using btree (id);
+</code></pre>
+<p>这时，表 t1 的数据组织形式就变成了这样：</p>
+<p><img alt="img" src="/assets/e69a618c2ad240056a54a672.jpg"/></p>
+<p>图 4 表 t1 的数据组织 – 增加 B-Tree 索引</p>
+<p>新增的这个 B-Tree 索引你看着就眼熟了，这跟 InnoDB 的 b+ 树索引组织形式类似。</p>
+<p>作为对比，你可以看一下这下面这两个语句的输出：</p>
+<p><img alt="img" src="/assets/3acb8d26df58a038df586fde.png"/></p>
+<p>图 5 使用 B-Tree 和 hash 索引查询返回结果对比</p>
+<p>可以看到，执行 select * from t1 where id 的时候，优化器会选择 B-Tree 索引，所以返回结果是 0 到 4。 使用 force index 强行使用主键 id 这个索引，id=0 这一行就在结果集的最末尾了。</p>
+<p>其实，一般在我们的印象中，内存表的优势是速度快，其中的一个原因就是 Memory 引擎支持 hash 索引。当然，更重要的原因是，内存表的所有数据都保存在内存，而内存的读写速度总是比磁盘快。</p>
+<p>但是，接下来我要跟你说明，为什么我不建议你在生产环境上使用内存表。这里的原因主要包括两个方面：</p>
+<ol>
+<li>锁粒度问题；</li>
+<li>数据持久化问题。</li>
+</ol>
+<h1 id="内存表的锁">内存表的锁</h1>
+<p>我们先来说说内存表的锁粒度问题。</p>
+<p>内存表不支持行锁，只支持表锁。因此，一张表只要有更新，就会堵住其他所有在这个表上的读写操作。</p>
+<p>需要注意的是，这里的表锁跟之前我们介绍过的 MDL 锁不同，但都是表级的锁。接下来，我通过下面这个场景，跟你模拟一下内存表的表级锁。</p>
+<p><img alt="img" src="/assets/75d307e152c69ee41bcd6253.png"/></p>
+<p>图 6 内存表的表锁 – 复现步骤</p>
+<p>在这个执行序列里，session A 的 update 语句要执行 50 秒，在这个语句执行期间 session B 的查询会进入锁等待状态。session C 的 show processlist 结果输出如下：</p>
+<p><img alt="img" src="/assets/dfd2dfe253c5970983afe93b.png"/></p>
+<p>图 7 内存表的表锁 – 结果</p>
+<p>跟行锁比起来，表锁对并发访问的支持不够好。所以，内存表的锁粒度问题，决定了它在处理并发事务的时候，性能也不会太好。</p>
+<h1 id="数据持久性问题">数据持久性问题</h1>
+<p>接下来，我们再看看数据持久性的问题。</p>
+<p>数据放在内存中，是内存表的优势，但也是一个劣势。因为，数据库重启的时候，所有的内存表都会被清空。</p>
+<p>你可能会说，如果数据库异常重启，内存表被清空也就清空了，不会有什么问题啊。但是，在高可用架构下，内存表的这个特点简直可以当做 bug 来看待了。为什么这么说呢？</p>
+<p><strong>我们先看看 M-S 架构下，使用内存表存在的问题。</strong></p>
+<p><img alt="img" src="/assets/97471427a7a2d25e6e92738e.jpg"/></p>
+<p>图 8 M-S 基本架构</p>
+<p>我们来看一下下面这个时序：</p>
+<ol>
+<li>业务正常访问主库；</li>
+<li>备库硬件升级，备库重启，内存表 t1 内容被清空；</li>
+<li>备库重启后，客户端发送一条 update 语句，修改表 t1 的数据行，这时备库应用线程就会报错“找不到要更新的行”。</li>
+</ol>
+<p>这样就会导致主备同步停止。当然，如果这时候发生主备切换的话，客户端会看到，表 t1 的数据“丢失”了。</p>
+<p>在图 8 中这种有 proxy 的架构里，大家默认主备切换的逻辑是由数据库系统自己维护的。这样对客户端来说，就是“网络断开，重连之后，发现内存表数据丢失了”。</p>
+<p>你可能说这还好啊，毕竟主备发生切换，连接会断开，业务端能够感知到异常。</p>
+<p>但是，接下来内存表的这个特性就会让使用现象显得更“诡异”了。由于 MySQL 知道重启之后，内存表的数据会丢失。所以，担心主库重启之后，出现主备不一致，MySQL 在实现上做了这样一件事儿：在数据库重启之后，往 binlog 里面写入一行 DELETE FROM t1。</p>
+<p><strong>如果你使用是如图 9 所示的双 M 结构的话：</strong></p>
+<p><img alt="img" src="/assets/ca600777b7d38f799d4ade88.jpg"/></p>
+<p>图 9 双 M 结构</p>
+<p>在备库重启的时候，备库 binlog 里的 delete 语句就会传到主库，然后把主库内存表的内容删除。这样你在使用的时候就会发现，主库的内存表数据突然被清空了。</p>
+<p>基于上面的分析，你可以看到，内存表并不适合在生产环境上作为普通数据表使用。</p>
+<p>有同学会说，但是内存表执行速度快呀。这个问题，其实你可以这么分析：</p>
+<ol>
+<li>如果你的表更新量大，那么并发度是一个很重要的参考指标，InnoDB 支持行锁，并发度比内存表好；</li>
+<li>能放到内存表的数据量都不大。如果你考虑的是读的性能，一个读 QPS 很高并且数据量不大的表，即使是使用 InnoDB，数据也是都会缓存在 InnoDB Buffer Pool 里的。因此，使用 InnoDB 表的读性能也不会差。</li>
+</ol>
+<p>所以，<strong>我建议你把普通内存表都用 InnoDB 表来代替。</strong>但是，有一个场景却是例外的。</p>
+<p>这个场景就是，我们在第 35 和 36 篇说到的用户临时表。在数据量可控，不会耗费过多内存的情况下，你可以考虑使用内存表。</p>
+<p>内存临时表刚好可以无视内存表的两个不足，主要是下面的三个原因：</p>
+<ol>
+<li>临时表不会被其他线程访问，没有并发性的问题；</li>
+<li>临时表重启后也是需要删除的，清空数据这个问题不存在；</li>
+<li>备库的临时表也不会影响主库的用户线程。</li>
+</ol>
+<p>现在，我们回过头再看一下第 35 篇 join 语句优化的例子，当时我建议的是创建一个 InnoDB 临时表，使用的语句序列是：</p>
+<pre><code>create temporary table temp_t(id int primary key, a int, b int, index(b))engine=innodb;
+insert into temp_t select * from t2 where b&gt;=1 and b&lt;=2000;
+select * from t1 join temp_t on (t1.b=temp_t.b);
+</code></pre>
+<p>了解了内存表的特性，你就知道了， 其实这里使用内存临时表的效果更好，原因有三个：</p>
+<ol>
+<li>相比于 InnoDB 表，使用内存表不需要写磁盘，往表 temp_t 的写数据的速度更快；</li>
+<li>索引 b 使用 hash 索引，查找的速度比 B-Tree 索引快；</li>
+<li>临时表数据只有 2000 行，占用的内存有限。</li>
+</ol>
+<p>因此，你可以对[第 35 篇文章]的语句序列做一个改写，将临时表 t1 改成内存临时表，并且在字段 b 上创建一个 hash 索引。</p>
+<pre><code>create temporary table temp_t(id int primary key, a int, b int, index (b))engine=memory;
+insert into temp_t select * from t2 where b&gt;=1 and b&lt;=2000;
+select * from t1 join temp_t on (t1.b=temp_t.b);
+</code></pre>
+<p><img alt="img" src="/assets/a000c859894252524d62563c.png"/></p>
+<p>图 10 使用内存临时表的执行效果</p>
+<p>可以看到，不论是导入数据的时间，还是执行 join 的时间，使用内存临时表的速度都比使用 InnoDB 临时表要更快一些。</p>
+<h1 id="小结">小结</h1>
+<p>今天这篇文章，我从“要不要使用内存表”这个问题展开，和你介绍了 Memory 引擎的几个特性。</p>
+<p>可以看到，由于重启会丢数据，如果一个备库重启，会导致主备同步线程停止；如果主库跟这个备库是双 M 架构，还可能导致主库的内存表数据被删掉。</p>
+<p>因此，在生产上，我不建议你使用普通内存表。</p>
+<p>如果你是 DBA，可以在建表的审核系统中增加这类规则，要求业务改用 InnoDB 表。我们在文中也分析了，其实 InnoDB 表性能还不错，而且数据安全也有保障。而内存表由于不支持行锁，更新语句会阻塞查询，性能也未必就如想象中那么好。</p>
+<p>基于内存表的特性，我们还分析了它的一个适用场景，就是内存临时表。内存表支持 hash 索引，这个特性利用起来，对复杂查询的加速效果还是很不错的。</p>
+<p>最后，我给你留一个问题吧。</p>
+<p>假设你刚刚接手的一个数据库上，真的发现了一个内存表。备库重启之后肯定是会导致备库的内存表数据被清空，进而导致主备同步停止。这时，最好的做法是将它修改成 InnoDB 引擎表。</p>
+<p>假设当时的业务场景暂时不允许你修改引擎，你可以加上什么自动化逻辑，来避免主备同步停止呢？</p>
+<p>你可以把你的思考和分析写在评论区，我会在下一篇文章的末尾跟你讨论这个问题。感谢你的收听，也欢迎你把这篇文章分享给更多的朋友一起阅读。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>08 资源指标数据统计的实现全解析（上） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">深入理解 Sentinel（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">21 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入理解 Sentinel（完）</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9A%E4%B8%80%E6%AC%A1%E6%9C%8D%E5%8A%A1%E9%9B%AA%E5%B4%A9%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E7%BB%8F%E5%8E%86.html">01 开篇词：一次服务雪崩问题排查经历</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/02%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%A0%E7%A7%8D%E9%99%8D%E7%BA%A7%E6%96%B9%E5%BC%8F.html">02 为什么需要服务降级以及常见的几种降级方式</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%20Sentinel%EF%BC%8CSentinel%20%E4%B8%8E%20Hystrix%20%E7%9A%84%E5%AF%B9%E6%AF%94.html">03 为什么选择 Sentinel，Sentinel 与 Hystrix 的对比</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/04%20Sentinel%20%E5%9F%BA%E4%BA%8E%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E5%AE%9E%E6%97%B6%E6%8C%87%E6%A0%87%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1.html">04 Sentinel 基于滑动窗口的实时指标数据统计</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/05%20Sentinel%20%E7%9A%84%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B1%BB%E4%BB%8B%E7%BB%8D.html">05 Sentinel 的一些概念与核心类介绍</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/06%20Sentinel%20%E4%B8%AD%E7%9A%84%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E4%B8%8E%20Sentinel%20%E7%9A%84%E6%95%B4%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.html">06 Sentinel 中的责任链模式与 Sentinel 的整体工作流程</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/07%20Java%20SPI%20%E5%8F%8A%20SPI%20%E5%9C%A8%20Sentinel%20%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">07 Java SPI 及 SPI 在 Sentinel 中的应用</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E8%B5%84%E6%BA%90%E6%8C%87%E6%A0%87%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89.html">08 资源指标数据统计的实现全解析（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/09%20%E8%B5%84%E6%BA%90%E6%8C%87%E6%A0%87%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89.html">09 资源指标数据统计的实现全解析（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/10%20%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B5%81%E9%87%8F%E6%95%88%E6%9E%9C%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%88%E4%B8%8A%EF%BC%89.html">10 限流降级与流量效果控制器（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/11%20%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B5%81%E9%87%8F%E6%95%88%E6%9E%9C%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%88%E4%B8%AD%EF%BC%89.html">11 限流降级与流量效果控制器（中）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B5%81%E9%87%8F%E6%95%88%E6%9E%9C%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%88%E4%B8%8B%EF%BC%89.html">12 限流降级与流量效果控制器（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%87%AA%E9%80%82%E5%BA%94%E9%99%90%E6%B5%81.html">13 熔断降级与系统自适应限流</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/14%20%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E9%99%90%E6%B5%81%E4%B8%8E%E7%83%AD%E7%82%B9%E5%8F%82%E6%95%B0%E9%99%90%E6%B5%81.html">14 黑白名单限流与热点参数限流</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/15%20%E8%87%AA%E5%AE%9A%E4%B9%89%20ProcessorSlot%20%E5%AE%9E%E7%8E%B0%E5%BC%80%E5%85%B3%E9%99%8D%E7%BA%A7.html">15 自定义 ProcessorSlot 实现开关降级</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/16%20Sentinel%20%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%9A%E8%A7%84%E5%88%99%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE.html">16 Sentinel 动态数据源：规则动态配置</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/17%20Sentinel%20%E4%B8%BB%E6%B5%81%E6%A1%86%E6%9E%B6%E9%80%82%E9%85%8D.html">17 Sentinel 主流框架适配</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/18%20Sentinel%20%E9%9B%86%E7%BE%A4%E9%99%90%E6%B5%81%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">18 Sentinel 集群限流的实现（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/19%20Sentinel%20%E9%9B%86%E7%BE%A4%E9%99%90%E6%B5%81%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">19 Sentinel 集群限流的实现（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/20%20%E7%BB%93%E6%9D%9F%E8%AF%AD%EF%BC%9ASentinel%20%E5%AF%B9%E5%BA%94%E7%94%A8%E7%9A%84%E6%80%A7%E8%83%BD%E5%BD%B1%E5%93%8D%E5%A6%82%E4%BD%95%EF%BC%9F.html">20 结束语：Sentinel 对应用的性能影响如何？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/21%20%E7%95%AA%E5%A4%96%E7%AF%87%EF%BC%9ASentinel%201.8.0%20%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7%E6%96%B0%E7%89%B9%E6%80%A7%E8%A7%A3%E8%AF%BB.html">21 番外篇：Sentinel 1.8.0 熔断降级新特性解读</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E8%B5%84%E6%BA%90%E6%8C%87%E6%A0%87%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="08 资源指标数据统计的实现全解析（上）" id="title">08 资源指标数据统计的实现全解析（上）</h1>
+<div><h3 id="节点选择器-nodeselectorslot">节点选择器：NodeSelectorSlot</h3>
+<p>NodeSelectorSlot 负责为资源的首次访问创建 DefaultNode，以及维护 Context.curNode 和调用树。NodeSelectorSlot 被放在 ProcessorSlotChain 链表的第一个位置，这是因为后续的 ProcessorSlot 都需要依赖这个 ProcessorSlot。NodeSelectorSlot 源码如下：</p>
+<pre><code class="language-java">public class NodeSelectorSlot extends AbstractLinkedProcessorSlot&lt;Object&gt; {
+    // Context 的 name -&gt; 资源的 DefaultNode
+    private volatile Map&lt;String, DefaultNode&gt; map = new HashMap&lt;&gt;(10);
+    // 入口方法
+    @Override
+    public void entry(Context context, ResourceWrapper resourceWrapper, Object obj, int count, boolean prioritized, Object... args) throws Throwable {
+        // 使用 Context 的名称作为 key 缓存资源的 DefaultNode
+        DefaultNode node = map.get(context.getName());
+        if (node == null) {
+            synchronized (this) {
+                node = map.get(context.getName());
+                if (node == null) {
+                    // 为资源创建 DefaultNode
+                    node = new DefaultNode(resourceWrapper, null);
+                    // 替换 map
+                    HashMap&lt;String, DefaultNode&gt; cacheMap = new HashMap&lt;&gt;(map.size());
+                    cacheMap.putAll(map);
+                    cacheMap.put(context.getName(), node);
+                    map = cacheMap;
+                    // 绑定调用树
+                    ((DefaultNode) context.getLastNode()).addChild(node);
+                }
+            }
+        }
+        // 替换 Context 的 curNode 为当前 DefaultNode
+        context.setCurNode(node);
+        fireEntry(context, resourceWrapper, node, count, prioritized, args);
+    }
+
+    // 出口方法什么也不做
+    @Override
+    public void exit(Context context, ResourceWrapper resourceWrapper, int count, Object... args) {
+        fireExit(context, resourceWrapper, count, args);
+    }
+}
+
+</code></pre>
+<p>如源码所示，map 字段是一个非静态字段，意味着每个 NodeSelectorSlot 都有一个 map。由于一个资源对应一个 ProcessorSlotChain，而一个 ProcessorSlotChain 只创建一个 NodeSelectorSlot，并且 map 缓存 DefaultNode 使用的 key 并非资源 ID，而是 Context.name，所以 map 的作用是缓存针对同一资源为不同调用链路入口创建的 DefaultNode。</p>
+<p>在 entry 方法中，首先根据 Context.name 从 map 获取当前调用链路入口的资源 DefaultNode，如果资源第一次被访问，也就是资源的 ProcessorSlotChain 第一次被创建，那么这个 map 是空的，就会加锁为资源创建 DefaultNode，如果资源不是首次被访问，但却首次作为当前调用链路（Context）的入口资源，也需要加锁为资源创建一个 DefaultNode。可见，Sentinel 会为同一资源 ID 创建多少个 DefaultNode 取决于有多少个调用链使用其作为入口资源，直白点就是同一资源存在多少个 DefaultNode 取决于 Context.name 有多少种不同取值，这就是为什么说一个资源可能有多个 DefaultNode 的原因。</p>
+<p>为什么这么设计呢？</p>
+<p>举个例子，对同一支付接口，我们需要使用 Spring MVC 暴露给前端访问，同时也可能会使用 Dubbo 暴露给其它内部服务调用。Sentinel 的 Web MVC 适配器在调用链路入口创建名为“sentinel_spring_web_context”的 Context，与 Sentinel 的 Dubbo 适配器调用 ContextUtil#enter 方法创建的 Context 名称不同。针对这种情况，我们可以实现只限制 Spring MVC 进来的流量，也就是限制前端发起接口调用的 QPS、并行占用的线程数等。</p>
+<p>NodeSelectorSlot#entry 方法最难以理解的就是实现绑定调用树这行代码：</p>
+<pre><code class="language-java">((DefaultNode) context.getLastNode()).addChild(node);
+
+</code></pre>
+<p>这行代码分两种情况分析更容易理解，我们就以 Sentinel 提供的 Demo 为例进行分析。</p>
+<h4 id="一般情况"><strong>一般情况</strong></h4>
+<p>Sentinel 的 sentinel-demo 模块下提供了多种使用场景的 Demo，我们选择 sentinel-demo-spring-webmvc 这个 Demo 为例，该 Demo 下有一个 hello 接口，其代码如下。</p>
+<pre><code class="language-java">@RestController
+public class WebMvcTestController {
+
+    @GetMapping("/hello")
+    public String apiHello() throws BlockException {
+        doBusiness();
+        return "Hello!";
+    }
+}
+
+</code></pre>
+<p>我们不需要添加任何规则，只是为了调试 Sentinel 的源码。将 demo 启动起来后，在浏览器访问“/hello”接口，在 NodeSelectorSlot#entry 方法的绑定调用树这一行代码下断点，观察此时 Context 的字段信息。正常情况下我们可以看到如下图所示的结果。</p>
+<p><img alt="08-01-one01" src="/assets/0dc76b04215fb1e2c2c98159.png"/></p>
+<p>从上图中可以看出，此时的 Context.entranceNode 的子节点为空（childList 的大小为 0），并且当前 CtEntry 父、子节点都是 Null（curEntry 字段）。当绑定调用树这一行代码执行完成后，Context 的字段信息如下图所示：</p>
+<p><img alt="08-02-one02" src="/assets/baa88a5b6adda255f701a945.png"/></p>
+<p>从上图可以看出，NodeSelectorSlot 为当前资源创建的 DefaultNode 被添加到了 Context.entranceNode 的子节点。entranceNode 类型为 EntranceNode，在调用 ContextUtil#enter 方法时创建，在第一次创建名为“sentinel_spring_web_context”的 Context 时创建，相同名称的 Context 都使用同一个 EntranceNode。并且该 EntranceNode 在创建时会被添加到 Constant.ROOT。</p>
+<p>此时，Constant.ROOT、Context.entranceNode、当前访问资源的 DefaultNode 构造成的调用树如下：</p>
+<pre><code class="language-java">           ROOT (machine-root)
+                /
+      EntranceNode (context name: sentinel_spring_web_context)
+             /
+DefaultNode （resource name: GET:/hello）
+
+</code></pre>
+<p>如果我们现在再访问 Demo 的其他接口，例如访问“/err”接口，那么生成的调用树就会变成如下：</p>
+<pre><code class="language-java">                        ROOT (machine-root)
+                            /
+      EntranceNode (context name: sentinel_spring_web_context)
+                    /                                \
+DefaultNode （resource name: GET:/hello）     DefaultNode （resource name: GET:/err） 
+
+</code></pre>
+<p>Context.entranceNode 将会存储 Web 项目的所有资源（接口）的 DefaultNode。</p>
+<h4 id="存在多次-sphu-entry-的情况"><strong>存在多次 SphU#entry 的情况</strong></h4>
+<p>比如我们在一个服务中添加了 Sentinel 的 Web MVC 适配模块的依赖，也添加了 Sentinel 的 OpenFeign 适配模块的依赖，并且我们使用 OpenFeign 调用内部其他服务的接口，那么就会存在一次调用链路上出现多次调用 SphU#entry 方法的情况。</p>
+<p>首先 webmvc 适配器在接收客户端请求时会调用一次 SphU#entry，在处理客户端请求时可能需要使用 OpenFeign 调用其它服务的接口，那么在发起接口调用时，Sentinel 的 OpenFeign 适配器也会调用一次 SphU#entry。</p>
+<p>现在我们将 Demo 的 hello 接口修改一下，将 hello 接口调用的 doBusiness 方法也作为资源使用 Sentinel 保护起来，改造后的 hello 接口代码如下：</p>
+<pre><code class="language-java">@RestController
+public class WebMvcTestController {
+
+    @GetMapping("/hello")
+    public String apiHello() throws BlockException {
+        ContextUtil.enter("my_context");
+        Entry entry = null;
+        try {
+            entry = SphU.entry("POST:http://wujiuye.com/hello2", EntryType.OUT);
+            // ==== 这里是被包装的代码 =====
+            doBusiness();
+            return "Hello!";
+            // ==== end ===============
+        } catch (Exception e) {
+            if (!(e instanceof BlockException)) {
+                Tracer.trace(e);
+            }
+            throw e;
+        } finally {
+            if (entry != null) {
+                entry.exit(1);
+            }
+            ContextUtil.exit();
+        }
+    }
+}
+
+</code></pre>
+<p>我们可将 doBusiness 方法看成是远程调用，例如调用第三方的接口，接口名称为“<a href="http://wujiuye.com/hello2”，使用" target="_blank">http://wujiuye.com/hello2”，使用</a> POST 方式调用，那么我们可以使用“POST:<a href="http://wujiuye.com/hello2”作为资源名称，并将流量类型设置为" target="_blank">http://wujiuye.com/hello2”作为资源名称，并将流量类型设置为</a> OUT 类型。上下文名称取名为”my_context”。</p>
+<p>现在启动 demo，使用浏览器访问“/hello”接口。当代码执行到 apiHello 方法时，在 NodeSelectorSlot#entry 方法的绑定调用树这一行代码下断点。当绑定调用树这行代码执行完成后，Context 的字段信息如下图所示。</p>
+<p><img alt="08-03-two01" src="/assets/f7cccd72d3ffbf4e1b47bef2.png"/></p>
+<p>如图所示，Sentinel 并没有创建名称为 my_context 的 Context，还是使用应用接收到请求时创建名为“sentinel_spring_web_context”的 Context，所以处理浏览器发送过来的请求的“GET:/hello”资源是本次调用链路的入口资源，Sentinel 在调用链路入口处创建 Context 之后不再创建新的 Context。</p>
+<p>由于之前并没有为名称为“POST:<a href="http://wujiuye.com/hello2”的资源创建" target="_blank">http://wujiuye.com/hello2”的资源创建</a> ProcessorSlotChain，所以 SphU#entry 会为该资源创建一个 ProcessorSlotChain，也就会为该 ProcessorSlotChain 创建一个 NodeSelectorSlot。在执行到 NodeSelectorSlot#entry 方法时，就会为该资源创建一个 DefaultNode，而将该资源的 DefaultNode 绑定到节点树后，该资源的 DefaultNode 就会成为“GET:/hello”资源的 DefaultNode 的子节点，调用树如下。</p>
+<pre><code class="language-java">                    ROOT (machine-root)
+                    /
+    EntranceNode (name: sentinel_spring_web_context)
+                 /                       \
+          DefaultNode （GET:/hello）   .........
+               /
+         DefaultNode  (POST:/hello2)
+
+</code></pre>
+<p>此时，当前调用链路上也已经存在两个 CtEntry，这两个 CtEntry 构造一个双向链表，如下图所示。</p>
+<p><img alt="08-04-two02" src="/assets/858b86a3e80804b91fa46b89.png"/></p>
+<p>虽然存在两个 CtEntry，但此时 Context.curEntry 指向第二个 CtEntry，第二个 CtEntry 在 apiHello 方法中调用 SphU#entry 方法时创建，当执行完 doBusiness 方法后，调用当前 CtEntry#exit 方法，由该 CtEntry 将 Context.curEntry 还原为该 CtEntry 的父 CtEntry。这有点像入栈和出栈操作，例如栈帧在 Java 虚拟机栈的入栈和出栈，调用方法时方法的栈帧入栈，方法执行完成栈帧出栈。</p>
+<p>NodeSelectorSlot#entry 方法我们还有一行代码没有分析，就是将当前创建的 DefaultNode 设置为 Context 的当前节点，代码如下：</p>
+<pre><code class="language-java">// 替换 Context.curNode 为当前 DefaultNode
+context.setCurNode(node);
+
+</code></pre>
+<p>替换 Context.curNode 为当前资源 DefaultNode 这行代码就是将当前创建的 DefaultNode 赋值给当前 CtEntry.curNode。对着上图理解就是，将资源“GET:/hello”的 DefaultNode 赋值给第一个 CtEntry.curNode，将资源“POST:<a href="http://wujiuye.com/hello2”的" target="_blank">http://wujiuye.com/hello2”的</a> DefaultNode 赋值给第二个 CtEntry.curNode。</p>
+<p>要理解 Sentinel 构造 CtEntry 双向链表的目的，首先我们需要了解调用 Context#getCurNode 方法获取当前资源的 DefaultNode 可以做什么。</p>
+<p>Tracer#tracer 方法用于记录异常。以异常指标数据统计为例，在发生非 Block 异常时，Tracer#tracer 需要从 Context 获取当前资源的 DefaultNode，通知 DefaultNode 记录异常，同时 DefaultNode 也会通知 ClusterNode 记录记录，如下代码所示。</p>
+<pre><code class="language-java">public class DefaultNode extends StatisticNode {
+  ......
+  @Override
+    public void increaseExceptionQps(int count) {
+        super.increaseExceptionQps(count);
+        this.clusterNode.increaseExceptionQps(count);
+    }
+}
+
+</code></pre>
+<p>这个例子虽然简单，但也足以说明 Sentinel 构造 CtEntry 双向链表的目的。</p>
+<h3 id="clusternode-构造器-clusterbuilderslot">ClusterNode 构造器：ClusterBuilderSlot</h3>
+<h4 id="clusternode-出现的背景"><strong>ClusterNode 出现的背景</strong></h4>
+<p>在一个资源的 ProcessorSlotChain 中，NodeSelectorSlot 负责为资源创建 DefaultNode，这个 DefaultNode 仅限同名的 Context 使用。所以一个资源可能会存在多个 DefaultNode，那么想要获取一个资源的总的 QPS 就必须要遍历这些 DefaultNode。为了性能考虑，Sentinel 会为每个资源创建一个全局唯一的 ClusterNode，用于统计资源的全局并行占用线程数、QPS、异常总数等指标数据。</p>
+<h4 id="clusterbuilderslot"><strong>ClusterBuilderSlot</strong></h4>
+<p>与 NodeSelectorSlot 的职责相似，ClusterBuilderSlot 的职责是为资源创建全局唯一的 ClusterNode，仅在资源第一次被访问时创建。ClusterBuilderSlot 还会将 ClusterNode 赋值给 DefaultNode.clusterNode，由 DefaultNode 持有 ClusterNode，负责管理 ClusterNode 的指标数据统计。这点也是 ClusterBuilderSlot 在 ProcessorSlotChain 链表中必须排在 NodeSelectorSlot 之后的原因，即必须先有 DefaultNode，才能将 ClusterNode 交给 DefaultNode 管理。</p>
+<p>ClusterBuilderSlot 的源码比较多，本篇只分析其实现 ProcessorSlot 接口的 entry 和 exit 方法。ClusterBuilderSlot 删减后的源码如下。</p>
+<pre><code class="language-java">public class ClusterBuilderSlot extends AbstractLinkedProcessorSlot&lt;DefaultNode&gt; {
+    // 资源 -&gt; ClusterNode
+    private static volatile Map&lt;ResourceWrapper, ClusterNode&gt; clusterNodeMap = new HashMap&lt;&gt;();
+    private static final Object lock = new Object();
+
+    // 非静态，一个资源对应一个 ProcessorSlotChain，所以一个资源共用一个 ClusterNode
+    private volatile ClusterNode clusterNode = null;
+
+    @Override
+    public void entry(Context context, ResourceWrapper resourceWrapper, DefaultNode node, int count,
+                      boolean prioritized, Object... args)
+            throws Throwable {
+        if (clusterNode == null) {
+            synchronized (lock) {
+                if (clusterNode == null) {
+                    // 创建 ClusterNode
+                    clusterNode = new ClusterNode(resourceWrapper.getName(), resourceWrapper.getResourceType());
+                    // 添加到缓存
+                    HashMap&lt;ResourceWrapper, ClusterNode&gt; newMap = new HashMap&lt;&gt;(Math.max(clusterNodeMap.size(), 16));
+                    newMap.putAll(clusterNodeMap);
+                    newMap.put(node.getId(), clusterNode);
+                    clusterNodeMap = newMap;
+                }
+            }
+        }
+        // node 为 NodeSelectorSlot 传递过来的 DefaultNode
+        node.setClusterNode(clusterNode);
+        // 如果 origin 不为空，则为远程创建一个 StatisticNode
+        if (!"".equals(context.getOrigin())) {
+            Node originNode = node.getClusterNode().getOrCreateOriginNode(context.getOrigin());
+            context.getCurEntry().setOriginNode(originNode);
+        }
+        fireEntry(context, resourceWrapper, node, count, prioritized, args);
+    }
+
+    @Override
+    public void exit(Context context, ResourceWrapper resourceWrapper, int count, Object... args) {
+        fireExit(context, resourceWrapper, count, args);
+    }
+}
+
+</code></pre>
+<p>ClusterBuilderSlot 使用一个 Map 缓存资源的 ClusterNode，并且用一个非静态的字段维护当前资源的 ClusterNode。因为一个资源只会创建一个 ProcessorSlotChain，意味着 ClusterBuilderSlot 也只会创建一个，那么让 ClusterBuilderSlot 持有该资源的 ClusterNode 就可以省去每次都从 Map 中获取的步骤，这当然也是 Sentinel 为性能做出的努力。</p>
+<p>ClusterBuilderSlot#entry 方法的 node 参数由前一个 ProcessorSlot 传递过来，也就是 NodeSelectorSlot 传递过来的 DefaultNode。ClusterBuilderSlot 将 ClusterNode 赋值给 DefaultNode.clusterNode，那么后续的 ProcessorSlot 就能从 node 参数中取得 ClusterNode。DefaultNode 与 ClusterNode 的关系如下图所示。</p>
+<p><img alt="08-05-default-cluster" src="/assets/fdf025a7b607a08dc5cf1669.png"/></p>
+<p>ClusterNode 有一个 Map 类型的字段用来缓存 origin 与 StatisticNode 的映射，代码如下：</p>
+<pre><code class="language-java">public class ClusterNode extends StatisticNode {
+    private final String name;
+    private final int resourceType;
+    private Map&lt;String, StatisticNode&gt; originCountMap = new HashMap&lt;&gt;();
+}
+
+</code></pre>
+<p>如果上游服务在调用当前服务的接口传递 origin 字段过来，例如可在 http 请求头添加“S-user”参数，或者 Dubbo rpc 调用在请求参数列表加上“application”参数，那么 ClusterBuilderSlot 就会为 ClusterNode 创建一个 StatisticNode，用来统计当前资源被远程服务调用的指标数据。</p>
+<p>例如，当 origin 表示来源应用的名称时，对应的 StatisticNode 统计的就是针对该调用来源的指标数据，可用来查看哪个服务访问这个接口最频繁，由此可实现按调用来源限流。</p>
+<p>ClusterNode#getOrCreateOriginNode 方法源码如下：</p>
+<pre><code class="language-java">   public Node getOrCreateOriginNode(String origin) {
+        StatisticNode statisticNode = originCountMap.get(origin);
+        if (statisticNode == null) {
+            try {
+                lock.lock();
+                statisticNode = originCountMap.get(origin);
+                if (statisticNode == null) {
+                    statisticNode = new StatisticNode();
+                    // 这几行代码在 Sentinel 中随处可见
+                    HashMap&lt;String, StatisticNode&gt; newMap = new HashMap&lt;&gt;(originCountMap.size() + 1);
+                    newMap.putAll(originCountMap);
+                    newMap.put(origin, statisticNode);
+                    originCountMap = newMap;
+                }
+            } finally {
+                lock.unlock();
+            }
+        }
+        return statisticNode;
+    }
+
+</code></pre>
+<p>为了便于使用，ClusterBuilderSlot 会将调用来源（origin）的 StatisticNode 赋值给 Context.curEntry.originNode，后续的 ProcessorSlot 可调用 Context#getCurEntry#getOriginNode 方法获取该 StatisticNode。这里我们可以得出一个结论，如果我们自定义的 ProcessorSlot 需要用到调用来源的 StatisticNode，那么在构建 ProcessorSlotChain 时，我们必须要将这个自定义 ProcessorSlot 放在 ClusterBuilderSlot 之后。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

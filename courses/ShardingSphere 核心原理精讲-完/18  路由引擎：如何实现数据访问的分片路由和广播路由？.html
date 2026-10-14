@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>18  路由引擎：如何实现数据访问的分片路由和广播路由？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/index.html">ShardingSphere 核心原理精讲-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">36 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>ShardingSphere 核心原理精讲-完</strong><ul><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/00%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%AD%A6%E4%B9%A0%E4%B8%80%E6%AC%BE%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%EF%BC%9F.html">00 如何正确学习一款分库分表开源框架？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/01%20%20%E4%BB%8E%E7%90%86%E8%AE%BA%E5%88%B0%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%9C%9F%E6%AD%A3%E8%90%BD%E5%9C%B0%EF%BC%9F.html">01  从理论到实践：如何让分库分表真正落地？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/02%20%20%E9%A1%B6%E7%BA%A7%E9%A1%B9%E7%9B%AE%EF%BC%9AShardingSphere%20%E6%98%AF%E4%B8%80%E6%AC%BE%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%20Apache%20%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%EF%BC%9F.html">02  顶级项目：ShardingSphere 是一款什么样的 Apache 开源软件？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/03%20%20%E8%A7%84%E8%8C%83%E5%85%BC%E5%AE%B9%EF%BC%9AJDBC%20%E8%A7%84%E8%8C%83%E4%B8%8E%20ShardingSphere%20%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">03  规范兼容：JDBC 规范与 ShardingSphere 是什么关系？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/04%20%20%E5%BA%94%E7%94%A8%E9%9B%86%E6%88%90%EF%BC%9A%E5%9C%A8%E4%B8%9A%E5%8A%A1%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%BD%BF%E7%94%A8%20ShardingSphere%20%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">04  应用集成：在业务系统中使用 ShardingSphere 的方式有哪些？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/05%20%20%E9%85%8D%E7%BD%AE%E9%A9%B1%E5%8A%A8%EF%BC%9AShardingSphere%20%E4%B8%AD%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F.html">05  配置驱动：ShardingSphere 中的配置体系是如何设计的？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/06%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%BA%93%E3%80%81%E5%88%86%E8%A1%A8%E3%80%81%E5%88%86%E5%BA%93%2B%E5%88%86%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  数据分片：如何实现分库、分表、分库+分表以及强制路由？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/07%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%BA%93%E3%80%81%E5%88%86%E8%A1%A8%E3%80%81%E5%88%86%E5%BA%93%2B%E5%88%86%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  数据分片：如何实现分库、分表、分库+分表以及强制路由？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/08%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%2B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%EF%BC%9F.html">08  读写分离：如何集成分库分表+数据库主从架构？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/09%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E4%B8%8E%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">09  分布式事务：如何使用强一致性事务与柔性事务？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/10%20%20%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AE%89%E5%85%A8%E8%AE%BF%E9%97%AE%EF%BC%9F.html">10  数据脱敏：如何确保敏感数据的安全访问？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/11%20%20%E7%BC%96%E6%8E%92%E6%B2%BB%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%EF%BC%9F.html">11  编排治理：如何实现分布式环境下的动态配置管理？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/12%20%20%E4%BB%8E%E5%BA%94%E7%94%A8%E5%88%B0%E5%8E%9F%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E9%98%85%E8%AF%BB%20ShardingSphere%20%E6%BA%90%E7%A0%81%EF%BC%9F.html">12  从应用到原理：如何高效阅读 ShardingSphere 源码？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/13%20%20%E5%BE%AE%E5%86%85%E6%A0%B8%E6%9E%B6%E6%9E%84%EF%BC%9AShardingSphere%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%89%A9%E5%B1%95%E6%80%A7%EF%BC%9F.html">13  微内核架构：ShardingSphere 如何实现系统的扩展性？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/14%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%EF%BC%9AShardingSphere%20%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%9F.html">14  分布式主键：ShardingSphere 中有哪些分布式主键实现方式？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/15%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">15  解析引擎：SQL 解析流程应该包括哪些核心阶段？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/16%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">16  解析引擎：SQL 解析流程应该包括哪些核心阶段？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/17%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E6%A0%B8%E5%BF%83%E7%B1%BB%20ShardingRouter%20%E7%9A%84%E8%BF%90%E4%BD%9C%E6%9C%BA%E5%88%B6%EF%BC%9F.html">17  路由引擎：如何理解分片路由核心类 ShardingRouter 的运作机制？</a></li><li><a class="active" aria-current="page" href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/18%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E7%9A%84%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E5%92%8C%E5%B9%BF%E6%92%AD%E8%B7%AF%E7%94%B1%EF%BC%9F.html">18  路由引擎：如何实现数据访问的分片路由和广播路由？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/19%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E8%B7%AF%E7%94%B1%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%9B%86%E6%88%90%E5%A4%9A%E7%A7%8D%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%E5%92%8C%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%EF%BC%9F.html">19  路由引擎：如何在路由过程中集成多种路由策略和路由算法？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/20%20%20%E6%94%B9%E5%86%99%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%20SQL%20%E6%94%B9%E5%86%99%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%EF%BC%9F.html">20  改写引擎：如何理解装饰器模式下的 SQL 改写实现机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/21%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%88%86%E7%89%87%E7%8E%AF%E5%A2%83%E4%B8%8B%20SQL%20%E6%89%A7%E8%A1%8C%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%8A%BD%E8%B1%A1%EF%BC%9F.html">21  执行引擎：分片环境下 SQL 执行的整体流程应该如何进行抽象？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/22%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%20ShardingSphere%20%E4%B8%AD%E7%9A%84%20Executor%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">22  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/23%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%20ShardingSphere%20%E4%B8%AD%E7%9A%84%20Executor%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">23  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/24%20%20%E5%BD%92%E5%B9%B6%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BD%92%E5%B9%B6%E7%9A%84%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E7%AE%80%E5%8D%95%E5%BD%92%E5%B9%B6%E7%AD%96%E7%95%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%EF%BC%9F.html">24  归并引擎：如何理解数据归并的类型以及简单归并策略的实现过程？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/25%20%20%E5%BD%92%E5%B9%B6%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%B5%81%E5%BC%8F%E5%BD%92%E5%B9%B6%E5%92%8C%E5%86%85%E5%AD%98%E5%BD%92%E5%B9%B6%E5%9C%A8%E5%A4%8D%E6%9D%82%E5%BD%92%E5%B9%B6%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%9F.html">25  归并引擎：如何理解流式归并和内存归并在复杂归并场景下的应用方式？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/26%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E6%99%AE%E9%80%9A%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%92%8C%E5%88%86%E7%89%87%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%88%86%E5%88%AB%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">26  读写分离：普通主从架构和分片主从架构分别是如何实现的？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/27%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%20ShardingSphere%20%E4%B8%AD%E5%AF%B9%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%8A%BD%E8%B1%A1%E8%BF%87%E7%A8%8B%EF%BC%9F.html">27  分布式事务：如何理解 ShardingSphere 中对分布式事务的抽象过程？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/28%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">28  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/29%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">29  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/30%20%20%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%94%B9%E5%86%99%E5%BC%95%E6%93%8E%E5%AE%9E%E7%8E%B0%E4%BD%8E%E4%BE%B5%E5%85%A5%E6%80%A7%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%E6%96%B9%E6%A1%88%EF%BC%9F.html">30  数据脱敏：如何基于改写引擎实现低侵入性数据脱敏方案？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/31%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E7%9A%84%E5%8A%A8%E6%80%81%E5%8C%96%E7%AE%A1%E7%90%86%EF%BC%9F.html">31 配置中心：如何基于配置中心实现配置信息的动态化管理？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/32%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E7%86%94%E6%96%AD%E6%9C%BA%E5%88%B6%EF%BC%9F.html">32 注册中心：如何基于注册中心实现数据库访问熔断机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/33%20%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20Hook%20%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%20OpenTracing%20%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9F.html">33 链路跟踪：如何基于 Hook 机制以及 OpenTracing 协议实现数据访问链路跟踪？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/34%20%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%8C%E6%88%90%20ShardingSphere%20%E5%86%85%E6%A0%B8%E4%B8%8E%20Spring%2BSpringBoot%20%E7%9A%84%E6%97%A0%E7%BC%9D%E6%95%B4%E5%90%88%EF%BC%9F.html">34 系统集成：如何完成 ShardingSphere 内核与 Spring+SpringBoot 的无缝整合？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/35%20%E7%BB%93%E8%AF%AD%EF%BC%9AShardingSphere%20%E6%80%BB%E7%BB%93%E5%8F%8A%E5%B1%95%E6%9C%9B.html">35 结语：ShardingSphere 总结及展望</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/18%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E7%9A%84%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E5%92%8C%E5%B9%BF%E6%92%AD%E8%B7%AF%E7%94%B1%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="18  路由引擎：如何实现数据访问的分片路由和广播路由？" id="title">18  路由引擎：如何实现数据访问的分片路由和广播路由？</h1>
+<div><p>在上一课时中，我们看到起到承上启下作用的 ShardingRouter 会调用 RoutingEngine 获取路由结果，而在 ShardingSphere 中存在多种不同类型的 RoutingEngine，分别针对不同的应用场景。</p>
+<p>我们可以按照<strong>是否携带分片键信息</strong>将这些路由方式分成两大类，即分片路由和广播路由，而这两类路由中又存在一些常见的 RoutingEngine 实现类型，如下图所示：</p>
+<p><img alt="image" src="/assets/a858fb082a0131d197c524d6.png"/></p>
+<p>我们无意对所有这些 RoutingEngine 进行详细 的 展开，但在接下来的内容中，我们会分别对分片路由和广播路由中具有代表性的 RoutingEngine 进行讨论。</p>
+<h3 id="分片路由">分片路由</h3>
+<p>对于分片路由而言，我们将重点介绍<strong>标准路由</strong>，标准路由是 ShardingSphere 推荐使用的分片方式。</p>
+<p>在使用过程中，我们需要首先考虑标准路由的适用范围。标准路由适用范围有两大场景：一种面向不包含关联查询的 SQL；另一种则适用于仅包含绑定表关联查询的 SQL。前面一种场景比较好理解，而针对后者，我们就需要引入绑定表这个 ShardingSphere 中的重要概念。</p>
+<p>关于绑定表，我们已经在 [《06 | 数据分片：如何实现分库、分表、分库+分表以及强制路由（上）？》]中进行了讨论，在明确了这些概念之后，我们来看标准路由的具体实现过程。</p>
+<h4 id="1-standardroutingengine-的创建过程">1.StandardRoutingEngine 的创建过程</h4>
+<p>明确了标准路由的基本含义之后，我们回顾一下上一课时中介绍的工厂类 RoutingEngineFactory。RoutingEngineFactory 类根据上下文中的路由信息构建对应的 RoutingEngine，但在其 newInstance 方法中，我们并没有发现直接创建StandardRoutingEngine 的代码。事实上，StandardRoutingEngine 的创建是在 newInstance 方法中的最后一个代码分支，即当所有前置的判断都不成立时会进入到最后的 getShardingRoutingEngine 代码分支中，如下所示：</p>
+<pre><code>private static RoutingEngine getShardingRoutingEngine(final ShardingRule shardingRule, final SQLStatementContext sqlStatementContext,
+                                                      final ShardingConditions shardingConditions, final Collection&lt;String&gt; tableNames) { 
+    //根据分片规则获取分片表 
+ Collection&lt;String&gt; shardingTableNames = shardingRule.getShardingLogicTableNames(tableNames); 
+    //如果目标表只要一张，或者说目标表都是绑定表关系，则构建StandardRoutingEngine 
+    if (1 == shardingTableNames.size() || shardingRule.isAllBindingTables(shardingTableNames)) { 
+        return new StandardRoutingEngine(shardingRule, shardingTableNames.iterator().next(), sqlStatementContext, shardingConditions); 
+    } 
+    //否则构建ComplexRoutingEngine 
+    return new ComplexRoutingEngine(shardingRule, tableNames, sqlStatementContext, shardingConditions); 
+}
+</code></pre>
+<p>这段代码首先根据解析出来的逻辑表获取分片表，以如下所示的 SQL 语句为例：</p>
+<pre><code>SELECT record.remark_name FROM health_record record JOIN health_task task ON record.record_id=task.record_id WHERE record.record_id = 1
+</code></pre>
+<p>那么 shardingTableNames 应该为 health_record 和 health_task。如果分片操作只涉及一张表，或者涉及多张表，但这些表是互为绑定表的关系时，则使用 StandardRoutingEngine 进行路由。</p>
+<p>基于绑定表的概念，当多表互为绑定表关系时，每张表的路由结果是相同的，所以只要计算第一张表的分片即可；反之，如果不满足这一条件，则构建一个 ComplexRoutingEngine 进行路由。</p>
+<p>这里我们来看一下代码中的 isAllBindingTables 方法如何对多表互为绑定表关系进行判定，该方法位于 ShardingRule 中，如下所示：</p>
+<pre><code>public boolean isAllBindingTables(final Collection&lt;String&gt; logicTableNames) { 
+    if (logicTableNames.isEmpty()) { 
+        return false; 
+    } 
+    //通过传入的logicTableNames构建一个专门的BindingTableRule 
+    Optional&lt;BindingTableRule&gt; bindingTableRule = findBindingTableRule(logicTableNames); 
+    if (!bindingTableRule.isPresent()) { 
+        return false; 
+    } 
+    Collection&lt;String&gt; result = new TreeSet&lt;&gt;(String.CASE_INSENSITIVE_ORDER); 
+    //获取BindingTableRule中的LogicTable 
+    result.addAll(bindingTableRule.get().getAllLogicTables()); 
+    //判断获取的LogicTable是否与传入的logicTableNames一致 
+    return !result.isEmpty() &amp;&amp; result.containsAll(logicTableNames); 
+}
+</code></pre>
+<p>这段代码会通过传入的 logicTableNames 构建一个专门的 BindingTableRule，然后看最终获取的 BindingTableRule 中的 LogicTable 是否与传入的 logicTableNames 一致。这里构建 BindingTableRule 的过程实际上是根据传入的 logicTableName 来从 ShardingRule 中自身保存的 Collection<code>&lt;BindingTableRule&gt;</code> 获取对应的 BindingTableRule，如下所示：</p>
+<pre><code>public Optional&lt;BindingTableRule&gt; findBindingTableRule(final String logicTableName) { 
+        for (BindingTableRule each : bindingTableRules) { 
+            if (each.hasLogicTable(logicTableName)) { 
+                return Optional.of(each); 
+            } 
+        } 
+        return Optional.absent(); 
+}
+</code></pre>
+<p>上述代码的 bindingTableRules 就是 ShardingRule 中自身保存的 BindingTableRule 集合，我们在 ShardingRule 构造函数中发现了初始化 bindingTableRules 的代码，如下所示：</p>
+<pre><code>bindingTableRules = createBindingTableRules(shardingRuleConfig.getBindingTableGroups());
+</code></pre>
+<p>显然，这个构建过程与规则配置机制有关。如果基于 Yaml 配置文件，绑定表的配置一般会采用如下形式：</p>
+<pre><code>shardingRule:
+  bindingTables: 
+     health_record,health_task
+</code></pre>
+<p>针对这种配置形式，ShardingRule 会对其进行解析并生成 BindingTableRule 对象，如下所示：</p>
+<pre><code>private BindingTableRule createBindingTableRule(final String bindingTableGroup) { 
+    List&lt;TableRule&gt; tableRules = new LinkedList&lt;&gt;(); 
+    for (String each : Splitter.on(",").trimResults().splitToList(bindingTableGroup)) { 
+        tableRules.add(getTableRule(each)); 
+    } 
+    return new BindingTableRule(tableRules); 
+}
+</code></pre>
+<p>至此，我们终于把绑定表相关的概念以及实现方式做了介绍，也就是说完成了 RoutingEngineFactory 中进入到 StandardRoutingEngine 这条代码分支的介绍。</p>
+<h4 id="2-standardroutingengine-的运行机制">2.StandardRoutingEngine 的运行机制</h4>
+<p>现在，我们已经创建了 StandardRoutingEngine，接下来就看它的运行机制。作为一种具体的路由引擎实现方案，StandardRoutingEngine 实现了 RoutingEngine 接口，它的 route 方法如下所示：</p>
+<pre><code>@Override 
+public RoutingResult route() { 
+	    … 
+        return generateRoutingResult(getDataNodes(shardingRule.getTableRule(logicTableName))); 
+}
+</code></pre>
+<p>这里的核心方法就是 generateRoutingResult，在此之前需要先通过 getDataNodes 方法来获取数据节点信息，该方法如下所示：</p>
+<pre><code>private Collection&lt;DataNode&gt; getDataNodes(final TableRule tableRule) { 
+     //如基于Hint进行路由 
+    if (isRoutingByHint(tableRule)) { 
+        return routeByHint(tableRule); 
+    } 
+    //基于分片条件进行路由 
+    if (isRoutingByShardingConditions(tableRule)) { 
+        return routeByShardingConditions(tableRule); 
+    } 
+    //执行混合路由 
+    return routeByMixedConditions(tableRule); 
+}
+</code></pre>
+<p>我们看到这个方法的入参是一个 TableRule 对象，而 TableRule 属于分片规则 ShardingRule 中的一部分。我们在上一课时中知道该对象主要保存着与分片相关的各种规则信息，其中就包括 ShardingStrategy。从命名上看，ShardingStrategy 属于一种分片策略，用于指定分片的具体 Column，以及执行分片并返回目标 DataSource 和 Table。</p>
+<p>这部分内容我们会在下一课时中进行展开。这里，我们先梳理与 ShardingStrategy 相关的类结构，如下所示：</p>
+<p>![image(assets/CgqCHl81FfKAYWCOAACN0o0OVu8479.png)</p>
+<p>在 StandardRoutingEngine 中，整体结构也与上图类似。在 StandardRoutingEngine 中，前面所介绍的 getDataNodes 方法的第一个判断分支 isRoutingByHint 方法中会判断是否根据 Hint 来进行路由，其判断依据是它的 DatabaseShardingStrategy 和 TableShardingStrategy 是否都为 HintShardingStrategy，这个方法就用到了 ShardingRule 的这两个ShardingStrategy 对象，如下所示：</p>
+<pre><code>private boolean isRoutingByHint(final TableRule tableRule) { 
+    return shardingRule.getDatabaseShardingStrategy(tableRule) instanceof HintShardingStrategy &amp;&amp; shardingRule.getTableShardingStrategy(tableRule) instanceof HintShardingStrategy; 
+}
+</code></pre>
+<p>在 ShardingSphere 中，Hint 代表的是一种强制路由的方法，是一条流程的支线。然后，我们再看 getDataNodes 方法中的 isRoutingByShardingConditions 判断。想要判断是否根据分片条件进行路由，其逻辑在于 DatabaseShardingStrategy 和 TableShardingStrategy 都不是 HintShardingStrategy 时就走这个代码分支。而最终如果 isRoutingByHint 和 isRoutingByShardingConditions 都不满足，也就是说，DatabaseShardingStrategy 或 TableShardingStrategy 中任意一个是 HintShardingStrategy，则执行 routeByMixedConditions 这一混合的路由方式。</p>
+<p>以上三条代码分支虽然处理方式有所不同，但<strong>本质上都是获取 RouteValue 的集合</strong>，我们在上一课时中介绍路由条件 ShardingCondition 时知道，RouteValue 保存的就是用于路由的表名和列名。在获取了所需的 RouteValue 之后，在 StandardRoutingEngine 中，以上三种场景最终都会调用 route0 基础方法进行路由，该方法的作用就是根据这些 RouteValue 得出目标 DataNode 的集合。同样，我们也知道 DataNode 中保存的就是具体的目标节点，包括 dataSourceName和tableName。route0 方法如下所示：</p>
+<pre><code>private Collection&lt;DataNode&gt; route0(final TableRule tableRule, final List&lt;RouteValue&gt; databaseShardingValues, final List&lt;RouteValue&gt; tableShardingValues) { 
+    //路由DataSource 
+ Collection&lt;String&gt; routedDataSources = routeDataSources(tableRule, databaseShardingValues); 
+    Collection&lt;DataNode&gt; result = new LinkedList&lt;&gt;(); 
+    //路由Table，并完成DataNode集合的拼装 
+    for (String each : routedDataSources) { 
+        result.addAll(routeTables(tableRule, each, tableShardingValues)); 
+    } 
+    return result; 
+}
+</code></pre>
+<p>可以看到，该方法首先路由 DataSource，然后再根据每个 DataSource 路由 Table，最终完成 DataNode 集合的拼装。在上述 routeDataSources 和 routeTables 方法中，最终都会分别依赖 DatabaseShardingStrategy 和 TableShardingStrategy 完成背后的路由计算以获取目标 DataSource 以及 Table。</p>
+<p>当获取了 DataNode 集合之后，我们回到 StandardRoutingEngine 的 generateRoutingResult 方法，该方法用于组装路由结果并返回一个 RoutingResult：</p>
+<pre><code>private RoutingResult generateRoutingResult(final Collection&lt;DataNode&gt; routedDataNodes) { 
+    RoutingResult result = new RoutingResult(); 
+    for (DataNode each : routedDataNodes) { 
+     //根据每个DataNode构建一个RoutingUnit对象 
+        RoutingUnit routingUnit = new RoutingUnit(each.getDataSourceName()); 
+        //填充RoutingUnit中的TableUnit 
+        routingUnit.getTableUnits().add(new TableUnit(logicTableName, each.getTableName())); 
+        result.getRoutingUnits().add(routingUnit); 
+    } 
+    return result; 
+}
+</code></pre>
+<p>这部分代码的作用就是根据每个 DataNode 构建一个 RoutingUnit 对象，然后再填充 RoutingUnit 中的 TableUnit。关于 RoutingUnit 和 TableUnit 的数据结构我们在上一课时中已经进行了介绍，这里不再展开。</p>
+<p>至此，对标准路由引擎 StandardRoutingEngine 的介绍就告一段落，标准路由是 ShardingSphere 最为推荐使用的分片方式，在日常开发中应用也最广泛。</p>
+<h3 id="广播路由">广播路由</h3>
+<p>对于不携带分片键的 SQL，路由引擎会采取广播路由的方式。在 ShardingSphere，根据输入 SQL 的类型，存在很多种用于广播的路由引擎，我们同样可以回顾 RoutingEngineFactory 中创建 RoutingEngine的 方法。</p>
+<p>首先，如果输入的是 TCLStatement，即授权、角色控制等数据库控制语言，那么直接执行 DatabaseBroadcastRoutingEngine；同样，如果执行的是用于数据定义的 DDLStatement，则执行 TableBroadcastRoutingEngine 中的路由方法，判断条件如下所示：</p>
+<pre><code>//全库路由 
+if (sqlStatement instanceof TCLStatement) { 
+    return new DatabaseBroadcastRoutingEngine(shardingRule); 
+} 
+//全库表路由 
+if (sqlStatement instanceof DDLStatement) { 
+    return new TableBroadcastRoutingEngine(shardingRule, metaData.getTables(), sqlStatementContext); 
+}
+</code></pre>
+<p>DatabaseBroadcastRoutingEngine 的路由方法非常直接，即基于每个 DataSourceName 构建一个 RoutingUnit，然后再拼装成 RoutingResult，如下所示：</p>
+<pre><code>public final class DatabaseBroadcastRoutingEngine implements RoutingEngine { 
+
+    private final ShardingRule shardingRule; 
+
+    @Override 
+    public RoutingResult route() { 
+        RoutingResult result = new RoutingResult(); 
+        for (String each : shardingRule.getShardingDataSourceNames().getDataSourceNames()) { 
+         //基于每个DataSourceName构建一个RoutingUnit 
+            result.getRoutingUnits().add(new RoutingUnit(each)); 
+        } 
+        return result; 
+    } 
+}
+</code></pre>
+<p>同样也可以想象 TableBroadcastRoutingEngine 的实现过程，我们根据 logicTableName 获取对应的 TableRule，然后根据 TableRule 中的真实 DataNode 构建 RoutingUnit 对象，这一过程如下所示：</p>
+<pre><code>private Collection&lt;RoutingUnit&gt; getAllRoutingUnits(final String logicTableName) { 
+    Collection&lt;RoutingUnit&gt; result = new LinkedList&lt;&gt;(); 
+    //根据logicTableName获取对应的TableRule 
+    TableRule tableRule = shardingRule.getTableRule(logicTableName); 
+    for (DataNode each : tableRule.getActualDataNodes()) { 
+        //根据TableRule中的真实DataNode构建RoutingUnit对象 
+        RoutingUnit routingUnit = new RoutingUnit(each.getDataSourceName()); 
+        //根据DataNode的TableName构建TableUnit 
+        routingUnit.getTableUnits().add(new TableUnit(logicTableName, each.getTableName())); 
+        result.add(routingUnit); 
+    } 
+    return result; 
+}
+</code></pre>
+<p>接着我们来看针对 DALStatement 的场景，这一场景相对复杂，根据输入的 DALStatement 的不同类型，会有几个不同的处理分支，如下所示：</p>
+<pre><code>private static RoutingEngine getDALRoutingEngine(final ShardingRule shardingRule, final SQLStatement sqlStatement, final Collection&lt;String&gt; tableNames) { 
+         //如果是Use语句，则什么也不做 
+        if (sqlStatement instanceof UseStatement) { 
+            return new IgnoreRoutingEngine(); 
+        } 
+         //如果是Set或ResetParameter语句，则进行全数据库广播 
+        if (sqlStatement instanceof SetStatement || sqlStatement instanceof ResetParameterStatement || sqlStatement instanceof ShowDatabasesStatement) { 
+            return new DatabaseBroadcastRoutingEngine(shardingRule); 
+        } 
+        //如果存在默认数据库，则执行默认数据库路由 
+        if (!tableNames.isEmpty() &amp;&amp; !shardingRule.tableRuleExists(tableNames) &amp;&amp; shardingRule.hasDefaultDataSourceName()) { 
+            return new DefaultDatabaseRoutingEngine(shardingRule, tableNames); 
+        } 
+        //如果表列表不为空，则执行单播路由 
+        if (!tableNames.isEmpty()) { 
+            return new UnicastRoutingEngine(shardingRule, tableNames); 
+        } 
+        // 
+        return new DataSourceGroupBroadcastRoutingEngine(shardingRule); 
+}
+</code></pre>
+<p>我们分别来看一下这里面的几个路由引擎。首先是最简单的 IgnoreRoutingEngine，它只返回一个空的 RoutingResult 对象，其他什么都不做，如下所示：</p>
+<pre><code>public final class IgnoreRoutingEngine implements RoutingEngine { 
+
+    @Override 
+    public RoutingResult route() { 
+        return new RoutingResult(); 
+    } 
+}
+</code></pre>
+<p>本质上，UnicastRoutingEngine 代表单播路由，用于获取某一真实表信息的场景，它只需要从任意库中的任意真实表中获取数据即可。例如 DESCRIBE 语句就适合使用 UnicastRoutingEngine，因为每个真实表中的数据描述结构都是相同的。</p>
+<p>UnicastRoutingEngine 实现过程如下所示，由于方法比较长，我们裁剪了代码，直接使用注释来标明每个分支的执行逻辑：</p>
+<pre><code>@Override 
+public RoutingResult route() { 
+    RoutingResult result = new RoutingResult(); 
+    if (shardingRule.isAllBroadcastTables(logicTables)) { 
+         //如果都是广播表，则对每个logicTable组装TableUnit，再构建RoutingUnit
+    } else if (logicTables.isEmpty()) { 
+         //如果表为null，则直接组装RoutingUnit，不用构建TableUnit
+    } else if (1 == logicTables.size()) { 
+         //如果只有一张表，则组装RoutingUnit和单个表的TableUnit
+    } else { 
+         //如果存在多个实体表，则先获取DataSource，再组装RoutingUnit和TableUnit
+    } 
+    return result; 
+}
+</code></pre>
+<p>DefaultDatabaseRoutingEngine，顾名思义是对默认的数据库执行路由。那么这个默认数据库是怎么来的呢？我们可以从 ShardingRule的ShardingDataSourceNames 类中的 getDefaultDataSourceName 方法中找到答案。</p>
+<p>一般，这种默认数据库可以通过配置的方式进行设置。明白这一点，DefaultDatabaseRoutingEngine 的路由过程也就不难理解了，其 route 方法如下所示：</p>
+<pre><code>@Override 
+public RoutingResult route() { 
+    RoutingResult result = new RoutingResult(); 
+    List&lt;TableUnit&gt; routingTables = new ArrayList&lt;&gt;(logicTables.size()); 
+    for (String each : logicTables) { 
+        routingTables.add(new TableUnit(each, each)); 
+    } 
+    //从ShardingRule中获取默认所配置的数据库名 
+    RoutingUnit routingUnit = new RoutingUnit(shardingRule.getShardingDataSourceNames().getDefaultDataSourceName()); 
+    routingUnit.getTableUnits().addAll(routingTables); 
+    result.getRoutingUnits().add(routingUnit); 
+    return result; 
+}
+</code></pre>
+<p>最后，我们来看一下针对数据控制语言 DCLStatement 的处理流程。在主从环境下，对于 DCLStatement 而言，有时候我们希望 SQL 语句只针对主数据库进行执行，所以就有了如下所示的 MasterInstanceBroadcastRoutingEngine：</p>
+<pre><code>@Override 
+public RoutingResult route() { 
+    RoutingResult result = new RoutingResult(); 
+    for (String each : shardingRule.getShardingDataSourceNames().getDataSourceNames()) { 
+        if (dataSourceMetas.getAllInstanceDataSourceNames().contains(each)) { 
+          //通过MasterSlaveRule获取主从数据库信息 
+            Optional&lt;MasterSlaveRule&gt; masterSlaveRule = shardingRule.findMasterSlaveRule(each); 
+            if (!masterSlaveRule.isPresent() || masterSlaveRule.get().getMasterDataSourceName().equals(each)) { 
+                result.getRoutingUnits().add(new RoutingUnit(each)); 
+            } 
+        } 
+    } 
+    return result; 
+}
+</code></pre>
+<p>可以看到，这里引入了一个 MasterSlaveRule 规则，该规则提供 getMasterDataSourceName 方法以获取主 DataSourceName，这样我们就可以针对这个主数据执行，如 Grant 等数据控制语言。</p>
+<h3 id="从源码解析到日常开发">从源码解析到日常开发</h3>
+<p>在 ShardingSphere 中，我们还是有必要再次强调其在配置信息管理上的一些设计和实践。基于 ShardingRule 和 TableRule 这两个配置类，ShardingSphere 把大量纷繁复杂的配置信息从业务流程中进行隔离，而这些配置信息往往需要灵活进行设置，以及多种默认配置值。基于 ShardingRule 和 TableRule 的两层配置体系，系统能够更好地完成业务逻辑的变化和配置信息变化之间的有效整合，值得我们在日常开发过程中进行尝试和应用。</p>
+<h3 id="小结与预告">小结与预告</h3>
+<p>今天我们关注的是 ShardingSphere 中各种路由引擎的实现过程，ShardingSphere 中实现了多款不同的路由引擎，可以分为分片路由和广播路由两大类。我们针对这两类路由引擎中的代表性实现方案分别展开了讨论。</p>
+<p><strong>这里给你留一道思考题：ShardingSphere 中如何判断两张表是互为绑定表关系？</strong> 欢迎你在留言区与大家讨论，我将一一点评解答。</p>
+<p>从今天的内容中，我们也看到了路由引擎中路由机制的实现需要依赖于分片策略及其背后分片算法的集成，下一课时将对 ShardingSphere 中的各种分片策略进行具体的展开。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>21 游标迭代器（过滤器）——Scan · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Redis 核心原理与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">43 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Redis 核心原理与实战</strong><ul><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/01%20Redis%20%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84.html">01 Redis 是如何执行的</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/02%20Redis%20%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8.html">02 Redis 快速搭建与使用</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/03%20Redis%20%E6%8C%81%E4%B9%85%E5%8C%96%E2%80%94%E2%80%94RDB.html">03 Redis 持久化——RDB</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/04%20Redis%20%E6%8C%81%E4%B9%85%E5%8C%96%E2%80%94%E2%80%94AOF.html">04 Redis 持久化——AOF</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/05%20Redis%20%E6%8C%81%E4%B9%85%E5%8C%96%E2%80%94%E2%80%94%E6%B7%B7%E5%90%88%E6%8C%81%E4%B9%85%E5%8C%96.html">05 Redis 持久化——混合持久化</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/06%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">06 字符串使用与内部实现原理</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E9%99%84%E5%BD%95%EF%BC%9A%E6%9B%B4%E5%A4%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.html">07 附录：更多字符串操作命令</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E5%AD%97%E5%85%B8%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">08 字典使用与内部实现原理</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%E9%99%84%E5%BD%95%EF%BC%9A%E6%9B%B4%E5%A4%9A%E5%AD%97%E5%85%B8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.html">09 附录：更多字典操作命令</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%E5%88%97%E8%A1%A8%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">10 列表使用与内部实现原理</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E9%99%84%E5%BD%95%EF%BC%9A%E6%9B%B4%E5%A4%9A%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.html">11 附录：更多列表操作命令</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">12 集合使用与内部实现原理</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E9%99%84%E5%BD%95%EF%BC%9A%E6%9B%B4%E5%A4%9A%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.html">13 附录：更多集合操作命令</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">14 有序集合使用与内部实现原理</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/15%20%E9%99%84%E5%BD%95%EF%BC%9A%E6%9B%B4%E5%A4%9A%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.html">15 附录：更多有序集合操作命令</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/16%20Redis%20%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90.html">16 Redis 事务深入解析</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/17%20Redis%20%E9%94%AE%E5%80%BC%E8%BF%87%E6%9C%9F%E6%93%8D%E4%BD%9C.html">17 Redis 键值过期操作</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/18%20Redis%20%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E4%B8%8E%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html">18 Redis 过期策略与源码分析</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/19%20Redis%20%E7%AE%A1%E9%81%93%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94Pipeline.html">19 Redis 管道技术——Pipeline</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E6%9F%A5%E8%AF%A2%E9%99%84%E8%BF%91%E7%9A%84%E4%BA%BA%E2%80%94%E2%80%94GEO.html">20 查询附近的人——GEO</a></li><li><a class="active" aria-current="page" href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/21%20%E6%B8%B8%E6%A0%87%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%89%E2%80%94%E2%80%94Scan.html">21 游标迭代器（过滤器）——Scan</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E4%BC%98%E7%A7%80%E7%9A%84%E5%9F%BA%E6%95%B0%E7%BB%9F%E8%AE%A1%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94HyperLogLog.html">22 优秀的基数统计算法——HyperLogLog</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%AE%97%E6%B3%95.html">23 内存淘汰机制与算法</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/24%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E2%80%94%E2%80%94%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F.html">24 消息队列——发布订阅模式</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%85%B6%E4%BB%96%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F.html">25 消息队列的其他实现方式</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%BB%88%E6%9E%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E2%80%94%E2%80%94Stream%EF%BC%88%E4%B8%8A%EF%BC%89.html">26 消息队列终极解决方案——Stream（上）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%BB%88%E6%9E%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E2%80%94%E2%80%94Stream%EF%BC%88%E4%B8%8B%EF%BC%89.html">27 消息队列终极解决方案——Stream（下）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E8%AF%A6%E8%A7%A3%E4%B8%8E%E4%BB%A3%E7%A0%81.html">28 实战：分布式锁详解与代码</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90.html">29 实战：布隆过滤器安装与使用及原理分析</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E5%AE%8C%E6%95%B4%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95.html">30 完整案例：实现延迟队列的两种方法</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/31%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E6%A1%88%E4%BE%8B.html">31 实战：定时任务案例</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E5%AE%9E%E6%88%98%EF%BC%9ARediSearch%20%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html">32 实战：RediSearch 高性能的全文搜索引擎</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95.html">33 实战：Redis 性能测试</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/34%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E6%85%A2%E6%9F%A5%E8%AF%A2.html">34 实战：Redis 慢查询</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/35%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.html">35 实战：Redis 性能优化方案</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/36%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5.html">36 实战：Redis 主从同步</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/37%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%8A%EF%BC%89.html">37 实战：Redis哨兵模式（上）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/38%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%8B%EF%BC%89.html">38 实战：Redis 哨兵模式（下）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/39%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%8A%EF%BC%89.html">39 实战：Redis 集群模式（上）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%8B%EF%BC%89.html">40 实战：Redis 集群模式（下）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E6%A1%88%E4%BE%8B%EF%BC%9ARedis%20%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E5%92%8C%E7%9B%B8%E5%85%B3%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">41 案例：Redis 问题汇总和相关解决方案</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E6%8A%80%E8%83%BD%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.html">42 技能学习指南</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/43%20%E5%8A%A0%E9%A4%90%EF%BC%9ARedis%20%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7.html">43 加餐：Redis 的可视化管理工具</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/21%20%E6%B8%B8%E6%A0%87%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%89%E2%80%94%E2%80%94Scan.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="21 游标迭代器（过滤器）——Scan" id="title">21 游标迭代器（过滤器）——Scan</h1>
+<div><h3 id="一个问题引发的-血案">一个问题引发的「血案」</h3>
+<p>曾经发生过这样一件事，我们的 Redis 服务器存储了海量的数据，其中登录用户信息是以 user_token_id 的形式存储的。运营人员想要当前所有的用户登录信息，然后悲剧就发生了：因为我们的工程师使用了 <code>keys user_token_*</code> 来查询对应的用户，结果导致 Redis 假死不可用，以至于影响到线上的其他业务接连发生问题，然后就收到了一堆的系统预警短信。并且这个假死的时间是和存储的数据成正比的，数据量越大假死的时间就越长，导致的故障时间也越长。</p>
+<p>那如何避免这个问题呢？</p>
+<h3 id="问题的解决方案">问题的解决方案</h3>
+<p>在 Redis 2.8 之前，我们只能使用 keys 命令来查询我们想要的数据，但这个命令存在两个缺点：</p>
+<ol>
+<li>此命令没有分页功能，我们只能一次性查询出所有符合条件的 key 值，如果查询结果非常巨大，那么得到的输出信息也会非常多；</li>
+<li>keys 命令是遍历查询，因此它的查询时间复杂度是 o(n)，所以数据量越大查询时间就越长。</li>
+</ol>
+<p>然而，比较幸运的是在 Redis 2.8 时推出了 Scan，解决了我们这些问题，下面来看 Scan 的具体使用。</p>
+<h3 id="scan-命令使用">Scan 命令使用</h3>
+<p>我们先来模拟海量数据，使用 Pipeline 添加 10w 条数据，Java 代码实现如下：</p>
+<pre><code class="language-java">import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Pipeline;
+import utils.JedisUtils;
+
+public class ScanExample {
+    public static void main(String[] args) {
+        // 添加 10w 条数据
+        initData();
+    }
+    public static void initData(){
+        Jedis jedis = JedisUtils.getJedis();
+        Pipeline pipe = jedis.pipelined();
+        for (int i = 1; i &lt; 100001; i++) {
+            pipe.set("user_token_" + i, "id" + i);
+        }
+        // 执行命令
+        pipe.sync();
+        System.out.println("数据插入完成");
+    }
+}
+
+</code></pre>
+<p>我们来查询用户 id 为 9999* 的数据，Scan 命令使用如下：</p>
+<pre><code class="language-shell">127.0.0.1:6379&gt; scan 0 match user_token_9999* count 10000
+1) "127064"
+2) 1) "user_token_99997"
+127.0.0.1:6379&gt; scan 127064 match user_token_9999* count 10000
+1) "1740"
+2) 1) "user_token_9999"
+127.0.0.1:6379&gt; scan 1740 match user_token_9999* count 10000
+1) "21298"
+2) 1) "user_token_99996"
+127.0.0.1:6379&gt; scan 21298 match user_token_9999* count 10000
+1) "65382"
+2) (empty list or set)
+127.0.0.1:6379&gt; scan 65382 match user_token_9999* count 10000
+1) "78081"
+2) 1) "user_token_99998"
+   2) "user_token_99992"
+127.0.0.1:6379&gt; scan 78081 match user_token_9999* count 10000
+1) "3993"
+2) 1) "user_token_99994"
+   2) "user_token_99993"
+127.0.0.1:6379&gt; scan 3993 match user_token_9999* count 10000
+1) "13773"
+2) 1) "user_token_99995"
+127.0.0.1:6379&gt; scan 13773 match user_token_9999* count 10000
+1) "47923"
+2) (empty list or set)
+127.0.0.1:6379&gt; scan 47923 match user_token_9999* count 10000
+1) "59751"
+2) 1) "user_token_99990"
+   2) "user_token_99991"
+   3) "user_token_99999"
+127.0.0.1:6379&gt; scan 59751 match user_token_9999* count 10000
+1) "0"
+2) (empty list or set)
+
+</code></pre>
+<p>从以上的执行结果，我们看出两个问题：</p>
+<ol>
+<li>查询的结果为空，但游标值不为 0，表示遍历还没结束；</li>
+<li>设置的是 count 10000，但每次返回的数量都不是 10000，且不固定，这是因为 count 只是限定服务器单次遍历的字典槽位数量（约等于），而不是规定返回结果的 count 值。</li>
+</ol>
+<p>相关语法：</p>
+<pre><code>scan cursor [MATCH pattern] [COUNT count]
+
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>cursor：光标位置，整数值，从 0 开始，到 0 结束，查询结果是空，但游标值不为 0，表示遍历还没结束；</li>
+<li>match pattern：正则匹配字段；</li>
+<li>count：限定服务器单次遍历的字典槽位数量（约等于），只是对增量式迭代命令的一种提示（hint），并不是查询结果返回的最大数量，它的默认值是 10。</li>
+</ul>
+<h3 id="代码实战">代码实战</h3>
+<p>本文我们使用 Java 代码来实现 Scan 的查询功能，代码如下：</p>
+<pre><code class="language-java">import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Pipeline;
+import redis.clients.jedis.ScanParams;
+import redis.clients.jedis.ScanResult;
+import utils.JedisUtils;
+
+public class ScanExample {
+    public static void main(String[] args) {
+        Jedis jedis = JedisUtils.getJedis();
+        // 定义 match 和 count 参数
+        ScanParams params = new ScanParams();
+        params.count(10000);
+        params.match("user_token_9999*");
+        // 游标
+        String cursor = "0";
+        while (true) {
+            ScanResult&lt;String&gt; res = jedis.scan(cursor, params);
+            if (res.getCursor().equals("0")) {
+                // 表示最后一条
+                break;
+            }
+            cursor = res.getCursor(); // 设置游标
+            for (String item : res.getResult()) {
+                // 打印查询结果
+                System.out.println("查询结果：" + item);
+            }
+        }
+    }
+}
+
+</code></pre>
+<p>以上程序执行结果如下：</p>
+<pre><code>查询结果：user_token_99997
+查询结果：user_token_9999
+查询结果：user_token_99996
+查询结果：user_token_99998
+查询结果：user_token_99992
+查询结果：user_token_99994
+查询结果：user_token_99993
+查询结果：user_token_99995
+查询结果：user_token_99990
+查询结果：user_token_99991
+查询结果：user_token_99999
+
+</code></pre>
+<h3 id="scan-相关命令">Scan 相关命令</h3>
+<p>Scan 是一个系列指令，除了 Scan 之外，还有以下 3 个命令：</p>
+<ol>
+<li>HScan 遍历字典游标迭代器</li>
+<li>SScan 遍历集合的游标迭代器</li>
+<li>ZScan 遍历有序集合的游标迭代器</li>
+</ol>
+<p>来看这些命令的具体使用。</p>
+<h4 id="hscan-使用"><strong>HScan 使用</strong></h4>
+<pre><code class="language-shell">127.0.0.1:6379&gt; hscan myhash 0 match k2* count 10
+1) "0"
+2) 1) "k2"
+   2) "v2"
+
+</code></pre>
+<p>相关语法：</p>
+<pre><code>hscan key cursor [MATCH pattern] [COUNT count]
+
+</code></pre>
+<h4 id="sscan-使用"><strong>SScan 使用</strong></h4>
+<pre><code class="language-shell">127.0.0.1:6379&gt; sscan myset 0 match v2* count 20
+1) "0"
+2) 1) "v2"
+
+</code></pre>
+<p>相关语法：</p>
+<pre><code>sscan key cursor [MATCH pattern] [COUNT count]
+
+</code></pre>
+<h4 id="zscan-使用"><strong>ZScan 使用</strong></h4>
+<pre><code class="language-shell">127.0.0.1:6379&gt; zscan zset 0 match red* count 20
+1) "0"
+2) 1) "redis"
+   2) "10"
+
+</code></pre>
+<p>相关语法：</p>
+<pre><code>zscan key cursor [MATCH pattern] [COUNT count]
+
+</code></pre>
+<h3 id="scan-说明">Scan 说明</h3>
+<p>官方对 Scan 命令的描述信息如下。</p>
+<h4 id="scan-guarantees"><strong>Scan guarantees</strong></h4>
+<blockquote>
+<p>The SCAN command, and the other commands in the SCAN family, are able to provide to the user a set of guarantees associated to full iterations.</p>
+<ul>
+<li>A full iteration always retrieves all the elements that were present in the collection from the start to the end of a full iteration. This means that if a given element is inside the collection when an iteration is started, and is still there when an iteration terminates, then at some point SCANreturned it to the user.</li>
+<li>A full iteration never returns any element that was NOT present in the collection from the start to the end of a full iteration. So if an element was removed before the start of an iteration, and is never added back to the collection for all the time an iteration lasts, SCAN ensures that this element will never be returned.</li>
+</ul>
+<p>However because SCAN has very little state associated (just the cursor) it has the following drawbacks:</p>
+<ul>
+<li>A given element may be returned multiple times. It is up to the application to handle the case of duplicated elements, for example only using the returned elements in order to perform operations that are safe when re-applied multiple times.</li>
+<li>Elements that were not constantly present in the collection during a full iteration, may be returned or not: it is undefined.</li>
+</ul>
+</blockquote>
+<p>官方文档地址：</p>
+<blockquote>
+<p><a href="https://redis.io/commands/scan" target="_blank">https://redis.io/commands/scan</a></p>
+</blockquote>
+<p>翻译为中文的含义是：Scan 及它的相关命令可以保证以下查询规则。</p>
+<ul>
+<li>它可以完整返回开始到结束检索集合中出现的所有元素，也就是在整个查询过程中如果这些元素没有被删除，且符合检索条件，则一定会被查询出来；</li>
+<li>它可以保证不会查询出，在开始检索之前删除的那些元素。</li>
+</ul>
+<p>然后，Scan 命令包含以下缺点：</p>
+<ul>
+<li>一个元素可能被返回多次，需要客户端来实现去重；</li>
+<li>在迭代过程中如果有元素被修改，那么修改的元素能不能被遍历到不确定。</li>
+</ul>
+<h3 id="小结">小结</h3>
+<p>通过本文我们可以知道 Scan 包含以下四个指令：</p>
+<ol>
+<li>Scan：用于检索当前数据库中所有数据；</li>
+<li>HScan：用于检索哈希类型的数据；</li>
+<li>SScan：用于检索集合类型中的数据；</li>
+<li>ZScan：由于检索有序集合中的数据。</li>
+</ol>
+<p>Scan 具备以下几个特点：</p>
+<ol>
+<li>Scan 可以实现 keys 的匹配功能；</li>
+<li>Scan 是通过游标进行查询的不会导致 Redis 假死；</li>
+<li>Scan 提供了 count 参数，可以规定遍历的数量；</li>
+<li>Scan 会把游标返回给客户端，用户客户端继续遍历查询；</li>
+<li>Scan 返回的结果可能会有重复数据，需要客户端去重；</li>
+<li>单次返回空值且游标不为 0，说明遍历还没结束；</li>
+<li>Scan 可以保证在开始检索之前，被删除的元素一定不会被查询出来；</li>
+<li>在迭代过程中如果有元素被修改， Scan 不保证能查询出相关的元素。</li>
+</ol>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

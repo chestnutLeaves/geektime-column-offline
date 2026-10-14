@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>01 Spark：从“大数据的Hello World”开始 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/index.html">零基础入门Spark</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">37 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>零基础入门Spark</strong><ul><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%85%A5%E9%97%A8Spark%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E5%AD%A6%E4%BC%9A%E2%80%9C%E4%B8%89%E6%AD%A5%E8%B5%B0%E2%80%9D.html">00 开篇词 入门Spark，你需要学会“三步走”</a></li><li><a class="active" aria-current="page" href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/01%20Spark%EF%BC%9A%E4%BB%8E%E2%80%9C%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9A%84Hello%20World%E2%80%9D%E5%BC%80%E5%A7%8B.html">01 Spark：从“大数据的Hello World”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/02%20RDD%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%BB%B6%E8%BF%9F%E8%AE%A1%E7%AE%97%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">02 RDD与编程模型：延迟计算是怎么回事？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/03%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ARDD%E5%86%85%E9%83%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2.html">03 RDD常用算子（一）：RDD内部的数据转换</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/04%20%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">04 进程模型与分布式部署：分布式计算是怎么回事？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/05%20%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9A%84%E7%B2%BE%E9%AB%93%EF%BC%9F.html">05 调度系统：如何把握分布式计算的精髓？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/06%20Shuffle%E7%AE%A1%E7%90%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Shuffle%E6%98%AF%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%EF%BC%9F.html">06 Shuffle管理：为什么Shuffle是性能瓶颈？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/07%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASpark%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%EF%BC%9F.html">07 RDD常用算子（二）：Spark如何实现数据聚合？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/08%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9ASpark%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98%EF%BC%9F.html">08 内存管理：Spark如何使用内存？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/09%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%9A%84%E5%87%86%E5%A4%87%E3%80%81%E9%87%8D%E5%88%86%E5%B8%83%E4%B8%8E%E6%8C%81%E4%B9%85%E5%8C%96.html">09 RDD常用算子（三）：数据的准备、重分布与持久化</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/10%20%E5%B9%BF%E6%92%AD%E5%8F%98%E9%87%8F%20%26%20%E7%B4%AF%E5%8A%A0%E5%99%A8%EF%BC%9A%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E6%98%AF%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F.html">10 广播变量 &amp; 累加器：共享变量是用来做什么的？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/11%20%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%88%B0%E5%BA%95%E9%83%BD%E5%AD%98%E5%93%AA%E5%84%BF%E4%BA%86%EF%BC%9F.html">11 存储系统：数据到底都存哪儿了？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/12%20%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9F.html">12 基础配置详解：哪些参数会影响应用程序稳定性？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/13%20Spark%20SQL%EF%BC%9A%E8%AE%A9%E6%88%91%E4%BB%AC%E4%BB%8E%E2%80%9C%E5%B0%8F%E6%B1%BD%E8%BD%A6%E6%91%87%E5%8F%B7%E5%88%86%E6%9E%90%E2%80%9D%E5%BC%80%E5%A7%8B.html">13 Spark SQL：让我们从“小汽车摇号分析”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/14%20%E5%8F%B0%E5%89%8D%E5%B9%95%E5%90%8E%EF%BC%9ADataFrame%E4%B8%8ESpark%20SQL%E7%9A%84%E7%94%B1%E6%9D%A5.html">14 台前幕后：DataFrame与Spark SQL的由来</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/15%20%E6%95%B0%E6%8D%AE%E6%BA%90%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%EF%BC%9ADataFrame%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5%EF%BC%9F.html">15 数据源与数据格式：DataFrame从何而来？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/16%20%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8DataFrame%E4%B9%8B%E4%B8%8A%E5%81%9A%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9F.html">16 数据转换：如何在DataFrame之上做数据处理？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/17%20%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%EF%BC%9A%E4%B8%8D%E5%90%8C%E7%9A%84%E5%85%B3%E8%81%94%E5%BD%A2%E5%BC%8F%E4%B8%8E%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E8%AF%A5%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F.html">17 数据关联：不同的关联形式与实现机制该怎么选？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/18%20%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%E4%BC%98%E5%8C%96%EF%BC%9A%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9BJoin%E7%AD%96%E7%95%A5%EF%BC%8C%E5%BC%80%E5%8F%91%E8%80%85%E8%AF%A5%E5%A6%82%E4%BD%95%E5%8F%96%E8%88%8D%EF%BC%9F.html">18 数据关联优化：都有哪些Join策略，开发者该如何取舍？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/19%20%E9%85%8D%E7%BD%AE%E9%A1%B9%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E6%80%A7%E8%83%BD%EF%BC%9F.html">19 配置项详解：哪些参数会影响应用程序执行性能？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/20%20Hive%20%2B%20Spark%E5%BC%BA%E5%BC%BA%E8%81%94%E5%90%88%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E4%BB%93%E7%9A%84%E4%B8%8D%E4%BA%8C%E4%B9%8B%E9%80%89.html">20 Hive + Spark强强联合：分布式数仓的不二之选</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/21%20Spark%20UI%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">21 Spark UI（上）：如何高效地定位性能问题？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/22%20Spark%20UI%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">22 Spark UI（下）：如何高效地定位性能问题？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/23%20Spark%20MLlib%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B%E2%80%9D%E5%BC%80%E5%A7%8B.html">23 Spark MLlib：从“房价预测”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/24%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F.html">24 特征工程（上）：有哪些常用的特征处理函数？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/25%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F.html">25 特征工程（下）：有哪些常用的特征处理函数？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/26%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">26 模型训练（上）：决策树系列算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/27%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%9B%9E%E5%BD%92%E3%80%81%E5%88%86%E7%B1%BB%E5%92%8C%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">27 模型训练（中）：回归、分类和聚类算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/28%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E9%A2%91%E7%B9%81%E9%A1%B9%E9%9B%86%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">28 模型训练（下）：协同过滤与频繁项集算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/29%20Spark%20MLlib%20Pipeline%EF%BC%9A%E9%AB%98%E6%95%88%E5%BC%80%E5%8F%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8.html">29 Spark MLlib Pipeline：高效开发机器学习应用</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/30%20Structured%20Streaming%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%B5%81%E5%8A%A8%E7%9A%84Word%20Count%E2%80%9D%E5%BC%80%E5%A7%8B.html">30 Structured Streaming：从“流动的Word Count”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/31%20%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B5%81%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6%EF%BC%9ABatch%20mode%E5%92%8CContinuous%20mode%E5%93%AA%E5%AE%B6%E5%BC%BA%EF%BC%9F.html">31 新一代流处理框架：Batch mode和Continuous mode哪家强？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/32%20Window%E6%93%8D%E4%BD%9C%26Watermark%EF%BC%9A%E6%B5%81%E5%A4%84%E7%90%86%E5%BC%95%E6%93%8E%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E7%A7%80%E6%9C%BA%E5%88%B6%EF%BC%9F.html">32 Window操作&amp;Watermark：流处理引擎提供了哪些优秀机制？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/33%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%EF%BC%9A%E6%B5%81%E4%B8%8E%E6%B5%81%E3%80%81%E6%B5%81%E4%B8%8E%E6%89%B9.html">33 流计算中的数据关联：流与流、流与批</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/34%20Spark%20%2B%20Kafka%EF%BC%9A%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E2%80%9C%E4%B8%87%E9%87%91%E6%B2%B9%E2%80%9D.html">34 Spark + Kafka：流计算中的“万金油”</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E5%B0%8F%E7%8E%8B%EF%BC%9A%E4%BF%9D%E6%8C%81%E7%A9%BA%E6%9D%AF%E5%BF%83%E6%80%81%EF%BC%8C%E4%B8%8D%E5%81%9A%E4%BA%95%E5%BA%95%E4%B9%8B%E8%9B%99.html">用户故事 小王：保持空杯心态，不做井底之蛙</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E8%BF%9B%E5%85%A5%E6%97%B6%E9%97%B4%E8%A3%82%E7%BC%9D%EF%BC%8C%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0.html">结束语 进入时间裂缝，持续学习</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/01%20Spark%EF%BC%9A%E4%BB%8E%E2%80%9C%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9A%84Hello%20World%E2%80%9D%E5%BC%80%E5%A7%8B.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="01 Spark：从“大数据的Hello World”开始" id="title">01 Spark：从“大数据的Hello World”开始</h1>
+<div><p>你好，我是吴磊。</p>
+<p>从这节课开始，我们先来学习Spark的“基础知识”模块，对Spark的概念和核心原理先做一个整体的了解。我并不会从RDD、DAG这些基本概念给你讲起。坦白地说，这些抽象的概念枯燥而又乏味，对于刚开始接触Spark的你来说，很难学进去。因此，我们不妨反其道而行之，先从实战入手，用一个小例子来直观地认识Spark，看看Spark都能做些什么。</p>
+<p>这就好比我们学习一门新的编程语言，往往都是从“Hello World”开始。我还记得，刚刚学编程那会，屏幕上打印出的“Hello World”，足足让我兴奋了一整天，让我莫名地有一种“I can change the world”的冲动。</p>
+<p>今天这一讲，我们就从“大数据的Hello World”开始，去学习怎么在Spark之上做应用开发。不过，“大数据的Hello World”并不是把字符串打印到屏幕上这么简单，而是要先对文件中的单词做统计计数，然后再打印出频次最高的5个单词，江湖人称“Word Count”。</p>
+<p>之所以会选择Word Count，作为我们迈入Spark门槛的第一个项目，主要有两个原因，一是Word Count场景比较简单、容易理解；二是Word Count麻雀虽小，但五脏俱全，一个小小的Word Count，就能够牵引出Spark许多的核心原理，帮助我们快速入门。</p>
+<p>好啦，话不多说，下面我们正式开启Word Count之旅。</p>
+<h2 id="准备工作"><strong>准备工作</strong></h2>
+<p>巧妇难为无米之炊，要做Word Count，我们得先把源文件准备好。</p>
+<p>咱们做Word Count的初衷是学习Spark，因此源文件的内容无足轻重。这里我提取了<a href="https://en.wikipedia.org/wiki/Apache_Spark" target="_blank">Wikipedia中对Spark的介绍</a>来做我们的源文件。我把它保存到了与课程配套的GitHub项目中，并把它命名为“wikiOfSpark.txt”。你可以从<a href="https://github.com/wulei-bj-cn/learn-spark/blob/main/chapter01/wikiOfSpark.txt" target="_blank">这里</a>下载它。</p>
+<p>为了跑通Word Count实例，我们还需要在本地（Local）部署Spark运行环境。这里的“本地”，指的是你手头能够获取到的任何计算资源，比如服务器、台式机，或是笔记本电脑。</p>
+<p>在本地部署Spark运行环境非常简单，即便你从来没有和Spark打过交道，也不必担心。<strong>只需要下面这3个步骤，我们就可以完成Spark的本地部署了</strong>。</p>
+<ol>
+<li><strong>下载安装包：</strong>从<a href="http://spark.apache.org/downloads.html" target="_blank">Spark官网</a>下载安装包，选择最新的预编译版本即可；</li>
+<li><strong>解压：</strong>解压Spark安装包到任意本地目录；</li>
+<li><strong>配置：</strong>将“${解压目录}/bin”配置到PATH环境变量。</li>
+</ol>
+<p>我这里给你准备了一个本地部署的小视频，你可以直观地感受一下。</p>
+<p>接下来，我们确认一下Spark是否部署成功。打开命令行终端，敲入“spark-shell –version”命令，如果该命令能成功地打印出Spark版本号，就表示我们大功告成了，就像这样：</p>
+<p><img alt="" src="/assets/2451e4bc0abdcf4798e47154.png" title="验证Spark本地部署成功"/></p>
+<p>在后续的实战中，我们会用spark-shell来演示Word Count的执行过程。spark-shell是提交Spark作业众多方式中的一种，我们在后续的课程中还会展开介绍，这里你不妨暂时把它当做是Spark中的Linux shell。spark-shell提供交互式的运行环境（REPL，Read-Evaluate-Print-Loop），以“所见即所得”的方式，让开发者在提交源代码之后，就可以迅速地获取执行结果。</p>
+<p>不过，需要注意的是，spark-shell在运行的时候，依赖于Java和Scala语言环境。因此，为了保证spark-shell的成功启动，你需要在本地预装Java与Scala。好消息是，关于Java与Scala的安装，网上的资料非常丰富，你可以参考那些资料来进行安装，咱们在本讲就不再赘述Java与Scala的安装步骤啦。</p>
+<h2 id="梳理-word-count的计算步骤"><strong>梳理</strong>Word Count的计算步骤</h2>
+<p>做了一番准备之后，接下来，我们就可以开始写代码了。不过，在“下手”之前，咱们不妨一起梳理下Word Count的计算步骤，先做到心中有数，然后再垒代码也不迟。</p>
+<p>之前我们提到，Word Count的初衷是对文件中的单词做统计计数，打印出频次最高的5个词汇。那么Word Count的第一步就很明显了，当然是得读取文件的内容，不然咱们统计什么呢？</p>
+<p>我们准备好的文件是wikiOfSpark.txt，它以纯文本的方式记录了关于Spark的简单介绍，我摘取了其中的部分内容给你看一下：</p>
+<p><img alt="" src="/assets/f2cf948fe44303b465b7a14d.png" title="wikiOfSpark.txt内容摘要"/></p>
+<p>我们知道，文件的读取往往是以行（Line）为单位的。不难发现，wikiOfSpark.txt的每一行都包含多个单词。</p>
+<p>我们要是以“单词”作为粒度做计数，就需要对每一行的文本做分词。分词过后，文件中的每一句话，都被打散成了一个个单词。这样一来，我们就可以按照单词做分组计数了。这就是Word Count的计算过程，主要包含如下3个步骤：</p>
+<ol>
+<li><strong>读取内容</strong>：调用Spark文件读取API，加载wikiOfSpark.txt文件内容；</li>
+<li><strong>分词</strong>：以行为单位，把句子打散为单词；</li>
+<li><strong>分组计数</strong>：按照单词做分组计数。</li>
+</ol>
+<p>明确了计算步骤后，接下来我们就可以调用Spark开发API，对这些步骤进行代码实现，从而完成Word Count的应用开发。</p>
+<p>众所周知，Spark支持种类丰富的开发语言，如Scala、Java、Python，等等。你可以结合个人偏好和开发习惯，任意选择其中的一种进行开发。尽管不同语言的开发API在语法上有着细微的差异，但不论是功能方面、还是性能方面，Spark对于每一种语言的支持都是一致的。换句话说，同样是Word Count，你用Scala实现也行，用Python实现也可以，两份代码的执行结果是一致的。不仅如此，在同样的计算资源下，两份代码的执行效率也是一样的。</p>
+<p>因此，就Word Count这个示例来说，开发语言不是重点，我们不妨选择Scala。你可能会说：“我本来对Spark就不熟，更没有接触过Scala，一上来就用Scala演示Spark应用代码，理解起来会不会很困难？”</p>
+<p>其实大可不必担心，Scala语法比较简洁，Word Count的Scala实现不超过10行代码。再者，对于Word Count中的每一行Scala代码，我会带着你手把手、逐行地进行讲解和分析。我相信，跟着我过完一遍代码之后，你能很快地把它“翻译”成你熟悉的语言，比如Java或Python。另外，绝大多数的Spark 源码都是由 Scala 实现的，接触并了解一些Scala的基本语法，有利于你后续阅读、学习Spark源代码。</p>
+<h2 id="word-count代码实现">Word Count代码实现</h2>
+<p>选定了语言，接下来，我们就按照读取内容、分词、分组计数这三步来看看Word Count具体怎么实现。</p>
+<h3 id="第一步-读取内容">第一步，读取内容</h3>
+<p>首先，我们调用SparkContext的textFile方法，读取源文件，也就是wikiOfSpark.txt，代码如下表所示：</p>
+<pre><code>import org.apache.spark.rdd.RDD
+
+// 这里的下划线"_"是占位符，代表数据文件的根目录
+val rootPath: String = _
+val file: String = s"${rootPath}/wikiOfSpark.txt"
+
+// 读取文件内容
+val lineRDD: RDD[String] = spark.sparkContext.textFile(file) 
+</code></pre>
+<p>在这段代码中，你可能会发现3个新概念，分别是spark、sparkContext和RDD。</p>
+<p>其中，spark和sparkContext分别是两种不同的开发入口实例：</p>
+<ul>
+<li>spark是开发入口SparkSession实例（Instance），SparkSession在spark-shell中会由系统自动创建；</li>
+<li>sparkContext是开发入口SparkContext实例。</li>
+</ul>
+<p>在Spark版本演进的过程中，从2.0版本开始，SparkSession取代了SparkContext，成为统一的开发入口。换句话说，要开发Spark应用，你必须先创建SparkSession。关于SparkSession和SparkContext，我会在后续的课程做更详细的介绍，这里你只要记住它们是必需的开发入口就可以了。</p>
+<p>我们再来看看RDD，RDD的全称是Resilient Distributed Dataset，意思是“弹性分布式数据集”。RDD是Spark对于分布式数据的统一抽象，它定义了一系列分布式数据的基本属性与处理方法。关于RDD的定义、内涵与作用，我们留到[下一讲]再去展开。</p>
+<p>在这里，你不妨先简单地把RDD理解成“数组”，比如代码中的lineRDD变量，它的类型是RDD[String]，你可以暂时把它当成元素类型是String的数组，数组的每个元素都是文件中的一行字符串。</p>
+<p>获取到文件内容之后，下一步我们就要做分词了。</p>
+<h3 id="第二步-分词">第二步，分词</h3>
+<p>“分词”就是把“数组”的行元素打散为单词。要实现这一点，我们可以调用RDD的flatMap方法来完成。flatMap操作在逻辑上可以分成两个步骤：<strong>映射</strong>和<strong>展平</strong>。</p>
+<p>这两个步骤是什么意思呢？我们还是结合Word Count的例子来看：</p>
+<pre><code>// 以行为单位做分词
+val wordRDD: RDD[String] = lineRDD.flatMap(line =&gt; line.split(" ")) 
+</code></pre>
+<p>要把lineRDD的行元素转换为单词，我们得先用分隔符对每个行元素进行分割（Split），咱们这里的分隔符是空格。</p>
+<p>分割之后，每个行元素就都变成了单词数组，元素类型也从String变成了Array[String]，像这样以元素为单位进行转换的操作，统一称作“<strong>映射</strong>”。</p>
+<p>映射过后，RDD类型由原来的RDD[String]变为RDD[Array[String]]。如果把RDD[String]看成是“数组”的话，那么RDD[Array[String]]就是一个“二维数组”，它的每一个元素都是单词。</p>
+<p><img alt="" src="/assets/3c950df57745b5b3cb01bcec.jpg" title="以行为单位做分词"/></p>
+<p>为了后续对单词做分组，我们还需要对这个“二维数组”做<strong>展平</strong>，也就是去掉内层的嵌套结构，把“二维数组”还原成“一维数组”，如下图所示。</p>
+<p><img alt="" src="/assets/e7bdc7b006d67057b5e22c16.jpg" title="分词后做展平"/></p>
+<p>就这样，在flatMap算子的作用下，原来以行为元素的lineRDD，转换成了以单词为元素的wordRDD。</p>
+<p>不过，值得注意的是，我们用“空格”去分割句子，有可能会产生空字符串。所以，在完成“映射”和“展平”之后，对于这样的“单词”，我们要把其中的空字符串都过滤掉，这里我们调用RDD的filter方法来过滤：</p>
+<pre><code>// 过滤掉空字符串
+val cleanWordRDD: RDD[String] = wordRDD.filter(word =&gt; !word.equals(""))
+</code></pre>
+<p>这样一来，我们在分词阶段就得到了过滤掉空字符串之后的单词“数组”，类型是RDD[String]。接下来，我们就可以准备做分组计数了。</p>
+<h3 id="第三步-分组计数">第三步，分组计数</h3>
+<p>在RDD的开发框架下，聚合类操作，如计数、求和、求均值，需要依赖<strong>键值对</strong>（Key Value Pair）类型的数据元素，也就是（Key，Value）形式的“数组”元素。</p>
+<p>因此，在调用聚合算子做分组计数之前，我们要先把RDD元素转换为（Key，Value）的形式，也就是把RDD[String]映射成RDD[(String, Int)]。</p>
+<p>其中，我们统一把所有的Value置为1。这样一来，对于同一个的单词，在后续的计数运算中，我们只要对Value做累加即可，就像这样：</p>
+<p><img alt="" src="/assets/ceff3a0f1c826cd7f38f0380.jpg" title="把元素转换为（Key，Value）形式"/></p>
+<p>下面是对应的代码：</p>
+<pre><code>// 把RDD元素转换为（Key，Value）的形式
+val kvRDD: RDD[(String, Int)] = cleanWordRDD.map(word =&gt; (word, 1)) 
+</code></pre>
+<p>这样一来，RDD就由原来存储String元素的cleanWordRDD，转换为了存储（String，Int）的kvRDD。</p>
+<p>完成了形式的转换之后，我们就该正式做分组计数了。分组计数其实是两个步骤，也就是先“分组”，再“计数”。下面，我们使用聚合算子reduceByKey来同时完成分组和计数这两个操作。</p>
+<p>对于kvRDD这个键值对“数组”，reduceByKey先是按照Key（也就是单词）来做分组，分组之后，每个单词都有一个与之对应的Value列表。然后根据用户提供的聚合函数，对同一个Key的所有Value做reduce运算。</p>
+<p>这里的reduce，你可以理解成是一种计算步骤或是一种计算方法。当我们给定聚合函数后，它会用折叠的方式，把包含多个元素的列表转换为单个元素值，从而统计出不同元素的数量。</p>
+<p>在Word Count的示例中，我们调用reduceByKey实现分组计算的代码如下：</p>
+<pre><code>// 按照单词做分组计数
+val wordCounts: RDD[(String, Int)] = kvRDD.reduceByKey((x, y) =&gt; x + y) 
+</code></pre>
+<p>可以看到，我们传递给reduceByKey算子的聚合函数是(x, y) =&gt; x + y，也就是累加函数。因此，在每个单词分组之后，reduce会使用累加函数，依次折叠计算Value列表中的所有元素，最终把元素列表转换为单词的频次。对于任意一个单词来说，reduce的计算过程都是一样的，如下图所示。</p>
+<p><img alt="" src="/assets/b22dfedccb7072f4db050147.jpg" title="reduce操作示意图"/></p>
+<p>reduceByKey完成计算之后，我们得到的依然是类型为RDD[(String, Int)]的RDD。不过，与kvRDD不同，wordCounts元素的Value值，记录的是每个单词的统计词频。到此为止，我们就完成了Word Count主逻辑的开发与实现。</p>
+<p><img alt="" src="/assets/f6d8321fce99b1eb288c2a10.jpg" title="reduceByKey转换示意图"/></p>
+<p>在程序的最后，我们还要把wordCounts按照词频做排序，并把词频最高的5个单词打印到屏幕上，代码如下所示。</p>
+<pre><code>// 打印词频最高的5个词汇
+wordCounts.map{case (k, v) =&gt; (v, k)}.sortByKey(false).take(5)
+</code></pre>
+<h3 id="代码执行"><strong>代码执行</strong></h3>
+<p>应用开发完成之后，我们就可以把代码丢进已经准备好的本地Spark部署环境里啦。首先，我们打开命令行终端（Terminal），敲入“spark-shell”，打开交互式运行环境，如下图所示。</p>
+<p><img alt="" src="/assets/7ad3226b7e84005286314afa.png" title="spark-shell启动界面"/></p>
+<p>然后，把我们开发好的代码，依次敲入spark-shell。为了方便你操作，我把完整的代码实现整理到下面了：</p>
+<pre><code>import org.apache.spark.rdd.RDD
+
+// 这里的下划线"_"是占位符，代表数据文件的根目录
+val rootPath: String = _
+val file: String = s"${rootPath}/wikiOfSpark.txt"
+
+// 读取文件内容
+val lineRDD: RDD[String] = spark.sparkContext.textFile(file)
+
+// 以行为单位做分词
+val wordRDD: RDD[String] = lineRDD.flatMap(line =&gt; line.split(" "))
+val cleanWordRDD: RDD[String] = wordRDD.filter(word =&gt; !word.equals(""))
+
+// 把RDD元素转换为（Key，Value）的形式
+val kvRDD: RDD[(String, Int)] = cleanWordRDD.map(word =&gt; (word, 1))
+// 按照单词做分组计数
+val wordCounts: RDD[(String, Int)] = kvRDD.reduceByKey((x, y) =&gt; x + y)
+
+// 打印词频最高的5个词汇
+wordCounts.map{case (k, v) =&gt; (v, k)}.sortByKey(false).take(5)
+</code></pre>
+<p>我们把上面的代码依次敲入到spark-shell之后，spark-shell最终会把词频最高的5个单词打印到屏幕上：</p>
+<p><img alt="" src="/assets/2bf91b63ccf2f883af0f87e8.png" title="打印词频最高的5个词汇"/></p>
+<p>在Wikipedia的Spark介绍文本中，词频最高的单词分别是the、Spark、a、and和of，除了“Spark”之外，其他4个单词都是常用的停用词（Stop Word），因此它们几个高居榜首也就不足为怪了。</p>
+<p>好啦，到此为止，我们在Spark之上，完成了“大数据领域Hello World”的开发与实现，恭喜你跨入大数据开发的大门！</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>今天这一讲，我们围绕着Word Count，初步探索并体验了Spark应用开发。你首先需要掌握的是Spark的本地部署，从而可以通过spark-shell来迅速熟悉Spark，获得对Spark的“第一印象”。要在本地部署Spark，你需要遵循3个步骤：</p>
+<ul>
+<li>从<a href="http://spark.apache.org/downloads.html" target="_blank">Spark官网</a>下载安装包，选择最新的预编译版本即可；</li>
+<li>解压Spark安装包到任意本地目录；</li>
+<li>将“${解压目录}/bin”配置到PATH环境变量。</li>
+</ul>
+<p>然后，我们一起分析并实现了入门Spark的第一个应用程序：Word Count。在我们的例子中，Word Count要完成的计算任务，是先对文件中的单词做统计计数，然后再打印出频次最高的5个单词。它的实现过程分为3个步骤：</p>
+<ul>
+<li>读取内容：调用Spark文件读取API，加载wikiOfSpark.txt文件内容；</li>
+<li>分词：以行为单位，把句子打散为单词；</li>
+<li>分组计数：按照单词做分组计数。</li>
+</ul>
+<p>也许你对RDD API还不熟悉，甚至从未接触过Scala，不过没关系，完成了这次“大数据的Hello World”开发之旅，你就已经踏上了新的征程。在接下来的课程里，让我们携手并肩，像探索新大陆一样，一层一层地剥开Spark的神秘面纱，加油！</p>
+<h2 id="每课一练">每课一练</h2>
+<p>在Word Count的代码实现中，我们用到了多种多样的RDD算子，如map、filter、flatMap和reduceByKey，除了这些算子以外，你知道还有哪些常用的RDD算子吗？（提示，可以结合<a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#transformations" target="_blank">官网</a>去查找）。</p>
+<p>另外，你能说说，以上这些算子都有哪些共性或是共同点吗？</p>
+<p>欢迎你把答案分享到评论区，我在评论区等你。</p>
+<p>如果这一讲对你有帮助，也欢迎你分享给自己的朋友，我们下一讲再见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

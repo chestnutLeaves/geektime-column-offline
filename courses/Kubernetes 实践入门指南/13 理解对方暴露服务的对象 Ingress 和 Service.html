@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>13 理解对方暴露服务的对象 Ingress 和 Service · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/index.html">Kubernetes 实践入门指南</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">25 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kubernetes 实践入门指南</strong><ul><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/00%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E8%A6%81%E5%AD%A6%E4%B9%A0%20Kubernetes%20%E6%8A%80%E6%9C%AF.html">00 为什么我们要学习 Kubernetes 技术</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/01%20%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%20Kubernetes%20%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6.html">01 重新认识 Kubernetes 的核心组件</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/02%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Kubernets%20%E7%9A%84%E7%BC%96%E6%8E%92%E5%AF%B9%E8%B1%A1.html">02 深入理解 Kubernets 的编排对象</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/03%20DevOps%20%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">03 DevOps 场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/04%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">04 微服务应用场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/05%20%E8%A7%A3%E5%86%B3%20K8s%20%E8%90%BD%E5%9C%B0%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA%E6%8F%90%E7%82%BC.html">05 解决 K8s 落地难题的方法论提炼</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/06%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E6%A0%B8%E5%BF%83%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86%E6%8E%8C%E6%8F%A1.html">06 练习篇：K8s 核心实践知识掌握</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/07%20%E5%AE%B9%E5%99%A8%E5%BC%95%E6%93%8E%20containerd%20%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">07 容器引擎 containerd 落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/08%20K8s%20%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7%20kubeadm%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">08 K8s 集群安装工具 kubeadm 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/09%20%E5%8D%97%E5%8C%97%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20IPVS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">09 南北向流量组件 IPVS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/10%20%E4%B8%9C%E8%A5%BF%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20Calico%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">10 东西向流量组件 Calico 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/11%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%20DNS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">11 服务发现 DNS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/12%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">12 练习篇：K8s 集群配置测验</a></li><li><a class="active" aria-current="page" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/13%20%E7%90%86%E8%A7%A3%E5%AF%B9%E6%96%B9%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AF%B9%E8%B1%A1%20Ingress%20%E5%92%8C%20Service.html">13 理解对方暴露服务的对象 Ingress 和 Service</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/14%20%E5%BA%94%E7%94%A8%E7%BD%91%E5%85%B3%20OpenResty%20%E5%AF%B9%E6%8E%A5%20K8s%20%E5%AE%9E%E8%B7%B5.html">14 应用网关 OpenResty 对接 K8s 实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/15%20Service%20%E5%B1%82%E5%BC%95%E6%B5%81%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">15 Service 层引流技术实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/16%20Cilium%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">16 Cilium 容器网络的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/17%20%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E7%9A%84%E4%BC%98%E9%9B%85%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E5%AE%9E%E8%B7%B5.html">17 应用流量的优雅无损切换实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/18%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9A%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E6%8A%80%E6%9C%AF%E6%B5%8B%E9%AA%8C.html">18 练习篇：应用流量无损切换技术测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/19%20%E4%BD%BF%E7%94%A8%20Rook%20%E6%9E%84%E5%BB%BA%E7%94%9F%E4%BA%A7%E5%8F%AF%E7%94%A8%E5%AD%98%E5%82%A8%E7%8E%AF%E5%A2%83%E5%AE%9E%E8%B7%B5.html">19 使用 Rook 构建生产可用存储环境实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/20%20%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8%E7%9A%84%E9%BB%98%E8%AE%A4%E7%89%B9%E6%80%A7%E8%90%BD%E5%9C%B0%E5%88%86%E6%9E%90.html">20 有状态应用的默认特性落地分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/21%20%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20MySQL%20%E9%9B%86%E7%BE%A4%E5%B7%A5%E5%85%B7%20Vitess%20%E5%AE%9E%E8%B7%B5%E5%88%86%E6%9E%90.html">21 案例：分布式 MySQL 集群工具 Vitess 实践分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/22%20%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%20PV%E3%80%81PVC%E3%80%81Storage%20Classes%20%E7%9A%84%E7%AE%A1%E7%90%86%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">22 存储对象 PV、PVC、Storage Classes 的管理落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/23%20K8s%20%E9%9B%86%E7%BE%A4%E4%B8%AD%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E7%81%BE%E5%A4%87%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">23 K8s 集群中存储对象灾备的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/24%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">24 练习篇：K8s 集群配置测验</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/13%20%E7%90%86%E8%A7%A3%E5%AF%B9%E6%96%B9%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AF%B9%E8%B1%A1%20Ingress%20%E5%92%8C%20Service.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="13 理解对方暴露服务的对象 Ingress 和 Service" id="title">13 理解对方暴露服务的对象 Ingress 和 Service</h1>
+<div><p>Kubernetes 中的服务（Service）可以理解为对外暴露服务的最小单元对象，这个和 Pod 对象还是有不同的。例如用户通过发布服务对象 Deployment 发布应用，当在容器集群中启动后，ReplicaSet 副本对象会帮我们维持 Pod 实例的副本数。Pod 使用的容器网络默认会选择构建在主机网络上的覆盖网络（Overlay），默认外网是无法直接访问这些 Pod 实例服务的。为了能有效对接容器网络，Kubernetes 创建了另外一层虚拟网络 ClusterIP，即 Service 对象。从实现上来看，它借助 iptables 调用底层 netfilter 实现了虚拟 IP，然后通过相应的规则链把南北向流量准确无误的接入后端 Pod 实例。随着需求的衍生，后来扩展的 Ingress 对象则是借助第三方代理服务如 HAProxy、Nginx 等 7 层引流工具打通外部流量和内部 Service 对象的通路。Ingress 对象的目的就是为了解决容器集群中需要高性能应用网关接入的需求。</p>
+<h3 id="service-的思考">Service 的思考</h3>
+<p>Service 定义的网络基于 iptables 编排 netfilter 规则来支持虚拟 IP。Service 对象被设计为反向代理模式，支持南北向流量的负载均衡，通过 DNAT 把流量转到后端的具体业务的 Pod 中。为了劫持接入流量和 NAT 转换，Kubernetes 创建了两条自定义链规则 PREROUTING 和 OUTPUT。如：</p>
+<pre><code>-A PREROUTING -m comment --comment "kubernetes service portals" -j KUBE-SERVICES
+...
+-A OUTPUT -m comment --comment "kubernetes service portals" -j KUBE-SERVICES
+...
+
+</code></pre>
+<p>PREROUTING 主要处理从外部引入的流量和来自 Pod 容器网络的引入流量，OUTPUT 主要处理流出到外部网络的流量和流出到 Pod 容器网络的流量。</p>
+<p>因为发布的服务肯定需要对外暴露服务，所以 Kubernetes 创建了一个自定义规则链 KUBE-SERVICE 来支持集群级别的服务发现，即 ClusterIP 和 LoadBalancer 类型，最后通过另外一条自定义规则链 KUBE-NODEPORTS 来对外暴露服务，案例如下：</p>
+<pre><code>-A KUBE-SERVICES -m comment --comment "kubernetes service nodeports; NOTE: this must be the last rule in this chain" -m addrtype --dst-type LOCAL -j KUBE-NODEPORTS
+
+</code></pre>
+<p>每一个 Service 都会创建一套规则链，NODEPORTS 规则必须在最后一行。因此不难知道，当服务数量达到上万个时候，iptables 是无法承载这种规模的规则链的处理的。所以，在最新服务方案中默认引入 ipvs 取代 iptables 的原因。</p>
+<h4 id="clusterip-类型"><strong>ClusterIP 类型</strong></h4>
+<p>Service 默认类型，配合场景可以分为以下 5 种分类：</p>
+<ul>
+<li>ClusterIP service</li>
+<li>ClusterIP service with session affinity</li>
+<li>ClusterIP with external IPs</li>
+<li>ClusterIP service without any endpoints</li>
+<li>Headless service</li>
+</ul>
+<p>为了加深印象，以下通过案例来学习 Service 对象：</p>
+<pre><code>#redis.yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+
+</code></pre>
+<p>先创建普通的 Service：</p>
+<pre><code>#redis-clusterip.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: redis
+
+</code></pre>
+<p>查看 Service 情况：</p>
+<pre><code>#kubectl get service redis
+NAME    TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+redis   ClusterIP   10.0.19.85   &lt;none&gt;        6379/TCP   3d4h
+
+#kubectl get endpoints redis
+NAME    ENDPOINTS                           AGE
+redis   10.244.1.69:6379,10.244.1.70:6379   3d4h
+
+</code></pre>
+<p>很多用户在遇到这个 Cluster ip 后，就会尝试 ping 它，但是 ping 不通，也不清楚为什么。其实它是一个虚拟 IP，并没有相关网络进程和它关联，当然也就无法访问。Kubernetes 默认会在创建 Service 的时候把此虚拟 IP 加入到内置的 DNS 中用来支持服务发现，仅此而已。如下：</p>
+<pre><code>#nslookup redis.default.svc.cluster.local 10.0.0.10
+Server:        10.0.0.10
+Address:    10.0.0.10#53
+
+Name:    redis.default.svc.cluster.local
+Address: 10.0.19.85
+
+</code></pre>
+<p>现在查看 kube-proxy 通过 iptables 定义的规则链，了解流量接入的实现方法如下：</p>
+<pre><code>-A KUBE-SERVICES ! -s 10.244.0.0/16 -d 10.0.19.85/32 -p tcp -m comment --comment "default/redis: cluster IP" -m tcp --dport 6379 -j KUBE-MARK-MASQ
+-A KUBE-SERVICES -d 10.0.19.85/32 -p tcp -m comment --comment "default/redis: cluster IP" -m tcp --dport 6379 -j KUBE-SVC-SCFPZ36VFLUNBB47
+
+-A KUBE-SVC-SCFPZ36VFLUNBB47 -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-UH5EYFQKYB24RWKN
+-A KUBE-SVC-SCFPZ36VFLUNBB47 -j KUBE-SEP-5MXPM55VLN7O52FQ
+
+-A KUBE-SEP-UH5EYFQKYB24RWKN -s 10.244.1.69/32 -j KUBE-MARK-MASQ
+-A KUBE-SEP-UH5EYFQKYB24RWKN -p tcp -m tcp -j DNAT --to-destination 10.244.1.69:6379
+
+-A KUBE-SEP-5MXPM55VLN7O52FQ -s 10.244.1.70/32 -j KUBE-MARK-MASQ
+-A KUBE-SEP-5MXPM55VLN7O52FQ -p tcp -m tcp -j DNAT --to-destination 10.244.1.70:6379
+
+</code></pre>
+<p>注意，Service 这层的负载均衡是通过 iptables 的 statistic 模块实现：</p>
+<pre><code>-A KUBE-SVC-SCFPZ36VFLUNBB47 -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-UH5EYFQKYB24RWKN
+-A KUBE-SVC-SCFPZ36VFLUNBB47 -j KUBE-SEP-5MXPM55VLN7O52FQ
+
+</code></pre>
+<p>还有一个问题，就是 Pod 内网 IP 访问 Service IP 的时候是会发生端口流量回流的。如何让端口流量不回流的技术，专业术语叫 hairpin NAT。通过 kubelet 配置参数 <code>--hairpin-mode=hairpin-veth</code> 可以让 Pod 内网网卡自动支持 hairpin，从而解决虚拟网卡流量回流的问题。</p>
+<p>让 ClusterIP 支持流量亲和性，你需要如下声明对象：</p>
+<pre><code>#redis-clusterip-sa.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-sa
+spec:
+  sessionAffinity: ClientIP
+  ports:
+  - port: 6379
+  selector:
+    app: redis
+
+</code></pre>
+<p>查看 iptables 生成的规则如下：</p>
+<pre><code>-A KUBE-SERVICES ! -s 10.244.0.0/16 -d 10.0.219.234/32 -p tcp -m comment --comment "default/redis-sa: cluster IP" -m tcp --dport 6379 -j KUBE-MARK-MASQ
+-A KUBE-SERVICES -d 10.0.219.234/32 -p tcp -m comment --comment "default/redis-sa: cluster IP" -m tcp --dport 6379 -j KUBE-SVC-YUZPDSCUOF7FG5LD
+
+-A KUBE-SVC-YUZPDSCUOF7FG5LD -m recent --rcheck --seconds 10800 --reap --name KUBE-SEP-6MUUJB4K75LGZXHS --mask 255.255.255.255 --rsource -j KUBE-SEP-6MUUJB4K75LGZXHS
+-A KUBE-SVC-YUZPDSCUOF7FG5LD -m recent --rcheck --seconds 10800 --reap --name KUBE-SEP-F5DCISRHJOTG66JA --mask 255.255.255.255 --rsource -j KUBE-SEP-F5DCISRHJOTG66JA
+-A KUBE-SVC-YUZPDSCUOF7FG5LD -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-6MUUJB4K75LGZXHS
+-A KUBE-SVC-YUZPDSCUOF7FG5LD -j KUBE-SEP-F5DCISRHJOTG66JA
+
+-A KUBE-SEP-6MUUJB4K75LGZXHS -s 10.244.1.69/32 -j KUBE-MARK-MASQ
+-A KUBE-SEP-6MUUJB4K75LGZXHS -p tcp -m recent --set --name KUBE-SEP-6MUUJB4K75LGZXHS --mask 255.255.255.255 --rsource -m tcp -j DNAT --to-destination 10.244.1.69:6379
+
+-A KUBE-SEP-F5DCISRHJOTG66JA -s 10.244.1.70/32 -j KUBE-MARK-MASQ
+-A KUBE-SEP-F5DCISRHJOTG66JA -p tcp -m recent --set --name KUBE-SEP-F5DCISRHJOTG66JA --mask 255.255.255.255 --rsource -m tcp -j DNAT --to-destination 10.244.1.70:6379
+
+</code></pre>
+<p>通过以上的规则链，可以知道链路亲和性主要是通过 iptables 的 recent 模块来支持的。</p>
+<p>如果不想创建 ClusterIP，可以声明 None 去掉 ClusterIP 支持，如下：</p>
+<pre><code>#redis-clusterip-headless.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-headless
+spec:
+  clusterIP: None
+  ports:
+  - port: 6379
+  selector:
+    app: redis
+
+</code></pre>
+<p>通过内网 DNS 可以了解到，查询 Service 将直接列出 Pod 的 IP 了，如下：</p>
+<pre><code>#nslookup redis-headless.default.svc.cluster.local 10.0.0.10
+Server:        10.0.0.10
+Address:    10.0.0.10#53
+
+Name:    redis-headless.default.svc.cluster.local
+Address: 10.244.1.69
+Name:    redis-headless.default.svc.cluster.local
+Address: 10.244.1.70
+
+</code></pre>
+<h4 id="nodeport-类型"><strong>NodePort 类型</strong></h4>
+<p>NodePort 类型也是我们最常用的类型，按照场景分类如下 5 种：</p>
+<ul>
+<li>NodePort service</li>
+<li>NodePort service with externalTrafficPolicy: Local</li>
+<li>NodePort service without any endpoints</li>
+<li>NodePort service with session affinity</li>
+<li>NodePort service with externalTrafficPolicy: Local and session affinity</li>
+</ul>
+<p>一般常见的定义如下：</p>
+<pre><code>#redis-nodeport.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-nodeport
+spec:
+  type: NodePort
+  ports:
+  - nodePort: 30001
+    port: 6379
+    targetPort: 6379    
+  selector:
+    app: redis
+
+</code></pre>
+<p>查看创建结果如下：</p>
+<pre><code>#kubectl get service redis-nodeport
+NAME             TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+redis-nodeport   NodePort   10.0.118.143   &lt;none&gt;        6379:30001/TCP   107s
+
+#kubectl get endpoints redis-nodeport
+NAME             ENDPOINTS          AGE
+redis-nodeport   10.244.0.4:6379   110s
+
+</code></pre>
+<p>通过暴露在主机层面的 30001 端口，外网可以轻松访问到容器集群中的服务。</p>
+<h3 id="ingress-的思考">Ingress 的思考</h3>
+<p>Ingress 打通了从集群外部到集群内服务的 HTTP 和 HTTPS 路由。流量路由由 Ingress 资源上定义的规则控制。其实真正的流量负载由第三方代理服务来支撑，如 HAProxy。大家可以回顾一下，在没有 Ingress 之前，我们一般都会在集群外部部署接入网关，然后把流量引入集群。但是 Kubernetes 集群中的服务是动态的，如何能通过查询 APIServer 动态获得服务列表和端口，然后实时更新到网关中，这不就完美实现业务需求了吗？是的，Ingress 因此而生，它的主要能力就是为服务提供外部可访问的 URL、负载均衡流量、终止 SSL/TLS。</p>
+<p>通过一个最小的 Ingress 资源示例来熟悉下：</p>
+<pre><code>apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        pathType: Prefix
+        backend:
+          serviceName: test
+          servicePort: 80
+
+</code></pre>
+<p>Nginx 的规则更新主要是通过 nginx-controller 定期从 APIServer 中抓取获得。</p>
+<h4 id="特性一-服务分组"><strong>特性一：服务分组</strong></h4>
+<p>一个分组配置根据请求的 HTTP URI 将流量从单个 IP 地址路由到多个服务。Ingress 允许将负载均衡器的数量降至最低。例如，这样的设置：</p>
+<pre><code>foo.bar.com -&gt; 178.91.123.132 -&gt; / foo    service1:4200
+                                 / bar    service2:8080
+
+</code></pre>
+<h4 id="特性二-基于名称的虚拟托管"><strong>特性二：基于名称的虚拟托管</strong></h4>
+<p>基于名称的虚拟域名支持将针对多个主机名的 HTTP 流量路由到同一 IP 地址上。</p>
+<pre><code>foo.bar.com --|                 |-&gt; foo.bar.com service1:80
+              | 178.91.123.132  |
+bar.foo.com --|                 |-&gt; bar.foo.com service2:80
+
+</code></pre>
+<h4 id="特性三-tls-终止"><strong>特性三：TLS 终止</strong></h4>
+<p>通过设定包含 TLS 私钥和证书的 Secret 来保护 Ingress。目前，Ingress 只支持单个 TLS 端口 443，并假定 TLS 终止。</p>
+<pre><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: testsecret-tls
+  namespace: default
+data:
+  tls.crt: base64 encoded cert
+  tls.key: base64 encoded key
+type: kubernetes.io/tls
+
+</code></pre>
+<p>在 Ingress 中引用此 Secret 将会告诉 Ingress 控制器使用 TLS 加密从客户端到负载均衡器的通道。你需要确保创建的 TLS Secret 来自包含 sslexample.foo.com 的公用名称（CN）的证书。这里的公共名称也被称为全限定域名（FQDN）。</p>
+<pre><code>apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: tls-example-ingress
+spec:
+  tls:
+  - hosts:
+    - sslexample.foo.com
+    secretName: testsecret-tls
+  rules:
+    - host: sslexample.foo.com
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: service1
+            servicePort: 80
+
+</code></pre>
+<p>从案例中来看，Ingress 虽然承担这应用网关的职责，但是其设计的能力受制于第三方代理组件，反而没有自定义应用网关那么灵活。所以在具体业务中，我们仍然需要考量需求后在觉得是否需要引入 Ingress。</p>
+<h3 id="总结">总结</h3>
+<p>集群对外服务对象 Service 和 Ingress 往往被人误解，并和 Pod 服务发现混在一起。通过以上的案例分析，我们可以充分理解 Service 的实现。从实践中发现，Service 这层的作用是起到承上启下的入口作用，功能上只要能暴露主机端口 NodePort 即可。采用 iptables 实现的 NAT 转换只有在上万规模服务的时候，规则链的暴增才会影响性能，采用 ipvs 反向代理模块后可以缓解。但是 iptables 定义的规则链还要解决 Service 和 Pod 容器网络的 NAT 连通，目前还无法完全去掉 iptables 模块。随着 eBPF 的兴起，预计后面去 iptables 化指日可待。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>18 购物车信息确定订单：为什么动态参数化逻辑非常重要？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">高楼的性能工程实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">34 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>高楼的性能工程实战课</strong><ul><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E6%89%93%E7%A0%B4%E5%9B%9B%E5%A4%A7%E8%AE%A4%E7%9F%A5%E5%B1%80%E9%99%90%EF%BC%8C%E8%BF%9B%E9%98%B6%E9%AB%98%E7%BA%A7%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%B8%88.html">00 开篇词 打破四大认知局限，进阶高级性能工程师</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%88%E5%A4%9A%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E4%BA%BA%E5%91%98%E6%97%A0%E6%B3%95%E5%AF%B9%E6%80%A7%E8%83%BD%E7%BB%93%E6%9E%9C%E8%B4%9F%E8%B4%A3%EF%BC%9F.html">01 性能工程：为什么很多性能测试人员无法对性能结果负责？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5%EF%BC%9A%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E5%92%8C%E5%9C%BA%E6%99%AF%E7%9A%84%E7%A1%AE%E5%AE%9A.html">02 关键概念：性能指标和场景的确定</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E6%A0%B8%E5%BF%83%E5%88%86%E6%9E%90%E9%80%BB%E8%BE%91%EF%BC%9A%E6%89%80%E6%9C%89%E7%9A%84%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%8C%E9%9D%A0%E8%BF%99%E4%B8%83%E6%AD%A5%E9%83%BD%E8%83%BD%E6%90%9E%E5%AE%9A.html">03 核心分析逻辑：所有的性能分析，靠这七步都能搞定</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E6%9F%A5%E6%89%BE%E7%93%B6%E9%A2%88%E8%AF%81%E6%8D%AE%E9%93%BE%EF%BC%9F.html">04 如何构建性能分析决策树和查找瓶颈证据链？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E6%80%A7%E8%83%BD%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BD%A0%E7%9A%84%E6%96%B9%E6%A1%88%E6%98%AF%E5%90%A6%E8%BF%98%E5%81%9C%E7%95%99%E5%9C%A8%E5%BD%A2%E5%BC%8F%E4%B8%8A%EF%BC%9F.html">05 性能方案：你的方案是否还停留在形式上？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E5%A6%82%E4%BD%95%E6%8A%BD%E5%8F%96%E5%87%BA%E7%AC%A6%E5%90%88%E7%9C%9F%E5%AE%9E%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">06 如何抽取出符合真实业务场景的业务模型？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E6%80%A7%E8%83%BD%E5%9C%BA%E6%99%AF%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%B0%E5%BA%95%E5%BA%94%E8%AF%A5%E5%81%9A%E6%88%90%E4%BB%80%E4%B9%88%E6%A0%B7%E5%AD%90%EF%BC%9F.html">07 性能场景的数据到底应该做成什么样子？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E5%B9%B6%E5%8F%91%E3%80%81%E5%9C%A8%E7%BA%BF%E5%92%8CTPS%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">08 并发、在线和TPS到底是什么关系？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%85%A8%E5%B1%80%E5%92%8C%E5%AE%9A%E5%90%91%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5%EF%BC%9F.html">09 如何设计全局和定向监控策略？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E8%AE%BE%E8%AE%A1%E5%9F%BA%E5%87%86%E5%9C%BA%E6%99%AF%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E5%93%AA%E4%BA%9B%E5%85%B3%E9%94%AE%E7%82%B9%EF%BC%9F.html">10 设计基准场景需要注意哪些关键点？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E6%89%93%E5%BC%80%E9%A6%96%E9%A1%B5%E4%B9%8B%E4%B8%80%EF%BC%9A%E4%B8%80%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%8C%E5%B8%A6%E4%BD%A0%E6%90%9E%E6%87%82%E5%9F%BA%E7%A1%80%E7%A1%AC%E4%BB%B6%E8%AE%BE%E6%96%BD%E7%9A%84%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98.html">11 打开首页之一：一个案例，带你搞懂基础硬件设施的性能问题</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/12%20%E6%89%93%E5%BC%80%E9%A6%96%E9%A1%B5%E4%B9%8B%E4%BA%8C%EF%BC%9A%E5%A6%82%E4%BD%95%E5%B9%B3%E8%A1%A1%E5%88%A9%E7%94%A8%E7%A1%AC%E4%BB%B6%E8%B5%84%E6%BA%90%EF%BC%9F.html">12 打开首页之二：如何平衡利用硬件资源？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/13%20%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%EF%BC%9A%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84Block%E5%8E%9F%E5%9B%A0%EF%BC%9F.html">13 用户登录：怎么判断线程中的Block原因？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%BD%91%E7%BB%9C%E8%BD%AF%E4%B8%AD%E6%96%AD%E7%93%B6%E9%A2%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">14 用户信息查询：如何解决网络软中断瓶颈问题？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/15%20%E6%9F%A5%E8%AF%A2%E5%95%86%E5%93%81%EF%BC%9A%E8%B5%84%E6%BA%90%E4%B8%8D%E8%B6%B3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%80%A7%E8%83%BD%E8%A1%A8%E7%8E%B0%EF%BC%9F.html">15 查询商品：资源不足有哪些性能表现？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/16%20%E5%95%86%E5%93%81%E5%8A%A0%E5%85%A5%E8%B4%AD%E7%89%A9%E8%BD%A6%EF%BC%9ASQL%E4%BC%98%E5%8C%96%E5%92%8C%E5%8E%8B%E5%8A%9B%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E5%88%86%E6%9E%90.html">16 商品加入购物车：SQL优化和压力工具中的参数分析</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/17%20%E6%9F%A5%E8%AF%A2%E8%B4%AD%E7%89%A9%E8%BD%A6%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%93%BA%E5%BA%95%E5%8F%82%E6%95%B0%E4%B8%80%E5%AE%9A%E8%A6%81%E7%AC%A6%E5%90%88%E7%9C%9F%E5%AE%9E%E4%B8%9A%E5%8A%A1%E7%89%B9%E6%80%A7%EF%BC%9F.html">17 查询购物车：为什么铺底参数一定要符合真实业务特性？</a></li><li><a class="active" aria-current="page" href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/18%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%BF%A1%E6%81%AF%E7%A1%AE%E5%AE%9A%E8%AE%A2%E5%8D%95%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E5%8C%96%E9%80%BB%E8%BE%91%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%EF%BC%9F.html">18 购物车信息确定订单：为什么动态参数化逻辑非常重要？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/19%20%E7%94%9F%E6%88%90%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%E4%B9%8B%E4%B8%80%EF%BC%9A%E5%BA%94%E7%94%A8JDBC%E6%B1%A0%E4%BC%98%E5%8C%96%E5%92%8C%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%88%86%E6%9E%90.html">19 生成订单信息之一：应用JDBC池优化和内存溢出分析</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/20%20%E7%94%9F%E6%88%90%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%E4%B9%8B%E4%BA%8C%EF%BC%9A%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E5%A4%8D%E6%9D%82%EF%BC%8C%E6%80%8E%E4%B9%88%E5%81%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F.html">20 生成订单信息之二：业务逻辑复杂，怎么做性能优化？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/21%20%E6%94%AF%E4%BB%98%E5%89%8D%E6%9F%A5%E8%AF%A2%E8%AE%A2%E5%8D%95%E5%88%97%E8%A1%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%E4%BC%98%E5%8C%96%E4%B8%80%E4%B8%AA%E5%9B%BA%E5%AE%9A%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6%EF%BC%9F.html">21 支付前查询订单列表：如何分析优化一个固定的技术组件？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/22%20%E6%94%AF%E4%BB%98%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E8%A7%A3%E5%86%B3for%E5%BE%AA%E7%8E%AF%E4%BA%A7%E7%94%9F%E7%9A%84%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%9F.html">22 支付订单信息：如何高效解决for循环产生的内存溢出？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E5%86%B3%E5%AE%9A%E5%AE%B9%E9%87%8F%E5%9C%BA%E6%99%AF%E6%88%90%E8%B4%A5%E7%9A%84%E5%85%B3%E9%94%AE%E5%9B%A0%E7%B4%A0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">23 决定容量场景成败的关键因素有哪些？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E5%AE%B9%E9%87%8F%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%B8%80%EF%BC%9A%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%92%8CKubernetes%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E4%B8%8D%E5%9D%87%E8%A1%A1%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">24 容量场景之一：索引优化和Kubernetes资源分配不均衡怎么办？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/25%20%E5%AE%B9%E9%87%8F%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%BA%8C%EF%BC%9A%E7%BC%93%E5%AD%98%E5%AF%B9%E6%80%A7%E8%83%BD%E4%BC%9A%E6%9C%89%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9F.html">25 容量场景之二：缓存对性能会有什么样的影响？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/26%20%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%B8%80%EF%BC%9A%E6%80%8E%E6%A0%B7%E6%90%9E%E5%AE%9A%E4%B8%9A%E5%8A%A1%E7%A7%AF%E7%B4%AF%E9%87%8F%E4%BA%A7%E7%94%9F%E7%9A%84%E7%93%B6%E9%A2%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">26 稳定性场景之一：怎样搞定业务积累量产生的瓶颈问题？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%BA%8C%EF%BC%9A%E6%80%8E%E6%A0%B7%E6%90%9E%E5%AE%9A%E7%A3%81%E7%9B%98%E4%B8%8D%E8%B6%B3%E4%BA%A7%E7%94%9F%E7%9A%84%E7%93%B6%E9%A2%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">27 稳定性场景之二：怎样搞定磁盘不足产生的瓶颈问题？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E5%BC%82%E5%B8%B8%E5%9C%BA%E6%99%AF%E7%9A%84%E8%8C%83%E5%9B%B4%E5%92%8C%E8%AE%BE%E8%AE%A1%E9%80%BB%E8%BE%91%EF%BC%9F.html">28 如何确定异常场景的范围和设计逻辑？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E5%BC%82%E5%B8%B8%E5%9C%BA%E6%99%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9F%E4%B8%8D%E5%90%8C%E7%BB%84%E4%BB%B6%E5%B1%82%E7%BA%A7%E7%9A%84%E5%BC%82%E5%B8%B8%EF%BC%9F.html">29 异常场景：如何模拟不同组件层级的异常？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E7%94%9F%E4%BA%A7%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%EF%BC%9F.html">30 如何确定生产系统配置？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E6%80%8E%E4%B9%88%E5%86%99%E5%87%BA%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84%E6%80%A7%E8%83%BD%E6%8A%A5%E5%91%8A%EF%BC%9F.html">31 怎么写出有价值的性能报告？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%88%91%E4%BB%AC%E8%BF%99%E4%B8%AA%E8%AF%BE%E7%A8%8B%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%EF%BC%9F.html">我们这个课程的系统是怎么搭建起来的？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%81%9A%E7%9C%9F%E6%AD%A3%E7%9A%84%E6%80%A7%E8%83%BD%E9%A1%B9%E7%9B%AE.html">结束语 做真正的性能项目</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/18%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%BF%A1%E6%81%AF%E7%A1%AE%E5%AE%9A%E8%AE%A2%E5%8D%95%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E5%8C%96%E9%80%BB%E8%BE%91%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="18 购物车信息确定订单：为什么动态参数化逻辑非常重要？" id="title">18 购物车信息确定订单：为什么动态参数化逻辑非常重要？</h1>
+<div><p>你好，我是高楼。</p>
+<p>我们今天来看一下购物车信息确定订单这个接口的性能怎么样，有哪些需要优化的地方。</p>
+<p>在这节课中，我将给你展示如何进行方法级的跟踪，来判断参数的问题。而这个参数，并不是我们这个接口直接用到的，它有不同的使用层次。</p>
+<p>直接的参数化我们都能理解，对吧。但是当一个参数产生新的数据，而新的数据又会在后续的动作中用到时，你就得注意了，因为我们有可能在第一层数据中没有发现问题，但是在后续的动作中会遇到问题。所以，我们一定要关注参数化的变化，也就是动态的参数化的数据。</p>
+<p>此外，在这节课中，我还将带你一起来看看在应用有多个节点的情况下，某个节点消耗资源过多导致的复杂问题该怎么处理。</p>
+<p>话不多说，我们开始今天的分析吧！</p>
+<h2 id="场景运行数据">场景运行数据</h2>
+<p>对于购物车信息确定订单这个接口，我们第一次运行的性能场景结果如下：</p>
+<p><img alt="" src="/assets/c0399092fa2bf3aa9971acb8.png"/></p>
+<p>在图中，响应时间随着压力的增加而增加，而TPS只到了160多，还是有点低了，我们现在就得考虑把TPS提升。</p>
+<p>注意，<strong>这是一个典型的TPS不高，响应时间不断增加的性能问题。</strong></p>
+<p>按照RESAR性能分析逻辑，我们看一下这个接口的架构图。</p>
+<h2 id="看架构图">看架构图</h2>
+<p><img alt="" src="/assets/db1a8cfc6ec57a45c29034ef.png"/></p>
+<p>可以看到，这个接口涉及到的服务比较多，架构图也比之前其他接口的要复杂一些。</p>
+<p>紧接着，我们就来拆分响应时间。</p>
+<h2 id="拆分响应时间">拆分响应时间</h2>
+<ul>
+<li>Gateway：</li>
+</ul>
+<p><img alt="" src="/assets/71a70d55f9de6d4160932bbd.png"/></p>
+<ul>
+<li>Order：</li>
+</ul>
+<p><img alt="" src="/assets/ec843f6757f4afa21f923ccc.png"/></p>
+<ul>
+<li>Member：</li>
+</ul>
+<p><img alt="" src="/assets/86875d63618b629e64a77efd.png"/></p>
+<ul>
+<li>Cart：</li>
+</ul>
+<p><img alt="" src="/assets/ca28b81f03dc64261362f80b.png"/></p>
+<ul>
+<li>Portal：</li>
+</ul>
+<p><img alt="" src="/assets/e5ebf02c9e204b88caea7005.png"/></p>
+<p>从上面的时间拆分来看，Cart消耗了最长的时间。所以，我们先分析Cart。</p>
+<p>我们再顺手点一下Cart和MySQL之间的时间消耗，看看是什么情况：</p>
+<p><img alt="" src="/assets/f322bb6f30f2b719f8028c2d.png"/></p>
+<p>这个Cart和MySQL之间的时间看起来不长，那我们就不用考虑数据库的SQL时间消耗了。</p>
+<p>接下来，我们就来分析响应时间长的Cart服务。</p>
+<h2 id="第一阶段">第一阶段</h2>
+<h3 id="全局分析">全局分析</h3>
+<p>按照惯例，我们来看一下worker层面的资源消耗情况：</p>
+<p><img alt="" src="/assets/ea17bb9c6d51c553e8016b13.png"/></p>
+<p>从上图来看，worker-3上消耗的资源较多。那我们就来查看一下worker-3上有什么服务。</p>
+<pre><code>[root@k8s-master-2 ~]# kubectl get pods -o wide | grep k8s-worker-3
+cloud-nacos-registry-685b8957d7-vskb6       1/1     Running     0          2d11h   10.100.69.199    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+cloud-redis-7f7db7f45c-t5g46                2/2     Running     0          2d8h    10.100.69.196    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+elasticsearch-master-2                      1/1     Running     0          3h28m   10.100.69.209    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+svc-mall-cart-558d787dc7-g6qgh              1/1     Running     0          2d11h   10.100.69.201    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+svc-mall-order-fbfd8b57c-kbczh              1/1     Running     0          2d11h   10.100.69.202    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+svc-mall-portal-846d9994f8-m7jbq            1/1     Running     0          38h     10.100.69.207    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+svc-mall-search-c9c8bc847-h7sgv             1/1     Running     0          161m    10.100.69.210    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+[root@k8s-master-2 ~]# 
+</code></pre>
+<p>可以看到，worker-3上有8个服务，哪个服务消耗的资源最多呢？现在我们进入worker-3，查看下top：</p>
+<pre><code>[root@k8s-worker-3 ~]# top
+top - 01:51:35 up 2 days, 12:18,  2 users,  load average: 19.48, 18.40, 17.07
+Tasks: 319 total,   1 running, 318 sleeping,   0 stopped,   0 zombie
+%Cpu0  : 68.6 us,  6.4 sy,  0.0 ni, 19.9 id,  0.0 wa,  0.0 hi,  5.1 si,  0.0 st
+%Cpu1  : 66.7 us,  5.8 sy,  0.0 ni, 22.8 id,  0.0 wa,  0.0 hi,  4.8 si,  0.0 st
+%Cpu2  : 66.4 us,  6.1 sy,  0.0 ni, 22.7 id,  0.0 wa,  0.0 hi,  4.7 si,  0.0 st
+%Cpu3  : 65.7 us,  5.4 sy,  0.0 ni, 23.6 id,  0.0 wa,  0.0 hi,  5.4 si,  0.0 st
+%Cpu4  : 66.6 us,  5.7 sy,  0.0 ni, 22.0 id,  0.0 wa,  0.0 hi,  5.7 si,  0.0 st
+%Cpu5  : 67.6 us,  5.8 sy,  0.0 ni, 22.5 id,  0.0 wa,  0.0 hi,  4.1 si,  0.0 st
+KiB Mem : 16265992 total,  2525940 free,  7015104 used,  6724948 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  8848464 avail Mem 
+
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                      
+32216 root      20   0 8878548 658820  16980 S 280.5  4.1 375:31.82 java -Dapp.id=svc-mall-cart -javaagent:/opt/skywalking/agent/skywalking-agen+
+32589 root      20   0 8839408 589196  15892 S  84.1  3.6 171:16.88 java -Dapp.id=svc-mall-order -javaagent:/opt/skywalking/agent/skywalking-age+
+24119 root      20   0 8798548 549804  15892 S  65.9  3.4 115:52.74 java -Dapp.id=svc-mall-portal -javaagent:/opt/skywalking/agent/skywalking-ag+
+ 1089 root      20   0 2438956 105708  37776 S   6.3  0.6 248:21.71 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.co+
+ 5470 root      20   0 1154816  14992   1816 S   3.6  0.1  20:15.93 redis-server 0.0.0.0:6379             
+</code></pre>
+<p>从以上数据来看，的确是Cart服务消耗的CPU比较高。不过，它<strong>还没有把6个CPU都用完</strong>，这一点我们要记一下。</p>
+<p>下面开始定向分析。</p>
+<h3 id="定向分析">定向分析</h3>
+<p>既然Cart服务消耗的CPU多，那我们当然要看一下Cart中的线程都在干啥。</p>
+<p><img alt="" src="/assets/d86afbcc2be43e596d88f60a.png"/></p>
+<p>这些线程状态基本都在绿色的Runnable状态，看起来都比较繁忙，有可能是因为线程数配置的太低了，我们查看下配置：</p>
+<pre><code>server:
+  port: 8086
+  tomcat:
+    accept-count: 1000
+    threads:
+      max: 20
+      min-spare: 5
+    max-connections: 500
+</code></pre>
+<p>知道了Spring Boot内置的Tomcat线程数配置，我们拆分一下在Cart上正在执行的方法，看看我们的定位方法是不是合理：</p>
+<p><img alt="" src="/assets/6d99169b936c4977d2ea0471.png"/></p>
+<p>看这张图的时候，你要注意消耗时间长的位置，也就是图中右侧线段比较长的地方。这里面有两个环节的问题：</p>
+<ol>
+<li>MySQL的执行时间长。你要注意哦，虽然这里的MySQL/JDBI/PreparedStatement/execute并没有消耗很长的时间，但是它的下一步Balance/Promotion/Cart/CartPromotion消耗的时间是长的；</li>
+<li>Promotionnew方法本身的时间长。</li>
+</ol>
+<p>由于慢的节点和MySQL有关，我们创建一个，mysqlreport来看MySQL整体的监控数据：</p>
+<pre><code>__ Connections _________________________________________________________
+Max used          152 of  151      %Max: 100.66
+Total             540     0.0/s
+</code></pre>
+<p>原来是连接用完了！我们赶紧改一下，从151改到500。</p>
+<p>不过，重测之后响应时间还是没有变化，那我们就只能接着跟踪Cart上的方法了。</p>
+<h4 id="方法级跟踪">方法级跟踪</h4>
+<p>于是，我们不得不来到方法级跟踪， 看一下我们关注的方法Promotionnew慢在哪里。</p>
+<p>由上面那张调用视图，我们可以编写下面这样的跟踪语句：</p>
+<p>trace -E com.dunshan.mall.cart.controller.CartItemController listPromotionnew -n 5 -v –skipJDKMethod false ‘1==1’</p>
+<p>然后得到了下面这个结果：</p>
+<pre><code>`---ts=2021-01-16 15:08:58;thread_name=http-nio-8086-exec-34;id=f8;is_daemon=true;priority=5;TCCL=org.springframework.boot.web.embedded.tomcat.TomcatEmbeddedWebappClassLoader@56887c8f
+    `---[97.827186ms] com.dunshan.mall.cart.service.imp.CartItemServiceImpl$$EnhancerBySpringCGLIB$$ac8f5a97:listPromotion()
+        `---[97.750962ms] org.springframework.cglib.proxy.MethodInterceptor:intercept() #57
+            `---[97.557484ms] com.dunshan.mall.cart.service.imp.CartItemServiceImpl:listPromotion()
+                +---[72.273747ms] com.dunshan.mall.cart.service.imp.CartItemServiceImpl:list() #166
+                +---[0.003516ms] cn.hutool.core.collection.CollUtil:isNotEmpty() #172
+                +---[0.004207ms] java.util.List:stream() #173
+                +---[0.003893ms] java.util.stream.Stream:filter() #57
+                +---[0.003018ms] java.util.stream.Collectors:toList() #57
+                +---[0.060052ms] java.util.stream.Stream:collect() #57
+                +---[0.002017ms] java.util.ArrayList:&lt;init&gt;() #177
+                +---[0.003013ms] org.springframework.util.CollectionUtils:isEmpty() #179
+                `---[25.152532ms] com.dunshan.mall.cart.feign.CartPromotionService:calcCartPromotion() #181
+</code></pre>
+<p>可以看到，在我们跟踪的方法com.dunshan.mall.cart.service.imp.CartItemServiceImpl:listPromotion()中，有两处listPromotion和calcCartPromotion时间消耗较大，分别是：</p>
+<ol>
+<li>com.dunshan.mall.cart.service.imp.CartItemServiceImpl:list()</li>
+<li>com.dunshan.mall.cart.feign.CartPromotionService:calcCartPromotion()</li>
+</ol>
+<h4 id="跟踪list函数">跟踪List函数</h4>
+<p>我们在Arthas中执行trace跟踪语句如下：</p>
+<pre><code>trace com.dunshan.mall.cart.service.imp.CartItemServiceImpl list -v -n 5 --skipJDKMethod false '1==1'
+</code></pre>
+<p>然后得到这样的结果：</p>
+<pre><code>`---ts=2021-01-16 15:19:45;thread_name=http-nio-8086-exec-65;id=23ce;is_daemon=true;priority=5;TCCL=org.springframework.boot.web.embedded.tomcat.TomcatEmbeddedWebappClassLoader@56887c8f
+    `---[70.158793ms] com.dunshan.mall.cart.service.imp.CartItemServiceImpl:list()
+        +---[0.003501ms] com.dunshan.mall.model.OmsCartItemExample:&lt;init&gt;() #150
+        +---[0.002642ms] com.dunshan.mall.model.OmsCartItemExample:createCriteria() #151
+        +---[0.002932ms] com.dunshan.mall.model.OmsCartItemExample$Criteria:andDeleteStatusEqualTo() #57
+        +---[0.00304ms] com.dunshan.mall.model.OmsCartItemExample$Criteria:andMemberIdEqualTo() #57
+        `---[70.078976ms] com.dunshan.mall.mapper.OmsCartItemMapper:selectByExample() #152
+</code></pre>
+<p>在一阵无聊的trace之后，看到一个select语句消耗时间较长，这个select语句是：</p>
+<pre><code>select id, product_id, product_sku_id, member_id, quantity, price, product_pic, product_name,     product_sub_title, product_sku_code, member_nickname, create_date, modify_date, delete_status,     product_category_id, product_brand, product_sn, product_attr       from oms_cart_item                 WHERE (  delete_status = ?                                                            and member_id = ? )
+</code></pre>
+<p>一个简单的select语句，怎么会耗时这么久呢？我们先不管为什么会这样，先来看看这个oms_cart_item的数据有多少。我连上数据库后一查，发现在oms_cart_item里面有10612条数据，这个数据量并不大。</p>
+<p>此外，我还查看了一下索引，也是有的，并且执行计划也走到了索引这里。那为什么会慢呢？到这里，我们得考虑一下是不是和数据量有关了。所以，我们来看看这个select语句究竟查出了多少条数据。</p>
+<p>在我补全SQL后一查，发现一个member_id对应500多条记录，这是一个人一次买了500个东西？</p>
+<p>既然在购物车信息里，同一个人有这么多记录，那一定是在商品加入购物车时加进去的。而要往一个人的购物车里加东西，显然是在性能脚本执行的过程中添加，因为每个用户的购物车一开始都是空的。所以，我们要去查一下商品加入购物车的脚本是怎么回事。</p>
+<p>商品加入购物车的脚本很简单，就是一个post，加上商品ID，在HTTP协议的请求头里面有一个Token来标识是哪个用户。</p>
+<p>在这里，我们要查的就是token有没有用重，JMeter中的Token参数化配置如下：</p>
+<p><img alt="" src="/assets/638f549758b599347b7edc00.png"/></p>
+<p>看起来挺好，我们在这里设计了不重用数据，所以在设置上Token不会被重用。那么，只有一种可能，就是Token重了。</p>
+<p><img alt="" src="/assets/e210771f7321f3e76697629c.png"/><img alt="" src="/assets/5da4916986fff0ba64dc6839.png"/></p>
+<p>在随机检查了几条Token之后，我发现有大量的Token重复。这也就解释了，为什么我们会在一个人的购物车里看到那么多商品数据。</p>
+<p>可是，这个逻辑就有问题了。你想想，我们设置了参数化中数据不重复使用，但实际上确实有大量的Token被重用，这就说明Token的参数化文件本身就重复了。</p>
+<p>那怎么办呢？我们只有把所有的Token全部清掉，让Token数据在商品加入购物车的时候不会被重用，以此来避免在一个人的购物车中加入太多商品的情况。</p>
+<p>接着怎么办？只有一招了，就是把所有的数据都清掉，然后用所有的用户创建合理的购物车数据。于是，我在这里又花了几个小时，造出了130多万数据。现在，我们再回归一下场景：</p>
+<p><img alt="" src="/assets/d253e289dc384c43fb8c4ae2.png"/></p>
+<p>你看，TPS增加到了300！</p>
+<p>本来这是一个美好到可以喝下午茶的结果，然而……天不随人愿，我在场景持续执行的过程中，又发现了问题，这让我们不得不开启第二阶段的分析。</p>
+<h2 id="第二阶段">第二阶段</h2>
+<h3 id="场景运行数据-1">场景运行数据</h3>
+<p>是什么问题呢？我在压力运行的数据中，竟然看到了这种TPS曲线：</p>
+<p><img alt="" src="/assets/e00bf0b41570a20cab045f4a.png"/></p>
+<p>你看，TPS相当规律地往下掉，不仅会掉下去，而且还会恢复回去，形成一个明显的锯齿状，并且这锯齿还挺大。</p>
+<p>怎么办？根据高老师的思路，现在我们就得按照RESAR性能分析逻辑来收拾这个问题了。我们在前面已经看过架构图，所以，现在直接来拆分响应时间。</p>
+<h3 id="拆分响应时间-1">拆分响应时间</h3>
+<ul>
+<li>Gateway：</li>
+</ul>
+<p><img alt="" src="/assets/92c63ef7d771c04d1367148b.png"/></p>
+<ul>
+<li>Order：</li>
+</ul>
+<p><img alt="" src="/assets/4ec7108ce9d4409b8f0e206e.png"/></p>
+<ul>
+<li>Cart：</li>
+</ul>
+<p><img alt="" src="/assets/c2a2c6a46170abca91f4bfe0.png"/></p>
+<ul>
+<li>Portal：</li>
+</ul>
+<p><img alt="" src="/assets/c474590dda51c01c4a15af83.png"/></p>
+<p>从上面的数据来看，似乎每一层都有时间消耗，性能都不怎么样。</p>
+<h3 id="全局分析-1">全局分析</h3>
+<p>那我们就查看下当前的全局监控数据，可以看到worker-3上的CPU消耗最多：</p>
+<p><img alt="" src="/assets/9a006fff202e850ea234fb56.png"/></p>
+<p>因此，我们来查一下worker-3上有哪些Pod：</p>
+<pre><code>[root@k8s-master-3 ~]# kubectl get pods -o wide | grep k8s-worker-3
+cloud-nacos-registry-685b8957d7-vskb6       1/1     Running     0          3d7h    10.100.69.199    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+cloud-redis-7f7db7f45c-t5g46                2/2     Running     1          3d4h    10.100.69.196    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+elasticsearch-master-2                      1/1     Running     0          23h     10.100.69.209    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+svc-mall-cart-79c667bf56-j76h6              1/1     Running     0          20h     10.100.69.213    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+svc-mall-order-fbfd8b57c-kbczh              1/1     Running     0          3d7h    10.100.69.202    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+svc-mall-portal-846d9994f8-m7jbq            1/1     Running     0          2d10h   10.100.69.207    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+svc-mall-search-c9c8bc847-h7sgv             1/1     Running     0          23h     10.100.69.210    k8s-worker-3   &lt;none&gt;           &lt;none&gt;
+[root@k8s-master-3 ~]#
+</code></pre>
+<p>居然有这么多服务都在worker-3上。</p>
+<p>我们现在登录到worker-3上，看一下top资源。其实，我在这里主要想看的是process table，因为我想先确定一下哪个服务消耗的资源最高，然后再决定收拾哪个服务。</p>
+<pre><code>[root@k8s-worker-3 ~]# top
+top - 22:13:01 up 3 days,  8:39,  3 users,  load average: 40.34, 30.03, 18.02
+Tasks: 326 total,   6 running, 320 sleeping,   0 stopped,   0 zombie
+%Cpu0  : 74.5 us, 13.4 sy,  0.0 ni,  7.7 id,  0.0 wa,  0.0 hi,  4.4 si,  0.0 st
+%Cpu1  : 66.3 us, 12.1 sy,  0.0 ni, 16.5 id,  0.0 wa,  0.0 hi,  4.7 si,  0.3 st
+%Cpu2  : 49.7 us, 32.4 sy,  0.0 ni, 14.9 id,  0.0 wa,  0.0 hi,  2.7 si,  0.3 st
+%Cpu3  : 73.2 us,  9.7 sy,  0.0 ni, 12.4 id,  0.0 wa,  0.0 hi,  4.7 si,  0.0 st
+%Cpu4  : 76.4 us, 10.5 sy,  0.0 ni,  8.8 id,  0.0 wa,  0.0 hi,  4.1 si,  0.3 st
+%Cpu5  : 62.4 us, 16.4 sy,  0.0 ni, 16.1 id,  0.0 wa,  0.0 hi,  4.7 si,  0.3 st
+KiB Mem : 16265992 total,   211212 free,  9204800 used,  6849980 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  6650068 avail Mem 
+
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                                                                  
+32485 root      20   0 8895760 700564  16896 S 101.6  4.3 723:03.52 java -Dapp.id=svc-mall-cart -javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.service_name=svc-ma+
+32589 root      20   0 8845576 778684  15896 S  93.6  4.8 427:04.44 java -Dapp.id=svc-mall-order -javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.service_name=svc-m+
+24119 root      20   0 8825208 600956  15888 S  67.9  3.7 262:00.83 java -Dapp.id=svc-mall-portal -javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.service_name=svc-+
+............
+</code></pre>
+<p>在上述top资源中，我们主要来看几个吃CPU的大户。不难发现，Cart/Order/Portal这三个服务在购物车信息确定订单的业务中都有用到，并且都在同一个worker上。同时，我们也可以看到，在这个6C的worker中，现在的CPU队列已经达到40了。</p>
+<h3 id="定向分析-1">定向分析</h3>
+<p>从系统上来看，CPU队列长的问题主要是由于资源的争用，因为线程在不断地唤醒，通过start_thread就能看出来：</p>
+<p><img alt="" src="/assets/64cb74e6449e1ceecb892cf3.png"/></p>
+<p>现在我们要做的就是把线程降下去。</p>
+<p>怎么降呢？有两种手段：</p>
+<ol>
+<li>把服务移走，先一个个收拾，分而治之。</li>
+<li>把服务的线程减少。</li>
+</ol>
+<p>这两种方式都是能减少资源争用，但是会带来不同的影响。其中，第一种手段比较合理，只是会消耗更多的整体资源；第二种手段虽然会减少争用，但是会导致响应时间增加。</p>
+<p>我这么跟你一讲，你可能已经发现了，这两种手段都不能解释TPS不稳定的问题。那为什么TPS一会儿掉下去，一会儿又恢复呢？现在我们还不知道答案，不过基于我们“全局-定向”的分析思路，我们先看一下worker-3的资源消耗：</p>
+<p><img alt="" src="/assets/1fad159f0ebe2848d4adcf10.png"/></p>
+<p>在同一时间段，我也查看了同一台物理机上的其他worker的资源消耗情况，发现worker-8的资源消耗有点不太正常。请你注意，我此时的查看逻辑，仍然依据的是<a href="https://time.geekbang.org/column/article/355982" target="_blank">第3</a><a href="https://time.geekbang.org/column/article/355982" target="_blank">讲</a>中描述的逻辑，以及对应<a href="https://time.geekbang.org/column/article/356789" target="_blank">第4</a><a href="https://time.geekbang.org/column/article/356789" target="_blank">讲</a>中的性能分析决策树。希望你不要觉得这里有跳跃，实际上我们还是在全局监控的第一层计数器上。</p>
+<p>我们具体来看一下worker-8的资源消耗：</p>
+<p><img alt="" src="/assets/02ddb80ac61d627455b670ce.png"/></p>
+<p>再来看一下压力场景的执行数据：</p>
+<p><img alt="" src="/assets/1dac8c3f03fbce34e9c2501e.png"/></p>
+<p>从上面worker-8的资源使用率来看，确实有很高的时候。考虑到同一物理机上资源的争用问题，我们现在把cart移到Worker-7上去，把order移到worker-9上去，再来看TPS：</p>
+<p><img alt="" src="/assets/42da489d29de3a0ca1127461.png"/></p>
+<p>花花绿绿，起起伏伏，真是好看……我们先不管这样做有没有增加TPS，光看这个趋势，就足以让人心碎了。既然结果还是这样，那我们就用老套路，继续拆分时间来看看。</p>
+<ul>
+<li>Gateway：</li>
+</ul>
+<p><img alt="" src="/assets/cc343aee1bfe318c4dfbae88.png"/></p>
+<ul>
+<li>Order：</li>
+</ul>
+<p><img alt="" src="/assets/e6ed1082f683999b0a2815ed.png"/></p>
+<ul>
+<li>Cart：</li>
+</ul>
+<p><img alt="" src="/assets/4e926ef32dc01ae0fc40f61a.png"/></p>
+<ul>
+<li>Portal：</li>
+</ul>
+<p><img alt="" src="/assets/4280d1556c7fdaeb6e8ec647.png"/></p>
+<ul>
+<li>Member：</li>
+</ul>
+<p><img alt="" src="/assets/d81c0d0b778292a4c24e6953.png"/></p>
+<p>从上面的时间来看，Gateway消耗的时间比较长，这就奇怪了，这都换了到了Gateway服务上有问题了。所以，我们到Gateway机器上看一下到底有哪些服务：</p>
+<p><img alt="" src="/assets/bdc0ef6c0690277e7bcd0da4.png"/></p>
+<p>呀呀呀，那个占第一位的是个啥？原来是ES的一个进程，这个进程消耗了多个CPU。看到这，我想起来前几天为了增加ES的能力，我们给ES data和ES client增加过CPU。当时考虑到它们都是吃CPU的大户，只能用一个CPU实在太委屈它们了，所以增加了CPU数量，想让它们的性能好一些。</p>
+<p>可是没想到，ES data和ES client对应用的影响有这么大。</p>
+<p>我当时改ES的CPU，是因为我们架构中的一个搜索服务用到了它，而当时的CPU给的是一个C，这导致Search服务的TPS很低。关于这一点，我在<a href="https://time.geekbang.org/column/article/366020" target="_blank">第</a><a href="https://time.geekbang.org/column/article/366020" target="_blank">15</a><a href="https://time.geekbang.org/column/article/366020" target="_blank">讲</a>中有描述，你如果不清楚，可以再看看。</p>
+<p>同时，我们还要注意一点，ES data和ES client都不是单一的节点，而是有几个节点。由此产生的问题就是，任意一个ES节点出现资源消耗过多的时候，都会影响到它所在的worker机器资源，进而影响到这个ES节点所在的整个物理机。</p>
+<p>既然ES的进程消耗资源占居首位，那我们该怎么办呢？为了验证问题，我先把ES给停掉，看看TPS能不能上来，如果能上来，我们再考虑怎么限制ES的资源。</p>
+<p>停了ES之后，TPS如下图所示：</p>
+<p><img alt="" src="/assets/7895f5c1ad2ee0ca56d8a48e.png"/></p>
+<p>看到没有？TPS增加了一倍，并且也没有掉下来！非常理想！</p>
+<p>所以，接下来，我们就要考虑把ES限制到固定的worker上，让它不影响现在的应用。</p>
+<h2 id="总结">总结</h2>
+<p>在这节课中，我们有两个阶段的分析。</p>
+<p>在第一个阶段中，我们定位了数据问题。对于性能来说，<strong>数据是非常重要的基础资源，而数据的合理性直接影响了测试的结果。</strong></p>
+<p>经常有初入性能行业的人讨论：性能脚本中的数据到底应该用多少？我觉得这是一个非常明确的问题，<strong>在所有的性能场景中，使用的资源都应该按真实发生的业务逻辑来确定，有且只有这样，才能保证结果是有效的</strong>。</p>
+<p>在第二阶段中，我们定位了一个有意思的问题，而这个问题的复杂性在于整体的架构。因为我们是用KVM、Kubernetes和Docker作为基础设施的，而我们选择的应用原本也不是真正的微服务，是对一个开源系统架构做了更改，把它改成了真正的微服务。</p>
+<p>在这样的环境中，如果一个应用有问题，那在修改重启的时候，应用会被Kubernetes调度到哪个节点上，是不确定的。也正是出于这样的原因，我们一会儿看到这里有问题，一会儿看到那里有问题，定位的逻辑全都对，但是就是层面不对。这也是<a href="https://time.geekbang.org/column/article/368125" target="_blank">上节课</a>中随机问题出现的原因。</p>
+<p>所以，根据我们在<a href="https://time.geekbang.org/column/article/356789" target="_blank">第4讲</a>中提到的性能分析决策树，我们仍然需要有全局监控、定向监控的思路，并且还要找到计数器的相关性。这样一来，当看到相关计数器有问题的时候，我们就能知道它们之间的关联关系了。</p>
+<p>希望你在这节课中，能把性能分析的逻辑记在心中。</p>
+<h2 id="课后作业">课后作业</h2>
+<p>最后，请你思考一下：</p>
+<ol>
+<li>性能脚本中的参数应该如何设计？</li>
+<li>如何定位TPS会掉下来的情况？大概描述一下你的思路。</li>
+</ol>
+<p>记得在留言区和我讨论、交流你的想法，每一次思考都会让你更进一步。</p>
+<p>如果你读完这篇文章有所收获，也欢迎你分享给你的朋友，共同学习进步。我们下这节课再见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

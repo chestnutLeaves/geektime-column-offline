@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>09 卷积（上）：如何用卷积为计算机“开天眼”？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/index.html">PyTorch深度学习实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">30 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>PyTorch深度学习实战</strong><ul><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%85%A5%E9%97%A8PyTorch%EF%BC%9F.html">00 开篇词 如何高效入门PyTorch？</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/01%20PyTorch%EF%BC%9A%E7%BD%91%E7%BA%A2%E4%B8%AD%E7%9A%84%E9%A1%B6%E6%B5%81%E6%98%8E%E6%98%9F.html">01 PyTorch：网红中的顶流明星</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/02%20NumPy%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3.html">02 NumPy（上）：核心数据结构详解</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/03%20NumPy%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C.html">03 NumPy（下）：深度学习中的常用操作</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/04%20Tensor%EF%BC%9APyTorch%E4%B8%AD%E6%9C%80%E5%9F%BA%E7%A1%80%E7%9A%84%E8%AE%A1%E7%AE%97%E5%8D%95%E5%85%83.html">04 Tensor：PyTorch中最基础的计算单元</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/05%20Tensor%E5%8F%98%E5%BD%A2%E8%AE%B0%EF%BC%9A%E5%BF%AB%E9%80%9F%E6%8E%8C%E6%8F%A1Tensor%E5%88%87%E5%88%86%E3%80%81%E5%8F%98%E5%BD%A2%E7%AD%89%E6%96%B9%E6%B3%95.html">05 Tensor变形记：快速掌握Tensor切分、变形等方法</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/06%20Torchvision%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96%EF%BC%8C%E8%AE%AD%E7%BB%83%E5%BC%80%E5%A7%8B%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5.html">06 Torchvision（上）：数据读取，训练开始的第一步</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/07%20Torchvision%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%EF%BC%8C%E8%AE%A9%E6%95%B0%E6%8D%AE%E6%9B%B4%E5%8A%A0%E5%A4%9A%E6%A0%B7%E6%80%A7.html">07 Torchvision（中）：数据增强，让数据更加多样性</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/08%20Torchvision%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%85%B6%E4%BB%96%E6%9C%89%E8%B6%A3%E7%9A%84%E5%8A%9F%E8%83%BD.html">08 Torchvision（下）：其他有趣的功能</a></li><li><a class="active" aria-current="page" href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/09%20%E5%8D%B7%E7%A7%AF%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%8D%B7%E7%A7%AF%E4%B8%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E2%80%9C%E5%BC%80%E5%A4%A9%E7%9C%BC%E2%80%9D%EF%BC%9F.html">09 卷积（上）：如何用卷积为计算机“开天眼”？</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/10%20%E5%8D%B7%E7%A7%AF%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%8D%B7%E7%A7%AF%E4%B8%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E2%80%9C%E5%BC%80%E5%A4%A9%E7%9C%BC%E2%80%9D%EF%BC%9F.html">10 卷积（下）：如何用卷积为计算机“开天眼”？</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/11%20%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%9A%E5%A6%82%E4%BD%95%E5%B8%AE%E5%8A%A9%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%BC%9A%E2%80%9C%E8%87%AA%E7%9C%81%E2%80%9D%EF%BC%9F.html">11 损失函数：如何帮助模型学会“自省”？</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/12%20%E8%AE%A1%E7%AE%97%E6%A2%AF%E5%BA%A6%EF%BC%9A%E7%BD%91%E7%BB%9C%E7%9A%84%E5%89%8D%E5%90%91%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD.html">12 计算梯度：网络的前向与反向传播</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/13%20%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%EF%BC%9A%E6%9B%B4%E6%96%B0%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95.html">13 优化方法：更新模型参数的方法</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/14%20%E6%9E%84%E5%BB%BA%E7%BD%91%E7%BB%9C%EF%BC%9A%E4%B8%80%E7%AB%99%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%A8%A1%E5%9E%8B%E6%90%AD%E5%BB%BA%E4%B8%8E%E8%AE%AD%E7%BB%83.html">14 构建网络：一站式实现模型搭建与训练</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/15%20%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%AE%AD%E7%BB%83%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%91%E6%8E%A7%EF%BC%9F.html">15 可视化工具：如何实现训练的可视化监控？</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/16%20%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%AD%E7%BB%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8A%A0%E9%80%9F%E4%BD%A0%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%9F.html">16 分布式训练：如何加速你的模型训练？</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/17%20%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E5%8E%9F%E7%90%86%E4%B8%8E%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B.html">17 图像分类（上）：图像分类原理与图像分类模型</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/18%20%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B_.html">18 图像分类（下）：如何构建一个图像分类模型_</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/19%20%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E8%AF%A6%E8%A7%A3%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E5%8E%9F%E7%90%86%E4%B8%8E%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E6%A8%A1%E5%9E%8B.html">19 图像分割（上）：详解图像分割原理与图像分割模型</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/20%20%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">20 图像分割（下）：如何构建一个图像分割模型？</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/21%20NLP%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E8%AF%A6%E8%A7%A3%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%8E%9F%E7%90%86%E4%B8%8E%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95.html">21 NLP基础（上）：详解自然语言处理原理与常用算法</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/22%20NLP%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%AF%A6%E8%A7%A3%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6.html">22 NLP基础（下）：详解语言模型与注意力机制</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/23%20%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8LSTM%E8%BF%9B%E8%A1%8C%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90%EF%BC%9F.html">23 情感分析：如何使用LSTM进行情感分析？</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/24%20%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8BERT%E6%9E%84%E5%BB%BA%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">24 文本分类：如何使用BERT构建文本分类模型？</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/25%20%E6%91%98%E8%A6%81%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%96%87%E6%91%98%E7%94%9F%E6%88%90%EF%BC%9F.html">25 摘要：如何快速实现自动文摘生成？</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%B6%E5%AE%9E%E5%B0%B1%E9%82%A3%E4%B9%88%E5%87%A0%E4%BB%B6%E4%BA%8B.html">加餐 机器学习其实就那么几件事</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20Tango%EF%BC%9A%E5%B8%88%E5%82%85%E9%A2%86%E8%BF%9B%E9%97%A8%EF%BC%8C%E4%BF%AE%E8%A1%8C%E5%9C%A8%E4%B8%AA%E4%BA%BA.html">用户故事 Tango：师傅领进门，修行在个人</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/%E7%AD%94%E7%96%91%E7%AF%87%20%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E9%9B%86%E9%94%A6.html">答疑篇 思考题答案集锦</a></li><li><a href="/courses/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%BA%BA%E7%94%9F%E5%85%85%E6%BB%A1%E9%80%89%E6%8B%A9%EF%BC%8C%E9%80%89%E6%8B%A9%E4%B8%8E%E5%8A%AA%E5%8A%9B%E5%90%8C%E6%A0%B7%E9%87%8D%E8%A6%81.html">结束语 人生充满选择，选择与努力同样重要</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/PyTorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/09%20%E5%8D%B7%E7%A7%AF%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%8D%B7%E7%A7%AF%E4%B8%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E2%80%9C%E5%BC%80%E5%A4%A9%E7%9C%BC%E2%80%9D%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="09 卷积（上）：如何用卷积为计算机“开天眼”？" id="title">09 卷积（上）：如何用卷积为计算机“开天眼”？</h1>
+<div><p>你好，我是方远。</p>
+<p>现在刷脸支付的场景越来越多，相信人脸识别你一定不陌生，你有没有想过，在计算机识别人脸之前，我们人类是如何判断一个人是谁的呢？</p>
+<p>我们眼睛看到人脸的时候，会先将人脸的一些粗粒度特征提取出来，例如人脸的轮廓、头发的颜色、头发长短等。然后这些信息会一层一层地传入到某一些神经元当中，每经过一层神经元就相当于特征提取。我们大脑最终会将最后的特征进行汇总，类似汇总成一张具体的人脸，用这张人脸去大脑的某一个地方与存好的人名进行匹配。</p>
+<p>那落实到我们计算机呢？其实这个过程是一样的，在计算机中进行特征提取的功能，就离不开我们今天要讲的卷积。</p>
+<p>可以说，没有卷积的话，深度学习在图像领域不可能取得今天的成就。 那么，就让我们来看看什么是卷积，还有它在PyTorch中的实现吧。</p>
+<h2 id="卷积">卷积</h2>
+<p>在使用卷积之前，人们尝试了很多人工神经网络来处理图像问题，但是人工神经网络的参数量非常大，从而导致非常难训练，所以计算机视觉的研究一直停滞不前，难以突破。</p>
+<p>直到卷积神经网络的出现，它的两个优秀特点：稀疏连接与平移不变性，这让计算机视觉的研究取得了长足的进步。什么是稀疏连接与平移不变性呢？简单来说，就是稀疏连接可以让学习的参数变得很少，而平移不变性则不关心物体出现在图像中什么位置。</p>
+<p>稀疏连接与平移不变性是卷积的两个重要特点，如果你想从事计算机视觉相关的工作，这两个特点必须该清楚，但不是本专栏的重点，这里就不展开了，有兴趣你可以自己去了解。</p>
+<p>下面我们直接来看看卷积是如何计算的。</p>
+<h3 id="最简单的情况">最简单的情况</h3>
+<p>我们先看最简单的情况，输入是一个4x4的特征图，卷积核的大小为2x2。</p>
+<p>卷积核是什么呢？其实就是我们卷积层要学习到的参数，就像下图中红色的示例，下图中的卷积核是最简单的情况，只有一个通道。</p>
+<p><img alt="图片" src="/assets/898ad27cb6b41645ccc07505.jpg"/></p>
+<p>输入特征与卷积核计算时，计算方式是卷积核与输入特征按位做乘积运算然后再求和，其结果为输出特征图的一个元素，下图为计算输出特征图第一个元素的计算方式：</p>
+<p><img alt="图片" src="/assets/b95068f159d309652d3cd67f.jpg"/></p>
+<p>完成了第一个元素的计算，我们接着往下看，按以从左向右，从上至下的顺序进行滑动卷积核，分别与输入的特征图进行计算，请看下图，下图为上图计算完毕之后，向右侧滑动一个单元的计算方式：</p>
+<p><img alt="图片" src="/assets/d420d5499dbcfbae9f9f273b.jpg"/></p>
+<p>第一行第三个单元的计算以此类推。说完了同一行的移动，我们再看看，第一行计算完毕，向下滑动的计算方式是什么样的。</p>
+<p><img alt="图片" src="/assets/50ad9615a28f68ea9014ce73.jpg"/></p>
+<p>第一行计算完毕之后，卷积核会回到行首，然后向下滑动一个单元，再重复以上从左至右的滑动计算。</p>
+<p>这里我再给你补充一个知识点，什么是步长？</p>
+<p>卷积上下左右滑动的长度，我们称为步长，用stride表示。上述例子中的步长就是1，根据问题的不同，会取不同的步长，但通常来说步长为1或2。不管是刚才说的最简单的卷积计算，还是我们后面要讲的标准卷积，都要用到这个参数。</p>
+<h3 id="标准的卷积">标准的卷积</h3>
+<p>好啦，前面只是最简单的情况，现在我们将最简单的卷积计算方式延伸到标准的卷积计算方式。</p>
+<p>我们先将上面的例子描述为更加通用的形式，输入的特征有m个通道，宽为w，高为h；输出有n个特征图，宽为<span class="math inline">\(w^{\\prime}\)</span>，高为<span class="math inline">\(h^{\\prime}\)</span>；卷积核的大小为kxk。</p>
+<p>在刚才的例子中m、n、k、w、h、<span class="math inline">\(w^{\\prime}\)</span>、<span class="math inline">\(h^{\\prime}\)</span>的值分别为1、1、2、4、4、3、3。而现在，我们需要把一个输入为(m，h，w)的输入特征图经过卷积计算，生成一个输出为(n, <span class="math inline">\(h^{\\prime}\)</span>, <span class="math inline">\(w^{\\prime}\)</span>)的特征图。</p>
+<p>那我们来看看可以获得这个操作的卷积是什么样子的。输出特征图的通道数由<strong>卷积核的个数决定</strong>的，所以说卷积核的个数为n。根据卷积计算的定义，<strong>输入特征图有m个通道，所以每个卷积核里要也要有m个通道</strong>。所以，我们的需要n个卷积核，每个卷积核的大小为(m, k, k)。</p>
+<p>为了帮你更好地理解刚才所讲的内容，我画了示意图，你可以对照一下：</p>
+<p><img alt="" src="/assets/fa26d567deb2b118fd4c326b.jpg"/></p>
+<p>结合上面的图解可以看到，卷积核1与全部输入特征进行卷积计算，就获得了输出特征图中第1个通道的数据，卷积核2与全部输入特征图进行计算获得输出特征图中第2个通道的数据。以此类推，最终就能计算n个输出特征图。</p>
+<p>在开篇的例子中，输入只有1个通道，现在有多个通道了，那我们该如何计算呢？其实计算方式类似，输入特征的每一个通道与卷积核中对应通道的数据按我们之前讲过的方式进行卷积计算，也就是输入特征图中第i个特征图与卷积核中的第i个通道的数据进行卷积。这样计算后会生成<strong>m</strong>个特征图，然后将这m个特征图按对应位置求和即可，求和后m个特征图合并为输出特征中一个通道的特征图。</p>
+<p>我们可以用后面的公式表示当输入有多个通道时，每个卷积核是如何与输入进行计算的。</p>
+<p><span class="math inline">\(Output\_i\)</span>表示计算第i个输出特征图，i的取值为1到n；</p>
+<p><span class="math inline">\(kernel\_k\)</span>表示1个卷积核里的第k个通道的数据；</p>
+<p><span class="math inline">\(input\_k\)</span>表示输入特征图中的第k个通道的数据；</p>
+<p><span class="math inline">\(bias\_k\)</span>为偏移项，我们在训练时一般都会默认加上；</p>
+<p><span class="math inline">\(\\star\)</span>为卷积计算；</p>
+<p><span class="math display">\[Output\_i = \\sum\_{k=0}^{m}kernel\_k \\star input\_k + bias\_i, \\space \\space \\space \\space i=1,2,…,n\]</span></p><p>我来解释一下为什么要加bias。就跟回归方程一样，如果不加bias的话，回归方程为y=wx不管w如何变化，回归方程都必须经过原点。如果加上bias的话，回归方程变为y=wx+b，这样就不是必须经过原点，可以变化的更加多样。</p>
+<p>好啦，卷积计算方式的讲解到这里就告一段落了。下面我们看看在卷积层中有关卷积计算的另外一个重要参数。</p>
+<h3 id="padding">Padding</h3>
+<p>让我们回到开头的例子，可以发现，输入的尺寸是4x4，输出的尺寸是3x3。你有没有发现，输出的特征图变小了？没错，在有多层卷积层的神经网络中，特征图会越来越小。</p>
+<p>但是，有的时候我们为了让特征图变得不是那么小，可以对特征图进行补零操作。这样做主要有两个目的：</p>
+<p>1.有的时候需要输入与输出的特征图保持一样的大小；-
+2.让输入的特征保留更多的信息。</p>
+<p>这里我举个例子，带你看看，一般什么情况下会希望特征图变得不那么小。</p>
+<p>通过刚才的讲解我们知道，如果不补零且步长（stride）为1的情况下，当有多层卷积层时，特征图会一点点变小。如果我们希望有更多层卷积层来提取更加丰富的信息时，就可以让特征图变小的速度稍微慢一些，这个时候就可以考虑补零。</p>
+<p>这个补零的操作就叫做padding，padding等于1就是补一圈的零，等于2就是补两圈的零，如下图所示：</p>
+<p><img alt="图片" src="/assets/9b84fb1a1e3c5272adff3895.jpg"/></p>
+<p>在Pytorch中，padding这个参数可以是字符串、int和tuple。</p>
+<p>我们分别来看看不同参数类型怎么使用：当为字符串时只能取<span class="math inline">\(^{\\prime}valid^{\\prime}\)</span>与<span class="math inline">\(^{\\prime}same^{\\prime}\)</span>。当给定整型时，则是说要在特征图外边补多少圈0。如果是tuple的时候，则是表示在特征图的行与列分别指定补多少零。</p>
+<p>我们重点看一下字符串的形式，相比于直接给定补多少零来说，我认为字符串更加常用。其中，<span class="math inline">\(^{\\prime}valid^{\\prime}\)</span>就是没有padding操作，就像开头的例子那样。<span class="math inline">\(^{\\prime}same^{\\prime}\)</span>则是让输出的特征图与输入的特征图获得相同的大小。</p>
+<p>那当padding为same时，到底是怎么计算的呢？我们继续用开篇的例子说明，现在padding为<span class="math inline">\(^{\\prime}same^{\\prime}\)</span>了。</p>
+<p><img alt="图片" src="/assets/f1e7f658ce92e8ea3b5a888b.jpg"/></p>
+<p>当滑动到特征图最右侧时，发现输出的特征图的宽与输入的特征图的宽不一致，它会自动补零，直到输出特征图的宽与输入特征图的宽一致为止。如下图所示：</p>
+<p><img alt="图片" src="/assets/0f830b24ba5f56e8a5d9dbfd.jpg"/></p>
+<p>高的计算和宽的计算同理，当计算到特征图的底部时，发现输出特征图的高与输入特征图的高不一致时，它同样会自动补零，直到输入和输出一致为止，如下图所示。</p>
+<p><img alt="图片" src="/assets/a5b910a3775d0f040ef4f916.jpg"/></p>
+<p>完成上述操作，我们就可以获得与输入特征图有相同高、宽的输出特征图了。理论讲完了，我们还是要学以致用，在实践中深入体会。在下面的练习中，我们会实际考察一下当padding为same时，是否像我们说的这样计算。</p>
+<h2 id="pytorch中的卷积">PyTorch中的卷积</h2>
+<p>卷积操作定义在torch.nn模块中，torch.nn模块为我们提供了很多构建网络的基础层与方法。</p>
+<p>在torch.nn模块中，关于今天介绍的卷积操作有nn.Conv1d、nn.Conv2d与nn.Conv3d三个类。</p>
+<p>请注意，我们上述的例子都是按照nn.Conv2d来介绍的，nn.Conv2d也是用的最多的，而nn.Conv1d与nn.Conv3d只是输入特征图的维度有所不一样而已，很少会被用到。</p>
+<p>让我们先看看创建一个nn.Conv2d需要哪些必须的参数：</p>
+<pre><code class="language-python"># Conv2d类
+class torch.nn.Conv2d(in_channels, 
+                      out_channels, 
+                      kernel_size, 
+                      stride=1, 
+                      padding=0, 
+                      dilation=1, 
+                      groups=1, 
+                      bias=True, 
+                      padding_mode='zeros', 
+                      device=None, 
+                      dtype=None)
+
+</code></pre>
+<p>我们挨个说说这些参数。首先是跟通道相关的两个参数：in_channels是指输入特征图的通道数，数据类型为int，在标准卷积的讲解中in_channels为m；out_channels是输出特征图的通道数，数据类型为int，在标准卷积的讲解中out_channels为n。</p>
+<p>kernel_size是卷积核的大小，数据类型为int或tuple，需要注意的是只给定卷积核的高与宽即可，在标准卷积的讲解中kernel_size为k。</p>
+<p>stride为滑动的步长，数据类型为int或tuple，默认是1，在前面的例子中步长都为1。</p>
+<p>padding为补零的方式，注意<strong>当padding为’valid’或’same’时，stride必须为1</strong>。</p>
+<p>对于kernel_size、stride、padding都可以是tuple类型，当为tuple类型时，第一个维度用于height的信息，第二个维度时用于width的信息。</p>
+<p>bias是否使用偏移项。</p>
+<p>还有两个参数：dilation与groups，具体内容下节课我们继续展开讲解，你先有个印象就行。</p>
+<h3 id="验证same方式">验证same方式</h3>
+<p>接下来，我们做一个练习，验证padding为same时，计算方式是否像我们所说的那样。过程并不复杂，一共三步，分别是创建输入特征图、设置卷积以及输出结果。</p>
+<p>先来看第一步，我们创建好例子中的（4，4，1）大小的输入特征图，代码如下：</p>
+<pre><code class="language-python">import torch
+import torch.nn as nn
+
+input_feat = torch.tensor([[4, 1, 7, 5], [4, 4, 2, 5], [7, 7, 2, 4], [1, 0, 2, 4]], dtype=torch.float32)
+print(input_feat)
+print(input_feat.shape)
+
+# 输出：
+tensor([[4., 1., 7., 5.],
+        [4., 4., 2., 5.],
+        [7., 7., 2., 4.],
+        [1., 0., 2., 4.]])
+torch.Size([4, 4])
+</code></pre>
+<p>第二步，创建一个2x2的卷积，根据刚才的介绍，输入的通道数为1，输出的通道数为1，padding为’same’，所以卷积定义为：</p>
+<pre><code class="language-python">conv2d = nn.Conv2d(1, 1, (2, 2), stride=1, padding='same', bias=True)
+# 默认情况随机初始化参数
+print(conv2d.weight)
+print(conv2d.bias)
+# 输出：
+Parameter containing:
+tensor([[[[ 0.3235, -0.1593],
+          [ 0.2548, -0.1363]]]], requires_grad=True)
+Parameter containing:
+tensor([0.4890], requires_grad=True)
+</code></pre>
+<p>需要注意的是，默认情况下是随机初始化的。一般情况下，我们不会人工强行干预卷积核的初始化，但是为了验证今天的例子，我们对卷积核的参数进行干预。请注意下面代码中卷积核的注释，代码如下：</p>
+<pre><code class="language-python">conv2d = nn.Conv2d(1, 1, (2, 2), stride=1, padding='same', bias=False)
+# 卷积核要有四个维度(输入通道数，输出通道数，高，宽)
+kernels = torch.tensor([[[[1, 0], [2, 1]]]], dtype=torch.float32)
+conv2d.weight = nn.Parameter(kernels, requires_grad=False)
+print(conv2d.weight)
+print(conv2d.bias)
+# 输出：
+Parameter containing:
+tensor([[[[1., 0.],
+          [2., 1.]]]])
+None
+</code></pre>
+<p>完成之后就进入了第三步，现在我们已经准备好例子中的输入数据与卷积数据了，下面只需要计算一下，然后输出就可以了，代码如下：</p>
+<pre><code class="language-python">output = conv2d(input_feat)
+---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+/var/folders/pz/z8t8232j1v17y01bkhyrl01w0000gn/T/ipykernel_29592/2273564149.py in &lt;module&gt;
+----&gt; 1 output = conv2d(input_feat)
+~/Library/Python/3.8/lib/python/site-packages/torch/nn/modules/module.py in _call_impl(self, *input, **kwargs)
+   1049         if not (self._backward_hooks or self._forward_hooks or self._forward_pre_hooks or _global_backward_hooks
+   1050                 or _global_forward_hooks or _global_forward_pre_hooks):
+-&gt; 1051             return forward_call(*input, **kwargs)
+   1052         # Do not call functions when jit is used
+   1053         full_backward_hooks, non_full_backward_hooks = [], []
+~/Library/Python/3.8/lib/python/site-packages/torch/nn/modules/conv.py in forward(self, input)
+    441 
+    442     def forward(self, input: Tensor) -&gt; Tensor:
+--&gt; 443         return self._conv_forward(input, self.weight, self.bias)
+    444 
+    445 class Conv3d(_ConvNd):
+~/Library/Python/3.8/lib/python/site-packages/torch/nn/modules/conv.py in _conv_forward(self, input, weight, bias)
+    437                             weight, bias, self.stride,
+    438                             _pair(0), self.dilation, self.groups)
+--&gt; 439         return F.conv2d(input, weight, bias, self.stride,
+    440                         self.padding, self.dilation, self.groups)
+    441 
+RuntimeError: Expected 4-dimensional input for 4-dimensional weight[1, 1, 2, 2], but got 2-dimensional input of size [4, 4] instead
+</code></pre>
+<p>结合上面代码，你会发现这里报错了，提示信息是输入的特征图需要是一个4维的，而我们的输入特征图是一个4x4的2维特征图。这是为什么呢？-
+请你记住，<strong>Pytorch输入tensor的维度信息是(batch_size, 通道数，高，宽)</strong>，但是在我们的例子中只给定了高与宽，没有给定batch_size（在训练时，不会将所有数据一次性加载进来训练，而是以多个批次进行读取的，每次读取的量成为batch_size）与通道数。所以，我们要回到第一步将输入的tensor改为(1,1,4,4)的形式。</p>
+<p>你还记得我在之前的讲解中提到过怎么对数组添加维度吗？</p>
+<p>在Pytorch中unsqueeze()对tensor的维度进行修改。代码如下：</p>
+<pre><code class="language-python">input_feat = torch.tensor([[4, 1, 7, 5], [4, 4, 2, 5], [7, 7, 2, 4], [1, 0, 2, 4]], dtype=torch.float32).unsqueeze(0).unsqueeze(0)
+print(input_feat)
+print(input_feat.shape)
+# 输出：
+tensor([[[[4., 1., 7., 5.],
+          [4., 4., 2., 5.],
+          [7., 7., 2., 4.],
+          [1., 0., 2., 4.]]]])
+torch.Size([1, 1, 4, 4])
+</code></pre>
+<p>这里，unsqueeze()中的参数是指在哪个位置添加维度。-
+好，做完了修改，我们再次执行代码。</p>
+<pre><code class="language-python">output = conv2d(input_feat)
+输出：
+tensor([[[[16., 11., 16., 15.],
+          [25., 20., 10., 13.],
+          [ 9.,  9., 10., 12.],
+          [ 1.,  0.,  2.,  4.]]]])
+          
+</code></pre>
+<p>你可以看看，跟我们在例子中推导的结果一不一样？</p>
+<h2 id="总结">总结</h2>
+<p>恭喜你完成了今天的学习。今天所讲的卷积非常重要，它是各种计算机视觉应用的基础，例如图像分类、目标检测、图像分割等。</p>
+<p>卷积的计算方式是你需要关注的重点。具体过程如下图所示，输出特征图的通道数由<strong>卷积核的个数决定</strong>的，下图中因为有n个卷积核，所以输出特征图的通道数为n。<strong>输入特征图有m个通道，所以每个卷积核里要也要有m个通道</strong>。</p>
+<p><img alt="" src="/assets/04776685f51c5d73b4f3c638.jpg"/></p>
+<p>其实卷积背后的理论比较复杂，但在PyTorch中实现却很简单。在卷积计算中涉及的几大要素：输入通道数、输出通道数、步长、padding、卷积核的大小，分别对应的就是PyTorch中nn.Conv2d的关键参数。所以，就像前面讲的那样，我们要熟练用好nn.Conv2d()。</p>
+<p>之后，我还带你做了一个验证same方式的练习，动手跑跑代码会帮你形成直观印象，快速掌握这部分内容。</p>
+<p>当然，对于卷积来说不光光有今天介绍的这种比较标准的卷积，还有各种变形。例如，今天没有讲到的dilation参数与groups参数，基于这两个参数实现的卷积操作，我会在下一节课中为展开，敬请期待。</p>
+<h2 id="每课一练">每课一练</h2>
+<p>请你想一想，padding为’same’时，stride可以为1以外的数值吗？</p>
+<p>欢迎你在留言区记录你的疑问或收获，也推荐你把这节课分享给更多朋友、同事。</p>
+<p>我是方远，我们下节课见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>15 同构复合类型：从定长数组到变长切片 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/index.html">Tony Bai · Go语言第一课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">59 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Tony Bai · Go语言第一课</strong><ul><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E8%BF%99%E6%A0%B7%E5%85%A5%E9%97%A8Go%EF%BC%8C%E6%89%8D%E8%83%BD%E5%B0%91%E8%B5%B0%E5%BC%AF%E8%B7%AF.html">00 开篇词 这样入门Go，才能少走弯路</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/01%20%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F%EF%BC%9A%E4%BD%A0%E4%B8%8D%E5%BE%97%E4%B8%8D%E4%BA%86%E8%A7%A3%E7%9A%84Go%E7%9A%84%E5%8E%86%E5%8F%B2%E5%92%8C%E7%8E%B0%E7%8A%B6.html">01 前世今生：你不得不了解的Go的历史和现状</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/02%20%E6%8B%92%E7%BB%9D%E2%80%9CHello%20and%20Bye%E2%80%9D%EF%BC%9AGo%E8%AF%AD%E8%A8%80%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">02 拒绝“Hello and Bye”：Go语言的设计哲学是怎么一回事？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/03%20%E9%85%8D%E5%A5%BD%E7%8E%AF%E5%A2%83%EF%BC%9A%E9%80%89%E6%8B%A9%E4%B8%80%E7%A7%8D%E6%9C%80%E9%80%82%E5%90%88%E4%BD%A0%E7%9A%84Go%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95.html">03 配好环境：选择一种最适合你的Go安装方法</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/04%20%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84%EF%BC%9A%E4%B8%80%E4%B8%AAGo%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BB%93%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">04 初窥门径：一个Go程序的结构是怎样的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/05%20%E6%A0%87%E5%87%86%E5%85%88%E8%A1%8C%EF%BC%9AGo%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%B8%83%E5%B1%80%E6%A0%87%E5%87%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">05 标准先行：Go项目的布局标准是什么？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/06%20%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%E6%98%AF%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E5%8C%85%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E9%97%AE%E9%A2%98%E7%9A%84%EF%BC%9F.html">06 构建模式：Go是怎么解决包依赖管理问题的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/07%20%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%20Module%E7%9A%846%E7%B1%BB%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C.html">07 构建模式：Go Module的6类常规操作</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/08%20%E5%85%A5%E5%8F%A3%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8C%85%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A%E6%90%9E%E6%B8%85Go%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%E6%AC%A1%E5%BA%8F.html">08 入口函数与包初始化：搞清Go程序的执行次序</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/09%20%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%BB%83%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AAWeb%E6%9C%8D%E5%8A%A1%E5%B0%B1%E6%98%AF%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95.html">09 即学即练：构建一个Web服务就是这么简单</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/10%20%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E%EF%BC%9A%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80%E6%9C%89%E5%88%AB%E4%BA%8E%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E7%9A%84%E9%87%8D%E8%A6%81%E7%89%B9%E5%BE%81.html">10 变量声明：静态语言有别于动态语言的重要特征</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/11%20%E4%BB%A3%E7%A0%81%E5%9D%97%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%8F%98%E9%87%8F%E4%B8%8D%E4%BC%9A%E8%A2%AB%E9%81%AE%E8%94%BD%EF%BC%9F.html">11 代码块与作用域：如何保证变量不会被遮蔽？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/12%20%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9AGo%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E7%9A%84%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">12 基本数据类型：Go原生支持的数值类型有哪些？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/13%20%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Go%E8%A6%81%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B%EF%BC%9F.html">13 基本数据类型：为什么Go要原生支持字符串类型？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/14%20%E5%B8%B8%E9%87%8F%EF%BC%9AGo%E5%9C%A8%E2%80%9C%E5%B8%B8%E9%87%8F%E2%80%9D%E8%AE%BE%E8%AE%A1%E4%B8%8A%E7%9A%84%E5%88%9B%E6%96%B0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">14 常量：Go在“常量”设计上的创新有哪些？</a></li><li><a class="active" aria-current="page" href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/15%20%E5%90%8C%E6%9E%84%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%BB%8E%E5%AE%9A%E9%95%BF%E6%95%B0%E7%BB%84%E5%88%B0%E5%8F%98%E9%95%BF%E5%88%87%E7%89%87.html">15 同构复合类型：从定长数组到变长切片</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/16%20%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%8E%9F%E7%94%9Fmap%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">16 复合数据类型：原生map类型的实现机制是怎样的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/17%20%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E7%94%A8%E7%BB%93%E6%9E%84%E4%BD%93%E5%BB%BA%E7%AB%8B%E5%AF%B9%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E6%8A%BD%E8%B1%A1.html">17 复合数据类型：用结构体建立对真实世界的抽象</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/18%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9Aif%E7%9A%84%E2%80%9C%E5%BF%AB%E4%B9%90%E8%B7%AF%E5%BE%84%E2%80%9D%E5%8E%9F%E5%88%99.html">18 控制结构：if的“快乐路径”原则</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/19%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9AGo%E7%9A%84for%E5%BE%AA%E7%8E%AF%EF%BC%8C%E4%BB%85%E6%AD%A4%E4%B8%80%E7%A7%8D.html">19 控制结构：Go的for循环，仅此一种</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/20%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9AGo%E4%B8%AD%E7%9A%84switch%E8%AF%AD%E5%8F%A5%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8F%98%E5%8C%96%EF%BC%9F.html">20 控制结构：Go中的switch语句有哪些变化？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/21%20%E5%87%BD%E6%95%B0%EF%BC%9A%E8%AF%B7%E5%8F%AB%E6%88%91%E2%80%9C%E4%B8%80%E7%AD%89%E5%85%AC%E6%B0%91%E2%80%9D.html">21 函数：请叫我“一等公民”</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/22%20%E5%87%BD%E6%95%B0%EF%BC%9A%E6%80%8E%E4%B9%88%E7%BB%93%E5%90%88%E5%A4%9A%E8%BF%94%E5%9B%9E%E5%80%BC%E8%BF%9B%E8%A1%8C%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9F.html">22 函数：怎么结合多返回值进行错误处理？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/23%20%E5%87%BD%E6%95%B0%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AE%A9%E5%87%BD%E6%95%B0%E6%9B%B4%E7%AE%80%E6%B4%81%E5%81%A5%E5%A3%AE%EF%BC%9F.html">23 函数：怎么让函数更简洁健壮？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/24%20%E6%96%B9%E6%B3%95%EF%BC%9A%E7%90%86%E8%A7%A3%E2%80%9C%E6%96%B9%E6%B3%95%E2%80%9D%E7%9A%84%E6%9C%AC%E8%B4%A8.html">24 方法：理解“方法”的本质</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/25%20%E6%96%B9%E6%B3%95%EF%BC%9A%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88%E4%B8%8E%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9receiver%E7%B1%BB%E5%9E%8B%EF%BC%9F.html">25 方法：方法集合与如何选择receiver类型？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/26%20%E6%96%B9%E6%B3%95%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%B5%8C%E5%85%A5%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E2%80%9C%E7%BB%A7%E6%89%BF%E2%80%9D%EF%BC%9F.html">26 方法：如何用类型嵌入模拟实现“继承”？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/27%20%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%BB%83%EF%BC%9A%E8%B7%9F%E8%B8%AA%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E9%93%BE%EF%BC%8C%E7%90%86%E8%A7%A3%E4%BB%A3%E7%A0%81%E6%9B%B4%E7%9B%B4%E8%A7%82.html">27 即学即练：跟踪函数调用链，理解代码更直观</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/28%20%E6%8E%A5%E5%8F%A3%EF%BC%9A%E6%8E%A5%E5%8F%A3%E5%8D%B3%E5%A5%91%E7%BA%A6.html">28 接口：接口即契约</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/29%20%E6%8E%A5%E5%8F%A3%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88nil%E6%8E%A5%E5%8F%A3%E4%B8%8D%E7%AD%89%E4%BA%8Enil%EF%BC%9F.html">29 接口：为什么nil接口不等于nil？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/30%20%E6%8E%A5%E5%8F%A3%EF%BC%9AGo%E4%B8%AD%E6%9C%80%E5%BC%BA%E5%A4%A7%E7%9A%84%E9%AD%94%E6%B3%95.html">30 接口：Go中最强大的魔法</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/31%20%E5%B9%B6%E5%8F%91%EF%BC%9AGo%E7%9A%84%E5%B9%B6%E5%8F%91%E6%96%B9%E6%A1%88%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">31 并发：Go的并发方案实现方案是怎样的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/32%20%E5%B9%B6%E5%8F%91%EF%BC%9A%E8%81%8A%E8%81%8AGoroutine%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E5%8E%9F%E7%90%86.html">32 并发：聊聊Goroutine调度器的原理</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%EF%BC%9A%E5%B0%8Fchannel%E4%B8%AD%E8%95%B4%E5%90%AB%E5%A4%A7%E6%99%BA%E6%85%A7.html">33 并发：小channel中蕴含大智慧</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%EF%BC%9F.html">34 并发：如何使用共享变量？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/35%20%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%BB%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">35 即学即练：如何实现一个轻量级线程池？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/36%20%E6%89%93%E7%A8%B3%E6%A0%B9%E5%9F%BA%EF%BC%9A%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">36 打稳根基：怎么实现一个TCP服务器？（上）</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/37%20%E4%BB%A3%E7%A0%81%E6%93%8D%E7%BB%83%EF%BC%9A%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%EF%BC%88%E4%B8%AD%EF%BC%89.html">37 代码操练：怎么实现一个TCP服务器？（中）</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/38%20%E6%88%90%E6%9E%9C%E4%BC%98%E5%8C%96%EF%BC%9A%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">38 成果优化：怎么实现一个TCP服务器？（下）</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/39%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E4%BA%86%E8%A7%A3%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0.html">39 驯服泛型：了解类型参数</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/40%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E5%AE%9A%E4%B9%89%E6%B3%9B%E5%9E%8B%E7%BA%A6%E6%9D%9F.html">40 驯服泛型：定义泛型约束</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/41%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E6%98%8E%E7%A1%AE%E4%BD%BF%E7%94%A8%E6%97%B6%E6%9C%BA.html">41 驯服泛型：明确使用时机</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%85%83%E6%97%A6%E5%BF%AB%E4%B9%90%20%E8%BF%99%E6%98%AF%E4%B8%80%E4%BB%BD%E6%9A%82%E6%97%B6%E5%81%9C%E6%9B%B4%E7%9A%84%E5%A3%B0%E6%98%8E.html">元旦快乐 这是一份暂时停更的声明</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E4%BD%9C%E4%B8%BAGo%20Module%E7%9A%84%E4%BD%9C%E8%80%85%EF%BC%8C%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B.html">加餐 作为Go Module的作者，你应该知道的几件事</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%A6%82%E4%BD%95%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E7%9A%84Go%20Module%EF%BC%9F.html">加餐 如何拉取私有的Go Module？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%88%91%E2%80%9C%E7%A7%81%E8%97%8F%E2%80%9D%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BC%98%E8%B4%A8%E4%B8%94%E6%9D%83%E5%A8%81%E7%9A%84Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99.html">加餐 我“私藏”的那些优质且权威的Go语言学习资料</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%81%8A%E8%81%8AGo%201.17%E7%89%88%E6%9C%AC%E7%9A%84%E9%82%A3%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7.html">加餐 聊聊Go 1.17版本的那些新特性</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%81%8A%E8%81%8AGo%E8%AF%AD%E8%A8%80%E7%9A%84%E6%8C%87%E9%92%88.html">加餐 聊聊Go语言的指针</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%81%8A%E8%81%8A%E6%9C%80%E8%BF%91%E5%A4%A7%E7%83%AD%E7%9A%84Go%E6%B3%9B%E5%9E%8B.html">加餐 聊聊最近大热的Go泛型</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%8F%B6%E5%89%91%E5%B3%B0%EF%BC%9AGo%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E7%82%B9.html">大咖助阵 叶剑峰：Go语言中常用的那些代码优化点</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%A4%A7%E6%98%8E%EF%BC%9AGo%E6%B3%9B%E5%9E%8B%EF%BC%8C%E6%B3%9B%E4%BA%86%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89%E5%AE%8C%E5%85%A8%E6%B3%9B.html">大咖助阵 大明：Go泛型，泛了，但没有完全泛</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%AD%94%E4%BB%A4%E9%A3%9E%EF%BC%9A%E4%BB%8E%E5%B0%8F%E7%99%BD%E5%88%B0%E2%80%9C%E8%80%81%E9%B8%9F%E2%80%9D%EF%BC%8C%E6%88%91%E7%9A%84Go%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E4%B9%8B%E8%B7%AF.html">大咖助阵 孔令飞：从小白到“老鸟”，我的Go语言进阶之路</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%BE%90%E7%A5%A5%E6%9B%A6%EF%BC%9A%E4%BB%8E%E9%94%80%E5%94%AE%E5%88%B0%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%8C%E6%88%91%E4%B8%8E%20Go%20%20%E7%9A%84%E6%95%85%E4%BA%8B.html">大咖助阵 徐祥曦：从销售到分布式存储工程师，我与 Go  的故事</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E6%9B%B9%E6%98%A5%E6%99%96%EF%BC%9A%E8%81%8A%E8%81%8A%20Go%20%E8%AF%AD%E8%A8%80%E7%9A%84%20GC%20%E5%AE%9E%E7%8E%B0.html">大咖助阵 曹春晖：聊聊 Go 语言的 GC 实现</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E6%B5%B7%E7%BA%B3%EF%BC%9A%E8%81%8A%E8%81%8A%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%B3%9B%E5%9E%8B.html">大咖助阵 海纳：聊聊语言中的类型系统与泛型</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E6%9C%9F%E4%B8%AD%E6%B5%8B%E8%AF%95%20%E4%B8%80%E8%B5%B7%E6%A3%80%E9%AA%8C%E4%B8%8B%E4%BD%A0%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C%E5%90%A7.html">期中测试 一起检验下你的学习成果吧</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E7%BD%97%E6%9D%B0%EF%BC%9A%E6%88%91%E7%9A%84Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF.html">用户故事 罗杰：我的Go语言学习之路</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%92%8C%E4%BD%A0%E4%B8%80%E8%B5%B7%E8%BF%8E%E6%8E%A5Go%E7%9A%84%E9%BB%84%E9%87%91%E5%8D%81%E5%B9%B4.html">结束语 和你一起迎接Go的黄金十年</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%BB%93%E8%AF%BE%E6%B5%8B%E8%AF%95%20%E5%BF%AB%E6%9D%A5%E6%A3%80%E9%AA%8C%E4%B8%8B%E4%BD%A0%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C%E5%90%A7%EF%BC%81.html">结课测试 快来检验下你的学习成果吧！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/15%20%E5%90%8C%E6%9E%84%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%BB%8E%E5%AE%9A%E9%95%BF%E6%95%B0%E7%BB%84%E5%88%B0%E5%8F%98%E9%95%BF%E5%88%87%E7%89%87.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="15 同构复合类型：从定长数组到变长切片" id="title">15 同构复合类型：从定长数组到变长切片</h1>
+<div><p>你好，我是Tony Bai。</p>
+<p>在前面的学习中，我们详细讲解了Go基本数据类型，主要包括数值类型与字符串类型。但是，仅仅学习这些基本数据类型建立的抽象概念，还远不足以让我们应对真实世界的各种问题。</p>
+<p>比如，我们要表示一组数量固定且连续的整型数，建立一个能表示书籍的抽象数据类型，这个类型中包含书名、页数、出版信息等；又或者，我们要建立一个学号与学生姓名的映射表等。这些问题基本数据类型都无法解决，所以我们需要一类新类型来建立这些抽象，丰富Go语言的表现力。</p>
+<p>这种新类型是怎么样的呢？我们可以通过这些例子总结出新类型的一个特点，那就是它们都是由多个同构类型（相同类型）或异构类型（不同类型）的元素的值组合而成的。这类数据类型在Go语言中被称为复合类型。</p>
+<p>从这一节课开始，我们就来讲解Go语言的复合类型。Go语言原生内置了多种复合数据类型，包括数组、切片（slice）、map、结构体，以及像channel这类用于并发程序设计的高级复合数据类型。那么这一节课，我们先来学习一下最简单的复合类型：数组，以及与数组有着密切关系的切片。</p>
+<p>下面我们就先从最基础的复合数据类型，数组开始。</p>
+<h2 id="数组有哪些基本特性">数组有哪些基本特性？</h2>
+<p>我们先来看数组类型的概念。Go语言的数组是一个长度固定的、由同构类型元素组成的连续序列。通过这个定义，我们可以识别出Go的数组类型包含两个重要属性：<strong>元素的类型</strong>和<strong>数组长度</strong>（元素的个数）。这两个属性也直接构成了Go语言中数组类型变量的声明：</p>
+<pre><code class="language-plain">var arr [N]T
+</code></pre>
+<p>这里我们声明了一个数组变量arr，它的类型为[N]T，其中元素的类型为T，数组的长度为N。这里，我们要注意，数组元素的类型可以为任意的Go原生类型或自定义类型，而且数组的长度必须在声明数组变量时提供，Go编译器需要在编译阶段就知道数组类型的长度，所以，我们只能用整型数字面值或常量表达式作为N值。</p>
+<p>通过这句代码我们也可以看到，<strong>如果两个数组类型的元素类型T与数组长度N都是一样的，那么这两个数组类型是等价的，如果有一个属性不同，它们就是两个不同的数组类型。</strong>下面这个示例很好地诠释了这一点：</p>
+<pre><code class="language-plain">func foo(arr [5]int) {}
+func main() {
+    var arr1 [5]int
+    var arr2 [6]int
+    var arr3 [5]string
+
+    foo(arr1) // ok
+    foo(arr2) // 错误：[6]int与函数foo参数的类型[5]int不是同一数组类型
+    foo(arr3) // 错误：[5]string与函数foo参数的类型[5]int不是同一数组类型
+}  
+</code></pre>
+<p>在这段代码里，arr2与arr3两个变量的类型分别为[6]int和 [5]string，前者的长度属性与[5]int不一致，后者的元素类型属性与[5]int不一致，因此这两个变量都不能作为调用函数foo时的实际参数。</p>
+<p>了解了数组类型的逻辑定义后，我们再来看看数组类型在内存中的实际表示是怎样的，这是数组区别于其他类型，也是我们区分不同数组类型的根本依据。</p>
+<p>数组类型不仅是逻辑上的连续序列，而且在实际内存分配时也占据着一整块内存。Go编译器在为数组类型的变量实际分配内存时，会为Go数组分配一整块、可以容纳它所有元素的连续内存，如下图所示：</p>
+<p><img alt="图片" src="/assets/31f477a7521bb57a5eee4e7f.jpg"/></p>
+<p>我们从这个数组类型的内存表示中可以看出来，这块内存全部空间都被用来表示数组元素，所以说这块内存的大小，就等于各个数组元素的大小之和。如果两个数组所分配的内存大小不同，那么它们肯定是不同的数组类型。Go提供了预定义函数len可以用于获取一个数组类型变量的长度，通过unsafe包提供的Sizeof函数，我们可以获得一个数组变量的总大小，如下面代码：</p>
+<pre><code class="language-plain">var arr = [6]int{1, 2, 3, 4, 5, 6}
+fmt.Println("数组长度：", len(arr))           // 6
+fmt.Println("数组大小：", unsafe.Sizeof(arr)) // 48
+</code></pre>
+<p>数组大小就是所有元素的大小之和，这里数组元素的类型为int。在64位平台上，int类型的大小为8，数组arr一共有6个元素，因此它的总大小为6x8=48个字节。</p>
+<p>和基本数据类型一样，我们声明一个数组类型变量的同时，也可以显式地对它进行初始化。如果不进行显式初始化，那么数组中的元素值就是它类型的零值。比如下面的数组类型变量arr1的各个元素值都为0：</p>
+<pre><code class="language-plain">var arr1 [6]int // [0 0 0 0 0 0]
+</code></pre>
+<p>如果要显式地对数组初始化，我们需要在右值中显式放置数组类型，并通过大括号的方式给各个元素赋值（如下面代码中的arr2）。当然，我们也可以忽略掉右值初始化表达式中数组类型的长度，用“…”替代，Go编译器会根据数组元素的个数，自动计算出数组长度（如下面代码中的arr3）：</p>
+<pre><code class="language-plain">var arr2 = [6]int {
+    11, 12, 13, 14, 15, 16,
+} // [11 12 13 14 15 16]
+
+var arr3 = [...]int { 
+    21, 22, 23,
+} // [21 22 23]
+fmt.Printf("%T\n", arr3) // [3]int
+</code></pre>
+<p>但如果我们要对一个长度较大的稀疏数组进行显式初始化，这样逐一赋值就太麻烦了，还有什么更好的方法吗？我们可以通过使用下标赋值的方式对它进行初始化，比如下面代码中的arr4：</p>
+<pre><code class="language-plain">var arr4 = [...]int{
+    99: 39, // 将第100个元素(下标值为99)的值赋值为39，其余元素值均为0
+}
+fmt.Printf("%T\n", arr4) // [100]int
+</code></pre>
+<p>通过数组类型变量以及下标值，我们可以很容易地访问到数组中的元素值，并且这种访问是十分高效的，不存在Go运行时带来的额外开销。但你要记住，数组的<strong>下标值是从0开始的</strong>。如果下标值超出数组长度范畴，或者是负数，那么Go编译器会给出错误提示，防止访问溢出：</p>
+<pre><code class="language-plain">var arr = [6]int{11, 12, 13, 14, 15, 16}
+fmt.Println(arr[0], arr[5]) // 11 16
+fmt.Println(arr[-1])        // 错误：下标值不能为负数
+fmt.Println(arr[8])         // 错误：小标值超出了arr的长度范围
+</code></pre>
+<h2 id="多维数组怎么解">多维数组怎么解？</h2>
+<p>上面这些元素类型为非数组类型的数组的都是简单的一维数组，但Go语言中，其实还有更复杂的数组类型，多维数组。也就是说，数组类型自身也可以作为数组元素的类型，这样就会产生<strong>多维数组</strong>，比如下面的变量mArr的类型就是一个多维数组[2] [3][4]int：</p>
+<pre><code class="language-plain">var mArr [2][3][4]int
+</code></pre>
+<p>多维数组也不难理解，我们以上面示例中的多维数组类型为例，我们从左向右逐维地去看，这样我们就可以将一个多维数组分层拆解成这样：</p>
+<p><img alt="图片" src="/assets/89011dc426f76ae2d0c76fe6.jpg"/></p>
+<p>我们从上向下看，首先我们将mArr这个数组看成是一个拥有两个元素，且元素类型都为[3] [4]int的数组，就像图中最上层画的那样。这样，mArr的两个元素分别为mArr[0]和mArr [1]，它们的类型均为[3] [4]int，也就是说它们都是二维数组。</p>
+<p>而以mArr[0]为例，我们可以将其看成一个拥有3个元素且元素类型为[4]int的数组，也就是图中中间层画的那样。这样mArr[0]的三个元素分别为mArr[0][0]、mArr[0][1]以及mArr[0][2]，它们的类型均为[4]int，也就是说它们都是一维数组。</p>
+<p>图中的最后一层就是mArr[0]的三个元素，以及mArr[1]的三个元素的各自展开形式。以此类推，你会发现，无论多维数组究竟有多少维，我们都可以将它从左到右逐一展开，最终化为我们熟悉的一维数组。</p>
+<p>不过，虽然数组类型是Go语言中最基础的复合数据类型，但是在使用中它也会有一些问题。数组类型变量是一个整体，这就意味着一个数组变量表示的是整个数组。这点与C语言完全不同，在C语言中，数组变量可视为指向数组第一个元素的指针。这样一来，无论是参与迭代，还是作为实际参数传给一个函数/方法，Go传递数组的方式都是纯粹的值拷贝，这会带来较大的内存拷贝开销。</p>
+<p>这时，你可能会想到我们可以使用指针的方式，来向函数传递数组。没错，这样做的确可以避免性能损耗，但这更像是C语言的惯用法。<strong>其实，Go语言为我们提供了一种更为灵活、更为地道的方式 ，切片，来解决这个问题。</strong>它的优秀特性让它成为了Go 语言中最常用的同构复合类型。</p>
+<h2 id="切片是怎么一回事">切片是怎么一回事？</h2>
+<p>我们前面提到过，数组作为最基本同构类型在Go语言中被保留了下来，但数组在使用上确有两点不足：固定的元素个数，以及传值机制下导致的开销较大。于是Go设计者们又引入了另外一种同构复合类型：切片（slice），来弥补数组的这两处不足。</p>
+<p>切片和数组就像两个一母同胞的亲兄弟，长得像，但又各有各的行为特点。我们可以先声明并初始化一个切片变量看看：</p>
+<pre><code class="language-plain">var nums = []int{1, 2, 3, 4, 5, 6}
+</code></pre>
+<p>我们看到与数组声明相比，切片声明仅仅是少了一个“长度”属性。去掉“长度”这一束缚后，切片展现出更为灵活的特性，这些特性我们后面再分析。</p>
+<p>虽然不需要像数组那样在声明时指定长度，但切片也有自己的长度，只不过这个长度不是固定的，而是随着切片中元素个数的变化而变化的。我们可以通过len函数获得切片类型变量的长度，比如上面那个切片变量的长度就是6:</p>
+<pre><code class="language-plain">fmt.Println(len(nums)) // 6
+</code></pre>
+<p>而且，通过Go内置函数append，我们可以动态地向切片中添加元素。当然，添加后切片的长度也就随之发生了变化，如下面代码所示：</p>
+<pre><code class="language-plain">nums = append(nums, 7) // 切片变为[1 2 3 4 5 6 7]
+fmt.Println(len(nums)) // 7
+</code></pre>
+<p>到这里，我想你已经初步了解切片类型的一些基础信息了。我们前面也说，相比数组类型，切片展现了更为灵活的特性，这些特性是怎么样的呢？现在我们深入它的实现原理看看。</p>
+<h2 id="go是如何实现切片类型的">Go是如何实现切片类型的？</h2>
+<p>Go切片在运行时其实是一个三元组结构，它在Go运行时中的表示如下：</p>
+<pre><code class="language-plain">type slice struct {
+    array unsafe.Pointer
+    len   int
+    cap   int
+}
+</code></pre>
+<p>我们可以看到，每个切片包含三个字段：</p>
+<ul>
+<li>array: 是指向底层数组的指针；</li>
+<li>len: 是切片的长度，即切片中当前元素的个数；</li>
+<li>cap: 是底层数组的长度，也是切片的最大容量，cap值永远大于等于len值。</li>
+</ul>
+<p>如果我们用这个三元组结构表示切片类型变量nums，会是这样：</p>
+<p><img alt="图片" src="/assets/17c6d4784cd69d6ddd81ba25.jpg"/></p>
+<p>我们看到，<strong>Go编译器会自动为每个新创建的切片</strong>，建立一个底层数组，默认底层数组的长度与切片初始元素个数相同。我们还可以用以下几种方法创建切片，并指定它底层数组的长度。</p>
+<p><strong>方法一：通过make函数来创建切片，并指定底层数组的长度。</strong>我们直接看下面这行代码：</p>
+<pre><code class="language-plain">sl := make([]byte, 6, 10) // 其中10为cap值，即底层数组长度，6为切片的初始长度
+</code></pre>
+<p>如果没有在make中指定cap参数，那么底层数组长度cap就等于len，比如：</p>
+<pre><code class="language-plain">sl := make([]byte, 6) // cap = len = 6
+</code></pre>
+<p>到这里，你肯定会有一个问题，为什么上面图中nums切片的底层数组长度为12，而不是初始的len值6呢？你可以先自己思考一下，我们在后面再细讲。</p>
+<p><strong>方法二：采用array[low : high : max]语法基于一个已存在的数组创建切片。</strong>这种方式被称为<strong>数组的切片化</strong>，比如下面代码：</p>
+<pre><code class="language-plain">arr := [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+sl := arr[3:7:9]
+</code></pre>
+<p>我们基于数组arr创建了一个切片sl，这个切片sl在运行时中的表示是这样：</p>
+<p><img alt="图片" src="/assets/d967450ec1a390e3babb7092.jpg"/></p>
+<p>我们看到，基于数组创建的切片，它的起始元素从low所标识的下标值开始，切片的长度（len）是high - low，它的容量是max - low。而且，由于切片sl的底层数组就是数组arr，对切片sl中元素的修改将直接影响数组arr变量。比如，如果我们将切片的第一个元素加10，那么数组arr的第四个元素将变为14：</p>
+<pre><code class="language-plain">sl[0] += 10
+fmt.Println("arr[3] =", arr[3]) // 14
+</code></pre>
+<p>这样看来，<strong>切片好比打开了一个访问与修改数组的“窗口”</strong>，通过这个窗口，我们可以直接操作底层数组中的部分元素。这有些类似于我们操作文件之前打开的“文件描述符”（Windows上称为句柄），通过文件描述符我们可以对底层的真实文件进行相关操作。<strong>可以说，切片之于数组就像是文件描述符之于文件。</strong></p>
+<p>在Go语言中，数组更多是“退居幕后”，承担的是底层存储空间的角色。切片就是数组的“描述符”，也正是因为这一特性，切片才能在函数参数传递时避免较大性能开销。因为我们传递的并不是数组本身，而是数组的“描述符”，而这个描述符的大小是固定的（见上面的三元组结构），无论底层的数组有多大，切片打开的“窗口”长度有多长，它都是不变的。此外，我们在进行数组切片化的时候，通常省略max，而max的默认值为数组的长度。</p>
+<p>另外，针对一个已存在的数组，我们还可以建立多个操作数组的切片，这些切片共享同一底层数组，切片对底层数组的操作也同样会反映到其他切片中。下面是为数组arr建立的两个切片的内存表示：</p>
+<p><img alt="图片" src="/assets/f62f0693260fca8a653aa0e7.jpg"/></p>
+<p>我们看到，上图中的两个切片sl1和sl2是数组arr的“描述符”，这样的情况下，无论我们通过哪个切片对数组进行的修改操作，都会反映到另一个切片中。比如，将sl2[2]置为14，那么sl1[0]也会变成14，因为sl2[2]直接操作的是底层数组arr的第四个元素arr[3]。</p>
+<p><strong>方法三：基于切片创建切片。</strong></p>
+<p>不过这种切片的运行时表示原理与上面的是一样的，我这里就不多分析了，你可以自己看一下。</p>
+<p>最后，我们回答一下前面切片变量nums在进行一次append操作后切片容量变为12的问题。这里我们要清楚一个概念：切片与数组最大的不同，就在于其长度的不定长，这种不定长需要Go运行时提供支持，这种支持就是切片的“动态扩容”。</p>
+<h2 id="切片的动态扩容">切片的动态扩容</h2>
+<p>“动态扩容”指的就是，当我们通过append操作向切片追加数据的时候，如果这时切片的len值和cap值是相等的，也就是说切片底层数组已经没有空闲空间再来存储追加的值了，Go运行时就会对这个切片做扩容操作，来保证切片始终能存储下追加的新值。</p>
+<p>前面的切片变量nums之所以可以存储下新追加的值，就是因为Go对其进行了动态扩容，也就是重新分配了其底层数组，从一个长度为6的数组变成了一个长为12的数组。</p>
+<p>接下来，我们再通过一个例子来体会一下切片动态扩容的过程：</p>
+<pre><code class="language-plain">var s []int
+s = append(s, 11) 
+fmt.Println(len(s), cap(s)) //1 1
+s = append(s, 12) 
+fmt.Println(len(s), cap(s)) //2 2
+s = append(s, 13) 
+fmt.Println(len(s), cap(s)) //3 4
+s = append(s, 14) 
+fmt.Println(len(s), cap(s)) //4 4
+s = append(s, 15) 
+fmt.Println(len(s), cap(s)) //5 8
+</code></pre>
+<p>在这个例子中，我们看到，append会根据切片对底层数组容量的需求，对底层数组进行动态调整。具体我们一步步分析。</p>
+<p>最开始，s初值为零值（nil），这个时候s没有“绑定”底层数组。我们先通过append操作向切片s添加一个元素11，这个时候，append会先分配底层数组u1（数组长度1），然后将s内部表示中的array指向u1，并设置len = 1, cap = 1;</p>
+<p>接着，我们通过append操作向切片s再添加第二个元素12，这个时候len(s) = 1，cap(s) = 1，append判断底层数组剩余空间已经不能够满足添加新元素的要求了，于是它就创建了一个新的底层数组u2，长度为2（u1数组长度的2倍），并把u1中的元素拷贝到u2中，最后将s内部表示中的array指向u2，并设置len = 2, cap = 2；</p>
+<p>然后，第三步，我们通过append操作向切片s添加了第三个元素13，这时len(s) = 2，cap(s) = 2，append判断底层数组剩余空间不能满足添加新元素的要求了，于是又创建了一个新的底层数组u3，长度为4（u2数组长度的2倍），并把u2中的元素拷贝到u3中，最后把s内部表示中的array指向u3，并设置len = 3, cap为u3数组长度，也就是4 ；</p>
+<p>第四步，我们依然通过append操作向切片s添加第四个元素14，此时len(s) = 3, cap(s) = 4，append判断底层数组剩余空间可以满足添加新元素的要求，所以就把14放在下一个元素的位置(数组u3末尾），并把s内部表示中的len加1，变为4；</p>
+<p>但我们的第五步又通过append操作，向切片s添加最后一个元素15，这时len(s) = 4，cap(s) = 4，append判断底层数组剩余空间又不够了，于是创建了一个新的底层数组u4，长度为8（u3数组长度的2倍），并将u3中的元素拷贝到u4中，最后将s内部表示中的array指向u4，并设置len = 5, cap为u4数组长度，也就是8。</p>
+<p>到这里，这个动态扩容的过程就结束了。我们看到，append会根据切片的需要，在当前底层数组容量无法满足的情况下，动态分配新的数组，新数组长度会按一定规律扩展。在上面这段代码中，针对元素是int型的数组，新数组的容量是当前数组的2倍。新数组建立后，append会把旧数组中的数据拷贝到新数组中，之后新数组便成为了切片的底层数组，旧数组会被垃圾回收掉。</p>
+<p>不过append操作的这种自动扩容行为，有些时候会给我们开发者带来一些困惑，比如基于一个已有数组建立的切片，一旦追加的数据操作触碰到切片的容量上限（实质上也是数组容量的上界)，切片就会和原数组解除“绑定”，后续对切片的任何修改都不会反映到原数组中了。我们再来看这段代码：</p>
+<pre><code class="language-plain">u := [...]int{11, 12, 13, 14, 15}
+fmt.Println("array:", u) // [11, 12, 13, 14, 15]
+s := u[1:3]
+fmt.Printf("slice(len=%d, cap=%d): %v\n", len(s), cap(s), s) // [12, 13]
+s = append(s, 24)
+fmt.Println("after append 24, array:", u)
+fmt.Printf("after append 24, slice(len=%d, cap=%d): %v\n", len(s), cap(s), s)
+s = append(s, 25)
+fmt.Println("after append 25, array:", u)
+fmt.Printf("after append 25, slice(len=%d, cap=%d): %v\n", len(s), cap(s), s)
+s = append(s, 26)
+fmt.Println("after append 26, array:", u)
+fmt.Printf("after append 26, slice(len=%d, cap=%d): %v\n", len(s), cap(s), s)
+
+s[0] = 22
+fmt.Println("after reassign 1st elem of slice, array:", u)
+fmt.Printf("after reassign 1st elem of slice, slice(len=%d, cap=%d): %v\n", len(s), cap(s), s)
+</code></pre>
+<p>运行这段代码，我们得到这样的结果：</p>
+<pre><code class="language-plain">array: [11 12 13 14 15]
+slice(len=2, cap=4): [12 13]
+after append 24, array: [11 12 13 24 15]
+after append 24, slice(len=3, cap=4): [12 13 24]
+after append 25, array: [11 12 13 24 25]
+after append 25, slice(len=4, cap=4): [12 13 24 25]
+after append 26, array: [11 12 13 24 25]
+after append 26, slice(len=5, cap=8): [12 13 24 25 26]
+after reassign 1st elem of slice, array: [11 12 13 24 25]
+after reassign 1st elem of slice, slice(len=5, cap=8): [22 13 24 25 26]
+</code></pre>
+<p>这里，在append 25之后，切片的元素已经触碰到了底层数组u的边界了。然后我们再append 26之后，append发现底层数组已经无法满足append的要求，于是新创建了一个底层数组（数组长度为cap(s)的2倍，即8），并将slice的元素拷贝到新数组中了。</p>
+<p>在这之后，我们即便再修改切片的第一个元素值，原数组u的元素也不会发生改变了，因为这个时候切片s与数组u已经解除了“绑定关系”，s已经不再是数组u的“描述符”了。这种因切片的自动扩容而导致的“绑定关系”解除，有时候会成为你实践道路上的一个小陷阱，你一定要注意这一点。</p>
+<h2 id="小结">小结</h2>
+<p>好了，今天的课讲到这里就结束了。这节课，我们讲解了Go语言的另一类常用数据类型，复合数据类型，并挑重点地讲解了其中最常使用的两种同构复合数据类型：数组和切片。</p>
+<p><strong>数组</strong>是一个固定长度的、由同构类型元素组成的连续序列。这种连续不仅仅是逻辑上的，Go编译器为数组类型变量分配的也是一整块可以容纳其所有元素的连续内存。而且，Go编译器为数组变量的初始化也提供了很多便利。当数组元素的类型也是数组类型时，会出现多维数组。我们只需要按照变量声明从左到右、按维度分层拆解，直到出现一元数组就好了。</p>
+<p>但是，Go值传递的机制让数组在各个函数间传递起来比较“笨重”，开销较大，且开销随数组长度的增加而增加。为了解决这个问题，Go引入了<strong>切片</strong>这一不定长同构数据类型。</p>
+<p>切片可以看成是数组的“描述符”，为数组打开了一个访问与修改的“窗口”。切片在Go运行时中被实现为一个“三元组（array, len, cap）”，其中的array是指向底层数组的指针，真正的数据都存储在这个底层数组中；len表示切片的长度；而cap则是切片底层数组的容量。我们可以为一个数组建立多个切片，这些切片由于共享同一个底层数组，因此我们通过任一个切片对数组的修改都会反映到其他切片中。</p>
+<p>切片是不定长同构复合类型，这个不定长体现在Go运行时对它提供的动态扩容的支撑。当切片的cap值与len值相等时，如果再向切片追加数据，Go运行时会自动对切片的底层数组进行扩容，追加数据的操作不会失败。</p>
+<p>在大多数场合，我们都会使用切片以替代数组，原因之一是切片作为数组“描述符”的轻量性，无论它绑定的底层数组有多大，传递这个切片花费的开销都是恒定可控的；另外一个原因是切片相较于数组指针也是有优势的，切片可以提供比指针更为强大的功能，比如下标访问、边界溢出校验、动态扩容等。而且，指针本身在Go语言中的功能也受到的限制，比如不支持指针算术运算。</p>
+<h2 id="思考题">思考题</h2>
+<p>今天的思考题，我想你请描述一下下面这两个切片变量sl1与sl2的差异。期待在留言区看到你的回答。</p>
+<pre><code class="language-plain">var sl1 []int
+var sl2 = []int{}
+</code></pre>
+<p>欢迎你把这节课分享给更多对Go语言中的复合数据类型感兴趣的朋友。我是Tony Bai ，我们下节课见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

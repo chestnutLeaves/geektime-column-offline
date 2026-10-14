@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>62 volatile 的作用是什么？与 synchronized 有什么异同？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/index.html">Java 并发编程 78 讲-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">79 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java 并发编程 78 讲-完</strong><ul><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/00%20%E7%94%B1%E7%82%B9%E5%8F%8A%E9%9D%A2%EF%BC%8C%E6%90%AD%E5%BB%BA%E4%BD%A0%E7%9A%84%20Java%20%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E7%BD%91.html">00 由点及面，搭建你的 Java 并发知识网</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/01%20%E4%B8%BA%E4%BD%95%E8%AF%B4%E5%8F%AA%E6%9C%89%201%20%E7%A7%8D%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F.html">01 为何说只有 1 种实现线程的方法？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/02%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%81%9C%E6%AD%A2%E7%BA%BF%E7%A8%8B%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%20volatile%20%E6%A0%87%E8%AE%B0%E4%BD%8D%E7%9A%84%E5%81%9C%E6%AD%A2%E6%96%B9%E6%B3%95%E6%98%AF%E9%94%99%E8%AF%AF%E7%9A%84%EF%BC%9F.html">02 如何正确停止线程？为什么 volatile 标记位的停止方法是错误的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/03%20%E7%BA%BF%E7%A8%8B%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%206%20%E7%A7%8D%E7%8A%B6%E6%80%81%E4%B9%8B%E9%97%B4%E8%BD%AC%E6%8D%A2%E7%9A%84%EF%BC%9F.html">03 线程是如何在 6 种状态之间转换的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/04%20waitnotifynotifyAll%20%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9F.html">04 waitnotifynotifyAll 方法的使用注意事项？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/05%20%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F.html">05 有哪几种实现生产者消费者模式的方法？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/06%20%E4%B8%80%E5%85%B1%E6%9C%89%E5%93%AA%203%20%E7%B1%BB%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%EF%BC%9F.html">06 一共有哪 3 类线程安全问题？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/07%20%E5%93%AA%E4%BA%9B%E5%9C%BA%E6%99%AF%E9%9C%80%E8%A6%81%E9%A2%9D%E5%A4%96%E6%B3%A8%E6%84%8F%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%EF%BC%9F.html">07 哪些场景需要额外注意线程安全问题？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/08%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BC%9A%E5%B8%A6%E6%9D%A5%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">08 为什么多线程会带来性能问题？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/09%20%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%AF%94%E6%89%8B%E5%8A%A8%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E5%A5%BD%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">09 使用线程池比手动创建线程好在哪里？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/10%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%90%84%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E5%90%AB%E4%B9%89%EF%BC%9F.html">10 线程池的各个参数的含义？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/11%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%9C%89%E5%93%AA%204%20%E7%A7%8D%E6%8B%92%E7%BB%9D%E7%AD%96%E7%95%A5%EF%BC%9F.html">11 线程池有哪 4 种拒绝策略？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/12%20%E6%9C%89%E5%93%AA%206%20%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%20Java8%20%E7%9A%84%20ForkJoinPool%EF%BC%9F.html">12 有哪 6 种常见的线程池？什么是 Java8 的 ForkJoinPool？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/13%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%B8%B8%E7%94%A8%E7%9A%84%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">13 线程池常用的阻塞队列有哪些？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/14%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%BA%94%E8%AF%A5%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">14 为什么不应该自动创建线程池？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/15%20%E5%90%88%E9%80%82%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%95%B0%E9%87%8F%E6%98%AF%E5%A4%9A%E5%B0%91%EF%BC%9FCPU%20%E6%A0%B8%E5%BF%83%E6%95%B0%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F.html">15 合适的线程数量是多少？CPU 核心数和线程数的关系？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/16%20%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E5%AE%9E%E9%99%85%E9%9C%80%E8%A6%81%EF%BC%8C%E5%AE%9A%E5%88%B6%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">16 如何根据实际需要，定制自己的线程池？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/17%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%85%B3%E9%97%AD%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9Fshutdown%20%E5%92%8C%20shutdownNow%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F.html">17 如何正确关闭线程池？shutdown 和 shutdownNow 的区别？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/18%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0%E2%80%9C%E7%BA%BF%E7%A8%8B%E5%A4%8D%E7%94%A8%E2%80%9D%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%9F.html">18 线程池实现“线程复用”的原理？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/19%20%E4%BD%A0%E7%9F%A5%E9%81%93%E5%93%AA%E5%87%A0%E7%A7%8D%E9%94%81%EF%BC%9F%E5%88%86%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">19 你知道哪几种锁？分别有什么特点？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/20%20%E6%82%B2%E8%A7%82%E9%94%81%E5%92%8C%E4%B9%90%E8%A7%82%E9%94%81%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">20 悲观锁和乐观锁的本质是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/21%20%E5%A6%82%E4%BD%95%E7%9C%8B%E5%88%B0%20synchronized%20%E8%83%8C%E5%90%8E%E7%9A%84%E2%80%9Cmonitor%20%E9%94%81%E2%80%9D%EF%BC%9F.html">21 如何看到 synchronized 背后的“monitor 锁”？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/22%20synchronized%20%E5%92%8C%20Lock%20%E5%AD%B0%E4%BC%98%E5%AD%B0%E5%8A%A3%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%EF%BC%9F.html">22 synchronized 和 Lock 孰优孰劣，如何选择？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/23%20Lock%20%E6%9C%89%E5%93%AA%E5%87%A0%E4%B8%AA%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9F%E5%88%86%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F.html">23 Lock 有哪几个常用方法？分别有什么用？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/24%20%E8%AE%B2%E4%B8%80%E8%AE%B2%E5%85%AC%E5%B9%B3%E9%94%81%E5%92%8C%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E2%80%9C%E9%9D%9E%E5%85%AC%E5%B9%B3%E2%80%9D%EF%BC%9F.html">24 讲一讲公平锁和非公平锁，为什么要“非公平”？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/25%20%E8%AF%BB%E5%86%99%E9%94%81%20ReadWriteLock%20%E8%8E%B7%E5%8F%96%E9%94%81%E6%9C%89%E5%93%AA%E4%BA%9B%E8%A7%84%E5%88%99%EF%BC%9F.html">25 读写锁 ReadWriteLock 获取锁有哪些规则？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/26%20%E8%AF%BB%E9%94%81%E5%BA%94%E8%AF%A5%E6%8F%92%E9%98%9F%E5%90%97%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E8%AF%BB%E5%86%99%E9%94%81%E7%9A%84%E5%8D%87%E9%99%8D%E7%BA%A7%EF%BC%9F.html">26 读锁应该插队吗？什么是读写锁的升降级？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/27%20%E4%BB%80%E4%B9%88%E6%98%AF%E8%87%AA%E6%97%8B%E9%94%81%EF%BC%9F%E8%87%AA%E6%97%8B%E7%9A%84%E5%A5%BD%E5%A4%84%E5%92%8C%E5%90%8E%E6%9E%9C%E6%98%AF%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F.html">27 什么是自旋锁？自旋的好处和后果是什么呢？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/28%20JVM%20%E5%AF%B9%E9%94%81%E8%BF%9B%E8%A1%8C%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8C%96%EF%BC%9F.html">28 JVM 对锁进行了哪些优化？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/29%20HashMap%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F.html">29 HashMap 为什么是线程不安全的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/30%20ConcurrentHashMap%20%E5%9C%A8%20Java7%20%E5%92%8C%208%20%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C%EF%BC%9F.html">30 ConcurrentHashMap 在 Java7 和 8 有何不同？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/31%20%E4%B8%BA%E4%BB%80%E4%B9%88%20Map%20%E6%A1%B6%E4%B8%AD%E8%B6%85%E8%BF%87%208%20%E4%B8%AA%E6%89%8D%E8%BD%AC%E4%B8%BA%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%9F.html">31 为什么 Map 桶中超过 8 个才转为红黑树？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/32%20%E5%90%8C%E6%A0%B7%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%8CConcurrentHashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%E5%8C%BA%E5%88%AB.html">32 同样是线程安全，ConcurrentHashMap 和 Hashtable 的区别</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/33%20CopyOnWriteArrayList%20%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">33 CopyOnWriteArrayList 有什么特点？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/34%20%E4%BB%80%E4%B9%88%E6%98%AF%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%EF%BC%9F.html">34 什么是阻塞队列？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/35%20%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9Fadd%E3%80%81offer%E3%80%81put%20%E7%AD%89%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F.html">35 阻塞队列包含哪些常用的方法？add、offer、put 等方法的区别？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/36%20%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%EF%BC%9F.html">36 有哪几种常见的阻塞队列？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/37%20%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E7%9A%84%E5%B9%B6%E5%8F%91%E5%AE%89%E5%85%A8%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">37 阻塞和非阻塞队列的并发安全原理是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/38%20%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%EF%BC%9F.html">38 如何选择适合自己的阻塞队列？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/39%20%E5%8E%9F%E5%AD%90%E7%B1%BB%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20CAS%20%E4%BF%9D%E8%AF%81%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F.html">39 原子类是如何利用 CAS 保证线程安全的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/40%20AtomicInteger%20%E5%9C%A8%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E6%80%A7%E8%83%BD%E4%B8%8D%E5%A5%BD%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F.html">40 AtomicInteger 在高并发下性能不好，如何解决？为什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/41%20%E5%8E%9F%E5%AD%90%E7%B1%BB%E5%92%8C%20volatile%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%82%E5%90%8C%EF%BC%9F.html">41 原子类和 volatile 有什么异同？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/42%20AtomicInteger%20%E5%92%8C%20synchronized%20%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9%EF%BC%9F.html">42 AtomicInteger 和 synchronized 的异同点？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/43%20Java%208%20%E4%B8%AD%20Adder%20%E5%92%8C%20Accumulator%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">43 Java 8 中 Adder 和 Accumulator 有什么区别？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/44%20ThreadLocal%20%E9%80%82%E5%90%88%E7%94%A8%E5%9C%A8%E5%93%AA%E4%BA%9B%E5%AE%9E%E9%99%85%E7%94%9F%E4%BA%A7%E7%9A%84%E5%9C%BA%E6%99%AF%E4%B8%AD%EF%BC%9F.html">44 ThreadLocal 适合用在哪些实际生产的场景中？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/45%20ThreadLocal%20%E6%98%AF%E7%94%A8%E6%9D%A5%E8%A7%A3%E5%86%B3%E5%85%B1%E4%BA%AB%E8%B5%84%E6%BA%90%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AE%BF%E9%97%AE%E7%9A%84%E9%97%AE%E9%A2%98%E5%90%97%EF%BC%9F.html">45 ThreadLocal 是用来解决共享资源的多线程访问的问题吗？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/46%20%E5%A4%9A%E4%B8%AA%20ThreadLocal%20%E5%9C%A8%20Thread%20%E4%B8%AD%E7%9A%84%20threadlocals%20%E9%87%8C%E6%98%AF%E6%80%8E%E4%B9%88%E5%AD%98%E5%82%A8%E7%9A%84%EF%BC%9F.html">46 多个 ThreadLocal 在 Thread 中的 threadlocals 里是怎么存储的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/47%20%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E2%80%94%E2%80%94%E4%B8%BA%E4%BD%95%E6%AF%8F%E6%AC%A1%E7%94%A8%E5%AE%8C%20ThreadLocal%20%E9%83%BD%E8%A6%81%E8%B0%83%E7%94%A8%20remove%28%29%EF%BC%9F.html">47 内存泄漏——为何每次用完 ThreadLocal 都要调用 remove()？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/48%20Callable%20%E5%92%8C%20Runnable%20%E7%9A%84%E4%B8%8D%E5%90%8C%EF%BC%9F.html">48 Callable 和 Runnable 的不同？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/49%20Future%20%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">49 Future 的主要功能是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/50%20%E4%BD%BF%E7%94%A8%20Future%20%E6%9C%89%E5%93%AA%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9%EF%BC%9FFuture%20%E4%BA%A7%E7%94%9F%E6%96%B0%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BA%86%E5%90%97%EF%BC%9F.html">50 使用 Future 有哪些注意点？Future 产生新的线程了吗？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/51%20%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20CompletableFuture%20%E5%AE%9E%E7%8E%B0%E2%80%9C%E6%97%85%E6%B8%B8%E5%B9%B3%E5%8F%B0%E2%80%9D%E9%97%AE%E9%A2%98%EF%BC%9F.html">51 如何利用 CompletableFuture 实现“旅游平台”问题？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/52%20%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%83%BD%E8%A2%AB%20FixedThreadPool%20%E6%9B%BF%E4%BB%A3%E5%90%97%EF%BC%9F.html">52 信号量能被 FixedThreadPool 替代吗？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/53%20CountDownLatch%20%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%89%E6%8E%92%E7%BA%BF%E7%A8%8B%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E7%9A%84%EF%BC%9F.html">53 CountDownLatch 是如何安排线程执行顺序的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/54%20CyclicBarrier%20%E5%92%8C%20CountdownLatch%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%82%E5%90%8C%EF%BC%9F.html">54 CyclicBarrier 和 CountdownLatch 有什么异同？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/55%20Condition%E3%80%81object.wait%28%29%20%E5%92%8C%20notify%28%29%20%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F.html">55 Condition、object.wait() 和 notify() 的关系？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/56%20%E8%AE%B2%E4%B8%80%E8%AE%B2%E4%BB%80%E4%B9%88%E6%98%AF%20Java%20%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">56 讲一讲什么是 Java 内存模型？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/57%20%E4%BB%80%E4%B9%88%E6%98%AF%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E5%BA%8F%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%87%8D%E6%8E%92%E5%BA%8F%EF%BC%9F.html">57 什么是指令重排序？为什么要重排序？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/58%20Java%20%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E6%9C%89%E5%93%AA%E4%BA%9B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9F.html">58 Java 中的原子操作有哪些注意事项？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/59%20%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%9C%E5%86%85%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7%E2%80%9D%E9%97%AE%E9%A2%98%EF%BC%9F.html">59 什么是“内存可见性”问题？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/60%20%E4%B8%BB%E5%86%85%E5%AD%98%E5%92%8C%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AD%98%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F.html">60 主内存和工作内存的关系？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/61%20%E4%BB%80%E4%B9%88%E6%98%AF%20happens-before%20%E8%A7%84%E5%88%99%EF%BC%9F.html">61 什么是 happens-before 规则？</a></li><li><a class="active" aria-current="page" href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/62%20volatile%20%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%8E%20synchronized%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%82%E5%90%8C%EF%BC%9F.html">62 volatile 的作用是什么？与 synchronized 有什么异同？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/63%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8F%8C%E9%87%8D%E6%A3%80%E6%9F%A5%E9%94%81%E6%A8%A1%E5%BC%8F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E5%8A%A0%20volatile%EF%BC%9F.html">63 单例模式的双重检查锁模式为什么必须加 volatile？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/64%20%E4%BD%A0%E7%9F%A5%E9%81%93%E4%BB%80%E4%B9%88%E6%98%AF%20CAS%20%E5%90%97%EF%BC%9F.html">64 你知道什么是 CAS 吗？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/65%20CAS%20%E5%92%8C%E4%B9%90%E8%A7%82%E9%94%81%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BC%9A%E7%94%A8%E5%88%B0%20CAS%EF%BC%9F.html">65 CAS 和乐观锁的关系，什么时候会用到 CAS？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/66%20CAS%20%E6%9C%89%E4%BB%80%E4%B9%88%E7%BC%BA%E7%82%B9%EF%BC%9F.html">66 CAS 有什么缺点？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/67%20%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%85%E7%84%B6%E6%AD%BB%E9%94%81%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%9F.html">67 如何写一个必然死锁的例子？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/68%20%E5%8F%91%E7%94%9F%E6%AD%BB%E9%94%81%E5%BF%85%E9%A1%BB%E6%BB%A1%E8%B6%B3%E5%93%AA%204%20%E4%B8%AA%E6%9D%A1%E4%BB%B6%EF%BC%9F.html">68 发生死锁必须满足哪 4 个条件？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/69%20%E5%A6%82%E4%BD%95%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%92%8C%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%9F.html">69 如何用命令行和代码定位死锁？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/70%20%E6%9C%89%E5%93%AA%E4%BA%9B%E8%A7%A3%E5%86%B3%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98%E7%9A%84%E7%AD%96%E7%95%A5%EF%BC%9F.html">70 有哪些解决死锁问题的策略？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/71%20%E8%AE%B2%E4%B8%80%E8%AE%B2%E7%BB%8F%E5%85%B8%E7%9A%84%E5%93%B2%E5%AD%A6%E5%AE%B6%E5%B0%B1%E9%A4%90%E9%97%AE%E9%A2%98.html">71 讲一讲经典的哲学家就餐问题</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/72%20final%20%E7%9A%84%E4%B8%89%E7%A7%8D%E7%94%A8%E6%B3%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">72 final 的三种用法是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/73%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8A%A0%E4%BA%86%20final%20%E5%8D%B4%E4%BE%9D%E7%84%B6%E6%97%A0%E6%B3%95%E6%8B%A5%E6%9C%89%E2%80%9C%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D%EF%BC%9F.html">73 为什么加了 final 却依然无法拥有“不变性”？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/74%20%E4%B8%BA%E4%BB%80%E4%B9%88%20String%20%E8%A2%AB%E8%AE%BE%E8%AE%A1%E4%B8%BA%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84%EF%BC%9F.html">74 为什么 String 被设计为是不可变的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/75%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%20AQS%EF%BC%9FAQS%20%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E9%87%8D%E8%A6%81%E6%80%A7%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">75 为什么需要 AQS？AQS 的作用和重要性是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/76%20AQS%20%E7%9A%84%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F.html">76 AQS 的内部原理是什么样的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/77%20AQS%20%E5%9C%A8%20CountDownLatch%20%E7%AD%89%E7%B1%BB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">77 AQS 在 CountDownLatch 等类中的应用原理是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/78%20%E4%B8%80%E4%BB%BD%E7%8B%AC%E5%AE%B6%E7%9A%84%20Java%20%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E5%9B%BE%E8%B0%B1.html">78 一份独家的 Java 并发工具图谱</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/62%20volatile%20%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%8E%20synchronized%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%82%E5%90%8C%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="62 volatile 的作用是什么？与 synchronized 有什么异同？" id="title">62 volatile 的作用是什么？与 synchronized 有什么异同？</h1>
+<div><p>本课时我们主要介绍 volatile 的作用和适用场景，以及它与 synchronized 有什么异同。</p>
+<h3 id="volatile-是什么">volatile 是什么</h3>
+<p>首先我们就来介绍一下 volatile，它是 Java 中的一个关键字，是一种同步机制。当某个变量是共享变量，且这个变量是被 volatile 修饰的，那么在修改了这个变量的值之后，再读取该变量的值时，可以保证获取到的是修改后的最新的值，而不是过期的值。</p>
+<p>相比于 synchronized 或者 Lock，volatile 是更轻量的，因为使用 volatile 不会发生上下文切换等开销很大的情况，不会让线程阻塞。但正是由于它的开销相对比较小，所以它的效果，也就是能力，相对也小一些。</p>
+<p>虽然说 volatile 是用来保证线程安全的，但是它做不到像 synchronized 那样的同步保护，volatile 仅在很有限的场景中才能发挥作用，所以下面就让我们来看一下它的适用场景，我们会先给出不适合使用 volatile 的场景，再给出两种适合使用 volatile 的场景。</p>
+<h3 id="volatile-的适用场合">volatile 的适用场合</h3>
+<h4 id="不适用-a">不适用：a++</h4>
+<p>首先我们就来看一下不适合使用 volatile 的场景，volatile 不适合运用于需要保证原子性的场景，比如更新的时候需要依赖原来的值，而最典型的就是 a++ 的场景，我们仅靠 volatile 是不能保证 a++ 的线程安全的。代码如下所示：</p>
+<pre><code class="language-java">public class DontVolatile implements Runnable {
+
+    volatile int a;
+
+    AtomicInteger realA = new AtomicInteger();
+
+    public static void main(String[] args) throws InterruptedException {
+
+        Runnable r =  new DontVolatile();
+
+        Thread thread1 = new Thread(r);
+
+        Thread thread2 = new Thread(r);
+
+        thread1.start();
+
+        thread2.start();
+
+        thread1.join();
+
+        thread2.join();
+
+        System.out.println(((DontVolatile) r).a);
+
+        System.out.println(((DontVolatile) r).realA.get());
+
+    }
+
+    @Override
+
+    public void run() {
+
+        for (int i = 0; i &lt; 1000; i++) {
+
+            a++;
+
+            realA.incrementAndGet();
+
+        }
+
+    }
+
+}
+</code></pre>
+<p>在这段代码中，我们有一个 volatile 修饰的 int 类型的 a 变量，并且下面还有一个原子类的 realA，原子类是可以保证线程安全的，所以我们就用它来和 volatile int a 做对比，看一看它们实际效果上的差别。</p>
+<p>在 main 函数中，我们新建了两个线程，并且让它们运行。这两个线程运行的内容就是去执行 1000 次的累加操作，每次累加操作会对 volatile 修饰的变量 a 进行自加操作，同时还会对原子类 realA 进行自加操作。当这两个线程都运行完毕之后，我们把结果给打印出来，其中一种运行结果如下：</p>
+<pre><code class="language-java">1988
+
+2000
+</code></pre>
+<p>会发现最终的 a 值和 realA 值分别为 1988 和 2000。可以看出，即便变量 a 被 volatile 修饰了，即便它最终一共执行了 2000 次的自加操作（这一点可以由原子类的最终值来印证），但是依然有一些自加操作失效了，所以最终它的结果是不到 2000 的，这就证明了 volatile 不能保证原子性，那么它究竟适合运用于什么场景呢？</p>
+<h4 id="适用场合1-布尔标记位">适用场合1：布尔标记位</h4>
+<p>如果某个共享变量自始至终只是被各个线程所赋值或读取，而没有其他的操作（比如读取并在此基础上进行修改这样的复合操作）的话，那么我们就可以使用 volatile 来代替 synchronized 或者代替原子类，因为赋值操作自身是具有原子性的，volatile 同时又保证了可见性，这就足以保证线程安全了。</p>
+<p>一个比较典型的场景就是布尔标记位的场景，例如 volatile boolean flag。因为通常情况下，boolean 类型的标记位是会被直接赋值的，此时不会存在复合操作（如 a++），只存在单一操作，就是去改变 flag 的值，而一旦 flag 被 volatile 修饰之后，就可以保证可见性了，那么这个 flag 就可以当作一个标记位，此时它的值一旦发生变化，所有线程都可以立刻看到，所以这里就很适合运用 volatile 了。</p>
+<p>我们来看一下代码示例：</p>
+<pre><code class="language-java">public class YesVolatile1 implements Runnable {
+
+    volatile boolean done = false;
+
+    AtomicInteger realA = new AtomicInteger();
+
+    public static void main(String[] args) throws InterruptedException {
+
+        Runnable r =  new YesVolatile1();
+
+        Thread thread1 = new Thread(r);
+
+        Thread thread2 = new Thread(r);
+
+        thread1.start();
+
+        thread2.start();
+
+        thread1.join();
+
+        thread2.join();
+
+        System.out.println(((YesVolatile1) r).done);
+
+        System.out.println(((YesVolatile1) r).realA.get());
+
+    }
+
+    @Override
+
+    public void run() {
+
+        for (int i = 0; i &lt; 1000; i++) {
+
+            setDone();
+
+            realA.incrementAndGet();
+
+        }
+
+    }
+
+    private void setDone() {
+
+        done = true;
+
+    }
+
+}
+</code></pre>
+<p>这段代码和前一段代码非常相似，唯一不同之处在于，我们把 volatile int a 改成了 volatile boolean done，并且在 1000 次循环的操作过程中调用的是 setDone() 方法，而这个 setDone() 方法就是把 done 这个变量设置为 true，而不是根据它原来的值再做判断，例如原来是 false，就设置成 true，或者原来是 true，就设置成 false，这些复杂的判断是没有的，setDone() 方法直接就把变量 done 的值设置为 true。那么这段代码最终运行的结果如下：</p>
+<pre><code class="language-java">true
+
+2000
+</code></pre>
+<p>无论运行多少次，控制台都会打印出 true 和 2000，打印出的 2000 已经印证出确实是执行了 2000 次操作，而最终的 true 结果证明了，在这种场景下，volatile 起到了保证线程安全的作用。</p>
+<p>第二个例子区别于第一个例子最大的不同点就在于，第一个例子的操作是 a++，这是个复合操作，不具备原子性，而在本例中的操作仅仅是把 done 设置为 true，这样的赋值操作本身就是具备原子性的，所以在这个例子中，它是适合运用 volatile 的。</p>
+<h4 id="适用场合-2-作为触发器">适用场合 2：作为触发器</h4>
+<p>那么下面我们再来看第二个适合用 volatile 的场景：作为触发器，保证其他变量的可见性。</p>
+<p>下面是 Brian Goetz 提供的一个经典例子：</p>
+<pre><code class="language-java">Map configOptions;
+
+char[] configText;
+
+volatile boolean initialized = false;
+
+. . .
+
+// In thread A
+
+configOptions = new HashMap();
+
+configText = readConfigFile(fileName);
+
+processConfigOptions(configText, configOptions);
+
+initialized = true;
+
+. . .
+
+// In thread B
+
+while (!initialized) 
+
+  sleep();
+
+// use configOptions
+</code></pre>
+<p>在这段代码中可以看到，我们有一个 map 叫作 configOptions，还有一个 char 数组叫作 configText，然后会有一个被 volatile 修饰的 boolean initialized，最开始等于 false。再下面的这四行代码是由线程 A 所执行的，它所做的事情就是初始化 configOptions，再初始化 configText，再把这两个值放到一个方法中去执行，实际上这些都代表了初始化的行为。那么一旦这些方法执行完毕之后，就代表初始化工作完成了，线程 A 就会把 initialized 这个变量设置为 true。</p>
+<p>而对于线程 B 而言，它一开始会在 while 循环中反复执行 sleep 方法（例如休眠一段时间），直到 initialized 这个变量变成 true，线程 B 才会跳过 sleep 方法，继续往下执行。重点来了，一旦 initialized 变成了 true，此时对于线程 B 而言，它就会立刻使用这个 configOptions，所以这就要求此时的 configOptions 是初始化完毕的，且初始化的操作的结果必须对线程 B 可见，否则线程 B 在执行的时候就可能报错。</p>
+<p>你可能会担心，因为这个 configOptions 是在线程 A 中修改的，那么在线程 B 中读取的时候，会不会发生可见性问题，会不会读取的不是初始化完毕后的值？如果我们不使用 volatile，那么确实是存在这个问题的。</p>
+<p>但是现在我们用了被 volatile 修饰的 initialized 作为触发器，所以这个问题被解决了。根据happens-before 关系的单线程规则，线程 A 中 configOptions 的初始化 happens-before 对 initialized 变量的写入，而线程 B 中对 initialzed 的读取 happens-before 对 configOptions 变量的使用，同时根据 happens-before 关系的 volatile 规则，线程 A 中对 initialized 的写入为 true 的操作 happens-before 线程 B 中随后对 initialized 变量的读取。</p>
+<p>如果我们分别有操作 A 和操作 B，我们用 hb(A, B) 来表示 A happens-before B。而 Happens-before 是有可传递性质的，如果hb(A, B)，且hb(B, C)，那么可以推出hb(A, C)。所以根据上面的条件，我们可以得出结论：线程 A 中对于 configOptions 的初始化 happens-before 线程 B 中 对于 configOptions 的使用。所以对于线程 B 而言，既然它已经看到了 initialized 最新的值，那么它同样就能看到包括 configOptions 在内的这些变量初始化后的状态，所以此时线程 B 使用 configOptions 是线程安全的。这种用法就是把被 volatile 修饰的变量作为触发器来使用，保证其他变量的可见性，这种用法也是非常值得掌握的，可以作为面试时的亮点。</p>
+<h3 id="volatile-的作用">volatile 的作用</h3>
+<p>上面我们分析了两种非常典型的用法，那么就来总结一下 volatile 的作用，它一共有两层作用。</p>
+<p><strong>第一层的作用是保证可见性</strong>。Happens-before 关系中对于 volatile 是这样描述的：对一个 volatile 变量的写操作 happen-before 后面对该变量的读操作。</p>
+<p>这就代表了如果变量被 volatile 修饰，那么每次修改之后，接下来在读取这个变量的时候一定能读取到该变量最新的值。</p>
+<p><strong>第二层的作用就是禁止重排序</strong>。先介绍一下 as-if-serial语义：不管怎么重排序，（单线程）程序的执行结果不会改变。在满足 as-if-serial 语义的前提下，由于编译器或 CPU 的优化，代码的实际执行顺序可能与我们编写的顺序是不同的，这在单线程的情况下是没问题的，但是一旦引入多线程，这种乱序就可能会导致严重的线程安全问题。用了 volatile 关键字就可以在一定程度上禁止这种重排序。</p>
+<h3 id="volatile-和-synchronized-的关系">volatile 和 synchronized 的关系</h3>
+<p>下面我们就来看一下 volatile 和 synchronized 的关系：</p>
+<p>相似性：volatile 可以看作是一个轻量版的 synchronized，比如一个共享变量如果自始至终只被各个线程赋值和读取，而没有其他操作的话，那么就可以用 volatile 来代替 synchronized 或者代替原子变量，足以保证线程安全。实际上，对 volatile 字段的每次读取或写入都类似于“半同步”——读取 volatile 与获取 synchronized 锁有相同的内存语义，而写入 volatile 与释放 synchronized 锁具有相同的语义。</p>
+<p>不可代替：但是在更多的情况下，volatile 是不能代替 synchronized 的，volatile 并没有提供原子性和互斥性。</p>
+<p>性能方面：volatile 属性的读写操作都是无锁的，正是因为无锁，所以不需要花费时间在获取锁和释放锁上，所以说它是高性能的，比 synchronized 性能更好。</p>
+<h3 id="小结">小结</h3>
+<p>最后总结一下，本课时主要介绍了 volatile 是什么，以及它不适用的场景和两种非常典型的适用场景；然后我们介绍了 volatile 的两点作用，第一点是保证可见性，第二点是禁止重排序；最后我们分析了 volatile 和 synchronized 的关系。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

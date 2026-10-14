@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>37 找到容器不容易：Service、DNS与服务发现 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/index.html">深入剖析Kubernetes</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">56 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入剖析Kubernetes</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E6%89%93%E9%80%9A%E2%80%9C%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E2%80%9D%E7%9A%84%E4%BB%BB%E7%9D%A3%E4%BA%8C%E8%84%89.html">00 开篇词 打通“容器技术”的任督二脉</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/01%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E5%B0%8F%E9%B2%B8%E9%B1%BC%E5%A4%A7%E4%BA%8B%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%88%9D%E5%87%BA%E8%8C%85%E5%BA%90.html">01 预习篇 · 小鲸鱼大事记（一）：初出茅庐</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/02%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E5%B0%8F%E9%B2%B8%E9%B1%BC%E5%A4%A7%E4%BA%8B%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%B4%AD%E9%9C%B2%E5%A4%B4%E8%A7%92.html">02 预习篇 · 小鲸鱼大事记（二）：崭露头角</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/03%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E5%B0%8F%E9%B2%B8%E9%B1%BC%E5%A4%A7%E4%BA%8B%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E7%BE%A4%E9%9B%84%E5%B9%B6%E8%B5%B7.html">03 预习篇 · 小鲸鱼大事记（三）：群雄并起</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/04%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E5%B0%8F%E9%B2%B8%E9%B1%BC%E5%A4%A7%E4%BA%8B%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%B0%98%E5%9F%83%E8%90%BD%E5%AE%9A.html">04 预习篇 · 小鲸鱼大事记（四）：尘埃落定</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/05%20%E7%99%BD%E8%AF%9D%E5%AE%B9%E5%99%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E%E8%BF%9B%E7%A8%8B%E8%AF%B4%E5%BC%80%E5%8E%BB.html">05 白话容器基础（一）：从进程说开去</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/06%20%E7%99%BD%E8%AF%9D%E5%AE%B9%E5%99%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%9A%94%E7%A6%BB%E4%B8%8E%E9%99%90%E5%88%B6.html">06 白话容器基础（二）：隔离与限制</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/07%20%E7%99%BD%E8%AF%9D%E5%AE%B9%E5%99%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F.html">07 白话容器基础（三）：深入理解容器镜像</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/08%20%E7%99%BD%E8%AF%9D%E5%AE%B9%E5%99%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86Docker%E5%AE%B9%E5%99%A8.html">08 白话容器基础（四）：重新认识Docker容器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/09%20%E4%BB%8E%E5%AE%B9%E5%99%A8%E5%88%B0%E5%AE%B9%E5%99%A8%E4%BA%91%EF%BC%9A%E8%B0%88%E8%B0%88Kubernetes%E7%9A%84%E6%9C%AC%E8%B4%A8.html">09 从容器到容器云：谈谈Kubernetes的本质</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/10%20Kubernetes%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%88%A9%E5%99%A8%EF%BC%9Akubeadm.html">10 Kubernetes一键部署利器：kubeadm</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/11%20%E4%BB%8E0%E5%88%B01%EF%BC%9A%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84Kubernetes%E9%9B%86%E7%BE%A4.html">11 从0到1：搭建一个完整的Kubernetes集群</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/12%20%E7%89%9B%E5%88%80%E5%B0%8F%E8%AF%95%EF%BC%9A%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%B9%E5%99%A8%E5%8C%96%E5%BA%94%E7%94%A8.html">12 牛刀小试：我的第一个容器化应用</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/13%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81Pod%EF%BC%9F.html">13 为什么我们需要Pod？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/14%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90Pod%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html">14 深入解析Pod对象（一）：基本概念</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/15%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90Pod%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">15 深入解析Pod对象（二）：使用进阶</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/16%20%E7%BC%96%E6%8E%92%E5%85%B6%E5%AE%9E%E5%BE%88%E7%AE%80%E5%8D%95%EF%BC%9A%E8%B0%88%E8%B0%88%E2%80%9C%E6%8E%A7%E5%88%B6%E5%99%A8%E2%80%9D%E6%A8%A1%E5%9E%8B.html">16 编排其实很简单：谈谈“控制器”模型</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/17%20%E7%BB%8F%E5%85%B8PaaS%E7%9A%84%E8%AE%B0%E5%BF%86%EF%BC%9A%E4%BD%9C%E4%B8%9A%E5%89%AF%E6%9C%AC%E4%B8%8E%E6%B0%B4%E5%B9%B3%E6%89%A9%E5%B1%95.html">17 经典PaaS的记忆：作业副本与水平扩展</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/18%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3StatefulSet%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%8B%93%E6%89%91%E7%8A%B6%E6%80%81.html">18 深入理解StatefulSet（一）：拓扑状态</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/19%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3StatefulSet%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%AD%98%E5%82%A8%E7%8A%B6%E6%80%81.html">19 深入理解StatefulSet（二）：存储状态</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/20%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3StatefulSet%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5.html">20 深入理解StatefulSet（三）：有状态应用实践</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/21%20%E5%AE%B9%E5%99%A8%E5%8C%96%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%84%8F%E4%B9%89%EF%BC%9ADaemonSet.html">21 容器化守护进程的意义：DaemonSet</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/22%20%E6%92%AC%E5%8A%A8%E7%A6%BB%E7%BA%BF%E4%B8%9A%E5%8A%A1%EF%BC%9AJob%E4%B8%8ECronJob.html">22 撬动离线业务：Job与CronJob</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/23%20%E5%A3%B0%E6%98%8E%E5%BC%8FAPI%E4%B8%8EKubernetes%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F.html">23 声明式API与Kubernetes编程范式</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/24%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E5%A3%B0%E6%98%8E%E5%BC%8FAPI%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AAPI%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A5%A5%E7%A7%98.html">24 深入解析声明式API（一）：API对象的奥秘</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/25%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E5%A3%B0%E6%98%8E%E5%BC%8FAPI%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%BC%96%E5%86%99%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E5%88%B6%E5%99%A8.html">25 深入解析声明式API（二）：编写自定义控制器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/26%20%E5%9F%BA%E4%BA%8E%E8%A7%92%E8%89%B2%E7%9A%84%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%EF%BC%9ARBAC.html">26 基于角色的权限控制：RBAC</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/27%20%E8%81%AA%E6%98%8E%E7%9A%84%E5%BE%AE%E5%88%9B%E6%96%B0%EF%BC%9AOperator%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%A7%A3%E8%AF%BB.html">27 聪明的微创新：Operator工作原理解读</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/28%20PV%E3%80%81PVC%E3%80%81StorageClass%EF%BC%8C%E8%BF%99%E4%BA%9B%E5%88%B0%E5%BA%95%E5%9C%A8%E8%AF%B4%E5%95%A5%EF%BC%9F.html">28 PV、PVC、StorageClass，这些到底在说啥？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/29%20PV%E3%80%81PVC%E4%BD%93%E7%B3%BB%E6%98%AF%E4%B8%8D%E6%98%AF%E5%A4%9A%E6%AD%A4%E4%B8%80%E4%B8%BE%EF%BC%9F%E4%BB%8E%E6%9C%AC%E5%9C%B0%E6%8C%81%E4%B9%85%E5%8C%96%E5%8D%B7%E8%B0%88%E8%B5%B7.html">29 PV、PVC体系是不是多此一举？从本地持久化卷谈起</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/30%20%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6%EF%BC%9AFlexVolume%E4%B8%8ECSI.html">30 编写自己的存储插件：FlexVolume与CSI</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/31%20%E5%AE%B9%E5%99%A8%E5%AD%98%E5%82%A8%E5%AE%9E%E8%B7%B5%EF%BC%9ACSI%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99%E6%8C%87%E5%8D%97.html">31 容器存储实践：CSI插件编写指南</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/32%20%E6%B5%85%E8%B0%88%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C.html">32 浅谈容器网络</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/33%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E5%AE%B9%E5%99%A8%E8%B7%A8%E4%B8%BB%E6%9C%BA%E7%BD%91%E7%BB%9C.html">33 深入解析容器跨主机网络</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/34%20Kubernetes%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E4%B8%8ECNI%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6.html">34 Kubernetes网络模型与CNI网络插件</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/35%20%E8%A7%A3%E8%AF%BBKubernetes%E4%B8%89%E5%B1%82%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88.html">35 解读Kubernetes三层网络方案</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/36%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4Kubernetes%E5%8F%AA%E6%9C%89soft%20multi-tenancy%EF%BC%9F.html">36 为什么说Kubernetes只有soft multi-tenancy？</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/37%20%E6%89%BE%E5%88%B0%E5%AE%B9%E5%99%A8%E4%B8%8D%E5%AE%B9%E6%98%93%EF%BC%9AService%E3%80%81DNS%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0.html">37 找到容器不容易：Service、DNS与服务发现</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/38%20%E4%BB%8E%E5%A4%96%E7%95%8C%E8%BF%9E%E9%80%9AService%E4%B8%8EService%E8%B0%83%E8%AF%95%E2%80%9C%E4%B8%89%E6%9D%BF%E6%96%A7%E2%80%9D.html">38 从外界连通Service与Service调试“三板斧”</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/39%20%E8%B0%88%E8%B0%88Service%E4%B8%8EIngress.html">39 谈谈Service与Ingress</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/40%20Kubernetes%E7%9A%84%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9E%8B%E4%B8%8E%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86.html">40 Kubernetes的资源模型与资源管理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/41%20%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3%E4%B8%8A%E7%9A%84Kubernetes%E9%BB%98%E8%AE%A4%E8%B0%83%E5%BA%A6%E5%99%A8.html">41 十字路口上的Kubernetes默认调度器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/42%20Kubernetes%E9%BB%98%E8%AE%A4%E8%B0%83%E5%BA%A6%E5%99%A8%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90.html">42 Kubernetes默认调度器调度策略解析</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/43%20Kubernetes%E9%BB%98%E8%AE%A4%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E%E6%8A%A2%E5%8D%A0%E6%9C%BA%E5%88%B6.html">43 Kubernetes默认调度器的优先级与抢占机制</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/44%20Kubernetes%20GPU%E7%AE%A1%E7%90%86%E4%B8%8EDevice%20Plugin%E6%9C%BA%E5%88%B6.html">44 Kubernetes GPU管理与Device Plugin机制</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/45%20%E5%B9%95%E5%90%8E%E8%8B%B1%E9%9B%84%EF%BC%9ASIG-Node%E4%B8%8ECRI.html">45 幕后英雄：SIG-Node与CRI</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/46%20%E8%A7%A3%E8%AF%BB%20CRI%20%E4%B8%8E%20%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6.html">46 解读 CRI 与 容器运行时</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/47%20%E7%BB%9D%E4%B8%8D%E4%BB%85%E4%BB%85%E6%98%AF%E5%AE%89%E5%85%A8%EF%BC%9AKata%20Containers%20%E4%B8%8E%20gVisor.html">47 绝不仅仅是安全：Kata Containers 与 gVisor</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/48%20Prometheus%E3%80%81Metrics%20Server%E4%B8%8EKubernetes%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB.html">48 Prometheus、Metrics Server与Kubernetes监控体系</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/49%20Custom%20Metrics_%20%E8%AE%A9Auto%20Scaling%E4%B8%8D%E5%86%8D%E2%80%9C%E9%A3%9F%E4%B9%8B%E6%97%A0%E5%91%B3%E2%80%9D.html">49 Custom Metrics_ 让Auto Scaling不再“食之无味”</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/50%20%E8%AE%A9%E6%97%A5%E5%BF%97%E6%97%A0%E5%A4%84%E5%8F%AF%E9%80%83%EF%BC%9A%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E4%B8%8E%E7%AE%A1%E7%90%86.html">50 让日志无处可逃：容器日志收集与管理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/51%20%E8%B0%88%E8%B0%88Kubernetes%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E5%92%8C%E6%9C%AA%E6%9D%A5%E8%B5%B0%E5%90%91.html">51 谈谈Kubernetes开源社区和未来走向</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/52%20%E7%AD%94%E7%96%91%EF%BC%9A%E5%9C%A8%E9%97%AE%E9%A2%98%E4%B8%AD%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%EF%BC%8C%E5%9C%A8%E6%80%9D%E8%80%83%E4%B8%AD%E4%BA%A7%E7%94%9F%E6%80%9D%E8%80%83.html">52 答疑：在问题中解决问题，在思考中产生思考</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%202019%20%E5%B9%B4%EF%BC%8C%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E7%94%9F%E6%80%81%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">特别放送 2019 年，容器技术生态会发生些什么？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%9F%BA%E4%BA%8E%20Kubernetes%20%E7%9A%84%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8%E7%AE%A1%E7%90%86%EF%BC%8C%E5%88%B0%E5%BA%95%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F.html">特别放送 基于 Kubernetes 的云原生应用管理，到底应该怎么做？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/%E7%BB%93%E6%9D%9F%E8%AF%AD%20Kubernetes%EF%BC%9A%E8%B5%A2%E5%BC%80%E5%8F%91%E8%80%85%E8%B5%A2%E5%A4%A9%E4%B8%8B.html">结束语 Kubernetes：赢开发者赢天下</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/37%20%E6%89%BE%E5%88%B0%E5%AE%B9%E5%99%A8%E4%B8%8D%E5%AE%B9%E6%98%93%EF%BC%9AService%E3%80%81DNS%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="37 找到容器不容易：Service、DNS与服务发现" id="title">37 找到容器不容易：Service、DNS与服务发现</h1>
+<div><p>你好，我是张磊。今天我和你分享的主题是：找到容器不容易之Service、DNS与服务发现。</p>
+<p>在前面的文章中，我们已经多次使用到了Service这个Kubernetes里重要的服务对象。而Kubernetes之所以需要Service，一方面是因为Pod的IP不是固定的，另一方面则是因为一组Pod实例之间总会有负载均衡的需求。</p>
+<p>一个最典型的Service定义，如下所示：</p>
+<pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: hostnames
+spec:
+  selector:
+    app: hostnames
+  ports:
+  - name: default
+    protocol: TCP
+    port: 80
+    targetPort: 9376
+</code></pre>
+<p>这个Service的例子，相信你不会陌生。其中，我使用了selector字段来声明这个Service只代理携带了app=hostnames标签的Pod。并且，这个Service的80端口，代理的是Pod的9376端口。</p>
+<p>然后，我们的应用的Deployment，如下所示：</p>
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hostnames
+spec:
+  selector:
+    matchLabels:
+      app: hostnames
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hostnames
+    spec:
+      containers:
+      - name: hostnames
+        image: k8s.gcr.io/serve_hostname
+        ports:
+        - containerPort: 9376
+          protocol: TCP
+</code></pre>
+<p>这个应用的作用，就是每次访问9376端口时，返回它自己的hostname。</p>
+<p>而被selector选中的Pod，就称为Service的Endpoints，你可以使用kubectl get ep命令看到它们，如下所示：</p>
+<pre><code>$ kubectl get endpoints hostnames
+NAME        ENDPOINTS
+hostnames   10.244.0.5:9376,10.244.0.6:9376,10.244.0.7:9376
+</code></pre>
+<p>需要注意的是，只有处于Running状态，且readinessProbe检查通过的Pod，才会出现在Service的Endpoints列表里。并且，当某一个Pod出现问题时，Kubernetes会自动把它从Service里摘除掉。</p>
+<p>而此时，通过该Service的VIP地址10.0.1.175，你就可以访问到它所代理的Pod了：</p>
+<pre><code>$ kubectl get svc hostnames
+NAME        TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+hostnames   ClusterIP   10.0.1.175   &lt;none&gt;        80/TCP    5s
+
+$ curl 10.0.1.175:80
+hostnames-0uton
+
+$ curl 10.0.1.175:80
+hostnames-yp2kp
+
+$ curl 10.0.1.175:80
+hostnames-bvc05
+</code></pre>
+<p>这个VIP地址是Kubernetes自动为Service分配的。而像上面这样，通过三次连续不断地访问Service的VIP地址和代理端口80，它就为我们依次返回了三个Pod的hostname。这也正印证了Service提供的是Round Robin方式的负载均衡。对于这种方式，我们称为：ClusterIP模式的Service。</p>
+<p>你可能一直比较好奇，Kubernetes里的Service究竟是如何工作的呢？</p>
+<p>实际上，<strong>Service是由kube-proxy组件，加上iptables来共同实现的。</strong></p>
+<p>举个例子，对于我们前面创建的名叫hostnames的Service来说，一旦它被提交给Kubernetes，那么kube-proxy就可以通过Service的Informer感知到这样一个Service对象的添加。而作为对这个事件的响应，它就会在宿主机上创建这样一条iptables规则（你可以通过iptables-save看到它），如下所示：</p>
+<pre><code>-A KUBE-SERVICES -d 10.0.1.175/32 -p tcp -m comment --comment "default/hostnames: cluster IP" -m tcp --dport 80 -j KUBE-SVC-NWV5X2332I4OT4T3
+</code></pre>
+<p>可以看到，这条iptables规则的含义是：凡是目的地址是10.0.1.175、目的端口是80的IP包，都应该跳转到另外一条名叫KUBE-SVC-NWV5X2332I4OT4T3的iptables链进行处理。</p>
+<p>而我们前面已经看到，10.0.1.175正是这个Service的VIP。所以这一条规则，就为这个Service设置了一个固定的入口地址。并且，由于10.0.1.175只是一条iptables规则上的配置，并没有真正的网络设备，所以你ping这个地址，是不会有任何响应的。</p>
+<p>那么，我们即将跳转到的KUBE-SVC-NWV5X2332I4OT4T3规则，又有什么作用呢？</p>
+<p>实际上，它是一组规则的集合，如下所示：</p>
+<pre><code>-A KUBE-SVC-NWV5X2332I4OT4T3 -m comment --comment "default/hostnames:" -m statistic --mode random --probability 0.33332999982 -j KUBE-SEP-WNBA2IHDGP2BOBGZ
+-A KUBE-SVC-NWV5X2332I4OT4T3 -m comment --comment "default/hostnames:" -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-X3P2623AGDH6CDF3
+-A KUBE-SVC-NWV5X2332I4OT4T3 -m comment --comment "default/hostnames:" -j KUBE-SEP-57KPRZ3JQVENLNBR
+</code></pre>
+<p>可以看到，这一组规则，实际上是一组随机模式（–mode random）的iptables链。</p>
+<p>而随机转发的目的地，分别是KUBE-SEP-WNBA2IHDGP2BOBGZ、KUBE-SEP-X3P2623AGDH6CDF3和KUBE-SEP-57KPRZ3JQVENLNBR。</p>
+<p>而这三条链指向的最终目的地，其实就是这个Service代理的三个Pod。所以这一组规则，就是Service实现负载均衡的位置。</p>
+<p>需要注意的是，iptables规则的匹配是从上到下逐条进行的，所以为了保证上述三条规则每条被选中的概率都相同，我们应该将它们的probability字段的值分别设置为1/3（0.333…）、1/2和1。</p>
+<p>这么设置的原理很简单：第一条规则被选中的概率就是1/3；而如果第一条规则没有被选中，那么这时候就只剩下两条规则了，所以第二条规则的probability就必须设置为1/2；类似地，最后一条就必须设置为1。</p>
+<p>你可以想一下，如果把这三条规则的probability字段的值都设置成1/3，最终每条规则被选中的概率会变成多少。</p>
+<p>通过查看上述三条链的明细，我们就很容易理解Service进行转发的具体原理了，如下所示：</p>
+<pre><code>-A KUBE-SEP-57KPRZ3JQVENLNBR -s 10.244.3.6/32 -m comment --comment "default/hostnames:" -j MARK --set-xmark 0x00004000/0x00004000
+-A KUBE-SEP-57KPRZ3JQVENLNBR -p tcp -m comment --comment "default/hostnames:" -m tcp -j DNAT --to-destination 10.244.3.6:9376
+
+-A KUBE-SEP-WNBA2IHDGP2BOBGZ -s 10.244.1.7/32 -m comment --comment "default/hostnames:" -j MARK --set-xmark 0x00004000/0x00004000
+-A KUBE-SEP-WNBA2IHDGP2BOBGZ -p tcp -m comment --comment "default/hostnames:" -m tcp -j DNAT --to-destination 10.244.1.7:9376
+
+-A KUBE-SEP-X3P2623AGDH6CDF3 -s 10.244.2.3/32 -m comment --comment "default/hostnames:" -j MARK --set-xmark 0x00004000/0x00004000
+-A KUBE-SEP-X3P2623AGDH6CDF3 -p tcp -m comment --comment "default/hostnames:" -m tcp -j DNAT --to-destination 10.244.2.3:9376
+</code></pre>
+<p>可以看到，这三条链，其实是三条DNAT规则。但在DNAT规则之前，iptables对流入的IP包还设置了一个“标志”（–set-xmark）。这个“标志”的作用，我会在下一篇文章再为你讲解。</p>
+<p>而DNAT规则的作用，就是在PREROUTING检查点之前，也就是在路由之前，将流入IP包的目的地址和端口，改成–to-destination所指定的新的目的地址和端口。可以看到，这个目的地址和端口，正是被代理Pod的IP地址和端口。</p>
+<p>这样，访问Service VIP的IP包经过上述iptables处理之后，就已经变成了访问具体某一个后端Pod的IP包了。不难理解，这些Endpoints对应的iptables规则，正是kube-proxy通过监听Pod的变化事件，在宿主机上生成并维护的。</p>
+<p>以上，就是Service最基本的工作原理。</p>
+<p>此外，你可能已经听说过，Kubernetes的kube-proxy还支持一种叫作IPVS的模式。这又是怎么一回事儿呢？</p>
+<p>其实，通过上面的讲解，你可以看到，kube-proxy通过iptables处理Service的过程，其实需要在宿主机上设置相当多的iptables规则。而且，kube-proxy还需要在控制循环里不断地刷新这些规则来确保它们始终是正确的。</p>
+<p>不难想到，当你的宿主机上有大量Pod的时候，成百上千条iptables规则不断地被刷新，会大量占用该宿主机的CPU资源，甚至会让宿主机“卡”在这个过程中。所以说，<strong>一直以来，基于iptables的Service实现，都是制约Kubernetes项目承载更多量级的Pod的主要障碍。</strong></p>
+<p>而IPVS模式的Service，就是解决这个问题的一个行之有效的方法。</p>
+<p>IPVS模式的工作原理，其实跟iptables模式类似。当我们创建了前面的Service之后，kube-proxy首先会在宿主机上创建一个虚拟网卡（叫作：kube-ipvs0），并为它分配Service VIP作为IP地址，如下所示：</p>
+<pre><code># ip addr
+  ...
+  73：kube-ipvs0：&lt;BROADCAST,NOARP&gt;  mtu 1500 qdisc noop state DOWN qlen 1000
+  link/ether  1a:ce:f5:5f:c1:4d brd ff:ff:ff:ff:ff:ff
+  inet 10.0.1.175/32  scope global kube-ipvs0
+  valid_lft forever  preferred_lft forever
+</code></pre>
+<p>而接下来，kube-proxy就会通过Linux的IPVS模块，为这个IP地址设置三个IPVS虚拟主机，并设置这三个虚拟主机之间使用轮询模式(rr)来作为负载均衡策略。我们可以通过ipvsadm查看到这个设置，如下所示：</p>
+<pre><code># ipvsadm -ln
+ IP Virtual Server version 1.2.1 (size=4096)
+  Prot LocalAddress:Port Scheduler Flags
+    -&gt;  RemoteAddress:Port           Forward  Weight ActiveConn InActConn     
+  TCP  10.102.128.4:80 rr
+    -&gt;  10.244.3.6:9376    Masq    1       0          0         
+    -&gt;  10.244.1.7:9376    Masq    1       0          0
+    -&gt;  10.244.2.3:9376    Masq    1       0          0
+</code></pre>
+<p>可以看到，这三个IPVS虚拟主机的IP地址和端口，对应的正是三个被代理的Pod。</p>
+<p>这时候，任何发往10.102.128.4:80的请求，就都会被IPVS模块转发到某一个后端Pod上了。</p>
+<p>而相比于iptables，IPVS在内核中的实现其实也是基于Netfilter的NAT模式，所以在转发这一层上，理论上IPVS并没有显著的性能提升。但是，IPVS并不需要在宿主机上为每个Pod设置iptables规则，而是把对这些“规则”的处理放到了内核态，从而极大地降低了维护这些规则的代价。这也正印证了我在前面提到过的，“将重要操作放入内核态”是提高性能的重要手段。</p>
+<blockquote>
+<p>备注：这里你可以再回顾下第33篇文章《深入解析容器跨主机网络》中的相关内容。</p>
+</blockquote>
+<p>不过需要注意的是，IPVS模块只负责上述的负载均衡和代理功能。而一个完整的Service流程正常工作所需要的包过滤、SNAT等操作，还是要靠iptables来实现。只不过，这些辅助性的iptables规则数量有限，也不会随着Pod数量的增加而增加。</p>
+<p>所以，在大规模集群里，我非常建议你为kube-proxy设置–proxy-mode=ipvs来开启这个功能。它为Kubernetes集群规模带来的提升，还是非常巨大的。</p>
+<p><strong>此外，我在前面的文章中还介绍过Service与DNS的关系。</strong></p>
+<p>在Kubernetes中，Service和Pod都会被分配对应的DNS A记录（从域名解析IP的记录）。</p>
+<p>对于ClusterIP模式的Service来说（比如我们上面的例子），它的A记录的格式是：..svc.cluster.local。当你访问这条A记录的时候，它解析到的就是该Service的VIP地址。</p>
+<p>而对于指定了clusterIP=None的Headless Service来说，它的A记录的格式也是：..svc.cluster.local。但是，当你访问这条A记录的时候，它返回的是所有被代理的Pod的IP地址的集合。当然，如果你的客户端没办法解析这个集合的话，它可能会只会拿到第一个Pod的IP地址。</p>
+<p>此外，对于ClusterIP模式的Service来说，它代理的Pod被自动分配的A记录的格式是：..pod.cluster.local。这条记录指向Pod的IP地址。</p>
+<p>而对Headless Service来说，它代理的Pod被自动分配的A记录的格式是：…svc.cluster.local。这条记录也指向Pod的IP地址。</p>
+<p>但如果你为Pod指定了Headless Service，并且Pod本身声明了hostname和subdomain字段，那么这时候Pod的A记录就会变成：<pod的hostname>…svc.cluster.local，比如：</pod的hostname></p>
+<pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: default-subdomain
+spec:
+  selector:
+    name: busybox
+  clusterIP: None
+  ports:
+  - name: foo
+    port: 1234
+    targetPort: 1234
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox1
+  labels:
+    name: busybox
+spec:
+  hostname: busybox-1
+  subdomain: default-subdomain
+  containers:
+  - image: busybox
+    command:
+      - sleep
+      - "3600"
+    name: busybox
+</code></pre>
+<p>在上面这个Service和Pod被创建之后，你就可以通过busybox-1.default-subdomain.default.svc.cluster.local解析到这个Pod的IP地址了。</p>
+<p>需要注意的是，在Kubernetes里，/etc/hosts文件是单独挂载的，这也是为什么kubelet能够对hostname进行修改并且Pod重建后依然有效的原因。这跟Docker的Init层是一个原理。</p>
+<h2 id="总结">总结</h2>
+<p>在这篇文章里，我为你详细讲解了Service的工作原理。实际上，Service机制，以及Kubernetes里的DNS插件，都是在帮助你解决同样一个问题，即：如何找到我的某一个容器？</p>
+<p>这个问题在平台级项目中，往往就被称作服务发现，即：当我的一个服务（Pod）的IP地址是不固定的且没办法提前获知时，我该如何通过一个固定的方式访问到这个Pod呢？</p>
+<p>而我在这里讲解的、ClusterIP模式的Service为你提供的，就是一个Pod的稳定的IP地址，即VIP。并且，这里Pod和Service的关系是可以通过Label确定的。</p>
+<p>而Headless Service为你提供的，则是一个Pod的稳定的DNS名字，并且，这个名字是可以通过Pod名字和Service名字拼接出来的。</p>
+<p>在实际的场景里，你应该根据自己的具体需求进行合理选择。</p>
+<h2 id="思考题">思考题</h2>
+<p>请问，Kubernetes的Service的负载均衡策略，在iptables和ipvs模式下，都有哪几种？具体工作模式是怎样的？</p>
+<p>感谢你的收听，欢迎你给我留言，也欢迎分享给更多的朋友一起阅读。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

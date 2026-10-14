@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>19  路由引擎：如何在路由过程中集成多种路由策略和路由算法？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/index.html">ShardingSphere 核心原理精讲-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">36 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>ShardingSphere 核心原理精讲-完</strong><ul><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/00%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%AD%A6%E4%B9%A0%E4%B8%80%E6%AC%BE%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6%EF%BC%9F.html">00 如何正确学习一款分库分表开源框架？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/01%20%20%E4%BB%8E%E7%90%86%E8%AE%BA%E5%88%B0%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%9C%9F%E6%AD%A3%E8%90%BD%E5%9C%B0%EF%BC%9F.html">01  从理论到实践：如何让分库分表真正落地？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/02%20%20%E9%A1%B6%E7%BA%A7%E9%A1%B9%E7%9B%AE%EF%BC%9AShardingSphere%20%E6%98%AF%E4%B8%80%E6%AC%BE%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%20Apache%20%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%EF%BC%9F.html">02  顶级项目：ShardingSphere 是一款什么样的 Apache 开源软件？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/03%20%20%E8%A7%84%E8%8C%83%E5%85%BC%E5%AE%B9%EF%BC%9AJDBC%20%E8%A7%84%E8%8C%83%E4%B8%8E%20ShardingSphere%20%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">03  规范兼容：JDBC 规范与 ShardingSphere 是什么关系？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/04%20%20%E5%BA%94%E7%94%A8%E9%9B%86%E6%88%90%EF%BC%9A%E5%9C%A8%E4%B8%9A%E5%8A%A1%E7%B3%BB%E7%BB%9F%E4%B8%AD%E4%BD%BF%E7%94%A8%20ShardingSphere%20%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">04  应用集成：在业务系统中使用 ShardingSphere 的方式有哪些？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/05%20%20%E9%85%8D%E7%BD%AE%E9%A9%B1%E5%8A%A8%EF%BC%9AShardingSphere%20%E4%B8%AD%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F.html">05  配置驱动：ShardingSphere 中的配置体系是如何设计的？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/06%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%BA%93%E3%80%81%E5%88%86%E8%A1%A8%E3%80%81%E5%88%86%E5%BA%93%2B%E5%88%86%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  数据分片：如何实现分库、分表、分库+分表以及强制路由？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/07%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%BA%93%E3%80%81%E5%88%86%E8%A1%A8%E3%80%81%E5%88%86%E5%BA%93%2B%E5%88%86%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BC%BA%E5%88%B6%E8%B7%AF%E7%94%B1%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  数据分片：如何实现分库、分表、分库+分表以及强制路由？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/08%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%2B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%EF%BC%9F.html">08  读写分离：如何集成分库分表+数据库主从架构？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/09%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E4%B8%8E%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">09  分布式事务：如何使用强一致性事务与柔性事务？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/10%20%20%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AE%89%E5%85%A8%E8%AE%BF%E9%97%AE%EF%BC%9F.html">10  数据脱敏：如何确保敏感数据的安全访问？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/11%20%20%E7%BC%96%E6%8E%92%E6%B2%BB%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%EF%BC%9F.html">11  编排治理：如何实现分布式环境下的动态配置管理？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/12%20%20%E4%BB%8E%E5%BA%94%E7%94%A8%E5%88%B0%E5%8E%9F%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E9%98%85%E8%AF%BB%20ShardingSphere%20%E6%BA%90%E7%A0%81%EF%BC%9F.html">12  从应用到原理：如何高效阅读 ShardingSphere 源码？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/13%20%20%E5%BE%AE%E5%86%85%E6%A0%B8%E6%9E%B6%E6%9E%84%EF%BC%9AShardingSphere%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%89%A9%E5%B1%95%E6%80%A7%EF%BC%9F.html">13  微内核架构：ShardingSphere 如何实现系统的扩展性？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/14%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%EF%BC%9AShardingSphere%20%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E9%94%AE%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%9F.html">14  分布式主键：ShardingSphere 中有哪些分布式主键实现方式？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/15%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">15  解析引擎：SQL 解析流程应该包括哪些核心阶段？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/16%20%20%E8%A7%A3%E6%9E%90%E5%BC%95%E6%93%8E%EF%BC%9ASQL%20%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E9%98%B6%E6%AE%B5%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">16  解析引擎：SQL 解析流程应该包括哪些核心阶段？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/17%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E6%A0%B8%E5%BF%83%E7%B1%BB%20ShardingRouter%20%E7%9A%84%E8%BF%90%E4%BD%9C%E6%9C%BA%E5%88%B6%EF%BC%9F.html">17  路由引擎：如何理解分片路由核心类 ShardingRouter 的运作机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/18%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E7%9A%84%E5%88%86%E7%89%87%E8%B7%AF%E7%94%B1%E5%92%8C%E5%B9%BF%E6%92%AD%E8%B7%AF%E7%94%B1%EF%BC%9F.html">18  路由引擎：如何实现数据访问的分片路由和广播路由？</a></li><li><a class="active" aria-current="page" href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/19%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E8%B7%AF%E7%94%B1%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%9B%86%E6%88%90%E5%A4%9A%E7%A7%8D%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%E5%92%8C%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%EF%BC%9F.html">19  路由引擎：如何在路由过程中集成多种路由策略和路由算法？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/20%20%20%E6%94%B9%E5%86%99%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%20SQL%20%E6%94%B9%E5%86%99%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%EF%BC%9F.html">20  改写引擎：如何理解装饰器模式下的 SQL 改写实现机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/21%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%88%86%E7%89%87%E7%8E%AF%E5%A2%83%E4%B8%8B%20SQL%20%E6%89%A7%E8%A1%8C%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%8A%BD%E8%B1%A1%EF%BC%9F.html">21  执行引擎：分片环境下 SQL 执行的整体流程应该如何进行抽象？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/22%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%20ShardingSphere%20%E4%B8%AD%E7%9A%84%20Executor%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">22  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/23%20%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%20ShardingSphere%20%E4%B8%AD%E7%9A%84%20Executor%20%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">23  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/24%20%20%E5%BD%92%E5%B9%B6%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BD%92%E5%B9%B6%E7%9A%84%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E7%AE%80%E5%8D%95%E5%BD%92%E5%B9%B6%E7%AD%96%E7%95%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%EF%BC%9F.html">24  归并引擎：如何理解数据归并的类型以及简单归并策略的实现过程？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/25%20%20%E5%BD%92%E5%B9%B6%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%B5%81%E5%BC%8F%E5%BD%92%E5%B9%B6%E5%92%8C%E5%86%85%E5%AD%98%E5%BD%92%E5%B9%B6%E5%9C%A8%E5%A4%8D%E6%9D%82%E5%BD%92%E5%B9%B6%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%9F.html">25  归并引擎：如何理解流式归并和内存归并在复杂归并场景下的应用方式？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/26%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%9A%E6%99%AE%E9%80%9A%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%92%8C%E5%88%86%E7%89%87%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%88%86%E5%88%AB%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">26  读写分离：普通主从架构和分片主从架构分别是如何实现的？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/27%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%20ShardingSphere%20%E4%B8%AD%E5%AF%B9%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%8A%BD%E8%B1%A1%E8%BF%87%E7%A8%8B%EF%BC%9F.html">27  分布式事务：如何理解 ShardingSphere 中对分布式事务的抽象过程？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/28%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">28  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（上）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/29%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AShardingSphere%20%E4%B8%AD%E5%A6%82%E4%BD%95%E9%9B%86%E6%88%90%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">29  分布式事务：ShardingSphere 中如何集成强一致性事务和柔性事务支持？（下）</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/30%20%20%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%94%B9%E5%86%99%E5%BC%95%E6%93%8E%E5%AE%9E%E7%8E%B0%E4%BD%8E%E4%BE%B5%E5%85%A5%E6%80%A7%E6%95%B0%E6%8D%AE%E8%84%B1%E6%95%8F%E6%96%B9%E6%A1%88%EF%BC%9F.html">30  数据脱敏：如何基于改写引擎实现低侵入性数据脱敏方案？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/31%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E7%9A%84%E5%8A%A8%E6%80%81%E5%8C%96%E7%AE%A1%E7%90%86%EF%BC%9F.html">31 配置中心：如何基于配置中心实现配置信息的动态化管理？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/32%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E7%86%94%E6%96%AD%E6%9C%BA%E5%88%B6%EF%BC%9F.html">32 注册中心：如何基于注册中心实现数据库访问熔断机制？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/33%20%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20Hook%20%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%20OpenTracing%20%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9F.html">33 链路跟踪：如何基于 Hook 机制以及 OpenTracing 协议实现数据访问链路跟踪？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/34%20%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%8C%E6%88%90%20ShardingSphere%20%E5%86%85%E6%A0%B8%E4%B8%8E%20Spring%2BSpringBoot%20%E7%9A%84%E6%97%A0%E7%BC%9D%E6%95%B4%E5%90%88%EF%BC%9F.html">34 系统集成：如何完成 ShardingSphere 内核与 Spring+SpringBoot 的无缝整合？</a></li><li><a href="/courses/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/35%20%E7%BB%93%E8%AF%AD%EF%BC%9AShardingSphere%20%E6%80%BB%E7%BB%93%E5%8F%8A%E5%B1%95%E6%9C%9B.html">35 结语：ShardingSphere 总结及展望</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/ShardingSphere%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E7%B2%BE%E8%AE%B2-%E5%AE%8C/19%20%20%E8%B7%AF%E7%94%B1%E5%BC%95%E6%93%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E8%B7%AF%E7%94%B1%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%9B%86%E6%88%90%E5%A4%9A%E7%A7%8D%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%E5%92%8C%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="19  路由引擎：如何在路由过程中集成多种路由策略和路由算法？" id="title">19  路由引擎：如何在路由过程中集成多种路由策略和路由算法？</h1>
+<div><p>上一课时《18 | 路由引擎：如何实现数据访问的分片路由和广播路由？》，我们在介绍 ShardingRule 对象时，引出了 ShardingSphere 路由引擎中的<strong>分片策略 ShardingStrategy</strong>，分片策略是路由引擎中的一个核心概念，直接影响了最终的路由结果。今天，我们将围绕这一核心概念展开讨论。</p>
+<h3 id="分片策略整体结构">分片策略整体结构</h3>
+<p>我们先来看分片策略 ShardingStrategy 的定义，ShardingStrategy 位于 sharding-core-common 工程的 org.apache.shardingsphere.core.strategy.route 包中，其定义如下所示：</p>
+<pre><code>public interface ShardingStrategy { 
+
+    //获取分片 Column 
+    Collection&lt;String&gt; getShardingColumns(); 
+
+    //执行分片 
+    Collection&lt;String&gt; doSharding(Collection&lt;String&gt; availableTargetNames, Collection&lt;RouteValue&gt; shardingValues); 
+}
+</code></pre>
+<p>可以看到 ShardingStrategy 包含两个核心方法：一个用于指定分片的 Column，而另一个负责执行分片并返回目标 DataSource 和 Table。ShardingSphere 中为我们提供了一系列的分片策略实例，类层结构如下所示：</p>
+<p><img alt="Drawing 0.png" src="/assets/34ff20b84ddf31e821cccfe4.png"/></p>
+<p>ShardingStrategy 实现类图</p>
+<p>如果我们翻阅这些具体 ShardingStrategy 实现类的代码，会发现每个 ShardingStrategy 中都会包含另一个与路由相关的核心概念，即<strong>分片算法 ShardingAlgorithm</strong>，我们发现 ShardingAlgorithm 是一个空接口，但包含了<strong>四个继承接口</strong>，即</p>
+<ul>
+<li>PreciseShardingAlgorithm</li>
+<li>RangeShardingAlgorithm</li>
+<li>ComplexKeysShardingAlgorithm</li>
+<li>HintShardingAlgorithm</li>
+</ul>
+<p>而这四个接口又分别具有一批实现类，ShardingAlgorithm 的类层结构如下所示：</p>
+<p><img alt="Drawing 1.png" src="/assets/8565e649f06802ce6169a483.png"/></p>
+<p>ShardingAlgorithm 子接口和实现类图</p>
+<p>请注意，ShardingStrategy 与 ShardingAlgorithm 之间并不是一对一的关系。<strong>在一个 ShardingStrategy 中，可以同时使用多个 ShardingAlgorithm 来完成具体的路由执行策略</strong>。因此，我们具有如下所示的类层结构关系图：</p>
+<p><img alt="Drawing 2.png" src="/assets/83903ad1a20dad6da0c1ff35.png"/></p>
+<p>由于分片算法的独立性，ShardingSphere 将其进行单独抽离。从关系上讲，分片策略中包含了分片算法和分片键，我们可以把分片策略的组成结构简单抽象成如下所示的公式：</p>
+<p><strong>分片策略 = 分片算法 + 分片键</strong></p>
+<h3 id="shardingsphere-分片策略详解">ShardingSphere 分片策略详解</h3>
+<p>在 ShardingSphere 中，一共存在五种 ShardingStrategy 实现：</p>
+<ul>
+<li>不分片策略（NoneShardingStrategy）</li>
+<li>Hint 分片策略（HintShardingStrategy）</li>
+<li>标准分片策略（StandardShardingStrategy）</li>
+<li>复合分片策略（ComplexShardingStrategy）</li>
+<li>行表达式分片策略（InlineShardingStrategy）</li>
+</ul>
+<p>接下来，我们就对这些 ShardingStrategy一 一进行展开讨论。</p>
+<h4 id="1-不分片策略-noneshardingstrategy">1.不分片策略 NoneShardingStrategy</h4>
+<p>这次我们从简单的开始，先来看 NoneShardingStrategy，这是一种不执行分片的策略，实现方式如下所示：</p>
+<pre><code>public final class NoneShardingStrategy implements ShardingStrategy { 
+
+    private final Collection&lt;String&gt; shardingColumns = Collections.emptyList(); 
+
+    @Override 
+    public Collection&lt;String&gt; doSharding(final Collection&lt;String&gt; availableTargetNames, final Collection&lt;RouteValue&gt; shardingValues) { 
+        return availableTargetNames; 
+    } 
+}
+</code></pre>
+<p>可以看到在 NoneShardingStrategy 中，直接返回了输入的 availableTargetNames 而不执行任何具体路由操作。</p>
+<h4 id="2-hint-分片策略-hintshardingstrategy">2.Hint 分片策略 HintShardingStrategy</h4>
+<p>接下来我们来看 HintShardingStrategy，回想我们在上一课时中通过这个 ShardingStrategy 来判断是否根据 Hint 进行路由。我们知道在有些场景下，分片字段不是由 SQL 本身决定，而由依赖于其他外置条件，这时候，就可使用 SQL Hint 灵活地注入分片字段。</p>
+<blockquote>
+<p>关于 Hint 的概念和前置路由的应用方式，可以回顾 [《07 | 数据分片：如何实现分库、分表、分库+分表以及强制路由（下）？》]中的内容。</p>
+</blockquote>
+<p>基于 HintShardingStrategy，我们可以通过 Hint 而非 SQL 解析的方式执行分片策略。而 HintShardingStrategy 的实现依赖于 <strong>HintShardingAlgorithm</strong>，HintShardingAlgorithm 继承了 ShardingAlgorithm 接口。</p>
+<p>其定义如下所示，可以看到该接口同样存在一个 doSharding 方法：</p>
+<pre><code>public interface HintShardingAlgorithm&lt;T extends Comparable&lt;?&gt;&gt; extends ShardingAlgorithm { 
+
+    //根据 Hint 信息执行分片 
+    Collection&lt;String&gt; doSharding(Collection&lt;String&gt; availableTargetNames, HintShardingValue&lt;T&gt; shardingValue); 
+}
+</code></pre>
+<p>对于 Hint 而言，因为它实际上是对 SQL 执行过程的一种直接干预，所以往往根据传入的 availableTargetNames 进行直接路由，所以我们来看 ShardingSphere 中 HintShardingAlgorithm 接口<strong>唯一的一个实现类 DefaultHintShardingAlgorithm</strong>：</p>
+<pre><code>public final class DefaultHintShardingAlgorithm implements HintShardingAlgorithm&lt;Integer&gt; { 
+
+    @Override 
+    public Collection&lt;String&gt; doSharding(final Collection&lt;String&gt; availableTargetNames, final HintShardingValue&lt;Integer&gt; shardingValue) { 
+        return availableTargetNames; 
+    } 
+}
+</code></pre>
+<p>可以看到这个分片算法的执行方式确实是基于 availableTargetNames，但只是直接返回而已。所以对于 HintShardingStrategy 而言，默认情况下实际上并没有执行任何路由效果。HintShardingStrategy 的完整实现如下所示：</p>
+<pre><code>public final class HintShardingStrategy implements ShardingStrategy { 
+
+    @Getter 
+    private final Collection&lt;String&gt; shardingColumns; 
+
+    private final HintShardingAlgorithm shardingAlgorithm; 
+
+    public HintShardingStrategy(final HintShardingStrategyConfiguration hintShardingStrategyConfig) { 
+        Preconditions.checkNotNull(hintShardingStrategyConfig.getShardingAlgorithm(), "Sharding algorithm cannot be null."); 
+        shardingColumns = new TreeSet&lt;&gt;(String.CASE_INSENSITIVE_ORDER); 
+        //从配置中获取 HintShardingAlgorithm 
+        shardingAlgorithm = hintShardingStrategyConfig.getShardingAlgorithm(); 
+    } 
+
+    @SuppressWarnings("unchecked") 
+    @Override 
+    public Collection&lt;String&gt; doSharding(final Collection&lt;String&gt; availableTargetNames, final Collection&lt;RouteValue&gt; shardingValues) { 
+        ListRouteValue shardingValue = (ListRouteValue) shardingValues.iterator().next(); 
+        Collection&lt;String&gt; shardingResult = shardingAlgorithm.doSharding(availableTargetNames,
+                new HintShardingValue(shardingValue.getTableName(), shardingValue.getColumnName(), shardingValue.getValues())); 
+        Collection&lt;String&gt; result = new TreeSet&lt;&gt;(String.CASE_INSENSITIVE_ORDER); 
+        result.addAll(shardingResult); 
+        return result; 
+    } 
+}
+</code></pre>
+<p>我们注意到在 HintShardingStrategy 中，shardingAlgorithm 变量的构建是通过 HintShardingStrategyConfiguration 配置类完成的，显然我们可以通过配置项来设置具体的 HintShardingAlgorithm。在日常开发过程中，我们一般都需要实现自定义的 HintShardingAlgorithm 并进行配置。</p>
+<blockquote>
+<p>[《07 | 数据分片：如何实现分库、分表、分库+分表以及强制路由（下）？》]中演示了这种做法，你可以做一些回顾。</p>
+</blockquote>
+<h4 id="3-标准分片策略-standardshardingstrategy">3.标准分片策略 StandardShardingStrategy</h4>
+<p>StandardShardingStrategy 是一种标准分片策略，提供对 SQL 语句中的=, &gt;, &lt;, &gt;=, &lt;=, IN 和 BETWEEN AND 等操作的分片支持。</p>
+<p>我们知道分片策略相当于分片算法与分片键的组合。对于 StandardShardingStrategy 而言，它<strong>只支持单分片键</strong>，并提供 <strong>PreciseShardingAlgorithm</strong> 和 <strong>RangeShardingAlgorithm</strong> 这两个分片算法。</p>
+<ul>
+<li>PreciseShardingAlgorithm 是必选的，用于处理 = 和 IN 的分片；</li>
+<li>RangeShardingAlgorithm 是可选的，用于处理 BETWEEN AND, &gt;, &lt;, &gt;=, &lt;= 分片。</li>
+</ul>
+<p>介绍 StandardShardingStrategy 之前，我们先对其涉及的这两种分片算法分别进行讨论。</p>
+<p><strong>（1）PreciseShardingAlgorithm</strong></p>
+<p>对于 PreciseShardingAlgorithm 而言，该接口用于处理使用单一键作为分片键的 = 和 IN 进行分片的场景。</p>
+<p>它有两个实现类，分别是 PreciseModuloDatabaseShardingAlgorithm 和 PreciseModuloTableShardingAlgorithm。显然，前者用于数据库级别的分片，而后者面向表操作。它们的分片方法都一样，就是使用取模（Modulo）操作。以 PreciseModuloDatabaseShardingAlgorithm 为例，其实现如下所示：</p>
+<pre><code>public final class PreciseModuloDatabaseShardingAlgorithm implements PreciseShardingAlgorithm&lt;Integer&gt; { 
+
+    @Override 
+    public String doSharding(final Collection&lt;String&gt; availableTargetNames, final PreciseShardingValue&lt;Integer&gt; shardingValue) { 
+        for (String each : availableTargetNames) { 
+             //根据分片值执行对2的取模操作 
+            if (each.endsWith(shardingValue.getValue() % 2 + "")) { 
+                return each; 
+            } 
+        } 
+        throw new UnsupportedOperationException(); 
+    } 
+}
+</code></pre>
+<p>可以看到，这里对 PreciseShardingValue 进行了对 2 的取模计算，并与传入的 availableTargetNames 进行比对，从而决定目标数据库。</p>
+<p><strong>（2）RangeShardingAlgorithm</strong></p>
+<p>而对于 RangeShardingAlgorithm 而言，情况就相对复杂。RangeShardingAlgorithm 同样具有两个实现类：分别为 RangeModuloDatabaseShardingAlgorithm 和 RangeModuloTableShardingAlgorithm，它们的命名和代码风格与 PreciseShardingAlgorithm 的实现类非常类似。</p>
+<p>这里也以 RangeModuloDatabaseShardingAlgorithm 为例，它的实现如下所示：</p>
+<pre><code>public final class RangeModuloDatabaseShardingAlgorithm implements RangeShardingAlgorithm&lt;Integer&gt; { 
+
+    @Override 
+    public Collection&lt;String&gt; doSharding(final Collection&lt;String&gt; availableTargetNames, final RangeShardingValue&lt;Integer&gt; shardingValue) { 
+        Collection&lt;String&gt; result = new LinkedHashSet&lt;&gt;(availableTargetNames.size()); 
+        //根据分片值，决定分片的范围 
+        for (Integer i = shardingValue.getValueRange().lowerEndpoint(); i &lt;= shardingValue.getValueRange().upperEndpoint(); i++) { 
+            for (String each : availableTargetNames) { 
+              //分片值执行对 2 的取模操作，并与目标数据库进行比对 
+              if (each.endsWith(i % 2 + "")) { 
+                    result.add(each); 
+                } 
+            } 
+        } 
+        return result; 
+    } 
+}
+</code></pre>
+<p>与 PreciseModuloDatabaseShardingAlgorithm 相比，这里多了一层 for 循环，在该循环中添加了对范围 ValueRange 的 lowerEndpoint() 到 upperEndpoint() 中各个值的计算和比对。</p>
+<p><strong>（3） StandardShardingStrategy 类</strong></p>
+<p>介绍完分片算法之后，我们回到 StandardShardingStrategy 类，我们来看它的 doSharding 方法，如下所示：</p>
+<pre><code>@Override 
+public Collection&lt;String&gt; doSharding(final Collection&lt;String&gt; availableTargetNames, final Collection&lt;RouteValue&gt; shardingValues) { 
+    RouteValue shardingValue = shardingValues.iterator().next(); 
+    Collection&lt;String&gt; shardingResult = shardingValue instanceof ListRouteValue 
+         //如果分片值是一个列表，则执行 PreciseShardingAlgorithm 
+            ? doSharding(availableTargetNames, (ListRouteValue) shardingValue)
+            //如果分片值是一个范围，则 执行RangeShardingAlgorithm 
+            : doSharding(availableTargetNames, (RangeRouteValue) shardingValue); 
+    Collection&lt;String&gt; result = new TreeSet&lt;&gt;(String.CASE_INSENSITIVE_ORDER); 
+    result.addAll(shardingResult); 
+    return result; 
+}
+</code></pre>
+<p>可以看到这里根据传入的 shardingValues 的类型分别执行不同的 doSharding 方法，如果输入的是 <strong>ListRouteValue</strong> 则会使用 PreciseShardingAlgorithm，如下所示：</p>
+<pre><code>private Collection&lt;String&gt; doSharding(final Collection&lt;String&gt; availableTargetNames, final ListRouteValue&lt;?&gt; shardingValue) { 
+    Collection&lt;String&gt; result = new LinkedList&lt;&gt;(); 
+    for (Comparable&lt;?&gt; each : shardingValue.getValues()) { 
+       //使用 PreciseShardingAlgorithm 进行分片 
+        String target = preciseShardingAlgorithm.doSharding(availableTargetNames, new PreciseShardingValue(shardingValue.getTableName(), shardingValue.getColumnName(), each)); 
+        if (null != target) { 
+            result.add(target); 
+        } 
+    } 
+    return result; 
+}
+</code></pre>
+<p>而如果是 <strong>RangeRouteValue</strong> 则使用 RangeShardingAlgorithm，如下所示：</p>
+<pre><code>private Collection&lt;String&gt; doSharding(final Collection&lt;String&gt; availableTargetNames, final RangeRouteValue&lt;?&gt; shardingValue) { 
+        if (null == rangeShardingAlgorithm) { 
+            throw new UnsupportedOperationException("Cannot find range sharding strategy in sharding rule."); 
+        } 
+	    //使用 RangeShardingAlgorithm 进行分片 
+        return rangeShardingAlgorithm.doSharding(availableTargetNames,
+                new RangeShardingValue(shardingValue.getTableName(), shardingValue.getColumnName(), shardingValue.getValueRange())); 
+}
+</code></pre>
+<h4 id="4-复合分片策略-complexshardingstrategy">4.复合分片策略 ComplexShardingStrategy</h4>
+<p>与 StandardShardingStrategy 只支持单分片键不同，ShardingSphere 的官网表明 ComplexShardingStrategy <strong>支持多分片键</strong>。</p>
+<p>ComplexShardingStrategy 的 doSharding 方法，如下所示：</p>
+<pre><code>public Collection&lt;String&gt; doSharding(final Collection&lt;String&gt; availableTargetNames, final Collection&lt;RouteValue&gt; shardingValues) { 
+    Map&lt;String, Collection&lt;Comparable&lt;?&gt;&gt;&gt; columnShardingValues = new HashMap&lt;&gt;(shardingValues.size(), 1); 
+    Map&lt;String, Range&lt;Comparable&lt;?&gt;&gt;&gt; columnRangeValues = new HashMap&lt;&gt;(shardingValues.size(), 1); 
+    String logicTableName = ""; 
+    for (RouteValue each : shardingValues) { 
+        if (each instanceof ListRouteValue) { 
+          //构建 ListRouteValue 
+            columnShardingValues.put(each.getColumnName(), ((ListRouteValue) each).getValues()); 
+        } else if (each instanceof RangeRouteValue) { 
+          //构建 RangeRouteValue 
+            columnRangeValues.put(each.getColumnName(), ((RangeRouteValue) each).getValueRange()); 
+        } 
+        logicTableName = each.getTableName(); 
+    } 
+    Collection&lt;String&gt; shardingResult = shardingAlgorithm.doSharding(availableTargetNames, new ComplexKeysShardingValue(logicTableName, columnShardingValues, columnRangeValues)); 
+    Collection&lt;String&gt; result = new TreeSet&lt;&gt;(String.CASE_INSENSITIVE_ORDER); 
+    result.addAll(shardingResult); 
+    return result; 
+}
+</code></pre>
+<p>这里基于传入的 RouteValue 分别构建了 ListRouteValue 和 RangeRouteValue，然后传递给 <strong>ComplexKeysShardingAlgorithm</strong> 进行计算。由于多分片键之间的关系复杂，因此 ComplexShardingStrategy 并未进行过多的封装，而是直接将分片键值组合以及分片操作符透传至分片算法，完全由应用开发者实现，提供最大的灵活度。</p>
+<p>基于这一点考虑，ShardingSphere 的 ComplexKeysShardingAlgorithm 的<strong>唯一实现类 DefaultComplexKeysShardingAlgorithm</strong> 显得非常简单，其代码如下所示：</p>
+<pre><code>public final class DefaultComplexKeysShardingAlgorithm implements ComplexKeysShardingAlgorithm&lt;Integer&gt; { 
+
+    @Override 
+    public Collection&lt;String&gt; doSharding(final Collection&lt;String&gt; availableTargetNames, final ComplexKeysShardingValue&lt;Integer&gt; shardingValue) { 
+        return availableTargetNames; 
+    } 
+}
+</code></pre>
+<p>可以看到 DefaultComplexKeysShardingAlgorithm 与 NoneShardingStrategy 的实现实际上是一样的，相当于就是什么都没有做，也就是所有的工作都需要交给开发者自行进行设计和实现。</p>
+<h4 id="5-行表达式分片策略-inlineshardingstrategy">5.行表达式分片策略 InlineShardingStrategy</h4>
+<p>与前面介绍的各种分片策略相比，InlineShardingStrategy 采用了一种特殊的机制来实现路由。</p>
+<p>我们已经在介绍分库分表案例中大量使用了行表达式，也知道在使用行表达式时需要指定一个分片列 shardingColumn 以及一个类似 ds$-&gt;{user_id % 2} 的表达式。</p>
+<p>你可能会好奇 ShardingSphere 是如何来解析这样的表达式的呢？基于 InlineShardingStrategy 定义的变量，我们可以找到问题的答案：</p>
+<pre><code>//分片列 
+private final String shardingColumn; 
+//Groovy 中的 Closure 实例 
+private final Closure&lt;?&gt; closure;
+</code></pre>
+<p>原来，ShardingSphere 在这里用到了 Groovy 中的 Closure 对象。Groovy 是可运行在 JVM 中的一种动态语言，既可以用于面向对象编程，又可以用作纯粹的脚本语言。使用该种语言不必编写过多的代码，同时又具有 Closure 和动态语言中的其他特性。在使用方式上，基本也与使用 Java 代码的方式相同。</p>
+<p>基于 Groovy 的动态语言特性，InlineShardingStrategy 提供对 SQL 语句中的 = 和 IN 的分片操作支持，目前只支持单分片键。对于类似 ds$-&gt;{user_id % 2} 这样的常见分片算法，可以通过简单配置进行使用，从而避免烦琐的 Java 代码开发。</p>
+<p>我们直接来到 InlineShardingStrategy 的 doSharding 方法，该方法的实现过程与标准分片策略 StandardShardingStrategy 中的相同，不同的是需要通过 Groovy 进行解析输入参数从而获取最终路由结果：</p>
+<pre><code>private Collection&lt;String&gt; doSharding(final ListRouteValue shardingValue) { 
+    Collection&lt;String&gt; result = new LinkedList&lt;&gt;(); 
+    for (PreciseShardingValue&lt;?&gt; each : transferToPreciseShardingValues(shardingValue)) { 
+     //通过 execute 方法解析出最终的结果 
+        result.add(execute(each)); 
+    } 
+    return result; 
+}
+</code></pre>
+<p>这里的 execute 方法中构建了 Groovy 的 Closure 对象，并设置了对应的解析策略以及所需要解析的属性，并最终返回解析的结果：</p>
+<pre><code>private String execute(final PreciseShardingValue shardingValue) { 
+     //构建 Groovy 的 Closur e对象 
+    Closure&lt;?&gt; result = closure.rehydrate(new Expando(), null, null); 
+    result.setResolveStrategy(Closure.DELEGATE_ONLY); 
+    result.setProperty(shardingColumn, shardingValue.getValue()); 
+    //获取解析结果 
+    return result.call().toString(); 
+}
+</code></pre>
+<p>最后，作为总结，我们要注意所有的 ShardingStrategy 相关类都位于 sharding-core-common 工程的 org.apache.shardingsphere.core.strategy 包下：</p>
+<p><img alt="Drawing 4.png" src="/assets/a64273ab411ba31d1dc319fb.png"/></p>
+<p>ShardingStrategy 相关类的包结构</p>
+<p>而所有的 ShardingAlgorithm 相关类则位于 sharding-core-api 工程的 org.apache.shardingsphere.api.sharding 包下：</p>
+<p><img alt="Drawing 5.png" src="/assets/a8eb5f893c30667b8feabb5f.png"/></p>
+<p>ShardingAlgorithm 相关类的包结构</p>
+<p>我们在前面已经提到过 ShardingStrategy 的创建依赖于 ShardingStrategyConfiguration，ShardingSphere 也提供了一个 ShardingStrategyFactory 工厂类用于创建各种具体的 ShardingStrategy：</p>
+<pre><code>public final class ShardingStrategyFactory { 
+
+    public static ShardingStrategy newInstance(final ShardingStrategyConfiguration shardingStrategyConfig) { 
+        if (shardingStrategyConfig instanceof StandardShardingStrategyConfiguration) { 
+            return new StandardShardingStrategy((StandardShardingStrategyConfiguration) shardingStrategyConfig); 
+        } 
+        if (shardingStrategyConfig instanceof InlineShardingStrategyConfiguration) { 
+            return new InlineShardingStrategy((InlineShardingStrategyConfiguration) shardingStrategyConfig); 
+        } 
+        if (shardingStrategyConfig instanceof ComplexShardingStrategyConfiguration) { 
+            return new ComplexShardingStrategy((ComplexShardingStrategyConfiguration) shardingStrategyConfig); 
+        } 
+        if (shardingStrategyConfig instanceof HintShardingStrategyConfiguration) { 
+            return new HintShardingStrategy((HintShardingStrategyConfiguration) shardingStrategyConfig); 
+        } 
+        return new NoneShardingStrategy(); 
+    } 
+}
+</code></pre>
+<p>而这里用到的各种 ShardingStrategyConfiguration 也都位于 sharding-core-api 工程的org.apache.shardingsphere.api.sharding.strategy 包下：</p>
+<p><img alt="Drawing 6.png" src="/assets/5eebdb9e79a4eae7e89f9f9a.png"/></p>
+<p>ShardingStrategyConfiguration 相关类的包结构</p>
+<p>这样，通过对路由引擎的介绍，我们又接触到了一大批 ShardingSphere 中的源代码。</p>
+<p>至此，关于 ShardingSphere 路由引擎部分的内容基本都介绍完毕。作为总结，我们在《17 | 路由引擎：如何理解分片路由核心类 ShardingRouter 的运作机制？》中所给出的时序图中添加了 ShardingStrategy 和 ShardingAlgorithm 部分的内容，如下所示：</p>
+<p><img alt="Drawing 7.png" src="/assets/2fdeb4c6f32d4255a978c1f8.png"/></p>
+<h3 id="从源码解析到日常开发">从源码解析到日常开发</h3>
+<p>在我们设计软件系统的过程中，面对复杂业务场景时，<strong>职责分离</strong>始终是需要考虑的一个设计点。ShardingSphere 对于分片策略的设计和实现很好地印证了这一观点。</p>
+<p>分片策略在 ShardingSphere 中实际上是一个比较复杂的概念，但通过将分片的具体算法分离出去并提炼 ShardingAlgorithm 接口，并构建 ShardingStrategy 和 ShardingAlgorithm 之间一对多的灵活关联关系，我们可以更好地把握整个分片策略体系的类层结构，这种职责分离机制同样可以应用与日常开发过程中。</p>
+<h3 id="小结与预告">小结与预告</h3>
+<p>承接上一课时的内容，今天我们全面介绍了 ShardingSphere 中的五大分片策略和四种分片算法以及它们之间的组合关系。</p>
+<p><img alt="Drawing 9.png" src="/assets/23bf8263b8df4bf4b40b6e23.png"/></p>
+<p>ShardingSphere 路由引擎中执行路由的过程正是依赖于这些分片策略和分片算法的功能特性。当然，作为一款具有高扩展性的开源框架，我们也可以基于自身的业务需求，实现特定的分片算法并嵌入到具体的分片策略中。</p>
+<p>这里给你留一道思考题：ShardingSphere 中分片策略与分片算法之间是如何协作的？ 欢迎你在留言区与大家讨论，我将一一点评解答。</p>
+<p>在路由引擎的基础上，下一课时将进入 ShardingSphere 分片引擎的另一个核心阶段，即改写引擎。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>46 软件架构：如何用Rust架构复杂系统？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/index.html">陈天 · Rust 编程第一课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">63 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>陈天 · Rust 编程第一课</strong><ul><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E8%AE%A9Rust%E6%88%90%E4%B8%BA%E4%BD%A0%E7%9A%84%E4%B8%8B%E4%B8%80%E9%97%A8%E4%B8%BB%E5%8A%9B%E8%AF%AD%E8%A8%80.html">00 开篇词 让Rust成为你的下一门主力语言</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/01%20%E5%86%85%E5%AD%98%EF%BC%9A%E5%80%BC%E6%94%BE%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%94%BE%E6%A0%88%E4%B8%8A%EF%BC%8C%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98.html">01 内存：值放堆上还是放栈上，这是一个问题</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/02%20%E4%B8%B2%E8%AE%B2%EF%BC%9A%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91%E4%B8%AD%EF%BC%8C%E9%82%A3%E4%BA%9B%E4%BD%A0%E9%9C%80%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html">02 串讲：编程开发中，那些你需要掌握的基本概念</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/03%20%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84%EF%BC%9A%E4%BB%8E%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AARust%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%A7%8B%EF%BC%81.html">03 初窥门径：从你的第一个Rust程序开始！</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/04%20get%20hands%20dirty%EF%BC%9A%E6%9D%A5%E5%86%99%E4%B8%AA%E5%AE%9E%E7%94%A8%E7%9A%84CLI%E5%B0%8F%E5%B7%A5%E5%85%B7.html">04 get hands dirty：来写个实用的CLI小工具</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/05%20get%20hands%20dirty%EF%BC%9A%E5%81%9A%E4%B8%80%E4%B8%AA%E5%9B%BE%E7%89%87%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9C%89%E5%A4%9A%E9%9A%BE%EF%BC%9F.html">05 get hands dirty：做一个图片服务器有多难？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/06%20get%20hands%20dirty%EF%BC%9ASQL%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7%E6%80%8E%E4%B9%88%E4%B8%80%E9%B1%BC%E5%A4%9A%E5%90%83%EF%BC%9F.html">06 get hands dirty：SQL查询工具怎么一鱼多吃？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/07%20%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E5%80%BC%E7%9A%84%E7%94%9F%E6%9D%80%E5%A4%A7%E6%9D%83%E5%88%B0%E5%BA%95%E5%9C%A8%E8%B0%81%E6%89%8B%E4%B8%8A%EF%BC%9F.html">07 所有权：值的生杀大权到底在谁手上？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/08%20%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E5%80%BC%E7%9A%84%E5%80%9F%E7%94%A8%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">08 所有权：值的借用是如何工作的？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/09%20%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%80%BC%E5%8F%AF%E4%BB%A5%E6%9C%89%E5%A4%9A%E4%B8%AA%E6%89%80%E6%9C%89%E8%80%85%E4%B9%88%EF%BC%9F.html">09 所有权：一个值可以有多个所有者么？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/10%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9A%E4%BD%A0%E5%88%9B%E5%BB%BA%E7%9A%84%E5%80%BC%E7%A9%B6%E7%AB%9F%E8%83%BD%E6%B4%BB%E5%A4%9A%E4%B9%85%EF%BC%9F.html">10 生命周期：你创建的值究竟能活多久？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/11%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9A%E4%BB%8E%E5%88%9B%E5%BB%BA%E5%88%B0%E6%B6%88%E4%BA%A1%EF%BC%8C%E5%80%BC%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.html">11 内存管理：从创建到消亡，值都经历了什么？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/12%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9ARust%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">12 类型系统：Rust的类型系统有什么特点？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/13%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8trait%E6%9D%A5%E5%AE%9A%E4%B9%89%E6%8E%A5%E5%8F%A3%EF%BC%9F.html">13 类型系统：如何使用trait来定义接口？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/14%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84trait%EF%BC%9F.html">14 类型系统：有哪些必须掌握的trait？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/15%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E8%BF%99%E4%BA%9B%E6%B5%93%E7%9C%89%E5%A4%A7%E7%9C%BC%E7%9A%84%E7%BB%93%E6%9E%84%E7%AB%9F%E7%84%B6%E9%83%BD%E6%98%AF%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%EF%BC%9F.html">15 数据结构：这些浓眉大眼的结构竟然都是智能指针？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/16%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9AVec_T_%E3%80%81%26%5BT%5D%E3%80%81Box_%5BT%5D_%20%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E9%9B%86%E5%90%88%E5%AE%B9%E5%99%A8%E4%B9%88%EF%BC%9F.html">16 数据结构：Vec_T_、&amp;[T]、Box_[T]_ ，你真的了解集合容器么？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/17%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A0%B8%E5%BF%83%E9%83%A8%E4%BB%B6%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%8C%E5%86%85%E5%AD%98%E5%A6%82%E4%BD%95%E5%B8%83%E5%B1%80%EF%BC%9F.html">17 数据结构：软件系统核心部件哈希表，内存如何布局？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/18%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Rust%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BC%97%E4%B8%8D%E5%90%8C%EF%BC%9F.html">18 错误处理：为什么Rust的错误处理与众不同？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/19%20%E9%97%AD%E5%8C%85%EF%BC%9AFnOnce%E3%80%81FnMut%E5%92%8CFn%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E7%B1%BB%E5%9E%8B%EF%BC%9F.html">19 闭包：FnOnce、FnMut和Fn，为什么有这么多类型？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/20%204%20Steps%20%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9B%B4%E5%A5%BD%E5%9C%B0%E9%98%85%E8%AF%BBRust%E6%BA%90%E7%A0%81%EF%BC%9F.html">20 4 Steps ：如何更好地阅读Rust源码？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/21%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%881%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B.html">21 阶段实操（1）：构建一个简单的KV server-基本流程</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/22%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%882%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B.html">22 阶段实操（2）：构建一个简单的KV server-基本流程</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/23%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%9E%E6%88%98%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%EF%BC%9F.html">23 类型系统：如何在实战中使用泛型编程？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/24%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%9E%E6%88%98%E4%B8%AD%E4%BD%BF%E7%94%A8trait%20object%EF%BC%9F.html">24 类型系统：如何在实战中使用trait object？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/25%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9B%B4%E7%BB%95trait%E6%9D%A5%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%9E%B6%E6%9E%84%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">25 类型系统：如何围绕trait来设计和架构系统？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/26%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%883%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E9%AB%98%E7%BA%A7trait%E6%8A%80%E5%B7%A7.html">26 阶段实操（3）：构建一个简单的KV server-高级trait技巧</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/27%20%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E6%9C%89%E7%9A%84Rust%E5%BA%93%E5%8F%AF%E4%BB%A5%E4%B8%BA%E6%88%91%E6%89%80%E7%94%A8%EF%BC%9F.html">27 生态系统：有哪些常有的Rust库可以为我所用？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/28%20%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Rust%E5%A4%84%E7%90%86%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%EF%BC%9F.html">28 网络开发（上）：如何使用Rust处理网络请求？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/29%20%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Rust%E5%A4%84%E7%90%86%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%EF%BC%9F.html">29 网络开发（下）：如何使用Rust处理网络请求？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/30%20Unsafe%20Rust%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8C%2B%2B%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E5%BC%80Rust%EF%BC%9F.html">30 Unsafe Rust：如何用C++的方式打开Rust？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/31%20FFI%EF%BC%9ARust%E5%A6%82%E4%BD%95%E5%92%8C%E4%BD%A0%E7%9A%84%E8%AF%AD%E8%A8%80%E6%9E%B6%E8%B5%B7%E6%B2%9F%E9%80%9A%E6%A1%A5%E6%A2%81%EF%BC%9F.html">31 FFI：Rust如何和你的语言架起沟通桥梁？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/32%20%E5%AE%9E%E6%93%8D%E9%A1%B9%E7%9B%AE%EF%BC%9A%E4%BD%BF%E7%94%A8PyO3%E5%BC%80%E5%8F%91Python3%E6%A8%A1%E5%9D%97.html">32 实操项目：使用PyO3开发Python3模块</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8Eatomics%E5%88%B0Channel%EF%BC%8CRust%E9%83%BD%E6%8F%90%E4%BE%9B%E4%BA%86%E4%BB%80%E4%B9%88%E5%B7%A5%E5%85%B7%EF%BC%9F.html">33 并发处理（上）：从atomics到Channel，Rust都提供了什么工具？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BB%8Eatomics%E5%88%B0Channel%EF%BC%8CRust%E9%83%BD%E6%8F%90%E4%BE%9B%E4%BA%86%E4%BB%80%E4%B9%88%E5%B7%A5%E5%85%B7%EF%BC%9F.html">34 并发处理（下）：从atomics到Channel，Rust都提供了什么工具？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/35%20%E5%AE%9E%E6%93%8D%E9%A1%B9%E7%9B%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84MPSC%20channel%EF%BC%9F.html">35 实操项目：如何实现一个基本的MPSC channel？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/36%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%884%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E7%BD%91%E7%BB%9C%E5%A4%84%E7%90%86.html">36 阶段实操（4）：构建一个简单的KV server-网络处理</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/37%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%885%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8.html">37 阶段实操（5）：构建一个简单的KV server-网络安全</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/38%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%EF%BC%9AFuture%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%AE%83%E5%92%8Casync_await%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">38 异步处理：Future是什么？它和async_await是什么关系？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/39%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%EF%BC%9Aasync_await%E5%86%85%E9%83%A8%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">39 异步处理：async_await内部是怎么实现的？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/40%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%BC%82%E6%AD%A5IO%EF%BC%9F.html">40 异步处理：如何处理异步IO？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/41%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%886%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86.html">41 阶段实操（6）：构建一个简单的KV server-异步处理</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/42%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%887%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%A6%82%E4%BD%95%E5%81%9A%E5%A4%A7%E7%9A%84%E9%87%8D%E6%9E%84%EF%BC%9F.html">42 阶段实操（7）：构建一个简单的KV server-如何做大的重构？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/43%20%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%EF%BC%9A%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E4%B8%8B%E7%9A%84%E4%B8%80%E4%B8%AARust%E9%A1%B9%E7%9B%AE%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E8%A6%81%E7%B4%A0%EF%BC%9F.html">43 生产环境：真实世界下的一个Rust项目包含哪些要素？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/44%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E5%A6%82%E4%BD%95%E6%89%93%E4%BA%A4%E9%81%93%EF%BC%9F.html">44 数据处理：应用程序和数据如何打交道？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/45%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%888%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E9%85%8D%E7%BD%AE_%E6%B5%8B%E8%AF%95_%E7%9B%91%E6%8E%A7_CI_CD.html">45 阶段实操（8）：构建一个简单的KV server-配置_测试_监控_CI_CD</a></li><li><a class="active" aria-current="page" href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/46%20%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8Rust%E6%9E%B6%E6%9E%84%E5%A4%8D%E6%9D%82%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">46 软件架构：如何用Rust架构复杂系统？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20Rust2021%E7%89%88%E6%AC%A1%E9%97%AE%E4%B8%96%E4%BA%86%EF%BC%81.html">加餐 Rust2021版次问世了！</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E4%BB%A3%E7%A0%81%E5%8D%B3%E6%95%B0%E6%8D%AE%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%AE%8F%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%EF%BC%9F.html">加餐 代码即数据：为什么我们需要宏编程能力？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%AE%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E7%94%A8%E6%9C%80%E2%80%9C%E7%AC%A8%E2%80%9D%E7%9A%84%E6%96%B9%E5%BC%8F%E6%92%B0%E5%86%99%E5%AE%8F.html">加餐 宏编程（上）：用最“笨”的方式撰写宏</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%AE%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E7%94%A8%20syn_quote%20%E4%BC%98%E9%9B%85%E5%9C%B0%E6%9E%84%E5%BB%BA%E5%AE%8F.html">加餐 宏编程（下）：用 syn_quote 优雅地构建宏</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%84%9A%E6%98%A7%E4%B9%8B%E5%B7%85%EF%BC%9A%E4%BD%A0%E7%9A%84Rust%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html">加餐 愚昧之巅：你的Rust学习常见问题汇总</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%9C%9F%E4%B8%AD%E6%B5%8B%E8%AF%95%EF%BC%9A%E5%8F%82%E8%80%83%E5%AE%9E%E7%8E%B0%E8%AE%B2%E8%A7%A3.html">加餐 期中测试：参考实现讲解</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%9C%9F%E4%B8%AD%E6%B5%8B%E8%AF%95%EF%BC%9A%E6%9D%A5%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84grep%E5%91%BD%E4%BB%A4%E8%A1%8C.html">加餐 期中测试：来写一个简单的grep命令行</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%BF%99%E4%B8%AA%E4%B8%93%E6%A0%8F%E4%BD%A0%E5%8F%AF%E4%BB%A5%E6%80%8E%E4%B9%88%E5%AD%A6%EF%BC%8C%E4%BB%A5%E5%8F%8ARust%E6%98%AF%E5%90%A6%E5%80%BC%E5%BE%97%E5%AD%A6%EF%BC%9F.html">加餐 这个专栏你可以怎么学，以及Rust是否值得学？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E5%9C%BA%20%E5%BC%80%E6%82%9F%E4%B9%8B%E5%9D%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9ARust%E7%9A%84%E7%8E%B0%E7%8A%B6%E3%80%81%E6%9C%BA%E9%81%87%E4%B8%8E%E6%8C%91%E6%88%98.html">大咖助场 开悟之坡（上）：Rust的现状、机遇与挑战</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E5%9C%BA%20%E5%BC%80%E6%82%9F%E4%B9%8B%E5%9D%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ARust%E7%9A%84%E7%8E%B0%E7%8A%B6%E3%80%81%E6%9C%BA%E9%81%87%E4%B8%8E%E6%8C%91%E6%88%98.html">大咖助场 开悟之坡（下）：Rust的现状、机遇与挑战</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%89%B9%E5%88%AB%E7%AD%96%E5%88%92%20%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%90%AC%E5%90%AC%E8%AF%BE%E4%BB%A3%E8%A1%A8%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4.html">特别策划 学习锦囊（一）：听听课代表们怎么说</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%89%B9%E5%88%AB%E7%AD%96%E5%88%92%20%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%90%AC%E5%90%AC%E8%AF%BE%E4%BB%A3%E8%A1%A8%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4.html">特别策划 学习锦囊（三）：听听课代表们怎么说</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%89%B9%E5%88%AB%E7%AD%96%E5%88%92%20%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%90%AC%E5%90%AC%E8%AF%BE%E4%BB%A3%E8%A1%A8%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4.html">特别策划 学习锦囊（二）：听听课代表们怎么说</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E7%BB%9D%E6%9C%9B%E4%B9%8B%E8%B0%B7%EF%BC%9A%E6%94%B9%E5%8F%98%E4%BB%8E%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%A7%8B.html">用户故事 绝望之谷：改变从学习开始</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E8%AF%AD%E8%A8%80%E4%B8%8D%E4%BB%85%E6%98%AF%E5%B7%A5%E5%85%B7%EF%BC%8C%E8%BF%98%E6%98%AF%E6%80%9D%E7%BB%B4%E6%96%B9%E5%BC%8F.html">用户故事 语言不仅是工具，还是思维方式</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%B0%B8%E7%BB%AD%E4%B9%8B%E5%8E%9F%EF%BC%9ARust%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%A6%82%E4%BD%95%E6%8C%81%E7%BB%AD%E7%B2%BE%E8%BF%9B%EF%BC%9F.html">结束语 永续之原：Rust学习，如何持续精进？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/46%20%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8Rust%E6%9E%B6%E6%9E%84%E5%A4%8D%E6%9D%82%E7%B3%BB%E7%BB%9F%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="46 软件架构：如何用Rust架构复杂系统？" id="title">46 软件架构：如何用Rust架构复杂系统？</h1>
+<div><p>你好，我是陈天。</p>
+<p>对一个软件系统来说，不同部门关心的侧重点不同。产品、运营和销售部门关心产品的功能，测试部门关心产品的缺陷，工程部门除了开发功能、解决缺陷外，还要不断地维护和优化系统的架构，减少之前遗留的技术债。</p>
+<p>从长远看，缺陷和技术债对软件系统是负面的作用，而功能和架构对软件系统是正面的作用。</p>
+<p>从是否对用户可见来说，相比可见的功能和缺陷，架构和技术债是不可见的，它们往往会被公司的决策层以各种理由忽视，尤其，当他们的 KPI/OKR 上都布满了急功近利的数字，每个季度或者每半个财年都是生死战（win or go home）的时候，只要能实现功能性的中短期目标，他们什么都可以牺牲。<strong>不可见并且很难带来直接收益的架构设计，往往是最先被牺牲掉的</strong>。</p>
+<p>但架构以及架构相关的工作会带来长期的回报。</p>
+<p>因为平时我们往系统里添加新的功能，会不可避免地增加系统的缺陷，潜在引入新的技术债，以及扰乱原本稳定的架构。这是一个熵增的过程。缺陷会拖累功能的表现，进一步恶化系统中的技术债；而技术债会延缓新功能的引入，放大已有的和未来的缺陷，并破坏现有的架构。这样一直持续下去，整个系统会进入到一个下降通道，直到无以为继。</p>
+<p>为了避免这样的事情发生，<strong>我们需要通过对架构进行维护性的工作，来减少缺陷，修复技术债，改善功能，最终将整个系统拉回到上升通道</strong>。</p>
+<p><img alt="图片" src="/assets/c6d4311cfc8071da54147bcc.jpg"/></p>
+<p>在我看来，软件系统是架构、功能、缺陷，以及技术债之间共同作用，互相拉扯的一个结果。</p>
+<p>在一个项目的初期，为了快速达到产品和市场的契合（product market fit），引入技术债来最大程度提高构建的速度，是最佳选择。但这并不意味着我们可以放弃架构的设计，埋头码字。</p>
+<p>过去二十年时间，敏捷宣言（Agile Manifesto）和精益创业（Lean startup）对软件社区最大的负面影响就是，一大堆外行或者并没有深刻理解软件工程的从业者，过分追求速度，过度曲解 MVP（Minimum Viable Product），而忽视了从起点出发前，必不可少的架构和设计功夫，导致大部分技术债实际上是架构和设计阶段的债务。</p>
+<p>但产品初期，在方向并不明朗的情况下，我们如何架构系统呢？</p>
+<p>类似瀑布模型那样的迭代方式，在产品的初期花费大量的精力做架构和设计，往往会导致过度设计，引入不必要的麻烦和可能永远用不上的“精妙”结构；但过分追求敏捷，干了再说，又会让技术债很快就积累到一个难以为继的地步。</p>
+<p>所以，对于这样的场景，我们应该采用<strong>渐进式的架构设计，从 MVP 的需求中寻找架构的核心要素，构建一个原始但完整的结构（primitive whole），然后围绕着核心要素演进。</strong>比如（图片来源：<a href="https://commons.wikimedia.org/wiki/File:From_minimum_viable_product_to_more_complex_product.png" target="_blank">维基百科</a>）：</p>
+<p><img alt="图片" src="/assets/adb8f4300793a45bba8b2817.png"/></p>
+<p>今天我们就来讲一讲怎么考虑架构设计，以及如何用Rust构建出一些典型的架构风格，希望你在学完这一讲最大的体会是：做任何开发之前，养成习惯，首先要做必要的架构和设计。</p>
+<h2 id="如何考虑架构设计">如何考虑架构设计？</h2>
+<p>架构设计是一个非常广泛的概念，很难一言以蔽之。在《Fundamentals of Software Architecture》一书中，作者从四个维度来探讨架构，分别是：</p>
+<ul>
+<li>Structure：架构的风格和结构，比如 MVVM、微服务</li>
+<li>Characteristics：架构的主要指标，比如可伸缩性、容错性和性能</li>
+<li>Decisions：架构的硬性规则，比如服务调用<strong>只能</strong>通过接口完成</li>
+<li>Design Principles：架构的设计原则，比如<strong>优先</strong>使用消息通讯</li>
+</ul>
+<p>可以对照下面这张图理解，我们一个个说（来源：<a href="https://book.douban.com/subject/34464806/" target="_blank">Fundamentals of Software Architecture</a>）：</p>
+<p><img alt="图片" src="/assets/528f9c0f9fd37745c7743806.png"/></p>
+<h3 id="structure架构的风格">Structure架构的风格</h3>
+<p>首先是架构的风格。实战课中我们一直在迭代的 KV server，就采取了分层的结构，把网络层、业务层和存储层分隔开。</p>
+<p><img alt="图片" src="/assets/fa4e51fcaf637b49ed7d3669.jpg"/></p>
+<p>虽然最开始网络层长什么样子我们并不清楚，但这种分层使得后来不断迭代网络层的时候，不管是加入 TLS 的支持，还是使用 yamux 做多路复用，都不会影响到业务层。</p>
+<p>一个复杂的大型系统往往可以使用分治的原则处理。之前展示过这样的图，一个互联网应用的最基本、最普遍的结构：</p>
+<p><img alt="图片" src="/assets/996c7bba4341e75dac7bba9c.png"/></p>
+<p>从业务的大方向上，我们可以进行分层处理，每层又可以选择不同的结构，比如微服务结构、事件驱动结构、管道结构等等，然后拆分出来的每个组件内部又可以用分层，比如把数据层、业务逻辑层和接口层分离，这样一层层延展下去，直到拆分出来的结果可以以“天”为单位执行。</p>
+<p>在执行的过程中，我们可以选取跟 MVP 有关的路径进行开发，并在这个过程中不断审视架构的设计，做相应的修改。你如果回顾一下 KV server 的演进过程，从最初构造到目前这个几乎成型的版本，就可以感受到一开始有一个完整但原始的结构，然后围绕着核心演进的重要性。</p>
+<h3 id="characteristics架构的主要指标">Characteristics架构的主要指标</h3>
+<p>再来看架构的主要指标。就像图中展示的那样，一个系统有非常多的指标来衡量其成功，包括并不限于：高性能、可用性、可靠性、可测性、可伸缩性、安全性、灵活性、容错性、自我修复性、可读性等等。</p>
+<p><img alt="图片" src="/assets/87655fe6d29e8c709f107fa9.png"/></p>
+<p>不过，这些指标并不是平等的关系，不同的系统会有不同的优先级。</p>
+<p>对于 KV server 来说，我们关心系统的性能/安全性/可测性，所以使用了最基本的 in-memory hashmap 来保证查询性能、使用 TCP + yamux 来保证网络性能、使用 channel 和 dashmap 来保证并发性能，以及使用 TLS 来保证安全性。同时，一直注重接口的清晰和可测试性。</p>
+<p>可以看到，一旦我们做出了架构指标上的决定，那么进一步的设计会优先考虑这些指标的需求。</p>
+<h3 id="decisions架构的硬性规则">Decisions架构的硬性规则</h3>
+<p>在架构设计的过程中，引入硬性约束或者原则非常重要。它就像架构的“基本法”，不可触碰。<strong>很多时候，当你引入了某个结构，你也就引入了这个结构所带来的的约束</strong>，比如微服务结构，它的约束就是：服务间的一切访问只能通过公开的接口来完成，任何服务间不能有私下的约定。</p>
+<p>这个现在看起来很容易理解的决定，在差不多二十年前，是振聋发聩的呐喊。2002 年，亚马逊还是一家小公司，贝佐斯还离首富差了几个比尔盖茨。作为一个不是特别懂技术的 MBA，他撰写了一个划时代的备忘录，并在亚马逊强制执行，这个备忘录很简单，看它的原文：</p>
+<blockquote>
+<ol>
+<li>All teams will henceforth expose their data and functionality through service interfaces.</li>
+<li>Teams must communicate with each other through these interfaces.</li>
+<li>There will be no other form of interprocess communication allowed: no direct linking, no direct reads of another team’s data store, no shared-memory model, no back-doors whatsoever. The only communication allowed is via service interface calls over the network.</li>
+<li>It doesn’t matter what technology they use. HTTP, Corba, Pubsub, custom protocols — doesn’t matter.</li>
+<li>All service interfaces, without exception, must be designed from the ground up to be externalizable. That is to say, the team must plan and design to be able to expose the interface to developers in the outside world. No exceptions.</li>
+<li>Anyone who doesn’t do this will be fired.</li>
+<li>Thank you; have a nice day!</li>
+</ol>
+</blockquote>
+<p>这个备忘录促成了 AWS 这个庞大的云服务帝国的诞生。贝佐斯对架构的视野，至今还让我啧啧称奇。他精准地“看”到了云服务的未来，并以架构的硬性约束来促成三个要点：独立的服务、服务间只能通过接口调用、服务的接口要能够被外部开发者调用。</p>
+<h3 id="design-principles架构的设计原则">Design Principles架构的设计原则</h3>
+<p>最后，我们简单说说架构的设计原则。和架构的硬性约束不同的是，设计原则更多是推荐做法，而非不可触碰的雷区。我们在构建系统的时候，要留有余地，这样在开发和迭代的过程中，才能根据情况选择合适的设计。</p>
+<p>比如对于 KV server 来说，推荐使用 TCP/yamux 来处理网络，但并不是说 gRPC 甚至 QUIC 就不能使用；推荐用二进制的 protobuf 来在客户端/服务器传输数据，但在某些场景下，如果基于文本的传输方式，或者非 protobuf 的二进制传输方式（比如 flatbuffer）更合适，那么未来完全可以替换这部分的设计。</p>
+<h2 id="如何用-rust-构建典型的架构风格">如何用 Rust 构建典型的架构风格？</h2>
+<p>再复习一下刚才聊的架构设计的四个方面：</p>
+<ul>
+<li>Structure架构的风格和结构</li>
+<li>Characteristics架构的主要指标</li>
+<li>Decisions架构的硬性规则</li>
+<li>Design Principles架构的设计原则</li>
+</ul>
+<p>其中后三点架构的指标、硬性规定以及设计原则，和具体项目的关联度很大，我们并没有模式化的工具来套用它。但架构风格是有很多固定的套路的。这些套路，往往是在日积月累的软件开发实践中，逐渐形成的。</p>
+<p>目前比较普遍使用的架构风格有：分层结构、流水线结构、插件结构、微服务结构、事件驱动结构等。</p>
+<p>微服务结构相信大家比较熟悉，这里就不赘述；事件驱动结构可以通过 channel 来实现，我们在KV server 中构建的 pub/sub 就有事件驱动的影子，但一个高性能的事件驱动结构需要第三方的消息队列来提供支持，比如 <a href="https://kafka.apache.org/" target="_blank">kafka</a>、<a href="https://nats.io/" target="_blank">nats</a> 等，你可以自己去看它们各自推荐的事件驱动模型。</p>
+<p>不过不管你用何种分布式的架构，最终，每个服务内部的架构还是会使用<strong>分层结构、流水线结构和插件结构</strong>，我们这里就简单讲讲这三者。</p>
+<h3 id="分层结构">分层结构</h3>
+<p>开头已经谈到了分层，这是最朴素，也是最实用的架构风格。软件行业的一句<a href="https://en.wikipedia.org/wiki/Indirection" target="_blank">至理名言</a>是：</p>
+<blockquote>
+<p>All problems in computer science can be solved by another level of indirection.</p>
+</blockquote>
+<p>这种使用分层来漂亮地解决问题的思路，贯穿整个软件行业。</p>
+<p>操作系统是应用程序和硬件的中间层；虚拟内存是线性内存和物理内存的中间层；虚拟机是操作系统和裸机的中间层；容器是应用程序和操作系统的中间层；ISO 的 OSI 模型，把网络划分为 7 层，这让我们至今还受益于几十年前就设计出来的网络结构。</p>
+<p>分层，意味着明确每一层的职责范围以及层与层之间接口。一旦我们有明晰的层级划分，以及硬性规定层与层之间只能通过公开接口调用，且不能跨层调用，那么，系统就具备了很强的灵活性，某层的内部实现可以完全被不同的实现来替换，而不必担心上下游受到影响。</p>
+<p><strong>在 Rust 下，我们可以用 trait 来进行接口的定义，通过接口来分层</strong>。就像 KV server 展现的那样，把网络层和业务层分开，网络层或者业务层各自的迭代不会影响对方的行为。</p>
+<h3 id="流水线结构">流水线结构</h3>
+<p>大部分系统的处理流程都可以用流水线结构来表述。我们可以把处理流程中的要素构建成一个个接口一致、功能单一的组件，然后根据不同的输入，来选择合适的组件，将它们组织为一个完整的流水线，然后再依次执行。</p>
+<p>这样做的好处是，在执行过程中，我们不需要对输入进行判断来决定执行什么代码，要执行的代码已经包含在流水线之中。而流水线的构建，在编译期、加载期就可以预处理好最常见的流程（fast path），只有不那么常见的输入，才需要在运行时构建合适的流水线（slow path）。一旦一个新的流水线被构建出来，还可以缓存它，下一次就可以直接执行（fast path）。</p>
+<p>我们看一个流水线处理的典型结构：</p>
+<p><img alt="图片" src="/assets/ac6befc73d202b71f4a58980.jpg"/></p>
+<p>这种结构在实战中非常有用，比如 Elixir 下处理网络流程的 <a href="https://hexdocs.pm/plug/readme.html" target="_blank">Plug</a>。下图是我之前在处理区块链的 TX 时设计的流水线结构：</p>
+<p><img alt="图片" src="/assets/d6c618c7b43f53fd5912f2b7.png"/></p>
+<p><strong>流水线可以是架构级的宏观流水线，也可以是函数级的微观流水线。它最大的好处是通过组合不同的基本功能，完成各种各样复杂多变的需求</strong>。就像乐高积木，最基本的积木组件是有限的，但我们可以创建出无穷多的组合。</p>
+<p>使用 Rust 创建流水线结构并不复杂，你可以利用 enum/trait 构造。比如下面的实例（<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=7a08a1385214271d393399e638caa36e" target="_blank">代码</a>）：</p>
+<pre><code>use std::fmt;
+
+pub use async_trait::async_trait;
+pub type BoxedError = Box&lt;dyn std::error::Error&gt;;
+
+/// rerun 超过 5 次，就视为失败
+const MAX_RERUN: usize = 5;
+
+/// plug 执行的结果
+#[must_use]
+pub enum PlugResult&lt;Ctx&gt; {
+    Continue,
+    Rerun,
+    Terminate,
+    NewPipe(Vec&lt;Box&lt;dyn Plug&lt;Ctx&gt;&gt;&gt;),
+    Err(BoxedError),
+}
+
+/// plug trait，任何 pipeline 中的组件需要实现这个 trait
+#[async_trait]
+pub trait Plug&lt;Ctx&gt;: fmt::Display {
+    async fn call(&amp;self, ctx: &amp;mut Ctx) -&gt; PlugResult&lt;Ctx&gt;;
+}
+
+/// pipeline 结构
+#[derive(Default)]
+pub struct Pipeline&lt;Ctx&gt; {
+    plugs: Vec&lt;Box&lt;dyn Plug&lt;Ctx&gt;&gt;&gt;,
+    pos: usize,
+    rerun: usize,
+    executed: Vec&lt;String&gt;,
+}
+
+impl&lt;Ctx&gt; Pipeline&lt;Ctx&gt; {
+    /// 创建一个新的 pipeline
+    pub fn new(plugs: Vec&lt;Box&lt;dyn Plug&lt;Ctx&gt;&gt;&gt;) -&gt; Self {
+        Self {
+            plugs,
+            pos: 0,
+            rerun: 0,
+            executed: Vec::with_capacity(16),
+        }
+    }
+
+    /// 执行整个 pipeline，要么执行完毕，要么出错
+    pub async fn execute(&amp;mut self, ctx: &amp;mut Ctx) -&gt; Result&lt;(), BoxedError&gt; {
+        while self.pos &lt; self.plugs.len() {
+            self.add_execution_log();
+            let plug = &amp;self.plugs[self.pos];
+
+            match plug.call(ctx).await {
+                PlugResult::Continue =&gt; {
+                    self.pos += 1;
+                    self.rerun = 0;
+                }
+                PlugResult::Rerun =&gt; {
+                    // pos 不往前走，重新执行现有组件，rerun 开始累加
+                    self.rerun += 1;
+                }
+                PlugResult::Terminate =&gt; {
+                    break;
+                }
+                PlugResult::NewPipe(v) =&gt; {
+                    self.pos = 0;
+                    self.rerun = 0;
+                    self.plugs = v;
+                }
+                PlugResult::Err(e) =&gt; return Err(e),
+            }
+
+            // 如果 rerun 5 次，返回错误
+            if self.rerun &gt;= MAX_RERUN {
+                return Err(anyhow::anyhow!("max rerun").into());
+            }
+        }
+
+        Ok(())
+    }
+
+    pub fn get_execution_log(&amp;self) -&gt; &amp;[String] {
+        &amp;self.executed
+    }
+
+    fn add_execution_log(&amp;mut self) {
+        self.executed.push(self.plugs[self.pos].to_string());
+    }
+}
+</code></pre>
+<p>你可以在 playground 里运行包括完整示例代码的<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=4c0a642205a816f3fbf95e86f2856134" target="_blank">例子</a>。</p>
+<p>开始的时候，初始化一个包含 [SecurityChecker, Normalizer] 两个组件的流水线。在执行 SecurityChecker 过程中，流水线被更新为 [CacheLoader, DataLoader, CacheWriter] 的结构，然后在执行到 DataLoader 时，出错退出。所以整个执行流程如下图所示：-
+<img alt="图片" src="/assets/cbc9bb4d5ea1d30f1bdcd7ab.jpg"/></p>
+<h3 id="插件-微内核-结构">插件（微内核）结构</h3>
+<p>插件结构（Plugin Architecture）也被称为微内核结构（Microkernel Architecture），它可以让你的系统拥有一个足够小的核心，然后围绕着这个核心以插件的方式注入新的功能。</p>
+<p>我们平时使用的 VS Code 就是典型的插件结构。它的核心功能就是文本的编辑，但通过各种插件，它可以支持代码的语法高亮、错误检查、格式化等等功能。</p>
+<p>在构建插件结构时，我们需要设计一套足够稳定的接口，保证插件和核心之间的交互；还需要设计一套注册机制，让插件可以被注册进系统，或者从系统中删除。</p>
+<p>在 Rust 下，除了正常使用 trait 和 trait object 来构建插件机制，在系统内部使用插件结构外，还可以通过 WebAssembly（通过 wasmer 或 wasmtime） 或者 rhai 这样的嵌入式脚本来允许第三方通过插件来扩展系统的能力：</p>
+<p><img alt="图片" src="/assets/0682ed7d3dc9923d9e3a17c8.jpg"/></p>
+<h2 id="小结">小结</h2>
+<p>架构是一个复杂的东西，它充满了权衡（trade-off）。我非常推崇 Clojure 创造者 Rich Hickey 的一句话，大意是说“你只有有了足够的替代方案，才谈得上权衡”。</p>
+<p>我们在做软件开发时，不要着急上来就甩开膀子写代码，要先让需求在大脑中沉淀，思考这个需求和已有的哪些需求相关、和我见过的哪些系统类似，然后再去思考都有什么样的方案、它们的利弊是什么。</p>
+<p>好的架构师了解足够多的架构风格，所以不拘泥于某一种，也不会手里拿着锤子，看什么都是钉子。好的架构师平时还有足够多的阅读、足够多的积累，这样在遇到架构问题时，可以迅速和曾经遇见的系统联系和类比。这也是为什么我非常建议你们多阅读市面上优秀的代码，因为广泛且有深度的阅读才能拓宽你的眼界，才能帮你累积足够多的素材。</p>
+<p>当然，阅读仅仅是第一步。<strong>有了阅读的基础，你可以多进行“纸上谈兵”的脑力训练</strong>，看到一个系统，就尝试分析它的架构，看看自己能不能自圆其说，架构出类似的产品。这样的脑力训练除了可以更好地帮助你提升架构分析能力外，还可以帮你学到“你不知道你不知道的事情”。</p>
+<p>比如我曾经花了些功夫去研究 Notion，顺着这条线更深入地探索 OT 和 CRDT 算法，在深入探索中，我遇见了 <a href="https://github.com/yjs/y-crdt" target="_blank">yjs</a>、<a href="https://github.com/automerge/automerge-rs" target="_blank">automerge</a>、<a href="https://github.com/josephg/diamond-types" target="_blank">diamond-types</a> 等优秀的工具，这些都是我之前从未使用过的东西。</p>
+<p>最后，你还需要去真正把自己设计的架构落地，应用在某些项目中。一个人一生中可以主导某些大项目架构的机会并不多，所以，<strong>在机会来临时，抓住它，把你平生所学应用上去，此时你会渐渐感受到头脑中的架构和真正落地的架构之间的差异</strong>。</p>
+<p>有同学可能会问，如果机会没有来临怎么办？那么就在业余时间去写各种你感兴趣的东西，以此来磨练自己的能力，默默等待属于自己的机会。当年明月写《明朝那些事儿》，刘慈欣写《三体》，也并不是他们在工作中得到的机会。兴趣最好的老师，热爱是前进的动力。</p>
+<h3 id="思考题">思考题</h3>
+<p>请花些时间阅读《Fundamentals of Software Architecture》这本书。</p>
+<p>欢迎在留言区分享你今天的学习收获或感悟。如果你觉得有收获，也欢迎分享给身边的朋友，邀他一起讨论。我们下节课见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 聚合：聚合查询之Bucket聚合详解 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/index.html">ElasticSearch知识体系详解</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">21 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>ElasticSearch知识体系详解</strong><ul><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/01%20%E8%AE%A4%E7%9F%A5%EF%BC%9AElasticSearch%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">01 认知：ElasticSearch基础概念</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/02%20%E8%AE%A4%E7%9F%A5%EF%BC%9AElastic%20Stack%E7%94%9F%E6%80%81%E5%92%8C%E5%9C%BA%E6%99%AF%E6%96%B9%E6%A1%88.html">02 认知：Elastic Stack生态和场景方案</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/03%20%E5%AE%89%E8%A3%85%EF%BC%9AElasticSearch%E5%92%8CKibana%E5%AE%89%E8%A3%85.html">03 安装：ElasticSearch和Kibana安装</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/04%20%E5%85%A5%E9%97%A8%EF%BC%9A%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%81%9A%E5%90%88%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html">04 入门：查询和聚合的基础使用</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/05%20%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86%E8%AF%A6%E8%A7%A3.html">05 索引：索引管理详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/06%20%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E6%A8%A1%E6%9D%BF%28Index%20Template%29%E8%AF%A6%E8%A7%A3.html">06 索引：索引模板(Index Template)详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/07%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8B%E5%A4%8D%E5%90%88%E6%9F%A5%E8%AF%A2%E8%AF%A6%E8%A7%A3.html">07 查询：DSL查询之复合查询详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/08%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8B%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E8%AF%A6%E8%A7%A3.html">08 查询：DSL查询之全文搜索详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/09%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8BTerm%E8%AF%A6%E8%A7%A3.html">09 查询：DSL查询之Term详解</a></li><li><a class="active" aria-current="page" href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/10%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BBucket%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">10 聚合：聚合查询之Bucket聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/11%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BMetric%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">11 聚合：聚合查询之Metric聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/12%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BPipline%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">12 聚合：聚合查询之Pipline聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/13%20%E5%8E%9F%E7%90%86%EF%BC%9A%E4%BB%8E%E5%9B%BE%E8%A7%A3%E6%9E%84%E7%AD%91%E5%AF%B9ES%E5%8E%9F%E7%90%86%E7%9A%84%E5%88%9D%E6%AD%A5%E8%AE%A4%E7%9F%A5.html">13 原理：从图解构筑对ES原理的初步认知</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/14%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85%E5%92%8C%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84.html">14 原理：ES原理知识点补充和整体结构</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/15%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E4%B9%8B%E7%B4%A2%E5%BC%95%E6%96%87%E6%A1%A3%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3.html">15 原理：ES原理之索引文档流程详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/16%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E4%B9%8B%E8%AF%BB%E5%8F%96%E6%96%87%E6%A1%A3%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3.html">16 原理：ES原理之读取文档流程详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/17%20%E4%BC%98%E5%8C%96%EF%BC%9AElasticSearch%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E8%AF%A6%E8%A7%A3.html">17 优化：ElasticSearch性能优化详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/18%20%E5%A4%A7%E5%8E%82%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%85%BE%E8%AE%AF%E4%B8%87%E4%BA%BF%E7%BA%A7%20Elasticsearch%20%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">18 大厂实践：腾讯万亿级 Elasticsearch 技术实践</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/19%20%E8%B5%84%E6%96%99%EF%BC%9AAwesome%20Elasticsearch.html">19 资料：Awesome Elasticsearch</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/20%20WrapperQuery.html">20 WrapperQuery</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/21%20%E5%A4%87%E4%BB%BD%E5%92%8C%E8%BF%81%E7%A7%BB.html">21 备份和迁移</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/10%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BBucket%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="10 聚合：聚合查询之Bucket聚合详解" id="title">10 聚合：聚合查询之Bucket聚合详解</h1>
+<div><h2 id="聚合的引入">聚合的引入</h2>
+<p>我们在SQL结果中常有：</p>
+<pre><code class="language-sql">SELECT COUNT(color) 
+FROM table
+GROUP BY color 
+</code></pre>
+<p>ElasticSearch中<strong>桶</strong>在概念上类似于 SQL 的分组（<code>GROUP BY</code>），而<strong>指标</strong>则类似于 <code>COUNT()</code> 、 <code>SUM()</code> 、 <code>MAX()</code> 等统计方法。</p>
+<p>进而引入了两个概念：</p>
+<ul>
+<li><strong>桶（Buckets）</strong> 满足特定条件的文档的集合</li>
+<li><strong>指标（Metrics）</strong> 对桶内的文档进行统计计算</li>
+</ul>
+<p>所以ElasticSearch包含3种聚合（Aggregation)方式</p>
+<ul>
+<li><p><strong>桶聚合（Bucket Aggregration)</strong> - 本文中详解</p></li>
+<li><p><strong>指标聚合（Metric Aggregration)</strong> - 下文中讲解</p></li>
+<li><p>管道聚合（Pipline Aggregration)</p></li>
+</ul>
+<p>- 再下一篇讲解</p>
+<ul>
+<li>聚合管道化，简单而言就是上一个聚合的结果成为下个聚合的输入；</li>
+</ul>
+<p>（PS:指标聚合和桶聚合很多情况下是组合在一起使用的，其实你也可以看到，桶聚合本质上是一种特殊的指标聚合，它的聚合指标就是数据的条数count)</p>
+<h2 id="如何理解bucket聚合">如何理解Bucket聚合</h2>
+<blockquote>
+<p>如果你直接去看文档，大概有几十种：</p>
+</blockquote>
+<p><img alt="img" src="/assets/d9fe34ab2d7f87f00a087f7b.png"/></p>
+<p>要么你需要花大量时间学习，要么你已经迷失或者即将迷失在知识点中…</p>
+<p>所以你需要稍微<strong>站在设计者的角度思考</strong>下，不难发现设计上大概分为三类（当然有些是第二和第三类的融合）</p>
+<p><img alt="img" src="/assets/5ac26b0385376403afbf1429.png"/></p>
+<p>（图中并没有全部列出内容，因为图要表达的意图我觉得还是比较清楚的，这就够了；有了这种思虑和认知，会大大提升你的认知效率。）</p>
+<h2 id="按知识点学习聚合">按知识点学习聚合</h2>
+<blockquote>
+<p>我们先按照官方权威指南中的一个例子，学习Aggregation中的知识点。</p>
+</blockquote>
+<h3 id="准备数据">准备数据</h3>
+<p>让我们先看一个例子。我们将会创建一些对汽车经销商有用的聚合，数据是关于汽车交易的信息：车型、制造商、售价、何时被出售等。</p>
+<p>首先我们批量索引一些数据：</p>
+<pre><code class="language-bash">POST /test-agg-cars/_bulk
+{ "index": {}}
+{ "price" : 10000, "color" : "red", "make" : "honda", "sold" : "2014-10-28" }
+{ "index": {}}
+{ "price" : 20000, "color" : "red", "make" : "honda", "sold" : "2014-11-05" }
+{ "index": {}}
+{ "price" : 30000, "color" : "green", "make" : "ford", "sold" : "2014-05-18" }
+{ "index": {}}
+{ "price" : 15000, "color" : "blue", "make" : "toyota", "sold" : "2014-07-02" }
+{ "index": {}}
+{ "price" : 12000, "color" : "green", "make" : "toyota", "sold" : "2014-08-19" }
+{ "index": {}}
+{ "price" : 20000, "color" : "red", "make" : "honda", "sold" : "2014-11-05" }
+{ "index": {}}
+{ "price" : 80000, "color" : "red", "make" : "bmw", "sold" : "2014-01-01" }
+{ "index": {}}
+{ "price" : 25000, "color" : "blue", "make" : "ford", "sold" : "2014-02-12" }
+</code></pre>
+<h3 id="标准的聚合">标准的聚合</h3>
+<p>有了数据，开始构建我们的第一个聚合。汽车经销商可能会想知道哪个颜色的汽车销量最好，用聚合可以轻易得到结果，用 terms 桶操作：</p>
+<pre><code class="language-bash">GET /test-agg-cars/_search
+{
+    "size" : 0,
+    "aggs" : { 
+        "popular_colors" : { 
+            "terms" : { 
+              "field" : "color.keyword"
+            }
+        }
+    }
+}
+</code></pre>
+<ol>
+<li>聚合操作被置于顶层参数 aggs 之下（如果你愿意，完整形式 aggregations 同样有效）。</li>
+<li>然后，可以为聚合指定一个我们想要名称，本例中是： popular_colors 。</li>
+<li>最后，定义单个桶的类型 terms 。</li>
+</ol>
+<p>结果如下：</p>
+<p><img alt="img" src="/assets/07e9bce1187ce57564f2ce4e.png"/></p>
+<ol>
+<li>因为我们设置了 size 参数，所以不会有 hits 搜索结果返回。</li>
+<li>popular_colors 聚合是作为 aggregations 字段的一部分被返回的。</li>
+<li>每个桶的 key 都与 color 字段里找到的唯一词对应。它总会包含 doc_count 字段，告诉我们包含该词项的文档数量。</li>
+<li>每个桶的数量代表该颜色的文档数量。</li>
+</ol>
+<h3 id="多个聚合">多个聚合</h3>
+<p>同时计算两种桶的结果：对color和对make。</p>
+<pre><code class="language-bash">GET /test-agg-cars/_search
+{
+    "size" : 0,
+    "aggs" : { 
+        "popular_colors" : { 
+            "terms" : { 
+              "field" : "color.keyword"
+            }
+        },
+        "make_by" : { 
+            "terms" : { 
+              "field" : "make.keyword"
+            }
+        }
+    }
+}
+</code></pre>
+<p>结果如下：</p>
+<p><img alt="img" src="/assets/c3f056895937e977c86ccfa9.png"/></p>
+<h3 id="聚合的嵌套">聚合的嵌套</h3>
+<p>这个新的聚合层让我们可以将 avg 度量嵌套置于 terms 桶内。实际上，这就为每个颜色生成了平均价格。</p>
+<pre><code class="language-bash">GET /test-agg-cars/_search
+{
+   "size" : 0,
+   "aggs": {
+      "colors": {
+         "terms": {
+            "field": "color.keyword"
+         },
+         "aggs": { 
+            "avg_price": { 
+               "avg": {
+                  "field": "price" 
+               }
+            }
+         }
+      }
+   }
+}
+</code></pre>
+<p>结果如下：</p>
+<p><img alt="img" src="/assets/ce9455c6acc1408d08b7094a.png"/></p>
+<p>正如 颜色 的例子，我们需要给度量起一个名字（ avg_price ）这样可以稍后根据名字获取它的值。最后，我们指定度量本身（ avg ）以及我们想要计算平均值的字段（ price ）</p>
+<h3 id="动态脚本的聚合">动态脚本的聚合</h3>
+<p>这个例子告诉你，ElasticSearch还支持一些基于脚本（生成运行时的字段）的复杂的动态聚合。</p>
+<pre><code class="language-bash">GET /test-agg-cars/_search
+{
+  "runtime_mappings": {
+    "make.length": {
+      "type": "long",
+      "script": "emit(doc['make.keyword'].value.length())"
+    }
+  },
+  "size" : 0,
+  "aggs": {
+    "make_length": {
+      "histogram": {
+        "interval": 1,
+        "field": "make.length"
+      }
+    }
+  }
+}
+</code></pre>
+<p>结果如下：</p>
+<p><img alt="img" src="/assets/f0a273dba2ec3d265cc03413.png"/></p>
+<p>histogram可以参考后文内容。</p>
+<h2 id="按分类学习bucket聚合">按分类学习Bucket聚合</h2>
+<blockquote>
+<p>我们在具体学习时，也无需学习每一个点，基于上面图的认知，我们只需用20%的时间学习最为常用的80%功能即可，其它查查文档而已。@pdai</p>
+</blockquote>
+<h3 id="前置条件的过滤-filter">前置条件的过滤：filter</h3>
+<p>在当前文档集上下文中定义与指定过滤器(Filter)匹配的所有文档的单个存储桶。通常，这将用于将当前聚合上下文缩小到一组特定的文档。</p>
+<pre><code class="language-bash">GET /test-agg-cars/_search
+{
+  "size": 0,
+  "aggs": {
+    "make_by": {
+      "filter": { "term": { "type": "honda" } },
+      "aggs": {
+        "avg_price": { "avg": { "field": "price" } }
+      }
+    }
+  }
+}
+</code></pre>
+<p>结果如下：</p>
+<p><img alt="img" src="/assets/d7e3abe99c6ccbc33eaaf1ba.png"/></p>
+<h3 id="对filter进行分组聚合-filters">对filter进行分组聚合：filters</h3>
+<p>设计一个新的例子, 日志系统中，每条日志都是在文本中，包含warning/info等信息。</p>
+<pre><code class="language-bash">PUT /test-agg-logs/_bulk?refresh
+{ "index" : { "_id" : 1 } }
+{ "body" : "warning: page could not be rendered" }
+{ "index" : { "_id" : 2 } }
+{ "body" : "authentication error" }
+{ "index" : { "_id" : 3 } }
+{ "body" : "warning: connection timed out" }
+{ "index" : { "_id" : 4 } }
+{ "body" : "info: hello pdai" }
+</code></pre>
+<p>我们需要对包含不同日志类型的日志进行分组，这就需要filters:</p>
+<pre><code class="language-bash">GET /test-agg-logs/_search
+{
+  "size": 0,
+  "aggs" : {
+    "messages" : {
+      "filters" : {
+        "other_bucket_key": "other_messages",
+        "filters" : {
+          "infos" :   { "match" : { "body" : "info"   }},
+          "warnings" : { "match" : { "body" : "warning" }}
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>结果如下：</p>
+<p><img alt="img" src="/assets/085f95993d59ce6b8d6ec5e9.png"/></p>
+<h3 id="对number类型聚合-range">对number类型聚合：Range</h3>
+<p>基于多桶值源的聚合，使用户能够定义一组范围-每个范围代表一个桶。在聚合过程中，将从每个存储区范围中检查从每个文档中提取的值，并“存储”相关/匹配的文档。请注意，此聚合包括from值，但不包括to每个范围的值。</p>
+<pre><code class="language-bash">GET /test-agg-cars/_search
+{
+  "size": 0,
+  "aggs": {
+    "price_ranges": {
+      "range": {
+        "field": "price",
+        "ranges": [
+          { "to": 20000 },
+          { "from": 20000, "to": 40000 },
+          { "from": 40000 }
+        ]
+      }
+    }
+  }
+}
+</code></pre>
+<p>结果如下：</p>
+<p><img alt="img" src="/assets/412129b6fb60d78ec1a8b1aa.png"/></p>
+<h3 id="对ip类型聚合-ip-range">对IP类型聚合：IP Range</h3>
+<p>专用于IP值的范围聚合。</p>
+<pre><code class="language-bash">GET /ip_addresses/_search
+{
+  "size": 10,
+  "aggs": {
+    "ip_ranges": {
+      "ip_range": {
+        "field": "ip",
+        "ranges": [
+          { "to": "10.0.0.5" },
+          { "from": "10.0.0.5" }
+        ]
+      }
+    }
+  }
+}
+</code></pre>
+<p>返回</p>
+<pre><code class="language-bash">{
+  ...
+
+  "aggregations": {
+    "ip_ranges": {
+      "buckets": [
+        {
+          "key": "*-10.0.0.5",
+          "to": "10.0.0.5",
+          "doc_count": 10
+        },
+        {
+          "key": "10.0.0.5-*",
+          "from": "10.0.0.5",
+          "doc_count": 260
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<ul>
+<li><strong>CIDR Mask分组</strong></li>
+</ul>
+<p>此外还可以用CIDR Mask分组</p>
+<pre><code class="language-bash">GET /ip_addresses/_search
+{
+  "size": 0,
+  "aggs": {
+    "ip_ranges": {
+      "ip_range": {
+        "field": "ip",
+        "ranges": [
+          { "mask": "10.0.0.0/25" },
+          { "mask": "10.0.0.127/25" }
+        ]
+      }
+    }
+  }
+}
+</code></pre>
+<p>返回</p>
+<pre><code class="language-bash">{
+  ...
+
+  "aggregations": {
+    "ip_ranges": {
+      "buckets": [
+        {
+          "key": "10.0.0.0/25",
+          "from": "10.0.0.0",
+          "to": "10.0.0.128",
+          "doc_count": 128
+        },
+        {
+          "key": "10.0.0.127/25",
+          "from": "10.0.0.0",
+          "to": "10.0.0.128",
+          "doc_count": 128
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<ul>
+<li><strong>增加key显示</strong></li>
+</ul>
+<pre><code class="language-bash">GET /ip_addresses/_search
+{
+  "size": 0,
+  "aggs": {
+    "ip_ranges": {
+      "ip_range": {
+        "field": "ip",
+        "ranges": [
+          { "to": "10.0.0.5" },
+          { "from": "10.0.0.5" }
+        ],
+        "keyed": true // here
+      }
+    }
+  }
+}
+</code></pre>
+<p>返回</p>
+<pre><code class="language-bash">{
+  ...
+
+  "aggregations": {
+    "ip_ranges": {
+      "buckets": {
+        "*-10.0.0.5": {
+          "to": "10.0.0.5",
+          "doc_count": 10
+        },
+        "10.0.0.5-*": {
+          "from": "10.0.0.5",
+          "doc_count": 260
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<ul>
+<li><strong>自定义key显示</strong></li>
+</ul>
+<pre><code class="language-bash">GET /ip_addresses/_search
+{
+  "size": 0,
+  "aggs": {
+    "ip_ranges": {
+      "ip_range": {
+        "field": "ip",
+        "ranges": [
+          { "key": "infinity", "to": "10.0.0.5" },
+          { "key": "and-beyond", "from": "10.0.0.5" }
+        ],
+        "keyed": true
+      }
+    }
+  }
+}
+</code></pre>
+<p>返回</p>
+<pre><code class="language-bash">{
+  ...
+
+  "aggregations": {
+    "ip_ranges": {
+      "buckets": {
+        "infinity": {
+          "to": "10.0.0.5",
+          "doc_count": 10
+        },
+        "and-beyond": {
+          "from": "10.0.0.5",
+          "doc_count": 260
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="对日期类型聚合-date-range">对日期类型聚合：Date Range</h3>
+<p>专用于日期值的范围聚合。</p>
+<pre><code class="language-bash">GET /test-agg-cars/_search
+{
+  "size": 0,
+  "aggs": {
+    "range": {
+      "date_range": {
+        "field": "sold",
+        "format": "yyyy-MM",
+        "ranges": [
+          { "from": "2014-01-01" },  
+          { "to": "2014-12-31" } 
+        ]
+      }
+    }
+  }
+}
+</code></pre>
+<p>结果如下：</p>
+<p><img alt="img" src="/assets/06de2f6a3feab9f71d3d5fda.png"/></p>
+<p>此聚合与Range聚合之间的主要区别在于 from和to值可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern" target="_blank">Date Math表达式 </a>中表示，并且还可以指定日期格式，通过该日期格式将返回from and to响应字段。请注意，此聚合包括from值，但<strong>不包括to每个范围的值</strong>。</p>
+<h3 id="对柱状图功能-histrogram">对柱状图功能：Histrogram</h3>
+<p>直方图 histogram 本质上是就是为柱状图功能设计的。</p>
+<p>创建直方图需要指定一个区间，如果我们要为售价创建一个直方图，可以将间隔设为 20,000。这样做将会在每个 $20,000 档创建一个新桶，然后文档会被分到对应的桶中。</p>
+<p>对于仪表盘来说，我们希望知道每个售价区间内汽车的销量。我们还会想知道每个售价区间内汽车所带来的收入，可以通过对每个区间内已售汽车的售价求和得到。</p>
+<p>可以用 histogram 和一个嵌套的 sum 度量得到我们想要的答案：</p>
+<pre><code class="language-bash">GET /test-agg-cars/_search
+{
+   "size" : 0,
+   "aggs":{
+      "price":{
+         "histogram":{ 
+            "field": "price.keyword",
+            "interval": 20000
+         },
+         "aggs":{
+            "revenue": {
+               "sum": { 
+                 "field" : "price"
+               }
+             }
+         }
+      }
+   }
+}
+</code></pre>
+<ol>
+<li>histogram 桶要求两个参数：一个数值字段以及一个定义桶大小间隔。</li>
+<li>sum 度量嵌套在每个售价区间内，用来显示每个区间内的总收入。</li>
+</ol>
+<p>如我们所见，查询是围绕 price 聚合构建的，它包含一个 histogram 桶。它要求字段的类型必须是数值型的同时需要设定分组的间隔范围。 间隔设置为 20,000 意味着我们将会得到如 [0-19999, 20000-39999, …] 这样的区间。</p>
+<p>接着，我们在直方图内定义嵌套的度量，这个 sum 度量，它会对落入某一具体售价区间的文档中 price 字段的值进行求和。 这可以为我们提供每个售价区间的收入，从而可以发现到底是普通家用车赚钱还是奢侈车赚钱。</p>
+<p>响应结果如下：</p>
+<p><img alt="img" src="/assets/e3e8f773b4c889a862db56ed.png"/></p>
+<p>结果很容易理解，不过应该注意到直方图的键值是区间的下限。键 0 代表区间 0-19，999 ，键 20000 代表区间 20，000-39，999 ，等等。</p>
+<p><img alt="img" src="/assets/6ba516cd1e82619fc80058da.png"/></p>
+<p>当然，我们可以为任何聚合输出的分类和统计结果创建条形图，而不只是 直方图 桶。让我们以最受欢迎 10 种汽车以及它们的平均售价、标准差这些信息创建一个条形图。 我们会用到 terms 桶和 extended_stats 度量：</p>
+<pre><code class="language-bash">GET /test-agg-cars/_search
+{
+  "size" : 0,
+  "aggs": {
+    "makes": {
+      "terms": {
+        "field": "make.keyword",
+        "size": 10
+      },
+      "aggs": {
+        "stats": {
+          "extended_stats": {
+            "field": "price"
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>上述代码会按受欢迎度返回制造商列表以及它们各自的统计信息。我们对其中的 stats.avg 、 stats.count 和 stats.std_deviation 信息特别感兴趣，并用 它们计算出标准差：</p>
+<pre><code class="language-bash">std_err = std_deviation / count
+</code></pre>
+<p><img alt="img" src="/assets/962797caaa0b4beda03ac4f3.png"/></p>
+<p>对应报表：</p>
+<p><img alt="img" src="/assets/45bdeb5c1106bbf49d004757.png"/></p>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html" target="_blank">https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html</a></p>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_aggregation_test_drive.html" target="_blank">https://www.elastic.co/guide/cn/elasticsearch/guide/current/_aggregation_test_drive.html</a></p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

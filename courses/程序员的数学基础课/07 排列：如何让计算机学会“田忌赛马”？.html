@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>07 排列：如何让计算机学会“田忌赛马”？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/index.html">程序员的数学基础课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">57 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>程序员的数学基础课</strong><ul><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/01%20%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%9A%E4%B8%8D%E4%BA%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%BA%90%E5%A4%B4%EF%BC%8C%E4%BD%A0%E5%AD%A6%E4%BB%80%E4%B9%88%E7%BC%96%E7%A8%8B.html">01 二进制：不了解计算机的源头，你学什么编程</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/02%20%E4%BD%99%E6%95%B0%EF%BC%9A%E5%8E%9F%E6%9D%A5%E5%8F%96%E4%BD%99%E6%93%8D%E4%BD%9C%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF%E4%B8%AA%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0.html">02 余数：原来取余操作本身就是个哈希函数</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/03%20%E8%BF%AD%E4%BB%A3%E6%B3%95%EF%BC%9A%E4%B8%8D%E7%94%A8%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E8%87%AA%E5%B8%A6%E5%87%BD%E6%95%B0%EF%BC%8C%E4%BD%A0%E4%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E5%B9%B3%E6%96%B9%E6%A0%B9%EF%BC%9F.html">03 迭代法：不用编程语言的自带函数，你会如何计算平方根？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/04%20%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%8F%90%E5%8D%87%E4%BB%A3%E7%A0%81%E7%9A%84%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87%EF%BC%9F.html">04 数学归纳法：如何用数学归纳提升代码的运行效率？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/05%20%E9%80%92%E5%BD%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%B3%9B%E5%8C%96%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%EF%BC%8C%E5%A6%82%E4%BD%95%E5%B0%86%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%AE%80%E5%8D%95%E5%8C%96%EF%BC%9F.html">05 递归（上）：泛化数学归纳，如何将复杂问题简单化？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/06%20%E9%80%92%E5%BD%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B%EF%BC%8C%E4%BB%8E%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E5%88%B0MapReduce.html">06 递归（下）：分而治之，从归并排序到MapReduce</a></li><li><a class="active" aria-current="page" href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/07%20%E6%8E%92%E5%88%97%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E4%BC%9A%E2%80%9C%E7%94%B0%E5%BF%8C%E8%B5%9B%E9%A9%AC%E2%80%9D%EF%BC%9F.html">07 排列：如何让计算机学会“田忌赛马”？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/08%20%E7%BB%84%E5%90%88%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E6%8E%92%E4%B8%96%E7%95%8C%E6%9D%AF%E7%9A%84%E8%B5%9B%E7%A8%8B%EF%BC%9F.html">08 组合：如何让计算机安排世界杯的赛程？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/09%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%9F%BA%E4%BA%8E%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%E7%9A%84%E6%9F%A5%E8%AF%A2%E6%8E%A8%E8%8D%90%EF%BC%9F.html">09 动态规划（上）：如何实现基于编辑距离的查询推荐？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/10%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E6%B1%82%E5%BE%97%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B%E5%B9%B6%E8%BF%9B%E8%A1%8C%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">10 动态规划（下）：如何求得状态转移方程并进行编程实现？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/11%20%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E9%AB%98%E6%95%88%E7%8E%87%E5%9C%B0%E6%9F%A5%E5%AD%97%E5%85%B8%EF%BC%9F.html">11 树的深度优先搜索（上）：如何才能高效率地查字典？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/12%20%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E9%AB%98%E6%95%88%E7%8E%87%E5%9C%B0%E6%9F%A5%E5%AD%97%E5%85%B8%EF%BC%9F.html">12 树的深度优先搜索（下）：如何才能高效率地查字典？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/13%20%E6%A0%91%E7%9A%84%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BA%BA%E9%99%85%E5%85%B3%E7%B3%BB%E7%9A%84%E5%85%AD%E5%BA%A6%E7%90%86%E8%AE%BA%E6%98%AF%E7%9C%9F%E7%9A%84%E5%90%97%EF%BC%9F.html">13 树的广度优先搜索（上）：人际关系的六度理论是真的吗？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/14%20%E6%A0%91%E7%9A%84%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8C%E5%90%91%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E7%9A%84%E6%95%88%E7%8E%87%E6%9B%B4%E9%AB%98%EF%BC%9F.html">14 树的广度优先搜索（下）：为什么双向广度优先搜索的效率更高？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/15%20%E4%BB%8E%E6%A0%91%E5%88%B0%E5%9B%BE%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E4%BC%9A%E7%9C%8B%E5%9C%B0%E5%9B%BE%EF%BC%9F.html">15 从树到图：如何让计算机学会看地图？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/16%20%E6%97%B6%E9%97%B4%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD%E6%98%AF%E5%90%A6%E5%8F%AA%E6%98%AF%E2%80%9C%E7%BA%B8%E4%B8%8A%E8%B0%88%E5%85%B5%E2%80%9D%EF%BC%9F.html">16 时间和空间复杂度（上）：优化性能是否只是“纸上谈兵”？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/17%20%E6%97%B6%E9%97%B4%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%85%AD%E4%B8%AA%E6%B3%95%E5%88%99%E8%BF%9B%E8%A1%8C%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90%EF%BC%9F.html">17 时间和空间复杂度（下）：如何使用六个法则进行复杂度分析？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/18%20%E6%80%BB%E7%BB%93%E8%AF%BE%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%81%E7%BC%96%E7%A8%8B%E8%AF%AD%E5%8F%A5%E5%92%8C%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E4%BD%93%E7%8E%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E6%95%B0%E5%AD%A6%E6%80%9D%E6%83%B3%EF%BC%9F.html">18 总结课：数据结构、编程语句和基础算法体现了哪些数学思想？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/19%20%E6%A6%82%E7%8E%87%E5%92%8C%E7%BB%9F%E8%AE%A1%EF%BC%9A%E7%BC%96%E7%A8%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%A6%82%E7%8E%87%E5%92%8C%E7%BB%9F%E8%AE%A1%EF%BC%9F.html">19 概率和统计：编程为什么需要概率和统计？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/20%20%E6%A6%82%E7%8E%87%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%AE%E4%BD%A0%E7%90%86%E8%A7%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E3%80%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%92%8C%E6%9C%9F%E6%9C%9B%E5%80%BC.html">20 概率基础（上）：一篇文章帮你理解随机变量、概率分布和期望值</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/21%20%E6%A6%82%E7%8E%87%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87%E3%80%81%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B3%95%E5%88%99%EF%BC%8C%E8%BF%99%E4%BA%9B%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F%E7%A9%B6%E7%AB%9F%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F.html">21 概率基础（下）：联合概率、条件概率和贝叶斯法则，这些概率公式究竟能做什么？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/22%20%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E4%BC%9A%E8%87%AA%E5%8A%A8%E5%88%86%E7%B1%BB%EF%BC%9F.html">22 朴素贝叶斯：如何让计算机学会自动分类？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/23%20%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86%E7%89%B9%E5%AE%9A%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B0%E9%97%BB%EF%BC%9F.html">23 文本分类：如何区分特定类型的新闻？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/24%20%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99%E5%92%8C%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E5%81%87%E8%AE%BE%E7%AE%80%E5%8C%96%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">24 语言模型：如何使用链式法则和马尔科夫假设简化概率模型？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/25%20%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%BB%8EPageRank%E5%88%B0%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%EF%BC%8C%E8%83%8C%E5%90%8E%E6%98%AF%E4%BB%80%E4%B9%88%E6%A8%A1%E5%9E%8B%E5%9C%A8%E6%94%AF%E6%92%91%EF%BC%9F.html">25 马尔科夫模型：从PageRank到语音识别，背后是什么模型在支撑？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/26%20%E4%BF%A1%E6%81%AF%E7%86%B5%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%8C%E6%B5%8B%E5%87%BA%E4%BD%A0%E5%AF%B9%E5%BA%94%E7%9A%84%E6%AD%A6%E4%BE%A0%E4%BA%BA%E7%89%A9%EF%BC%9F.html">26 信息熵：如何通过几个问题，测出你对应的武侠人物？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/27%20%E5%86%B3%E7%AD%96%E6%A0%91%EF%BC%9A%E4%BF%A1%E6%81%AF%E5%A2%9E%E7%9B%8A%E3%80%81%E5%A2%9E%E7%9B%8A%E6%AF%94%E7%8E%87%E5%92%8C%E5%9F%BA%E5%B0%BC%E6%8C%87%E6%95%B0%E7%9A%84%E8%BF%90%E7%94%A8.html">27 决策树：信息增益、增益比率和基尼指数的运用</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/28%20%E7%86%B5%E3%80%81%E4%BF%A1%E6%81%AF%E5%A2%9E%E7%9B%8A%E5%92%8C%E5%8D%A1%E6%96%B9%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE%E5%85%B3%E9%94%AE%E7%89%B9%E5%BE%81%EF%BC%9F.html">28 熵、信息增益和卡方：如何寻找关键特征？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/29%20%E5%BD%92%E4%B8%80%E5%8C%96%E5%92%8C%E6%A0%87%E5%87%86%E5%8C%96%EF%BC%9A%E5%90%84%E7%A7%8D%E7%89%B9%E5%BE%81%E5%A6%82%E4%BD%95%E7%BB%BC%E5%90%88%E6%89%8D%E6%98%AF%E6%9C%80%E5%90%88%E7%90%86%E7%9A%84%EF%BC%9F.html">29 归一化和标准化：各种特征如何综合才是最合理的？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/30%20%E7%BB%9F%E8%AE%A1%E6%84%8F%E4%B9%89%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E9%AA%8C%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BD%A0%E7%9A%84A_B%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%B7%A7%E5%90%88%EF%BC%9F.html">30 统计意义（上）：如何通过显著性检验，判断你的A_B测试结果是不是巧合？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/31%20%E7%BB%9F%E8%AE%A1%E6%84%8F%E4%B9%89%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E9%AA%8C%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BD%A0%E7%9A%84A_B%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%B7%A7%E5%90%88%EF%BC%9F.html">31 统计意义（下）：如何通过显著性检验，判断你的A_B测试结果是不是巧合？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/32%20%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1%E7%AF%87%E7%AD%94%E7%96%91%E5%92%8C%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E6%AC%A0%E6%8B%9F%E5%90%88%E5%92%8C%E8%BF%87%E6%8B%9F%E5%90%88%EF%BC%9F.html">32 概率统计篇答疑和总结：为什么会有欠拟合和过拟合？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/33%20%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%EF%BC%9A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%88%B0%E5%BA%95%E9%83%BD%E8%AE%B2%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">33 线性代数：线性代数到底都讲了些什么？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/34%20%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%90%86%E8%A7%A3%E7%8E%B0%E5%AE%9E%E4%BA%8B%E7%89%A9%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F.html">34 向量空间模型：如何让计算机理解现实事物之间的关系？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/35%20%E6%96%87%E6%9C%AC%E6%A3%80%E7%B4%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%A4%84%E7%90%86%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%EF%BC%9F.html">35 文本检索：如何让计算机处理自然语言？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/36%20%E6%96%87%E6%9C%AC%E8%81%9A%E7%B1%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%87%E6%BB%A4%E5%86%97%E4%BD%99%E7%9A%84%E6%96%B0%E9%97%BB%EF%BC%9F.html">36 文本聚类：如何过滤冗余的新闻？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/37%20%E7%9F%A9%E9%98%B5%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C%E8%BF%9B%E8%A1%8CPageRank%E8%AE%A1%E7%AE%97%EF%BC%9F.html">37 矩阵（上）：如何使用矩阵操作进行PageRank计算？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/38%20%E7%9F%A9%E9%98%B5%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C%E8%BF%9B%E8%A1%8C%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E6%8E%A8%E8%8D%90%EF%BC%9F.html">38 矩阵（下）：如何使用矩阵操作进行协同过滤推荐？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/39%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83%E6%B1%82%E8%A7%A3%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%EF%BC%9F.html">39 线性回归（上）：如何使用高斯消元求解线性方程组？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/40%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E8%BF%9B%E8%A1%8C%E7%9B%B4%E7%BA%BF%E6%8B%9F%E5%90%88%EF%BC%9F.html">40 线性回归（中）：如何使用最小二乘法进行直线拟合？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/41%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E8%BF%9B%E8%A1%8C%E6%95%88%E6%9E%9C%E9%AA%8C%E8%AF%81%EF%BC%9F.html">41 线性回归（下）：如何使用最小二乘法进行效果验证？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/42%20PCA%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5%E6%9D%A5%E9%99%8D%E7%BB%B4%EF%BC%9F.html">42 PCA主成分分析（上）：如何利用协方差矩阵来降维？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/43%20PCA%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%AE%A1%E7%AE%97%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5%E7%9A%84%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F%EF%BC%9F.html">43 PCA主成分分析（下）：为什么要计算协方差矩阵的特征值和特征向量？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/44%20%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8C%96%E6%8E%98%E6%BD%9C%E5%9C%A8%E7%9A%84%E8%AF%AD%E4%B9%89%E5%85%B3%E7%B3%BB%EF%BC%9F.html">44 奇异值分解：如何挖掘潜在的语义关系？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/45%20%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%AF%87%E7%AD%94%E7%96%91%E5%92%8C%E6%80%BB%E7%BB%93%EF%BC%9A%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E7%9A%84%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">45 线性代数篇答疑和总结：矩阵乘法的几何意义是什么？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/46%20%E7%BC%93%E5%AD%98%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%93%88%E5%B8%8C%E8%A1%A8%E5%92%8C%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E8%AE%BF%E9%97%AE%EF%BC%9F.html">46 缓存系统：如何通过哈希表和队列实现高效访问？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/47%20%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E5%92%8C%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4%E6%A8%A1%E5%9E%8B%EF%BC%8C%E6%89%93%E9%80%A0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9F.html">47 搜索引擎（上）：如何通过倒排索引和向量空间模型，打造一个简单的搜索引擎？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/48%20%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%88%86%E7%B1%BB%EF%BC%8C%E8%AE%A9%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C%E6%9B%B4%E7%9B%B8%E5%85%B3%EF%BC%9F.html">48 搜索引擎（下）：如何通过查询的分类，让电商平台的搜索结果更相关？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/49%20%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%9F%BA%E4%BA%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%EF%BC%9F.html">49 推荐系统（上）：如何实现基于相似度的协同过滤？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/50%20%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87SVD%E5%88%86%E6%9E%90%E7%94%A8%E6%88%B7%E5%92%8C%E7%89%A9%E5%93%81%E7%9A%84%E7%9F%A9%E9%98%B5%EF%BC%9F.html">50 推荐系统（下）：如何通过SVD分析用户和物品的矩阵？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/51%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8%E7%AF%87%E7%AD%94%E7%96%91%E5%92%8C%E6%80%BB%E7%BB%93%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%B8%AA%E6%80%A7%E5%8C%96%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">51 综合应用篇答疑和总结：如何进行个性化用户画像的设计？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E5%AF%BC%E8%AF%BB%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E5%AD%A6%E6%95%B0%E5%AD%A6%EF%BC%9F.html">导读：程序员应该怎么学数学？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BD%9C%E4%B8%BA%E7%A8%8B%E5%BA%8F%E5%91%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E5%BA%94%E8%AF%A5%E5%AD%A6%E5%A5%BD%E6%95%B0%E5%AD%A6%EF%BC%9F.html">开篇词 作为程序员，为什么你应该学好数学？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E6%95%B0%E5%AD%A6%E4%B8%93%E6%A0%8F%E8%AF%BE%E5%A4%96%E5%8A%A0%E9%A4%90%EF%BC%88%E4%B8%80%EF%BC%89%20%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%8F%8D%E7%A0%81%E5%92%8C%E8%A1%A5%E7%A0%81%EF%BC%9F.html">数学专栏课外加餐（一） 我们为什么需要反码和补码？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E6%95%B0%E5%AD%A6%E4%B8%93%E6%A0%8F%E8%AF%BE%E5%A4%96%E5%8A%A0%E9%A4%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9C%80%E8%A6%81%E8%AF%BB%E5%93%AA%E4%BA%9B%E6%95%B0%E5%AD%A6%E4%B9%A6%EF%BC%9F.html">数学专栏课外加餐（三）：程序员需要读哪些数学书？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E6%95%B0%E5%AD%A6%E4%B8%93%E6%A0%8F%E8%AF%BE%E5%A4%96%E5%8A%A0%E9%A4%90%EF%BC%88%E4%BA%8C%EF%BC%89%20%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%9A%84%E4%B8%89%E4%B8%AA%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B.html">数学专栏课外加餐（二） 位操作的三个应用实例</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%BB%8E%E6%95%B0%E5%AD%A6%E5%88%B0%E7%BC%96%E7%A8%8B%EF%BC%8C%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E5%BE%88%E9%95%BF%E7%9A%84%E9%93%BE%E6%9D%A1.html">结束语 从数学到编程，本身就是一个很长的链条</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/07%20%E6%8E%92%E5%88%97%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E4%BC%9A%E2%80%9C%E7%94%B0%E5%BF%8C%E8%B5%9B%E9%A9%AC%E2%80%9D%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="07 排列：如何让计算机学会“田忌赛马”？" id="title">07 排列：如何让计算机学会“田忌赛马”？</h1>
+<div><p>你好，我是黄申。</p>
+<p>“田忌赛马”的故事我想你肯定听过吧？田忌是齐国有名的将领，他常常和齐王赛马，可是总是败下阵来，心中非常不悦。孙膑想帮田忌一把。他把这些马分为上、中、下三等。他让田忌用自己的下等马来应战齐王的上等马，用上等马应战齐王的中等马，用中等马应战齐王的下等马。三场比赛结束后，田忌只输了第一场，赢了后面两场，最终赢得与齐王的整场比赛。</p>
+<p>孙膑每次都从田忌的马匹中挑选出一匹，一共进行三次，排列出战的顺序。是不是感觉这个过程很熟悉？这其实就是数学中的<strong>排列</strong>过程。</p>
+<p>我们初高中的时候，都学过排列，它的概念是这么说的：从n个不同的元素中取出m（1≤m≤n）个不同的元素，按照一定的顺序排成一列，这个过程就叫<strong>排列</strong>（Permutation）。当m=n这种特殊情况出现的时候，比如说，在田忌赛马的故事中，田忌的三匹马必须全部出战，这就是<strong>全排列</strong>（All Permutation）。</p>
+<p>如果选择出的这m个元素可以有重复的，这样的排列就是为<strong>重复排列</strong>（Permutation with Repetition），否则就是<strong>不重复排列</strong>（Permutation without Repetition）。</p>
+<p><img alt="" src="/assets/67bef3b5c70bf63b6f95ea56.jpg"/></p>
+<p>看出来没有？这其实是一个树状结构。从树的根结点到叶子结点，每种路径都是一种排列。有多少个叶子结点就有多少种全排列。从图中我们可以看出，最终叶子结点的数量是3x2x1=6，所以最终排列的数量为6。</p>
+<pre><code>{上等，中等，下等}
+{上等，下等，中等}
+{中等，上等，下等}
+{中等，下等，上等}
+{下等，上等，中等}
+{下等，中等，上等}
+</code></pre>
+<p>我用t1，t2和t3分别表示田忌的上、中、下等马跑完全程所需的时间，用q1，q2和q3分别表示齐王的上、中、下等马跑全程所需的时间，因此，q1<t1<q2<t2<q3<t3。< p="">
+<p>如果你将这些可能的排列，仔细地和齐王的上等、中等和下等马进行对比，只有{下等，上等，中等}这一种可能战胜齐王，也就是t3&gt;q1，t1<q2，t2<q3。< p="">
+<p>对于最终排列的数量，这里我再推广一下：</p>
+<ul>
+<li><p>对于n个元素的全排列，所有可能的排列数量就是nx(n-1)x(n-2)x…x2x1，也就是n!；</p></li>
+<li><p>对于n个元素里取出m(0≤n)个元素的不重复排列数量是nx(n-1)x(n-2)x…x(n - m + 1)，也就是n!/(n-m)!。</p></li>
+</ul>
+<p>这两点都是可以用数学归纳法证明的，有兴趣的话你可以自己尝试一下。</p>
+<h2 id="如何让计算机为田忌安排赛马">如何让计算机为田忌安排赛马？</h2>
+<p>我们刚才讨论了3匹马的情况，这倒还好。可是，如果有30匹马、300匹马，怎么办？30的阶乘已经是天文数字了。更糟糕的是，如果两组马之间的速度关系也是非常随机的，例如q1<q2<t1<t2<q3<t3， p="" 那就不能再使用“最差的马和对方最好的马比赛”这种战术了。这个时候，人手动肯定是算不过来了，计算机又要帮我们大忙啦！我们使用代码来展示如何生成所有的排列。<="">
+<p>如果你细心的话，就会发现在新版舍罕王赏麦的案例中，其实已经涉及了排列的思想，不过那个案例不是以“选取多少个元素”为终止条件，而是以“选取元素的总和”为终止条件。尽管这样，我们仍然可以使用递归的方式来快速地实现排列。</p>
+<p>不过，要把田忌赛马的案例，转成计算机所能理解的内容，还需要额外下点功夫。</p>
+<p>首先，在不同的选马阶段，我们都要保存已经有几匹马出战、它们的排列顺序、以及还剩几匹马没有选择。我使用变量result来存储到当前函数操作之前，已经出战的马匹及其排列顺序。而变量horses存储了到当前函数操作之前，还剩几匹马还没出战。变量new_result和rest_horses是分别从result和horses克隆而来，保证不会影响上一次的结果。</p>
+<p>其次，孙膑的方法之所以奏效，是因为他看到每一等马中，田忌的马只比齐王的差一点点。如果相差太多，可能就会有不同的胜负结局。所以，在设置马匹跑完全程的时间上，我特意设置为q1<t1<q2<t2<q3<t3，只有这样才能保证计算机得出和孙膑相同的结论。< p="">
+<pre><code>import java.util.ArrayList;
+import java.util.Arrays; 
+import java.util.HashMap;
+
+public class Lesson7_1 {
+	
+	// 设置齐王的马跑完所需时间
+	public static HashMap&lt;String, Double&gt; q_horses_time = new HashMap&lt;String, Double&gt;(){
+		{
+		 	  put("q1", 1.0);
+		 	  put("q2", 2.0);
+		    put("q3", 3.0);
+		}
+	};
+	
+	// 设置田忌的马跑完所需时间
+	public static HashMap&lt;String, Double&gt; t_horses_time = new HashMap&lt;String, Double&gt;(){
+		{
+		 	  put("t1", 1.5);
+		 	  put("t2", 2.5);
+		    put("t3", 3.5);
+		}
+	};
+	
+	public	static ArrayList&lt;String&gt; q_horses = new ArrayList&lt;String&gt;(Arrays.asList("q1", "q2", "q3"));
+	
+	/**
+    * @Description:	使用函数的递归（嵌套）调用，找出所有可能的马匹出战顺序
+    * @param horses-目前还剩多少马没有出战，result-保存当前已经出战的马匹及顺序
+    * @return void
+    */
+	
+    public static void permutate(ArrayList&lt;String&gt; horses, ArrayList&lt;String&gt; result) {
+    	
+    	// 所有马匹都已经出战，判断哪方获胜，输出结果
+    	if (horses.size() == 0) {
+    		System.out.println(result);
+    		compare(result, q_horses);
+    		
+    		System.out.println();
+    		
+ 	 			return;
+   		}
+    	
+   		for (int i = 0; i &lt; horses.size(); i++) {
+    		// 从剩下的未出战马匹中，选择一匹，加入结果
+ 	 			ArrayList&lt;String&gt; new_result = (ArrayList&lt;String&gt;)(result.clone());
+   			new_result.add(horses.get(i));
+  	 		
+    		// 将已选择的马匹从未出战的列表中移出
+ 	 			ArrayList&lt;String&gt; rest_horses = ((ArrayList&lt;String&gt;)horses.clone());
+ 	 			rest_horses.remove(i);
+    		
+    		// 递归调用，对于剩余的马匹继续生成排列
+   			permutate(rest_horses, new_result);
+   		}
+    	
+    }
+
+
+}
+ 
+</code></pre>
+<p>另外，我还使用了compare的函数来比较田忌和齐王的马匹，看哪方获胜。</p>
+<pre><code>    public static void compare(ArrayList&lt;String&gt; t, ArrayList&lt;String&gt; q) {
+    	int t_won_cnt = 0;
+    	for (int i = 0; i &lt; t.size(); i++) {
+			System.out.println(t_horses_time.get(t.get(i)) + " " +  q_horses_time.get(q.get(i)));
+			if (t_horses_time.get(t.get(i)) &lt; q_horses_time.get(q.get(i))) t_won_cnt ++;
+		}
+		
+		if (t_won_cnt &gt; (t.size() / 2)) System.out.println("田忌获胜！");
+		else System.out.println("齐王获胜！");
+		
+		System.out.println();
+    }
+ 
+</code></pre>
+<p>下面是测试代码。当然你可以设置更多的马匹，并增加相应的马匹跑完全程的时间。</p>
+<pre><code>  public static void main(String[] args) {
+		
+		ArrayList&lt;String&gt; horses = new	ArrayList&lt;String&gt;(Arrays.asList("t1", "t2", "t3"));
+		Lesson7_1.permutate(horses,	new ArrayList&lt;String&gt;());
+		
+	}
+
+</code></pre>
+<p>在最终的输出结果中，6种排列中只有一种情况是田忌获胜的。</p>
+<pre><code>[t3, t1, t2]
+3.5 1.0
+1.5 2.0
+2.5 3.0
+田忌获胜！
+</code></pre>
+<p>如果田忌不听从孙膑的建议，而是随机的安排马匹出战，那么他只有1/6的获胜概率。</p>
+<p>说到这里，我突然产生了一个想法，如果齐王也是随机安排他的马匹出战顺序，又会是怎样的结果？如果动手来实现的话，大体思路是我们为田忌和齐王两方都生成他们马匹的全排序，然后再做交叉对比，看哪方获胜。这个交叉对比的过程也是个排列的问题，田忌这边有6种顺序，而齐王也是6种顺序，所以一共的可能性是6x6=36种。</p>
+<p>我用代码模拟了一下，你可以看看。</p>
+<pre><code>public static void main(String[] args) {
+		
+		ArrayList&lt;String&gt; t_horses = new ArrayList&lt;String&gt;(Arrays.asList("t1", "t2", "t3"));
+		Lesson7_2.permutate(t_horses, new ArrayList&lt;String&gt;(), t_results);
+		
+		ArrayList&lt;String&gt; q_horses = new ArrayList&lt;String&gt;(Arrays.asList("q1", "q2", "q3"));
+		Lesson7_2.permutate(q_horses, new ArrayList&lt;String&gt;(), q_results);
+		
+		System.out.println(t_results);
+		System.out.println(q_results);
+		System.out.println();
+		
+		for (int i = 0; i &lt; t_results.size(); i++) {
+			for (int j = 0; j &lt; q_results.size(); j++) {
+				Lesson7_2.compare(t_results.get(i), q_results.get(j));
+			}
+		}
+		
+	}
+ 
+</code></pre>
+<p>由于交叉对比时只需要选择2个元素，分别是田忌的出战顺序和齐王的出战顺序，所以这里使用2层循环的嵌套来实现。从最后的结果可以看出，田忌获胜的概率仍然是1/6。</p>
+<h2 id="暴力破解密码如何使用排列思想">暴力破解密码如何使用排列思想？</h2>
+<p>聊了这么多，相信你对排列有了更多了解。在概率中，排列有很大的作用，因为排列会帮助我们列举出随机变量取值的所有可能性，用于生成这个变量的概率分布，之后在概率统计篇我还会具体介绍。此外，排列在计算机领域中有着很多应用场景。我这里讲讲最常见的密码的暴力破解。</p>
+<p>我们先来看去年网络安全界的两件大事。第一件发生在2017年5月，新型“蠕虫”式勒索病毒WannaCry爆发。当时这个病毒蔓延得非常迅速，电脑被感染后，其中的文件会被加密锁住，黑客以此会向用户勒索比特币。第二件和美国的信用评级公司Equifax有关。仅在2017年内，这个公司就被黑客盗取了大约1.46亿用户的数据。</p>
+<p>看样子，黑客攻击的方式多种多样，手段也高明了很多，但是窃取系统密码仍然是最常用的攻击方式。有时候，黑客们并不需要真的拿到你的密码，而是通过“猜”，也就是列举各种可能的密码，然后逐个地去尝试密码的正确性。如果某个尝试的密码正好和原先管理员设置的一样，那么系统就被破解了。这就是我们常说的<strong>暴力破解法</strong>。</p>
+<p>我们可以假设一个密码是由英文字母组成的，那么每位密码有52种选择，也就是大小写字母加在一起的数量。那么，生成m位密码的可能性就是52^m种。也就是说，从n（这里n为52）个元素取出m（0≤n）个元素的可重复全排列，总数量为n^m。如果你遍历并尝试所有的可能性，就能破解密码了。</p>
+<p>不过，即使存在这种暴力法，你也不用担心自己的密码很容易被人破解。我们平时需要使用密码登录的网站或者移动端App程序，基本上都限定了一定时间内尝试密码的次数，例如1天之内只能尝试5次等等。这些次数一定远远小于密码排列的可能性。</p>
+<p>这也是为什么有些网站或App需要你一定使用多种类型的字符来创建密码，比如字母加数字加特殊符号。因为类型越多，n^m中的n越大，可能性就越多。如果使用英文字母的4位密码，就有52^4=7311616种，超过了700万种。如果我们在密码中再加入0～9这10个阿拉伯数字，那么可能性就是62^4=14776336种，超过了1400万。</p>
+<p>同理，我们也可以增加密码长度，也就是用n^m中的m来实现这一点。如果在英文和阿拉伯数字的基础上，我们把密码的长度增加到6位，那么就是62^6=56800235584种，已经超过了568亿了！这还没有考虑键盘上的各种特殊符号。有人估算了一下，如果用上全部256个ASCII码字符，设置长度为8的密码，那么一般的黑客需要10年左右的时间才能暴力破解这种密码。</p>
+<h2 id="小结">小结</h2>
+<p>排列可以帮助我们生成很多可能性。由于这种特性，排列最多的用途就是穷举法，也就是，列出所有可能的情况，一个一个验证，然后看每种情况是否符合条件的解。</p>
+<p>古代的孙膑利用排列的思想，穷举了田忌马匹的各种出战顺序，然后获得了战胜齐王的策略。现代的黑客，通过排列的方法，穷举了各种可能的密码，试图破坏系统的安全性。如果你所面临的问题，它的答案也是各种元素所组成的排列，那么你就可以考虑，有没有可能排列出所有的可能性，然后通过穷举的方式来获得最终的解。</p>
+<p><img alt="" src="/assets/8b65d6d0a57d0419290b3d15.jpg"/></p>
+<h2 id="思考题">思考题</h2>
+<p>假设有一个4位字母密码，每位密码是a～e之间的小写字母。你能否编写一段代码，来暴力破解该密码？（提示：根据可重复排列的规律，生成所有可能的4位密码。）</p>
+<p>欢迎在留言区交作业，并写下你今天的学习笔记。你可以点击“请朋友读”，把今天的内容分享给你的好友，和他一起精进。</p>
+</t1<q2<t2<q3<t3，只有这样才能保证计算机得出和孙膑相同的结论。<></p></q2<t1<t2<q3<t3，></p></q2，t2<q3。<></p></t1<q2<t2<q3<t3。<></p></div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

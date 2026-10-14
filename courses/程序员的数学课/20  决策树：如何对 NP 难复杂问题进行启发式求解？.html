@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>20  决策树：如何对 NP 难复杂问题进行启发式求解？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/index.html">程序员的数学课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">25 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>程序员的数学课</strong><ul><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E6%95%B0%E5%AD%A6%EF%BC%8C%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E7%9A%84%E8%90%A5%E5%85%BB%E6%A0%B9%E5%9F%BA.html">00 开篇词  数学，编程能力的营养根基</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/01%20%20%E4%BB%8E%E8%AE%A1%E6%95%B0%E5%BC%80%E5%A7%8B%EF%BC%8C%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%9A%84%E6%95%B0%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%B3%95.html">01  从计数开始，程序员必知必会的数制转换法</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/02%20%20%E9%80%BB%E8%BE%91%E4%B8%8E%E6%B2%9F%E9%80%9A%EF%BC%8C%E6%80%8E%E6%A0%B7%E6%89%8D%E8%83%BD%E8%AE%B2%E5%87%BA%E6%9C%89%E9%80%BB%E8%BE%91%E7%9A%84%E8%AF%9D%EF%BC%9F.html">02  逻辑与沟通，怎样才能讲出有逻辑的话？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/03%20%20%E7%94%A8%E6%95%B0%E5%AD%A6%E5%86%B3%E7%AD%96%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E5%88%92%E5%A5%BD%E6%8A%95%E5%85%A5%E3%80%81%E8%BD%AC%E5%8C%96%E5%92%8C%E4%BA%A7%E5%87%BA%EF%BC%9F.html">03  用数学决策，如何规划好投入、转化和产出？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/04%20%20%E4%B8%87%E7%89%A9%E5%8F%AF%E6%95%B0%E5%AD%A6%EF%BC%8C%E7%BB%8F%E5%85%B8%E5%85%AC%E5%BC%8F%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BA%94%E7%94%A8%E7%9A%84%EF%BC%9F.html">04  万物可数学，经典公式是如何在生活中应用的？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/05%20%20%E6%B1%82%E6%9E%81%E5%80%BC%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E7%9A%84%E6%9C%80%E4%BC%98%E8%A7%A3%EF%BC%9F.html">05  求极值：如何找到复杂业务的最优解？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/06%20%20%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E5%AF%BC%E6%95%B0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%A6%82%E4%BD%95%E5%AE%8C%E6%88%90%E5%AF%B9%E6%B5%B7%E9%87%8F%E9%AB%98%E7%BB%B4%E5%BA%A6%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97%EF%BC%9F.html">06  向量及其导数：计算机如何完成对海量高维度数据计算？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/07%20%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A6%BB%E6%95%A3%E7%82%B9%E4%B8%AD%E5%AF%BB%E6%89%BE%E6%95%B0%E6%8D%AE%E8%A7%84%E5%BE%8B%EF%BC%9F.html">07  线性回归：如何在离散点中寻找数据规律？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/08%20%20%E5%8A%A0%E4%B9%98%E6%B3%95%E5%88%99%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E5%A4%8D%E6%9D%82%E4%BA%8B%E4%BB%B6%E5%8F%91%E7%94%9F%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%9F.html">08  加乘法则：如何计算复杂事件发生的概率？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/09%20%20%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20MLE%20%E5%AF%B9%E5%8F%82%E6%95%B0%E8%BF%9B%E8%A1%8C%E4%BC%B0%E8%AE%A1%EF%BC%9F.html">09  似然估计：如何利用 MLE 对参数进行估计？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/10%20%20%E4%BF%A1%E6%81%AF%E7%86%B5%EF%BC%9A%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%EF%BC%9F.html">10  信息熵：事件的不确定性如何计算？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/11%20%20%E7%81%B0%E5%BA%A6%E5%AE%9E%E9%AA%8C%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%81%B0%E5%BA%A6%E5%AE%9E%E9%AA%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E5%AE%9E%E9%AA%8C%E7%9A%84%E6%94%B6%E7%9B%8A%EF%BC%9F.html">11  灰度实验：如何设计灰度实验并计算实验的收益？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/12%20%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%96%B9%E6%B3%95%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8E%E7%81%B0%E5%BA%A6%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C%E4%B8%8D%E6%98%AF%E5%81%B6%E7%84%B6%E5%BE%97%E5%88%B0%E7%9A%84%EF%BC%9F.html">12  统计学方法：如何证明灰度实验效果不是偶然得到的？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/13%20%20%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC%E5%AF%B9%E7%A8%8B%E5%BA%8F%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96%EF%BC%9F.html">13  复杂度：如何利用数学推导对程序进行优化？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/14%20%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BE%AA%E7%8E%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95%E8%BF%9B%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%EF%BC%9F.html">14  程序的循环：如何利用数学归纳法进行程序开发？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/15%20%20%E9%80%92%E5%BD%92%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98%E7%9A%84%E7%A7%BB%E5%8A%A8%E6%AD%A5%E6%95%B0%EF%BC%9F.html">15  递归：如何计算汉诺塔问题的移动步数？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/16%20%20%E4%BA%8C%E5%88%86%E6%B3%95%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E6%8C%87%E6%95%B0%E7%88%86%E7%82%B8%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">16  二分法：如何利用指数爆炸优化程序？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/17%20%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E6%9C%80%E4%BC%98%E5%AD%90%E7%BB%93%E6%9E%84%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%EF%BC%9F.html">17  动态规划：如何利用最优子结构解决问题？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/18%20%20AI%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%88%A9%E7%94%A8%203%20%E4%B8%AA%E5%85%AC%E5%BC%8F%E6%90%AD%E5%BB%BA%E6%9C%80%E7%AE%80%20AI%20%E6%A1%86%E6%9E%B6.html">18  AI 入门：利用 3 个公式搭建最简 AI 框架</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/19%20%20%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%81%9A%E5%87%BA%E4%BA%8C%E5%80%BC%E5%8C%96%E5%86%B3%E7%AD%96%EF%BC%9F.html">19  逻辑回归：如何让计算机做出二值化决策？</a></li><li><a class="active" aria-current="page" href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/20%20%20%E5%86%B3%E7%AD%96%E6%A0%91%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AF%B9%20NP%20%E9%9A%BE%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E8%BF%9B%E8%A1%8C%E5%90%AF%E5%8F%91%E5%BC%8F%E6%B1%82%E8%A7%A3%EF%BC%9F.html">20  决策树：如何对 NP 难复杂问题进行启发式求解？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/21%20%20%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%98%AF%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%9B%BE%E5%83%8F%E3%80%81%E6%96%87%E6%9C%AC%E5%92%8C%E8%AF%AD%E9%9F%B3%E7%9A%84%EF%BC%9F.html">21  神经网络与深度学习：计算机是如何理解图像、文本和语音的？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/22%20%20%E9%9D%A2%E8%AF%95%E4%B8%AD%E9%82%A3%E4%BA%9B%E5%9D%91%E4%BA%86%E6%97%A0%E6%95%B0%E4%BA%BA%E7%9A%84%E7%AE%97%E6%B3%95%E9%A2%98.html">22  面试中那些坑了无数人的算法题</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/23%20%20%E7%AB%99%E5%9C%A8%E7%94%9F%E6%B4%BB%E7%9A%84%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3%EF%BC%8C%E5%A6%82%E4%BD%95%E7%94%A8%E6%95%B0%E5%AD%A6%E6%8A%89%E6%8B%A9%EF%BC%9F.html">23  站在生活的十字路口，如何用数学抉择？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/24%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E6%95%B0%E5%AD%A6%E5%BA%95%E5%AD%90%E5%A5%BD%EF%BC%8C%E5%AD%A6%E5%95%A5%E9%83%BD%E5%BF%AB.html">24 结束语  数学底子好，学啥都快</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/20%20%20%E5%86%B3%E7%AD%96%E6%A0%91%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AF%B9%20NP%20%E9%9A%BE%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E8%BF%9B%E8%A1%8C%E5%90%AF%E5%8F%91%E5%BC%8F%E6%B1%82%E8%A7%A3%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="20  决策树：如何对 NP 难复杂问题进行启发式求解？" id="title">20  决策树：如何对 NP 难复杂问题进行启发式求解？</h1>
+<div><p>这一讲，我们学习决策树模型。决策树模型既可以解决分类问题，也可以解决回归问题，经典的决策树算法有 ID3、C4.5，以及 CART 算法。</p>
+<p>当今主流的人工智能模型都是基于决策树的模型，例如更复杂的梯度提升决策树、随机森林等等。这些模型有着更加复杂、深厚的数学机理，但本质上还是决策树的思想。</p>
+<h3 id="决策树及其基本结构">决策树及其基本结构</h3>
+<p>决策树算法采用树形结构，使用层层推理来实现最终的分类。与逻辑回归不同，决策树模型很难用一个函数来描述输入向量<strong><em>x</em></strong>和预测类别 y 之间的关系。但是，如果利用一个如下图的树形状图形，就能很轻松描述清楚。</p>
+<p><img alt="图片1.png" src="/assets/a252462affe6d8e03324ae79.png"/></p>
+<p>决策树</p>
+<p>我们可以发现决策树有以下特点。</p>
+<p>决策树由结点和边组成。最上边的结点称作<strong>根结点</strong>，最下边的结点称作<strong>叶子结点</strong>。除了叶子结点外，每个结点都根据某个变量及其分界阈值，决定了是向左走或向右走。每个叶子结点代表了某个分类的结果。</p>
+<ul>
+<li>当使用决策树模型去预测某个样本的归属类别时，需要将这个样本从根结点输入；</li>
+<li>接着就要“按图索骥”，根据决策树中的规则，一步步找到向左走或向右走的路径；</li>
+<li>直到最终，最终到达了某个叶子结点中，并用该叶子结点的类别表示预测结果。</li>
+</ul>
+<p>例如，大迷糊的头发长度为 6 厘米、指甲长度为 0.1 厘米，我们要预测大迷糊的性别。从根结点出发，因为大迷糊的头发长度大于 5 厘米，则向左走；又因为大迷糊的指甲长度小于 1 厘米，则向右走。最终抵达叶子结点为男性，这就是预测的结果。</p>
+<h3 id="决策树建模的挑战">决策树建模的挑战</h3>
+<p>我们曾说过，利用人工智能建模就是建立假设，再去找到假设条件下的最优化参数。对于决策树而言，它的假设就是输入向量<strong><em>x</em></strong>和输出类别 y 之间是一棵树的条件判断关系。</p>
+<p>这样来看，决策树模型的参数就是每个结点的分裂变量和分裂变量的阈值。决策树建模，就是要找到最优的模型参数，让预测结果尽可能更准。然而，在使用决策树建模时想最优的模型参数是个 NP 难的问题。</p>
+<p>NP 难问题，指最优参数无法在多项式时间内被计算出来，这很像我们先前所说的指数爆炸。NP 难问题是数学界的一类经典问题，我们这里进行简单介绍。</p>
+<p>例如，旅行商问题（Travel Saleman Problem or TSP）就是个典型的 NP 难问题。旅行商问题，是指一个旅行商需要从 A 城市出发，经过 B 城市、C 城市、D 城市等 n 个城市后， 最后返回 A 城市，已知任意两个城市之间的路费 xij。</p>
+<p>问：这个旅行商以怎样的城市顺序安排旅行，能让自己的路费最少。</p>
+<p>这个旅行商问题显然就是一个 NP 难问题，这体现在两个方面。</p>
+<ul>
+<li>第一，任意给出一个行程安排，例如 A-&gt;B-&gt;D-&gt;C-&gt;A，都可以很容易算出旅行路线的总费用；</li>
+<li>第二，但是要想找到费用最少的那条路线，最坏情况下，必须检查所有可能的路线，而这里可能的路线是 (n-1)! 个。</li>
+</ul>
+<blockquote>
+<p>例如，3 个城市的路线有 A-&gt;B-&gt;C-&gt;A、A-&gt;C-&gt;B-&gt;A 两种可能，搜索空间决定了时间复杂度，显然复杂度是 O(n!)。这远大于多项式，例如 O(n)、O(n2)、O(n3) 的时间复杂度。</p>
+</blockquote>
+<p>面对 NP 难问题，常规的解法是降低解的质量，去换取复杂度的降低。简而言之就是，从寻找 NP 难问题的全局最优解，转变为在多项式时间内寻找某个大差不差的次优解。通常，这类算法也被称为启发式的算法。</p>
+<p>因此，在使用决策树建模时，绝大多数的决策树算法（如 ID3 和 C4.5）所采取的策略都是启发式算法（例如贪心算法）来对空间进行搜索。这样，决策树中的每个结点都是基于当前的局部最优选择进行构造。</p>
+<h3 id="id3-决策树的启发式建模">ID3 决策树的启发式建模</h3>
+<p>补充完了基本概念后，我们以 ID3 决策树为例，详细探讨一下决策树建模的过程。ID3 决策树的核心思想，是在当前结点，根据信息增益最大的那个特征变量，决定如何构成决策树。</p>
+<blockquote>
+<p>我们在《10 | 信息熵：事件的不确定性如何计算？》曾经学过，利用熵、条件熵来描述事件的不确定性。进一步，可以得到信息增益，来量化某个条件对于事件不确定性降低的多少。</p>
+</blockquote>
+<p>由此可见，ID3 决策树的思路非常简单，就是在所有能降低不确定性的变量中，找到那个降低程度最多的变量作为分裂变量。经过多次重复这个过程，就能得到一棵决策树了。</p>
+<p><strong>【ID3 决策树建模步骤】</strong></p>
+<ul>
+<li>计算出数据集的信息熵。</li>
+<li>对于<strong><em>x</em></strong>向量的每一个维度：
+
+<ol>
+<li>以这个维度作为条件，计算条件熵；</li>
+<li>根据数据集的信息熵和条件熵，计算信息增益。</li>
+</ol></li>
+<li>找到信息增益最大的变量，作为当前的分裂变量，并根据这个分裂变量得到若干个子集。</li>
+<li>对分类过后的每个子集，递归地执行 1～3 步，直到终止条件满足。</li>
+</ul>
+<p><strong>【ID3 决策树常见的两个终止条件】</strong></p>
+<ul>
+<li>如果结点中的全部的样本都属于同一类别，则算法停止，并输出类别标签。</li>
+<li>若无法继续对当层节点进行划分（特征用完），将该节点内的最高频的类别标签输出。</li>
+</ul>
+<h4 id="论述-id3-建模的过程-案例-1">论述 ID3 建模的过程 案例 1</h4>
+<p>假设有以下数据集，每一行是一个样本，每一列一个特征变量，最后一列是样本的真实类别。试着去建立 ID3 决策树。
+<img alt="WechatIMG1513.png" src="/assets/34491d25be9e3ff4051628a5.png"/>
+<strong>1.首先，计算信息熵。</strong></p>
+<p>数据集中，类别为“1”的样本有 1 个，类别为“0”的样本有 3 个；这样，类别“1”出现的概率就是 1/4，类别“0”出现的概率就是 3/4。</p>
+<p>根据公式可以知道，信息熵为
+<img alt="图片3.jpg" src="/assets/f5d91068d7a9cb3ae94ed597.jpg"/></p>
+<p><strong>2.接着，对每个变量，计算条件熵及其信息增益</strong></p>
+<ul>
+<li>第一个变量</li>
+</ul>
+<p>第一个变量，即数据集中的第一列。它包含了两个“1”和两个“0”，可见“1”和“0”的概率为1/2。其中在第一个变量为“1”的两个样本中，类别标签分别为“1”和“0”，则信息熵为
+<img alt="图片4-1.jpg" src="/assets/08a4e62536ac71b1e02673bc.jpg"/>
+在第一个变量为“0”的两个样本中，类别标签都是“0”，则信息熵为
+<img alt="图片4-2.jpg" src="/assets/9f8610dd519b6ee5f8303331.jpg"/></p>
+<p><img alt="图片4-3.jpg" src="/assets/d1d68ca5e32e160f072f05d5.jpg"/></p>
+<ul>
+<li>第二个变量</li>
+</ul>
+<p>同理，可以计算出第二个变量的信息增益为
+<img alt="图片5-1.jpg" src="/assets/480dd1cd8946d1316a887f04.jpg"/></p>
+<ul>
+<li>第三个变量</li>
+</ul>
+<p>对于第三个变量，它的值都是 1，也就是说第三个变量出现 1 的概率是 100%。
+<img alt="图片5-2.jpg" src="/assets/8fa97361791027d39afba886.jpg"/></p>
+<p>也就是没有信息增益，等同于是个废话。从数据中也能看出，第三个变量的值对于所有数据样本而言都是一样的，可见它是没有任何区分度的。</p>
+<p><strong>3.变量分裂与决策树</strong></p>
+<p>基于这个过程，我们选取出信息增益最大的变量为第一个变量，标记为 x1（但若信息增益都一样，随机选择一个就可以了）。根据 x1 以及 x1 可能的取值，可以把决策树暂时建立如下图所示。</p>
+<p><img alt="Drawing 1.png" src="/assets/e42c8dd3f5527b6054d41ab3.png"/></p>
+<p>根据当前的决策树，可以把原数据集切分为两个子集，分别是 D1 和 D2。</p>
+<p><strong>X</strong>1<strong>= 0 时，子数据集是 D</strong>1</p>
+<p><img alt="Lark20201229-160955.png" src="/assets/a6f5512c23acb3533e96c570.png"/>
+在 D1 中，所有样本的类别标签都是“0”，满足了决策树建模的终止条件，则直接输出类别标签“0”，决策树更新为</p>
+<p><img alt="Drawing 2.png" src="/assets/1509f5d752696808e8aa2e82.png"/></p>
+<p><strong>X</strong>1<strong>= 1 时，子数据集是 D</strong>2</p>
+<p><img alt="Lark20201229-161001.png" src="/assets/2e2b6626d65d4c32e0511723.png"/></p>
+<p>对于 D2 而言，还需要重复计算熵和信息增益。在D2中，类别“1”和类别“0”各有一个样本，即出现的概率都是 1/2，因此熵为
+<img alt="111.jpg" src="/assets/8a64b3500bc7054776bb2c50.jpg"/></p>
+<ul>
+<li>而对于三个变量而言，第一个变量和第三个变量的信息增益都是零。这是因为，两个样本在第一个变量和第三个变量的值是相等的，没有任何信息量；</li>
+<li>对于第二个变量而言，条件熵为 H(y|x2) = (<sup>1</sup>⁄<sub>2</sub>)×0 + (<sup>1</sup>⁄<sub>2</sub>)×0 = 0，信息增益为 g(x2,y) = H(p) - H(y|x2) = 1。</li>
+</ul>
+<p>因此，应该采用第二个变量进行分裂，则有下面的决策树</p>
+<p><img alt="Drawing 3.png" src="/assets/b8cdbc61baf68efa185dcfdb.png"/></p>
+<p>基于这个决策树，如果 x2 为 0，则得到子集 D3；如果 x2 为 1，则得到子集 D4。</p>
+<ul>
+<li>同时，在 D3 中，只剩下 [1,0,1,0] 这条样本，直接输出类别标签“0”；</li>
+<li>在 D4 中，只剩下 [1,1,1,1] 这条样本，直接输出类别标签“1”。</li>
+</ul>
+<p>二者都满足了停止条件，这样决策树就建立完成了，结果如下：</p>
+<p><img alt="Drawing 4.png" src="/assets/706e6138017931f651511e5c.png"/></p>
+<h4 id="论述-id3-建模的过程-案例-2">论述 ID3 建模的过程 案例 2</h4>
+<p>我们再看一个数据集，如下所示，这也是上一讲中，逻辑回归没有建立出模型的非线性问题的数据集。</p>
+<blockquote>
+<p>其中每一行是一个样本，每一列一个变量，最后一列是样本的类别标签。</p>
+</blockquote>
+<p><img alt="图片8.png" src="/assets/9b75362403dc729f49312dae.png"/>
+我们还是可以根据 ID3 决策树的流程来建立模型。</p>
+<p><strong>1.首先，计算信息熵</strong></p>
+<p>我们发现在数据集中，类别为“1”的样本有两个，类别为“0”的样本也有两个；这样，他们二者出现的概率就都是 1/2。</p>
+<p><img alt="9.png" src="/assets/5de0b5c8831101dde00ac5dc.png"/></p>
+<p><strong>2.接着，对每个变量计算条件熵和信息增益</strong></p>
+<p>对于第一个变量 x1 的值有 1 和 0 两个可能性，出现的概率都是 2/4。</p>
+<p><img alt="10.png" src="/assets/a89787339dfb3b35b1a03e3b.png"/></p>
+<p><strong>3.变量分裂与决策树</strong></p>
+<p>当信息增益完全一致的时候，我们随机选择一个作为分裂变量。假设选 x1，则根据 x1 的不同，可以得到下面的决策树。</p>
+<p><img alt="Drawing 5.png" src="/assets/b4e63827707e387fe35c1d20.png"/></p>
+<p>根据当前的决策树，可以将数据集分割为 D1 和 D2 两部分，并建立决策树。</p>
+<p><strong>X1 为 0 时，子数据集为 D1</strong></p>
+<p><img alt="Lark20201229-161007.png" src="/assets/f757df7003a56425734b4c98.png"/></p>
+<p><img alt="Lark20201229-161010.png" src="/assets/e1263edc9a2b68c85bbc357f.png"/></p>
+<ul>
+<li>不难发现，在 D1 中，第一个变量 x1 和第三个变量 x3 的信息增益都是 0；</li>
+<li></li>
+</ul>
+<p><img alt="Lark20201229-164322.png" src="/assets/4a24ea282746a398e3dab6ec.png"/></p>
+<p>可见，需要用 x2 对 D1 进行拆分，这样就得到了下面的决策树。</p>
+<p><img alt="Drawing 6.png" src="/assets/4738d9f05fd271ff9180cb7f.png"/></p>
+<p><strong>x</strong>1<strong>为 1 时，子数据集是 D</strong>2</p>
+<p><img alt="Lark20201229-161012.png" src="/assets/bef5a104d3314b5b39290c21.png"/></p>
+<p>对于 D2 子集，也用同样的方法，我们直接给出建树的结果如下：</p>
+<p><img alt="Drawing 7.png" src="/assets/e807dde8a85287dbe33df934.png"/></p>
+<p>所剩特征为 0，分裂结束。</p>
+<h4 id="id3-决策树的代码实现">ID3 决策树的代码实现</h4>
+<p>对于这种像 ID3 这种成型的算法而言，已经有很多被封装好的工具包（如 sklearn）可以直接调用，并不需要自己来自主开发。</p>
+<p>如果自己来写底层建模的代码，可能需要上百行的代码量。为了给大家展示最核心的部分，我们给出建立 ID3 决策树的伪代码。</p>
+<pre><code>def createTree(x, y):
+
+	if 终止条件满足:
+
+		return labels[0]
+
+	hp = getHp(y)
+
+	xStar = getBestSplitVar(x,y)
+
+	model.save(xStar)
+
+	xSubList = getSubset(xStar,x)
+
+	ySubList = getSubset(xStar,y)
+
+	for i in len(xSubList):
+
+		createTree(xSubList[i],ySubList[i])
+
+	return model
+</code></pre>
+<p>【我们对代码进行走读】</p>
+<p>从开发的角度来看，决策树采用了一种递归式的建模，可见函数主体一定是一个递归结构。这个递归的终止条件，就是 ID3 建树的终止条件。</p>
+<ul>
+<li>第 3 行，我们在伪代码中，只提及了所有样本一致的情况篇；另一种情况比较少见，可以先不处理。</li>
+<li>第 4 行，我们需要开发个函数 getHp() 来计算当前数据集的熵，计算熵只跟类别标签 y 向量有关。</li>
+<li>第 5 行，我们需要对所有的变量计算条件熵，并比较出谁产生的信息增益最大。此时我们需要开发 getBestSplitVar() 的函数，它同时依赖 x 向量和 y 向量的输入。</li>
+<li>在得到了最优的分裂变量后，我们就完成了一次迭代，可以在第 6 行把它保存在模型中了。</li>
+<li>第 7 行和第 8 行，是基于现有模型，对数据集进行的切分。此时还需要开发一个函数 getSubset()，需要实现的功能是在数据集中基于 xStar 对数据集进行分割，并返回所有子集的 list。</li>
+<li>最后，第 9～10 行，对于每个子集，递归地调用建树的函数 createTree()，再次重复上面的过程。</li>
+</ul>
+<p>ID3 决策树建树的代码开发，就是一个递归结构的开发。虽然实际的开发中需要开发多个函数，代码量也是很多的，但从原理来看还是非常简单的。</p>
+<h3 id="决策树模型的优势和不足">决策树模型的优势和不足</h3>
+<h4 id="1-优势">1.优势</h4>
+<p>从上述结果可以看出，决策树最大的优势，是在原本逻辑回归无法做出准确分类的数据集上，决策树<strong>可以做出正确分类</strong>。</p>
+<ul>
+<li>这是因为，逻辑回归方法得到的决策边界总是线性的，它是个只能处理线性问题的线性模型；</li>
+<li>而决策树是按照层次结构的规则生成的，它可以通过增加决策树的层次来模拟更复杂的分类边界，可以用来解决更复杂的非线性问题。</li>
+</ul>
+<p>同时，在模型的可解释性上，决策树明确给出了预测的依据。要解释决策树如何预测非常简单，从根结点开始，依照所有的特征开始分支，一直到到达叶子节点，找到最终的预测。决策树可以很好地捕捉特征之间的互动和依赖，树形结构也可以很好地可视化。</p>
+<h4 id="2-不足">2.不足</h4>
+<p>ID3 决策树，或者说绝大多数的决策树都不是最优的树结构。这主要是因为建树本来就是个 NP 难问题，导致我们的算法只能采用一些启发式的贪心算法。从一开始，建树的目标就不是去寻找最优解。</p>
+<h3 id="小结">小结</h3>
+<p>决策树模型是<strong>浅层模型</strong>中最优秀、最普适的一类模型。很多提升方法也都是基于决策树演变而来的。</p>
+<p>在这里我们提到了一个浅层模型的概念，这主要是与深度学习进行的比较。我们知道这几年由于神经网络的兴起，深度学习的概念一下子称为 AI 领域的研究热点。</p>
+<p>原本，学者们并没有浅层模型的概念。因为深度学习兴起后，产生了很多层次复杂、结构很深的模型；那么与之对应的经典模型，就被人们统称为浅层模型了。</p>
+<p>然而经过人们的验证会发现，浅层模型中的佼佼者仍然是<strong>树模型</strong>。而深层模型通过增加了模型的复杂度，换取了更好的效果。关于深层模型，我们会在下一讲《21 | 神经网络与深度学习：计算机是如何理解图像、文本和语音的？》中进行讨论。</p>
+<p>最后，我们留一个练习题。对于下面的数据集，试着用 ID3 算法建立决策树。</p>
+<p><img alt="图片13.png" src="/assets/d214addac4bdb43d78e6eaf6.png"/></p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

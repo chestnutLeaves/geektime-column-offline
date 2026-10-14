@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>13  Redis 6.0多IO线程的效率提高了吗？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Redis 源码剖析与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">34 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Redis 源码剖析与实战</strong><ul><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E9%98%85%E8%AF%BBRedis%E6%BA%90%E7%A0%81%E8%83%BD%E7%BB%99%E4%BD%A0%E5%B8%A6%E6%9D%A5%E4%BB%80%E4%B9%88%EF%BC%9F.html">00  开篇词  阅读Redis源码能给你带来什么？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%20%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E6%94%BB%E7%95%A5Redis%E6%BA%90%E7%A0%81%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.html">01  带你快速攻略Redis源码的整体架构</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/02%20%20%E9%94%AE%E5%80%BC%E5%AF%B9%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%8C%E7%94%A8char%E8%BF%98%E6%98%AF%E7%BB%93%E6%9E%84%E4%BD%93%EF%BC%9F.html">02  键值对中字符串的实现，用char还是结构体？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%80%A7%E8%83%BD%E4%BC%98%E5%BC%82%E7%9A%84Hash%E8%A1%A8%EF%BC%9F.html">03  如何实现一个性能优异的Hash表？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/04%20%20%E5%86%85%E5%AD%98%E5%8F%8B%E5%A5%BD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%A5%E5%A6%82%E4%BD%95%E7%BB%86%E5%8C%96%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">04  内存友好的数据结构该如何细化设计？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%20%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E4%B8%BA%E4%BD%95%E8%83%BD%E5%90%8C%E6%97%B6%E6%94%AF%E6%8C%81%E7%82%B9%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%EF%BC%9F.html">05  有序集合为何能同时支持点查询和范围查询？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/06%20%20%E4%BB%8Eziplist%E5%88%B0quicklist%EF%BC%8C%E5%86%8D%E5%88%B0listpack%E7%9A%84%E5%90%AF%E5%8F%91.html">06  从ziplist到quicklist，再到listpack的启发</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%20%E4%B8%BA%E4%BB%80%E4%B9%88Stream%E4%BD%BF%E7%94%A8%E4%BA%86Radix%20Tree%EF%BC%9F.html">07  为什么Stream使用了Radix Tree？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%20Redis%20server%E5%90%AF%E5%8A%A8%E5%90%8E%E4%BC%9A%E5%81%9A%E5%93%AA%E4%BA%9B%E6%93%8D%E4%BD%9C%EF%BC%9F.html">08  Redis server启动后会做哪些操作？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%20Redis%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8select%E3%80%81poll%E3%80%81epoll%EF%BC%9F.html">09  Redis事件驱动框架（上）：何时使用select、poll、epoll？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%20Redis%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9ARedis%E5%AE%9E%E7%8E%B0%E4%BA%86Reactor%E6%A8%A1%E5%9E%8B%E5%90%97%EF%BC%9F.html">10  Redis事件驱动框架（中）：Redis实现了Reactor模型吗？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%20Redis%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ARedis%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BA%8B%E4%BB%B6%EF%BC%9F.html">11  Redis事件驱动框架（下）：Redis有哪些事件？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%20Redis%E7%9C%9F%E7%9A%84%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%90%97%EF%BC%9F.html">12  Redis真的是单线程吗？</a></li><li><a class="active" aria-current="page" href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%20Redis%206.0%E5%A4%9AIO%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%95%88%E7%8E%87%E6%8F%90%E9%AB%98%E4%BA%86%E5%90%97%EF%BC%9F.html">13  Redis 6.0多IO线程的效率提高了吗？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%20%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E7%9C%8B%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E5%8E%9F%E5%AD%90%E6%80%A7%E4%BF%9D%E8%AF%81.html">14  从代码实现看分布式锁的原子性保证</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/15%20%20%E4%B8%BA%E4%BB%80%E4%B9%88LRU%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%92%8C%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F.html">15  为什么LRU算法原理和代码实现不一样？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%20LFU%E7%AE%97%E6%B3%95%E5%92%8C%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95%E7%9B%B8%E6%AF%94%E6%9C%89%E4%BC%98%E5%8A%BF%E5%90%97%EF%BC%9F.html">16  LFU算法和其他算法相比有优势吗？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%20Lazy%20Free%E4%BC%9A%E5%BD%B1%E5%93%8D%E7%BC%93%E5%AD%98%E6%9B%BF%E6%8D%A2%E5%90%97%EF%BC%9F.html">17  Lazy Free会影响缓存替换吗？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/18%20%20%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E5%92%8C%E8%A7%A3%E8%AF%BBRDB%E6%96%87%E4%BB%B6%EF%BC%9F.html">18  如何生成和解读RDB文件？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%20AOF%E9%87%8D%E5%86%99%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E8%A7%A6%E5%8F%91%E6%97%B6%E6%9C%BA%E4%B8%8E%E9%87%8D%E5%86%99%E7%9A%84%E5%BD%B1%E5%93%8D.html">19  AOF重写（上）：触发时机与重写的影响</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%20AOF%E9%87%8D%E5%86%99%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E9%87%8D%E5%86%99%E6%97%B6%E7%9A%84%E6%96%B0%E5%86%99%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">20  AOF重写（下）：重写时的新写操作记录在哪里？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/21%20%20%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%8A%B6%E6%80%81%E6%9C%BA%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0.html">21  主从复制：基于状态机的设计与实现</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%20%E5%93%A8%E5%85%B5%E4%B9%9F%E5%92%8CRedis%E5%AE%9E%E4%BE%8B%E4%B8%80%E6%A0%B7%E5%88%9D%E5%A7%8B%E5%8C%96%E5%90%97%EF%BC%9F.html">22  哨兵也和Redis实例一样初始化吗？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%20%E4%BB%8E%E5%93%A8%E5%85%B5Leader%E9%80%89%E4%B8%BE%E5%AD%A6%E4%B9%A0Raft%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">23  从哨兵Leader选举学习Raft协议实现（上）</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/24%20%20%E4%BB%8E%E5%93%A8%E5%85%B5Leader%E9%80%89%E4%B8%BE%E5%AD%A6%E4%B9%A0Raft%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">24  从哨兵Leader选举学习Raft协议实现（下）</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%20PubSub%E5%9C%A8%E4%B8%BB%E4%BB%8E%E6%95%85%E9%9A%9C%E5%88%87%E6%8D%A2%E6%97%B6%E6%98%AF%E5%A6%82%E4%BD%95%E5%8F%91%E6%8C%A5%E4%BD%9C%E7%94%A8%E7%9A%84%EF%BC%9F.html">25  PubSub在主从故障切换时是如何发挥作用的？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%20%E4%BB%8EPing-Pong%E6%B6%88%E6%81%AF%E5%AD%A6%E4%B9%A0Gossip%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AE%9E%E7%8E%B0.html">26  从Ping-Pong消息学习Gossip协议的实现</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%20%E4%BB%8EMOVED%E3%80%81ASK%E7%9C%8B%E9%9B%86%E7%BE%A4%E8%8A%82%E7%82%B9%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%EF%BC%9F.html">27  从MOVED、ASK看集群节点如何处理命令？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%20Redis%20Cluster%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E4%BC%9A%E9%98%BB%E5%A1%9E%E5%90%97%EF%BC%9F.html">28  Redis Cluster数据迁移会阻塞吗？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%AE%9E%E7%8E%B0%E5%BE%AA%E7%8E%AF%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%9F.html">29  如何正确实现循环缓冲区？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%20%E5%A6%82%E4%BD%95%E5%9C%A8%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E7%9B%91%E6%8E%A7%EF%BC%9F.html">30  如何在系统中实现延迟监控？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/31%20%20%E4%BB%8EModule%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%AD%A6%E4%B9%A0%E5%8A%A8%E6%80%81%E6%89%A9%E5%B1%95%E5%8A%9F%E8%83%BD.html">31  从Module的实现学习动态扩展功能</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%20%E5%A6%82%E4%BD%95%E5%9C%A8%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%AE%9E%E7%8E%B0%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%9F.html">32  如何在一个系统中实现单元测试？</a></li><li><a href="/courses/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20Redis%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%8C%E8%AE%A9%E6%88%91%E4%BB%AC%E4%BB%8E%E6%96%B0%E5%BC%80%E5%A7%8B.html">结束语  Redis源码阅读，让我们从新开始</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Redis%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%20Redis%206.0%E5%A4%9AIO%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%95%88%E7%8E%87%E6%8F%90%E9%AB%98%E4%BA%86%E5%90%97%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="13  Redis 6.0多IO线程的效率提高了吗？" id="title">13  Redis 6.0多IO线程的效率提高了吗？</h1>
+<div><p>通过上节课的学习，我们知道 Redis server 启动后的进程会以单线程的方式，执行客户端请求解析和处理工作。但是，Redis server 也会通过 bioInit 函数启动三个后台线程，来处理后台任务。也就是说，Redis 不再让主线程执行一些耗时操作，比如同步写、删除等，而是交给后台线程异步完成，从而避免了对主线程的阻塞。</p>
+<p>实际上，在 2020 年 5 月推出的 Redis 6.0 版本中，Redis 在执行模型中还进一步使用了多线程来处理 IO 任务，这样设计的目的，就是为了充分利用当前服务器的多核特性，使用多核运行多线程，让多线程帮助加速数据读取、命令解析以及数据写回的速度，提升 Redis 整体性能。</p>
+<p><strong>那么，这些多线程具体是在什么时候启动，又是通过什么方式来处理 IO 请求的呢？</strong></p>
+<p>今天这节课，我就来给你介绍下 Redis 6.0 实现的多 IO 线程机制。通过这部分内容的学习，你可以充分了解到 Redis 6.0 是如何通过多线程来提升 IO 请求处理效率的。这样你也就可以结合实际业务来评估，自己是否需要使用 Redis 6.0 了。</p>
+<p>好，接下来，我们先来看下多 IO 线程的初始化。注意，因为我们之前课程中阅读的是 Redis 5.0.8 版本的代码，所以在开始学习今天的课程之前，你还需要下载<a href="https://github.com/redis/redis/tree/6.0" target="_blank">Redis 6.0.15</a>的源码，以便能查看到和多 IO 线程机制相关的代码。</p>
+<h2 id="多-io-线程的初始化">多 IO 线程的初始化</h2>
+<p>我在上一讲给你介绍过，Redis 5.0 中的三个后台线程，是 server 在初始化过程的最后，调用 InitSeverLast 函数，而 InitServerLast 函数再进一步调用 bioInit 函数来完成的。如果我们在 Redis 6.0 中查看 InitServerLast 函数，会发现和 Redis 5.0 相比，该函数在调完 bioInit 函数后，又调用了 <strong>initThreadedIO 函数</strong>。而 initThreadedIO 函数正是用来初始化多 IO 线程的，这部分的代码调用如下所示：</p>
+<pre><code class="language-c">void InitServerLast() {
+    bioInit();
+    initThreadedIO();  //调用initThreadedIO函数初始化IO线程
+    set_jemalloc_bg_thread(server.jemalloc_bg_thread);
+    server.initial_memory_usage = zmalloc_used_memory();
+}
+</code></pre>
+<p>所以下面，我们就来看下 initThreadedIO 函数的主要执行流程，这个函数是在<a href="https://github.com/redis/redis/tree/5.0/src/networking.c" target="_blank">networking.c</a>文件中实现的。</p>
+<p><strong>首先，initThreadedIO 函数会设置 IO 线程的激活标志。</strong>这个激活标志保存在 redisServer 结构体类型的全局变量 server 当中，对应 redisServer 结构体的成员变量 io_threads_active。initThreadedIO 函数会把 io_threads_active 初始化为 0，表示 IO 线程还没有被激活。这部分代码如下所示：</p>
+<pre><code class="language-c">void initThreadedIO(void) {
+  server.io_threads_active = 0;
+  …
+}
+</code></pre>
+<p>这里，你要注意一下，刚才提到的<strong>全局变量 server</strong> 是 Redis server 运行时，用来保存各种全局信息的结构体变量。我在【第 8 讲】给你介绍 Redis server 初始化过程的时候，提到过 Redis server 的各种参数初始化配置，都是保存在这个全局变量 server 中的。所以，当你在阅读 Redis 源码时，如果在某个函数中看到变量 server，要知道其实就是这个全局变量。</p>
+<p><strong>紧接着，initThreadedIO 函数会对设置的 IO 线程数量进行判断。</strong>这个数量就是保存在全局变量 server 的成员变量 io_threads_num 中的。那么在这里，IO 线程的数量判断会有三种结果。</p>
+<p>第一种，如果 IO 线程数量为 1，就表示只有 1 个主 IO 线程，initThreadedIO 函数就直接返回了。此时，Redis server 的 IO 线程和 Redis 6.0 之前的版本是相同的。</p>
+<pre><code class="language-c">if (server.io_threads_num == 1) return;
+</code></pre>
+<p>第二种，如果 IO 线程数量大于宏定义 IO_THREADS_MAX_NUM（默认值为 128），那么 initThreadedIO 函数会报错，并退出整个程序。</p>
+<pre><code class="language-c">if (server.io_threads_num &gt; IO_THREADS_MAX_NUM) {
+        …  //报错日志记录
+        exit(1);  //退出程序
+ }
+</code></pre>
+<p>第三种，如果 IO 线程数量大于 1，并且小于宏定义 IO_THREADS_MAX_NUM，那么，initThreadedIO 函数会执行一个循环流程，该流程的循环次数就是设置的 IO 线程数量。</p>
+<p>如此一来，在该循环流程中，initThreadedIO 函数就会给以下四个数组进行初始化操作。</p>
+<ul>
+<li><strong>io_threads_list 数组</strong>：保存了每个 IO 线程要处理的客户端，将数组每个元素初始化为一个 List 类型的列表；</li>
+<li><strong>io_threads_pending 数组</strong>：保存等待每个 IO 线程处理的客户端个数；</li>
+<li><strong>io_threads_mutex 数组</strong>：保存线程互斥锁；</li>
+<li><strong>io_threads 数组</strong>：保存每个 IO 线程的描述符。</li>
+</ul>
+<p>这四个数组的定义都在 networking.c 文件中，如下所示：</p>
+<pre><code class="language-c">pthread_t io_threads[IO_THREADS_MAX_NUM];   //记录线程描述符的数组
+pthread_mutex_t io_threads_mutex[IO_THREADS_MAX_NUM];  //记录线程互斥锁的数组
+_Atomic unsigned long io_threads_pending[IO_THREADS_MAX_NUM];  //记录线程待处理的客户端个数
+list *io_threads_list[IO_THREADS_MAX_NUM];  //记录线程对应处理的客户端
+</code></pre>
+<p>然后，在对这些数组进行初始化的同时，initThreadedIO 函数还会根据 IO 线程数量，<strong>调用 pthread_create 函数创建相应数量的线程</strong>。我在上节课给你介绍过，pthread_create 函数的参数包括创建线程要运行的函数和函数参数（*tidp、*attr、*start_routine、*arg）。</p>
+<p>所以，对于 initThreadedIO 函数来说，它创建的线程要运行的函数是 <strong>IOThreadMain</strong>，参数是当前创建线程的编号。不过要注意的是，这个编号是从 1 开始的，编号为 0 的线程其实是运行 Redis server 主流程的主 IO 线程。</p>
+<p>以下代码就展示了 initThreadedIO 函数对数组的初始化，以及创建 IO 线程的过程，你可以看下。</p>
+<pre><code class="language-c">for (int i = 0; i &lt; server.io_threads_num; i++) {
+ 
+        io_threads_list[i] = listCreate();
+        if (i == 0) continue; //编号为0的线程是主IO线程
+ 
+        pthread_t tid;
+        pthread_mutex_init(&amp;io_threads_mutex[i],NULL);  //初始化io_threads_mutex数组
+        io_threads_pending[i] = 0;   //初始化io_threads_pending数组
+        pthread_mutex_lock(&amp;io_threads_mutex[i]);
+        //调用pthread_create函数创建IO线程，线程运行函数为IOThreadMain
+        if (pthread_create(&amp;tid,NULL,IOThreadMain,(void*)(long)i) != 0) {
+            … //出错处理
+        }
+        io_threads[i] = tid;  //初始化io_threads数组，设置值为线程标识
+    }
+</code></pre>
+<p>好了，现在我们再来看下，刚才介绍的 IO 线程启动后要运行的函数 IOThreadMain。了解这个函数，可以帮助我们掌握 IO 线程实际做的工作。</p>
+<h2 id="io-线程的运行函数-iothreadmain">IO 线程的运行函数 IOThreadMain</h2>
+<p>IOThreadMain 函数也是在 networking.c 文件中定义的，它的主要执行逻辑是一个 <strong>while(1) 循环</strong>。在这个循环中，IOThreadMain 函数会把 io_threads_list 数组中，每个 IO 线程对应的列表读取出来。</p>
+<p>就像我在前面给你介绍的一样，io_threads_list 数组中会针对每个 IO 线程，使用一个列表记录该线程要处理的客户端。所以，IOThreadMain 函数就会从每个 IO 线程对应的列表中，进一步取出要处理的客户端，然后判断线程要执行的操作标记。这个操作标记是用变量 io_threads_op 表示的，它有两种取值。</p>
+<ul>
+<li><strong>io_threads_op 的值为宏定义 IO_THREADS_OP_WRITE</strong>：这表明该 IO 线程要做的是写操作，线程会调用 writeToClient 函数将数据写回客户端。</li>
+<li><strong>io_threads_op 的值为宏定义 IO_THREADS_OP_READ</strong>：这表明该 IO 线程要做的是读操作，线程会调用 readQueryFromClient 函数从客户端读取数据。</li>
+</ul>
+<p>这部分的代码逻辑你可以看看下面的代码。</p>
+<pre><code class="language-c">void *IOThreadMain(void *myid) {
+…
+while(1) {
+   listIter li;
+   listNode *ln;
+   //获取IO线程要处理的客户端列表
+   listRewind(io_threads_list[id],&amp;li);
+   while((ln = listNext(&amp;li))) {
+      client *c = listNodeValue(ln); //从客户端列表中获取一个客户端
+      if (io_threads_op == IO_THREADS_OP_WRITE) {
+         writeToClient(c,0);  //如果线程操作是写操作，则调用writeToClient将数据写回客户端
+       } else if (io_threads_op == IO_THREADS_OP_READ) {
+          readQueryFromClient(c-&gt;conn); //如果线程操作是读操作，则调用readQueryFromClient从客户端读取数据
+       } else {
+          serverPanic("io_threads_op value is unknown");
+       }
+   }
+   listEmpty(io_threads_list[id]); //处理完所有客户端后，清空该线程的客户端列表
+   io_threads_pending[id] = 0; //将该线程的待处理任务数量设置为0
+ 
+   }
+}
+</code></pre>
+<p>我也画了下面这张图，展示了 IOThreadMain 函数的基本流程，你可以看下。</p>
+<p><img alt="" src="/assets/c57693cc886fafb2b4eb3992.webp"/></p>
+<p>好了，到这里你应该就了解了，每一个 IO 线程运行时，都会不断检查是否有等待它处理的客户端。如果有，就根据操作类型，从客户端读取数据或是将数据写回客户端。你可以看到，这些操作都是 Redis 要和客户端完成的 IO 操作，所以，这也是为什么我们把这些线程称为 IO 线程的原因。</p>
+<p>那么，你看到这里，可能也会产生一些疑问，<strong>IO 线程要处理的客户端是如何添加到 io_threads_list 数组中的呢？</strong></p>
+<p>这就要说到 Redis server 对应的全局变量 server 了。server 变量中有两个 List 类型的成员变量：clients_pending_write 和 clients_pending_read，它们分别记录了待写回数据的客户端和待读取数据的客户端，如下所示：</p>
+<pre><code class="language-c">struct redisServer {
+...
+list *clients_pending_write;  //待写回数据的客户端
+list *clients_pending_read;  //待读取数据的客户端
+...
+}
+</code></pre>
+<p>你要知道，Redis server 在接收到客户端请求和给客户端返回数据的过程中，会根据一定条件，推迟客户端的读写操作，并分别把待读写的客户端保存到这两个列表中。然后，Redis server 在每次进入事件循环前，会再把列表中的客户端添加到 io_threads_list 数组中，交给 IO 线程进行处理。</p>
+<p>所以接下来，我们就先来看下，Redis 是如何推迟客户端的读写操作，并把这些客户端添加到 clients_pending_write 和 clients_pending_read 这两个列表中的。</p>
+<h2 id="如何推迟客户端读操作">如何推迟客户端读操作？</h2>
+<p>Redis server 在和一个客户端建立连接后，就会开始监听这个客户端上的可读事件，而处理可读事件的回调函数是 <strong>readQueryFromClient</strong>。我在【第 11 讲】中给你介绍了这个过程，你可以再去回顾下。</p>
+<p>那么这里，我们再来看下 Redis 6.0 版本中的 readQueryFromClient 函数。这个函数一开始会先从传入参数 conn 中获取客户端 c，紧接着就调用 postponeClientRead 函数，来判断是否推迟从客户端读取数据。这部分的执行逻辑如下所示：</p>
+<pre><code class="language-c">void readQueryFromClient(connection *conn) {
+    client *c = connGetPrivateData(conn);  //从连接数据结构中获取客户
+    ...
+    if (postponeClientRead(c)) return;  //判断是否推迟从客户端读取数据
+    ...
+}
+</code></pre>
+<p>现在，我们就来看下 <strong>postponeClientRead 函数</strong>的执行逻辑。这个函数会根据四个条件判断能否推迟从客户端读取数据。</p>
+<p><strong>条件一：全局变量 server 的 io_threads_active 值为 1</strong></p>
+<p>这表示多 IO 线程已经激活。我刚才说过，这个变量值在 initThreadedIO 函数中是会被初始化为 0 的，也就是说，多 IO 线程初始化后，默认还没有激活（我一会儿还会给你介绍这个变量值何时被设置为 1）。</p>
+<p><strong>条件二：全局变量 server 的 io_threads_do_read 值为 1</strong></p>
+<p>这表示多 IO 线程可以用于处理延后执行的客户端读操作。这个变量值是在 Redis 配置文件 redis.conf 中，通过配置项 io-threads-do-reads 设置的，默认值为 no，也就是说，多 IO 线程机制默认并不会用于客户端读操作。所以，如果你想用多 IO 线程处理客户端读操作，就需要把 io-threads-do-reads 配置项设为 yes。</p>
+<p><strong>条件三：ProcessingEventsWhileBlocked 变量值为 0</strong></p>
+<p>这表示 processEventsWhileBlokced 函数没有在执行。ProcessingEventsWhileBlocked 是一个全局变量，它会在 processEventsWhileBlokced 函数执行时被设置为 1，在 processEventsWhileBlokced 函数执行完成时被设置为 0。</p>
+<p>而 processEventsWhileBlokced 函数是在<a href="https://github.com/redis/redis/tree/5.0/src/networking.c" target="_blank">networking.c</a>文件中实现的。当 Redis 在读取 RDB 文件或是 AOF 文件时，这个函数会被调用，用来处理事件驱动框架捕获到的事件。这样就避免了因读取 RDB 或 AOF 文件造成 Redis 阻塞，而无法及时处理事件的情况。所以，当 processEventsWhileBlokced 函数执行处理客户端可读事件时，这些客户端读操作是不会被推迟执行的。</p>
+<p><strong>条件四：客户端现有标识不能有 CLIENT_MASTER、CLIENT_SLAVE 和 CLIENT_PENDING_READ</strong></p>
+<p>其中，CLIENT_MASTER 和 CLIENT_SLAVE 标识分别表示客户端是用于主从复制的客户端，也就是说，这些客户端不会推迟读操作。CLIENT_PENDING_READ 本身就表示一个客户端已经被设置为推迟读操作了，所以，对于已带有 CLIENT_PENDING_READ 标识的客户端，postponeClientRead 函数就不会再推迟它的读操作了。</p>
+<p>总之，只有前面这四个条件都满足了，postponeClientRead 函数才会推迟当前客户端的读操作。具体来说，postponeClientRead 函数会给该客户端设置 CLIENT_PENDING_REA 标识，并调用 listAddNodeHead 函数，把这个客户端添加到全局变量 server 的 clients_pending_read 列表中。</p>
+<p>我把 postponeClientRead 函数的代码放在这里，你可以看下。</p>
+<pre><code class="language-c">int postponeClientRead(client *c) {
+    //判断IO线程是否激活，
+    if (server.io_threads_active &amp;&amp; server.io_threads_do_reads &amp;&amp;      
+         !ProcessingEventsWhileBlocked &amp;&amp;
+        !(c-&gt;flags &amp; (CLIENT_MASTER|CLIENT_SLAVE|CLIENT_PENDING_READ)))
+    {
+        c-&gt;flags |= CLIENT_PENDING_READ; //给客户端的flag添加CLIENT_PENDING_READ标记，表示推迟该客户端的读操作
+        listAddNodeHead(server.clients_pending_read,c); //将客户端添加到clients_pending_read列表中
+        return 1;
+    } else {
+        return 0;
+    }
+}
+</code></pre>
+<p>好，现在你已经知道，Redis 是在客户端读事件回调函数 readQueryFromClient 中，通过调用 postponeClientRead 函数来判断和推迟客户端读操作。下面，我再带你来看下 Redis 是如何推迟客户端写操作的。</p>
+<h2 id="如何推迟客户端写操作">如何推迟客户端写操作？</h2>
+<p>Redis 在执行了客户端命令，要给客户端返回结果时，会调用 <strong>addReply 函数</strong>将待返回结果写入客户端输出缓冲区。</p>
+<p>而在 addReply 函数的一开始，该函数会调用 <strong>prepareClientToWrite 函数</strong>，来判断是否推迟执行客户端写操作。下面代码展示了 addReply 函数对 prepareClientToWrite 函数的调用，你可以看下。</p>
+<pre><code class="language-c">void addReply(client *c, robj *obj) {
+    if (prepareClientToWrite(c) != C_OK) return;
+    ...
+}
+</code></pre>
+<p>所以这里，我们继续来看下 prepareClientToWrite 函数。这个函数会根据客户端设置的标识进行一系列的判断。其中，该函数会调用 <strong>clientHasPendingReplies 函数</strong>，判断当前客户端是否还有留存在输出缓冲区中的数据等待写回。</p>
+<p>如果没有的话，那么，prepareClientToWrite 就会调用 <strong>clientInstallWriteHandler 函数</strong>，再进一步判断能否推迟该客户端写操作。下面的代码展示了这一调用过程，你可以看下。</p>
+<pre><code class="language-c">int prepareClientToWrite(client *c) {
+   ...
+   //如果当前客户端没有待写回数据，调用clientInstallWriteHandler函数
+   if (!clientHasPendingReplies(c)) clientInstallWriteHandler(c);
+   return C_OK;
+}
+</code></pre>
+<p>那么这样一来，我们其实就知道了，能否推迟客户端写操作，最终是由 clientInstallWriteHandler 函数来决定的，这个函数会判断两个条件。</p>
+<ul>
+<li><strong>条件一</strong>：客户端没有设置过 CLIENT_PENDING_WRITE 标识，即没有被推迟过执行写操作。</li>
+<li><strong>条件二</strong>：客户端所在实例没有进行主从复制，或者客户端所在实例是主从复制中的从节点，但全量复制的 RDB 文件已经传输完成，客户端可以接收请求。</li>
+</ul>
+<p>一旦这两个条件都满足了，clientInstallWriteHandler 函数就会把客户端标识设置为 CLIENT_PENDING_WRITE，表示推迟该客户端的写操作。同时，clientInstallWriteHandler 函数会把这个客户端添加到全局变量 server 的待写回客户端列表中，也就是 clients_pending_write 列表中。</p>
+<pre><code class="language-c">void clientInstallWriteHandler(client *c) {
+    //如果客户端没有设置过CLIENT_PENDING_WRITE标识，并且客户端没有在进行主从复制，或者客户端是主从复制中的从节点，已经能接收请求
+    if (!(c-&gt;flags &amp; CLIENT_PENDING_WRITE) &amp;&amp;
+        (c-&gt;replstate == REPL_STATE_NONE ||
+         (c-&gt;replstate == SLAVE_STATE_ONLINE &amp;&amp; !c-&gt;repl_put_online_on_ack)))
+    {
+        //将客户端的标识设置为待写回，即CLIENT_PENDING_WRITE
+        c-&gt;flags |= CLIENT_PENDING_WRITE;
+        listAddNodeHead(server.clients_pending_write,c);  //将可获得加入clients_pending_write列表
+    }
+}
+</code></pre>
+<p>为了便于你更好地理解，我画了一张图，展示了 Redis 推迟客户端写操作的函数调用关系，你可以再回顾下。</p>
+<p><img alt="" src="/assets/74495a6ac9013bd5947854b8.webp"/></p>
+<p>不过，当 Redis 使用 clients_pending_read 和 clients_pending_write 两个列表，保存了推迟执行的客户端后，<strong>这些客户端又是如何分配给多 IO 线程执行的呢？</strong>这就和下面两个函数相关了。</p>
+<ul>
+<li>handleClientsWithPendingReadsUsingThreads 函数：该函数主要负责将 clients_pending_read 列表中的客户端分配给 IO 线程进行处理。</li>
+<li>handleClientsWithPendingWritesUsingThreads 函数：该函数主要负责将 clients_pending_write 列表中的客户端分配给 IO 线程进行处理。</li>
+</ul>
+<p>所以接下来，我们就来看下这两个函数的具体操作。</p>
+<h2 id="如何把待读客户端分配给-io-线程执行">如何把待读客户端分配给 IO 线程执行？</h2>
+<p>首先，我们来了解 <strong>handleClientsWithPendingReadsUsingThreads 函数</strong>。这个函数是在 beforeSleep 函数中调用的。</p>
+<p>在 Redis 6.0 版本的代码中，事件驱动框架同样是调用 aeMain 函数来执行事件循环流程，该循环流程会调用 aeProcessEvents 函数处理各种事件。而在 aeProcessEvents 函数实际调用 aeApiPoll 函数捕获 IO 事件之前，beforeSleep 函数会被调用。</p>
+<p>这个过程如下图所示，你可以看下。</p>
+<p><img alt="" src="/assets/b4dd56cabad57adefd9c01dd.webp"/></p>
+<p>handleClientsWithPendingReadsUsingThreads 函数的主要执行逻辑可以分成四步。</p>
+<p><strong>第一步</strong>，该函数会先根据全局变量 server 的 io_threads_active 成员变量，判定 IO 线程是否激活，并且根据 server 的 io_threads_do_reads 成员变量，判定用户是否设置了 Redis 可以用 IO 线程处理待读客户端。只有在 IO 线程激活，并且 IO 线程可以用于处理待读客户端时，handleClientsWithPendingReadsUsingThreads 函数才会继续执行，否则该函数就直接结束返回了。这一步的判断逻辑如以下代码所示：</p>
+<pre><code class="language-c">if (!server.io_threads_active || !server.io_threads_do_reads) 
+return 0;
+</code></pre>
+<p><strong>第二步</strong>，handleClientsWithPendingReadsUsingThreads 函数会获取 clients_pending_read 列表的长度，这代表了要处理的待读客户端个数。然后，该函数会从 clients_pending_read 列表中逐一取出待处理的客户端，并用客户端在列表中的序号，对 IO 线程数量进行取模运算。</p>
+<p>这样一来，我们就可以根据取模得到的余数，把该客户端分配给对应的 IO 线程进行处理。紧接着，handleClientsWithPendingReadsUsingThreads 函数会<strong>调用 listAddNodeTail 函数，把分配好的客户端添加到 io_threads_list 列表的相应元素中</strong>。我刚才给你介绍过，io_threads_list 数组的每个元素是一个列表，对应保存了每个 IO 线程要处理的客户端。</p>
+<p>为了便于你理解，我来给你举个例子。</p>
+<p>假设 IO 线程数量设置为 3，clients_pending_read 列表中一共有 5 个待读客户端，它们在列表中的序号分别是 0，1，2，3 和 4。在这一步中，0 号到 4 号客户端对线程数量 3 取模的结果分别是 0，1，2，0，1，这也对应了即将处理这些客户端的 IO 线程编号。这也就是说，0 号客户端由 0 号线程处理，1 号客户端有 1 号线程处理，以此类推。你可以看到，这个分配方式其实就是把待处理客户端，以<strong>轮询方式</strong>逐一分配给各个 IO 线程。</p>
+<p>我画了下面这张图，展示了这个分配结果，你可以再看下。</p>
+<p><img alt="" src="/assets/7e34d12d82796dbbad044b54.webp"/></p>
+<p>以下代码展示的就是以轮询方式将客户端分配给 IO 线程的执行逻辑：</p>
+<pre><code class="language-c">int processed = listLength(server.clients_pending_read);
+listRewind(server.clients_pending_read,&amp;li);
+int item_id = 0;
+while((ln = listNext(&amp;li))) {
+        client *c = listNodeValue(ln);
+        int target_id = item_id % server.io_threads_num;
+        listAddNodeTail(io_threads_list[target_id],c);
+        item_id++;
+ }
+</code></pre>
+<p>这样，当 handleClientsWithPendingReadsUsingThreads 函数完成客户端的 IO 线程分配之后，它会将 IO 线程的操作标识设置为<strong>读操作</strong>，也就是 IO_THREADS_OP_READ。然后，它会遍历 io_threads_list 数组中的每个元素列表长度，等待每个线程处理的客户端数量，赋值给 io_threads_pending 数组。这一过程如下所示：</p>
+<pre><code class="language-c"> io_threads_op = IO_THREADS_OP_READ;
+ for (int j = 1; j &lt; server.io_threads_num; j++) {
+        int count = listLength(io_threads_list[j]);
+        io_threads_pending[j] = count;
+ }
+</code></pre>
+<p><strong>第三步</strong>，handleClientsWithPendingReadsUsingThreads 函数会将 io_threads_list 数组 0 号列表（也就是 io_threads_list[0]元素）中的待读客户端逐一取出来，并调用 readQueryFromClient 函数进行处理。</p>
+<p>其实，handleClientsWithPendingReadsUsingThreads 函数本身就是由 IO 主线程执行的，而 io_threads_list 数组对应的 0 号线程正是 IO 主线程，所以，这里就是让主 IO 线程来处理它的待读客户端。</p>
+<pre><code class="language-c">  listRewind(io_threads_list[0],&amp;li);  //获取0号列表中的所有客户端
+    while((ln = listNext(&amp;li))) {
+        client *c = listNodeValue(ln);
+        readQueryFromClient(c-&gt;conn);
+    }
+    listEmpty(io_threads_list[0]); //处理完后，清空0号列表
+</code></pre>
+<p>紧接着，handleClientsWithPendingReadsUsingThreads 函数会执行一个 while(1) 循环，等待所有 IO 线程完成待读客户端的处理，如下所示：</p>
+<pre><code class="language-c"> while(1) {
+        unsigned long pending = 0;
+        for (int j = 1; j &lt; server.io_threads_num; j++)
+            pending += io_threads_pending[j];
+        if (pending == 0) break;
+    }
+</code></pre>
+<p><strong>第四步</strong>，handleClientsWithPendingReadsUsingThreads 函数会再次遍历一遍 clients_pending_read 列表，依次取出其中的客户端。紧接着，它会判断客户端的标识中是否有 CLIENT_PENDING_COMMAND。如果有 CLIENT_PENDING_COMMAND 标识，表明该客户端中的命令已经被某一个 IO 线程解析过，已经可以被执行了。</p>
+<p>此时，handleClientsWithPendingReadsUsingThreads 函数会调用 processCommandAndResetClient 函数执行命令。最后，它会直接调用 processInputBuffer 函数解析客户端中所有命令并执行。</p>
+<p>这部分的代码逻辑如下所示，你可以看下。</p>
+<pre><code class="language-c">while(listLength(server.clients_pending_read)) {
+        ln = listFirst(server.clients_pending_read);
+        client *c = listNodeValue(ln);
+        ...
+        //如果命令已经解析过，则执行该命令
+        if (c-&gt;flags &amp; CLIENT_PENDING_COMMAND) {
+            c-&gt;flags &amp;= ~CLIENT_PENDING_COMMAND;
+            if (processCommandAndResetClient(c) == C_ERR) {      
+                continue;
+            }
+        }
+        //解析并执行所有命令
+        processInputBuffer(c);
+}
+</code></pre>
+<p>好了，到这里，你就了解了 clients_pending_read 列表中的待读客户端，是如何经过以上四个步骤来分配给 IO 线程进行处理的。下图展示了这个主要过程，你可以再回顾下。</p>
+<p><img alt="" src="/assets/abdf0c7fab878f02f6c12487.webp"/></p>
+<p>那么，接下来，我们再来看下待写客户端的分配和处理。</p>
+<h2 id="如何把待写客户端分配给-io-线程执行">如何把待写客户端分配给 IO 线程执行？</h2>
+<p>和待读客户端的分配处理类似，待写客户端分配处理是由 <strong>handleClientsWithPendingWritesUsingThreads 函数</strong>来完成的。该函数也是在 beforeSleep 函数中被调用的。</p>
+<p>handleClientsWithPendingWritesUsingThreads 函数的主要流程同样也可以分成 4 步，其中，第 2、3 和 4 步的执行逻辑，和 handleClientsWithPendingReadsUsingThreads 函数类似。</p>
+<p>简单来说，在第 2 步，handleClientsWithPendingWritesUsingThreads 函数会把待写客户端，按照<strong>轮询方式</strong>分配给 IO 线程，添加到 io_threads_list 数组各元素中。</p>
+<p>然后，在第 3 步，handleClientsWithPendingWritesUsingThreads 函数会让主 IO 线程处理其待写客户端，并执行 while(1) 循环等待所有 IO 线程完成处理。</p>
+<p>在第 4 步，handleClientsWithPendingWritesUsingThreads 函数会再次检查 clients_pending_write 列表中，是否还有待写的客户端。如果有的话，并且这些客户端还有留存在缓冲区中的数据，那么，handleClientsWithPendingWritesUsingThreads 函数就会调用 connSetWriteHandler 函数注册可写事件，而这个可写事件对应的回调函数是 <strong>sendReplyToClient 函数</strong>。</p>
+<p>等到事件循环流程再次执行时，刚才 handleClientsWithPendingWritesUsingThreads 函数注册的可写事件就会被处理，紧接着 sendReplyToClient 函数会执行，它会直接调用 writeToClient 函数，把客户端缓冲区中的数据写回。</p>
+<p>这里，<strong>你需要注意的是</strong>，connSetWriteHandler 函数最终会映射为 connSocketSetWriteHandler 函数，而 connSocketSetWriteHandler 函数是在<a href="https://github.com/redis/redis/tree/5.0/src/connection.c" target="_blank">connection.c</a>文件中实现的。connSocketSetWriteHandler 函数会调用 aeCreateFileEvent 函数创建 AE_WRITABLE 事件，这就是刚才介绍的可写事件的注册（关于 aeCreateFileEvent 函数的使用，你也可以再回顾下第 11 讲）。</p>
+<p>不过，和 handleClientsWithPendingReadsUsingThreads 函数不同的是在第 1 步，handleClientsWithPendingWritesUsingThreads 函数，<strong>会判断 IO 线程数量是否为 1，或者待写客户端数量是否小于 IO 线程数量的 2 倍。</strong></p>
+<p>如果这两个条件中有一个条件成立，那么 handleClientsWithPendingWritesUsingThreads 函数就不会用多线程来处理客户端了，而是会调用 handleClientsWithPendingWrites 函数由主 IO 线程直接处理待写客户端。这样做的目的，主要是为了在待写客户端数量不多时，避免采用多线程，从而<strong>节省 CPU 开销</strong>。</p>
+<p>这一步的条件判断逻辑如下所示。其中，stopThreadedIOIfNeeded 函数主要是用来判断待写客户端数量，是否不足为 IO 线程数量的 2 倍。</p>
+<pre><code class="language-c">if (server.io_threads_num == 1 || stopThreadedIOIfNeeded()) {
+        return handleClientsWithPendingWrites();
+}
+</code></pre>
+<p>另外，handleClientsWithPendingWritesUsingThreads 函数在第 1 步中，还会<strong>判断 IO 线程是否已激活</strong>。如果没有激活，它就会调用 startThreadedIO 函数，把全局变量 server 的 io_threads_active 成员变量值设置为 1，表示 IO 线程已激活。这步判断操作如下所示：</p>
+<pre><code class="language-c">if (!server.io_threads_active) startThreadedIO();
+</code></pre>
+<p>总之你要知道的就是，Redis 是通过 handleClientsWithPendingWritesUsingThreads 函数，把待写客户端按轮询方式分配给各个 IO 线程，并由它们来负责写回数据的。</p>
+<h2 id="小结">小结</h2>
+<p>今天这节课，我给你介绍了 Redis 6.0 中新设计实现的<strong>多 IO 线程机制</strong>。这个机制的设计主要是为了使用多个 IO 线程，来并发处理客户端读取数据、解析命令和写回数据。使用了多线程后，Redis 就可以充分利用服务器的多核特性，从而<strong>提高 IO 效率</strong>。</p>
+<p>总结来说，Redis 6.0 先是在初始化过程中，根据用户设置的 IO 线程数量，创建对应数量的 IO 线程。</p>
+<p>当 Redis server 初始化完成后正常运行时，它会在 readQueryFromClient 函数中通过调用 postponeClientRead 函数来决定是否推迟客户端读操作。同时，Redis server 会在 addReply 函数中通过调用 prepareClientToWrite 函数，来决定是否推迟客户端写操作。而待读写的客户端会被分别加入到 clients_pending_read 和 clients_pending_write 两个列表中。</p>
+<p>这样，每当 Redis server 要进入事件循环流程前，都会在 beforeSleep 函数中分别调用 handleClientsWithPendingReadsUsingThreads 函数和 handleClientsWithPendingWritesUsingThreads 函数，将待读写客户端<strong>以轮询方式分配给 IO 线程</strong>，加入到 IO 线程的待处理客户端列表 io_threads_list 中。</p>
+<p>而 IO 线程一旦运行后，本身会一直检测 io_threads_list 中的客户端，如果有待读写客户端，IO 线程就会调用 readQueryFromClient 或 writeToClient 函数来进行处理。</p>
+<p>最后，我也想再提醒你一下，<strong>多 IO 线程本身并不会执行命令</strong>，它们只是利用多核并行地读取数据和解析命令，或是将 server 数据写回（下节课我还会结合分布式锁的原子性保证，来给你介绍这一部分的源码实现。）。所以，<strong>Redis 执行命令的线程还是主 IO 线程</strong>。这一点对于你理解多 IO 线程机制很重要，可以避免你误解 Redis 有多线程同时执行命令。</p>
+<p>这样一来，我们原来针对 Redis 单个主 IO 线程做的优化仍然有效，比如避免 bigkey、避免阻塞操作等。</p>
+<h2 id="每课一问">每课一问</h2>
+<p>Redis 多 IO 线程机制使用 startThreadedIO 函数和 stopThreadedIO 函数，来设置 IO 线程激活标识 io_threads_active 为 1 和为 0。此处，这两个函数还会对线程互斥锁数组进行解锁和加锁操作，如下所示。你知道为什么这两个函数要执行解锁和加锁操作么？</p>
+<pre><code class="language-c">void startThreadedIO(void) {
+    ...
+    for (int j = 1; j &lt; server.io_threads_num; j++)
+        pthread_mutex_unlock(&amp;io_threads_mutex[j]);  //给互斥锁数组中每个线程对应的互斥锁做解锁操作
+    server.io_threads_active = 1;
+}
+
+void stopThreadedIO(void) {
+    ...
+    for (int j = 1; j &lt; server.io_threads_num; j++)
+        pthread_mutex_lock(&amp;io_threads_mutex[j]);  //给互斥锁数组中每个线程对应的互斥锁做加锁操作
+    server.io_threads_active = 0;
+}
+</code></pre>
+<p>欢迎在留言区分享你的答案和思考过程，如果觉得有收获，也欢迎你把今天的内容分享给更多的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>054 领域模型与函数范式 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">领域驱动设计实践（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">109 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>领域驱动设计实践（完）</strong><ul><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/001%20%E3%80%8C%E6%88%98%E7%95%A5%E7%AF%87%E3%80%8D%E8%AE%BF%E8%B0%88%20%20DDD%20%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">001 「战略篇」访谈  DDD 和微服务是什么关系？</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/002%20%E3%80%8C%E6%88%98%E7%95%A5%E7%AF%87%E3%80%8D%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9A%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%EF%BC%8C%E9%87%8D%E7%84%95%E9%9D%92%E6%98%A5%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%BB%8F%E5%85%B8.html">002 「战略篇」开篇词：领域驱动设计，重焕青春的设计经典</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/003%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A7%88.html">003 领域驱动设计概览</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/004%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6.html">004 深入分析软件的复杂度</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/005%20%E6%8E%A7%E5%88%B6%E8%BD%AF%E4%BB%B6%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%8E%9F%E5%88%99.html">005 控制软件复杂度的原则</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/006%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AF%B9%E8%BD%AF%E4%BB%B6%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%BA%94%E5%AF%B9%EF%BC%88%E4%B8%8A%EF%BC%89.html">006 领域驱动设计对软件复杂度的应对（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/007%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AF%B9%E8%BD%AF%E4%BB%B6%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%BA%94%E5%AF%B9%EF%BC%88%E4%B8%8B%EF%BC%89.html">007 领域驱动设计对软件复杂度的应对（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/008%20%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%9B%A2%E9%98%9F%E7%9A%84%E6%B2%9F%E9%80%9A%E4%B8%8E%E5%8D%8F%E4%BD%9C.html">008 软件开发团队的沟通与协作</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/009%20%E8%BF%90%E7%94%A8%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%E6%8F%90%E7%82%BC%E9%A2%86%E5%9F%9F%E7%9F%A5%E8%AF%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">009 运用领域场景分析提炼领域知识（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/010%20%E8%BF%90%E7%94%A8%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%E6%8F%90%E7%82%BC%E9%A2%86%E5%9F%9F%E7%9F%A5%E8%AF%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">010 运用领域场景分析提炼领域知识（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/011%20%E5%BB%BA%E7%AB%8B%E7%BB%9F%E4%B8%80%E8%AF%AD%E8%A8%80.html">011 建立统一语言</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/012%20%E7%90%86%E8%A7%A3%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87.html">012 理解限界上下文</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/013%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E6%8E%A7%E5%88%B6%E5%8A%9B%EF%BC%88%E4%B8%8A%EF%BC%89.html">013 限界上下文的控制力（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/014%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E6%8E%A7%E5%88%B6%E5%8A%9B%EF%BC%88%E4%B8%8B%EF%BC%89.html">014 限界上下文的控制力（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/015%20%E8%AF%86%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88%E4%B8%8A%EF%BC%89.html">015 识别限界上下文（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/016%20%E8%AF%86%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88%E4%B8%8B%EF%BC%89.html">016 识别限界上下文（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/017%20%E7%90%86%E8%A7%A3%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84.html">017 理解上下文映射</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/018%20%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84%E7%9A%84%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%A8%A1%E5%BC%8F.html">018 上下文映射的团队协作模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/019%20%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84%E7%9A%84%E9%80%9A%E4%BF%A1%E9%9B%86%E6%88%90%E6%A8%A1%E5%BC%8F.html">019 上下文映射的通信集成模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/020%20%E8%BE%A8%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB%EF%BC%88%E4%B8%8A%EF%BC%89.html">020 辨别限界上下文的协作关系（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/021%20%E8%BE%A8%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB%EF%BC%88%E4%B8%8B%EF%BC%89.html">021 辨别限界上下文的协作关系（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/022%20%E8%AE%A4%E8%AF%86%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84.html">022 认识分层架构</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/023%20%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E5%8C%96.html">023 分层架构的演化</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/024%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E8%BF%9B.html">024 领域驱动架构的演进</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/025%20%E6%A1%88%E4%BE%8B%20%20%E5%B1%82%E6%AC%A1%E7%9A%84%E8%81%8C%E8%B4%A3%E4%B8%8E%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB%EF%BC%88%E5%9B%BE%E6%96%87%E7%AF%87%EF%BC%89.html">025 案例  层次的职责与协作关系（图文篇）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/026%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E6%9E%B6%E6%9E%84.html">026 限界上下文与架构</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/027%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AF%B9%E6%9E%B6%E6%9E%84%E7%9A%84%E5%BD%B1%E5%93%8D.html">027 限界上下文对架构的影响</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/028%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B.html">028 领域驱动设计的代码模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/029%20%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%9E%B6%E6%9E%84%E5%86%B3%E7%AD%96.html">029 代码模型的架构决策</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/030%20%E5%AE%9E%E8%B7%B5%20%20%E5%85%88%E5%90%AF%E9%98%B6%E6%AE%B5%E7%9A%84%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.html">030 实践  先启阶段的需求分析</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/031%20%E5%AE%9E%E8%B7%B5%20%20%E5%85%88%E5%90%AF%E9%98%B6%E6%AE%B5%E7%9A%84%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89.html">031 实践  先启阶段的领域场景分析（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/032%20%E5%AE%9E%E8%B7%B5%20%20%E5%85%88%E5%90%AF%E9%98%B6%E6%AE%B5%E7%9A%84%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89.html">032 实践  先启阶段的领域场景分析（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/033%20%E5%AE%9E%E8%B7%B5%20%20%E8%AF%86%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87.html">033 实践  识别限界上下文</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/034%20%E5%AE%9E%E8%B7%B5%20%20%E7%A1%AE%E5%AE%9A%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB.html">034 实践  确定限界上下文的协作关系</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/035%20%E5%AE%9E%E8%B7%B5%20%20EAS%20%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.html">035 实践  EAS 的整体架构</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/036%20%E3%80%8C%E6%88%98%E6%9C%AF%E7%AF%87%E3%80%8D%E8%AE%BF%E8%B0%88%EF%BC%9ADDD%20%E8%83%BD%E5%B8%AE%E5%BC%80%E5%8F%91%E5%9B%A2%E9%98%9F%E6%8F%90%E9%AB%98%E8%AE%BE%E8%AE%A1%E6%B0%B4%E5%B9%B3%E5%90%97%EF%BC%9F.html">036 「战术篇」访谈：DDD 能帮开发团队提高设计水平吗？</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/037%20%E3%80%8C%E6%88%98%E6%9C%AF%E7%AF%87%E3%80%8D%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9A%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7.html">037 「战术篇」开篇词：领域驱动设计的不确定性</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/038%20%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9E%8B.html">038 什么是模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/039%20%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B.html">039 数据分析模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/040%20%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B.html">040 数据设计模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/041%20%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B.html">041 数据模型与对象模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/042%20%E6%95%B0%E6%8D%AE%E5%AE%9E%E7%8E%B0%E6%A8%A1%E5%9E%8B.html">042 数据实现模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/043%20%E6%A1%88%E4%BE%8B%20%20%E5%9F%B9%E8%AE%AD%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F.html">043 案例  培训管理系统</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/044%20%E6%9C%8D%E5%8A%A1%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9E%8B.html">044 服务资源模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/045%20%E6%9C%8D%E5%8A%A1%E8%A1%8C%E4%B8%BA%E6%A8%A1%E5%9E%8B.html">045 服务行为模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/046%20%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B.html">046 服务设计模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/047%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1.html">047 领域模型驱动设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/048%20%E9%A2%86%E5%9F%9F%E5%AE%9E%E7%8E%B0%E6%A8%A1%E5%9E%8B.html">048 领域实现模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/049%20%E7%90%86%E8%A7%A3%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B.html">049 理解领域模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/050%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BB%93%E6%9E%84%E8%8C%83%E5%BC%8F.html">050 领域模型与结构范式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/051%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%EF%BC%88%E4%B8%8A%EF%BC%89.html">051 领域模型与对象范式（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/052%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%EF%BC%88%E4%B8%AD%EF%BC%89.html">052 领域模型与对象范式（中）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/053%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%EF%BC%88%E4%B8%8B%EF%BC%89.html">053 领域模型与对象范式（下）</a></li><li><a class="active" aria-current="page" href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/054%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%87%BD%E6%95%B0%E8%8C%83%E5%BC%8F.html">054 领域模型与函数范式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/055%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B.html">055 领域驱动分层架构与对象模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/056%20%E7%BB%9F%E4%B8%80%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B.html">056 统一语言与领域分析模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/057%20%E7%B2%BE%E7%82%BC%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B.html">057 精炼领域分析模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/058%20%E5%BD%A9%E8%89%B2%20UML%20%E4%B8%8E%E5%BD%A9%E8%89%B2%E5%BB%BA%E6%A8%A1.html">058 彩色 UML 与彩色建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/059%20%E5%9B%9B%E8%89%B2%E5%BB%BA%E6%A8%A1%E6%B3%95.html">059 四色建模法</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/060%20%E6%A1%88%E4%BE%8B%20%20%E8%AE%A2%E5%8D%95%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E7%9A%84%E5%9B%9B%E8%89%B2%E5%BB%BA%E6%A8%A1.html">060 案例  订单核心流程的四色建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/061%20%E4%BA%8B%E4%BB%B6%E9%A3%8E%E6%9A%B4%E4%B8%8E%E4%B8%9A%E5%8A%A1%E5%85%A8%E6%99%AF%E6%8E%A2%E7%B4%A2.html">061 事件风暴与业务全景探索</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/062%20%E4%BA%8B%E4%BB%B6%E9%A3%8E%E6%9A%B4%E4%B8%8E%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E5%BB%BA%E6%A8%A1.html">062 事件风暴与领域分析建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/063%20%E6%A1%88%E4%BE%8B%20%20%E8%AE%A2%E5%8D%95%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E7%9A%84%E4%BA%8B%E4%BB%B6%E9%A3%8E%E6%9A%B4.html">063 案例  订单核心流程的事件风暴</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/064%20%E8%A1%A8%E8%BE%BE%E9%A2%86%E5%9F%9F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B.html">064 表达领域设计模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/065%20%E5%AE%9E%E4%BD%93.html">065 实体</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/066%20%E5%80%BC%E5%AF%B9%E8%B1%A1.html">066 值对象</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/067%20%E5%AF%B9%E8%B1%A1%E5%9B%BE%E4%B8%8E%E8%81%9A%E5%90%88.html">067 对象图与聚合</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/068%20%E8%81%9A%E5%90%88%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html">068 聚合设计原则</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/069%20%E8%81%9A%E5%90%88%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.html">069 聚合之间的关系</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/070%20%E8%81%9A%E5%90%88%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%BF%87%E7%A8%8B.html">070 聚合的设计过程</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/071%20%E6%A1%88%E4%BE%8B%20%20%E5%9F%B9%E8%AE%AD%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%81%9A%E5%90%88%E8%AE%BE%E8%AE%A1.html">071 案例  培训领域模型的聚合设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/072%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E5%B7%A5%E5%8E%82.html">072 领域模型对象的生命周期-工厂</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/073%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%B5%84%E6%BA%90%E5%BA%93.html">073 领域模型对象的生命周期-资源库</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/074%20%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1.html">074 领域服务</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/075%20%E6%A1%88%E4%BE%8B%20%20%E9%A2%86%E5%9F%9F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BB%B7%E5%80%BC.html">075 案例  领域设计模型的价值</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/076%20%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1.html">076 应用服务</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/077%20%E5%9C%BA%E6%99%AF%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A9%B1%E5%8A%A8%E5%8A%9B.html">077 场景的设计驱动力</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/078%20%E6%A1%88%E4%BE%8B%20%20%E8%96%AA%E8%B5%84%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9C%BA%E6%99%AF%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1.html">078 案例  薪资管理系统的场景驱动设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/079%20%E5%9C%BA%E6%99%AF%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%20DCI%20%E6%A8%A1%E5%BC%8F.html">079 场景驱动设计与 DCI 模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/080%20%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6.html">080 领域事件</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/081%20%E5%8F%91%E5%B8%83%E8%80%85%E2%80%94%E8%AE%A2%E9%98%85%E8%80%85%E6%A8%A1%E5%BC%8F.html">081 发布者—订阅者模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/082%20%E4%BA%8B%E4%BB%B6%E6%BA%AF%E6%BA%90%E6%A8%A1%E5%BC%8F.html">082 事件溯源模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/083%20%E6%B5%8B%E8%AF%95%E4%BC%98%E5%85%88%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AE%9E%E7%8E%B0%E5%BB%BA%E6%A8%A1.html">083 测试优先的领域实现建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/084%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E7%AE%80%E5%8D%95%E8%AE%BE%E8%AE%A1.html">084 深入理解简单设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/085%20%E6%A1%88%E4%BE%8B%20%20%E8%96%AA%E8%B5%84%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89.html">085 案例  薪资管理系统的测试驱动开发（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/086%20%E6%A1%88%E4%BE%8B%20%20%E8%96%AA%E8%B5%84%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8B%EF%BC%89.html">086 案例  薪资管理系统的测试驱动开发（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/087%20%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84%EF%BC%88%E4%B8%8A%EF%BC%89.html">087 对象关系映射（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/088%20%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84%EF%BC%88%E4%B8%8B%EF%BC%89.html">088 对象关系映射（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/089%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.html">089 领域模型与数据模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/090%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AF%B9%E6%8C%81%E4%B9%85%E5%8C%96%E7%9A%84%E5%BD%B1%E5%93%8D.html">090 领域驱动设计对持久化的影响</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/091%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E4%BD%93%E7%B3%BB.html">091 领域驱动设计体系</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/092%20%E5%AD%90%E9%A2%86%E5%9F%9F%E4%B8%8E%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87.html">092 子领域与限界上下文</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/093%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E8%BE%B9%E7%95%8C%E4%B8%8E%E5%8D%8F%E4%BD%9C.html">093 限界上下文的边界与协作</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/094%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B9%8B%E9%97%B4%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1.html">094 限界上下文之间的分布式通信</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/095%20%E5%91%BD%E4%BB%A4%E6%9F%A5%E8%AF%A2%E8%81%8C%E8%B4%A3%E5%88%86%E7%A6%BB.html">095 命令查询职责分离</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/096%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1.html">096 分布式柔性事务</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/097%20%E8%AE%BE%E8%AE%A1%E6%A6%82%E5%BF%B5%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AF%AD%E8%A8%80.html">097 设计概念的统一语言</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/098%20%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%B1%A1.html">098 模型对象</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/099%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%8F%82%E8%80%83%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B.html">099 领域驱动设计参考过程模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/100%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%B2%BE%E9%AB%93.html">100 领域驱动设计的精髓</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/101%20%E5%AE%9E%E8%B7%B5%20%20%E5%91%98%E5%B7%A5%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%BB%BA%E6%A8%A1.html">101 实践  员工上下文的领域建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/102%20%E5%AE%9E%E8%B7%B5%20%20%E8%80%83%E5%8B%A4%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%BB%BA%E6%A8%A1.html">102 实践  考勤上下文的领域建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/103%20%E5%AE%9E%E8%B7%B5%20%20%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%BB%BA%E6%A8%A1.html">103 实践  项目上下文的领域建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/104%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E4%B8%9A%E5%8A%A1%E9%9C%80%E6%B1%82.html">104 实践  培训上下文的业务需求</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/105%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E5%BB%BA%E6%A8%A1.html">105 实践  培训上下文的领域分析建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/106%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E8%AE%BE%E8%AE%A1%E5%BB%BA%E6%A8%A1.html">106 实践  培训上下文的领域设计建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/107%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AE%9E%E7%8E%B0%E5%BB%BA%E6%A8%A1.html">107 实践  培训上下文的领域实现建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/108%20%E5%AE%9E%E8%B7%B5%20%20EAS%20%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B.html">108 实践  EAS 系统的代码模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/109%20%E5%90%8E%E8%AE%B0%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1.html">109 后记：如何学习领域驱动设计</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/054%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%87%BD%E6%95%B0%E8%8C%83%E5%BC%8F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="054 领域模型与函数范式" id="title">054 领域模型与函数范式</h1>
+<div><h3 id="函数范式">函数范式</h3>
+<p>REA 的 Ken Scambler 认为函数范式的主要特征为：模块化（Modularity）、抽象化（Abstraction）和可组合（Composability），这三个特征可以帮助我们编写<strong>简单</strong>的程序。</p>
+<p>通常，为了降低系统的复杂度，都需要将系统分解为多个功能的组成部分，每个组成部分有着清晰的边界。<strong>模块化</strong>的编码范式需要支持实现者能够轻易地对模块进行替换，这就要求模块具有隔离性，避免在模块之间出现太多的纠缠。函数范式以“函数”为核心，作为模块化的重要组成部分。函数范式要求函数均为没有副作用的纯函数（Pure Function）。在推断每个函数的功能时，由于函数没有产生副作用，就可以不考虑该函数当前所处的上下文，形成清晰的隔离边界。这种相互隔离的纯函数使得模块化成为可能。</p>
+<p>函数的<strong>抽象</strong>能力不言而喻，因为它本质上是一种将输入类型转换为输出类型的转换行为。任何一个函数都可以视为一种转换（Transform），这是对行为的最高抽象，代表了类型（Type）之间的某种动作。极端情况下，我们甚至不用考虑函数的名称和类型，只需要关注其数学本质：f(x) = y。其中，x 是输入，y 是输出，f 就是极度抽象的函数。</p>
+<p>函数范式领域模型的核心要素为代数数据类型（Algebraic Data Type，ADT）和纯函数。代数数据类型表达领域概念，纯函数表达领域行为。由于二者皆被定义为不变的、原子的，因此在类型的约束规则下可以对它们进行组合。<strong>可组合</strong>的特征使得函数范式建立的领域模型可以由简单到复杂，利用组合子来表现复杂的领域逻辑。</p>
+<h4 id="代数数据类型">代数数据类型</h4>
+<p>代数数据类型借鉴了代数学中的概念，作为一种函数式数据结构，体现了函数范式的数学意义。通常，代数数据类型不包含任何行为。它利用<strong>和类型（Sum Type）</strong> 来展示相同抽象概念的不同组合，使用<strong>积类型（Product Type）</strong> 来展示同一个概念不同属性的组合。</p>
+<p>和与积是代数中的概念，它们在函数范式中体现了类型的两种组合模式。和就是加，用以表达一种类型是它的所有子类型之和。例如表达时间单位的 TimeUnit 类型：</p>
+<pre><code class="language-scala">sealed trait TimeUnit
+
+case object Days extends TimeUnit
+case object Hours extends TimeUnit
+case object Minutes extends TimeUnit
+case object Seconds extends TimeUnit
+case object MilliSeconds extends TimeUnit
+case object MicroSeconds extends TimeUnit
+case object NanoSeconds extends TimeUnit
+
+</code></pre>
+<p><strong>说明</strong>：由于 Java 并非真正的函数式语言，较难表达一些函数式特性，因此，本节内容的代码使用 Scala 语言作为示例。</p>
+<p>在上述模型中，TimeUnit 是对时间单位概念的一个抽象。定义为和类型，说明它的实例只能是以下的任意一种：Days、Hours、Minutes、Seconds、MilliSeconds、MicroSeconds 或 NanoSeconds。这是一种逻辑或的关系，用加号来表示：</p>
+<pre><code>type TimeUnit = Days + Hours + Minutes + Seconds + MilliSeconds + MicroSeconds + NanoSeconds
+
+</code></pre>
+<p>积类型体现了一个代数数据类型是其属性组合的笛卡尔积，例如一个员工类型：</p>
+<pre><code class="language-scala">case class Employee(number: String, name: String, email: String, onboardingDate: Date)
+
+</code></pre>
+<p>它表示 Employee 类型是 (String, String, String, Date) 组合的集合，也就是这四种数据类型的笛卡尔积，在类型语言中可以表达为：</p>
+<pre><code class="language-scala">type Employee = (String, String, String, Date)
+
+</code></pre>
+<p>也可以用乘号来表示这个类型的定义：</p>
+<pre><code>type Employee = String * String * String * Date
+
+</code></pre>
+<p>和类型和积类型的这一特点体现了代数数据类型的组合（Combinable）特性。代数数据类型的这两种类型并非互斥的，有的代数数据类型既是和类型，又是积类型，例如银行的账户类型：</p>
+<pre><code class="language-scala">sealed trait Currency
+case object RMB extends Currency
+case object USD extends Currency
+case object EUR extends Currency
+
+case class Balance(amount: BigDecimal, currency: Currency)
+
+sealed trait Account {
+    def number: String
+    def name: String
+}
+
+case class SavingsAccount(number: String, name: String, dateOfOpening: Date) extends Account
+case class BilledAccount(number: String, name: String, dateOfOpening: Date, balance: Balance) extends Account
+
+</code></pre>
+<p>代码中的 Currency 被定义为和类型，Balance 为积类型。Account 首先是和类型，它的值要么是 SavingsAccount，要么是 BilledAccount；同时，每个类型的 Account 又是一个积类型。</p>
+<p>代数数据类型与对象范式的抽象数据类型有着本质的区别。前者体现了数学计算的特性，具有<strong>不变性</strong>。使用 Scala 的 case object 或 case class 语法糖会帮助我们创建一个不可变的抽象。当我们创建了如下的账户对象时，它的值就已经确定，不可改变：</p>
+<pre><code class="language-scala">val today = Calendar.getInstance.getTime
+val balance = Balance(10.0, RMB)
+val account = BilledAccount("980130111110043", "Bruce Zhang", today, balance)
+
+</code></pre>
+<p>数据的不变性使得代码可以更好地支持并发，可以随意共享值而无需承受对可变状态的担忧。<strong>不可变数据是函数式编程中实践的重要原则之一</strong>，它可以与纯函数更好地结合。</p>
+<p>代数数据类型既体现了领域概念的知识，同时还通过和类型和积类型定义了约束规则，从而建立了严格的抽象。例如类型组合 (String, String, Date) 是一种高度的抽象，但它却丢失了领域知识，因为它缺乏类型标签，如果采用积类型方式进行定义，则在抽象的同时，还约束了各自的类型。和类型在约束上更进了一步，它将变化建模在一个特定数据类型内部，并限制了类型的取值范围。和类型与积类型结合起来，与操作代数数据类型的函数放在一起，然后利用模式匹配来实现表达业务规则的领域行为。</p>
+<p>我们以 Robert Martin 在《敏捷软件开发》一书中给出的薪资管理系统需求为例，利用函数范式的建模方式来说明代数数据类型的优势。需求描述如下：</p>
+<blockquote>
+<p>公司雇员有三种类型。一种雇员是钟点工，系统会按照雇员记录中每小时报酬字段的值对他们进行支付。他们每天会提交工作时间卡，其中记录了日期以及工作小时数。如果他们每天工作超过 8 小时，超过部分会按照正常报酬的 1.5 倍进行支付。支付日期为每周五。月薪制的雇员以月薪进行支付。每个月的最后一个工作日对他们进行支付。在雇员记录中有月薪字段。销售人员会根据他们的销售情况支付一定数量的酬金（Commssion）。他们会提交销售凭条，其中记录了销售的日期和数量。在他们的雇员记录中有一个酬金报酬字段。每隔一周的周五对他们进行支付。</p>
+</blockquote>
+<p>我们现在要计算公司雇员的薪资。从需求看，我们需要建立的领域模型是雇员，它是一个<strong>积类型</strong>。注意，需求虽然清晰地勾勒出三种类型的雇员，但实则它们的差异体现在<strong>收入</strong>的类型上，这种差异体现为<strong>和类型</strong>不同的值。于是，可以得到由如下代数数据类型呈现的领域模型：</p>
+<pre><code class="language-scala">// ADT 定义，体现了领域概念
+// Amount 是一个积类型，Currency 则为前面定义的和类型
+calse class Amount(value: BigDecimal, currency: Currency) {
+    // 实现了运算符重载，支持 Amount 的组合运算
+    def +(that: Amount): Amount = {
+        require(that.currency == currency)
+        Amount(value + that.value, currency)
+    }
+    def *(times: BigDecimal): Amount = {
+        Amount(value * times, currency)
+    }
+}
+
+//以下类型皆为积类型，分别体现了工作时间卡与销售凭条领域概念
+case class TimeCard(startTime: Date, endTimeDate)
+case class SalesReceipt(date: Date, amount: Amount)
+
+//支付周期是一个隐藏概念，不同类型的雇员支付周期不同
+case class PayrollPeriod(startDate: Date, endDate: Date)
+
+//Income 的抽象表示成和类型与乘积类型的组合
+sealed trait Income
+case class WeeklySalary(feeOfHour: Amount, timeCards: List[TimeCard], payrollPeriod: PayrollPeriod) extends Income
+case class MonthlySalary(salary: Amount, payrollPeriod: PayrollPeriod) extends Income
+case class Commission(salary: Amount, saleReceipts: List[SalesReceipt], payrollPeriod: PayrollPeriod)
+
+//Employee 被定义为积类型，它组合的 Income 具有不同的抽象
+case class Employee(number: String, name: String, onboardingDate: Date, income: Income)
+
+</code></pre>
+<p>在定义了以上由代数数据类型组成的领域模型之后，即可将其与领域行为结合起来，例如计算每个雇员的收入。由于 Income 被定义为和类型，它表达的是一种逻辑或的关系，因此它的每个子类型（称为 ADT 变体）都将成为模式匹配的分支。和类型的组合有着确定的值（类型理论的术语将其称之为 Inhabitant），例如 Income 和类型的值为 3，则模式匹配的分支就应该是 3 个，这就使得 Scala 编译器可以检查模式匹配的穷尽性。如果模式匹配缺少了对和类型的值表示，编译器都会给出警告。倘若和类型增加了一个新的值，编译器也会指出所有需要新增 ADT 变体来更新模式匹配的地方。针对 Income 积类型，可以利用模式匹配结合业务规则对它进行解构，代码如下所示：</p>
+<pre><code class="language-scala">def calculateIncome(employee: Employee): Amount = employee.income match {
+    case WeeklySalary(fee, timeCards, _) =&gt; weeklyIncomeOf(fee, timeCards)
+    case MonthlySalary(salary, _) =&gt; salary
+    case Commision(salary, saleReceipts, _) =&gt; salary + commistionOf(saleReceipts)
+}
+
+</code></pre>
+<p>calculateIncome() 是一个纯函数，它利用模式匹配，针对 Employee 的特定 Income 类型计算雇员的不同收入。</p>
+<h4 id="纯函数">纯函数</h4>
+<p>在函数范式中，往往使用纯函数（Pure Function）来表现领域行为。所谓“纯函数”，就是指没有副作用（Side Effects）的函数。《Scala 函数式编程》认为常见的副作用包括：</p>
+<ul>
+<li>修改一个变量</li>
+<li>直接修改数据结构</li>
+<li>设置一个对象的成员</li>
+<li>抛出一个异常或以一个错误终止</li>
+<li>打印到终端或读取用户的输入</li>
+<li>读取或写入一个文件</li>
+<li>在屏幕上绘画</li>
+</ul>
+<p>例如，读取花名册文件对内容进行解析，获得收件人电子邮件列表的函数为：</p>
+<pre><code class="language-scala">def parse(rosterPath: String): List[Email] = {
+    val lines = readLines(rosterPath)
+    lines.filter(containsValidEmail(_)).map(toEmail(_))
+}
+
+</code></pre>
+<p>代码中的 readLines() 函数需要读取一个外部的花名册文件，这是引起副作用的一个原因。该副作用为单元测试带来了影响。要测试 parse() 函数，就需要为它事先准备好一个花名册文件，增加了测试的复杂度。同时，该副作用使得我们无法根据输入参数推断函数的返回结果，因为读取文件可能出现一些未知的错误，如读取文件错误，又或者有其他人同时在修改该文件，就可能抛出异常或者返回一个不符合预期的邮件列表。</p>
+<p>要将 parse() 定义为纯函数，就需要分离这种副作用，函数的计算结果就不会受到任何内部或外部过程状态改变的影响。一旦去掉副作用，调用函数返回的结果就与直接使用返回结果具有相同效果，二者可以互相替换，这称之为“引用透明（Referential Transparency）”。引用透明的替换性可以用于验证一个函数是否是纯函数。假设客户端要根据解析获得的电子邮件列表发送邮件，解析的花名册文件路径为 roster.txt。假定解析该花名册得到的电子邮件列表为：</p>
+<pre><code class="language-scala">List(Email("<a class="__cf_email__" data-cfemail="93fffae6f1f6fad3f7f7f7f0fcfee3f2fdeabdf0fcfe" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>"), Email("<a class="__cf_email__" data-cfemail="a0c7d5c1ced9d5e0c4c4c4c3cfcdd0c1ced98ec3cfcd" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>"))
+
+</code></pre>
+<p>如果 parse() 是一个纯函数，就需要遵循引用透明的原则，则如下函数调用的行为应该完全相同：</p>
+<pre><code class="language-scala">// 调用解析方法
+send(parse("roster.txt"))
+
+// 直接调用解析结果
+send(List(Email("<a class="__cf_email__" data-cfemail="c1ada8b4a3a4a881a5a5a5a2aeacb1a0afb8efa2aeac" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>"), Email("<a class="__cf_email__" data-cfemail="e7809286899e92a783838384888a9786899ec984888a" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>")))
+
+</code></pre>
+<p>显然并非如此。后者传入的参数是一个电子邮件列表，而前者除了提供了电子邮件列表之外，还读取了花名册文件。函数获得的电子邮件列表不是由花名册文件路径决定的，而是由读取文件的内容决定。读取外部文件的这种副作用使得我们无法根据确定的输入参数推断出确定的计算结果。要将 parse() 改造为支持引用透明的纯函数，就需要分离副作用，即将产生副作用的读取外部文件功能推向 parse() 函数外部：</p>
+<pre><code class="language-scala">def parse(content: List[String]): List[Emial] = 
+    content.filter(containsValidEmail(_)).map(toEmail(_))
+
+</code></pre>
+<p>现在，以下代码的行为就是完全相同的：</p>
+<pre><code class="language-scala">send(parse(List("liubei, <a class="__cf_email__" data-cfemail="f29e9b8790979bb2969696919d9f82939c8bdc919d9f" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>", "noname", "guanyu, <a class="__cf_email__" data-cfemail="b8dfcdd9d6c1cdf8dcdcdcdbd7d5c8d9d6c196dbd7d5" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>")))
+
+send(List(Email("<a class="__cf_email__" data-cfemail="bed2d7cbdcdbd7fedadadaddd1d3cedfd0c790ddd1d3" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>"), Email("<a class="__cf_email__" data-cfemail="305745515e494570545454535f5d40515e491e535f5d" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>")))
+
+</code></pre>
+<p>这意味着改进后的 parse() 可以根据输入结果推断出函数的计算结果，这正是引用透明的价值。<strong>保持函数的引用透明，不产生任何副作用，是函数式编程的基本原则。</strong>如果说面向对象设计需要将依赖尽可能向外推，最终采用依赖注入的方式来降低耦合；那么，函数式编程思想就是要利用纯函数来隔离变化与不变，内部由无副作用的纯函数组成，纯函数将副作用向外推，形成由不变的业务内核与可变的副作用外围组成的结构：</p>
+<p><img alt="35715185.png" src="/assets/6645b1d42858d9c92abb5b5e.png"/></p>
+<p>具有引用透明特征的纯函数更加贴近数学中的函数概念：没有计算，只有转换。转换操作不会修改输入参数的值，只是基于某种规则把输入参数值转换为输出。输入值和输出值都是不变的（Immutable），只要给定的输入值相同，总会给出相同的输出结果。例如我们定义 add1() 函数：</p>
+<pre><code class="language-scala">def add1(x: Int):Int =&gt; x + 1
+
+</code></pre>
+<p>基于数学函数的转换（Transformation）特征，完全可以翻译为如下代码：</p>
+<pre><code class="language-scala">def add1(x: Int): Int =&gt; x match {
+    case 0 =&gt; 1
+    case 1 =&gt; 2
+    case 2 =&gt; 3
+    case 3 =&gt; 4
+    // ...
+}
+
+</code></pre>
+<p>我们看到的不是对变量 x 增加 1，而是根据x 的值进行模式匹配，然后基于业务规则返回确定的值。这就是纯函数的数学意义。</p>
+<p>引用透明、无副作用以及数学函数的转换本质，为纯函数提供了模块化的能力，再结合高阶函数的特性，使纯函数具备了强大的组合（Combinable）特性，而这正是函数式编程的核心原则。这种组合性如下图所示：</p>
+<p><img alt="61929115.png" src="/assets/0e336bec518a9e4ff09ca4ed.png"/></p>
+<p>图中的 andThen 是 Scala 语言提供的组合子，它可以组合两个函数形成一个新的函数。Scala 还提供了 compose 组合子，二者的区别在于组合函数的顺序不同。上图可以表现为如下 Scala 代码：</p>
+<pre><code class="language-scala">sealed trait Fruit {
+    def weight: Int
+}
+case class Apple(weight: Int) extends Fruit
+case class Pear(weight: Int) extends Fruit
+case class Banana(weight: Int) extends Fruit
+
+val appleToPear: Apple =&gt; Pear = apple =&gt; Pear(apple.weight)
+val pearToBanana: Pear =&gt; Banana = pear =&gt; Banana(pear.weight)
+
+// 使用组合
+val appleToBanana = appleToPear andThen pearToBanana
+
+</code></pre>
+<p>组合后得到的函数类型，以及对该函数的调用如下所示：</p>
+<pre><code>scala&gt; val appleToBanana = appleToPear andThen pearToBanana
+appleToBanana: Apple =&gt; Banana = &lt;function1&gt;
+
+scala&gt; appleToBanana(Apple(15))
+res0: Banana = Banana(15)
+
+</code></pre>
+<p>除了纯函数的组合性之外，函数式编程中的 Monad 模式也支持组合。我们可以简单地将一个 Monad 理解为提供 bind 功能的容器。在 Scala 语言中，bind 功能就是 flatMap 函数。可以简单地将 flatMap 函数理解为是 map 与 flattern 的组合。例如，针对如下的编程语言列表：</p>
+<pre><code>scala&gt; val l = List("scala", "java", "python", "go")
+
+l: List[String] = List(scala, java, python, go)
+
+</code></pre>
+<p>对该列表执行 map 操作，对列表中的每个元素执行 toCharArray() 函数，就可以把一个字符串转换为同样是 Monad 的字符数组：</p>
+<pre><code>scala&gt; l.map(lang =&gt; lang.toCharArray)
+res7: List[Array[Char]] = List(Array(s, c, a, l, a), Array(j, a, v, a), Array(p, y, t, h, o, n), Array(g, o))
+
+</code></pre>
+<p>map 函数完成了从 List[String] 到 List[Array[Char]] 的转换。对同一个列表执行相同的转换函数，但调用 flatMap 函数：</p>
+<pre><code>scala&gt; l.flatMap(lang =&gt; lang.toCharArray)
+
+res6: List[Char] = List(s, c, a, l, a, j, a, v, a, p, y, t, h, o, n, g, o)
+
+</code></pre>
+<p>flatMap 函数将字符串转换为字符数组后，还执行了一次拍平操作，完成了 List[String] 到 List[Char] 的转换。</p>
+<p>然而在 Monad 的真正实现中，flatMap 并非 map 与 flattern 的组合，相反，map 函数是 flatMap 基于 unit 演绎出来的。因此，Monad 的核心其实是 flatMap 函数：</p>
+<pre><code class="language-scala">class M[A](value: A) { 
+    private def unit[B] (value : B) = new M(value) 
+    def map[B](f: A =&gt; B) : M[B] = flatMap {x =&gt; unit(f(x))} 
+    def flatMap[B](f: A =&gt; M[B]) : M[B] = ... 
+} 
+
+</code></pre>
+<p>flatMap、map 和 filter 往往可以组合起来，实现更加复杂的针对 Monad 的操作。一旦操作变得复杂，这种组合操作的可读性就会降低。例如，我们将两个同等大小列表中的元素项相乘，使用 flatMap 与 map 的代码为：</p>
+<pre><code class="language-scala">val ns = List(1, 2)
+val os = List(4, 5)
+val qs = ns.flatMap(n =&gt; os.map(o =&gt; n * o))
+
+</code></pre>
+<p>这样的代码并不好理解。为了提高代码的可读性，Scala 提供了 for-comprehaension。它本质上是 Monad 的语法糖，组合了 flatMap、map 与 filter 等函数；但从语法上看，却类似一个 for 循环，这就使得我们多了一种可读性更强的调用 Monad 的形式。同样的功能，使用 for-comprehaension 语法糖就变成了：</p>
+<pre><code class="language-scala">val qs = for {
+    n &lt;- ns
+    o &lt;- os
+} yield n * o
+
+</code></pre>
+<p>这里演示的 for 语法糖看起来像是一个嵌套循环，分别从 ns 和 os 中取值，然后利用 yield 生成器将计算得到的积返回为一个列表；实质上，这段代码与使用 flatMap 和 map 的代码完全相同。</p>
+<p>在使用纯函数表现领域行为时，我们可以让纯函数返回一个 Monad 容器，再通过 for-comprehaension 进行组合。这种方式既保证了代码对领域行为知识的体现，又能因为不变性避免状态变更带来的缺陷。同时，结合纯函数的组合子特性，使得代码的表现力更加强大，非常自然地传递了领域知识。例如，针对下订单场景，需要验证订单，并对验证后的订单进行计算。验证订单时，需要验证订单自身的合法性、客户状态以及库存；对订单的计算则包括计算订单的总金额、促销折扣与运费。</p>
+<p>在对这样的需求进行领域建模时，我们需要先寻找到表达领域知识的各个原子元素，包括具体的代数数据类型和实现原子功能的纯函数：</p>
+<pre><code class="language-scala">// 积类型
+case class Order(id: OrderId, customerId: CustomerId, desc: String, totalPrice: Amount, discount: Amount, shippingFee: Amount, orderItems: List[OrderItem])
+
+// 以下是验证订单的行为，皆为原子的纯函数，并返回 scalaz 定义的 Validation Monad
+val validateOrder : Order =&gt; Validation[Order, Boolean] = order =&gt;
+    if (order.orderItems isEmpty) Failure(s"Validation failed for order $order.id") 
+    else Success(true)
+
+val checkCustomerStatus: Order =&gt; Validation[Order, Boolean] = order =&gt; 
+    Success(true)
+
+val checkInventory: Order =&gt; Validation[Order, Boolean] = order =&gt; 
+    Success(true)
+
+// 以下定义了计算订单的行为，皆为原子的纯函数
+val calculateTotalPrice: Order =&gt; Order = order =&gt; 
+    val total = totalPriceOf(order)
+    order.copy(totalPrice = total)
+
+val calculateDiscount: Order =&gt; Order = order =&gt; 
+    order.copy(discount = discountOf(order))
+
+val calculateShippingFee: Order =&gt; Order = order =&gt;
+    order.copy(shippingFee = shippingFeeOf(order))
+
+</code></pre>
+<p>这些纯函数是原子的、分散的、可组合的，接下来就可以利用纯函数与 Monad 的组合能力，编写满足业务场景需求的实现代码：</p>
+<pre><code class="language-scala">val order = ...
+
+// 组合验证逻辑
+// 注意返回的 orderValidated 也是一个 Validation Monad
+val orderValidated = for {
+    _ &lt;- validateOrder(order)
+    _ &lt;- checkCustomerStatus(order)
+    c &lt;- checkInventory(order)
+} yield c
+
+if (orderValidated.isSuccess) {
+    // 组合计算逻辑，返回了一个组合后的函数
+    val calculate = calculateTotalPrice andThen calculateDiscount andThen calculateShippingFee
+    // 返回具有订单总价、折扣与运费的订单对象
+    // 在计算订单的过程中，订单对象是不变的
+    val calculatedOrder = calculate(order)
+
+    // ...
+}
+
+</code></pre>
+<h4 id="函数范式与领域模型">函数范式与领域模型</h4>
+<p>遵循函数范式建立领域模型时，代数数据类型与纯函数是主要的建模元素。代数数据类型中的和类型与积类型可以表达领域概念，纯函数则用于表达领域行为。它们都被定义为不变的原子类型，然后再将这些原子的类型与操作组合起来，满足复杂业务逻辑的需要。这是函数式编程中面向组合子（Combinator）的建模方法，它与面向对象的建模方法存在思想上的不同。</p>
+<p>面向对象的建模方法是一种<strong>归纳法</strong>，通过分析和归纳需求，找到问题域并逐级分解问题，然后通过对象来表达领域逻辑，并以职责的角度分析这些领域逻辑，按照角色把职责分配给各自的对象，通过对象之间的协作实现复杂的领域行为。面向组合子的建模方法则是一种<strong>演绎法</strong>，通过在领域需求中寻找和定义最基本的原子操作，然后根据基本的组合规则将这些原子类型与原子函数组合起来。</p>
+<p>因此，函数范式对领域建模的影响是全方位的，它与对象范式看待世界的角度迥然不同。对象范式是在定义一个完整的世界，然后以上帝的身份去规划各自行使职责的对象；函数范式是在组合一个完整的世界，它就像古代哲学家一般，看透了物质的本原而识别出不可再分的原子微粒，然后再按照期望的方式组合这些微粒来创造世界。故而，采用函数范式进行领域建模，关键是组合子包括组合规则的设计，既要简单，又要完整，还需要保证每个组合子的正交性，如此才能对其进行组合，互不冗余，互不干涉。这些组合子，就是前面介绍的代数数据类型和纯函数。</p>
+<p>通过前面给出的案例，我们发现函数范式的领域模型颠覆了面向对象思想中“贫血模型是坏的”这一观点。事实上，函数范式的贫血模型不同于结构范式和对象范式的贫血模型。结构范式是将过程与数据分离，这些过程实现的是一个完整的业务场景，由于缺乏完整的封装性，因而无法控制过程与数据的修改对其他调用者带来的影响。对象范式要求将数据与行为封装在一起，就是为了解决这一问题。函数范式虽然建立的是贫血模型，但它的模块化、抽象化与可组合特征降低了变化带来的影响。在组合这些组合子时，通过引入高内聚松耦合的模块对这些功能进行分组，就能避免细粒度的组合子过于散乱，形成更加清晰的代码层次。</p>
+<p>Debasish Ghosh 总结了函数范式的基本原则，用以建立更好的领域模型：</p>
+<ul>
+<li>利用函数组合的力量，用小函数组装成一个大函数，获得更好的组合性。</li>
+<li>纯粹，领域模型的很多部分都由引用透明的表达式组成。</li>
+<li>通过方程式推导，可以很容易地推导和验证领域行为。</li>
+</ul>
+<p>不止如此，根据代数数据类型的不变性，以及对模式匹配的支持，它还天生适合表达领域事件。例如地址变更事件，就可以用一个积类型来表示：</p>
+<pre><code class="language-scala">case class AddressChanged(eventId: EventId, customerId: CustomerId, oldAddress: Address, newAddress: Address, occurred: Time)
+
+</code></pre>
+<p>我们还可以用和类型对事件进行抽象，这样就可以在处理事件时运用模式匹配：</p>
+<pre><code class="language-scala">sealed trait Event {
+    def eventId: EventId
+    def occurred: Time
+}
+
+case class AddressChanged(eventId: EventId, customerId: CustomerId, oldAddress: Address, newAddress: Address, occurred: Time) extends Event
+case class AccountOpened(eventId: EventId, Account: Account, occurred: Time) extends Event
+
+def handle(event: Event) = event match {
+    case ac: AddressChanged =&gt; ...
+    case ao: AccountOpened =&gt; ...
+}
+
+</code></pre>
+<p>函数范式中的代数数据类型仍然可以用来表示实体和值对象，但它们都是不变的，二者的区别主要在于是否需要定义唯一标识符。聚合的概念仍然存在，如果使用 Scala 语言，往往会为聚合定义满足角色特征的 trait，这样就可以使得聚合的实现通过混入多个 trait 来完成代数数据类型的组合。由于资源库（Repository）会与外部资源进行协作，意味着它会产生副作用，因此遵循函数式编程思想，往往会将其推向纯函数的外部。在函数式语言中，可以利用柯里化（Currying，又译作咖喱化）或者 Reader Monad 来推迟对资源库具体实现的注入。</p>
+<p>主流的领域驱动设计往往以对象范式作为建模范式，利用函数范式建立的领域模型多多少少显得有点“另类”，因此我将其称之为非主流的领域驱动设计。这里所谓的“非主流”，仅仅是从建模范式的普及性角度来考虑的，并不能说明二者的优劣与高下之分。事实上，函数范式可以很好地与事件驱动架构结合在一起，这是一种<strong>以领域事件作为模型驱动设计的驱动力</strong>思想。针对事件进行建模，则任何业务流程皆可用状态机来表达。状态的迁移，就是命令（Command）或者决策（Decision）对事件的触发。我们还可以利用事件风暴（Event Storming）帮助我们识别这些事件，而事件的不变性特征又可以很好地与函数式编程结合起来。</p>
+<p>如果采用命令查询职责分离（CQRS）模式，那么在命令端，将由命令与事件组成一系列异步的非阻塞消息流。这种对消息的认识，恰好可以与响应式编程（Reactive Programming）结合起来。诸如 ReactiveX 这样的响应式编程框架在参考了迭代器模式与观察者模式的基础上，结合了函数式编程思想，以事件处理的形式实现了异步非阻塞处理，在满足系统架构灵活性与伸缩性的同时，提高了事件处理的响应能力。</p>
+<p>显然，围绕着不变的事件为中心，包括响应式编程、事件风暴、事件溯源与命令查询职责分离模式都可以与函数范式有效地结合起来，形成一种事件模型驱动设计（Event Model Driven Design，EDDD）方法。与事件驱动架构不同，事件模型驱动设计可以算是领域驱动设计的一种分支。作为一种设计方法学，它的实践与模式同样涵盖了战略设计与战术设计等多个层次，且可以与领域驱动设计的模式如限界上下文、领域事件、领域服务等结合起来。在金融、通信等少数领域，已经开始了对这种建立在函数范式基础之上的领域驱动设计的尝试，与它们相关的知识可以写成厚厚的一本大书，在这里就不再赘述了。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

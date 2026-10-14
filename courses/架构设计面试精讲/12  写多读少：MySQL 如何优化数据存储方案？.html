@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12  写多读少：MySQL 如何优化数据存储方案？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/index.html">架构设计面试精讲</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">22 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>架构设计面试精讲</strong><ul><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%B8%AD%E9%AB%98%E7%BA%A7%E7%A0%94%E5%8F%91%E9%9D%A2%E8%AF%95%EF%BC%8C%E9%80%83%E4%B8%8D%E5%BC%80%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E8%BF%99%E4%B8%80%E7%8E%AF.html">00 开篇词  中高级研发面试，逃不开架构设计这一环</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/01%20%20%E7%A0%94%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%83%B3%E6%8F%90%E5%8D%87%E9%9D%A2%E8%AF%95%E7%AB%9E%E4%BA%89%E5%8A%9B%EF%BC%8C%E8%AF%A5%E5%85%B7%E5%A4%87%E8%BF%99%E4%B8%89%E4%B8%AA%E6%8A%80%E6%9C%AF%E8%AE%A4%E7%9F%A5.html">01  研发工程师想提升面试竞争力，该具备这三个技术认知</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/02%20%20%E7%A0%94%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%A6%82%E4%BD%95%E7%94%A8%E6%9E%B6%E6%9E%84%E5%B8%88%E8%A7%86%E8%A7%92%E5%9B%9E%E7%AD%94%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9F.html">02  研发工程师如何用架构师视角回答架构设计方案？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/03%20%20%E9%9D%A2%E8%AF%95%E5%AE%98%E5%A6%82%E4%BD%95%E8%80%83%E5%AF%9F%E4%B8%8E%20CAP%20%E6%9C%89%E5%85%B3%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA%EF%BC%9F.html">03  面试官如何考察与 CAP 有关的分布式理论？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/04%20%20%E4%BA%BF%E7%BA%A7%E5%95%86%E5%93%81%E5%AD%98%E5%82%A8%E4%B8%8B%EF%BC%8C%E5%A6%82%E4%BD%95%E6%B7%B1%E5%BA%A6%E5%9B%9E%E7%AD%94%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8E%9F%E7%90%86%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9F.html">04  亿级商品存储下，如何深度回答分布式系统的原理性问题？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/05%20%20%E6%B5%B7%E9%87%8F%E5%B9%B6%E5%8F%91%E5%9C%BA%E6%99%AF%E4%B8%8B%EF%BC%8C%E5%A6%82%E4%BD%95%E5%9B%9E%E7%AD%94%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9F.html">05  海量并发场景下，如何回答分布式事务一致性问题？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/06%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E5%9B%9E%E7%AD%94%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F.html">06  分布式系统中，如何回答锁的实现原理？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/07%20%20RPC%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E9%9D%A2%E8%AF%95%E4%B8%AD%E5%B1%95%E7%8E%B0%E5%87%BA%E2%80%9C%E9%80%A0%E8%BD%AE%E5%AD%90%E2%80%9D%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%9F.html">07  RPC：如何在面试中展现出“造轮子”的能力？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/08%20%20MQ%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9B%9E%E7%AD%94%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A2%E5%A4%B1%E3%80%81%E9%87%8D%E5%A4%8D%E4%B8%8E%E7%A7%AF%E5%8E%8B%E9%97%AE%E9%A2%98.html">08  MQ：如何回答消息队列的丢失、重复与积压问题</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/08%20%E6%A1%88%E4%BE%8B%E4%B8%B2%E8%81%94%20%20%E5%A6%82%E4%BD%95%E8%AE%A9%E7%B3%BB%E7%BB%9F%E6%8A%97%E4%BD%8F%E5%8F%8C%E5%8D%81%E4%B8%80%E7%9A%84%E9%A2%84%E7%BA%A6%E6%8A%A2%E8%B4%AD%E6%B4%BB%E5%8A%A8%EF%BC%9F.html">08 案例串联  如何让系统抗住双十一的预约抢购活动？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/09%20%20%E5%A6%82%E4%BD%95%E5%9B%9E%E7%AD%94%20MySQL%20%E7%9A%84%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98%EF%BC%9F.html">09  如何回答 MySQL 的索引原理与优化问题？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/10%20%20%E5%A6%82%E4%BD%95%E5%9B%9E%E7%AD%94%20MySQL%20%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81%E7%9A%84%E6%9C%BA%E5%88%B6%EF%BC%9F.html">10  如何回答 MySQL 的事务隔离级别和锁的机制？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/11%20%20%E8%AF%BB%E5%A4%9A%E5%86%99%E5%B0%91%EF%BC%9AMySQL%20%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%A1%88%EF%BC%9F.html">11  读多写少：MySQL 如何优化数据查询方案？</a></li><li><a class="active" aria-current="page" href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/12%20%20%E5%86%99%E5%A4%9A%E8%AF%BB%E5%B0%91%EF%BC%9AMySQL%20%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88%EF%BC%9F.html">12  写多读少：MySQL 如何优化数据存储方案？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/13%20%20%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%EF%BC%9A%E5%BA%94%E5%AF%B9%E9%9D%A2%E8%AF%95%E4%BD%A0%E8%A6%81%E6%8E%8C%E6%8F%A1%20Redis%20%E5%93%AA%E4%BA%9B%E5%8E%9F%E7%90%86%EF%BC%9F.html">13  缓存原理：应对面试你要掌握 Redis 哪些原理？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/14%20%20%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%EF%BC%9A%E9%9D%A2%E8%AF%95%E4%B8%AD%E5%A6%82%E4%BD%95%E5%9B%9E%E7%AD%94%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E9%9B%AA%E5%B4%A9%E7%AD%89%E9%97%AE%E9%A2%98%EF%BC%9F.html">14  缓存策略：面试中如何回答缓存穿透、雪崩等问题？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/15%20%20%E5%A6%82%E4%BD%95%E5%90%91%E9%9D%A2%E8%AF%95%E5%AE%98%E8%AF%81%E6%98%8E%E4%BD%A0%E5%81%9A%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%98%AF%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84%EF%BC%9F.html">15  如何向面试官证明你做的系统是高可用的？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/16%20%20%E5%A6%82%E4%BD%95%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%B8%88%E8%A7%92%E5%BA%A6%E5%9B%9E%E7%AD%94%E7%B3%BB%E7%BB%9F%E5%AE%B9%E9%94%99%E3%80%81%E9%99%8D%E7%BA%A7%E7%AD%89%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%EF%BC%9F.html">16  如何从架构师角度回答系统容错、降级等高可用问题？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/17%20%20%E5%A6%82%E4%BD%95%E5%90%91%E9%9D%A2%E8%AF%95%E5%AE%98%E8%AF%81%E6%98%8E%E4%BD%A0%E5%81%9A%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%98%AF%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%EF%BC%9F.html">17  如何向面试官证明你做的系统是高性能的？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/18%20%20%E5%A6%82%E4%BD%95%E4%BB%8E%E6%9E%B6%E6%9E%84%E5%B8%88%E8%A7%92%E5%BA%A6%E5%9B%9E%E7%AD%94%E6%80%8E%E4%B9%88%E5%BA%94%E5%AF%B9%E5%8D%83%E4%B8%87%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F.html">18  如何从架构师角度回答怎么应对千万级流量的问题？</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/19%20%E5%BD%A9%E8%9B%8B%20%20%E4%BA%92%E8%81%94%E7%BD%91%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB.html">19 彩蛋  互联网架构设计面试，你需要掌握的知识体系</a></li><li><a href="/courses/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E9%81%93%E3%80%81%E6%9C%AF%E3%80%81%E5%8A%BF.html">结束语  程序员的道、术、势</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/12%20%20%E5%86%99%E5%A4%9A%E8%AF%BB%E5%B0%91%EF%BC%9AMySQL%20%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12  写多读少：MySQL 如何优化数据存储方案？" id="title">12  写多读少：MySQL 如何优化数据存储方案？</h1>
+<div><p>上一讲，我带你学习了在高并发读多写少的场景下，数据库的一种优化方案：读写分离。通过主从复制的技术把数据复制多份，读操作只读取从数据库中的数据，这样就增强了抵抗大量并发读请求的能力，提升了数据库的查询性能。这时，你的系统架构如下：</p>
+<p><img alt="1.png" src="/assets/eae9b66431eb1fa57a286a56.png"/></p>
+<p>系统架构图</p>
+<h3 id="案例背景">案例背景</h3>
+<p>假设在这样的背景下，面试官出了一道考题：</p>
+<blockquote>
+<p>公司现有业务不断发展，流量剧增，交易数量突破了千万订单，但是订单数据还是单表存储，主从分离后，虽然减少了缓解读请求的压力，但随着写入压力增加，数据库的查询和写入性能都在下降，这时你要怎么设计架构？</p>
+</blockquote>
+<p>这个问题可以归纳为：数据库写入请求量过大，导致系统出现性能与可用性问题。</p>
+<p>要想解决该问题，你可以对存储数据做分片，常见的方式就是对数据库做“分库分表”，在实现上有三种策略：<strong>垂直拆分</strong>、<strong>水平拆分</strong>、<strong>垂直水平拆分</strong>。所以一些候选人通常会直接给出这样的回答“可以分库分表，比如垂直拆分、水平拆分、垂直水平拆分”。</p>
+<p>这么回答真的可以吗？</p>
+<h3 id="案例分析">案例分析</h3>
+<p>我在面试候选人时发现，大部分研发工程师都能把分库分表策略熟练地回答出来，因为这个技术是常识，那你可能会问了：既然这个技术很普遍，大家都知道，面试官为什么还要问呢？</p>
+<p>虽然分库分表技术方案很常见，但是在面试中回答好并不简单。因为面试官不会单纯浮于表面问你“分库分表的思路”，而是会站在业务场景中，当数据出现写多读少时，<strong>考察你做分库分表的整体设计方案和技术实现的落地思路</strong>。一般会涉及这样几个问题：</p>
+<ul>
+<li>什么场景该分库？什么场景该分表？</li>
+<li>复杂的业务如何选择分片策略？</li>
+<li>如何解决分片后的数据查询问题？</li>
+</ul>
+<h3 id="案例解答">案例解答</h3>
+<h4 id="如何确定分库还是分表">如何确定分库还是分表？</h4>
+<p>针对“如何确定分库还是分表？”的问题，你要结合具体的场景。</p>
+<ul>
+<li><strong>何时分表</strong></li>
+</ul>
+<p>当数据量过大造成事务执行缓慢时，就要考虑分表，因为减少每次查询数据总量是解决数据查询缓慢的主要原因。你可能会问：“查询可以通过主从分离或缓存来解决，为什么还要分表？”但这里的查询是指事务中的查询和更新操作。</p>
+<ul>
+<li><strong>何时分库</strong></li>
+</ul>
+<p>为了应对高并发，一个数据库实例撑不住，即单库的性能无法满足高并发的要求，就把并发请求分散到多个实例中去（这种应对高并发的思路我之前也说过）。</p>
+<p><strong>总的来说，分库分表使用的场景不一样：</strong> 分表是因为数据量比较大，导致事务执行缓慢；分库是因为单库的性能无法满足要求。</p>
+<h4 id="如何选择分片策略">如何选择分片策略？</h4>
+<p>在明确分库分表的场景后，面试官一般会追问“怎么进行分片？”换句话说就是按照什么分片策略对数据库进行分片？</p>
+<ul>
+<li><strong>垂直拆分</strong></li>
+</ul>
+<p>垂直拆分是根据数据的业务相关性进行拆分。比如一个数据库里面既存在商品数据，又存在订单数据，那么垂直拆分可以把商品数据放到商品库，把订单数据放到订单库。一般情况，垂直拆库常伴随着系统架构上的调整。</p>
+<p><img alt="2021-02-08" src="/assets/0e01cab2f5c2028bb17fc30e.png"/></p>
+<p>垂直拆分</p>
+<p>比如在对做系统“微服务”改造时，将原本一个单体系统拆分成多个子系统，每个系统提供单独的服务，那么随着应用层面的拆分带来的也有数据层面的拆分，将一个主库的数据表，拆分到多个独立的子库中去。</p>
+<p>对数据库进行垂直拆分最常规，优缺点也很明显。</p>
+<p>垂直拆分可以把不同的业务数据进行隔离，让系统和数据更为“纯粹”，更有助于架构上的扩展。但它依然不能解决某一个业务的数据大量膨胀的问题，一旦系统中的某一个业务库的数据量剧增，比如商品系统接入了一个大客户的供应链，对于商品数据的存储需求量暴增，在这个时候，就要把数据拆分到多个数据库和数据表中，也就是对数据做水平拆分。</p>
+<ul>
+<li><strong>水平拆分</strong></li>
+</ul>
+<p>垂直拆分随架构改造而拆分，关注点在于业务领域，而水平拆分指的是把单一库表数据按照规则拆分到多个数据库和多个数据表中，比如把单表 1 亿的数据按 Hash 取模拆分到 10 个相同结构的表中，每个表 1 千万的数据。并且拆分出来的表，可以分别存放到不同的物理数据库中，关注点在于数据扩展。</p>
+<p><img alt="2021-02-08" src="/assets/dade18607eb4b521965e22cd.png"/></p>
+<p>水平拆分</p>
+<p>拆分的规则就是哈希分片和范围分片（这部分内容你可以参考 04 讲中的内容，我就不赘述了）。但我要强调一下 Range 分片，因为 04 讲中有些同学对 Range 分片解决数据热点的问题有些误解。</p>
+<ul>
+<li><strong>Range（范围分片）</strong></li>
+</ul>
+<p>是按照某一个字段的区间来拆分，最好理解的就是按照时间字段分片，比如可以把一个月的数据放入一张表中，这样在查询时就可以根据时间先定位数据存储在哪个表里面，再按照查询条件来查询。</p>
+<p>但是按时间字段进行范围分片的场景并不多，因为会导致数据分布不均，毕竟不是每个月的销量都是平均的。所以常见的 Range 分片是按照字段类型，比如按照商品的所属品类进行分片。这样与 Hash 分片不同的是，Range 分片就可以加入对于业务的预估。</p>
+<p><img alt="2021-02-08" src="/assets/da64623c4debb1aaf81576da.png"/></p>
+<p>Range 分片</p>
+<p>但是同样的，由于不同“商品品类”的业务热点不同，对于商品数据存储也会存在热点数据问题，这个时候处理的手段有两个。</p>
+<p><strong>1、垂直扩展</strong></p>
+<p>由于 Range 分片是按照业务特性进行的分片策略，所以可以对热点数据做垂直扩展，即提升单机处理能力。在业务发展突飞猛进的初期，建议使用“增强单机硬件性能”的方式提升系统处理能力，因为此阶段，公司的战略往往是发展业务抢时间，“增强单机硬件性能”是最快的方法。</p>
+<p><strong>2、分片元数据</strong></p>
+<p>单机性能总是有极限的，互联网分布式架构设计高并发终极解决方案还是水平扩展，所以结合业务的特性，就需要在 Range 的基础上引入“分片元数据”的概念：分片的规则记录在一张表里面，每次执行查询的时候，先去表里查一下要找的数据在哪个分片中。</p>
+<p>这种方式的优点是灵活性高，并且分片规则可以随着业务发展随意改动。比如当某个分片已经是热点了，那就可以把这个分片再拆成几个分片，或者把这个分片的数据移到其他分片中去，然后修改一下分片元数据表，就可以在线完成数据的再分片了。</p>
+<p><img alt="2021-02-08" src="/assets/ade3c9502af5990db15f9ad1.png"/></p>
+<p>分片元数据</p>
+<p>但你要注意，分片元数据本身需要做高可用（面试考察点可以参考 04 讲中的内容）。方案缺点是实现起来复杂，需要二次查询，需要保证分片元数据服务的高可用。不过分片元数据表可以通过缓存进行提速。</p>
+<ul>
+<li><strong>垂直水平拆分</strong></li>
+</ul>
+<p>垂直水平拆分，是综合垂直和水平拆分方式的一种混合方式，垂直拆分把不同类型的数据存储到不同库中，再结合水平拆分，使单表数据量保持在合理范围内，提升性能。</p>
+<p><img alt="2021-02-08" src="/assets/3658239fe3ec9b7e3f7e1128.png"/></p>
+<p>垂直水平拆分</p>
+<h4 id="如何解决数据查询问题">如何解决数据查询问题？</h4>
+<p>分库分表引入的另外一个问题就是数据查询的问题（比较常见），比如面试官会问类似的问题：</p>
+<blockquote>
+<p>在未分库分表之前，我们查询数据总数时，可以直接通过 SQL 的 count() 命令，现在数据分片到多个库表中，如何解决呢？</p>
+</blockquote>
+<p>解题思路很多，你可以考虑其他的存储方案，比如聚合查询使用频繁时，可以将聚合查询的数据同步到 ES 中，或者将计数的数据单独存储在一张表里。如果是每日定时生成的统计类报表数据，也可以将数据同步到 HDFS 中，然后用一些大数据技术来生成报表。</p>
+<h4 id="技术认知">技术认知</h4>
+<p>不夸张地说，MySQL 是每个后端开发人员都要精通的数据库，因为其开源、轻量级，且有着金融级别的事务保证，所以一直是互联网项目的标配。</p>
+<p>但是随着近些年技术的发展，下一代存储技术上出现了 NewSQL ，我觉得未来它可能会取代 MySQL ：</p>
+<blockquote>
+<p>NewSQL 是新一代的分布式数据库，不但具备分布式存储系统的高性能、高可用，弹性扩容等能力，还兼容传统关系型数据库的 SQL 标准。并且，还提供了和传统关系型数据库不相上下的事务保证，是具备了支撑未来交易类业务能力的。</p>
+</blockquote>
+<p>为了能体现你个人的技术视野，我希望你在面试的过程中，也谈一些与存储这个技术领域有关的内容，比如 NewSQL 的发展和相关开源产品，如 CockroachDB、TiDB。你可以在面试前熟悉一下 NewSQL 数据库的原理，然后以其和现有关系型的区别为切入点，和面试官讨论即可。</p>
+<h3 id="总结">总结</h3>
+<p>总的来说，在面对数据库容量瓶颈和写请求并发量大时，你可以选择垂直分片和水平分片：垂直分片一般随着业务架构拆分来进行；水平分片通常按照 Hash（哈希分片）取模和 Range（范围分片）进行，并且，通常的形态是垂直拆分伴随着水平拆分，即先按照业务垂直拆分后，再根据数据量的多少决定水平分片。</p>
+<p>Hash 分片在互联网中应用最为广泛，简单易实现，可以保证数据非常均匀地分布到多个分片，但其过滤掉了业务属性，不能根据业务特性进行调整。而 Range 分片却能预估业务，更高效地扫描数据记录（Hash 分片由于数据被打散，扫描操作的 I/O 开销更大）。除了 Hash 分片和 Range 分片，更为灵活的方式是基于分片元数据。</p>
+<p>不过你要注意，这几种方式也会引入诸如聚合查询的问题，要想解决聚合查询，你可以让聚合查询记录存储在其他存储设备中（比如 ES、HDFS）。</p>
+<p>最后，除了中规中矩地回答面试官提出的问题，我也希望你能展示自己的技术视野，选择 NewSQL 作为切入点。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

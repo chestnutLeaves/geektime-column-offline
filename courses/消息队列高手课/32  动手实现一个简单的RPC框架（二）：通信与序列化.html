@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>32  动手实现一个简单的RPC框架（二）：通信与序列化 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/index.html">消息队列高手课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">39 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>消息队列高手课</strong><ul><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%BC%98%E7%A7%80%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98%EF%BC%8C%E4%BD%A0%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88%E4%B8%AD%E4%B8%8D%E8%83%BD%E5%8F%AA%E6%9C%89%E2%80%9C%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E2%80%9D.html">00 开篇词  优秀的程序员，你的技术栈中不能只有“增删改查”</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E9%A2%84%E4%B9%A0%20%20%E6%80%8E%E6%A0%B7%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%AD%A6%E4%B9%A0%E8%BF%99%E9%97%A8%E8%AF%BE%EF%BC%9F.html">00 预习  怎样更好地学习这门课？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/01%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%9F.html">01  为什么需要消息队列？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/02%20%20%E8%AF%A5%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%9F.html">02  该如何选择消息队列？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/03%20%20%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%B8%BB%E9%A2%98%E5%92%8C%E9%98%9F%E5%88%97%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">03  消息模型：主题和队列有什么区别？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/04%20%20%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">04  如何利用事务消息实现分布式事务？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/05%20%20%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%BC%9A%E4%B8%A2%E5%A4%B1.html">05  如何确保消息不会丢失</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/06%20%20%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%B6%88%E8%B4%B9%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%EF%BC%9F.html">06  如何处理消费过程中的重复消息？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/07%20%20%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B%E4%BA%86%E8%AF%A5%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%EF%BC%9F.html">07  消息积压了该如何处理？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/08%20%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%EF%BC%88%E4%B8%80%EF%BC%89%20%20%E7%BD%91%E5%85%B3%E5%A6%82%E4%BD%95%E6%8E%A5%E6%94%B6%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E7%A7%92%E6%9D%80%E7%BB%93%E6%9E%9C%EF%BC%9F.html">08  答疑解惑（一）  网关如何接收服务端的秒杀结果？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/09%20%20%E5%AD%A6%E4%B9%A0%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%AF%A5%E5%A6%82%E4%BD%95%E5%85%A5%E6%89%8B%EF%BC%9F.html">09  学习开源代码该如何入手？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/10%20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%BC%82%E6%AD%A5%E8%AE%BE%E8%AE%A1%E6%8F%90%E5%8D%87%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD%EF%BC%9F.html">10  如何使用异步设计提升系统性能？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/11%20%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%EF%BC%9F.html">11  如何实现高性能的异步网络传输？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/12%20%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F.html">12  序列化与反序列化：如何通过网络传输结构化的数据？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/13%20%20%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B9%8B%E9%97%B4%E5%AF%B9%E8%AF%9D%E7%9A%84%E8%AF%AD%E8%A8%80.html">13  传输协议：应用程序之间对话的语言</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/14%20%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%92%8C%E9%A2%91%E7%B9%81%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%9F.html">14  内存管理：如何避免内存溢出和频繁的垃圾回收？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/15%20%20Kafka%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%80%A7%E8%83%BDIO%EF%BC%9F.html">15  Kafka如何实现高性能IO？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/16%20%20%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98%E6%9D%A5%E5%87%8F%E5%B0%91%E7%A3%81%E7%9B%98IO%EF%BC%9F.html">16  缓存策略：如何使用缓存来减少磁盘IO？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/17%20%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E9%94%81%E4%BF%9D%E6%8A%A4%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%8D%8F%E8%B0%83%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">17  如何正确使用锁保护共享数据，协调异步线程？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/18%20%20%E5%A6%82%E4%BD%95%E7%94%A8%E7%A1%AC%E4%BB%B6%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD%EF%BC%88CAS%EF%BC%89%E6%9B%BF%E4%BB%A3%E9%94%81%EF%BC%9F.html">18  如何用硬件同步原语（CAS）替代锁？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/19%20%20%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9%EF%BC%9A%E6%97%B6%E9%97%B4%E6%8D%A2%E7%A9%BA%E9%97%B4%E7%9A%84%E6%B8%B8%E6%88%8F.html">19  数据压缩：时间换空间的游戏</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/20%20%20RocketMQ%20Producer%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%9A%E6%B6%88%E6%81%AF%E7%94%9F%E4%BA%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B.html">20  RocketMQ Producer源码分析：消息生产的实现过程</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/21%20%20Kafka%20Consumer%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%9A%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B.html">21  Kafka Consumer源码分析：消息消费的实现过程</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/22%20%20Kafka%E5%92%8CRocketMQ%E7%9A%84%E6%B6%88%E6%81%AF%E5%A4%8D%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%B7%AE%E5%BC%82%E7%82%B9%E5%9C%A8%E5%93%AA%EF%BC%9F.html">22  Kafka和RocketMQ的消息复制实现的差异点在哪？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/23%20%20RocketMQ%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E9%9B%86%E7%BE%A4%E4%B8%AD%E6%89%BE%E5%88%B0%E6%AD%A3%E7%A1%AE%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%9F.html">23  RocketMQ客户端如何在集群中找到正确的节点？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/24%20%20Kafka%E7%9A%84%E5%8D%8F%E8%B0%83%E6%9C%8D%E5%8A%A1ZooKeeper%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E2%80%9C%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80%E2%80%9D.html">24  Kafka的协调服务ZooKeeper：实现分布式系统的“瑞士军刀”</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/25%20%20RocketMQ%E4%B8%8EKafka%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">25  RocketMQ与Kafka中如何实现事务？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/26%20%20MQTT%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E6%B5%B7%E9%87%8F%E7%9A%84%E5%9C%A8%E7%BA%BFIoT%E8%AE%BE%E5%A4%87.html">26  MQTT协议：如何支持海量的在线IoT设备</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/27%20%20Pulsar%E7%9A%84%E5%AD%98%E5%82%A8%E8%AE%A1%E7%AE%97%E5%88%86%E7%A6%BB%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%85%A8%E6%96%B0%E7%9A%84%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF.html">27  Pulsar的存储计算分离设计：全新的消息队列设计思路</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/28%20%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%88%91%E7%9A%84100%E5%85%83%E5%93%AA%E5%84%BF%E5%8E%BB%E4%BA%86%EF%BC%9F.html">28  答疑解惑（二）：我的100元哪儿去了？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/29%20%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B6%88%E6%81%AF%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E9%80%9A%E8%BF%87Flink%E7%90%86%E8%A7%A3%E6%B5%81%E8%AE%A1%E7%AE%97%E7%9A%84%E5%8E%9F%E7%90%86.html">29  流计算与消息（一）：通过Flink理解流计算的原理</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/30%20%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B6%88%E6%81%AF%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%9C%A8%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E4%BD%BF%E7%94%A8Kafka%E9%93%BE%E6%8E%A5%E8%AE%A1%E7%AE%97%E4%BB%BB%E5%8A%A1.html">30  流计算与消息（二）：在流计算中使用Kafka链接计算任务</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/31%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%8E%9F%E7%90%86%E5%92%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BB%93%E6%9E%84.html">31  动手实现一个简单的RPC框架（一）：原理和程序的结构</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/32%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%80%9A%E4%BF%A1%E4%B8%8E%E5%BA%8F%E5%88%97%E5%8C%96.html">32  动手实现一个简单的RPC框架（二）：通信与序列化</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/33%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF.html">33  动手实现一个简单的RPC框架（三）：客户端</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/34%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">34  动手实现一个简单的RPC框架（四）：服务端</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/35%20%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E4%B8%BB%E6%B5%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%83%BD%E6%98%AF%E5%A6%82%E4%BD%95%E5%AD%98%E5%82%A8%E6%B6%88%E6%81%AF%E7%9A%84%EF%BC%9F.html">35  答疑解惑（三）：主流消息队列都是如何存储消息的？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%20JMQ%E7%9A%84Broker%E6%98%AF%E5%A6%82%E4%BD%95%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%E7%9A%84%EF%BC%9F.html">加餐  JMQ的Broker是如何异步处理消息的？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%EF%BC%9F.html">结束语  程序员如何构建知识体系？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/32%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%80%9A%E4%BF%A1%E4%B8%8E%E5%BA%8F%E5%88%97%E5%8C%96.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="32  动手实现一个简单的RPC框架（二）：通信与序列化" id="title">32  动手实现一个简单的RPC框架（二）：通信与序列化</h1>
+<div><p>你好，我是李玥。</p>
+<p>继续上节课的内容，这节课我们一起来实现这个 RPC 框架的通信和序列化部分。如何实现高性能的异步通信、如何来将结构化的数据序列化成字节流，用于网络传输或者存储到文件中，这两部分内容，我在进阶篇中都有在专门的课程分别讲解过。</p>
+<p>网络传输和序列化这两部分的功能相对来说是非常通用并且独立的，在设计的时候，只要能做到比较好的抽象，这两部的实现，它的通用性是非常强的。不仅可以用于我们这个例子中的 RPC 框架中，同样可以直接拿去用于实现消息队列，或者其他需要互相通信的分布式系统中。</p>
+<p>我们在实现这两部分的时候，会尽量以开发一个高性能的生产级系统这样的质量要求来设计和实现，但是为了避免代码过于繁杂影响你理解主干流程，我也会做适当的简化，简化的部分我会尽量给出提示。</p>
+<h2 id="如何设计一个通用的高性能序列化实现">如何设计一个通用的高性能序列化实现？</h2>
+<p>我们先来实现序列化和反序列化部分，因为后面讲到的部分会用到序列化和反序列化。</p>
+<p>首先我们需要设计一个可扩展的，通用的序列化接口，为了方便使用，我们直接使用静态类的方式来定义这个接口（严格来说这并不是一个接口）。</p>
+<pre><code>public class SerializeSupport {
+    public static  &lt;E&gt; E parse(byte [] buffer) {
+        // ...
+    }
+    public static &lt;E&gt; byte [] serialize(E  entry) {
+        // ...
+    }
+}
+</code></pre>
+<p>上面的 parse 方法用于反序列化，serialize 方法用于序列化。如果你对 Java 语言不是特别的熟悉，可能会看不懂<code>&lt;E&gt;</code>是什么意思，这是 Java 语言泛型机制，你可以先忽略它。看一下如何来使用这个类就明白了：</p>
+<pre><code>// 序列化
+MyClass myClassObject = new MyClass();
+byte [] bytes = SerializeSupport.serialize(myClassObject);
+// 反序列化
+MyClass myClassObject1 = SerializeSupport.parse(bytes);
+</code></pre>
+<p>我在讲解序列化和反序列化的时候说过，可以使用通用的序列化实现，也可以自己来定义专用的序列化实现。专用的序列化性能最好，但缺点是实现起来比较复杂，你要为每一种类型的数据专门编写序列化和反序列化方法。一般的 RPC 框架采用的都是通用的序列化实现，比如 gRPC 采用的是 Protobuf 序列化实现，Dubbo 支持 hession2 等好几种序列化实现。</p>
+<p>那为什么这些 RPC 框架不像消息队列一样，采用性能更好的专用的序列化实现呢？这个原因很简单，消息队列它需要序列化数据的类型是固定的，只是它自己的内部通信的一些命令。但 RPC 框架，它需要序列化的数据是，用户调用远程方法的参数，这些参数可能是各种数据类型，所以必须使用通用的序列化实现，确保各种类型的数据都能被正确的序列化和反序列化。我们这里还是采用专用的序列化实现，主要的目的是带你一起来实践一下，如何来实现序列化和反序列化。</p>
+<p>我们给所有序列化的实现类定义一个 Serializer 接口，所有的序列化实现类都实现这个接口就可以了：</p>
+<pre><code>public interface Serializer&lt;T&gt; {
+    /**
+     * 计算对象序列化后的长度，主要用于申请存放序列化数据的字节数组
+     * @param entry 待序列化的对象
+     * @return 对象序列化后的长度
+     */
+    int size(T entry);
+ 
+    /**
+     * 序列化对象。将给定的对象序列化成字节数组
+     * @param entry 待序列化的对象
+     * @param bytes 存放序列化数据的字节数组
+     * @param offset 数组的偏移量，从这个位置开始写入序列化数据
+     * @param length 对象序列化后的长度，也就是{@link Serializer#size(java.lang.Object)}方法的返回值。
+     */
+    void serialize(T entry, byte[] bytes, int offset, int length);
+ 
+    /**
+     * 反序列化对象
+     * @param bytes 存放序列化数据的字节数组
+     * @param offset 数组的偏移量，从这个位置开始写入序列化数据
+     * @param length 对象序列化后的长度
+     * @return 反序列化之后生成的对象
+     */
+    T parse(byte[] bytes, int offset, int length);
+ 
+    /**
+     * 用一个字节标识对象类型，每种类型的数据应该具有不同的类型值
+     */
+    byte type();
+ 
+    /**
+     * 返回序列化对象类型的 Class 对象。
+     */
+    Class&lt;T&gt; getSerializeClass();
+}
+</code></pre>
+<p>这个接口中，除了 serialize 和 parse 这两个序列化和反序列化两个方法以外，还定义了下面这几个方法：size 方法计算序列化之后的数据长度，用于事先来申请存放序列化数据的字节数组；type 方法定义每种序列化实现的类型，这个类型值也会写入到序列化之后的数据中，主要的作用是在反序列化的时候，能够识别是什么数据类型的，以便找到对应的反序列化实现类；getSerializeClass 这个方法返回这个序列化实现类对应的对象类型，目的是，在执行序列化的时候，通过被序列化的对象类型找到对应序列化实现类。</p>
+<p>利用这个 Serializer 接口，我们就可以来实现 SerializeSupport 这个支持任何对象类型序列化的通用静态类了。首先我们定义两个 Map，这两个 Map 中存放着所有实现 Serializer 接口的序列化实现类。</p>
+<pre><code>    private static Map&lt;Class&lt;?&gt;/* 序列化对象类型 */, Serializer&lt;?&gt;/* 序列化实现 */&gt; serializerMap = new HashMap&lt;&gt;();
+    private static Map&lt;Byte/* 序列化实现类型 */, Class&lt;?&gt;/* 序列化对象类型 */&gt; typeMap = new HashMap&lt;&gt;();
+</code></pre>
+<p>serializerMap 中的 key 是序列化实现类对应的序列化对象的类型，它的用途是在序列化的时候，通过被序列化的对象类型，找到对应的序列化实现类。typeMap 的作用和 serializerMap 是类似的，它的 key 是序列化实现类的类型，用于在反序列化的时候，从序列化的数据中读出对象类型，然后找到对应的序列化实现类。</p>
+<p>理解了这两个 Map 的作用，实现序列化和反序列化这两个方法就很容易了。这两个方法的实现思路是一样的，都是通过一个类型在这两个 Map 中进行查找，查找的结果就是对应的序列化实现类的实例，也就是 Serializer 接口的实现，然后调用对应的序列化或者反序列化方法就可以了。具体的实现在 SerializeSupport 中，你可以自行查看。我刚刚讲的这几个类型，听起来可能会感觉有些晕，但其实并不难，你对着代码来自己看一遍，就很容易理解了。</p>
+<p>所有的 Serializer 的实现类是怎么加载到 SerializeSupport 的那两个 Map 中的呢？这里面利用了 Java 的一个 SPI 类加载机制，我会在后面的课程中专门来讲。</p>
+<p>到这里，我们就封装好了一个通用的序列化的接口，对于使用序列化的模块来说，它只要依赖 SerializeSupport 这个静态类，调用它的序列化和反序列化方法就可以了，不需要依赖任何序列化实现类。对于序列化实现的提供者来说，也只需要依赖并实现 Serializer 这个接口就可以了。比如，我们的 HelloService 例子中的参数是一个 String 类型的数据，我们需要实现一个支持 String 类型的序列化实现：</p>
+<pre><code>public class StringSerializer implements Serializer&lt;String&gt; {
+    @Override
+    public int size(String entry) {
+        return entry.getBytes(StandardCharsets.UTF_8).length;
+    }
+ 
+    @Override
+    public void serialize(String entry, byte[] bytes, int offset, int length) {
+        byte [] strBytes = entry.getBytes(StandardCharsets.UTF_8);
+        System.arraycopy(strBytes, 0, bytes, offset, strBytes.length);
+    }
+ 
+    @Override
+    public String parse(byte[] bytes, int offset, int length) {
+        return new String(bytes, offset, length, StandardCharsets.UTF_8);
+    }
+ 
+    @Override
+    public byte type() {
+        return Types.TYPE_STRING;
+    }
+ 
+    @Override
+    public Class&lt;String&gt; getSerializeClass() {
+        return String.class;
+    }
+}
+</code></pre>
+<p>这里面有个初学者容易犯的错误，在把 String 和 byte 数组做转换的时候，一定要指定编码方式，确保序列化和反序列化的时候都使用一致的编码，我们这里面统一使用 UTF8 编码。否则，如果遇到执行序列化和反序列化的两台服务器默认编码不一样，就会出现乱码。我们在开发过程用遇到的很多中文乱码问题，绝大部分都是这个原因。</p>
+<p>在我们这个例子中，还有一个更复杂的序列化实现 MetadataSerializer，用于将注册中心的数据持久化到文件中，你也可以参考一下。</p>
+<p>到这里序列化的部分就实现完成了。我们这个序列化的实现，对外提供服务的就只有一个 SerializeSupport 静态类，并且可以通过扩展支持序列化任何类型的数据，这样一个通用的实现，不仅可以用在我们这个 RPC 框架的例子中，你完全可以把这部分直接拿过去用在你的业务代码中。</p>
+<h2 id="使用-netty-来实现异步网络通信">使用 Netty 来实现异步网络通信</h2>
+<p>接下来我们来说网络通信部分的实现。</p>
+<p>同样的思路，我们把通信的部分也封装成接口。在我们这个 RPC 框架中，对于通信模块的需求是这样的：只需要客户端给服务端发送请求，然后服务返回响应就可以了。所以，我们的通信接口只需要提供一个发送请求方法就可以了：</p>
+<pre><code>public interface Transport {
+    /**
+     * 发送请求命令
+     * @param request 请求命令
+     * @return 返回值是一个 Future，Future
+     */
+    CompletableFuture&lt;Command&gt; send(Command request);
+}
+</code></pre>
+<p>这个 send 方法参数 request 就是需要发送的请求数据，返回值是一个 CompletableFuture 对象，通过这个 CompletableFuture 对象可以获得响应结果。这里面使用一个 CompletableFuture 作为返回值，使用起来就非常灵活，我们可以直接调用它的 get 方法来获取响应数据，这就相当于同步调用；也可以使用以 then 开头的一系列异步方法，指定当响应返回的时候，需要执行的操作，就等同于异步调用。等于，这样一个方法既可以同步调用，也可以异步调用。</p>
+<p>在这个接口中，请求和响应数据都抽象成了一个 Command 类，我们来看一下这个类是如何定义的：</p>
+<pre><code>public class Command {
+    protected Header header;
+    private byte [] payload;
+    //...
+}
+ 
+public class Header {
+    private int requestId;
+    private int version;
+    private int type;
+    // ...
+}
+public class ResponseHeader extends Header {
+    private int code;
+    private String error;
+    // ...
+}
+</code></pre>
+<p>Command 类包含一个命令头 Header 和一个 payload 字节数组。payload 就是命令中要传输的数据，这里我们要求这个数据已经是被序列化之后生成的字节数组。Header 中包含三个属性：requestId 用于唯一标识一个请求命令，在我们使用双工方式异步收发数据的时候，这个 requestId 可以用于请求和响应的配对儿。我们在加餐那节课实现两个大爷对话的例子中，使用的是同样的设计。</p>
+<p>version 这个属性用于标识这条命令的版本号。type 用于标识这条命令的类型，这个类型主要的目的是为了能让接收命令一方来识别收到的是什么命令，以便路由到对应的处理类中去。</p>
+<p>另外，在返回的响应 Header 中，我们还需要包含一个 code 字段和一个 error 字段，code 字段使用一个数字表示响应状态，0 代表成功，其他值分别代表各种错误，这个设计和 HTTP 协议中的 StatueCode 是一样的。</p>
+<p>在设计通信协议时，让协议具备持续的升级能力，并且保持向下兼容是非常重要的。因为所有的软件，唯一不变的就是变化，由于需求一直变化，你不可能保证传输协议永远不变，一旦传输协议发生变化，为了确保使用这个传输协议的这些程序还能正常工作，或者是向下兼容，协议中必须提供一个版本号，标识收到的这条数据使用的是哪个版本的协议。</p>
+<p>发送方在发送命令的时候需要带上这个命令的版本号，接收方在收到命令之后必须先检查命令的版本号，如果接收方可以支持这个版本的命令就正常处理，否则就拒绝接收这个命令，返回响应告知对方：我不认识这个命令。这样才是一个完备的，可持续的升级的通信协议。</p>
+<p>需要注意的是，这个版本号是命令的版本号，或者说是传输协议的版本号，它不等同于程序的版本号。我们这个例子中，并没有检查命令版本号，你在生产系统中需要自己补充这部分逻辑。</p>
+<p>然后我们继续来看 Transport 这个接口的实现 NettyTransport 类。这个 send 方法的实现，本质上就是一个异步方法，在把请求数据发出去之后就返回了，并不会阻塞当前这个线程去等待响应返回来。来看一下它的实现：</p>
+<pre><code>@Override
+public  CompletableFuture&lt;Command&gt; send(Command request) {
+    // 构建返回值
+    CompletableFuture&lt;Command&gt; completableFuture = new CompletableFuture&lt;&gt;();
+    try {
+        // 将在途请求放到 inFlightRequests 中
+        inFlightRequests.put(new ResponseFuture(request.getHeader().getRequestId(), completableFuture));
+        // 发送命令
+        channel.writeAndFlush(request).addListener((ChannelFutureListener) channelFuture -&gt; {
+            // 处理发送失败的情况
+            if (!channelFuture.isSuccess()) {
+                completableFuture.completeExceptionally(channelFuture.cause());
+                channel.close();
+            }
+        });
+    } catch (Throwable t) {
+        // 处理发送异常
+        inFlightRequests.remove(request.getHeader().getRequestId());
+        completableFuture.completeExceptionally(t);
+    }
+    return completableFuture;
+}
+</code></pre>
+<p>这段代码实际上就干了两件事儿，第一件事儿是把请求中的 requestId 和返回的 completableFuture 一起，构建了一个 ResponseFuture 对象，然后把这个对象放到了 inFlightRequests 这个变量中。inFlightRequests 中存放了所有在途的请求，也就是已经发出了请求但还没有收到响应的这些 responseFuture 对象。</p>
+<p>第二件事儿就是调用 netty 发送数据的方法，把这个 request 命令发给对方。这里面需要注意的一点是，已经发出去的请求，有可能会因为网络连接断开或者对方进程崩溃等各种异常情况，永远都收不到响应。那为了确保这些孤儿 ResponseFuture 不会在内存中越积越多，我们必须要捕获所有的异常情况，结束对应的 ResponseFuture。所以，我们在上面代码中，两个地方都做了异常处理，分别应对发送失败和发送异常两种情况。</p>
+<p>即使是我们对所有能捕获的异常都做了处理，也不能保证所有 ResponseFuture 都能正常或者异常结束，比如说，编写对端程序的程序员写的代码有问题，收到了请求就是没给我们返回响应，为了应对这种情况，还必须有一个兜底超时的机制来保证所有情况下 ResponseFuture 都能结束，无论什么情况，只要超过了超时时间还没有收到响应，我们就认为这个 ResponseFuture 失败了，结束并删除它。这部分代码在 InFlightRequests 这个类中。</p>
+<p>这里面还有一个很重要的最佳实践分享给你。我们知道，如果是同步发送请求，客户端需要等待服务端返回响应，服务端处理这个请求需要花多长时间，客户端就要等多长时间。这实际上是一个天然的背压机制（Back pressure），服务端处理速度会天然地限制客户端请求的速度。</p>
+<p>但是在异步请求中，客户端异步发送请求并不会等待服务端，缺少了这个天然的背压机制，如果服务端的处理速度跟不上客户端的请求速度，客户端的发送速度也不会因此慢下来，就会出现在途的请求越来越多，这些请求堆积在服务端的内存中，内存放不下就会一直请求失败。服务端处理不过来的时候，客户端还一直不停地发请求显然是没有意义的。为了避免这种情况，我们需要增加一个背压机制，在服务端处理不过来的时候限制一下客户端的请求速度。</p>
+<p>这个背压机制的实现也在 InFlightRequests 类中，在这里面我们定义了一个信号量：</p>
+<pre><code>private final Semaphore semaphore = new Semaphore(10);
+</code></pre>
+<p>这个信号量有 10 个许可，我们每次往 inFlightRequest 中加入一个 ResponseFuture 的时候，需要先从信号量中获得一个许可，如果这时候没有许可了，就会阻塞当前这个线程，也就是发送请求的这个线程，直到有人归还了许可，才能继续发送请求。我们每结束一个在途请求，就归还一个许可，这样就可以保证在途请求的数量最多不超过 10 个请求，积压在服务端正在处理或者待处理的请求也不会超过 10 个。这样就实现了一个简单有效的背压机制。</p>
+<p>我们在 ResponseInvocation 这个类中异步接收所有服务端返回的响应，处理逻辑比较简单，就是根据响应头中的 requestId，去在途请求 inFlightRequest 中查找对应的 ResponseFuture，设置返回值并结束这个 ResponseFuture 就可以了。</p>
+<p>使用 Netty 来收发数据这部分代码，我都放在了 com.github.liyue2008.rpc.transport.netty 这个包中，你可以自行查看。</p>
+<h2 id="小结">小结</h2>
+<p>这节课我们一起实现了序列化和异步网络通信这两部分的代码，用到的都是在进阶篇中讲过的知识。我们在设计序列化和网络传输这两部分实现的时候，都预先定义了对外提供服务的接口。使用服务的使用方只依赖这个接口，而不依赖这个接口的任何实现。</p>
+<p>这样做的好处是，让接口的使用者和接口的调用者充分解耦，使得我们可以安全地替换接口的实现。把接口定义的尽量通用，让接口定义与接口的使用方无关，这个接口的实现就很容易被复用，比如我们这个例子中网络传输和序列化这两部分代码，不仅可以用在这个 RPC 框架中，同样可以不做任何修改就用在其他的系统中。</p>
+<p>在设计协议的时候，我们给每个命令都设计了一个固定的头，这样设计的好处是，我们在解析命令的时候可以先把头解析出来，就可以对命令进行版本检查、路由分发等通用的预处理工作，而不必把整个命令都解析出来。那为了应对变化，使协议具有持续升级的能力，命令中需要携带一个协议版本号，我们需要在收到命令后检查这个版本号，确保接收方可以支持这个版本的协议。</p>
+<p>在实现异步网络传输的时候，一定要配套实现一个背压的机制，避免客户端请求速度过快，导致大量的请求失败。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

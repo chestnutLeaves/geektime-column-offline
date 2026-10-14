@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>07 集群管理：以 Redis 为例-部署及访问 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/index.html">Kubernetes 从上手到实践</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kubernetes 从上手到实践</strong><ul><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/01%20%20%E5%BC%80%E7%AF%87%EF%BC%9A%20Kubernetes%20%E6%98%AF%E4%BB%80%E4%B9%88%E4%BB%A5%E5%8F%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AE%83.html">01  开篇： Kubernetes 是什么以及为什么需要它</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/02%20%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">02 初步认识：Kubernetes 基础概念</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/03%20%E5%AE%8F%E8%A7%82%E8%AE%A4%E8%AF%86%EF%BC%9A%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.html">03 宏观认识：整体架构</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/04%20%E6%90%AD%E5%BB%BA%20Kubernetes%20%E9%9B%86%E7%BE%A4%20-%20%E6%9C%AC%E5%9C%B0%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA.html">04 搭建 Kubernetes 集群 - 本地快速搭建</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/05%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%20Kubernetes%20%E9%9B%86%E7%BE%A4%20-%20%E7%94%9F%E4%BA%A7%E5%8F%AF%E7%94%A8.html">05 动手实践：搭建一个 Kubernetes 集群 - 生产可用</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/06%20%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%EF%BC%9A%E5%88%9D%E8%AF%86%20kubectl.html">06 集群管理：初识 kubectl</a></li><li><a class="active" aria-current="page" href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/07%20%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%EF%BC%9A%E4%BB%A5%20Redis%20%E4%B8%BA%E4%BE%8B-%E9%83%A8%E7%BD%B2%E5%8F%8A%E8%AE%BF%E9%97%AE.html">07 集群管理：以 Redis 为例-部署及访问</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/08%20%E5%AE%89%E5%85%A8%E9%87%8D%E7%82%B9%20%E8%AE%A4%E8%AF%81%E5%92%8C%E6%8E%88%E6%9D%83.html">08 安全重点 认证和授权</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/09%20%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83%EF%BC%9A%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE.html">09 应用发布：部署实际项目</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/10%20%E5%BA%94%E7%94%A8%E7%AE%A1%E7%90%86%EF%BC%9A%E5%88%9D%E8%AF%86%20Helm.html">10 应用管理：初识 Helm</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/11%20%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%A5%20Helm%20%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE.html">11 部署实践：以 Helm 部署项目</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/12%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Akube-apiserver.html">12 庖丁解牛：kube-apiserver</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/13%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Aetcd.html">13 庖丁解牛：etcd</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/14%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Acontroller-manager.html">14 庖丁解牛：controller-manager</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/15%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Akube-scheduler.html">15 庖丁解牛：kube-scheduler</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/16%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Akubelet.html">16 庖丁解牛：kubelet</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/17%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9Akube-proxy.html">17 庖丁解牛：kube-proxy</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/18%20%20%E5%BA%96%E4%B8%81%E8%A7%A3%E7%89%9B%EF%BC%9AContainer%20Runtime%20%EF%BC%88Docker%EF%BC%89.html">18  庖丁解牛：Container Runtime （Docker）</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/19%20Troubleshoot.html">19 Troubleshoot</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/20%20%E6%89%A9%E5%B1%95%E5%A2%9E%E5%BC%BA%EF%BC%9ADashboard.html">20 扩展增强：Dashboard</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/21%20%E6%89%A9%E5%B1%95%E5%A2%9E%E5%BC%BA%EF%BC%9ACoreDNS.html">21 扩展增强：CoreDNS</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/22%20%E6%9C%8D%E5%8A%A1%E5%A2%9E%E5%BC%BA%EF%BC%9AIngress.html">22 服务增强：Ingress</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/23%20%E7%9B%91%E6%8E%A7%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%AF%B9%20K8S%20%E9%9B%86%E7%BE%A4%E8%BF%9B%E8%A1%8C%E7%9B%91%E6%8E%A7.html">23 监控实践：对 K8S 集群进行监控</a></li><li><a href="/courses/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/24%20%E6%80%BB%E7%BB%93.html">24 总结</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kubernetes%20%E4%BB%8E%E4%B8%8A%E6%89%8B%E5%88%B0%E5%AE%9E%E8%B7%B5/07%20%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%EF%BC%9A%E4%BB%A5%20Redis%20%E4%B8%BA%E4%BE%8B-%E9%83%A8%E7%BD%B2%E5%8F%8A%E8%AE%BF%E9%97%AE.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="07 集群管理：以 Redis 为例-部署及访问" id="title">07 集群管理：以 Redis 为例-部署及访问</h1>
+<div><p>上节我们已经学习了 <code>kubectl</code> 的基础使用，本节我们使用 <code>kubectl</code> 在 K8S 中进行部署。</p>
+<p><strong>前面我们已经说过，Pod 是 K8S 中最小的调度单元，所以我们无法直接在 K8S 中运行一个 container 但是我们可以运行一个 Pod 而这个 Pod 中只包含一个 container 。</strong></p>
+<h2 id="从-kubectl-run-开始">从 <code>kubectl run</code> 开始</h2>
+<p><code>kubectl run</code> 的基础用法如下：</p>
+<pre><code>Usage:
+  kubectl run NAME --image=image [--env="key=value"] [--port=port] [--replicas=replicas] [--dry-run=bool] [--overrides=inline-json] [--command] -- [COMMAND] [args...] [options]
+</code></pre>
+<p><code>NAME</code> 和 <code>--image</code> 是必需项。分别代表此次部署的名字及所使用的镜像，其余部分之后进行解释。当然，在我们实际使用时，推荐编写配置文件并通过 <code>kubectl create</code> 进行部署。</p>
+<h2 id="使用最小的-redis-镜像">使用最小的 Redis 镜像</h2>
+<p>在 Redis 的<a href="https://hub.docker.com/_/redis/" target="_blank">官方镜像列表</a>可以看到有很多的 tag 可供选择，其中使用 <a href="https://alpinelinux.org/" target="_blank">Alpine Linux</a> 作为基础的镜像体积最小，下载较为方便。我们选择 <code>redis:alpine</code> 这个镜像进行部署。</p>
+<h2 id="部署">部署</h2>
+<p>现在我们只部署一个 Redis 实例。</p>
+<pre><code>➜  ~ kubectl run redis --image='redis:alpine'
+deployment.apps/redis created
+</code></pre>
+<p>可以看到提示 <code>deployment.apps/redis created</code> 这个稍后进行解释，我们使用 <code>kubectl get all</code> 来看看到底发生了什么。</p>
+<pre><code>➜  ~ kubectl get all
+NAME                         READY     STATUS    RESTARTS   AGE
+pod/redis-7c7545cbcb-2m6rp   1/1       Running   0          30s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   32s
+
+NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/redis   1         1         1            1           30s
+
+NAME                               DESIRED   CURRENT   READY     AGE
+replicaset.apps/redis-7c7545cbcb   1         1         1         30s
+</code></pre>
+<p>可以看到其中有我们刚才执行 <code>run</code> 操作后创建的 <code>deployment.apps/redis</code>，还有 <code>replicaset.apps/redis-7c7545cbcb</code>, <code>service/kubernetes</code> 以及 <code>pod/redis-7c7545cbcb-f984p</code>。</p>
+<p>使用 <code>kubectl get all</code> 输出内容的格式 <code>/</code> 前代表类型，<code>/</code> 后是名称。</p>
+<p>这些分别代表什么含义？</p>
+<h3 id="deployment">Deployment</h3>
+<p><code>Deployment</code> 是一种高级别的抽象，允许我们进行扩容，滚动更新及降级等操作。我们使用 <code>kubectl run redis --image='redis:alpine</code> 命令便创建了一个名为 <code>redis</code> 的 <code>Deployment</code>，并指定了其使用的镜像为 <code>redis:alpine</code>。</p>
+<p>同时 K8S 会默认为其增加一些标签（<code>Label</code>）。我们可以通过更改 <code>get</code> 的输出格式进行查看。</p>
+<pre><code>➜  ~ kubectl get deployment.apps/redis -o wide 
+NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE       CONTAINERS   IMAGES         SELECTOR
+redis     1         1         1            1           40s       redis        redis:alpine   run=redis
+➜  ~ kubectl get deploy redis -o wide          
+NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE       CONTAINERS   IMAGES         SELECTOR
+redis     1         1         1            1           40s       redis        redis:alpine   run=redis
+</code></pre>
+<p>那么这些 <code>Label</code> 有什么作用呢？它们可作为选择条件进行使用。如：</p>
+<pre><code>➜  ~ kubectl get deploy -l run=redis -o wide 
+NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE       CONTAINERS   IMAGES         SELECTOR
+redis     1         1         1            1           11h       redis        redis:alpine   run=redis
+➜  ~ kubectl get deploy -l run=test -o wide  # 由于我们并没有创建过 test 所以查不到任何东西
+No resources found.
+</code></pre>
+<p>我们在应用部署或更新时总是会考虑的一个问题是如何平滑升级，利用 <code>Deployment</code> 也能很方便的进行金丝雀发布（Canary deployments）。这主要也依赖 <code>Label</code> 和 <code>Selector</code>， 后面我们再详细介绍如何实现。</p>
+<p><code>Deployment</code> 的创建除了使用我们这里提到的方式外，更推荐的方式便是使用 <code>yaml</code> 格式的配置文件。在配置文件中主要是声明一种预期的状态，而其他组件则负责协同调度并最终达成这种预期的状态。当然这也是它的关键作用之一，将 <code>Pod</code> 托管给下面将要介绍的 <code>ReplicaSet</code>。</p>
+<h3 id="replicaset">ReplicaSet</h3>
+<p><code>ReplicaSet</code> 是一种较低级别的结构，允许进行扩容。</p>
+<p>我们上面已经提到 <code>Deployment</code> 主要是声明一种预期的状态，并且会将 <code>Pod</code> 托管给 <code>ReplicaSet</code>，而 <code>ReplicaSet</code> 则会去检查当前的 <code>Pod</code> 数量及状态是否符合预期，并尽量满足这一预期。</p>
+<p><code>ReplicaSet</code> 可以由我们自行创建，但一般情况下不推荐这样去做，因为如果这样做了，那其实就相当于跳过了 <code>Deployment</code> 的部分，<code>Deployment</code> 所带来的功能或者特性我们便都使用不到了。</p>
+<p>除了 <code>ReplicaSet</code> 外，我们还有一个选择名为 <code>ReplicationController</code>，这两者的主要区别更多的在选择器上，我们后面再做讨论。现在推荐的做法是 <code>ReplicaSet</code> 所以不做太多解释。</p>
+<p><code>ReplicaSet</code> 可简写为 <code>rs</code>，通过以下命令查看：</p>
+<pre><code>➜  ~ kubectl get rs -o wide
+NAME               DESIRED   CURRENT   READY     AGE       CONTAINERS   IMAGES         SELECTOR                           
+redis-7c7545cbcb   1         1         1         11h       redis        redis:alpine   pod-template-hash=3731017676,run=redis
+</code></pre>
+<p>在输出结果中，我们注意到这里除了我们前面看到的 <code>run=redis</code> 标签外，还多了一个 <code>pod-template-hash=3731017676</code> 标签，这个标签是由 <code>Deployment controller</code> 自动添加的，目的是为了防止出现重复，所以将 <code>pod-template</code> 进行 hash 用作唯一性标识。</p>
+<h3 id="service">Service</h3>
+<p><code>Service</code> 简单点说就是为了能有个稳定的入口访问我们的应用服务或者是一组 <code>Pod</code>。通过 <code>Service</code> 可以很方便的实现服务发现和负载均衡。</p>
+<pre><code>➜  ~ kubectl get service -o wide
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE       SELECTOR
+kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   16m        &lt;none&gt;
+</code></pre>
+<p>通过使用 <code>kubectl</code> 查看，能看到主要会显示 <code>Service</code> 的名称，类型，IP，端口及创建时间和选择器等。我们来具体拆解下。</p>
+<h4 id="类型">类型</h4>
+<p><code>Service</code> 目前有 4 种类型：</p>
+<ul>
+<li><code>ClusterIP</code>： 是 K8S 当前默认的 <code>Service</code> 类型。将 service 暴露于一个仅集群内可访问的虚拟 IP 上。</li>
+<li><code>NodePort</code>： 是通过在集群内所有 <code>Node</code> 上都绑定固定端口的方式将服务暴露出来，这样便可以通过 <code>&lt;NodeIP&gt;:&lt;NodePort&gt;</code> 访问服务了。</li>
+<li><code>LoadBalancer</code>： 是通过 <code>Cloud Provider</code> 创建一个外部的负载均衡器，将服务暴露出来，并且会自动创建外部负载均衡器路由请求所需的 <code>Nodeport</code> 或 <code>ClusterIP</code> 。</li>
+<li><code>ExternalName</code>： 是通过将服务由 DNS CNAME 的方式转发到指定的域名上将服务暴露出来，这需要 <code>kube-dns</code> 1.7 或更高版本支持。</li>
+</ul>
+<h4 id="实践">实践</h4>
+<p>上面已经说完了 <code>Service</code> 的基本类型，而我们也已经部署了一个 Redis ,当还无法访问到该服务，接下来我们将刚才部署的 Redis 服务暴露出来。</p>
+<pre><code>➜  ~ kubectl expose deploy/redis --port=6379 --protocol=TCP --target-port=6379 --name=redis-server  
+service/redis-server exposed
+➜  ~ kubectl get svc -o wide                                                                       
+NAME           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE       SELECTOR
+kubernetes     ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP    49m       &lt;none&gt;
+redis-server   ClusterIP   10.108.105.63   &lt;none&gt;        6379/TCP   4s        run=redis
+</code></pre>
+<p>通过 <code>kubectl expose</code> 命令将 redis server 暴露出来，这里需要进行下说明：</p>
+<ul>
+<li><code>port</code>： 是 <code>Service</code> 暴露出来的端口，可通过此端口访问 <code>Service</code>。</li>
+<li><code>protocol</code>： 是所用协议。当前 K8S 支持 TCP/UDP 协议，在 1.12 版本中实验性的加入了对 <a href="https://zh.wikipedia.org/zh-hans/流控制传输协议" target="_blank">SCTP 协议</a>的支持。默认是 TCP 协议。</li>
+<li><code>target-port</code>： 是实际服务所在的目标端口，请求由 <code>port</code> 进入通过上述指定 <code>protocol</code> 最终流向这里配置的端口。</li>
+<li><code>name</code>： <code>Service</code> 的名字，它的用处主要在 dns 方面。</li>
+<li><code>type</code>： 是前面提到的类型，如果没指定默认是 <code>ClusterIP</code>。</li>
+</ul>
+<p>现在我们的 redis 是使用的默认类型 <code>ClusterIP</code>，所以并不能直接通过外部进行访问，我们使用 <code>port-forward</code> 的方式让它可在集群外部访问。</p>
+<pre><code>➜  ~ kubectl port-forward svc/redis-server 6379:6379
+Forwarding from 127.0.0.1:6379 -&gt; 6379
+Forwarding from [::1]:6379 -&gt; 6379
+Handling connection for 6379
+</code></pre>
+<p>在另一个本地终端内可通过 redis-cli 工具进行连接：</p>
+<pre><code>➜  ~ redis-cli -h 127.0.0.1 -p 6379
+127.0.0.1:6379&gt; ping
+PONG
+</code></pre>
+<p>当然，我们也可以使用 <code>NodePort</code> 的方式对外暴露服务。</p>
+<pre><code>➜  ~ kubectl expose deploy/redis --port=6379 --protocol=TCP --target-port=6379 --name=redis-server-nodeport --type=NodePort
+service/redis-server-nodeport exposed
+➜  ~ kubectl get service/redis-server-nodeport -o wide 
+NAME                    TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE       SELECTOR
+redis-server-nodeport   NodePort   10.109.248.204   &lt;none&gt;        6379:31913/TCP   11s       run=redis
+</code></pre>
+<p>我们可以通过任意 <code>Node</code> 上的 31913 端口便可连接我们的 redis 服务。当然，这里需要注意的是这个端口范围其实是可以通过 <code>kube-apiserver</code> 的 <code>service-node-port-range</code> 进行配置的，默认是 <code>30000-32767</code>。</p>
+<h3 id="pod">Pod</h3>
+<p>第二节中，我们提到过 <code>Pod</code> 是 K8S 中的最小化部署单元。我们看下当前集群中 <code>Pod</code> 的状态。</p>
+<pre><code>➜  ~ kubectl get pods
+NAME                     READY     STATUS    RESTARTS   AGE
+redis-7c7545cbcb-jwcf2   1/1       Running   0          8h
+</code></pre>
+<p>我们进行一次简单的扩容操作。</p>
+<pre><code>➜  ~ kubectl scale deploy/redis --replicas=2
+deployment.extensions/redis scaled
+➜  ~ kubectl get pods
+NAME                     READY     STATUS    RESTARTS   AGE
+redis-7c7545cbcb-jwcf2   1/1       Running   0          8h
+redis-7c7545cbcb-wzh6w   1/1       Running   0          4s
+</code></pre>
+<p>可以看到 <code>Pod</code> 数已经增加，并且也已经是 <code>Running</code> 的状态了。(当然在生产环境中 Redis 服务的扩容并不是使用这种方式进行扩容的，需要看实际的部署方式以及业务的使用姿势。)</p>
+<h2 id="总结">总结</h2>
+<p>本节我们使用 Redis 作为例子，学习了集群管理相关的基础知识。学习了如何进行应用部署， <code>Service</code> 的基础类型以及如何通过 <code>port-forward</code> 或 <code>NodePort</code> 等方式将服务提供至集群的外部访问。</p>
+<p>同时我们学习了应用部署中主要会涉及到的几类资源 <code>Deployment</code>，<code>Replicaset</code>，<code>Service</code> 和 <code>Pod</code> 等。对这些资源及它们之间关系的掌握，对于后续集群维护或定位问题有很大的帮助。</p>
+<p>下节，我们开始学习在生产环境中使用 K8S 至关重要的一环，权限控制。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

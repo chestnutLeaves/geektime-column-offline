@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>17 ReplicaStateMachine：揭秘副本状态机实现原理 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/index.html">Kafka核心源码解读</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">42 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kafka核心源码解读</strong><ul><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E5%AF%BC%E8%AF%BB%20%E6%9E%84%E5%BB%BAKafka%E5%B7%A5%E7%A8%8B%E5%92%8C%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E3%80%81Scala%E8%AF%AD%E8%A8%80%E7%83%AD%E8%BA%AB.html">00 导读 构建Kafka工程和源码阅读环境、Scala语言热身</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E9%98%85%E8%AF%BB%E6%BA%90%E7%A0%81%EF%BC%8C%E9%80%90%E6%B8%90%E6%88%90%E4%BA%86%E8%81%8C%E4%B8%9A%E8%BF%9B%E9%98%B6%E9%81%93%E8%B7%AF%E4%B8%8A%E7%9A%84%E2%80%9C%E5%BF%85%E9%80%89%E9%A1%B9%E2%80%9D.html">00 开篇词  阅读源码，逐渐成了职业进阶道路上的“必选项”</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E9%87%8D%E7%A3%85%E5%8A%A0%E9%A4%90%20%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8Scala%E8%AF%AD%E8%A8%80.html">00 重磅加餐 带你快速入门Scala语言</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/01%20%E6%97%A5%E5%BF%97%E6%AE%B5%EF%BC%9A%E4%BF%9D%E5%AD%98%E6%B6%88%E6%81%AF%E6%96%87%E4%BB%B6%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">01 日志段：保存消息文件的对象是怎么实现的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/02%20%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%97%A5%E5%BF%97%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BD%E6%97%A5%E5%BF%97%E6%AE%B5%E7%9A%84%EF%BC%9F.html">02 日志（上）：日志究竟是如何加载日志段的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/03%20%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82Log%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C.html">03 日志（下）：彻底搞懂Log对象的常见操作</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/04%20%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%94%B9%E8%BF%9B%E7%9A%84%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%E5%9C%A8Kafka%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BA%94%E7%94%A8.html">04 索引（上）：改进的二分查找算法在Kafka索引的应用</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/05%20%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BD%8D%E7%A7%BB%E7%B4%A2%E5%BC%95%E5%92%8C%E6%97%B6%E9%97%B4%E6%88%B3%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">05 索引（下）：位移索引和时间戳索引的区别是什么？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/06%20%E8%AF%B7%E6%B1%82%E9%80%9A%E9%81%93%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0Kafka%E8%AF%B7%E6%B1%82%E9%98%9F%E5%88%97%EF%BC%9F.html">06 请求通道：如何实现Kafka请求队列？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/07%20SocketServer%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AKafka%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E5%BA%94%E7%94%A8NIO%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E7%9A%84%EF%BC%9F.html">07 SocketServer（上）：Kafka到底是怎么应用NIO实现网络通信的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/08%20SocketServer%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E8%AF%B7%E6%B1%82%E8%BF%98%E8%A6%81%E5%8C%BA%E5%88%86%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%9F.html">08 SocketServer（中）：请求还要区分优先级？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/09%20SocketServer%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E5%85%A8%E6%B5%81%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html">09 SocketServer（下）：请求处理全流程源码分析</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/10%20KafkaApis%EF%BC%9AKafka%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E6%BA%90%E7%A0%81%E5%85%A5%E5%8F%A3%EF%BC%8C%E6%B2%A1%E6%9C%89%E4%B9%8B%E4%B8%80.html">10 KafkaApis：Kafka最重要的源码入口，没有之一</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/11%20Controller%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9AController%E9%83%BD%E4%BF%9D%E5%AD%98%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%9C%E8%A5%BF%EF%BC%9F%E6%9C%89%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81%EF%BC%9F.html">11 Controller元数据：Controller都保存有哪些东西？有几种状态？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/12%20ControllerChannelManager%EF%BC%9AController%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81%EF%BC%9F.html">12 ControllerChannelManager：Controller如何管理请求发送？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/13%20ControllerEventManager%EF%BC%9A%E5%8F%98%E8%BA%AB%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%90%8E%E7%9A%84Controller%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BA%8B%E4%BB%B6%EF%BC%9F.html">13 ControllerEventManager：变身单线程后的Controller如何处理事件？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/14%20Controller%E9%80%89%E4%B8%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">14 Controller选举是怎么实现的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/15%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Controller%E5%9C%A8Kafka%E9%9B%86%E7%BE%A4%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F.html">15 如何理解Controller在Kafka集群中的作用？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/16%20TopicDeletionManager%EF%BC%9A%20Topic%E6%98%AF%E6%80%8E%E4%B9%88%E8%A2%AB%E5%88%A0%E9%99%A4%E7%9A%84%EF%BC%9F.html">16 TopicDeletionManager： Topic是怎么被删除的？</a></li><li><a class="active" aria-current="page" href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/17%20ReplicaStateMachine%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%89%AF%E6%9C%AC%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">17 ReplicaStateMachine：揭秘副本状态机实现原理</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/18%20PartitionStateMachine%EF%BC%9A%E5%88%86%E5%8C%BA%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">18 PartitionStateMachine：分区状态转换如何实现？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/19%20TimingWheel%EF%BC%9A%E6%8E%A2%E7%A9%B6Kafka%E5%AE%9A%E6%97%B6%E5%99%A8%E8%83%8C%E5%90%8E%E7%9A%84%E9%AB%98%E6%95%88%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95.html">19 TimingWheel：探究Kafka定时器背后的高效时间轮算法</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/20%20DelayedOperation%EF%BC%9ABroker%E6%98%AF%E6%80%8E%E4%B9%88%E5%BB%B6%E6%97%B6%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84%EF%BC%9F.html">20 DelayedOperation：Broker是怎么延时处理请求的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/21%20AbstractFetcherThread%EF%BC%9A%E6%8B%89%E5%8F%96%E6%B6%88%E6%81%AF%E5%88%86%E5%87%A0%E6%AD%A5%EF%BC%9F.html">21 AbstractFetcherThread：拉取消息分几步？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/22%20ReplicaFetcherThread%EF%BC%9AFollower%E5%A6%82%E4%BD%95%E6%8B%89%E5%8F%96Leader%E6%B6%88%E6%81%AF%EF%BC%9F.html">22 ReplicaFetcherThread：Follower如何拉取Leader消息？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/23%20ReplicaManager%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%BF%85%E9%A1%BB%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E7%B1%BB%E5%AE%9A%E4%B9%89%E5%92%8C%E6%A0%B8%E5%BF%83%E5%AD%97%E6%AE%B5.html">23 ReplicaManager（上）：必须要掌握的副本管理类定义和核心字段</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/24%20ReplicaManager%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%AF%BB%E5%86%99%E5%89%AF%E6%9C%AC%E7%9A%84%EF%BC%9F.html">24 ReplicaManager（中）：副本管理器是如何读写副本的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/25%20ReplicaManager%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%89%AF%E6%9C%AC%E7%9A%84%EF%BC%9F.html">25 ReplicaManager（下）：副本管理器是如何管理副本的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/26%20MetadataCache%EF%BC%9ABroker%E6%98%AF%E6%80%8E%E4%B9%88%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0%E5%85%83%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E7%9A%84%EF%BC%9F.html">26 MetadataCache：Broker是怎么异步更新元数据缓存的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/27%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9F.html">27 消费者组元数据（上）：消费者组都有哪些元数据？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/28%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AKafka%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E8%BF%99%E4%BA%9B%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9F.html">28 消费者组元数据（下）：Kafka如何管理这些元数据？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/29%20GroupMetadataManager%EF%BC%9A%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E4%B8%AA%E4%BB%80%E4%B9%88%E4%B8%9C%E8%A5%BF%EF%BC%9F.html">29 GroupMetadataManager：组元数据管理器是个什么东西？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/30%20GroupMetadataManager%EF%BC%9A%E4%BD%8D%E7%A7%BB%E4%B8%BB%E9%A2%98%E4%BF%9D%E5%AD%98%E7%9A%84%E5%8F%AA%E6%98%AF%E4%BD%8D%E7%A7%BB%E5%90%97%EF%BC%9F.html">30 GroupMetadataManager：位移主题保存的只是位移吗？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/31%20GroupMetadataManager%EF%BC%9A%E6%9F%A5%E8%AF%A2%E4%BD%8D%E7%A7%BB%E6%97%B6%EF%BC%8C%E4%B8%8D%E7%94%A8%E8%AF%BB%E5%8F%96%E4%BD%8D%E7%A7%BB%E4%B8%BB%E9%A2%98%EF%BC%9F.html">31 GroupMetadataManager：查询位移时，不用读取位移主题？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/32%20GroupCoordinator%EF%BC%9A%E5%9C%A8Rebalance%E4%B8%AD%EF%BC%8CCoordinator%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%88%90%E5%91%98%E5%85%A5%E7%BB%84%EF%BC%9F.html">32 GroupCoordinator：在Rebalance中，Coordinator如何处理成员入组？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/33%20GroupCoordinator%EF%BC%9A%E5%9C%A8Rebalance%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%BB%84%E5%90%8C%E6%AD%A5%EF%BC%9F.html">33 GroupCoordinator：在Rebalance中，如何进行组同步？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%B8%80%EF%BC%89%E7%BB%8F%E5%85%B8%E7%9A%84Kafka%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">特别放送（一）经典的Kafka学习资料有哪些？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%B8%89%EF%BC%89%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%BA%A6%E8%BF%87%E6%97%A5%E5%B8%B8%E4%B8%80%E5%A4%A9%E7%9A%84%EF%BC%9F.html">特别放送（三）我是怎么度过日常一天的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%8F%82%E4%B8%8E%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E7%9A%84%E5%85%A8%E9%83%A8%E6%B5%81%E7%A8%8B.html">特别放送（二）一篇文章带你了解参与开源社区的全部流程</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%BA%94%EF%BC%89%20Kafka%20%E7%A4%BE%E5%8C%BA%E7%9A%84%E9%87%8D%E7%A3%85%E5%8A%9F%E8%83%BD%EF%BC%9A%E7%A7%BB%E9%99%A4%20ZooKeeper%20%E4%BE%9D%E8%B5%96.html">特别放送（五） Kafka 社区的重磅功能：移除 ZooKeeper 依赖</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E5%9B%9B%EF%BC%8920%E9%81%93%E7%BB%8F%E5%85%B8%E7%9A%84Kafka%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AF%A6%E8%A7%A3.html">特别放送（四）20道经典的Kafka面试题详解</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%88%91%E4%BB%AC%E6%89%8D%E5%88%9A%E4%B8%8A%E8%B7%AF%E5%91%A2.html">结束语 源码学习，我们才刚上路呢</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/17%20ReplicaStateMachine%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%89%AF%E6%9C%AC%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="17 ReplicaStateMachine：揭秘副本状态机实现原理" id="title">17 ReplicaStateMachine：揭秘副本状态机实现原理</h1>
+<div><p>你好，我是胡夕。今天我们讲副本状态机。</p>
+<p>前几节课，在讲Controller、TopicDeletionManager时，我反复提到副本状态机和分区状态机这两个组件。现在，你应该知道了，它们分别管理着Kafka集群中所有副本和分区的状态转换，但是，你知道副本和分区到底都有哪些状态吗？</p>
+<p>带着这个问题，我们用两节课的时间，重点学习下这两个组件的源码。我们先从副本状态机（ReplicaStateMachine）开始。</p>
+<h2 id="课前导读">课前导读</h2>
+<p>坦率地说，ReplicaStateMachine不如前面的组件有名气，Kafka官网文档中甚至没有任何关于它的描述，可见，它是一个内部组件，一般用户感觉不到它的存在。因此，很多人都会有这样的错觉：既然它是外部不可见的组件，那就没有必要学习它的实现代码了。</p>
+<p>其实不然。弄明白副本状态机的原理，对于我们从根本上定位很多数据不一致问题是有帮助的。下面，我跟你分享一个我的真实经历。</p>
+<p>曾经，我们部署过一个3-Broker的Kafka集群，版本是2.0.0。假设这3个Broker是A、B和C，我们在这3个Broker上创建了一个单分区、双副本的主题。</p>
+<p>当时，我们发现了一个奇怪的现象：如果两个副本分别位于A和B，而Controller在C上，那么，当关闭A、B之后，ZooKeeper中会显示该主题的Leader是-1，ISR为空；但是，如果两个副本依然位于A和B上，而Controller在B上，当我们依次关闭A和B后，该主题在ZooKeeper中的Leader和ISR就变成了B。这显然和刚刚的情况不符。</p>
+<p>虽然这并不是特别严重的问题，可毕竟出现了数据的不一致性，所以还是需要谨慎对待。在仔细查看源码之后，我们找到了造成不一致的原因：原来，在第一种情况下，Controller会调用ReplicaStateMachine，调整该主题副本的状态，进而变更了Leader和ISR；而在第二种情况下，Controller执行了Failover，但是并未在新Controller组件初始化时进行状态转换，因而出现了不一致。</p>
+<p>你看，要是不阅读这部分源码，我们肯定是无法定位这个问题的原因的。总之，副本状态机代码定义了Kafka副本的状态集合，同时控制了这些状态之间的流转规则。对于想要深入了解内部原理的你来说，短小精悍的ReplicaStateMachine源码是绝对不能错过的。</p>
+<h2 id="定义与初始化">定义与初始化</h2>
+<p>今天，我们要关注的源码文件是controller包下的ReplicaStateMachine.scala文件。它的代码结构非常简单，如下图所示：</p>
+<p><img alt="" src="/assets/7c901a68fc4f9cbe0593293c.jpg"/></p>
+<p>在不到500行的源文件中，代码定义了3个部分。</p>
+<ul>
+<li>ReplicaStateMachine：副本状态机抽象类，定义了一些常用方法（如startup、shutdown等），以及状态机最重要的处理逻辑方法handleStateChanges。</li>
+<li>ZkReplicaStateMachine：副本状态机具体实现类，重写了handleStateChanges方法，实现了副本状态之间的状态转换。目前，ZkReplicaStateMachine是唯一的ReplicaStateMachine子类。</li>
+<li>ReplicaState：副本状态集合，Kafka目前共定义了7种副本状态。</li>
+</ul>
+<p>下面，我们看下ReplicaStateMachine及其子类ZKReplicaStateMachine在代码中是如何定义的，请看这两个代码片段：</p>
+<pre><code>// ReplicaStateMachine抽象类定义
+abstract class ReplicaStateMachine(controllerContext: ControllerContext) extends Logging {
+  ......
+}
+
+// ZkReplicaStateMachine具体实现类定义
+class ZkReplicaStateMachine(config: KafkaConfig, 
+  stateChangeLogger: StateChangeLogger,
+  controllerContext: ControllerContext,
+  zkClient: KafkaZkClient,
+  controllerBrokerRequestBatch: ControllerBrokerRequestBatch) 
+  extends ReplicaStateMachine(controllerContext) with Logging {
+  ......
+}
+</code></pre>
+<p>ReplicaStateMachine只需要接收一个ControllerContext对象实例。在前几节课，我反复说过，ControllerContext封装了Controller端保存的所有集群元数据信息。</p>
+<p>ZKReplicaStateMachine的属性则多一些。如果要构造一个ZKReplicaStateMachine实例，除了ControllerContext实例，比较重要的属性还有<strong>KafkaZkClient对象实例</strong>和<strong>ControllerBrokerRequestBatch实例</strong>。前者负责与ZooKeeper进行交互；后者用于给集群Broker发送控制类请求（也就是咱们在[第12节课]重点讲过的LeaderAndIsrRequest、StopReplicaRequest和UpdateMetadataRequest）。</p>
+<p>ControllerBrokerRequestBatch对象的源码位于ControllerChannelManager.scala中，这是一个只有10行代码的类，主要的功能是将给定的Request发送给指定的Broker，你可以自行探索下它是如何发送请求的。（给你个提示：结合我们在[第12节课]讲到的ControllerBrokerStateInfo代码进行思考。）</p>
+<p>在副本状态转换操作的逻辑中，一个很重要的步骤，就是为Broker上的副本更新信息，而这是通过Controller给Broker发送请求实现的，因此，你最好了解下这里的请求发送逻辑。</p>
+<p>好了，学习了副本状态机类的定义，下面我们看下副本状态机是在何时进行初始化的。</p>
+<p>一句话总结就是，<strong>KafkaController对象在构建的时候，就会初始化一个ZkReplicaStateMachine实例</strong>，如下列代码所示：</p>
+<pre><code>val replicaStateMachine: ReplicaStateMachine = new   
+  ZkReplicaStateMachine(config, stateChangeLogger, 
+    controllerContext, zkClient,
+    new ControllerBrokerRequestBatch(config, controllerChannelManager, eventManager, controllerContext, stateChangeLogger))
+</code></pre>
+<p>你可能会问：“如果一个Broker没有被选举为Controller，它也会构建KafkaController对象实例吗？”没错！所有Broker在启动时，都会创建KafkaController实例，因而也会创建ZKReplicaStateMachine实例。</p>
+<p>每个Broker都会创建这些实例，并不代表每个Broker都会启动副本状态机。事实上，只有在Controller所在的Broker上，副本状态机才会被启动。具体的启动代码位于KafkaController的onControllerFailover方法，如下所示：</p>
+<pre><code>private def onControllerFailover(): Unit = {
+	......
+	replicaStateMachine.startup() // 启动副本状态机
+    partitionStateMachine.startup() // 启动分区状态机
+    ......
+}
+</code></pre>
+<p>当Broker被成功推举为Controller后，onControllerFailover方法会被调用，进而启动该Broker早已创建好的副本状态机和分区状态机。</p>
+<h2 id="副本状态及状态管理流程">副本状态及状态管理流程</h2>
+<p>副本状态机一旦被启动，就意味着它要行使它最重要的职责了：<strong>管理副本状态的转换</strong>。</p>
+<p>不过，在学习如何管理状态之前，我们必须要弄明白，当前都有哪些状态，以及它们的含义分别是什么。源码中的ReplicaState定义了7种副本状态。</p>
+<ul>
+<li>NewReplica：副本被创建之后所处的状态。</li>
+<li>OnlineReplica：副本正常提供服务时所处的状态。</li>
+<li>OfflineReplica：副本服务下线时所处的状态。</li>
+<li>ReplicaDeletionStarted：副本被删除时所处的状态。</li>
+<li>ReplicaDeletionSuccessful：副本被成功删除后所处的状态。</li>
+<li>ReplicaDeletionIneligible：开启副本删除，但副本暂时无法被删除时所处的状态。</li>
+<li>NonExistentReplica：副本从副本状态机被移除前所处的状态。</li>
+</ul>
+<p>具体到代码而言，<strong>ReplicaState接口及其实现对象定义了每种状态的序号，以及合法的前置状态</strong>。我以OnlineReplica代码为例进行说明：</p>
+<pre><code>// ReplicaState接口
+sealed trait ReplicaState {
+  def state: Byte
+  def validPreviousStates: Set[ReplicaState] // 定义合法的前置状态
+}
+
+// OnlineReplica状态
+case object OnlineReplica extends ReplicaState {
+  val state: Byte = 2
+  val validPreviousStates: Set[ReplicaState] = Set(NewReplica, OnlineReplica, OfflineReplica, ReplicaDeletionIneligible)
+}
+</code></pre>
+<p>OnlineReplica的validPreviousStates属性是一个集合类型，里面包含NewReplica、OnlineReplica、OfflineReplica和ReplicaDeletionIneligible。这说明，Kafka只允许副本从刚刚这4种状态变更到OnlineReplica状态。如果从ReplicaDeletionStarted状态跳转到OnlineReplica状态，就是非法的状态转换。</p>
+<p>这里，我只列出了OnlineReplica。实际上，其他6种副本状态的代码逻辑也是类似的，因为比较简单，我就不一一介绍了，课下你可以对照着源码自己探索下，重点关注这些状态的validPreviousStates字段，看看每个状态合法的前置状态都有哪些。</p>
+<p>为了方便你记忆，我直接帮你提炼了出来了。这张图绘制出了完整的状态转换规则：</p>
+<p><img alt="" src="/assets/c3f8f0a345359c98f959b17b.jpg"/></p>
+<p>图中的单向箭头表示只允许单向状态转换，双向箭头则表示转换方向可以是双向的。比如，OnlineReplica和OfflineReplica之间有一根双向箭头，这就说明，副本可以在OnlineReplica和OfflineReplica状态之间随意切换。</p>
+<p>结合这张图，我再详细解释下各个状态的含义，以及它们的流转过程。</p>
+<p>当副本对象首次被创建出来后，它会被置于NewReplica状态。经过一番初始化之后，当副本对象能够对外提供服务之后，状态机会将其调整为OnlineReplica，并一直以该状态持续工作。</p>
+<p>如果副本所在的Broker关闭或者是因为其他原因不能正常工作了，副本需要从OnlineReplica变更为OfflineReplica，表明副本已处于离线状态。</p>
+<p>一旦开启了如删除主题这样的操作，状态机会将副本状态跳转到ReplicaDeletionStarted，以表明副本删除已然开启。倘若删除成功，则置为ReplicaDeletionSuccessful，倘若不满足删除条件（如所在Broker处于下线状态），那就设置成ReplicaDeletionIneligible，以便后面重试。</p>
+<p>当副本对象被删除后，其状态会变更为NonExistentReplica，副本状态机将移除该副本数据。</p>
+<p>这就是一个基本的状态管理流程。</p>
+<h2 id="具体实现类-zkreplicastatemachine">具体实现类：ZkReplicaStateMachine</h2>
+<p>了解了这些状态之后，我们来看下ZkReplicaStateMachine类的原理，毕竟，它是副本状态机的具体实现类。</p>
+<p>该类定义了1个public方法和7个private方法。这个public方法是副本状态机最重要的逻辑处理代码，它就是handleStateChanges方法。而那7个方法全部都是用来辅助public方法的。</p>
+<h3 id="状态转换方法定义">状态转换方法定义</h3>
+<p>在详细介绍handleStateChanges方法前，我稍微花点时间，给你简单介绍下其他7个方法都是做什么用的。就像前面说过的，这些方法主要是起辅助的作用。只有清楚了这些方法的用途，你才能更好地理解handleStateChanges的实现逻辑。</p>
+<ul>
+<li>logFailedStateChange：仅仅是记录一条错误日志，表明执行了一次无效的状态变更。</li>
+<li>logInvalidTransition：同样也是记录错误之用，记录一次非法的状态转换。</li>
+<li>logSuccessfulTransition：记录一次成功的状态转换操作。</li>
+<li>getTopicPartitionStatesFromZk：从ZooKeeper中获取指定分区的状态信息，包括每个分区的Leader副本、ISR集合等数据。</li>
+<li>doRemoveReplicasFromIsr：把给定的副本对象从给定分区ISR中移除。</li>
+<li>removeReplicasFromIsr：调用doRemoveReplicasFromIsr方法，实现将给定的副本对象从给定分区ISR中移除的功能。</li>
+<li>doHandleStateChanges：执行状态变更和转换操作的主力方法。接下来，我们会详细学习它的源码部分。</li>
+</ul>
+<h3 id="handlestatechanges方法">handleStateChanges方法</h3>
+<p>handleStateChange方法的作用是处理状态的变更，是对外提供状态转换操作的入口方法。其方法签名如下：</p>
+<pre><code>def handleStateChanges(replicas: Seq[PartitionAndReplica], targetState: ReplicaState): Unit
+</code></pre>
+<p>该方法接收两个参数：<strong>replicas</strong>是一组副本对象，每个副本对象都封装了它们各自所属的主题、分区以及副本所在的Broker ID数据；<strong>targetState</strong>是这组副本对象要转换成的目标状态。</p>
+<p>这个方法的完整代码如下：</p>
+<pre><code>override def handleStateChanges(
+  replicas: Seq[PartitionAndReplica], 
+  targetState: ReplicaState): Unit = {
+  if (replicas.nonEmpty) {
+    try {
+      // 清空Controller待发送请求集合
+      controllerBrokerRequestBatch.newBatch()
+      // 将所有副本对象按照Broker进行分组，依次执行状态转换操作
+      replicas.groupBy(_.replica).foreach {
+        case (replicaId, replicas) =&gt;
+          doHandleStateChanges(replicaId, replicas, targetState)
+      }
+      // 发送对应的Controller请求给Broker
+      controllerBrokerRequestBatch.sendRequestsToBrokers(
+        controllerContext.epoch)
+    } catch {
+      // 如果Controller易主，则记录错误日志然后抛出异常
+      case e: ControllerMovedException =&gt;
+        error(s"Controller moved to another broker when moving some replicas to $targetState state", e)
+        throw e
+      case e: Throwable =&gt; error(s"Error while moving some replicas to $targetState state", e)
+    }
+  }
+}
+</code></pre>
+<p>代码逻辑总体上分为两步：第1步是调用doHandleStateChanges方法执行真正的副本状态转换；第2步是给集群中的相应Broker批量发送请求。</p>
+<p>在执行第1步的时候，它会将replicas按照Broker ID进行分组。</p>
+<p>举个例子，如果我们使用&lt;主题名，分区号，副本Broker ID&gt;表示副本对象，假设replicas为集合（<test, 0="" 0,="">, <test, 0,="" 1="">, <test, 0="" 1,="">, <test, 1="" 1,="">），那么，在调用doHandleStateChanges方法前，代码会将replicas按照Broker ID进行分组，即变成：Map(0 -&gt; Set(<test, 0="" 0,="">, <test, 0="" 1,="">)，1 -&gt; Set(<test, 0,="" 1="">, <test, 1="" 1,="">))。</test,></test,></test,></test,></test,></test,></test,></test,></p>
+<p>待这些都做完之后，代码开始调用doHandleStateChanges方法，执行状态转换操作。这个方法看着很长，其实都是不同的代码分支。</p>
+<h3 id="dohandlestatechanges方法">doHandleStateChanges方法</h3>
+<p>我先用一张图，帮你梳理下它的流程，然后再具体分析下它的代码：</p>
+<p><img alt="" src="/assets/da28bc18e2a63c71a6378ae3.jpg"/></p>
+<p>从图中，我们可以发现，代码的第1步，会尝试获取给定副本对象在Controller端元数据缓存中的当前状态，如果没有保存某个副本对象的状态，代码会将其初始化为NonExistentReplica状态。</p>
+<p>第2步，代码根据不同ReplicaState中定义的合法前置状态集合以及传入的目标状态（targetState），将给定的副本对象集合划分成两部分：能够合法转换的副本对象集合，以及执行非法状态转换的副本对象集合。doHandleStateChanges方法会为后者中的每个副本对象记录一条错误日志。</p>
+<p>第3步，代码携带能够执行合法转换的副本对象集合，进入到不同的代码分支。由于当前Kafka为副本定义了7类状态，因此，这里的代码分支总共有7路。</p>
+<p>我挑选几路最常见的状态转换路径详细说明下，包括副本被创建时被转换到NewReplica状态，副本正常工作时被转换到OnlineReplica状态，副本停止服务后被转换到OfflineReplica状态。至于剩下的记录代码，你可以在课后自行学习下，它们的转换操作原理大致是相同的。</p>
+<h4 id="第1路-转换到newreplica状态">第1路：转换到NewReplica状态</h4>
+<p>首先，我们先来看第1路，即目标状态是NewReplica的代码。代码如下：</p>
+<pre><code>case NewReplica =&gt;
+  // 遍历所有能够执行转换的副本对象
+  validReplicas.foreach { replica =&gt;
+    // 获取该副本对象的分区对象，即&lt;主题名，分区号&gt;数据
+    val partition = replica.topicPartition
+    // 获取副本对象的当前状态
+    val currentState = controllerContext.replicaState(replica)
+    // 尝试从元数据缓存中获取该分区当前信息
+    // 包括Leader是谁、ISR都有哪些副本等数据
+    controllerContext.partitionLeadershipInfo.get(partition) match {
+      // 如果成功拿到分区数据信息
+      case Some(leaderIsrAndControllerEpoch) =&gt;
+        // 如果该副本是Leader副本
+        if (leaderIsrAndControllerEpoch.leaderAndIsr.leader == replicaId) {
+          val exception = new StateChangeFailedException(s"Replica $replicaId for partition $partition cannot be moved to NewReplica state as it is being requested to become leader")
+          // 记录错误日志。Leader副本不能被设置成NewReplica状态
+          logFailedStateChange(replica, currentState, OfflineReplica, exception)
+        // 否则，给该副本所在的Broker发送LeaderAndIsrRequest
+        // 向它同步该分区的数据, 之后给集群当前所有Broker发送
+        // UpdateMetadataRequest通知它们该分区数据发生变更
+        } else {
+          controllerBrokerRequestBatch
+            .addLeaderAndIsrRequestForBrokers(
+              Seq(replicaId),
+              replica.topicPartition,
+              leaderIsrAndControllerEpoch,
+              controllerContext.partitionFullReplicaAssignment(
+                replica.topicPartition),
+              isNew = true)
+          if (traceEnabled)
+            logSuccessfulTransition(
+              stateLogger, replicaId, 
+              partition, currentState, NewReplica)
+          // 更新元数据缓存中该副本对象的当前状态为NewReplica
+          controllerContext.putReplicaState(replica, NewReplica)
+        }
+      // 如果没有相应数据
+      case None =&gt;
+        if (traceEnabled)
+          logSuccessfulTransition(
+            stateLogger, replicaId, 
+            partition, currentState, NewReplica)
+        // 仅仅更新元数据缓存中该副本对象的当前状态为NewReplica即可
+        controllerContext.putReplicaState(replica, NewReplica)
+    }
+  }
+</code></pre>
+<p>看完了代码，你可以再看下这张流程图：</p>
+<p><img alt="" src="/assets/ab2dea1bc4bdee4759da2c2a.jpg"/></p>
+<p>这一路主要做的事情是，尝试从元数据缓存中，获取这些副本对象的分区信息数据，包括分区的Leader副本在哪个Broker上、ISR中都有哪些副本，等等。</p>
+<p>如果找不到对应的分区数据，就直接把副本状态更新为NewReplica。否则，代码就需要给该副本所在的Broker发送请求，让它知道该分区的信息。同时，代码还要给集群所有运行中的Broker发送请求，让它们感知到新副本的加入。</p>
+<h4 id="第2路-转换到onlinereplica状态">第2路：转换到OnlineReplica状态</h4>
+<p>下面我们来看第2路，即转换副本对象到OnlineReplica。</p>
+<p>刚刚我说过，这是副本对象正常工作时所处的状态。我们来看下要转换到这个状态，源码都做了哪些事情：</p>
+<pre><code>case OnlineReplica =&gt;
+  validReplicas.foreach { replica =&gt;
+    // 获取副本所在分区
+    val partition = replica.topicPartition
+    // 获取副本当前状态
+    val currentState = controllerContext.replicaState(replica)
+    currentState match {
+      // 如果当前状态是NewReplica
+      case NewReplica =&gt;
+        // 从元数据缓存中拿到分区副本列表
+        val assignment = controllerContext
+          .partitionFullReplicaAssignment(partition)
+        // 如果副本列表不包含当前副本，视为异常情况
+        if (!assignment.replicas.contains(replicaId)) {
+          error(s"Adding replica ($replicaId) that is not part of the assignment $assignment")
+          // 将该副本加入到副本列表中，并更新元数据缓存中该分区的副本列表
+          val newAssignment = assignment.copy(
+            replicas = assignment.replicas :+ replicaId)
+          controllerContext.updatePartitionFullReplicaAssignment(
+            partition, newAssignment)
+        }
+      // 如果当前状态是其他状态
+      case _ =&gt;
+        // 尝试获取该分区当前信息数据
+        controllerContext.partitionLeadershipInfo
+          .get(partition) match {
+          // 如果存在分区信息
+          // 向该副本对象所在Broker发送请求，令其同步该分区数据
+          case Some(leaderIsrAndControllerEpoch) =&gt;
+            controllerBrokerRequestBatch
+              .addLeaderAndIsrRequestForBrokers(Seq(replicaId),
+                replica.topicPartition,
+                leaderIsrAndControllerEpoch,
+                controllerContext
+                  .partitionFullReplicaAssignment(partition), 
+                isNew = false)
+          case None =&gt;
+        }
+    }
+    if (traceEnabled)
+      logSuccessfulTransition(
+        stateLogger, replicaId, 
+        partition, currentState, OnlineReplica)
+    // 将该副本对象设置成OnlineReplica状态
+    controllerContext.putReplicaState(replica, OnlineReplica)
+  }
+</code></pre>
+<p>我同样使用一张图来说明：</p>
+<p><img alt="" src="/assets/b381043c16b590bb3db52eff.jpg"/></p>
+<p>代码依然会对副本对象进行遍历，并依次执行下面的几个步骤。</p>
+<ul>
+<li>第1步，获取元数据中该副本所属的分区对象，以及该副本的当前状态。</li>
+<li>第2步，查看当前状态是否是NewReplica。如果是，则获取分区的副本列表，并判断该副本是否在当前的副本列表中，假如不在，就记录错误日志，并更新元数据中的副本列表；如果状态不是NewReplica，就说明，这是一个已存在的副本对象，那么，源码会获取对应分区的详细数据，然后向该副本对象所在的Broker发送LeaderAndIsrRequest请求，令其同步获知，并保存该分区数据。</li>
+<li>第3步，将该副本对象状态变更为OnlineReplica。至此，该副本处于正常工作状态。</li>
+</ul>
+<h4 id="第3路-转换到offlinereplica状态">第3路：转换到OfflineReplica状态</h4>
+<p>最后，再来看下第3路分支。这路分支要将副本对象的状态转换成OfflineReplica。我依然以代码注释的方式给出主要的代码逻辑：</p>
+<pre><code>case OfflineReplica =&gt;
+  validReplicas.foreach { replica =&gt;
+    // 向副本所在Broker发送StopReplicaRequest请求，停止对应副本
+    controllerBrokerRequestBatch
+      .addStopReplicaRequestForBrokers(Seq(replicaId), 
+        replica.topicPartition, deletePartition = false)
+  }
+  // 将副本对象集合划分成有Leader信息的副本集合和无Leader信息的副本集合
+  val (replicasWithLeadershipInfo, replicasWithoutLeadershipInfo) = 
+    validReplicas.partition { replica =&gt;
+      controllerContext.partitionLeadershipInfo
+        .contains(replica.topicPartition)
+    }
+  // 对于有Leader信息的副本集合而言从，
+  // 它们对应的所有分区中移除该副本对象并更新ZooKeeper节点
+  val updatedLeaderIsrAndControllerEpochs = 
+    removeReplicasFromIsr(replicaId,  
+      replicasWithLeadershipInfo.map(_.topicPartition))
+  // 遍历每个更新过的分区信息
+  updatedLeaderIsrAndControllerEpochs.foreach {
+    case (partition, leaderIsrAndControllerEpoch) =&gt;
+      stateLogger.info(s"Partition $partition state changed to $leaderIsrAndControllerEpoch after removing replica $replicaId from the ISR as part of transition to $OfflineReplica")
+      // 如果分区对应主题并未被删除
+      if (!controllerContext.isTopicQueuedUpForDeletion(
+        partition.topic)) {
+        // 获取该分区除给定副本以外的其他副本所在的Broker  
+        val recipients = controllerContext
+          .partitionReplicaAssignment(partition)
+          .filterNot(_ == replicaId)
+        // 向这些Broker发送请求更新该分区更新过的分区LeaderAndIsr数据
+        controllerBrokerRequestBatch.addLeaderAndIsrRequestForBrokers(
+          recipients,
+          partition,
+          leaderIsrAndControllerEpoch,
+          controllerContext.partitionFullReplicaAssignment(partition), 
+          isNew = false)
+      }
+      val replica = PartitionAndReplica(partition, replicaId)
+      val currentState = controllerContext.replicaState(replica)
+      if (traceEnabled)
+        logSuccessfulTransition(stateLogger, replicaId, 
+          partition, currentState, OfflineReplica)
+      // 设置该分区给定副本的状态为OfflineReplica
+      controllerContext.putReplicaState(replica, OfflineReplica)
+  }
+  // 遍历无Leader信息的所有副本对象
+  replicasWithoutLeadershipInfo.foreach { replica =&gt;
+    val currentState = controllerContext.replicaState(replica)
+    if (traceEnabled)
+      logSuccessfulTransition(stateLogger, replicaId, 
+        replica.topicPartition, currentState, OfflineReplica)
+     // 向集群所有Broker发送请求，更新对应分区的元数据
+    controllerBrokerRequestBatch.addUpdateMetadataRequestForBrokers(
+      controllerContext.liveOrShuttingDownBrokerIds.toSeq,
+      Set(replica.topicPartition))
+    // 设置该分区给定副本的状态为OfflineReplica
+    controllerContext.putReplicaState(replica, OfflineReplica)
+  }
+</code></pre>
+<p>我依然用一张图来说明它的执行流程：</p>
+<p><img alt="" src="/assets/1cff226214809ecd4bef862f.jpg"/></p>
+<p>首先，代码会给所有符合状态转换的副本所在的Broker，发送StopReplicaRequest请求，显式地告诉这些Broker停掉其上的对应副本。Kafka的副本管理器组件（ReplicaManager）负责处理这个逻辑。后面我们会用两节课的时间专门讨论ReplicaManager的实现，这里你只需要了解，StopReplica请求被发送出去之后，这些Broker上对应的副本就停止工作了。</p>
+<p>其次，代码根据分区是否保存了Leader信息，将副本集合划分成两个子集：有Leader副本集合和无Leader副本集合。有无Leader信息并不仅仅包含Leader，还有ISR和controllerEpoch等数据。不过，你大致可以认为，副本集合是根据有无Leader进行划分的。</p>
+<p>接下来，源码会遍历有Leader的子集合，向这些副本所在的Broker发送LeaderAndIsrRequest请求，去更新停止副本操作之后的分区信息，再把这些分区状态设置为OfflineReplica。</p>
+<p>最后，源码遍历无Leader的子集合，执行与上一步非常类似的操作。只不过，对于无Leader而言，因为我们没有执行任何Leader选举操作，所以给这些副本所在的Broker发送的就不是LeaderAndIsrRequest请求了，而是UpdateMetadataRequest请求，显式去告知它们更新对应分区的元数据即可，然后再把副本状态设置为OfflineReplica。</p>
+<p>从这段描述中，我们可以知道，把副本状态变更为OfflineReplica的主要逻辑，其实就是停止对应副本+更新远端Broker元数据的操作。</p>
+<h2 id="总结">总结</h2>
+<p>今天，我们重点学习了Kafka的副本状态机实现原理，还仔细研读了这部分的源码。我们简单回顾一下这节课的重点。</p>
+<ul>
+<li>副本状态机：ReplicaStateMachine是Kafka Broker端源码中控制副本状态流转的实现类。每个Broker启动时都会创建ReplicaStateMachine实例，但只有Controller组件所在的Broker才会启动它。</li>
+<li>副本状态：当前，Kafka定义了7类副本状态。同时，它还规定了每类状态合法的前置状态。</li>
+<li>handleStateChanges：用于执行状态转换的核心方法。底层调用doHandleStateChanges方法，以7路case分支的形式穷举每类状态的转换逻辑。</li>
+</ul>
+<p><img alt="" src="/assets/0d74b1c925be223ccf7b7d88.jpg"/></p>
+<p>下节课，我将带你学习Kafka中另一类著名的状态机：分区状态机。掌握了这两个状态机，你就能清楚地知道Kafka Broker端管理分区和副本对象的完整流程和手段了。事实上，弄明白了这两个组件之后，Controller负责主题方面的所有工作内容基本上都不会难倒你了。</p>
+<h2 id="课后讨论">课后讨论</h2>
+<p>请尝试分析doHandleStateChanges方法中最后一路分支的代码。</p>
+<p>欢迎你在留言区写下你的思考和答案，跟我交流讨论，也欢迎你把今天的内容分享给你的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

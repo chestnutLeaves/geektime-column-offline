@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>29 PV、PVC体系是不是多此一举？从本地持久化卷谈起 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/index.html">深入剖析Kubernetes</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">56 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入剖析Kubernetes</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E6%89%93%E9%80%9A%E2%80%9C%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E2%80%9D%E7%9A%84%E4%BB%BB%E7%9D%A3%E4%BA%8C%E8%84%89.html">00 开篇词 打通“容器技术”的任督二脉</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/01%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E5%B0%8F%E9%B2%B8%E9%B1%BC%E5%A4%A7%E4%BA%8B%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%88%9D%E5%87%BA%E8%8C%85%E5%BA%90.html">01 预习篇 · 小鲸鱼大事记（一）：初出茅庐</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/02%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E5%B0%8F%E9%B2%B8%E9%B1%BC%E5%A4%A7%E4%BA%8B%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%B4%AD%E9%9C%B2%E5%A4%B4%E8%A7%92.html">02 预习篇 · 小鲸鱼大事记（二）：崭露头角</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/03%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E5%B0%8F%E9%B2%B8%E9%B1%BC%E5%A4%A7%E4%BA%8B%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E7%BE%A4%E9%9B%84%E5%B9%B6%E8%B5%B7.html">03 预习篇 · 小鲸鱼大事记（三）：群雄并起</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/04%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E5%B0%8F%E9%B2%B8%E9%B1%BC%E5%A4%A7%E4%BA%8B%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%B0%98%E5%9F%83%E8%90%BD%E5%AE%9A.html">04 预习篇 · 小鲸鱼大事记（四）：尘埃落定</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/05%20%E7%99%BD%E8%AF%9D%E5%AE%B9%E5%99%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E%E8%BF%9B%E7%A8%8B%E8%AF%B4%E5%BC%80%E5%8E%BB.html">05 白话容器基础（一）：从进程说开去</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/06%20%E7%99%BD%E8%AF%9D%E5%AE%B9%E5%99%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%9A%94%E7%A6%BB%E4%B8%8E%E9%99%90%E5%88%B6.html">06 白话容器基础（二）：隔离与限制</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/07%20%E7%99%BD%E8%AF%9D%E5%AE%B9%E5%99%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F.html">07 白话容器基础（三）：深入理解容器镜像</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/08%20%E7%99%BD%E8%AF%9D%E5%AE%B9%E5%99%A8%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86Docker%E5%AE%B9%E5%99%A8.html">08 白话容器基础（四）：重新认识Docker容器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/09%20%E4%BB%8E%E5%AE%B9%E5%99%A8%E5%88%B0%E5%AE%B9%E5%99%A8%E4%BA%91%EF%BC%9A%E8%B0%88%E8%B0%88Kubernetes%E7%9A%84%E6%9C%AC%E8%B4%A8.html">09 从容器到容器云：谈谈Kubernetes的本质</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/10%20Kubernetes%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%88%A9%E5%99%A8%EF%BC%9Akubeadm.html">10 Kubernetes一键部署利器：kubeadm</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/11%20%E4%BB%8E0%E5%88%B01%EF%BC%9A%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84Kubernetes%E9%9B%86%E7%BE%A4.html">11 从0到1：搭建一个完整的Kubernetes集群</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/12%20%E7%89%9B%E5%88%80%E5%B0%8F%E8%AF%95%EF%BC%9A%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AE%B9%E5%99%A8%E5%8C%96%E5%BA%94%E7%94%A8.html">12 牛刀小试：我的第一个容器化应用</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/13%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81Pod%EF%BC%9F.html">13 为什么我们需要Pod？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/14%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90Pod%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html">14 深入解析Pod对象（一）：基本概念</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/15%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90Pod%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">15 深入解析Pod对象（二）：使用进阶</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/16%20%E7%BC%96%E6%8E%92%E5%85%B6%E5%AE%9E%E5%BE%88%E7%AE%80%E5%8D%95%EF%BC%9A%E8%B0%88%E8%B0%88%E2%80%9C%E6%8E%A7%E5%88%B6%E5%99%A8%E2%80%9D%E6%A8%A1%E5%9E%8B.html">16 编排其实很简单：谈谈“控制器”模型</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/17%20%E7%BB%8F%E5%85%B8PaaS%E7%9A%84%E8%AE%B0%E5%BF%86%EF%BC%9A%E4%BD%9C%E4%B8%9A%E5%89%AF%E6%9C%AC%E4%B8%8E%E6%B0%B4%E5%B9%B3%E6%89%A9%E5%B1%95.html">17 经典PaaS的记忆：作业副本与水平扩展</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/18%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3StatefulSet%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%8B%93%E6%89%91%E7%8A%B6%E6%80%81.html">18 深入理解StatefulSet（一）：拓扑状态</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/19%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3StatefulSet%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%AD%98%E5%82%A8%E7%8A%B6%E6%80%81.html">19 深入理解StatefulSet（二）：存储状态</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/20%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3StatefulSet%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5.html">20 深入理解StatefulSet（三）：有状态应用实践</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/21%20%E5%AE%B9%E5%99%A8%E5%8C%96%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%84%8F%E4%B9%89%EF%BC%9ADaemonSet.html">21 容器化守护进程的意义：DaemonSet</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/22%20%E6%92%AC%E5%8A%A8%E7%A6%BB%E7%BA%BF%E4%B8%9A%E5%8A%A1%EF%BC%9AJob%E4%B8%8ECronJob.html">22 撬动离线业务：Job与CronJob</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/23%20%E5%A3%B0%E6%98%8E%E5%BC%8FAPI%E4%B8%8EKubernetes%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F.html">23 声明式API与Kubernetes编程范式</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/24%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E5%A3%B0%E6%98%8E%E5%BC%8FAPI%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AAPI%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A5%A5%E7%A7%98.html">24 深入解析声明式API（一）：API对象的奥秘</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/25%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E5%A3%B0%E6%98%8E%E5%BC%8FAPI%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%BC%96%E5%86%99%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E5%88%B6%E5%99%A8.html">25 深入解析声明式API（二）：编写自定义控制器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/26%20%E5%9F%BA%E4%BA%8E%E8%A7%92%E8%89%B2%E7%9A%84%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%EF%BC%9ARBAC.html">26 基于角色的权限控制：RBAC</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/27%20%E8%81%AA%E6%98%8E%E7%9A%84%E5%BE%AE%E5%88%9B%E6%96%B0%EF%BC%9AOperator%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%A7%A3%E8%AF%BB.html">27 聪明的微创新：Operator工作原理解读</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/28%20PV%E3%80%81PVC%E3%80%81StorageClass%EF%BC%8C%E8%BF%99%E4%BA%9B%E5%88%B0%E5%BA%95%E5%9C%A8%E8%AF%B4%E5%95%A5%EF%BC%9F.html">28 PV、PVC、StorageClass，这些到底在说啥？</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/29%20PV%E3%80%81PVC%E4%BD%93%E7%B3%BB%E6%98%AF%E4%B8%8D%E6%98%AF%E5%A4%9A%E6%AD%A4%E4%B8%80%E4%B8%BE%EF%BC%9F%E4%BB%8E%E6%9C%AC%E5%9C%B0%E6%8C%81%E4%B9%85%E5%8C%96%E5%8D%B7%E8%B0%88%E8%B5%B7.html">29 PV、PVC体系是不是多此一举？从本地持久化卷谈起</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/30%20%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AD%98%E5%82%A8%E6%8F%92%E4%BB%B6%EF%BC%9AFlexVolume%E4%B8%8ECSI.html">30 编写自己的存储插件：FlexVolume与CSI</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/31%20%E5%AE%B9%E5%99%A8%E5%AD%98%E5%82%A8%E5%AE%9E%E8%B7%B5%EF%BC%9ACSI%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99%E6%8C%87%E5%8D%97.html">31 容器存储实践：CSI插件编写指南</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/32%20%E6%B5%85%E8%B0%88%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C.html">32 浅谈容器网络</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/33%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E5%AE%B9%E5%99%A8%E8%B7%A8%E4%B8%BB%E6%9C%BA%E7%BD%91%E7%BB%9C.html">33 深入解析容器跨主机网络</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/34%20Kubernetes%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E4%B8%8ECNI%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6.html">34 Kubernetes网络模型与CNI网络插件</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/35%20%E8%A7%A3%E8%AF%BBKubernetes%E4%B8%89%E5%B1%82%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88.html">35 解读Kubernetes三层网络方案</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/36%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4Kubernetes%E5%8F%AA%E6%9C%89soft%20multi-tenancy%EF%BC%9F.html">36 为什么说Kubernetes只有soft multi-tenancy？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/37%20%E6%89%BE%E5%88%B0%E5%AE%B9%E5%99%A8%E4%B8%8D%E5%AE%B9%E6%98%93%EF%BC%9AService%E3%80%81DNS%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0.html">37 找到容器不容易：Service、DNS与服务发现</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/38%20%E4%BB%8E%E5%A4%96%E7%95%8C%E8%BF%9E%E9%80%9AService%E4%B8%8EService%E8%B0%83%E8%AF%95%E2%80%9C%E4%B8%89%E6%9D%BF%E6%96%A7%E2%80%9D.html">38 从外界连通Service与Service调试“三板斧”</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/39%20%E8%B0%88%E8%B0%88Service%E4%B8%8EIngress.html">39 谈谈Service与Ingress</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/40%20Kubernetes%E7%9A%84%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9E%8B%E4%B8%8E%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86.html">40 Kubernetes的资源模型与资源管理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/41%20%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3%E4%B8%8A%E7%9A%84Kubernetes%E9%BB%98%E8%AE%A4%E8%B0%83%E5%BA%A6%E5%99%A8.html">41 十字路口上的Kubernetes默认调度器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/42%20Kubernetes%E9%BB%98%E8%AE%A4%E8%B0%83%E5%BA%A6%E5%99%A8%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90.html">42 Kubernetes默认调度器调度策略解析</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/43%20Kubernetes%E9%BB%98%E8%AE%A4%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E%E6%8A%A2%E5%8D%A0%E6%9C%BA%E5%88%B6.html">43 Kubernetes默认调度器的优先级与抢占机制</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/44%20Kubernetes%20GPU%E7%AE%A1%E7%90%86%E4%B8%8EDevice%20Plugin%E6%9C%BA%E5%88%B6.html">44 Kubernetes GPU管理与Device Plugin机制</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/45%20%E5%B9%95%E5%90%8E%E8%8B%B1%E9%9B%84%EF%BC%9ASIG-Node%E4%B8%8ECRI.html">45 幕后英雄：SIG-Node与CRI</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/46%20%E8%A7%A3%E8%AF%BB%20CRI%20%E4%B8%8E%20%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6.html">46 解读 CRI 与 容器运行时</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/47%20%E7%BB%9D%E4%B8%8D%E4%BB%85%E4%BB%85%E6%98%AF%E5%AE%89%E5%85%A8%EF%BC%9AKata%20Containers%20%E4%B8%8E%20gVisor.html">47 绝不仅仅是安全：Kata Containers 与 gVisor</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/48%20Prometheus%E3%80%81Metrics%20Server%E4%B8%8EKubernetes%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB.html">48 Prometheus、Metrics Server与Kubernetes监控体系</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/49%20Custom%20Metrics_%20%E8%AE%A9Auto%20Scaling%E4%B8%8D%E5%86%8D%E2%80%9C%E9%A3%9F%E4%B9%8B%E6%97%A0%E5%91%B3%E2%80%9D.html">49 Custom Metrics_ 让Auto Scaling不再“食之无味”</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/50%20%E8%AE%A9%E6%97%A5%E5%BF%97%E6%97%A0%E5%A4%84%E5%8F%AF%E9%80%83%EF%BC%9A%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E4%B8%8E%E7%AE%A1%E7%90%86.html">50 让日志无处可逃：容器日志收集与管理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/51%20%E8%B0%88%E8%B0%88Kubernetes%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E5%92%8C%E6%9C%AA%E6%9D%A5%E8%B5%B0%E5%90%91.html">51 谈谈Kubernetes开源社区和未来走向</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/52%20%E7%AD%94%E7%96%91%EF%BC%9A%E5%9C%A8%E9%97%AE%E9%A2%98%E4%B8%AD%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%EF%BC%8C%E5%9C%A8%E6%80%9D%E8%80%83%E4%B8%AD%E4%BA%A7%E7%94%9F%E6%80%9D%E8%80%83.html">52 答疑：在问题中解决问题，在思考中产生思考</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%202019%20%E5%B9%B4%EF%BC%8C%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E7%94%9F%E6%80%81%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">特别放送 2019 年，容器技术生态会发生些什么？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%9F%BA%E4%BA%8E%20Kubernetes%20%E7%9A%84%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8%E7%AE%A1%E7%90%86%EF%BC%8C%E5%88%B0%E5%BA%95%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F.html">特别放送 基于 Kubernetes 的云原生应用管理，到底应该怎么做？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/%E7%BB%93%E6%9D%9F%E8%AF%AD%20Kubernetes%EF%BC%9A%E8%B5%A2%E5%BC%80%E5%8F%91%E8%80%85%E8%B5%A2%E5%A4%A9%E4%B8%8B.html">结束语 Kubernetes：赢开发者赢天下</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90Kubernetes/29%20PV%E3%80%81PVC%E4%BD%93%E7%B3%BB%E6%98%AF%E4%B8%8D%E6%98%AF%E5%A4%9A%E6%AD%A4%E4%B8%80%E4%B8%BE%EF%BC%9F%E4%BB%8E%E6%9C%AC%E5%9C%B0%E6%8C%81%E4%B9%85%E5%8C%96%E5%8D%B7%E8%B0%88%E8%B5%B7.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="29 PV、PVC体系是不是多此一举？从本地持久化卷谈起" id="title">29 PV、PVC体系是不是多此一举？从本地持久化卷谈起</h1>
+<div><p>你好，我是张磊。今天我和你分享的主题是：PV、PVC体系是不是多此一举？从本地持久化卷谈起。</p>
+<p>在上一篇文章中，我为你详细讲解了PV、PVC持久化存储体系在Kubernetes项目中的设计和实现原理。而在文章最后的思考题中，我为你留下了这样一个讨论话题：像PV、PVC这样的用法，是不是有“过度设计”的嫌疑？</p>
+<p>比如，我们公司的运维人员可以像往常一样维护一套NFS或者Ceph服务器，根本不必学习Kubernetes。而开发人员，则完全可以靠“复制粘贴”的方式，在Pod的YAML文件里填上Volumes字段，而不需要去使用PV和PVC。</p>
+<p>实际上，如果只是为了职责划分，PV、PVC体系确实不见得比直接在Pod里声明Volumes字段有什么优势。</p>
+<p>不过，你有没有想过这样一个问题，如果<a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes" target="_blank">Kubernetes内置的20种持久化数据卷实现</a>，都没办法满足你的容器存储需求时，该怎么办？</p>
+<p>这个情况乍一听起来有点不可思议。但实际上，凡是鼓捣过开源项目的读者应该都有所体会，“不能用”“不好用”“需要定制开发”，这才是落地开源基础设施项目的三大常态。</p>
+<p>而在持久化存储领域，用户呼声最高的定制化需求，莫过于支持“本地”持久化存储了。</p>
+<p>也就是说，用户希望Kubernetes能够直接使用宿主机上的本地磁盘目录，而不依赖于远程存储服务，来提供“持久化”的容器Volume。</p>
+<p>这样做的好处很明显，由于这个Volume直接使用的是本地磁盘，尤其是SSD盘，它的读写性能相比于大多数远程存储来说，要好得多。这个需求对本地物理服务器部署的私有Kubernetes集群来说，非常常见。</p>
+<p>所以，Kubernetes在v1.10之后，就逐渐依靠PV、PVC体系实现了这个特性。这个特性的名字叫作：Local Persistent Volume。</p>
+<p>不过，首先需要明确的是，<strong>Local Persistent Volume并不适用于所有应用</strong>。事实上，它的适用范围非常固定，比如：高优先级的系统应用，需要在多个不同节点上存储数据，并且对I/O较为敏感。典型的应用包括：分布式数据存储比如MongoDB、Cassandra等，分布式文件系统比如GlusterFS、Ceph等，以及需要在本地磁盘上进行大量数据缓存的分布式应用。</p>
+<p>其次，相比于正常的PV，一旦这些节点宕机且不能恢复时，Local Persistent Volume的数据就可能丢失。这就要求<strong>使用Local Persistent Volume的应用必须具备数据备份和恢复的能力</strong>，允许你把这些数据定时备份在其他位置。</p>
+<p>接下来，我就为你深入讲解一下这个特性。</p>
+<p>不难想象，Local Persistent Volume的设计，主要面临两个难点。</p>
+<p><strong>第一个难点在于</strong>：如何把本地磁盘抽象成PV。</p>
+<p>可能你会说，Local Persistent Volume，不就等同于hostPath加NodeAffinity吗？</p>
+<p>比如，一个Pod可以声明使用类型为Local的PV，而这个PV其实就是一个hostPath类型的Volume。如果这个hostPath对应的目录，已经在节点A上被事先创建好了。那么，我只需要再给这个Pod加上一个nodeAffinity=nodeA，不就可以使用这个Volume了吗？</p>
+<p>事实上，<strong>你绝不应该把一个宿主机上的目录当作PV使用</strong>。这是因为，这种本地目录的存储行为完全不可控，它所在的磁盘随时都可能被应用写满，甚至造成整个宿主机宕机。而且，不同的本地目录之间也缺乏哪怕最基础的I/O隔离机制。</p>
+<p>所以，一个Local Persistent Volume对应的存储介质，一定是一块额外挂载在宿主机的磁盘或者块设备（“额外”的意思是，它不应该是宿主机根目录所使用的主硬盘）。这个原则，我们可以称为“<strong>一个PV一块盘</strong>”。</p>
+<p><strong>第二个难点在于</strong>：调度器如何保证Pod始终能被正确地调度到它所请求的Local Persistent Volume所在的节点上呢？</p>
+<p>造成这个问题的原因在于，对于常规的PV来说，Kubernetes都是先调度Pod到某个节点上，然后，再通过“两阶段处理”来“持久化”这台机器上的Volume目录，进而完成Volume目录与容器的绑定挂载。</p>
+<p>可是，对于Local PV来说，节点上可供使用的磁盘（或者块设备），必须是运维人员提前准备好的。它们在不同节点上的挂载情况可以完全不同，甚至有的节点可以没这种磁盘。</p>
+<p>所以，这时候，调度器就必须能够知道所有节点与Local Persistent Volume对应的磁盘的关联关系，然后根据这个信息来调度Pod。</p>
+<p>这个原则，我们可以称为“<strong>在调度的时候考虑Volume分布</strong>”。在Kubernetes的调度器里，有一个叫作VolumeBindingChecker的过滤条件专门负责这个事情。在Kubernetes v1.11中，这个过滤条件已经默认开启了。</p>
+<p>基于上述讲述，在开始使用Local Persistent Volume之前，你首先需要在集群里配置好磁盘或者块设备。在公有云上，这个操作等同于给虚拟机额外挂载一个磁盘，比如GCE的Local SSD类型的磁盘就是一个典型例子。</p>
+<p>而在我们部署的私有环境中，你有两种办法来完成这个步骤。</p>
+<ul>
+<li>第一种，当然就是给你的宿主机挂载并格式化一个可用的本地磁盘，这也是最常规的操作；</li>
+<li>第二种，对于实验环境，你其实可以在宿主机上挂载几个RAM Disk（内存盘）来模拟本地磁盘。</li>
+</ul>
+<p>接下来，我会使用第二种方法，在我们之前部署的Kubernetes集群上进行实践。</p>
+<p><strong>首先</strong>，在名叫node-1的宿主机上创建一个挂载点，比如/mnt/disks；<strong>然后</strong>，用几个RAM Disk来模拟本地磁盘，如下所示：</p>
+<pre><code># 在node-1上执行
+$ mkdir /mnt/disks
+$ for vol in vol1 vol2 vol3; do
+    mkdir /mnt/disks/$vol
+    mount -t tmpfs $vol /mnt/disks/$vol
+done
+</code></pre>
+<p>需要注意的是，如果你希望其他节点也能支持Local Persistent Volume的话，那就需要为它们也执行上述操作，并且确保这些磁盘的名字（vol1、vol2等）都不重复。</p>
+<p>接下来，我们就可以为这些本地磁盘定义对应的PV了，如下所示：</p>
+<pre><code>apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: example-pv
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /mnt/disks/vol1
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node-1
+</code></pre>
+<p>可以看到，这个PV的定义里：local字段，指定了它是一个Local Persistent Volume；而path字段，指定的正是这个PV对应的本地磁盘的路径，即：/mnt/disks/vol1。</p>
+<p>当然了，这也就意味着如果Pod要想使用这个PV，那它就必须运行在node-1上。所以，在这个PV的定义里，需要有一个nodeAffinity字段指定node-1这个节点的名字。这样，调度器在调度Pod的时候，就能够知道一个PV与节点的对应关系，从而做出正确的选择。<strong>这正是Kubernetes实现“在调度的时候就考虑Volume分布”的主要方法。</strong></p>
+<p><strong>接下来</strong>，我们就可以使用kubect create来创建这个PV，如下所示：</p>
+<pre><code>$ kubectl create -f local-pv.yaml 
+persistentvolume/example-pv created
+
+$ kubectl get pv
+NAME         CAPACITY   ACCESS MODES   RECLAIM POLICY  STATUS      CLAIM             STORAGECLASS    REASON    AGE
+example-pv   5Gi        RWO            Delete           Available                     local-storage             16s
+</code></pre>
+<p>可以看到，这个PV创建后，进入了Available（可用）状态。</p>
+<p>而正如我在上一篇文章里所建议的那样，使用PV和PVC的最佳实践，是你要创建一个StorageClass来描述这个PV，如下所示：</p>
+<pre><code>kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+</code></pre>
+<p>这个StorageClass的名字，叫作local-storage。需要注意的是，在它的provisioner字段，我们指定的是no-provisioner。这是因为Local Persistent Volume目前尚不支持Dynamic Provisioning，所以它没办法在用户创建PVC的时候，就自动创建出对应的PV。也就是说，我们前面创建PV的操作，是不可以省略的。</p>
+<p>与此同时，这个StorageClass还定义了一个volumeBindingMode=WaitForFirstConsumer的属性。它是Local Persistent Volume里一个非常重要的特性，即：<strong>延迟绑定</strong>。</p>
+<p>我们知道，当你提交了PV和PVC的YAML文件之后，Kubernetes就会根据它们俩的属性，以及它们指定的StorageClass来进行绑定。只有绑定成功后，Pod才能通过声明这个PVC来使用对应的PV。</p>
+<p>可是，如果你使用的是Local Persistent Volume的话，就会发现，这个流程根本行不通。</p>
+<p>比如，现在你有一个Pod，它声明使用的PVC叫作pvc-1。并且，我们规定，这个Pod只能运行在node-2上。</p>
+<p>而在Kubernetes集群中，有两个属性（比如：大小、读写权限）相同的Local类型的PV。</p>
+<p>其中，第一个PV的名字叫作pv-1，它对应的磁盘所在的节点是node-1。而第二个PV的名字叫作pv-2，它对应的磁盘所在的节点是node-2。</p>
+<p>假设现在，Kubernetes的Volume控制循环里，首先检查到了pvc-1和pv-1的属性是匹配的，于是就将它们俩绑定在一起。</p>
+<p>然后，你用kubectl create创建了这个Pod。</p>
+<p>这时候，问题就出现了。</p>
+<p>调度器看到，这个Pod所声明的pvc-1已经绑定了pv-1，而pv-1所在的节点是node-1，根据“调度器必须在调度的时候考虑Volume分布”的原则，这个Pod自然会被调度到node-1上。</p>
+<p>可是，我们前面已经规定过，这个Pod根本不允许运行在node-1上。所以。最后的结果就是，这个Pod的调度必然会失败。</p>
+<p><strong>这就是为什么，在使用Local Persistent Volume的时候，我们必须想办法推迟这个“绑定”操作。</strong></p>
+<p>那么，具体推迟到什么时候呢？</p>
+<p><strong>答案是：推迟到调度的时候。</strong></p>
+<p>所以说，StorageClass里的volumeBindingMode=WaitForFirstConsumer的含义，就是告诉Kubernetes里的Volume控制循环（“红娘”）：虽然你已经发现这个StorageClass关联的PVC与PV可以绑定在一起，但请不要现在就执行绑定操作（即：设置PVC的VolumeName字段）。</p>
+<p>而要等到第一个声明使用该PVC的Pod出现在调度器之后，调度器再综合考虑所有的调度规则，当然也包括每个PV所在的节点位置，来统一决定，这个Pod声明的PVC，到底应该跟哪个PV进行绑定。</p>
+<p>这样，在上面的例子里，由于这个Pod不允许运行在pv-1所在的节点node-1，所以它的PVC最后会跟pv-2绑定，并且Pod也会被调度到node-2上。</p>
+<p>所以，通过这个延迟绑定机制，原本实时发生的PVC和PV的绑定过程，就被延迟到了Pod第一次调度的时候在调度器中进行，从而保证了这个<strong>绑定结果不会影响Pod的正常调度</strong>。</p>
+<p>当然，在具体实现中，调度器实际上维护了一个与Volume Controller类似的控制循环，专门负责为那些声明了“延迟绑定”的PV和PVC进行绑定工作。</p>
+<p>通过这样的设计，这个额外的绑定操作，并不会拖慢调度器的性能。而当一个Pod的PVC尚未完成绑定时，调度器也不会等待，而是会直接把这个Pod重新放回到待调度队列，等到下一个调度周期再做处理。</p>
+<p>在明白了这个机制之后，我们就可以创建StorageClass了，如下所示：</p>
+<pre><code>$ kubectl create -f local-sc.yaml 
+storageclass.storage.k8s.io/local-storage created
+</code></pre>
+<p>接下来，我们只需要定义一个非常普通的PVC，就可以让Pod使用到上面定义好的Local Persistent Volume了，如下所示：</p>
+<pre><code>kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: example-local-claim
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: local-storage
+</code></pre>
+<p>可以看到，这个PVC没有任何特别的地方。唯一需要注意的是，它声明的storageClassName是local-storage。所以，将来Kubernetes的Volume Controller看到这个PVC的时候，不会为它进行绑定操作。</p>
+<p>现在，我们来创建这个PVC：</p>
+<pre><code>$ kubectl create -f local-pvc.yaml 
+persistentvolumeclaim/example-local-claim created
+
+$ kubectl get pvc
+NAME                  STATUS    VOLUME    CAPACITY   ACCESS MODES   STORAGECLASS    AGE
+example-local-claim   Pending                                       local-storage   7s
+</code></pre>
+<p>可以看到，尽管这个时候，Kubernetes里已经存在了一个可以与PVC匹配的PV，但这个PVC依然处于Pending状态，也就是等待绑定的状态。</p>
+<p>然后，我们编写一个Pod来声明使用这个PVC，如下所示：</p>
+<pre><code>kind: Pod
+apiVersion: v1
+metadata:
+  name: example-pv-pod
+spec:
+  volumes:
+    - name: example-pv-storage
+      persistentVolumeClaim:
+       claimName: example-local-claim
+  containers:
+    - name: example-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: example-pv-storage
+</code></pre>
+<p>这个Pod没有任何特别的地方，你只需要注意，它的volumes字段声明要使用前面定义的、名叫example-local-claim的PVC即可。</p>
+<p>而我们一旦使用kubectl create创建这个Pod，就会发现，我们前面定义的PVC，会立刻变成Bound状态，与前面定义的PV绑定在了一起，如下所示：</p>
+<pre><code>$ kubectl create -f local-pod.yaml 
+pod/example-pv-pod created
+
+$ kubectl get pvc
+NAME                  STATUS    VOLUME       CAPACITY   ACCESS MODES   STORAGECLASS    AGE
+example-local-claim   Bound     example-pv   5Gi        RWO            local-storage   6h
+</code></pre>
+<p>也就是说，在我们创建的Pod进入调度器之后，“绑定”操作才开始进行。</p>
+<p>这时候，我们可以尝试在这个Pod的Volume目录里，创建一个测试文件，比如：</p>
+<pre><code>$ kubectl exec -it example-pv-pod -- /bin/sh
+# cd /usr/share/nginx/html
+# touch test.txt
+</code></pre>
+<p>然后，登录到node-1这台机器上，查看一下它的 /mnt/disks/vol1目录下的内容，你就可以看到刚刚创建的这个文件：</p>
+<pre><code># 在node-1上
+$ ls /mnt/disks/vol1
+test.txt
+</code></pre>
+<p>而如果你重新创建这个Pod的话，就会发现，我们之前创建的测试文件，依然被保存在这个持久化Volume当中：</p>
+<pre><code>$ kubectl delete -f local-pod.yaml 
+
+$ kubectl create -f local-pod.yaml 
+
+$ kubectl exec -it example-pv-pod -- /bin/sh
+# ls /usr/share/nginx/html
+# touch test.txt
+</code></pre>
+<p>这就说明，像Kubernetes这样构建出来的、基于本地存储的Volume，完全可以提供容器持久化存储的功能。所以，像StatefulSet这样的有状态编排工具，也完全可以通过声明Local类型的PV和PVC，来管理应用的存储状态。</p>
+<p><strong>需要注意的是，我们上面手动创建PV的方式，即Static的PV管理方式，在删除PV时需要按如下流程执行操作：</strong></p>
+<ol>
+<li><p>删除使用这个PV的Pod；</p></li>
+<li><p>从宿主机移除本地磁盘（比如，umount它）；</p></li>
+<li><p>删除PVC；</p></li>
+<li><p>删除PV。</p></li>
+</ol>
+<p>如果不按照这个流程的话，这个PV的删除就会失败。</p>
+<p>当然，由于上面这些创建PV和删除PV的操作比较繁琐，Kubernetes其实提供了一个Static Provisioner来帮助你管理这些PV。</p>
+<p>比如，我们现在的所有磁盘，都挂载在宿主机的/mnt/disks目录下。</p>
+<p>那么，当Static Provisioner启动后，它就会通过DaemonSet，自动检查每个宿主机的/mnt/disks目录。然后，调用Kubernetes API，为这些目录下面的每一个挂载，创建一个对应的PV对象出来。这些自动创建的PV，如下所示：</p>
+<pre><code>$ kubectl get pv
+NAME                CAPACITY    ACCESSMODES   RECLAIMPOLICY   STATUS      CLAIM     STORAGECLASS    REASON    AGE
+local-pv-ce05be60   1024220Ki   RWO           Delete          Available             local-storage             26s
+
+$ kubectl describe pv local-pv-ce05be60 
+Name:  local-pv-ce05be60
+...
+StorageClass: local-storage
+Status:  Available
+Claim:  
+Reclaim Policy: Delete
+Access Modes: RWO
+Capacity: 1024220Ki
+NodeAffinity:
+  Required Terms:
+      Term 0:  kubernetes.io/hostname in [node-1]
+Message: 
+Source:
+    Type: LocalVolume (a persistent volume backed by local storage on a node)
+    Path: /mnt/disks/vol1
+</code></pre>
+<p>这个PV里的各种定义，比如StorageClass的名字、本地磁盘挂载点的位置，都可以通过provisioner的<a href="https://github.com/kubernetes-incubator/external-storage/tree/master/local-volume/helm" target="_blank">配置文件指定</a>。当然，provisioner也会负责前面提到的PV的删除工作。</p>
+<p>而这个provisioner本身，其实也是一个我们前面提到过的<a href="https://github.com/kubernetes-incubator/external-storage/tree/master/local-volume" target="_blank">External Provisioner</a>，它的部署方法，在<a href="https://github.com/kubernetes-incubator/external-storage/tree/master/local-volume#option-1-using-the-local-volume-static-provisioner" target="_blank">对应的文档里</a>有详细描述。这部分内容，就留给你课后自行探索了。</p>
+<h2 id="总结">总结</h2>
+<p>在今天这篇文章中，我为你详细介绍了Kubernetes里Local Persistent Volume的实现方式。</p>
+<p>可以看到，正是通过PV和PVC，以及StorageClass这套存储体系，这个后来新添加的持久化存储方案，对Kubernetes已有用户的影响，几乎可以忽略不计。作为用户，你的Pod的YAML和PVC的YAML，并没有任何特殊的改变，这个特性所有的实现只会影响到PV的处理，也就是由运维人员负责的那部分工作。</p>
+<p>而这，正是这套存储体系带来的“解耦”的好处。</p>
+<p>其实，Kubernetes很多看起来比较“繁琐”的设计（比如“声明式API”，以及我今天讲解的“PV、PVC体系”）的主要目的，都是希望为开发者提供更多的“可扩展性”，给使用者带来更多的“稳定性”和“安全感”。这两个能力的高低，是衡量开源基础设施项目水平的重要标准。</p>
+<h2 id="思考题">思考题</h2>
+<p>正是由于需要使用“延迟绑定”这个特性，Local Persistent Volume目前还不能支持Dynamic Provisioning。你是否能说出，为什么“延迟绑定”会跟Dynamic Provisioning有冲突呢？</p>
+<p>感谢你的收听，欢迎你给我留言，也欢迎分享给更多的朋友一起阅读。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

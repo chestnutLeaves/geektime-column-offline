@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>26 如何监控和诊断JVM堆内和堆外内存使用？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/index.html">Java核心技术面试精讲</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">42 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java核心技术面试精讲</strong><ul><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%A5%E9%9D%A2%E8%AF%95%E9%A2%98%E4%B8%BA%E5%88%87%E5%85%A5%E7%82%B9%EF%BC%8C%E6%9C%89%E6%95%88%E6%8F%90%E5%8D%87%E4%BD%A0%E7%9A%84Java%E5%86%85%E5%8A%9F.html">00 开篇词 以面试题为切入点，有效提升你的Java内功</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/01%20%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9Java%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F.html">01 谈谈你对Java平台的理解？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/02%20Exception%E5%92%8CError%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">02 Exception和Error有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/03%20%E8%B0%88%E8%B0%88final%E3%80%81finally%E3%80%81%20finalize%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">03 谈谈final、finally、 finalize有什么不同？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/04%20%E5%BC%BA%E5%BC%95%E7%94%A8%E3%80%81%E8%BD%AF%E5%BC%95%E7%94%A8%E3%80%81%E5%BC%B1%E5%BC%95%E7%94%A8%E3%80%81%E5%B9%BB%E8%B1%A1%E5%BC%95%E7%94%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">04 强引用、软引用、弱引用、幻象引用有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/05%20String%E3%80%81StringBuffer%E3%80%81StringBuilder%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">05 String、StringBuffer、StringBuilder有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/06%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%98%AF%E5%9F%BA%E4%BA%8E%E4%BB%80%E4%B9%88%E5%8E%9F%E7%90%86%EF%BC%9F.html">06 动态代理是基于什么原理？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/07%20int%E5%92%8CInteger%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">07 int和Integer有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/08%20%E5%AF%B9%E6%AF%94Vector%E3%80%81ArrayList%E3%80%81LinkedList%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB%EF%BC%9F.html">08 对比Vector、ArrayList、LinkedList有何区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/09%20%E5%AF%B9%E6%AF%94Hashtable%E3%80%81HashMap%E3%80%81TreeMap%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">09 对比Hashtable、HashMap、TreeMap有什么不同？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/10%20%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%9B%86%E5%90%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84_%20ConcurrentHashMap%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%9F.html">10 如何保证集合是线程安全的_ ConcurrentHashMap如何实现高效地线程安全？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/11%20Java%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9BIO%E6%96%B9%E5%BC%8F%EF%BC%9F%20NIO%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%EF%BC%9F.html">11 Java提供了哪些IO方式？ NIO如何实现多路复用？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/12%20Java%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D%E6%96%B9%E5%BC%8F%EF%BC%9F%E5%93%AA%E4%B8%80%E7%A7%8D%E6%9C%80%E9%AB%98%E6%95%88%EF%BC%9F.html">12 Java有几种文件拷贝方式？哪一种最高效？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/13%20%E8%B0%88%E8%B0%88%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">13 谈谈接口和抽象类有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/14%20%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9F%A5%E9%81%93%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">14 谈谈你知道的设计模式？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/15%20synchronized%E5%92%8CReentrantLock%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%91%A2%EF%BC%9F.html">15 synchronized和ReentrantLock有什么区别呢？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/16%20synchronized%E5%BA%95%E5%B1%82%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E9%94%81%E7%9A%84%E5%8D%87%E7%BA%A7%E3%80%81%E9%99%8D%E7%BA%A7%EF%BC%9F.html">16 synchronized底层如何实现？什么是锁的升级、降级？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/17%20%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E4%B8%A4%E6%AC%A1%E8%B0%83%E7%94%A8start%28%29%E6%96%B9%E6%B3%95%E4%BC%9A%E5%87%BA%E7%8E%B0%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%EF%BC%9F.html">17 一个线程两次调用start()方法会出现什么情况？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/18%20%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8BJava%E7%A8%8B%E5%BA%8F%E4%BC%9A%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%EF%BC%9F%E5%A6%82%E4%BD%95%E5%AE%9A%E4%BD%8D%E3%80%81%E4%BF%AE%E5%A4%8D%EF%BC%9F.html">18 什么情况下Java程序会产生死锁？如何定位、修复？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/19%20Java%E5%B9%B6%E5%8F%91%E5%8C%85%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%EF%BC%9F.html">19 Java并发包提供了哪些并发工具类？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/20%20%E5%B9%B6%E5%8F%91%E5%8C%85%E4%B8%AD%E7%9A%84ConcurrentLinkedQueue%E5%92%8CLinkedBlockingQueue%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">20 并发包中的ConcurrentLinkedQueue和LinkedBlockingQueue有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/21%20Java%E5%B9%B6%E5%8F%91%E7%B1%BB%E5%BA%93%E6%8F%90%E4%BE%9B%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%EF%BC%9F%20%E5%88%86%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">21 Java并发类库提供的线程池有哪几种？ 分别有什么特点？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/22%20AtomicInteger%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%A7%E5%93%81%E4%BB%A3%E7%A0%81%E4%B8%AD%E5%BA%94%E7%94%A8CAS%E6%93%8D%E4%BD%9C%EF%BC%9F.html">22 AtomicInteger底层实现原理是什么？如何在自己的产品代码中应用CAS操作？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/23%20%E8%AF%B7%E4%BB%8B%E7%BB%8D%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">23 请介绍类加载过程，什么是双亲委派模型？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/24%20%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AAJava%E7%B1%BB%EF%BC%9F.html">24 有哪些方法可以在运行时动态生成一个Java类？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/25%20%E8%B0%88%E8%B0%88JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E7%9A%84%E5%88%92%E5%88%86%EF%BC%8C%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%9F%9F%E5%8F%AF%E8%83%BD%E5%8F%91%E7%94%9FOutOfMemoryError_.html">25 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError_</a></li><li><a class="active" aria-current="page" href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/26%20%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E5%92%8C%E8%AF%8A%E6%96%ADJVM%E5%A0%86%E5%86%85%E5%92%8C%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%EF%BC%9F.html">26 如何监控和诊断JVM堆内和堆外内存使用？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/27%20Java%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">27 Java常见的垃圾收集器有哪些？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/28%20%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9A%84GC%E8%B0%83%E4%BC%98%E6%80%9D%E8%B7%AF_.html">28 谈谈你的GC调优思路_</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/29%20Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84happen-before%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">29 Java内存模型中的happen-before是什么？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/30%20Java%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E5%9C%A8Docker%E7%AD%89%E5%AE%B9%E5%99%A8%E7%8E%AF%E5%A2%83%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E9%97%AE%E9%A2%98%EF%BC%9F.html">30 Java程序运行在Docker等容器环境有哪些新问题？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/31%20%E4%BD%A0%E4%BA%86%E8%A7%A3Java%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%E5%90%97%EF%BC%9F.html">31 你了解Java应用开发中的注入攻击吗？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/32%20%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E5%AE%89%E5%85%A8%E7%9A%84Java%E4%BB%A3%E7%A0%81%EF%BC%9F.html">32 如何写出安全的Java代码？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/33%20%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%87%BA%E7%8E%B0%E6%98%8E%E6%98%BE%E2%80%9C%E5%8F%98%E6%85%A2%E2%80%9D%EF%BC%8C%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9A%84%E8%AF%8A%E6%96%AD%E6%80%9D%E8%B7%AF%EF%BC%9F.html">33 后台服务出现明显“变慢”，谈谈你的诊断思路？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/34%20%E6%9C%89%E4%BA%BA%E8%AF%B4%E2%80%9CLambda%E8%83%BD%E8%AE%A9Java%E7%A8%8B%E5%BA%8F%E6%85%A230%E5%80%8D%E2%80%9D%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%9F.html">34 有人说“Lambda能让Java程序慢30倍”，你怎么看？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/35%20JVM%E4%BC%98%E5%8C%96Java%E4%BB%A3%E7%A0%81%E6%97%B6%E9%83%BD%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.html">35 JVM优化Java代码时都做了什么？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/36%20%E8%B0%88%E8%B0%88MySQL%E6%94%AF%E6%8C%81%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%82%B2%E8%A7%82%E9%94%81%E5%92%8C%E4%B9%90%E8%A7%82%E9%94%81%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F.html">36 谈谈MySQL支持的事务隔离级别，以及悲观锁和乐观锁的原理和应用场景？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/37%20%E8%B0%88%E8%B0%88Spring%20Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F.html">37 谈谈Spring Bean的生命周期和作用域？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/38%20%E5%AF%B9%E6%AF%94Java%E6%A0%87%E5%87%86NIO%E7%B1%BB%E5%BA%93%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93Netty%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9B%B4%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%90%97%EF%BC%9F.html">38 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/39%20%E8%B0%88%E8%B0%88%E5%B8%B8%E7%94%A8%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8FID%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9FSnowflake%E6%98%AF%E5%90%A6%E5%8F%97%E5%86%AC%E4%BB%A4%E6%97%B6%E5%88%87%E6%8D%A2%E5%BD%B1%E5%93%8D%EF%BC%9F.html">39 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/%E5%91%A8%E6%9C%AB%E7%A6%8F%E5%88%A9%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9Java%E5%AD%A6%E4%B9%A0%E5%92%8C%E9%9D%A2%E8%AF%95%E7%9A%84%E7%9C%8B%E6%B3%95.html">周末福利 谈谈我对Java学习和面试的看法</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%80%E6%9C%AF%E6%B2%A1%E6%9C%89%E7%BB%88%E7%82%B9.html">结束语 技术没有终点</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/26%20%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E5%92%8C%E8%AF%8A%E6%96%ADJVM%E5%A0%86%E5%86%85%E5%92%8C%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="26 如何监控和诊断JVM堆内和堆外内存使用？" id="title">26 如何监控和诊断JVM堆内和堆外内存使用？</h1>
+<div><p>上一讲我介绍了JVM内存区域的划分，总结了相关的一些概念，今天我将结合JVM参数、工具等方面，进一步分析JVM内存结构，包括外部资料相对较少的堆外部分。</p>
+<p>今天我要问你的问题是，如何监控和诊断JVM堆内和堆外内存使用？</p>
+<h2 id="典型回答">典型回答</h2>
+<p>了解JVM内存的方法有很多，具体能力范围也有区别，简单总结如下：</p>
+<ul>
+<li>可以使用综合性的图形化工具，如JConsole、VisualVM（注意，从Oracle JDK 9开始，VisualVM已经不再包含在JDK安装包中）等。这些工具具体使用起来相对比较直观，直接连接到Java进程，然后就可以在图形化界面里掌握内存使用情况。</li>
+</ul>
+<p>以JConsole为例，其内存页面可以显示常见的<strong>堆内存</strong>和<strong>各种堆外部分</strong>使用状态。</p>
+<ul>
+<li><p>也可以使用命令行工具进行运行时查询，如jstat和jmap等工具都提供了一些选项，可以查看堆、方法区等使用数据。</p></li>
+<li><p>或者，也可以使用jmap等提供的命令，生成堆转储（Heap Dump）文件，然后利用jhat或Eclipse MAT等堆转储分析工具进行详细分析。</p></li>
+<li><p>如果你使用的是Tomcat、Weblogic等Java EE服务器，这些服务器同样提供了内存管理相关的功能。</p></li>
+<li><p>另外，从某种程度上来说，GC日志等输出，同样包含着丰富的信息。</p></li>
+</ul>
+<p>这里有一个相对特殊的部分，就是是堆外内存中的直接内存，前面的工具基本不适用，可以使用JDK自带的Native Memory Tracking（NMT）特性，它会从JVM本地内存分配的角度进行解读。</p>
+<h2 id="考点分析">考点分析</h2>
+<p>今天选取的问题是Java内存管理相关的基础实践，对于普通的内存问题，掌握上面我给出的典型工具和方法就足够了。这个问题也可以理解为考察两个基本方面能力，第一，你是否真的理解了JVM的内部结构；第二，具体到特定内存区域，应该使用什么工具或者特性去定位，可以用什么参数调整。</p>
+<p>对于JConsole等工具的使用细节，我在专栏里不再赘述，如果你还没有接触过，你可以参考<a href="https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html" target="_blank">JConsole官方教程</a>。我这里特别推荐<a href="http://www.oracle.com/technetwork/java/javaseproducts/mission-control/java-mission-control-1998576.html" target="_blank">Java Mission Control</a>（JMC），这是一个非常强大的工具，不仅仅能够使用<a href="https://en.wikipedia.org/wiki/Java_Management_Extensions" target="_blank">JMX</a>进行普通的管理、监控任务，还可以配合<a href="https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm#JFRUH171" target="_blank">Java Flight Recorder</a>（JFR）技术，以非常低的开销，收集和分析JVM底层的Profiling和事件等信息。目前， Oracle已经将其开源，如果你有兴趣请可以查看OpenJDK的<a href="http://openjdk.java.net/projects/jmc/" target="_blank">Mission Control</a>项目。</p>
+<p>关于内存监控与诊断，我会在知识扩展部分结合JVM参数和特性，尽量从庞杂的概念和JVM参数选项中，梳理出相对清晰的框架：</p>
+<ul>
+<li><p>细化对各部分内存区域的理解，堆内结构是怎样的？如何通过参数调整？</p></li>
+<li><p>堆外内存到底包括哪些部分？具体大小受哪些因素影响？</p></li>
+</ul>
+<h2 id="知识扩展">知识扩展</h2>
+<p>今天的分析，我会结合相关JVM参数和工具，进行对比以加深你对内存区域更细粒度的理解。</p>
+<p>首先，堆内部是什么结构？</p>
+<p>对于堆内存，我在上一讲介绍了最常见的新生代和老年代的划分，其内部结构随着JVM的发展和新GC方式的引入，可以有不同角度的理解，下图就是年代视角的堆结构示意图。-
+<img alt="" src="/assets/b9224943ed025c39a079f853.png"/></p>
+<p>你可以看到，按照通常的GC年代方式划分，Java堆内分为：</p>
+<ol>
+<li>新生代</li>
+</ol>
+<p>新生代是大部分对象创建和销毁的区域，在通常的Java应用中，绝大部分对象生命周期都是很短暂的。其内部又分为Eden区域，作为对象初始分配的区域；两个Survivor，有时候也叫from、to区域，被用来放置从Minor GC中保留下来的对象。</p>
+<ul>
+<li><p>JVM会随意选取一个Survivor区域作为“to”，然后会在GC过程中进行区域间拷贝，也就是将Eden中存活下来的对象和from区域的对象，拷贝到这个“to”区域。这种设计主要是为了防止内存的碎片化，并进一步清理无用对象。</p></li>
+<li><p>从内存模型而不是垃圾收集的角度，对Eden区域继续进行划分，Hotspot JVM还有一个概念叫做Thread Local Allocation Buffer（TLAB），据我所知所有OpenJDK衍生出来的JVM都提供了TLAB的设计。这是JVM为每个线程分配的一个私有缓存区域，否则，多线程同时分配内存时，为避免操作同一地址，可能需要使用加锁等机制，进而影响分配速度，你可以参考下面的示意图。从图中可以看出，TLAB仍然在堆上，它是分配在Eden区域内的。其内部结构比较直观易懂，start、end就是起始地址，top（指针）则表示已经分配到哪里了。所以我们分配新对象，JVM就会移动top，当top和end相遇时，即表示该缓存已满，JVM会试图再从Eden里分配一块儿。-
+<img alt="" src="/assets/ff98d25caab80b47a9c1e08c.png"/></p></li>
+</ul>
+<ol>
+<li>老年代</li>
+</ol>
+<p>放置长生命周期的对象，通常都是从Survivor区域拷贝过来的对象。当然，也有特殊情况，我们知道普通的对象会被分配在TLAB上；如果对象较大，JVM会试图直接分配在Eden其他位置上；如果对象太大，完全无法在新生代找到足够长的连续空闲空间，JVM就会直接分配到老年代。</p>
+<ol>
+<li>永久代</li>
+</ol>
+<p>这部分就是早期Hotspot JVM的方法区实现方式了，储存Java类元数据、常量池、Intern字符串缓存，在JDK 8之后就不存在永久代这块儿了。</p>
+<p>那么，我们如何利用JVM参数，直接影响堆和内部区域的大小呢？我来简单总结一下：</p>
+<ul>
+<li><p>最大堆体积</p>
+<p>-Xmx value</p></li>
+<li><p>初始的最小堆体积</p>
+<p>-Xms value</p></li>
+<li><p>老年代和新生代的比例</p>
+<p>-XX:NewRatio=value</p></li>
+</ul>
+<p>默认情况下，这个数值是2，意味着老年代是新生代的2倍大；换句话说，新生代是堆大小的1/3。</p>
+<ul>
+<li><p>当然，也可以不用比例的方式调整新生代的大小，直接指定下面的参数，设定具体的内存大小数值。</p>
+<p>-XX:NewSize=value</p></li>
+<li><p>Eden和Survivor的大小是按照比例设置的，如果SurvivorRatio是8，那么Survivor区域就是Eden的1/8大小，也就是新生代的1/10，因为YoungGen=Eden + 2*Survivor，JVM参数格式是</p>
+<p>-XX:SurvivorRatio=value</p></li>
+<li><p>TLAB当然也可以调整，JVM实现了复杂的适应策略，如果你有兴趣可以参考这篇<a href="https://blogs.oracle.com/jonthecollector/the-real-thing" target="_blank">说明</a>。</p></li>
+</ul>
+<p>不知道你有没有注意到，我在年代视角的堆结构示意图也就是第一张图中，还标记出了Virtual区域，这是块儿什么区域呢？</p>
+<p>在JVM内部，如果Xms小于Xmx，堆的大小并不会直接扩展到其上限，也就是说保留的空间（reserved）大于实际能够使用的空间（committed）。当内存需求不断增长的时候，JVM会逐渐扩展新生代等区域的大小，所以Virtual区域代表的就是暂时不可用（uncommitted）的空间。</p>
+<p>第二，分析完堆内空间，我们一起来看看JVM堆外内存到底包括什么？</p>
+<p>在JMC或JConsole的内存管理界面，会统计部分非堆内存，但提供的信息相对有限，下图就是JMC活动内存池的截图。-
+<img alt="" src="/assets/fe446947dda76571e190060c.png"/></p>
+<p>接下来我会依赖NMT特性对JVM进行分析，它所提供的详细分类信息，非常有助于理解JVM内部实现。</p>
+<p>首先来做些准备工作，开启NMT并选择summary模式，</p>
+<pre><code>    -XX:NativeMemoryTracking=summary
+</code></pre>
+<p>为了方便获取和对比NMT输出，选择在应用退出时打印NMT统计信息</p>
+<pre><code>    -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics
+</code></pre>
+<p>然后，执行一个简单的在标准输出打印HelloWorld的程序，就可以得到下面的输出-
+<img alt="" src="/assets/87c51ea0db261d7a3b0ede46.png"/></p>
+<p>我来仔细分析一下，NMT所表征的JVM本地内存使用：</p>
+<ul>
+<li><p>第一部分非常明显是Java堆，我已经分析过使用什么参数调整，不再赘述。</p></li>
+<li><p>第二部分是Class内存占用，它所统计的就是Java类元数据所占用的空间，JVM可以通过类似下面的参数调整其大小：</p></li>
+</ul>
+<pre><code>    -XX:MaxMetaspaceSize=value
+</code></pre>
+<p>对于本例，因为HelloWorld没有什么用户类库，所以其内存占用主要是启动类加载器（Bootstrap）加载的核心类库。你可以使用下面的小技巧，调整启动类加载器元数据区，这主要是为了对比以加深理解，也许只有在hack JDK时才有实际意义。</p>
+<pre><code>    -XX:InitialBootClassLoaderMetaspaceSize=30720
+</code></pre>
+<ul>
+<li>下面是Thread，这里既包括Java线程，如程序主线程、Cleaner线程等，也包括GC等本地线程。你有没有注意到，即使是一个HelloWorld程序，这个线程数量竟然还有25。似乎有很多浪费，设想我们要用Java作为Serverless运行时，每个function是非常短暂的，如何降低线程数量呢？-
+如果你充分理解了专栏讲解的内容，对JVM内部有了充分理解，思路就很清晰了：-
+JDK 9的默认GC是G1，虽然它在较大堆场景表现良好，但本身就会比传统的Parallel GC或者Serial GC之类复杂太多，所以要么降低其并行线程数目，要么直接切换GC类型；-
+JIT编译默认是开启了TieredCompilation的，将其关闭，那么JIT也会变得简单，相应本地线程也会减少。-
+我们来对比一下，这是默认参数情况的输出：-</li>
+</ul>
+<p><img alt="" src="/assets/94056640b999b85c37aaddb9.png"/></p>
+<p>下面是替换了默认GC，并关闭TieredCompilation的命令行-
+<img alt="" src="/assets/54c052982151c9355854a243.png"/></p>
+<p>得到的统计信息如下，线程数目从25降到了17，消耗的内存也下降了大概1/3。-
+<img alt="" src="/assets/4160be2f22523fc515bc976e.png"/></p>
+<ul>
+<li>接下来是Code统计信息，显然这是CodeCache相关内存，也就是JIT compiler存储编译热点方法等信息的地方，JVM提供了一系列参数可以限制其初始值和最大值等，例如：</li>
+</ul>
+<pre><code>    -XX:InitialCodeCacheSize=value
+
+    -XX:ReservedCodeCacheSize=value
+</code></pre>
+<p>你可以设置下列JVM参数，也可以只设置其中一个，进一步判断不同参数对CodeCache大小的影响。-
+<img alt="" src="/assets/657fb4dacf9cd160576aad4d.png"/>-
+<img alt="" src="/assets/9c2243dcea5d6d482fe1c00b.png"/></p>
+<p>很明显，CodeCache空间下降非常大，这是因为我们关闭了复杂的TieredCompilation，而且还限制了其初始大小。</p>
+<ul>
+<li>下面就是GC部分了，就像我前面介绍的，G1等垃圾收集器其本身的设施和数据结构就非常复杂和庞大，例如Remembered Set通常都会占用20%~30%的堆空间。如果我把GC明确修改为相对简单的Serial GC，会有什么效果呢？</li>
+</ul>
+<p>使用命令：</p>
+<pre><code>    -XX:+UseSerialGC
+</code></pre>
+<p><img alt="" src="/assets/15f8e46f9eabe58ce9a8c58d.png"/></p>
+<p>可见，不仅总线程数大大降低（25 → 13），而且GC设施本身的内存开销就少了非常多。据我所知，AWS Lambda中Java运行时就是使用的Serial GC，可以大大降低单个function的启动和运行开销。</p>
+<ul>
+<li><p>Compiler部分，就是JIT的开销，显然关闭TieredCompilation会降低内存使用。</p></li>
+<li><p>其他一些部分占比都非常低，通常也不会出现内存使用问题，请参考<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr022.html#BABCBGFA" target="_blank">官方文档</a>。唯一的例外就是Internal（JDK 11以后在Other部分）部分，其统计信息<strong>包含着Direct Buffer的直接内存</strong>，这其实是堆外内存中比较敏感的部分，很多堆外内存OOM就发生在这里，请参考专栏第12讲的处理步骤。原则上Direct Buffer是不推荐频繁创建或销毁的，如果你怀疑直接内存区域有问题，通常可以通过类似instrument构造函数等手段，排查可能的问题。</p></li>
+</ul>
+<p>JVM内部结构就介绍到这里，主要目的是为了加深理解，很多方面只有在定制或调优JVM运行时才能真正涉及，随着微服务和Serverless等技术的兴起，JDK确实存在着为新特征的工作负载进行定制的需求。</p>
+<p>今天我结合JVM参数和特性，系统地分析了JVM堆内和堆外内存结构，相信你一定对JVM内存结构有了比较深入的了解，在定制Java运行时或者处理OOM等问题的时候，思路也会更加清晰。JVM问题千奇百怪，如果你能快速将问题缩小，大致就能清楚问题可能出在哪里，例如如果定位到问题可能是堆内存泄漏，往往就已经有非常清晰的<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/memleaks004.html#CIHIEEFH" target="_blank">思路和工具</a>可以去解决了。</p>
+<h2 id="一课一练">一课一练</h2>
+<p>关于今天我们讨论的题目你做到心中有数了吗？今天的思考题是，如果用程序的方式而不是工具，对Java内存使用进行监控，有哪些技术可以做到?</p>
+<p>请你在留言区写写你对这个问题的思考，我会选出经过认真思考的留言，送给你一份学习奖励礼券，欢迎你与我一起讨论。</p>
+<p>你的朋友是不是也在准备面试呢？你可以“请朋友读”，把今天的题目分享给好友，或许你能帮到他。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

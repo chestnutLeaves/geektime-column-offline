@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>19  逻辑回归：如何让计算机做出二值化决策？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/index.html">程序员的数学课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">25 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>程序员的数学课</strong><ul><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E6%95%B0%E5%AD%A6%EF%BC%8C%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E7%9A%84%E8%90%A5%E5%85%BB%E6%A0%B9%E5%9F%BA.html">00 开篇词  数学，编程能力的营养根基</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/01%20%20%E4%BB%8E%E8%AE%A1%E6%95%B0%E5%BC%80%E5%A7%8B%EF%BC%8C%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%9A%84%E6%95%B0%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%B3%95.html">01  从计数开始，程序员必知必会的数制转换法</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/02%20%20%E9%80%BB%E8%BE%91%E4%B8%8E%E6%B2%9F%E9%80%9A%EF%BC%8C%E6%80%8E%E6%A0%B7%E6%89%8D%E8%83%BD%E8%AE%B2%E5%87%BA%E6%9C%89%E9%80%BB%E8%BE%91%E7%9A%84%E8%AF%9D%EF%BC%9F.html">02  逻辑与沟通，怎样才能讲出有逻辑的话？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/03%20%20%E7%94%A8%E6%95%B0%E5%AD%A6%E5%86%B3%E7%AD%96%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E5%88%92%E5%A5%BD%E6%8A%95%E5%85%A5%E3%80%81%E8%BD%AC%E5%8C%96%E5%92%8C%E4%BA%A7%E5%87%BA%EF%BC%9F.html">03  用数学决策，如何规划好投入、转化和产出？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/04%20%20%E4%B8%87%E7%89%A9%E5%8F%AF%E6%95%B0%E5%AD%A6%EF%BC%8C%E7%BB%8F%E5%85%B8%E5%85%AC%E5%BC%8F%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E7%94%9F%E6%B4%BB%E4%B8%AD%E5%BA%94%E7%94%A8%E7%9A%84%EF%BC%9F.html">04  万物可数学，经典公式是如何在生活中应用的？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/05%20%20%E6%B1%82%E6%9E%81%E5%80%BC%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E7%9A%84%E6%9C%80%E4%BC%98%E8%A7%A3%EF%BC%9F.html">05  求极值：如何找到复杂业务的最优解？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/06%20%20%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E5%AF%BC%E6%95%B0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%A6%82%E4%BD%95%E5%AE%8C%E6%88%90%E5%AF%B9%E6%B5%B7%E9%87%8F%E9%AB%98%E7%BB%B4%E5%BA%A6%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97%EF%BC%9F.html">06  向量及其导数：计算机如何完成对海量高维度数据计算？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/07%20%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A6%BB%E6%95%A3%E7%82%B9%E4%B8%AD%E5%AF%BB%E6%89%BE%E6%95%B0%E6%8D%AE%E8%A7%84%E5%BE%8B%EF%BC%9F.html">07  线性回归：如何在离散点中寻找数据规律？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/08%20%20%E5%8A%A0%E4%B9%98%E6%B3%95%E5%88%99%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E5%A4%8D%E6%9D%82%E4%BA%8B%E4%BB%B6%E5%8F%91%E7%94%9F%E7%9A%84%E6%A6%82%E7%8E%87%EF%BC%9F.html">08  加乘法则：如何计算复杂事件发生的概率？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/09%20%20%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20MLE%20%E5%AF%B9%E5%8F%82%E6%95%B0%E8%BF%9B%E8%A1%8C%E4%BC%B0%E8%AE%A1%EF%BC%9F.html">09  似然估计：如何利用 MLE 对参数进行估计？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/10%20%20%E4%BF%A1%E6%81%AF%E7%86%B5%EF%BC%9A%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%EF%BC%9F.html">10  信息熵：事件的不确定性如何计算？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/11%20%20%E7%81%B0%E5%BA%A6%E5%AE%9E%E9%AA%8C%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%81%B0%E5%BA%A6%E5%AE%9E%E9%AA%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E5%AE%9E%E9%AA%8C%E7%9A%84%E6%94%B6%E7%9B%8A%EF%BC%9F.html">11  灰度实验：如何设计灰度实验并计算实验的收益？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/12%20%20%E7%BB%9F%E8%AE%A1%E5%AD%A6%E6%96%B9%E6%B3%95%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8E%E7%81%B0%E5%BA%A6%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C%E4%B8%8D%E6%98%AF%E5%81%B6%E7%84%B6%E5%BE%97%E5%88%B0%E7%9A%84%EF%BC%9F.html">12  统计学方法：如何证明灰度实验效果不是偶然得到的？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/13%20%20%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC%E5%AF%B9%E7%A8%8B%E5%BA%8F%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96%EF%BC%9F.html">13  复杂度：如何利用数学推导对程序进行优化？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/14%20%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BE%AA%E7%8E%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95%E8%BF%9B%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%EF%BC%9F.html">14  程序的循环：如何利用数学归纳法进行程序开发？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/15%20%20%E9%80%92%E5%BD%92%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98%E7%9A%84%E7%A7%BB%E5%8A%A8%E6%AD%A5%E6%95%B0%EF%BC%9F.html">15  递归：如何计算汉诺塔问题的移动步数？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/16%20%20%E4%BA%8C%E5%88%86%E6%B3%95%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E6%8C%87%E6%95%B0%E7%88%86%E7%82%B8%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">16  二分法：如何利用指数爆炸优化程序？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/17%20%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E6%9C%80%E4%BC%98%E5%AD%90%E7%BB%93%E6%9E%84%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%EF%BC%9F.html">17  动态规划：如何利用最优子结构解决问题？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/18%20%20AI%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%88%A9%E7%94%A8%203%20%E4%B8%AA%E5%85%AC%E5%BC%8F%E6%90%AD%E5%BB%BA%E6%9C%80%E7%AE%80%20AI%20%E6%A1%86%E6%9E%B6.html">18  AI 入门：利用 3 个公式搭建最简 AI 框架</a></li><li><a class="active" aria-current="page" href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/19%20%20%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%81%9A%E5%87%BA%E4%BA%8C%E5%80%BC%E5%8C%96%E5%86%B3%E7%AD%96%EF%BC%9F.html">19  逻辑回归：如何让计算机做出二值化决策？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/20%20%20%E5%86%B3%E7%AD%96%E6%A0%91%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AF%B9%20NP%20%E9%9A%BE%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E8%BF%9B%E8%A1%8C%E5%90%AF%E5%8F%91%E5%BC%8F%E6%B1%82%E8%A7%A3%EF%BC%9F.html">20  决策树：如何对 NP 难复杂问题进行启发式求解？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/21%20%20%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%98%AF%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%9B%BE%E5%83%8F%E3%80%81%E6%96%87%E6%9C%AC%E5%92%8C%E8%AF%AD%E9%9F%B3%E7%9A%84%EF%BC%9F.html">21  神经网络与深度学习：计算机是如何理解图像、文本和语音的？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/22%20%20%E9%9D%A2%E8%AF%95%E4%B8%AD%E9%82%A3%E4%BA%9B%E5%9D%91%E4%BA%86%E6%97%A0%E6%95%B0%E4%BA%BA%E7%9A%84%E7%AE%97%E6%B3%95%E9%A2%98.html">22  面试中那些坑了无数人的算法题</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/23%20%20%E7%AB%99%E5%9C%A8%E7%94%9F%E6%B4%BB%E7%9A%84%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3%EF%BC%8C%E5%A6%82%E4%BD%95%E7%94%A8%E6%95%B0%E5%AD%A6%E6%8A%89%E6%8B%A9%EF%BC%9F.html">23  站在生活的十字路口，如何用数学抉择？</a></li><li><a href="/courses/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/24%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E6%95%B0%E5%AD%A6%E5%BA%95%E5%AD%90%E5%A5%BD%EF%BC%8C%E5%AD%A6%E5%95%A5%E9%83%BD%E5%BF%AB.html">24 结束语  数学底子好，学啥都快</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E8%AF%BE/19%20%20%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%81%9A%E5%87%BA%E4%BA%8C%E5%80%BC%E5%8C%96%E5%86%B3%E7%AD%96%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="19  逻辑回归：如何让计算机做出二值化决策？" id="title">19  逻辑回归：如何让计算机做出二值化决策？</h1>
+<div><p>在上一讲，学习完 AI 的基本框架后，我们现在就开始围绕当前人工智能领域最常用的模型，来分别学习一下它们背后的原理。</p>
+<p>这一讲，我们从最常见的逻辑回归模型说起，逻辑回归是人工智能领域中入门级的基础模型，它在很多领域都有应用，例如用户的信贷模型、疾病识别等。</p>
+<p>逻辑回归是一种分类模型，可以对一个输入 x，识别并预测出一个二值化的类别标签 y。例如，要预测照片中人物的性别，可以采用逻辑回归建立模型。给模型输入一个描述照片的特征向量 x，经过模型的计算，可以得到输出值 y 为“男”或“女”。</p>
+<p>在深入学习逻辑回归的原理之前，我们先来了解一下什么是分类问题，以及分类问题有哪些类型。</p>
+<h3 id="分类问题">分类问题</h3>
+<p>在人工智能领域中，分类问题是特别常见的一种问题类型。简而言之，分类问题就是对一个测试验本去预测它归属的类别。例如，预测胎儿性别、预测足球比赛结果。</p>
+<p>根据归属类别可能性的数量，分类问题又可以分为二分类问题和多分类问题。</p>
+<ul>
+<li>二分类问题，顾名思义就是预测的归属类别只有两个。例如，预测性别男/女、预测主场球队的胜负、预测明天是否下雨。</li>
+<li>多分类问题，预测的归属类别大于两个的那类问题。例如，预测足球比赛结果是胜、负，还是平局；预测明天天气是雨天、晴天，还是阴天。</li>
+</ul>
+<p>在研究分类的建模算法时，人们往往会从二分类问题入手，这主要是因为多分类问题可以用多个二分类问题来表示。例如，预测明天天气是雨天、晴天，还是阴天，这是个多分类问题（三分类）；它也可以表示为，预测明天是否下雨、预测明天是否晴天、预测明天是否阴天，这三个二分类问题。</p>
+<p>因此，二分类问题是分类问题的基础，在讨论分类算法时，人们往往会从二分类问题入手。</p>
+<h3 id="逻辑回归及其建模流程">逻辑回归及其建模流程</h3>
+<p>逻辑回归（Logistic Regression，LR）是人工智能领域非常经典的算法之一，它可以用来对二分类问题进行建模，对于一个给定的输入，可以预测其类别为正 1 或负 0。接下来，我们就从 AI 基本框架的 3 个公式，来学习一下 LR 的建模流程。</p>
+<p>重温一下人工智能基本框架的 3 个公式分别是：</p>
+<ul>
+<li>第一步，根据假设，写出模型的输入、输出关系 y = f(<strong><em>w</em></strong>; x)；</li>
+<li>第二步，根据偏差的计算方法，写出描述偏差的损失函数 L(<strong><em>w</em></strong>)；</li>
+<li>第三步，对于损失函数，求解最优的参数值，即 <strong><em>w</em></strong>*= argmin L(<strong><em>w</em></strong>)。</li>
+</ul>
+<p>接下来，我会逐一展示这三步的过程。</p>
+<h4 id="1-模型的输入-输出关系-sigmoid-函数">1.模型的输入、输出关系（Sigmoid 函数）</h4>
+<p>在逻辑回归中，第一个公式的表达式非常简单，为 y=f(<strong><em>w;x</em></strong>)=sigmoid(<strong><em>w·x</em></strong>)=1/(1+e-<strong><em>w·x</em></strong>)。</p>
+<p>直观上来看，逻辑回归的模型假设是，把模型参数向量 <strong><em>w</em></strong> 和输入向量 <strong><em>x</em></strong> 的点乘（即线性变换）结果输入给 Sigmoid 函数中，即可得到预测值 y。</p>
+<p>此时的预测值 y 还是个 0～1 之间的连续值，这是因为 Sigmoid 函数的值域是 (0,1)。逻辑回归是个二分类模型，它的最终输出值只能是两个类别标签之一。通常，我们习惯于用“0”和“1”来分别标记二分类的两个类别。</p>
+<p>在逻辑回归中，常用预测值 y 和 0.5 的大小关系，来判断样本的类别归属。<strong>具体地，预测值 y 如果大于 0.5，则认为预测的类别为 1；反之，则预测的类别为 0。</strong></p>
+<p>我们把上面的描述进行总结，来汇总一下逻辑回归输入向量、预测值和类别标签之间的关系，则有下面的流程图。</p>
+<p><img alt="图片1.png" src="/assets/4d46d1aaf149c03902656126.png"/></p>
+<p>为了深入了解逻辑回归的模型假设，我们需要先认识下 Sigmoid 函数。Sigmoid 函数的表达式为 y = sigmoid(x)=1/(1+e-x)，它是个单调递增函数，定义域为 (-∞, +∞)，值域为 (0,1)，它的函数图像如下。
+<img alt="图片2.png" src="/assets/ecc1b5a92dbf7dbe570ccd6b.png"/>
+我们可以看出，Sigmoid 函数可以将任意一个实数 x，单调地映射到 0 到 1 的区间内，这正好符合了“概率”的取值范围。</p>
+<p>我们还可以用求导公式来看一下 Sigmoid 函数的一阶导数。
+<img alt="WechatIMG1422.png" src="/assets/617b680929ccfaaaeddf7cbd.png"/></p>
+<h4 id="2-逻辑回归的损失函数">2.逻辑回归的损失函数</h4>
+<p>有了这些基本假设后，我们尝试根据偏差的计算方法，写出描述偏差的损失函数 L(<strong><em>w</em></strong>)。</p>
+<p>我们刚刚提到过，逻辑回归预测结果的值域 y 为 (0,1)，代表的是样本属于类别 1 的概率。</p>
+<ul>
+<li>具体而言，如果样本属于类别“1”的概率大于 0.5，则认为样本的预测类别为“1”；</li>
+<li>如果样本属于类别“1”的概率小于 0.5，则认为样本的预测类别为“0”。</li>
+</ul>
+<p>这里出现了这么多的概率，我们可以借鉴在《09 | 似然估计：如何利用 MLE 对参数进行估计？》中学的概率计算和极大似然估计的思想，尝试写出样本被正确预测的概率。
+<img alt="WechatIMG1421.png" src="/assets/69be51514e49025a5ff8fc87.png"/>
+我们将上面两个等式合并，就可以得到某个数据<strong><em>x</em></strong>i 被正确预测的概率，即 P(yi|xi,w)=Φ(zi)yi·[1-Φ(zi)]1-yi。</p>
+<ul>
+<li>如果真实结果 yi 为 1，则 P(yi|xi,w) = Φ(zi)，描述的是样本被预测为类别“1”的概率；</li>
+<li>如果真实结果 yi 为 0，则 P(yi|xi,w) = 1-Φ(zi)，描述的是样本被预测为类别“0”的概率。</li>
+</ul>
+<p>接下来可以将上式扩展到整个样本数据集中，则可采用极大似然估计得到 L(<strong><em>w</em></strong>)，即
+<img alt="图片4.png" src="/assets/8c668e6166282474277a9771.png"/></p>
+<p>我们之前在《09 | 似然估计：如何利用 MLE 对参数进行估计？》学习极大似然估计 MLE 时，曾经提过一个常用的公式化简方法，那就是通过取对数，让连续乘积的大型运算变为连续求和，则有
+<img alt="图片5.png" src="/assets/00bb6b478d3f16b82646eab5.png"/></p>
+<h4 id="3-求解最优的模型参数值"><strong>3.求解最优的模型参数值</strong></h4>
+<p>AI 建模框架的最后一步，就是对损失函数求解最优的参数值，即<strong><em>w</em></strong>*= argmin l(<strong><em>w</em></strong>)。刚刚我们求得，损失函数为
+<img alt="图片6.png" src="/assets/dcaa0b52c22d23b6caa64dc7.png"/>
+可见，损失函数是个关于 <strong><em>x</em></strong>i、yi 和 <strong><em>w</em></strong> 的函数，而<strong><em>x</em></strong>i 和 yi 是输入数据集中已知的条件，所以损失函数的未知数只有 <strong><em>w</em></strong>。</p>
+<p>于是可以得到结论，逻辑回归最后一步的建模公式，实质上就是求解函数极值的问题。</p>
+<blockquote>
+<p>关于求极值，我们在《05 | 求极值：如何找到复杂业务的最优解？》曾详细介绍过求导法和梯度下降法。</p>
+</blockquote>
+<p>在这里，由于损失函数包含了非线性的 sigmoid 函数，求导法是无法得到解析解的；因此，我们使用梯度下降法来求解参数<strong><em>w</em></strong>。
+<img alt="图片7.png" src="/assets/3eab638971a9c2c31b32abdd.png"/>
+<img alt="图片8.png" src="/assets/ffe3d815d9871fe7e319adc1.png"/>
+我们已经计算出了损失函数关于模型参数的导数，这也是损失函数的梯度方向，我们可以利用先前所学的梯度下降法来求解函数的极值。</p>
+<p>然而，这里存在一个计算效率的缺陷，即梯度函数中包含了大型求和的运算。这里的大型求和是 i 从 1 到 n 的计算，也就是对于整个数据集全部的数据去进行的全量计算。</p>
+<blockquote>
+<p>可以想象出，当输入的数据量非常大的时候，梯度下降法每次的迭代都会产生大量的计算。这样，建模过程中会消耗大量计算资源，模型更新效率也会受到很大影响。</p>
+</blockquote>
+<h4 id="随机梯度下降法">【随机梯度下降法】</h4>
+<p>为了解决这个问题，人工智能领域常常用<strong>随机梯度下降法</strong>来修正<strong>梯度下降法</strong>的不足。随机梯度下降法与梯度下降法的区别只有一点，那就是随机梯度下降在每轮更新参数时，只随机选取一个样本 dm 来计算梯度，而非计算整个数据集梯度。其余的计算过程，二者完全一致。</p>
+<p><img alt="图片9.png" src="/assets/ab20744a3864b845896adcd3.png"/></p>
+<p>根据上面更新公式的算法，我们通过多轮迭代，就能最终求解出让 l(w) 取得最大值的参数向量<strong><em>w</em></strong>。</p>
+<h3 id="逻辑回归代码实现">逻辑回归代码实现</h3>
+<p>接下来，我们在下面的数据集上，分别采用逻辑回归来建立分类模型。</p>
+<p>第一个数据集如下，其中每一行是一个样本，每一列一个特征，最后一列是样本的类别。</p>
+<p><img alt="图片10.png" src="/assets/febe686d56c3c9ce734b447f.png"/></p>
+<p>第二个数据集如下，格式与第一个数据集相同。</p>
+<p><img alt="图片11.png" src="/assets/ee7e4f2ced4e852d3800fda2.png"/></p>
+<p>我们采用下面的代码，建立逻辑回归模型。</p>
+<pre><code>import math
+
+import numpy as np
+
+import random
+
+x = np.array([[1,1,1],[0,0,1],[0,1,1],[1,0,1]])
+
+y = np.array([1,0,0,0])
+
+#y = np.array([0,0,1,1])
+
+w = np.array([0.5,0.5,0.5])
+
+a = 0.01
+
+maxloop = 10000
+
+for _ in range(maxloop):
+
+	m = random.randint(0,3)
+
+	fi = 1.0/(1+math.pow(math.e,-np.dot(x[m],w)))
+
+	g = (y[m] - fi)*x[m]
+
+	w = w + a*g
+
+	print w
+</code></pre>
+<p>【我们对代码进行走读】</p>
+<ul>
+<li>代码中，第 5～7 行分别输入数据集 x 和 y；</li>
+<li>第 9 行，初始化参数向量，在这里，我们采用固定的初始化方法，你也可以调整为随机初始化；</li>
+<li>第 11 行，设置学习率为 0.01；</li>
+<li>第 12 行，设置最大迭代轮数为 10000 次。</li>
+</ul>
+<p>接下来进入随机梯度下降法的循环体。</p>
+<ul>
+<li>第 14 行，从 0 到 3 中随机抽取一个数字作为本轮迭代梯度的样本；</li>
+<li>第 15 行，计算 Φ(zm)；</li>
+<li>第 16 行，计算样本 m 带来的梯度 g；</li>
+<li>第 17 行，利用随机梯度下降法更新参数 w；</li>
+<li>第 18 行，打印这一轮的结果。</li>
+</ul>
+<h4 id="数据集一">【数据集一】</h4>
+<p>运行上述代码，我们对数据集一建模得到的最优参数为 [3.1,3.0,-4.8]。利用这组参数，我们可以对数据集一的学习效果进行测试，如下表所示</p>
+<p><img alt="图片12.png" src="/assets/4ea7bacbb987312631a1258e.png"/></p>
+<p>可见，数据集一上，我们的模型全部正确预测，效果非常好。</p>
+<h4 id="数据集二">【数据集二】</h4>
+<p>再运行上述代码，我们对数据集二建模得到的最优参数为 [0.16, 0.10, -0.03]。利用这组参数，我们可以对数据集二的学习效果进行测试，如下表所示。
+<img alt="图片13.png" src="/assets/4acfcb43794501fccbdcf71e.png"/>
+我们发现，在数据集二上，模型的预测结果只能是马马虎虎，这体现在两点：</p>
+<ul>
+<li>4 个样本中，并没有全部正确预测，样本 1 预测错误；</li>
+<li>对于正确预测的 3 个样本而言，预测值都在边界线 0.5 附近，就算是正确预测，也没有压倒性优势。</li>
+</ul>
+<p>那么为什么同样的模型，只是换了数据集，效果就千差万别呢？</p>
+<h3 id="逻辑回归的不足">逻辑回归的不足</h3>
+<p>这是因为，逻辑回归是个线性模型，它只能处理线性问题。</p>
+<p>例如，对于一个二维平面来说，线性模型就是一条直线。如果数据的分布不支持用一条线来分割的话，逻辑回归就无法收敛，如下图所示。
+<img alt="图片3.png" src="/assets/25b93f8155c45c92c7bb0f28.png"/>
+图中蓝色点是一类，黄色点是一类。现在，我们要用逻辑回归这样的线性模型来进行区分。可见，不论这条线怎么选，都是无法将两类样本进行分割的，这也是逻辑回归模型的缺陷。</p>
+<blockquote>
+<p>要想解决的话，只有用更复杂的模型，例如我们后续的课时中会介绍的决策树、神经网络等模型。</p>
+</blockquote>
+<h4 id="逻辑回归与线性回归">【逻辑回归与线性回归】</h4>
+<p>在上一讲《18 | AI 入门：利用 3 个公式搭建最简 AI 框架》中，通过“身高预测”，我们从人工智能模型的视角，重新认识了线性回归，那么逻辑回归和线性回归的不同有哪些呢？</p>
+<ul>
+<li><strong>从名字上比较</strong></li>
+</ul>
+<p>线性回归是回归模型，是用一根“线”去回归出输入和输出之间的关系，即用一根线去尽可能把全部样本“串”起来。</p>
+<p>而逻辑回归虽然名字里有“回归”二字，但其实是一个分类模型，它是希望用一根线去把两波样本尽可能分开。</p>
+<ul>
+<li><strong>从表达式上看</strong></li>
+</ul>
+<p>逻辑回归是在线性回归的基础上加了一个 Sigmoid 函数的映射，在最终的类别判断上，还需要对比一下预测值和 0.5 之间的大小关系。</p>
+<p>因此，线性回归解决的是回归问题，输出的连续值；而逻辑回归解决的是二分类问题，输出的是“0”或“1”的离散值。</p>
+<ul>
+<li><strong>从机理上看</strong></li>
+</ul>
+<p>逻辑回归增加了 sigmoid 函数，可以让预测结果在 0.5 附近产生更大的变化率，变化率更大，意味着梯度更大。</p>
+<p>在使用梯度下降法的时候，这样的机理，让模型的预测值会倾向于离开变化率大的地方，而收敛在“0”或“1”附近。这样的模型机理，会让它更适合用于分类问题的建模，具有更好的鲁棒性。</p>
+<h3 id="小结">小结</h3>
+<p><strong>逻辑回归</strong>是人工智能领域中分类问题的入门级算法。利用 AI 基本框架来看，它的 3 个核心公式分别是
+<img alt="WechatIMG1406.png" src="/assets/ef6f66468e939008b9ee3ae0.png"/>
+逻辑回归是个线性模型，具有计算简单、可解释性强等优势。它的不足是，只能处理线性问题，对于非线性问题则束手无策。</p>
+<p>最后，我们留一个思考题。试着把本课时中的代码，由随机梯度下降法改写为梯度下降法，再来求解一次参数 <strong><em>w</em></strong> 吧。原则上除了计算量会变大以外，对分类结果是不会产生改变的。不妨亲自试一下。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

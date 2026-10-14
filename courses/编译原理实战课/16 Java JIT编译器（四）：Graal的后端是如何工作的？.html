@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16 Java JIT编译器（四）：Graal的后端是如何工作的？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">编译原理实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">53 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理实战课</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E8%BF%99%E9%97%A8%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE%EF%BC%9F.html">00 学习指南 如何学习这门编译原理实战课？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%9C%A8%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%AD%E6%B8%B8%E5%8E%86.html">00 开篇词 在真实世界的编译器中游历</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E7%BC%96%E8%AF%91%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B%E9%83%BD%E6%82%84%E6%82%84%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85%EF%BC%9F.html">01 编译的全过程都悄悄做了哪些事情？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E7%94%A8%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9E%84%E9%80%A0%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA.html">02 词法分析：用两种方式构造有限自动机</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%9F%BA%E6%9C%AC%E5%8A%9F%E5%92%8C%E4%B8%A4%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF.html">03 语法分析：两个基本功和两种算法思路</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%9A%E8%AE%A9%E7%A8%8B%E5%BA%8F%E7%AC%A6%E5%90%88%E8%AF%AD%E4%B9%89%E8%A7%84%E5%88%99.html">04 语义分析：让程序符合语义规则</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%BD%A0%E6%9C%89%E5%8F%91%E8%A8%80%E6%9D%83.html">05 运行时机制：程序如何运行，你有发言权</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E4%B8%8D%E6%98%AF%E5%8F%AA%E6%9C%89%E4%B8%80%E5%89%AF%E9%9D%A2%E5%AD%94.html">06 中间代码：不是只有一副面孔</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E8%B7%9F%E7%BC%96%E8%AF%91%E5%99%A8%E5%81%9A%E6%9C%8B%E5%8F%8B%EF%BC%8C%E8%AE%A9%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E9%A3%9E%E8%B5%B7%E6%9D%A5.html">07 代码优化：跟编译器做朋友，让你的代码飞起来</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%9F.html">08 代码生成：如何实现机器相关的优化？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/09%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%89%8B%E5%86%99%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%EF%BC%9F.html">09 Java编译器（一）：手写的编译器有什么优势？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/10%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%BF%98%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Java编译器（二）：语法分析之后，还要做些什么？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/11%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%B1%9E%E6%80%A7%E5%88%86%E6%9E%90%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90.html">11 Java编译器（三）：属性分析和数据流分析</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/12%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%8E%BB%E9%99%A4%E8%AF%AD%E6%B3%95%E7%B3%96%E5%92%8C%E7%94%9F%E6%88%90%E5%AD%97%E8%8A%82%E7%A0%81.html">12 Java编译器（四）：去除语法糖和生成字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/13%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%8A%A8%E6%89%8B%E4%BF%AE%E6%94%B9Graal%E7%BC%96%E8%AF%91%E5%99%A8.html">13 Java JIT编译器（一）：动手修改Graal编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/14%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASea%20of%20Nodes%E4%B8%BA%E4%BD%95%E5%A6%82%E6%AD%A4%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">14 Java JIT编译器（二）：Sea of Nodes为何如此强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/15%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%8E%A2%E7%A9%B6%E5%86%85%E8%81%94%E5%92%8C%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%E7%9A%84%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86.html">15 Java JIT编译器（三）：探究内联和逃逸分析的算法原理</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/16%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9AGraal%E7%9A%84%E5%90%8E%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">16 Java JIT编译器（四）：Graal的后端是如何工作的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/17%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">17 Python编译器（一）：如何用工具生成编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/18%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E4%BB%8EAST%E5%88%B0%E5%AD%97%E8%8A%82%E7%A0%81.html">18 Python编译器（二）：从AST到字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/19%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6.html">19 Python编译器（三）：运行时机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/20%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E6%9E%90%E5%92%8C%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.html">20 JavaScript编译器（一）：V8的解析和编译过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/21%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E9%87%8A%E5%99%A8%E5%92%8C%E4%BC%98%E5%8C%96%E7%BC%96%E8%AF%91%E5%99%A8.html">21 JavaScript编译器（二）：V8的解释器和优化编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/22%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E6%80%A7%E8%83%BD%E5%BE%88%E9%AB%98%EF%BC%9F.html">22 Julia编译器（一）：如何让动态语言性能很高？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/23%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8LLVM%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E5%90%8E%E7%AB%AF%E5%8A%9F%E8%83%BD%EF%BC%9F.html">23 Julia编译器（二）：如何利用LLVM的优化和后端功能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/24%20Go%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A%E6%8A%8A%E5%AE%83%E5%BD%93%E4%BD%9C%E6%95%99%E7%A7%91%E4%B9%A6%E5%90%A7.html">24 Go语言编译器：把它当作教科书吧</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/25%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%A7%A3%E6%9E%90%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.html">25 MySQL编译器（一）：解析一条SQL语句的执行过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/26%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E5%A6%82%E4%BD%95%E5%B8%AE%E4%BD%A0%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%A7%E8%83%BD%EF%BC%9F.html">26 MySQL编译器（二）：编译技术如何帮你提升数据库性能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E8%AF%BE%E5%89%8D%E5%AF%BC%E8%AF%BB%EF%BC%9A%E5%AD%A6%E4%B9%A0%E7%8E%B0%E4%BB%A3%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF.html">27 课前导读：学习现代语言设计的正确姿势</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%89%8D%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E4%B9%9F%E6%9C%89%E4%BA%BA%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%AD%A6.html">28 前端总结：语言设计也有人机工程学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E4%B8%AD%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%8D%E9%81%97%E4%BD%99%E5%8A%9B%E5%9C%B0%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96.html">29 中端总结：不遗余力地进行代码优化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E5%85%85%E5%88%86%E5%8F%91%E6%8C%A5%E7%A1%AC%E4%BB%B6%E7%9A%84%E8%83%BD%E5%8A%9B.html">30 后端总结：充分发挥硬件的能力</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E0%E5%88%B0%E8%AF%AD%E8%A8%80%E7%BA%A7%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96.html">31 运行时（一）：从0到语言级的虚拟化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/32%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E6%80%A7%E6%9C%89%E5%85%B3%E5%90%97%EF%BC%9F.html">32 运行时（二）：垃圾收集与语言的特性有关吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">33 并发中的编译技术（一）：如何从语言层面支持线程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E5%8D%8F%E7%A8%8B%EF%BC%9F.html">34 并发中的编译技术（二）：如何从语言层面支持协程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/35%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9AErlang%E8%AF%AD%E8%A8%80%E5%8E%89%E5%AE%B3%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">35 并发中的编译技术（三）：Erlang语言厉害在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/36%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">36 高级特性（一）：揭秘元编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">37 高级特性（二）：揭秘泛型编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%9F.html">38 综合实现（一）：如何实现面向对象编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%9F.html">39 综合实现（二）：如何实现函数式编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/40%20%E6%88%90%E6%9E%9C%E6%A3%80%E9%AA%8C%EF%BC%9A%E6%96%B9%E8%88%9F%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%BC%98%E5%8A%BF%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">40 成果检验：方舟编译器的优势在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%901%20%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E9%9C%80%E8%A6%81%E4%BD%A0%E6%88%91%E5%85%B7%E5%A4%87%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%B4%A0%E8%B4%A8%EF%BC%9F.html">不定期加餐1 远程办公，需要你我具备什么样的素质？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%902%20%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%98%AF%E8%AE%AD%E7%BB%83%E5%BF%83%E7%90%86%E7%B4%A0%E8%B4%A8%E7%9A%84%E8%BF%87%E7%A8%8B.html">不定期加餐2 学习技术的过程，其实是训练心理素质的过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%903%20%E8%BF%99%E5%87%A0%E5%B9%B4%EF%BC%8C%E6%89%93%E5%8A%A8%E6%88%91%E7%9A%84%E4%B8%A4%E6%9C%AC%E5%A5%BD%E4%B9%A6.html">不定期加餐3 这几年，打动我的两本好书</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%904%20%E4%BB%8E%E8%BA%AB%E8%BE%B9%E7%9A%84%E7%89%9B%E4%BA%BA%E8%BA%AB%E4%B8%8A%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E7%A7%80%E5%93%81%E8%B4%A8.html">不定期加餐4 从身边的牛人身上，我学到的一些优秀品质</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%905%20%E5%80%9F%E5%8A%A9%E5%AE%9E%E4%BE%8B%EF%BC%8C%E6%8E%A2%E7%A9%B6C%2B%2B%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6.html">不定期加餐5 借助实例，探究C++编译器的内部机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%88%92%E9%87%8D%E7%82%B9%207%E7%A7%8D%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">划重点 7种编译器的核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%9C%9F%E6%9C%AB%E7%AD%94%E7%96%91%E4%B8%8E%E6%80%BB%E7%BB%93%20%E5%86%8D%E6%AC%A1%E5%AE%A1%E8%A7%86%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%9A%84%E4%BD%9C%E7%94%A8.html">期末答疑与总结 再次审视学习编译原理的作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%20%E5%A6%82%E4%BD%95%E5%90%83%E9%80%8F7%E7%A7%8D%E7%9C%9F%E5%AE%9E%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">热点问题答疑 如何吃透7种真实的编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%98%93%E6%98%8A%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8D%E6%AD%A2%E6%9C%89Bug%E5%92%8C%E5%8A%A0%E7%8F%AD%EF%BC%8C%E8%BF%98%E6%9C%89%E8%AF%97%E5%92%8C%E8%BF%9C%E6%96%B9.html">用户故事 易昊：程序员不止有Bug和加班，还有诗和远方</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%9F%A5%E8%AF%86%E5%9C%B0%E5%9B%BE%20%E4%B8%80%E8%B5%B7%E6%9D%A5%E5%A4%8D%E4%B9%A0%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">知识地图 一起来复习编译技术核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%AE%9E%E6%88%98%E6%98%AF%E5%94%AF%E4%B8%80%E6%A0%87%E5%87%86%EF%BC%81.html">结束语 实战是唯一标准！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/16%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9AGraal%E7%9A%84%E5%90%8E%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="16 Java JIT编译器（四）：Graal的后端是如何工作的？" id="title">16 Java JIT编译器（四）：Graal的后端是如何工作的？</h1>
+<div><p>你好，我是宫文学。</p>
+<p>前面两讲中，我介绍了Sea of Nodes类型的HIR，以及基于HIR的各种分析处理，这可以看做是编译器的中端。</p>
+<p>可编译器最终还是要生成机器码的。那么，这个过程是怎么实现的呢？与硬件架构相关的LIR是什么样子的呢？指令选择是怎么做的呢？</p>
+<p>这一讲，我就带你了解Graal编译器的后端功能，回答以上这些问题，破除你对后端处理过程的神秘感。</p>
+<p>首先，我们来直观地了解一下后端处理的流程。</p>
+<h2 id="后端的处理流程">后端的处理流程</h2>
+<p>在<a href="https://time.geekbang.org/column/article/256914" target="_blank">第14讲</a>中，我们在运行Java示例程序的时候（比如<code>atLeastTen()</code>方法），使用了“<code>-Dgraal.Dump=:5</code>”的选项，这个选项会dump出整个编译过程最详细的信息。</p>
+<p>对于HIR的处理过程，程序会通过网络端口，dump到IdealGraphVisualizer里面。而后端的处理过程，缺省则会dump到工作目录下的一个“<code>graal_dumps</code>”子目录下。你可以用文本编辑器打开查看里面的信息。</p>
+<pre><code>//至少返回10
+public int atLeastTen(int a){
+    if (a &lt; 10)
+        return 10;
+    else
+        return a;    
+}
+</code></pre>
+<p>不过，你还可以再偷懒一下，使用一个图形工具<a href="http://lafo.ssw.uni-linz.ac.at/c1visualizer/" target="_blank">c1visualizer</a>来查看。</p>
+<p>补充：c1visualizer原本是用于查看Hopspot的C1编译器（也就是客户端编译器）的LIR的工具，这也就是说，Graal的LIR和C1的是一样的。另外，该工具不能用太高版本的JDK运行，我用的是JDK1.8。</p>
+<p><img alt="" src="/assets/125032fe68f59b8787939a6c.jpg"/></p>
+<p>图1：atLeatTen()方法对应的LIR</p>
+<p>在窗口的左侧，你能看到后端的处理流程。</p>
+<ul>
+<li>首先是把HIR做最后一次排序（HIR Final Schedule），这个处理会把HIR节点分配到基本块，并且排序；</li>
+<li>第二是生成LIR，在这个过程中要做指令选择；</li>
+<li>第三，寄存器分配工作，Graal采用的算法是线性扫描（Linear Scan）；</li>
+<li>第四，是基于LIR的一些优化工作，比如ControlFlowOptimizer等；</li>
+<li>最后一个步骤，是生成目标代码。</li>
+</ul>
+<p>接下来，我们来认识一下这个LIR：它是怎样生成的，用什么数据结构保存的，以及都有什么特点。</p>
+<h2 id="认识lir">认识LIR</h2>
+<p>在对HIR的处理过程中，前期（High Tier、Mid Tier）基本上都是与硬件无关。到了后期（Low Tier），你会看到IR中的一些节点逐步开始带有硬件的特征，比如上一讲中，计算AMD64地址的节点。而LIR就更加反映目标硬件的特征了，基本上可以跟机器码一对一地翻译。所以，从HIR生成LIR的过程，就要做指令选择。</p>
+<p>我把与LIR相关的包和类整理成了类图，里面划分成了三个包，分别包含了与HIR、LIR和CFG有关的类。你可以重点看看它们之间的相互关系。</p>
+<p><img alt="" src="/assets/1ca8044eeb835d2cae1d9680.jpg"/></p>
+<p>图2：HIR、LIR和CFG的关联关系</p>
+<p>在HIR的最后的处理阶段，程序会通过一个Schedule过程，把HIR节点排序，并放到控制流图中，为生成LIR和目标代码做准备。我之前说过，HIR的一大好处，就是那些浮动节点，可以最大程度地免受控制流的约束。但在最后生成的目标代码中，我们还是要把每行指令归属到某个具体的基本块的。而且，基本块中的HIR节点是按照顺序排列的，在ScheduleResult中保存着这个顺序（blockToNodesMap中顺序保存了每个Block中的节点）。</p>
+<p><strong>你要注意</strong>，这里所说的Schedule，跟编译器后端的指令排序不是一回事儿。这里是把图变成线性的程序；而编译器后端的指令排序（也叫做Schedule），则是为了实现指令级并行的优化。</p>
+<p>当然，把HIR节点划分到不同的基本块，优化程度是不同的。比如，与循环无关的代码，放在循环内部和外部都是可以的，但显然放在循环外部更好一些。把HIR节点排序的Schedule算法，复杂度比较高，所以使用了很多<strong>启发式</strong>的规则。刚才提到的把循环无关代码放在循环外面，就是一种启发式的规则。</p>
+<p>图2中的ControlFlowGraph类和Block类构成了控制流图，控制流图和最后阶段的HIR是互相引用的。这样，你就可以知道HIR中的每个节点属于哪个基本块，也可以知道每个基本块中包含的HIR节点。</p>
+<p>做完Schedule以后，接着就会生成LIR。<strong>与声明式的HIR不同，LIR是命令式的，由一行行指令构成。</strong></p>
+<p>图1显示的是Foo.atLeatTen方法对应的LIR。你会看到一个控制流图（CFG），里面有三个基本块。B0是B1和B2的前序基本块，B0中的最后一个语句是分支语句（基本块中，只有最后一个语句才可以是导致指令跳转的语句）。</p>
+<p>LIR中的指令是放到基本块中的，LIR对象的LIRInstructions属性中，保存了每个基本块中的指令列表。</p>
+<p>OK，那接下来，我们来看看LIR的指令都有哪些，它们都有什么特点。</p>
+<p>LIRInstruction的子类，主要放在三个包中，你可以看看下面的类图。</p>
+<p><img alt="" src="/assets/9ecdda7b66c81715c11b6d9b.jpg"/></p>
+<p>图3：LIR中的指令类型</p>
+<p>首先，在<strong>org.graalvm.compiler.lir包</strong>中，声明了一些与架构无关的指令，比如跳转指令、标签指令等。因为无论什么架构的CPU，一定都会有跳转指令，也一定有作为跳转目标的标签。</p>
+<p>然后，在<strong>org.graalvm.compiler.lir.amd64包</strong>中，声明了几十个AMD64架构的指令，为了降低你的阅读负担，这里我只列出了有代表性的几个。这些指令是LIR代码中的主体。</p>
+<p>最后，在<strong>org.graalvm.compiler.hotspot.amd64包</strong>中，也声明了几个指令。这几个指令是利用HotSpot虚拟机的功能实现的。比如，要获取某个类的定义的地址，只能由虚拟机提供。</p>
+<p>好了，通过这样的一个分析，你应该对LIR有更加具体的认识了：<strong>LIR中的指令，大多数是与架构相关的。</strong>这样才适合运行后端的一些算法，比如指令选择、寄存器分配等。你也可以据此推测，其他编译器的LIR，差不多也是这个特点。</p>
+<p>接下来，我们就来了解一下Graal编译器是如何生成LIR，并且在这个过程中，它是如何实现指令选择的。</p>
+<h2 id="生成lir及指令选择">生成LIR及指令选择</h2>
+<p>我们已经知道了，Graal在生成LIR的过程中，要进行指令选择。</p>
+<p>我们先看一下Graal对一个简单的示例程序Foo.add1，是如何生成LIR的。</p>
+<pre><code>public static int add1(int x, int y){
+    return x + y + 10;
+}
+</code></pre>
+<p>这个示例程序，在转LIR之前，它的HIR是下面这样。其中有两个加法节点，操作数包括了参数（ParameterNode）和常数（ConstantNode）两种类型。最后是一个Return节点。这个例子足够简单。实际上，它简单到只是一棵树，而不是图。</p>
+<p><img alt="" src="/assets/29e94f59b08a73d4dc0aaf44.jpg"/></p>
+<p>图4：add1方法对应的HIR</p>
+<p>你可以想一下，对于这么简单的一棵树，编译器要如何生成指令呢？</p>
+<p>最简单的方法，是做一个语法制导的简单翻译。我们可以深度遍历这棵树，针对不同的节点，分别使用不同的规则来生成指令。比如：</p>
+<ul>
+<li>在遇到参数节点的时候，我们要搞清楚它的存放位置。因为参数要么是在寄存器中，要么是在栈中，可以直接用于各种计算。</li>
+<li>遇到常数节点的时候，我们记下这个常数，用于在下一条指令中作为立即数使用。</li>
+<li>在遇到加法节点的时候，生成一个add指令，左右两棵子树的计算结果分别是其操作数。在处理到6号节点的时候，可以不用add指令，而是生成一个lea指令，这样可以直接把结果写入rax寄存器，作为返回值。这算是一个优化，因为可以减少一次从寄存器到寄存器的拷贝工作。</li>
+<li>遇到Return节点的时候，看看其子树的计算结果是否放在rax寄存器中。如果不是，那么就要生成一个mov指令，把返回值放入rax寄存器，然后再生成一条返回指令（ret）。通常，在返回之前，编译器还要做一些栈帧的处理工作，把栈指针还原。</li>
+</ul>
+<p>对于这个简单的例子来说，按照这个翻译规则来生成代码，是完全没有问题的。你可以看下，Graal生成LIR，然后再基于LIR生成的目标代码的示例程序，它只有三行，足够精简和优化：</p>
+<pre><code>add    esi,edx       #将参数1加到参数0上，结果保存在esi寄存器
+lea    eax,[rsi+0xa] #将rsi加10,结果放入eax寄存器
+ret                  #返回
+</code></pre>
+<p>补充：-
+1.我去掉了一些额外的汇编代码，比如用于跟JVM握手，让JVM有机会做垃圾收集的代码。-
+2. lea指令原本是用于计算地址的。上面的指令的意思是把rsi寄存器的值作为地址，然后再偏移10个字节，把新的地址放到eax寄存器。-
+x86计算机支持间接寻址方式：<strong>偏移量（基址，索引值，字节数）</strong>-
+其地址是：<strong>基址 + 索引值*字节数 + 偏移量</strong>-
+所以，你可以利用这个特点，计算出<code>a+b*c+d</code>的值。但c（也就是字节数）只能取1、2、4、8。就算让c取1，那也能完成<code>a+b+c</code>的计算。并且，它还可以在另一个操作数里指定把结果写到哪个寄存器，而不像add指令，只能从一个操作数加到另一个操作数上。这些优点，使得x86汇编中经常使用lea指令做加法计算。</p>
+<p>Graal编译器实际上大致也是这么做的。</p>
+<p>首先，它通过Schedule的步骤，把HIR的节点排序，并放入基本块。对于这个简单的程序，只有一个基本块。</p>
+<p><img alt="" src="/assets/55bca3881438cef00dbd4aa8.jpg"/></p>
+<p>接着，编译器会对基本块中的节点做遍历（参考：NodeLIRBuilder.java中的<a href="https://github.com/oracle/graal/blob/vm-20.0.1/compiler/src/org.graalvm.compiler.core/src/org/graalvm/compiler/core/gen/NodeLIRBuilder.java#L363" target="_blank">代码</a>）。针对每个节点转换（Lower）成LIR。</p>
+<ul>
+<li>把参数节点转换成了MoveFromRegOp指令，在示例程序里，其实这是冗余的，因为可以直接把存放参数的两个寄存器，用于加法计算；</li>
+<li>把第一个加法节点转换成了CommutativeTwoOp指令；</li>
+<li>把第二个加法节点转换成了LeaOp指令，并且把常数节点变成了LeaOp指令的操作数；</li>
+<li>Return节点生成了两条指令，一条是把加法运算的值放到rax寄存器，作为返回值，这条我们知道是冗余的，所以就要看看后面的优化算法如何消除这个冗余；第二条是返回指令。</li>
+</ul>
+<p><img alt="" src="/assets/b75944ceadf56fde1c6d4bb4.jpg"/></p>
+<p>一开始生成的LIR，使用的寄存器都是虚拟的寄存器名称，用v1、v2、v3这些来表示。等把这些虚拟的寄存器对应到具体的物理寄存器以后，就可以消除掉刚才提到的冗余代码了。</p>
+<p>我们在c1visualizer中检查一下优化过程，可以发现这是在LinearScanAssignLocationsPhase做的优化。加法指令中对参数1和参数2的引用，变成了对物理寄存器的引用，从而优化掉了两条指令。lea指令中的返回值，也直接赋给了rax寄存器。这样呢，也就省掉了把计算结果mov到rax的指令。这样优化后的LIR，基本上已经等价于目标代码了。</p>
+<p><img alt="" src="/assets/cfd633efb67b6f6649f761a2.jpg"/></p>
+<p>好了，通过这样一个分析，你应该理解了从HIR生成LIR的过程。但是还有个问题，这中间似乎也没有做什么指令选择呀？唯一的一处，就是把加法操作优化成了lea指令。而这个也比较简单，基于单独的Add节点就能做出这个优化选择。<strong>那么，更复杂的模式匹配是怎么做的呢？</strong></p>
+<p>不要着急，我们接下来就看看Graal是如何实现复杂一点的指令选择的。这一次，我们用了另一个示例程序：Foo.addMemory方法。它把一个类成员变量m和参数a相加。</p>
+<pre><code>public class Foo{
+    static int m = 3;
+    public static int addMemory(int a){
+        return m + a;
+    } 
+    ...
+}
+</code></pre>
+<p>这跟add1方法有所不同，因为它要使用一个成员变量，所以一定要访问内存。而add1方法的所有操作，都是在寄存器里完成的，是“空中作业”，根本不在内存里落地。</p>
+<p>我们来看一下这个示例程序对应的HIR。其中一个黄色节点“Read#Foo.m”，是读取内存的节点，也就是读取成员变量m的值。而这又需要通过AMD64Address节点来计算m的地址。由于m是个静态成员，所以它的地址要通过类的地址加上一定的偏移量来计算。</p>
+<p><img alt="" src="/assets/df94774df3a998728dafd9e9.jpg"/></p>
+<p>图5：addMemory()方法对应的HIR</p>
+<p>这里有一个小的知识点，我在第14讲中也提过：对内存操作的节点（如图中的ReadNode），是要加入控制流中的。因为内存里的值，会由于别的操作而改变。如果你把它变成浮动节点，就有可能破坏对内存读写的顺序，从而出现错误。</p>
+<p>回到主题，我们来看看怎么为addMemory生成LIR。</p>
+<p>如果还是像处理add1方法一样，那么你就会这么做：</p>
+<ul>
+<li><strong>计算m变量的地址，并放入一个寄存器；</strong></li>
+<li><strong>基于这个地址，取出m的值，放入另一个寄存器；</strong></li>
+<li><strong>把m的值和参数a做加法。</strong></li>
+</ul>
+<p>不过这样做，至少要生成3条指令。</p>
+<p>在<a href="https://time.geekbang.org/column/article/249261" target="_blank">第8讲</a>中我曾经讲过，像AMD64这样使用复杂指令集（CICS）的架构，具有强大的地址表达能力，并且可以在做算术运算的时候，直接使用内存。所以上面的三条指令，其实能够缩减成一条指令。</p>
+<p>这就需要编译器把刚才这种基于内存访问做加法的模式识别出来，以便生成优化的LIR，进而生成优化的目标代码。这也是指令选择算法要完成的任务。可是，<strong>如何识别这种模式呢？</strong></p>
+<p>跟踪Graal的执行，你会发现HIR在生成LIR之前，有一个对基本块中的节点做<a href="https://github.com/oracle/graal/blob/vm-20.0.1/compiler/src/org.graalvm.compiler.core/src/org/graalvm/compiler/core/LIRGenerationPhase.java#L72" target="_blank">模式匹配</a>的操作，进而又调用匹配复杂表达式（<a href="https://github.com/oracle/graal/blob/vm-20.0.1/compiler/src/org.graalvm.compiler.core/src/org/graalvm/compiler/core/gen/NodeLIRBuilder.java#L430" target="_blank">matchComplexExpressions</a>）。在这里，编译器会把节点跟一个个匹配规则（<a href="https://github.com/oracle/graal/blob/vm-20.0.1/compiler/src/org.graalvm.compiler.core/src/org/graalvm/compiler/core/match/MatchStatement.java" target="_blank">MatchStatement</a>）做匹配。<strong>注意</strong>，匹配的时候是逆序做的，相当于从树根开始遍历。</p>
+<p>在匹配加法节点的时候，Graal匹配上了一个MatchStatement，这个规则的名字叫“addMemory”，是专门针对涉及内存操作的加法运算提供的一个匹配规则。这个MatchStatement包含了一个匹配模式（MatchPattern），该模式的要求是：</p>
+<ul>
+<li>节点类型是AddNode；</li>
+<li>第一个输入（也就是子节点）是一个值节点（value）；</li>
+<li>第二个输入是一个ReadNode，而且必须只有一个使用者（singleUser=true）。</li>
+</ul>
+<p><img alt="" src="/assets/e582bf8b528584ee434edb07.jpg"/></p>
+<p>图6：匹配规则和匹配模式</p>
+<p>这个MatchStatement是在<a href="https://github.com/oracle/graal/blob/vm-20.0.1/compiler/src/org.graalvm.compiler.core.amd64/src/org/graalvm/compiler/core/amd64/AMD64NodeMatchRules.java#L487" target="_blank">AMD64NodeMatchRules</a>中用注解生成的。利用这样的一个匹配规则，就能够匹配示例程序中的Add节点。</p>
+<p>匹配上以后，Graal会把AddNode和ReadNode做上特殊标记，这样在生成LIR的时候，就会按照新的生成规则。生成的LIR如下：</p>
+<p><img alt="" src="/assets/834f794625a09ba7359d05c7.jpg"/></p>
+<p>你可以发现，优化后，编译器把取参数a的指令省略掉了，直接使用了传入参数a的寄存器rsi：</p>
+<p><img alt="" src="/assets/7410bf5ea495ddab212ea7bd.jpg"/></p>
+<p>最后生成的目标代码如下：</p>
+<pre><code>movabs rax,0x797b00690          #把Foo类的地址放入rax寄存器
+add    esi,DWORD PTR [rax+0x68] #偏移0x68后，是m的地址。做加法
+mov    eax,esi                  #设置返回值
+ret                             #返回
+</code></pre>
+<p>到目前为止，你已经了解了Graal是如何匹配一个模式，并选择优化的指令的了。</p>
+<p>你可以看看<a href="https://github.com/oracle/graal/blob/vm-20.0.1/compiler/src/org.graalvm.compiler.core.amd64/src/org/graalvm/compiler/core/amd64/AMD64NodeMatchRules.java#L487" target="_blank">AMD64NodeMatchRules</a>类，它的里面定义了不少这种匹配规则。通过阅读和理解这些规则，你就会对为什么要做指令选择有更加具体的理解了。</p>
+<p>Graal的指令选择算法算是比较简单的。在HotSpot的C2编译器中，指令选择采用的是BURS（Bottom-Up Rewrite System，自底向上的重写系统）。这个算法会更加复杂一点，消耗的时间更长，但优化效果更好一些。</p>
+<p>这里我补充一个分享，我曾经请教过ARM公司的研发人员，他们目前认为Graal对针对AArch64的指令选择是比较初级的，你可以参考这个<a href="https://static.linaro.org/connect/san19/presentations/san19-514.pdf" target="_blank">幻灯片</a>。所以，他们也正在帮助Graal做改进。</p>
+<h2 id="后端的其他功能">后端的其他功能</h2>
+<p>出于突出特色功能的目的，这一讲我着重讲了LIR的特点和指令选择算法。不过在考察编译器的后端的时候，我们通常还要注意一些其他功能，比如寄存器分配算法、指令排序，等等。我这里就把Graal在这些功能上的实现特点，给你简单地介绍一下，你如果有兴趣的话，可以根据我的提示去做深入了解：</p>
+<ul>
+<li><strong>寄存器分配</strong>：Graal采用了线性扫描（Linear Scan）算法。这个算法的特点是速度比较快，但优化效果不如图染色算法。在HotSpot的C2中采用的是后者。</li>
+<li><strong>指令排序</strong>：Graal没有为了实现指令级并行而去做指令排序。这里一个主要原因，是现在的很多CPU都已经支持乱序（out-of-order）执行，再做重排序的收益不大。</li>
+<li><strong>窥孔优化</strong>：Graal在生成LIR的时候，会做一点窥孔优化（AMD64NodeLIRBuilder类的<a href="https://github.com/oracle/graal/blob/vm-20.0.1/compiler/src/org.graalvm.compiler.core.amd64/src/org/graalvm/compiler/core/amd64/AMD64NodeLIRBuilder.java#L62" target="_blank">peephole</a>方法）。不过它的优化功能有限，只实现了针对除法和求余数计算的一点优化。</li>
+<li><strong>从LIR生成目标代码</strong>：由于LIR已经跟目标代码很接近了，所以这个翻译过程已经比较简单，没有太难的算法了，需要的只是了解和熟悉汇编代码和调用约定。</li>
+</ul>
+<h2 id="课程小结">课程小结</h2>
+<p>这一讲，我带你对Graal的后端做了一个直观的认识，让你的后端知识有了第一个真实世界中编译器的参考系。</p>
+<p>第一，把LIR从比较抽象的概念中落地。你现在可以确切地知道哪些指令是必须跟架构相关的，而哪些指令可以跟架构无关。</p>
+<p>第二，把指令选择算法落地。虽然Graal的指令选择算法并不复杂，但这毕竟提供了一个可以借鉴的思路，是你认知的一个阶梯。如果你仔细阅读代码，你还可以具象地了解到，符合哪些模式的表达式，是可以从指令选择中受益的。这又是一个理论印证实践的点。</p>
+<p>我把这讲的思维导图也放在了下面，供你参考。</p>
+<p><img alt="" src="/assets/919e14195dbd39c50fabbcb5.jpg"/></p>
+<p>同时，这一讲之后，我们对Java编译器的探讨也就告一段落了。但是，我希望你对它的研究不要停止。</p>
+<p>我们讨论的两个编译器（javac和Graal）中的很多知识点，你只要稍微深入挖掘一下，就可以得出不错的成果了。比如，我看到有国外的硕士学生研究了一下HotSpot，就可以发表不错的<a href="http://ssw.jku.at/Research/Papers/Schwaighofer09Master/schwaighofer09master.pdf" target="_blank">论文</a>。如果你是在校大学生，我相信你也可以通过顺着这门课程提供的信息做一些研究，从而得到不错的成果。如果是已经工作的同学，我们可以在极客时间的社群（比如留言区和部落）里保持对Java编译技术的讨论，也一定会对于你的工作有所助益。</p>
+<h2 id="一课一思">一课一思</h2>
+<p>请你阅读<a href="https://github.com/oracle/graal/blob/vm-20.0.1/compiler/src/org.graalvm.compiler.core.amd64/src/org/graalvm/compiler/core/amd64/AMD64NodeMatchRules.java#L487" target="_blank">AMD64NodeMatchRules</a>中的匹配规则，自己设计另一个例子，能够测试出指令选择的效果。如果降低一下工作量的话，你可以把它里面的某些规则解读一下，在留言区发表你的见解。</p>
+<p>好，就到这里。感谢你的阅读，欢迎你把今天的内容分享给更多的朋友，我们下一讲再见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

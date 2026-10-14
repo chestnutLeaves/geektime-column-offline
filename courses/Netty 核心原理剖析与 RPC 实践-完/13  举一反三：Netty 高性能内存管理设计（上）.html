@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>13  举一反三：Netty 高性能内存管理设计（上） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/index.html">Netty 核心原理剖析与 RPC 实践-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">32 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Netty 核心原理剖析与 RPC 实践-完</strong><ul><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/00%20%E5%AD%A6%E5%A5%BD%20Netty%EF%BC%8C%E6%98%AF%E4%BD%A0%E4%BF%AE%E7%82%BC%20Java%20%E5%86%85%E5%8A%9F%E7%9A%84%E5%BF%85%E7%BB%8F%E4%B9%8B%E8%B7%AF.html">00 学好 Netty，是你修炼 Java 内功的必经之路</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/01%20%20%E5%88%9D%E8%AF%86%20Netty%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%20Netty%20%E8%BF%99%E4%B9%88%E6%B5%81%E8%A1%8C%EF%BC%9F.html">01  初识 Netty：为什么 Netty 这么流行？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/02%20%20%E7%BA%B5%E8%A7%88%E5%85%A8%E5%B1%80%EF%BC%9A%E6%8A%8A%E6%8F%A1%20Netty%20%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%84%89%E7%BB%9C.html">02  纵览全局：把握 Netty 整体架构脉络</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/03%20%20%E5%BC%95%E5%AF%BC%E5%99%A8%E4%BD%9C%E7%94%A8%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%90%AF%E5%8A%A8%E9%83%BD%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">03  引导器作用：客户端和服务端启动都要做些什么？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/04%20%E4%BA%8B%E4%BB%B6%E8%B0%83%E5%BA%A6%E5%B1%82%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%20EventLoop%20%E6%98%AF%20Netty%20%E7%9A%84%E7%B2%BE%E9%AB%93%EF%BC%9F.html">04 事件调度层：为什么 EventLoop 是 Netty 的精髓？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/05%20%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%B1%82%EF%BC%9APipeline%20%E5%A6%82%E4%BD%95%E5%8D%8F%E8%B0%83%E5%90%84%E7%B1%BB%20Handler%20%EF%BC%9F.html">05  服务编排层：Pipeline 如何协调各类 Handler ？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/06%20%20%E7%B2%98%E5%8C%85%E6%8B%86%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8C%85%EF%BC%9F.html">06  粘包拆包问题：如何获取一个完整的网络包？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/07%20%20%E6%8E%A5%E5%A4%B4%E6%9A%97%E8%AF%AD%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20Netty%20%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8D%8F%E8%AE%AE%E9%80%9A%E4%BF%A1%EF%BC%9F.html">07  接头暗语：如何利用 Netty 实现自定义协议通信？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/08%20%20%E5%BC%80%E7%AE%B1%E5%8D%B3%E7%94%A8%EF%BC%9ANetty%20%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E8%A7%A3%E7%A0%81%E5%99%A8%EF%BC%9F.html">08  开箱即用：Netty 支持哪些常用的解码器？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/09%20%20%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9AwriteAndFlush%20%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%E5%89%96%E6%9E%90.html">09  数据传输：writeAndFlush 处理流程剖析</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/10%20%20%E5%8F%8C%E5%88%83%E5%89%91%EF%BC%9A%E5%90%88%E7%90%86%E7%AE%A1%E7%90%86%20Netty%20%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98.html">10  双刃剑：合理管理 Netty 堆外内存</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/11%20%20%E5%8F%A6%E8%B5%B7%E7%82%89%E7%81%B6%EF%BC%9ANetty%20%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E8%BD%BD%E4%BD%93%20ByteBuf%20%E8%AF%A6%E8%A7%A3.html">11  另起炉灶：Netty 数据传输载体 ByteBuf 详解</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/12%20%20%E4%BB%96%E5%B1%B1%E4%B9%8B%E7%9F%B3%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%99%A8%20jemalloc%20%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86.html">12  他山之石：高性能内存分配器 jemalloc 基本原理</a></li><li><a class="active" aria-current="page" href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/13%20%20%E4%B8%BE%E4%B8%80%E5%8F%8D%E4%B8%89%EF%BC%9ANetty%20%E9%AB%98%E6%80%A7%E8%83%BD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89.html">13  举一反三：Netty 高性能内存管理设计（上）</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/14%20%20%E4%B8%BE%E4%B8%80%E5%8F%8D%E4%B8%89%EF%BC%9ANetty%20%E9%AB%98%E6%80%A7%E8%83%BD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89.html">14  举一反三：Netty 高性能内存管理设计（下）</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/15%20%20%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%AF%B9%E8%B1%A1%E5%9B%9E%E6%94%B6%E7%AB%99%EF%BC%9ARecycler%20%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90.html">15  轻量级对象回收站：Recycler 对象池技术解析</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/16%20%20IO%20%E5%8A%A0%E9%80%9F%EF%BC%9A%E4%B8%8E%E4%BC%97%E4%B8%8D%E5%90%8C%E7%9A%84%20Netty%20%E9%9B%B6%E6%8B%B7%E8%B4%9D%E6%8A%80%E6%9C%AF.html">16  IO 加速：与众不同的 Netty 零拷贝技术</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/17%20%20%E6%BA%90%E7%A0%81%E7%AF%87%EF%BC%9A%E4%BB%8E%20Linux%20%E5%87%BA%E5%8F%91%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.html">17  源码篇：从 Linux 出发深入剖析服务端启动流程</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/18%20%20%E6%BA%90%E7%A0%81%E7%AF%87%EF%BC%9A%E8%A7%A3%E5%AF%86%20Netty%20Reactor%20%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.html">18  源码篇：解密 Netty Reactor 线程模型</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/19%20%20%E6%BA%90%E7%A0%81%E7%AF%87%EF%BC%9A%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9C%A8%20Netty%20%E4%B8%AD%E7%9A%84%E6%97%85%E7%A8%8B.html">19  源码篇：一个网络请求在 Netty 中的旅程</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/20%20%20%E6%8A%80%E5%B7%A7%E7%AF%87%EF%BC%9ANetty%20%E7%9A%84%20FastThreadLocal%20%E7%A9%B6%E7%AB%9F%E6%AF%94%20ThreadLocal%20%E5%BF%AB%E5%9C%A8%E5%93%AA%E5%84%BF%EF%BC%9F.html">20  技巧篇：Netty 的 FastThreadLocal 究竟比 ThreadLocal 快在哪儿？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/21%20%20%E6%8A%80%E5%B7%A7%E7%AF%87%EF%BC%9A%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86%E7%A5%9E%E5%99%A8%E4%B9%8B%E6%97%B6%E9%97%B4%E8%BD%AE%20HashedWheelTimer.html">21  技巧篇：延迟任务处理神器之时间轮 HashedWheelTimer</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/22%20%20%E6%8A%80%E5%B7%A7%E7%AF%87%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E6%97%A0%E9%94%81%E9%98%9F%E5%88%97%20Mpsc%20Queue.html">22  技巧篇：高性能无锁队列 Mpsc Queue</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/23%20%20%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E9%AB%98%E6%80%A7%E8%83%BD%E5%88%86%E5%B8%83%E5%BC%8F%20RPC%20%E6%A1%86%E6%9E%B6.html">23  架构设计：如何实现一个高性能分布式 RPC 框架</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/24%20%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E4%B8%8E%E8%AE%A2%E9%98%85%EF%BC%9A%E6%90%AD%E5%BB%BA%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E6%B6%88%E8%B4%B9%E8%80%85%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6.html">24  服务发布与订阅：搭建生产者和消费者的基础框架</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/25%20%20%E8%BF%9C%E7%A8%8B%E9%80%9A%E4%BF%A1%EF%BC%9A%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1%E4%BB%A5%E5%8F%8A%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9A%84%E5%AE%9E%E7%8E%B0.html">25  远程通信：通信协议设计以及编解码的实现</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/26%20%20%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9C%BA%E5%88%B6%E7%9A%84%E5%AE%9E%E7%8E%B0.html">26  服务治理：服务发现与负载均衡机制的实现</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/27%20%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%EF%BC%9A%E4%B8%BA%E7%94%A8%E6%88%B7%E5%B1%8F%E8%94%BD%20RPC%20%E8%B0%83%E7%94%A8%E7%9A%84%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82.html">27  动态代理：为用户屏蔽 RPC 调用的底层细节</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/28%20%20%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93%EF%BC%9ARPC%20%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93%E4%B8%8E%E8%BF%9B%E9%98%B6%E5%BB%B6%E4%BC%B8.html">28  实战总结：RPC 实战总结与进阶延伸</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/29%20%20%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9ANetty%20%E4%B8%AD%E5%BA%94%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">29  编程思想：Netty 中应用了哪些设计模式？</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/30%20%20%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93%EF%BC%9ANetty%20%E5%9C%A8%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.html">30  实践总结：Netty 在项目开发中的一些最佳实践</a></li><li><a href="/courses/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/31%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E6%8A%80%E6%9C%AF%E6%88%90%E9%95%BF%E4%B9%8B%E8%B7%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB.html">31 结束语  技术成长之路：如何打造自己的技术体系</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Netty%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90%E4%B8%8E%20RPC%20%E5%AE%9E%E8%B7%B5-%E5%AE%8C/13%20%20%E4%B8%BE%E4%B8%80%E5%8F%8D%E4%B8%89%EF%BC%9ANetty%20%E9%AB%98%E6%80%A7%E8%83%BD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="13  举一反三：Netty 高性能内存管理设计（上）" id="title">13  举一反三：Netty 高性能内存管理设计（上）</h1>
+<div><p>Netty 作为一款高性能的网络框架，需要处理海量的字节数据，而且 Netty 默认提供了池化对象的内存分配，使用完后归还到内存池，所以一套高性能的内存管理机制是 Netty 必不可少的。在上节课中我们介绍了原生 jemalloc 的基本原理，而 Netty 高性能的内存管理也是借鉴 jemalloc 实现的，它同样需要解决两个经典的核心问题：</p>
+<ul>
+<li>在单线程或者多线程的场景下，如何高效地进行内存分配和回收？</li>
+<li>如何减少内存碎片，提高内存的有效利用率？</li>
+</ul>
+<p>我们同样带着这两个经典问题开始 Netty 内存管理的课程学习。</p>
+<h3 id="内存规格介绍">内存规格介绍</h3>
+<p>Netty 保留了内存规格分类的设计理念，不同大小的内存块采用的分配策略是不同的，具体内存规格的分类情况如下图所示。</p>
+<p><img alt="13-1.png" src="/assets/6302e8536e23daafd53a6c94.png"/></p>
+<p>上图中 Tiny 代表 0 ~ 512B 之间的内存块，Samll 代表 512B ~ 8K 之间的内存块，Normal 代表 8K ~ 16M 的内存块，Huge 代表大于 16M 的内存块。在 Netty 中定义了一个 SizeClass 类型的枚举，用于描述上图中的内存规格类型，分别为 Tiny、Small 和 Normal。但是图中 Huge 并未在代码中定义，当分配大于 16M 时，可以归类为 Huge 场景，Netty 会直接使用非池化的方式进行内存分配。</p>
+<p>Netty 在每个区域内又定义了更细粒度的内存分配单位，分别为 Chunk、Page、Subpage，我们将逐一对其进行介绍。</p>
+<p>Chunk 是 Netty 向操作系统申请内存的单位，所有的内存分配操作也是基于 Chunk 完成的，Chunk 可以理解为 Page 的集合，每个 Chunk 默认大小为 16M。</p>
+<p>Page 是 Chunk 用于管理内存的单位，Netty 中的 Page 的大小为 8K，不要与 Linux 中的内存页 Page 相混淆了。假如我们需要分配 64K 的内存，需要在 Chunk 中选取 8 个 Page 进行分配。</p>
+<p>Subpage 负责 Page 内的内存分配，假如我们分配的内存大小远小于 Page，直接分配一个 Page 会造成严重的内存浪费，所以需要将 Page 划分为多个相同的子块进行分配，这里的子块就相当于 Subpage。按照 Tiny 和 Small 两种内存规格，SubPage 的大小也会分为两种情况。在 Tiny 场景下，最小的划分单位为 16B，按 16B 依次递增，16B、32B、48B …… 496B；在 Small 场景下，总共可以划分为 512B、1024B、2048B、4096B 四种情况。Subpage 没有固定的大小，需要根据用户分配的缓冲区大小决定，例如分配 1K 的内存时，Netty 会把一个 Page 等分为 8 个 1K 的 Subpage。</p>
+<p>了解了 Netty 不同粒度的内存的分配单位后，我们接下来看看 Netty 中的 jemalloc 是如何实现的。</p>
+<h3 id="netty-内存池架构设计">Netty 内存池架构设计</h3>
+<p>Netty 中的内存池可以看作一个 Java 版本的 jemalloc 实现，并结合 JVM 的诸多特性做了部分优化。如下图所示，我们首先从全局视角看下 Netty 内存池的整体布局，对它有一个宏观的认识。</p>
+<p><img alt="13-2.png" src="/assets/abee19b29e03ee22be58c3ce.png"/></p>
+<p>基于上图的内存池模型，Netty 抽象出一些核心组件，如 PoolArena、PoolChunk、PoolChunkList、PoolSubpage、PoolThreadCache、MemoryRegionCache 等，可以看出与 jemalloc 中的核心概念有些是类似的，接下来我们逐一进行介绍。</p>
+<h4 id="poolarena">PoolArena</h4>
+<p>Netty 借鉴了 jemalloc 中 Arena 的设计思想，采用固定数量的多个 Arena 进行内存分配，Arena 的默认数量与 CPU 核数有关，通过创建多个 Arena 来缓解资源竞争问题，从而提高内存分配效率。线程在首次申请分配内存时，会通过 round-robin 的方式轮询 Arena 数组，选择一个固定的 Arena，在线程的生命周期内只与该 Arena 打交道，所以每个线程都保存了 Arena 信息，从而提高访问效率。</p>
+<p>根据分配内存的类型，ByteBuf 可以分为 Heap 和 Direct，同样 PoolArena 抽象类提供了  HeapArena 和 DirectArena 两个子类。首先看下 PoolArena 的数据结构，如下图所示。</p>
+<p><img alt="13-3.png" src="/assets/de07329bca266fb715f13ff6.png"/></p>
+<p>PoolArena 的数据结构包含两个 PoolSubpage 数组和六个 PoolChunkList，两个 PoolSubpage 数组分别存放 Tiny 和 Small 类型的内存块，六个 PoolChunkList 分别存储不同利用率的 Chunk，构成一个双向循环链表。</p>
+<p>之前我们介绍了 Netty 内存规格的分类，PoolArena 对应实现了 Subpage 和 Chunk 中的内存分配，其 中 PoolSubpage 用于分配小于 8K 的内存，PoolChunkList 用于分配大于 8K 的内存。</p>
+<p>PoolSubpage 也是按照 Tiny 和 Small 两种内存规格，设计了tinySubpagePools 和 smallSubpagePools 两个数组，根据关于 Subpage 的介绍，我们知道 Tiny 场景下，内存单位最小为 16B，按 16B 依次递增，共 32 种情况，Small 场景下共分为 512B、1024B、2048B、4096B 四种情况，分别对应两个数组的长度大小，每种粒度的内存单位都由一个 PoolSubpage 进行管理。假如我们分配 20B 大小的内存空间，也会向上取整找到 32B 的 PoolSubpage 节点进行分配。</p>
+<p>PoolChunkList 用于 Chunk 场景下的内存分配，PoolArena 中初始化了六个 PoolChunkList，分别为 qInit、q000、q025、q050、q075、q100，这与 jemalloc 中 run 队列思路是一致的，它们分别代表不同的内存使用率，如下所示：</p>
+<ul>
+<li>qInit，内存使用率为 0 ~ 25% 的 Chunk。</li>
+<li>q000，内存使用率为 1 ~ 50% 的 Chunk。</li>
+<li>q025，内存使用率为 25% ~ 75% 的 Chunk。</li>
+<li>q050，内存使用率为 50% ~ 100% 的 Chunk。</li>
+<li>q075，内存使用率为 75% ~ 100% 的 Chunk。</li>
+<li>q100，内存使用率为 100% 的 Chunk。</li>
+</ul>
+<p>六种类型的 PoolChunkList 除了 qInit，它们之间都形成了双向链表，如下图所示。</p>
+<p><img alt="13-4.png" src="/assets/e32d615656b568aeb95148ec.png"/></p>
+<p>随着 Chunk 内存使用率的变化，Netty 会重新检查内存的使用率并放入对应的 PoolChunkList，所以 PoolChunk 会在不同的 PoolChunkList 移动。</p>
+<p>我在刚开始学习 PoolChunkList 的时候的一个疑问就是，qInit 和 q000 为什么需要设计成两个，是否可以合并成一个？其实它们各有用处。</p>
+<p>qInit 用于存储初始分配的 PoolChunk，因为在第一次内存分配时，PoolChunkList 中并没有可用的 PoolChunk，所以需要新创建一个 PoolChunk 并添加到 qInit 列表中。qInit 中的 PoolChunk 即使内存被完全释放也不会被回收，避免 PoolChunk 的重复初始化工作。</p>
+<p>q000 则用于存放内存使用率为 1 ~ 50% 的 PoolChunk，q000 中的 PoolChunk 内存被完全释放后，PoolChunk 从链表中移除，对应分配的内存也会被回收。</p>
+<p>还有一点需要注意的是，在分配大于 8K 的内存时，其链表的访问顺序是 q050-&gt;q025-&gt;q000-&gt;qInit-&gt;q075，遍历检查 PoolChunkList 中是否有 PoolChunk 可以用于内存分配，源码如下：</p>
+<pre><code>private void allocateNormal(PooledByteBuf&lt;T&gt; buf, int reqCapacity, int normCapacity) {
+
+    if (q050.allocate(buf, reqCapacity, normCapacity) || q025.allocate(buf, reqCapacity, normCapacity) ||
+
+        q000.allocate(buf, reqCapacity, normCapacity) || qInit.allocate(buf, reqCapacity, normCapacity) ||
+
+        q075.allocate(buf, reqCapacity, normCapacity)) {
+
+        return;
+
+    }
+
+    PoolChunk&lt;T&gt; c = newChunk(pageSize, maxOrder, pageShifts, chunkSize);
+
+    boolean success = c.allocate(buf, reqCapacity, normCapacity);
+
+    assert success;
+
+    qInit.add(c);
+
+}
+</code></pre>
+<p>这里你或许有了疑问，为什么会优先选择 q050，而不是从 q000 开始呢？</p>
+<p>可以说这是一个折中的选择，在频繁分配内存的场景下，如果从 q000 开始，会有大部分的 PoolChunk 面临频繁的创建和销毁，造成内存分配的性能降低。如果从 q050 开始，会使 PoolChunk 的使用率范围保持在中间水平，降低了 PoolChunk 被回收的概率，从而兼顾了性能。</p>
+<p>PoolArena 是 Netty 内存分配中非常重要的部分，我们花了较多篇幅进行讲解，对之后理解内存分配的实现原理会有所帮助。</p>
+<h4 id="poolchunklist">PoolChunkList</h4>
+<p>PoolChunkList 负责管理多个 PoolChunk 的生命周期，同一个 PoolChunkList 中存放内存使用率相近的 PoolChunk，这些 PoolChunk 同样以双向链表的形式连接在一起，PoolChunkList 的结构如下图所示。因为 PoolChunk 经常要从 PoolChunkList 中删除，并且需要在不同的 PoolChunkList 中移动，所以双向链表是管理 PoolChunk 时间复杂度较低的数据结构。</p>
+<p><img alt="13-5.png" src="/assets/8b30fd7d2bf2163322a8be97.png"/></p>
+<p>每个 PoolChunkList 都有内存使用率的上下限：minUsage 和 maxUsage，当 PoolChunk 进行内存分配后，如果使用率超过 maxUsage，那么 PoolChunk 会从当前 PoolChunkList 移除，并移动到下一个 PoolChunkList。同理，PoolChunk 中的内存发生释放后，如果使用率小于 minUsage，那么 PoolChunk 会从当前 PoolChunkList 移除，并移动到前一个 PoolChunkList。</p>
+<p>回过头再看下 Netty 初始化的六个 PoolChunkList，每个 PoolChunkList 的上下限都有交叉重叠的部分，如下图所示。因为 PoolChunk 需要在 PoolChunkList 不断移动，如果每个 PoolChunkList 的内存使用率的临界值都是恰好衔接的，例如 1 ~ 50%、50% ~ 75%，那么如果 PoolChunk 的使用率一直处于 50% 的临界值，会导致 PoolChunk 在两个 PoolChunkList 不断移动，造成性能损耗。</p>
+<p><img alt="13-6.png" src="/assets/203d576d3ec86457ca51cd00.png"/></p>
+<h4 id="poolchunk">PoolChunk</h4>
+<p>Netty 内存的分配和回收都是基于 PoolChunk 完成的，PoolChunk 是真正存储内存数据的地方，每个 PoolChunk 的默认大小为 16M，首先我们看下 PoolChunk 数据结构的定义：</p>
+<pre><code>final class PoolChunk&lt;T&gt; implements PoolChunkMetric {
+
+    final PoolArena&lt;T&gt; arena;
+
+    final T memory; // 存储的数据
+
+    private final byte[] memoryMap; // 满二叉树中的节点是否被分配，数组大小为 4096
+
+    private final byte[] depthMap; // 满二叉树中的节点高度，数组大小为 4096
+
+    private final PoolSubpage&lt;T&gt;[] subpages; // PoolChunk 中管理的 2048 个 8K 内存块
+
+    private int freeBytes; // 剩余的内存大小
+
+    PoolChunkList&lt;T&gt; parent;
+
+    PoolChunk&lt;T&gt; prev;
+
+    PoolChunk&lt;T&gt; next;
+    // 省略其他代码
+
+}
+</code></pre>
+<p>PoolChunk 可以理解为 Page 的集合，Page 只是一种抽象的概念，实际在 Netty 中 Page 所指的是 PoolChunk 所管理的子内存块，每个子内存块采用 PoolSubpage 表示。Netty 会使用伙伴算法将 PoolChunk 分配成 2048 个 Page，最终形成一颗满二叉树，二叉树中所有子节点的内存都属于其父节点管理，如下图所示。</p>
+<p><img alt="13-7.png" src="/assets/7c8677c68ebd50a8d038ccf6.png"/></p>
+<p>结合 PoolChunk 的结构图，我们介绍一下 PoolChunk 中几个重要的属性：</p>
+<p>depthMap 用于存放节点所对应的高度。例如第 2048 个节点 depthMap[1025] = 10。</p>
+<p>memoryMap 用于记录二叉树节点的分配信息，memoryMap 初始值与 depthMap 是一样的，随着节点被分配，不仅节点的值会改变，而且会递归遍历更新其父节点的值，父节点的值取两个子节点中最小的值。</p>
+<p>subpages 对应上图中 PoolChunk 内部的 Page0、Page1、Page2 …… Page2047，Netty 中并没有 Page 的定义，直接使用 PoolSubpage 表示。当分配的内存小于 8K 时，PoolChunk 中的每个 Page 节点会被划分成为更小粒度的内存块进行管理，小内存块同样以 PoolSubpage 管理。从图中可以看出，小内存的分配场景下，会首先找到对应的 PoolArena ，然后根据计算出对应的 tinySubpagePools 或者 smallSubpagePools 数组对应的下标，如果对应数组元素所包含的 PoolSubpage 链表不存在任何节点，那么将创建新的 PoolSubpage 加入链表中。</p>
+<h4 id="poolsubpage">PoolSubpage</h4>
+<p>目前大家对 PoolSubpage 应该有了一些认识，在小内存分配的场景下，即分配的内存大小小于一个 Page 8K，会使用 PoolSubpage 进行管理。首先看下 PoolSubpage 的定义：</p>
+<pre><code>final class PoolSubpage&lt;T&gt; implements PoolSubpageMetric {
+
+    final PoolChunk&lt;T&gt; chunk;
+
+    private final int memoryMapIdx; // 对应满二叉树节点的下标
+
+    private final int runOffset; // PoolSubpage 在 PoolChunk 中 memory 的偏移量
+
+    private final long[] bitmap; // 记录每个小内存块的状态
+
+    // 与 PoolArena 中 tinySubpagePools 或 smallSubpagePools 中元素连接成双向链表
+
+    PoolSubpage&lt;T&gt; prev;
+
+    PoolSubpage&lt;T&gt; next;
+
+    int elemSize; // 每个小内存块的大小
+
+    private int maxNumElems; // 最多可以存放多少小内存块：8K/elemSize
+
+    private int numAvail; // 可用于分配的内存块个数
+    // 省略其他代码
+
+}
+</code></pre>
+<p>PoolSubpage 中每个属性的含义都比较清晰易懂，我都以注释的形式标出，在这里就不一一赘述了，只指出其中比较重点的两个知识点：</p>
+<p>第一个就是 PoolSubpage 是如何记录内存块的使用状态的呢？PoolSubpage 通过位图 bitmap 记录子内存是否已经被使用，bit 的取值为 0 或者 1，如下图所示。</p>
+<p><img alt="13-8.png" src="/assets/36e309b12edb8fe87484c3f0.png"/></p>
+<p>第二个就是 PoolSubpage 和 PoolArena 之间是如何联系起来的？</p>
+<p>通过之前的介绍，我们知道 PoolArena 在创建是会初始化 tinySubpagePools 和 smallSubpagePools 两个 PoolSubpage 数组，数组的大小分别为 32 和 4。</p>
+<p>假如我们现在需要分配 20B 大小的内存，会向上取整为 32B，从满二叉树的第 11 层找到一个 PoolSubpage 节点，并把它等分为 8KB/32B = 256B 个小内存块，然后找到这个 PoolSubpage 节点对应的 PoolArena，将 PoolSubpage 节点与 tinySubpagePools[1] 对应的 head 节点连接成双向链表，形成下图所示的结构。</p>
+<p><img alt="13-9.png" src="/assets/1276ab0a06b11966a0d65f92.png"/></p>
+<p>下次再有 32B 规格的内存分配时，会直接查找 PoolArena 中 tinySubpagePools[1] 元素的 next 节点是否存在可用的 PoolSubpage，如果存在将直接使用该 PoolSubpage 执行内存分配，从而提高了内存分配效率，其他内存规格的分配原理类似。</p>
+<h4 id="poolthreadcache-memoryregioncache">PoolThreadCache &amp; MemoryRegionCache</h4>
+<p>PoolThreadCache 顾名思义，对应的是 jemalloc 中本地线程缓存的意思。那么 PoolThreadCache 是如何被使用的呢？它可以缓存哪些类型的数据呢？</p>
+<p>当内存释放时，与 jemalloc 一样，Netty 并没有将缓存归还给 PoolChunk，而是使用 PoolThreadCache 缓存起来，当下次有同样规格的内存分配时，直接从 PoolThreadCache 取出使用即可。PoolThreadCache 缓存 Tiny、Small、Normal 三种类型的数据，而且根据堆内和堆外内存的类型进行了区分，如 PoolThreadCache 的源码定义所示：</p>
+<pre><code>final class PoolThreadCache {
+
+    final PoolArena&lt;byte[]&gt; heapArena;
+
+    final PoolArena&lt;ByteBuffer&gt; directArena;
+
+    private final MemoryRegionCache&lt;byte[]&gt;[] tinySubPageHeapCaches;
+
+    private final MemoryRegionCache&lt;byte[]&gt;[] smallSubPageHeapCaches;
+
+    private final MemoryRegionCache&lt;ByteBuffer&gt;[] tinySubPageDirectCaches;
+
+    private final MemoryRegionCache&lt;ByteBuffer&gt;[] smallSubPageDirectCaches;
+
+    private final MemoryRegionCache&lt;byte[]&gt;[] normalHeapCaches;
+
+    private final MemoryRegionCache&lt;ByteBuffer&gt;[] normalDirectCaches;
+    // 省略其他代码
+
+}
+</code></pre>
+<p>PoolThreadCache 中有一个重要的数据结构：MemoryRegionCache。MemoryRegionCache 有三个重要的属性，分别为 queue，sizeClass 和 size，下图是不同内存规格所对应的 MemoryRegionCache 属性取值范围。</p>
+<p><img alt="13-10.png" src="/assets/36d81a52e815b736f862908a.png"/></p>
+<p>MemoryRegionCache 实际就是一个队列，当内存释放时，将内存块加入队列当中，下次再分配同样规格的内存时，直接从队列中取出空闲的内存块。</p>
+<p>PoolThreadCache 将不同规格大小的内存都使用单独的 MemoryRegionCache 维护，如下图所示，图中的每个节点都对应一个 MemoryRegionCache，例如 Tiny 场景下对应的 32 种内存规格会使用 32 个 MemoryRegionCache 维护，所以 PoolThreadCache 源码中 Tiny、Small、Normal 类型的 MemoryRegionCache 数组长度分别为 32、4、3。</p>
+<p><img alt="13-11.png" src="/assets/77753a83ff3ef5062f247248.png"/></p>
+<p>到此为止，Netty 中内存管理所涉及的核心组件都介绍完毕，推荐你回头再梳理一遍 jemalloc 的核心概念，与 Netty 做一个简单的对比，思路会更加清晰。</p>
+<h3 id="总结">总结</h3>
+<p>知识都是殊途同归的，当你理解 jemalloc 之后，Netty 的内存管理也就不是那么难了，其中大部分的思路与 jemalloc 是保持一致的，所以打好基础非常重要。下节课我们继续看下 Netty 内存分配与回收的实现原理。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

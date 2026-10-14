@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>46  加餐：深入服务自省方案中的服务发布订阅（下） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/index.html">Dubbo源码解读与实战-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">50 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Dubbo源码解读与实战-完</strong><ul><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E6%B7%B1%E5%85%A5%E6%8E%8C%E6%8F%A1%20Dubbo%20%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8F%90%E5%8D%87%E4%BD%A0%E7%9A%84%E8%81%8C%E5%9C%BA%E7%AB%9E%E4%BA%89%E5%8A%9B.html">00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/01%20%20Dubbo%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%9A%E5%8D%83%E9%87%8C%E4%B9%8B%E8%A1%8C%EF%BC%8C%E5%A7%8B%E4%BA%8E%E8%B6%B3%E4%B8%8B.html">01  Dubbo 源码环境搭建：千里之行，始于足下</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/02%20Dubbo%20%E7%9A%84%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BA%BF%EF%BC%9A%E6%8A%93%E4%BD%8F%20URL%EF%BC%8C%E5%B0%B1%E7%90%86%E8%A7%A3%E4%BA%86%E5%8D%8A%E4%B8%AA%20Dubbo.html">02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/03%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8A%EF%BC%89.html">03  Dubbo SPI 精析，接口实现两极反转（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/04%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8B%EF%BC%89.html">04  Dubbo SPI 精析，接口实现两极反转（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/05%20%20%E6%B5%B7%E9%87%8F%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E8%BD%AE%E6%90%9E%E5%AE%9A.html">05  海量定时任务，一个时间轮搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/07%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/08%20%20%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0.html">08  代理模式与常见实现</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/09%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">09  Netty 入门，用它做网络编程都说好（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/10%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">10  Netty 入门，用它做网络编程都说好（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/11%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">11  简易版 RPC 框架实现（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/12%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">12  简易版 RPC 框架实现（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/13%20%20%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%EF%BC%9A%E9%99%8D%E4%BD%8E%20ZooKeeper%20%E5%8E%8B%E5%8A%9B%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5.html">13  本地缓存：降低 ZooKeeper 压力的一个常用手段</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/14%20%20%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%E6%98%AF%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BF%9D%E8%AF%81.html">14  重试机制是网络操作的基本保证</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/15%20%20ZooKeeper%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E8%B7%B5.html">15  ZooKeeper 注册中心实现，官方推荐注册中心实践</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/16%20%20Dubbo%20Serialize%20%E5%B1%82%EF%BC%9A%E5%A4%9A%E7%A7%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AE%97%E6%B3%95%EF%BC%8C%E6%80%BB%E6%9C%89%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E4%BD%A0.html">16  Dubbo Serialize 层：多种序列化算法，总有一款适合你</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/17%20%20Dubbo%20Remoting%20%E5%B1%82%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E5%88%86%E6%9E%90%EF%BC%9A%E8%BF%99%E5%B1%85%E7%84%B6%E6%98%AF%E4%B8%80%E5%A5%97%E5%85%BC%E5%AE%B9%E6%89%80%E6%9C%89%20NIO%20%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/18%20%20Buffer%20%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%9A%E6%88%91%E4%BB%AC%E4%B8%8D%E7%94%9F%E4%BA%A7%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AA%E6%98%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E6%90%AC%E8%BF%90%E5%B7%A5.html">18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/19%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/20%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">20  Transporter 层核心实现：编解码与线程模型一文打尽（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/21%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/22%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/23%20%20%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D%EF%BC%8CRPC%20%E5%B1%82%E9%AA%A8%E6%9E%B6%E6%A2%B3%E7%90%86.html">23  核心接口介绍，RPC 层骨架梳理</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/24%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/25%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/26%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8A%EF%BC%89.html">26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/27%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8B%EF%BC%89.html">27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/28%20%20%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%AE%80%E5%8D%95%E5%8C%96%EF%BC%8C%E4%BB%A3%E7%90%86%E5%B8%AE%E4%BD%A0%E9%9A%90%E8%97%8F%E4%BA%86%E5%A4%9A%E5%B0%91%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82%EF%BC%9F.html">28  复杂问题简单化，代理帮你隐藏了多少底层细节？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/29%20%20%E5%8A%A0%E9%A4%90%EF%BC%9AHTTP%20%E5%8D%8F%E8%AE%AE%20%2B%20JSON-RPC%EF%BC%8CDubbo%20%E8%B7%A8%E8%AF%AD%E8%A8%80%E5%B0%B1%E6%98%AF%E5%A6%82%E6%AD%A4%E7%AE%80%E5%8D%95.html">29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/30%20%20Filter%20%E6%8E%A5%E5%8F%A3%EF%BC%8C%E6%89%A9%E5%B1%95%20Dubbo%20%E6%A1%86%E6%9E%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5%E6%8C%87%E5%8C%97.html">30  Filter 接口，扩展 Dubbo 框架的常用手段指北</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/31%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E6%BD%9C%20Directory%20%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8E%A2%E7%A7%98%E6%9C%8D%E5%8A%A1%E7%9B%AE%E5%BD%95%E7%8E%84%E6%9C%BA.html">31  加餐：深潜 Directory 实现，探秘服务目录玄机</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/32%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8A%EF%BC%89.html">32  路由机制：请求到底怎么走，它说了算（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/33%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8B%EF%BC%89.html">33  路由机制：请求到底怎么走，它说了算（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/34%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%88%9D%E6%8E%A2%20Dubbo%20%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">34  加餐：初探 Dubbo 动态配置的那些事儿</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/35%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8A%EF%BC%89.html">35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/36%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8B%EF%BC%89.html">36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/37%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8A%EF%BC%89.html">37  集群容错：一个好汉三个帮（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/38%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8B%EF%BC%89.html">38  集群容错：一个好汉三个帮（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/39%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%A4%9A%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%8D%E7%94%A8%E6%80%95%EF%BC%8CMerger%20%E5%90%88%E5%B9%B6%E5%99%A8%E6%9D%A5%E5%B8%AE%E5%BF%99.html">39  加餐：多个返回值不用怕，Merger 合并器来帮忙</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/40%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%A8%A1%E6%8B%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%EF%BC%8CMock%20%E6%9C%BA%E5%88%B6%E5%B8%AE%E4%BD%A0%E6%90%9E%E5%AE%9A.html">40  加餐：模拟远程调用，Mock 机制帮你搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/41%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E4%B8%80%E9%94%AE%E9%80%9A%E5%85%B3%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E5%85%A8%E6%B5%81%E7%A8%8B.html">41  加餐：一键通关服务发布全流程</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/42%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E6%B5%81%E7%A8%8B%E5%85%A8%E8%A7%A3%E6%9E%90.html">42  加餐：服务引用流程全解析</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/43%20%20%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9A%E6%96%B0%E7%89%88%E6%9C%AC%E6%96%B0%E6%96%B9%E6%A1%88.html">43  服务自省设计方案：新版本新方案</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/44%20%20%E5%85%83%E6%95%B0%E6%8D%AE%E6%96%B9%E6%A1%88%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E6%95%B0%E6%8D%AE%E9%87%8F%E8%86%A8%E8%83%80%EF%BC%9F.html">44  元数据方案深度剖析，如何避免注册中心数据量膨胀？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/45%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8A%EF%BC%89.html">45  加餐：深入服务自省方案中的服务发布订阅（上）</a></li><li><a class="active" aria-current="page" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/46%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8B%EF%BC%89.html">46  加餐：深入服务自省方案中的服务发布订阅（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/47%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8A%EF%BC%89.html">47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/48%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8B%EF%BC%89.html">48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/49%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E8%AE%A4%E7%9C%9F%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BC%A9%E5%B0%8F%E5%B7%AE%E8%B7%9D.html">49 结束语  认真学习，缩小差距</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/46%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8B%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="46  加餐：深入服务自省方案中的服务发布订阅（下）" id="title">46  加餐：深入服务自省方案中的服务发布订阅（下）</h1>
+<div><p>在课程第二部分（13~15 课时）中介绍 Dubbo 传统框架中的注册中心部分实现时，我们提到了 Registry、RegistryFactory 等与注册中心交互的接口。<strong>为了将 ServiceDiscovery 接口的功能与 Registry 融合，Dubbo 提供了一个 ServiceDiscoveryRegistry 实现</strong>，继承关系如下所示：</p>
+<p><img alt="Drawing 0.png" src="/assets/61f705335cf1e08ba1216fe7.png"/></p>
+<p>ServiceDiscoveryRegistry 、ServiceDiscoveryRegistryFactory 继承关系图</p>
+<p>由图我们可以看到：ServiceDiscoveryRegistryFactory（扩展名称是 service-discovery-registry）是 ServiceDiscoveryRegistry 对应的工厂类，继承了 AbstractRegistryFactory 提供的公共能力。</p>
+<p><strong>ServiceDiscoveryRegistry 是一个面向服务实例（ServiceInstance）的注册中心实现</strong>，其底层依赖前面两个课时介绍的 ServiceDiscovery、WritableMetadataService 等组件。</p>
+<p>ServiceDiscoveryRegistry 中的核心字段有如下几个。</p>
+<ul>
+<li>serviceDiscovery（ServiceDiscovery 类型）：用于 ServiceInstance 的发布和订阅。</li>
+<li>subscribedServices（Set 类型）：记录了当前订阅的服务名称。</li>
+<li>serviceNameMapping（ServiceNameMapping 类型）：用于 Service ID 与 Service Name 之间的转换。</li>
+<li>writableMetadataService（WritableMetadataService 类型）：用于发布和查询元数据。</li>
+<li>registeredListeners（Set 类型）：记录了注册的 ServiceInstancesChangedListener 的唯一标识。</li>
+<li>subscribedURLsSynthesizers（List 类型）：将 ServiceInstance 的信息与元数据进行合并，得到订阅服务的完整 URL。</li>
+</ul>
+<p>在 ServiceDiscoveryRegistry 的构造方法中，会初始化上述字段：</p>
+<pre><code class="language-java">public ServiceDiscoveryRegistry(URL registryURL) {
+    // 初始化父类，其中包括FailbackRegistry中的时间轮和重试定时任务以及AbstractRegistry中的本地文件缓存等
+    super(registryURL);
+    // 初始化ServiceDiscovery对象
+    this.serviceDiscovery = createServiceDiscovery(registryURL);
+    // 从registryURL中解析出subscribed-services参数，并按照逗号切分，得到subscribedServices集合
+    this.subscribedServices = parseServices(registryURL.getParameter(SUBSCRIBED_SERVICE_NAMES_KEY));
+    // 获取DefaultServiceNameMapping对象
+    this.serviceNameMapping = ServiceNameMapping.getDefaultExtension();
+    // 初始化WritableMetadataService对象
+    String metadataStorageType = getMetadataStorageType(registryURL);
+    this.writableMetadataService = WritableMetadataService.getExtension(metadataStorageType);
+    // 获取目前支持的全部SubscribedURLsSynthesizer实现，并初始化
+    this.subscribedURLsSynthesizers = initSubscribedURLsSynthesizers();
+}
+</code></pre>
+<p>在 createServiceDiscovery() 方法中，不仅会加载 ServiceDiscovery 的相应实现，还会在外层添加 EventPublishingServiceDiscovery 装饰器，在 register()、initialize() 等方法前后触发相应的事件，具体实现如下：</p>
+<pre><code class="language-java">protected ServiceDiscovery createServiceDiscovery(URL registryURL) {
+    // 根据registryURL获取对应的ServiceDiscovery实现
+    ServiceDiscovery originalServiceDiscovery = getServiceDiscovery(registryURL);
+    // ServiceDiscovery外层添加一层EventPublishingServiceDiscovery修饰器，
+    // EventPublishingServiceDiscovery会在register()、initialize()等方法前后触发相应的事件，
+    // 例如，在register()方法的前后分别会触发ServiceInstancePreRegisteredEvent和ServiceInstanceRegisteredEvent
+    ServiceDiscovery serviceDiscovery = enhanceEventPublishing(originalServiceDiscovery);
+    execute(() -&gt; { // 初始化ServiceDiscovery
+        serviceDiscovery.initialize(registryURL.addParameter(INTERFACE_KEY, ServiceDiscovery.class.getName())
+                .removeParameter(REGISTRY_TYPE_KEY));
+    });
+    return serviceDiscovery;
+}
+</code></pre>
+<p>Registry 接口的核心是服务发布和订阅，ServiceDiscoveryRegistry 既然实现了 Registry 接口，必然也要实现了服务注册和发布的功能。</p>
+<h3 id="服务注册">服务注册</h3>
+<p>在 ServiceDiscoveryRegistry 的 register() 中，首先会检测待发布 URL 中的 side 参数，然后调用父类的 register() 方法。我们知道 FailbackRegistry.register() 方法会回调子类的 doRegister() 方法，而 ServiceDiscoveryRegistry.doRegister() 方法直接依赖 WritableMetadataService 的 exportURL() 方法，完成元数据的发布。</p>
+<pre><code class="language-java">public final void register(URL url) {
+    if (!shouldRegister(url)) { // 检测URL中的side参数是否为provider
+        return;
+    }
+    super.register(url);
+}
+
+@Override
+public void doRegister(URL url) {
+    // 将元数据发布到MetadataService
+    if (writableMetadataService.exportURL(url)) {
+        ... // 输出INFO日志
+    } else {
+        ... // 输出WARN日志
+    }
+}
+</code></pre>
+<p>ServiceDiscoveryRegistry.unregister() 方法的实现逻辑也是类似的，这里就不再展示，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/dubbo" target="_blank">源码</a>进行学习。</p>
+<h3 id="服务订阅">服务订阅</h3>
+<p>接下来看 ServiceDiscoveryRegistry.subscribe() 方法的实现，其中也是首先会检测待发布 URL 中的 side 参数，然后调用父类的 subscribe() 方法。我们知道 FailbackRegistry.subscribe() 方法会回调子类的 doSubscribe() 方法。在 ServiceDiscoveryRegistry 的 doSubscribe() 方法中，会执行如下完整的订阅流程：</p>
+<ol>
+<li>调用 WriteMetadataService.subscribeURL() 方法在 subscribedServiceURLs 集合中记录当前订阅的 URL；</li>
+<li>通过订阅的 URL 获取 Service Name；</li>
+<li>根据 Service Name 获取 ServiceInstance 集合；</li>
+<li>根据 ServiceInstance 调用相应的 MetadataService 服务，获取元数据，其中涉及历史数据的清理和缓存更新等操作；</li>
+<li>将 ServiceInstance 信息以及对应的元数据信息进行合并，得到完整的 URL；</li>
+<li>触发 NotifyListener 监听器；</li>
+<li>添加 ServiceInstancesChangedListener 监听器。</li>
+</ol>
+<p>下面来看 ServiceDiscoveryRegistry.doSubscribe() 方法的具体实现：</p>
+<pre><code class="language-java">protected void subscribeURLs(URL url, NotifyListener listener) {
+    // 记录该订阅的URL
+    writableMetadataService.subscribeURL(url);
+    // 获取订阅的Service Name
+    Set&lt;String&gt; serviceNames = getServices(url);
+    if (CollectionUtils.isEmpty(serviceNames)) {
+        throw new IllegalStateException("...");
+    }
+    // 执行后续的订阅操作
+    serviceNames.forEach(serviceName -&gt; subscribeURLs(url, listener, serviceName));
+}
+</code></pre>
+<p>我们这就展开一步步来解析上面的这个流程。</p>
+<h4 id="1-获取-service-name">1. 获取 Service Name</h4>
+<p>首先来看 getServices() 方法的具体实现：它会首先根据 subscribeURL 的 provided-by 参数值获取订阅的 Service Name 集合，如果获取失败，则根据 Service ID 获取对应的 Service Name 集合；如果此时依旧获取失败，则尝试从 registryURL 中的 subscribed-services 参数值获取 Service Name 集合。下面来看 getServices() 方法的具体实现：</p>
+<pre><code class="language-java">protected Set&lt;String&gt; getServices(URL subscribedURL) {
+    Set&lt;String&gt; subscribedServices = new LinkedHashSet&lt;&gt;();
+    // 首先尝试从subscribeURL中获取provided-by参数值，其中封装了全部Service Name
+    String serviceNames = subscribedURL.getParameter(PROVIDED_BY);
+    if (StringUtils.isNotEmpty(serviceNames)) {
+        // 解析provided-by参数值，得到全部的Service Name集合
+        subscribedServices = parseServices(serviceNames);
+    }
+    if (isEmpty(subscribedServices)) { 
+        // 如果没有指定provided-by参数，则尝试通过subscribedURL构造Service ID，
+        // 然后通过ServiceNameMapping的get()方法查找Service Name
+        subscribedServices = findMappedServices(subscribedURL);
+        if (isEmpty(subscribedServices)) {
+            // 如果subscribedServices依旧为空，则返回registryURL中的subscribed-services参数值
+            subscribedServices = getSubscribedServices();
+        }
+    }
+    return subscribedServices;
+}
+</code></pre>
+<h4 id="2-查找-service-instance">2. 查找 Service Instance</h4>
+<p>接下来看 subscribeURLs(url, listener, serviceName) 这个重载的具体实现，其中会根据 Service Name 从 ServiceDiscovery 中查找对应的 ServiceInstance 集合，以及注册ServiceInstancesChangedListener 监听。</p>
+<pre><code class="language-java">protected void subscribeURLs(URL url, NotifyListener listener, String serviceName) {
+    // 根据Service Name获取ServiceInstance对象
+    List&lt;ServiceInstance&gt; serviceInstances = serviceDiscovery.getInstances(serviceName);
+    // 调用另一个subscribeURLs()方法重载
+    subscribeURLs(url, listener, serviceName, serviceInstances);
+    // 添加ServiceInstancesChangedListener监听器
+    registerServiceInstancesChangedListener(url, new ServiceInstancesChangedListener(serviceName) {
+        @Override
+        public void onEvent(ServiceInstancesChangedEvent event) {
+            subscribeURLs(url, listener, event.getServiceName(), new ArrayList&lt;&gt;(event.getServiceInstances()));
+        }
+    });
+}
+</code></pre>
+<p>在 subscribeURLs(url, listener, serviceName, serviceInstances) 这个重载中，主要是根据前面获取的 ServiceInstance 实例集合，构造对应的、完整的 subscribedURL 集合，并触发传入的 NotifyListener 监听器，如下所示：</p>
+<pre><code class="language-java">protected void subscribeURLs(URL subscribedURL, NotifyListener listener, String serviceName,
+                             Collection&lt;ServiceInstance&gt; serviceInstances) {
+    List&lt;URL&gt; subscribedURLs = new LinkedList&lt;&gt;();
+    // 尝试通过MetadataService获取subscribedURL集合
+    subscribedURLs.addAll(getExportedURLs(subscribedURL, serviceInstances));
+    if (subscribedURLs.isEmpty()) { // 如果上面的尝试失败
+        // 尝试通过SubscribedURLsSynthesizer获取subscribedURL集合
+        subscribedURLs.addAll(synthesizeSubscribedURLs(subscribedURL, serviceInstances));
+    }
+    // 触发NotifyListener监听器
+    listener.notify(subscribedURLs);
+}
+</code></pre>
+<p>这里构造完整 subscribedURL 可以分为两个分支。</p>
+<ul>
+<li><p>第一个分支：结合传入的 subscribedURL 以及从元数据中获取每个 ServiceInstance 的对应参数，组装成每个 ServiceInstance 对应的完整 subscribeURL。<strong>该部分实现在 getExportedURLs() 方法中，也是订阅操作的核心</strong>。</p></li>
+<li><p>第二个分支：当上述操作无法获得完整的 subscribeURL 集合时，会使用 SubscribedURLsSynthesizer，基于 subscribedURL 拼凑出每个 ServiceInstance 对应的完整的 subscribedURL。<strong>该部分实现在 synthesizeSubscribedURLs() 方法中，目前主要针对 rest 协议</strong>。</p></li>
+</ul>
+<h4 id="3-getexportedurls-方法核心实现">3. getExportedURLs() 方法核心实现</h4>
+<p>getExportedURLs() 方法主要围绕 serviceRevisionExportedURLsCache 这个集合展开的，它是一个 Map<string, list="" map<string,="">&gt; 类型的集合，其中第一层 Key 是 Service Name，第二层 Key 是 Revision，最终的 Value 值是 Service Name 对应的最新的 URL 集合。</string,></p>
+<h5 id="1-清理过期-url">（1）清理过期 URL</h5>
+<p>在 getExportedURLs() 方法中，首先会调用 expungeStaleRevisionExportedURLs() 方法销毁全部已过期的 URL 信息，具体实现如下：</p>
+<pre><code class="language-java">private void expungeStaleRevisionExportedURLs(List&lt;ServiceInstance&gt; serviceInstances) {
+    // 从第一个ServiceInstance即可获取Service Name
+    String serviceName = serviceInstances.get(0).getServiceName();
+    // 获取该Service Name当前在serviceRevisionExportedURLsCache中对应的URL集合
+    Map&lt;String, List&lt;URL&gt;&gt; revisionExportedURLsMap = serviceRevisionExportedURLsCache
+        .computeIfAbsent(serviceName, s -&gt; new LinkedHashMap());
+    if (revisionExportedURLsMap.isEmpty()) { // 没有缓存任何URL，则无须后续清理操作，直接返回即可
+        return;
+    }
+    // 获取Service Name在serviceRevisionExportedURLsCache中缓存的修订版本
+    Set&lt;String&gt; existedRevisions = revisionExportedURLsMap.keySet();
+    // 从ServiceInstance中获取当前最新的修订版本
+    Set&lt;String&gt; currentRevisions = serviceInstances.stream()
+            .map(ServiceInstanceMetadataUtils::getExportedServicesRevision)
+            .collect(Collectors.toSet());
+    // 获取要删除的陈旧修订版本：staleRevisions = existedRevisions(copy) - currentRevisions
+    Set&lt;String&gt; staleRevisions = new HashSet&lt;&gt;(existedRevisions);
+    staleRevisions.removeAll(currentRevisions);
+    // 从revisionExportedURLsMap中删除staleRevisions集合中所有Key对应的URL集合
+    staleRevisions.forEach(revisionExportedURLsMap::remove);
+}
+</code></pre>
+<p>我们看到这里是通过 ServiceInstanceMetadataUtils 工具类从每个 ServiceInstance 的 metadata 集合中获取最新的修订版本（Key 为 dubbo.exported-services.revision），那么该修订版本的信息是在哪里写入的呢？我们来看一个新接口—— ServiceInstanceCustomizer，具体定义如下：</p>
+<pre><code class="language-java">@SPI
+public interface ServiceInstanceCustomizer extends Prioritized {
+    void customize(ServiceInstance serviceInstance);
+}
+</code></pre>
+<p>关于 ServiceInstanceCustomizer 接口，这里需要关注三个点：①该接口被 @SPI 注解修饰，是一个扩展点；②该接口继承了 Prioritized 接口；③该接口中定义的 customize() 方法可以用来自定义 ServiceInstance 信息，其中就包括控制 metadata 集合中的数据。</p>
+<p>也就说，<strong>ServiceInstanceCustomizer 的多个实现可以按序调用，实现 ServiceInstance 的自定义</strong>。下图展示了 ServiceInstanceCustomizer 接口的所有实现类：</p>
+<p><img alt="Drawing 1.png" src="/assets/69d106c087bb42ce2e4cac81.png"/></p>
+<p>ServiceInstanceCustomizer 继承关系图</p>
+<p>我们首先来看 ServiceInstanceMetadataCustomizer 这个抽象类，它主要是对 ServiceInstance 中 metadata 这个 KV 集合进行自定义修改，这部分逻辑在 customize() 方法中，如下所示：</p>
+<pre><code class="language-java">public final void customize(ServiceInstance serviceInstance) {
+    // 获取ServiceInstance对象的metadata字段
+    Map&lt;String, String&gt; metadata = serviceInstance.getMetadata();
+    // 生成要添加到metadata集合的KV值
+    String propertyName = resolveMetadataPropertyName(serviceInstance);
+    String propertyValue = resolveMetadataPropertyValue(serviceInstance);
+    // 判断待添加的KV值是否为空
+    if (!isBlank(propertyName) &amp;&amp; !isBlank(propertyValue)) {
+        String existedValue = metadata.get(propertyName);
+        boolean put = existedValue == null || isOverride();
+        if (put) { // 是否覆盖原值
+            metadata.put(propertyName, propertyValue);
+        }
+    }
+}
+</code></pre>
+<p>生成 KV 值的 resolveMetadataPropertyName()、resolveMetadataPropertyValue() 方法以及 isOverride() 方法都是抽象方法，在 ServiceInstanceMetadataCustomizer 子类中实现。</p>
+<p>在 ExportedServicesRevisionMetadataCustomizer 这个实现中，resolveMetadataPropertyName() 方法返回 “dubbo.exported-services.revision” 固定字符串，resolveMetadataPropertyValue() 方法会通过 WritableMetadataService 获取当前 ServiceInstance 对象发布的全部 URL，然后计算 revision 值。具体实现如下：</p>
+<pre><code class="language-java">protected String resolveMetadataPropertyValue(ServiceInstance serviceInstance) {
+    // 从ServiceInstance对象的metadata集合中获取当前ServiceInstance存储元数据的方式（local还是remote）
+    String metadataStorageType = getMetadataStorageType(serviceInstance);
+    // 获取相应的WritableMetadataService对象，并获取当前ServiceInstance发布的全部元数据
+    WritableMetadataService writableMetadataService = getExtension(metadataStorageType);
+    SortedSet&lt;String&gt; exportedURLs = writableMetadataService.getExportedURLs();
+    // 计算整个exportedURLs集合的revision值
+    URLRevisionResolver resolver = new URLRevisionResolver();
+    return resolver.resolve(exportedURLs);
+}
+</code></pre>
+<p>这里需要说明下计算 revision 值的核心实现：首先获取每个服务接口的方法签名以及对应 URL 参数集合，然后计算 hashCode 并加和返回，如果通过上述方式没有拿到 revision 值，则返回 “N/A” 占位符字符串。URLRevisionResolver.resolve() 方法的具体实现比较简单，这里就不再展示，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/dubbo" target="_blank">源码</a>进行学习。</p>
+<p>在 SubscribedServicesRevisionMetadataCustomizer 这个实现中，resolveMetadataPropertyName() 方法返回的是 “dubbo.subscribed-services.revision” 固定字符串，resolveMetadataPropertyValue() 方法会通过 WritableMetadataService 获取当前 ServiceInstance 对象引用的全部 URL，然后计算 revision 值并返回。具体实现如下：</p>
+<pre><code class="language-java">protected String resolveMetadataPropertyValue(ServiceInstance serviceInstance) {
+    String metadataStorageType = getMetadataStorageType(serviceInstance);
+    WritableMetadataService writableMetadataService = getExtension(metadataStorageType);
+    // 获取subscribedServiceURLs集合
+    SortedSet&lt;String&gt; subscribedURLs = writableMetadataService.getSubscribedURLs();
+    URLRevisionResolver resolver = new URLRevisionResolver();
+    // 计算revision值
+    return resolver.resolve(subscribedURLs);
+}
+</code></pre>
+<p>在 MetadataServiceURLParamsMetadataCustomizer 这个实现中，resolveMetadataPropertyName() 方法返回 “dubbo.metadata-service.url-params” 固定字符串，resolveMetadataPropertyValue() 方法返回 MetadataService 服务 URL 的参数。</p>
+<p>对于 RefreshServiceMetadataCustomizer 这个实现，我们首先关注其执行顺序， 它覆盖了 getPriority() 方法，具体实现如下：</p>
+<pre><code class="language-java">public int getPriority() {
+    return MIN_PRIORITY; // 执行优先级最低
+}
+</code></pre>
+<p>这就保证了 RefreshServiceMetadataCustomizer 在前面介绍的 ServiceInstanceMetadataCustomizer 实现之后执行（ServiceInstanceMetadataCustomizer 的优先级为 NORMAL_PRIORITY）。</p>
+<p>customize() 方法的实现中，RefreshServiceMetadataCustomizer 会分别获取该 ServiceInstance 发布服务的 URL revision 以及引用服务的 URL revision，并更新到元数据中心。具体实现如下：</p>
+<pre><code class="language-java">public void customize(ServiceInstance serviceInstance) {
+    String metadataStoredType = getMetadataStorageType(serviceInstance);
+    WritableMetadataService writableMetadataService = getExtension(metadataStoredType);
+    // 从ServiceInstance.metadata集合中获取两个revision，并调用refreshMetadata()方法进行更新
+    writableMetadataService.refreshMetadata(getExportedServicesRevision(serviceInstance),
+            getSubscribedServicesRevision(serviceInstance));
+}
+</code></pre>
+<p>在 WritableMetadataService 接口的实现中，只有 RemoteWritableMetadataService 实现了 refreshMetadata() 方法，其中会判断两个 revision 值是否发生变化，如果发生了变化，则将相应的 URL 集合更新到元数据中心。如下所示：</p>
+<pre><code class="language-java">public boolean refreshMetadata(String exportedRevision, String subscribedRevision) {
+    boolean result = true;
+    // 比较当前ServiceInstance的exportedRevision是否发生变化
+    if (!StringUtils.isEmpty(exportedRevision) &amp;&amp; !exportedRevision.equals(this.exportedRevision)) {
+        // 发生变化的话，会更新exportedRevision字段，同时将exportedServiceURLs集合中的URL更新到元数据中心
+        this.exportedRevision = exportedRevision;
+        boolean executeResult = saveServiceMetadata();
+        if (!executeResult) {
+            result = false;
+        }
+    }
+    // 比较当前ServiceInstance的subscribedRevision是否发生变化 
+    if (!StringUtils.isEmpty(subscribedRevision) &amp;&amp; !subscribedRevision.equals(this.subscribedRevision)
+            &amp;&amp; CollectionUtils.isNotEmpty(writableMetadataService.getSubscribedURLs())) {
+        // 发生变化的话，会更新subscribedRevision字段，同时将subscribedServiceURLs集合中的URL更新到元数据中心
+        this.subscribedRevision = subscribedRevision;
+        SubscriberMetadataIdentifier metadataIdentifier = new SubscriberMetadataIdentifier();
+        metadataIdentifier.setApplication(serviceName());
+        metadataIdentifier.setRevision(subscribedRevision);
+        boolean executeResult = throwableAction(getMetadataReport()::saveSubscribedData, metadataIdentifier,
+                writableMetadataService.getSubscribedURLs());
+        if (!executeResult) {
+            result = false;
+        }
+    }
+    return result;
+}
+</code></pre>
+<p>在 EventListener 接口的实现中有一个名为 CustomizableServiceInstanceListener 的实现，它会监听 ServiceInstancePreRegisteredEvent，在其 onEvent() 方法中，加载全部 ServiceInstanceCustomizer 实现，并调用全部 customize() 方法完成 ServiceInstance 的自定义。具体实现如下：</p>
+<pre><code class="language-java">public void onEvent(ServiceInstancePreRegisteredEvent event) {
+    // 加载全部ServiceInstanceCustomizer实现
+    ExtensionLoader&lt;ServiceInstanceCustomizer&gt; loader =
+            ExtensionLoader.getExtensionLoader(ServiceInstanceCustomizer.class);
+    // 按序实现ServiceInstance自定义
+    loader.getSupportedExtensionInstances().forEach(customizer -&gt; {
+        customizer.customize(event.getServiceInstance());
+    });
+}
+</code></pre>
+<h5 id="2-更新-revision-缓存">（2）更新 Revision 缓存</h5>
+<p>介绍完 ServiceInstanceMetadataCustomizer 的内容之后，下面我们回到 ServiceDiscoveryRegistry 继续分析。</p>
+<p>在清理完过期的修订版本 URL 之后，接下来会<strong>检测所有 ServiceInstance 的 revision 值是否已经存在于 serviceRevisionExportedURLsCache 缓存中</strong>，如果某个 ServiceInstance 的 revision 值没有在该缓存中，则会调用该 ServiceInstance 发布的 MetadataService 接口进行查询，这部分逻辑在 initializeRevisionExportedURLs() 方法中实现。具体实现如下：</p>
+<pre><code class="language-java">private List&lt;URL&gt; initializeRevisionExportedURLs(ServiceInstance serviceInstance) {
+    if (serviceInstance == null) { // 判空
+        return emptyList();
+    }
+    // 获取Service Name
+    String serviceName = serviceInstance.getServiceName();
+    // 获取该ServiceInstance.metadata中携带的revision值
+    String revision = getExportedServicesRevision(serviceInstance);
+    // 从serviceRevisionExportedURLsCache集合中获取该revision值对应的URL集合
+    Map&lt;String, List&lt;URL&gt;&gt; revisionExportedURLsMap = getRevisionExportedURLsMap(serviceName);
+    List&lt;URL&gt; revisionExportedURLs = revisionExportedURLsMap.get(revision);
+
+    if (revisionExportedURLs == null) { // serviceRevisionExportedURLsCache缓存没有命中        
+        // 调用该ServiceInstance对应的MetadataService服务，获取其发布的URL集合
+        revisionExportedURLs = getExportedURLs(serviceInstance);
+        if (revisionExportedURLs != null) { // 调用MetadataService服务成功之后，更新到serviceRevisionExportedURLsCache缓存中
+            revisionExportedURLsMap.put(revision, revisionExportedURLs);
+        }
+    } else { // 命中serviceRevisionExportedURLsCache缓存
+        ... // 打印日志
+    }
+    return revisionExportedURLs;
+}
+</code></pre>
+<h5 id="3-请求-metadataservice-服务">（3）请求 MetadataService 服务</h5>
+<p>这里我们可以看到，请求某个 ServiceInstance 的 MetadataService 接口的实现是在 getExportedURLs() 方法中实现的，与我们前面整个课程介绍的请求普通业务接口的原理类似。具体实现如下：</p>
+<pre><code class="language-java">private List&lt;URL&gt; getExportedURLs(ServiceInstance providerServiceInstance) {
+    List&lt;URL&gt; exportedURLs = null;
+    // 获取指定ServiceInstance实例存储元数据的类型
+    String metadataStorageType = getMetadataStorageType(providerServiceInstance);
+    try {
+        // 创建MetadataService接口的本地代理
+        MetadataService metadataService = MetadataServiceProxyFactory.getExtension(metadataStorageType)
+                .getProxy(providerServiceInstance);
+        if (metadataService != null) {
+            // 通过本地代理，请求该ServiceInstance的MetadataService服务
+            SortedSet&lt;String&gt; urls = metadataService.getExportedURLs();
+            exportedURLs = toURLs(urls);
+        }
+    } catch (Throwable e) {
+        exportedURLs = null; // 置空exportedURLs
+    }
+    return exportedURLs;
+}
+</code></pre>
+<p>这里涉及一个新的接口——<strong>MetadataServiceProxyFactory，它是用来创建 MetadataService 本地代理的工厂类</strong>，继承关系如下所示：</p>
+<p><img alt="Drawing 2.png" src="/assets/35ff77ce2aa20bfa65aaea15.png"/></p>
+<p>MetadataServiceProxyFactory 继承关系图</p>
+<p>在 BaseMetadataServiceProxyFactory 中提供了缓存 MetadataService 本地代理的公共功能，其中维护了一个 proxies 集合（HashMap<string, metadataservice=""> 类型），Key 是 Service Name 与一个 ServiceInstance 的 revision 值的组合，Value 是该 ServiceInstance 对应的 MetadataService 服务的本地代理对象。创建 MetadataService 本地代理的功能是在 createProxy() 抽象方法中实现的，这个方法由 BaseMetadataServiceProxyFactory 的子类具体实现。</string,></p>
+<p><strong>下面来看 BaseMetadataServiceProxyFactory 的两个实现——DefaultMetadataServiceProxyFactory 和 RemoteMetadataServiceProxyFactory。</strong></p>
+<p>DefaultMetadataServiceProxyFactory 在其 createProxy() 方法中，会先通过 MetadataServiceURLBuilder 获取 MetadataService 接口的 URL，然后通过 Protocol 接口引用指定 ServiceInstance 发布的 MetadataService 服务，得到对应的 Invoker 对象，最后通过 ProxyFactory 在 Invoker 对象的基础上创建 MetadataService 本地代理。</p>
+<pre><code class="language-java">protected MetadataService createProxy(ServiceInstance serviceInstance) {
+    MetadataServiceURLBuilder builder = null;
+    ExtensionLoader&lt;MetadataServiceURLBuilder&gt; loader
+            = ExtensionLoader.getExtensionLoader(MetadataServiceURLBuilder.class);
+    Map&lt;String, String&gt; metadata = serviceInstance.getMetadata();
+    // 在使用Spring Cloud的时候，metadata集合中会包含METADATA_SERVICE_URLS_PROPERTY_NAME整个Key
+    String dubboURLsJSON = metadata.get(METADATA_SERVICE_URLS_PROPERTY_NAME);
+    if (StringUtils.isNotEmpty(dubboURLsJSON)) {
+        builder = loader.getExtension(SpringCloudMetadataServiceURLBuilder.NAME);
+    } else {
+        builder = loader.getExtension(StandardMetadataServiceURLBuilder.NAME);
+    }
+    // 构造MetadataService服务对应的URL集合
+    List&lt;URL&gt; urls = builder.build(serviceInstance); 
+    // 引用服务，创建Invoker，注意，即使MetadataService接口使用了多种协议，这里也只会使用第一种协议
+    Invoker&lt;MetadataService&gt; invoker = protocol.refer(MetadataService.class, urls.get(0));
+    // 创建MetadataService的本地代理对象
+    return proxyFactory.getProxy(invoker);
+}
+</code></pre>
+<p>这里我们来看 MetadataServiceURLBuilder 接口中创建 MetadataService 服务对应的 URL 的逻辑，下图展示了 MetadataServiceURLBuilder 接口的实现：</p>
+<p><img alt="Drawing 3.png" src="/assets/527755d5c5944be8932db63f.png"/></p>
+<p>MetadataServiceURLBuilder 继承关系图</p>
+<p>其中，SpringCloudMetadataServiceURLBuilder 是兼容 Spring Cloud 的实现，这里就不深入分析了。我们重点来看 StandardMetadataServiceURLBuilder 的实现，其中会根据 ServiceInstance.metadata 携带的 URL 参数、Service Name、ServiceInstance 的 host 等信息构造 MetadataService 服务对应 URL，如下所示：</p>
+<pre><code class="language-java">public List&lt;URL&gt; build(ServiceInstance serviceInstance) {
+    // 从metadata集合中获取"dubbo.metadata-service.url-params"这个Key对应的Value值，
+    // 这个Key是在MetadataServiceURLParamsMetadataCustomizer中写入的
+    Map&lt;String, Map&lt;String, String&gt;&gt; paramsMap = getMetadataServiceURLsParams(serviceInstance);
+    List&lt;URL&gt; urls = new ArrayList&lt;&gt;(paramsMap.size());
+    // 获取Service Name
+    String serviceName = serviceInstance.getServiceName();
+    // 获取ServiceInstance监听的host
+    String host = serviceInstance.getHost();
+    // MetadataService接口可能被发布成多种协议，遍历paramsMap集合，为每种协议都生成对应的URL
+    for (Map.Entry&lt;String, Map&lt;String, String&gt;&gt; entry : paramsMap.entrySet()) {
+        String protocol = entry.getKey();
+        Map&lt;String, String&gt; params = entry.getValue();
+        int port = Integer.parseInt(params.get(PORT_KEY));
+        URLBuilder urlBuilder = new URLBuilder()
+                .setHost(host)
+                .setPort(port)
+                .setProtocol(protocol)
+                .setPath(MetadataService.class.getName());
+        params.forEach((name, value) -&gt; urlBuilder.addParameter(name, valueOf(value)));
+        urlBuilder.addParameter(GROUP_KEY, serviceName);
+        urls.add(urlBuilder.build());
+    }
+    return urls;
+}
+</code></pre>
+<p>接下来我们看 RemoteMetadataServiceProxyFactory 这个实现类，其中的 createProxy() 方法会直接创建一个 RemoteMetadataServiceProxy 对象并返回。在前面第 44 课时介绍 MetadataService 接口的时候，我们重点介绍的是 WritableMetadataService 这个子接口下的实现，并没有提及 RemoteMetadataServiceProxy 这个实现。下图是 RemoteMetadataServiceProxy 在继承体系中的位置：</p>
+<p><img alt="Drawing 4.png" src="/assets/08aac4b3f1033bd32856e56d.png"/></p>
+<p>RemoteMetadataServiceProxy 继承关系图</p>
+<p>RemoteMetadataServiceProxy 作为 RemoteWritableMetadataService 的本地代理，其 getExportedURLs()、getServiceDefinition() 等方法的实现，完全依赖于 MetadataReport 进行实现。这里以 getExportedURLs() 方法为例：</p>
+<pre><code class="language-java">public SortedSet&lt;String&gt; getExportedURLs(String serviceInterface, String group, String version, String protocol) {
+    // 通过getMetadataReport()方法获取MetadataReport实现对象，并通过其getExportedURLs()方法进行查询，查询条件封装成ServiceMetadataIdentifier传入，其中包括服务接口、group、version以及revision等一系列信息，以ZookeeperMetadataReport实现为例真正有用的信息是revision和protocol
+    return toSortedStrings(getMetadataReport().getExportedURLs(
+            new ServiceMetadataIdentifier(serviceInterface, group, version, PROVIDER_SIDE, revision, protocol)));
+}
+</code></pre>
+<p>到此为止，serviceRevisionExportedURLsCache 缓存中各个修订版本的 URL 已经更新到最新数据。</p>
+<h4 id="4-生成-subcribedurl">（4）生成 SubcribedURL</h4>
+<p>在拿到最新修订版本的 URL 集合之后，接下来会调用 cloneExportedURLs() 方法，结合模板 URL（也就是 subscribedURL）以及各个 ServiceInstance 发布出来的元数据，生成要订阅服务的最终 subscribedURL 集合。</p>
+<pre><code class="language-java">private List&lt;URL&gt; cloneExportedURLs(URL subscribedURL, Collection&lt;ServiceInstance&gt; serviceInstances) {
+    if (isEmpty(serviceInstances)) {
+        return emptyList();
+    }
+    List&lt;URL&gt; clonedExportedURLs = new LinkedList&lt;&gt;();
+    serviceInstances.forEach(serviceInstance -&gt; {
+        // 获取该ServiceInstance的host
+        String host = serviceInstance.getHost();
+        // 获取该ServiceInstance的模板URL集合，getTemplateExportedURLs()方法会根据Service Name以及当前ServiceInstance的revision
+        // 从serviceRevisionExportedURLsCache缓存中获取对应的URL集合，另外，还会根据subscribedURL的protocol、group、version等参数进行过滤
+        getTemplateExportedURLs(subscribedURL, serviceInstance)
+                .stream()
+                // 删除timestamp、pid等参数
+                .map(templateURL -&gt; templateURL.removeParameter(TIMESTAMP_KEY))
+                .map(templateURL -&gt; templateURL.removeParameter(PID_KEY))
+                .map(templateURL -&gt; {
+                    // 从ServiceInstance.metadata集合中获取该protocol对应的端口号
+                    String protocol = templateURL.getProtocol();
+                    int port = getProtocolPort(serviceInstance, protocol);
+                    if (Objects.equals(templateURL.getHost(), host)
+                            &amp;&amp; Objects.equals(templateURL.getPort(), port)) { // use templateURL if equals
+                        return templateURL;
+                    }
+                    // 覆盖host、port参数
+                    URLBuilder clonedURLBuilder = from(templateURL)
+                            .setHost(host) 
+                            .setPort(port);
+                    return clonedURLBuilder.build();
+                })
+                .forEach(clonedExportedURLs::add); // 记录新生成的URL
+    });
+    return clonedExportedURLs;
+}
+</code></pre>
+<p>在 getProtocolPort() 方法中会从 ServiceInstance.metadata 集合中获取 endpoints 列表（Key 为 dubbo.endpoints），具体实现如下：</p>
+<pre><code class="language-java">public static Integer getProtocolPort(ServiceInstance serviceInstance, String protocol) {
+    Map&lt;String, String&gt; metadata = serviceInstance.getMetadata();
+    // 从metadata集合中进行查询
+    String rawEndpoints = metadata.get("dubbo.endpoints");
+    if (StringUtils.isNotEmpty(rawEndpoints)) {
+        // 将JSON格式的数据进行反序列化，这里的Endpoint是ServiceDiscoveryRegistry的内部类，只有port和protocol两个字段
+        List&lt;Endpoint&gt; endpoints = JSON.parseArray(rawEndpoints, Endpoint.class);
+        for (Endpoint endpoint : endpoints) {
+            // 根据Protocol获取对应的port
+            if (endpoint.getProtocol().equals(protocol)) {
+                return endpoint.getPort();
+            }
+        }
+    }
+    return null;
+}
+</code></pre>
+<p>在 ServiceInstance.metadata 集合中设置 Endpoint 集合的 ServiceInstanceCustomizer 接口的另一个实现—— ProtocolPortsMetadataCustomizer，主要是为了将不同 Protocol 监听的不同端口通知到 Consumer 端。ProtocolPortsMetadataCustomizer.customize() 方法的具体实现如下：</p>
+<pre><code class="language-java">public void customize(ServiceInstance serviceInstance) {
+    // 获取WritableMetadataService
+    String metadataStoredType = getMetadataStorageType(serviceInstance);
+    WritableMetadataService writableMetadataService = getExtension(metadataStoredType);
+    Map&lt;String, Integer&gt; protocols = new HashMap&lt;&gt;();
+    // 先获取将当前ServiceInstance发布的各种Protocol对应的URL
+    writableMetadataService.getExportedURLs()
+            .stream().map(URL::valueOf)
+            // 过滤掉MetadataService接口
+            .filter(url -&gt; !MetadataService.class.getName().equals(url.getServiceInterface()))
+            .forEach(url -&gt; {
+                // 记录Protocol与port之间的映射关系
+                protocols.put(url.getProtocol(), url.getPort());
+            });
+    // 将protocols这个Map中的映射关系转换成Endpoint对象，然后再序列化成JSON字符串，并设置到该ServiceInstance的metadata集合中
+    setEndpoints(serviceInstance, protocols);
+}
+</code></pre>
+<p>到此为止，整个 getExportedURLs() 方法的核心流程就介绍完了。</p>
+<h4 id="4-subscribedurlssynthesizer">4. SubscribedURLsSynthesizer</h4>
+<p>最后，我们再来看看 synthesizeSubscribedURLs() 方法的相关实现，其中使用到 SubscribedURLsSynthesizer 这个接口，具体定义如下：</p>
+<pre><code class="language-java">@SPI
+public interface SubscribedURLsSynthesizer extends Prioritized {
+    // 是否支持该类型的URL
+    boolean supports(URL subscribedURL);
+    // 根据subscribedURL以及ServiceInstance的信息，合成完整subscribedURL集合
+    List&lt;URL&gt; synthesize(URL subscribedURL, Collection&lt;ServiceInstance&gt; serviceInstances);
+}
+</code></pre>
+<p>目前 Dubbo 只提供了 rest 协议的实现—— RestProtocolSubscribedURLsSynthesizer，其中会根据 subscribedURL 中的服务接口以及 ServiceInstance 的 host、port、Service Name 等合成完整的 URL，具体实现如下：</p>
+<pre><code class="language-java">public List&lt;URL&gt; synthesize(URL subscribedURL, Collection&lt;ServiceInstance&gt; serviceInstances) {
+    // 获取Protocol
+    String protocol = subscribedURL.getParameter(PROTOCOL_KEY); 
+    return serviceInstances.stream().map(serviceInstance -&gt; {
+        URLBuilder urlBuilder = new URLBuilder()
+                .setProtocol(protocol)
+                // 使用ServiceInstance的host、port
+                .setHost(serviceInstance.getHost()) 
+                .setPort(serviceInstance.getPort())
+                // 设置业务接口
+                .setPath(subscribedURL.getServiceInterface()) 
+                .addParameter(SIDE_KEY, PROVIDER)
+                // 设置Service Name
+                .addParameter(APPLICATION_KEY, serviceInstance.getServiceName())
+                .addParameter(REGISTER_KEY, TRUE.toString());
+        return urlBuilder.build();
+    }).collect(Collectors.toList());
+}
+</code></pre>
+<p>到这里，关于整个 ServiceDiscoveryRegistry 的内容，我们就介绍完了。</p>
+<h3 id="总结">总结</h3>
+<p>本课时我们重点介绍了 Dubbo 服务自省架构中服务发布、服务订阅功能与传统 Dubbo 架构中Registry 接口的兼容实现，也就是 ServiceDiscoveryRegistry 的核心实现。</p>
+<p>首先我们讲解了 ServiceDiscoveryRegistry 对服务注册的核心实现，然后详细介绍了 ServiceDiscoveryRegistry 对服务订阅功能的实现，其中涉及 Service Instance 和 Service Name 的查询、MetadataService 服务调用等操作，最终得到 SubcribedURL。</p>
+<p>下一课时，我们将开始介绍 Dubbo 服务自省架构中配置中心的相关内容，记得按时来听课。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

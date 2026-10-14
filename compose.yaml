@@ -1,0 +1,14 @@
+services:
+  website:
+    image: lianglianglee-library:local
+    build: .
+    container_name: lianglianglee-library
+    ports:
+      - "127.0.0.1:18891:80"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+    security_opt:
+      - no-new-privileges:true

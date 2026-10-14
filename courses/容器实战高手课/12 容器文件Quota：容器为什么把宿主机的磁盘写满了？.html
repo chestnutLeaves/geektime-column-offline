@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12 容器文件Quota：容器为什么把宿主机的磁盘写满了？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/index.html">容器实战高手课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">28 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>容器实战高手课</strong><ul><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%80%E4%B8%AA%E6%80%81%E5%BA%A6%E4%B8%A4%E4%B8%AA%E6%AD%A5%E9%AA%A4%EF%BC%8C%E6%88%90%E4%B8%BA%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B.html">00 开篇词 一个态度两个步骤，成为容器实战高手</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/01%20%E8%AE%A4%E8%AF%86%E5%AE%B9%E5%99%A8%EF%BC%9A%E5%AE%B9%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%92%8C%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">01 认识容器：容器的基本操作和实现原理</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/02%20%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B%EF%BC%881%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E4%B8%8D%E8%83%BDkill%201%E5%8F%B7%E8%BF%9B%E7%A8%8B%EF%BC%9F.html">02 理解进程（1）：为什么我在容器中不能kill 1号进程？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/03%20%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B%EF%BC%882%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E9%87%8C%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9F.html">03 理解进程（2）：为什么我的容器里有这么多僵尸进程？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/04%20%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B%EF%BC%883%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E8%A2%AB%E5%BC%BA%E5%88%B6%E6%9D%80%E6%AD%BB%E4%BA%86%EF%BC%9F.html">04 理解进程（3）：为什么我在容器中的进程被强制杀死了？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/05%20%E5%AE%B9%E5%99%A8CPU%EF%BC%881%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E9%99%90%E5%88%B6%E5%AE%B9%E5%99%A8%E7%9A%84CPU%E4%BD%BF%E7%94%A8%EF%BC%9F.html">05 容器CPU（1）：怎么限制容器的CPU使用？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/06%20%E5%AE%B9%E5%99%A8CPU%EF%BC%882%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%9C%B0%E6%8B%BF%E5%88%B0%E5%AE%B9%E5%99%A8CPU%E7%9A%84%E5%BC%80%E9%94%80%EF%BC%9F.html">06 容器CPU（2）：如何正确地拿到容器CPU的开销？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/07%20Load%20Average%EF%BC%9A%E5%8A%A0%E4%BA%86CPU%20Cgroup%E9%99%90%E5%88%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E8%BF%98%E6%98%AF%E5%BE%88%E6%85%A2%EF%BC%9F.html">07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/08%20%E5%AE%B9%E5%99%A8%E5%86%85%E5%AD%98%EF%BC%9A%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A2%AB%E6%9D%80%E4%BA%86%EF%BC%9F.html">08 容器内存：我的容器为什么被杀了？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/09%20Page%20Cache%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E9%87%8F%E6%80%BB%E6%98%AF%E5%9C%A8%E4%B8%B4%E7%95%8C%E7%82%B9.html">09 Page Cache：为什么我的容器内存使用量总是在临界点</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/10%20Swap%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8Swap%E7%A9%BA%E9%97%B4%E5%90%97%EF%BC%9F.html">10 Swap：容器可以使用Swap空间吗？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/11%20%E5%AE%B9%E5%99%A8%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%88%91%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E5%8F%98%E6%85%A2%E4%BA%86%EF%BC%9F.html">11 容器文件系统：我在容器中读写文件怎么变慢了？</a></li><li><a class="active" aria-current="page" href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/12%20%E5%AE%B9%E5%99%A8%E6%96%87%E4%BB%B6Quota%EF%BC%9A%E5%AE%B9%E5%99%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%8A%E5%AE%BF%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%A3%81%E7%9B%98%E5%86%99%E6%BB%A1%E4%BA%86%EF%BC%9F.html">12 容器文件Quota：容器为什么把宿主机的磁盘写满了？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/13%20%E5%AE%B9%E5%99%A8%E7%A3%81%E7%9B%98%E9%99%90%E9%80%9F%EF%BC%9A%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E9%87%8C%E7%A3%81%E7%9B%98%E8%AF%BB%E5%86%99%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%A8%B3%E5%AE%9A_.html">13 容器磁盘限速：我的容器里磁盘读写为什么不稳定_</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/14%20%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E4%B8%8EIO%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%86%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%BB%B6%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B3%A2%E5%8A%A8%E5%BE%88%E5%A4%A7%EF%BC%9F.html">14 容器中的内存与IO：容器写文件的延时为什么波动很大？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/15%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%88%91%E4%BF%AE%E6%94%B9%E4%BA%86_proc_sys_net%E4%B8%8B%E7%9A%84%E5%8F%82%E6%95%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E4%B8%8D%E8%B5%B7%E6%95%88%EF%BC%9F.html">15 容器网络：我修改了_proc_sys_net下的参数，为什么在容器中不起效？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/16%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%881%EF%BC%89%EF%BC%9A%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E4%B8%8D%E9%80%9A%E4%BA%86%E8%A6%81%E6%80%8E%E4%B9%88%E8%B0%83%E8%AF%95.html">16 容器网络配置（1）：容器网络不通了要怎么调试</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/17%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%882%EF%BC%89%EF%BC%9A%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E5%BB%B6%E6%97%B6%E8%A6%81%E6%AF%94%E5%AE%BF%E4%B8%BB%E6%9C%BA%E4%B8%8A%E7%9A%84%E9%AB%98%E5%90%97.html">17 容器网络配置（2）：容器网络延时要比宿主机上的高吗</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/18%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%883%EF%BC%89%EF%BC%9A%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E7%BD%91%E7%BB%9C%E4%B9%B1%E5%BA%8F%E5%8C%85%E6%80%8E%E4%B9%88%E8%BF%99%E4%B9%88%E9%AB%98%EF%BC%9F.html">18 容器网络配置（3）：容器中的网络乱序包怎么这么高？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/19%20%E5%AE%B9%E5%99%A8%E5%AE%89%E5%85%A8%EF%BC%881%EF%BC%89%EF%BC%9A%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E7%9C%9F%E7%9A%84%E9%9C%80%E8%A6%81privileged%E6%9D%83%E9%99%90%E5%90%97.html">19 容器安全（1）：我的容器真的需要privileged权限吗</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/20%20%E5%AE%B9%E5%99%A8%E5%AE%89%E5%85%A8%EF%BC%882%EF%BC%89%EF%BC%9A%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%EF%BC%8C%E6%88%91%E4%B8%8D%E4%BB%A5root%E7%94%A8%E6%88%B7%E6%9D%A5%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%8F%AF%E4%BB%A5%E5%90%97%EF%BC%9F.html">20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9001%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E6%B5%B7%E9%87%8FIPVS%E8%A7%84%E5%88%99%E5%B8%A6%E6%9D%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E5%BB%B6%E6%97%B6%E6%8A%96%E5%8A%A8%E9%97%AE%E9%A2%98%EF%BC%9F.html">加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9002%20%E7%90%86%E8%A7%A3perf%EF%BC%9A%E6%80%8E%E4%B9%88%E7%94%A8perf%E8%81%9A%E7%84%A6%E7%83%AD%E7%82%B9%E5%87%BD%E6%95%B0%EF%BC%9F.html">加餐02 理解perf：怎么用perf聚焦热点函数？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9003%20%E7%90%86%E8%A7%A3ftrace%EF%BC%881%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E5%BA%94%E7%94%A8ftrace%E6%9F%A5%E7%9C%8B%E9%95%BF%E5%BB%B6%E6%97%B6%E5%86%85%E6%A0%B8%E5%87%BD%E6%95%B0%EF%BC%9F.html">加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9004%20%E7%90%86%E8%A7%A3ftrace%EF%BC%882%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3ftrace%E8%83%8C%E5%90%8E%E7%9A%84%E6%8A%80%E6%9C%AFtracepoint%E5%92%8Ckprobe%EF%BC%9F.html">加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9005%20eBPF%EF%BC%9A%E6%80%8E%E4%B9%88%E6%9B%B4%E5%8A%A0%E6%B7%B1%E5%85%A5%E5%9C%B0%E6%9F%A5%E7%9C%8B%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%9F.html">加餐05 eBPF：怎么更加深入地查看内核中的函数？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9006%20BCC%EF%BC%9A%E5%85%A5%E9%97%A8eBPF%E7%9A%84%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7.html">加餐06 BCC：入门eBPF的前端工具</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E8%B7%B3%E5%87%BA%E8%88%92%E9%80%82%E5%8C%BA%EF%BC%8C%E7%AA%81%E7%A0%B4%E6%80%9D%E8%80%83%E7%9A%84%E6%83%B0%E6%80%A7.html">结束语 跳出舒适区，突破思考的惰性</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/12%20%E5%AE%B9%E5%99%A8%E6%96%87%E4%BB%B6Quota%EF%BC%9A%E5%AE%B9%E5%99%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%8A%E5%AE%BF%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%A3%81%E7%9B%98%E5%86%99%E6%BB%A1%E4%BA%86%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12 容器文件Quota：容器为什么把宿主机的磁盘写满了？" id="title">12 容器文件Quota：容器为什么把宿主机的磁盘写满了？</h1>
+<div><p>你好，我是程远。今天我们聊一聊容器文件Quota。</p>
+<p>上一讲，我们学习了容器文件系统OverlayFS，这个OverlayFS有两层，分别是lowerdir和upperdir。lowerdir里是容器镜像中的文件，对于容器来说是只读的；upperdir存放的是容器对文件系统里的所有改动，它是可读写的。</p>
+<p>从宿主机的角度看，upperdir就是一个目录，如果容器不断往容器文件系统中写入数据，实际上就是往宿主机的磁盘上写数据，这些数据也就存在于宿主机的磁盘目录中。</p>
+<p>当然对于容器来说，如果有大量的写操作是不建议写入容器文件系统的，一般是需要给容器挂载一个volume，用来满足大量的文件读写。</p>
+<p>但是不能避免的是，用户在容器中运行的程序有错误，或者进行了错误的配置。</p>
+<p>比如说，我们把log写在了容器文件系统上，并且没有做log rotation，那么时间一久，就会导致宿主机上的磁盘被写满。这样影响的就不止是容器本身了，而是整个宿主机了。</p>
+<p>那对于这样的问题，我们该怎么解决呢？</p>
+<h2 id="问题再现">问题再现</h2>
+<p>我们可以自己先启动一个容器，一起试试不断地往容器文件系统中写入数据，看看是一个什么样的情况。</p>
+<p>用Docker启动一个容器后，我们看到容器的根目录(/)也就是容器文件系统OverlayFS，它的大小是160G，已经使用了100G。其实这个大小也是宿主机上的磁盘空间和使用情况。</p>
+<p><img alt="img" src="/assets/a7870777ef8940894dcc681a.png"/></p>
+<p>这时候，我们可以回到宿主机上验证一下，就会发现宿主机的根目录(/)的大小也是160G，同样是使用了100G。</p>
+<p><img alt="img" src="/assets/967a6f5b94279541365e0de7.png"/></p>
+<p>好，那现在我们再往容器的根目录里写入10GB的数据。</p>
+<p>这里我们可以看到容器的根目录使用的大小增加了，从刚才的100G变成现在的110G。而多写入的10G大小的数据，对应的是test.log这个文件。</p>
+<p><img alt="img" src="/assets/660d4f0404096153418534bc.png"/></p>
+<p>接下来，我们再回到宿主机上，可以看到宿主机上的根目录(/)里使用的大小也是110G了。</p>
+<p><img alt="img" src="/assets/6136654bd079bf60b13ceaf7.png"/></p>
+<p>我们还是继续看宿主机，看看OverlayFS里upperdir目录中有什么文件？</p>
+<p>这里我们仍然可以通过/proc/mounts这个路径，找到容器OverlayFS对应的lowerdir和upperdir。因为写入的数据都在upperdir里，我们就只要看upperdir对应的那个目录就行了。果然，里面存放着容器写入的文件test.log，它的大小是10GB。</p>
+<p><img alt="img" src="/assets/d602896b4ace56b54afe9401.png"/></p>
+<p>通过这个例子，我们已经验证了在容器中对于OverlayFS中写入数据，<strong>其实就是往宿主机的一个目录（upperdir）里写数据。</strong>我们现在已经写了10GB的数据，如果继续在容器中写入数据，结果估计你也知道了，就是会写满宿主机的磁盘。</p>
+<p>那遇到这种情况，我们该怎么办呢？</p>
+<h2 id="知识详解">知识详解</h2>
+<p>容器写自己的OverlayFS根目录，结果把宿主机的磁盘写满了。发生这个问题，我们首先就会想到需要对容器做限制，限制它写入自己OverlayFS的数据量，比如只允许一个容器写100MB的数据。</p>
+<p>不过我们实际查看OverlayFS文件系统的特性，就会发现没有直接限制文件写入量的特性。别担心，在没有现成工具的情况下，我们只要搞懂了原理，就能想出解决办法。</p>
+<p>所以我们再来分析一下OverlayFS，它是通过lowerdir和upperdir两层目录联合挂载来实现的，lowerdir是只读的，数据只会写在upperdir中。</p>
+<p>那我们是不是可以通过限制upperdir目录容量的方式，来限制一个容器OverlayFS根目录的写入数据量呢？</p>
+<p>沿着这个思路继续往下想，因为upperdir在宿主机上也是一个普通的目录，这样就要看<strong>宿主机上的文件系统是否可以支持对一个目录限制容量了。</strong></p>
+<p>对于Linux上最常用的两个文件系统XFS和ext4，它们有一个特性Quota，那我们就以XFS文件系统为例，学习一下这个Quota概念，然后看看这个特性能不能限制一个目录的使用量。</p>
+<h3 id="xfs-quota">XFS Quota</h3>
+<p>在Linux系统里的XFS文件系统缺省都有Quota的特性，这个特性可以为Linux系统里的一个用户（user），一个用户组（group）或者一个项目（project）来限制它们使用文件系统的额度（quota），也就是限制它们可以写入文件系统的文件总量。</p>
+<p>因为我们的目标是要限制一个目录中总体的写入文件数据量，那么显然给用户和用户组限制文件系统的写入数据量的模式，并不适合我们的这个需求。</p>
+<p>因为同一个用户或者用户组可以操作多个目录，多个用户或者用户组也可以操作同一个目录，这样对一个用户或者用户组的限制，就很难用来限制一个目录。</p>
+<p>那排除了限制用户或用户组的模式，我们再来看看Project模式。Project模式是怎么工作的呢？</p>
+<p>我举一个例子你会更好理解，对Linux熟悉的同学可以一边操作，一边体会一下它的工作方式。不熟悉的同学也没关系，可以重点关注我后面的讲解思路。</p>
+<p>首先我们要使用XFS Quota特性，必须在文件系统挂载的时候加上对应的Quota选项，比如我们目前需要配置Project Quota，那么这个挂载参数就是”pquota”。</p>
+<p>对于根目录来说，<strong>这个参数必须作为一个内核启动的参数”rootflags=pquota”，这样设置就可以保证根目录在启动挂载的时候，带上XFS Quota的特性并且支持Project模式。</strong></p>
+<p>我们可以从/proc/mounts信息里，看看根目录是不是带”prjquota”字段。如果里面有这个字段，就可以确保文件系统已经带上了支持project模式的XFS quota特性。</p>
+<p><img alt="img" src="/assets/8c2f6ab4c841c4d72b827442.png"/></p>
+<p>下一步，我们还需要给一个指定的目录打上一个Project ID。这个步骤我们可以使用XFS文件系统自带的工具 <a href="https://linux.die.net/man/8/xfs_quota" target="_blank">xfs_quota</a> 来完成，然后执行下面的这个命令就可以了。</p>
+<p>执行命令之前，我先对下面的命令和输出做两点解释，让你理解这个命令的含义。</p>
+<p>第一点，新建的目录/tmp/xfs_prjquota，我们想对它做Quota限制。所以在这里要对它打上一个Project ID。</p>
+<p>第二点，通过xfs_quota这条命令，我们给/tmp/xfs_prjquota打上Project ID值101，这个101是我随便选的一个数字，就是个ID标识，你先有个印象。在后面针对Project进行Quota限制的时候，我们还会用到这个ID。</p>
+<pre><code class="language-shell"># mkdir -p  /tmp/xfs_prjquota
+# xfs_quota -x -c 'project -s -p /tmp/xfs_prjquota 101' /
+Setting up project 101 (path /tmp/xfs_prjquota)...
+Processed 1 (/etc/projects and cmdline) paths for project 101 with recursion depth infinite (-1).
+</code></pre>
+<p>最后，我们还是使用xfs_quota命令，对101（我们刚才建立的这个Project ID）做Quota限制。</p>
+<p>你可以执行下面这条命令，里面的”-p bhard=10m 101”就代表限制101这个project ID，限制它的数据块写入量不能超过10MB。</p>
+<pre><code class="language-shell"># xfs_quota -x -c 'limit -p bhard=10m 101' /
+</code></pre>
+<p>做好限制之后，我们可以尝试往/tmp/xfs_prjquota写数据，看看是否可以超过10MB。比如说，我们尝试写入20MB的数据到/tmp/xfs_prjquota里。</p>
+<p>我们可以看到，执行dd写入命令，就会有个出错返回信息”No space left on device”。这表示已经不能再往这个目录下写入数据了，而最后写入数据的文件test.file大小也停留在了10MB。</p>
+<pre><code class="language-shell"># dd if=/dev/zero of=/tmp/xfs_prjquota/test.file bs=1024 count=20000
+dd: error writing '/tmp/xfs_prjquota/test.file': No space left on device
+10241+0 records in
+10240+0 records out
+10485760 bytes (10 MB, 10 MiB) copied, 0.0357122 s, 294 MB/s
+
+# ls -l /tmp/xfs_prjquota/test.file
+-rw-r--r-- 1 root root 10485760 Oct 31 10:00 /tmp/xfs_prjquota/test.file
+</code></pre>
+<p>好了，做到这里，我们发现使用XFS Quota的Project模式，确实可以限制一个目录里的写入数据量，它实现的方式其实也不难，就是下面这两步。</p>
+<p>第一步，给目标目录打上一个Project ID，这个ID最终是写到目录对应的inode上。</p>
+<p>这里我解释一下，inode是文件系统中用来描述一个文件或者一个目录的元数据，里面包含文件大小，数据块的位置，文件所属用户/组，文件读写属性以及其他一些属性。</p>
+<p>那么一旦目录打上这个ID之后，在这个目录下的新建的文件和目录也都会继承这个ID。</p>
+<p>第二步，在XFS文件系统中，我们需要给这个project ID设置一个写入数据块的限制。</p>
+<p>有了ID和限制值之后，文件系统就可以统计所有带这个ID文件的数据块大小总和，并且与限制值进行比较。一旦所有文件大小的总和达到限制值，文件系统就不再允许更多的数据写入了。</p>
+<p>用一句话概括，XFS Quota就是通过前面这两步限制了一个目录里写入的数据量。</p>
+<h2 id="解决问题">解决问题</h2>
+<p>我们理解了XFS Quota对目录限流的机制之后，再回到我们最开始的问题，如何确保容器不会写满宿主机上的磁盘。</p>
+<p>你应该已经想到了，方法就是<strong>对OverlayFS的upperdir目录做XFS Quota的限流</strong>，没错，就是这个解决办法！</p>
+<p>其实Docker也已经实现了限流功能，也就是用XFS Quota来限制容器的OverlayFS大小。</p>
+<p>我们在用 <code>docker run</code> 启动容器的时候，加上一个参数 <code>--storage-opt size= &lt;SIZE&gt;</code> ，就能限制住容器OverlayFS文件系统可写入的最大数据量了。</p>
+<p>我们可以一起试一下，这里我们限制的size是10MB。</p>
+<p>进入容器之后，先运行 <code>df -h</code> 命令，这时候你可以看到根目录(/)overlayfs文件系统的大小就10MB，而不是我们之前看到的160GB的大小了。这样容器在它的根目录下，最多只能写10MB数据，就不会把宿主机的磁盘给写满了。</p>
+<p><img alt="img" src="/assets/0e1191c70cf395223ef595b3.png"/></p>
+<p>完成了上面这个小试验之后，我们可以再看一下Docker的代码，看看它的实现是不是和我们想的一样。</p>
+<p>Docker里<a href="https://github.com/moby/moby/blob/19.03/daemon/graphdriver/quota/projectquota.go#L155" target="_blank">SetQuota()</a>函数就是用来实现XFS Quota 限制的，我们可以看到它里面最重要的两步，分别是 <code>setProjectID</code> 和 <code>setProjectQuota</code> 。</p>
+<p>其实，这两步做的就是我们在基本概念中提到的那两步：</p>
+<p>第一步，给目标目录打上一个Project ID；第二步，为这个Project ID在XFS文件系统中，设置一个写入数据块的限制。</p>
+<pre><code class="language-shell">// SetQuota - assign a unique project id to directory and set the quota limits
+// for that project id
+
+func (q *Control) SetQuota(targetPath string, quota Quota) error {
+        q.RLock()
+        projectID, ok := q.quotas[targetPath]
+        q.RUnlock()
+
+        if !ok {
+                q.Lock()
+                projectID = q.nextProjectID
+
+                //
+                // assign project id to new container directory
+                //
+
+                err := setProjectID(targetPath, projectID)
+                if err != nil {
+                        q.Unlock()
+                        return err
+                }
+
+                q.quotas[targetPath] = projectID
+                q.nextProjectID++
+                q.Unlock()
+        }
+
+ 
+
+        //
+        // set the quota limit for the container's project id
+        //
+
+        logrus.Debugf("SetQuota(%s, %d): projectID=%d", targetPath, quota.Size, projectID)
+        return setProjectQuota(q.backingFsBlockDev, projectID, quota)
+}
+</code></pre>
+<p>那 <code>setProjectID</code> 和 <code>setProjectQuota</code> 是如何实现的呢？</p>
+<p>你可以进入到这两个函数里看一下，<strong>它们分别调用了ioctl()和quotactl()这两个系统调用来修改内核中XFS的数据结构，从而完成project ID的设置和Quota值的设置。</strong>具体的细节，我不在这里展开了，如果你有兴趣，可以继续去查看内核中对应的代码。</p>
+<p>好了，Docker里XFS Quota操作的步骤完全和我们先前设想的一样，那么还有最后一个问题要解决，XFS Quota限制的目录是哪一个？</p>
+<p>这个我们可以根据/proc/mounts中容器的OverlayFS Mount信息，再结合Docker的<a href="https://github.com/moby/moby/blob/19.03/daemon/graphdriver/overlay2/overlay.go#L335" target="_blank">代码</a>，就可以知道限制的目录是”/var/lib/docker/overlay2/<docker_id>“。那这个目录下有什么呢？果然upperdir目录中有对应的”diff”目录，就在里面！</docker_id></p>
+<p><img alt="img" src="/assets/d9b9b4d7a8eb65ed99c0d1d7.png"/></p>
+<p>讲到这里，我想你已经清楚了对于使用OverlayFS的容器，我们应该如何去防止它把宿主机的磁盘给写满了吧？<strong>方法就是对OverlayFS的upperdir目录做XFS Quota的限流。</strong></p>
+<h2 id="重点总结">重点总结</h2>
+<p>我们这一讲的问题是，容器写了大量数据到OverlayFS文件系统的根目录，在这个情况下，就会把宿主机的磁盘写满。</p>
+<p>由于OverlayFS自己没有专门的特性，可以限制文件数据写入量。这时我们通过实际试验找到了解决思路：依靠底层文件系统的Quota特性来限制OverlayFS的upperdir目录的大小，这样就能实现限制容器写磁盘的目的。</p>
+<p>底层文件系统XFS Quota的Project模式，能够限制一个目录的文件写入量，这个功能具体是通过这两个步骤实现：</p>
+<p>第一步，给目标目录打上一个Project ID。</p>
+<p>第二步，给这个Project ID在XFS文件系统中设置一个写入数据块的限制。</p>
+<p>Docker正是使用了这个方法，也就是<strong>用XFS Quota来限制OverlayFS的upperdir目录</strong>，通过这个方式控制容器OverlayFS的根目录大小。</p>
+<p>当我们理解了这个方法后，对于不是用Docker启动的容器，比如直接由containerd启动起来的容器，也可以自己实现XFS Quota限制upperdir目录。这样就能有效控制容器对OverlayFS的写数据操作，避免宿主机的磁盘被写满。</p>
+<h2 id="思考题">思考题</h2>
+<p>在正文知识详解的部分，我们使用”xfs_quota”给目录打了project ID并且限制了文件写入的数据量。那在做完这样的限制之后，我们是否能用xfs_quota命令，查询到被限制目录的project ID和限制的数据量呢？</p>
+<p>欢迎你在留言区分享你的思考或疑问。如果这篇文章让你有所收获，也欢迎转发给你的同事、朋友，一起交流和学习。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>02 Java内存模型：看Java如何解决可见性和有序性问题 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/index.html">Java并发编程实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">50 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java并发编程实战</strong><ul><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/00%20%E5%AD%A6%E4%B9%A0%E6%94%BB%E7%95%A5%20%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E5%AD%A6%E5%A5%BD%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9F.html">00 学习攻略 如何才能学好并发编程？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BD%A0%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AD%A6%E4%B9%A0%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9F.html">00 开篇词 你为什么需要学习并发编程？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/01%20%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E5%8E%9F%E5%AD%90%E6%80%A7%E5%92%8C%E6%9C%89%E5%BA%8F%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8BBug%E7%9A%84%E6%BA%90%E5%A4%B4.html">01 可见性、原子性和有序性问题：并发编程Bug的源头</a></li><li><a class="active" aria-current="page" href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/02%20Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%9C%8BJava%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8F%AF%E8%A7%81%E6%80%A7%E5%92%8C%E6%9C%89%E5%BA%8F%E6%80%A7%E9%97%AE%E9%A2%98.html">02 Java内存模型：看Java如何解决可见性和有序性问题</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/03%20%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%8E%9F%E5%AD%90%E6%80%A7%E9%97%AE%E9%A2%98.html">03 互斥锁（上）：解决原子性问题</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/04%20%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E4%B8%80%E6%8A%8A%E9%94%81%E4%BF%9D%E6%8A%A4%E5%A4%9A%E4%B8%AA%E8%B5%84%E6%BA%90%EF%BC%9F.html">04 互斥锁（下）：如何用一把锁保护多个资源？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/05%20%E4%B8%80%E4%B8%8D%E5%B0%8F%E5%BF%83%E5%B0%B1%E6%AD%BB%E9%94%81%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">05 一不小心就死锁了，怎么办？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/06%20%E7%94%A8%E2%80%9C%E7%AD%89%E5%BE%85-%E9%80%9A%E7%9F%A5%E2%80%9D%E6%9C%BA%E5%88%B6%E4%BC%98%E5%8C%96%E5%BE%AA%E7%8E%AF%E7%AD%89%E5%BE%85.html">06 用“等待-通知”机制优化循环等待</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/07%20%E5%AE%89%E5%85%A8%E6%80%A7%E3%80%81%E6%B4%BB%E8%B7%83%E6%80%A7%E4%BB%A5%E5%8F%8A%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98.html">07 安全性、活跃性以及性能问题</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/08%20%E7%AE%A1%E7%A8%8B%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%87%E8%83%BD%E9%92%A5%E5%8C%99.html">08 管程：并发编程的万能钥匙</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/09%20Java%E7%BA%BF%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AJava%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html">09 Java线程（上）：Java线程的生命周期</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/10%20Java%E7%BA%BF%E7%A8%8B%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%88%9B%E5%BB%BA%E5%A4%9A%E5%B0%91%E7%BA%BF%E7%A8%8B%E6%89%8D%E6%98%AF%E5%90%88%E9%80%82%E7%9A%84%EF%BC%9F.html">10 Java线程（中）：创建多少线程才是合适的？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/11%20Java%E7%BA%BF%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F.html">11 Java线程（下）：为什么局部变量是线程安全的？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/12%20%E5%A6%82%E4%BD%95%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%86%99%E5%A5%BD%E5%B9%B6%E5%8F%91%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">12 如何用面向对象思想写好并发程序？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/13%20%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">13 理论基础模块热点问题答疑</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/14%20Lock%E5%92%8CCondition%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%9A%90%E8%97%8F%E5%9C%A8%E5%B9%B6%E5%8F%91%E5%8C%85%E4%B8%AD%E7%9A%84%E7%AE%A1%E7%A8%8B.html">14 Lock和Condition（上）：隐藏在并发包中的管程</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/15%20Lock%E5%92%8CCondition%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ADubbo%E5%A6%82%E4%BD%95%E7%94%A8%E7%AE%A1%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E8%BD%AC%E5%90%8C%E6%AD%A5%EF%BC%9F.html">15 Lock和Condition（下）：Dubbo如何用管程实现异步转同步？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/16%20Semaphore%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E9%99%90%E6%B5%81%E5%99%A8%EF%BC%9F.html">16 Semaphore：如何快速实现一个限流器？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/17%20ReadWriteLock%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%8C%E5%A4%87%E7%9A%84%E7%BC%93%E5%AD%98%EF%BC%9F.html">17 ReadWriteLock：如何快速实现一个完备的缓存？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/18%20StampedLock%EF%BC%9A%E6%9C%89%E6%B2%A1%E6%9C%89%E6%AF%94%E8%AF%BB%E5%86%99%E9%94%81%E6%9B%B4%E5%BF%AB%E7%9A%84%E9%94%81%EF%BC%9F.html">18 StampedLock：有没有比读写锁更快的锁？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/19%20CountDownLatch%E5%92%8CCyclicBarrier%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%AD%A5%E8%B0%83%E4%B8%80%E8%87%B4%EF%BC%9F.html">19 CountDownLatch和CyclicBarrier：如何让多线程步调一致？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/20%20%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%EF%BC%9A%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E2%80%9C%E5%9D%91%E2%80%9D%E9%9C%80%E8%A6%81%E6%88%91%E4%BB%AC%E5%A1%AB%EF%BC%9F.html">20 并发容器：都有哪些“坑”需要我们填？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/21%20%E5%8E%9F%E5%AD%90%E7%B1%BB%EF%BC%9A%E6%97%A0%E9%94%81%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E5%85%B8%E8%8C%83.html">21 原子类：无锁工具类的典范</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/22%20Executor%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E6%AD%A3%E7%A1%AE%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">22 Executor与线程池：如何创建正确的线程池？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/23%20Future%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E6%9C%80%E4%BC%98%E7%9A%84%E2%80%9C%E7%83%A7%E6%B0%B4%E6%B3%A1%E8%8C%B6%E2%80%9D%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">23 Future：如何用多线程实现最优的“烧水泡茶”程序？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/24%20CompletableFuture%EF%BC%9A%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E6%B2%A1%E9%82%A3%E4%B9%88%E9%9A%BE.html">24 CompletableFuture：异步编程没那么难</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/25%20CompletionService%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%B9%E9%87%8F%E6%89%A7%E8%A1%8C%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%EF%BC%9F.html">25 CompletionService：如何批量执行异步任务？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/26%20Fork_Join%EF%BC%9A%E5%8D%95%E6%9C%BA%E7%89%88%E7%9A%84MapReduce.html">26 Fork_Join：单机版的MapReduce</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/27%20%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%E6%A8%A1%E5%9D%97%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">27 并发工具类模块热点问题答疑</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/28%20Immutability%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E4%B8%8D%E5%8F%98%E6%80%A7%E8%A7%A3%E5%86%B3%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98%EF%BC%9F.html">28 Immutability模式：如何利用不变性解决并发问题？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/29%20Copy-on-Write%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%8D%E6%98%AF%E5%BB%B6%E6%97%B6%E7%AD%96%E7%95%A5%E7%9A%84COW.html">29 Copy-on-Write模式：不是延时策略的COW</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%20%E4%B8%AA%E7%94%A8%E6%88%B7%E6%9D%A5%E4%BF%A1%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%B9%B6%E5%8F%91%E4%B8%96%E7%95%8C.html">3 个用户来信 打开一个新的并发世界</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/30%20%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%B2%A1%E6%9C%89%E5%85%B1%E4%BA%AB%EF%BC%8C%E5%B0%B1%E6%B2%A1%E6%9C%89%E4%BC%A4%E5%AE%B3.html">30 线程本地存储模式：没有共享，就没有伤害</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/31%20Guarded%20Suspension%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%AD%89%E5%BE%85%E5%94%A4%E9%86%92%E6%9C%BA%E5%88%B6%E7%9A%84%E8%A7%84%E8%8C%83%E5%AE%9E%E7%8E%B0.html">31 Guarded Suspension模式：等待唤醒机制的规范实现</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/32%20Balking%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%86%8D%E8%B0%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">32 Balking模式：再谈线程安全的单例模式</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/33%20Thread-Per-Message%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%9C%80%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E7%9A%84%E5%88%86%E5%B7%A5%E6%96%B9%E6%B3%95.html">33 Thread-Per-Message模式：最简单实用的分工方法</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/34%20Worker%20Thread%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E9%87%8D%E5%A4%8D%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">34 Worker Thread模式：如何避免重复创建线程？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/35%20%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E7%BB%88%E6%AD%A2%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">35 两阶段终止模式：如何优雅地终止线程？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/36%20%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%94%A8%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%80%9D%E6%83%B3%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87.html">36 生产者-消费者模式：用流水线思想提高效率</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/37%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A8%A1%E5%9D%97%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">37 设计模式模块热点问题答疑</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/38%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E9%99%90%E6%B5%81%E5%99%A8Guava%20RateLimiter.html">38 案例分析（一）：高性能限流器Guava RateLimiter</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/39%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6Netty.html">39 案例分析（二）：高性能网络应用框架Netty</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/40%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor.html">40 案例分析（三）：高性能队列Disruptor</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/41%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0HiKariCP.html">41 案例分析（四）：高性能数据库连接池HiKariCP</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/42%20Actor%E6%A8%A1%E5%9E%8B%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%8E%9F%E7%94%9F%E7%9A%84%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B.html">42 Actor模型：面向对象原生的并发模型</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/43%20%E8%BD%AF%E4%BB%B6%E4%BA%8B%E5%8A%A1%E5%86%85%E5%AD%98%EF%BC%9A%E5%80%9F%E9%89%B4%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%8F%E9%AA%8C.html">43 软件事务内存：借鉴数据库的并发经验</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/44%20%E5%8D%8F%E7%A8%8B%EF%BC%9A%E6%9B%B4%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%9A%84%E7%BA%BF%E7%A8%8B.html">44 协程：更轻量级的线程</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/45%20CSP%E6%A8%A1%E5%9E%8B%EF%BC%9AGolang%E7%9A%84%E4%B8%BB%E5%8A%9B%E9%98%9F%E5%91%98.html">45 CSP模型：Golang的主力队员</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%9D%A5%E4%BF%A1%20%E7%9C%9F%E5%A5%BD%EF%BC%8C%E9%9D%A2%E8%AF%95%E8%80%83%E5%88%B0%E8%BF%99%E4%BA%9B%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%8C%E6%88%91%E9%83%BD%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%81.html">用户来信 真好，面试考到这些并发编程，我都答对了！</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%8D%81%E5%B9%B4%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%88%9D%E5%BF%83%E4%BE%9D%E6%97%A7.html">结束语 十年之后，初心依旧</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/02%20Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%9C%8BJava%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8F%AF%E8%A7%81%E6%80%A7%E5%92%8C%E6%9C%89%E5%BA%8F%E6%80%A7%E9%97%AE%E9%A2%98.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="02 Java内存模型：看Java如何解决可见性和有序性问题" id="title">02 Java内存模型：看Java如何解决可见性和有序性问题</h1>
+<div><p>上一期我们讲到在并发场景中，因可见性、原子性、有序性导致的问题常常会违背我们的直觉，从而成为并发编程的Bug之源。这三者在编程领域属于共性问题，所有的编程语言都会遇到，Java在诞生之初就支持多线程，自然也有针对这三者的技术方案，而且在编程语言领域处于领先地位。理解Java解决并发问题的解决方案，对于理解其他语言的解决方案有触类旁通的效果。</p>
+<p>那我们就先来聊聊如何解决其中的可见性和有序性导致的问题，这也就引出来了今天的主角——<strong>Java内存模型</strong>。</p>
+<p>Java内存模型这个概念，在职场的很多面试中都会考核到，是一个热门的考点，也是一个人并发水平的具体体现。原因是当并发程序出问题时，需要一行一行地检查代码，这个时候，只有掌握Java内存模型，才能慧眼如炬地发现问题。</p>
+<h2 id="什么是java内存模型">什么是Java内存模型？</h2>
+<p>你已经知道，导致可见性的原因是缓存，导致有序性的原因是编译优化，那解决可见性、有序性最直接的办法就是<strong>禁用缓存和编译优化</strong>，但是这样问题虽然解决了，我们程序的性能可就堪忧了。</p>
+<p>合理的方案应该是<strong>按需禁用缓存以及编译优化</strong>。那么，如何做到“按需禁用”呢？对于并发程序，何时禁用缓存以及编译优化只有程序员知道，那所谓“按需禁用”其实就是指按照程序员的要求来禁用。所以，为了解决可见性和有序性问题，只需要提供给程序员按需禁用缓存和编译优化的方法即可。</p>
+<p>Java内存模型是个很复杂的规范，可以从不同的视角来解读，站在我们这些程序员的视角，本质上可以理解为，Java内存模型规范了JVM如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 <strong>volatile</strong>、<strong>synchronized</strong> 和 <strong>final</strong> 三个关键字，以及六项 <strong>Happens-Before 规则</strong>，这也正是本期的重点内容。</p>
+<h2 id="使用volatile的困惑">使用volatile的困惑</h2>
+<p>volatile关键字并不是Java语言的特产，古老的C语言里也有，它最原始的意义就是禁用CPU缓存。</p>
+<p>例如，我们声明一个volatile变量 <code>volatile int x = 0</code>，它表达的是：告诉编译器，对这个变量的读写，不能使用CPU缓存，必须从内存中读取或者写入。这个语义看上去相当明确，但是在实际使用的时候却会带来困惑。</p>
+<p>例如下面的示例代码，假设线程A执行writer()方法，按照 volatile 语义，会把变量 “v=true” 写入内存；假设线程B执行reader()方法，同样按照 volatile 语义，线程B会从内存中读取变量v，如果线程B看到 “v == true” 时，那么线程B看到的变量x是多少呢？</p>
+<p>直觉上看，应该是42，那实际应该是多少呢？这个要看Java的版本，如果在低于1.5版本上运行，x可能是42，也有可能是0；如果在1.5以上的版本上运行，x就是等于42。</p>
+<pre><code>// 以下代码来源于【参考1】
+class VolatileExample {
+  int x = 0;
+  volatile boolean v = false;
+  public void writer() {
+    x = 42;
+    v = true;
+  }
+  public void reader() {
+    if (v == true) {
+      // 这里x会是多少呢？
+    }
+  }
+}
+</code></pre>
+<p>分析一下，为什么1.5以前的版本会出现x = 0的情况呢？我相信你一定想到了，变量x可能被CPU缓存而导致可见性问题。这个问题在1.5版本已经被圆满解决了。Java内存模型在1.5版本对volatile语义进行了增强。怎么增强的呢？答案是一项 Happens-Before 规则。</p>
+<h2 id="happens-before-规则">Happens-Before 规则</h2>
+<p>如何理解 Happens-Before 呢？如果望文生义（很多网文也都爱按字面意思翻译成“先行发生”），那就南辕北辙了，Happens-Before 并不是说前面一个操作发生在后续操作的前面，它真正要表达的是：<strong>前面一个操作的结果对后续操作是可见的</strong>。就像有心灵感应的两个人，虽然远隔千里，一个人心之所想，另一个人都看得到。Happens-Before 规则就是要保证线程之间的这种“心灵感应”。所以比较正式的说法是：Happens-Before 约束了编译器的优化行为，虽允许编译器优化，但是要求编译器优化后一定遵守 Happens-Before 规则。</p>
+<p>Happens-Before 规则应该是Java内存模型里面最晦涩的内容了，和程序员相关的规则一共有如下六项，都是关于可见性的。</p>
+<p>恰好前面示例代码涉及到这六项规则中的前三项，为便于你理解，我也会分析上面的示例代码，来看看规则1、2和3到底该如何理解。至于其他三项，我也会结合其他例子作以说明。</p>
+<h3 id="1-程序的顺序性规则">1. 程序的顺序性规则</h3>
+<p>这条规则是指在一个线程中，按照程序顺序，前面的操作 Happens-Before 于后续的任意操作。这还是比较容易理解的，比如刚才那段示例代码，按照程序的顺序，第6行代码 “x = 42;” Happens-Before 于第7行代码 “v = true;”，这就是规则1的内容，也比较符合单线程里面的思维：程序前面对某个变量的修改一定是对后续操作可见的。</p>
+<p>（为方便你查看，我将那段示例代码在这儿再呈现一遍）</p>
+<pre><code>// 以下代码来源于【参考1】
+class VolatileExample {
+  int x = 0;
+  volatile boolean v = false;
+  public void writer() {
+    x = 42;
+    v = true;
+  }
+  public void reader() {
+    if (v == true) {
+      // 这里x会是多少呢？
+    }
+  }
+}
+</code></pre>
+<h3 id="2-volatile变量规则">2. volatile变量规则</h3>
+<p>这条规则是指对一个volatile变量的写操作， Happens-Before 于后续对这个volatile变量的读操作。</p>
+<p>这个就有点费解了，对一个volatile变量的写操作相对于后续对这个volatile变量的读操作可见，这怎么看都是禁用缓存的意思啊，貌似和1.5版本以前的语义没有变化啊？如果单看这个规则，的确是这样，但是如果我们关联一下规则3，就有点不一样的感觉了。</p>
+<h3 id="3-传递性">3. 传递性</h3>
+<p>这条规则是指如果A Happens-Before B，且B Happens-Before C，那么A Happens-Before C。</p>
+<p>我们将规则3的传递性应用到我们的例子中，会发生什么呢？可以看下面这幅图：</p>
+<p><img alt="" src="/assets/36f5817907b11c5f86637294.png"/></p>
+<p>示例代码中的传递性规则</p>
+<p>从图中，我们可以看到：</p>
+<ol>
+<li>“x=42” Happens-Before 写变量 “v=true” ，这是规则1的内容；</li>
+<li>写变量“v=true” Happens-Before 读变量 “v=true”，这是规则2的内容 。</li>
+</ol>
+<p>再根据这个传递性规则，我们得到结果：“x=42” Happens-Before 读变量“v=true”。这意味着什么呢？</p>
+<p>如果线程B读到了“v=true”，那么线程A设置的“x=42”对线程B是可见的。也就是说，线程B能看到 “x == 42” ，有没有一种恍然大悟的感觉？这就是1.5版本对volatile语义的增强，这个增强意义重大，1.5版本的并发工具包（java.util.concurrent）就是靠volatile语义来搞定可见性的，这个在后面的内容中会详细介绍。</p>
+<h3 id="4-管程中锁的规则">4. 管程中锁的规则</h3>
+<p>这条规则是指对一个锁的解锁 Happens-Before 于后续对这个锁的加锁。</p>
+<p>要理解这个规则，就首先要了解“管程指的是什么”。<strong>管程</strong>是一种通用的同步原语，在Java中指的就是synchronized，synchronized是Java里对管程的实现。</p>
+<p>管程中的锁在Java里是隐式实现的，例如下面的代码，在进入同步块之前，会自动加锁，而在代码块执行完会自动释放锁，加锁以及释放锁都是编译器帮我们实现的。</p>
+<pre><code>synchronized (this) { //此处自动加锁
+  // x是共享变量,初始值=10
+  if (this.x &lt; 12) {
+    this.x = 12; 
+  }  
+} //此处自动解锁
+</code></pre>
+<p>所以结合规则4——管程中锁的规则，可以这样理解：假设x的初始值是10，线程A执行完代码块后x的值会变成12（执行完自动释放锁），线程B进入代码块时，能够看到线程A对x的写操作，也就是线程B能够看到x==12。这个也是符合我们直觉的，应该不难理解。</p>
+<h3 id="5-线程-start-规则">5. 线程 start() 规则</h3>
+<p>这条是关于线程启动的。它是指主线程A启动子线程B后，子线程B能够看到主线程在启动子线程B前的操作。</p>
+<p>换句话说就是，如果线程A调用线程B的 start() 方法（即在线程A中启动线程B），那么该start()操作 Happens-Before 于线程B中的任意操作。具体可参考下面示例代码。</p>
+<pre><code>Thread B = new Thread(()-&gt;{
+  // 主线程调用B.start()之前
+  // 所有对共享变量的修改，此处皆可见
+  // 此例中，var==77
+});
+// 此处对共享变量var修改
+var = 77;
+// 主线程启动子线程
+B.start();
+</code></pre>
+<h3 id="6-线程-join-规则">6. 线程 join() 规则</h3>
+<p>这条是关于线程等待的。它是指主线程A等待子线程B完成（主线程A通过调用子线程B的join()方法实现），当子线程B完成后（主线程A中join()方法返回），主线程能够看到子线程的操作。当然所谓的“看到”，指的是对<strong>共享变量</strong>的操作。</p>
+<p>换句话说就是，如果在线程A中，调用线程B的 join() 并成功返回，那么线程B中的任意操作Happens-Before 于该 join() 操作的返回。具体可参考下面示例代码。</p>
+<pre><code>Thread B = new Thread(()-&gt;{
+  // 此处对共享变量var修改
+  var = 66;
+});
+// 例如此处对共享变量修改，
+// 则这个修改结果对线程B可见
+// 主线程启动子线程
+B.start();
+B.join()
+// 子线程所有对共享变量的修改
+// 在主线程调用B.join()之后皆可见
+// 此例中，var==66
+</code></pre>
+<h2 id="被我们忽视的final">被我们忽视的final</h2>
+<p>前面我们讲volatile为的是禁用缓存以及编译优化，我们再从另外一个方面来看，有没有办法告诉编译器优化得更好一点呢？这个可以有，就是<strong>final关键字</strong>。</p>
+<p><strong>final修饰变量时，初衷是告诉编译器：这个变量生而不变，可以可劲儿优化。</strong>Java编译器在1.5以前的版本的确优化得很努力，以至于都优化错了。</p>
+<p>问题类似于上一期提到的利用双重检查方法创建单例，构造函数的错误重排导致线程可能看到final变量的值会变化。详细的案例可以参考<a href="http://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html#finalWrong" target="_blank">这个文档</a>。</p>
+<p>当然了，在1.5以后Java内存模型对final类型变量的重排进行了约束。现在只要我们提供正确构造函数没有“逸出”，就不会出问题了。</p>
+<p>“逸出”有点抽象，我们还是举个例子吧，在下面例子中，在构造函数里面将this赋值给了全局变量global.obj，这就是“逸出”，线程通过global.obj读取x是有可能读到0的。因此我们一定要避免“逸出”。</p>
+<pre><code>// 以下代码来源于【参考1】
+final int x;
+// 错误的构造函数
+public FinalFieldExample() { 
+  x = 3;
+  y = 4;
+  // 此处就是讲this逸出，
+  global.obj = this;
+}
+</code></pre>
+<h2 id="总结">总结</h2>
+<p>Java的内存模型是并发编程领域的一次重要创新，之后C++、C#、Golang等高级语言都开始支持内存模型。Java内存模型里面，最晦涩的部分就是Happens-Before规则了，Happens-Before规则最初是在一篇叫做<strong>Time, Clocks, and the Ordering of Events in a Distributed System</strong>的论文中提出来的，在这篇论文中，Happens-Before的语义是一种因果关系。在现实世界里，如果A事件是导致B事件的起因，那么A事件一定是先于（Happens-Before）B事件发生的，这个就是Happens-Before语义的现实理解。</p>
+<p>在Java语言里面，Happens-Before的语义本质上是一种可见性，A Happens-Before B 意味着A事件对B事件来说是可见的，无论A事件和B事件是否发生在同一个线程里。例如A事件发生在线程1上，B事件发生在线程2上，Happens-Before规则保证线程2上也能看到A事件的发生。</p>
+<p>Java内存模型主要分为两部分，一部分面向你我这种编写并发程序的应用开发人员，另一部分是面向JVM的实现人员的，我们可以重点关注前者，也就是和编写并发程序相关的部分，这部分内容的核心就是Happens-Before规则。相信经过本章的介绍，你应该对这部分内容已经有了深入的认识。</p>
+<h2 id="课后思考">课后思考</h2>
+<p>有一个共享变量 abc，在一个线程里设置了abc的值 <code>abc=3</code>，你思考一下，有哪些办法可以让其他线程能够看到<code>abc==3</code>？</p>
+<p>欢迎在留言区与我分享你的想法，也欢迎你在留言区记录你的思考过程。感谢阅读，如果你觉得这篇文章对你有帮助的话，也欢迎把它分享给更多的朋友。</p>
+<h2 id="参考">参考</h2>
+<ol>
+<li><a href="http://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html" target="_blank">JSR 133 (Java Memory Model) FAQ</a></li>
+<li><a href="http://ifeve.com/jmm-faq/" target="_blank">Java内存模型FAQ</a></li>
+<li><a href="https://www.cs.umd.edu/~pugh/java/memoryModel/jsr133.pdf" target="_blank">JSR-133: JavaTM Memory Model and Thread Specification</a></li>
+</ol>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

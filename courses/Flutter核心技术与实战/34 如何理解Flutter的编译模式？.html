@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>34 如何理解Flutter的编译模式？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Flutter核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">47 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Flutter核心技术与实战</strong><ul><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E4%B8%80%E4%BD%8D%E5%A4%A7%E5%89%8D%E7%AB%AF%E4%BB%8E%E4%B8%9A%E8%80%85%E9%83%BD%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%B9%A0Flutter%EF%BC%9F.html">00 开篇词 为什么每一位大前端从业者都应该学习Flutter？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BAFlutter%E5%B7%A5%E7%A8%8B%E7%8E%AF%E5%A2%83.html">01 预习篇 · 从0开始搭建Flutter工程环境</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20Dart%E8%AF%AD%E8%A8%80%E6%A6%82%E8%A7%88.html">02 预习篇 · Dart语言概览</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%96%B9%E6%A1%88%E7%9A%84%E5%8E%86%E5%8F%B2%E5%8F%91%E5%B1%95%E9%80%BB%E8%BE%91.html">03 深入理解跨平台方案的历史发展逻辑</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20Flutter%E5%8C%BA%E5%88%AB%E4%BA%8E%E5%85%B6%E4%BB%96%E6%96%B9%E6%A1%88%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">04 Flutter区别于其他方案的关键技术是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E4%BB%8E%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%85%A5%E6%89%8B%EF%BC%8C%E4%BD%93%E4%BC%9AFlutter%E4%BB%A3%E7%A0%81%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E5%9C%A8%E5%8E%9F%E7%94%9F%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%84.html">05 从标准模板入手，体会Flutter代码是如何运行在原生系统上的</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E4%B8%8E%E7%B1%BB%E5%9E%8B%E5%8F%98%E9%87%8F%EF%BC%9ADart%E6%98%AF%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E4%BF%A1%E6%81%AF%E7%9A%84%EF%BC%9F.html">06 基础语法与类型变量：Dart是如何表示信息的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E5%87%BD%E6%95%B0%E3%80%81%E7%B1%BB%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%9ADart%E6%98%AF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BF%A1%E6%81%AF%E7%9A%84%EF%BC%9F.html">07 函数、类与运算符：Dart是如何处理信息的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%EF%BC%9A%E6%8E%8C%E6%8F%A1Dart%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7.html">08 综合案例：掌握Dart核心特性</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20Widget%EF%BC%8C%E6%9E%84%E5%BB%BAFlutter%E7%95%8C%E9%9D%A2%E7%9A%84%E5%9F%BA%E7%9F%B3.html">09 Widget，构建Flutter界面的基石</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20Widget%E4%B8%AD%E7%9A%84State%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Widget中的State到底是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E6%8F%90%E5%88%B0%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%8C%E6%88%91%E4%BB%AC%E6%98%AF%E5%9C%A8%E8%AF%B4%E4%BB%80%E4%B9%88%EF%BC%9F.html">11 提到生命周期，我们是在说什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E7%BB%8F%E5%85%B8%E6%8E%A7%E4%BB%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%96%87%E6%9C%AC%E3%80%81%E5%9B%BE%E7%89%87%E5%92%8C%E6%8C%89%E9%92%AE%E5%9C%A8Flutter%E4%B8%AD%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F.html">12 经典控件（一）：文本、图片和按钮在Flutter中怎么用？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E7%BB%8F%E5%85%B8%E6%8E%A7%E4%BB%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AUITableView_ListView%E5%9C%A8Flutter%E4%B8%AD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">13 经典控件（二）：UITableView_ListView在Flutter中是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E7%BB%8F%E5%85%B8%E5%B8%83%E5%B1%80%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E5%AD%90%E6%8E%A7%E4%BB%B6%E5%9C%A8%E7%88%B6%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%8E%92%E7%89%88%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%9F.html">14 经典布局：如何定义子控件在父容器中排版的位置？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20%E7%BB%84%E5%90%88%E4%B8%8E%E8%87%AA%E7%BB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E9%80%89%E7%94%A8%E4%BD%95%E7%A7%8D%E6%96%B9%E5%BC%8F%E8%87%AA%E5%AE%9A%E4%B9%89Widget%EF%BC%9F.html">15 组合与自绘，我该选用何种方式自定义Widget？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E4%BB%8E%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F%E8%AF%B4%E8%B5%B7%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9A%E5%88%B6%E4%B8%8D%E5%90%8C%E9%A3%8E%E6%A0%BC%E7%9A%84App%E4%B8%BB%E9%A2%98%EF%BC%9F.html">16 从夜间模式说起，如何定制不同风格的App主题？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9B%BE%E7%89%87%E3%80%81%E9%85%8D%E7%BD%AE%E5%92%8C%E5%AD%97%E4%BD%93%E5%9C%A8Flutter%E4%B8%AD%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F.html">17 依赖管理（一）：图片、配置和字体在Flutter中怎么用？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BB%84%E4%BB%B6%E5%BA%93%E5%9C%A8Flutter%E4%B8%AD%E8%A6%81%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%EF%BC%9F.html">18 依赖管理（二）：第三方组件库在Flutter中要如何管理？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%BA%8B%E4%BB%B6%E8%AF%A5%E5%A6%82%E4%BD%95%E5%93%8D%E5%BA%94%EF%BC%9F.html">19 用户交互事件该如何响应？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E5%85%B3%E4%BA%8E%E8%B7%A8%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BD%A0%E5%8F%AA%E9%9C%80%E8%A6%81%E8%AE%B0%E4%BD%8F%E8%BF%99%E4%B8%89%E6%8B%9B.html">20 关于跨组件传递数据，你只需要记住这三招</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%AF%BC%E8%88%AA%EF%BC%8CFlutter%E6%98%AF%E8%BF%99%E6%A0%B7%E5%AE%9E%E7%8E%B0%E9%A1%B5%E9%9D%A2%E5%88%87%E6%8D%A2%E7%9A%84.html">21 路由与导航，Flutter是这样实现页面切换的</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E5%A6%82%E4%BD%95%E6%9E%84%E9%80%A0%E7%82%AB%E9%85%B7%E7%9A%84%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%EF%BC%9F.html">22 如何构造炫酷的动画效果？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81UI%E8%BF%90%E8%A1%8C%E6%B5%81%E7%95%85%EF%BC%9F.html">23 单线程模型怎么保证UI运行流畅？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20HTTP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B8%8EJSON%E8%A7%A3%E6%9E%90.html">24 HTTP网络编程与JSON解析</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96.html">25 本地存储与数据库的使用和优化</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E5%A6%82%E4%BD%95%E5%9C%A8Dart%E5%B1%82%E5%85%BC%E5%AE%B9Android_iOS%E5%B9%B3%E5%8F%B0%E7%89%B9%E5%AE%9A%E5%AE%9E%E7%8E%B0%EF%BC%9F%EF%BC%88%E4%B8%80%EF%BC%89.html">26 如何在Dart层兼容Android_iOS平台特定实现？（一）</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E5%A6%82%E4%BD%95%E5%9C%A8Dart%E5%B1%82%E5%85%BC%E5%AE%B9Android_iOS%E5%B9%B3%E5%8F%B0%E7%89%B9%E5%AE%9A%E5%AE%9E%E7%8E%B0%EF%BC%9F%EF%BC%88%E4%BA%8C%EF%BC%89.html">27 如何在Dart层兼容Android_iOS平台特定实现？（二）</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E5%9C%A8%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8%E4%B8%AD%E6%B7%B7%E7%BC%96Flutter%E5%B7%A5%E7%A8%8B%EF%BC%9F.html">28 如何在原生应用中混编Flutter工程？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%EF%BC%8C%E8%AF%A5%E7%94%A8%E4%BD%95%E7%A7%8D%E6%96%B9%E6%A1%88%E7%AE%A1%E7%90%86%E5%AF%BC%E8%88%AA%E6%A0%88%EF%BC%9F.html">29 混合开发，该用何种方案管理导航栈？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%81%9A%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F.html">30 为什么需要做状态管理，怎么做？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%94%9F%E6%8E%A8%E9%80%81%E8%83%BD%E5%8A%9B%EF%BC%9F.html">31 如何实现原生推送能力？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E9%80%82%E9%85%8D%E5%9B%BD%E9%99%85%E5%8C%96%EF%BC%8C%E9%99%A4%E4%BA%86%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%88%91%E4%BB%AC%E8%BF%98%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88_.html">32 适配国际化，除了多语言我们还需要注意什么_</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%A6%82%E4%BD%95%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8C%E5%88%86%E8%BE%A8%E7%8E%87%E7%9A%84%E6%89%8B%E6%9C%BA%E5%B1%8F%E5%B9%95%EF%BC%9F.html">33 如何适配不同分辨率的手机屏幕？</a></li><li><a class="active" aria-current="page" href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Flutter%E7%9A%84%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">34 如何理解Flutter的编译模式？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20Hot%20Reload%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E5%88%B0%E7%9A%84%EF%BC%9F.html">35 Hot Reload是怎么做到的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BC%98%E5%8C%96%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95%E6%95%88%E7%8E%87%EF%BC%9F.html">36 如何通过工具链优化开发调试效率？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B%E5%B9%B6%E4%BC%98%E5%8C%96Flutter%20App%E7%9A%84%E6%95%B4%E4%BD%93%E6%80%A7%E8%83%BD%E8%A1%A8%E7%8E%B0%EF%BC%9F.html">37 如何检测并优化Flutter App的整体性能表现？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%8F%90%E9%AB%98%E4%BA%A4%E4%BB%98%E8%B4%A8%E9%87%8F%EF%BC%9F.html">38 如何通过自动化测试提高交付质量？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20%E7%BA%BF%E4%B8%8A%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E8%AF%A5%E5%A6%82%E4%BD%95%E5%81%9A%E5%A5%BD%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7%E4%B8%8E%E4%BF%A1%E6%81%AF%E9%87%87%E9%9B%86%EF%BC%9F.html">39 线上出现问题，该如何做好异常捕获与信息采集？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E8%A1%A1%E9%87%8FFlutter%20App%E7%BA%BF%E4%B8%8A%E8%B4%A8%E9%87%8F%EF%BC%8C%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8%E8%BF%99%E4%B8%89%E4%B8%AA%E6%8C%87%E6%A0%87.html">40 衡量Flutter App线上质量，我们需要关注这三个指标</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E7%BB%84%E4%BB%B6%E5%8C%96%E5%92%8C%E5%B9%B3%E5%8F%B0%E5%8C%96%EF%BC%8C%E8%AF%A5%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E5%90%88%E7%90%86%E7%A8%B3%E5%AE%9A%E7%9A%84Flutter%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%EF%BC%9F.html">41 组件化和平台化，该如何组织合理稳定的Flutter工程结构？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%9A%84Flutter%20App%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83%E7%8E%AF%E5%A2%83%EF%BC%9F.html">42 如何构建高效的Flutter App打包发布环境？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/43%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Flutter%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9F.html">43 如何构建自己的Flutter混合开发框架（一）？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/44%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Flutter%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9F.html">44 如何构建自己的Flutter混合开发框架（二）？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%20%20%E6%B8%A9%E6%95%85%E8%80%8C%E7%9F%A5%E6%96%B0%EF%BC%8C%E4%B8%8E%E4%BD%A0%E8%AF%B4%E8%AF%B4%E4%B8%93%E6%A0%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E6%80%9D%E8%80%83%E9%A2%98.html">特别放送   温故而知新，与你说说专栏的那些思考题</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%8B%BF%E7%95%8F%E9%9A%BE%EF%BC%8C%E5%8B%BF%E8%BD%BB%E7%95%A5.html">结束语 勿畏难，勿轻略</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Flutter%E7%9A%84%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="34 如何理解Flutter的编译模式？" id="title">34 如何理解Flutter的编译模式？</h1>
+<div><p>你好，我是陈航。今天，我们来聊聊Flutter的编译模式吧。</p>
+<p>在开发移动应用程序时，一个App的完整生命周期包括开发、测试和上线3个阶段。在每个阶段，开发者的关注点都不一样。</p>
+<p>比如，在开发阶段，我们希望调试尽可能方便、快速，尽可能多地提供错误上下文信息；在测试阶段，我们希望覆盖范围尽可能全面，能够具备不同配置切换能力，可以测试和验证还没有对外发布的新功能；而在发布阶段，我们则希望能够去除一切测试代码，精简调试信息，使运行速度尽可能快，代码足够安全。</p>
+<p>这就要求开发者在构建移动应用时，不仅要在工程内提前准备多份配置环境，还要利用编译器提供的编译选项，打包出符合不同阶段优化需求的App。</p>
+<p>对于Flutter来说，它既支持常见的Debug、Release等工程物理层面的编译模式，也支持在工程内提供多种配置环境入口。今天，我们就来学习一下Flutter提供的编译模式，以及如何在App中引用开发环境和生产环境，使得我们在不破坏任何生产环境代码的情况下，能够测试处于开发期的新功能。</p>
+<h2 id="flutter的编译模式">Flutter的编译模式</h2>
+<p>Flutter支持3种运行模式，包括Debug、Release和Profile。在编译时，这三种模式是完全独立的。首先，我们先来看看这3种模式的具体含义吧。</p>
+<ul>
+<li>Debug模式对应Dart的JIT模式，可以在真机和模拟器上同时运行。该模式会打开所有的断言（assert），以及所有的调试信息、服务扩展和调试辅助（比如Observatory）。此外，该模式为快速开发和运行做了优化，支持亚秒级有状态的Hot reload（热重载），但并没有优化代码执行速度、二进制包大小和部署。flutter run –debug命令，就是以这种模式运行的。</li>
+<li>Release模式对应Dart的AOT模式，只能在真机上运行，不能在模拟器上运行，其编译目标为最终的线上发布，给最终的用户使用。该模式会关闭所有的断言，以及尽可能多的调试信息、服务扩展和调试辅助。此外，该模式优化了应用快速启动、代码快速执行，以及二级制包大小，因此编译时间较长。flutter run –release命令，就是以这种模式运行的。</li>
+<li>Profile模式，基本与Release模式一致，只是多了对Profile模式的服务扩展的支持，包括支持跟踪，以及一些为了最低限度支持所需要的依赖（比如，可以连接Observatory到进程）。该模式用于分析真实设备实际运行性能。flutter run –profile命令，就是以这种模式运行的。</li>
+</ul>
+<p>由于Profile与Release在编译过程上几乎无差异，因此我们今天只讨论Debug和Release模式。</p>
+<p>在开发应用时，为了便于快速发现问题，我们通常会在运行时识别当前的编译模式，去改变代码的部分执行行为：在Debug模式下，我们会打印详细的日志，调用开发环境接口；而在Release模式下，我们会只记录极少的日志，调用生产环境接口。</p>
+<p>在运行时识别应用的编译模式，有两种解决办法：</p>
+<ul>
+<li>通过断言识别；</li>
+<li>通过Dart VM所提供的编译常数识别。</li>
+</ul>
+<p>我们先来看看<strong>如何通过断言识别应用的编译模式</strong>。</p>
+<p>通过Debug与Release模式的介绍，我们可以得出，Release与Debug模式的一个重要区别就是，Release模式关闭了所有的断言。因此，我们可以借助于断言，写出只在Debug模式下生效的代码。</p>
+<p>如下所示，我们在断言里传入了一个始终返回true的匿名函数执行结果，这个匿名函数的函数体只会在Debug模式下生效：</p>
+<pre><code>assert(() {
+  //Do sth for debug
+  return true;
+}());
+</code></pre>
+<p>需要注意的是，匿名函数声明调用结束时追加了小括号（）。 这是因为断言只能检查布尔值，所以我们必须使用括号强制执行这个始终返回true的匿名函数，以确保匿名函数体的代码可以执行。</p>
+<p>接下来，我们再看看<strong>如何通过编译常数识别应用的编译模式</strong>。</p>
+<p>如果说通过断言只能写出在Debug模式下运行的代码，而通过Dart提供的编译常数，我们还可以写出只在Release模式下生效的代码。Dart提供了一个布尔型的常量kReleaseMode，用于反向指示当前App的编译模式。</p>
+<p>如下所示，我们通过判断这个常量，可以准确地识别出当前的编译模式：</p>
+<pre><code>if(kReleaseMode){
+  //Do sth for release 
+} else {
+  //Do sth for debug
+}
+</code></pre>
+<h2 id="分离配置环境">分离配置环境</h2>
+<p>通过断言和kReleaseMode常量，我们能够识别出当前App的编译环境，从而可以在运行时对某个代码功能进行局部微调。而如果我们想在整个应用层面，为不同的运行环境提供更为统一的配置（比如，对于同一个接口调用行为，开发环境会使用dev.example.com域名，而生产环境会使用api.example.com域名），则需要在应用启动入口提供可配置的初始化方式，根据特定需求为应用注入配置环境。</p>
+<p>在Flutter构建App时，为应用程序提供不同的配置环境，总体可以分为抽象配置、配置多入口、读配置和编译打包4个步骤：</p>
+<ol>
+<li>抽象出应用程序的可配置部分，并使用InheritedWidget对其进行封装；</li>
+<li>将不同的配置环境拆解为多个应用程序入口（比如，开发环境为main-dev.dart、生产环境为main.dart），把应用程序的可配置部分固化在各个入口处；</li>
+<li>在运行期，通过InheritedWidget提供的数据共享机制，将配置部分应用到其子Widget对应的功能中；</li>
+<li>使用Flutter提供的编译打包选项，构建出不同配置环境的安装包。</li>
+</ol>
+<p><strong>接下来，我将依次为你介绍具体的实现步骤。</strong></p>
+<p>在下面的示例中，我会把应用程序调用的接口和标题进行区分实现，即开发环境使用dev.example.com域名，应用主页标题为dev；而生产环境使用api.example.com域名，主页标题为example。</p>
+<p>首先是<strong>配置抽象</strong>。根据需求可以看出，应用程序中有两个需要配置的部分，即接口apiBaseUrl和标题appName，因此我定义了一个继承自InheritedWidget的类AppConfig，对这两个配置进行封装：</p>
+<pre><code>class AppConfig extends InheritedWidget {
+  AppConfig({
+    @required this.appName,
+    @required this.apiBaseUrl,
+    @required Widget child,
+  }) : super(child: child);
+
+  final String appName;//主页标题
+  final String apiBaseUrl;//接口域名
+
+  //方便其子Widget在Widget树中找到它
+  static AppConfig of(BuildContext context) {
+    return context.inheritFromWidgetOfExactType(AppConfig);
+  }
+  
+  //判断是否需要子Widget更新。由于是应用入口，无需更新
+  @override
+  bool updateShouldNotify(InheritedWidget oldWidget) =&gt; false;
+}
+</code></pre>
+<p>接下来，我们需要<strong>为不同的环境创建不同的应用入口</strong>。</p>
+<p>在这个例子中，由于只有两个环境，即开发环境与生产环境，因此我们将文件分别命名为main_dev.dart和main.dart。在这两个文件中，我们会使用不同的配置数据来对AppConfig进行初始化，同时把应用程序实例MyApp作为其子Widget，这样整个应用内都可以获取到配置数据：</p>
+<pre><code>//main_dev.dart
+void main() {
+  var configuredApp = AppConfig(
+    appName: 'dev',//主页标题
+    apiBaseUrl: 'http://dev.example.com/',//接口域名
+    child: MyApp(),
+  );
+  runApp(configuredApp);//启动应用入口
+}
+
+//main.dart
+void main() {
+  var configuredApp = AppConfig(
+    appName: 'example',//主页标题
+    apiBaseUrl: 'http://api.example.com/',//接口域名
+    child: MyApp(),
+  );
+  runApp(configuredApp);//启动应用入口
+}
+</code></pre>
+<p>完成配置环境的注入之后，接下来就可以<strong>在应用内获取配置数据</strong>，来实现定制化的功能了。由于AppConfig是整个应用程序的根节点，因此我可以通过调用AppConfig.of方法，来获取到相关的数据配置。</p>
+<p>在下面的代码中，我分别获取到了应用主页的标题，以及接口域名，并显示了出来：</p>
+<pre><code>class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var config = AppConfig.of(context);//获取应用配置
+    return MaterialApp(
+      title: config.appName,//应用主页标题
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var config = AppConfig.of(context);//获取应用配置
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(config.appName),//应用主页标题
+      ),
+      body:  Center(
+        child: Text('API host: ${config.apiBaseUrl}'),//接口域名
+      ),
+    );
+  }
+}
+</code></pre>
+<p>现在，我们已经完成了分离配置环境的代码部分。最后，我们可以使用Flutter提供的编译选项，来<strong>构建出不同配置的安装包</strong>了。</p>
+<p>如果想要在模拟器或真机上运行这段代码，我们可以在flutter run命令后面，追加–target或-t参数，来指定应用程序初始化入口：</p>
+<pre><code>//运行开发环境应用程序
+flutter run -t lib/main_dev.dart 
+
+//运行生产环境应用程序
+flutter run -t lib/main.dart
+</code></pre>
+<p>如果我们想在Android Studio上为应用程序创建不同的启动配置，则可以<strong>通过Flutter插件为main_dev.dart增加启动入口</strong>。</p>
+<p>首先，点击工具栏上的Config Selector，选择Edit Configurations进入编辑应用程序启动选项：</p>
+<p><img alt="" src="/assets/97bf85ce89191ca689796aab.png"/></p>
+<p>图1 Config Selector新增入口</p>
+<p>然后，点击位于工具栏面板左侧顶部的“+”按钮，在弹出的菜单中选择Flutter选项，为应用程序新增一项启动入口：</p>
+<p><img alt="" src="/assets/01bb7221b85e4c407d2ab65f.png"/></p>
+<p>图2 选择新增类型</p>
+<p>最后，在入口的编辑面板中，为main_dev选择程序的Dart入口，点击OK后，就完成了入口的新增工作：</p>
+<p><img alt="" src="/assets/f8833abca04b6a52d8351ad9.png"/></p>
+<p>图3 编辑启动入口</p>
+<p>接下来，我们就可以<strong>在Config Selector中切换不同的启动入口，从而直接在Android Studio中注入不同的配置环境了</strong>：</p>
+<p><img alt="" src="/assets/f5b21404781f022155eee330.png"/></p>
+<p>图4 Config Selector切换启动入口</p>
+<p>我们试着在不同的入口中进行切换和运行，可以看到，App已经可以识别出不同的配置环境了：</p>
+<p><img alt="" src="/assets/ae49bbe63cb87eca9c91a18e.png"/></p>
+<p>图5 开发环境运行示例</p>
+<p><img alt="" src="/assets/147dd42d0a310bc4719e2ae9.png"/></p>
+<p>图6 生产环境运行示例</p>
+<p>而如果我们想要打包构建出适用于Android的APK，或是iOS的IPA安装包，则可以在flutter build 命令后面，同样追加–target或-t参数，指定应用程序初始化入口：</p>
+<pre><code>//打包开发环境应用程序
+flutter build apk -t lib/main_dev.dart 
+flutter build ios -t lib/main_dev.dart
+
+//打包生产环境应用程序
+flutter build apk -t lib/main.dart
+flutter build ios -t lib/main.dart
+</code></pre>
+<h2 id="总结">总结</h2>
+<p>好了，今天的分享就到这里。我们来总结一下今天的主要内容吧。</p>
+<p>Flutter支持Debug与Release的编译模式，并且这两种模式在构建时是完全独立的。Debug模式下会打开所有的断言和调试信息，而Release模式下则会关闭这些信息，因此我们可以通过断言，写出只在Debug模式下生效的代码。而如果我们想更精准地识别出当前的编译模式，则可以利用Dart所提供的编译常数kReleaseMode，写出只在Release模式下生效的代码。</p>
+<p>除此之外，Flutter对于常见的分环境配置能力也提供了支持，我们可以使用InheritedWidget为应用中可配置部分进行封装抽象，通过配置多入口的方式为应用的启动注入配置环境。</p>
+<p>需要注意的是，虽然断言和kReleaseMode都能够识别出Debug编译模式，但它们对二进制包的打包构建影响是不同的。</p>
+<p>采用断言的方式，其相关代码会在Release构建中被完全剔除；而如果使用kReleaseMode常量来识别Debug环境，虽然这段代码永远不会在Release环境中执行，但却会被打入到二进制包中，增大包体积。因此，如果没有特殊需求的话，一定要使用断言来实现Debug特有的逻辑，或是在发布期前将使用kReleaseMode判断的Debug逻辑完全删除。</p>
+<p>我把今天分享所涉及到的知识点打包到了<a href="https://github.com/cyndibaby905/34_multi_env" target="_blank">GitHub</a>中，你可以下载下来，反复运行几次，加深理解与记忆。</p>
+<h2 id="思考题">思考题</h2>
+<p>最后，我给你留一道思考题吧。</p>
+<p>在保持生产环境代码不变的情况下，如果想在开发环境中支持不同配置的切换，我们应该如何实现？</p>
+<p>欢迎你在评论区给我留言分享你的观点，我会在下一篇文章中等待你！感谢你的收听，也欢迎你把这篇文章分享给更多的朋友一起阅读。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

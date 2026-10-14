@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>14 答疑（二）：如何用perf工具分析Java程序？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/index.html">Linux性能优化实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">64 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Linux性能优化实战</strong><ul><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%88%AB%E5%86%8D%E8%AE%A9Linux%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E6%88%90%E4%B8%BA%E4%BD%A0%E7%9A%84%E7%BB%8A%E8%84%9A%E7%9F%B3.html">00 开篇词 别再让Linux性能问题成为你的绊脚石</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/01%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F.html">01 如何学习Linux性能优化？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/02%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E5%88%B0%E5%BA%95%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3%E2%80%9C%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD%E2%80%9D%EF%BC%9F.html">02 基础篇：到底应该怎么理解“平均负载”？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/03%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E7%BB%8F%E5%B8%B8%E8%AF%B4%E7%9A%84%20CPU%20%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">03 基础篇：经常说的 CPU 上下文切换是什么意思？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/04%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E7%BB%8F%E5%B8%B8%E8%AF%B4%E7%9A%84%20CPU%20%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">04 基础篇：经常说的 CPU 上下文切换是什么意思？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/05%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%9F%90%E4%B8%AA%E5%BA%94%E7%94%A8%E7%9A%84CPU%E4%BD%BF%E7%94%A8%E7%8E%87%E5%B1%85%E7%84%B6%E8%BE%BE%E5%88%B0100%25%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">05 基础篇：某个应用的CPU使用率居然达到100%，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/06%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9A%84%20CPU%20%E4%BD%BF%E7%94%A8%E7%8E%87%E5%BE%88%E9%AB%98%EF%BC%8C%E4%BD%86%E4%B8%BA%E5%95%A5%E5%8D%B4%E6%89%BE%E4%B8%8D%E5%88%B0%E9%AB%98%20CPU%20%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9F.html">06 案例篇：系统的 CPU 使用率很高，但为啥却找不到高 CPU 的应用？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/07%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%87%BA%E7%8E%B0%E5%A4%A7%E9%87%8F%E4%B8%8D%E5%8F%AF%E4%B8%AD%E6%96%AD%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">07 案例篇：系统中出现大量不可中断进程和僵尸进程怎么办？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/08%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%87%BA%E7%8E%B0%E5%A4%A7%E9%87%8F%E4%B8%8D%E5%8F%AF%E4%B8%AD%E6%96%AD%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">08 案例篇：系统中出现大量不可中断进程和僵尸进程怎么办？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/09%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3Linux%E8%BD%AF%E4%B8%AD%E6%96%AD%EF%BC%9F.html">09 基础篇：怎么理解Linux软中断？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/10%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BD%AF%E4%B8%AD%E6%96%ADCPU%E4%BD%BF%E7%94%A8%E7%8E%87%E5%8D%87%E9%AB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">10 案例篇：系统的软中断CPU使用率升高，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/11%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%85%E9%80%9F%E5%88%86%E6%9E%90%E5%87%BA%E7%B3%BB%E7%BB%9FCPU%E7%9A%84%E7%93%B6%E9%A2%88%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">11 套路篇：如何迅速分析出系统CPU的瓶颈在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/12%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9ACPU%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF.html">12 套路篇：CPU 性能优化的几个思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/13%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%97%A0%E6%B3%95%E6%A8%A1%E6%8B%9F%E5%87%BA%20RES%20%E4%B8%AD%E6%96%AD%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">13 答疑（一）：无法模拟出 RES 中断的问题，怎么办？</a></li><li><a class="active" aria-current="page" href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8perf%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90Java%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">14 答疑（二）：如何用perf工具分析Java程序？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/15%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%E5%86%85%E5%AD%98%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">15 基础篇：Linux内存是怎么工作的？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/16%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84Buffer%E5%92%8CCache%EF%BC%9F.html">16 基础篇：怎么理解内存中的Buffer和Cache？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/17%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87%EF%BC%9F.html">17 案例篇：如何利用系统缓存优化程序的运行效率？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/18%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E4%BA%86%EF%BC%8C%E6%88%91%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%A4%84%E7%90%86%EF%BC%9F.html">18 案例篇：内存泄漏了，我该如何定位和处理？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/19%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%B3%BB%E7%BB%9F%E7%9A%84Swap%E5%8F%98%E9%AB%98%E4%BA%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">19 案例篇：为什么系统的Swap变高了（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/20%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%B3%BB%E7%BB%9F%E7%9A%84Swap%E5%8F%98%E9%AB%98%E4%BA%86%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">20 案例篇：为什么系统的Swap变高了？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/21%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E2%80%9C%E5%BF%AB%E5%87%86%E7%8B%A0%E2%80%9D%E6%89%BE%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F.html">21 套路篇：如何“快准狠”找到系统内存的问题？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/22%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%A3%81%E7%9B%98%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">22 答疑（三）：文件系统与磁盘的区别是什么？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/23%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">23 基础篇：Linux 文件系统是怎么工作的？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/24%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E7%A3%81%E7%9B%98I_O%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%88%E4%B8%8A%EF%BC%89.html">24 基础篇：Linux 磁盘I_O是怎么工作的（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/25%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E7%A3%81%E7%9B%98I_O%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%88%E4%B8%8B%EF%BC%89.html">25 基础篇：Linux 磁盘I_O是怎么工作的（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/26%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%BE%E5%87%BA%E7%8B%82%E6%89%93%E6%97%A5%E5%BF%97%E7%9A%84%E2%80%9C%E5%86%85%E9%AC%BC%E2%80%9D%EF%BC%9F.html">26 案例篇：如何找出狂打日志的“内鬼”？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/27%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E7%A3%81%E7%9B%98I_O%E5%BB%B6%E8%BF%9F%E5%BE%88%E9%AB%98%EF%BC%9F.html">27 案例篇：为什么我的磁盘I_O延迟很高？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/28%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%80%E4%B8%AASQL%E6%9F%A5%E8%AF%A2%E8%A6%8115%E7%A7%92%EF%BC%8C%E8%BF%99%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">28 案例篇：一个SQL查询要15秒，这是怎么回事？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/29%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9ARedis%E5%93%8D%E5%BA%94%E4%B8%A5%E9%87%8D%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F.html">29 案例篇：Redis响应严重延迟，如何解决？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/30%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%85%E9%80%9F%E5%88%86%E6%9E%90%E5%87%BA%E7%B3%BB%E7%BB%9FI_O%E7%9A%84%E7%93%B6%E9%A2%88%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">30 套路篇：如何迅速分析出系统I_O的瓶颈在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/31%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%A3%81%E7%9B%98%20I_O%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF.html">31 套路篇：磁盘 I_O 性能优化的几个思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/32%20%E7%AD%94%E7%96%91%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E9%98%BB%E5%A1%9E%E3%80%81%E9%9D%9E%E9%98%BB%E5%A1%9E%20I_O%20%E4%B8%8E%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%20I_O%20%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB.html">32 答疑（四）：阻塞、非阻塞 I_O 与同步、异步 I_O 的区别和联系</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/33%20%E5%85%B3%E4%BA%8E%20Linux%20%E7%BD%91%E7%BB%9C%EF%BC%8C%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E8%BF%99%E4%BA%9B%EF%BC%88%E4%B8%8A%EF%BC%89.html">33 关于 Linux 网络，你必须知道这些（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/34%20%E5%85%B3%E4%BA%8E%20Linux%20%E7%BD%91%E7%BB%9C%EF%BC%8C%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E8%BF%99%E4%BA%9B%EF%BC%88%E4%B8%8B%EF%BC%89.html">34 关于 Linux 网络，你必须知道这些（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/35%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9AC10K%20%E5%92%8C%20C1000K%20%E5%9B%9E%E9%A1%BE.html">35 基础篇：C10K 和 C1000K 回顾</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/36%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AF%84%E4%BC%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%EF%BC%9F.html">36 套路篇：怎么评估系统的网络性能？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/37%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9ADNS%20%E8%A7%A3%E6%9E%90%E6%97%B6%E5%BF%AB%E6%97%B6%E6%85%A2%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">37 案例篇：DNS 解析时快时慢，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/38%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%20tcpdump%20%E5%92%8C%20Wireshark%20%E5%88%86%E6%9E%90%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%EF%BC%9F.html">38 案例篇：怎么使用 tcpdump 和 Wireshark 分析网络流量？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/39%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%BC%93%E8%A7%A3%20DDoS%20%E6%94%BB%E5%87%BB%E5%B8%A6%E6%9D%A5%E7%9A%84%E6%80%A7%E8%83%BD%E4%B8%8B%E9%99%8D%E9%97%AE%E9%A2%98%EF%BC%9F.html">39 案例篇：怎么缓解 DDoS 攻击带来的性能下降问题？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/40%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%BB%B6%E8%BF%9F%E5%8F%98%E5%A4%A7%E4%BA%86%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">40 案例篇：网络请求延迟变大了，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/41%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%20NAT%20%E6%80%A7%E8%83%BD%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">41 案例篇：如何优化 NAT 性能？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/42%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%20NAT%20%E6%80%A7%E8%83%BD%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">42 案例篇：如何优化 NAT 性能？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/43%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF%EF%BC%88%E4%B8%8A%EF%BC%89.html">43 套路篇：网络性能优化的几个思路（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/44%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF%EF%BC%88%E4%B8%8B%EF%BC%89.html">44 套路篇：网络性能优化的几个思路（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/45%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%94%B6%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BD%8D%E7%BD%AE%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">45 答疑（五）：网络收发过程中，缓冲区位置在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/46%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8%E5%8C%96%E5%90%8E%EF%BC%8C%E5%90%AF%E5%8A%A8%E6%85%A2%E4%BA%86%E5%BE%88%E5%A4%9A%EF%BC%9F.html">46 案例篇：为什么应用容器化后，启动慢了很多？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/47%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%BB%E6%98%AF%E6%97%B6%E4%B8%8D%E6%97%B6%E4%B8%A2%E5%8C%85%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">47 案例篇：服务器总是时不时丢包，我该怎么办？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/48%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%BB%E6%98%AF%E6%97%B6%E4%B8%8D%E6%97%B6%E4%B8%A2%E5%8C%85%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">48 案例篇：服务器总是时不时丢包，我该怎么办？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/49%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%86%85%E6%A0%B8%E7%BA%BF%E7%A8%8B%20CPU%20%E5%88%A9%E7%94%A8%E7%8E%87%E5%A4%AA%E9%AB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">49 案例篇：内核线程 CPU 利用率太高，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/50%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%8A%A8%E6%80%81%E8%BF%BD%E8%B8%AA%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">50 案例篇：动态追踪怎么用？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/51%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%8A%A8%E6%80%81%E8%BF%BD%E8%B8%AA%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">51 案例篇：动态追踪怎么用？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/52%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%90%9E%E5%90%90%E9%87%8F%E4%B8%8B%E9%99%8D%E5%BE%88%E5%8E%89%E5%AE%B3%EF%BC%8C%E6%80%8E%E4%B9%88%E5%88%86%E6%9E%90%EF%BC%9F.html">52 案例篇：服务吞吐量下降很厉害，怎么分析？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/53%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%E7%9A%84%E7%BB%BC%E5%90%88%E6%80%9D%E8%B7%AF.html">53 套路篇：系统监控的综合思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/54%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%BA%94%E7%94%A8%E7%9B%91%E6%8E%A7%E7%9A%84%E4%B8%80%E8%88%AC%E6%80%9D%E8%B7%AF.html">54 套路篇：应用监控的一般思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/55%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%88%86%E6%9E%90%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4.html">55 套路篇：分析性能问题的一般步骤</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/56%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%96%B9%E6%B3%95.html">56 套路篇：优化性能问题的一般方法</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/57%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9ALinux%20%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7%E9%80%9F%E6%9F%A5.html">57 套路篇：Linux 性能工具速查</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/58%20%E7%AD%94%E7%96%91%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%86%B7%E5%90%AF%E5%8A%A8%E5%A6%82%E4%BD%95%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%9F.html">58 答疑（六）：容器冷启动如何性能分析？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%EF%BC%88%E4%B8%80%EF%BC%89%20%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90%EF%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%92%8CLinux%20%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html">加餐（一） 书单推荐：性能优化和Linux 系统原理</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%EF%BC%88%E4%BA%8C%EF%BC%89%20%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90%EF%BC%9A%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%92%8C%20Linux%20%E5%86%85%E6%A0%B8%E5%AE%9E%E7%8E%B0.html">加餐（二） 书单推荐：网络原理和 Linux 内核实现</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E2%80%9C%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%20%E2%80%9D%EF%BC%8C%E4%B9%9F%E8%A6%81%E9%A1%BA%E5%88%A9%E6%8B%BF%E4%B8%8B%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%81.html">用户故事 “半路出家 ”，也要顺利拿下性能优化！</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E8%BF%90%E7%BB%B4%E5%92%8C%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4%EF%BC%9F.html">用户故事 运维和开发工程师们怎么说？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%84%BF%E4%BD%A0%E6%94%BB%E5%85%8B%E6%80%A7%E8%83%BD%E9%9A%BE%E5%85%B3.html">结束语 愿你攻克性能难关</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8perf%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90Java%E7%A8%8B%E5%BA%8F%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="14 答疑（二）：如何用perf工具分析Java程序？" id="title">14 答疑（二）：如何用perf工具分析Java程序？</h1>
+<div><p>你好，我是倪朋飞。</p>
+<p>今天是我们第二期答疑，这期答疑的主题是我们多次用到的perf工具，内容主要包括前面案例中， perf 使用方法的各种疑问。</p>
+<p>perf 在性能分析中非常有效，是我们每个人都需要掌握的核心工具。perf 的使用方法也很丰富，不过不用担心，目前你只要会用 perf record 和 perf report 就够了。而对于 perf 显示的调用栈中的某些内核符号，如果你不理解也没有关系，可以暂时跳过，并不影响我们的分析。</p>
+<p>同样的，为了便于你学习理解，它们并不是严格按照文章顺序排列的，如果你需要回顾内容原文，可以扫描每个问题右下方的二维码查看。</p>
+<h2 id="问题-1-使用-perf-工具时-看到的是16进制地址而不是函数名">问题 1： 使用 perf 工具时，看到的是16进制地址而不是函数名</h2>
+<p><img alt="" src="/assets/1a0b48a636346a5e660b90f7.png"/></p>
+<p>这也是留言比较多的一个问题，在 CentOS 系统中，使用 perf 工具看不到函数名，只能看到一些16进制格式的函数地址。</p>
+<p>其实，只要你观察一下perf界面最下面的那一行，就会发现一个警告信息：</p>
+<pre><code>Failed to open /opt/bitnami/php/lib/php/extensions/opcache.so, continuing without symbols
+</code></pre>
+<p>这说明，perf 找不到待分析进程依赖的库。当然，实际上这个案例中有很多依赖库都找不到，只不过，perf工具本身只在最后一行显示警告信息，所以你只能看到这一条警告。</p>
+<p>这个问题，其实也是在分析Docker容器应用时，我们经常碰到的一个问题，因为容器应用依赖的库都在镜像里面。</p>
+<p>针对这种情况，我总结了下面<strong>四个解决方法</strong>。</p>
+<p><strong>第一个方法，在容器外面构建相同路径的依赖库</strong>。这种方法从原理上可行，但是我并不推荐，一方面是因为找出这些依赖库比较麻烦，更重要的是，构建这些路径，会污染容器主机的环境。</p>
+<p><strong>第二个方法，在容器内部运行 perf</strong>。不过，这需要容器运行在特权模式下，但实际的应用程序往往只以普通容器的方式运行。所以，容器内部一般没有权限执行 perf 分析。</p>
+<p>比方说，如果你在普通容器内部运行 perf record ，你将会看到下面这个错误提示：</p>
+<pre><code>$ perf_4.9 record -a -g
+perf_event_open(..., PERF_FLAG_FD_CLOEXEC) failed with unexpected error 1 (Operation not permitted)
+perf_event_open(..., 0) failed unexpectedly with error 1 (Operation not permitted)
+</code></pre>
+<p>当然，其实你还可以通过配置 /proc/sys/kernel/perf_event_paranoid （比如改成-1），来允许非特权用户执行 perf 事件分析。</p>
+<p>不过还是那句话，为了安全起见，这种方法我也不推荐。</p>
+<p><strong>第三个方法，指定符号路径为容器文件系统的路径</strong>。比如对于第05讲的应用，你可以执行下面这个命令：</p>
+<pre><code>$ mkdir /tmp/foo
+$ PID=$(docker inspect --format {{.State.Pid}} phpfpm)
+$ bindfs /proc/$PID/root /tmp/foo
+$ perf report --symfs /tmp/foo
+
+# 使用完成后不要忘记解除绑定
+$ umount /tmp/foo/
+</code></pre>
+<p>不过这里要注意，bindfs 这个工具需要你额外安装。bindfs 的基本功能是实现目录绑定（类似于 mount –bind），这里需要你安装的是 1.13.10 版本（这也是它的最新发布版）。</p>
+<p>如果你安装的是旧版本，你可以到 <a href="https://github.com/mpartel/bindfs" target="_blank">GitHub</a>上面下载源码，然后编译安装。</p>
+<p><strong>第四个方法，在容器外面把分析纪录保存下来，再去容器里查看结果</strong>。这样，库和符号的路径也就都对了。</p>
+<p>比如，你可以这么做。先运行 perf record -g -p &lt; pid&gt;，执行一会儿（比如15秒）后，按Ctrl+C停止。</p>
+<p>然后，把生成的 perf.data 文件，拷贝到容器里面来分析：</p>
+<pre><code>$ docker cp perf.data phpfpm:/tmp 
+$ docker exec -i -t phpfpm bash
+</code></pre>
+<p>接下来，在容器的 bash 中继续运行下面的命令，安装 perf 并使用 perf report 查看报告：</p>
+<pre><code>$ cd /tmp/ 
+$ apt-get update &amp;&amp; apt-get install -y linux-tools linux-perf procps
+$ perf_4.9 report
+</code></pre>
+<p>不过，这里也有两点需要你注意。</p>
+<p>首先是perf工具的版本问题。在最后一步中，我们运行的工具是容器内部安装的版本 perf_4.9，而不是普通的 perf 命令。这是因为， perf 命令实际上是一个软连接，会跟内核的版本进行匹配，但镜像里安装的perf版本跟虚拟机的内核版本有可能并不一致。</p>
+<p>另外，php-fpm 镜像是基于 Debian 系统的，所以安装 perf 工具的命令，跟 Ubuntu 也并不完全一样。比如， Ubuntu 上的安装方法是下面这样：</p>
+<pre><code>$ apt-get install -y linux-tools-common linux-tools-generic linux-tools-$(uname -r)）
+</code></pre>
+<p>而在 php-fpm 容器里，你应该执行下面的命令来安装 perf：</p>
+<pre><code>$ apt-get install -y linux-perf
+</code></pre>
+<p>当你按照前面这几种方法操作后，你就可以在容器内部看到 sqrt 的堆栈：</p>
+<p><img alt="" src="/assets/6cbac2d1e1a212f7feb4c14a.png"/></p>
+<p>事实上，抛开我们的案例来说，即使是在非容器化的应用中，你也可能会碰到这个问题。假如你的应用程序在编译时，使用 strip 删除了ELF二进制文件的符号表，那么你同样也只能看到函数的地址。</p>
+<p>现在的磁盘空间，其实已经足够大了。保留这些符号，虽然会导致编译后的文件变大，但对整个磁盘空间来说已经不是什么大问题。所以为了调试的方便，建议你还是把它们保留着。</p>
+<p>顺便提一下，案例中各种工具的安装方法，可以算是我们专栏学习的基本功，这一点希望你能够熟悉并掌握。还是那句话，不会安装先查文档，还是不行就上网搜索或者在文章里留言提问。</p>
+<p>在这里也要表扬一下，很多同学已经把摸索到的方法分享到了留言中。记录并分享，是一个很好的习惯。</p>
+<h2 id="问题-2-如何用perf工具分析java程序">问题 2：如何用perf工具分析Java程序</h2>
+<p><img alt="" src="/assets/2ac34fdf6e193339b83d48c8.png"/><img alt="" src="/assets/6937c02f10a1beddd3fdbdda.jpg"/></p>
+<p>这两个问题，其实是上一个 perf 问题的延伸。 像是Java这种通过 JVM 来运行的应用程序，运行堆栈用的都是 JVM 内置的函数和堆栈管理。所以，从系统层面你只能看到JVM的函数堆栈，而不能直接得到Java应用程序的堆栈。</p>
+<p>perf_events 实际上已经支持了 JIT，但还需要一个 /tmp/perf-PID.map文件，来进行符号翻译。当然，开源项目 <a href="https://github.com/jvm-profiling-tools/perf-map-agent" target="_blank">perf-map-agent</a> 可以帮你生成这个符号表。</p>
+<p>此外，为了生成全部调用栈，你还需要开启JDK的选项 -XX:+PreserveFramePointer。因为这里涉及到大量的 Java 知识，我就不再详细展开了。如果你的应用刚好基于 Java ，那么你可以参考 Netflix 的技术博客 <a href="https://medium.com/netflix-techblog/java-in-flames-e763b3d32166" target="_blank">Java in Flames</a> ，来查看详细的使用步骤。</p>
+<p>说到这里，我也想强调一个问题，那就是学习性能优化时，不要一开始就把自己限定在具体的某个编程语言或者性能工具中，纠结于语言或工具的细节出不来。</p>
+<p>掌握整体的分析思路，才是我们首先要做的。因为，性能优化的原理和思路，在任何编程语言中都是相通的。</p>
+<h2 id="问题-3-为什么-perf-的报告中-很多符号都不显示调用栈">问题 3：为什么 perf 的报告中，很多符号都不显示调用栈</h2>
+<p><img alt="" src="/assets/1bb7ad486b32d53854760bee.png"/></p>
+<p>perf report 是一个可视化展示 perf.data 的工具。在第 08 讲的案例中，我直接给出了最终结果，并没有详细介绍它的参数。估计很多同学的机器在运行时，都碰到了跟路过同学一样的问题，看到的是下面这个界面。</p>
+<p><img alt="" src="/assets/d70806007612be95b7bd432e.png"/></p>
+<p>这个界面可以清楚看到，perf report 的输出中，只有 swapper 显示了调用栈，其他所有符号都不能查看堆栈情况，包括我们案例中的 app 应用。</p>
+<p>这种情况我们以前也遇到过，当你发现性能工具的输出无法理解时，应该怎么办呢？当然还是查工具的手册。比如，你可以执行 man perf-report 命令，找到 -g 参数的说明：</p>
+<pre><code>-g, --call-graph=&lt;print_type,threshold[,print_limit],order,sort_key[,branch],value&gt; 
+           Display call chains using type, min percent threshold, print limit, call order, sort key, optional branch and value. Note that 
+           ordering is not fixed so any parameter can be given in an arbitrary order. One exception is the print_limit which should be 
+           preceded by threshold. 
+
+               print_type can be either: 
+               - flat: single column, linear exposure of call chains. 
+               - graph: use a graph tree, displaying absolute overhead rates. (default) 
+               - fractal: like graph, but displays relative rates. Each branch of 
+                        the tree is considered as a new profiled object. 
+               - folded: call chains are displayed in a line, separated by semicolons 
+               - none: disable call chain display. 
+
+               threshold is a percentage value which specifies a minimum percent to be 
+               included in the output call graph.  Default is 0.5 (%). 
+
+               print_limit is only applied when stdio interface is used.  It's to limit 
+               number of call graph entries in a single hist entry.  Note that it needs 
+               to be given after threshold (but not necessarily consecutive). 
+               Default is 0 (unlimited). 
+
+               order can be either: 
+               - callee: callee based call graph. 
+               - caller: inverted caller based call graph. 
+               Default is 'caller' when --children is used, otherwise 'callee'. 
+
+               sort_key can be: 
+               - function: compare on functions (default) 
+               - address: compare on individual code addresses 
+               - srcline: compare on source filename and line number 
+
+               branch can be: 
+               - branch: include last branch information in callgraph when available. 
+                         Usually more convenient to use --branch-history for this. 
+
+               value can be: 
+               - percent: diplay overhead percent (default) 
+               - period: display event period 
+               - count: display event count
+</code></pre>
+<p>通过这个说明可以看到，-g 选项等同于 –call-graph，它的参数是后面那些被逗号隔开的选项，意思分别是输出类型、最小阈值、输出限制、排序方法、排序关键词、分支以及值的类型。</p>
+<p>我们可以看到，这里默认的参数是 graph,0.5,caller,function,percent，具体含义文档中都有详细讲解，这里我就不再重复了。</p>
+<p>现在再回过头来看我们的问题，堆栈显示不全，相关的参数当然就是最小阈值 threshold。通过手册中对threshold的说明，我们知道，当一个事件发生比例高于这个阈值时，它的调用栈才会显示出来。</p>
+<p>threshold 的默认值为 0.5%，也就是说，事件比例超过 0.5%时，调用栈才能被显示。再观察我们案例应用 app 的事件比例，只有 0.34%，低于 0.5%，所以看不到 app 的调用栈就很正常了。</p>
+<p>这种情况下，你只需要给 perf report 设置一个小于 0.34% 的阈值，就可以显示我们想看到的调用图了。比如执行下面的命令：</p>
+<pre><code>$ perf report -g graph,0.3
+</code></pre>
+<p>你就可以得到下面这个新的输出界面，展开 app 后，就可以看到它的调用栈了。</p>
+<p><img alt="" src="/assets/25a89898e5bafdbfd36287a7.png"/></p>
+<h2 id="问题-4-怎么理解-perf-report-报告">问题 4：怎么理解 perf report 报告</h2>
+<p><img alt="" src="/assets/1bf9d41fbb3a348fadfc3f4d.png"/><img alt="" src="/assets/8f64bc7bd9c758585a585afd.png"/></p>
+<p>看到这里，我估计你也曾嘀咕过，为啥不一上来就用 perf 工具解决，还要执行那么多其他工具呢？ 这个问题其实就给出了很好的解释。</p>
+<p>在问题4的perf report 界面中，你也一定注意到了， swapper 高达 99% 的比例。直觉来说，我们应该直接观察它才对，为什么没那么做呢？</p>
+<p>其实，当你清楚了 swapper 的原理后，就很容易理解我们为什么可以忽略它了。</p>
+<p>看到swapper，你可能首先想到的是SWAP分区。实际上， swapper 跟 SWAP 没有任何关系，它只在系统初始化时创建 init 进程，之后，它就成了一个最低优先级的空闲任务。也就是说，当 CPU 上没有其他任务运行时，就会执行swapper 。所以，你可以称它为“空闲任务”。</p>
+<p>回到我们的问题，在 perf report 的界面中，展开它的调用栈，你会看到， swapper 时钟事件都耗费在了 do_idle 上，也就是在执行空闲任务。</p>
+<p><img alt="" src="/assets/06cc8c9ce8dc8b2977ff10e8.png"/></p>
+<p>所以，分析案例时，我们直接忽略了前面这个 99% 的符号，转而分析后面只有 0.3% 的 app。其实从这里你也能理解，为什么我们一开始不先用 perf 分析。</p>
+<p>因为在多任务系统中，次数多的事件，不一定就是性能瓶颈。所以，只观察到一个大数值，并不能说明什么问题。具体有没有瓶颈，还需要你观测多个方面的多个指标，来交叉验证。这也是我在套路篇中不断强调的一点。</p>
+<p>另外，关于 Children 和 Self 的含义，手册里其实有详细说明，还很友好地举了一个例子，来说明它们的百分比的计算方法。简单来说，</p>
+<ul>
+<li><p>Self 是最后一列的符号（可以理解为函数）本身所占比例；</p></li>
+<li><p>Children 是这个符号调用的其他符号（可以理解为子函数，包括直接和间接调用）占用的比例之和。</p></li>
+</ul>
+<p>正如同学留言问到的，很多性能工具确实会对系统性能有一定影响。就拿 perf 来说，它需要在内核中跟踪内核栈的各种事件，那么不可避免就会带来一定的性能损失。这一点，虽然对大部分应用来说，没有太大影响，但对特定的某些应用（比如那些对时钟周期特别敏感的应用），可能就是灾难了。</p>
+<p>所以，使用性能工具时，确实应该考虑工具本身对系统性能的影响。而这种情况，就需要你了解这些工具的原理。比如，</p>
+<ul>
+<li><p>perf 这种动态追踪工具，会给系统带来一定的性能损失。</p></li>
+<li><p>vmstat、pidstat 这些直接读取 proc 文件系统来获取指标的工具，不会带来性能损失。</p></li>
+</ul>
+<h2 id="问题-5-性能优化书籍和参考资料推荐">问题 5：性能优化书籍和参考资料推荐</h2>
+<p><img alt="" src="/assets/6c9c746ca6cd25713de91ff4.png"/></p>
+<p>我很高兴看到留言有这么高的学习热情，其实好多文章后面都有大量留言，希望我能推荐书籍和学习资料。这一点也是我乐意看到的。专栏学习一定不是你性能优化之旅的全部，能够带你入门、帮你解决实际问题、甚至是激发你的学习热情，已经让我非常开心。</p>
+<p>在 <a href="https://time.geekbang.org/column/article/69346" target="_blank">如何学习Linux性能优化</a> 的文章中，我曾经介绍过 Brendan Gregg，他是当之无愧的性能优化大师，你在各种 Linux 性能优化的文章中，基本都能看到他的那张性能工具图谱。</p>
+<p>所以，关于性能优化的书籍，我最喜欢的其实正是他写的那本 《Systems Performance: Enterprise and the Cloud》。这本书也出了中文版，名字是《性能之巅：洞悉系统、企业与云计算》。</p>
+<p>从出版时间来看，这本书确实算一本老书了，英文版的是 2013 年出版的。但是经典之所以成为经典，正是因为不会过时。这本书里的性能分析思路以及很多的性能工具，到今天依然适用。</p>
+<p>另外，我也推荐你去关注他的个人网站 <a href="http://www.brendangregg.com/" target="_blank">http://www.brendangregg.com/</a>，特别是 <a href="http://www.brendangregg.com/linuxperf.html" target="_blank">Linux Performance</a> 这个页面，包含了很多 Linux 性能优化的资料，比如：</p>
+<ul>
+<li><p>Linux性能工具图谱 ；</p></li>
+<li><p>性能分析参考资料；</p></li>
+<li><p>性能优化的演讲视频 。</p></li>
+</ul>
+<p>不过，这里很多内容会涉及到大量的内核知识，对初学者来说并不友好。但是，如果你想成为高手，辛苦和坚持都是不可避免的。所以，希望你在查看这些资料时，不要一遇到不懂的就打退堂鼓。任何东西的第一遍学习有不懂的地方很正常，忍住恐惧别放弃，继续往后走，前面很多问题可能会一并解决掉，再看第二遍、第三遍就更轻松了。</p>
+<p>还是那句话，抓住主线不动摇，先从最基本的原理开始，掌握性能分析的思路，然后再逐步深入，探究细节，不要试图一口吃成个大胖子。</p>
+<p>最后，欢迎继续在留言区写下你的疑问，我会持续不断地解答。我的目的仍然不变，希望可以和你一起，把文章的知识变成你的能力，我们不仅仅在实战中演练，也要在交流中进步。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>42 Kafka Streams在金融领域的应用 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Kafka核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kafka核心技术与实战</strong><ul><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0Kafka%EF%BC%9F.html">00 开篇词 为什么要学习Kafka？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%20%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E%E7%B3%BB%E7%BB%9FABC.html">01  消息引擎系统ABC</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E6%90%9E%E5%AE%9AKafka%E6%9C%AF%E8%AF%AD.html">02 一篇文章带你快速搞定Kafka术语</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20Kafka%E5%8F%AA%E6%98%AF%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E%E7%B3%BB%E7%BB%9F%E5%90%97%EF%BC%9F.html">03 Kafka只是消息引擎系统吗？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20%E6%88%91%E5%BA%94%E8%AF%A5%E9%80%89%E6%8B%A9%E5%93%AA%E7%A7%8DKafka%EF%BC%9F.html">04 我应该选择哪种Kafka？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E8%81%8A%E8%81%8AKafka%E7%9A%84%E7%89%88%E6%9C%AC%E5%8F%B7.html">05 聊聊Kafka的版本号</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20Kafka%E7%BA%BF%E4%B8%8A%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F.html">06 Kafka线上集群部署方案怎么做？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E6%9C%80%E6%9C%80%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E9%9B%86%E7%BE%A4%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%8A%EF%BC%89.html">07 最最最重要的集群参数配置（上）</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E6%9C%80%E6%9C%80%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E9%9B%86%E7%BE%A4%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%8B%EF%BC%89.html">08 最最最重要的集群参数配置（下）</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%20%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E6%81%AF%E5%88%86%E5%8C%BA%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90.html">09  生产者消息分区机制原理剖析</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%E7%94%9F%E4%BA%A7%E8%80%85%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E9%9D%A2%E9%9D%A2%E8%A7%82.html">10 生产者压缩算法面面观</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E6%97%A0%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1%E9%85%8D%E7%BD%AE%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">11 无消息丢失配置怎么实现？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%B8%B8%E8%A7%81%E4%BD%86%E6%98%AF%E5%BE%88%E9%AB%98%E7%BA%A7%E7%9A%84%E5%8A%9F%E8%83%BD%EF%BC%9F.html">12 客户端都有哪些不常见但是很高级的功能？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%20Java%E7%94%9F%E4%BA%A7%E8%80%85%E6%98%AF%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86TCP%E8%BF%9E%E6%8E%A5%E7%9A%84%EF%BC%9F.html">13  Java生产者是如何管理TCP连接的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E5%B9%82%E7%AD%89%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E4%BA%8B%E5%8A%A1%E7%94%9F%E4%BA%A7%E8%80%85%E6%98%AF%E4%B8%80%E5%9B%9E%E4%BA%8B%E5%90%97%EF%BC%9F.html">14 幂等生产者和事务生产者是一回事吗？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">15 消费者组到底是什么？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E6%8F%AD%E5%BC%80%E7%A5%9E%E7%A7%98%E7%9A%84%E2%80%9C%E4%BD%8D%E7%A7%BB%E4%B8%BB%E9%A2%98%E2%80%9D%E9%9D%A2%E7%BA%B1.html">16 揭开神秘的“位移主题”面纱</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E9%87%8D%E5%B9%B3%E8%A1%A1%E8%83%BD%E9%81%BF%E5%85%8D%E5%90%97%EF%BC%9F.html">17 消费者组重平衡能避免吗？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20Kafka%E4%B8%AD%E4%BD%8D%E7%A7%BB%E6%8F%90%E4%BA%A4%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">18 Kafka中位移提交那些事儿</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20CommitFailedException%E5%BC%82%E5%B8%B8%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F.html">19 CommitFailedException异常怎么处理？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E5%8F%91%E6%B6%88%E8%B4%B9%E8%80%85%E5%AE%9E%E4%BE%8B.html">20 多线程开发消费者实例</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20Java%20%E6%B6%88%E8%B4%B9%E8%80%85%E6%98%AF%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86TCP%E8%BF%9E%E6%8E%A5%E7%9A%84_.html">21 Java 消费者是如何管理TCP连接的_</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E6%B6%88%E8%B4%B9%E8%BF%9B%E5%BA%A6%E7%9B%91%E6%8E%A7%E9%83%BD%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">22 消费者组消费进度监控都怎么实现？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20Kafka%E5%89%AF%E6%9C%AC%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3.html">23 Kafka副本机制详解</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20%E8%AF%B7%E6%B1%82%E6%98%AF%E6%80%8E%E4%B9%88%E8%A2%AB%E5%A4%84%E7%90%86%E7%9A%84%EF%BC%9F.html">24 请求是怎么被处理的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E9%87%8D%E5%B9%B3%E8%A1%A1%E5%85%A8%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90.html">25 消费者组重平衡全流程解析</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E4%BD%A0%E4%B8%80%E5%AE%9A%E4%B8%8D%E8%83%BD%E9%94%99%E8%BF%87%E7%9A%84Kafka%E6%8E%A7%E5%88%B6%E5%99%A8.html">26 你一定不能错过的Kafka控制器</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E5%85%B3%E4%BA%8E%E9%AB%98%E6%B0%B4%E4%BD%8D%E5%92%8CLeader%20Epoch%E7%9A%84%E8%AE%A8%E8%AE%BA.html">27 关于高水位和Leader Epoch的讨论</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E4%B8%BB%E9%A2%98%E7%AE%A1%E7%90%86%E7%9F%A5%E5%A4%9A%E5%B0%91_.html">28 主题管理知多少_</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20Kafka%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E4%BA%86%E8%A7%A3%E4%B8%8B%EF%BC%9F.html">29 Kafka动态配置了解下？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E6%80%8E%E4%B9%88%E9%87%8D%E8%AE%BE%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E4%BD%8D%E7%A7%BB%EF%BC%9F.html">30 怎么重设消费者组位移？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20%E5%B8%B8%E8%A7%81%E5%B7%A5%E5%85%B7%E8%84%9A%E6%9C%AC%E5%A4%A7%E6%B1%87%E6%80%BB.html">31 常见工具脚本大汇总</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20KafkaAdminClient%EF%BC%9AKafka%E7%9A%84%E8%BF%90%E7%BB%B4%E5%88%A9%E5%99%A8.html">32 KafkaAdminClient：Kafka的运维利器</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20Kafka%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6%E7%94%A8%E5%93%AA%E5%AE%B6%EF%BC%9F.html">33 Kafka认证机制用哪家？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20%E4%BA%91%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E6%8E%88%E6%9D%83%E8%AF%A5%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F.html">34 云环境下的授权该怎么做？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20%E8%B7%A8%E9%9B%86%E7%BE%A4%E5%A4%87%E4%BB%BD%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88MirrorMaker.html">35 跨集群备份解决方案MirrorMaker</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20%E4%BD%A0%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E7%9B%91%E6%8E%A7Kafka%EF%BC%9F.html">36 你应该怎么监控Kafka？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20%E4%B8%BB%E6%B5%81%E7%9A%84Kafka%E7%9B%91%E6%8E%A7%E6%A1%86%E6%9E%B6.html">37 主流的Kafka监控框架</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20%E8%B0%83%E4%BC%98Kafka%EF%BC%8C%E4%BD%A0%E5%81%9A%E5%88%B0%E4%BA%86%E5%90%97%EF%BC%9F.html">38 调优Kafka，你做到了吗？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20%E4%BB%8E0%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EKafka%E7%9A%84%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%AE%9E%E6%97%B6%E6%97%A5%E5%BF%97%E6%B5%81%E5%A4%84%E7%90%86%E5%B9%B3%E5%8F%B0.html">39 从0搭建基于Kafka的企业级实时日志流处理平台</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20Kafka%20Streams%E4%B8%8E%E5%85%B6%E4%BB%96%E6%B5%81%E5%A4%84%E7%90%86%E5%B9%B3%E5%8F%B0%E7%9A%84%E5%B7%AE%E5%BC%82%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">40 Kafka Streams与其他流处理平台的差异在哪里？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20Kafka%20Streams%20DSL%E5%BC%80%E5%8F%91%E5%AE%9E%E4%BE%8B.html">41 Kafka Streams DSL开发实例</a></li><li><a class="active" aria-current="page" href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20Kafka%20Streams%E5%9C%A8%E9%87%91%E8%9E%8D%E9%A2%86%E5%9F%9F%E7%9A%84%E5%BA%94%E7%94%A8.html">42 Kafka Streams在金融领域的应用</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%20%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E3%80%81%E9%98%85%E8%AF%BB%E6%BA%90%E7%A0%81%E6%96%B9%E6%B3%95%E3%80%81%E7%BB%8F%E5%85%B8%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E5%A4%A7%E6%8F%AD%E7%A7%98.html">加餐 搭建开发环境、阅读源码方法、经典学习资料大揭秘</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E9%BB%84%E4%BA%91%EF%BC%9A%E8%A1%8C%E7%99%BE%E9%87%8C%E8%80%85%E5%8D%8A%E4%B9%9D%E5%8D%81.html">用户故事 黄云：行百里者半九十</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%BB%A5%E6%A2%A6%E4%B8%BA%E9%A9%AC%EF%BC%8C%E8%8E%AB%E8%B4%9F%E9%9F%B6%E5%8D%8E%EF%BC%81.html">结束语 以梦为马，莫负韶华！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20Kafka%20Streams%E5%9C%A8%E9%87%91%E8%9E%8D%E9%A2%86%E5%9F%9F%E7%9A%84%E5%BA%94%E7%94%A8.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="42 Kafka Streams在金融领域的应用" id="title">42 Kafka Streams在金融领域的应用</h1>
+<div><p>你好，我是胡夕。今天我要和你分享的主题是：Kafka Streams在金融领域的应用。</p>
+<h2 id="背景">背景</h2>
+<p>金融领域囊括的内容有很多，我今天分享的主要是，如何利用大数据技术，特别是Kafka Streams实时计算框架，来帮助我们更好地做企业用户洞察。</p>
+<p>众所周知，金融领域内的获客成本是相当高的，一线城市高净值白领的获客成本通常可达上千元。面对如此巨大的成本压力，金融企业一方面要降低广告投放的获客成本，另一方面要做好精细化运营，实现客户生命周期内价值（Custom Lifecycle Value, CLV）的最大化。</p>
+<p><strong>实现价值最大化的一个重要途径就是做好用户洞察，而用户洞察要求你要更深度地了解你的客户</strong>，即所谓的Know Your Customer（KYC），真正做到以客户为中心，不断地满足客户需求。</p>
+<p>为了实现KYC，传统的做法是花费大量的时间与客户见面，做面对面的沟通以了解客户的情况。但是，用这种方式得到的数据往往是不真实的，毕竟客户内心是有潜在的自我保护意识的，短时间内的面对面交流很难真正洞察到客户的真实诉求。</p>
+<p>相反地，渗透到每个人日常生活方方面面的大数据信息则代表了客户的实际需求。比如客户经常浏览哪些网站、都买过什么东西、最喜欢的视频类型是什么。这些数据看似很随意，但都表征了客户最真实的想法。将这些数据汇总在一起，我们就能完整地构造出客户的画像，这就是所谓的用户画像（User Profile）技术。</p>
+<h2 id="用户画像">用户画像</h2>
+<p>用户画像听起来很玄妙，但实际上你应该是很熟悉的。你的很多基本信息，比如性别、年龄、所属行业、工资收入和爱好等，都是用户画像的一部分。举个例子，我们可以这样描述一个人：某某某，男性，28岁，未婚，工资水平大致在15000到20000元之间，是一名大数据开发工程师，居住在北京天通苑小区，平时加班很多，喜欢动漫或游戏。</p>
+<p>其实，这一连串的描述就是典型的用户画像。通俗点来说，构建用户画像的核心工作就是给客户或用户打标签（Tagging）。刚刚那一连串的描述就是用户系统中的典型标签。用户画像系统通过打标签的形式，把客户提供给业务人员，从而实现精准营销。</p>
+<h2 id="id映射-id-mapping">ID映射（ID Mapping）</h2>
+<p>用户画像的好处不言而喻，而且标签打得越多越丰富，就越能精确地表征一个人的方方面面。不过，在打一个个具体的标签之前，弄清楚“你是谁”是所有用户画像系统首要考虑的问题，这个问题也被称为ID识别问题。</p>
+<p>所谓的ID即Identification，表示用户身份。在网络上，能够标识用户身份信息的常见ID有5种。</p>
+<ul>
+<li>身份证号：这是最能表征身份的ID信息，每个身份证号只会对应一个人。</li>
+<li>手机号：手机号通常能较好地表征身份。虽然会出现同一个人有多个手机号或一个手机号在不同时期被多个人使用的情形，但大部分互联网应用使用手机号表征用户身份的做法是很流行的。</li>
+<li>设备ID：在移动互联网时代，这主要是指手机的设备ID或Mac、iPad等移动终端设备的设备ID。特别是手机的设备ID，在很多场景下具备定位和识别用户的功能。常见的设备ID有iOS端的IDFA和Android端的IMEI。</li>
+<li>应用注册账号：这属于比较弱的一类ID。每个人在不同的应用上可能会注册不同的账号，但依然有很多人使用通用的注册账号名称，因此具有一定的关联性和识别性。</li>
+<li>Cookie：在PC时代，浏览器端的Cookie信息是很重要的数据，它是网络上表征用户信息的重要手段之一。只不过随着移动互联网时代的来临，Cookie早已江河日下，如今作为ID数据的价值也越来越小了。我个人甚至认为，在构建基于移动互联网的新一代用户画像时，Cookie可能要被抛弃了。</li>
+</ul>
+<p>在构建用户画像系统时，我们会从多个数据源上源源不断地收集各种个人用户数据。通常情况下，这些数据不会全部携带以上这些ID信息。比如在读取浏览器的浏览历史时，你获取的是Cookie数据，而读取用户在某个App上的访问行为数据时，你拿到的是用户的设备ID和注册账号信息。</p>
+<p>倘若这些数据表征的都是一个用户的信息，我们的用户画像系统如何识别出来呢？换句话说，你需要一种手段或技术帮你做各个ID的打通或映射。这就是用户画像领域的ID映射问题。</p>
+<h2 id="实时id-mapping">实时ID Mapping</h2>
+<p>我举个简单的例子。假设有一个金融理财用户张三，他首先在苹果手机上访问了某理财产品，然后在安卓手机上注册了该理财产品的账号，最后在电脑上登录该账号，并购买了该理财产品。ID Mapping 就是要将这些不同端或设备上的用户信息聚合起来，然后找出并打通用户所关联的所有ID信息。</p>
+<p>实时ID Mapping的要求就更高了，它要求我们能够实时地分析从各个设备收集来的数据，并在很短的时间内完成ID Mapping。打通用户ID身份的时间越短，我们就能越快地为其打上更多的标签，从而让用户画像发挥更大的价值。</p>
+<p>从实时计算或流处理的角度来看，实时ID Mapping能够转换成一个<strong>流-表连接问题</strong>（Stream-Table Join），即我们实时地将一个流和一个表进行连接。</p>
+<p>消息流中的每个事件或每条消息包含的是一个未知用户的某种信息，它可以是用户在页面的访问记录数据，也可以是用户的购买行为数据。这些消息中可能会包含我们刚才提到的若干种ID信息，比如页面访问信息中可能包含设备ID，也可能包含注册账号，而购买行为信息中可能包含身份证信息和手机号等。</p>
+<p>连接的另一方表保存的是<strong>用户所有的ID信息</strong>，随着连接的不断深入，表中保存的ID品类会越来越丰富，也就是说，流中的数据会被不断地补充进表中，最终实现对用户所有ID的打通。</p>
+<h2 id="kafka-streams实现">Kafka Streams实现</h2>
+<p>好了，现在我们就来看看如何使用Kafka Streams来实现一个特定场景下的实时ID Mapping。为了方便理解，我们假设ID Mapping只关心身份证号、手机号以及设备ID。下面是用Avro写成的Schema格式：</p>
+<pre><code>{
+  "namespace": "kafkalearn.userprofile.idmapping",
+  "type": "record",
+  "name": "IDMapping",
+  "fields": [
+    {"name": "deviceId", "type": "string"},
+    {"name": "idCard", "type": "string"},
+    {"name": "phone", "type": "string"}
+  ]
+}
+</code></pre>
+<p>顺便说一下，<strong>Avro是Java或大数据生态圈常用的序列化编码机制</strong>，比如直接使用JSON或XML保存对象。Avro能极大地节省磁盘占用空间或网络I/O传输量，因此普遍应用于大数据量下的数据传输。</p>
+<p>在这个场景下，我们需要两个Kafka主题，一个用于构造表，另一个用于构建流。这两个主题的消息格式都是上面的IDMapping对象。</p>
+<p>新用户在填写手机号注册App时，会向第一个主题发送一条消息，该用户后续在App上的所有访问记录，也都会以消息的形式发送到第二个主题。值得注意的是，发送到第二个主题上的消息有可能携带其他的ID信息，比如手机号或设备ID等。就像我刚刚所说的，这是一个典型的流-表实时连接场景，连接之后，我们就能够将用户的所有数据补齐，实现ID Mapping的打通。</p>
+<p>基于这个设计思路，我先给出完整的Kafka Streams代码，稍后我会对重点部分进行详细解释：</p>
+<pre><code>package kafkalearn.userprofile.idmapping;
+
+// omit imports……
+
+public class IDMappingStreams {
+
+
+    public static void main(String[] args) throws Exception {
+
+        if (args.length &lt; 1) {
+            throw new IllegalArgumentException("Must specify the path for a configuration file.");
+        }
+
+        IDMappingStreams instance = new IDMappingStreams();
+        Properties envProps = instance.loadProperties(args[0]);
+        Properties streamProps = instance.buildStreamsProperties(envProps);
+        Topology topology = instance.buildTopology(envProps);
+
+        instance.createTopics(envProps);
+
+        final KafkaStreams streams = new KafkaStreams(topology, streamProps);
+        final CountDownLatch latch = new CountDownLatch(1);
+
+        // Attach shutdown handler to catch Control-C.
+        Runtime.getRuntime().addShutdownHook(new Thread("streams-shutdown-hook") {
+            @Override
+            public void run() {
+                streams.close();
+                latch.countDown();
+            }
+        });
+
+        try {
+            streams.start();
+            latch.await();
+        } catch (Throwable e) {
+            System.exit(1);
+        }
+        System.exit(0);
+    }
+
+    private Properties loadProperties(String propertyFilePath) throws IOException {
+        Properties envProps = new Properties();
+        try (FileInputStream input = new FileInputStream(propertyFilePath)) {
+            envProps.load(input);
+            return envProps;
+        }
+    }
+
+    private Properties buildStreamsProperties(Properties envProps) {
+        Properties props = new Properties();
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG, envProps.getProperty("application.id"));
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, envProps.getProperty("bootstrap.servers"));
+        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        return props;
+    }
+
+    private void createTopics(Properties envProps) {
+        Map&lt;String, Object&gt; config = new HashMap&lt;&gt;();
+        config.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, envProps.getProperty("bootstrap.servers"));
+        try (AdminClient client = AdminClient.create(config)) {
+            List&lt;NewTopic&gt; topics = new ArrayList&lt;&gt;();
+            topics.add(new NewTopic(
+                    envProps.getProperty("stream.topic.name"),
+                    Integer.parseInt(envProps.getProperty("stream.topic.partitions")),
+                    Short.parseShort(envProps.getProperty("stream.topic.replication.factor"))));
+
+            topics.add(new NewTopic(
+                    envProps.getProperty("table.topic.name"),
+                    Integer.parseInt(envProps.getProperty("table.topic.partitions")),
+                    Short.parseShort(envProps.getProperty("table.topic.replication.factor"))));
+
+            client.createTopics(topics);
+        }
+    }
+
+    private Topology buildTopology(Properties envProps) {
+        final StreamsBuilder builder = new StreamsBuilder();
+        final String streamTopic = envProps.getProperty("stream.topic.name");
+        final String rekeyedTopic = envProps.getProperty("rekeyed.topic.name");
+        final String tableTopic = envProps.getProperty("table.topic.name");
+        final String outputTopic = envProps.getProperty("output.topic.name");
+        final Gson gson = new Gson();
+
+        // 1. 构造表
+        KStream&lt;String, IDMapping&gt; rekeyed = builder.&lt;String, String&gt;stream(tableTopic)
+                .mapValues(json -&gt; gson.fromJson(json, IDMapping.class))
+                .filter((noKey, idMapping) -&gt; !Objects.isNull(idMapping.getPhone()))
+                .map((noKey, idMapping) -&gt; new KeyValue&lt;&gt;(idMapping.getPhone(), idMapping));
+        rekeyed.to(rekeyedTopic);
+        KTable&lt;String, IDMapping&gt; table = builder.table(rekeyedTopic);
+
+        // 2. 流-表连接
+        KStream&lt;String, String&gt; joinedStream = builder.&lt;String, String&gt;stream(streamTopic)
+                .mapValues(json -&gt; gson.fromJson(json, IDMapping.class))
+                .map((noKey, idMapping) -&gt; new KeyValue&lt;&gt;(idMapping.getPhone(), idMapping))
+                .leftJoin(table, (value1, value2) -&gt; IDMapping.newBuilder()
+                        .setPhone(value2.getPhone() == null ? value1.getPhone() : value2.getPhone())
+                        .setDeviceId(value2.getDeviceId() == null ? value1.getDeviceId() : value2.getDeviceId())
+                        .setIdCard(value2.getIdCard() == null ? value1.getIdCard() : value2.getIdCard())
+                        .build())
+                .mapValues(v -&gt; gson.toJson(v));
+
+        joinedStream.to(outputTopic);
+
+        return builder.build();
+    }
+}
+</code></pre>
+<p>这个Java类代码中最重要的方法是<strong>buildTopology函数</strong>，它构造了我们打通ID Mapping的所有逻辑。</p>
+<p>在该方法中，我们首先构造了StreamsBuilder对象实例，这是构造任何Kafka Streams应用的第一步。之后我们读取配置文件，获取了要读写的所有Kafka主题名。在这个例子中，我们需要用到4个主题，它们的作用如下：</p>
+<ul>
+<li>streamTopic：保存用户登录App后发生的各种行为数据，格式是IDMapping对象的JSON串。你可能会问，前面不是都创建Avro Schema文件了吗，怎么这里又用回JSON了呢？原因是这样的：社区版的Kafka没有提供Avro的序列化/反序列化类支持，如果我要使用Avro，必须改用Confluent公司提供的Kafka，但这会偏离我们专栏想要介绍Apache Kafka的初衷。所以，我还是使用JSON进行说明。这里我只是用了Avro Code Generator帮我们提供IDMapping对象各个字段的set/get方法，你使用Lombok也是可以的。</li>
+<li>rekeyedTopic：这个主题是一个中间主题，它将streamTopic中的手机号提取出来作为消息的Key，同时维持消息体不变。</li>
+<li>tableTopic：保存用户注册App时填写的手机号。我们要使用这个主题构造连接时要用到的表数据。</li>
+<li>outputTopic：保存连接后的输出信息，即打通了用户所有ID数据的IDMapping对象，将其转换成JSON后输出。</li>
+</ul>
+<p>buildTopology的第一步是构造表，即KTable对象。我们修改初始的消息流，以用户注册的手机号作为Key，构造了一个中间流，之后将这个流写入到rekeyedTopic，最后直接使用builder.table方法构造出KTable。这样每当有新用户注册时，该KTable都会新增一条数据。</p>
+<p>有了表之后，我们继续构造消息流来封装用户登录App之后的行为数据，我们同样提取出手机号作为要连接的Key，之后使用KStream的<strong>leftJoin方法</strong>将其与上一步的KTable对象进行关联。</p>
+<p>在关联的过程中，我们同时提取两边的信息，尽可能地补充到最后生成的IDMapping对象中，然后将这个生成的IDMapping实例返回到新生成的流中。最后，我们将它写入到outputTopic中保存。</p>
+<p>至此，我们使用了不到200行的Java代码，就简单实现了一个真实场景下的实时ID Mapping任务。理论上，你可以将这个例子继续扩充，扩展到任意多个ID Mapping，甚至是含有其他标签的数据，连接原理是相通的。在我自己的项目中，我借助于Kafka Streams帮助我实现了用户画像系统的部分功能，而ID Mapping就是其中的一个。</p>
+<h2 id="小结">小结</h2>
+<p>好了，我们小结一下。今天，我展示了Kafka Streams在金融领域的一个应用案例，重点演示了如何利用连接函数来实时关联流和表。其实，Kafka Streams提供的功能远不止这些，我推荐你阅读一下<a href="https://kafka.apache.org/23/documentation/streams/developer-guide/" target="_blank">官网</a>的教程，然后把自己的一些轻量级的实时计算线上任务改为使用Kafka Streams来实现。</p>
+<p><img alt="" src="/assets/c8ced554ed5acf71c577cf98.jpg"/></p>
+<h2 id="开放讨论">开放讨论</h2>
+<p>最后，我们来讨论一个问题。在刚刚的这个例子中，你觉得我为什么使用leftJoin方法而不是join方法呢？（小提示：可以对比一下SQL中的left join和inner join。）</p>
+<p>欢迎写下你的思考和答案，我们一起讨论。如果你觉得有所收获，也欢迎把文章分享给你的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>34 Spark + Kafka：流计算中的“万金油” · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/index.html">零基础入门Spark</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">37 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>零基础入门Spark</strong><ul><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%85%A5%E9%97%A8Spark%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E5%AD%A6%E4%BC%9A%E2%80%9C%E4%B8%89%E6%AD%A5%E8%B5%B0%E2%80%9D.html">00 开篇词 入门Spark，你需要学会“三步走”</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/01%20Spark%EF%BC%9A%E4%BB%8E%E2%80%9C%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9A%84Hello%20World%E2%80%9D%E5%BC%80%E5%A7%8B.html">01 Spark：从“大数据的Hello World”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/02%20RDD%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%BB%B6%E8%BF%9F%E8%AE%A1%E7%AE%97%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">02 RDD与编程模型：延迟计算是怎么回事？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/03%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ARDD%E5%86%85%E9%83%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2.html">03 RDD常用算子（一）：RDD内部的数据转换</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/04%20%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">04 进程模型与分布式部署：分布式计算是怎么回事？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/05%20%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9A%84%E7%B2%BE%E9%AB%93%EF%BC%9F.html">05 调度系统：如何把握分布式计算的精髓？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/06%20Shuffle%E7%AE%A1%E7%90%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Shuffle%E6%98%AF%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%EF%BC%9F.html">06 Shuffle管理：为什么Shuffle是性能瓶颈？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/07%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASpark%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%EF%BC%9F.html">07 RDD常用算子（二）：Spark如何实现数据聚合？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/08%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9ASpark%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98%EF%BC%9F.html">08 内存管理：Spark如何使用内存？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/09%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%9A%84%E5%87%86%E5%A4%87%E3%80%81%E9%87%8D%E5%88%86%E5%B8%83%E4%B8%8E%E6%8C%81%E4%B9%85%E5%8C%96.html">09 RDD常用算子（三）：数据的准备、重分布与持久化</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/10%20%E5%B9%BF%E6%92%AD%E5%8F%98%E9%87%8F%20%26%20%E7%B4%AF%E5%8A%A0%E5%99%A8%EF%BC%9A%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E6%98%AF%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F.html">10 广播变量 &amp; 累加器：共享变量是用来做什么的？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/11%20%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%88%B0%E5%BA%95%E9%83%BD%E5%AD%98%E5%93%AA%E5%84%BF%E4%BA%86%EF%BC%9F.html">11 存储系统：数据到底都存哪儿了？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/12%20%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9F.html">12 基础配置详解：哪些参数会影响应用程序稳定性？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/13%20Spark%20SQL%EF%BC%9A%E8%AE%A9%E6%88%91%E4%BB%AC%E4%BB%8E%E2%80%9C%E5%B0%8F%E6%B1%BD%E8%BD%A6%E6%91%87%E5%8F%B7%E5%88%86%E6%9E%90%E2%80%9D%E5%BC%80%E5%A7%8B.html">13 Spark SQL：让我们从“小汽车摇号分析”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/14%20%E5%8F%B0%E5%89%8D%E5%B9%95%E5%90%8E%EF%BC%9ADataFrame%E4%B8%8ESpark%20SQL%E7%9A%84%E7%94%B1%E6%9D%A5.html">14 台前幕后：DataFrame与Spark SQL的由来</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/15%20%E6%95%B0%E6%8D%AE%E6%BA%90%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%EF%BC%9ADataFrame%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5%EF%BC%9F.html">15 数据源与数据格式：DataFrame从何而来？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/16%20%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8DataFrame%E4%B9%8B%E4%B8%8A%E5%81%9A%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9F.html">16 数据转换：如何在DataFrame之上做数据处理？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/17%20%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%EF%BC%9A%E4%B8%8D%E5%90%8C%E7%9A%84%E5%85%B3%E8%81%94%E5%BD%A2%E5%BC%8F%E4%B8%8E%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E8%AF%A5%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F.html">17 数据关联：不同的关联形式与实现机制该怎么选？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/18%20%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%E4%BC%98%E5%8C%96%EF%BC%9A%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9BJoin%E7%AD%96%E7%95%A5%EF%BC%8C%E5%BC%80%E5%8F%91%E8%80%85%E8%AF%A5%E5%A6%82%E4%BD%95%E5%8F%96%E8%88%8D%EF%BC%9F.html">18 数据关联优化：都有哪些Join策略，开发者该如何取舍？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/19%20%E9%85%8D%E7%BD%AE%E9%A1%B9%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E6%80%A7%E8%83%BD%EF%BC%9F.html">19 配置项详解：哪些参数会影响应用程序执行性能？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/20%20Hive%20%2B%20Spark%E5%BC%BA%E5%BC%BA%E8%81%94%E5%90%88%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E4%BB%93%E7%9A%84%E4%B8%8D%E4%BA%8C%E4%B9%8B%E9%80%89.html">20 Hive + Spark强强联合：分布式数仓的不二之选</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/21%20Spark%20UI%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">21 Spark UI（上）：如何高效地定位性能问题？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/22%20Spark%20UI%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">22 Spark UI（下）：如何高效地定位性能问题？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/23%20Spark%20MLlib%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B%E2%80%9D%E5%BC%80%E5%A7%8B.html">23 Spark MLlib：从“房价预测”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/24%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F.html">24 特征工程（上）：有哪些常用的特征处理函数？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/25%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F.html">25 特征工程（下）：有哪些常用的特征处理函数？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/26%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">26 模型训练（上）：决策树系列算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/27%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%9B%9E%E5%BD%92%E3%80%81%E5%88%86%E7%B1%BB%E5%92%8C%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">27 模型训练（中）：回归、分类和聚类算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/28%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E9%A2%91%E7%B9%81%E9%A1%B9%E9%9B%86%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">28 模型训练（下）：协同过滤与频繁项集算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/29%20Spark%20MLlib%20Pipeline%EF%BC%9A%E9%AB%98%E6%95%88%E5%BC%80%E5%8F%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8.html">29 Spark MLlib Pipeline：高效开发机器学习应用</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/30%20Structured%20Streaming%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%B5%81%E5%8A%A8%E7%9A%84Word%20Count%E2%80%9D%E5%BC%80%E5%A7%8B.html">30 Structured Streaming：从“流动的Word Count”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/31%20%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B5%81%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6%EF%BC%9ABatch%20mode%E5%92%8CContinuous%20mode%E5%93%AA%E5%AE%B6%E5%BC%BA%EF%BC%9F.html">31 新一代流处理框架：Batch mode和Continuous mode哪家强？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/32%20Window%E6%93%8D%E4%BD%9C%26Watermark%EF%BC%9A%E6%B5%81%E5%A4%84%E7%90%86%E5%BC%95%E6%93%8E%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E7%A7%80%E6%9C%BA%E5%88%B6%EF%BC%9F.html">32 Window操作&amp;Watermark：流处理引擎提供了哪些优秀机制？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/33%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%EF%BC%9A%E6%B5%81%E4%B8%8E%E6%B5%81%E3%80%81%E6%B5%81%E4%B8%8E%E6%89%B9.html">33 流计算中的数据关联：流与流、流与批</a></li><li><a class="active" aria-current="page" href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/34%20Spark%20%2B%20Kafka%EF%BC%9A%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E2%80%9C%E4%B8%87%E9%87%91%E6%B2%B9%E2%80%9D.html">34 Spark + Kafka：流计算中的“万金油”</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E5%B0%8F%E7%8E%8B%EF%BC%9A%E4%BF%9D%E6%8C%81%E7%A9%BA%E6%9D%AF%E5%BF%83%E6%80%81%EF%BC%8C%E4%B8%8D%E5%81%9A%E4%BA%95%E5%BA%95%E4%B9%8B%E8%9B%99.html">用户故事 小王：保持空杯心态，不做井底之蛙</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E8%BF%9B%E5%85%A5%E6%97%B6%E9%97%B4%E8%A3%82%E7%BC%9D%EF%BC%8C%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0.html">结束语 进入时间裂缝，持续学习</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/34%20Spark%20%2B%20Kafka%EF%BC%9A%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E2%80%9C%E4%B8%87%E9%87%91%E6%B2%B9%E2%80%9D.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="34 Spark + Kafka：流计算中的“万金油”" id="title">34 Spark + Kafka：流计算中的“万金油”</h1>
+<div><p>你好，我是吴磊。</p>
+<p>在前面的几讲中，咱们不止一次提到，就数据源来说，Kafka是Structured Streaming最重要的Source之一。在工业级的生产系统中，Kafka与Spark这对组合最为常见。因此，掌握Kafka与Spark的集成，对于想从事流计算方向的同学来说，是至关重要的。</p>
+<p>今天这一讲，咱们就来结合实例，说一说Spark与Kafka这对“万金油”组合如何使用。随着业务飞速发展，各家公司的集群规模都是有增无减。在集群规模暴涨的情况下，资源利用率逐渐成为大家越来越关注的焦点。毕竟，不管是自建的Data center，还是公有云，每台机器都是真金白银的投入。</p>
+<h2 id="实例-资源利用率实时计算">实例：资源利用率实时计算</h2>
+<p>咱们今天的实例，就和资源利用率的实时计算有关。具体来说，我们首先需要搜集集群中每台机器的资源（CPU、内存）利用率，并将其写入Kafka。然后，我们使用Spark的Structured Streaming来消费Kafka数据流，并对资源利用率数据做初步的分析与聚合。最后，再通过Structured Streaming，将聚合结果打印到Console、并写回到Kafka，如下图所示。</p>
+<p><img alt="图片" src="/assets/8077ccbb57d4b1bba94b399b.jpg" title="资源利用率实时计算流程图"/></p>
+<p>一般来说，在工业级应用中，上图中的每一个圆角矩形，在部署上都是独立的。绿色矩形代表待监测的服务器集群，蓝色矩形表示独立部署的Kafka集群，而红色的Spark集群，也是独立部署的。所谓独立部署，它指的是，集群之间不共享机器资源，如下图所示。</p>
+<p><img alt="图片" src="/assets/84126b8781a901e309e97a69.jpg" title="独立部署示意图"/></p>
+<p>如果你手头上没有这样的部署环境，也不用担心。要完成资源利用率实时计算的实例，咱们不必非要依赖独立部署的分布式集群。实际上，仅在单机环境中，你就可以复现今天的实例。</p>
+<h2 id="课程安排">课程安排</h2>
+<p>今天这一讲涉及的内容比较多，在正式开始课程之前，咱们不妨先梳理一下课程内容，让你做到心中有数。</p>
+<p><img alt="图片" src="/assets/8077ccbb57d4b1bba94b399b.jpg" title="资源利用率实时计算流程图"/></p>
+<p>对于上图的1、2、3、4这四个步骤，我们会结合代码实现，分别讲解如下这四个环节：</p>
+<ol>
+<li>生成CPU与内存消耗数据流，写入Kafka；-</li>
+<li>Structured Streaming消费Kafka数据，并做初步聚合；-</li>
+<li>Structured Streaming将计算结果打印到终端；-</li>
+<li>Structured Streaming将计算结果写回Kafka，以备后用。</li>
+</ol>
+<p>除此之外，为了照顾不熟悉Kafka的同学，咱们还会对Kafka的安装、Topic创建与消费、以及Kafka的基本概念，做一个简单的梳理。</p>
+<h2 id="速读kafka的架构与运行机制">速读Kafka的架构与运行机制</h2>
+<p>在完成前面交代的计算环节之前，我们需要了解Kafka都提供了哪些核心功能。</p>
+<p>在大数据的流计算生态中，Kafka是应用最为广泛的消息中间件（Messaging Queue）。消息中间件的核心功能有以下三点。</p>
+<ol>
+<li>连接消息生产者与消息消费者；-</li>
+<li>缓存生产者生产的消息（或者说事件）；-</li>
+<li>有能力让消费者以最低延迟访问到消息。</li>
+</ol>
+<p>所谓消息生产者，它指的是事件或消息的来源与渠道。在我们的例子中，待监测集群就是生产者。集群中的机器，源源不断地生产资源利用率消息。相应地，消息的消费者，它指的是访问并处理消息的系统。显然，在这一讲的例子中，消费者是Spark。Structured Streaming读取并处理Kafka中的资源利用率消息，对其进行聚合、汇总。</p>
+<p>经过前面的分析，我们不难发现，消息中间件的存在，让生产者与消费者这两个系统之间，天然地享有如下三方面的收益。</p>
+<ul>
+<li>解耦：双方无需感知对方的存在，二者除了消息本身以外，再无交集；</li>
+<li>异步：双方都可以按照自己的“节奏”和“步调”，来生产或是消费消息，而不必受制于对方的处理能力；</li>
+<li>削峰：当消费者订阅了多个生产者的消息，且多个生产者同时生成大量消息时，得益于异步模式，消费者可以灵活地消费并处理消息，从而避免计算资源被撑爆的隐患。</li>
+</ul>
+<p>好啦，了解了Kafka的核心功能与特性之后，接下来，我们说一说Kafka的系统架构。与大多数主从架构的大数据组件（如HDFS、YARN、Spark、Presto、Flink，等等）不同，Kafka为无主架构。也就是说，在Kafka集群中，没有Master这样一个角色来维护全局的数据状态。</p>
+<p>集群中的每台Server被称为Kafka Broker，Broker的职责在于存储生产者生产的消息，并为消费者提供数据访问。Broker与Broker之间，都是相互独立的，彼此不存在任何的依赖关系。</p>
+<p>如果就这么平铺直叙去介绍Kafka架构的话，难免让你昏昏欲睡，所以我们上图解。配合示意图解释Kafka中的关键概念，会更加直观易懂。</p>
+<p><img alt="图片" src="/assets/21d9bc8a21acab357b47537e.jpg" title="Kafka架构示意图"/></p>
+<p>刚刚说过，Kafka为无主架构，它依赖ZooKeeper来存储并维护全局元信息。所谓元信息，它指的是消息在Kafka集群中的分布与状态。在逻辑上，消息隶属于一个又一个的Topic，也就是消息的话题或是主题。在上面的示意图中，蓝色圆角矩形所代表的消息，全部隶属于Topic A；而绿色圆角矩形，则隶属于Topic B。</p>
+<p>而在资源利用率的实例中，我们会创建两个Topic，一个是CPU利用率cpu-monitor，另一个是内存利用率mem-monitor。<strong>生产者在向Kafka写入消息的时候，需要明确指明，消息隶属于哪一个Topic</strong>。比方说，关于CPU的监控数据，应当发往cpu-monitor，而对于内存的监控数据，则应该发往mem-monitor。</p>
+<p>为了平衡不同Broker之间的工作负载，在物理上，同一个Topic中的消息，以分区、也就是Partition为粒度进行存储，示意图中的圆角矩形，代表的正是一个个数据分区。在Kafka中，一个分区，实际上就是磁盘上的一个文件目录。而消息，则依序存储在分区目录的文件中。</p>
+<p>为了提供数据访问的高可用（HA，High Availability），在生产者把消息写入主分区（Leader）之后，Kafka会把消息同步到多个分区副本（Follower），示意图中的步骤1与步骤2演示了这个过程。</p>
+<p>一般来说，消费者默认会从主分区拉取并消费数据，如图中的步骤3所示。<strong>而当主分区出现故障、导致数据不可用时，Kafka就会从剩余的分区副本中，选拔出一个新的主分区来对外提供服务，这个过程，又称作“选主”</strong>。</p>
+<p>好啦，到此为止，Kafka的基础功能和运行机制我们就讲完了，尽管这些介绍不足以覆盖Kafka的全貌，但是，对于初学者来说，这些概念足以帮我们进军实战，做好Kafka与Spark的集成。</p>
+<h2 id="kafka与spark集成">Kafka与Spark集成</h2>
+<p>接下来，咱们就来围绕着“资源利用率实时计算”这个例子，手把手地带你实现Kafka与Spark的集成过程。首先，第一步，我们先来准备Kafka环境。</p>
+<h3 id="kafka环境准备">Kafka环境准备</h3>
+<p>要配置Kafka环境，我们只需要简单的三个步骤即可：</p>
+<ol>
+<li>安装ZooKeeper、安装Kafka，启动ZooKeeper；-</li>
+<li>修改Kafka配置文件server.properties，设置ZooKeeper相关配置项；-</li>
+<li>启动Kafka，创建Topic。</li>
+</ol>
+<p>首先，咱们从 <a href="https://archive.apache.org/dist/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0-bin.tar.gz" target="_blank">ZooKeeper官网</a>与 <a href="https://archive.apache.org/dist/kafka/2.8.0/kafka_2.12-2.8.0.tgz" target="_blank">Kafka官网</a>，分别下载二者的安装包。然后，依次解压安装包、并配置相关环境变量即可，如下表所示。</p>
+<pre><code>// 下载ZooKeeper安装包
+wget https://archive.apache.org/dist/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0-bin.tar.gz
+// 下载Kafka安装包
+wget https://archive.apache.org/dist/kafka/2.8.0/kafka_2.12-2.8.0.tgz
+
+// 把ZooKeeper解压并安装到指定目录
+tar -zxvf apache-zookeeper-3.7.0-bin.tar.gz -C /opt/zookeeper
+// 把Kafka解压并安装到指定目录
+tar -zxvf kafka_2.12-2.8.0.tgz -C /opt/kafka
+
+// 编辑环境变量
+vi ~/.bash_profile
+/** 输入如下内容到文件中
+export ZOOKEEPER_HOME=/opt/zookeeper/apache-zookeeper-3.7.0-bin
+export KAFKA_HOME=/opt/kafka/kafka_2.12-2.8.0
+export PATH=$PATH:$ZOOKEEPER_HOME/bin:$KAFKA_HOME/bin
+*/
+
+// 启动ZooKeeper
+zkServer.sh start
+</code></pre>
+<p>接下来，我们打开Kafka配置目录下（也即$KAFKA_HOME/config）的server.properties文件，将其中的配置项zookeeper.connect，设置为“hostname:2181”，也就是主机名加端口号。</p>
+<p>如果你把ZooKeeper和Kafka安装到同一个节点，那么hostname可以写localhost。而如果是分布式部署，hostname要写ZooKeeper所在的安装节点。一般来说，ZooKeeper默认使用2181端口来提供服务，这里我们使用默认端口即可。</p>
+<p>配置文件设置完毕之后，我们就可以使用如下命令，在多个节点启动Kafka Broker。</p>
+<pre><code>kafka-server-start.sh -daemon $KAFKA_HOME/config/server.properties
+</code></pre>
+<p>Kafka启动之后，咱们就来创建刚刚提到的两个Topic：cpu-monitor和mem-monitor，它们分别用来存储CPU利用率消息与内存利用率消息。</p>
+<pre><code>kafka-topics.sh --zookeeper hostname:2181/kafka --create
+--topic cpu-monitor
+--replication-factor 3
+--partitions 1
+
+kafka-topics.sh --zookeeper hostname:2181/kafka --create
+--topic mem-monitor
+--replication-factor 3 
+--partitions 1
+</code></pre>
+<p>怎么样？是不是很简单？要创建Topic，只要指定ZooKeeper服务地址、Topic名字和副本数量即可。不过，这里需要特别注意的是，<strong>副本数量，也就是replication-factor，不能超过集群中的Broker数量</strong>。所以，如果你是本地部署的话，也就是所有服务都部署到一台节点，那么这里的replication-factor应该设置为1。</p>
+<p>好啦，到此为止，Kafka环境安装、配置完毕。下一步，我们就该让生产者去生产资源利用率消息，并把消息源源不断地注入Kafka集群了。</p>
+<h3 id="消息的生产">消息的生产</h3>
+<p>在咱们的实例中，我们要做的是监测集群中每台机器的资源利用率。因此，我们需要这些机器，每隔一段时间，就把CPU和内存利用率发送出来。而要做到这一点，咱们只需要完成一下两个两个必要步骤：</p>
+<ol>
+<li><p>每台节点从本机收集CPU与内存使用数据；-</p></li>
+<li><p>把收集到的数据，按照固定间隔，发送给Kafka集群。-
+由于消息生产这部分代码比较长，而我们的重点是学习Kafka与Spark的集成，因此，这里咱们只给出这两个步骤所涉及的关键代码片段。完整的代码实现，你可以从<a href="https://github.com/wulei-bj-cn/learn-spark/tree/main/chapter34" target="_blank">这里</a>进行下载。</p>
+<p>import java.lang.management.ManagementFactory
+import java.lang.reflect.Modifier</p>
+<p>def getUsage(mothedName: String): Any = {
+// 获取操作系统Java Bean
+val operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean
+// 获取操作系统对象中声明过的方法</p>
+<pre><code>for (method &lt;- operatingSystemMXBean.getClass.getDeclaredMethods) {
+  method.setAccessible(true)
+</code></pre>
+<p>// 判断是否为我们需要的方法名</p>
+<pre><code>  if (method.getName.startsWith(mothedName) &amp;&amp; Modifier.isPublic(method.getModifiers)) {
+</code></pre>
+<p>// 调用并执行方法，获取指定资源（CPU或内存）的利用率</p>
+<pre><code>    return method.invoke(operatingSystemMXBean)
+  }
+}
+throw new Exception(s"Can not reflect method: ${mothedName}")
+</code></pre>
+<p>}</p>
+<p>// 获取CPU利用率
+def getCPUUsage(): String = {</p>
+<pre><code>var usage = 0.0
+</code></pre>
+<p>try{
+// 调用getUsage方法，传入”getSystemCpuLoad”参数，获取CPU利用率</p>
+<pre><code>  usage = getUsage("getSystemCpuLoad").asInstanceOf[Double] * 100
+} catch {
+  case e: Exception =&gt; throw e
+}
+usage.toString
+</code></pre>
+<p>}</p>
+<p>// 获取内存利用率
+def getMemoryUsage(): String = {</p>
+<pre><code>var freeMemory = 0L
+var totalMemory = 0L
+var usage = 0.0
+</code></pre>
+<p>try{
+// 调用getUsage方法，传入相关内存参数，获取内存利用率</p>
+<pre><code>  freeMemory = getUsage("getFreePhysicalMemorySize").asInstanceOf[Long]
+  totalMemory = getUsage("getTotalPhysicalMemorySize").asInstanceOf[Long]
+</code></pre>
+<p>// 用总内存，减去空闲内存，获取当前内存用量</p>
+<pre><code>  usage = (totalMemory - freeMemory.doubleValue) / totalMemory * 100
+} catch {
+  case e: Exception =&gt; throw e
+}
+usage.toString
+</code></pre>
+<p>}</p></li>
+</ol>
+<p>利用Java的反射机制，获取资源利用率</p>
+<p>上面的代码，用来获取CPU与内存利用率。在这段代码中，最核心的部分是利用Java的反射机制，来获取操作系统对象的各个公有方法，然后通过调用这些公有方法，来完成资源利用率的获取。</p>
+<p>不过，看到这你可能会说：“我并不了解Java的反射机制，上面的代码看不太懂。”这也没关系，只要你能结合注释，把上述代码的计算逻辑搞清楚即可。获取到资源利用率的数据之后，接下来，我们就可以把它们发送给Kafka了。</p>
+<pre><code>import org.apache.kafka.clients.producer.{Callback, KafkaProducer, ProducerConfig, ProducerRecord}
+import org.apache.kafka.common.serialization.StringSerializer
+
+// 初始化属性信息
+  def initConfig(clientID: String): Properties = {
+    val props = new Properties
+val brokerList = "localhost:9092"
+// 指定Kafka集群Broker列表
+    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, brokerList)
+    props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer].getName)
+    props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer].getName)
+    props.put(ProducerConfig.CLIENT_ID_CONFIG, clientID)
+    props
+  }
+
+val clientID = "usage.monitor.client"
+    val cpuTopic = "cpu-monitor"
+    val memTopic = "mem-monitor"
+
+// 定义属性，其中包括Kafka集群信息、序列化方法，等等
+val props = initConfig(clientID)
+// 定义Kafka Producer对象，用于发送消息
+val producer = new KafkaProducer[String, String](props)
+// 回调函数，可暂时忽略
+    val usageCallback = _
+
+    while (true) {
+      var cpuUsage = new String
+      var memoryUsage = new String
+// 调用之前定义的函数，获取CPU、内存利用率
+      cpuUsage = getCPUUsage()
+      memoryUsage = getMemoryUsage()
+
+// 为CPU Topic生成Kafka消息
+      val cpuRecord = new ProducerRecord[String, String](cpuTopic, clientID, cpuUsage)
+// 为Memory Topic生成Kafka消息
+      val memRecord = new ProducerRecord[String, String](memTopic, clientID, memoryUsage)
+// 向Kafka集群发送CPU利用率消息
+      producer.send(cpuRecord, usageCallback)
+// 向Kafka集群发送内存利用率消息
+      producer.send(memRecord, usageCallback)
+// 设置发送间隔：2秒
+      Thread.sleep(2000)
+    }
+</code></pre>
+<p>从上面的代码中，我们不难发现，其中的关键步骤有三步：</p>
+<ul>
+<li>定义Kafka Producer对象，其中需要我们在属性信息中，指明Kafka集群相关信息；</li>
+<li>调用之前定义的函数getCPUUsage、getMemoryUsage，获取CPU与内存资源利用率；</li>
+<li>把资源利用率封装为消息，并发送给对应的Topic。-
+好啦，到此为止，生产端的事情，我们就全部做完啦。在待监测的集群中，每隔两秒钟，每台机器都会向Kafka集群的cpu-monitor和mem-monitor这两个Topic发送即时消息。Kafka接收到这些消息之后，会把它们落盘到相应的分区中，等待着下游（也就是Spark）的消费。</li>
+</ul>
+<h3 id="消息的消费">消息的消费</h3>
+<p>接下来，终于要轮到Structured Streaming闪亮登场了。在流计算模块的[第一讲]，我们就提到，Structured Streaming支持多种Source（Socket、File、Kafka），而在这些Source中，Kafka的应用最为广泛。在用法上，相比其他Source，从Kafka接收并消费数据并没有什么两样，咱们依然是依赖“万能”的readStream API，如下表所示。</p>
+<pre><code>import org.apache.spark.sql.DataFrame
+
+// 依然是依赖readStream API
+val dfCPU:DataFrame = spark.readStream
+// format要明确指定Kafka
+.format("kafka")
+// 指定Kafka集群Broker地址，多个Broker用逗号隔开
+.option("kafka.bootstrap.servers", "hostname1:9092,hostname2:9092,hostname3:9092")
+// 订阅相关的Topic，这里以cpu-monitor为例
+.option("subscribe", "cpu-monitor")
+.load()
+</code></pre>
+<p>对于readStream API的用法，想必你早已烂熟于心了，上面的代码，你应该会觉得看上去很眼熟。这里需要我们特别注意的，主要有三点：</p>
+<ul>
+<li>format中需要明确指定Kafka；</li>
+<li>为kafka.bootstrap.servers键值指定Kafka集群Broker，多个Broker之间以逗号分隔；</li>
+<li>为subscribe键值指定需要消费的Topic名，明确Structured Streaming要消费的Topic。</li>
+</ul>
+<p>挥完上面的“三板斧”之后，我们就得到了用于承载CPU利用率消息的DataFrame。有了DataFrame，我们就可以利用Spark SQL提供的能力，去做各式各样的数据处理。再者，结合Structured Streaming框架特有的Window和Watermark机制，我们还能以时间窗口为粒度做计数统计，同时决定“多迟”的消息，我们将不再处理。</p>
+<p>不过，在此之前，咱们不妨先来直观看下代码，感受一下存在Kafka中的消息长什么样子。</p>
+<pre><code>import org.apache.spark.sql.streaming.{OutputMode, Trigger}
+import scala.concurrent.duration._
+
+dfCPU.writeStream
+.outputMode("Complete")
+// 以Console为Sink
+.format("console")
+// 每10秒钟，触发一次Micro-batch
+.trigger(Trigger.ProcessingTime(10.seconds))
+.start()
+.awaitTermination()
+</code></pre>
+<p>利用上述代码，通过终端，我们可以直接观察到Structured Streaming获取的Kafka消息，从而对亟待处理的消息，建立一个感性的认知，如下图所示。</p>
+<p><img alt="图片" src="/assets/4d8aba96a6286e28c1c5fcf5.jpg" title="CPU利用率消息示例"/></p>
+<p>在上面的数据中，除了Key、Value以外，其他信息都是消息的元信息，也即消息所属Topic、所在分区、消息的偏移地址、录入Kafka的时间，等等。</p>
+<p>在咱们的实例中，Key对应的是发送资源利用率数据的服务器节点，而Value则是具体的CPU或是内存利用率。初步熟悉了消息的Schema与构成之后，接下来，咱们就可以有的放矢地去处理这些实时的数据流了。</p>
+<p>对于这些每两秒钟就产生的资源利用率数据，假设我们仅关心它们在一定时间内（比如10秒钟）的平均值，那么，我们就可以结合Trigger与聚合计算来做到这一点，代码如下所示。</p>
+<pre><code>import org.apache.spark.sql.types.StringType
+
+dfCPU
+.withColumn("clientName", $"key".cast(StringType))
+.withColumn("cpuUsage", $"value".cast(StringType))
+// 按照服务器做分组
+.groupBy($"clientName")
+// 求取均值
+.agg(avg($"cpuUsage").cast(StringType).alias("avgCPUUsage"))
+.writeStream
+.outputMode("Complete")
+// 以Console为Sink
+.format("console")
+// 每10秒触发一次Micro-batch
+.trigger(Trigger.ProcessingTime(10.seconds))
+.start()
+.awaitTermination()
+</code></pre>
+<p>可以看到，我们利用Fixed interval trigger，每隔10秒创建一个Micro-batch。然后，在一个Micro-batch中，我们按照发送消息的服务器做分组，并计算CPU利用率平均值。最后将统计结果打印到终端，如下图所示。</p>
+<p><img alt="图片" src="/assets/d20bcb55380a3c2a405425d7.jpg" title="统计CPU利用率均值"/></p>
+<h3 id="再次写入kafka">再次写入Kafka</h3>
+<p>实际上，除了把结果打印到终端外，我们还可以把它写回Kafka。我们知道Structured Streaming支持种类丰富的Sink，除了常用于测试的Console以外，还支持File、Kafka、Foreach(Batch)，等等。要把数据写回Kafka也不难，我们只需在writeStream API中，指定format为Kafka并设置相关选项即可，如下表所示。</p>
+<pre><code>dfCPU
+.withColumn("key", $"key".cast(StringType))
+.withColumn("value", $"value".cast(StringType))
+.groupBy($"key")
+.agg(avg($"value").cast(StringType).alias("value"))
+.writeStream
+.outputMode("Complete")
+// 指定Sink为Kafka
+.format("kafka")
+// 设置Kafka集群信息，本例中只有localhost一个Kafka Broker
+.option("kafka.bootstrap.servers", "localhost:9092")
+// 指定待写入的Kafka Topic，需事先创建好Topic：cpu-monitor-agg-result
+.option("topic", "cpu-monitor-agg-result")
+// 指定WAL Checkpoint目录地址
+.option("checkpointLocation", "/tmp/checkpoint")
+.trigger(Trigger.ProcessingTime(10.seconds))
+.start()
+.awaitTermination()
+</code></pre>
+<p>我们首先指定Sink为Kafka，然后通过option选项，分别设置Kafka集群信息、待写入的Topic名字，以及WAL Checkpoint目录。将上述代码敲入spark-shell，Structured Streaming会每隔10秒钟，就从Kafka拉取原始的利用率信息（Topic：cpu-monitor），然后按照服务器做分组聚合，最终再把聚合结果写回到Kafka（Topic：cpu-monitor-agg-result）。</p>
+<p>这里有两点需要特别注意，一个是<strong>读取与写入的Topic要分开，以免造成逻辑与数据上的混乱</strong>。再者，细心的你可能已经发现，<strong>写回Kafka的数据，在Schema上必须用“key”和“value”这两个固定的字段</strong>，而不能再像写入Console时，可以灵活地定义类似于“clientName”和“avgCPUUsage”这样的字段名，关于这一点，还需要你特别关注。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>好啦，到此为止，我手把手地带你实现了Kafka与Spark的集成，完成了图中涉及的每一个环节，也即从消息的生产、到写入Kafka，再到消息的消费与处理，并最终写回Kafka。</p>
+<p><img alt="图片" src="/assets/8077ccbb57d4b1bba94b399b.jpg" title="资源利用率实时计算流程图"/></p>
+<p>今天的内容比较多，你除了需要掌握集成中的每一个环节与用法外，还需要了解一些有关Kafka的基本概念与特性。Kafka是应用最为广泛的消息中间件（Messaging Queue），它的核心功能有三个：</p>
+<ol>
+<li>连接消息生产者与消息消费者；-</li>
+<li>缓存生产者生产的消息（或者说事件）；-</li>
+<li>有能力让消费者以最低延迟访问到消息。-
+对于Kafka的一些基本概念，你无需死记硬背，在需要的时候，回顾后面这张架构图即可。这张图中，清楚地标记了Kafka的基础概念，以及消息生产、缓存与消费的简易流程。</li>
+</ol>
+<p><img alt="图片" src="/assets/21d9bc8a21acab357b47537e.jpg" title="Kafka架构示意图"/></p>
+<p>而对于Kafka与Spark两者的集成，不管是Structured Streaming通过readStream API消费Kafka消息，还是使用writeStream API将计算结果写入Kafka，你只需要记住如下几点，即可轻松地搭建这对“万金油”组合。</p>
+<ul>
+<li>在format函数中，指定Kafka为Source或Sink；</li>
+<li>在option选项中，为kafka.bootstrap.servers键值指定Kafka集群Broker；</li>
+<li>在option选项中，设置subscribe或是topic，指定读取或是写入的Kafka Topic。</li>
+</ul>
+<h2 id="每课一练">每课一练</h2>
+<p>请你结合本讲中CPU利用率的代码，针对内存利用率，完成示意图中的各个环节，也即内存利用率消息的生产、写入Kafka（步骤1）、消息的消费与计算（步骤2、3），聚合结果再次写入Kafka（步骤4）。</p>
+<p><img alt="图片" src="/assets/8077ccbb57d4b1bba94b399b.jpg"/></p>
+<p>欢迎你把今天这讲内容转发给更多同事、朋友，跟他一起动手试验一下Spark + Kafka的实例，我再留言区等你分享。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

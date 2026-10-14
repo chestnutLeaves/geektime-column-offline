@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 安装：ElasticSearch和Kibana安装 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/index.html">ElasticSearch知识体系详解</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">21 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>ElasticSearch知识体系详解</strong><ul><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/01%20%E8%AE%A4%E7%9F%A5%EF%BC%9AElasticSearch%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">01 认知：ElasticSearch基础概念</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/02%20%E8%AE%A4%E7%9F%A5%EF%BC%9AElastic%20Stack%E7%94%9F%E6%80%81%E5%92%8C%E5%9C%BA%E6%99%AF%E6%96%B9%E6%A1%88.html">02 认知：Elastic Stack生态和场景方案</a></li><li><a class="active" aria-current="page" href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/03%20%E5%AE%89%E8%A3%85%EF%BC%9AElasticSearch%E5%92%8CKibana%E5%AE%89%E8%A3%85.html">03 安装：ElasticSearch和Kibana安装</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/04%20%E5%85%A5%E9%97%A8%EF%BC%9A%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%81%9A%E5%90%88%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html">04 入门：查询和聚合的基础使用</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/05%20%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86%E8%AF%A6%E8%A7%A3.html">05 索引：索引管理详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/06%20%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E6%A8%A1%E6%9D%BF%28Index%20Template%29%E8%AF%A6%E8%A7%A3.html">06 索引：索引模板(Index Template)详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/07%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8B%E5%A4%8D%E5%90%88%E6%9F%A5%E8%AF%A2%E8%AF%A6%E8%A7%A3.html">07 查询：DSL查询之复合查询详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/08%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8B%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E8%AF%A6%E8%A7%A3.html">08 查询：DSL查询之全文搜索详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/09%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8BTerm%E8%AF%A6%E8%A7%A3.html">09 查询：DSL查询之Term详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/10%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BBucket%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">10 聚合：聚合查询之Bucket聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/11%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BMetric%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">11 聚合：聚合查询之Metric聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/12%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BPipline%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">12 聚合：聚合查询之Pipline聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/13%20%E5%8E%9F%E7%90%86%EF%BC%9A%E4%BB%8E%E5%9B%BE%E8%A7%A3%E6%9E%84%E7%AD%91%E5%AF%B9ES%E5%8E%9F%E7%90%86%E7%9A%84%E5%88%9D%E6%AD%A5%E8%AE%A4%E7%9F%A5.html">13 原理：从图解构筑对ES原理的初步认知</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/14%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85%E5%92%8C%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84.html">14 原理：ES原理知识点补充和整体结构</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/15%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E4%B9%8B%E7%B4%A2%E5%BC%95%E6%96%87%E6%A1%A3%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3.html">15 原理：ES原理之索引文档流程详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/16%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E4%B9%8B%E8%AF%BB%E5%8F%96%E6%96%87%E6%A1%A3%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3.html">16 原理：ES原理之读取文档流程详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/17%20%E4%BC%98%E5%8C%96%EF%BC%9AElasticSearch%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E8%AF%A6%E8%A7%A3.html">17 优化：ElasticSearch性能优化详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/18%20%E5%A4%A7%E5%8E%82%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%85%BE%E8%AE%AF%E4%B8%87%E4%BA%BF%E7%BA%A7%20Elasticsearch%20%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">18 大厂实践：腾讯万亿级 Elasticsearch 技术实践</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/19%20%E8%B5%84%E6%96%99%EF%BC%9AAwesome%20Elasticsearch.html">19 资料：Awesome Elasticsearch</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/20%20WrapperQuery.html">20 WrapperQuery</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/21%20%E5%A4%87%E4%BB%BD%E5%92%8C%E8%BF%81%E7%A7%BB.html">21 备份和迁移</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/03%20%E5%AE%89%E8%A3%85%EF%BC%9AElasticSearch%E5%92%8CKibana%E5%AE%89%E8%A3%85.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="03 安装：ElasticSearch和Kibana安装" id="title">03 安装：ElasticSearch和Kibana安装</h1>
+<div><h2 id="安装elasticsearch">安装ElasticSearch</h2>
+<blockquote>
+<p>ElasticSearch 是基于Java平台的，所以先要安装Java</p>
+</blockquote>
+<ul>
+<li><strong>平台确认</strong></li>
+</ul>
+<p>这里我准备了一台Centos7虚拟机, 为方便选择后续安装的版本，所以需要看下系统版本信息。</p>
+<pre><code class="language-bash">[root@VM-0-14-centos ~]# uname -a
+Linux VM-0-14-centos 3.10.0-862.el7.x86_64 #1 SMP Fri Apr 20 16:44:24 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+    
+</code></pre>
+<ul>
+<li><strong>安装Java</strong></li>
+</ul>
+<p>安装 Elasticsearch 之前，你需要先安装一个较新的版本的 Java，最好的选择是，你可以从 <a href="http://www.java.com" target="_blank">www.java.com  </a> 获得官方提供的最新版本的 Java。安装以后，确认是否安装成功：</p>
+<pre><code class="language-bash">[root@VM-0-14-centos ~]# java --version
+openjdk 14.0.2 2020-07-14
+OpenJDK Runtime Environment 20.3 (slowdebug build 14.0.2+12)
+OpenJDK 64-Bit Server VM 20.3 (slowdebug build 14.0.2+12, mixed mode, sharing)
+    
+</code></pre>
+<ul>
+<li><strong>下载ElasticSearch</strong></li>
+</ul>
+<p>从<a href="https://www.elastic.co/cn/downloads/elasticsearch" target="_blank">这里  </a>下载ElasticSearch</p>
+<p>比如可以通过curl下载</p>
+<pre><code class="language-bash">[root@VM-0-14-centos opt]# curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.12.0-linux-x86_64.tar.gz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+    
+</code></pre>
+<ul>
+<li><strong>解压</strong></li>
+</ul>
+<pre><code class="language-bash">[root@VM-0-14-centos opt]# tar zxvf /opt/elasticsearch-7.12.0-linux-x86_64.tar.gz 
+...
+[root@VM-0-14-centos opt]# ll | grep elasticsearch
+drwxr-xr-x  9 root root      4096 Mar 18 14:21 elasticsearch-7.12.0
+-rw-r--r--  1 root root 327497331 Apr  5 21:05 elasticsearch-7.12.0-linux-x86_64.tar.gz
+    
+</code></pre>
+<ul>
+<li><strong>增加elasticSearch用户</strong></li>
+</ul>
+<p>必须创建一个非root用户来运行ElasticSearch(ElasticSearch5及以上版本，基于安全考虑，强制规定不能以root身份运行。)</p>
+<p>如果你使用root用户来启动ElasticSearch，则会有如下错误信息：</p>
+<pre><code class="language-bash">[root@VM-0-14-centos opt]# cd elasticsearch-7.12.0/
+[root@VM-0-14-centos elasticsearch-7.12.0]# ./bin/elasticsearch
+[2021-04-05T21:36:46,510][ERROR][o.e.b.ElasticsearchUncaughtExceptionHandler] [VM-0-14-centos] uncaught exception in thread [main]
+org.elasticsearch.bootstrap.StartupException: java.lang.RuntimeException: can not run elasticsearch as root
+        at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:163) ~[elasticsearch-7.12.0.jar:7.12.0]
+        at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:150) ~[elasticsearch-7.12.0.jar:7.12.0]
+        at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:75) ~[elasticsearch-7.12.0.jar:7.12.0]
+        at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:116) ~[elasticsearch-cli-7.12.0.jar:7.12.0]
+        at org.elasticsearch.cli.Command.main(Command.java:79) ~[elasticsearch-cli-7.12.0.jar:7.12.0]
+        at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:115) ~[elasticsearch-7.12.0.jar:7.12.0]
+        at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:81) ~[elasticsearch-7.12.0.jar:7.12.0]
+Caused by: java.lang.RuntimeException: can not run elasticsearch as root
+        at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:101) ~[elasticsearch-7.12.0.jar:7.12.0]
+        at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:168) ~[elasticsearch-7.12.0.jar:7.12.0]
+        at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:397) ~[elasticsearch-7.12.0.jar:7.12.0]
+        at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:159) ~[elasticsearch-7.12.0.jar:7.12.0]
+        ... 6 more
+uncaught exception in thread [main]
+java.lang.RuntimeException: can not run elasticsearch as root
+        at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:101)
+        at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:168)
+        at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:397)
+        at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:159)
+        at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:150)
+        at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:75)
+        at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:116)
+        at org.elasticsearch.cli.Command.main(Command.java:79)
+        at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:115)
+        at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:81)
+For complete error details, refer to the log at /opt/elasticsearch-7.12.0/logs/elasticsearch.log
+2021-04-05 13:36:46,979269 UTC [8846] INFO  Main.cc@106 Parent process died - ML controller exiting
+    
+</code></pre>
+<p>所以我们增加一个独立的elasticsearch用户来运行</p>
+<pre><code class="language-bash"># 增加elasticsearch用户
+[root@VM-0-14-centos elasticsearch-7.12.0]# useradd elasticsearch
+[root@VM-0-14-centos elasticsearch-7.12.0]# passwd elasticsearch
+Changing password for user elasticsearch.
+New password: 
+BAD PASSWORD: The password contains the user name in some form
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+
+# 修改目录权限至新增的elasticsearch用户
+[root@VM-0-14-centos elasticsearch-7.12.0]# chown -R elasticsearch /opt/elasticsearch-7.12.0
+# 增加data和log存放区，并赋予elasticsearch用户权限
+[root@VM-0-14-centos elasticsearch-7.12.0]# mkdir -p /data/es
+[root@VM-0-14-centos elasticsearch-7.12.0]# chown -R elasticsearch /data/es
+[root@VM-0-14-centos elasticsearch-7.12.0]# mkdir -p /var/log/es
+[root@VM-0-14-centos elasticsearch-7.12.0]# chown -R elasticsearch /var/log/es
+
+    
+</code></pre>
+<p>然后修改上述的data和log路径，<code>vi /opt/elasticsearch-7.12.0/config/elasticsearch.yml</code></p>
+<pre><code class="language-bash"># ----------------------------------- Paths ------------------------------------
+#
+# Path to directory where to store the data (separate multiple locations by comma):
+#
+path.data: /data/es
+#
+# Path to log files:
+#
+path.logs: /var/log/es
+    
+</code></pre>
+<ul>
+<li><strong>修改Linux系统的限制配置</strong></li>
+</ul>
+<ol>
+<li>修改系统中允许应用最多创建多少文件等的限制权限。Linux默认来说，一般限制应用最多创建的文件是65535个。但是ES至少需要65536的文件创建权限。</li>
+<li>修改系统中允许用户启动的进程开启多少个线程。默认的Linux限制root用户开启的进程可以开启任意数量的线程，其他用户开启的进程可以开启1024个线程。必须修改限制数为4096+。因为ES至少需要4096的线程池预备。ES在5.x版本之后，强制要求在linux中不能使用root用户启动ES进程。所以必须使用其他用户启动ES进程才可以。</li>
+<li>Linux低版本内核为线程分配的内存是128K。4.x版本的内核分配的内存更大。如果虚拟机的内存是1G，最多只能开启3000+个线程数。至少为虚拟机分配1.5G以上的内存。</li>
+</ol>
+<p>修改如下配置</p>
+<pre><code class="language-bash">[root@VM-0-14-centos elasticsearch-7.12.0]# vi /etc/security/limits.conf
+
+elasticsearch soft nofile 65536
+elasticsearch hard nofile 65536
+elasticsearch soft nproc 4096
+elasticsearch hard nproc 4096
+    
+</code></pre>
+<ul>
+<li><strong>启动ElasticSearch</strong></li>
+</ul>
+<pre><code class="language-bash">[root@VM-0-14-centos elasticsearch-7.12.0]# su elasticsearch
+[elasticsearch@VM-0-14-centos elasticsearch-7.12.0]$ ./bin/elasticsearch -d
+[2021-04-05T22:03:38,332][INFO ][o.e.n.Node               ] [VM-0-14-centos] version[7.12.0], pid[13197], build[default/tar/78722783c38caa25a70982b5b042074cde5d3b3a/2021-03-18T06:17:15.410153305Z], OS[Linux/3.10.0-862.el7.x86_64/amd64], JVM[AdoptOpenJDK/OpenJDK 64-Bit Server VM/15.0.1/15.0.1+9]
+[2021-04-05T22:03:38,348][INFO ][o.e.n.Node               ] [VM-0-14-centos] JVM home [/opt/elasticsearch-7.12.0/jdk], using bundled JDK [true]
+[2021-04-05T22:03:38,348][INFO ][o.e.n.Node               ] [VM-0-14-centos] JVM arguments [-Xshare:auto, -Des.networkaddress.cache.ttl=60, -Des.networkaddress.cache.negative.ttl=10, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -XX:+ShowCodeDetailsInExceptionMessages, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dio.netty.allocator.numDirectArenas=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Djava.locale.providers=SPI,COMPAT, --add-opens=java.base/java.io=ALL-UNNAMED, -XX:+UseG1GC, -Djava.io.tmpdir=/tmp/elasticsearch-17264135248464897093, -XX:+HeapDumpOnOutOfMemoryError, -XX:HeapDumpPath=data, -XX:ErrorFile=logs/hs_err_pid%p.log, -Xlog:gc*,gc+age=trace,safepoint:file=logs/gc.log:utctime,pid,tags:filecount=32,filesize=64m, -Xms1894m, -Xmx1894m, -XX:MaxDirectMemorySize=993001472, -XX:G1HeapRegionSize=4m, -XX:InitiatingHeapOccupancyPercent=30, -XX:G1ReservePercent=15, -Des.path.home=/opt/elasticsearch-7.12.0, -Des.path.conf=/opt/elasticsearch-7.12.0/config, -Des.distribution.flavor=default, -Des.distribution.type=tar, -Des.bundled_jdk=true]
+    
+</code></pre>
+<ul>
+<li><strong>查看安装是否成功</strong></li>
+</ul>
+<pre><code class="language-bash">[root@VM-0-14-centos ~]# netstat -ntlp | grep 9200
+tcp6       0      0 127.0.0.1:9200          :::*                    LISTEN      13549/java          
+tcp6       0      0 ::1:9200                :::*                    LISTEN      13549/java          
+[root@VM-0-14-centos ~]# curl 127.0.0.1:9200
+{
+  "name" : "VM-0-14-centos",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "ihttW8b2TfWSkwf_YgPH2Q",
+  "version" : {
+    "number" : "7.12.0",
+    "build_flavor" : "default",
+    "build_type" : "tar",
+    "build_hash" : "78722783c38caa25a70982b5b042074cde5d3b3a",
+    "build_date" : "2021-03-18T06:17:15.410153305Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.8.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+    
+</code></pre>
+<h2 id="安装kibana">安装Kibana</h2>
+<blockquote>
+<p>Kibana是界面化的查询数据的工具，下载时尽量下载与ElasicSearch一致的版本。</p>
+</blockquote>
+<ul>
+<li><strong>下载Kibana</strong></li>
+</ul>
+<p>从<a href="https://www.elastic.co/cn/downloads/kibana" target="_blank">这里  </a>下载Kibana</p>
+<ul>
+<li><strong>解压</strong></li>
+</ul>
+<pre><code class="language-bash">[root@VM-0-14-centos opt]# tar -vxzf kibana-7.12.0-linux-x86_64.tar.gz
+    
+</code></pre>
+<ul>
+<li><strong>使用elasticsearch用户权限</strong></li>
+</ul>
+<pre><code class="language-bash">[root@VM-0-14-centos opt]# chown -R elasticsearch /opt/kibana-7.12.0-linux-x86_64
+#配置Kibana的远程访问
+[root@VM-0-14-centos opt]# vi /opt/kibana-7.12.0-linux-x86_64/config/kibana.yml
+server.host: 0.0.0.0
+    
+</code></pre>
+<ul>
+<li><strong>启动</strong></li>
+</ul>
+<p>需要切换至elasticsearch用户</p>
+<pre><code class="language-bash">[root@VM-0-14-centos opt]# su elasticsearch
+[elasticsearch@VM-0-14-centos opt]$ cd /opt/kibana-7.12.0-linux-x86_64/
+[elasticsearch@VM-0-14-centos kibana-7.12.0-linux-x86_64]$ ./bin/kibana
+  log   [22:30:22.185] [info][plugins-service] Plugin "osquery" is disabled.
+  log   [22:30:22.283] [warning][config][deprecation] Config key [monitoring.cluster_alerts.email_notifications.email_address] will be required for email notifications to work in 8.0."
+  log   [22:30:22.482] [info][plugins-system] Setting up [100] plugins: [taskManager,licensing,globalSearch,globalSearchProviders,banners,code,usageCollection,xpackLegacy,telemetryCollectionManager,telemetry,telemetryCollectionXpack,kibanaUsageCollection,securityOss,share,newsfeed,mapsLegacy,kibanaLegacy,translations,legacyExport,embeddable,uiActionsEnhanced,expressions,charts,esUiShared,bfetch,data,home,observability,console,consoleExtensions,apmOss,searchprofiler,painlessLab,grokdebugger,management,indexPatternManagement,advancedSettings,fileUpload,savedObjects,visualizations,visTypeVislib,visTypeVega,visTypeTimelion,features,licenseManagement,watcher,canvas,visTypeTagcloud,visTypeTable,visTypeMetric,visTypeMarkdown,tileMap,regionMap,visTypeXy,graph,timelion,dashboard,dashboardEnhanced,visualize,visTypeTimeseries,inputControlVis,discover,discoverEnhanced,savedObjectsManagement,spaces,security,savedObjectsTagging,maps,lens,reporting,lists,encryptedSavedObjects,dashboardMode,dataEnhanced,cloud,upgradeAssistant,snapshotRestore,fleet,indexManagement,rollup,remoteClusters,crossClusterReplication,indexLifecycleManagement,enterpriseSearch,beatsManagement,transform,ingestPipelines,eventLog,actions,alerts,triggersActionsUi,stackAlerts,ml,securitySolution,case,infra,monitoring,logstash,apm,uptime]
+  log   [22:30:22.483] [info][plugins][taskManager] TaskManager is identified by the Kibana UUID: xxxxxx
+  ...
+    
+</code></pre>
+<p>如果是后台启动：</p>
+<pre><code class="language-bash">[elasticsearch@VM-0-14-centos kibana-7.12.0-linux-x86_64]$ nohup ./bin/kibana &amp;
+    
+</code></pre>
+<ul>
+<li><strong>界面访问</strong></li>
+</ul>
+<p><img alt="img" src="/assets/123bd643a1a1b5ff290a8f6b.png"/></p>
+<p>可以导入simple data</p>
+<p><img alt="img" src="/assets/7193f5e459dd7161c3f619e4.png"/></p>
+<p>查看数据</p>
+<p><img alt="img" src="/assets/d5a12ffc2177e9418157f339.png"/></p>
+<h2 id="配置密码访问">配置密码访问</h2>
+<blockquote>
+<p>使用基本许可证时，默认情况下禁用Elasticsearch安全功能。由于我测试环境是放在公网上的，所以需要设置下密码访问。相关文档可以参考<a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.12/security-minimal-setup.html" target="_blank">这里  </a></p>
+</blockquote>
+<ol>
+<li>停止kibana和elasticsearch服务</li>
+<li>将<code>xpack.security.enabled</code>设置添加到ES_PATH_CONF/elasticsearch.yml文件并将值设置为true</li>
+<li>启动elasticsearch (<code>./bin/elasticsearch -d</code>)</li>
+<li>执行如下密码设置器，<code>./bin/elasticsearch-setup-passwords interactive</code>来设置各个组件的密码</li>
+<li>将elasticsearch.username设置添加到KIB_PATH_CONF/kibana.yml 文件并将值设置给elastic用户： <code>elasticsearch.username: "elastic"</code></li>
+<li>创建kibana keystore, <code>./bin/kibana-keystore create</code></li>
+<li>在kibana keystore 中添加密码 <code>./bin/kibana-keystore add elasticsearch.password</code></li>
+<li>重启kibana 服务即可 <code>nohup ./bin/kibana &amp;</code></li>
+</ol>
+<p>然后就可以使用密码登录了：</p>
+<p><img alt="img" src="/assets/f48df658adca2d3dd3f72e7b.png"/></p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

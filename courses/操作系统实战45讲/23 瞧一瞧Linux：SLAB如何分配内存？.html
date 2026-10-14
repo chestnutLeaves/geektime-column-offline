@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>23 瞧一瞧Linux：SLAB如何分配内存？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/index.html">操作系统实战45讲</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">57 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>操作系统实战45讲</strong><ul><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E5%86%99%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">00 开篇词 为什么要学写一个操作系统？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/00%20%E7%BC%96%E8%BE%91%E6%89%8B%E8%AE%B0%20%E5%8D%87%E7%BA%A7%E8%AE%A4%E7%9F%A5%EF%BC%8C%E8%BF%AD%E4%BB%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">00 编辑手记 升级认知，迭代自己的操作系统</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/01%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%9A%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%BA%E5%99%A8%E8%BF%90%E8%A1%8C.html">01 程序的运行过程：从代码到机器运行</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/02%20%E5%87%A0%E8%A1%8C%E6%B1%87%E7%BC%96%E5%87%A0%E8%A1%8CC%EF%BC%9A%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E6%A0%B8.html">02 几行汇编几行C：实现一个最简单的内核</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/03%20%E9%BB%91%E7%9B%92%E4%B9%8B%E4%B8%AD%E6%9C%89%E4%BB%80%E4%B9%88%EF%BC%9A%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84%E4%B8%8E%E8%AE%BE%E8%AE%A1.html">03 黑盒之中有什么：内核结构与设计</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/04%20%E9%9C%87%E6%92%BC%E7%9A%84Linux%E5%85%A8%E6%99%AF%E5%9B%BE%EF%BC%9A%E4%B8%9A%E7%95%8C%E6%88%90%E7%86%9F%E7%9A%84%E5%86%85%E6%A0%B8%E6%9E%B6%E6%9E%84%E9%95%BF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%9F.html">04 震撼的Linux全景图：业界成熟的内核架构长什么样？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/05%20CPU%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F.html">05 CPU工作模式：执行程序的三种模式</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/06%20%E8%99%9A%E5%B9%BB%E4%B8%8E%E7%9C%9F%E5%AE%9E%EF%BC%9A%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9D%80%E5%A6%82%E4%BD%95%E8%BD%AC%E6%8D%A2%EF%BC%9F.html">06 虚幻与真实：程序中的地址如何转换？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/07%20Cache%E4%B8%8E%E5%86%85%E5%AD%98%EF%BC%9A%E7%A8%8B%E5%BA%8F%E6%94%BE%E5%9C%A8%E5%93%AA%E5%84%BF%EF%BC%9F.html">07 Cache与内存：程序放在哪儿？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/08%20%E9%94%81%EF%BC%9A%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C%E4%B8%AD%EF%BC%8C%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95.html">08 锁：并发操作中，解决数据同步的四种方法</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/09%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9ALinux%E7%9A%84%E8%87%AA%E6%97%8B%E9%94%81%E5%92%8C%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">09 瞧一瞧Linux：Linux的自旋锁和信号量如何实现？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/10%20%E8%AE%BE%E7%BD%AE%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%BB%BA%E7%AB%8B%E8%AE%A1%E7%AE%97%E6%9C%BA.html">10 设置工作模式与环境（上）：建立计算机</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/11%20%E8%AE%BE%E7%BD%AE%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%BB%BA%E9%80%A0%E4%BA%8C%E7%BA%A7%E5%BC%95%E5%AF%BC%E5%99%A8.html">11 设置工作模式与环境（中）：建造二级引导器</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/12%20%E8%AE%BE%E7%BD%AE%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%8E%A2%E6%9F%A5%E5%92%8C%E6%94%B6%E9%9B%86%E4%BF%A1%E6%81%AF.html">12 设置工作模式与环境（下）：探查和收集信息</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/13%20%E7%AC%AC%E4%B8%80%E4%B8%AAC%E5%87%BD%E6%95%B0%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9D%BF%E7%BA%A7%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9F.html">13 第一个C函数：如何实现板级初始化？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/14%20Linux%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AGRUB%E4%B8%8Evmlinuz%E7%9A%84%E7%BB%93%E6%9E%84.html">14 Linux初始化（上）：GRUB与vmlinuz的结构</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/15%20Linux%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BB%8E_start%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B.html">15 Linux初始化（下）：从_start到第一个进程</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/16%20%E5%88%92%E5%88%86%E5%9C%9F%E5%9C%B0%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%92%E5%88%86%E4%B8%8E%E7%BB%84%E7%BB%87%E5%86%85%E5%AD%98%EF%BC%9F.html">16 划分土地（上）：如何划分与组织内存？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/17%20%E5%88%92%E5%88%86%E5%9C%9F%E5%9C%B0%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E9%A1%B5%E9%9D%A2%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9F.html">17 划分土地（中）：如何实现内存页面初始化？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/18%20%E5%88%92%E5%88%86%E5%9C%9F%E5%9C%B0%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E9%A1%B5%E7%9A%84%E5%88%86%E9%85%8D%E4%B8%8E%E9%87%8A%E6%94%BE%EF%BC%9F.html">18 划分土地（下）：如何实现内存页的分配与释放？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/19%20%E5%9C%9F%E5%9C%B0%E4%B8%8D%E8%83%BD%E6%B5%AA%E8%B4%B9%EF%BC%9A%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%86%85%E5%AD%98%E5%AF%B9%E8%B1%A1%EF%BC%9F.html">19 土地不能浪费：如何管理内存对象？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/20%20%E5%9C%9F%E5%9C%B0%E9%9C%80%E6%B1%82%E6%89%A9%E5%A4%A7%E4%B8%8E%E4%BF%9D%E9%9A%9C%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%EF%BC%9F.html">20 土地需求扩大与保障：如何表示虚拟内存？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/21%20%E5%9C%9F%E5%9C%B0%E9%9C%80%E6%B1%82%E6%89%A9%E5%A4%A7%E4%B8%8E%E4%BF%9D%E9%9A%9C%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E5%92%8C%E9%87%8A%E6%94%BE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%EF%BC%9F.html">21 土地需求扩大与保障：如何分配和释放虚拟内存？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/22%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E4%BC%99%E4%BC%B4%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%EF%BC%9F.html">22 瞧一瞧Linux：伙伴系统如何分配内存？</a></li><li><a class="active" aria-current="page" href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/23%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9ASLAB%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%EF%BC%9F.html">23 瞧一瞧Linux：SLAB如何分配内存？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/24%20%E6%B4%BB%E5%8A%A8%E7%9A%84%E6%8F%8F%E8%BF%B0%EF%BC%9A%E5%88%B0%E5%BA%95%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%9B%E7%A8%8B%EF%BC%9F.html">24 活动的描述：到底什么是进程？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/25%20%E5%A4%9A%E4%B8%AA%E6%B4%BB%E5%8A%A8%E8%A6%81%E5%AE%89%E6%8E%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%A6%82%E4%BD%95%E8%B0%83%E5%BA%A6%EF%BC%9F.html">25 多个活动要安排（上）：多进程如何调度？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/26%20%E5%A4%9A%E4%B8%AA%E6%B4%BB%E5%8A%A8%E8%A6%81%E5%AE%89%E6%8E%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%AD%89%E5%BE%85%E4%B8%8E%E5%94%A4%E9%86%92%E6%9C%BA%E5%88%B6%EF%BC%9F.html">26 多个活动要安排（下）：如何实现进程的等待与唤醒机制？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/27%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E4%B8%8E%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6_.html">27 瞧一瞧Linux：Linux如何实现进程与进程调度_</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/28%20%E9%83%A8%E9%97%A8%E5%88%86%E7%B1%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E8%AE%BE%E5%A4%87%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%EF%BC%9F.html">28 部门分类：如何表示设备类型与设备驱动？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/29%20%E9%83%A8%E9%97%A8%E5%BB%BA%E7%AB%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E5%86%85%E6%A0%B8%E4%B8%AD%E6%B3%A8%E5%86%8C%E8%AE%BE%E5%A4%87%EF%BC%9F.html">29 部门建立：如何在内核中注册设备？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/30%20%E9%83%A8%E9%97%A8%E5%93%8D%E5%BA%94%EF%BC%9A%E8%AE%BE%E5%A4%87%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%86%85%E6%A0%B8I_O%E5%8C%85%EF%BC%9F.html">30 部门响应：设备如何处理内核I_O包？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/31%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF%EF%BC%9F.html">31 瞧一瞧Linux：如何获取所有设备信息？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/32%20%E4%BB%93%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E6%96%87%E4%BB%B6_.html">32 仓库结构：如何组织文件_</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/33%20%E4%BB%93%E5%BA%93%E5%88%92%E5%88%86%EF%BC%9A%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%93%8D%E4%BD%9C.html">33 仓库划分：文件系统的格式化操作</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/34%20%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E5%85%AD%E5%A4%A7%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%EF%BC%9F.html">34 仓库管理：如何实现文件的六大基本操作？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/35%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E6%96%87%E4%BB%B6%EF%BC%9F.html">35 瞧一瞧Linux：虚拟文件系统如何管理文件？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/36%20%E4%BB%8EURL%E5%88%B0%E7%BD%91%E5%8D%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E5%85%A8%E5%B1%80%E8%A7%82%E5%AF%9F%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%8A%A8%EF%BC%9F.html">36 从URL到网卡：如何全局观察网络数据流动？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/37%20%E4%BB%8E%E5%86%85%E6%A0%B8%E5%88%B0%E5%BA%94%E7%94%A8%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%86%85%E6%A0%B8%E4%B8%AD%E5%A6%82%E4%BD%95%E6%B5%81%E8%BD%AC.html">37 从内核到应用：网络数据在内核中如何流转</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/38%20%E4%BB%8E%E5%8D%95%E6%8E%92%E5%88%B0%E5%9B%A2%E6%88%98%EF%BC%9A%E8%AF%A6%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%8F%E8%A7%82%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84.html">38 从单排到团战：详解操作系统的宏观网络架构</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/39%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E8%AF%A6%E8%A7%A3socket%E5%AE%9E%E7%8E%B0%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3.html">39 瞧一瞧Linux：详解socket实现与网络编程接口</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/40%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E8%AF%A6%E8%A7%A3socket%E7%9A%84%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0.html">40 瞧一瞧Linux：详解socket的接口实现</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/41%20%E6%9C%8D%E5%8A%A1%E6%8E%A5%E5%8F%A3%EF%BC%9A%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E6%B2%9F%E9%80%9A%E6%A1%A5%E6%A2%81%EF%BC%9F.html">41 服务接口：如何搭建沟通桥梁？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/42%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%B3%BB%E7%BB%9FAPI%EF%BC%9F.html">42 瞧一瞧Linux：如何实现系统API？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/43%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E6%A0%B8%EF%BC%9AKVM%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">43 虚拟机内核：KVM是什么？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/44%20%E5%AE%B9%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%AE%B9%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%EF%BC%9F.html">44 容器：如何理解容器的实现机制？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/45%20ARM%E6%96%B0%E5%AE%A0%EF%BC%9A%E8%8B%B9%E6%9E%9C%E7%9A%84M1%E8%8A%AF%E7%89%87%E5%9B%A0%E4%BD%95%E8%80%8C%E5%BF%AB%EF%BC%9F.html">45 ARM新宠：苹果的M1芯片因何而快？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/46%20AArch64%E4%BD%93%E7%B3%BB%EF%BC%9AARM%E6%9C%80%E6%96%B0%E7%BC%96%E7%A8%8B%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B%E5%89%96%E6%9E%90.html">46 AArch64体系：ARM最新编程架构模型剖析</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/LMOS%E6%9D%A5%E4%BF%A1%EF%BC%9A%E7%AC%AC%E4%BA%8C%E5%AD%A3%E8%AF%BE%E7%A8%8B%E5%B8%A6%E4%BD%A0%E2%80%9C%E6%89%8B%E6%92%95%E2%80%9D%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80.html">LMOS来信：第二季课程带你“手撕”计算机基础</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E5%A4%A7%E5%92%96%E5%8A%A9%E5%9C%BA%20%E4%BB%A5%E6%97%A0%E6%B3%95%E4%B8%BA%E6%9C%89%E6%B3%95%EF%BC%8C%E4%BB%A5%E6%97%A0%E9%99%90%E4%B8%BA%E6%9C%89%E9%99%90.html">大咖助场 以无法为有法，以无限为有限</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20yiyang%EF%BC%9A%E6%88%91%E7%9A%84%E4%B8%8A%E6%9C%BA%E5%AE%9E%E9%AA%8C%E2%80%9C%E7%88%AC%E5%9D%91%E6%8C%87%E5%8D%97%E2%80%9D.html">用户故事 yiyang：我的上机实验“爬坑指南”</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%88%90%E4%B8%BA%E9%9D%A2%E5%90%91%E2%80%9C%E7%9F%A5%E8%AF%86%E5%BA%93%E2%80%9D%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B8%88.html">用户故事 成为面向“知识库”的工程师</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%A6%82%E4%BD%95%E5%81%9A%E9%80%89%E6%8B%A9%EF%BC%8C%E8%B7%AF%E6%89%8D%E8%B6%8A%E8%B5%B0%E8%B6%8A%E5%AE%BD%EF%BC%9F.html">用户故事 技术人如何做选择，路才越走越宽？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%91%E7%83%A7%E5%8F%8B%EF%BC%9A%E7%9C%8B%E4%B8%8D%E6%87%82%EF%BC%9F%E5%9B%A0%E4%B8%BA%E4%BD%A0%E6%B2%A1%E5%8A%A8%E6%89%8B.html">用户故事 操作系统发烧友：看不懂？因为你没动手</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E7%94%A8%E5%A5%BD%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%EF%BC%8C%E5%8A%A9%E5%8A%9B%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0.html">用户故事 用好动态调试，助力课程学习</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E8%89%BE%E5%90%8C%E5%AD%A6%EF%BC%9A%E8%B7%AF%E8%99%BD%E8%BF%9C%EF%BC%8C%E8%A1%8C%E5%88%99%E5%B0%86%E8%87%B3.html">用户故事 艾同学：路虽远，行则将至</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E7%94%9F%E6%B4%BB%E5%8F%AF%E4%BB%A5%E4%B8%80%E5%9C%B0%E9%B8%A1%E6%AF%9B%EF%BC%8C%E4%BD%86%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8D%B4%E6%98%AF%E5%BF%83%E4%B8%AD%E7%9A%84%E5%85%89.html">结束语 生活可以一地鸡毛，但操作系统却是心中的光</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/23%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9ASLAB%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="23 瞧一瞧Linux：SLAB如何分配内存？" id="title">23 瞧一瞧Linux：SLAB如何分配内存？</h1>
+<div><p>你好，我是LMOS。</p>
+<p>上节课我们学习了伙伴系统，了解了它是怎样管理物理内存页面的。那么你自然会想到这个问题：Linux系统中，比页更小的内存对象要怎样分配呢？</p>
+<p>带着这个问题，我们来一起看看<strong>SLAB分配器的原理和实现。</strong>在学习过程中，你也可以对照一下我们Cosmos的内存管理组件，看看两者的内存管理有哪些异同。</p>
+<h2 id="slab">SLAB</h2>
+<p>与Cosmos物理内存页面管理器一样，Linux中的伙伴系统是以页面为最小单位分配的，现实更多要以内核对象为单位分配内存，其实更具体一点说，就是根据内核对象的实例变量大小来申请和释放内存空间，这些数据结构实例变量的大小通常从几十字节到几百字节不等，远远小于一个页面的大小。</p>
+<p>如果一个几十字节大小的数据结构实例变量，就要为此分配一个页面，这无疑是对宝贵物理内存的一种巨大浪费，因此一个更好的技术方案应运而生，就是<strong>Slab分配器</strong>（由Sun公司的雇员Jeff Bonwick在Solaris 2.4中设计并实现）。</p>
+<p>由于作者公开了实现方法，后来被Linux所借鉴，用于实现内核中更小粒度的内存分配。看看吧，你以为Linux很强大，真的强大吗？不过是站在巨人的肩膀上飞翔的。</p>
+<h3 id="走进slab对象">走进SLAB对象</h3>
+<p>何为SLAB对象？在SLAB分配器中，它把一个内存页面或者一组连续的内存页面，划分成大小相同的块，其中这一个小的内存块就是SLAB对象，但是这一组连续的内存页面中不只是SLAB对象，还有SLAB管理头和着色区。</p>
+<p>我画个图你就明白了，如下所示。</p>
+<p><img alt="" src="/assets/5a8dfe2a5692a6a74d16adcb.jpg"/></p>
+<p>上图中有一个内存页面和两个内存页面的SLAB，你可能对着色区有点陌生，我来给你讲解一下。</p>
+<p>这个着色区也是一块动态的内存块，建立SLAB时才会设置它的大小，目的是为了错开不同SLAB中的对象地址，降低硬件Cache行中的地址争用，以免导致Cache抖动效应，整个系统性能下降。</p>
+<p>SLAB头其实是一个数据结构，但是它不一定放在保存对象内存页面的开始。通常会有一个保存SLAB管理头的SLAB，在Linux中，SLAB管理头用kmem_cache结构来表示，代码如下。</p>
+<pre><code>struct array_cache {
+    unsigned int avail;
+    unsigned int limit;
+    void *entry[]; 
+};
+struct kmem_cache {
+    //是每个CPU一个array_cache类型的变量，cpu_cache是用于管理空闲对象的 
+    struct array_cache __percpu *cpu_cache;
+    unsigned int size; //cache大小
+    slab_flags_t flags;//slab标志
+    unsigned int num;//对象个数
+    unsigned int gfporder;//分配内存页面的order
+    gfp_t allocflags;
+    size_t colour;//着色区大小
+    unsigned int colour_off;//着色区的开始偏移
+    const char *name;//本SLAB的名字
+    struct list_head list;//所有的SLAB都要链接起来
+    int refcount;//引用计数
+    int object_size;//对象大小
+    int align;//对齐大小
+    struct kmem_cache_node *node[MAX_NUMNODES];//指向管理kmemcache的上层结构
+};
+</code></pre>
+<p>上述代码中，有多少个CPU，就会有多少个array_cache类型的变量。这种为每个CPU构造一个变量副本的同步机制，就是<strong>每CPU变量</strong>（per-cpu-variable）。array_cache结构中”entry[]“表示了一个遵循LIFO顺序的数组，”avail”和”limit”分别指定了当前可用对象的数目和允许容纳对象的最大数目。</p>
+<p><img alt="" src="/assets/c751ba812562d4ef71b1881f.jpg"/></p>
+<h3 id="第一个kmem-cache">第一个kmem_cache</h3>
+<p>第一个kmem_cache是哪里来的呢？其实它是静态定义在代码中的，如下所示。</p>
+<pre><code>static struct kmem_cache kmem_cache_boot = {
+    .batchcount = 1,
+    .limit = BOOT_CPUCACHE_ENTRIES,
+    .shared = 1,
+    .size = sizeof(struct kmem_cache),
+    .name = "kmem_cache",
+};
+
+void __init kmem_cache_init(void)
+{
+    int i;
+    //指向静态定义的kmem_cache_boot
+    kmem_cache = &amp;kmem_cache_boot;
+
+    for (i = 0; i &lt; NUM_INIT_LISTS; i++)
+        kmem_cache_node_init(&amp;init_kmem_cache_node[i]);
+    //建立保存kmem_cache结构的kmem_cache
+    create_boot_cache(kmem_cache, "kmem_cache",
+        offsetof(struct kmem_cache, node) +
+                  nr_node_ids * sizeof(struct kmem_cache_node *),
+                  SLAB_HWCACHE_ALIGN, 0, 0);
+    //加入全局slab_caches链表中
+    list_add(&amp;kmem_cache-&gt;list, &amp;slab_caches);
+    {
+        int nid;
+        for_each_online_node(nid) {
+            init_list(kmem_cache, &amp;init_kmem_cache_node[CACHE_CACHE + nid], nid);
+            init_list(kmalloc_caches[KMALLOC_NORMAL][INDEX_NODE],                      &amp;init_kmem_cache_node[SIZE_NODE + nid], nid);
+        }
+    }
+    //建立kmalloc函数使用的的kmem_cache
+    create_kmalloc_caches(ARCH_KMALLOC_FLAGS);
+}
+</code></pre>
+<h3 id="管理kmem-cache">管理kmem_cache</h3>
+<p>我们建好了第一个kmem_cache，以后kmem_cache越来越多，而且我们并没有看到kmem_cache结构中有任何指向内存页面的字段，但在kmem_cache结构中有个保存kmem_cache_node结构的指针数组。</p>
+<p>kmem_cache_node结构是每个内存节点对应一个，它就是用来管理kmem_cache结构的，它开始是静态定义的，初始化时建立了第一个kmem_cache结构之后，init_list函数负责一个个分配内存空间，代码如下所示。</p>
+<pre><code>#define NUM_INIT_LISTS (2 * MAX_NUMNODES)
+//定义的kmem_cache_node结构数组
+static struct kmem_cache_node __initdata init_kmem_cache_node[NUM_INIT_LISTS];
+
+struct kmem_cache_node {
+    spinlock_t list_lock;//自旋锁
+    struct list_head slabs_partial;//有一部分空闲对象的kmem_cache结构
+    struct list_head slabs_full;//没有空闲对象的kmem_cache结构
+    struct list_head slabs_free;//对象全部空闲kmem_cache结构
+    unsigned long total_slabs; //一共多少kmem_cache结构
+    unsigned long free_slabs;  //空闲的kmem_cache结构
+    unsigned long free_objects;//空闲的对象
+    unsigned int free_limit;
+};
+static void __init init_list(struct kmem_cache *cachep, struct kmem_cache_node *list,
+                int nodeid)
+{
+    struct kmem_cache_node *ptr;
+    //分配新的 kmem_cache_node 结构的空间
+    ptr = kmalloc_node(sizeof(struct kmem_cache_node), GFP_NOWAIT, nodeid);
+    BUG_ON(!ptr);
+    //复制初始时的静态kmem_cache_node结构
+    memcpy(ptr, list, sizeof(struct kmem_cache_node));
+    spin_lock_init(&amp;ptr-&gt;list_lock);
+    MAKE_ALL_LISTS(cachep, ptr, nodeid);
+    //设置kmem_cache_node的地址
+    cachep-&gt;node[nodeid] = ptr;
+}
+</code></pre>
+<p>我们第一次分配对象时，肯定没有对应的内存页面存放对象，那么SLAB模块就会调用<strong>cache_grow_begin函数</strong>获取内存页面，然后用获取的页面来存放对象，我们一起来看看代码。</p>
+<pre><code>static void slab_map_pages(struct kmem_cache *cache, struct page *page,void *freelist)
+{
+    //页面结构指向kmem_cache结构
+    page-&gt;slab_cache = cache;
+    //指向空闲对象的链表
+    page-&gt;freelist = freelist;
+}
+static struct page *cache_grow_begin(struct kmem_cache *cachep,
+                gfp_t flags, int nodeid)
+{
+    void *freelist;
+    size_t offset;
+    gfp_t local_flags;
+    int page_node;
+    struct kmem_cache_node *n;
+    struct page *page;
+
+    WARN_ON_ONCE(cachep-&gt;ctor &amp;&amp; (flags &amp; __GFP_ZERO));
+    local_flags = flags &amp; (GFP_CONSTRAINT_MASK|GFP_RECLAIM_MASK);
+    //获取页面
+    page = kmem_getpages(cachep, local_flags, nodeid);
+    //获取页面所在的内存节点号
+    page_node = page_to_nid(page);
+    //根据内存节点获取对应kmem_cache_node结构
+    n = get_node(cachep, page_node);
+    //分配管理空闲对象的数据结构
+    freelist = alloc_slabmgmt(cachep, page, offset,
+            local_flags &amp; ~GFP_CONSTRAINT_MASK, page_node);
+    //让页面中相关的字段指向kmem_cache和空闲对象
+    slab_map_pages(cachep, page, freelist);
+    //初始化空闲对象管理数据
+    cache_init_objs(cachep, page);
+    return page;
+}
+
+static void cache_grow_end(struct kmem_cache *cachep, struct page *page)
+{
+    struct kmem_cache_node *n;
+    void *list = NULL;
+    if (!page)
+        return;
+    //初始化结page构的slab_list链表
+    INIT_LIST_HEAD(&amp;page-&gt;slab_list);
+    //根据内存节点获取对应kmem_cache_node结构.
+    n = get_node(cachep, page_to_nid(page));
+    spin_lock(&amp;n-&gt;list_lock);
+    //slab计数增加
+    n-&gt;total_slabs++;
+    if (!page-&gt;active) {
+        //把这个page结构加入到kmem_cache_node结构的空闲链表中
+        list_add_tail(&amp;page-&gt;slab_list, &amp;n-&gt;slabs_free);
+        n-&gt;free_slabs++;
+    } 
+    spin_unlock(&amp;n-&gt;list_lock);
+}
+</code></pre>
+<p>上述代码中的注释已经很清楚了，cache_grow_begin函数会为kmem_cache结构分配用来存放对象的页面，随后会调用与之对应的cache_grow_end函数，把这页面挂载到kmem_cache_node结构的链表中，并让页面指向kmem_cache结构。</p>
+<p>这样kmem_cache_node，kmem_cache，page这三者之间就联系起来了。你再看一下后面的图，就更加清楚了。</p>
+<p><img alt="" src="/assets/fbe4ce26521b034796a48a8e.jpg"/></p>
+<p>上图中page可能是一组连续的pages，但是只会把第一个page挂载到kmem_cache_node中，同时，在slab_map_pages函数中又让page指向了kmem_cache。</p>
+<p>但你要特别留意kmem_cache_node中的三个链表，它们分别挂载的pages，有一部分是空闲对象的page、还有对象全部都已经分配的page，以及全部都为空闲对象的page。这是为了提高分配时查找kmem_cache的性能。</p>
+<h2 id="slab分配对象的过程">SLAB分配对象的过程</h2>
+<p>有了前面对SLAB数据结构的了解，SLAB分配对象的过程你自己也能推导出来，无非是根据请求分配对象的大小，查找对应的kmem_cache结构，接着从这个结构中获取arry_cache结构，然后分配对象。</p>
+<p>如果没有空闲对象了，就需要在kmem_cache对应的kmem_cache_node结构中查找有空闲对象的kmem_cache。如果还是没找到，最后就要分配内存页面新增kmem_cache结构了。</p>
+<p><img alt="" src="/assets/c86f411b9d69036c3ca7801d.jpg"/></p>
+<p>下面我们从接口开始了解这些过程。</p>
+<h3 id="slab分配接口">SLAB分配接口</h3>
+<p>其实在Linux内核中，用的最多的是kmalloc函数，经常用于分配小的缓冲区，或者数据结构分配实例空间，这个函数就是SLAB分配接口，它是用来分配对象的，这个对象就是一小块内存空间。</p>
+<p>下面一起来看看代码。</p>
+<pre><code>static __always_inline void *__do_kmalloc(size_t size, gfp_t flags,unsigned long caller)
+{
+    struct kmem_cache *cachep;
+    void *ret;
+    if (unlikely(size &gt; KMALLOC_MAX_CACHE_SIZE))
+        return NULL;
+    //查找size对应的kmem_cache
+    cachep = kmalloc_slab(size, flags);
+    if (unlikely(ZERO_OR_NULL_PTR(cachep)))
+        return cachep;
+    //分配对象
+    ret = slab_alloc(cachep, flags, caller);
+    return ret;
+}
+
+void *__kmalloc(size_t size, gfp_t flags)
+{
+    return __do_kmalloc(size, flags, _RET_IP_);
+}
+static __always_inline void *kmalloc(size_t size, gfp_t flags)
+{
+    return __kmalloc(size, flags);
+}
+</code></pre>
+<p>上面代码的流程很简单，就是在__do_kmalloc函数中，查找出分配大小对应的kmem_cache结构，然后调用slab_alloc函数进行分配。可以说，slab_alloc函数才是SLAB的接口函数，但是它的参数中<strong>必须要有kmem_cache结构</strong>。</p>
+<p>具体是如何查找的呢？我们这就来看看。</p>
+<h3 id="如何查找kmem-cache结构">如何查找kmem_cache结构</h3>
+<p>由于SLAB的接口函数slab_alloc，它的参数中必须要有kmem_cache结构指针，指定从哪个kmem_cache结构分配对象，所以在调用slab_alloc函数之前必须给出kmem_cache结构。</p>
+<p>我们怎么查找到它呢？这就需要调用kmalloc_slab函数了，代码如下所示。</p>
+<pre><code>enum kmalloc_cache_type {
+    KMALLOC_NORMAL = 0,
+    KMALLOC_RECLAIM,
+#ifdef CONFIG_ZONE_DMA
+    KMALLOC_DMA,
+#endif
+    NR_KMALLOC_TYPES
+};
+struct kmem_cache *kmalloc_caches[NR_KMALLOC_TYPES][KMALLOC_SHIFT_HIGH + 1] __ro_after_init ={ static u8 size_index[24] __ro_after_init = {
+    3,  /* 8 */
+    4,  /* 16 */
+    5,  /* 24 */
+    5,  /* 32 */
+    6,  /* 40 */
+    6,  /* 48 */
+    6,  /* 56 */
+    6,  /* 64 */
+    1,  /* 72 */
+    1,  /* 80 */
+    1,  /* 88 */
+    1,  /* 96 */
+    7,  /* 104 */
+    7,  /* 112 */
+    7,  /* 120 */
+    7,  /* 128 */
+    2,  /* 136 */
+    2,  /* 144 */
+    2,  /* 152 */
+    2,  /* 160 */
+    2,  /* 168 */
+    2,  /* 176 */
+    2,  /* 184 */
+    2   /* 192 */
+};
+//根据分配标志返回枚举类型，其实是0、1、2其中之一
+static __always_inline enum kmalloc_cache_type kmalloc_type(gfp_t flags)
+{
+#ifdef CONFIG_ZONE_DMA
+    if (likely((flags &amp; (__GFP_DMA | __GFP_RECLAIMABLE)) == 0))
+        return KMALLOC_NORMAL;
+    return flags &amp; __GFP_DMA ? KMALLOC_DMA : KMALLOC_RECLAIM;
+#else
+    return flags &amp; __GFP_RECLAIMABLE ? KMALLOC_RECLAIM : KMALLOC_NORMAL;
+#endif
+}
+struct kmem_cache *kmalloc_slab(size_t size, gfp_t flags)
+{
+    unsigned int index;
+    //计算出index
+    if (size &lt;= 192) {
+        if (!size)
+            return ZERO_SIZE_PTR;
+        index = size_index[size_index_elem(size)];
+    } else {
+        if (WARN_ON_ONCE(size &gt; KMALLOC_MAX_CACHE_SIZE))
+            return NULL;
+        index = fls(size - 1);
+    }
+    return kmalloc_caches[kmalloc_type(flags)][index];
+}
+</code></pre>
+<p>从上述代码，不难发现kmalloc_caches就是个全局的二维数组，kmalloc_slab函数只是根据分配大小和分配标志计算出了数组下标，最后取出其中kmem_cache结构指针。</p>
+<p>那么kmalloc_caches中的kmem_cache，它又是谁建立的呢？我们还是接着看代码。</p>
+<pre><code>struct kmem_cache *__init create_kmalloc_cache(const char *name,
+        unsigned int size, slab_flags_t flags,
+        unsigned int useroffset, unsigned int usersize)
+{
+    //从第一个kmem_cache中分配一个对象放kmem_cache
+    struct kmem_cache *s = kmem_cache_zalloc(kmem_cache, GFP_NOWAIT);
+
+    if (!s)
+        panic("Out of memory when creating slab %s\n", name);
+    //设置s的对齐参数，处理s的freelist就是arr_cache
+    create_boot_cache(s, name, size, flags, useroffset, usersize);
+    list_add(&amp;s-&gt;list, &amp;slab_caches);
+    s-&gt;refcount = 1;
+    return s;
+}
+//新建一个kmem_cache
+static void __init new_kmalloc_cache(int idx, enum kmalloc_cache_type type, slab_flags_t flags)
+{
+    if (type == KMALLOC_RECLAIM)
+        flags |= SLAB_RECLAIM_ACCOUNT;
+        //根据kmalloc_info中信息建立一个kmem_cache
+    kmalloc_caches[type][idx] = create_kmalloc_cache(
+                    kmalloc_info[idx].name[type],
+                    kmalloc_info[idx].size, flags, 0,
+                    kmalloc_info[idx].size);
+}
+//建立所有的kmalloc_caches中的kmem_cache
+void __init create_kmalloc_caches(slab_flags_t flags)
+{
+    int i;
+    enum kmalloc_cache_type type;
+    for (type = KMALLOC_NORMAL; type &lt;= KMALLOC_RECLAIM; type++) {
+        for (i = KMALLOC_SHIFT_LOW; i &lt;= KMALLOC_SHIFT_HIGH; i++) {
+            if (!kmalloc_caches[type][i])
+                //建立一个新的kmem_cache
+                new_kmalloc_cache(i, type, flags);
+            if (KMALLOC_MIN_SIZE &lt;= 32 &amp;&amp; i == 6 &amp;&amp;
+                    !kmalloc_caches[type][1])
+                new_kmalloc_cache(1, type, flags);
+            if (KMALLOC_MIN_SIZE &lt;= 64 &amp;&amp; i == 7 &amp;&amp;
+                    !kmalloc_caches[type][2])
+                new_kmalloc_cache(2, type, flags);
+        }
+    }
+}
+</code></pre>
+<p>到这里，__do_kmalloc函数中根据分配对象大小查找的所有kmem_cache结构，我们就建立好了，保存在kmalloc_caches数组中。下面我们再去看看对象是如何分配的。</p>
+<h3 id="分配对象">分配对象</h3>
+<p>下面我们从slab_alloc函数开始探索对象的分配过程，slab_alloc函数的第一个参数就kmem_cache结构的指针，表示从该kmem_cache结构中分配对象。</p>
+<pre><code>static __always_inline void *slab_alloc(struct kmem_cache *cachep, gfp_t flags, unsigned long caller)
+{
+    unsigned long save_flags;
+    void *objp;
+    //关中断
+    local_irq_save(save_flags);
+    //分配对象
+    objp = __do_cache_alloc(cachep, flags);
+    //恢复中断
+    local_irq_restore(save_flags);
+    return objp;
+}
+</code></pre>
+<p>接口函数总是简单的，真正干活的是__do_cache_alloc函数，下面我们就来看看这个函数。</p>
+<pre><code>static inline void *____cache_alloc(struct kmem_cache *cachep, gfp_t flags)
+{
+    void *objp;
+    struct array_cache *ac;
+    //获取当前cpu在cachep结构中的array_cache结构的指针
+    ac = cpu_cache_get(cachep);
+    //如果ac中的avail不为0,说明当前kmem_cache结构中freelist是有空闲对象
+    if (likely(ac-&gt;avail)) {
+        ac-&gt;touched = 1;
+        //空间对象的地址保存在ac-&gt;entry
+        objp = ac-&gt;entry[--ac-&gt;avail];
+        goto out;
+    }
+    objp = cache_alloc_refill(cachep, flags);
+out:
+    return objp;
+}
+static __always_inline void *__do_cache_alloc(struct kmem_cache *cachep, gfp_t flags)
+{
+    return ____cache_alloc(cachep, flags);
+}
+</code></pre>
+<p>上述代码中真正做事的函数是<strong>____cache_alloc函数</strong>，它首先获取了当前kmem_cache结构中指向array_cache结构的指针，找到它里面空闲对象的地址（如果你不懂array_cache结构，请回到SLAB对象那一小节复习），然后在array_cache结构中取出一个空闲对象地址返回，这样就分配成功了。</p>
+<p>这个速度是很快的，如果array_cache结构中没有空闲对象了，就会调用cache_alloc_refill函数。那这个函数又干了什么呢？我们接着往下看。代码如下所示。</p>
+<pre><code>static struct page *get_first_slab(struct kmem_cache_node *n, bool pfmemalloc)
+{
+    struct page *page;
+    assert_spin_locked(&amp;n-&gt;list_lock);
+    //首先从kmem_cache_node结构中的slabs_partial链表上查看有没有page
+    page = list_first_entry_or_null(&amp;n-&gt;slabs_partial, struct page,slab_list);
+    if (!page) {
+    //如果没有
+        n-&gt;free_touched = 1;
+    //从kmem_cache_node结构中的slabs_free链表上查看有没有page
+        page = list_first_entry_or_null(&amp;n-&gt;slabs_free, struct page,slab_list);
+        if (page)
+            n-&gt;free_slabs--; //空闲slab计数减一
+    }
+    //返回page
+    return page;
+}
+static void *cache_alloc_refill(struct kmem_cache *cachep, gfp_t flags)
+{
+    int batchcount;
+    struct kmem_cache_node *n;
+    struct array_cache *ac, *shared;
+    int node;
+    void *list = NULL;
+    struct page *page;
+    //获取内存节点
+    node = numa_mem_id();
+    ac = cpu_cache_get(cachep);
+    batchcount = ac-&gt;batchcount;
+    //获取cachep所属的kmem_cache_node
+    n = get_node(cachep, node);
+    shared = READ_ONCE(n-&gt;shared);
+    if (!n-&gt;free_objects &amp;&amp; (!shared || !shared-&gt;avail))
+        goto direct_grow;
+    while (batchcount &gt; 0) {
+        //获取kmem_cache_node结构中其它kmem_cache,返回的是page，而page会指向kmem_cache
+        page = get_first_slab(n, false);
+        if (!page)
+            goto must_grow;
+        batchcount = alloc_block(cachep, ac, page, batchcount);
+    }
+must_grow:
+    n-&gt;free_objects -= ac-&gt;avail;
+direct_grow:
+    if (unlikely(!ac-&gt;avail)) {
+        //分配新的kmem_cache并初始化
+        page = cache_grow_begin(cachep, gfp_exact_node(flags), node);
+        ac = cpu_cache_get(cachep);
+        if (!ac-&gt;avail &amp;&amp; page)
+            alloc_block(cachep, ac, page, batchcount);
+        //让page挂载到kmem_cache_node结构的slabs_list链表上
+        cache_grow_end(cachep, page);
+        if (!ac-&gt;avail)
+            return NULL;
+    }
+    ac-&gt;touched = 1;
+    //重新分配
+    return ac-&gt;entry[--ac-&gt;avail];
+}
+</code></pre>
+<p>调用cache_alloc_refill函数的过程，主要的工作都有哪些呢？我给你梳理一下。</p>
+<p>首先，获取了cachep所属的kmem_cache_node。</p>
+<p>然后调用get_first_slab，获取kmem_cache_node结构还有没有包含空闲对象的kmem_cache。但是请注意，这里返回的是page，因为page会指向kmem_cache结构，page所代表的物理内存页面，也保存着kmem_cache结构中的对象。</p>
+<p>最后，如果kmem_cache_node结构没有包含空闲对象的kmem_cache了，就必须调用cache_grow_begin函数，找伙伴系统分配新的内存页面，而且还要找第一个kmem_cache分配新的对象，来存放kmem_cache结构的实例变量，并进行必要的初始化。</p>
+<p>这些步骤完成之后，再调用cache_grow_end函数，把刚刚分配的page挂载到kmem_cache_node结构的slabs_list链表上。因为cache_grow_begin和cache_grow_end函数在前面已经分析过了，这里不再赘述。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>今天的内容讲完了，我来帮你梳理一下本课程的重点。</p>
+<p>1.为了分配小于1个page的小块内存，Linux实现了SLAB，用kmem_cache结构管理page对应内存页面上小块内存对象，然后让该page指向kmem_cache，由kmem_cache_node结构管理多个page。</p>
+<p>2.我们从Linux内核中使用的kmalloc函数入手，了解了SLAB下整个内存对象的分配过程。</p>
+<p>到此为止，我们对SLAB的研究就告一段落了，是不是感觉和Cosmos内存管理有些相像而又不同呢？甚至我们Cosmos内存管理要更为简洁和高效。</p>
+<h2 id="思考题">思考题</h2>
+<p>Linux的SLAB，使用kmalloc函数能分配多大的内存对象呢？</p>
+<p>欢迎你在留言区跟我交流互动，也欢迎你把这节课分享给你的同事、朋友，跟他一起研究SLAB相关的内容。</p>
+<p>我是LMOS，我们下节课见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

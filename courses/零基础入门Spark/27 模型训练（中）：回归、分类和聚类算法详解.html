@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>27 模型训练（中）：回归、分类和聚类算法详解 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/index.html">零基础入门Spark</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">37 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>零基础入门Spark</strong><ul><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%85%A5%E9%97%A8Spark%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E5%AD%A6%E4%BC%9A%E2%80%9C%E4%B8%89%E6%AD%A5%E8%B5%B0%E2%80%9D.html">00 开篇词 入门Spark，你需要学会“三步走”</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/01%20Spark%EF%BC%9A%E4%BB%8E%E2%80%9C%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9A%84Hello%20World%E2%80%9D%E5%BC%80%E5%A7%8B.html">01 Spark：从“大数据的Hello World”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/02%20RDD%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%BB%B6%E8%BF%9F%E8%AE%A1%E7%AE%97%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">02 RDD与编程模型：延迟计算是怎么回事？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/03%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ARDD%E5%86%85%E9%83%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2.html">03 RDD常用算子（一）：RDD内部的数据转换</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/04%20%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">04 进程模型与分布式部署：分布式计算是怎么回事？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/05%20%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9A%84%E7%B2%BE%E9%AB%93%EF%BC%9F.html">05 调度系统：如何把握分布式计算的精髓？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/06%20Shuffle%E7%AE%A1%E7%90%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Shuffle%E6%98%AF%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%EF%BC%9F.html">06 Shuffle管理：为什么Shuffle是性能瓶颈？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/07%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASpark%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%EF%BC%9F.html">07 RDD常用算子（二）：Spark如何实现数据聚合？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/08%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9ASpark%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98%EF%BC%9F.html">08 内存管理：Spark如何使用内存？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/09%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%9A%84%E5%87%86%E5%A4%87%E3%80%81%E9%87%8D%E5%88%86%E5%B8%83%E4%B8%8E%E6%8C%81%E4%B9%85%E5%8C%96.html">09 RDD常用算子（三）：数据的准备、重分布与持久化</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/10%20%E5%B9%BF%E6%92%AD%E5%8F%98%E9%87%8F%20%26%20%E7%B4%AF%E5%8A%A0%E5%99%A8%EF%BC%9A%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E6%98%AF%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F.html">10 广播变量 &amp; 累加器：共享变量是用来做什么的？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/11%20%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%88%B0%E5%BA%95%E9%83%BD%E5%AD%98%E5%93%AA%E5%84%BF%E4%BA%86%EF%BC%9F.html">11 存储系统：数据到底都存哪儿了？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/12%20%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9F.html">12 基础配置详解：哪些参数会影响应用程序稳定性？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/13%20Spark%20SQL%EF%BC%9A%E8%AE%A9%E6%88%91%E4%BB%AC%E4%BB%8E%E2%80%9C%E5%B0%8F%E6%B1%BD%E8%BD%A6%E6%91%87%E5%8F%B7%E5%88%86%E6%9E%90%E2%80%9D%E5%BC%80%E5%A7%8B.html">13 Spark SQL：让我们从“小汽车摇号分析”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/14%20%E5%8F%B0%E5%89%8D%E5%B9%95%E5%90%8E%EF%BC%9ADataFrame%E4%B8%8ESpark%20SQL%E7%9A%84%E7%94%B1%E6%9D%A5.html">14 台前幕后：DataFrame与Spark SQL的由来</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/15%20%E6%95%B0%E6%8D%AE%E6%BA%90%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%EF%BC%9ADataFrame%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5%EF%BC%9F.html">15 数据源与数据格式：DataFrame从何而来？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/16%20%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8DataFrame%E4%B9%8B%E4%B8%8A%E5%81%9A%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9F.html">16 数据转换：如何在DataFrame之上做数据处理？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/17%20%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%EF%BC%9A%E4%B8%8D%E5%90%8C%E7%9A%84%E5%85%B3%E8%81%94%E5%BD%A2%E5%BC%8F%E4%B8%8E%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E8%AF%A5%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F.html">17 数据关联：不同的关联形式与实现机制该怎么选？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/18%20%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%E4%BC%98%E5%8C%96%EF%BC%9A%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9BJoin%E7%AD%96%E7%95%A5%EF%BC%8C%E5%BC%80%E5%8F%91%E8%80%85%E8%AF%A5%E5%A6%82%E4%BD%95%E5%8F%96%E8%88%8D%EF%BC%9F.html">18 数据关联优化：都有哪些Join策略，开发者该如何取舍？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/19%20%E9%85%8D%E7%BD%AE%E9%A1%B9%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E6%80%A7%E8%83%BD%EF%BC%9F.html">19 配置项详解：哪些参数会影响应用程序执行性能？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/20%20Hive%20%2B%20Spark%E5%BC%BA%E5%BC%BA%E8%81%94%E5%90%88%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E4%BB%93%E7%9A%84%E4%B8%8D%E4%BA%8C%E4%B9%8B%E9%80%89.html">20 Hive + Spark强强联合：分布式数仓的不二之选</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/21%20Spark%20UI%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">21 Spark UI（上）：如何高效地定位性能问题？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/22%20Spark%20UI%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">22 Spark UI（下）：如何高效地定位性能问题？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/23%20Spark%20MLlib%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B%E2%80%9D%E5%BC%80%E5%A7%8B.html">23 Spark MLlib：从“房价预测”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/24%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F.html">24 特征工程（上）：有哪些常用的特征处理函数？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/25%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F.html">25 特征工程（下）：有哪些常用的特征处理函数？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/26%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">26 模型训练（上）：决策树系列算法详解</a></li><li><a class="active" aria-current="page" href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/27%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%9B%9E%E5%BD%92%E3%80%81%E5%88%86%E7%B1%BB%E5%92%8C%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">27 模型训练（中）：回归、分类和聚类算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/28%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E9%A2%91%E7%B9%81%E9%A1%B9%E9%9B%86%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">28 模型训练（下）：协同过滤与频繁项集算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/29%20Spark%20MLlib%20Pipeline%EF%BC%9A%E9%AB%98%E6%95%88%E5%BC%80%E5%8F%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8.html">29 Spark MLlib Pipeline：高效开发机器学习应用</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/30%20Structured%20Streaming%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%B5%81%E5%8A%A8%E7%9A%84Word%20Count%E2%80%9D%E5%BC%80%E5%A7%8B.html">30 Structured Streaming：从“流动的Word Count”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/31%20%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B5%81%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6%EF%BC%9ABatch%20mode%E5%92%8CContinuous%20mode%E5%93%AA%E5%AE%B6%E5%BC%BA%EF%BC%9F.html">31 新一代流处理框架：Batch mode和Continuous mode哪家强？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/32%20Window%E6%93%8D%E4%BD%9C%26Watermark%EF%BC%9A%E6%B5%81%E5%A4%84%E7%90%86%E5%BC%95%E6%93%8E%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E7%A7%80%E6%9C%BA%E5%88%B6%EF%BC%9F.html">32 Window操作&amp;Watermark：流处理引擎提供了哪些优秀机制？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/33%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%EF%BC%9A%E6%B5%81%E4%B8%8E%E6%B5%81%E3%80%81%E6%B5%81%E4%B8%8E%E6%89%B9.html">33 流计算中的数据关联：流与流、流与批</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/34%20Spark%20%2B%20Kafka%EF%BC%9A%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E2%80%9C%E4%B8%87%E9%87%91%E6%B2%B9%E2%80%9D.html">34 Spark + Kafka：流计算中的“万金油”</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E5%B0%8F%E7%8E%8B%EF%BC%9A%E4%BF%9D%E6%8C%81%E7%A9%BA%E6%9D%AF%E5%BF%83%E6%80%81%EF%BC%8C%E4%B8%8D%E5%81%9A%E4%BA%95%E5%BA%95%E4%B9%8B%E8%9B%99.html">用户故事 小王：保持空杯心态，不做井底之蛙</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E8%BF%9B%E5%85%A5%E6%97%B6%E9%97%B4%E8%A3%82%E7%BC%9D%EF%BC%8C%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0.html">结束语 进入时间裂缝，持续学习</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/27%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%9B%9E%E5%BD%92%E3%80%81%E5%88%86%E7%B1%BB%E5%92%8C%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="27 模型训练（中）：回归、分类和聚类算法详解" id="title">27 模型训练（中）：回归、分类和聚类算法详解</h1>
+<div><p>你好，我是吴磊。</p>
+<p>在上一讲，我们学习了决策树系列算法，包括决策树、GBDT和随机森林。今天这一讲，我们来看看在Spark MLlib框架下，如何将这些算法应用到实际的场景中。</p>
+<p>你还记得我们给出的Spark MLlib模型算法“全景图”么？对于这张“全景图”，我们会时常回顾它。一方面，它能为我们提供“全局视角”，再者，有了它，我们就能够轻松地把学习过的内容对号入座，从而对于学习的进展，做到心中有数。</p>
+<p><img alt="图片" src="/assets/62e84c0e0c88df400c3fb08d.jpg" title="Spark MLlib支持的模型算法"/></p>
+<p>今天这一讲，我们会结合房屋预测场景，一起学习回归、分类与聚类中的典型算法在Spark MLlib框架下的具体用法。掌握这些用法之后，针对同一类机器学习问题（回归、分类或是聚类），你就可以在其算法集合中，灵活、高效地做算法选型。</p>
+<h2 id="房屋预测场景">房屋预测场景</h2>
+<p>在这个场景中，我们有3个实例，分别是房价预测、房屋分类和房屋聚类。房价预测我们并不陌生，在前面的学习中，我们一直在尝试把房价预测得更准。</p>
+<p>房屋分类，它指的是，给定离散标签（Label），如“OverallQual”（房屋质量），结合房屋属性特征，将所有房屋分类到相应的标签取值，如房屋质量的“好、中、差”三类。</p>
+<p>而房屋聚类，它指的是，在不存在标签的情况下，根据房屋特征向量，结合“物以类聚”的思想，将相似的房屋聚集到一起，形成聚类。</p>
+<h3 id="房价预测">房价预测</h3>
+<p>在特征工程的两讲中，我们一直尝试使用线性模型来拟合房价，但线性模型的拟合能力相当有限。决策树系列模型属于非线性模型，在拟合能力上，更胜一筹。经过之前的讲解，想必你对Spark MLlib框架下模型训练的“套路”，已经了然于胸，模型训练基本上可以分为3个环节：</p>
+<ul>
+<li>准备训练样本</li>
+<li>定义模型，并拟合训练数据</li>
+<li>验证模型效果</li>
+</ul>
+<p>除了模型定义，第一个与第三个环节实际上是通用的。不论我们采用哪种模型，训练样本其实都大同小异，度量指标（不论是用于回归的RMSE，还是用于分类的AUC）本身也与模型无关。因此，今天这一讲，我们把重心放在<strong>第二个环节</strong>，对于代码实现，我们在文稿中也只粘贴这一环节的代码，其他环节的代码，你可以参考特征工程的两讲的内容。</p>
+<p>[上一讲]我们学过了决策树系列模型及其衍生算法，也就是随机森林与GBDT算法。这两种算法既可以解决分类问题，也可以用来解决回归问题。既然GBDT擅长拟合残差，那么我们不妨用它来解决房价预测的（回归）问题，而把随机森林留给后面的房屋分类。</p>
+<p>要用GBDT来拟合房价，我们首先还是先来准备训练样本。</p>
+<pre><code>// numericFields代表数值字段，indexFields为采用StringIndexer处理后的非数值字段
+val assembler = new VectorAssembler()
+.setInputCols(numericFields ++ indexFields)
+.setOutputCol("features")
+
+// 创建特征向量“features”
+engineeringDF = assembler.transform(engineeringDF)
+
+import org.apache.spark.ml.feature.VectorIndexer
+
+// 区分离散特征与连续特征
+val vectorIndexer = new VectorIndexer()
+.setInputCol("features")
+.setOutputCol("indexedFeatures")
+// 设定区分阈值
+.setMaxCategories(30)
+
+// 完成数据转换
+engineeringDF = vectorIndexer.fit(engineeringDF).transform(engineeringDF)
+</code></pre>
+<p>我们之前已经学过了VectorAssembler的用法，它用来把多个字段拼接为特征向量。你可能已经发现，在VectorAssembler之后，我们使用了一个新的特征处理函数对engineeringDF进一步做了转换，这个函数叫作VectorIndexer。它是用来干什么的呢？</p>
+<p>简单地说，它用来帮助决策树系列算法（如GBDT、随机森林）区分离散特征与连续特征。连续特征也即数值型特征，数值之间本身是存在大小关系的。而离散特征（如街道类型）在经过StringIndexer转换为数字之后，<strong>数字与数字之间会引入原本并不存在的大小关系</strong>（具体你可以回看[第25讲]）。</p>
+<p>这个问题要怎么解决呢？首先，对于经过StringIndexer处理过的离散特征，VectorIndexer会进一步对它们编码，抹去数字之间的比较关系，从而明确告知GBDT等算法，该特征为离散特征，数字与数字之间相互独立，不存在任何关系。</p>
+<p>VectorIndexer对象的setMaxCategories方法，用于设定阈值，该阈值用于区分离散特征与连续特征，我们这里设定的阈值为30。这个阈值有什么用呢？凡是多样性（Cardinality）大于30的特征，后续的GBDT模型会把它们看作是连续特征，而多样性小于30的特征，GBDT会把它们当作是离散特征来进行处理。</p>
+<p>说到这里，你可能会问：“对于一个特征，区分它是连续的、还是离散的，有这么重要吗？至于这么麻烦吗？”</p>
+<p>还记得在决策树基本原理中，特征的“提纯”能力这个概念吗？对于同样一份数据样本，同样一个特征，连续值与离散值的“提纯”能力可能有着天壤之别。还原特征原本的“提纯”能力，将为决策树的合理构建，打下良好的基础。</p>
+<p>好啦，样本准备好之后，接下来，我们就要定义并拟合GBDT模型了。</p>
+<pre><code>import org.apache.spark.ml.regression.GBTRegressor
+
+// 定义GBDT模型
+val gbt = new GBTRegressor()
+.setLabelCol("SalePriceInt")
+.setFeaturesCol("indexedFeatures")
+// 限定每棵树的最大深度
+.setMaxDepth(5)
+// 限定决策树的最大棵树
+.setMaxIter(30)
+
+// 区分训练集、验证集
+val Array(trainingData, testData) = engineeringDF.randomSplit(Array(0.7, 0.3))
+
+// 拟合训练数据
+val gbtModel = gbt.fit(trainingData)
+</code></pre>
+<p>可以看到，我们通过定义GBTRegressor来定义GBDT模型，其中setLabelCol、setFeaturesCol都是老生常谈的方法了，不再赘述。值得注意的是<strong>setMaxDepth和setMaxIter，这两个方法用于避免GBDT模型出现过拟合的情况，前者限定每棵树的深度，而后者直接限制了GBDT模型中决策树的总体数目。后面的训练过程，依然是调用模型的fit方法</strong>。</p>
+<p>到此为止，我们介绍了如何通过定义GBDT模型，来拟合房价。后面的效果评估环节，鼓励你结合[第23讲]的模型验证部分，去自行尝试，加油！</p>
+<h3 id="房屋分类">房屋分类</h3>
+<p>接下来，我们再来说说房屋分类。我们知道，在“<a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/overview" target="_blank">House Prices - Advanced Regression Techniques</a>”竞赛项目中，数据集总共有79个字段。在之前，我们一直把售价SalePrice当作是预测标的，也就是Label，而用其他字段构建特征向量。</p>
+<p>现在，我们来换个视角，把房屋质量OverallQual看作是Label，让售价SalePrice作为普通字段去参与构建特征向量。在房价预测的数据集中，房屋质量是离散特征，它的取值总共有10个，如下图所示。</p>
+<p><img alt="图片" src="/assets/47ad10a588570e731669eb28.jpg" title="OverallQual取值范围"/></p>
+<p>如此一来，我们就把先前的回归问题（预测连续值），转换成了分类问题（预测离散值）。不过，不管是什么机器学习问题，模型训练都离不开那3个环节：</p>
+<ul>
+<li>准备训练样本</li>
+<li>定义模型，并拟合训练数据</li>
+<li>验证模型效果</li>
+</ul>
+<p>在训练样本的准备上，除了把预测标的从SalePrice替换为OverallQual，我们完全可以复用刚刚使用GBDT来预测房价的代码实现。</p>
+<pre><code>// Label字段："OverallQual"
+val labelField: String = "OverallQual"
+
+import org.apache.spark.sql.types.IntegerType
+engineeringDF = engineeringDF
+.withColumn("indexedOverallQual", col(labelField).cast(IntegerType))
+.drop(labelField)
+</code></pre>
+<p>接下来，我们就可以定义随机森林模型、并拟合训练数据。实际上，除了类名不同，RandomForestClassifier在用法上与GBDT的GBTRegressor几乎一模一样，如下面的代码片段所示。</p>
+<pre><code>import org.apache.spark.ml.regression.RandomForestClassifier
+
+// 定义随机森林模型
+val rf= new RandomForestClassifier ()
+// Label不再是房价，而是房屋质量
+.setLabelCol("indexedOverallQual")
+.setFeaturesCol("indexedFeatures")
+// 限定每棵树的最大深度
+.setMaxDepth(5)
+// 限定决策树的最大棵树
+.setMaxIter(30)
+
+// 区分训练集、验证集
+val Array(trainingData, testData) = engineeringDF.randomSplit(Array(0.7, 0.3))
+
+// 拟合训练数据
+val rfModel = rf.fit(trainingData)
+</code></pre>
+<p>模型训练好之后，在第三个环节，我们来初步验证模型效果。</p>
+<p>需要注意的是，衡量模型效果时，回归与分类问题，各自有一套不同的度量指标。毕竟，回归问题预测的是连续值，我们往往用不同形式的误差（如RMSE、MAE、MAPE，等等）来评价回归模型的好坏。而分类问题预测的是离散值，因此，我们通常采用那些能够评估分类“纯度”的指标，比如说准确度、精准率、召回率，等等。</p>
+<p><img alt="图片" src="/assets/14ac178a95eac6f1301823c3.jpg" title="不同机器学习问题的度量指标"/></p>
+<p>这里，我们以Accuracy（准确度）为例，来评估随机森林模型的拟合效果，代码如下所示。</p>
+<pre><code>import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+
+// 在训练集上做推理
+val trainPredictions = rfModel.transform(trainingData)
+
+// 定义分类问题的评估对象
+val evaluator = new MulticlassClassificationEvaluator()
+.setLabelCol("indexedOverallQual")
+.setPredictionCol("prediction")
+.setMetricName("accuracy")
+
+// 在训练集的推理结果上，计算Accuracy度量值
+val accuracy = evaluator.evaluate(trainPredictions)
+</code></pre>
+<p>好啦，到此为止，我们以房价预测和房屋分类为例，分别介绍了如何在Spark MLlib框架下去应对回归问题与分类问题。分类与回归，是监督学习中最典型的两类模型算法，是我们必须要熟悉并掌握的。接下来，让我们以房屋聚类为例，说一说非监督学习。</p>
+<h3 id="房屋聚类">房屋聚类</h3>
+<p>与监督学习相对，非监督学习，泛指那些数据样本中没有Label的机器学习问题。</p>
+<p>以房屋数据为例，整个数据集包含79个字段。如果我们把“SalePrice”和“OverallQual”这两个字段抹掉，那么原始数据集就变成了不带Label的数据样本。你可能会好奇：“对于这些没有Label的样本，我们能拿他们做些什么呢？”</p>
+<p>其实能做的事情还真不少，基于房屋数据，我们可以结合“物以类聚”的思想，使用K-means算法把他们进行分门别类的处理。再者，在下一讲电影推荐的例子中，我们还可以基于频繁项集算法，挖掘出不同电影之间共现的频次与关联规则，从而实现推荐。</p>
+<p>今天我们先来讲K-mean，结合数据样本的特征向量，根据向量之间的相对距离，K-means算法可以把所有样本划分为K个类别，这也是算法命名中“K”的由来。举例来说，图中的每个点，都代表一个向量，给定不同的K值，K-means划分的结果会随着K的变化而变化。</p>
+<p><img alt="图片" src="/assets/349c82f0f0bdf87cbf501490.jpg" title="K-means算法示意图"/></p>
+<p>在Spark MLlib的开发框架下，我们可以轻而易举地对任意向量做聚类。</p>
+<p>首先，在模型训练的第一个环节，我们先把训练样本准备好。注意，这一次，我们去掉了“SalePrice”和“OverallQual”这两个字段。</p>
+<pre><code>import org.apache.spark.ml.feature.VectorAssembler
+
+val assembler = new VectorAssembler()
+// numericFields包含连续特征，oheFields为离散特征的One hot编码
+.setInputCols(numericFields ++ oheFields)
+.setOutputCol("features")
+</code></pre>
+<p>接下来，在第二个环节，我们来定义K-means模型，并使用刚刚准备好的样本，去做模型训练。可以看到，模型定义非常简单，只需实例化KMeans对象，并通过setK指定K值即可。</p>
+<pre><code>import org.apache.spark.ml.clustering.KMeans
+
+val kmeans = new KMeans().setK(20)
+
+val Array(trainingSet, testSet) = engineeringDF
+.select("features")
+.randomSplit(Array(0.7, 0.3))
+
+val model = kmeans.fit(trainingSet)
+</code></pre>
+<p>这里，我们准备把不同的房屋划分为20个不同的类别。完成训练之后，我们同样需要对模型效果进行评估。由于数据样本没有Label，因此，先前回归与分类的评估指标，不适合像K-means这样的非监督学习算法。</p>
+<p>K-means的设计思想是“物以类聚”，既然如此，那么同一个类别中的向量应该足够地接近，而不同类别中向量之间的距离，应该越远越好。因此，我们可以用距离类的度量指标（如欧氏距离）来量化K-means的模型效果。</p>
+<pre><code>import org.apache.spark.ml.evaluation.ClusteringEvaluator
+
+val predictions = model.transform(trainingSet)
+
+// 定义聚类评估器
+val evaluator = new ClusteringEvaluator()
+
+// 计算所有向量到分类中心点的欧氏距离
+val euclidean = evaluator.evaluate(predictions)
+</code></pre>
+<p>好啦，到此为止，我们使用非监督学习算法K-means，根据房屋向量，对房屋类型进行了划分。不过你要注意，使用这种方法划分出的类型，是没有真实含义的，比如它不能代表房屋质量，也不能代表房屋评级。既然如此，我们用K-means忙活了半天，图啥呢？</p>
+<p>尽管K-means的结果没有真实含义，但是它以量化的形式，刻画了房屋之间的相似性与差异性。你可以这样来理解，我们用K-means为房屋生成了新的特征，相比现有的房屋属性，这个生成的新特征（Generated Features）往往与预测标的（如房价、房屋类型）有着更强的关联性，所以让这个新特性参与到监督学习的训练，就有希望优化/提升监督学习的模型效果。</p>
+<p><img alt="图片" src="/assets/ec1d5823beb73b45cce9913a.jpg" title="打卡回归、分类与聚类算法"/></p>
+<p>好啦，到此为止，结合房价预测、房屋分类和房屋聚类三个实例，我们成功打卡了回归、分类和聚类这三类模型算法。恭喜你！离Spark MLlib模型算法通关，咱们还有一步之遥。在下一讲，我们会结合电影推荐的场景，继续学习两个有趣的模型算法：协同过滤与频繁项集。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>今天这一讲，你首先需要掌握K-means算法的基本原理。聚类的设计思想，是“物以类聚、人以群分”，给定任意向量集合，K-means都可以把它划分为K个子集合，从而完成聚类。</p>
+<p>K-means的计算主要依赖向量之间的相对距离，它的计算结果，一方面可以直接用于划分“人群”、“种群”，另一方面可以拿来当做生成特征，去参与到监督学习的训练中去。</p>
+<p>此外，你需要掌握GBTRegressor和RandomForestClassifier的一般用法。其中，setLabelCol与setFeaturesCol分别用于指定模型的预测标的与特征向量。而setMaxDepth与setMaxIter分别用于设置模型的超参数，也即最大树深与最大迭代次数（决策树的数量），从而避免模型出现过拟合的情况。</p>
+<h2 id="每课一练">每课一练</h2>
+<p>对于房价预测与房屋分类这两个场景，你觉得在它们之间，有代码（尤其是特征工程部分的代码）复用的必要和可能性吗？</p>
+<p>欢迎你在留言区跟我交流互动，也推荐你把这一讲的内容分享给更多的同事、朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

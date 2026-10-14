@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16 值传递，引用传递or其他，Python里参数是如何传递的？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Python核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Python核心技术与实战</strong><ul><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%E5%B7%A5%E7%A8%8B%E7%9A%84%E8%A7%92%E5%BA%A6%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python.html">00 开篇词 从工程的角度深入理解Python</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%E5%A6%82%E4%BD%95%E9%80%90%E6%AD%A5%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%88%90%E4%B8%BAPython%E9%AB%98%E6%89%8B%EF%BC%9F.html">01 如何逐步突破，成为Python高手？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20Jupyter%20Notebook%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%8E%B0%E4%BB%A3Python%E7%9A%84%E5%BF%85%E5%AD%A6%E6%8A%80%E6%9C%AF%EF%BC%9F.html">02 Jupyter Notebook为什么是现代Python的必学技术？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%EF%BC%8C%E5%88%B0%E5%BA%95%E7%94%A8%E5%93%AA%E4%B8%80%E4%B8%AA%EF%BC%9F.html">03 列表和元组，到底用哪一个？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20%E5%AD%97%E5%85%B8%E3%80%81%E9%9B%86%E5%90%88%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F.html">04 字典、集合，你真的了解吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2.html">05 深入浅出字符串</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20Python%20%E2%80%9C%E9%BB%91%E7%AE%B1%E2%80%9D%EF%BC%9A%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA.html">06 Python “黑箱”：输入与输出</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E4%BF%AE%E7%82%BC%E5%9F%BA%E6%9C%AC%E5%8A%9F%EF%BC%9A%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%BE%AA%E7%8E%AF.html">07 修炼基本功：条件与循环</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9F.html">08 异常处理：如何提高程序的稳定性？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%E4%B8%8D%E5%8F%AF%E6%88%96%E7%BC%BA%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0.html">09 不可或缺的自定义函数</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%E7%AE%80%E7%BA%A6%E4%B8%8D%E7%AE%80%E5%8D%95%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0.html">10 简约不简单的匿名函数</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E7%B1%BB%E6%AF%94%E8%AF%B4%E8%B5%B7.html">11 面向对象（上）：从生活中的类比说起</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9F.html">12 面向对象（下）：如何实现一个搜索引擎？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E6%90%AD%E5%BB%BA%E7%A7%AF%E6%9C%A8%EF%BC%9APython%20%E6%A8%A1%E5%9D%97%E5%8C%96.html">13 搭建积木：Python 模块化</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%E7%9A%84%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">14 答疑（一）：列表和元组的内部实现是怎样的？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20Python%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%AF%94%E8%BE%83%E3%80%81%E6%8B%B7%E8%B4%9D.html">15 Python对象的比较、拷贝</a></li><li><a class="active" aria-current="page" href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E5%80%BC%E4%BC%A0%E9%80%92%EF%BC%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92or%E5%85%B6%E4%BB%96%EF%BC%8CPython%E9%87%8C%E5%8F%82%E6%95%B0%E6%98%AF%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E7%9A%84%EF%BC%9F.html">16 值传递，引用传递or其他，Python里参数是如何传递的？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%E5%BC%BA%E5%A4%A7%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8.html">17 强大的装饰器</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20metaclass%EF%BC%8C%E6%98%AF%E6%BD%98%E5%A4%9A%E6%8B%89%E9%AD%94%E7%9B%92%E8%BF%98%E6%98%AF%E9%98%BF%E6%8B%89%E4%B8%81%E7%A5%9E%E7%81%AF%EF%BC%9F.html">18 metaclass，是潘多拉魔盒还是阿拉丁神灯？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8.html">19 深入理解迭代器和生成器</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E6%8F%AD%E7%A7%98%20Python%20%E5%8D%8F%E7%A8%8B.html">20 揭秘 Python 协程</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20Python%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8BFutures.html">21 Python并发编程之Futures</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8BAsyncio.html">22 并发编程之Asyncio</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%87%82Python%20GIL%EF%BC%88%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81%EF%BC%89%E5%90%97%EF%BC%9F.html">23 你真的懂Python GIL（全局解释器锁）吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20%E5%B8%A6%E4%BD%A0%E8%A7%A3%E6%9E%90%20Python%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6.html">24 带你解析 Python 垃圾回收机制</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AGIL%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%E5%91%A2%EF%BC%9F.html">25 答疑（二）：GIL与多线程是什么关系呢？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E6%B4%BB%E9%83%BD%E6%9D%A5%E4%B8%8D%E5%8F%8A%E5%B9%B2%E4%BA%86%EF%BC%8C%E8%BF%98%E6%9C%89%E7%A9%BA%E6%B3%A8%E6%84%8F%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%EF%BC%9F%EF%BC%81.html">26 活都来不及干了，还有空注意代码风格？！</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E5%AD%A6%E4%BC%9A%E5%90%88%E7%90%86%E5%88%86%E8%A7%A3%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E5%8F%AF%E8%AF%BB%E6%80%A7.html">27 学会合理分解代码，提高代码可读性</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E5%90%88%E7%90%86%E5%88%A9%E7%94%A8assert%EF%BC%9F.html">28 如何合理利用assert？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E5%B7%A7%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8%E5%92%8CWith%E8%AF%AD%E5%8F%A5%E7%B2%BE%E7%AE%80%E4%BB%A3%E7%A0%81.html">29 巧用上下文管理器和With语句精简代码</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E7%9C%9F%E7%9A%84%E6%9C%89%E5%BF%85%E8%A6%81%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%90%97%EF%BC%9F.html">30 真的有必要写单元测试吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20pdb%20%26%20cProfile%EF%BC%9A%E8%B0%83%E8%AF%95%E5%92%8C%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E7%9A%84%E6%B3%95%E5%AE%9D.html">31 pdb &amp; cProfile：调试和性能分析的法宝</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F%EF%BC%9F.html">32 答疑（三）：如何选择合适的异常处理方式？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%B8%A6%E4%BD%A0%E5%88%9D%E6%8E%A2%E9%87%8F%E5%8C%96%E4%B8%96%E7%95%8C.html">33 带你初探量化世界</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20RESTful%20%26%20Socket%EF%BC%9A%E6%90%AD%E5%BB%BA%E4%BA%A4%E6%98%93%E6%89%A7%E8%A1%8C%E5%B1%82%E6%A0%B8%E5%BF%83.html">34 RESTful &amp; Socket：搭建交易执行层核心</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20RESTful%20%26%20Socket%EF%BC%9A%E8%A1%8C%E6%83%85%E6%95%B0%E6%8D%AE%E5%AF%B9%E6%8E%A5%E5%92%8C%E6%8A%93%E5%8F%96.html">35 RESTful &amp; Socket：行情数据对接和抓取</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20Pandas%20%26%20Numpy%EF%BC%9A%E7%AD%96%E7%95%A5%E4%B8%8E%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F.html">36 Pandas &amp; Numpy：策略与回测系统</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20Kafka%20%26%20ZMQ%EF%BC%9A%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E6%B5%81%E6%B0%B4%E7%BA%BF.html">37 Kafka &amp; ZMQ：自动化交易流水线</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20MySQL%EF%BC%9A%E6%97%A5%E5%BF%97%E5%92%8C%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F.html">38 MySQL：日志和数据存储系统</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20Django%EF%BC%9A%E6%90%AD%E5%BB%BA%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0.html">39 Django：搭建监控平台</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E6%80%BB%E7%BB%93%EF%BC%9APython%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%A8%E6%99%AF.html">40 总结：Python中的数据结构与算法全景</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E4%BA%92%E8%81%94%E7%BD%91%E5%85%AC%E5%8F%B8%E7%9A%84%E5%B7%A5%E4%BD%9C%E4%BD%93%E9%AA%8C.html">41 硅谷一线互联网公司的工作体验</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E7%BB%86%E6%95%B0%E6%8A%80%E6%9C%AF%E7%A0%94%E5%8F%91%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">42 细数技术研发的注意事项</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/43%20Q%26A%EF%BC%9A%E8%81%8A%E4%B8%80%E8%81%8A%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E5%92%8C%E9%80%89%E6%8B%A9.html">43 Q&amp;A：聊一聊职业发展和选择</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%20%E5%B8%A6%E4%BD%A0%E4%B8%8A%E6%89%8BSWIG%EF%BC%9A%E4%B8%80%E4%BB%BD%E6%B8%85%E6%99%B0%E5%A5%BD%E7%94%A8%E7%9A%84SWIG%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97.html">加餐 带你上手SWIG：一份清晰好用的SWIG编程实践指南</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%A4%96%E7%9A%84%E5%87%A0%E7%82%B9%E6%88%90%E9%95%BF%E5%BB%BA%E8%AE%AE.html">结束语 技术之外的几点成长建议</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E5%80%BC%E4%BC%A0%E9%80%92%EF%BC%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92or%E5%85%B6%E4%BB%96%EF%BC%8CPython%E9%87%8C%E5%8F%82%E6%95%B0%E6%98%AF%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E7%9A%84%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="16 值传递，引用传递or其他，Python里参数是如何传递的？" id="title">16 值传递，引用传递or其他，Python里参数是如何传递的？</h1>
+<div><p>你好，我是景霄。</p>
+<p>在前面的第一大章节中，我们一起学习了Python的函数基础及其应用。我们大致明白了，所谓的传参，就是把一些参数从一个函数传递到另一个函数，从而使其执行相应的任务。但是你有没有想过，参数传递的底层是如何工作的，原理又是怎样的呢？</p>
+<p>实际工作中，很多人会遇到这样的场景：写完了代码，一测试，发现结果和自己期望的不一样，于是开始一层层地debug。花了很多时间，可到最后才发现，是传参过程中数据结构的改变，导致了程序的“出错”。</p>
+<p>比如，我将一个列表作为参数传入另一个函数，期望列表在函数运行结束后不变，但是往往“事与愿违”，由于某些操作，它的值改变了，那就很有可能带来后续程序一系列的错误。</p>
+<p>因此，了解Python中参数的传递机制，具有十分重要的意义，这往往能让我们写代码时少犯错误，提高效率。今天我们就一起来学习一下，Python中参数是如何传递的。</p>
+<h2 id="什么是值传递和引用传递"><strong>什么是值传递和引用传递</strong></h2>
+<p>如果你接触过其他的编程语言，比如C/C++，很容易想到，常见的参数传递有2种：<strong>值传递</strong>和<strong>引用传递</strong>。所谓值传递，通常就是拷贝参数的值，然后传递给函数里的新变量。这样，原变量和新变量之间互相独立，互不影响。</p>
+<p>比如，我们来看下面的一段C++代码：</p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+ 
+// 交换2个变量的值
+void swap(int x, int y) {
+int temp;
+temp = x; // 交换x和y的值
+ x = y;
+ y = temp;
+ return;
+}
+int main () {
+ int a = 1;
+ int b = 2;
+ cout &lt;&lt; "Before swap, value of a :" &lt;&lt; a &lt;&lt; endl;
+ cout &lt;&lt; "Before swap, value of b :" &lt;&lt; b &lt;&lt; endl;
+ swap(a, b); 
+ cout &lt;&lt; "After swap, value of a :" &lt;&lt; a &lt;&lt; endl;
+ cout &lt;&lt; "After swap, value of b :" &lt;&lt; b &lt;&lt; endl;
+ return 0;
+}
+Before swap, value of a :1
+Before swap, value of b :2
+After swap, value of a :1
+After swap, value of b :2
+</code></pre>
+<p>这里的swap()函数，把a和b的值拷贝给了x和y，然后再交换x和y的值。这样一来，x和y的值发生了改变，但是a和b不受其影响，所以值不变。这种方式，就是我们所说的值传递。</p>
+<p>所谓引用传递，通常是指把参数的引用传给新的变量，这样，原变量和新变量就会指向同一块内存地址。如果改变了其中任何一个变量的值，那么另外一个变量也会相应地随之改变。</p>
+<p>还是拿我们刚刚讲到的C++代码为例，上述例子中的swap()函数，如果改成下面的形式，声明引用类型的参数变量：</p>
+<pre><code>void swap(int&amp; x, int&amp; y) {
+   int temp;
+   temp = x; // 交换x和y的值
+   x = y;
+   y = temp;
+   return;
+}
+</code></pre>
+<p>那么输出的便是另一个结果：</p>
+<pre><code>Before swap, value of a :1
+Before swap, value of b :2
+After swap, value of a :2
+After swap, value of b :1
+</code></pre>
+<p>原变量a和b的值被交换了，因为引用传递使得a和x，b和y一模一样，对x和y的任何改变必然导致了a和b的相应改变。</p>
+<p>不过，这是C/C++语言中的特点。那么Python中，参数传递到底是如何进行的呢？它们到底属于值传递、引用传递，还是其他呢？</p>
+<p>在回答这个问题之前，让我们先来了解一下，Python变量和赋值的基本原理。</p>
+<h2 id="python变量及其赋值"><strong>Python变量及其赋值</strong></h2>
+<p>我们首先来看，下面的Python代码示例：</p>
+<pre><code>a = 1
+b = a
+a = a + 1
+</code></pre>
+<p>这里首先将1赋值于a，即a指向了1这个对象，如下面的流程图所示：</p>
+<p><img alt="" src="/assets/29b4381e9c232f9451be9987.png"/></p>
+<p>接着b = a则表示，让变量b也同时指向1这个对象。这里要注意，Python里的对象可以被多个变量所指向或引用。</p>
+<p><img alt="" src="/assets/3a7f99ff9968b796b709f900.png"/></p>
+<p>最后执行a = a + 1。需要注意的是，Python的数据类型，例如整型（int）、字符串（string）等等，是不可变的。所以，a = a + 1，并不是让a的值增加1，而是表示重新创建了一个新的值为2的对象，并让a指向它。但是b仍然不变，仍然指向1这个对象。</p>
+<p>因此，最后的结果是，a的值变成了2，而b的值不变仍然是1。</p>
+<p><img alt="" src="/assets/875aff9cc03529dc72e7dca0.png"/></p>
+<p>通过这个例子你可以看到，这里的a和b，开始只是两个指向同一个对象的变量而已，或者你也可以把它们想象成同一个对象的两个名字。简单的赋值b = a，并不表示重新创建了新对象，只是让同一个对象被多个变量指向或引用。</p>
+<p>同时，指向同一个对象，也并不意味着两个变量就被绑定到了一起。如果你给其中一个变量重新赋值，并不会影响其他变量的值。</p>
+<p>明白了这个基本的变量赋值例子，我们再来看一个列表的例子：</p>
+<pre><code>l1 = [1, 2, 3]
+l2 = l1
+l1.append(4)
+l1
+[1, 2, 3, 4]
+l2
+[1, 2, 3, 4]
+</code></pre>
+<p>同样的，我们首先让列表l1和l2同时指向了[1, 2, 3]这个对象。</p>
+<p><img alt="" src="/assets/ecc5fc4e892f39f3b7e650da.png"/></p>
+<p>由于列表是可变的，所以l1.append(4)不会创建新的列表，只是在原列表的末尾插入了元素4，变成[1, 2, 3, 4]。由于l1和l2同时指向这个列表，所以列表的变化会同时反映在l1和l2这两个变量上，那么，l1和l2的值就同时变为了[1, 2, 3, 4]。</p>
+<p><img alt="" src="/assets/2944b836bf1adf16085212aa.png"/></p>
+<p>另外，需要注意的是，Python里的变量可以被删除，但是对象无法被删除。比如下面的代码：</p>
+<pre><code>l = [1, 2, 3]
+del l
+</code></pre>
+<p>del l 删除了l这个变量，从此以后你无法访问l，但是对象[1, 2, 3]仍然存在。Python程序运行时，其自带的垃圾回收系统会跟踪每个对象的引用。如果[1, 2, 3]除了l外，还在其他地方被引用，那就不会被回收，反之则会被回收。</p>
+<p>由此可见，在Python中：</p>
+<ul>
+<li>变量的赋值，只是表示让变量指向了某个对象，并不表示拷贝对象给变量；而一个对象，可以被多个变量所指向。</li>
+<li>可变对象（列表，字典，集合等等）的改变，会影响所有指向该对象的变量。</li>
+<li>对于不可变对象（字符串、整型、元组等等），所有指向该对象的变量的值总是一样的，也不会改变。但是通过某些操作（+=等等）更新不可变对象的值时，会返回一个新的对象。</li>
+<li>变量可以被删除，但是对象无法被删除。</li>
+</ul>
+<h2 id="python函数的参数传递"><strong>Python函数的参数传递</strong></h2>
+<p>从上述Python变量的命名与赋值的原理讲解中，相信你能举一反三，大概猜出Python函数中参数是如何传递了吧？</p>
+<p>这里首先引用Python官方文档中的一段说明：</p>
+<blockquote>
+<p>“Remember that arguments are passed by assignment in Python. Since assignment just creates references to objects, there’s no alias between an argument name in the caller and callee, and so no call-by-reference per Se.”</p>
+</blockquote>
+<p>准确地说，Python的参数传递是<strong>赋值传递</strong> （pass by assignment），或者叫作对象的<strong>引用传递</strong>（pass by object reference）。Python里所有的数据类型都是对象，所以参数传递时，只是让新变量与原变量指向相同的对象而已，并不存在值传递或是引用传递一说。</p>
+<p>比如，我们来看下面这个例子：</p>
+<pre><code>def my_func1(b):
+	b = 2
+
+a = 1
+my_func1(a)
+a
+1
+</code></pre>
+<p>这里的参数传递，使变量a和b同时指向了1这个对象。但当我们执行到b = 2时，系统会重新创建一个值为2的新对象，并让b指向它；而a仍然指向1这个对象。所以，a的值不变，仍然为1。</p>
+<p>那么对于上述例子的情况，是不是就没有办法改变a的值了呢？</p>
+<p>答案当然是否定的，我们只需稍作改变，让函数返回新变量，赋给a。这样，a就指向了一个新的值为2的对象，a的值也因此变为2。</p>
+<pre><code>def my_func2(b):
+	b = 2
+	return b
+
+a = 1
+a = my_func2(a)
+a
+2
+</code></pre>
+<p>不过，当可变对象当作参数传入函数里的时候，改变可变对象的值，就会影响所有指向它的变量。比如下面的例子：</p>
+<pre><code>def my_func3(l2):
+	l2.append(4)
+
+l1 = [1, 2, 3]
+my_func3(l1)
+l1
+[1, 2, 3, 4]
+</code></pre>
+<p>这里l1和l2先是同时指向值为[1, 2, 3]的列表。不过，由于列表可变，执行append()函数，对其末尾加入新元素4时，变量l1和l2的值也都随之改变了。</p>
+<p>但是，下面这个例子，看似都是给列表增加了一个新元素，却得到了明显不同的结果。</p>
+<pre><code>def my_func4(l2):
+	l2 = l2 + [4]
+
+l1 = [1, 2, 3]
+my_func4(l1)
+l1
+[1, 2, 3]
+</code></pre>
+<p>为什么l1仍然是[1, 2, 3]，而不是[1, 2, 3, 4]呢？</p>
+<p>要注意，这里l2 = l2 + [4]，表示创建了一个“末尾加入元素4“的新列表，并让l2指向这个新的对象。这个过程与l1无关，因此l1的值不变。当然，同样的，如果要改变l1的值，我们就得让上述函数返回一个新列表，再赋予l1即可：</p>
+<pre><code>def my_func5(l2):
+	l2 = l2 + [4]
+	return l2
+
+l1 = [1, 2, 3]
+l1 = my_func5(l1)
+l1
+[1, 2, 3, 4]
+</code></pre>
+<p>这里你尤其要记住的是，改变变量和重新赋值的区别：</p>
+<ul>
+<li>my_func3()中单纯地改变了对象的值，因此函数返回后，所有指向该对象的变量都会被改变；</li>
+<li>但my_func4()中则创建了新的对象，并赋值给一个本地变量，因此原变量仍然不变。</li>
+</ul>
+<p>至于my_func3()和my_func5()的用法，两者虽然写法不同，但实现的功能一致。不过，在实际工作应用中，我们往往倾向于类似my_func5()的写法，添加返回语句。这样更简洁明了，不易出错。</p>
+<h2 id="总结"><strong>总结</strong></h2>
+<p>今天，我们一起学习了Python的变量及其赋值的基本原理，并且解释了Python中参数是如何传递的。和其他语言不同的是，Python中参数的传递既不是值传递，也不是引用传递，而是赋值传递，或者是叫对象的引用传递。</p>
+<p>需要注意的是，这里的赋值或对象的引用传递，不是指向一个具体的内存地址，而是指向一个具体的对象。</p>
+<ul>
+<li>如果对象是可变的，当其改变时，所有指向这个对象的变量都会改变。</li>
+<li>如果对象不可变，简单的赋值只能改变其中一个变量的值，其余变量则不受影响。</li>
+</ul>
+<p>清楚了这一点，如果你想通过一个函数来改变某个变量的值，通常有两种方法。一种是直接将可变数据类型（比如列表，字典，集合）当作参数传入，直接在其上修改；第二种则是创建一个新变量，来保存修改后的值，然后将其返回给原变量。在实际工作中，我们更倾向于使用后者，因为其表达清晰明了，不易出错。</p>
+<h2 id="思考题"><strong>思考题</strong></h2>
+<p>最后，我为你留下了两道思考题。</p>
+<p>第一个问题，下面的代码中, l1、l2和l3都指向同一个对象吗？</p>
+<pre><code>l1 = [1, 2, 3]
+l2 = [1, 2, 3]
+l3 = l2
+</code></pre>
+<p>第二个问题，下面的代码中，打印d最后的输出是什么呢？</p>
+<pre><code>def func(d):
+    d['a'] = 10
+	d['b'] = 20
+
+d = {'a': 1, 'b': 2}
+func(d)
+print(d)
+</code></pre>
+<p>欢迎留言和我分享，也欢迎你把这篇文章分享给你的同事、朋友，一起在交流中进步。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

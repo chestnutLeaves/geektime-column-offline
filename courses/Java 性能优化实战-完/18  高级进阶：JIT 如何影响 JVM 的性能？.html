@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>18  高级进阶：JIT 如何影响 JVM 的性能？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/index.html">Java 性能优化实战-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">23 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java 性能优化实战-完</strong><ul><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/00%20Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%8C%E6%98%AF%E8%BF%9B%E9%98%B6%E9%AB%98%E7%BA%A7%E6%9E%B6%E6%9E%84%E5%B8%88%E7%9A%84%E7%82%BC%E9%87%91%E7%9F%B3.html">00 Java 性能优化，是进阶高级架构师的炼金石</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/01%20%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%EF%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E8%A1%A1%E9%87%8F%E6%8C%87%E6%A0%87%EF%BC%9F%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88%EF%BC%9F.html">01 理论分析：性能优化，有哪些衡量指标？需要注意什么？</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/02%20%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%EF%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%9C%89%E7%AB%A0%E5%8F%AF%E5%BE%AA%EF%BC%8C%E8%B0%88%E8%B0%88%E5%B8%B8%E7%94%A8%E7%9A%84%E5%88%87%E5%85%A5%E7%82%B9.html">02 理论分析：性能优化有章可循，谈谈常用的切入点</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/03%20%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%EF%BC%9A%E5%93%AA%E4%BA%9B%E8%B5%84%E6%BA%90%EF%BC%8C%E5%AE%B9%E6%98%93%E6%88%90%E4%B8%BA%E7%93%B6%E9%A2%88%EF%BC%9F.html">03 深入剖析：哪些资源，容易成为瓶颈？</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/04%20%E5%B7%A5%E5%85%B7%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E4%BB%A3%E7%A0%81%E6%80%A7%E8%83%BD%E6%95%B0%E6%8D%AE%EF%BC%9F.html">04 工具实践：如何获取代码性能数据？</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/05%20%E5%B7%A5%E5%85%B7%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%20JMH%EF%BC%8C%E7%B2%BE%E7%A1%AE%E6%B5%8B%E9%87%8F%E6%96%B9%E6%B3%95%E6%80%A7%E8%83%BD.html">05 工具实践：基准测试 JMH，精确测量方法性能</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BB%A3%E7%A0%81%E5%8A%A0%E9%80%9F.html">06 案例分析：缓冲区如何让代码加速</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/07%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E6%97%A0%E5%A4%84%E4%B8%8D%E5%9C%A8%E7%9A%84%E7%BC%93%E5%AD%98%EF%BC%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B3%95%E5%AE%9D.html">07  案例分析：无处不在的缓存，高并发系统的法宝</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/08%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9ARedis%20%E5%A6%82%E4%BD%95%E5%8A%A9%E5%8A%9B%E7%A7%92%E6%9D%80%E4%B8%9A%E5%8A%A1.html">08  案例分析：Redis 如何助力秒杀业务</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/09%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E6%B1%A0%E5%8C%96%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF.html">09  案例分析：池化对象的应用场景</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/10%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%A4%A7%E5%AF%B9%E8%B1%A1%E5%A4%8D%E7%94%A8%E7%9A%84%E7%9B%AE%E6%A0%87%E5%92%8C%E6%B3%A8%E6%84%8F%E7%82%B9.html">10  案例分析：大对象复用的目标和注意点</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/11%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD.html">11  案例分析：如何用设计模式优化性能</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/12%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E8%AE%A9%E4%BB%A3%E7%A0%81%E2%80%9C%E9%A3%9E%E2%80%9D%E8%B5%B7%E6%9D%A5.html">12  案例分析：并行计算让代码“飞”起来</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/13%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%94%81%E7%9A%84%E4%BC%98%E5%8C%96.html">13  案例分析：多线程锁的优化</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/14%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%97%A0%E9%94%81.html">14  案例分析：乐观锁和无锁</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/15%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%8E%20BIO%20%E5%88%B0%20NIO%EF%BC%8C%E5%86%8D%E5%88%B0%20AIO.html">15  案例分析：从 BIO 到 NIO，再到 AIO</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/16%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%B8%B8%E8%A7%81%20Java%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%B3%95%E5%88%99.html">16  案例分析：常见 Java 代码优化法则</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/17%20%20%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6%EF%BC%9AJVM%20%E5%A6%82%E4%BD%95%E5%AE%8C%E6%88%90%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%9F.html">17  高级进阶：JVM 如何完成垃圾回收？</a></li><li><a class="active" aria-current="page" href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/18%20%20%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6%EF%BC%9AJIT%20%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%20JVM%20%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">18  高级进阶：JIT 如何影响 JVM 的性能？</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/19%20%20%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6%EF%BC%9AJVM%20%E5%B8%B8%E8%A7%81%E4%BC%98%E5%8C%96%E5%8F%82%E6%95%B0.html">19  高级进阶：JVM 常见优化参数</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/20%20%20SpringBoot%20%E6%9C%8D%E5%8A%A1%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">20  SpringBoot 服务性能优化</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/21%20%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B%E6%96%B9%E6%B3%95%E4%B8%8E%E6%B1%82%E8%81%8C%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93.html">21  性能优化的过程方法与求职面经总结</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/22%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E5%AE%9E%E8%B7%B5%E5%87%BA%E7%9C%9F%E7%9F%A5.html">22 结束语  实践出真知</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/18%20%20%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6%EF%BC%9AJIT%20%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%20JVM%20%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="18  高级进阶：JIT 如何影响 JVM 的性能？" id="title">18  高级进阶：JIT 如何影响 JVM 的性能？</h1>
+<div><p>我们在上一课时，我们了解到 Java 虚拟机栈，其实是一个双层的栈，如下图所示，第一层就是针对 method 的栈帧，第二层是针对字节码指令的操作数栈。</p>
+<p><img alt="Drawing 0.png" src="/assets/58c36feabc7fce573f31d633.png"/></p>
+<p>Java 虚拟机栈图</p>
+<p>栈帧的创建是需要耗费资源的，尤其是对于 Java 中常见的 getter、setter 方法来说，这些代码通常只有一行，每次都创建栈帧的话就太浪费了。</p>
+<p>另外，Java 虚拟机栈对代码的执行，采用的是字节码解释的方式，考虑到下面这段代码，变量 a 声明之后，就再也不被使用，要是按照字节码指令解释执行的话，就要做很多无用功。</p>
+<pre><code>public class A{
+    int attr = 0;
+    public void test(){
+        int a = attr;
+        System.out.println("ok");
+    }
+}
+</code></pre>
+<p>下面是这段代码的字节码指令，我们能够看到 aload_0，getfield ，istore_1 这三个无用的字节码指令操作。</p>
+<pre><code> public void test();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=1
+         0: aload_0
+         1: getfield      #2                  // Field attr:I
+         4: istore_1
+         5: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         8: ldc           #4                  // String ok
+        10: invokevirtual #5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        13: return
+      LineNumberTable:
+        line 4: 0
+        line 5: 5
+        line 6: 13
+</code></pre>
+<p>另外，我们了解到垃圾回收器回收的目标区域主要是堆，堆上创建的对象越多，GC 的压力就越大。要是能把一些变量，直接在栈上分配，那 GC 的压力就会小一些。</p>
+<p>其实，我们说的这几个优化的可能性，JVM 已经通过 JIT 编译器（Just In Time Compiler）去做了，JIT 最主要的目标是把解释执行变成编译执行。</p>
+<p>为了提高热点代码的执行效率，在运行时，虚拟机将会把这些代码编译成与本地平台相关的机器码，并进行各种层次的优化，这就是 JIT 编译器的功能。</p>
+<p><img alt="Drawing 2.png" src="/assets/771d82bcb68fb5cc05685132.png"/></p>
+<p>如上图，JVM 会将调用次数很高，或者在 for 循环里频繁被使用的代码，编译成机器码，然后缓存在 CodeCache 区域里，下次调用相同方法的时候，就可以直接使用。</p>
+<p>那 JIT 编译都有哪些手段呢？接下来我们详细介绍。</p>
+<h3 id="方法内联">方法内联</h3>
+<p>在 <strong>“05 | 工具实践：基准测试 JMH，精确测量方法性能”</strong> 提到 JMH 的时候，我们就了解到 CompilerControl 注解可以控制 JIT 编译器的一些行为。</p>
+<p>其中，有一个模式叫作<strong>inline</strong>，就是内联的意思，它会把一些短小的方法体，直接纳入目标方法的作用范围之内，就像是直接在代码块中追加代码。这样，就少了一次方法调用，执行速度就能够得到提升，这就是方法内联的概念。</p>
+<p>可以使用 -XX:-Inline 参数来禁用方法内联，如果想要更细粒度的控制，可以使用 CompileCommand 参数，例如：</p>
+<pre><code>-XX:CompileCommand=exclude,java/lang/String.indexOf
+</code></pre>
+<p>JMH 就是使用这个参数来实现的自定义编译特性。
+在 JDK 的源码里，也有很多被 <strong>@ForceInline</strong>注解的方法，这些方法，会在执行的时候被强制进行内联；而被<strong>@DontInline</strong>注解的方法，则始终不会被内联。</p>
+<p>我们从 <strong>“05 | 工具实践：基准测试 JMH，精确测量方法性能”</strong> 获取第 16 个代码示例，来看一下 JIT 这些优化的效果，主要代码块如下：</p>
+<pre><code>public void target_blank() {
+    // this method was intentionally left blank
+}
+
+@CompilerControl(CompilerControl.Mode.DONT_INLINE)
+public void target_dontInline() {
+    // this method was intentionally left blank
+}
+
+@CompilerControl(CompilerControl.Mode.INLINE)
+public void target_inline() {
+    // this method was intentionally left blank
+}
+
+@CompilerControl(CompilerControl.Mode.EXCLUDE)
+public void target_exclude() {
+    // this method was intentionally left blank
+}
+</code></pre>
+<p>执行结果如下，可以看到不使用 JIT 编译和使用了 JIT 编译的性能差距达到了 100 多倍，使用了内联比不使用内联，速度快了 5 倍。</p>
+<pre><code>Benchmark                                Mode  Cnt   Score   Error  Units
+JMHSample_16_CompilerControl.baseline    avgt    3   0.485 ± 1.492  ns/op
+JMHSample_16_CompilerControl.blank       avgt    3   0.483 ± 1.518  ns/op
+JMHSample_16_CompilerControl.dontinline  avgt    3   1.934 ± 3.112  ns/op
+JMHSample_16_CompilerControl.exclude     avgt    3  57.603 ± 4.435  ns/op
+JMHSample_16_CompilerControl.inline      avgt    3   0.483 ± 1.520  ns/op
+</code></pre>
+<p><img alt="Drawing 4.png" src="/assets/107ab8d94a6722155681374d.png"/></p>
+<p>JIT 编译之后的二进制代码，是放在 Code Cache 区域里的。这个区域的大小是固定的，而且一旦启动无法扩容。如果 Code Cache 满了，JVM 并不会报错，但会停止编译。所以编译执行就会退化为解释执行，性能就会降低。不仅如此，JIT 编译器会一直尝试去优化你的代码，造成 CPU 占用上升。</p>
+<p>通过参数 -XX:ReservedCodeCacheSize 可以指定 Code Cache 区域的大小，如果你通过监控发现空间达到了上限，就要适当的增加它的大小。</p>
+<h3 id="编译层次">编译层次</h3>
+<p>HotSpot 虚拟机包含多个即时编译器，有 C1，C2 和 Graal，JDK8 以后采用的是分层编译的模式。使用 jstack 命令获得的线程信息，经常能看到它们的身影。</p>
+<pre><code>"C2 CompilerThread0" #6 daemon prio=9 os_prio=31 cpu=830.41ms elapsed=4252.14s tid=0x00007ffaed023000 nid=0x5a03 waiting on condition  [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+   No compile task
+
+"C1 CompilerThread0" #8 daemon prio=9 os_prio=31 cpu=549.91ms elapsed=4252.14s tid=0x00007ffaed831800 nid=0x5c03 waiting on condition  [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+   No compile task
+</code></pre>
+<p>使用额外线程进行即时编译，可以不用阻塞解释执行的逻辑。JIT 通常会在触发之后就在后台运行，编译完成之后就将相应的字节码替换为编译后的代码。
+JIT 编译方式有两种：一种是编译方法，另一种是编译循环。</p>
+<p>分层编译将 Java 虚拟机的执行状态分为了五个层次。</p>
+<ul>
+<li>字节码的解释执行;</li>
+<li>执行不带 profiling 的 C1 代码;</li>
+<li>执行仅带方法调用次数以及循环执行次数 profiling 的 C1 代码;</li>
+<li>执行带所有 profiling 的 C1 代码;</li>
+<li>执行 C2 代码。</li>
+</ul>
+<p>其中，Profiling 指的是运行时的程序的执行状态数据，比如循环调用的次数、方法调用的次数、分支跳转次数、类型转换次数等。比如 JDK 中的 hprof 工具，就是一种 profiler，说白了就是一些中间的统计数据。</p>
+<p>在不启用分层编译的情况下，当方法的调用次数和循环回边的次数的总和，超过由参数 -XX:CompileThreshold 指定的阈值时，便会触发即时编译；但当启用分层编译时，这个参数将会失效，会采用一套动态调整进行调整。</p>
+<h3 id="逃逸分析">逃逸分析</h3>
+<p><strong>下面着重讲解一下逃逸分析，这个知识点在面试的时候经常会被问到。</strong></p>
+<p>我们先回顾一下上一课时留下的问题：我们常说的对象，除了基本数据类型，一定是在堆上分配的吗？</p>
+<p>答案是否定的，通过逃逸分析，JVM 能够分析出一个新的对象的使用范围，从而决定是否要将这个对象分配到堆上。逃逸分析现在是 JVM 的默认行为，可以通过参数 -XX:-DoEscapeAnalysis 关掉它。</p>
+<p>那什么样的对象算是逃逸的呢？可以看一下下面的两种典型情况。</p>
+<p>如代码所示，对象被赋值给成员变量或者静态变量，可能被外部使用，变量就发生了逃逸。</p>
+<pre><code>public class EscapeAttr {
+    Object attr;
+    public void test() {
+        attr = new Object();
+    }
+}
+</code></pre>
+<p>再看下面这段代码，对象通过 return 语句返回。由于程序并不能确定这个对象后续会不会被使用，外部的线程能够访问到这个结果，对象也发生了逃逸。</p>
+<pre><code>public class EscapeReturn {
+    Object attr;
+    public Object test() {
+        Object obj = new Object();
+        return obj;
+    }
+}
+</code></pre>
+<p>那逃逸分析有什么好处呢？
+<strong>1. 栈上分配</strong></p>
+<p>如果一个对象在子程序中被分配，指向该对象的指针永远不会逃逸，对象有可能会被优化为栈分配。栈分配可以快速地在栈帧上创建和销毁对象，不用再分配到堆空间，可以有效地减少 GC 的压力。</p>
+<p><strong>2. 分离对象或标量替换</strong></p>
+<p>但对象结构通常都比较复杂，如何将对象保存在栈上呢？</p>
+<p>JIT 可以将对象打散，全部替换为一个个小的局部变量，这个打散的过程，就叫作标量替换（标量就是不能被进一步分割的变量，比如 int、long 等基本类型）。也就是说，标量替换后的对象，全部变成了局部变量，可以方便地进行栈上分配，而无须改动其他的代码。</p>
+<p>从上面的描述我们可以看到，并不是所有的对象或者数组，都会在堆上分配。由于JIT的存在，如果发现某些对象没有逃逸出方法，那么就有可能被优化成栈分配。</p>
+<p><strong>3.同步消除</strong></p>
+<p>如果一个对象被发现只能从一个线程被访问到，那么对于这个对象的操作可以不考虑同步。</p>
+<p>注意这是针对 synchronized 来说的，JUC 中的 Lock 并不能被消除。</p>
+<p>要开启同步消除，需要加上 -XX:+EliminateLocks 参数。由于这个参数依赖逃逸分析，所以同时要打开 -XX:+DoEscapeAnalysis 选项。</p>
+<p>比如下面这段代码，JIT 判断对象锁只能被一个线程访问，就可以去掉这个同步的影响。</p>
+<pre><code>public class SyncEliminate {
+    public void test() {
+        synchronized (new Object()) {
+        }
+    }
+}
+</code></pre>
+<p>仓库中也有一个 StringBuffer 和 StringBuilder 的 JMH 测试对比，可以看到在开启了锁消除的情况下，它们的效率相差并不大。</p>
+<pre><code>Benchmark                          Mode  Cnt       Score       Error   Units
+BuilderVsBufferBenchmark.buffer   thrpt   10   90085.927 ± 95174.289  ops/ms
+BuilderVsBufferBenchmark.builder  thrpt   10  103280.200 ± 76172.538  ops/ms
+</code></pre>
+<h3 id="jitwatch">JITWatch</h3>
+<p>可以使用 jitwatch 工具来观测 JIT 的一些行为。</p>
+<pre><code>https://github.com/AdoptOpenJDK/jitwatch
+</code></pre>
+<p>在代码的启动参数里加入 LogCompilation 等参数开启记录，将生成一个 jitdemo.log 文件。</p>
+<pre><code> -XX:+UnlockDiagnosticVMOptions -XX:+TraceClassLoading  -XX:+PrintAssembly -XX:+LogCompilation -XX:LogFile=jitdemo.log
+</code></pre>
+<p>使用 jitwatch 工具，可打开这个文件，看到详细的编译结果。</p>
+<p><img alt="Drawing 5.png" src="/assets/9519247ab33408c10f265de0.png"/></p>
+<p>下面是一段测试代码：</p>
+<pre><code>public class SimpleInliningTest {
+    public SimpleInliningTest() {
+        int sum = 0;
+        // 1_000_000 is F4240 in hex
+        for (int i = 0; i &lt; 1_000_000; i++) {
+            sum = this.add(sum, 99);
+            // 63 hex
+        }
+        System.out.println("Sum:" + sum);
+    }
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+    public static void main(String[] args) {
+        new SimpleInliningTest();
+    }
+}
+</code></pre>
+<p>从执行后的结果可以看到，热点 for 循环已经使用 JIT 进行了编译，而里面应用的 add 方法，也已经被内联。</p>
+<p><img alt="Drawing 6.png" src="/assets/86168eb6fcd56337b1bd20e5.png"/></p>
+<h3 id="小结">小结</h3>
+<p>JIT 是现代 JVM 主要的优化点，能够显著地提升程序的执行效率。从解释执行到最高层次的 C2，一个数量级的性能提升也是有可能的。但即时编译的过程是非常缓慢的，既耗时间也费空间，所以这些优化操作会和解释执行同时进行。</p>
+<p>值得注意的是，JIT 在某些情况下还会出现逆优化。比如一些热部署方式触发的 redefineClass，就会造成 JIT 编译结果的失效，相关的内联代码也需要重新生成。</p>
+<p>JIT 优化并不见得每次都有用，比如下面这段代码，编译后执行，会发生死循环。但如果你在启动的时候，加上 <strong>-Djava.compiler=NONE</strong> 参数，禁用 JIT，它就能够执行下去。</p>
+<pre><code>public class Demo {
+	static final class TestThread extends Thread {
+		boolean stop = false;
+		public boolean isStop() {
+			return stop;
+		}
+		@Override
+		public void run() {
+			try {
+				Thread.sleep(100);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			stop = true;
+			System.out.println("END");
+		}
+	}
+	public static void main(String[] args) {
+		int i = 0;
+		TestThread test = new TestThread();
+		test.start();
+		while(!test.isStop()){
+			System.out.println("--");
+			i++;
+		}
+	}
+}
+</code></pre>
+<p><strong>我们主要看了方法内联、逃逸分析等概念，了解到一些方法在被优化后，对象并不一定是在堆上分配的，它可能在被标量替换后，直接在栈上分配。这几个知识点也是在面试中经常被问到的。</strong></p>
+<p>JIT 的这些优化一般都是在后台进程默默地去做了，我们不需要关注太多。Code Cache 的容量达到上限，会影响程序执行的效率，但除非你有特别多的代码，默认的 240M 一般来说，足够用了。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

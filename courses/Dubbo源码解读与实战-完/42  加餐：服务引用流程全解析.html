@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>42  加餐：服务引用流程全解析 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/index.html">Dubbo源码解读与实战-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">50 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Dubbo源码解读与实战-完</strong><ul><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E6%B7%B1%E5%85%A5%E6%8E%8C%E6%8F%A1%20Dubbo%20%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8F%90%E5%8D%87%E4%BD%A0%E7%9A%84%E8%81%8C%E5%9C%BA%E7%AB%9E%E4%BA%89%E5%8A%9B.html">00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/01%20%20Dubbo%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%9A%E5%8D%83%E9%87%8C%E4%B9%8B%E8%A1%8C%EF%BC%8C%E5%A7%8B%E4%BA%8E%E8%B6%B3%E4%B8%8B.html">01  Dubbo 源码环境搭建：千里之行，始于足下</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/02%20Dubbo%20%E7%9A%84%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BA%BF%EF%BC%9A%E6%8A%93%E4%BD%8F%20URL%EF%BC%8C%E5%B0%B1%E7%90%86%E8%A7%A3%E4%BA%86%E5%8D%8A%E4%B8%AA%20Dubbo.html">02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/03%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8A%EF%BC%89.html">03  Dubbo SPI 精析，接口实现两极反转（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/04%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8B%EF%BC%89.html">04  Dubbo SPI 精析，接口实现两极反转（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/05%20%20%E6%B5%B7%E9%87%8F%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E8%BD%AE%E6%90%9E%E5%AE%9A.html">05  海量定时任务，一个时间轮搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/07%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/08%20%20%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0.html">08  代理模式与常见实现</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/09%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">09  Netty 入门，用它做网络编程都说好（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/10%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">10  Netty 入门，用它做网络编程都说好（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/11%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">11  简易版 RPC 框架实现（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/12%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">12  简易版 RPC 框架实现（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/13%20%20%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%EF%BC%9A%E9%99%8D%E4%BD%8E%20ZooKeeper%20%E5%8E%8B%E5%8A%9B%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5.html">13  本地缓存：降低 ZooKeeper 压力的一个常用手段</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/14%20%20%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%E6%98%AF%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BF%9D%E8%AF%81.html">14  重试机制是网络操作的基本保证</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/15%20%20ZooKeeper%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E8%B7%B5.html">15  ZooKeeper 注册中心实现，官方推荐注册中心实践</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/16%20%20Dubbo%20Serialize%20%E5%B1%82%EF%BC%9A%E5%A4%9A%E7%A7%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AE%97%E6%B3%95%EF%BC%8C%E6%80%BB%E6%9C%89%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E4%BD%A0.html">16  Dubbo Serialize 层：多种序列化算法，总有一款适合你</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/17%20%20Dubbo%20Remoting%20%E5%B1%82%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E5%88%86%E6%9E%90%EF%BC%9A%E8%BF%99%E5%B1%85%E7%84%B6%E6%98%AF%E4%B8%80%E5%A5%97%E5%85%BC%E5%AE%B9%E6%89%80%E6%9C%89%20NIO%20%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/18%20%20Buffer%20%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%9A%E6%88%91%E4%BB%AC%E4%B8%8D%E7%94%9F%E4%BA%A7%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AA%E6%98%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E6%90%AC%E8%BF%90%E5%B7%A5.html">18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/19%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/20%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">20  Transporter 层核心实现：编解码与线程模型一文打尽（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/21%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/22%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/23%20%20%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D%EF%BC%8CRPC%20%E5%B1%82%E9%AA%A8%E6%9E%B6%E6%A2%B3%E7%90%86.html">23  核心接口介绍，RPC 层骨架梳理</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/24%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/25%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/26%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8A%EF%BC%89.html">26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/27%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8B%EF%BC%89.html">27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/28%20%20%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%AE%80%E5%8D%95%E5%8C%96%EF%BC%8C%E4%BB%A3%E7%90%86%E5%B8%AE%E4%BD%A0%E9%9A%90%E8%97%8F%E4%BA%86%E5%A4%9A%E5%B0%91%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82%EF%BC%9F.html">28  复杂问题简单化，代理帮你隐藏了多少底层细节？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/29%20%20%E5%8A%A0%E9%A4%90%EF%BC%9AHTTP%20%E5%8D%8F%E8%AE%AE%20%2B%20JSON-RPC%EF%BC%8CDubbo%20%E8%B7%A8%E8%AF%AD%E8%A8%80%E5%B0%B1%E6%98%AF%E5%A6%82%E6%AD%A4%E7%AE%80%E5%8D%95.html">29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/30%20%20Filter%20%E6%8E%A5%E5%8F%A3%EF%BC%8C%E6%89%A9%E5%B1%95%20Dubbo%20%E6%A1%86%E6%9E%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5%E6%8C%87%E5%8C%97.html">30  Filter 接口，扩展 Dubbo 框架的常用手段指北</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/31%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E6%BD%9C%20Directory%20%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8E%A2%E7%A7%98%E6%9C%8D%E5%8A%A1%E7%9B%AE%E5%BD%95%E7%8E%84%E6%9C%BA.html">31  加餐：深潜 Directory 实现，探秘服务目录玄机</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/32%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8A%EF%BC%89.html">32  路由机制：请求到底怎么走，它说了算（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/33%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8B%EF%BC%89.html">33  路由机制：请求到底怎么走，它说了算（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/34%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%88%9D%E6%8E%A2%20Dubbo%20%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">34  加餐：初探 Dubbo 动态配置的那些事儿</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/35%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8A%EF%BC%89.html">35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/36%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8B%EF%BC%89.html">36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/37%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8A%EF%BC%89.html">37  集群容错：一个好汉三个帮（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/38%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8B%EF%BC%89.html">38  集群容错：一个好汉三个帮（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/39%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%A4%9A%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%8D%E7%94%A8%E6%80%95%EF%BC%8CMerger%20%E5%90%88%E5%B9%B6%E5%99%A8%E6%9D%A5%E5%B8%AE%E5%BF%99.html">39  加餐：多个返回值不用怕，Merger 合并器来帮忙</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/40%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%A8%A1%E6%8B%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%EF%BC%8CMock%20%E6%9C%BA%E5%88%B6%E5%B8%AE%E4%BD%A0%E6%90%9E%E5%AE%9A.html">40  加餐：模拟远程调用，Mock 机制帮你搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/41%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E4%B8%80%E9%94%AE%E9%80%9A%E5%85%B3%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E5%85%A8%E6%B5%81%E7%A8%8B.html">41  加餐：一键通关服务发布全流程</a></li><li><a class="active" aria-current="page" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/42%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E6%B5%81%E7%A8%8B%E5%85%A8%E8%A7%A3%E6%9E%90.html">42  加餐：服务引用流程全解析</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/43%20%20%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9A%E6%96%B0%E7%89%88%E6%9C%AC%E6%96%B0%E6%96%B9%E6%A1%88.html">43  服务自省设计方案：新版本新方案</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/44%20%20%E5%85%83%E6%95%B0%E6%8D%AE%E6%96%B9%E6%A1%88%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E6%95%B0%E6%8D%AE%E9%87%8F%E8%86%A8%E8%83%80%EF%BC%9F.html">44  元数据方案深度剖析，如何避免注册中心数据量膨胀？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/45%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8A%EF%BC%89.html">45  加餐：深入服务自省方案中的服务发布订阅（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/46%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8B%EF%BC%89.html">46  加餐：深入服务自省方案中的服务发布订阅（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/47%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8A%EF%BC%89.html">47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/48%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8B%EF%BC%89.html">48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/49%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E8%AE%A4%E7%9C%9F%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BC%A9%E5%B0%8F%E5%B7%AE%E8%B7%9D.html">49 结束语  认真学习，缩小差距</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/42%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E6%B5%81%E7%A8%8B%E5%85%A8%E8%A7%A3%E6%9E%90.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="42  加餐：服务引用流程全解析" id="title">42  加餐：服务引用流程全解析</h1>
+<div><p>Dubbo 作为一个 RPC 框架，暴露给用户最基本的功能就是服务发布和服务引用。在上一课时，我们已经分析了服务发布的核心流程。那么在本课时，我们就接着深入分析<strong>服务引用的核心流程</strong>。</p>
+<p>Dubbo 支持两种方式引用远程的服务：</p>
+<ul>
+<li><strong>服务直连的方式</strong>，仅适合在<strong>调试服务</strong>的时候使用；</li>
+<li><strong>基于注册中心引用服务</strong>，这是<strong>生产环境</strong>中使用的服务引用方式。</li>
+</ul>
+<h3 id="dubbobootstrap-入口">DubboBootstrap 入口</h3>
+<p>在上一课时介绍服务发布的时候，我们介绍了 DubboBootstrap.start() 方法的核心流程，其中除了会<strong>调用 exportServices() 方法完成服务发布</strong>之外，还会<strong>调用 referServices() 方法完成服务引用</strong>，这里就不再贴出 DubboBootstrap.start() 方法的具体代码，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/dubbo" target="_blank">源码</a>进行学习。</p>
+<p>在 DubboBootstrap.referServices() 方法中，会从 ConfigManager 中获取所有 ReferenceConfig 列表，并根据 ReferenceConfig 获取对应的代理对象，入口逻辑如下：</p>
+<pre><code>private void referServices() {
+
+    if (cache == null) { // 初始ReferenceConfigCache
+
+        cache = ReferenceConfigCache.getCache();
+
+    }
+
+    configManager.getReferences().forEach(rc -&gt; {
+
+        // 遍历ReferenceConfig列表
+
+        ReferenceConfig referenceConfig = (ReferenceConfig) rc;
+
+        referenceConfig.setBootstrap(this);
+
+        if (rc.shouldInit()) { // 检测ReferenceConfig是否已经初始化
+
+            if (referAsync) { // 异步
+
+                CompletableFuture&lt;Object&gt; future = ScheduledCompletableFuture.submit(
+
+                        executorRepository.getServiceExporterExecutor(),
+
+                        () -&gt; cache.get(rc)
+
+                );
+
+                asyncReferringFutures.add(future);
+
+            } else { // 同步
+
+                cache.get(rc);
+
+            }
+
+        }
+
+    });
+
+}
+</code></pre>
+<p>这里的 ReferenceConfig 是哪里来的呢？在[第 01 课时]dubbo-demo-api-consumer 示例中，我们可以看到构造 ReferenceConfig 对象的逻辑，这些新建的 ReferenceConfig 对象会通过 DubboBootstrap.reference() 方法添加到 ConfigManager 中进行管理，如下所示：</p>
+<pre><code>public DubboBootstrap reference(ReferenceConfig&lt;?&gt; referenceConfig) {
+
+    configManager.addReference(referenceConfig);
+
+    return this;
+
+}
+</code></pre>
+<h3 id="referenceconfigcache">ReferenceConfigCache</h3>
+<p><strong>服务引用的核心实现在 ReferenceConfig 之中</strong>，一个 ReferenceConfig 对象对应一个服务接口，每个 ReferenceConfig 对象中都封装了与注册中心的网络连接，以及与 Provider 的网络连接，这是一个非常重要的对象。</p>
+<p><strong>为了避免底层连接泄漏造成性能问题，从 Dubbo 2.4.0 版本开始，Dubbo 提供了 ReferenceConfigCache 用于缓存 ReferenceConfig 实例。</strong></p>
+<p>在 dubbo-demo-api-consumer 示例中，我们可以看到 ReferenceConfigCache 的基本使用方式：</p>
+<pre><code>ReferenceConfig&lt;DemoService&gt; reference = new ReferenceConfig&lt;&gt;();
+
+reference.setInterface(DemoService.class);
+
+... 
+
+// 这一步在DubboBootstrap.start()方法中完成
+
+ReferenceConfigCache cache = ReferenceConfigCache.getCache();
+
+...
+
+DemoService demoService = ReferenceConfigCache.getCache().get(reference);
+</code></pre>
+<p>在 ReferenceConfigCache 中维护了一个静态的 Map（CACHE_HOLDER）字段，其中 Key 是由 Group、服务接口和 version 构成，Value 是一个 ReferenceConfigCache 对象。在 ReferenceConfigCache 中可以传入一个 KeyGenerator 用来修改缓存 Key 的生成逻辑，KeyGenerator 接口的定义如下：</p>
+<pre><code>public interface KeyGenerator {
+
+    String generateKey(ReferenceConfigBase&lt;?&gt; referenceConfig);
+
+}
+</code></pre>
+<p>默认的 KeyGenerator 实现是 ReferenceConfigCache 中的匿名内部类，其对象由 DEFAULT_KEY_GENERATOR 这个静态字段引用，具体实现如下：</p>
+<pre><code>public static final KeyGenerator DEFAULT_KEY_GENERATOR = referenceConfig -&gt; {
+
+    String iName = referenceConfig.getInterface();
+
+    if (StringUtils.isBlank(iName)) { // 获取服务接口名称
+
+        Class&lt;?&gt; clazz = referenceConfig.getInterfaceClass();
+
+        iName = clazz.getName();
+
+    }
+
+    if (StringUtils.isBlank(iName)) {
+
+        throw new IllegalArgumentException("No interface info in ReferenceConfig" + referenceConfig);
+
+    }
+
+    // Key的格式是group/interface:version
+
+    StringBuilder ret = new StringBuilder();
+
+    if (!StringUtils.isBlank(referenceConfig.getGroup())) {
+
+        ret.append(referenceConfig.getGroup()).append("/");
+
+    }
+
+    ret.append(iName);
+
+    if (!StringUtils.isBlank(referenceConfig.getVersion())) {
+
+        ret.append(":").append(referenceConfig.getVersion());
+
+    }
+
+    return ret.toString();
+
+};
+</code></pre>
+<p>在 ReferenceConfigCache 实例对象中，会维护下面两个 Map 集合。</p>
+<ul>
+<li>proxies（ConcurrentMap<class<?>, ConcurrentMap<string, object="">&gt;类型）：该集合用来存储服务接口的全部代理对象，其中第一层 Key 是服务接口的类型，第二层 Key 是上面介绍的 KeyGenerator 为不同服务提供方生成的 Key，Value 是服务的代理对象。</string,></class<?></li>
+<li>referredReferences（ConcurrentMap<string, referenceconfigbase<?="">&gt; 类型）：该集合用来存储已经被处理的 ReferenceConfig 对象。</string,></li>
+</ul>
+<p>我们回到 DubboBootstrap.referServices() 方法中，看一下其中与 ReferenceConfigCache 相关的逻辑。</p>
+<p>首先是 ReferenceConfigCache.getCache() 这个静态方法，会在 CACHE_HOLDER 集合中添加一个 Key 为“*DEFAULT*”的 ReferenceConfigCache 对象（使用默认的 KeyGenerator 实现），它将作为默认的 ReferenceConfigCache 对象。</p>
+<p>接下来，无论是同步服务引用还是异步服务引用，都会调用 ReferenceConfigCache.get() 方法，创建并缓存代理对象。下面就是 ReferenceConfigCache.get() 方法的核心实现：</p>
+<pre><code>public &lt;T&gt; T get(ReferenceConfigBase&lt;T&gt; referenceConfig) {
+
+    // 生成服务提供方对应的Key
+
+    String key = generator.generateKey(referenceConfig);
+
+    // 获取接口类型
+
+    Class&lt;?&gt; type = referenceConfig.getInterfaceClass();
+
+    // 获取该接口对应代理对象集合
+
+    proxies.computeIfAbsent(type, _t -&gt; new ConcurrentHashMap&lt;&gt;());
+
+    ConcurrentMap&lt;String, Object&gt; proxiesOfType = proxies.get(type);
+
+    // 根据Key获取服务提供方对应的代理对象
+
+    proxiesOfType.computeIfAbsent(key, _k -&gt; {
+
+        // 服务引用
+
+        Object proxy = referenceConfig.get();
+
+        // 将ReferenceConfig记录到referredReferences集合
+
+        referredReferences.put(key, referenceConfig);            
+
+        return proxy;
+
+    });
+
+    return (T) proxiesOfType.get(key);
+
+}
+</code></pre>
+<h3 id="referenceconfig">ReferenceConfig</h3>
+<p>通过前面的介绍我们知道，<strong>ReferenceConfig 是服务引用的真正入口</strong>，其中会创建相关的代理对象。下面先来看 ReferenceConfig.get() 方法：</p>
+<pre><code>public synchronized T get() {
+
+    if (destroyed) { // 检测当前ReferenceConfig状态
+
+        throw new IllegalStateException("...");
+
+    }
+
+    if (ref == null) {// ref指向了服务的代理对象
+
+        init(); // 初始化ref字段
+
+    }
+
+    return ref;
+
+}
+</code></pre>
+<p>在 ReferenceConfig.init() 方法中，首先会对服务引用的配置进行处理，以保证配置的正确性。这里的具体实现其实本身并不复杂，但由于涉及很多的配置解析和处理逻辑，代码就显得非常长，我们就不再一一展示，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/dubbo" target="_blank">源码</a>进行学习。</p>
+<p><strong>ReferenceConfig.init() 方法的核心逻辑是调用 createProxy() 方法</strong>，调用之前会从配置中获取 createProxy() 方法需要的参数：</p>
+<pre><code>public synchronized void init() {
+
+    if (initialized) { // 检测ReferenceConfig的初始化状态
+
+        return;
+
+    }
+
+    if (bootstrap == null) { // 检测DubboBootstrap的初始化状态
+
+        bootstrap = DubboBootstrap.getInstance();
+
+        bootstrap.init();
+
+    }
+
+    ... // 省略其他配置的检查
+
+    Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+
+    map.put(SIDE_KEY, CONSUMER_SIDE); // 添加side参数
+
+    // 添加Dubbo版本、release参数、timestamp参数、pid参数
+
+    ReferenceConfigBase.appendRuntimeParameters(map);
+
+    // 添加interface参数
+
+    map.put(INTERFACE_KEY, interfaceName);
+
+    ... // 省略其他参数的处理
+
+    String hostToRegistry = ConfigUtils.getSystemProperty(DUBBO_IP_TO_REGISTRY);
+
+    if (StringUtils.isEmpty(hostToRegistry)) {
+
+        hostToRegistry = NetUtils.getLocalHost();
+
+    } else if (isInvalidLocalHost(hostToRegistry)) {
+
+        throw new IllegalArgumentException("...");
+
+    }
+
+    // 添加ip参数
+
+    map.put(REGISTER_IP_KEY, hostToRegistry);
+
+    // 调用createProxy()方法
+
+    ref = createProxy(map);
+
+    ...// 省略其他代码
+
+    initialized = true;
+
+    // 触发ReferenceConfigInitializedEvent事件
+
+    dispatch(new ReferenceConfigInitializedEvent(this, invoker));
+
+}
+</code></pre>
+<p>ReferenceConfig.createProxy() 方法中处理了多种服务引用的场景，例如，直连单个/多个Provider、单个/多个注册中心。下面是 createProxy() 方法的核心流程，大致可以梳理出这么 5 个步骤。</p>
+<ol>
+<li>根据传入的参数集合判断协议是否为 injvm 协议，如果是，直接通过 InjvmProtocol 引用服务。</li>
+<li>构造 urls 集合。Dubbo 支持<strong>直连 Provider</strong>和<strong>依赖注册中心</strong>两种服务引用方式。如果是直连服务的模式，我们可以通过 url 参数指定一个或者多个 Provider 地址，会被解析并填充到 urls 集合；如果通过注册中心的方式进行服务引用，则会调用 AbstractInterfaceConfig.loadRegistries() 方法加载所有注册中心。</li>
+<li>如果 urls 集合中只记录了一个 URL，通过 Protocol 适配器选择合适的 Protocol 扩展实现创建 Invoker 对象。如果是直连 Provider 的场景，则 URL 为 dubbo 协议，这里就会使用 DubboProtocol 这个实现；如果依赖注册中心，则使用 RegistryProtocol 这个实现。</li>
+<li>如果 urls 集合中有多个注册中心，则使用 ZoneAwareCluster 作为 Cluster 的默认实现，生成对应的 Invoker 对象；如果 urls 集合中记录的是多个直连服务的地址，则使用 Cluster 适配器选择合适的扩展实现生成 Invoker 对象。</li>
+<li>通过 ProxyFactory 适配器选择合适的 ProxyFactory 扩展实现，将 Invoker 包装成服务接口的代理对象。</li>
+</ol>
+<p>通过上面的流程我们可以看出<strong>createProxy() 方法中有两个核心</strong>：一是通过 Protocol 适配器选择合适的 Protocol 扩展实现创建 Invoker 对象；二是通过 ProxyFactory 适配器选择合适的 ProxyFactory 创建代理对象。</p>
+<p>下面我们来看 createProxy() 方法的具体实现：</p>
+<pre><code>private T createProxy(Map&lt;String, String&gt; map) {
+
+    if (shouldJvmRefer(map)) { // 根据url的协议、scope以及injvm等参数检测是否需要本地引用
+
+        // 创建injvm协议的URL
+
+        URL url = new URL(LOCAL_PROTOCOL, LOCALHOST_VALUE, 0, interfaceClass.getName()).addParameters(map);
+
+        // 通过Protocol的适配器选择对应的Protocol实现创建Invoker对象
+
+        invoker = REF_PROTOCOL.refer(interfaceClass, url);
+
+        if (logger.isInfoEnabled()) {
+
+            logger.info("Using injvm service " + interfaceClass.getName());
+
+        }
+
+    } else {
+
+        urls.clear();
+
+        if (url != null &amp;&amp; url.length() &gt; 0) {
+
+            String[] us = SEMICOLON_SPLIT_PATTERN.split(url); // 配置多个URL的时候，会用分号进行切分
+
+            if (us != null &amp;&amp; us.length &gt; 0) { // url不为空，表明用户可能想进行点对点调用
+
+                for (String u : us) {
+
+                    URL url = URL.valueOf(u);
+
+                    if (StringUtils.isEmpty(url.getPath())) {
+
+                        url = url.setPath(interfaceName);  // 设置接口完全限定名为URL Path
+
+                    }
+
+                    if (UrlUtils.isRegistry(url)) { // 检测URL协议是否为registry，若是，说明用户想使用指定的注册中心
+
+                        // 这里会将map中的参数整理成一个参数添加到refer参数中
+
+                        urls.add(url.addParameterAndEncoded(REFER_KEY, StringUtils.toQueryString(map)));
+
+                    } else {
+
+                        // 将map中的参数添加到url中
+
+                        urls.add(ClusterUtils.mergeUrl(url, map));
+
+                    }
+
+                }
+
+            }
+
+        } else { 
+
+            if (!LOCAL_PROTOCOL.equalsIgnoreCase(getProtocol())) {
+
+                checkRegistry();
+
+                // 加载注册中心的地址RegistryURL
+
+                List&lt;URL&gt; us = ConfigValidationUtils.loadRegistries(this, false);
+
+                if (CollectionUtils.isNotEmpty(us)) {
+
+                    for (URL u : us) {
+
+                        URL monitorUrl = ConfigValidationUtils.loadMonitor(this, u);
+
+                        if (monitorUrl != null) {
+
+                            map.put(MONITOR_KEY, URL.encode(monitorUrl.toFullString()));
+
+                        }
+
+                        // 将map中的参数整理成refer参数，添加到RegistryURL中
+
+                        urls.add(u.addParameterAndEncoded(REFER_KEY, StringUtils.toQueryString(map)));
+
+                    }
+
+                }
+
+                if (urls.isEmpty()) { // 既不是服务直连，也没有配置注册中心，抛出异常
+
+                    throw new IllegalStateException("...");
+
+                }
+
+            }
+
+        }
+
+        if (urls.size() == 1) {
+
+            // 在单注册中心或是直连单个服务提供方的时候，通过Protocol的适配器选择对应的Protocol实现创建Invoker对象
+
+            invoker = REF_PROTOCOL.refer(interfaceClass, urls.get(0));
+
+        } else {
+
+            // 多注册中心或是直连多个服务提供方的时候，会根据每个URL创建Invoker对象
+
+            List&lt;Invoker&lt;?&gt;&gt; invokers = new ArrayList&lt;Invoker&lt;?&gt;&gt;();
+
+            URL registryURL = null;
+
+            for (URL url : urls) {
+
+                invokers.add(REF_PROTOCOL.refer(interfaceClass, url));
+
+                if (UrlUtils.isRegistry(url)) { // 确定是多注册中心，还是直连多个Provider
+
+                    registryURL = url;
+
+                }
+
+            }
+
+            if (registryURL != null) {
+
+                // 多注册中心的场景中，会使用ZoneAwareCluster作为Cluster默认实现，多注册中心之间的选择
+
+                URL u = registryURL.addParameterIfAbsent(CLUSTER_KEY, ZoneAwareCluster.NAME);
+
+                invoker = CLUSTER.join(new StaticDirectory(u, invokers));
+
+            } else {
+
+                // 多个Provider直连的场景中，使用Cluster适配器选择合适的扩展实现
+
+                invoker = CLUSTER.join(new StaticDirectory(invokers));
+
+            }
+
+        }
+
+    }
+
+    if (shouldCheck() &amp;&amp; !invoker.isAvailable()) {
+
+        // 根据check配置决定是否检测Provider的可用性
+
+        invoker.destroy();
+
+        throw new IllegalStateException("...");
+
+    }
+
+    ...// 元数据处理相关的逻辑
+
+    // 通过ProxyFactory适配器选择合适的ProxyFactory扩展实现，创建代理对象
+
+    return (T) PROXY_FACTORY.getProxy(invoker, ProtocolUtils.isGeneric(generic));
+
+}
+</code></pre>
+<h3 id="registryprotocol">RegistryProtocol</h3>
+<p>在直连 Provider 的场景中，会使用 DubboProtocol.refer() 方法完成服务引用，DubboProtocol.refer() 方法的具体实现在前面[第 25 课时]中已经详细介绍过了，这里我们重点来看存在注册中心的场景中，Dubbo Consumer 是如何通过 RegistryProtocol 完成服务引用的。</p>
+<p>在 RegistryProtocol.refer() 方法中，会先根据 URL 获取注册中心的 URL，再调用 doRefer 方法生成 Invoker，在 refer() 方法中会使用 MergeableCluster 处理多 group 引用的场景。</p>
+<pre><code>public &lt;T&gt; Invoker&lt;T&gt; refer(Class&lt;T&gt; type, URL url) throws RpcException {
+
+    url = getRegistryUrl(url); // 从URL中获取注册中心的URL
+
+    // 获取Registry实例，这里的RegistryFactory对象是通过Dubbo SPI的自动装载机制注入的
+
+    Registry registry = registryFactory.getRegistry(url);
+
+    if (RegistryService.class.equals(type)) {
+
+        return proxyFactory.getInvoker((T) registry, type, url);
+
+    }
+
+    // 从注册中心URL的refer参数中获取此次服务引用的一些参数，其中就包括group
+
+    Map&lt;String, String&gt; qs = StringUtils.parseQueryString(url.getParameterAndDecoded(REFER_KEY));
+
+    String group = qs.get(GROUP_KEY);
+
+    if (group != null &amp;&amp; group.length() &gt; 0) {
+
+        if ((COMMA_SPLIT_PATTERN.split(group)).length &gt; 1 || "*".equals(group)) {
+
+            // 如果此次可以引用多个group的服务，则Cluser实现使用MergeableCluster实现，
+
+            // 这里的getMergeableCluster()方法就会通过Dubbo SPI方式找到MergeableCluster实例
+
+            return doRefer(getMergeableCluster(), registry, type, url);
+
+        }
+
+    }
+
+    // 如果没有group参数或是只指定了一个group，则通过Cluster适配器选择Cluster实现
+
+    return doRefer(cluster, registry, type, url);
+
+}
+</code></pre>
+<p>在 doRefer() 方法中，首先会根据 URL 初始化 RegistryDirectory 实例，然后生成 Subscribe URL 并进行注册，之后会通过 Registry 订阅服务，最后通过 Cluster 将多个 Invoker 合并成一个 Invoker 返回给上层，具体实现如下：</p>
+<pre><code>private &lt;T&gt; Invoker&lt;T&gt; doRefer(Cluster cluster, Registry registry, Class&lt;T&gt; type, URL url) {
+
+    // 创建RegistryDirectory实例
+
+    RegistryDirectory&lt;T&gt; directory = new RegistryDirectory&lt;T&gt;(type, url);
+
+    directory.setRegistry(registry);
+
+    directory.setProtocol(protocol);
+
+    // 生成SubscribeUrl，协议为consumer，具体的参数是RegistryURL中refer参数指定的参数
+
+    Map&lt;String, String&gt; parameters = new HashMap&lt;String, String&gt;(directory.getConsumerUrl().getParameters());
+
+    URL subscribeUrl = new URL(CONSUMER_PROTOCOL, parameters.remove(REGISTER_IP_KEY), 0, type.getName(), parameters);
+
+    if (directory.isShouldRegister()) {
+
+        directory.setRegisteredConsumerUrl(subscribeUrl); // 在SubscribeUrl中添加category=consumers和check=false参数
+
+        registry.register(directory.getRegisteredConsumerUrl()); // 服务注册，在Zookeeper的consumers节点下，添加该Consumer对应的节点
+
+    }
+
+    directory.buildRouterChain(subscribeUrl); // 根据SubscribeUrl创建服务路由
+
+    // 订阅服务，toSubscribeUrl()方法会将SubscribeUrl中category参数修改为"providers,configurators,routers"
+
+    // RegistryDirectory的subscribe()在前面详细分析过了，其中会通过Registry订阅服务，同时还会添加相应的监听器
+
+    directory.subscribe(toSubscribeUrl(subscribeUrl));
+
+    // 注册中心中可能包含多个Provider，相应地，也就有多个Invoker，
+
+    // 这里通过前面选择的Cluster将多个Invoker对象封装成一个Invoker对象
+
+    Invoker&lt;T&gt; invoker = cluster.join(directory);
+
+    // 根据URL中的registry.protocol.listener参数加载相应的监听器实现
+
+    List&lt;RegistryProtocolListener&gt; listeners = findRegistryProtocolListeners(url);
+
+    if (CollectionUtils.isEmpty(listeners)) {
+
+        return invoker;
+
+    }
+
+    // 为了方便在监听器中回调，这里将此次引用使用到的Directory对象、Cluster对象、Invoker对象以及SubscribeUrl
+
+    // 封装到一个RegistryInvokerWrapper中，传递给监听器
+
+    RegistryInvokerWrapper&lt;T&gt; registryInvokerWrapper = new RegistryInvokerWrapper&lt;&gt;(directory, cluster, invoker, subscribeUrl);
+
+    for (RegistryProtocolListener listener : listeners) {
+
+        listener.onRefer(this, registryInvokerWrapper);
+
+    }
+
+    return registryInvokerWrapper;
+
+}
+</code></pre>
+<p>这里涉及的 RegistryDirectory、Router 接口、Cluster 接口及其相关的扩展实现，我们都已经在前面的课时详细分析过了，这里不再重复。</p>
+<h3 id="总结">总结</h3>
+<p>本课时，我们重点介绍了 Dubbo 服务引用的整个流程。</p>
+<ul>
+<li>首先，我们介绍了 DubboBootStrap 这个入口门面类与服务引用相关的方法，其中涉及 referServices()、reference() 等核心方法。</li>
+<li>接下来，我们分析了 ReferenceConfigCache 这个 ReferenceConfig 对象缓存，以及 ReferenceConfig 实现服务引用的核心流程。</li>
+<li>最后，我们还讲解了 RegistryProtocol 从注册中心引用服务的核心实现。</li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

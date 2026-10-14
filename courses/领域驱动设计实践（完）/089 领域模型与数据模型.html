@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>089 领域模型与数据模型 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">领域驱动设计实践（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">109 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>领域驱动设计实践（完）</strong><ul><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/001%20%E3%80%8C%E6%88%98%E7%95%A5%E7%AF%87%E3%80%8D%E8%AE%BF%E8%B0%88%20%20DDD%20%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">001 「战略篇」访谈  DDD 和微服务是什么关系？</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/002%20%E3%80%8C%E6%88%98%E7%95%A5%E7%AF%87%E3%80%8D%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9A%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%EF%BC%8C%E9%87%8D%E7%84%95%E9%9D%92%E6%98%A5%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%BB%8F%E5%85%B8.html">002 「战略篇」开篇词：领域驱动设计，重焕青春的设计经典</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/003%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A7%88.html">003 领域驱动设计概览</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/004%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6.html">004 深入分析软件的复杂度</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/005%20%E6%8E%A7%E5%88%B6%E8%BD%AF%E4%BB%B6%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%8E%9F%E5%88%99.html">005 控制软件复杂度的原则</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/006%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AF%B9%E8%BD%AF%E4%BB%B6%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%BA%94%E5%AF%B9%EF%BC%88%E4%B8%8A%EF%BC%89.html">006 领域驱动设计对软件复杂度的应对（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/007%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AF%B9%E8%BD%AF%E4%BB%B6%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%BA%94%E5%AF%B9%EF%BC%88%E4%B8%8B%EF%BC%89.html">007 领域驱动设计对软件复杂度的应对（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/008%20%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%9B%A2%E9%98%9F%E7%9A%84%E6%B2%9F%E9%80%9A%E4%B8%8E%E5%8D%8F%E4%BD%9C.html">008 软件开发团队的沟通与协作</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/009%20%E8%BF%90%E7%94%A8%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%E6%8F%90%E7%82%BC%E9%A2%86%E5%9F%9F%E7%9F%A5%E8%AF%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">009 运用领域场景分析提炼领域知识（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/010%20%E8%BF%90%E7%94%A8%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%E6%8F%90%E7%82%BC%E9%A2%86%E5%9F%9F%E7%9F%A5%E8%AF%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">010 运用领域场景分析提炼领域知识（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/011%20%E5%BB%BA%E7%AB%8B%E7%BB%9F%E4%B8%80%E8%AF%AD%E8%A8%80.html">011 建立统一语言</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/012%20%E7%90%86%E8%A7%A3%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87.html">012 理解限界上下文</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/013%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E6%8E%A7%E5%88%B6%E5%8A%9B%EF%BC%88%E4%B8%8A%EF%BC%89.html">013 限界上下文的控制力（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/014%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E6%8E%A7%E5%88%B6%E5%8A%9B%EF%BC%88%E4%B8%8B%EF%BC%89.html">014 限界上下文的控制力（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/015%20%E8%AF%86%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88%E4%B8%8A%EF%BC%89.html">015 识别限界上下文（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/016%20%E8%AF%86%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88%E4%B8%8B%EF%BC%89.html">016 识别限界上下文（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/017%20%E7%90%86%E8%A7%A3%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84.html">017 理解上下文映射</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/018%20%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84%E7%9A%84%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%A8%A1%E5%BC%8F.html">018 上下文映射的团队协作模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/019%20%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84%E7%9A%84%E9%80%9A%E4%BF%A1%E9%9B%86%E6%88%90%E6%A8%A1%E5%BC%8F.html">019 上下文映射的通信集成模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/020%20%E8%BE%A8%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB%EF%BC%88%E4%B8%8A%EF%BC%89.html">020 辨别限界上下文的协作关系（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/021%20%E8%BE%A8%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB%EF%BC%88%E4%B8%8B%EF%BC%89.html">021 辨别限界上下文的协作关系（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/022%20%E8%AE%A4%E8%AF%86%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84.html">022 认识分层架构</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/023%20%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E5%8C%96.html">023 分层架构的演化</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/024%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E8%BF%9B.html">024 领域驱动架构的演进</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/025%20%E6%A1%88%E4%BE%8B%20%20%E5%B1%82%E6%AC%A1%E7%9A%84%E8%81%8C%E8%B4%A3%E4%B8%8E%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB%EF%BC%88%E5%9B%BE%E6%96%87%E7%AF%87%EF%BC%89.html">025 案例  层次的职责与协作关系（图文篇）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/026%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E6%9E%B6%E6%9E%84.html">026 限界上下文与架构</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/027%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AF%B9%E6%9E%B6%E6%9E%84%E7%9A%84%E5%BD%B1%E5%93%8D.html">027 限界上下文对架构的影响</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/028%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B.html">028 领域驱动设计的代码模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/029%20%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%9E%B6%E6%9E%84%E5%86%B3%E7%AD%96.html">029 代码模型的架构决策</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/030%20%E5%AE%9E%E8%B7%B5%20%20%E5%85%88%E5%90%AF%E9%98%B6%E6%AE%B5%E7%9A%84%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.html">030 实践  先启阶段的需求分析</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/031%20%E5%AE%9E%E8%B7%B5%20%20%E5%85%88%E5%90%AF%E9%98%B6%E6%AE%B5%E7%9A%84%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89.html">031 实践  先启阶段的领域场景分析（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/032%20%E5%AE%9E%E8%B7%B5%20%20%E5%85%88%E5%90%AF%E9%98%B6%E6%AE%B5%E7%9A%84%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89.html">032 实践  先启阶段的领域场景分析（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/033%20%E5%AE%9E%E8%B7%B5%20%20%E8%AF%86%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87.html">033 实践  识别限界上下文</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/034%20%E5%AE%9E%E8%B7%B5%20%20%E7%A1%AE%E5%AE%9A%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB.html">034 实践  确定限界上下文的协作关系</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/035%20%E5%AE%9E%E8%B7%B5%20%20EAS%20%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.html">035 实践  EAS 的整体架构</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/036%20%E3%80%8C%E6%88%98%E6%9C%AF%E7%AF%87%E3%80%8D%E8%AE%BF%E8%B0%88%EF%BC%9ADDD%20%E8%83%BD%E5%B8%AE%E5%BC%80%E5%8F%91%E5%9B%A2%E9%98%9F%E6%8F%90%E9%AB%98%E8%AE%BE%E8%AE%A1%E6%B0%B4%E5%B9%B3%E5%90%97%EF%BC%9F.html">036 「战术篇」访谈：DDD 能帮开发团队提高设计水平吗？</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/037%20%E3%80%8C%E6%88%98%E6%9C%AF%E7%AF%87%E3%80%8D%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9A%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7.html">037 「战术篇」开篇词：领域驱动设计的不确定性</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/038%20%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9E%8B.html">038 什么是模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/039%20%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B.html">039 数据分析模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/040%20%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B.html">040 数据设计模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/041%20%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B.html">041 数据模型与对象模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/042%20%E6%95%B0%E6%8D%AE%E5%AE%9E%E7%8E%B0%E6%A8%A1%E5%9E%8B.html">042 数据实现模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/043%20%E6%A1%88%E4%BE%8B%20%20%E5%9F%B9%E8%AE%AD%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F.html">043 案例  培训管理系统</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/044%20%E6%9C%8D%E5%8A%A1%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9E%8B.html">044 服务资源模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/045%20%E6%9C%8D%E5%8A%A1%E8%A1%8C%E4%B8%BA%E6%A8%A1%E5%9E%8B.html">045 服务行为模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/046%20%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B.html">046 服务设计模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/047%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1.html">047 领域模型驱动设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/048%20%E9%A2%86%E5%9F%9F%E5%AE%9E%E7%8E%B0%E6%A8%A1%E5%9E%8B.html">048 领域实现模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/049%20%E7%90%86%E8%A7%A3%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B.html">049 理解领域模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/050%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BB%93%E6%9E%84%E8%8C%83%E5%BC%8F.html">050 领域模型与结构范式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/051%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%EF%BC%88%E4%B8%8A%EF%BC%89.html">051 领域模型与对象范式（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/052%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%EF%BC%88%E4%B8%AD%EF%BC%89.html">052 领域模型与对象范式（中）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/053%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%EF%BC%88%E4%B8%8B%EF%BC%89.html">053 领域模型与对象范式（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/054%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%87%BD%E6%95%B0%E8%8C%83%E5%BC%8F.html">054 领域模型与函数范式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/055%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B.html">055 领域驱动分层架构与对象模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/056%20%E7%BB%9F%E4%B8%80%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B.html">056 统一语言与领域分析模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/057%20%E7%B2%BE%E7%82%BC%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B.html">057 精炼领域分析模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/058%20%E5%BD%A9%E8%89%B2%20UML%20%E4%B8%8E%E5%BD%A9%E8%89%B2%E5%BB%BA%E6%A8%A1.html">058 彩色 UML 与彩色建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/059%20%E5%9B%9B%E8%89%B2%E5%BB%BA%E6%A8%A1%E6%B3%95.html">059 四色建模法</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/060%20%E6%A1%88%E4%BE%8B%20%20%E8%AE%A2%E5%8D%95%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E7%9A%84%E5%9B%9B%E8%89%B2%E5%BB%BA%E6%A8%A1.html">060 案例  订单核心流程的四色建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/061%20%E4%BA%8B%E4%BB%B6%E9%A3%8E%E6%9A%B4%E4%B8%8E%E4%B8%9A%E5%8A%A1%E5%85%A8%E6%99%AF%E6%8E%A2%E7%B4%A2.html">061 事件风暴与业务全景探索</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/062%20%E4%BA%8B%E4%BB%B6%E9%A3%8E%E6%9A%B4%E4%B8%8E%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E5%BB%BA%E6%A8%A1.html">062 事件风暴与领域分析建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/063%20%E6%A1%88%E4%BE%8B%20%20%E8%AE%A2%E5%8D%95%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E7%9A%84%E4%BA%8B%E4%BB%B6%E9%A3%8E%E6%9A%B4.html">063 案例  订单核心流程的事件风暴</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/064%20%E8%A1%A8%E8%BE%BE%E9%A2%86%E5%9F%9F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B.html">064 表达领域设计模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/065%20%E5%AE%9E%E4%BD%93.html">065 实体</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/066%20%E5%80%BC%E5%AF%B9%E8%B1%A1.html">066 值对象</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/067%20%E5%AF%B9%E8%B1%A1%E5%9B%BE%E4%B8%8E%E8%81%9A%E5%90%88.html">067 对象图与聚合</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/068%20%E8%81%9A%E5%90%88%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html">068 聚合设计原则</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/069%20%E8%81%9A%E5%90%88%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.html">069 聚合之间的关系</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/070%20%E8%81%9A%E5%90%88%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%BF%87%E7%A8%8B.html">070 聚合的设计过程</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/071%20%E6%A1%88%E4%BE%8B%20%20%E5%9F%B9%E8%AE%AD%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%81%9A%E5%90%88%E8%AE%BE%E8%AE%A1.html">071 案例  培训领域模型的聚合设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/072%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E5%B7%A5%E5%8E%82.html">072 领域模型对象的生命周期-工厂</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/073%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%B5%84%E6%BA%90%E5%BA%93.html">073 领域模型对象的生命周期-资源库</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/074%20%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1.html">074 领域服务</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/075%20%E6%A1%88%E4%BE%8B%20%20%E9%A2%86%E5%9F%9F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BB%B7%E5%80%BC.html">075 案例  领域设计模型的价值</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/076%20%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1.html">076 应用服务</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/077%20%E5%9C%BA%E6%99%AF%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A9%B1%E5%8A%A8%E5%8A%9B.html">077 场景的设计驱动力</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/078%20%E6%A1%88%E4%BE%8B%20%20%E8%96%AA%E8%B5%84%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9C%BA%E6%99%AF%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1.html">078 案例  薪资管理系统的场景驱动设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/079%20%E5%9C%BA%E6%99%AF%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%20DCI%20%E6%A8%A1%E5%BC%8F.html">079 场景驱动设计与 DCI 模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/080%20%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6.html">080 领域事件</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/081%20%E5%8F%91%E5%B8%83%E8%80%85%E2%80%94%E8%AE%A2%E9%98%85%E8%80%85%E6%A8%A1%E5%BC%8F.html">081 发布者—订阅者模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/082%20%E4%BA%8B%E4%BB%B6%E6%BA%AF%E6%BA%90%E6%A8%A1%E5%BC%8F.html">082 事件溯源模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/083%20%E6%B5%8B%E8%AF%95%E4%BC%98%E5%85%88%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AE%9E%E7%8E%B0%E5%BB%BA%E6%A8%A1.html">083 测试优先的领域实现建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/084%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E7%AE%80%E5%8D%95%E8%AE%BE%E8%AE%A1.html">084 深入理解简单设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/085%20%E6%A1%88%E4%BE%8B%20%20%E8%96%AA%E8%B5%84%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89.html">085 案例  薪资管理系统的测试驱动开发（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/086%20%E6%A1%88%E4%BE%8B%20%20%E8%96%AA%E8%B5%84%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8B%EF%BC%89.html">086 案例  薪资管理系统的测试驱动开发（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/087%20%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84%EF%BC%88%E4%B8%8A%EF%BC%89.html">087 对象关系映射（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/088%20%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84%EF%BC%88%E4%B8%8B%EF%BC%89.html">088 对象关系映射（下）</a></li><li><a class="active" aria-current="page" href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/089%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.html">089 领域模型与数据模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/090%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AF%B9%E6%8C%81%E4%B9%85%E5%8C%96%E7%9A%84%E5%BD%B1%E5%93%8D.html">090 领域驱动设计对持久化的影响</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/091%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E4%BD%93%E7%B3%BB.html">091 领域驱动设计体系</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/092%20%E5%AD%90%E9%A2%86%E5%9F%9F%E4%B8%8E%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87.html">092 子领域与限界上下文</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/093%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E8%BE%B9%E7%95%8C%E4%B8%8E%E5%8D%8F%E4%BD%9C.html">093 限界上下文的边界与协作</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/094%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B9%8B%E9%97%B4%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1.html">094 限界上下文之间的分布式通信</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/095%20%E5%91%BD%E4%BB%A4%E6%9F%A5%E8%AF%A2%E8%81%8C%E8%B4%A3%E5%88%86%E7%A6%BB.html">095 命令查询职责分离</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/096%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1.html">096 分布式柔性事务</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/097%20%E8%AE%BE%E8%AE%A1%E6%A6%82%E5%BF%B5%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AF%AD%E8%A8%80.html">097 设计概念的统一语言</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/098%20%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%B1%A1.html">098 模型对象</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/099%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%8F%82%E8%80%83%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B.html">099 领域驱动设计参考过程模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/100%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%B2%BE%E9%AB%93.html">100 领域驱动设计的精髓</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/101%20%E5%AE%9E%E8%B7%B5%20%20%E5%91%98%E5%B7%A5%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%BB%BA%E6%A8%A1.html">101 实践  员工上下文的领域建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/102%20%E5%AE%9E%E8%B7%B5%20%20%E8%80%83%E5%8B%A4%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%BB%BA%E6%A8%A1.html">102 实践  考勤上下文的领域建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/103%20%E5%AE%9E%E8%B7%B5%20%20%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%BB%BA%E6%A8%A1.html">103 实践  项目上下文的领域建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/104%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E4%B8%9A%E5%8A%A1%E9%9C%80%E6%B1%82.html">104 实践  培训上下文的业务需求</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/105%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E5%BB%BA%E6%A8%A1.html">105 实践  培训上下文的领域分析建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/106%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E8%AE%BE%E8%AE%A1%E5%BB%BA%E6%A8%A1.html">106 实践  培训上下文的领域设计建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/107%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AE%9E%E7%8E%B0%E5%BB%BA%E6%A8%A1.html">107 实践  培训上下文的领域实现建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/108%20%E5%AE%9E%E8%B7%B5%20%20EAS%20%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B.html">108 实践  EAS 系统的代码模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/109%20%E5%90%8E%E8%AE%B0%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1.html">109 后记：如何学习领域驱动设计</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/089%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="089 领域模型与数据模型" id="title">089 领域模型与数据模型</h1>
+<div><h2 id="领域模型与数据模型">领域模型与数据模型</h2>
+<p>领域驱动的设计模型最重要的概念就是聚合，同时，聚合还要受到限界上下文边界的控制。Eric Evans 之所以要引入限界上下文，其中一个重要原因就是因为我们“无法维护一个涵盖整个企业的统一模型”，于是需要限界上下文来“标记出不同模型之间的边界和关系”。当领域模型引入限界上下文与聚合之后，领域模型类与数据表之间就有可能突破类与表之间一一对应的关系。因此，在遵循领域驱动设计原则实现持久化时，需要考虑领域模型与数据模型之间的关系。</p>
+<h3 id="领域模型与数据模型的分离">领域模型与数据模型的分离</h3>
+<p>资源库是持久化在领域层的抽象。一个资源库对应一个聚合，因此可以认为<strong>聚合是领域模型中最小的持久化单元</strong>。这是了解领域驱动设计对持久化影响的关键，也是在实现阶段，领域模型驱动设计有别于数据模型驱动设计的核心特征。先有领域模型，后有数据模型，采用领域模型驱动设计的过程，就应以限界上下文为基础，面向聚合进行领域模型设计。在确定了聚合内的各个实体与值对象之后，形成对限界上下文领域模型的细化，然后在实现阶段，再考虑该如何针对每个聚合内的对象进行持久化。</p>
+<p>仍以薪资管理系统为例，对员工的管理和薪资结算分属两个不同的限界上下文：员工上下文（Employee Context）和薪资上下文（Payroll Context）。员工上下文关注员工基本信息的管理，薪资上下文需要对各种类型的员工进行薪资结算，这就会导致这两个限界上下文的领域模型都会包含 Employee 这个领域概念类。在考虑建立它们的持久化数据模型时，存在两种不同的设计方案：</p>
+<ul>
+<li>单库单表：在数据模型中统一建立一张员工表，然后在映射元数据中做好对应的配置。这一方案满足单体架构风格。</li>
+<li>多库多表：为不同的限界上下文建立不同的数据库，员工模型也映射不同的员工表，之间以共同的员工 ID 关联。这一方案符合微服务架构风格。</li>
+</ul>
+<p>无论数据模型采用哪一种设计方案，它们的领域模型包括对聚合内实体与值对象的定义，界定的聚合边界都不应有任何区别，即做到领域模型的设计与持久化机制无关。在领域模型中，受到数据模型影响的应只限于ORM元数据定义。如下图所示的代码结构，应不受数据模型设计方案的影响：</p>
+<p><img alt="31d8e84b-2647-4739-a5f6-ad9294ef052f.png" src="/assets/dbe9f3fee46ae1be8cb64e23.png"/></p>
+<p>在领域模型中，员工上下文的 Employee 聚合根实体与薪资上下文的员工聚合根实体通过 EmployeeId 建立关联，薪资上下文中的 HourlyEmployee、SalariedEmployee 与 CommissionedEmployee 三个聚合根实体之间没有任何关系。在设计领域模型时，不应该受到数据模型设计的干扰，但在实现领域模型时，就需要确定数据模型的设计方案，并在选定 ORM 框架的基础上，确定该如何映射领域模型到数据模型的实现方案，并编写代码实现。领域模型与数据模型彼此之间的关系如下图所示：</p>
+<p><img alt="76245529.png" src="/assets/d3d4eb0bf84738e285e68035.png"/></p>
+<p>从概念上讲，HourlyEmployee、SalariedEmployee 与 CommissionedEmployee 都是员工，似乎应为其建立以 Employee 为父类的继承体系。然而，若采用领域驱动设计，根据业务能力与领域关注点划分了限界上下文，它们又应该分属不同的限界上下文。如果仍然设计为继承体系，就会导致薪资上下文成为员工上下文的遵奉者。这正是对象范式的领域驱动设计与常规的面向对象设计不同之处，<strong>领域驱动设计在战略和战术层面尤为关注和强调限界上下文与聚合的边界控制力</strong>。这是在运用领域驱动设计进行落地实现时，尤其需要注意的一点。</p>
+<h3 id="领域模型">领域模型</h3>
+<p>不同的限界上下文有着不同的领域模型，也有着不同的统一语言，因此在定义领域模型的类型时，需要注意区分限界上下文的边界。</p>
+<p>由于员工上下文专注于对员工信息的管理，因此 Employee 类的定义包含了员工所有的基本属性，部分属性则因为体现了更小的内聚的领域概念，被定义为值对象：</p>
+<pre><code class="language-java">package top.dddclub.payroll.employeecontext.domain;
+
+public class Employee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;Employee&gt; {
+    private EmployeeId employeeId;
+    private String name;
+    private Email email;
+    private EmployeeType employeeType;
+    private Gender gender;
+    private Address address;
+    private Contact contact;
+    private LocalDate onBoardingDate;
+}
+
+</code></pre>
+<p>薪资上下文关心的领域逻辑是计算每种员工的薪资。倘若不同类型员工仅存在薪资计算行为的差异，自然可以引入策略模式，将这一行为分离出来，并抽象为薪资计算的接口。然而，不同类型员工还存在完全不同的属性和对等的行为，钟点工需要提交工作时间卡，月薪雇员需要记录缺勤记录，销售人员需要提交销售凭条，它们之间唯一存在的共性就是 EmployeeId，除此之外，我们还需要维护它们各自的一致性。因此，针对薪资上下文的领域模型，可以为不同类型雇员建立不同的聚合，然后在薪资计算行为层面引入抽象，保持适度的扩展能力：</p>
+<p><img alt="73601347.png" src="/assets/5a5088f44971eb7ce25162a7.png"/></p>
+<p>薪资上下文领域模型的聚合定义如下：</p>
+<pre><code class="language-java">package top.dddclub.payroll.payrollcontext.domain.hourlyemployee;
+
+public class HourlyEmployee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;HourlyEmployee&gt; {
+    private EmployeeId employeeId;
+    private Salary salaryOfHour;
+    private List&lt;TimeCard&gt; timeCards = new ArrayList&lt;&gt;();
+
+    public Payroll payroll(Period settlementPeriod) { }
+}
+
+package top.dddclub.payroll.payrollcontext.domain.salariedemployee;
+
+public class SalariedEmployee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;SalariedEmployee&gt; {
+    private EmployeeId employeeId;
+    private Salary salaryOfMonth;
+    private List&lt;Absence&gt; absences = new ArrayList&lt;&gt;();
+
+    public Payroll payroll(Period settlementPeriod) { }
+}
+
+package top.dddclub.payroll.payrollcontext.domain.commissionedemployee;
+
+public class  CommissionedEmployee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;CommissionedEmployee&gt; {
+    private EmployeeId employeeId;
+    private Salary salaryOfTwoWeeks;
+    private List&lt;Commission&gt; commissions = new ArrayList&lt;&gt;();
+
+    public Payroll payroll(Period settlementPeriod) { }
+}
+
+</code></pre>
+<p>引入聚合的目的在于保证领域概念的完整性，并确保外部的调用者不会因为直接访问聚合边界内除聚合根实体之外的其余对象而破坏这种完整性。例如在 HourlyEmployee 类的 payroll() 方法中，对 timecards 进行了验证，并通过 filterByPeriod() 方法过滤了不符合结算周期的工作时间卡：</p>
+<pre><code class="language-java">public class HourlyEmployee extends... {
+    public Payroll payroll(Period settlementPeriod) {
+        // 对工作时间卡进行验证
+        if (Objects.isNull(timeCards) || timeCards.isEmpty()) {
+            return new Payroll(this.employeeId, settlementPeriod.beginDate(), settlementPeriod.endDate(), Salary.zero());
+        }
+
+        Salary regularSalary = calculateRegularSalary(settlementPeriod);
+        Salary overtimeSalary = calculateOvertimeSalary(settlementPeriod);
+        Salary totalSalary = regularSalary.add(overtimeSalary);
+
+        return new Payroll(this.employeeId, settlementPeriod.beginDate(), settlementPeriod.endDate(), totalSalary);
+    }
+
+    private Salary calculateRegularSalary(Period period) {
+        int regularHours = filterByPeriod(period)
+                .map(TimeCard::getRegularWorkHours)
+                .reduce(0, Integer::sum);
+        return salaryOfHour.multiply(regularHours);
+    }
+
+    private Salary calculateOvertimeSalary(Period period) {
+        int overtimeHours = filterByPeriod(period)
+                .filter(TimeCard::isOvertime)
+                .map(TimeCard::getOvertimeWorkHours)
+                .reduce(0, Integer::sum);
+
+        return salaryOfHour.multiply(OVERTIME_FACTOR).multiply(overtimeHours);
+    }
+
+    // 过滤不符合结算周期条件的工作时间卡
+    private Stream&lt;TimeCard&gt; filterByPeriod(Period period) {
+        return timeCards.stream()
+                .filter(t -&gt; t.isIn(period));
+    }
+}
+
+</code></pre>
+<p>通过测试驱动开发实现聚合的业务逻辑时，编写的单元测试也应体现这种聚合内的规则约束。例如，当钟点工缺少工作时间卡时，计算的薪资为 0，测试需要体现这一规则约束：</p>
+<pre><code class="language-java">public class HourlyEmployeeTest {
+    @Test
+    public void should_be_0_given_null_timecard() {
+        //given
+        HourlyEmployee hourlyEmployee = EmployeeFixture.hourlyEmployeeOf(employeeId, null);
+
+        //when
+        Payroll payroll = hourlyEmployee.payroll(settlementPeriod);
+
+        //then
+        assertThat(payroll).isNotNull();
+        assertThat(payroll.employeId().value()).isEqualTo(employeeId);
+        assertThat(payroll.amount()).isEqualTo(Salary.zero());
+    }
+}
+
+</code></pre>
+<p>三个聚合根实体定义的 payroll(Period) 方法在抽象上保持了一致性，不过，由于员工在计算薪资之前还需要调用聚合资源库获取对应的员工对象列表，因此还需要引入领域服务做进一步封装，如 HourlyEmployeePayrollCalculator 服务：</p>
+<pre><code class="language-java">public class HourlyEmployeePayrollCalculator {
+    private HourlyEmployeeRepository employeeRepository;
+
+    public void setRepository(HourlyEmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    public List&lt;Payroll&gt; execute(Period settlementPeriod) {
+        List&lt;HourlyEmployee&gt; hourlyEmployees = employeeRepository.allEmployeesOf();
+        return hourlyEmployees.stream()
+                .map(e -&gt; e.payroll(settlementPeriod))
+                .collect(Collectors.toList());
+    }
+}
+
+</code></pre>
+<p>领域服务的 execute() 方法封装了对资源库的调用实现，它的抽象层次方才彻底抹掉了员工类型的差异，可由此引入策略模式：</p>
+<pre><code class="language-java">public interface PayrollCalculator {
+    List&lt;Payroll&gt; execute(Period settlementPeriod);
+}
+
+public class HourlyEmployeePayrollCalculator implements PayrollCalculator {}
+public class SalariedEmployeePayrollCalculator implements PayrollCalculator {}
+public class CommissionedEmployeePayrollCalculator implements PayrollCalculator {}
+
+</code></pre>
+<p>显然，聚合概念对于以对象范式建立的领域模型存在一定的约束和限制，当然，这种约束与限制也不妨看做是对设计的指导。实际上，倘若我们为钟点工、月薪雇员和销售人员建立了员工继承体系，一旦引入策略模式，就会导致员工类与薪资计算策略类之间存在“平行的继承体系”坏味道。如果没有聚合的要求，又可能会仅定义一个员工类，然后通过员工类型来区分各自的差异，导致产生一个承担了太多职责的过大的类，不利于维护员工与工作时间卡、缺勤记录与销售凭条之间的关系。当然，将它们都设计为一个个仅提供数据属性的贫血对象，自然就不可取了。</p>
+<h3 id="数据模型">数据模型</h3>
+<p>如前所述，取决于限界上下文的边界以及系统选择的架构风格，存在两种迥然不同的数据模型：单库单表和多库多表。它们的数据模型自然不同，由此也会影响到领域模型到数据模型之间的映射关系。</p>
+<h4 id="单库单表的orm映射">单库单表的ORM映射</h4>
+<p>若采用单体架构，员工对应的数据模型最简单的设计就是单库单表，即创建 employees 表。由于员工与工作时间卡、缺勤记录和销售凭条之间都存在一对多关系，因此采用单库设计的数据模型如下所示：</p>
+<p><img alt="74796269.png" src="/assets/4f7522465bbd232c3247e317.png"/></p>
+<p>领域驱动设计虽然隔离了领域模型与数据模型，但在实现持久化时，必须为持久化框架提供对象与关系的映射信息。倘若采用 JPA，就是通过 Java 标注来声明，这可以认为是持久化机制对领域模型的一点侵入。由于员工上下文和薪资上下文中的员工领域模型都映射自 employees 表，且薪资上下文的 HourlyEmployee、SalariedEmployee 与 CommissionedEmployee 聚合对应了各自类型的员工数据，故而在领域模型中设置映射信息时，需要作出一点点调整。映射元数据的声明如下所示：</p>
+<pre><code class="language-java">package top.dddclub.payroll.employeecontext.domain;
+@Entity
+@Table(name="employees")
+public class Employee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;Employee&gt; {
+    @EmbeddedId
+    private EmployeeId employeeId;
+
+    // 略去其余字段定义
+}
+
+package top.dddclub.payroll.payrollcontext.domain.hourlyemployee;
+@Entity
+@Table(name = "employees")
+@DiscriminatorColumn(name = "employeeType", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorOptions(force=true)
+@DiscriminatorValue(value = "0")
+public class HourlyEmployee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;HourlyEmployee&gt; {
+    @EmbeddedId
+    private EmployeeId employeeId;
+
+    @Embedded
+    private Salary salaryOfHour;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "employeeId", nullable = false)
+    private List&lt;TimeCard&gt; timeCards = new ArrayList&lt;&gt;();
+}
+
+package top.dddclub.payroll.payrollcontext.domain.salariedemployee;
+@Entity
+@Table(name = "employees")
+@DiscriminatorColumn(name = "employeeType", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorOptions(force=true)
+@DiscriminatorValue(value = "1")
+public class SalariedEmployee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;HourlyEmployee&gt; {
+    @EmbeddedId
+    private EmployeeId employeeId;
+
+    @Embedded
+    private Salary salaryOfMonth;
+
+    @ElementCollection
+    @CollectionTable(name = "absences", joinColumns = @JoinColumn(name = "employeeId"))
+    private List&lt;Absence&gt; absences = new ArrayList&lt;&gt;();
+}
+
+package top.dddclub.payroll.payrollcontext.domain.commissionedemployee;
+@Entity
+@Table(name = "employees")
+@DiscriminatorColumn(name = "employeeType", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorOptions(force=true)
+@DiscriminatorValue(value = "2")
+public class CommissionedEmployee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;HourlyEmployee&gt; {
+    @EmbeddedId
+    private EmployeeId employeeId;
+
+    @Embedded
+    private Salary salaryOfTwoWeeks;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "employeeId", nullable = false)
+    private List&lt;Commission&gt; commissions = new ArrayList&lt;&gt;();
+}
+
+</code></pre>
+<p>以上四个聚合类都通过 <code>@Table(name = "employees")</code> 将实体映射到 employees 表。由于这些聚合处于两个不同的限界上下文，各个聚合根实体面对的业务关注点也不相同，故而各自定义的字段存在差别。如 HourlyEmployee 类除了 employeeId 字段外，就仅定义了 salaryOfHour 与 timecards 字段，这两个字段却是 Employee 类所不具备的。站在数据模型的角度看，同一个表对应的领域类存在这样的差异是非常奇怪的，但如果你抛开数据表设计的影响，仅从业务去思考领域类的定义，你又会觉得合情合理。认识到这一差异的根源，有助于理解为何 Eric Evans 要将这一方法体系命名为<strong>领域驱动</strong>设计。</p>
+<p>无论是 employees 表，还是 Employee 类，都定义了 employeeType 以区分员工的类型。这似乎是 JPA 采用 Single-Table 策略实现继承的标识列。然而如前所述，领域模型中的 HourlyEmployee、SalariedEmployee、CommissionedEmployee 与 Employee 之间并不存在继承关系；但在数据模型中，三种不同类型的员工数据却放在同一张表中，必然需要某种方式告知各自的 Repository：在管理聚合对象的生命周期时，需要对数据加以区分。</p>
+<p>例如，在调用 HourlyEmployeeRepository 的查询方法时，就只能查询 employeeType 值为 0 的员工数据。要实现这一区分，就可以为 HourlyEmployee 聚合根实体添加 @DiscriminatorColumn 标注来区分它的员工类型。一旦为 HourlyEmployee 等聚合根实体设置了标识列声明，聚合根对应的资源库在查询数据库时，只会返回满足标识列值的数据记录，无需再额外添加对 employeeType 值进行判断的查询条件。反观 Employee 聚合根，由于员工上下文并不需要区分员工类型，它的实体定义反而无需添加标识列声明。</p>
+<p>钟点工、月薪雇员和销售人员存在薪资结算的业务差异，这是将它们定义为不同聚合的主因。HourlyEmployee 维持了与 TimeCard 的一致性，SalariedEmployee 维持了与 Absence 的一致性，CommissionedEmployee 维持了与 Commission 的一致性，且它们都属于一对多的组合关系，在数据模型中也各自采用了表关联，并以员工 ID 作为从表的外键。</p>
+<p>TimeCard 和 Commision 被定义为<strong>实体</strong>，因而在各自聚合根实体的定义中，使用了 @OneToMany 标注来映射这种一对多的组合关系；Absence 被定义为<strong>值对象</strong>，因此在 SalariedEmployee 类中使用了 @ElementCollection 标注来表达这种一对多的包含关系。</p>
+<p>对比薪资上下文中这三个聚合之间的差异，会发现它们虽然都定义了 Salary 类型的字段，但字段名称却并不相同，分别代表日薪、月薪和双周薪。但是，该字段对应的数据列却是完全相同的，在领域模型中通过声明了列名的 Salary 值对象来匹配这种映射关系：</p>
+<pre><code class="language-java">@Embeddable
+public class Salary {
+    private static final int SCALE = 2;
+
+    @Column(name = "salary")
+    private BigDecimal value;
+}
+
+</code></pre>
+<h4 id="多库多表的-orm-映射">多库多表的 ORM 映射</h4>
+<p>多库多表的数据模型发生了本质的变化，因为要创建的表分布在不同的数据库。由于薪资上下文的数据库不再包含 employees 表，因此需要为钟点工、月薪雇员和销售人员分别创建三张表，以及与之关联的 timecards、absences 和 commissions 表：</p>
+<p><img alt="75352172.png" src="/assets/52e941cc5159d9fe07f2908c.png"/></p>
+<p>如果采用 JPA 规范实现资源库的持久化，就需要在各自的限界上下文中定义 persistence.xml 文件，定义不同的 Persistence Unit，并设置属性指向对应的数据库。</p>
+<p>既然数据模型中员工相关的表名与结构都发生了变化，领域模型的映射元数据也要做相应的调整：</p>
+<pre><code class="language-java">package top.dddclub.payroll.employeecontext.domain;
+@Entity
+@Table(name="employees")
+public class Employee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;Employee&gt; {
+    @EmbeddedId
+    private EmployeeId employeeId;
+
+    // 略去其余字段定义
+}
+
+package top.dddclub.payroll.payrollcontext.domain.hourlyemployee;
+@Entity
+@Table(name = "hourlyEmployees")
+public class HourlyEmployee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;HourlyEmployee&gt; {
+    @EmbeddedId
+    private EmployeeId employeeId;
+
+    @Embedded
+    private Salary salaryOfHour;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "employeeId", nullable = false)
+    private List&lt;TimeCard&gt; timeCards = new ArrayList&lt;&gt;();
+}
+
+package top.dddclub.payroll.payrollcontext.domain.salariedemployee;
+@Entity
+@Table(name = "salariedEmployees")
+public class SalariedEmployee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;HourlyEmployee&gt; {
+    @EmbeddedId
+    private EmployeeId employeeId;
+
+    @Embedded
+    private Salary salaryOfMonth;
+
+    @ElementCollection
+    @CollectionTable(name = "absences", joinColumns = @JoinColumn(name = "employeeId"))
+    private List&lt;Absence&gt; absences = new ArrayList&lt;&gt;();
+}
+
+package top.dddclub.payroll.payrollcontext.domain.commissionedemployee;
+@Entity
+@Table(name = "commissionedEmployees")
+public class CommissionedEmployee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;HourlyEmployee&gt; {
+    @EmbeddedId
+    private EmployeeId employeeId;
+
+    @Embedded
+    private Salary salaryOfTwoWeeks;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "employeeId", nullable = false)
+    private List&lt;Commission&gt; commissions = new ArrayList&lt;&gt;();
+}
+
+</code></pre>
+<p>这些聚合根实体都通过 @Table 指向了对应的数据表。注意，薪资上下文的三个员工聚合根实体不再声明 @DiscriminatorColumn 标注，这是因为每种类型的员工记录在物理上是分离的，每张表仅存储相同类型的员工数据，自然无需定义标识列来区分员工类型。当然，员工上下文的 employees 表仍然定义了 employeeType 列，但它对应的领域模型却不需要列标识。</p>
+<p>如果去掉所有的 JPA 标注，如上的领域模型与单库单表的领域模型是完全一致的。这也充分说明了领域模型的设计应与数据模型无关。既然领域模型没有差异，聚合对应的资源库，以及领域服务自然也不会有任何差异。换言之，当我们将系统从单体架构迁移到微服务架构时，除了数据库需要进行调整，并考虑可能的数据迁移外，领域层的代码几乎不需要做任何调整。如果在编码时，还注意守护了聚合与限界上下文的边界，保证聚合之间的关联通过聚合 ID 进行（推而广之，限界上下文之间也不应共享领域模型），就可以保证领域层不受架构风格变化的影响，这既符合将业务复杂度与技术复杂度分离的原则，也满足整洁架构的设计思想。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

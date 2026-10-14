@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>08 消息消费 API 与版本变迁说明 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">RocketMQ 实战与进阶（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">30 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>RocketMQ 实战与进阶（完）</strong><ul><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E6%90%AD%E5%BB%BA%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E7%AF%87.html">01 搭建学习环境准备篇</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/02%20RocketMQ%20%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%89%AB%E7%9B%B2%E7%AF%87.html">02 RocketMQ 核心概念扫盲篇</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%20API%20%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.html">03 消息发送 API 详解与版本变迁说明</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/04%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E8%B0%88%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81.html">04 结合实际应用场景谈消息发送</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/05%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.html">05 消息发送核心参数与工作原理详解</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/06%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">06 消息发送常见错误与解决方案</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/07%20%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E4%BD%BF%E7%94%A8%E5%8F%8A%E6%96%B9%E6%A1%88%E9%80%89%E5%9E%8B%E6%80%9D%E8%80%83.html">07 事务消息使用及方案选型思考</a></li><li><a class="active" aria-current="page" href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%20API%20%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.html">08 消息消费 API 与版本变迁说明</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/09%20DefaultMQPushConsumer%20%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">09 DefaultMQPushConsumer 核心参数与工作原理</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/10%20DefaultMQPushConsumer%20%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">10 DefaultMQPushConsumer 使用示例与注意事项</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/11%20DefaultLitePullConsumer%20%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%AE%9E%E6%88%98.html">11 DefaultLitePullConsumer 核心参数与实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E5%86%8D%E8%81%8A%20DefaultLitePullConsumer%20%E7%9A%84%E4%BD%BF%E7%94%A8.html">12 结合实际场景再聊 DefaultLitePullConsumer 的使用</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E3%80%81%E6%B6%88%E6%81%AF%E8%BF%87%E6%BB%A4%E5%AE%9E%E6%88%98.html">13 结合实际场景顺序消费、消息过滤实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/14%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%A7%AF%E5%8E%8B%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98.html">14 消息消费积压问题排查实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/15%20RocketMQ%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%AE%9E%E6%88%98.html">15 RocketMQ 常用命令实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/16%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E6%91%B8%E9%AB%98.html">16 RocketMQ 集群性能摸高</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/17%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98.html">17 RocketMQ 集群性能调优</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/18%20RocketMQ%20%E9%9B%86%E7%BE%A4%E5%B9%B3%E6%BB%91%E8%BF%90%E7%BB%B4.html">18 RocketMQ 集群平滑运维</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/19%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%B8%80%EF%BC%89.html">19 RocketMQ 集群监控（一）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/20%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%BA%8C%EF%BC%89.html">20 RocketMQ 集群监控（二）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/21%20RocketMQ%20%E9%9B%86%E7%BE%A4%E5%91%8A%E8%AD%A6.html">21 RocketMQ 集群告警</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/22%20RocketMQ%20%E9%9B%86%E7%BE%A4%E8%B8%A9%E5%9D%91%E8%AE%B0.html">22 RocketMQ 集群踩坑记</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/23%20%E6%B6%88%E6%81%AF%E8%BD%A8%E8%BF%B9%E3%80%81ACL%20%E4%B8%8E%E5%A4%9A%E5%89%AF%E6%9C%AC%E6%90%AD%E5%BB%BA.html">23 消息轨迹、ACL 与多副本搭建</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/24%20RocketMQ-Console%20%E5%B8%B8%E7%94%A8%E9%A1%B5%E9%9D%A2%E6%8C%87%E6%A0%87%E8%8E%B7%E5%8F%96%E9%80%BB%E8%BE%91.html">24 RocketMQ-Console 常用页面指标获取逻辑</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/25%20RocketMQ%20Nameserver%20%E8%83%8C%E5%90%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5.html">25 RocketMQ Nameserver 背后的设计理念</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/26%20Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98.html">26 Java 并发编程实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/27%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">27 从 RocketMQ 学基于文件的编程模式（一）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/28%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">28 从 RocketMQ 学基于文件的编程模式（二）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/29%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%20Netty%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7.html">29 从 RocketMQ 学 Netty 网络编程技巧</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/30%20RocketMQ%20%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E6%88%91%E8%A7%81.html">30 RocketMQ 学习方法之我见</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%20API%20%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="08 消息消费 API 与版本变迁说明" id="title">08 消息消费 API 与版本变迁说明</h1>
+<div><p>从本篇开始我们将详细介绍 RockeMQ 的消息消费端的 API。</p>
+<h3 id="消息消费类图">消息消费类图</h3>
+<p>RocketMQ 消费端的 API 如下图所示：</p>
+<p><img alt="1" src="/assets/806b19d9fe489fe811c91f71.png"/></p>
+<p>其核心类图如下所示。</p>
+<p><strong>MQAdmin</strong></p>
+<p>MQ 一些基本的管理功能，例如创建 Topic，这里稍微有点奇怪，消费端应该不需要继承该接口。该类在消息发送 API 章节已详细介绍，再次不再重复说明。</p>
+<p><strong>MQConsumer</strong></p>
+<p>MQ 消费者，这个接口定义得过于简单，如果该接口需要，可以将其子接口一些共同的方法提取到该接口中。</p>
+<pre><code>Set&lt;MessageQueue&gt; fetchSubscribeMessageQueues(final String topic)
+
+</code></pre>
+<p>获取分配该 Topic 所有的读队列。</p>
+<p><strong>MQPushConsumer</strong></p>
+<p>RocketMQ 支持推、拉两种模式，该接口是<strong>拉模式</strong>的接口定义。</p>
+<pre><code>void start()
+
+</code></pre>
+<p>启动消费者。</p>
+<pre><code>void shutdown()
+
+</code></pre>
+<p>关闭消费者。</p>
+<pre><code>void registerMessageQueueListener(String topic, MessageQueueListener listener)
+
+</code></pre>
+<p>注册消息队列变更回调时间，即消费端分配到的队列发生变化时触发的回调函数，其声明如下：</p>
+<p><img alt="2" src="/assets/9a91e0be0dcd3e0510a3f47c.png"/></p>
+<p>其参数说明如下：</p>
+<ul>
+<li><code>String topic</code>：主题。</li>
+<li><code>Set&lt;MessageQueue&gt; mqAll</code>：该 Topic 所有的队列集合。</li>
+<li><code>Set&lt;MessageQueue&gt; mqDivided</code>：分配给当前消费者的消费队列。</li>
+</ul>
+<pre><code>PullResult pull(MessageQueue mq, String subExpression, long offset,int maxNums, long timeout)
+
+</code></pre>
+<p>消息拉取，应用程序可以通过调用该方法从 RocketMQ 服务器拉取一篇消息，其参数含义说明如下：</p>
+<ul>
+<li><code>MessageQueue mq</code>：消息消费队列。</li>
+<li><code>String subExpression</code>：消息过滤表达式，基于 Tag、SQL92 的过滤表达式。</li>
+<li><code>long offset</code>：消息偏移量，消息在 ConsumeQueue 中的偏移量。</li>
+<li><code>int maxNums</code>：一次消息拉取返回的最大消息条数。</li>
+<li><code>long timeout</code>：本次拉取的超时时间。</li>
+</ul>
+<pre><code>PullResult pull(MessageQueue mq, MessageSelector selector, long offset,int maxNums, long timeout)
+
+</code></pre>
+<p>pull 重载方法，通过 MessageSelector 构建消息过滤对象，可以通过 MessageSelector 的 buildSql、buildTag 两个方法构建过滤表达式。</p>
+<pre><code>void pull(MessageQueue mq, String subExpression, long offset, int maxNums,PullCallback pullCallback)
+
+</code></pre>
+<p>异步拉取，调用其异步回调函数 PullCallback。</p>
+<pre><code>PullResult pullBlockIfNotFound(MessageQueue mq, String subExpression,long offset, int maxNums)
+
+</code></pre>
+<p>拉取消息，如果服务端没有新消息待拉取，一直阻塞等待，直到有消息返回，同样该方法有一个重载放假支持异步拉取。</p>
+<pre><code>void updateConsumeOffset(MessageQueue mq, long offset)
+
+</code></pre>
+<p>更新消息消费处理进度。</p>
+<pre><code>long fetchConsumeOffset(MessageQueue mq, boolean fromStore)
+
+</code></pre>
+<p>获取指定消息消费队列的消费进度。其中参数 fromStore 如果为 true，表示从消息消费进度存储文件中获取消费进度。</p>
+<pre><code>Set&lt;MessageQueue&gt; fetchMessageQueuesInBalance(String topic)
+
+</code></pre>
+<p>获取当前正在处理的消息消费队列（通过消息队列负载机制分配的队列）。</p>
+<pre><code>void sendMessageBack(MessageExt msg, int delayLevel, String brokerName, String consumerGroup)
+
+</code></pre>
+<p>消息消费失败后发送的 ACK。</p>
+<p><strong>MQPushConsumer</strong></p>
+<p>RocketMQ <strong>推模式</strong>消费者接口。</p>
+<pre><code>void start()
+
+</code></pre>
+<p>启动消费者。</p>
+<pre><code>void shutdown()
+
+</code></pre>
+<p>关闭消费者。</p>
+<pre><code>void registerMessageListener(MessageListenerConcurrently messageListener)
+
+</code></pre>
+<p>注册并发消费模式监听器。</p>
+<pre><code>void registerMessageListener(MessageListenerOrderly messageListener)
+
+</code></pre>
+<p>注册顺序消费模式监听器。</p>
+<pre><code>void subscribe(String topic, String subExpression)
+
+</code></pre>
+<p>订阅主题。其参数说明如下：</p>
+<ul>
+<li><code>String topic</code>： 订阅的主题，RocketMQ 支持一个消费者订阅多个主题，操作方式是多次调用该方法。</li>
+<li><code>String subExpression</code>：消息过滤表达式，例如传入订阅的 tag，SQL92 表达式。</li>
+</ul>
+<pre><code>void subscribe(String topic, MessageSelector selector)
+
+</code></pre>
+<p>订阅主题，重载方法，MessageSelector 提供了 buildSQL、buildTag 的订阅方式。</p>
+<pre><code>void unsubscribe(String topic)
+
+</code></pre>
+<p>取消订阅。</p>
+<pre><code>void suspend()
+
+</code></pre>
+<p>挂起消费。</p>
+<pre><code>void resume()
+
+</code></pre>
+<p>恢复继续消费。</p>
+<p><strong>DefaultMQPushConsumer</strong></p>
+<p>RocketMQ 消息推模式默认实现类。</p>
+<p><strong>DefaultMQPullConsumer</strong></p>
+<p>RocketMQ 消息拉取模式默认实现类。</p>
+<p>在 RocketMQ 的内部实现原理中，其实现机制为 PULL 模式，而 PUSH 模式是一种伪推送，是对 PULL 模式的封装，PUSH 模式的实现原理如下图所示：</p>
+<p><img alt="3" src="/assets/9a91e0be0dcd3e0510a3f47c.png"/></p>
+<p>即 PUSH 模式就是对 PULL 模式的封装，每拉去一批消息后，提交到消费端的线程池（异步），然后马上向 Broker 拉取消息，即实现类似“推”的效果。</p>
+<p>从 PULL 模式来看，消息的消费主要包含如下几个方面：</p>
+<ul>
+<li>消息拉取，消息拉取模式通过 PULL 相关的 API 从 Broker 指定消息消费队列中拉取一批消息到消费消费客户端，多个消费者需要手动完成队列的分配。</li>
+<li>消息消费端处理完消费，需要向 Broker 端报告消息处理队列，然后继续拉取下一批消息。</li>
+<li>如果遇到消息消费失败，需要告知 Broker，该条消息消费失败，后续需要重试，通过手动调用 sendMessageBack 方法实现。</li>
+</ul>
+<p>而 PUSH 模式就上述这些处理操作无需使用者考虑，只需告诉 RocketMQ 消费者在拉取消息后需要调用的事件监听器即可，消息消费进度的存储、消息消费的重试统一由 RocketMQ Client 来实现。</p>
+<h3 id="消息消费-api-简单使用示例">消息消费 API 简单使用示例</h3>
+<p>从上文基本可以得知，推模式 API 与拉模式 API 在使用层面的差别，可以简单理解为汽车领域的自动挡与手动挡。在实际业务类场景中，通常使用的是推送风格的 API，适合实时监控；但在大数据领域，通常是跑批处理即定时类任务，故大数据领域通常使用拉模式更多。</p>
+<p>接下来编写几个示例代码对拉取、推送相关 API 进行一个使用方面的演示。</p>
+<h4 id="rocketmq-拉模式核心-api-使用示例"><strong>RocketMQ 拉模式核心 API 使用示例</strong></h4>
+<p>使用场景：例如公司大数据团队需要对订单进行分析，为了提高计算效能，采取每 2 个小时调度一次，每批任务处理任务启动之前的所有消息。</p>
+<p>首先我先给出一个基于 RocketMQ PULL 的 API 的编程示例代码，本示例接近生产实践，示例代码如下：</p>
+<pre><code>import org.apache.rocketmq.client.consumer.DefaultMQPullConsumer;
+import org.apache.rocketmq.client.consumer.PullResult;
+import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.common.message.MessageQueue;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+public class PullConsumerTest {
+    public static void main(String[] args) throws Exception {
+        Semaphore semaphore = new Semaphore();
+        Thread t = new Thread(new Task(semaphore));
+        t.start();
+        CountDownLatch cdh = new CountDownLatch(1);
+        try {
+            //程序运行 120s　后介绍
+            cdh.await(120 * 1000, TimeUnit.MILLISECONDS);
+        } finally {
+            semaphore.running = false;
+        }
+    }
+    /**
+     * 消息拉取核心实现逻辑
+     */
+    static class Task implements Runnable {
+        Semaphore s = new Semaphore();
+        public Task(Semaphore s ) {
+            this.s = s;
+        }
+        public void run() {
+            try {
+                DefaultMQPullConsumer consumer = new 
+                    DefaultMQPullConsumer("dw_pull_consumer");
+                consumer.setNamesrvAddr("127.0.01:9876");
+                consumer.start();
+                Map&lt;MessageQueue, Long&gt; offsetTable = new HashMap&lt;MessageQueue, Long&gt;();
+                Set&lt;MessageQueue&gt; msgQueueList = consumer.
+                    fetchSubscribeMessageQueues("TOPIC_TEST"); // 获取该 Topic 的所有队列
+                if(msgQueueList != null &amp;&amp; !msgQueueList.isEmpty()) {
+                    boolean noFoundFlag = false;
+                    while(this.s.running) {
+                        if(noFoundFlag) { //　没有找到消息，暂停一下消费
+                            Thread.sleep(1000);
+                        }
+                        for( MessageQueue q : msgQueueList ) {
+                            PullResult pullResult = consumer.pull(q, "*",                                          decivedPulloffset(offsetTable
+                             , q, consumer) , 3000);
+                            System.out.println("pullStatus:" + 
+                                               pullResult.getPullStatus());
+                            switch (pullResult.getPullStatus()) {
+                                case FOUND:
+                                    doSomething(pullResult.getMsgFoundList());
+                                    break;
+                                case NO_MATCHED_MSG:
+                                    break;
+                                case NO_NEW_MSG:
+                                case OFFSET_ILLEGAL:
+                                    noFoundFlag = true;
+                                    break;
+                                default:
+                                    continue ;
+                            }
+                            //提交位点
+                            consumer.updateConsumeOffset(q, 
+                                 pullResult.getNextBeginOffset());
+                        }
+                        System.out.println("balacne queue is empty: " + consumer.
+                              fetchMessageQueuesInBalance("TOPIC_TEST").isEmpty());
+                    }
+                } else {
+                    System.out.println("end,because queue is enmpty");
+                }
+                consumer.shutdown();
+                System.out.println("consumer shutdown");
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    /** 拉取到消息后具体的处理逻辑　*/
+    private static void doSomething(List&lt;MessageExt&gt; msgs) {
+        System.out.println("本次拉取到的消息条数:" + msgs.size());
+    }
+    public static long decivedPulloffset(Map&lt;MessageQueue, Long&gt; offsetTable, 
+             MessageQueue queue, DefaultMQPullConsumer consumer) throws Exception {
+        long offset = consumer.fetchConsumeOffset(queue, false);
+        if(offset &lt; 0 ) {
+            offset = 0;
+        }
+        System.out.println("offset:" + offset);
+        return offset;
+    }
+    static class Semaphore {
+        public volatile boolean running = true;
+    }
+}
+
+</code></pre>
+<p>关于上述代码，提供了优雅的线程拉取的方法，消息的拉取实现主要在任务 Task 的 run 方法中，主要的实现技巧如下：</p>
+<ul>
+<li>首先根据 MQConsumer 的 fetchSubscribeMessageQueues 的方法获取 Topic 的所有队列信息。</li>
+<li>然后遍历所有队列，依次通过 MQConsuemr 的 PULL 方法从 Broker 端拉取消息。</li>
+<li>对拉取的消息进行消费处理。</li>
+<li>通过调用 MQConsumer 的 updateConsumeOffset 方法更新位点，但需要注意的是这个方法并不是实时向 Broker 提交，而是客户端会启用以线程，默认每隔 5s 向 Broker 集中上报一次。</li>
+</ul>
+<p>上面的示例演示的是一个消费组只有一个消费者，如果有多个消费组呢？这里就涉及到队列的重新分配，而每一个消费者是否只负责拉取分配的队列，是不是觉得这个直接使用 PULL 模式，是不是觉得有点复杂了。笔者也觉得是，接下来我们来看一下 PUSH 模式。</p>
+<h4 id="rocketmq-推模式使用示例"><strong>RocketMQ 推模式使用示例</strong></h4>
+<p>在 RocketMQ 中绝大数场景中，通常会选择使用 PUSH 模式，因为 PUSH 模式是对 PULL 模式的封装，将消息的拉取、消息队列的自动负载、消息进度（位点）自动提交、消息消费重试都进行了封装，无需使用者关心，其示例代码如下：</p>
+<pre><code>public static void main(String[] args) throws InterruptedException, MQClientException {
+        DefaultMQPushConsumer consumer = new 
+            DefaultMQPushConsumer("dw_test_consumer_6");
+        consumer.setNamesrvAddr("127.0.0.1:9876");
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+        consumer.subscribe("TOPIC_TEST", "*");
+        consumer.setAllocateMessageQueueStrategy(new 
+               AllocateMessageQueueAveragelyByCircle());
+        consumer.registerMessageListener(new MessageListenerConcurrently() {
+            @Override
+            public ConsumeConcurrentlyStatus consumeMessage(List&lt;MessageExt&gt; msgs,
+                ConsumeConcurrentlyContext context) {
+                try {
+                    System.out.printf("%s Receive New Messages: %s %n", 
+                          Thread.currentThread().getName(), msgs);
+                    return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                    return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+                }
+            }
+        });
+        consumer.start();
+        System.out.printf("Consumer Started.%n");
+    }
+
+</code></pre>
+<p>上面的代码是不是非常简单。在后续的文章我们会重点对 PUSH 模式消费者的核心属性即工作原理做详细的介绍。使用 DefaultMQPushConsumer 开发一个消费者，其代码基本覆盖如下几个方面：</p>
+<ul>
+<li>首先 new DefaultMQPushConsumer 对象，并指定一个消费组名。</li>
+<li>然后设置相关参数，例如 nameSrvAdd、消费失败重试次数、线程数等（可以设置哪些参数将在下篇文章中详细介绍）。</li>
+<li>通过调用 setConsumeFromWhere 方法指定初次启动时从什么地方消费，默认是最新的消息开始消费。</li>
+<li>通过调用 setAllocateMessageQueueStrategy 指定队列负载机制，默认平均分配。</li>
+<li>通过调用 registerMessageListener 设置消息监听器，即消息处理逻辑，最终返回 CONSUME_SUCCESS（成功消费）或 RECONSUME_LATER（需要重试）。</li>
+</ul>
+<blockquote>
+<p>温馨提示，关于消息消费的详细使用，将在后面的文章中进行详细介绍。</p>
+</blockquote>
+<h3 id="消息消费-api-版本演变说明">消息消费 API 版本演变说明</h3>
+<p>RocketMQ 在消费端的 API 相对来说还是比较稳定的，只是在 RocketMQ 4.6.0 版本引入了 DefaultLitePullConsumer，如果上述 PULL 示例代码引用的 Client 包版本为 4.6.0，细心的读者朋友们肯定会发现 DefaultMQPullConsumer 已过期，取代它的正是 DefaultLitePullConsumer。那这是什么原因呢？</p>
+<p>我想只要大家使用过 DefaultMQPullConsumer 编写代码后，就会发现这个类的 API 太底层，使用者需要考虑的问题太多，例如队列负载、消费进度存储等等方面，可以毫不夸张地说，要用好 DefaultMQPullConsumer 还是不那么容易的。</p>
+<p>RocketMQ 设计者也意识到了这样的问题，故引入了 DefaultLitePullConsumer，按照官方文档上的介绍，该类具备如下特性：</p>
+<ul>
+<li>支持以订阅方式进行消息消费，支持消费队列自动再平衡。</li>
+<li>支持手动分配队列的方式进行消息消费，此模式不支持队列自动再平衡。</li>
+<li>提供 seek/commit 方法来重置、提交消费位点。</li>
+</ul>
+<p>温馨提示：由于 DefaultLitePullConsumer 的内容比较多，我们将在后续单独一篇文章对其参数、方法、使用示例进行详细介绍，故本篇只是告知其引入的目的。</p>
+<h3 id="小结">小结</h3>
+<p>本篇详细介绍了 RocketMQ PUSH、PULl 两种消息消费模式的核心 API，并对相关 API 进行了演示，后续会详细结合实际场景，并梳理核心参数，给出使用建议，后面引出了 RocketMQ 消费者一个重大的版本变更。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

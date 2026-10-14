@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>23 K8s 集群中存储对象灾备的落地实践 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/index.html">Kubernetes 实践入门指南</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">25 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kubernetes 实践入门指南</strong><ul><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/00%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E8%A6%81%E5%AD%A6%E4%B9%A0%20Kubernetes%20%E6%8A%80%E6%9C%AF.html">00 为什么我们要学习 Kubernetes 技术</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/01%20%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%20Kubernetes%20%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6.html">01 重新认识 Kubernetes 的核心组件</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/02%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Kubernets%20%E7%9A%84%E7%BC%96%E6%8E%92%E5%AF%B9%E8%B1%A1.html">02 深入理解 Kubernets 的编排对象</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/03%20DevOps%20%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">03 DevOps 场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/04%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">04 微服务应用场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/05%20%E8%A7%A3%E5%86%B3%20K8s%20%E8%90%BD%E5%9C%B0%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA%E6%8F%90%E7%82%BC.html">05 解决 K8s 落地难题的方法论提炼</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/06%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E6%A0%B8%E5%BF%83%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86%E6%8E%8C%E6%8F%A1.html">06 练习篇：K8s 核心实践知识掌握</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/07%20%E5%AE%B9%E5%99%A8%E5%BC%95%E6%93%8E%20containerd%20%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">07 容器引擎 containerd 落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/08%20K8s%20%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7%20kubeadm%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">08 K8s 集群安装工具 kubeadm 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/09%20%E5%8D%97%E5%8C%97%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20IPVS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">09 南北向流量组件 IPVS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/10%20%E4%B8%9C%E8%A5%BF%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20Calico%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">10 东西向流量组件 Calico 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/11%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%20DNS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">11 服务发现 DNS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/12%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">12 练习篇：K8s 集群配置测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/13%20%E7%90%86%E8%A7%A3%E5%AF%B9%E6%96%B9%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AF%B9%E8%B1%A1%20Ingress%20%E5%92%8C%20Service.html">13 理解对方暴露服务的对象 Ingress 和 Service</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/14%20%E5%BA%94%E7%94%A8%E7%BD%91%E5%85%B3%20OpenResty%20%E5%AF%B9%E6%8E%A5%20K8s%20%E5%AE%9E%E8%B7%B5.html">14 应用网关 OpenResty 对接 K8s 实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/15%20Service%20%E5%B1%82%E5%BC%95%E6%B5%81%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">15 Service 层引流技术实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/16%20Cilium%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">16 Cilium 容器网络的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/17%20%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E7%9A%84%E4%BC%98%E9%9B%85%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E5%AE%9E%E8%B7%B5.html">17 应用流量的优雅无损切换实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/18%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9A%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E6%8A%80%E6%9C%AF%E6%B5%8B%E9%AA%8C.html">18 练习篇：应用流量无损切换技术测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/19%20%E4%BD%BF%E7%94%A8%20Rook%20%E6%9E%84%E5%BB%BA%E7%94%9F%E4%BA%A7%E5%8F%AF%E7%94%A8%E5%AD%98%E5%82%A8%E7%8E%AF%E5%A2%83%E5%AE%9E%E8%B7%B5.html">19 使用 Rook 构建生产可用存储环境实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/20%20%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8%E7%9A%84%E9%BB%98%E8%AE%A4%E7%89%B9%E6%80%A7%E8%90%BD%E5%9C%B0%E5%88%86%E6%9E%90.html">20 有状态应用的默认特性落地分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/21%20%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20MySQL%20%E9%9B%86%E7%BE%A4%E5%B7%A5%E5%85%B7%20Vitess%20%E5%AE%9E%E8%B7%B5%E5%88%86%E6%9E%90.html">21 案例：分布式 MySQL 集群工具 Vitess 实践分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/22%20%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%20PV%E3%80%81PVC%E3%80%81Storage%20Classes%20%E7%9A%84%E7%AE%A1%E7%90%86%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">22 存储对象 PV、PVC、Storage Classes 的管理落地实践</a></li><li><a class="active" aria-current="page" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/23%20K8s%20%E9%9B%86%E7%BE%A4%E4%B8%AD%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E7%81%BE%E5%A4%87%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">23 K8s 集群中存储对象灾备的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/24%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">24 练习篇：K8s 集群配置测验</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/23%20K8s%20%E9%9B%86%E7%BE%A4%E4%B8%AD%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E7%81%BE%E5%A4%87%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="23 K8s 集群中存储对象灾备的落地实践" id="title">23 K8s 集群中存储对象灾备的落地实践</h1>
+<div><p>谈到存储对象的灾备，我们可以想象成当你启动了挂载卷的 Pod 的时候，突然集群机器宕机的场景，我们应该如何应对存储对象的容错能力呢？应用的高可用固然最好，但是灾备方案一直都是最后一道门槛，在很多极限情况下，容错的备份是你安心提供服务的保障。</p>
+<p>在虚拟机时代，我们通过控制应用平均分配到各个虚拟机中和定期计划执行的数据备份，让业务可靠性不断地提高。现在升级到 Kubernetes 时代，所有业务都被 Kubernetes 托管，集群可以迅速调度并自维护应用的容器状态，随时可以扩缩资源来应对突发情况。</p>
+<p>听笔者这么说，感觉好像并不需要对存储有多大的担心，只要挂载的是网络存储，即使应用集群坏了，数据还在么，好像也没有多大的事情，那么学这个存储对象的灾备又有什么意义呢？</p>
+<p>笔者想说事情远没有想象中那么简单，我们需要带入接近业务的场景中，再来通过破坏集群状态，看看读存储对象是否有破坏性。</p>
+<p>因为我们从虚拟机时代升级到 Kubernetes 时代，我们的目的是利用动态扩缩的资源来减少业务中断的时间，让应用可以随需扩缩，随需自愈。所以在 Kubernetes 时代，我们要的并不是数据丢不丢的问题，而是能不能有快速保障让业务恢复时间越来越短，甚至让用户没有感知。这个可能实现吗？</p>
+<p>笔者认为 Kubernetes 通过不断丰富的资源对象已经快接近实现这个目标了。所以笔者这里带着大家一起梳理一遍各种存储对象的灾备在 Kubernetes 落地的实践经验，以备不时之需。</p>
+<h3 id="nfs-存储对象的灾备落地经验">NFS 存储对象的灾备落地经验</h3>
+<p>首先我们应该理解 PV/PVC 创建 NFS 网络卷的配置方法，注意 mountOptions 参数的使用姿势。如下例子参考：</p>
+<pre><code class="language-yaml">### nfs-pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: nfs
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: /opt/k8s-pods/data   # 指定 nfs 的挂载点
+    server: 192.168.1.40  # 指定 nfs 服务地址
+---
+### nfs-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pvc
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+
+</code></pre>
+<p>在这个例子中，PersistentVolume 是 NFS 类型的，因此需要辅助程序 /sbin/mount.nfs 来支持挂载 NFS 文件系统。</p>
+<pre><code class="language-bash">[kadmin@k8s-master ~]$ kubectl get pvc nfs-pvc
+NAME      STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+nfs-pvc   Bound    nfs-pv   10Gi       RWX            nfs            3m54s
+[kadmin@k8s-master ~]$
+[kadmin@k8s-master ~]$ kubectl get pv nfs-pv
+NAME     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM             STORAGECLASS   REASON   AGE
+nfs-pv   10Gi       RWX            Recycle          Bound    default/nfs-pvc   nfs                     18m
+
+</code></pre>
+<p>执行一个 Pod 挂载 NFS 卷：</p>
+<pre><code class="language-yaml">### nfs-pv-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pv-pod
+spec:
+  volumes:
+    - name: nginx-pv-storage
+      persistentVolumeClaim:
+        claimName: nfs-pvc
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "nginx-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: nginx-pv-storage
+
+复制
+[kadmin@k8s-master ~]$ kubectl create -f nfs-pv-pod.yaml
+pod/nginx-pv-pod created
+[kadmin@k8s-master ~]$
+[kadmin@k8s-master ~]$ kubectl get pod nginx-pv-pod -o wide
+NAME           READY   STATUS    RESTARTS   AGE   IP              NODE           NOMINATED NODE   READINESS GATES
+nginx-pv-pod   1/1     Running   0          66s   172.16.140.28   k8s-worker-2   &lt;none&gt;           &lt;none&gt;
+
+[kadmin@k8s-master ~]$ curl http://172.16.140.28
+Hello, NFS Storage NGINX
+
+</code></pre>
+<p>当你在一个 Pod 里面挂载了 NFS 卷之后，就需要考虑如何把数据备份出来。<a href="https://github.com/vmware-tanzu/velero" target="_blank">velero</a> 作为云原生的备份恢复工具出现了，它可以帮助我们备份持久化数据对象。velero 案例如下：</p>
+<pre><code class="language-bash">velero backup create backupName --include-cluster-resources=true --ordered-resources 'pods=ns1/pod1,ns1/pod2;persistentvolumes=pv4,pv8' --include-namespaces=ns1
+
+</code></pre>
+<p>注意 velero 默认没法备份卷，所以它集成了开源组件 <a href="https://github.com/restic/restic" target="_blank">restic</a> 支持了存储卷的支持。因为目前还处于试验阶段，注意请不要在生产环境中使用。</p>
+<h3 id="ceph-数据备份及恢复">Ceph 数据备份及恢复</h3>
+<p>Rook 是管理 Ceph 集群的云原生管理系统，在早前的课程中我已经和大家实践过使用 Rook 创建 Ceph 集群的方法。现在假设 Ceph 集群瘫痪了应该如何修复它。是的，我们需要手工修复它。步骤如下：</p>
+<p>第一步，停止 Ceph operator 把 Ceph 集群的控制器关掉，不让它能自动负载自己的程序。</p>
+<pre><code class="language-bash">kubectl -n rook-ceph scale deployment rook-ceph-operator --replicas=0
+
+</code></pre>
+<p>第二步，这个 Ceph 的 monmap 保持跟踪 Ceph 节点的容错数量。我们先通过更新保持健康监控节点的实例正常运行。此处为 rook-ceph-mon-b，不健康的实例为 rook-ceph-mon-a 和 rook-ceph-mon-c。备份 rook-ceph-mon-b 的 Deployment 对象：</p>
+<pre><code class="language-bash">kubectl -n rook-ceph get deployment rook-ceph-mon-b -o yaml &gt; rook-ceph-mon-b-deployment.yaml
+
+</code></pre>
+<p>修改监控实例的命令：</p>
+<pre><code class="language-bash">kubectl -n rook-ceph patch deployment rook-ceph-mon-b -p '{"spec": {"template": {"spec": {"containers": [{"name": "mon", "command": ["sleep", "infinity"], "args": []}]}}}}'
+
+</code></pre>
+<p>进入健康的监控实例中：</p>
+<pre><code class="language-bash">kubectl -n rook-ceph exec -it &lt;mon-pod&gt; bash
+
+# set a few simple variables
+cluster_namespace=rook-ceph
+good_mon_id=b
+monmap_path=/tmp/monmap
+
+# extract the monmap to a file, by pasting the ceph mon command
+# from the good mon deployment and adding the
+# `--extract-monmap=${monmap_path}` flag
+ceph-mon \
+    --fsid=41a537f2-f282-428e-989f-a9e07be32e47 \
+    --keyring=/etc/ceph/keyring-store/keyring \
+    --log-to-stderr=true \
+    --err-to-stderr=true \
+    --mon-cluster-log-to-stderr=true \
+    --log-stderr-prefix=debug \
+    --default-log-to-file=false \
+    --default-mon-cluster-log-to-file=false \
+    --mon-host=$ROOK_CEPH_MON_HOST \
+    --mon-initial-members=$ROOK_CEPH_MON_INITIAL_MEMBERS \
+    --id=b \
+    --setuser=ceph \
+    --setgroup=ceph \
+    --foreground \
+    --public-addr=10.100.13.242 \
+    --setuser-match-path=/var/lib/ceph/mon/ceph-b/store.db \
+    --public-bind-addr=$ROOK_POD_IP \
+    --extract-monmap=${monmap_path}
+
+# review the contents of the monmap
+monmaptool --print /tmp/monmap
+
+# remove the bad mon(s) from the monmap
+monmaptool ${monmap_path} --rm &lt;bad_mon&gt;
+
+# in this example we remove mon0 and mon2:
+monmaptool ${monmap_path} --rm a
+monmaptool ${monmap_path} --rm c
+
+# inject the modified monmap into the good mon, by pasting
+# the ceph mon command and adding the
+# `--inject-monmap=${monmap_path}` flag, like this
+ceph-mon \
+    --fsid=41a537f2-f282-428e-989f-a9e07be32e47 \
+    --keyring=/etc/ceph/keyring-store/keyring \
+    --log-to-stderr=true \
+    --err-to-stderr=true \
+    --mon-cluster-log-to-stderr=true \
+    --log-stderr-prefix=debug \
+    --default-log-to-file=false \
+    --default-mon-cluster-log-to-file=false \
+    --mon-host=$ROOK_CEPH_MON_HOST \
+    --mon-initial-members=$ROOK_CEPH_MON_INITIAL_MEMBERS \
+    --id=b \
+    --setuser=ceph \
+    --setgroup=ceph \
+    --foreground \
+    --public-addr=10.100.13.242 \
+    --setuser-match-path=/var/lib/ceph/mon/ceph-b/store.db \
+    --public-bind-addr=$ROOK_POD_IP \
+    --inject-monmap=${monmap_path}
+
+</code></pre>
+<p>编辑 rook configmap 文件：</p>
+<pre><code class="language-bash">kubectl -n rook-ceph edit configmap rook-ceph-mon-endpoints
+
+</code></pre>
+<p>在 data 字段那里去掉过期的 a 和 b：</p>
+<pre><code class="language-bash">data: a=10.100.35.200:6789;b=10.100.13.242:6789;c=10.100.35.12:6789
+
+</code></pre>
+<p>变成：</p>
+<pre><code class="language-bash">data: b=10.100.13.242:6789
+
+</code></pre>
+<p>更新 secret 配置：</p>
+<pre><code class="language-bash">mon_host=$(kubectl -n rook-ceph get svc rook-ceph-mon-b -o jsonpath='{.spec.clusterIP}')
+kubectl -n rook-ceph patch secret rook-ceph-config -p '{"stringData": {"mon_host": "[v2:'"${mon_host}"':3300,v1:'"${mon_host}"':6789]", "mon_initial_members": "'"${good_mon_id}"'"}}'
+
+</code></pre>
+<p>重启监控实例：</p>
+<pre><code class="language-bash">kubectl replace --force -f rook-ceph-mon-b-deployment.yaml
+
+</code></pre>
+<p>重启 operator:</p>
+<pre><code class="language-bash"># create the operator. it is safe to ignore the errors that a number of resources already exist.
+kubectl -n rook-ceph scale deployment rook-ceph-operator --replicas=1
+
+</code></pre>
+<h3 id="jenkins-挂载-pvc-应用的数据恢复">Jenkins 挂载 PVC 应用的数据恢复</h3>
+<p>假设 Jenkins 数据损坏，想修复 Jenkins 的数据目录，可以采用把 PVC 挂载带临时镜像并配合 <code>kubectl cp</code> 实现，步骤如下。</p>
+<p>\1. 获得当前 Jenkins 容器的运行权限：</p>
+<pre><code class="language-bash">$ kubectl --namespace=cje-cluster-example get pods cjoc-0 -o jsonpath='{.spec.securityContext}'
+map[fsGroup:1000]
+
+</code></pre>
+<p>\2. 关闭容器：</p>
+<pre><code class="language-bash">$ kubectl --namespace=cje-cluster-example scale statefulset/cjoc --replicas=0
+statefulset.apps "cjoc" scaled
+
+</code></pre>
+<p>\3. 查看 PVC：</p>
+<pre><code class="language-bash">$ kubectl --namespace=cje-cluster-example get pvc
+NAME                  STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+jenkins-home-cjoc-0   Bound     pvc-6b27e963-b770-11e8-bcbf-42010a8400c1   20Gi       RWO            standard       46d
+jenkins-home-mm1-0    Bound     pvc-b2b7e305-ba66-11e8-bcbf-42010a8400c1   50Gi       RWO            standard       42d
+jenkins-home-mm2-0    Bound     pvc-6561b8da-c0c8-11e8-bcbf-42010a8400c1   50Gi       RWO            standard       34d
+
+</code></pre>
+<p>\4. 挂载 PVC 到临时镜像中方便恢复数据：</p>
+<pre><code class="language-bash">$ cat &lt;&lt;EOF | kubectl --namespace=cje-cluster-example create -f -
+kind: Pod
+apiVersion: v1
+metadata:
+  name: rescue-pod
+spec:
+  securityContext:
+    runAsUser: 1000
+    fsGroup: 1000
+  volumes:
+    - name: rescue-storage
+      persistentVolumeClaim:
+       claimName: jenkins-home-cjoc-0
+  containers:
+    - name: rescue-container
+      image: nginx
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do echo hello; sleep 10;done"]
+      volumeMounts:
+        - mountPath: "/tmp/jenkins-home"
+          name: rescue-storage
+EOF
+pod "rescue-pod" created
+
+</code></pre>
+<p>\5. 复制备份数据到临时镜像：</p>
+<pre><code class="language-bash">kubectl cp oc-jenkins-home.backup.tar.gz rescue-pod:/tmp/
+
+</code></pre>
+<p>\6. 解压数据到 PVC 挂载卷：</p>
+<pre><code class="language-bash">kubectl exec --namespace=cje-cluster-example rescue-pod -it -- tar -xzf /tmp/oc-jenkins-home.backup.tar.gz -C /tmp/jenkins-home
+
+</code></pre>
+<p>\7. 删除临时镜像 Pod：</p>
+<pre><code class="language-bash">kubectl --namespace=cje-cluster-example delete pod rescue-pod
+
+</code></pre>
+<p>\8. 恢复 Jenkins 容器：</p>
+<pre><code class="language-bash">kubectl --namespace=cje-cluster-example scale statefulset/cjoc --replicas=1
+
+</code></pre>
+<h3 id="kubernetes-集群的备份">Kubernetes 集群的备份</h3>
+<p>Kubernetes 集群是分布式集群，我们备份集群的元数据的目的一般有两个主要目的：</p>
+<ul>
+<li>能快速恢复控制节点而不是计算节点</li>
+<li>能恢复应用容器</li>
+</ul>
+<p>从集群备份的难度来讲，我们要清楚理解集群控制节点上有哪些关键数据是需要备份的：自签名证书、etcd 数据、kubeconfig。</p>
+<p>拿单个控制几点服务器上的备份步骤来看：</p>
+<pre><code class="language-bash"># Backup certificates
+sudo cp -r /etc/kubernetes/pki backup/
+# Make etcd snapshot
+sudo docker run --rm -v $(pwd)/backup:/backup \
+    --network host \
+    -v /etc/kubernetes/pki/etcd:/etc/kubernetes/pki/etcd \
+    --env ETCDCTL_API=3 \
+    k8s.gcr.io/etcd:3.4.3-0 \
+    etcdctl --endpoints=https://127.0.0.1:2379 \
+    --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+    --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+    --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+    snapshot save /backup/etcd-snapshot-latest.db
+
+# Backup kubeadm-config
+sudo cp /etc/kubeadm/kubeadm-config.yaml backup/
+
+</code></pre>
+<p>数据恢复一个控制节点的操作如下：</p>
+<pre><code class="language-bash"># Restore certificates
+sudo cp -r backup/pki /etc/kubernetes/
+
+# Restore etcd backup
+sudo mkdir -p /var/lib/etcd
+sudo docker run --rm \
+    -v $(pwd)/backup:/backup \
+    -v /var/lib/etcd:/var/lib/etcd \
+    --env ETCDCTL_API=3 \
+    k8s.gcr.io/etcd:3.4.3-0 \
+    /bin/sh -c "etcdctl snapshot restore '/backup/etcd-snapshot-latest.db' ; \
+    mv /default.etcd/member/ /var/lib/etcd/"
+
+# Restore kubeadm-config
+sudo mkdir /etc/kubeadm
+sudo cp backup/kubeadm-config.yaml /etc/kubeadm/
+
+# Initialize the master with backup
+sudo kubeadm init --ignore-preflight-errors=DirAvailable--var-lib-etcd \
+    --config /etc/kubeadm/kubeadm-config.yaml
+
+</code></pre>
+<p>通过以上案例知道 Kubernetes 集群中 etcd 数据的备份和恢复，学会善用和 <code>kubectl cp</code> 的配合使用。</p>
+<h3 id="总结">总结</h3>
+<p>依赖 Kubernetes 原生的数据复制能力 <code>kubectl cp</code> 和 cronjob，我们可以应对大部分的数据备份和恢复工作。当需要处理分布式系统的备份和恢复的时候，大部分情况并不是去备份数据，而是尝试从有效节点中去除故障节点，让集群能自愈。这是分布式系统的特点，它可以自愈。但是分布式系统的弱点也在于自愈是有条件的，如果故障节点超过可用节点数 Quorum，再智能也是无用的。所以备份仍然是最后一道防线。一定要做定期的并且冗余的<strong>数据备份</strong>。</p>
+<h3 id="参考链接">参考链接</h3>
+<ul>
+<li><a href="https://github.com/rook/rook/blob/master/Documentation/ceph-disaster-recovery.md" target="_blank">https://github.com/rook/rook/blob/master/Documentation/ceph-disaster-recovery.md</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/Quorum_(分布式系统)" target="_blank">https://zh.wikipedia.org/wiki/Quorum_(%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F)</a></li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

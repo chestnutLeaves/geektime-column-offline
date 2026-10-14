@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>23 包体积优化（下）：资源优化的进阶实践 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/index.html">Android开发高手课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">61 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Android开发高手课</strong><ul><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E5%AF%BC%E8%AF%BB%20%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9F.html">00 导读 如何打造高质量的应用？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E7%84%A6%E8%99%91%E7%9A%84%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E8%80%85%E8%AF%A5%E5%A6%82%E4%BD%95%E7%A0%B4%E5%B1%80%EF%BC%9F.html">00 开篇词 焦虑的移动开发者该如何破局？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/01%20%E5%B4%A9%E6%BA%83%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%85%B3%E4%BA%8E%E2%80%9C%E5%B4%A9%E6%BA%83%E2%80%9D%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">01 崩溃优化（上）：关于“崩溃”那些事儿</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/02%20%E5%B4%A9%E6%BA%83%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B4%A9%E6%BA%83%E4%BA%86%EF%BC%8C%E4%BD%A0%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E5%8E%BB%E5%88%86%E6%9E%90%EF%BC%9F.html">02 崩溃优化（下）：应用崩溃了，你应该如何去分析？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/03%20%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A4GB%E5%86%85%E5%AD%98%E6%97%B6%E4%BB%A3%EF%BC%8C%E5%86%8D%E8%B0%88%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.html">03 内存优化（上）：4GB内存时代，再谈内存优化</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/04%20%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%E8%BF%99%E4%BB%B6%E4%BA%8B%EF%BC%8C%E5%BA%94%E8%AF%A5%E4%BB%8E%E5%93%AA%E9%87%8C%E7%9D%80%E6%89%8B%EF%BC%9F.html">04 内存优化（下）：内存优化这件事，应该从哪里着手？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/05%20%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BD%A0%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%8D%A1%E9%A1%BF%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95.html">05 卡顿优化（上）：你要掌握的卡顿分析方法</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/06%20%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E5%BA%94%E7%94%A8%E5%8D%A1%E9%A1%BF%EF%BC%9F.html">06 卡顿优化（下）：如何监控应用卡顿？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/06%E8%A1%A5%E5%85%85%E7%AF%87%20%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%EF%BC%9A%E5%8D%A1%E9%A1%BF%E7%8E%B0%E5%9C%BA%E4%B8%8E%E5%8D%A1%E9%A1%BF%E5%88%86%E6%9E%90.html">06补充篇 卡顿优化：卡顿现场与卡顿分析</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/07%20%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B%E7%9C%8B%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96.html">07 启动优化（上）：从启动过程看启动速度优化</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/08%20%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BC%98%E5%8C%96%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E7%9A%84%E8%BF%9B%E9%98%B6%E6%96%B9%E6%B3%95.html">08 启动优化（下）：优化启动速度的进阶方法</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/09%20I_O%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%BF%85%E5%A4%87%E7%9A%84I_O%E4%BC%98%E5%8C%96%E7%9F%A5%E8%AF%86.html">09 I_O优化（上）：开发工程师必备的I_O优化知识</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/10%20I_O%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E4%B8%8D%E5%90%8CI_O%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 I_O优化（中）：不同I_O方式的使用场景是什么？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/11%20I_O%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E7%BA%BF%E4%B8%8AI_O%E6%93%8D%E4%BD%9C%EF%BC%9F.html">11 I_O优化（下）：如何监控线上I_O操作？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/12%20%E5%AD%98%E5%82%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%B8%B8%E8%A7%81%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">12 存储优化（上）：常见的数据存储方法有哪些？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/13%20%E5%AD%98%E5%82%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9F.html">13 存储优化（中）：如何优化数据存储？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/14%20%E5%AD%98%E5%82%A8%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93SQLite%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96.html">14 存储优化（下）：数据库SQLite的使用和优化</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/15%20%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%BF%85%E5%A4%87%E7%9A%84%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%E7%9F%A5%E8%AF%86.html">15 网络优化（上）：移动开发工程师必备的网络优化知识</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/16%20%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%A4%8D%E6%9D%82%E5%A4%9A%E5%8F%98%E7%9A%84%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C%E8%AF%A5%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%EF%BC%9F.html">16 网络优化（中）：复杂多变的移动网络该如何优化？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/17%20%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B8%8B%E7%BD%91%E7%BB%9C%E8%AF%A5%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%EF%BC%9F.html">17 网络优化（下）：大数据下网络该如何监控？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/18%20%E8%80%97%E7%94%B5%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%94%B5%E9%87%8F%E4%BC%98%E5%8C%96%E7%9A%84%E6%BC%94%E8%BF%9B%E7%9C%8B%E8%80%97%E7%94%B5%E5%88%86%E6%9E%90.html">18 耗电优化（上）：从电量优化的演进看耗电分析</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/19%20%E8%80%97%E7%94%B5%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%80%97%E7%94%B5%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E4%B8%8E%E7%BA%BF%E4%B8%8A%E7%9B%91%E6%8E%A7.html">19 耗电优化（下）：耗电的优化方法与线上监控</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/20%20UI%20%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AUI%20%E6%B8%B2%E6%9F%93%E7%9A%84%E5%87%A0%E4%B8%AA%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5.html">20 UI 优化（上）：UI 渲染的几个关键概念</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/21%20UI%20%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%20UI%20%E6%B8%B2%E6%9F%93%EF%BC%9F.html">21 UI 优化（下）：如何优化 UI 渲染？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/22%20%E5%8C%85%E4%BD%93%E7%A7%AF%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E5%AE%89%E8%A3%85%E5%8C%85%E5%A4%A7%E5%B0%8F%EF%BC%9F.html">22 包体积优化（上）：如何减少安装包大小？</a></li><li><a class="active" aria-current="page" href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/23%20%E5%8C%85%E4%BD%93%E7%A7%AF%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E7%9A%84%E8%BF%9B%E9%98%B6%E5%AE%9E%E8%B7%B5.html">23 包体积优化（下）：资源优化的进阶实践</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/24%20%E6%83%B3%E6%88%90%E4%B8%BAAndroid%E9%AB%98%E6%89%8B%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E5%85%88%E6%90%9E%E5%AE%9A%E8%BF%99%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98.html">24 想成为Android高手，你需要先搞定这三个问题</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/25%20%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E7%BB%84%E7%BB%87%E4%B8%8E%E4%B8%AA%E4%BA%BA%E7%9A%84%E7%A0%94%E5%8F%91%E6%95%88%E8%83%BD%EF%BC%9F.html">25 如何提升组织与个人的研发效能？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/26%20%E5%85%B3%E4%BA%8E%E7%BC%96%E8%AF%91%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E4%BA%86%E8%A7%A3%E4%BB%80%E4%B9%88%EF%BC%9F.html">26 关于编译，你需要了解什么？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/27%20%E7%BC%96%E8%AF%91%E6%8F%92%E6%A1%A9%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9AAspectJ%E3%80%81ASM%E3%80%81ReDex.html">27 编译插桩的三种方法：AspectJ、ASM、ReDex</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/28%20%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B8%8EAI%EF%BC%8C%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E6%B5%8B%E8%AF%95%EF%BC%9F.html">28 大数据与AI，如何高效地测试？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/29%20%E4%BB%8E%E6%AF%8F%E6%9C%88%E5%88%B0%E6%AF%8F%E5%A4%A9%EF%BC%8C%E5%A6%82%E4%BD%95%E7%BB%99%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E6%8F%90%E9%80%9F%EF%BC%9F.html">29 从每月到每天，如何给版本发布提速？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/30%20%E6%95%B0%E6%8D%AE%E8%AF%84%E4%BC%B0%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84%E4%B8%8A%E6%8A%A5%E7%BB%84%E4%BB%B6%EF%BC%9F.html">30 数据评估（上）：如何实现高可用的上报组件？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/31%20%E6%95%B0%E6%8D%AE%E8%AF%84%E4%BC%B0%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%EF%BC%9F.html">31 数据评估（下）：什么是大数据平台？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/32%20%E7%BA%BF%E4%B8%8A%E7%96%91%E9%9A%BE%E9%97%AE%E9%A2%98%E8%AF%A5%E5%A6%82%E4%BD%95%E6%8E%92%E6%9F%A5%E5%92%8C%E8%B7%9F%E8%B8%AA%EF%BC%9F.html">32 线上疑难问题该如何排查和跟踪？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/33%20%E5%81%9A%E4%B8%80%E5%90%8D%E6%9C%89%E9%AB%98%E5%BA%A6%E7%9A%84%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88.html">33 做一名有高度的移动开发工程师</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/34%20%E8%81%8A%E8%81%8A%E9%87%8D%E6%9E%84%EF%BC%9A%E4%BC%98%E7%A7%80%E7%9A%84%E6%9E%B6%E6%9E%84%E9%83%BD%E6%98%AF%E6%BC%94%E8%BF%9B%E8%80%8C%E6%9D%A5%E7%9A%84.html">34 聊聊重构：优秀的架构都是演进而来的</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/35%20Native%20Hook%20%E6%8A%80%E6%9C%AF%EF%BC%8C%E5%A4%A9%E4%BD%BF%E8%BF%98%E6%98%AF%E9%AD%94%E9%AC%BC%EF%BC%9F.html">35 Native Hook 技术，天使还是魔鬼？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/36%20%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%BC%80%E5%8F%91%E7%9A%84%E7%8E%B0%E7%8A%B6%E4%B8%8E%E5%BA%94%E7%94%A8.html">36 跨平台开发的现状与应用</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/37%20%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E6%96%B0%E5%A4%A7%E9%99%86%EF%BC%9A%E5%B7%A5%E4%BD%9C%E4%B8%89%E5%B9%B4%E5%8D%8A%EF%BC%8C%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E8%BD%AC%E5%9E%8B%E6%89%8B%E6%B8%B8%E5%BC%80%E5%8F%91.html">37 移动开发新大陆：工作三年半，移动开发转型手游开发</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/38%20%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E6%96%B0%E5%A4%A7%E9%99%86%EF%BC%9AAndroid%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91.html">38 移动开发新大陆：Android音视频开发</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/39%20%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E6%96%B0%E5%A4%A7%E9%99%86%EF%BC%9A%20%E8%BE%B9%E7%BC%98%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%9A%84%E8%B6%8B%E5%8A%BF.html">39 移动开发新大陆： 边缘智能计算的趋势</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/40%20%E5%8A%A8%E6%80%81%E5%8C%96%E5%AE%9E%E8%B7%B5%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E6%96%B9%E6%A1%88%EF%BC%9F.html">40 动态化实践，如何选择适合自己的方案？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/41%20%E8%81%8A%E8%81%8AFlutter%EF%BC%8C%E9%9D%A2%E5%AF%B9%E5%B1%82%E5%87%BA%E4%B8%8D%E7%A9%B7%E7%9A%84%E6%96%B0%E6%8A%80%E6%9C%AF%E8%AF%A5%E5%A6%82%E4%BD%95%E8%B7%9F%E8%BF%9B%EF%BC%9F.html">41 聊聊Flutter，面对层出不穷的新技术该如何跟进？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/42%20Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE%E5%AD%A6%E4%B9%A0%E5%BF%83%E5%BE%97.html">42 Android开发高手课学习心得</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/Android%20JVM%20TI%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3%EF%BC%88%E5%86%85%E5%90%AB%E7%A6%8F%E5%88%A9%E5%BD%A9%E8%9B%8B%EF%BC%89.html">Android JVM TI机制详解（内含福利彩蛋）</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/Android%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E2%80%9C%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97%E2%80%9D.html">Android工程师的“面试指南”</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/Native%E4%B8%8B%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E8%B0%83%E7%94%A8%E6%A0%88%EF%BC%9F.html">Native下如何获取调用栈？</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E4%B8%93%E6%A0%8F%E5%AD%A6%E5%BE%97%E8%8B%A6%EF%BC%9F%E5%8F%AF%E8%83%BD%E4%BD%A0%E8%BF%98%E9%9C%80%E8%A6%81%E4%B8%80%E4%BB%BD%E9%85%8D%E5%A5%97%E5%AD%A6%E4%B9%A0%E4%B9%A6%E5%8D%95.html">专栏学得苦？可能你还需要一份配套学习书单</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E4%B8%93%E6%A0%8F%E5%AD%A6%E5%BE%97%E8%8B%A6%EF%BC%9F%E5%8F%AF%E8%83%BD%E6%98%AF%E6%96%B9%E6%B3%95%E6%B2%A1%E6%89%BE%E5%AF%B9.html">专栏学得苦？可能是方法没找对</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E8%B7%AF%20%E8%AE%BE%E8%AE%A1%E8%83%BD%E5%8A%9B%E7%9A%84%E6%8F%90%E5%8D%87%E9%80%94%E5%BE%84.html">程序员修炼之路 设计能力的提升途径</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20ASM%E6%8F%92%E6%A1%A9%E5%BC%BA%E5%8C%96%E7%BB%83%E4%B9%A0.html">练习Sample跑起来 ASM插桩强化练习</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E5%94%AF%E9%B9%BF%E5%90%8C%E5%AD%A6%E7%9A%84%E7%BB%83%E4%B9%A0%E6%89%8B%E8%AE%B0%20%E7%AC%AC1%E8%BE%91.html">练习Sample跑起来 唯鹿同学的练习手记 第1辑</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E5%94%AF%E9%B9%BF%E5%90%8C%E5%AD%A6%E7%9A%84%E7%BB%83%E4%B9%A0%E6%89%8B%E8%AE%B0%20%E7%AC%AC2%E8%BE%91.html">练习Sample跑起来 唯鹿同学的练习手记 第2辑</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E5%94%AF%E9%B9%BF%E5%90%8C%E5%AD%A6%E7%9A%84%E7%BB%83%E4%B9%A0%E6%89%8B%E8%AE%B0%20%E7%AC%AC3%E8%BE%91.html">练习Sample跑起来 唯鹿同学的练习手记 第3辑</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%E7%AC%AC1%E6%9C%9F.html">练习Sample跑起来 热点问题答疑第1期</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%E7%AC%AC2%E6%9C%9F.html">练习Sample跑起来 热点问题答疑第2期</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%E7%AC%AC3%E6%9C%9F.html">练习Sample跑起来 热点问题答疑第3期</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%83%E4%B9%A0Sample%E8%B7%91%E8%B5%B7%E6%9D%A5%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%E7%AC%AC4%E6%9C%9F.html">练习Sample跑起来 热点问题答疑第4期</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E7%9A%84%E4%BB%8A%E5%A4%A9%E5%92%8C%E6%98%8E%E5%A4%A9.html">结束语 移动开发的今天和明天</a></li><li><a href="/courses/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/%E8%81%8A%E8%81%8AFramework%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95.html">聊聊Framework的学习方法</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Android%E5%BC%80%E5%8F%91%E9%AB%98%E6%89%8B%E8%AF%BE/23%20%E5%8C%85%E4%BD%93%E7%A7%AF%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E7%9A%84%E8%BF%9B%E9%98%B6%E5%AE%9E%E8%B7%B5.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="23 包体积优化（下）：资源优化的进阶实践" id="title">23 包体积优化（下）：资源优化的进阶实践</h1>
+<div><p>上一期我们聊了Dex与Native Library的优化，是不是还有点意犹未尽的感觉呢？那安装包还有哪些可以优化的地方呢？</p>
+<p><img alt="" src="/assets/cac1773ff34add17739c617e.png"/></p>
+<p>请看上面这张图，Assets、Resource以及签名metadata都是安装包中的“资源”部分，今天我们就一起来看看如何进一步优化资源的体积。</p>
+<h2 id="andresguard工具">AndResGuard工具</h2>
+<p>在美团的一篇文章<a href="https://tech.meituan.com/2017/04/07/android-shrink-overall-solution.html" target="_blank">《Android App包瘦身优化实践》</a>中，也讲到了很多资源优化相关的方法，例如WebP和SVG、R文件、无用资源、资源混淆以及语言压缩等。</p>
+<p>在我们的安装包中，资源相关的文件具体有下面这几个，它们都是我们需要优化的目标文件。</p>
+<p><img alt="" src="/assets/bd99a0bbe18405ea278b6d62.png"/></p>
+<p>想使用好<a href="https://github.com/shwenzhang/AndResGuard" target="_blank">AndResGuard</a>工具，需要对安装包格式以及Android资源编译的原理有很深地理解，它主要有两个功能，一个是资源混淆，一个是资源的极限压缩。</p>
+<p>接下来我们先来复习一下这个工具的核心实现，然后再进一步思考还有哪些地方需要继续优化。</p>
+<p><strong>1. 资源混淆</strong></p>
+<p>ProGuard的核心优化主要有三个：Shrink、Optimize和Obfuscate，也就是裁剪、优化和混淆。当初我在写AndResGuard的时候，希望实现的就是ProGuard中的混淆功能。</p>
+<p>资源混淆的思路其实非常简单，就是把资源和文件的名字混淆成短路径：</p>
+<pre><code>Proguard          -&gt; Resource Proguard
+R.string.name     -&gt; R.string.a   
+res/drawable/icon -&gt; res/s/a
+</code></pre>
+<p>那么这样的实现究竟对哪些资源文件有优化作用呢？</p>
+<ul>
+<li><p><strong>resources.arsc</strong>。因为资源索引文件resources.arsc需要记录资源文件的名称与路径，使用混淆后的短路径res/s/a，可以减少整个文件的大小。</p></li>
+<li><p><strong>metadata签名文件</strong>。<a href="https://cloud.tencent.com/developer/article/1354380" target="_blank">签名文件MF与SF</a>都需要记录所有文件的路径以及它们的哈希值，使用短路径可以减少这两个文件的大小。</p></li>
+</ul>
+<p><img alt="" src="/assets/40e888cbd666a1a832b29e0b.png"/></p>
+<ul>
+<li><strong>ZIP文件索引</strong>。ZIP文件格式里面也需要记录每个文件Entry的路径、压缩算法、CRC、文件大小等信息。使用短路径，本身就可以减少记录文件路径的字符串大小。</li>
+</ul>
+<p><img alt="" src="/assets/f25d600c663a3b25c8abd536.png"/></p>
+<p>资源文件有一个非常大的特点，那就是文件数量特别多。以微信7.0为例，安装包中就有7000多个资源文件。所以说，资源混淆工具仅仅通过短路径的优化，就可以达到减少resources.arsc、签名文件以及ZIP文件大小的目的。</p>
+<p>既然移动优化已经到了“深水区”，正如Dex和Library优化一样，我们需要对它们的格式以及特性有非常深入的研究，才能找到优化的思路。而我们要做的资源优化也是如此，要对resources.arsc、签名文件以及ZIP格式需要有非常深入的研究与思考。</p>
+<p><strong>2. 极限压缩</strong></p>
+<p>AndResGuard的另外一个优化就是极限压缩，它的极限压缩功能体现在两个方面：</p>
+<ul>
+<li><p><strong>更高的压缩率</strong>。虽然我们使用的还是Zip算法，但是利用了7-Zip的大字典优化，APK的整体压缩率可以提升3%左右。</p></li>
+<li><p><strong>压缩更多的文件</strong>。Android编译过程中，下面这些格式的文件会指定不压缩；在AndResGuard中，我们支持针对resources.arsc、PNG、JPG以及GIF等文件的强制压缩。</p></li>
+</ul>
+<pre><code>/* these formats are already compressed, or don't compress well */
+static const char* kNoCompressExt[] = {
+    ".jpg", ".jpeg", ".png", ".gif",
+    ".wav", ".mp2", ".mp3", ".ogg", ".aac",
+    ".mpg", ".mpeg", ".mid", ".midi", ".smf", ".jet",
+    ".rtttl", ".imy", ".xmf", ".mp4", ".m4a",
+    ".m4v", ".3gp", ".3gpp", ".3g2", ".3gpp2",
+    ".amr", ".awb", ".wma", ".wmv", ".webm", ".mkv"
+};
+</code></pre>
+<p>这里可能会有一个疑问，为什么Android系统会专门选择不去压缩这些文件呢？</p>
+<ul>
+<li><p><strong>压缩效果并不明显</strong>。这些格式的文件大部分本身已经压缩过，重新做Zip压缩效果并不明显。例如PNG和JPG格式，重新压缩只有3%～5%的收益，并不是十分明显。</p></li>
+<li><p><strong>读取时间与内存的考虑</strong>。如果文件是没有压缩的，系统可以利用mmap的方式直接读取，而不需要一次性解压并放在内存中。</p></li>
+</ul>
+<p>Android 6.0之后AndroidManifest支持不压缩Library文件，这样安装APK的时候也不需要把Library文件解压出来，系统可以直接mmap安装包中的Library文件。</p>
+<blockquote>
+<p>android:extractNativeLibs=“true”</p>
+</blockquote>
+<p>简单来说，我们在启动性能、内存和安装包体积之间又做了一个抉择。在上一期中我就讲过对于Dex和Library来说，最有效果的方法是使用XZ或者7-Zip压缩，对于资源来说也是如此，一些比较大的资源文件我们也可以考虑使用XZ压缩，但是在首次启动时需要解压出来。</p>
+<h2 id="进阶的优化方法">进阶的优化方法</h2>
+<p>学习完AndResGuard工具的混淆和压缩功能的实现原理后，可以帮助我们加深对安装包格式以及Android资源编译的原理的认识。</p>
+<p>但AndResGuard毕竟是几年前的产物，那现在又有哪些新的进阶优化方法呢？</p>
+<p><strong>1. 资源合并</strong></p>
+<p>在资源混淆方案中，我们发现资源文件的路径对于resources.arsc、签名信息以及ZIP文件信息都会有影响。而且因为资源文件数量非常非常多，导致这部分的体积非常可观。</p>
+<p>那我们能不能把所有的资源文件都合并成同一个大文件，这样做肯定会比资源混淆方案效果更好。</p>
+<p><img alt="" src="/assets/e99a23b9f63a908bb585c6d2.png"/></p>
+<p>事实上，大部分的换肤方案也是采用这个思路，这个大资源文件就相当于一套皮肤。因此我们完全可以把这套方案推广开来，但是实现起来还是需要解决不少问题的。</p>
+<ul>
+<li><strong>资源的解析</strong>。我们需要模拟系统实现资源文件的解析，例如把PNG、JPG以及XML文件转换为Bitmap或者Drawable，这样获取资源的方法需要改成我们自定义的方法。</li>
+</ul>
+<pre><code>// 系统默认的方式
+Drawable drawable = getResouces().getDrawable(R.drawable.loading);
+
+// 新的获取方式
+Drawable drawable = CustomResManager.getDrawable(R.drawable.loading);
+</code></pre>
+<p>那为什么我们不像SVG那样，直接把这些解析完的所有Drawable全部丢到系统的缓存中呢？这样代码就无需做太多修改？之所以没这么做主要是考虑对内存的影响，如果我们把全部的资源文件一次性全部解析，并且丢到系统的缓存中，这部分会占用非常大的内存。</p>
+<ul>
+<li><strong>资源的管理</strong>。考虑到内存和启动时间，所有的资源也是用时加载，我们只需要使用mmap来加载“Big resource File”。同时我们还要实现自己的资源缓存池ResourceCache，释放不再使用的资源文件，这部分内容你可以参考类似Glide图片库的实现。</li>
+</ul>
+<p>我在逆向Facebook的App的时候也发现，它们的资源和多语言基本走的完全是自己的流程。在“UI优化”时我就说过，我们先在系统的框架下尝试做了很多的优化，但是渐渐发现这样的方式依然要受系统的各种制约，这时就要考虑去突破系统的限制，把所有的流程都接管过来。</p>
+<p>当然我们也需要在性能和效率之间寻找平衡点，要看自己的应用当前更重视性能提升还是开发效率。</p>
+<p><strong>2. 无用资源</strong></p>
+<p>AndResGuard中的资源混淆实现的是ProGuard的Obfuscate，那我们是否可以同样实现资源的Shrink，也就是裁剪功能呢？应用通过长时间的迭代，总会有一些无用的资源，尽管它们在程序运行过程不会被使用，但是依然占据着安装包的体积。</p>
+<p>事实上，Android官方早就考虑到这种情况了，下面我们一起来看看无用资源优化方案的演进过程。</p>
+<p><strong>第一阶段：Lint</strong></p>
+<p>从Eclipse时代开始，我们就开始使用<a href="https://cloud.tencent.com/developer/article/1014614" target="_blank">Lint</a>这个静态代码扫描工具，它里面就支持Unused Resources扫描。</p>
+<p><img alt="" src="/assets/7004155c2d4b2cf6b9bc66c4.png"/></p>
+<p>然后我们直接选择“Remove All Unused Resources”，就可以轻松删除所有的无用资源了。既然它是第一阶段的方案，那Lint方案扫描具体的缺点是什么呢？</p>
+<p>Lint作为一个静态扫描工具，它最大的问题在于没有考虑到ProGuard的代码裁剪。在ProGuard过程我们会shrink掉大量的无用代码，但是Lint工具并不能检查出这些无用代码所引用的无用资源。</p>
+<p><strong>第二阶段：shrinkResources</strong></p>
+<p>所以Android在第二阶段增加了“shrinkResources”资源压缩功能，它需要配合ProGurad的“minifyEnabled”功能同时使用。</p>
+<p>如果ProGuard把部分无用代码移除，这些代码所引用的资源也会被标记为无用资源，然后通过资源压缩功能将它们移除。</p>
+<pre><code>android {
+    ...
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+        }
+    }
+}
+</code></pre>
+<p>是不是看起来很完美，但是目前的shrinkResources实现起来还有几个缺陷。</p>
+<ul>
+<li><strong>没有处理resources.arsc文件</strong>。这样导致大量无用的String、ID、Attr、Dimen等资源并没有被删除。</li>
+</ul>
+<p><img alt="" src="/assets/d93b5ba6a9261db49aba873d.png"/></p>
+<ul>
+<li><strong>没有真正删除资源文件</strong>。对于Drawable、Layout这些无用资源，shrinkResources也没有真正把它们删掉，而是仅仅替换为一个空文件。为什么不能删除呢？主要还是因为resources.arsc里面还有这些文件的路径，具体你可以查看这个<a href="https://issuetracker.google.com/issues/37010152" target="_blank">issues</a>。</li>
+</ul>
+<p>所以尽管我们的应用有大量的无用资源，但是系统目前的做法并没有真正减少文件数量。这样resources.arsc、签名信息以及ZIP文件信息这几个“大头”依然没有任何改善。</p>
+<p>那为什么Studio不把这些资源真正删掉呢？事实上Android也知道有这个问题，在它的核心实现<a href="https://android.googlesource.com/platform/tools/base/+/studio-master-dev/build-system/gradle-core/src/main/java/com/android/build/gradle/tasks/ResourceUsageAnalyzer.java" target="_blank">ResourceUsageAnalyzer</a>中的注释也写得非常清楚，并尝试解决这个问题提供了两种思路。</p>
+<p><img alt="" src="/assets/0756491be4c4f924e37a2164.png"/></p>
+<p>如果想解答系统为什么不能直接把这些资源删除，我们需要先回过头来重温一下Android的编译流程。</p>
+<p><img alt="" src="/assets/f416e1ad2773a452de68edc1.png"/></p>
+<ul>
+<li><p>由于Java代码需要用到资源的R.java文件，所以我们就需要把R.java提前准备好。</p></li>
+<li><p>在编译Java代码过程，已经根据R.java文件，直接将代码中资源的引用替换为常量，例如将R.String.sample替换为0x7f0c0003。</p></li>
+<li><p>.ap_资源文件的同步编译，例如resources.arsc、XML文件的处理等。</p></li>
+</ul>
+<p>如果我们在这个过程强行把无用资源文件删除，resources.arsc和R.java文件的资源ID都会改变（因为默认都是连续的），这个时候代码中已经替换过的0x7f0c0003就会出现资源错乱或者找不到的情况。</p>
+<p>因此系统为了避免发生这种情况，采用了折中的方法，并没有二次处理resources.arsc文件，只是仅仅把无用的Drawable和Layout文件替换为空文件。</p>
+<p><strong>第三阶段：realShrinkResources</strong></p>
+<p>那怎么样才能真正实现无用资源的删除功能呢？ResourceUsageAnalyzer的注释中就提供了一个思路，我们可以利用resources.arsc中Public ID的机制，实现非连续的资源ID。</p>
+<p>简单来说，就是keep住保留资源的ID，保证已经编译完的代码可以正常找到对应的资源。</p>
+<p><img alt="" src="/assets/c136cadca495a9a7642c473e.png"/></p>
+<p>但是重写resources.arsc的方法会比资源混淆更加复杂，我们既要从这个文件中抹去所有的无用资源相关信息，还要keep住所有保留资源的ID，相当于把整个文件都重写了。</p>
+<p>正因为异常复杂，所以目前Android还没有提供这套方案的完整实现。我最近也正在按照这个思路来实现这套方案，希望完成后可以尽快开源出来。</p>
+<h2 id="总结">总结</h2>
+<p>今天我们回顾了AndResGuard工具的实现原理，也学习了两种资源优化的进阶方式。特别是无用资源的优化，你可以看到尽管是无所不能的Google，也并没有把方案做到最好，依然存在一些妥协的地方。</p>
+<p>其实这种不完美的地方还有很多很多，也正是有了这些不完美的地方，才会出现各种各样优秀的开源方案。也因此我们才会不断思考如何突破系统的限制，去实现更多、更底层的优化。</p>
+<h2 id="课后作业">课后作业</h2>
+<p>对于Android的编译流程，你还有不理解的地方吗？对于安装包中的资源，你还有哪些好的优化方案？欢迎留言跟我和其他同学一起讨论。</p>
+<p>不知道你有没有想过，其实“第三阶段”的无用资源删除方案也并不是终极解决方案，因为它并没有考虑到无用的Assets资源。</p>
+<p>但是对于Assets资源，代码中会有各种各样的引用方式，如果想准确地识别出无用的Assets并不是那么容易。当初在Matrix中，我们尝试提供了一套简单的实现，你可以参考<a href="https://github.com/Tencent/matrix/blob/master/matrix/matrix-android/matrix-apk-canary/src/main/java/com/tencent/matrix/apk/model/task/UnusedAssetsTask.java" target="_blank">UnusedAssetsTask</a>。</p>
+<p>希望你在课后也可以进一步思考，我们可以如何识别出无用的Assets资源，在这个过程中会遇到哪些问题？</p>
+<p>欢迎你点击“请朋友读”，把今天的内容分享给好友，邀请他一起学习。最后别忘了在评论区提交今天的作业，我也为认真完成作业的同学准备了丰厚的“学习加油礼包”，期待与你一起切磋进步哦。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

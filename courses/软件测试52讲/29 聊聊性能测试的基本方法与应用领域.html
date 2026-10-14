@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>29 聊聊性能测试的基本方法与应用领域 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/index.html">软件测试52讲</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">62 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>软件测试52讲</strong><ul><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%E2%80%9C%E5%B0%8F%E5%B7%A5%E2%80%9D%E5%88%B0%E2%80%9C%E4%B8%93%E5%AE%B6%E2%80%9D%EF%BC%8C%E6%88%91%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93.html">00 开篇词 从“小工”到“专家”，我的软件测试修炼之道</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/01%20%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%87%82%E6%B5%8B%E8%AF%95%E5%90%97%EF%BC%9F%E4%BB%8E%E2%80%9C%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E2%80%9D%E6%B5%8B%E8%AF%95%E8%B0%88%E8%B5%B7.html">01 你真的懂测试吗？从“用户登录”测试谈起</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/02%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E2%80%9C%E5%A5%BD%E7%9A%84%E2%80%9D%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F.html">02 如何设计一个“好的”测试用例？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/03%20%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%9F%E5%A6%82%E4%BD%95%E5%81%9A%E5%A5%BD%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%9F.html">03 什么是单元测试？如何做好单元测试？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/04%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9A%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%EF%BC%9F%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E9%A1%B9%E7%9B%AE%E9%80%82%E5%90%88%E5%81%9A%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%EF%BC%9F.html">04 为什么要做自动化测试？什么样的项目适合做自动化测试？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/05%20%E4%BD%A0%E7%9F%A5%E9%81%93%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%90%84%E9%98%B6%E6%AE%B5%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E5%90%97%EF%BC%9F.html">05 你知道软件开发各阶段都有哪些自动化测试技术吗？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/06%20%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%87%82%E6%B5%8B%E8%AF%95%E8%A6%86%E7%9B%96%E7%8E%87%E5%90%97%EF%BC%9F.html">06 你真的懂测试覆盖率吗？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/07%20%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%A1%AB%E5%86%99%E8%BD%AF%E4%BB%B6%E7%BC%BA%E9%99%B7%E6%8A%A5%E5%91%8A%EF%BC%9F.html">07 如何高效填写软件缺陷报告？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/08%20%E4%BB%A5%E7%BB%88%E4%B8%BA%E5%A7%8B%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E5%81%9A%E5%A5%BD%E6%B5%8B%E8%AF%95%E8%AE%A1%E5%88%92%EF%BC%9F.html">08 以终为始，如何才能做好测试计划？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/09%20%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%A0%B8%E5%BF%83%E7%AB%9E%E4%BA%89%E5%8A%9B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">09 软件测试工程师的核心竞争力是什么？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/10%20%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9C%80%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E9%9D%9E%E6%B5%8B%E8%AF%95%E7%9F%A5%E8%AF%86%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">10 软件测试工程师需要掌握的非测试知识有哪些？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/11%20%E4%BA%92%E8%81%94%E7%BD%91%E4%BA%A7%E5%93%81%E7%9A%84%E6%B5%8B%E8%AF%95%E7%AD%96%E7%95%A5%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">11 互联网产品的测试策略应该如何设计？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/12%20%E4%BB%8E0%E5%88%B01%EF%BC%9A%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAGUI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95.html">12 从0到1：你的第一个GUI自动化测试</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/13%20%E6%95%88%E7%8E%87%E4%B8%BA%E7%8E%8B%EF%BC%9A%E8%84%9A%E6%9C%AC%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A7%A3%E8%80%A6%20%2B%20Page%20Object%E6%A8%A1%E5%9E%8B.html">13 效率为王：脚本与数据的解耦 + Page Object模型</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/14%20%E6%9B%B4%E6%8E%A5%E8%BF%91%E4%B8%9A%E5%8A%A1%E7%9A%84%E6%8A%BD%E8%B1%A1%EF%BC%9A%E8%AE%A9%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC%E6%9B%B4%E5%A5%BD%E5%9C%B0%E6%8F%8F%E8%BF%B0%E4%B8%9A%E5%8A%A1.html">14 更接近业务的抽象：让自动化测试脚本更好地描述业务</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/15%20%E8%BF%87%E4%B8%8D%E4%BA%86%E7%9A%84%E5%9D%8E%EF%BC%9A%E8%81%8A%E8%81%8AGUI%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE.html">15 过不了的坎：聊聊GUI自动化过程中的测试数据</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/16%20%E8%84%91%E6%B4%9E%E5%A4%A7%E5%BC%80%EF%BC%9AGUI%E6%B5%8B%E8%AF%95%E8%BF%98%E8%83%BD%E8%BF%99%E4%B9%88%E7%8E%A9%EF%BC%88Page%20Code%20Gen%20%2B%20Data%20Gen%20%2B%20Headless%EF%BC%89%EF%BC%9F.html">16 脑洞大开：GUI测试还能这么玩（Page Code Gen + Data Gen + Headless）？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/17%20%E7%B2%BE%E7%9B%8A%E6%B1%82%E7%B2%BE%EF%BC%9A%E8%81%8A%E8%81%8A%E6%8F%90%E9%AB%98GUI%E6%B5%8B%E8%AF%95%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF.html">17 精益求精：聊聊提高GUI测试稳定性的关键技术</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/18%20%E7%9C%BC%E5%89%8D%E4%B8%80%E4%BA%AE%EF%BC%9A%E5%B8%A6%E4%BD%A0%E7%8E%A9%E8%BD%ACGUI%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A.html">18 眼前一亮：带你玩转GUI自动化的测试报告</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/19%20%E7%9C%9F%E5%AE%9E%E7%9A%84%E6%88%98%E5%9C%BA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E5%A4%A7%E5%9E%8B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E8%AE%BE%E8%AE%A1GUI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%AD%96%E7%95%A5.html">19 真实的战场：如何在大型项目中设计GUI自动化测试策略</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/20%20%E4%B8%8E%E6%97%B6%E4%BF%B1%E8%BF%9B%EF%BC%9A%E6%B5%85%E8%B0%88%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95%E4%B8%8E%E6%80%9D%E8%B7%AF.html">20 与时俱进：浅谈移动应用测试方法与思路</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/21%20%E7%A7%BB%E5%8A%A8%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8%EF%BC%9A%E5%B8%A6%E4%BD%A0%E7%8E%A9%E8%BD%ACAppium.html">21 移动测试神器：带你玩转Appium</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/22%20%E4%BB%8E0%E5%88%B01%EF%BC%9AAPI%E6%B5%8B%E8%AF%95%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F%E5%B8%B8%E7%94%A8API%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E7%AE%80%E4%BB%8B.html">22 从0到1：API测试怎么做？常用API测试工具简介</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/23%20%E7%9F%A5%E5%85%B6%E7%84%B6%E7%9F%A5%E5%85%B6%E6%89%80%E4%BB%A5%E7%84%B6%EF%BC%9A%E8%81%8A%E8%81%8AAPI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F.html">23 知其然知其所以然：聊聊API自动化测试框架的前世今生</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/24%20%E7%B4%A7%E8%B7%9F%E6%97%B6%E4%BB%A3%E6%AD%A5%E4%BC%90%EF%BC%9A%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%BC%8F%E4%B8%8BAPI%E6%B5%8B%E8%AF%95%E8%A6%81%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F.html">24 紧跟时代步伐：微服务模式下API测试要怎么做？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/25%20%E4%B8%8D%E7%A0%B4%E4%B8%8D%E7%AB%8B%EF%BC%9A%E6%8E%8C%E6%8F%A1%E4%BB%A3%E7%A0%81%E7%BA%A7%E6%B5%8B%E8%AF%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%90%86%E5%BF%B5%E4%B8%8E%E6%96%B9%E6%B3%95.html">25 不破不立：掌握代码级测试的基本理念与方法</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/26%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E9%9D%99%E6%80%81%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95.html">26 深入浅出之静态测试方法</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/27%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E5%8A%A8%E6%80%81%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95.html">27 深入浅出之动态测试方法</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/28%20%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E8%A7%A3%E8%AF%BB%E4%B8%8D%E5%90%8C%E8%A7%86%E8%A7%92%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%80%A7%E8%83%BD%E4%B8%8E%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87.html">28 带你一起解读不同视角的软件性能与性能指标</a></li><li><a class="active" aria-current="page" href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/29%20%E8%81%8A%E8%81%8A%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95%E4%B8%8E%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F.html">29 聊聊性能测试的基本方法与应用领域</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/30%20%E5%B7%A5%E6%AC%B2%E5%96%84%E5%85%B6%E4%BA%8B%E5%BF%85%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8%EF%BC%9A%E5%90%8E%E7%AB%AF%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E5%8E%9F%E7%90%86%E4%B8%8E%E8%A1%8C%E4%B8%9A%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%AE%80%E4%BB%8B.html">30 工欲善其事必先利其器：后端性能测试工具原理与行业常用工具简介</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/31%20%E5%B7%A5%E6%AC%B2%E5%96%84%E5%85%B6%E4%BA%8B%E5%BF%85%E5%85%88%E5%88%A9%E5%85%B6%E5%99%A8%EF%BC%9A%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E5%8E%9F%E7%90%86%E4%B8%8E%E8%A1%8C%E4%B8%9A%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%AE%80%E4%BB%8B.html">31 工欲善其事必先利其器：前端性能测试工具原理与行业常用工具简介</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/32%20%E6%97%A0%E5%AE%9E%E4%BE%8B%E6%97%A0%E7%9C%9F%E7%9B%B8%EF%BC%9A%E5%9F%BA%E4%BA%8ELoadRunner%E5%AE%9E%E7%8E%B0%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%84%E5%AE%9E%E8%B7%B5%EF%BC%88%E4%B8%8A%EF%BC%89.html">32 无实例无真相：基于LoadRunner实现企业级服务器端性能测试的实践（上）</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/33%20%E6%97%A0%E5%AE%9E%E4%BE%8B%E6%97%A0%E7%9C%9F%E7%9B%B8%EF%BC%9A%E5%9F%BA%E4%BA%8ELoadRunner%E5%AE%9E%E7%8E%B0%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%84%E5%AE%9E%E8%B7%B5%EF%BC%88%E4%B8%8B%EF%BC%89.html">33 无实例无真相：基于LoadRunner实现企业级服务器端性能测试的实践（下）</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/34%20%E7%AB%99%E5%9C%A8%E5%B7%A8%E4%BA%BA%E7%9A%84%E8%82%A9%E8%86%80%EF%BC%9A%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%AE%9E%E9%99%85%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%A1%88%E4%BE%8B%E4%B8%8E%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB.html">34 站在巨人的肩膀：企业级实际性能测试案例与经验分享</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/35%20%E5%A6%82%E4%BD%95%E5%87%86%E5%A4%87%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%EF%BC%9F.html">35 如何准备测试数据？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/36%20%E6%B5%85%E8%B0%88%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E7%9A%84%E7%97%9B%E7%82%B9.html">36 浅谈测试数据的痛点</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/37%20%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E7%9A%84%E2%80%9C%E9%93%B6%E5%BC%B9%E2%80%9D-%20%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">37 测试数据的“银弹”- 统一测试数据平台（上）</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/38%20%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E7%9A%84%E2%80%9C%E9%93%B6%E5%BC%B9%E2%80%9D-%20%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">38 测试数据的“银弹”- 统一测试数据平台（下）</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/39%20%E4%BB%8E%E5%B0%8F%E4%BD%9C%E5%9D%8A%E5%88%B0%E5%B7%A5%E5%8E%82%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AFSelenium%20Grid%EF%BC%9F%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BASelenium%20Grid%EF%BC%9F.html">39 从小作坊到工厂：什么是Selenium Grid？如何搭建Selenium Grid？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/40%20%E4%BB%8E%E5%B0%8F%E5%B7%A5%E5%88%B0%E4%B8%93%E5%AE%B6%EF%BC%9A%E8%81%8A%E8%81%8A%E6%B5%8B%E8%AF%95%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89.html">40 从小工到专家：聊聊测试执行环境的架构设计（上）</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/41%20%E4%BB%8E%E5%B0%8F%E5%B7%A5%E5%88%B0%E4%B8%93%E5%AE%B6%EF%BC%9A%E8%81%8A%E8%81%8A%E6%B5%8B%E8%AF%95%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89.html">41 从小工到专家：聊聊测试执行环境的架构设计（下）</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/42%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A4%A7%E5%9E%8B%E5%85%A8%E7%90%83%E5%8C%96%E7%94%B5%E5%95%86%E7%9A%84%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">42 实战：大型全球化电商的测试基础架构设计</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/43%20%E5%8F%91%E6%8C%A5%E4%BA%BA%E7%9A%84%E6%BD%9C%E8%83%BD%EF%BC%9A%E6%8E%A2%E7%B4%A2%E5%BC%8F%E6%B5%8B%E8%AF%95.html">43 发挥人的潜能：探索式测试</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/44%20%E6%B5%8B%E8%AF%95%E5%85%88%E8%A1%8C%EF%BC%9A%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%28TDD%29.html">44 测试先行：测试驱动开发(TDD)</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/45%20%E6%89%93%E8%9B%87%E6%89%93%E4%B8%83%E5%AF%B8%EF%BC%9A%E7%B2%BE%E5%87%86%E6%B5%8B%E8%AF%95.html">45 打蛇打七寸：精准测试</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/46%20%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%EF%BC%9A%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95.html">46 安全第一：渗透测试</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/47%20%E7%94%A8%E6%9C%BA%E5%99%A8%E8%AE%BE%E8%AE%A1%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%B5%8B%E8%AF%95.html">47 用机器设计测试用例：基于模型的测试</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/48%20%E4%BC%98%E7%A7%80%E7%9A%84%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%87%82%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">48 优秀的测试工程师为什么要懂大型网站的架构设计？</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/49%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BD%91%E7%AB%99%E9%AB%98%E6%80%A7%E8%83%BD%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">49 深入浅出网站高性能架构设计</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/50%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BD%91%E7%AB%99%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">50 深入浅出网站高可用架构设计</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/51%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BD%91%E7%AB%99%E4%BC%B8%E7%BC%A9%E6%80%A7%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">51 深入浅出网站伸缩性架构设计</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/52%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%BD%91%E7%AB%99%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">52 深入浅出网站可扩展性架构设计</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/%E6%B5%8B%E8%AF%95%E4%B8%93%E6%A0%8F%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E6%B5%85%E8%B0%88%E5%85%A8%E9%93%BE%E8%B7%AF%E5%8E%8B%E6%B5%8B.html">测试专栏特别放送 浅谈全链路压测</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/%E6%B5%8B%E8%AF%95%E4%B8%93%E6%A0%8F%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%E7%AC%AC%E4%B8%80%E6%9C%9F.html">测试专栏特别放送 答疑解惑第一期</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/%E6%B5%8B%E8%AF%95%E4%B8%93%E6%A0%8F%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%E7%AC%AC%E4%B8%83%E6%9C%9F.html">测试专栏特别放送 答疑解惑第七期</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/%E6%B5%8B%E8%AF%95%E4%B8%93%E6%A0%8F%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%E7%AC%AC%E4%B8%89%E6%9C%9F.html">测试专栏特别放送 答疑解惑第三期</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/%E6%B5%8B%E8%AF%95%E4%B8%93%E6%A0%8F%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%E7%AC%AC%E4%BA%8C%E6%9C%9F.html">测试专栏特别放送 答疑解惑第二期</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/%E6%B5%8B%E8%AF%95%E4%B8%93%E6%A0%8F%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%E7%AC%AC%E4%BA%94%E6%9C%9F.html">测试专栏特别放送 答疑解惑第五期</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/%E6%B5%8B%E8%AF%95%E4%B8%93%E6%A0%8F%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%E7%AC%AC%E5%85%AD%E6%9C%9F.html">测试专栏特别放送 答疑解惑第六期</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/%E6%B5%8B%E8%AF%95%E4%B8%93%E6%A0%8F%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%E7%AC%AC%E5%9B%9B%E6%9C%9F.html">测试专栏特别放送 答疑解惑第四期</a></li><li><a href="/courses/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%B8%8D%E6%98%AF%E7%BB%93%E6%9D%9F%EF%BC%8C%E8%80%8C%E6%98%AF%E5%BC%80%E5%A7%8B.html">结束语 不是结束，而是开始</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%9552%E8%AE%B2/29%20%E8%81%8A%E8%81%8A%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95%E4%B8%8E%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="29 聊聊性能测试的基本方法与应用领域" id="title">29 聊聊性能测试的基本方法与应用领域</h1>
+<div><p>你好，我是茹炳晟。今天我和你分享的主题是：聊聊性能测试的基本方法与应用领域。</p>
+<p>在上一次分享《带你一起解读不同视角的软件性能与性能指标》这个主题时，我介绍了衡量软件性能的三个最主要的指标：并发用户数、响应时间和系统吞吐量，和你分享了这个指标的内涵和外延。</p>
+<p>所以，今天我会先继续上次的话题，和你分享并发用户数、响应时间和系统吞吐量这三个指标之间的关系和约束；然后，我会再和你分享性能测试七种常用方法，以及四大应用领域。</p>
+<p>由于性能测试是一个很宽泛的话题，所以不同的人对性能测试的看法也不完全一样，同样一种方法可能也会有不同的表述方式。但是，从我亲身经历的实践来看，我们最关键的还是要去理解这些方法的本质和内涵，这样在面对实际问题时才能处变不惊，灵活应对。</p>
+<p>虽然关于概念、方法和原理的内容会有些枯燥，但是掌握了这些看似枯燥的内容后，你会发现自己的性能测试知识体系越发完善了。当然，在这些看似枯燥的理论讲解中，我也会通过类比的方式，帮助你理解。如果你觉得不过瘾，还想知道一些更细节的实现，欢迎你给我留言，我们一起来讨论。</p>
+<h2 id="并发用户数-响应时间-系统吞吐量之间的关系">并发用户数、响应时间、系统吞吐量之间的关系</h2>
+<p>并发用户数、响应时间、系统吞吐量，这三个名词的含义可能就已经让你感觉云里雾里了，因此我会通过一个我们日常生活中的体检为例，再来解释一下它们到底是什么，以及它们之间的关系和约束。</p>
+<p>你先来想象这样一个场景：假设你找了一份新工作，入职前需要到体检中心完成入职体检。</p>
+<p>在体检中心做检查的过程，通常是先到前台登记个人信息并领取体检单，然后根据体检单的检查项目依次完成不同科室的检查。</p>
+<p>假设一共有5个科室，每个科室有3个候诊室，你发现体检中心有很多人都在做检查，那么你一般会选择先做排队人数较少的检查项目，直至完成5个科室的全部检查，最后离开体检中心。</p>
+<p>现在，我们做个类比：把整个体检中心想象成一个软件系统，从你进入体检中心到完成全部检查离开所花费的时间就是响应时间，而同时在体检中心参加体检的总人数就是并发用户数，那么系统吞吐量就可以想象成是单位时间内完成体检的人数，比如每小时100人。</p>
+<p>如果你到达体检中心的时间比较早，这时人还很少，5个科室都不用排队，那么你就能以最短的时间完成体检。</p>
+<p>也就是说，当系统的并发用户数比较少时，响应时间就比较短；但是由于整体的并发用户数少，所以系统的吞吐量也很低。从中，我们可以得出这样的结论：</p>
+<blockquote>
+<p>当系统并发用户数较少时，系统的吞吐量也低，系统处于空闲状态，我们往往把这个阶段称为 “空闲区间”。</p>
+</blockquote>
+<p>如果你到达体检中心时，这里的人已经比较多了，只有部分科室不需要排队，但好在每个科室都有3个候诊室同时进行检查，所以排队时间不会很长，你还是可以在较短的时间完成体检。</p>
+<p>也就是说，当系统的并发用户数比较多时，响应时间不会增加太多，因此系统的整体吞吐量也随着并发用户数的变大而变大的。从中，我们可以得出这样的结论：</p>
+<blockquote>
+<p>当系统整体负载并不是很大时，随着系统并发用户数的增长，系统的吞吐量也会随之呈线性增长，我们往往把这个阶段称为 “线性增长区间”。</p>
+</blockquote>
+<p>但是，当体检中心的人越来越多时，每个科室都需要排队，而且每个科室的队伍都很长，你每检查完一个项目都要花很长时间去排队进行下一个检查项目。这样一来，你完成体检的时间就会明显变长。</p>
+<p>也就是说，系统的并发用户数达到一定规模时，每个用户的响应时间都会明显变长，所以系统的整体吞吐量并不会继续随着并发用户数的增长而增长。从中，我们可以得出这样的结论：</p>
+<blockquote>
+<p>随着系统并发用户数的进一步增长，系统的处理能力逐渐趋于饱和，因此每个用户的响应时间会逐渐变长。相应地，系统的整体吞吐量并不会随着并发用户数的增长而继续呈线性增长。我们往往把这个阶段称为系统的“拐点”。</p>
+</blockquote>
+<p>最糟糕的情况来了，如果体检中心的人继续增加，你会发现连排队、站人的地方都没有了，所有人都被堵在了一起，候诊室中检查完的人出不来，排队的人又进不去。</p>
+<p>也就是说，系统的并发用户数已经突破极限，每个用户的响应时间变得无限长，因此系统的整体吞吐量变成了零。换言之，此时的系统已经被压垮了。从中，我们可以得出这样的结论：</p>
+<blockquote>
+<p>随着系统并发用户数的增长，系统处理能力达到过饱和状态。此时，如果继续增加并发用户数，最终所有用户的响应时间会变得无限长。相应地，系统的整体吞吐量会降为零，系统处于被压垮的状态。我们往往把这个阶段称为“过饱和区间”。</p>
+</blockquote>
+<p>通过这个类比，相信你已经对并发用户数、响应时间和系统吞吐量理解得更透彻了，对于它们之间的关系和约束，也都了然于胸了。</p>
+<p>只有理解了这些主要性能指标之间的约束关系，我们才能在实际的性能测试实践中设计有的放矢的性能测试场景。比如，后端性能测试的测试负载，我们一般只会把它设计在“线性增长区间”内；而压力测试的测试负载，我们则会将它设计在系统“拐点”上下，甚至是“过饱和区间”。</p>
+<p>那么，接下来让我们一起来看一下性能测试的方法都有哪些。</p>
+<h2 id="常用的七种性能测试方法">常用的七种性能测试方法</h2>
+<p>根据在实际项目中的实践经验，我把常用的性能测试方法分为七大类：后端性能测试（Back-end Performance Test）、前端性能测试（Front-end Performance Test）、代码级性能测试（Code-level Performance Test）、压力测试（Load/Stress Test）、配置测试（Configuration Test）、并发测试（Concurrence Test），以及可靠性测试（Reliability Test）。接下来，我将详细为你介绍每一种测试方法。</p>
+<p><strong>第一，后端性能测试</strong></p>
+<p>其实，你平时听到的性能测试，大多数情况下指的是后端性能测试，也就是服务器端性能测试。</p>
+<p><strong>后端性能测试，是通过性能测试工具模拟大量的并发用户请求，然后获取系统性能的各项指标，并且验证各项指标是否符合预期的性能需求的测试手段。</strong></p>
+<p>这里的性能指标，除了包括并发用户数、响应时间和系统吞吐量外，还应该包括各类资源的使用率，比如系统级别的CPU占用率、内存使用率、磁盘I/O和网络I/O等，再比如应用级别以及JVM级别的各类资源使用率指标等。</p>
+<p>由于需要模拟的并发用户数，通常在“几百”到“几百万”的数量级，所以你选择的性能测试工具，一定不是基于GUI的，而是要采用基于协议的模拟方式，也就是去模拟用户在GUI操作的过程中实际向后端服务发起的请求。</p>
+<p>只有这样才能模拟很高的并发用户数，尽可能地模拟出真实的使用场景，这也是现在所有后端性能测试工具所采用的方法。</p>
+<p>根据应用领域的不同，后端性能测试的场景设计主要包括以下两种方式：</p>
+<ul>
+<li>基于性能需求目标的测试验证；</li>
+<li>探索系统的容量，并验证系统容量的可扩展性</li>
+</ul>
+<p><strong>第二，前端性能测试</strong></p>
+<p>前端性能测试并没有一个严格的定义和标准。</p>
+<p><strong>通常来讲，前端性能关注的是浏览器端的页面渲染时间、资源加载顺序、请求数量、前端缓存使用情况、资源压缩等内容，希望借此找到页面加载过程中比较耗时的操作和资源，然后进行有针对性的优化，最终达到优化终端用户在浏览器端使用体验的目的。</strong></p>
+<p>目前，业界普遍采用的前端测试方法，是雅虎（Yahoo）前端团队总结的7大类35条前端优化规则，你可以通过<a href="https://developer.yahoo.com/performance/rules.html?guccounter=1" target="_blank">雅虎网站</a>查看这些规则，以及对各规则的详细解读。</p>
+<p>我在这里列出了其中几个最典型也是最重要的规则，来帮助你理解前端性能测试优化的关注范围。</p>
+<ul>
+<li><strong>减少http请求次数</strong>：http请求数量越多，执行过程耗时就越长，所以可以采用合并多个图片到一个图片文件的方法来减少http请求次数，也可以采用将多个脚本文件合并成单一文件的方式减少http请求次数；</li>
+<li><strong>减少DNS查询次数</strong>：DNS的作用是将URL转化为实际服务器主机IP地址，实现原理是分级查找，查找过程需要花费20~100ms的时间，所以一方面我们要加快单次查找的时间，另一方面也要减少一个页面中资源使用了多个不同域的情况；</li>
+<li><strong>避免页面跳转</strong>：页面跳转相当于又打开一个新的页面，耗费的时间就会比较长，所以要尽量避免使用页面跳转；</li>
+<li><strong>使用内容分发网络（CDN）</strong>：使用CDN相当于对静态内容做了缓存，并把缓存内容放在网络供应商（ISP）的机房，用户根据就近原则到ISP机房获取这些被缓存了的静态资源，因此可以大幅提高性能；</li>
+<li><strong>Gzip压缩传输文件</strong>：压缩可以帮助减小传输文件的大小，进而可以从网络传输时间的层面来减少响应时间；</li>
+</ul>
+<p><strong>第三，代码级性能测试</strong></p>
+<p><strong>代码级性能测试，是指在单元测试阶段就对代码的时间性能和空间性能进行必要的测试和评估，以防止底层代码的效率问题在项目后期才被发现的尴尬。</strong></p>
+<p>如果你从事过性能测试相关的工作，一定遇到过这样的场景：系统级别的性能测试发现一个操作的响应时间很长，然后你要花费很多时间去逐级排查，最后却发现罪魁祸首是代码中某个实现低效的底层算法。这种自上而下的逐级排查定位的方法，效率通常都很低，代价也很高。</p>
+<p>所以，我们就需要在项目早期，对一些关键算法进行代码级别的性能测试，以防止此类在代码层面就可以被发现的性能问题，遗留到最后的系统性能测试阶段才被发现。</p>
+<p>但是，从实际执行的层面来讲，代码级性能测试并不存在严格意义上的测试工具，通常的做法是：改造现有的单元测试框架。</p>
+<p>最常使用的改造方法是：</p>
+<ol>
+<li><p>将原本只会执行一次的单元测试用例连续执行n次，这个n的取值范围通常是2000~5000；</p></li>
+<li><p>统计执行n次的平均时间。如果这个平均时间比较长（也就是单次函数调用时间比较长）的话，比如已经达到了秒级，那么通常情况下这个被测函数的实现逻辑一定需要优化。</p></li>
+</ol>
+<p>这里之所以采用执行n次的方式，是因为函数执行时间往往是毫秒级的，单次执行的误差会比较大，所以采用多次执行取平均值的做法。</p>
+<p><strong>第四，压力测试</strong></p>
+<p><strong>压力测试，通常指的是后端压力测试</strong>，一般采用后端性能测试的方法，不断对系统施加压力，并验证系统化处于或长期处于临界饱和阶段的稳定性以及性能指标，并试图找到系统处于临界状态时的主要瓶颈点。所以，压力测试往往被用于系统容量规划的测试。</p>
+<p>还有些情况，在执行压力测试时，我们还会故意在临界饱和状态的基础上继续施加压力，直至系统完全瘫痪，观察这个期间系统的行为；然后，逐渐减小压力，观察瘫痪的系统是否可以自愈。</p>
+<p><strong>第五，配置测试</strong></p>
+<p>配置测试，主要用于观察系统在不同配置下的性能表现，通常使用后端性能测试的方法：</p>
+<ol>
+<li><p>通过性能基准测试（Performance Benchmark）建立性能基线（Performance Baseline）；</p></li>
+<li><p>在此基础上，调整配置；</p></li>
+<li><p>基于同样的性能基准测试，观察不同配置条件下系统性能的差异，根本目的是要找到特定压力模式下的最佳配置。</p></li>
+</ol>
+<p>这里需要注意的是，“配置”是一个广义配置的概念，包含了以下多个层面的配置：</p>
+<ul>
+<li>宿主操作系统的配置；</li>
+<li>应用服务器的配置；</li>
+<li>数据库的配置；</li>
+<li>JVM的配置；</li>
+<li>网络环境的配置；</li>
+<li>…</li>
+</ul>
+<p><strong>第六，并发测试</strong></p>
+<p>并发测试，指的是在同一时间，同时调用后端服务，期间观察被调用服务在并发情况下的行为表现，旨在发现诸如资源竞争、资源死锁之类的问题。</p>
+<p>谈到并发测试，我就不得不和你说说“集合点并发”的概念了，它源于HP的LoadRunner，目前已经被广泛使用了。那，到底什么是“集合点并发”呢？</p>
+<p>假设我们希望后端调用的并发数是100，如果直接设定100个并发用户是无法达到这个目标的，因为这100个并发用户会各自执行各自的操作，你无法控制某一个确定的时间点上后端服务的并发数量。</p>
+<p>为了达到准确控制后端服务并发数的目的，我们需要让某些并发用户到达该集合点时，先处于等待状态，直到参与该集合的全部并发用户都到达时，再一起向后端服务发起请求。简单地说，就是先到的并发用户要等着，等所有并发用户都到了以后，再集中向后端服务发起请求。</p>
+<p>比如，当要求的集合点并发数是100时，那么前99个到达的用户都会等在那里，直到第100个用户到了，才集中向后端服务发起请求。当然，实际达到服务器的并发请求数，还会因为网络延迟等原因小于100。</p>
+<p>所以，<strong>在实际项目中，我建议在要求的并发数上进行适当放大，比如要求的并发数是100，那我们集合点并发数可以设置为120。</strong></p>
+<p><strong>第七，可靠性测试</strong></p>
+<p>可靠性测试，是验证系统在常规负载模式下长期运行的稳定性。</p>
+<p><strong>虽然可靠性测试在不同公司的叫法不同，但其本质就是通过长时间模拟真实的系统负载来发现系统潜在的内存泄漏、链接池回收等问题</strong>。</p>
+<p>由于真实环境下的实际负载，会有高峰和低谷的交替变化（比如，对于企业级应用，白天通常是高峰时段，而晚上则是低峰时段），所以为了尽可能地模拟出真实的负载情况，我们会每12小时模拟一个高峰负载，两个高峰负载中间会模拟一个低峰负载，依次循环3-7天，形成一个类似于“波浪形”的系统测试负载曲线。</p>
+<p>然后，用这个“波浪形”的测试负载模拟真实的系统负载，完成可靠性测试。同样地，可靠性测试也会持续3-7天。</p>
+<p>聊完了常用性能测试方法的种类后，我们再来简单看一下性能测试的四大应用领域，以及每个应用领域都会使用哪些性能测试方法。</p>
+<h2 id="性能测试的四大应用领域">性能测试的四大应用领域</h2>
+<p>不同的性能测试方法适用于不同的应用领域去解决不同的问题，这里“不同的应用领域”主要包括能力验证、能力规划、性能调优、缺陷发现这四大方面。每个应用领域可以根据自身特点，选择合适的测试方法。</p>
+<p><strong>第一，能力验证</strong></p>
+<p>能力验证是最常用，也是最容易理解的性能测试的应用领域，主要是验证“某系统能否在A条件下具有B能力”，通常要求在明确的软硬件环境下，根据明确的系统性能需求设计测试方案和用例。</p>
+<p>能力验证这个领域最常使用的测试方法，包括后端性能测试、压力测试和可靠性测试。</p>
+<p><strong>第二，能力规划</strong></p>
+<p>能力规划关注的是，如何才能使系统达到要求的性能和容量。通常情况下，我们会采用探索性测试的方式来了解系统的能力。</p>
+<p>能力规划解决的问题，主要包括以下几个方面：</p>
+<ul>
+<li>能否支持未来一段时间内的用户增长；</li>
+<li>应该如何调整系统配置，使系统能够满足不断增长的用户数需求；</li>
+<li>应用集群的可扩展性验证，以及寻找集群扩展的瓶颈点；</li>
+<li>数据库集群的可扩展性验证；</li>
+<li>缓存集群的可扩展性验证；</li>
+<li>…</li>
+</ul>
+<p>能力规划最常使用的测试方法，主要有后端性能测试、压力测试、配置测试和可靠性测试。</p>
+<p><strong>第三，性能调优</strong></p>
+<p>性能调优，其实是性能测试的延伸。在一些大型软件公司，会有专门的性能工程（Performance Engineering）团队，除了负责性能测试的工作外，还会负责性能调优。</p>
+<p>性能调优主要解决性能测试过程中发现的性能瓶颈的问题，通常会涉及多个层面的调整，包括硬件设备选型、操作系统配置、应用系统配置、数据库配置和应用代码实现的优化等等。</p>
+<p>这个领域最常用的测试方法，涵盖了我在上面分享的七大类测试方法，即后端性能测试、前端性能测试、代码级性能测试、压力测试、配置测试、并发测试和可靠性测试。</p>
+<p><strong>第四，缺陷发现</strong></p>
+<p>缺陷发现，是一个比较直接的应用领域，通过性能测试的各种方法来发现诸如内存泄露、资源竞争、不合理的线程锁和死锁等问题。</p>
+<p>缺陷发现，最常用的测试方法主要有并发测试、压力测试、后端性能测试和代码级性能测试。</p>
+<p>上面这些内容就是性能测试的常用方法和应用领域了，我用一张表汇总了各个应用领域需要用到的测试方法，希望可以帮助你记忆、理解。</p>
+<p><img alt="" src="/assets/153bff33c98ffc5eda22fb89.png"/></p>
+<h2 id="总结">总结</h2>
+<p>今天我通过一个生活中“体检”的实例，和你分享了并发用户数、响应时间和系统吞吐量三者之间的关系：</p>
+<ul>
+<li>当系统整体负载并不是很大时，随着并发用户数的增长，系统的吞吐量也会随之线性增长；</li>
+<li>随着并发用户数的进一步增长，系统处理能力逐渐趋于饱和，因此每个用户的响应时间会逐渐变长，相应地，系统的整体吞吐量并不会随着并发用户数的增长而继续线性增长。</li>
+<li>如果并发用户数再继续增长，系统处理能力达到过饱和状态，此时所有用户的响应时间会变得无限长，相应地，系统的整体吞吐量会降为零，系统处于被压垮的状态。</li>
+</ul>
+<p>然后，我跟你分享了后端性能测试、前端性能测试、代码级性能测试、压力测试、配置测试、并发测试，以及可靠性测试这七种常用的性能测试方法，并探讨了这七种方法在能力验证、能力规划、性能调优和缺陷发现这四种场景下的使用情况。</p>
+<p>希望我今天的分享，可以帮你打好性能测试知识体系的基础，解决你在实际项目中遇到的问题。</p>
+<h2 id="思考题">思考题</h2>
+<p>我今天提到的性能测试的七种测试方法，以及四大应用领域，你在实际的工程项目中接触过哪些呢？在使用过程中，你有没有遇到过什么问题，又是如何解决的？</p>
+<p>感谢你的收听，欢迎给我留言。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

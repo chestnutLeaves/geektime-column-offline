@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>13 继承和多态：面向对象运行期的动态特性 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/index.html">编译原理之美</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">43 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理之美</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%EF%BC%9F.html">00 开篇词 为什么你要学习编译原理？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/01%20%E7%90%86%E8%A7%A3%E4%BB%A3%E7%A0%81%EF%BC%9A%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF.html">01 理解代码：编译器的前端技术</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/02%20%E6%AD%A3%E5%88%99%E6%96%87%E6%B3%95%E5%92%8C%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8.html">02 正则文法和有限自动机：纯手工打造词法分析器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E5%85%AC%E5%BC%8F%E8%AE%A1%E7%AE%97%E5%99%A8.html">03 语法分析（一）：纯手工打造公式计算器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/04%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%A7%A3%E5%86%B3%E4%BA%8C%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E9%9A%BE%E7%82%B9.html">04 语法分析（二）：解决二元表达式中的难点</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/05%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%97%A8%E7%AE%80%E5%8D%95%E7%9A%84%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80.html">05 语法分析（三）：实现一门简单的脚本语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/06%20%E7%BC%96%E8%AF%91%E5%99%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%94%A8Antlr%E7%94%9F%E6%88%90%E8%AF%8D%E6%B3%95%E3%80%81%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8.html">06 编译器前端工具（一）：用Antlr生成词法、语法分析器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/07%20%E7%BC%96%E8%AF%91%E5%99%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%94%A8Antlr%E9%87%8D%E6%9E%84%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80.html">07 编译器前端工具（二）：用Antlr重构脚本语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/08%20%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E7%94%9F%E5%AD%98%E6%9C%9F%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%87%BD%E6%95%B0.html">08 作用域和生存期：实现块作用域和函数</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/09%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%9A%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%92%8C%E6%96%B9%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85.html">09 面向对象：实现数据和方法的封装</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/10%20%E9%97%AD%E5%8C%85%EF%BC%9A%20%E7%90%86%E8%A7%A3%E4%BA%86%E5%8E%9F%E7%90%86%EF%BC%8C%E5%AE%83%E5%B0%B1%E4%B8%8D%E5%8F%8D%E7%9B%B4%E8%A7%89%E4%BA%86.html">10 闭包： 理解了原理，它就不反直觉了</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/11%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E5%AE%8C%E5%96%84%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">11 语义分析（上）：如何建立一个完善的类型系统？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/12%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9B%B8%E5%85%B3%E6%83%85%E5%86%B5%E7%9A%84%E5%A4%84%E7%90%86%EF%BC%9F.html">12 语义分析（下）：如何做上下文相关情况的处理？</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/13%20%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%90%E8%A1%8C%E6%9C%9F%E7%9A%84%E5%8A%A8%E6%80%81%E7%89%B9%E6%80%A7.html">13 继承和多态：面向对象运行期的动态特性</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/14%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%8F%E6%98%8E%E5%9C%B0%E6%94%AF%E6%8C%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%EF%BC%9F.html">14 前端技术应用（一）：如何透明地支持数据库分库分表？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/15%20%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E6%8A%A5%E8%A1%A8%E5%B7%A5%E5%85%B7%EF%BC%9F.html">15 前端技术应用（二）：如何设计一个报表工具？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/16%20NFA%E5%92%8CDFA%EF%BC%9A%E5%A6%82%E4%BD%95%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B7%A5%E5%85%B7%EF%BC%9F.html">16 NFA和DFA：如何自己实现一个正则表达式工具？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/17%20First%E5%92%8CFollow%E9%9B%86%E5%90%88%EF%BC%9A%E7%94%A8LL%E7%AE%97%E6%B3%95%E6%8E%A8%E6%BC%94%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B.html">17 First和Follow集合：用LL算法推演一个实例</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/18%20%E7%A7%BB%E8%BF%9B%E5%92%8C%E8%A7%84%E7%BA%A6%EF%BC%9A%E7%94%A8LR%E7%AE%97%E6%B3%95%E6%8E%A8%E6%BC%94%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8B.html">18 移进和规约：用LR算法推演一个实例</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/19%20%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%9A%E5%AF%B9%E4%BA%8E%E5%B7%A6%E9%80%92%E5%BD%92%E7%9A%84%E8%AF%AD%E6%B3%95%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E6%8E%A8%E5%AF%BC%E4%B8%8D%E6%98%AF%E5%B7%A6%E9%80%92%E5%BD%92%E7%9A%84%EF%BC%9F.html">19 案例总结与热点问题答疑：对于左递归的语法，为什么我的推导不是左递归的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/20%20%E9%AB%98%E6%95%88%E8%BF%90%E8%A1%8C%EF%BC%9A%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF.html">20 高效运行：编译器的后端技术</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/21%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%AA%81%E7%A0%B4%E7%8E%B0%E8%B1%A1%E7%9C%8B%E6%9C%AC%E8%B4%A8%EF%BC%8C%E9%80%8F%E8%BF%87%E8%AF%AD%E6%B3%95%E7%9C%8B%E8%BF%90%E8%A1%8C%E6%97%B6.html">21 运行时机制：突破现象看本质，透过语法看运行时</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/22%20%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%85%B6%E5%AE%9E%E4%B8%8D%E9%9A%BE%E5%AD%A6.html">22 生成汇编代码（一）：汇编语言其实不难学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/23%20%E7%94%9F%E6%88%90%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8A%8A%E8%84%9A%E6%9C%AC%E7%BC%96%E8%AF%91%E6%88%90%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6.html">23 生成汇编代码（二）：把脚本编译成可执行文件</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/24%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E5%85%BC%E5%AE%B9%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%AD%E8%A8%80%E5%92%8C%E7%A1%AC%E4%BB%B6.html">24 中间代码：兼容不同的语言和硬件</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/25%20%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF%E7%9A%84%E9%87%8D%E7%94%A8%EF%BC%9ALLVM%E4%B8%8D%E4%BB%85%E4%BB%85%E8%AE%A9%E4%BD%A0%E9%AB%98%E6%95%88.html">25 后端技术的重用：LLVM不仅仅让你高效</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/26%20%E7%94%9F%E6%88%90IR%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%9D%99%E6%80%81%E7%BC%96%E8%AF%91%E7%9A%84%E8%AF%AD%E8%A8%80.html">26 生成IR：实现静态编译的语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/27%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E6%AF%94%E4%BB%96%E7%9A%84%E6%9B%B4%E9%AB%98%E6%95%88%EF%BC%9F.html">27 代码优化：为什么你的代码比他的更高效？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/28%20%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90%EF%BC%9A%E4%BD%A0%E5%86%99%E7%9A%84%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%AE%83%E6%9B%B4%E6%87%82.html">28 数据流分析：你写的程序，它更懂</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/29%20%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%82%E5%BA%94%E5%90%84%E7%A7%8D%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9F.html">29 目标代码的生成和优化（一）：如何适应各种硬件架构？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/30%20%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%82%E5%BA%94%E5%90%84%E7%A7%8D%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9F.html">30 目标代码的生成和优化（二）：如何适应各种硬件架构？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/31%20%E5%86%85%E5%AD%98%E8%AE%A1%E7%AE%97%EF%BC%9A%E5%AF%B9%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%81%9A%E8%AE%A1%E7%AE%97%EF%BC%8C%E5%88%B0%E5%BA%95%E5%8F%AF%E4%BB%A5%E6%9C%89%E5%A4%9A%E5%BF%AB%EF%BC%9F.html">31 内存计算：对海量数据做计算，到底可以有多快？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/32%20%E5%AD%97%E8%8A%82%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Spring%E6%8A%80%E6%9C%AF%E5%BE%88%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">32 字节码生成：为什么Spring技术很强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/33%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%9A%E8%83%BD%E5%90%A6%E4%B8%8D%E5%81%9C%E4%B8%8B%E6%95%B4%E4%B8%AA%E4%B8%96%E7%95%8C%EF%BC%9F.html">33 垃圾收集：能否不停下整个世界？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/34%20%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BC%98%E5%8C%96%EF%BC%9A%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E4%BD%9C%E7%94%A8.html">34 运行时优化：即时编译的原理和作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/35%20%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%9A%E5%90%8E%E7%AB%AF%E9%83%A8%E5%88%86%E7%9C%9F%E7%9A%84%E6%AF%94%E5%89%8D%E7%AB%AF%E9%83%A8%E5%88%86%E9%9A%BE%E5%90%97%EF%BC%9F.html">35 案例总结与热点问题答疑：后端部分真的比前端部分难吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/36%20%E5%BD%93%E5%89%8D%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%AF%B9%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E7%9A%84%E5%BD%B1%E5%93%8D.html">36 当前技术的发展趋势以及其对编译技术的影响</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/37%20%20%E4%BA%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BC%9A%E5%A6%82%E4%BD%95%E6%94%B9%E5%8F%98%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">37  云编程：云计算会如何改变编程模式？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/38%20%E5%85%83%E7%BC%96%E7%A8%8B%EF%BC%9A%E4%B8%80%E8%BE%B9%E5%86%99%E7%A8%8B%E5%BA%8F%EF%BC%8C%E4%B8%80%E8%BE%B9%E5%86%99%E8%AF%AD%E8%A8%80.html">38 元编程：一边写程序，一边写语言</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E5%8A%A0%E9%A4%90%20%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A8%8B%E4%B8%8E%E6%A0%88%E5%B8%A7%E7%AE%A1%E7%90%86.html">加餐 汇编代码编程与栈帧管理</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E5%9B%A0%E4%B8%BA%E7%83%AD%E7%88%B1%EF%BC%8C%E6%89%80%E4%BB%A5%E5%9D%9A%E6%8C%81.html">用户故事 因为热爱，所以坚持</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%AC%AC%E4%BA%8C%E5%AD%A3%E5%9B%9E%E5%BD%92%20%E8%BF%99%E6%AC%A1%EF%BC%8C%E6%88%91%E4%BB%AC%E4%B8%80%E8%B5%B7%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8.html">第二季回归 这次，我们一起实战解析真实世界的编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80%EF%BC%8C%E6%8E%A8%E5%8A%A8%E8%BF%99%E4%B8%AA%E4%B8%96%E7%95%8C%E7%9A%84%E6%BC%94%E5%8C%96.html">结束语 用程序语言，推动这个世界的演化</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B9%8B%E7%BE%8E/13%20%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BF%90%E8%A1%8C%E6%9C%9F%E7%9A%84%E5%8A%A8%E6%80%81%E7%89%B9%E6%80%A7.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="13 继承和多态：面向对象运行期的动态特性" id="title">13 继承和多态：面向对象运行期的动态特性</h1>
+<div><p>面向对象是一个比较大的话题。在“<a href="https://time.geekbang.org/column/article/130422" target="_blank">09 | 面向对象：实现数据和方法的封装</a>”中，我们了解了面向对象的封装特性，也探讨了对象成员的作用域和生存期特征等内容。本节课，我们再来了解一下面向对象的另外两个重要特征：<strong>继承和多态。</strong></p>
+<p>你也许会问，为什么没有在封装特性之后，马上讲继承和多态呢？那是因为继承和多态涉及的语义分析阶段的知识点比较多，特别是它对类型系统提出了新的概念和挑战，所以我们先掌握语义分析，再了解这部分内容，才是最好的选择。</p>
+<p>继承和多态对类型系统提出的新概念，就是子类型。我们之前接触的类型往往是并列关系，你是整型，我是字符串型，都是平等的。而现在，一个类型可以是另一个类型的子类型，比如我是一只羊，又属于哺乳动物。这会导致我们在编译期无法准确计算出所有的类型，从而无法对方法和属性的调用做完全正确的消解（或者说绑定）。这部分工作要留到运行期去做，也因此，面向对象编程会具备非常好的优势，因为它会导致多态性。这个特性会让面向对象语言在处理某些类型的问题时，更加优雅。</p>
+<p>而我们要想深刻理解面向对象的特征，就必须了解子类型的原理和运行期的机制。所以，接下来，我们从类型体系的角度理解继承和多态，然后看看在编译期需要做哪些语义分析，再考察继承和多态的运行期特征。</p>
+<h2 id="从类型体系的角度理解继承和多态">从类型体系的角度理解继承和多态</h2>
+<p><strong>继承的意思是一个类的子类，自动具备了父类的属性和方法，除非被父类声明为私有的。</strong>比如一个类是哺乳动物，它有体重（weight）的属性，还会做叫(speak)的操作。如果基于哺乳动物这个父类创建牛和羊两个子类，那么牛和羊就自动继承了哺乳动物的属性，有体重，还会叫。</p>
+<p>所以继承的强大之处，就在于重用。也就是有些逻辑，如果在父类中实现，在子类中就不必重复实现。</p>
+<p><strong>多态的意思是同一个类的不同子类，在调用同一个方法时会执行不同的动作。</strong>这是因为每个子类都可以重载掉父类的某个方法，提供一个不同的实现。哺乳动物会“叫”，而牛和羊重载了这个方法，发出“哞~”和“咩~”的声音。这似乎很普通，但如果创建一个哺乳动物的数组，并在里面存了各种动物对象，遍历这个数组并调用每个对象“叫”的方法时，就会发出“哞~”“咩~”“喵~”等各种声音，这就有点儿意思了。</p>
+<p>下面这段示例代码，演示了继承和多态的特性，a的speak()方法和b的speak()方法会分别打印出牛叫和羊叫，调用的是子类的方法，而不是父类的方法：</p>
+<pre><code>/**
+mammal.play 演示面向对象编程：继承和多态。
+*/
+class Mammal{
+    int weight = 20;  
+    boolean canSpeak(){
+        return true;
+    }
+
+    void speak(){
+        println("mammal speaking...");
+    }
+}
+
+class Cow extends Mammal{
+    void speak(){
+        println("moo~~ moo~~");
+    }
+}
+
+class Sheep extends Mammal{
+    void speak(){
+        println("mee~~ mee~~");
+        println("My weight is: " + weight); //weight的作用域覆盖子类
+    }
+}
+
+//将子类的实例赋给父类的变量
+Mammal a = Cow();
+Mammal b = Sheep();
+
+//canSpeak()方法是继承的
+println("a.canSpeak() : " + a.canSpeak());
+println("b.canSpeak() : " + b.canSpeak());
+
+//下面两个的叫声会不同，在运行期动态绑定方法
+a.speak();  //打印牛叫
+b.speak();  //打印羊叫
+</code></pre>
+<p>所以，多态的强大之处，在于虽然每个子类不同，但我们仍然可以按照统一的方式使用它们，做到求同存异。<strong>以前端工程师天天打交道的前端框架为例，这是最能体现面向对象编程优势的领域之一。</strong></p>
+<p>前端界面往往会用到各种各样的小组件，比如静态文本、可编辑文本、按钮等等。如果我们想刷新组件的显示，没必要针对每种组件调用一个方法，把所有组件的类型枚举一遍，可以直接调用父类中统一定义的方法redraw()，非常简洁。即便将来添加新的前端组件，代码也不需要修改，程序也会更容易维护。</p>
+<p><strong>总结一下：</strong>面向对象编程时，我们可以给某个类创建不同的子类，实现一些个性化的功能；写程序时，我们可以站在抽象度更高的层次上，不去管具体的差异。</p>
+<p>如果把上面的结论抽象成一般意义上的类型理论，就是<strong>子类型（subtype）。</strong></p>
+<p>子类型（或者动名词：子类型化），是对我们前面讲的类型体系的一个补充。</p>
+<p>子类型的核心是提供了is-a的操作。也就是对某个类型所做的所有操作都可以用子类型替代。因为子类型 is a 父类型，也就是能够兼容父类型，比如一只牛是哺乳动物。</p>
+<p>这意味着只要对哺乳动物可以做的操作，都可以对牛来做，这就是子类型的好处。它可以放宽对类型的检查，从而导致多态。你可以粗略地把面向对象的继承看做是子类型化的一个体现，它的结果就是能用子类代替父类，从而导致多态。</p>
+<p>子类型有两种实现方式：一种就是像Java和C++语言，需要显式声明继承了什么类，或者实现了什么接口。这种叫做名义子类型（Nominal Subtyping）。</p>
+<p>另一种是结构化子类型（Structural Subtyping），又叫鸭子类型（Duck Type）。也就是一个类不需要显式地说自己是什么类型，只要它实现了某个类型的所有方法，那就属于这个类型。鸭子类型是个直观的比喻，如果我们定义鸭子的特征是能够呱呱叫，那么只要能呱呱叫的，就都是鸭子。</p>
+<p>了解了继承和多态之后，我们看看在编译期如何对继承和多态的特性做语义分析。</p>
+<h2 id="如何对继承和多态的特性做语义分析">如何对继承和多态的特性做语义分析</h2>
+<p>针对哺乳动物的例子，我们用前面语义分析的知识，看看如何在编译期针对继承和多态做语义分析，也算对语义分析的知识点进行应用和复盘。</p>
+<p>首先，从类型处理的角度出发，我们要识别出新的类型：Mammal、Cow和Sheep。之后，就可以用它们声明变量了。</p>
+<p>第二，我们要设置正确的作用域。</p>
+<p>从作用域的角度来看，一个类的属性（或者说成员变量），是可以规定能否被子类访问的。以Java为例，除了声明为private的属性以外，其他属性在子类中都是可见的。所以父类的属性的作用域，可以说是以树状的形式覆盖到了各级子类：</p>
+<p><img alt="" src="/assets/7f08fbe4fbd6c5dfe5328570.jpg"/></p>
+<p>第三，要对变量和函数做类型的引用消解。</p>
+<p>也就是要分析出a和b这两个变量的类型。那么a和b的类型是什么呢？是父类Mammal？还是Cow或Sheep？</p>
+<p>注意，代码里是用Mammal来声明这两个变量的。按照类型推导的算法，a和b都是Mammal，这是个I属性计算的过程。也就是说，在编译期，我们无法知道变量被赋值的对象确切是哪个子类型，只知道声明变量时，它们是哺乳动物类型，至于是牛还是羊，就不清楚了。</p>
+<p>你可能会说：“不对呀，我在编译的时候能知道a和b的准确类型啊，因为我看到了a是一个Cow对象，而b是一个Sheep，代码里有这两个对象的创建过程，我可以推导出a和b的实际类型呀。”</p>
+<p>没错，语言的确有自动类型推导的特性，但你忽略了限制条件。比如，强类型机制要求变量的类型一旦确定，在运行过程就不能再改，所以要让a和b能够重新指向其他的对象，并保持类型不变。从这个角度出发，a和b的类型只能是父类Mammal。</p>
+<p>所以说，编译期无法知道变量的真实类型，可能只知道它的父类型，也就是知道它是一个哺乳动物，但不知道它具体是牛还是羊。这会导致我们没法正确地给speak()方法做引用消解。正确的消解，是要指向Cow和Sheep的speak方法，而我们只能到运行期再解决这个问题。</p>
+<p>所以接下来，我们就讨论一下如何在运行期实现方法的动态绑定。</p>
+<h2 id="如何在运行期实现方法的动态绑定">如何在运行期实现方法的动态绑定</h2>
+<p>在运行期，我们能知道a和b这两个变量具体指向的是哪个对象，对象里是保存了真实类型信息的。具体来说，在playscript中，ClassObject的type属性会指向一个正确的Class，这个类型信息是在创建对象的时候被正确赋值的：</p>
+<p><img alt="" src="/assets/86370f351ae1254bff4e4f20.jpg"/></p>
+<p>在调用类的属性和方法时，我们可以根据运行时获得的，确定的类型信息进行动态绑定。下面这段代码是从本级开始，逐级查找某个方法的实现，如果本级和父类都有这个方法，那么本级的就会覆盖掉父类的，<strong>这样就实现了多态：</strong></p>
+<pre><code>protected Function getFunction(String name, List&lt;Type&gt; paramTypes){
+    //在本级查找这个这个方法
+    Function rtn = super.getFunction(name, paramTypes);  //TODO 是否要检查visibility
+
+    //如果在本级找不到，那么递归的从父类中查找
+    if (rtn == null &amp;&amp; parentClass != null){
+        rtn = parentClass.getFunction(name,paramTypes);
+    }
+
+    return rtn;
+}
+</code></pre>
+<p>如果当前类里面没有实现这个方法，它可以直接复用某一级的父类中的实现，<strong>这实际上就是继承机制在运行期的原理。</strong></p>
+<p>你看，只有了解运行期都发生了什么，才能知道继承和多态是怎么发生的吧。</p>
+<p>这里延伸一下。我们刚刚谈到，在运行时可以获取类型信息，这种机制就叫做运行时类型信息（Run Time Type Information, RTTI）。C++、Java等都有这种机制，比如Java的instanceof操作，就能检测某个对象是不是某个类或者其子类的实例。</p>
+<p>汇编语言是无类型的，所以一般高级语言在编译成目标语言之后，这些高层的语义就会丢失。如果要在运行期获取类型信息，需要专门实现RTTI的功能，这就要花费额外的存储开销和计算开销。就像在playscript中，我们要在ClassObject中专门拿出一个字段来存type信息。</p>
+<p>现在，我们已经了解如何在运行期获得类型信息，实现方法的动态绑定。接下来，我带你了解一下运行期的对象的逐级初始化机制。</p>
+<h2 id="继承情况下对象的实例化">继承情况下对象的实例化</h2>
+<p>在存在继承关系的情况下，创建对象时，不仅要初始化自己这一级的属性变量，还要把各级父类的属性变量也都初始化。比如，在实例化Cow的时候，还要对Mammal的成员变量weight做初始化。</p>
+<p>所以我们要修改playscript中对象实例化的代码，从最顶层的祖先起，对所有的祖先层层初始化：</p>
+<pre><code>//从父类到子类层层执行缺省的初始化方法，即不带参数的初始化方法
+protected ClassObject createAndInitClassObject(Class theClass) {
+    ClassObject obj = new ClassObject();
+    obj.type = theClass;
+
+    Stack&lt;Class&gt; ancestorChain = new Stack&lt;Class&gt;();
+
+    // 从上到下执行缺省的初始化方法
+    ancestorChain.push(theClass);
+    while (theClass.getParentClass() != null) {
+        ancestorChain.push(theClass.getParentClass());
+        theClass = theClass.getParentClass();
+    }
+
+    // 执行缺省的初始化方法
+    StackFrame frame = new StackFrame(obj);
+    pushStack(frame);
+    while (ancestorChain.size() &gt; 0) {
+        Class c = ancestorChain.pop();
+        defaultObjectInit(c, obj);
+    }
+    popStack();
+
+    return obj;
+}
+</code></pre>
+<p>在逐级初始化的过程中，我们要先执行缺省的成员变量初始化，也就是变量声明时所带的初始化部分，然后调用这一级的构造方法。如果不显式指定哪个构造方法，就会执行不带参数的构造方法。不过有的时候，子类会选择性地调用父类某一个构造方法，就像Java可以在构造方法里通过super()来显式地调用父类某个具体构造方法。</p>
+<h2 id="如何实现this和super">如何实现this和super</h2>
+<p>现在，我们已经了解了继承和多态在编译期和运行期的特性。接下来，我们通过一个示例程序，把本节课的所有知识复盘检验一下，加深对它们的理解，也加深对this和super机制的理解。</p>
+<p>这个示例程序是用Java写的，在Java语言中，为面向对象编程专门提供了两个关键字：this和super，这两个关键字特别容易引起混乱。</p>
+<p>比如在下面的ThisSuperTest.Java代码中，Mammal和它的子类Cow都有speak()方法。如果我们要创建一个Cow对象，会调用Mammal的构造方法Mammal(int weight)，而在这个构造方法里调用的this.speak()方法，是Mammal的，还是Cow的呢？</p>
+<pre><code>package play;
+
+public class ThisSuperTest {
+
+    public static void main(String args[]){
+        //创建Cow对象的时候，会在Mammal的构造方法里调用this.reportWeight()，这里会显示什么
+        Cow cow = new Cow();
+
+        System.out.println();
+
+        //这里调用，会显示什么
+        cow.speak();
+    }
+}
+
+class Mammal{
+    int weight;
+
+    Mammal(){
+        System.out.println("Mammal() called");
+        this.weight = 100;
+    }
+
+    Mammal(int weight){
+        this();   //调用自己的另一个构造函数
+        System.out.println("Mammal(int weight) called");
+        this.weight = weight;
+
+        //这里访问属性，是自己的weight
+        System.out.println("this.weight in Mammal : " + this.weight);
+
+        //这里的speak()调用的是谁，会显示什么数值
+        this.speak();
+    }
+
+    void speak(){
+        System.out.println("Mammal's weight is : " + this.weight);
+    }
+}
+
+
+class Cow extends Mammal{
+    int weight = 300;
+
+    Cow(){
+        super(200);   //调用父类的构造函数
+    }
+
+    void speak(){
+        System.out.println("Cow's weight is : " + this.weight);
+        System.out.println("super.weight is : " + super.weight);
+    }
+}
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code>Mammal() called
+Mammal(int weight) called
+this.weight in Mammal : 200
+Cow's weight is : 0
+super.weight is : 200
+
+Cow's weight is : 300
+super.weight is : 200
+</code></pre>
+<p>答案是Cow的speak()方法，而不是Mammal的。怎么回事？代码里不是调用的this.speak()吗？怎么这个this不是Mammal，却变成了它的子类Cow呢？</p>
+<p>其实，在这段代码中，this用在了三个地方：</p>
+<ul>
+<li>this.weight 是访问自己的成员变量，因为成员变量的作用域是这个类本身，以及子类。</li>
+<li>this()是调用自己的另一个构造方法，因为这是构造方法，肯定是做自身的初始化。换句话说，构造方法不存在多态问题。</li>
+<li>this.speak()是调用一个普通的方法。这时，多态仍会起作用。运行时会根据对象的实际类型，来绑定到Cow的speak()方法上。</li>
+</ul>
+<p>只不过，在Mammal的构造方法中调用this.speak()时，虽然访问的是Cow的speak()方法，打印的是Cow中定义的weight成员变量，但它的值却是0，而不是成员变量声明时“int weight = 300;”的300。为什么呢？</p>
+<p>要想知道这个答案，我们需要理解多层继承情况下对象的初始化过程。在Mammal的构造方法中调用speak()的时候，Cow的初始化过程还没有开始呢，所以“int weight = 300;”还没有执行，Cow的weight属性还是缺省值0。</p>
+<p>怎么样？一个小小的例子，却需要用到三个方面的知识：面向对象的成员变量的作用域、多态、对象初始化。<strong>Java程序员可以拿这个例子跟同事讨论一下，看看是不是很好玩。</strong></p>
+<p>讨论完this，super就比较简单了，它的语义要比this简单，不会出现歧义。super的调用，也是分成三种情况：</p>
+<ul>
+<li>super.weight。这是调用父类或更高的祖先的weight属性，而不是Cow这一级的weight属性。不一定非是直接父类，也可以是祖父类中的。根据变量作用域的覆盖关系，只要是比Cow这一级高的就行。</li>
+<li>super(200)。这是调用父类的构造方法，必须是直接父类的。</li>
+<li>super.speak()。跟访问属性的逻辑一样，是调用父类或更高的祖先的speak()方法。</li>
+</ul>
+<h2 id="课程小结">课程小结</h2>
+<p>这节课我带你实现了面向对象中的另两个重要特性：继承和多态。在这节课中，我建议你掌握的重点内容是：</p>
+<ul>
+<li>从类型的角度，面向对象的继承和多态是一种叫做子类型的现象，子类型能够放宽对类型的检查，从而支持多态。</li>
+<li>在编译期，无法准确地完成对象方法和属性的消解，因为无法确切知道对象的子类型。</li>
+<li>在运行期，我们能够获得对象的确切的子类型信息，从而绑定正确的方法和属性，实现继承和多态。另一个需要注意的运行期的特征，是对象的逐级初始化过程。</li>
+</ul>
+<p>面向对象涉及了这么多精彩的知识点，拿它作为前端技术原理篇的最后一讲，是正确的选择。到目前为止，我们已经讲完了前端技术的原理篇，也如约拥有了一门具备丰富特性的脚本语言，甚至还支持面向对象编程、闭包、函数式编程这些很高级的特性。一般的应用项目所需要的语言特性，很难超过这个范围了。接下来的两节，我们就通过两个具体的应用案例，来检验一下学到的编译原理前端技术，看看它的威力！</p>
+<h2 id="一课一思">一课一思</h2>
+<p>本节课我们深入讨论了面向对象的继承和多态特征。那么你所熟悉的框架，有没有充分利用继承和多态的特点实现一些很有威力的功能？或者，你有没有利用多态的特点，写过一些比较有用的类库或框架呢？欢迎在留言区分享你的经验。</p>
+<p>最后，感谢你的阅读，如果这篇文章让你有所收获，也欢迎你将它分享给更多的朋友。</p>
+<p>本节课的示例代码我放在了文末，供你参考。</p>
+<ul>
+<li>playscript-java（项目目录）： <a href="https://gitee.com/richard-gong/PlayWithCompiler/tree/master/playscript-java" target="_blank">码云</a> <a href="https://github.com/RichardGong/PlayWithCompiler/tree/master/playscript-java" target="_blank">GitHub</a></li>
+<li>ASTEvaluator.java（解释器，请找一下运行期方法和属性动态绑定，以及对象实例逐级初始化的代码）： <a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/playscript-java/src/main/play/ASTEvaluator.java" target="_blank">码云</a> <a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/playscript-java/src/main/play/ASTEvaluator.java" target="_blank">GitHub</a></li>
+<li>ThisSuperTest.java（测试Java的this和super特性）：<a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/lab/oop/ThisSuperTest.java" target="_blank">码云</a> <a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/lab/oop/ThisSuperTest.java" target="_blank">GitHub</a></li>
+<li>this-and-super.play (playscript的this和super特性)：<a href="https://gitee.com/richard-gong/PlayWithCompiler/blob/master/playscript-java/src/examples/this-and-super.play" target="_blank">码云</a> <a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/playscript-java/src/examples/this-and-super.play" target="_blank">GitHub</a></li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

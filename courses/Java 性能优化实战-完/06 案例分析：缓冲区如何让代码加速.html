@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>06 案例分析：缓冲区如何让代码加速 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/index.html">Java 性能优化实战-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">23 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java 性能优化实战-完</strong><ul><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/00%20Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%8C%E6%98%AF%E8%BF%9B%E9%98%B6%E9%AB%98%E7%BA%A7%E6%9E%B6%E6%9E%84%E5%B8%88%E7%9A%84%E7%82%BC%E9%87%91%E7%9F%B3.html">00 Java 性能优化，是进阶高级架构师的炼金石</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/01%20%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%EF%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E8%A1%A1%E9%87%8F%E6%8C%87%E6%A0%87%EF%BC%9F%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88%EF%BC%9F.html">01 理论分析：性能优化，有哪些衡量指标？需要注意什么？</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/02%20%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%EF%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%9C%89%E7%AB%A0%E5%8F%AF%E5%BE%AA%EF%BC%8C%E8%B0%88%E8%B0%88%E5%B8%B8%E7%94%A8%E7%9A%84%E5%88%87%E5%85%A5%E7%82%B9.html">02 理论分析：性能优化有章可循，谈谈常用的切入点</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/03%20%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%EF%BC%9A%E5%93%AA%E4%BA%9B%E8%B5%84%E6%BA%90%EF%BC%8C%E5%AE%B9%E6%98%93%E6%88%90%E4%B8%BA%E7%93%B6%E9%A2%88%EF%BC%9F.html">03 深入剖析：哪些资源，容易成为瓶颈？</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/04%20%E5%B7%A5%E5%85%B7%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E4%BB%A3%E7%A0%81%E6%80%A7%E8%83%BD%E6%95%B0%E6%8D%AE%EF%BC%9F.html">04 工具实践：如何获取代码性能数据？</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/05%20%E5%B7%A5%E5%85%B7%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%20JMH%EF%BC%8C%E7%B2%BE%E7%A1%AE%E6%B5%8B%E9%87%8F%E6%96%B9%E6%B3%95%E6%80%A7%E8%83%BD.html">05 工具实践：基准测试 JMH，精确测量方法性能</a></li><li><a class="active" aria-current="page" href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BB%A3%E7%A0%81%E5%8A%A0%E9%80%9F.html">06 案例分析：缓冲区如何让代码加速</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/07%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E6%97%A0%E5%A4%84%E4%B8%8D%E5%9C%A8%E7%9A%84%E7%BC%93%E5%AD%98%EF%BC%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B3%95%E5%AE%9D.html">07  案例分析：无处不在的缓存，高并发系统的法宝</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/08%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9ARedis%20%E5%A6%82%E4%BD%95%E5%8A%A9%E5%8A%9B%E7%A7%92%E6%9D%80%E4%B8%9A%E5%8A%A1.html">08  案例分析：Redis 如何助力秒杀业务</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/09%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E6%B1%A0%E5%8C%96%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF.html">09  案例分析：池化对象的应用场景</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/10%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%A4%A7%E5%AF%B9%E8%B1%A1%E5%A4%8D%E7%94%A8%E7%9A%84%E7%9B%AE%E6%A0%87%E5%92%8C%E6%B3%A8%E6%84%8F%E7%82%B9.html">10  案例分析：大对象复用的目标和注意点</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/11%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD.html">11  案例分析：如何用设计模式优化性能</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/12%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E8%AE%A9%E4%BB%A3%E7%A0%81%E2%80%9C%E9%A3%9E%E2%80%9D%E8%B5%B7%E6%9D%A5.html">12  案例分析：并行计算让代码“飞”起来</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/13%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%94%81%E7%9A%84%E4%BC%98%E5%8C%96.html">13  案例分析：多线程锁的优化</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/14%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%97%A0%E9%94%81.html">14  案例分析：乐观锁和无锁</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/15%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%8E%20BIO%20%E5%88%B0%20NIO%EF%BC%8C%E5%86%8D%E5%88%B0%20AIO.html">15  案例分析：从 BIO 到 NIO，再到 AIO</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/16%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%B8%B8%E8%A7%81%20Java%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%B3%95%E5%88%99.html">16  案例分析：常见 Java 代码优化法则</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/17%20%20%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6%EF%BC%9AJVM%20%E5%A6%82%E4%BD%95%E5%AE%8C%E6%88%90%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%9F.html">17  高级进阶：JVM 如何完成垃圾回收？</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/18%20%20%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6%EF%BC%9AJIT%20%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%20JVM%20%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">18  高级进阶：JIT 如何影响 JVM 的性能？</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/19%20%20%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6%EF%BC%9AJVM%20%E5%B8%B8%E8%A7%81%E4%BC%98%E5%8C%96%E5%8F%82%E6%95%B0.html">19  高级进阶：JVM 常见优化参数</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/20%20%20SpringBoot%20%E6%9C%8D%E5%8A%A1%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">20  SpringBoot 服务性能优化</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/21%20%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B%E6%96%B9%E6%B3%95%E4%B8%8E%E6%B1%82%E8%81%8C%E9%9D%A2%E7%BB%8F%E6%80%BB%E7%BB%93.html">21  性能优化的过程方法与求职面经总结</a></li><li><a href="/courses/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/22%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E5%AE%9E%E8%B7%B5%E5%87%BA%E7%9C%9F%E7%9F%A5.html">22 结束语  实践出真知</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BB%A3%E7%A0%81%E5%8A%A0%E9%80%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="06 案例分析：缓冲区如何让代码加速" id="title">06 案例分析：缓冲区如何让代码加速</h1>
+<div><p>本课时将详细介绍“缓冲”这个优化手段，之前在 02 课时的复用优化中便提到过“缓冲”，你可以回看复习一下。</p>
+<h1 id="深入理解缓冲的本质">深入理解缓冲的本质</h1>
+<p>缓冲（Buffer）通过对数据进行暂存，然后批量进行传输或者操作，多采用顺序方式，来缓解不同设备之间次数频繁但速度缓慢的随机读写。</p>
+<p>你可以把缓冲区，想象成一个蓄水池。放水的水龙头一直开着，如果池子里有水，它就以恒定的速度流淌，不需要暂停；供水的水龙头速度却不确定，有时候会快一些，有时候会特别慢。它通过判断水池里水的状态，就可以自由控制进水的速度。</p>
+<p>或者再想象一下包饺子的过程，包馅的需要等着擀皮的。如果擀皮的每擀一个就交给包馅的，速度就会很慢；但如果中间放一个盆子，擀皮的只管往里扔，包馅的只管从盆里取，这个过程就快得多。许多工厂流水线也经常使用这种方法，可见“缓冲”这个理念的普及性和实用性。</p>
+<p>从宏观上来说，JVM 的堆就是一个大的缓冲区，代码不停地在堆空间中生产对象，而垃圾回收器进程则在背后默默地进行垃圾回收。</p>
+<p>通过上述比喻和释意，你可以发现<strong>缓冲区的好处</strong>：</p>
+<ul>
+<li>缓冲双方能各自保持自己的操作节奏，操作处理顺序也不会打乱，可以 one by one 顺序进行；</li>
+<li>以批量的方式处理，减少网络交互和繁重的 I/O 操作，从而减少性能损耗；</li>
+<li>优化用户体验，比如常见的音频/视频缓冲加载，通过提前缓冲数据，达到流畅的播放效果。</li>
+</ul>
+<p>缓冲在 Java 语言中被广泛应用，在 IDEA 中搜索 Buffer，可以看到长长的类列表，其中最典型的就是<strong>文件读取和写入字符流</strong>。</p>
+<p><img alt="15932484217918.jpg" src="/assets/9cea165eef3985a0cfc5b82a.jpg"/></p>
+<h1 id="文件读写流">文件读写流</h1>
+<p>接下来，我会以文件读取和写入字符流为例进行讲解。</p>
+<p>Java 的 I/O 流设计，采用的是<strong>装饰器模式</strong>，当需要给类添加新的功能时，就可以将被装饰者通过参数传递到装饰者，封装成新的功能方法。下图是装饰器模式的典型示意图，就增加功能来说，装饰模式比生成子类更为灵活。</p>
+<p><img alt="image" src="/assets/e905f92423c57e282499c4d5.png"/></p>
+<p>在读取和写入流的 API 中，BufferedInputStream 和 BufferedReader 可以加快读取字符的速度，BufferedOutputStream 和 BufferedWriter 可以加快写入的速度。</p>
+<p>下面是直接读取文件的代码实现：</p>
+<pre><code>int result = 0; 
+try (Reader reader = new FileReader(FILE_PATH)) { 
+    int value; 
+    while ((value = reader.read()) != -1) { 
+        result += value; 
+    } 
+} 
+return result;
+</code></pre>
+<p>要使用缓冲方式读取，只需要将 FileReader 装饰一下即可：</p>
+<pre><code>int result = 0; 
+try (Reader reader = new BufferedReader(new FileReader(FILE_PATH))) { 
+    int value; 
+    while ((value = reader.read()) != -1) { 
+        result += value; 
+    } 
+} 
+return result;
+</code></pre>
+<p>我们先看一下与之类似的，BufferedInputStream 类的具体实现方法：</p>
+<pre><code>//代码来自JDK 
+public synchronized int read() throws IOException { 
+        if (pos &gt;= count) { 
+            fill(); 
+            if (pos &gt;= count) 
+                return -1; 
+        } 
+        return getBufIfOpen()[pos++] &amp; 0xff; 
+    }
+</code></pre>
+<p>当缓冲区的内容读取完毕，将尝试使用 fill 函数把输入流读入缓冲区：</p>
+<pre><code>//代码来自JDK 
+private void fill() throws IOException { 
+    byte[] buffer = getBufIfOpen(); 
+    if (markpos &lt; 0) 
+        pos = 0;            /* no mark: throw away the buffer */ 
+    else if (pos &gt;= buffer.length)  /* no room left in buffer */ 
+        if (markpos &gt; 0) {  /* can throw away early part of the buffer */ 
+            int sz = pos - markpos; 
+            System.arraycopy(buffer, markpos, buffer, 0, sz); 
+            pos = sz; 
+            markpos = 0; 
+        } else if (buffer.length &gt;= marklimit) { 
+            markpos = -1;   /* buffer got too big, invalidate mark */ 
+            pos = 0;        /* drop buffer contents */ 
+        } else if (buffer.length &gt;= MAX_BUFFER_SIZE) { 
+            throw new OutOfMemoryError("Required array size too large"); 
+        } else {            /* grow buffer */ 
+            int nsz = (pos &lt;= MAX_BUFFER_SIZE - pos) ? 
+                    pos * 2 : MAX_BUFFER_SIZE; 
+            if (nsz &gt; marklimit) 
+                nsz = marklimit; 
+            byte nbuf[] = new byte[nsz]; 
+            System.arraycopy(buffer, 0, nbuf, 0, pos); 
+            if (!bufUpdater.compareAndSet(this, buffer, nbuf)) { 
+                // Can't replace buf if there was an async close. 
+                // Note: This would need to be changed if fill() 
+                // is ever made accessible to multiple threads. 
+                // But for now, the only way CAS can fail is via close. 
+                // assert buf == null; 
+                throw new IOException("Stream closed"); 
+            } 
+            buffer = nbuf; 
+        } 
+    count = pos; 
+    int n = getInIfOpen().read(buffer, pos, buffer.length - pos); 
+    if (n &gt; 0) 
+        count = n + pos; 
+}
+</code></pre>
+<p>程序会调整一些读取的位置，并对缓冲区进行位置更新，然后使用被装饰的 InputStream 进行数据读取：</p>
+<pre><code>int n = getInIfOpen().read(buffer, pos, buffer.length - pos);
+</code></pre>
+<p>那么为什么要这么做呢？直接读写不行吗？</p>
+<p>这是因为：字符流操作的对象，一般是文件或者 Socket，要从这些缓慢的设备中，通过频繁的交互获取数据，效率非常慢；而缓冲区的数据是保存在内存中的，能够显著地提升读写速度。</p>
+<p>既然好处那么多，为什么不把所有的数据全部读到缓冲区呢？</p>
+<p>这就是一个权衡的问题，缓冲区开得太大，会增加单次读写的时间，同时内存价格很高，不能无限制使用，缓冲流的默认缓冲区大小是 8192 字节，也就是 8KB，算是一个比较折中的值。</p>
+<p>这好比搬砖，如果一块一块搬，时间便都耗费在往返路上了；但若给你一个小推车，往返的次数便会大大降低，效率自然会有所提升。</p>
+<p>下图是使用 FileReader 和 BufferedReader 读取文件的 JMH 对比（相关代码见仓库），可以看到，使用了缓冲，读取效率有了很大的提升（暂未考虑系统文件缓存）。</p>
+<p><img alt="15933320286502.jpg" src="/assets/42899b46ec6634a9f20745a9.jpg"/></p>
+<h1 id="日志缓冲">日志缓冲</h1>
+<p>日志是程序员们最常打交道的地方。在高并发应用中，即使对日志进行了采样，日志数量依旧惊人，所以选择高速的日志组件至关重要。</p>
+<p>SLF4J 是 Java 里标准的日志记录库，它是一个允许你使用任何 Java 日志记录库的抽象适配层，最常用的实现是 Logback，支持修改后自动 reload，它比 Java 自带的 JUL 还要流行。</p>
+<p><strong>Logback</strong> 性能也很高，其中一个原因就是<strong>异步日志</strong>，它在记录日志时，使用了一个缓冲队列，当缓冲的内容达到一定的阈值时，才会把缓冲区的内容写到文件里。使用异步日志有两个考虑：</p>
+<ul>
+<li>同步日志的写入，会阻塞业务，导致服务接口的耗时增加；</li>
+<li>日志写入磁盘的代价是昂贵的，如果每产生一条日志就写入一次，CPU 会花很多时间在磁盘 I/O 上。</li>
+</ul>
+<p>Logback 的异步日志也比较好配置，我们需要在正常配置的基础上，包装一层异步输出的逻辑（详见仓库）。</p>
+<pre><code>&lt;appender name ="ASYNC" class= "ch.qos.logback.classic.AsyncAppender"&gt; 
+        &lt;discardingThreshold &gt;0&lt;/discardingThreshold&gt; 
+        &lt;queueSize&gt;512&lt;/queueSize&gt; 
+        &lt;!--这里指定了一个已有的Appender--&gt; 
+        &lt;appender-ref ref ="FILE"/&gt; 
+&lt;/appender&gt;
+</code></pre>
+<p><img alt="image" src="/assets/7cbf6767b446e32a080d74e0.png"/></p>
+<p>如上图，异步日志输出之后，日志信息将暂存在 ArrayBlockingQueue 列表中，后台会有一个 Worker 线程不断地获取缓冲区内容，然后写入磁盘中。</p>
+<p>上图中有三个关键参数：</p>
+<ul>
+<li><strong>queueSize</strong>，代表了队列的大小，默认是256。如果这个值设置的太大，大日志量下突然断电，会丢掉缓冲区的内容；</li>
+<li><strong>maxFlushTime</strong>，关闭日志上下文后，继续执行写任务的时间，这是通过调用 Thread 类的 join 方法来实现的（worker.join(maxFlushTime)）；</li>
+<li><strong>discardingThreshold</strong>，当 queueSize 快达到上限时，可以通过配置，丢弃一些级别比较低的日志，这个值默认是队列长度的 80%；但若你担心可能会丢失业务日志，则可以将这个值设置成 0，表示所有的日志都要打印。</li>
+</ul>
+<h1 id="缓冲区优化思路">缓冲区优化思路</h1>
+<p>毫无疑问缓冲区是可以提高性能的，<strong>但它通常会引入一个异步的问题</strong>，使得编程模型变复杂。</p>
+<p>通过文件读写流和 Logback 两个例子，我们来看一下对于缓冲区设计的一些常规操作。</p>
+<p>如下图所示，资源 A 读取或写入一些操作到资源 B，这本是一个正常的操作流程，但由于中间插入了一个额外的<strong>存储层</strong>，所以这个流程被生生截断了，这时就需要你手动处理被截断两方的资源协调问题。</p>
+<p><img alt="image" src="/assets/8868bcc57a2b633b0b3be420.png"/></p>
+<p>根据资源的不同，对正常业务进行截断后的操作，分为同步操作和异步操作。</p>
+<h2 id="1-同步操作">1.同步操作</h2>
+<p>同步操作的编程模型相对简单，在一个线程中就可完成，你只需要控制缓冲区的大小，并把握处理的时机。比如，缓冲区<strong>大小达到阈值</strong>，或者缓冲区的元素在缓冲区的<strong>停留时间超时</strong>，这时就会触发<strong>批量操作</strong>。</p>
+<p>由于所有的操作又都在<strong>单线程</strong>，或者同步方法块中完成，再加上资源 B 的处理能力有限，那么很多操作就会阻塞并等待在调用线程上。比如写文件时，需要等待前面的数据写入完毕，才能处理后面的请求。</p>
+<p><img alt="image" src="/assets/36082a8f13ac3c0f9a277fc6.png"/></p>
+<h2 id="2-异步操作">2.异步操作</h2>
+<p>异步操作就复杂很多。</p>
+<p>缓冲区的<strong>生产</strong>者一般是同步调用，但也可以采用异步方式进行填充，一旦采用异步操作，就涉及缓冲区满了以后，生产者的一些响应策略。</p>
+<p>此时，应该将这些策略抽象出来，根据业务的属性选择，比如直接抛弃、抛出异常，或者直接在用户的线程进行等待。你会发现它与线程池的饱和策略是类似的，这部分的详细概念将在 12 课时讲解。</p>
+<p>许多应用系统还会有更复杂的策略，比如在用户线程等待，设置一个超时时间，以及成功进入缓冲区之后的回调函数等。</p>
+<p>对缓冲区的<strong>消费</strong>，一般采用开启线程的方式，如果有多个线程消费缓冲区，还会存在信息同步和顺序问题。</p>
+<p><img alt="image" src="/assets/ba57d25b64e21fc0a07391c9.png"/></p>
+<h2 id="3-kafka缓冲区示例">3.Kafka缓冲区示例</h2>
+<p><strong>这里以一个常见的面试题来讲解上面的知识点：Kafka 的生产者，有可能会丢数据吗？</strong></p>
+<p><img alt="image" src="/assets/703c49a23db94f58387a1bd8.png"/></p>
+<p>如图，要想解答这个问题，需要先了解 Kafka 对生产者的一些封装，其中有一个对性能影响非常大的点，就是缓冲。</p>
+<p>生产者会把发送到同一个 partition 的多条消息，封装在一个 batch（缓冲区）中。当 batch 满了（参数 batch.size），或者消息达到了超时时间（参数 linger.ms），缓冲区中的消息就会被发送到 broker 上。</p>
+<p>这个缓冲区默认是 16KB，如果生产者的业务突然断电，这 16KB 数据是没有机会发送出去的。此时，就造成了消息丢失。</p>
+<p>解决的办法有两种：</p>
+<ul>
+<li>把缓冲区设置得非常小，此时消息会退化成单条发送，这会严重影响性能；</li>
+<li>消息发送前记录一条日志，消息发送成功后，通过回调再记录一条日志，通过扫描生成的日志，就可以判断哪些消息丢失了。</li>
+</ul>
+<p><strong>另外一个面试的问题是：Kafka 生产者会影响业务的高可用吗？</strong></p>
+<p>这同样和生产者的缓冲区有关。缓冲区大小毕竟是有限制的，如果消息产生得过快，或者生产者与 broker 节点之间有网络问题，缓冲区就会一直处于 full 的状态。此时，有新的消息到达，会如何处理呢？</p>
+<p>通过配置生产者的超时参数和重试次数，可以让新的消息一直阻塞在业务方。一般来说，这个超时值设置成 1 秒就已经够大了，有的应用在线上把超时参数配置得非常大，比如 1 分钟，就造成了用户的线程迅速占满，整个业务不能再接受新的请求。</p>
+<h2 id="4-其他做法">4.其他做法</h2>
+<p>使用缓冲区来提升性能的做法非常多，下面再举几个例子：</p>
+<ul>
+<li>StringBuilder 和 StringBuffer，通过将要处理的字符串缓冲起来，最后完成拼接，提高字符串拼接的性能；</li>
+<li>操作系统在写入磁盘，或者网络 I/O 时，会开启特定的缓冲区，来提升信息流转的效率。通常可使用 flush 函数强制刷新数据，比如通过调整 Socket 的参数 SO_SNDBUF 和 SO_RCVBUF 提高网络传输性能；</li>
+<li>MySQL 的 InnoDB 引擎，通过配置合理的 innodb_buffer_pool_size，减少换页，增加数据库的性能；</li>
+<li>在一些比较底层的工具中，也会变相地用到缓冲。比如常见的 ID 生成器，使用方通过缓冲一部分 ID 段，就可以避免频繁、耗时的交互。</li>
+</ul>
+<h2 id="5-注意事项">5.注意事项</h2>
+<p>虽然缓冲区可以帮我们大大地提高应用程序的性能，但同时它也有不少问题，在我们设计时，要注意这些异常情况。</p>
+<p>其中，<strong>比较严重就是缓冲区内容的丢失</strong>。即使你使用 addShutdownHook 做了优雅关闭，有些情形依旧难以防范避免，比如机器突然间断电，应用程序进程突然死亡等。这时，缓冲区内未处理完的信息便会丢失，尤其金融信息，电商订单信息的丢失都是比较严重的。</p>
+<p>所以，<strong>内容写入缓冲区之前，需要先预写日志</strong>，故障后重启时，就会根据这些日志进行数据恢复。在数据库领域，文件缓冲的场景非常多，一般都是采用 WAL 日志（Write-Ahead Logging）解决。对数据完整性比较严格的系统，甚至会通过电池或者 UPS 来保证缓冲区的落地。这就是性能优化带来的新问题，必须要解决。</p>
+<h1 id="小结">小结</h1>
+<p>可以看到，缓冲区优化是对正常的业务流程进行截断，然后加入缓冲组件的一个操作，它分为同步和异步方式，其中异步方式的实现难度相对更高。</p>
+<p>大多数组件，从操作系统到数据库，从 Java 的 API 到一些中间件，都可以通过设置一些参数，来控制缓冲区大小，从而取得较大的性能提升。但需要注意的是，某些极端场景（断电、异常退出、kill -9等）可能会造成数据丢失，若你的业务对此容忍度较低，那么你需要花更多精力来应对这些异常。</p>
+<p>在我们面试的时候，除了考察大家对知识细节的掌握程度，还会考察总结能力，以及遇到相似问题的分析能力。大家在平常的工作中，也要多多总结，多多思考，窥一斑而知全貌。如此回答，必会让面试官眼前一亮。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>我们这个课程的系统是怎么搭建起来的？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">高楼的性能工程实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">34 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>高楼的性能工程实战课</strong><ul><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E6%89%93%E7%A0%B4%E5%9B%9B%E5%A4%A7%E8%AE%A4%E7%9F%A5%E5%B1%80%E9%99%90%EF%BC%8C%E8%BF%9B%E9%98%B6%E9%AB%98%E7%BA%A7%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%B8%88.html">00 开篇词 打破四大认知局限，进阶高级性能工程师</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%88%E5%A4%9A%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E4%BA%BA%E5%91%98%E6%97%A0%E6%B3%95%E5%AF%B9%E6%80%A7%E8%83%BD%E7%BB%93%E6%9E%9C%E8%B4%9F%E8%B4%A3%EF%BC%9F.html">01 性能工程：为什么很多性能测试人员无法对性能结果负责？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5%EF%BC%9A%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E5%92%8C%E5%9C%BA%E6%99%AF%E7%9A%84%E7%A1%AE%E5%AE%9A.html">02 关键概念：性能指标和场景的确定</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E6%A0%B8%E5%BF%83%E5%88%86%E6%9E%90%E9%80%BB%E8%BE%91%EF%BC%9A%E6%89%80%E6%9C%89%E7%9A%84%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%8C%E9%9D%A0%E8%BF%99%E4%B8%83%E6%AD%A5%E9%83%BD%E8%83%BD%E6%90%9E%E5%AE%9A.html">03 核心分析逻辑：所有的性能分析，靠这七步都能搞定</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E6%9F%A5%E6%89%BE%E7%93%B6%E9%A2%88%E8%AF%81%E6%8D%AE%E9%93%BE%EF%BC%9F.html">04 如何构建性能分析决策树和查找瓶颈证据链？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E6%80%A7%E8%83%BD%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BD%A0%E7%9A%84%E6%96%B9%E6%A1%88%E6%98%AF%E5%90%A6%E8%BF%98%E5%81%9C%E7%95%99%E5%9C%A8%E5%BD%A2%E5%BC%8F%E4%B8%8A%EF%BC%9F.html">05 性能方案：你的方案是否还停留在形式上？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E5%A6%82%E4%BD%95%E6%8A%BD%E5%8F%96%E5%87%BA%E7%AC%A6%E5%90%88%E7%9C%9F%E5%AE%9E%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">06 如何抽取出符合真实业务场景的业务模型？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E6%80%A7%E8%83%BD%E5%9C%BA%E6%99%AF%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%B0%E5%BA%95%E5%BA%94%E8%AF%A5%E5%81%9A%E6%88%90%E4%BB%80%E4%B9%88%E6%A0%B7%E5%AD%90%EF%BC%9F.html">07 性能场景的数据到底应该做成什么样子？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E5%B9%B6%E5%8F%91%E3%80%81%E5%9C%A8%E7%BA%BF%E5%92%8CTPS%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">08 并发、在线和TPS到底是什么关系？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%85%A8%E5%B1%80%E5%92%8C%E5%AE%9A%E5%90%91%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5%EF%BC%9F.html">09 如何设计全局和定向监控策略？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E8%AE%BE%E8%AE%A1%E5%9F%BA%E5%87%86%E5%9C%BA%E6%99%AF%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E5%93%AA%E4%BA%9B%E5%85%B3%E9%94%AE%E7%82%B9%EF%BC%9F.html">10 设计基准场景需要注意哪些关键点？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E6%89%93%E5%BC%80%E9%A6%96%E9%A1%B5%E4%B9%8B%E4%B8%80%EF%BC%9A%E4%B8%80%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%8C%E5%B8%A6%E4%BD%A0%E6%90%9E%E6%87%82%E5%9F%BA%E7%A1%80%E7%A1%AC%E4%BB%B6%E8%AE%BE%E6%96%BD%E7%9A%84%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98.html">11 打开首页之一：一个案例，带你搞懂基础硬件设施的性能问题</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/12%20%E6%89%93%E5%BC%80%E9%A6%96%E9%A1%B5%E4%B9%8B%E4%BA%8C%EF%BC%9A%E5%A6%82%E4%BD%95%E5%B9%B3%E8%A1%A1%E5%88%A9%E7%94%A8%E7%A1%AC%E4%BB%B6%E8%B5%84%E6%BA%90%EF%BC%9F.html">12 打开首页之二：如何平衡利用硬件资源？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/13%20%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%EF%BC%9A%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84Block%E5%8E%9F%E5%9B%A0%EF%BC%9F.html">13 用户登录：怎么判断线程中的Block原因？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%BD%91%E7%BB%9C%E8%BD%AF%E4%B8%AD%E6%96%AD%E7%93%B6%E9%A2%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">14 用户信息查询：如何解决网络软中断瓶颈问题？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/15%20%E6%9F%A5%E8%AF%A2%E5%95%86%E5%93%81%EF%BC%9A%E8%B5%84%E6%BA%90%E4%B8%8D%E8%B6%B3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%80%A7%E8%83%BD%E8%A1%A8%E7%8E%B0%EF%BC%9F.html">15 查询商品：资源不足有哪些性能表现？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/16%20%E5%95%86%E5%93%81%E5%8A%A0%E5%85%A5%E8%B4%AD%E7%89%A9%E8%BD%A6%EF%BC%9ASQL%E4%BC%98%E5%8C%96%E5%92%8C%E5%8E%8B%E5%8A%9B%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E5%88%86%E6%9E%90.html">16 商品加入购物车：SQL优化和压力工具中的参数分析</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/17%20%E6%9F%A5%E8%AF%A2%E8%B4%AD%E7%89%A9%E8%BD%A6%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%93%BA%E5%BA%95%E5%8F%82%E6%95%B0%E4%B8%80%E5%AE%9A%E8%A6%81%E7%AC%A6%E5%90%88%E7%9C%9F%E5%AE%9E%E4%B8%9A%E5%8A%A1%E7%89%B9%E6%80%A7%EF%BC%9F.html">17 查询购物车：为什么铺底参数一定要符合真实业务特性？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/18%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%BF%A1%E6%81%AF%E7%A1%AE%E5%AE%9A%E8%AE%A2%E5%8D%95%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E5%8C%96%E9%80%BB%E8%BE%91%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%EF%BC%9F.html">18 购物车信息确定订单：为什么动态参数化逻辑非常重要？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/19%20%E7%94%9F%E6%88%90%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%E4%B9%8B%E4%B8%80%EF%BC%9A%E5%BA%94%E7%94%A8JDBC%E6%B1%A0%E4%BC%98%E5%8C%96%E5%92%8C%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%88%86%E6%9E%90.html">19 生成订单信息之一：应用JDBC池优化和内存溢出分析</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/20%20%E7%94%9F%E6%88%90%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%E4%B9%8B%E4%BA%8C%EF%BC%9A%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E5%A4%8D%E6%9D%82%EF%BC%8C%E6%80%8E%E4%B9%88%E5%81%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F.html">20 生成订单信息之二：业务逻辑复杂，怎么做性能优化？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/21%20%E6%94%AF%E4%BB%98%E5%89%8D%E6%9F%A5%E8%AF%A2%E8%AE%A2%E5%8D%95%E5%88%97%E8%A1%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%E4%BC%98%E5%8C%96%E4%B8%80%E4%B8%AA%E5%9B%BA%E5%AE%9A%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6%EF%BC%9F.html">21 支付前查询订单列表：如何分析优化一个固定的技术组件？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/22%20%E6%94%AF%E4%BB%98%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E8%A7%A3%E5%86%B3for%E5%BE%AA%E7%8E%AF%E4%BA%A7%E7%94%9F%E7%9A%84%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%9F.html">22 支付订单信息：如何高效解决for循环产生的内存溢出？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E5%86%B3%E5%AE%9A%E5%AE%B9%E9%87%8F%E5%9C%BA%E6%99%AF%E6%88%90%E8%B4%A5%E7%9A%84%E5%85%B3%E9%94%AE%E5%9B%A0%E7%B4%A0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">23 决定容量场景成败的关键因素有哪些？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E5%AE%B9%E9%87%8F%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%B8%80%EF%BC%9A%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%92%8CKubernetes%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E4%B8%8D%E5%9D%87%E8%A1%A1%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">24 容量场景之一：索引优化和Kubernetes资源分配不均衡怎么办？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/25%20%E5%AE%B9%E9%87%8F%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%BA%8C%EF%BC%9A%E7%BC%93%E5%AD%98%E5%AF%B9%E6%80%A7%E8%83%BD%E4%BC%9A%E6%9C%89%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9F.html">25 容量场景之二：缓存对性能会有什么样的影响？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/26%20%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%B8%80%EF%BC%9A%E6%80%8E%E6%A0%B7%E6%90%9E%E5%AE%9A%E4%B8%9A%E5%8A%A1%E7%A7%AF%E7%B4%AF%E9%87%8F%E4%BA%A7%E7%94%9F%E7%9A%84%E7%93%B6%E9%A2%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">26 稳定性场景之一：怎样搞定业务积累量产生的瓶颈问题？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%BA%8C%EF%BC%9A%E6%80%8E%E6%A0%B7%E6%90%9E%E5%AE%9A%E7%A3%81%E7%9B%98%E4%B8%8D%E8%B6%B3%E4%BA%A7%E7%94%9F%E7%9A%84%E7%93%B6%E9%A2%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">27 稳定性场景之二：怎样搞定磁盘不足产生的瓶颈问题？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E5%BC%82%E5%B8%B8%E5%9C%BA%E6%99%AF%E7%9A%84%E8%8C%83%E5%9B%B4%E5%92%8C%E8%AE%BE%E8%AE%A1%E9%80%BB%E8%BE%91%EF%BC%9F.html">28 如何确定异常场景的范围和设计逻辑？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E5%BC%82%E5%B8%B8%E5%9C%BA%E6%99%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9F%E4%B8%8D%E5%90%8C%E7%BB%84%E4%BB%B6%E5%B1%82%E7%BA%A7%E7%9A%84%E5%BC%82%E5%B8%B8%EF%BC%9F.html">29 异常场景：如何模拟不同组件层级的异常？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E7%94%9F%E4%BA%A7%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%EF%BC%9F.html">30 如何确定生产系统配置？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E6%80%8E%E4%B9%88%E5%86%99%E5%87%BA%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84%E6%80%A7%E8%83%BD%E6%8A%A5%E5%91%8A%EF%BC%9F.html">31 怎么写出有价值的性能报告？</a></li><li><a class="active" aria-current="page" href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%88%91%E4%BB%AC%E8%BF%99%E4%B8%AA%E8%AF%BE%E7%A8%8B%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%EF%BC%9F.html">我们这个课程的系统是怎么搭建起来的？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%81%9A%E7%9C%9F%E6%AD%A3%E7%9A%84%E6%80%A7%E8%83%BD%E9%A1%B9%E7%9B%AE.html">结束语 做真正的性能项目</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%88%91%E4%BB%AC%E8%BF%99%E4%B8%AA%E8%AF%BE%E7%A8%8B%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="我们这个课程的系统是怎么搭建起来的？" id="title">我们这个课程的系统是怎么搭建起来的？</h1>
+<div><p>你好，我是高楼。</p>
+<p>在我们这个课程里，为了让你更好地理解我的性能工程理念，我专门搭建了一个完整的系统，我们所有的内容都是基于这个系统展开的。</p>
+<p>自课程更新以来，有不少同学问我要这个系统的搭建教程，想自己试一试。因此，我梳理了一版搭建教程，希望能帮到你。</p>
+<p>由于整个系统相对复杂，有很多需要考虑、部署的细节，所以这节课的内容会比较长。下面这张图是我们这节课的目录，你可以整体了解一下，然后对应这张目录图，来学习具体的搭建步骤，以免迷失方向。</p>
+<p><img alt="" src="/assets/402c9bcf1d2cb5e35421ffb1.jpg"/></p>
+<h2 id="一-物理服务器">一. 物理服务器</h2>
+<h3 id="1-服务器规划">1. 服务器规划</h3>
+<p>在这个系统中，我们主要用到了四台服务器，下面是具体的硬件配置：</p>
+<p><img alt="" src="/assets/5b25ce059b39c25956767ad9.jpg"/></p>
+<p>我们可以看到，当前服务器在应用中使用的资源总共是 64C 的 CPU 资源，以及 128 G 的内存资源。由于 NFS (网络存储)服务器不用在应用中，我们不计算在内。</p>
+<p>因为单台机器的硬件资源相对较多，所以，在后续的工作中，我们将这些物理机化为虚拟机使用，以方便应用的管理。</p>
+<p>在成本上，所有物理机的费用加在一起大概八万元左右，这其中还包括交换机、机柜、网线等各类杂七杂八的费用。</p>
+<h3 id="2-服务器搭建">2. 服务器搭建</h3>
+<p>目前，行业内主流的基于 x86 架构的 Linux 系统，无非是 CentOS 和 Ubuntu。在我们这个项目中，我选择 CentOS 系列来搭建 Linux 系统，主要是考虑到系统的稳定性。CentOS 来自 Redhat 商业版本的重新编译，它在稳定性、系统优化以及兼容性方面，具有比较完善的测试和发版流程。</p>
+<p>在 CentOS 7 之后的版本中，CentOS 的内核换成了 Linux 3.x，因此，我们这个课程的分析都是基于 Linux 3.x 这个内核版本展开的。</p>
+<p>在搭建过程中，我们给每台服务器都安装了 CentOS 7.8 的操作系统。如果你是新手，我建议你使用带 GUI 桌面的系统，方便后续操作和管理虚拟机。具体的操作系统安装步骤，你可以参考这个链接来部署： <a href="https://blog.csdn.net/zuozewei/article/details/84951690" target="_blank">HP 服务器安装 CentOS 7</a> 。</p>
+<h2 id="二-虚拟化">二. 虚拟化</h2>
+<h3 id="1-虚拟机规划">1. 虚拟机规划</h3>
+<p>我们接着来看虚拟机规划。我们部署了至少五台虚机，并且把虚拟机类型分为两种主机节点类型：</p>
+<ul>
+<li>普通节点：</li>
+</ul>
+<p>普通节点用来做非被测系统使用，比如压力机、管理平台等。我们可以选择采用 Docker、二进制等方式来部署。</p>
+<ul>
+<li>Kubernetes节点：</li>
+</ul>
+<p>Kubernetes节点用于部署项目的应用服务，包括 mall-admin、mall-portal、mall-gateway、mall-member、mall-cart 等应用服务，还包括 SkyWalking、Nacos 等基础组件。这些都采用 Kubernetes的方式来部署。</p>
+<p>具体的节点规划，你可以参考这张表：</p>
+<p><img alt="" src="/assets/7c54f3035604e753fea1de30.jpg"/></p>
+<p>在这里，我们规划了三个Kubernetes控制节点，这是为后续的高可用方案准备的。如果你计划搭建单 Master 集群，只需要一个Kubernetes控制节点即可。至于Kubernetes计算节点，结合前面的节点规划，我们在这里配置 9 个 worker 节点，其他的节点根据自己的需求灵活扩展。</p>
+<h3 id="2-虚机安装">2. 虚机安装</h3>
+<p>到了安装虚拟机这一步，我们最终选择以 KVM 为主的方案。这主要考虑到，KVM 是目前比较成熟的开源虚拟化平台，在 2006 年被写入到 Linux 内核中。并且在 RedHat 6 以后，RedHat 开始转向支持 KVM，而非之前大力推广的 Xen 虚拟化方案，随后 Intel 也开始全面支持 KVM。KVM 相比较于 Xen，更小，更轻量级，也更方便管理。</p>
+<p>在项目搭建之初，我们也尝试过用 OpenStack 做底层，但是 OpenStack 部署起来不仅繁杂，而且坑也多，需要投入大量的时间成本。我们当时在分析 OpenStack 本身的问题上花费了很多时间，对于我们的这个系统来说，这是没有必要的。</p>
+<p>所以，我们最终选择用 KVM 来做虚拟化，它的技术相对成熟，操作又比较简单。</p>
+<p>你可能会有疑问，为什么不用 VMware 呢？我们知道，在虚拟化平台中，VMware 在 IO 和稳定性方面都算是目前最优的一个方案了，也能满足我们的需求。不过，它是一款商业软件，授权比较昂贵，这是我们这个项目不得不放弃的一个原因。当然，如果你的项目有充足的预算， VMware 是一个不错的选择。</p>
+<p>在安装之前，你可以大概了解一下 KVM 性能、热迁移、稳定性、应用移植、搭建等方面的注意事项，做为知识的扩展补充。对性能分析来说，我们要关注一下KVM的优化重点：<a href="https://mp.weixin.qq.com/s/L-jNlwYKFWgoKX6L5ffz5A" target="_blank">关于KVM 虚拟化注意的二三事整理</a></p>
+<p>至于 KVM 的安装和使用，你可以参考这个链接里的内容：<a href="https://mp.weixin.qq.com/s/UluDn0jG-uYZqpIsIXzKAg" target="_blank">Linux KVM 安装使用手册</a>。</p>
+<h2 id="三-kubernetes-集群">三. Kubernetes 集群</h2>
+<h3 id="1-计算资源">1. 计算资源</h3>
+<p>关于集群计算资源，你可以参考这张表：</p>
+<p><img alt="" src="/assets/dcdc619c051f4db1983e48c8.jpg"/></p>
+<p>我们在做计算资源规划的时候，通常需要考虑不同的应用场景：</p>
+<ul>
+<li>传统虚拟化技术的 I/O 损耗较大，对于 I/O 密集型应用，物理机相比传统虚拟机（像VMware的传统虚拟化做出来的虚拟机)有更好的性能表现；</li>
+<li>在物理机上部署应用，有更少的额外资源开销（如虚拟化管理、虚拟机操作系统等），并且可以有更高的部署密度，来降低基础设施成本；</li>
+<li>在物理机上可以更加灵活地选择网络、存储等设备和软件应用生态。</li>
+</ul>
+<p>如果从实际生产环境考虑，一般而言建议：</p>
+<ul>
+<li>对性能极其敏感的应用，如高性能计算，物理机是较好的选择；</li>
+<li>云主机支持热迁移，可以有效降低运维成本；</li>
+<li>在工作实践中，我们会为 Kubernetes 集群划分静态资源池和弹性资源池。通常而言，固定资源池可以根据需要选择物理机或者云主机实例；弹性资源池则可以根据应用负载，使用合适规格的云主机实例来优化成本，避免资源浪费，同时提升弹性供给保障。</li>
+</ul>
+<p>由于我们这个系统只是课程的示例项目，为了尽可能压榨服务器资源，节省服务器成本，我们选择了自行准备虚机的方案，这样可以充分使用硬件资源。</p>
+<h3 id="2-集群搭建">2. 集群搭建</h3>
+<p>关于集群搭建，我们的节点规划如下：</p>
+<p><img alt="" src="/assets/766b5ffcadf9adff1aeef00f.jpg"/></p>
+<p>关于集群搭建的具体步骤，你可以按照下面这两个文档进行部署：</p>
+<ul>
+<li>单 Master 集群：<a href="https://mp.weixin.qq.com/s/eQOMt3dz1P2JwezDaoZGzg" target="_blank">使用 kubeadm 安装单master kubernetes 集群（脚本版）</a></li>
+<li>高可用方案： <a href="https://mp.weixin.qq.com/s/bdq4GySQWjcIjJmn0ZD80g" target="_blank">Kubernetes 高可用集群落地二三事</a></li>
+</ul>
+<p>安装的负载均衡组件如下：</p>
+<p><img alt="" src="/assets/e2d2ee7ffdfaa9f523e5ff46.jpg"/></p>
+<p>如果你没有Kubernetes的使用基础，那么我建议学习一下这几篇入门文章：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/X2Z_a_eYq12O6yTQmRRxfw" target="_blank">Kubernetes 集群基本概念</a></li>
+<li><a href="https://mp.weixin.qq.com/s/dSbCK_ms4YMoEvqp0afNZg" target="_blank">k8s入门篇-Kubernetes的基本概念和术语</a></li>
+<li><a href="https://mp.weixin.qq.com/s/EPdOEwFaoc-hI27C0v3urA" target="_blank">K8s命令篇-Kubernetes工作实用命令集结号</a></li>
+<li><a href="https://mp.weixin.qq.com/s/xYjR5_WZNhny_0RdjM1tpA" target="_blank">Kubernetes 集群常用操作总结</a></li>
+</ul>
+<h3 id="3-插件安装">3. 插件安装</h3>
+<p>我们需要安装的插件主要有三种：网络插件、存储插件以及组件。</p>
+<p>对于网络插件，我们选用的是目前主流的网络插件 Calico。如果你的系统有其它选型需求，那你可以参考下面这篇文章，这里我就不做赘述了。</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/H4ncgG0AqsmpPSg3ICBP3g" target="_blank">Kubernetes 网络插件（CNI）超过 10Gbit/s 的基准测试结果</a></li>
+</ul>
+<p>安装Calico插件的具体步骤，在前面的单 Master 集群部署文档中已有说明，你可以参考一下。</p>
+<p>对于存储插件，我们选用的是 NFS 网络存储。因为 NFS 相对简单，上手快，我们只需要部署一个NFS服务，再由Kubernetes提供一个自动配置卷程序，然后通过 StoageClass 动态配置 PVC 就可以了。 而且在性能上，NFS 也能满足我们这个系统的需求。</p>
+<p>只不过，NFS 并不是高可用方案。如果你是在生产环境中使用，可以考虑把 Ceph 作为存储选型方案。Ceph 是一个统一的分布式存储系统，也是高可用存储方案，并且可以提供比较好的性能、可靠性和可扩展性。但是，Ceph 部署起来更复杂些，同时维护也比 NFS 复杂。</p>
+<p>我把 NFS 和 Ceph 的详细安装步骤放在这里，你如果有需要，可以学习参考。</p>
+<ul>
+<li>NFS： <a href="https://mp.weixin.qq.com/s/xKPAHWuLBMYuaVzpel5rUQ" target="_blank">Kubernetes 集群部署 NFS 网络存储</a></li>
+<li>Ceph： <a href="https://mp.weixin.qq.com/s/tww0dPNeFNR_WaEWUh97ZQ" target="_blank">Kubernetes 集群分布式存储插件 Rook Ceph部署</a></li>
+</ul>
+<p>另外，不要忘了，NFS 配置中还需要这两个组件：</p>
+<p><img alt="" src="/assets/1519485de1d4f64123d75d90.jpg"/></p>
+<h3 id="4-kubernetes管理平台">4. Kubernetes管理平台</h3>
+<p>安装组件：</p>
+<p><img alt="" src="/assets/36c28f419cd598cfa46c7c6f.jpg"/></p>
+<p>Kuboard 采用的是可视化UI的方式来管理应用和组件，降低了Kubernetes集群的使用门槛。下面我们看看怎么部署 Kuboard 组件。</p>
+<p>第一步，k8s 集群执行资源文件：</p>
+<pre><code>kubectl apply -f https://kuboard.cn/install-script/kuboard.yaml
+kubectl apply -f https://addons.kuboard.cn/metrics-server/0.3.7/metrics-server.yaml
+</code></pre>
+<p>第二步，把 Kuboard 安装好后，我们看一下 Kuboard 的运行状态：</p>
+<pre><code>kubectl get pods -l k8s.kuboard.cn/name=kuboard -n kube-system
+</code></pre>
+<p>输出结果：</p>
+<pre><code>NAME                       READY   STATUS        RESTARTS   AGE
+kuboard-54c9c4f6cb-6lf88   1/1     Running       0          45s
+</code></pre>
+<p>这个结果表明 kuboard 已经成功部署了。</p>
+<p>接着，我们获取管理员 Token 。这一步是为了登录访问 Kuboard，检查组件是否成功运行。</p>
+<pre><code># 可在第一个 Master 节点上执行此命令
+echo $(kubectl -n kube-system get secret $(kubectl -n kube-system get secret | grep kuboard-user | awk '{print $1}') -o go-template='{{.data.token}}' | base64 -d)
+</code></pre>
+<p>通过检查部署我们了解到，Kuboard Service 使用了 NodePort 的方式暴露服务，NodePort 为 32567。因此，我们可以按照下面这个方式访问 Kuboard：</p>
+<pre><code>http://任意一个Worker节点的IP地址:32567/
+</code></pre>
+<p>然后，在登录中输入管理员 Token，就可以进入到 Kuboard 集群的概览页了。</p>
+<p>注意，如果你使用的是阿里云、腾讯云等云服务，那么你可以在对应的安全组设置里，开放 worker 节点 32567 端口的入站访问，你也可以修改 Kuboard.yaml 文件，使用自己定义的 NodePort 端口号。</p>
+<h2 id="四-依赖组件">四. 依赖组件</h2>
+<h3 id="1-部署清单">1. 部署清单</h3>
+<p><img alt="" src="/assets/8b9b0014b7d37837a67db673.jpg"/></p>
+<h3 id="2-安装部署">2. 安装部署</h3>
+<p>对于上述依赖组件的安装部署，我整理了对应的教程放在这里，你有兴趣可以尝试一下。</p>
+<p>MySQL 的二进制安装方式，在网上的教程多如牛毛，我在这里就不介绍了，如果你想知道怎么在Kubernetes下部署 MySQL，你可以参考这个链接中的详细步骤：<a href="https://mp.weixin.qq.com/s/4YSx4a2oqjrp1f6wNQgR-g" target="_blank">如何在 Kubernetes 集群中搭建一个复杂的 MySQL 数据库</a>。</p>
+<p>Elasticsearch 集群的部署可以参考：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/VAlbWoSf_16-Cf5nIwEShg" target="_blank">Kubernetes Helm3 部署 Elastic</a><a href="https://mp.weixin.qq.com/s/VAlbWoSf_16-Cf5nIwEShg" target="_blank">s</a><a href="https://mp.weixin.qq.com/s/VAlbWoSf_16-Cf5nIwEShg" target="_blank">earch &amp; Kibana 7 集群</a></li>
+</ul>
+<p>JMeter的部署可以参考：</p>
+<ul>
+<li>二进制：<a href="https://mp.weixin.qq.com/s/nUNAz3Gma9fwoFNFA9Orog" target="_blank">性能工具之JMeter+InfluxDB+Grafana打造压测可视化实时监控</a></li>
+<li>Kubernetes：<a href="https://mp.weixin.qq.com/s/VQl05FvzK456WAkXDM6I9Q" target="_blank">Kubernetes 下部署 Jmeter 集群</a></li>
+</ul>
+<p>镜像仓库 Harbor 的部署可以参考：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/_0hEWz7TUvYGASg9I3az4g" target="_blank">Kubernetes 集群仓库 harbor Helm3 部署</a></li>
+</ul>
+<p>Nacos 的部署可以参考：</p>
+<ul>
+<li>Docker 单机模式： <a href="https://nacos.io/zh-cn/docs/quick-start-docker.html" target="_blank">Nacos Docker 快速开始</a></li>
+<li>Kubernetes：<a href="https://nacos.io/zh-cn/docs/use-nacos-with-kubernetes.html" target="_blank">Kubernetes Nacos</a></li>
+</ul>
+<p>Redis、RabbitMQ、MongoDB 单机部署的部署可以参考：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/yuAU-qWeTr4svaSI497sbQ" target="_blank">Kubernetes 集群监控 kube-prometheus 自动发现</a></li>
+</ul>
+<p>Logstash 的部署可以参考：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/D7Xuw_8nsituhR33BpjU2w" target="_blank">整合ELK实现日志收集</a></li>
+</ul>
+<h2 id="五-监控组件">五. 监控组件</h2>
+<h3 id="1-全局监控">1. 全局监控</h3>
+<p>不知道你还记不记得，我们这个系统的架构：</p>
+<p><img alt="" src="/assets/4e4ebc5f209762022c1e8122.png"/></p>
+<p>根据这个系统的架构，我们选择的工具要监控到这几个层面：</p>
+<ul>
+<li>第一层，物理主机；</li>
+<li>第二层，KVM 虚拟机；</li>
+<li>第三层，Kubernetes套件；</li>
+<li>第四层，各种应用所需要的技术组件。</li>
+</ul>
+<p>其实，有了上面的系统架构，监控设计就已经出现在写方案之人的脑袋里了。对于我们这个课程所用的系统，全局监控如下所示：</p>
+<p><img alt="" src="/assets/3ec36bcb215809ef0ffc17fd.png"/></p>
+<p>从上图来看，我们使用 Prometheus/Grafana/Spring Boot Admin/SkyWalking/Weave Scope/ELK/EFK 就可以实现具有全局视角的第一层监控。对于工具中没有覆盖的第一层计数器，我们只能在执行场景时再执行命令来补充了。</p>
+<h3 id="2-部署清单">2. 部署清单</h3>
+<p><img alt="" src="/assets/5ecff01123efb75ea67b3bc6.jpg"/></p>
+<h3 id="3-安装部署">3. 安装部署</h3>
+<p>对于上面这些监控工具的部署，我也把相应的安装教程放在这里，供你参考学习。</p>
+<p>Kubernetes集群资源监控的部署：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/AOl_z0zMuPzRlf36J6OLMg" target="_blank">Kubernetes 集群监控 kube-prometheus 部署</a></li>
+<li><a href="https://mp.weixin.qq.com/s/T1Yhbw2efw-wjKu1PZyudg" target="_blank">Kubernetes 集群监控 controller-manager &amp; scheduler 组件</a></li>
+<li><a href="https://mp.weixin.qq.com/s/chvukvjmCDvrYqYapRCEkA" target="_blank">Kubernetes 集群监控 ETCD 组件</a></li>
+</ul>
+<p>日志聚合部署的部署：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/7shBCfpKRBBQDsutSpClhQ" target="_blank">Kubernetes 集群日志监控 EFK 安装</a></li>
+</ul>
+<p>依赖组件的部署：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/yuAU-qWeTr4svaSI497sbQ" target="_blank">Kubernetes 集群监控 kube-prometheus 自动发现</a></li>
+</ul>
+<p>APM 链路跟踪的部署：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/bDfPFjTF5W2z8XUD-8EYQQ" target="_blank">Kubernetes + Spring Cloud 集成链路追踪 SkyWalking</a></li>
+</ul>
+<h2 id="六-微服务">六. 微服务</h2>
+<h3 id="1-项目介绍">1. 项目介绍</h3>
+<p>在搭建这个课程所用的系统时，我采用了微服务的架构，这也是当前主流的技术架构。</p>
+<p>如果你有兴趣了解详细的项目介绍，可以参考这篇文章：<a href="https://mp.weixin.qq.com/s/a8nDBbkuvSjreaCxuM2PuQ" target="_blank">《高楼的性能工程实战课》微服务电商项目技术全解析</a>。这里面主要介绍了该项目的一些预备知识、系统结构、主要技术栈以及核心组件。此外，还有相关的运行效果截图。</p>
+<h3 id="2-拉取源代码">2. 拉取源代码</h3>
+<p>我们把 git clone 项目源代码下载到本地，来部署我们的被测系统：</p>
+<pre><code>git clone https://github.com/xncssj/7d-mall-microservice.git
+</code></pre>
+<h3 id="3-修改-nacos-配置">3. 修改 Nacos 配置</h3>
+<p>我们先将项目 config 目录下的配置包导入到 Nacos 中，然后根据自己的实际需要修改相关配置。</p>
+<p>接着，我们将配置信息导入到 Nacos 中后，会显示这样的信息：</p>
+<p><img alt="" src="/assets/5f7d8bbe2b2c949743129871.png"/></p>
+<p>请你注意，我们修改的配置文件主要是每个单体服务下的 application-prod.yml 和 bootstrap-prod.yml。因为两个全局配置文件，都是服务容器内加载的配置文件。</p>
+<h3 id="4-镜像打包及推送">4. 镜像打包及推送</h3>
+<p>我们使用 Java 语言的 IDE （推荐 IDEA ）打开项目工程。</p>
+<p>首先，修改项目根目录下的 pom.xml 文件：</p>
+<pre><code>&lt;properties&gt;
+    &lt;!--改为你自己的 Docker 服务远程访问地址--&gt;
+    &lt;docker.host&gt;http://172.16.106.237:2375&lt;/docker.host&gt;
+&lt;/properties&gt;
+</code></pre>
+<p>在 IDEA 的右边 Maven 标签页，我们可以找到 root 工程下的 package 按钮，选中并执行：</p>
+<p><img alt="" src="/assets/3cc1bdc379e1c8f5ba5be9b0.png"/></p>
+<p>然后，在编译的远程 Docker 主机上，我们修改所有服务的镜像标签名称。之后，再推送镜像到 Docker 仓库。</p>
+<h3 id="5-导入数据库">5. 导入数据库</h3>
+<p>这一步需要将项目 document/sql 目录下的 SQL 脚本导入到 MySQL 数据库中。</p>
+<h3 id="6-初始化依赖组件">6. 初始化依赖组件</h3>
+<h4 id="6-1-rabbitmq">6.1. RabbitMQ</h4>
+<p>第一步，进入 RabbitMQ 容器并开启管理功能：</p>
+<pre><code>#登录容器的时候需要注意到容器支持的 shell 是什么。
+kubectl exec -it &lt;pod-name&gt; -n &lt;ns-name&gt; bash
+kubectl exec -it &lt;pod-name&gt; -n &lt;ns-name&gt; sh
+
+
+root@cloud-rabbitmq-5b49d784c-gbr8m:/# rabbitmq-plugins enable rabbitmq_management
+Enabling plugins on node rabbit@cloud-rabbitmq-5b49d784c-gbr8m:
+rabbitmq_management
+The following plugins have been configured:
+  rabbitmq_management
+  rabbitmq_management_agent
+  rabbitmq_web_dispatch
+Applying plugin configuration to rabbit@cloud-rabbitmq-5b49d784c-gbr8m...
+Plugin configuration unchanged.
+</code></pre>
+<p>因为 RabbitMQ Service 使用 NodePort 的方式暴露控制台地址，比如 NodePort 为 15672。所以，第二步，我们访问地址 <a href="http://xn--IP-rm4eu79a9miiio:15672/" target="_blank">http://计算节点IP:15672/</a> 地址，查看是否安装成功：</p>
+<p><img alt="" src="/assets/aa569688debdf869a76d6037.png"/></p>
+<p>第三步，输入账号密码并登录guest/guest。</p>
+<p>第四步，创建帐号并设置其角色为管理员 mall/mall。</p>
+<p><img alt="" src="/assets/f1d22846eb7b52f6d43ef827.png"/></p>
+<p>第五步，创建一个新的虚拟 host 为 /mall。</p>
+<p><img alt="" src="/assets/46761928bc0e463ce9acb4e6.png"/></p>
+<p>第六步，点击 mall 用户进入用户配置页面，给 mall 用户配置该虚拟 host 的权限。</p>
+<p><img alt="" src="/assets/fad56a248f3db237ff5526ec.png"/></p>
+<p>到这里，RabbitMQ 的初始化就完成了。</p>
+<h4 id="6-2-elasticsearch">6.2. Elasticsearch</h4>
+<p>安装中文分词器 IKAnalyzer，并重新启动：</p>
+<pre><code>#此命令需要在容器中运行
+elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.6.2/elasticsearch-analysis-ik-7.6.2.zip
+</code></pre>
+<h3 id="7-使用-yaml-资源文件部署应用">7. 使用 yaml 资源文件部署应用</h3>
+<p>将项目 document/k8s 目录下的 yaml 资源文件中的 Dokcer 镜像，修改为自己的 Tag 并上传到 k8s 集群中执行：</p>
+<pre><code>kubectl apply -f k8s/
+</code></pre>
+<h2 id="七-运行效果展示">七. 运行效果展示</h2>
+<h3 id="1-服务器">1. 服务器</h3>
+<p><img alt="" src="/assets/60efb3035021f3e01df1dcaf.jpg"/></p>
+<h3 id="2-虚拟机">2. 虚拟机</h3>
+<p><img alt="" src="/assets/1879dba1fb7ab9e5d949bda9.png"/></p>
+<h3 id="3-kubernetes-集群">3. Kubernetes 集群</h3>
+<p>Kubernetes 集群：</p>
+<pre><code>[root@k8s-master-1 ~]# kubectl get nodes
+NAME           STATUS   ROLES    AGE   VERSION
+k8s-master-1   Ready    master   26d   v1.19.2
+k8s-master-2   Ready    master   26d   v1.19.2
+k8s-master-3   Ready    master   26d   v1.19.2
+k8s-worker-1   Ready    &lt;none&gt;   26d   v1.19.2
+k8s-worker-2   Ready    &lt;none&gt;   26d   v1.19.2
+k8s-worker-3   Ready    &lt;none&gt;   26d   v1.19.2
+k8s-worker-4   Ready    &lt;none&gt;   26d   v1.19.2
+k8s-worker-5   Ready    &lt;none&gt;   26d   v1.19.2
+k8s-worker-6   Ready    &lt;none&gt;   26d   v1.19.2
+k8s-worker-7   Ready    &lt;none&gt;   26d   v1.19.2
+k8s-worker-8   Ready    &lt;none&gt;   26d   v1.19.2
+k8s-worker-9   Ready    &lt;none&gt;   26d   v1.19.2
+[root@k8s-master-1 ~]# 
+</code></pre>
+<p>微服务管理：</p>
+<p><img alt="" src="/assets/6efe6876c692fa3c4ae3502d.png"/></p>
+<h3 id="4-微服务">4. 微服务</h3>
+<p>部署架构图：</p>
+<p><img alt="" src="/assets/2867cd8e8e4455120eb4d309.png"/></p>
+<p>API 文档：</p>
+<p><img alt="" src="/assets/6faae10fd49045e2d1a80cba.png"/></p>
+<p>调用链监控：-
+<img alt="" src="/assets/05af08a4b07fc2d4db773766.png"/>-
+<img alt="" src="/assets/ff256c6521e996c57ea091b0.png"/></p>
+<p><img alt="" src="/assets/missing-be41a61bcb449f6b6dce6e45.svg"/></p>
+<p>服务注册：</p>
+<p><img alt="" src="/assets/c928cb4d9ecfba41c297d891.png"/></p>
+<p>服务监控:-
+<img alt="" src="/assets/d45b1a243d21d27e871d2378.png"/></p>
+<p>日志聚合：</p>
+<p><img alt="" src="/assets/996767ef80223b346fd9602d.png"/></p>
+<p>配置管理：</p>
+<p><img alt="" src="/assets/edd710e0c6383be2dd0651b7.png"/></p>
+<p>系统保护：</p>
+<p><img alt="" src="/assets/99dca6f39a3fa23b4124c127.png"/></p>
+<p>容器仓库：</p>
+<p><img alt="" src="/assets/59e5cd666f3c11c8e252d5ee.png"/></p>
+<p>压力引擎：</p>
+<p><img alt="" src="/assets/ced49cad3bed6db2d45a4494.png"/></p>
+<h3 id="5-资源监控">5.资源监控</h3>
+<p>Kubernetes集群资源监控：</p>
+<p><img alt="" src="/assets/7830afec13ac89a2247027e7.png"/></p>
+<p>Linux 资源监控：</p>
+<p><img alt="" src="/assets/0b4a5deb2494ef71f311a983.png"/></p>
+<p>MySQL 资源监控：</p>
+<p><img alt="" src="/assets/e7e13e5a33aee6eef8d5ce56.png"/></p>
+<p>RabbitMQ 资源监控：</p>
+<p><img alt="" src="/assets/c5817af1efe4cf3f0a547a34.png"/></p>
+<p>MongoDB 数据库资源监控：</p>
+<p><img alt="" src="/assets/20aa87c25662fa97ae7536cd.png"/></p>
+<p>Kubernetes etcd 资源监控：</p>
+<p><img alt="" src="/assets/74c43ac7c5096012ad3f7383.png"/></p>
+<p>Kubernetes API Server 资源监控：</p>
+<p><img alt="" src="/assets/088a4d5894ad73d89a45073b.png"/></p>
+<p>Kubernetes 服务拓扑：</p>
+<p><img alt="" src="/assets/3634ba6f6a791783982cda8f.png"/></p>
+<h2 id="八-总结">八. 总结</h2>
+<p>这节课的内容包括了物理环境的说明、技术组件的具体搭建过程、示例系统的搭建过程以及运行效果。经过上面所有的步骤，我们就把整个课程涉及的所有技术组件、示例系统完全搭建起来了。</p>
+<p>而我之所以选择这样的技术栈，主要有三方面的考虑：</p>
+<p><strong>1. 核心优势</strong></p>
+<ul>
+<li>任务调度：为集群系统中的任务提供调度服务，自动将服务按资源需求分配到资源限制的计算节点；</li>
+<li>资源隔离：为产品提供管控与服务节点隔离能力，保证研发应用和管控服务不产生相互的影响；</li>
+<li>高可用能力：自动监控服务运行，根据运行情况对失效的服务进行自动重启恢复；</li>
+<li>网络互联互通能力：提供统一的IP地址分配和网络互通能力；</li>
+<li>统一编排管理能力：结合 Gitlab 和 k8s ，对输出的产品进行统一的编排管理；</li>
+<li>公共产品组件可以为团队提供统一部署、验证、授权、调度和管控能力，为私有云服务提供基础性的支撑。</li>
+</ul>
+<p><strong>2. 核心设施平台（IaaS云）</strong></p>
+<ul>
+<li>提供计算、网络、存储等核心资源设备的虚拟化；</li>
+<li>支持不同操作系统，包括主流的 Win 和 Linux 系统；</li>
+<li>提供主要的三种服务：云主机、云网络、云硬盘；</li>
+<li>提供可视化 Web UI；</li>
+<li>提供 k8s 集群（容器云）规划、部署和运营；</li>
+<li>支持多种计算、存储和网络方案。</li>
+</ul>
+<p><strong>3. 基础服务平台（PaaS云）</strong></p>
+<ul>
+<li>提供数据存储：支持常见 NFS 、Ceph RBD、Local Volume 等；</li>
+<li>提供应用服务：支持自愈和自动伸缩、调度和发布、负载均衡等；</li>
+<li>提供运维管理：支持日志监控、资源监控、消息告警等。</li>
+</ul>
+<p>我们这个系统采用的技术栈，是当前技术市场中流行的主流技术栈，这样的环境具有很高的借鉴价值。而且，从我们要表达的 RESAR 性能分析架构和逻辑来说，也说明 RESAR 性能分析理念是足以支撑当前的技术栈的。</p>
+<h2 id="参考资料汇总">参考资料汇总</h2>
+<p><strong>1. CentOS 7的部署</strong>：<a href="https://blog.csdn.net/zuozewei/article/details/84951690" target="_blank">HP 服务器安装 CentOS 7</a>-
+<strong>2. KVM的优化重点</strong>：<a href="https://mp.weixin.qq.com/s/L-jNlwYKFWgoKX6L5ffz5A" target="_blank">关于KVM 虚拟化注意的二三事整理</a>-
+<strong>3. KVM 的安装和使用</strong>：<a href="https://mp.weixin.qq.com/s/UluDn0jG-uYZqpIsIXzKAg" target="_blank">Linux KVM 安装使用手册</a>-
+<strong>4. Kubernetes 集群搭建</strong>：</p>
+<ul>
+<li>单 Master 集群：<a href="https://mp.weixin.qq.com/s/eQOMt3dz1P2JwezDaoZGzg" target="_blank">使用 kubeadm 安装单master kubernetes 集群（脚本版）</a></li>
+<li>高可用方案： <a href="https://mp.weixin.qq.com/s/bdq4GySQWjcIjJmn0ZD80g" target="_blank">Kubernetes 高可用集群落地二三事</a></li>
+</ul>
+<p><strong>5. Kubernetes的使用基础</strong>：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/X2Z_a_eYq12O6yTQmRRxfw" target="_blank">Kubernetes 集群基本概念</a></li>
+<li><a href="https://mp.weixin.qq.com/s/dSbCK_ms4YMoEvqp0afNZg" target="_blank">k8s入门篇-Kubernetes的基本概念和术语</a></li>
+<li><a href="https://mp.weixin.qq.com/s/EPdOEwFaoc-hI27C0v3urA" target="_blank">K8s命令篇-Kubernetes工作实用命令集结号</a></li>
+<li><a href="https://mp.weixin.qq.com/s/xYjR5_WZNhny_0RdjM1tpA" target="_blank">Kubernetes 集群常用操作总结</a></li>
+</ul>
+<p><strong>6. Kubernetes网络插件选型</strong>：<a href="https://mp.weixin.qq.com/s/H4ncgG0AqsmpPSg3ICBP3g" target="_blank">Kubernetes 网络插件（CNI）超过 10Gbit/s 的基准测试结果</a></p>
+<p><strong>7. NFS部署</strong>： <a href="https://mp.weixin.qq.com/s/xKPAHWuLBMYuaVzpel5rUQ" target="_blank">Kubernetes 集群部署 NFS 网络存储</a></p>
+<p><strong>8. Ceph部署</strong>： <a href="https://mp.weixin.qq.com/s/tww0dPNeFNR_WaEWUh97ZQ" target="_blank">Kubernetes 集群分布式存储插件 Rook Ceph部署</a></p>
+<p><strong>9. Kubernetes下的MySQL部署</strong>：<a href="https://mp.weixin.qq.com/s/4YSx4a2oqjrp1f6wNQgR-g" target="_blank">如何在 Kubernetes 集群中搭建一个复杂的 MySQL 数据库</a></p>
+<p><strong>10. Elasticsearch 集群的部署</strong>：<a href="https://mp.weixin.qq.com/s/VAlbWoSf_16-Cf5nIwEShg" target="_blank">Kubernetes Helm3 部署 Elasticsearch &amp; Kibana 7 集群</a></p>
+<p><strong>11. JMeter的部署</strong>：</p>
+<ul>
+<li>二进制：<a href="https://mp.weixin.qq.com/s/nUNAz3Gma9fwoFNFA9Orog" target="_blank">性能工具之JMeter+InfluxDB+Grafana打造压测可视化实时监控</a></li>
+<li>Kubernetes：<a href="https://mp.weixin.qq.com/s/VQl05FvzK456WAkXDM6I9Q" target="_blank">Kubernetes 下部署 Jmeter 集群</a></li>
+</ul>
+<p><strong>12. 镜像仓库 Harbor 的部署</strong>：<a href="https://mp.weixin.qq.com/s/_0hEWz7TUvYGASg9I3az4g" target="_blank">Kubernetes 集群仓库 harbor Helm3 部署</a></p>
+<p><strong>13. Nacos 的部署</strong>：</p>
+<ul>
+<li>Docker 单机模式： <a href="https://nacos.io/zh-cn/docs/quick-start-docker.html" target="_blank">Nacos Docker 快速开始</a></li>
+<li>Kubernetes：<a href="https://nacos.io/zh-cn/docs/use-nacos-with-kubernetes.html" target="_blank">Kubernetes Nacos</a></li>
+</ul>
+<p><strong>14. Redis、RabbitMQ、MongoDB 单机部署的部署</strong>：<a href="https://mp.weixin.qq.com/s/yuAU-qWeTr4svaSI497sbQ" target="_blank">Kubernetes 集群监控 kube-prometheus 自动发现</a></p>
+<p><strong>15. Logstash 的部署</strong>：<a href="https://mp.weixin.qq.com/s/D7Xuw_8nsituhR33BpjU2w" target="_blank">整合ELK实现日志收集</a></p>
+<p><strong>16. Kubernetes集群资源监控的部署</strong>：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/AOl_z0zMuPzRlf36J6OLMg" target="_blank">Kubernetes 集群监控 kube-prometheus 部署</a></li>
+<li><a href="https://mp.weixin.qq.com/s/T1Yhbw2efw-wjKu1PZyudg" target="_blank">Kubernetes 集群监控 controller-manager &amp; scheduler 组件</a></li>
+<li><a href="https://mp.weixin.qq.com/s/chvukvjmCDvrYqYapRCEkA" target="_blank">Kubernetes 集群监控 ETCD 组件</a></li>
+</ul>
+<p><strong>17. 日志聚合部署的部署</strong>：<a href="https://mp.weixin.qq.com/s/7shBCfpKRBBQDsutSpClhQ" target="_blank">Kubernetes 集群日志监控 EFK 安装</a></p>
+<p><strong>18. 依赖组件的部署</strong>：<a href="https://mp.weixin.qq.com/s/yuAU-qWeTr4svaSI497sbQ" target="_blank">Kubernetes 集群监控 kube-prometheus 自动发现</a></p>
+<p><strong>19. APM 链路跟踪的部署</strong>：<a href="https://mp.weixin.qq.com/s/bDfPFjTF5W2z8XUD-8EYQQ" target="_blank">Kubernetes + Spring Cloud 集成链路追踪 SkyWalking</a></p>
+<p><strong>20. 微服务项目介绍</strong>：<a href="https://mp.weixin.qq.com/s/a8nDBbkuvSjreaCxuM2PuQ" target="_blank">《高楼的性能工程实战课》微服务电商项目技术全解析</a></p>
+<p><strong>21. 其他学习资料推荐</strong>：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/JeKdirFrM5LGAqZrrdKoXA" target="_blank">SpringCloud 日志在压测中的二三事</a></li>
+<li><a href="https://mp.weixin.qq.com/s/KHGfK7DUbSBcNOF6J8mb6Q" target="_blank">高楼的性能工程实战课之脚本开发</a></li>
+<li><a href="https://mp.weixin.qq.com/s/tYooETSGhiMBBDlwihiqAA" target="_blank">《高楼的性能工程实战课》学习所推荐的知识点</a></li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>07 事务消息使用及方案选型思考 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">RocketMQ 实战与进阶（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">30 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>RocketMQ 实战与进阶（完）</strong><ul><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E6%90%AD%E5%BB%BA%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E7%AF%87.html">01 搭建学习环境准备篇</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/02%20RocketMQ%20%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%89%AB%E7%9B%B2%E7%AF%87.html">02 RocketMQ 核心概念扫盲篇</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%20API%20%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.html">03 消息发送 API 详解与版本变迁说明</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/04%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E8%B0%88%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81.html">04 结合实际应用场景谈消息发送</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/05%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.html">05 消息发送核心参数与工作原理详解</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/06%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">06 消息发送常见错误与解决方案</a></li><li><a class="active" aria-current="page" href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/07%20%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E4%BD%BF%E7%94%A8%E5%8F%8A%E6%96%B9%E6%A1%88%E9%80%89%E5%9E%8B%E6%80%9D%E8%80%83.html">07 事务消息使用及方案选型思考</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%20API%20%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.html">08 消息消费 API 与版本变迁说明</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/09%20DefaultMQPushConsumer%20%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">09 DefaultMQPushConsumer 核心参数与工作原理</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/10%20DefaultMQPushConsumer%20%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">10 DefaultMQPushConsumer 使用示例与注意事项</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/11%20DefaultLitePullConsumer%20%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%AE%9E%E6%88%98.html">11 DefaultLitePullConsumer 核心参数与实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E5%86%8D%E8%81%8A%20DefaultLitePullConsumer%20%E7%9A%84%E4%BD%BF%E7%94%A8.html">12 结合实际场景再聊 DefaultLitePullConsumer 的使用</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E3%80%81%E6%B6%88%E6%81%AF%E8%BF%87%E6%BB%A4%E5%AE%9E%E6%88%98.html">13 结合实际场景顺序消费、消息过滤实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/14%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%A7%AF%E5%8E%8B%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98.html">14 消息消费积压问题排查实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/15%20RocketMQ%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%AE%9E%E6%88%98.html">15 RocketMQ 常用命令实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/16%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E6%91%B8%E9%AB%98.html">16 RocketMQ 集群性能摸高</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/17%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98.html">17 RocketMQ 集群性能调优</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/18%20RocketMQ%20%E9%9B%86%E7%BE%A4%E5%B9%B3%E6%BB%91%E8%BF%90%E7%BB%B4.html">18 RocketMQ 集群平滑运维</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/19%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%B8%80%EF%BC%89.html">19 RocketMQ 集群监控（一）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/20%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%BA%8C%EF%BC%89.html">20 RocketMQ 集群监控（二）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/21%20RocketMQ%20%E9%9B%86%E7%BE%A4%E5%91%8A%E8%AD%A6.html">21 RocketMQ 集群告警</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/22%20RocketMQ%20%E9%9B%86%E7%BE%A4%E8%B8%A9%E5%9D%91%E8%AE%B0.html">22 RocketMQ 集群踩坑记</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/23%20%E6%B6%88%E6%81%AF%E8%BD%A8%E8%BF%B9%E3%80%81ACL%20%E4%B8%8E%E5%A4%9A%E5%89%AF%E6%9C%AC%E6%90%AD%E5%BB%BA.html">23 消息轨迹、ACL 与多副本搭建</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/24%20RocketMQ-Console%20%E5%B8%B8%E7%94%A8%E9%A1%B5%E9%9D%A2%E6%8C%87%E6%A0%87%E8%8E%B7%E5%8F%96%E9%80%BB%E8%BE%91.html">24 RocketMQ-Console 常用页面指标获取逻辑</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/25%20RocketMQ%20Nameserver%20%E8%83%8C%E5%90%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5.html">25 RocketMQ Nameserver 背后的设计理念</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/26%20Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98.html">26 Java 并发编程实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/27%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">27 从 RocketMQ 学基于文件的编程模式（一）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/28%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">28 从 RocketMQ 学基于文件的编程模式（二）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/29%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%20Netty%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7.html">29 从 RocketMQ 学 Netty 网络编程技巧</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/30%20RocketMQ%20%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E6%88%91%E8%A7%81.html">30 RocketMQ 学习方法之我见</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/07%20%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E4%BD%BF%E7%94%A8%E5%8F%8A%E6%96%B9%E6%A1%88%E9%80%89%E5%9E%8B%E6%80%9D%E8%80%83.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="07 事务消息使用及方案选型思考" id="title">07 事务消息使用及方案选型思考</h1>
+<div><h3 id="事务消息应用场景">事务消息应用场景</h3>
+<p>首先需要申明的是，事务消息与业界用 RocketMQ 解决分布式事务，并不是一回事。</p>
+<p>RocketMQ 引入事务消息，主要是要解决什么问题呢？接下来以电商一个登录送积分的示例来展开本文的叙述。</p>
+<p>在互联网电商发展的初期，为了提高用户的活跃度，通常会采取这样一个提高用户活跃度：一个用户每一天首次登录送积分活动。</p>
+<p>在没有提出送积分活动时，用户登录的代码如下：</p>
+<pre><code>public Map&lt;String, Object&gt; login(String userName, String password) {
+    Map&lt;String, Object&gt; result = new HashMap&lt;&gt;();
+    if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)) {
+       result.put("code", 1);
+       result.put("msg", "用户名与密码不能为空");
+       return result;
+     }
+     try {
+        User user = userMapper.findByUserName(userName);
+        if(user == null || !password.equals(user.getPassword()) ) {
+            result.put("code", 1);
+            result.put("msg", "用户名或密码不正确");
+            return result;
+         }
+         //登录成功，记录登录日志
+         UserLoginLogger userLoginLogger = new UserLoginLogger(user.getId(),                               System.currentTimeMillis());
+         userLoginLoggerMapper.insert(userLoginLogger);
+         result.put("code", 0);
+         result.put("data", user);
+     } catch (Throwable e) {
+         e.printStackTrace();
+         result.put("code", 1);
+         result.put("msg" , e.getMessage());
+     }
+     return result;
+ }
+
+</code></pre>
+<blockquote>
+<p>温馨提示：本文所有的示例代码只是用来描述场景，但代码的实现只是用来阐述最基本的场景，与具体的生产代码还是存在一些差别，主要是指在业务的完备性方面。</p>
+</blockquote>
+<p>上面的示例代码完成用户登录主要分成了 3 个步骤：</p>
+<ol>
+<li>验证用户参数是否合法</li>
+<li>验证用户名密码是否正确</li>
+<li>记录此次登录操作记录日志</li>
+</ol>
+<p>现在为了提高用户的日活，活动部推出了一个活动，从 2020-09-01 到 09-15 号，用户每天首次登录，送 200 积分。</p>
+<p>开发收到这个需求后，三下两除二就搞定了，写出如下代码：</p>
+<p><img alt="1" src="/assets/5b25e32595c801b9280df57b.png"/></p>
+<p>红色部分为本次送积分需求新增的代码，这种方式存在一个明显的弊端，就是会增加用户登录的耗时，因为需要调用一个积分的 RPC 服务。经分析我们可以任务用户登录操作为主流程，应该重复降低该服务的延迟，送积分这个只是一个辅助流程，完全可以将其解耦，这个时候自然而言会想到利用消息中间件来完成解耦。没错，经过改造后的代码如下图所示：</p>
+<p><img alt="2" src="/assets/4c6ef300b850c2b8803b7507.png"/></p>
+<p>但这样问题又来了，如果消息发送成功了，然后被用户直接用 <code>kill -9</code> 命令将应用程序关闭，这样导致数据库并没有存储此次登录日志。但由于消息发送成功了，会送积分，那等用户再次登录的时候，再次发送消息会出现积分被重复发放，即这里的关键是无法保证 MySQL 数据库事务与消息发送这两个独立的操作要么同时成功，要么同时失败，即需要具备分布式事务的处理能力。</p>
+<p>故为了解决上述消息发送与数据库事务的不一致性带来的业务出错，RocketMQ 在 4.3.0 版本引入了事务消息，完美解决上述难题。</p>
+<h3 id="rocketmq-事务消息原理">RocketMQ 事务消息原理</h3>
+<p>事务消息实现原理如下图所示：</p>
+<p><img alt="3" src="/assets/6d579af21140e4ec1166013d.png"/></p>
+<p>应用程序在事务内完成相关业务数据落库后，需要同步调用 RocketMQ 消息发送接口，发送状态为 prepare 的消息，消息发送成功后 RocketMQ 服务器会回调 RocketMQ 消息发送者的事件监听程序，记录消息的本地事务状态，该相关标记与本地业务操作同属一个事务，确保消息发送与本地事务的原子性。</p>
+<p>RocketMQ 在收到类型为 prepare 的消息时，会首先备份消息的原主题与原消息消费队列，然后将消息存储在主题为 RMQ_SYS_TRANS_HALF_TOPIC 的消息消费队列中，就是因为这样，消费端并不会立即被消费到。</p>
+<p>RocketMQ 消息服务器开启一个定时任务，消费 RMQ_SYS_TRANS_HALF_TOPIC 的消息，向消息发送端（应用程序）发起消息事务状态回查，应用程序根据保存的事务状态回馈消息服务器事务的状态（提交、回滚、未知），如果是提交或回滚，则消息服务器提交或回滚消息，如果是未知，待下一次回查，RocketMQ 允许设置一条消息的回查间隔与回查次数，如果在超过回查次数后未知消息的事务状态，则默认回滚消息。</p>
+<h3 id="事务消息实战">事务消息实战</h3>
+<p>从上面的过程，其实可以基本看成 RocketMQ 事务消息的实现原理有点类似于两阶段提交＋定时轮循，其实现套路其实与在没有事务消息之前，我们会通过数据库＋定时任务的机制来实现，只不过 RocketMQ 的事务消息自动提供了定时回查的功能。接下来我们将以上述用户登录＋送积分这个场景，来基于 Spring Boot 的真实应用，使用事务消息来解决我们遇到的问题，实现用户登录、消息发送这两个分布式操作的一致性。</p>
+<p>本次事务消息的整体时序图如下：</p>
+<p><img alt="4" src="/assets/8743ebee66b614dd9cbec3a3.png"/></p>
+<p>接下来我将给出关键代码的截图，笔者为了后续对专栏的演示更贴近实战，从本篇文章开始给出了一个基于 Spring Boot、Dubbo、MyBatis、RocketMQ 的项目。项目的下载信息：</p>
+<blockquote>
+<p><a href="https://pan.baidu.com/s/1ccSMN_dGMaUrFr-57UTn_A" target="_blank">https://pan.baidu.com/s/1ccSMN_dGMaUrFr-57UTn_A</a></p>
+<p>提取码：srif</p>
+</blockquote>
+<p>项目的整体目录如下：</p>
+<p><img alt="5" src="/assets/34e758f1dcbfc346963109fb.png"/></p>
+<p>事务实战的代码位于 rocketmq-example-user-service 模块。</p>
+<h4 id="rocketmq-生产者初始化"><strong>RocketMQ 生产者初始化</strong></h4>
+<p><img alt="6" src="/assets/4464f4d797d40d105e79a6e5.png"/></p>
+<p><img alt="7" src="/assets/cc655c546dbd7ea53144b788.png"/></p>
+<p>代码解读：上述引入了 TransactionMQProducerContainer，主要的目的是事务消息需要关联一个事务回调监听器，故这里采取的是每一个 Topic 单独一个 TransactionMQProducer，所属的生产者组为一个固定前缀与 Topic 的组合。</p>
+<h4 id="userserviceimpl-业务方法实现概述"><strong>UserServiceImpl 业务方法实现概述</strong></h4>
+<p><img alt="8" src="/assets/ab6bc92fa340a072caca233e.png"/></p>
+<p>代码解决：UserServiceImpl 的 login 就是实现登录的处理逻辑，首先先执行普通的业务逻辑，即验证登录用户的用户名与密码，如果不匹配，返回对应的业务错误提示；如果符合登录后，构建登录日志，并为登录日志生成全局唯一的业务流水号。该流水号将贯穿整个业务处理路程，即事务回调、消息消费等各个环节。</p>
+<blockquote>
+<p>注意：这里并不会操作有数据库的写入操作，数据库的写入操作放在了事务消息的监听器中。</p>
+</blockquote>
+<h4 id="事件回调监听器"><strong>事件回调监听器</strong></h4>
+<p><img alt="9" src="/assets/16ebcbc27ac3717a1d104231.png"/></p>
+<p>代码解读：</p>
+<pre><code>executeLocalTransaction
+
+</code></pre>
+<p>引入了一个事务本地表，在一个事务中将业务数据，本地事务日志一起操作数据库，该事务提交成功。业务写的类型为什么要放在这里主要是 RocketMQ 对该方法中产生的异常进行捕获，这样如果将业务操作放在 UserServiceImpl 类中，将记录本地事务日志表放在该回调函数中，这样会导致两者并不会具备一致性。</p>
+<pre><code>checkLocalTransaction
+
+</code></pre>
+<p>该方法由 RocketMQ Broker 会主动调用，在该方法我们如果能根据唯一流水号查询到记录，则任务事务成功提交，则返回 COMMIT_MESSAGE，RocketMQ 会提交事务，将处于 PREPARE 状态的消息发送到用户真实的 Topic 中，这样消费端就能正常消费消息；如果从本地事务表中未查询到消息，返回 UNOWN 即可，不能直接返回 ROLL_BACK，只有当 RocketMQ 在指定回查次数后还未查询到，则会回滚该条消息，客户端不会消费到消息，<strong>实现业务与消息发送的分布式事务一致性</strong>。</p>
+<p>上面有增加测试代码，就是该事务成功与事务失败，看数据库与 MQ 是否是一致性。</p>
+<p>本例的测试方法，启动 rocketmq-example-gateway、rocketmq-example-user-service 两个模块，并且需要启动 RocketMQ 服务器、ZooKeeper 服务器，然后可以通过浏览器或 Postman 发送请求，进行测试，示例如下：</p>
+<p><img alt="10" src="/assets/f074b519d7707e1c46b801b2.png"/></p>
+<p>然后可以通过 RocketMQ-Console 查看消息是否已成功发送，其截图如下：</p>
+<p><img alt="11" src="/assets/b46b4375ed6c90d89ae11a1d.png"/></p>
+<h3 id="事务消息架构思考">事务消息架构思考</h3>
+<p>事务消息能保证业务与消息发送这两个操作的强一致性，以前在没有事务消息时，通常有两种方式解决方案。</p>
+<ul>
+<li>严格的事务一致性，采用与 RocketMQ 事务消息的实现模型，自己实现本地事务表与回调，即多了一个步骤，通过定时任务扫描本地事务消息，进行消息发送。</li>
+<li>基于补偿的思想，例如只在消息发送时采用消息重试机制，确保消息发送成功，另外结合业务的状态，以订单流为例，订单状态为已成功支付后，向 RocketMQ 集群发送一条消息，然后商户物流系统订阅该 Topic，对其进行消费，处理完后会将订单的状态变更为已发货，但如果这条消息被丢失，那无法驱动订单的后续流程，故这里可以基于补偿思想，用一个定时器扫描订单表，查找那些已支付但未发货的订单，并且已超过多少时间的订单，补发一条消息，同样能够最终的一致性。</li>
+</ul>
+<p>事务消息确实能提供强一致性，但需要引入事务本地表，每一次业务都需要增加一次数据库的写入开销，而基于补偿思路，采取的是乐观的机制，并且出错的概率本来就很低，故效率通常会更好。</p>
+<p>故大家可以根据实际情况进行技术选型，不要觉得事务消息这项技术和牛，就必须选用此种方案。</p>
+<h3 id="小结">小结</h3>
+<p>本文的行文思路是先介绍事务消息的使用场景，然后详细介绍 RocketMQ 事务消息的实现原理，最后贴近实战，给出可以运行的 Spring Boot + MyBatis + RocketMQ + Dubbo 的项目示例，最后给出自己对其架构的一些简单思考。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

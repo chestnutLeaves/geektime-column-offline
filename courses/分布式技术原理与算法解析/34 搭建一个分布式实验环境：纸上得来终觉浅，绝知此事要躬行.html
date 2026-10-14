@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>34 搭建一个分布式实验环境：纸上得来终觉浅，绝知此事要躬行 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/index.html">分布式技术原理与算法解析</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">41 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>分布式技术原理与算法解析</strong><ul><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%9B%9B%E7%BA%B5%E5%9B%9B%E6%A8%AA%EF%BC%8C%E5%B8%A6%E4%BD%A0%E9%80%8F%E5%BD%BB%E7%90%86%E8%A7%A3%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF.html">00 开篇词 四纵四横，带你透彻理解分布式技术</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/01%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%98%E4%BD%95%E8%80%8C%E8%B5%B7%EF%BC%9A%E4%BB%8E%E5%8D%95%E5%85%B5%EF%BC%8C%E5%88%B0%E6%B8%B8%E5%87%BB%E9%98%9F%EF%BC%8C%E5%88%B0%E9%9B%86%E5%9B%A2%E5%86%9B.html">01 分布式缘何而起：从单兵，到游击队，到集团军</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/02%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%8C%87%E6%A0%87%EF%BC%9A%E5%95%A5%E6%98%AF%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E4%B8%89%E5%9B%B4.html">02 分布式系统的指标：啥是分布式的三围</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/03%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%92%E6%96%A5%EF%BC%9A%E6%9C%89%E4%BD%A0%E6%B2%A1%E6%88%91%EF%BC%8C%E6%9C%89%E6%88%91%E6%B2%A1%E4%BD%A0.html">03 分布式互斥：有你没我，有我没你</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/04%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%89%E4%B8%BE%EF%BC%9A%E5%9B%BD%E4%B8%8D%E5%8F%AF%E4%B8%80%E6%97%A5%E6%97%A0%E5%90%9B.html">04 分布式选举：国不可一日无君</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/05%20%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E8%AF%86%EF%BC%9A%E5%AD%98%E5%BC%82%E6%B1%82%E5%90%8C.html">05 分布式共识：存异求同</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/06%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9AAll%20or%20nothing.html">06 分布式事务：All or nothing</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/07%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%9A%E5%85%B3%E9%94%AE%E9%87%8D%E5%9C%B0%EF%BC%8C%E9%9D%9E%E8%AF%B7%E5%8B%BF%E5%85%A5.html">07 分布式锁：关键重地，非请勿入</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/08%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E6%98%AF%E5%A6%82%E4%BD%95%E5%BC%95%E7%88%86%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9A%84%EF%BC%9F.html">08 分布式技术是如何引爆人工智能的？</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/09%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%BB%93%E6%9E%84%EF%BC%9A%E4%B8%80%E4%BA%BA%E5%9C%A8%E4%B8%8A%EF%BC%8C%E4%B8%87%E4%BA%BA%E5%9C%A8%E4%B8%8B.html">09 分布式体系结构之集中式结构：一人在上，万人在下</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/10%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9D%9E%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%BB%93%E6%9E%84%EF%BC%9A%E4%BC%97%E7%94%9F%E5%B9%B3%E7%AD%89.html">10 分布式体系结构之非集中式结构：众生平等</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/11%20%E5%88%86%E5%B8%83%E5%BC%8F%E8%B0%83%E5%BA%A6%E6%9E%B6%E6%9E%84%E4%B9%8B%E5%8D%95%E4%BD%93%E8%B0%83%E5%BA%A6%EF%BC%9A%E7%89%A9%E8%B4%A8%E6%96%87%E6%98%8E%E3%80%81%E7%B2%BE%E7%A5%9E%E6%96%87%E6%98%8E%E4%B8%80%E6%89%8B%E6%8A%93.html">11 分布式调度架构之单体调度：物质文明、精神文明一手抓</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/12%20%E5%88%86%E5%B8%83%E5%BC%8F%E8%B0%83%E5%BA%A6%E6%9E%B6%E6%9E%84%E4%B9%8B%E4%B8%A4%E5%B1%82%E8%B0%83%E5%BA%A6%EF%BC%9A%E7%89%A9%E8%B4%A8%E6%96%87%E6%98%8E%E3%80%81%E7%B2%BE%E7%A5%9E%E6%96%87%E6%98%8E%E4%B8%A4%E6%89%8B%E6%8A%93.html">12 分布式调度架构之两层调度：物质文明、精神文明两手抓</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/13%20%E5%88%86%E5%B8%83%E5%BC%8F%E8%B0%83%E5%BA%A6%E6%9E%B6%E6%9E%84%E4%B9%8B%E5%85%B1%E4%BA%AB%E7%8A%B6%E6%80%81%E8%B0%83%E5%BA%A6%EF%BC%9A%E7%89%A9%E8%B4%A8%E6%96%87%E6%98%8E%E3%80%81%E7%B2%BE%E7%A5%9E%E6%96%87%E6%98%8E%E5%A4%9A%E6%89%8B%E5%8D%8F%E5%95%86%E6%8A%93.html">13 分布式调度架构之共享状态调度：物质文明、精神文明多手协商抓</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/14%20%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.html">14 答疑篇：分布式事务与分布式锁相关问题</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/15%20%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%BC%8F%E4%B9%8BMR%EF%BC%9A%E4%B8%80%E9%97%A8%E5%90%8C%E6%B5%81%E5%90%88%E6%B1%A1%E7%9A%84%E8%89%BA%E6%9C%AF.html">15 分布式计算模式之MR：一门同流合污的艺术</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/16%20%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%BC%8F%E4%B9%8BStream%EF%BC%9A%E4%B8%80%E9%97%A8%E8%83%8C%E9%94%85%E7%9A%84%E8%89%BA%E6%9C%AF.html">16 分布式计算模式之Stream：一门背锅的艺术</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/17%20%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%BC%8F%E4%B9%8BActor%EF%BC%9A%E4%B8%80%E9%97%A8%E7%94%A9%E9%94%85%E7%9A%84%E8%89%BA%E6%9C%AF.html">17 分布式计算模式之Actor：一门甩锅的艺术</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/18%20%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9A%E4%BD%A0%E6%96%B9%E5%94%B1%E7%BD%A2%E6%88%91%E7%99%BB%E5%9C%BA.html">18 分布式计算模式之流水线：你方唱罢我登场</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/19%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1%E4%B9%8B%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%EF%BC%9A%E6%88%91%E6%98%AF%E4%BD%A0%E7%9A%84%E5%8D%83%E9%87%8C%E7%9C%BC.html">19 分布式通信之远程调用：我是你的千里眼</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/20%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1%E4%B9%8B%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%9A%E9%80%81%E8%B4%A7%E4%B8%8A%E9%97%A8.html">20 分布式通信之发布订阅：送货上门</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/21%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1%E4%B9%8B%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%9A%E8%B4%A7%E7%89%A9%E8%87%AA%E5%8F%96.html">21 分布式通信之消息队列：货物自取</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/22%20%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.html">22 答疑篇：分布式体系架构与分布式计算相关问题</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/23%20CAP%E7%90%86%E8%AE%BA%EF%BC%9A%E8%BF%99%E9%A1%B6%E5%B8%BD%E5%AD%90%E6%88%91%E4%B8%8D%E6%83%B3%E8%A6%81.html">23 CAP理论：这顶帽子我不想要</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/24%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F%E4%B9%8B%E4%B8%89%E8%A6%81%E7%B4%A0%EF%BC%9A%E9%A1%BE%E5%AE%A2%E3%80%81%E5%AF%BC%E8%B4%AD%E4%B8%8E%E8%B4%A7%E6%9E%B6.html">24 分布式数据存储系统之三要素：顾客、导购与货架</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/25%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E6%96%B9%E5%BC%8F%E4%B9%8B%E5%93%88%E5%B8%8C%E4%B8%8E%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%EF%BC%9A%E2%80%9C%E6%8E%90%E6%8C%87%E4%B8%80%E7%AE%97%E2%80%9D%E4%B8%8E%E2%80%9C%E6%8E%90%E6%8C%87%E4%B8%A4%E7%AE%97%E2%80%9D%E7%9A%84%E4%BA%8B.html">25 数据分布方式之哈希与一致性哈希：“掐指一算”与“掐指两算”的事</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/26%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%A4%8D%E5%88%B6%E6%8A%80%E6%9C%AF%EF%BC%9A%E5%88%86%E8%BA%AB%E6%9C%89%E6%9C%AF.html">26 分布式数据复制技术：分身有术</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/27%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E4%B9%8B%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF%EF%BC%9A%E2%80%9C%E8%BA%AB%E6%89%8B%E9%92%A5%E9%92%B1%E2%80%9D%E9%9A%8F%E8%BA%AB%E5%B8%A6.html">27 分布式数据之缓存技术：“身手钥钱”随身带</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/28%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%AB%98%E5%8F%AF%E9%9D%A0%E4%B9%8B%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E4%B8%8D%E6%82%A3%E5%AF%A1%EF%BC%8C%E8%80%8C%E6%82%A3%E4%B8%8D%E5%9D%87.html">28 分布式高可靠之负载均衡：不患寡，而患不均</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/29%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%AB%98%E5%8F%AF%E9%9D%A0%E4%B9%8B%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%EF%BC%9A%E5%A4%A7%E7%A6%B9%E6%B2%BB%E6%B0%B4%EF%BC%8C%E5%9C%A8%E7%96%8F%E4%B8%8D%E5%9C%A8%E5%A0%B5.html">29 分布式高可靠之流量控制：大禹治水，在疏不在堵</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/30%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%AB%98%E5%8F%AF%E7%94%A8%E4%B9%8B%E6%95%85%E9%9A%9C%E9%9A%94%E7%A6%BB%EF%BC%9A%E5%BD%93%E6%96%AD%E4%B8%8D%E6%96%AD%EF%BC%8C%E5%8F%8D%E5%8F%97%E5%85%B6%E4%B9%B1.html">30 分布式高可用之故障隔离：当断不断，反受其乱</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/31%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%AB%98%E5%8F%AF%E7%94%A8%E4%B9%8B%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%EF%BC%9A%E7%9F%A5%E9%94%99%E8%83%BD%E6%94%B9%EF%BC%8C%E5%96%84%E8%8E%AB%E5%A4%A7%E7%84%89.html">31 分布式高可用之故障恢复：知错能改，善莫大焉</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/32%20%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%B9%B6%E8%A7%A3%E5%86%B3%E7%BD%91%E7%BB%9C%E5%88%86%E5%8C%BA%E9%97%AE%E9%A2%98%EF%BC%9F.html">32 答疑篇：如何判断并解决网络分区问题？</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/33%20%E7%9F%A5%E8%AF%86%E4%B8%B2%E8%81%94%EF%BC%9A%E4%BB%A5%E8%B4%AD%E4%B9%B0%E7%81%AB%E8%BD%A6%E7%A5%A8%E7%9A%84%E6%B5%81%E7%A8%8B%E4%B8%B2%E8%81%94%E5%88%86%E5%B8%83%E5%BC%8F%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF.html">33 知识串联：以购买火车票的流程串联分布式核心技术</a></li><li><a class="active" aria-current="page" href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/34%20%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%EF%BC%9A%E7%BA%B8%E4%B8%8A%E5%BE%97%E6%9D%A5%E7%BB%88%E8%A7%89%E6%B5%85%EF%BC%8C%E7%BB%9D%E7%9F%A5%E6%AD%A4%E4%BA%8B%E8%A6%81%E8%BA%AC%E8%A1%8C.html">34 搭建一个分布式实验环境：纸上得来终觉浅，绝知此事要躬行</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Jackey%EF%BC%9A%E5%AF%84%E8%AF%AD%E5%A4%A9%E6%B6%AF%E5%AE%A2%EF%BC%8C%E8%BD%BB%E5%AF%92%E5%BA%95%E7%94%A8%E6%84%81.html">特别放送 Jackey：寄语天涯客，轻寒底用愁</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8B%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E6%9D%82%E8%B0%88.html">特别放送 分布式下的一致性杂谈</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%B4%94%E6%96%B0%EF%BC%9A%E8%BF%BD%E6%A0%B9%E6%BA%AF%E6%BA%90%EF%BC%8C%E6%8B%A8%E5%BC%80%E4%BA%91%E9%9B%BE%E8%A7%81%E9%9D%92%E5%A4%A9.html">特别放送 崔新：追根溯源，拨开云雾见青天</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%BE%90%E5%BF%97%E5%BC%BA%EF%BC%9A%E5%AD%A6%E4%B9%A0%E8%BF%99%E4%BB%B6%E4%BA%8B%E5%84%BF%EF%BC%8C%E4%B8%8D%E5%88%B0%E9%95%BF%E5%9F%8E%E9%9D%9E%E5%A5%BD%E6%B1%89.html">特别放送 徐志强：学习这件事儿，不到长城非好汉</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E9%82%A3%E4%BA%9B%E4%BD%A0%E4%B8%8D%E8%83%BD%E9%94%99%E8%BF%87%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E8%AE%BA%E6%96%87.html">特别放送 那些你不能错过的分布式系统论文</a></li><li><a href="/courses/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4%E6%8F%90%E5%8D%87%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E8%A6%81%E4%BB%8E%E5%B0%8A%E9%87%8D%E3%80%81%E8%AF%9A%E5%AE%9E%E5%BC%80%E5%A7%8B%EF%BC%9F.html">结束语 为什么说提升职业竞争力要从尊重、诚实开始？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/34%20%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%EF%BC%9A%E7%BA%B8%E4%B8%8A%E5%BE%97%E6%9D%A5%E7%BB%88%E8%A7%89%E6%B5%85%EF%BC%8C%E7%BB%9D%E7%9F%A5%E6%AD%A4%E4%BA%8B%E8%A6%81%E8%BA%AC%E8%A1%8C.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="34 搭建一个分布式实验环境：纸上得来终觉浅，绝知此事要躬行" id="title">34 搭建一个分布式实验环境：纸上得来终觉浅，绝知此事要躬行</h1>
+<div><p>你好，我是聂鹏程。</p>
+<p>上一讲，我以购买火车票为例，为你串讲了分布式技术的应用，帮助你理解所学分布式技术可以应用到哪些业务中。其实，到目前为止，我们主要是从理论上学习相关的分布式技术。但，“纸上得来终觉浅，绝知此事要躬行”。</p>
+<p>今天，我就以Kubernetes为例，和你一起搭建一个分布式实验环境。我先简单和你说下这篇文章的内容分配：</p>
+<ul>
+<li>不会特别详细地讲述搭建过程，而是着重说明搭建的主要步骤以及可能遇到的问题；</li>
+<li>在讲述搭建过程时，串联一下其中涉及的分布式相关知识；</li>
+<li>搭建完Kubernetes集群之后，我会以部署Nginx服务为例，帮助你更直观地体验分布式技术，以巩固、加深对分布式技术的理解。</li>
+</ul>
+<p>话不多说，接下来，我们就一起搭建这个分布式实验环境吧。</p>
+<h2 id="搭建目标">搭建目标</h2>
+<p>Kubernetes是Google开源的容器集群管理系统，是Borg的开源版本。我在<a href="https://time.geekbang.org/column/article/148187" target="_blank">第9篇文章</a>中讲解集中式架构时，和你分析过Kubernetes集群属于主从架构的分布式集群。</p>
+<p>Kubernetes集群主要由Master节点和Worker节点组成。Master节点就是中心服务器，负责对集群进行调度管理；Worker节点是真正的工作节点，负责运行业务应用的容器。而容器是一种虚拟化技术，通过限制自身使用的资源来实现资源隔离，可以为应用提供一整套运行环境，从而实现了服务运行环境的隔离，进而实现了故障隔离。你可以回顾下<a href="https://time.geekbang.org/column/article/175213" target="_blank">第30篇文章</a>中，资源隔离的相关内容。</p>
+<p>接下来，我们明确下这次搭建分布式实验室环境的目标：</p>
+<ul>
+<li>搭建一个Kubernetes集群，包括一个Master节点，两个Worker节点;</li>
+<li>在Kubernetes集群上创建一个Nginx服务。</li>
+</ul>
+<h2 id="搭建前的准备">搭建前的准备</h2>
+<p>今天我们要搭建的Kubernetes集群，以3台服务器为例，一台作为Master节点，两台作为Worker节点。服务器应具备的条件如下：</p>
+<ul>
+<li>Ubuntu 16.04操作系统；</li>
+<li>2GB或以上的内存；</li>
+<li>2核CPU或以上；</li>
+<li>服务器间网络连通；</li>
+<li>每台服务器具有唯一的主机名、MAC地址和product_uuid；</li>
+<li>通过执行命令swapoff -a来关闭Swap；</li>
+<li>30GB及以上的磁盘空间；</li>
+<li>具备外网访问权限，以方便获取相关镜像。</li>
+</ul>
+<p>在这次部署中，我采用的机器配置如下：</p>
+<p><img alt="" src="/assets/b08dc946c3b0024452d148f0.jpg"/></p>
+<p>准备工作完成后，我们就开始搭建集群吧。</p>
+<h2 id="kubernetes集群搭建">Kubernetes集群搭建</h2>
+<p>搭建Kubernetes集群的步骤，主要包括安装Docker，安装部署kubeadm、kubelet、kubectl，部署Master节点，部署Worker节点，安装网络插件这几步。</p>
+<p>其中，安装Docker、部署Master节点和Worker节点涉及分布式的，需要在多个节点上部署，比如Docker节点需要在每个Worker节点部署，Master节点若为集群模式，需要在多个节点上配置主备，Worker节点需要与Master节点建立连接等。</p>
+<p>接下来， 我们具体看看如何一步一步搭建出Kubernetes集群吧。</p>
+<h3 id="1-安装docker">1. 安装Docker</h3>
+<p>Kubernetes是一个容器集群管理系统，因此每个Worker节点会运行容器，以实现业务运行环境隔离。我们在每台服务器上采用如下命令安装Docker：</p>
+<pre><code>apt-get install -y docker.io
+</code></pre>
+<h3 id="2-安装部署kubeadm-kubelet-kubectl">2. 安装部署kubeadm、kubelet、kubectl</h3>
+<p>kubeadm是Kubernetes社区提供的一个部署工具，该工具将kubelet组件之外的其他组件均采用容器部署，实现了自动化， 避免了手动部署容器的麻烦，简化了部署操作。</p>
+<p>其中，Master节点包括API Server、Scheduler、Cluster State Store(默认etcd)和Control Manager Srever核心组件；Worker节点包括kubelet和kube-proxy核心组件。具体的组件功能和原理，你可以再回顾下<a href="https://time.geekbang.org/column/article/148187" target="_blank">第9篇文章</a>中的相关内容。</p>
+<p>kubelet组件本身是一个管控容器的组件，需要执行配置容器网络等操作，这些操作需要在宿主机上执行，不采用容器部署。因此，kubelet组件需要单独部署，而不能用kubeadm进行部署。</p>
+<p>除此之外，我们还需要安装一下kubectl组件。这个组件是Kubernetes的命令行工具，通过kubectl可以部署和管理应用，查看资源，创建、删除和更新组件。</p>
+<p>那么，如何部署kubeadm、kubelet和kubectl这三个组件呢？</p>
+<p>apt是Linux下常用的安装管理工具，这里我就采用apt来安装这三个组件。</p>
+<p>首先，我们需要添加Kubernetes源。</p>
+<ul>
+<li>你可以通过执行以下语句获取Kubernetes源（需要外网权限）：</li>
+</ul>
+<pre><code>sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+cat &lt;&lt;EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+</code></pre>
+<p>然后使用以下命令更新源：</p>
+<pre><code>sudo apt-get update
+</code></pre>
+<ul>
+<li>这时，我们就可以使用如下命令来安装kubelet、kubectl和kubeadm了：</li>
+</ul>
+<pre><code>sudo apt-get install -y kubelet kubeadm kubectl
+</code></pre>
+<ul>
+<li>如果没有外网访问权限，在添加kubernetes源的时候可以执行以下命令来添加阿里云的Kubernetes源：</li>
+</ul>
+<pre><code>cat &lt;&lt;EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial main
+EOF
+</code></pre>
+<p>同样的，使用以下命令来更新源：</p>
+<pre><code>apt-get update # 忽略gpg的报错信息
+</code></pre>
+<p>最后，使用如下命令安装kubelet、kubectl和kubeadm：</p>
+<pre><code>apt-get install -y kubelet kubeadm kubectl --allow-unauthenticated
+</code></pre>
+<p>安装好这三个组件之后，我们就可以使用kubeadm来一键部署集群节点了。</p>
+<p>首先，我们来部署Master节点。</p>
+<h3 id="3-部署master节点">3. 部署Master节点</h3>
+<p>这一步其实就是容器化启动Master节点中的各个组件，直接使用kubeadm工具提供的一条命令kubeadm init即可自动安装。</p>
+<p>kubeadm init这条命令底层其实就是将Master的各个组件，比如API Server、etcd等，以Pod形式（容器集合）运行起来。</p>
+<p>当然了，你可以部署多个Master节点来实现集群的高可用，比如两个Master节点互为主备（你可以回顾下<a href="https://time.geekbang.org/column/article/175545" target="_blank">第31篇文章</a>中介绍的主备机制）。具体的部署方法，你可以参考<a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/" target="_blank">这篇文章</a>。</p>
+<p>除此之外，etcd组件也可以采用集群方式部署，从而保证了数据不会丢失。etcd采用的是Raft强一致性协议，相关技术你可以再回顾下<a href="https://time.geekbang.org/column/article/143329" target="_blank">第4篇文章</a>中的相关问题。</p>
+<p><strong>在本次部署中我以一个Master节点为例为你讲解集群的搭建</strong>，关于Master为集群的方式，各节点上kubernetes配置类似，你可以参考Kubernetes官网。</p>
+<p>在这里，我把192.168.124.49这台机器作为Master节点。在该机器上直接执行kubeadm init，即可完成部署：</p>
+<pre><code>kubeadm init
+</code></pre>
+<p>如果有外网访问权限，基本就可以部署成功了。那么，我们可以根据如下信息判断自己是否部署成功：</p>
+<pre><code>Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.124.49:6443 --token uv17vd.q3ber8i5knxg4h0x \
+    --discovery-token-ca-cert-hash sha256:c55bd70d346d809e1079565cc1fc1a05f001671cc9f2d02c55bbbc4a00bcc2a3
+</code></pre>
+<p>可以看到，想要使用集群，需要执行以下命令，执行结束后才可以使用kubectl。</p>
+<pre><code>mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+</code></pre>
+<p>如果没有外网访问权限，会报pull image xxxxxx的错误。</p>
+<p>此时不要慌，从报错信息中，我们可以看到哪些镜像拉取不成功。我们可以手动在Docker Hub上寻找相对应的组件及版本，进行拉取，然后再通过Docker打tag，修改为需要的镜像。</p>
+<p>比如，以[ERROR ImagePull]: failed to pull image k8s.gcr.io/kube-apiserver:v1.16.3为例，可以通过以下代码进行拉取。</p>
+<pre><code># 可以拉取的相对应的组件和版本
+docker pull aiotceo/kube-apiserver:v1.16.3
+# 通过打tag的方式修改为所需要的镜像
+docker tag aiotceo/kube-apiserver:v1.16.3 k8s.gcr.io/kube-apiserver:v1.16.3
+</code></pre>
+<p>然后重新执行 kubeadm init即可。</p>
+<p>从以上操作也可以看出，<strong>kubeadm的底层其实就是将容器化组件的操作实现了自动化， 省去了手动部署的麻烦</strong>。</p>
+<p>部署完Master节点后，我们来继续部署Worker节点。</p>
+<h3 id="4-部署worker节点">4. 部署Worker节点</h3>
+<p>部署Worker节点与部署Master节点类似，都可以通过命令一键部署。这里，我们使用kubeadm提供的kubeadm join命令来进行自动化部署。</p>
+<p>kubeadm join命令的底层与kubeadm init类似，会自动以Pod形式运行Worker节点中需要的组件。不同的是，命令执行后，底层还需要将Worker节点加入到Kubernetes集群中。</p>
+<p>执行kubeadm join命令后（具体命令如下所示），就可以看到Kubernetes集群中的节点信息了。这条命令中需要配置Master节点的IP和Port信息，目的是Worker节点根据IP和Port信息建立连接，并在建立连接的基础上，建立心跳机制。</p>
+<p>具体的心跳机制，你可以参考<a href="https://time.geekbang.org/column/article/175545" target="_blank">第31篇文章</a>中关于故障恢复的内容。</p>
+<p>到目前为止，Kubernetes的集群已经完成大半了，下面我们继续部署集群。</p>
+<p>根据Master节点部署成功后输出结果的最后几行可以知道，想要加入集群，可以执行kubeadm join命令。我在另外2台机器上都执行了如下命令：</p>
+<pre><code>kubeadm join 192.168.124.49:6443 --token uv17vd.q3ber8i5knxg4h0x \
+    --discovery-token-ca-cert-hash sha256:c55bd70d346d809e1079565cc1fc1a05f001671cc9f2d02c55bbbc4a00bcc2a3
+</code></pre>
+<p>这条命令执行后，一个集中式架构的雏形就搭建完成了。接下来，我们需要安装相应的网络插件，以实现Kubernetes集群中Pod之间的通信。</p>
+<h3 id="5-安装网络插件">5. 安装网络插件</h3>
+<p>网络插件有很多，比如Canal、Flannel、Weave等。不同的插件命令不一致，具体命令可参考官网。</p>
+<p>这里，我以安装Weave插件为例，通过执行以下命令完成安装：</p>
+<pre><code>sysctl net.bridge.bridge-nf-call-iptables=1
+
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+</code></pre>
+<h3 id="6-验证">6. 验证</h3>
+<p>到这里，集群就部署完成了，是不是很简单呢？接下来，我就通过获取节点和Pod信息来验证一下集群部署是否成功。</p>
+<p>可以通过刚刚安装的kubectl组件提供的命令查看集群的相关信息。比如，查看节点的运行状态可以通过kubectl get nodes来获得，查看各个组件对应的Pod运行状态可以通过kubectl get pods来获得。命令执行结果，如下所示：</p>
+<pre><code>kubectl get nodes
+
+# NAME           STATUS   ROLES    AGE   VERSION
+# vm1-pc   Ready    master   11h   v1.16.3
+# vm2-pc   Ready    &lt;none&gt;   11h   v1.16.3
+# vm3-pc   Ready    &lt;none&gt;   24m   v1.16.3
+
+kubectl get pods --all-namespaces
+
+# NAMESPACE     NAME                                   READY   STATUS    RESTARTS   AGE
+# kube-system   coredns-5644d7b6d9-9dprc               1/1     Running   0          11h
+# kube-system   coredns-5644d7b6d9-ljv5w               1/1     Running   0          11h
+# kube-system   etcd-vm1-pc                      1/1     Running   0          11h
+# kube-system   kube-apiserver-vm1-pc            1/1     Running   0          11h
+# kube-system   kube-controller-manager-vm1-pc   1/1     Running   0          11h
+# kube-system   kube-proxy-qpvtb                       1/1     Running   0          25m
+# kube-system   kube-proxy-v2xnb                       1/1     Running   0          11h
+# kube-system   kube-proxy-wkxzg                       1/1     Running   0          11h
+# kube-system   kube-scheduler-vm1-pc            1/1     Running   0          11h
+# kube-system   weave-net-6nj4c                        2/2     Running   0          25m
+# kube-system   weave-net-lm6dh                        2/2     Running   0          37m
+# kube-system   weave-net-vwnc2                        2/2     Running   0          37m
+</code></pre>
+<p>可以看到，节点全部是Ready状态，各个组件对应的Pod也处于Running状态，表明部署成功。</p>
+<h3 id="7-可能遇到的问题">7. 可能遇到的问题</h3>
+<p>如果整个安装失败的话，可以重置，重新安装，即重新kubeadm init</p>
+<pre><code>kubeadm reset 
+</code></pre>
+<p>部署Worker节点时，pod部署不成功。原因可能是因为没有外网访问权限，镜像拉取不下来，可以通过以下命令查看pod的相关信息：</p>
+<pre><code># 检查所有pod是否正常
+kubectl get pod --all-namespaces -o wide
+#如果pod处于非running状态，则查看该pod：
+kubectl describe pod xxxxx -n kube-system 
+</code></pre>
+<p>从错误信息里可以查看到是哪个镜像拉取不下来，与部署Master节点时采用的方式一样，到Docker Hub上手动拉取镜像，并设置Tag即可。</p>
+<p>至此，Kubernetes集群就配置成功了。</p>
+<p>集群环境搭建后，如何验证集群是可用的呢？或者说，如何在集群上运行服务呢？接下来，我就以Nginx服务为例，带你了解如何在Kubernetes集群上进行服务部署。当然，你可以参考这个例子，在Kubernetes集群上部署其他服务。</p>
+<h2 id="nginx服务部署">Nginx服务部署</h2>
+<p>Kubernetes推荐使用YAML配置文件的方式来创建服务，所以我接下来会使用这种方式部署完成Nginx服务的部署。</p>
+<p>部署Nginx服务这个Demo时，我会创建两个Kubernetes对象（Kubernetes对象是Kubernetes系统中的持久实体，用于表示集群的状态），一个是Deployment，一个是Service：</p>
+<ul>
+<li>Deployment对象规定Pod创建的相关信息，比如期望创建几个Pod，每个Pod应该部署什么应用等。</li>
+<li>Service对象用来给用户访问提供接口。它可以通过Label Selector（标签选择器）来指定可以访问的Pod有哪些。关于Kubernetes对象的相关内容，你可以参考<a href="http://docs.kubernetes.org.cn/232.html" target="_blank">这篇文章</a>。</li>
+</ul>
+<p>因为Pod是Kubernetes中最小的工作单元，所以Nginx服务都部署在Pod中。下面，我就来创建一个Deployment对象来创建我们期望的Pod状态。</p>
+<p>首先，创建一个YAML配置文件，我将其命名为nginx-deployment.yaml。为将用户请求负载均衡到不同的Pod，减轻单个Pod的访问压力，这里我会创建三个Pod共同运行Nginx服务。</p>
+<p>文件内容如下：</p>
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+</code></pre>
+<p>文件中，replicas字段就是副本数量，也就是Pod数量，设置为3，即创建三个Pod来运行Nginx服务；template字段规定了单个Pod中运行哪些容器，这里运行的是名称为nginx的容器。</p>
+<ul>
+<li>创建完配置文件后，通过以下命令就可以将Deployment对象创建成功。</li>
+</ul>
+<pre><code>kubectl apply -f nginx-deployment.yaml
+</code></pre>
+<p>执行后，就等待对象的创建，可以通过以下命令来查看创建是否成功。</p>
+<pre><code>kubectl get deployment
+</code></pre>
+<p>以下是我创建成功后的输出：</p>
+<pre><code>NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3/3     3            3           3m17s
+</code></pre>
+<p>同时，你也可以通过以下命令来查看创建的Pod的信息：</p>
+<pre><code>kubectl get pod
+</code></pre>
+<p>以下是我的输出结果：</p>
+<pre><code>NAME                               READY   STATUS    RESTARTS   AGE
+nginx-deployment-59c9f8dff-dtg4w   1/1     Running   0          3m15s
+nginx-deployment-59c9f8dff-f2hmv   1/1     Running   0          3m15s
+nginx-deployment-59c9f8dff-lsvdh   1/1     Running   0          3m15s
+</code></pre>
+<p>创建完deployment之后，我们来创建Service服务。同样是通过配置文件来创建，文件名是nginx-service.yaml，内容如下：</p>
+<pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 88
+    targetPort: 80
+  selector:
+    app: nginx
+  type: NodePort
+</code></pre>
+<p>文件中port属性就是service对外提供的端口。</p>
+<p>同样的，采用kubectl apply命令创建Nginx服务：</p>
+<pre><code>kubectl apply -f nginx-service.yaml
+</code></pre>
+<p>执行完成后，可以通过以下命令来查看创建是否成功：</p>
+<pre><code>kubectl get service
+</code></pre>
+<p>以下是我的输出结果：</p>
+<pre><code>NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+kubernetes      ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP          12h
+nginx-service   NodePort    10.101.29.9      &lt;none&gt;        88:30755/TCP     5m12s
+</code></pre>
+<p>现在我们就可以通过访问Nginx服务来查看它是否部署成功了。访问该服务可以通过以下命令：</p>
+<pre><code>curl 10.101.29.9:88
+</code></pre>
+<p>结果如下，表明Nginx服务部署成功。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a href="http://nginx.org/"&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+Commercial support is available at
+&lt;a href="http://nginx.com/"&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>在这个过程中，有两个步骤涉及<a href="https://time.geekbang.org/column/article/173398" target="_blank">负载均衡</a>的相关知识：</p>
+<ul>
+<li>一个是创建Deployment时，该Deployment会创建三个Pod，而Pod需要部署到某个Worker节点中，因此会将Pod均衡部署到各个Worker节点中；</li>
+<li>另一个是用户访问，Nginx服务后台三个运行的Pod都可以提供服务，用户访问到来时，可以均衡分布到各个Pod中进行处理。</li>
+</ul>
+<p>到这里，我们搭建的目标就完成了，下面为你留几个实验题，你可以尝试去搭建一下或运行一下，以进一步加深对分布式技术的理解。</p>
+<ul>
+<li>实验一：搭建高可用Kubernetes集群，也就是通过etcd实现Master节点以集群模式部署。具体搭建方法可参考<a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/" target="_blank">https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/</a>；</li>
+<li>实验二：在Kubernetes上部署Cassandra，其中Cassandra作为服务部署到容器中，以学习Cassandra集群的节点发现、集群组件等原理，具体搭建方法可参考<a href="https://kubernetes.io/docs/tutorials/stateful-application/cassandra/" target="_blank">https://kubernetes.io/docs/tutorials/stateful-application/cassandra/</a>；</li>
+<li>实验三：在Kubernetes集群上通过部署一个MySQL服务，体验在Kubernetes集群上如何运行一个单实例有状态应用。具体搭建方法可参考<a href="https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/" target="_blank">https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/</a>。</li>
+</ul>
+<p>好了，整个搭建环境，我就讲到这里。</p>
+<p>其实，到这里，对分布式世界的探索可以说才刚开始，只有动手去实践，你学到的知识才能真正转化为你自己的。加油，赶紧行动起来吧。</p>
+<h2 id="总结">总结</h2>
+<p>今天，我主要带你学习了搭建分布式实验环境。</p>
+<p>首先，我以Kubernetes为例，介绍了如何搭建 Kubernetes集群环境，其中包括容器、Master节点、Worker节点等配置和安装。</p>
+<p>然后，在搭建好的Kubernetes集群的基础上，我以Nginx服务为例，展示了如何在Kubernetes集群上部署服务。</p>
+<p>其实，今天我演示的Demo只是冰山一角。在Kubernetes中，有很多非常实用的功能，比如Kubernetes可以让服务持续不断运行，当有Pod出现故障时，会自动重启另一个Pod来达到Deployment配置文件中规定的期望状态；还可以自动实现版本更迭等。</p>
+<p>相信通过本讲的学习，你会对分布式技术有更进一步的认知。加油，赶紧行动起来，为你的服务搭建一个分布式实验环境吧。</p>
+<p>我是聂鹏程，感谢你的收听，欢迎你在评论区给我留言分享你的观点，也欢迎你把这篇文章分享给更多的朋友一起阅读。我们下期再会！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

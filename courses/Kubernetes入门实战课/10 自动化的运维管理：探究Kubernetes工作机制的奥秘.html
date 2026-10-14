@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 自动化的运维管理：探究Kubernetes工作机制的奥秘 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">Kubernetes入门实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">38 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kubernetes入门实战课</strong><ul><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A%EF%BC%8C%E5%81%9A%E4%BA%91%E5%8E%9F%E7%94%9F%E6%97%B6%E4%BB%A3%E7%9A%84%E5%BC%84%E6%BD%AE%E5%84%BF.html">00 开篇词 迎难而上，做云原生时代的弄潮儿</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E8%AF%BE%E5%89%8D%E5%87%86%E5%A4%87%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%E6%89%8D%E6%98%AF%E6%9C%80%E5%A5%BD%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F.html">00 课前准备 动手实践才是最好的学习方式</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E5%88%9D%E8%AF%86%E5%AE%B9%E5%99%A8%EF%BC%9A%E4%B8%87%E4%BA%8B%E5%BC%80%E5%A4%B4%E9%9A%BE.html">01 初识容器：万事开头难</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E8%A2%AB%E9%9A%94%E7%A6%BB%E7%9A%84%E8%BF%9B%E7%A8%8B%EF%BC%9A%E4%B8%80%E8%B5%B7%E6%9D%A5%E7%9C%8B%E7%9C%8B%E5%AE%B9%E5%99%A8%E7%9A%84%E6%9C%AC%E8%B4%A8.html">02 被隔离的进程：一起来看看容器的本质</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E5%AE%B9%E5%99%A8%E5%8C%96%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9A%E4%BC%9A%E4%BA%86%E8%BF%99%E4%BA%9B%E4%BD%A0%E5%B0%B1%E6%98%AFDocker%E9%AB%98%E6%89%8B.html">03 容器化的应用：会了这些你就是Docker高手</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E6%AD%A3%E7%A1%AE%E3%80%81%E9%AB%98%E6%95%88%E7%9A%84Dockerfile.html">04 创建容器镜像：如何编写正确、高效的Dockerfile</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%EF%BC%9A%E8%AF%A5%E6%80%8E%E6%A0%B7%E7%94%A8%E5%A5%BDDocker%20Hub%E8%BF%99%E4%B8%AA%E5%AE%9D%E8%97%8F.html">05 镜像仓库：该怎样用好Docker Hub这个宝藏</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E6%89%93%E7%A0%B4%E6%AC%A1%E5%85%83%E5%A3%81%EF%BC%9A%E5%AE%B9%E5%99%A8%E8%AF%A5%E5%A6%82%E4%BD%95%E4%B8%8E%E5%A4%96%E7%95%8C%E4%BA%92%E8%81%94%E4%BA%92%E9%80%9A.html">06 打破次元壁：容器该如何与外界互联互通</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%EF%BC%9A%E7%8E%A9%E8%BD%ACDocker.html">07 实战演练：玩转Docker</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E8%A7%86%E9%A2%91%EF%BC%9A%E5%85%A5%E9%97%A8%E7%AF%87%E5%AE%9E%E6%93%8D%E6%80%BB%E7%BB%93.html">08 视频：入门篇实操总结</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E8%B5%B0%E8%BF%91%E4%BA%91%E5%8E%9F%E7%94%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E6%9C%AC%E6%9C%BA%E6%90%AD%E5%BB%BA%E5%B0%8F%E5%B7%A7%E5%AE%8C%E5%A4%87%E7%9A%84Kubernetes%E7%8E%AF%E5%A2%83.html">09 走近云原生：如何在本机搭建小巧完备的Kubernetes环境</a></li><li><a class="active" aria-current="page" href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E8%BF%90%E7%BB%B4%E7%AE%A1%E7%90%86%EF%BC%9A%E6%8E%A2%E7%A9%B6Kubernetes%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6%E7%9A%84%E5%A5%A5%E7%A7%98.html">10 自动化的运维管理：探究Kubernetes工作机制的奥秘</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/11%20YAML%EF%BC%9AKubernetes%E4%B8%96%E7%95%8C%E9%87%8C%E7%9A%84%E9%80%9A%E7%94%A8%E8%AF%AD.html">11 YAML：Kubernetes世界里的通用语</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/12%20Pod%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%BF%99%E4%B8%AAKubernetes%E9%87%8C%E6%9C%80%E6%A0%B8%E5%BF%83%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%9F.html">12 Pod：如何理解这个Kubernetes里最核心的概念？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/13%20Job_CronJob%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5%E7%94%A8Pod%E6%9D%A5%E5%A4%84%E7%90%86%E4%B8%9A%E5%8A%A1%EF%BC%9F.html">13 Job_CronJob：为什么不直接用Pod来处理业务？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/14%20ConfigMap_Secret%EF%BC%9A%E6%80%8E%E6%A0%B7%E9%85%8D%E7%BD%AE%E3%80%81%E5%AE%9A%E5%88%B6%E6%88%91%E7%9A%84%E5%BA%94%E7%94%A8.html">14 ConfigMap_Secret：怎样配置、定制我的应用</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/15%20%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%EF%BC%9A%E7%8E%A9%E8%BD%ACKubernetes%EF%BC%881%EF%BC%89.html">15 实战演练：玩转Kubernetes（1）</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/16%20%E8%A7%86%E9%A2%91%EF%BC%9A%E5%88%9D%E7%BA%A7%E7%AF%87%E5%AE%9E%E6%93%8D%E6%80%BB%E7%BB%93.html">16 视频：初级篇实操总结</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/17%20%E6%9B%B4%E7%9C%9F%E5%AE%9E%E7%9A%84%E4%BA%91%E5%8E%9F%E7%94%9F%EF%BC%9A%E5%AE%9E%E9%99%85%E6%90%AD%E5%BB%BA%E5%A4%9A%E8%8A%82%E7%82%B9%E7%9A%84Kubernetes%E9%9B%86%E7%BE%A4.html">17 更真实的云原生：实际搭建多节点的Kubernetes集群</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/18%20Deployment%EF%BC%9A%E8%AE%A9%E5%BA%94%E7%94%A8%E6%B0%B8%E4%B8%8D%E5%AE%95%E6%9C%BA.html">18 Deployment：让应用永不宕机</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/19%20Daemonset%EF%BC%9A%E5%BF%A0%E5%AE%9E%E5%8F%AF%E9%9D%A0%E7%9A%84%E7%9C%8B%E9%97%A8%E7%8B%97.html">19 Daemonset：忠实可靠的看门狗</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/20%20Service%EF%BC%9A%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84%E5%BA%94%E5%AF%B9%E4%B9%8B%E9%81%93.html">20 Service：微服务架构的应对之道</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/21%20Ingress%EF%BC%9A%E9%9B%86%E7%BE%A4%E8%BF%9B%E5%87%BA%E6%B5%81%E9%87%8F%E7%9A%84%E6%80%BB%E7%AE%A1.html">21 Ingress：集群进出流量的总管</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/22%20%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%EF%BC%9A%E7%8E%A9%E8%BD%ACKubernetes%EF%BC%882%EF%BC%89.html">22 实战演练：玩转Kubernetes（2）</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E8%A7%86%E9%A2%91%EF%BC%9A%E4%B8%AD%E7%BA%A7%E7%AF%87%E5%AE%9E%E6%93%8D%E6%80%BB%E7%BB%93.html">23 视频：中级篇实操总结</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/24%20PersistentVolume%EF%BC%9A%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96%E7%9A%84%E9%9A%BE%E9%A2%98%EF%BC%9F.html">24 PersistentVolume：怎么解决数据持久化的难题？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/25%20PersistentVolume%20%2B%20NFS%EF%BC%9A%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%EF%BC%9F.html">25 PersistentVolume + NFS：怎么使用网络共享存储？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/26%20StatefulSet%EF%BC%9A%E6%80%8E%E4%B9%88%E7%AE%A1%E7%90%86%E6%9C%89%E7%8A%B6%E6%80%81%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9F.html">26 StatefulSet：怎么管理有状态的应用？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E6%BB%9A%E5%8A%A8%E6%9B%B4%E6%96%B0%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E5%B9%B3%E6%BB%91%E7%9A%84%E5%BA%94%E7%94%A8%E5%8D%87%E7%BA%A7%E9%99%8D%E7%BA%A7%EF%BC%9F.html">27 滚动更新：如何做到平滑的应用升级降级？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%BA%94%E7%94%A8%E4%BF%9D%E9%9A%9C%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9Pod%E8%BF%90%E8%A1%8C%E5%BE%97%E6%9B%B4%E5%81%A5%E5%BA%B7%EF%BC%9F.html">28 应用保障：如何让Pod运行得更健康？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%90%8D%E5%AD%97%E7%A9%BA%E9%97%B4%E5%88%86%E9%9A%94%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%EF%BC%9F.html">29 集群管理：如何用名字空间分隔系统资源？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Metrics%20Server%E5%92%8CPrometheus%EF%BC%9F.html">30 系统监控：如何使用Metrics Server和Prometheus？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%EF%BC%9ACNI%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F%E5%8F%88%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">31 网络通信：CNI是怎么回事？又是怎么工作的？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/32%20%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%EF%BC%9A%E7%8E%A9%E8%BD%ACKubernetes%EF%BC%883%EF%BC%89.html">32 实战演练：玩转Kubernetes（3）</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/33%20%E8%A7%86%E9%A2%91%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%AF%87%E5%AE%9E%E6%93%8D%E6%80%BB%E7%BB%93.html">33 视频：高级篇实操总结</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%90%20docker-compose%EF%BC%9A%E5%8D%95%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92%E5%B7%A5%E5%85%B7.html">加餐 docker-compose：单机环境下的容器编排工具</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%B0%88%E8%B0%88Kong%20Ingress%20Controller.html">加餐 谈谈Kong Ingress Controller</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%98%AF%E7%BB%88%E7%82%B9%EF%BC%8C%E6%9B%B4%E6%98%AF%E8%B5%B7%E7%82%B9.html">结束语 是终点，更是起点</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E8%BF%90%E7%BB%B4%E7%AE%A1%E7%90%86%EF%BC%9A%E6%8E%A2%E7%A9%B6Kubernetes%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6%E7%9A%84%E5%A5%A5%E7%A7%98.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="10 自动化的运维管理：探究Kubernetes工作机制的奥秘" id="title">10 自动化的运维管理：探究Kubernetes工作机制的奥秘</h1>
+<div><p>你好，我是Chrono。</p>
+<p>在上一次课里，我们看到容器技术只实现了应用的打包分发，到运维真正落地实施的时候仍然会遇到很多困难，所以就需要用容器编排技术来解决这些问题，而Kubernetes是这个领域的唯一霸主，已经成为了“事实标准”。</p>
+<p>那么，Kubernetes凭什么能担当这样的领军重任呢？难道仅仅因为它是由Google主导开发的吗？</p>
+<p>今天我就带你一起来看看Kubernetes的内部架构和工作机制，了解它能够傲视群雄的秘密所在。</p>
+<h2 id="云计算时代的操作系统">云计算时代的操作系统</h2>
+<p>前面我曾经说过，Kubernetes是<strong>一个生产级别的容器编排平台和集群管理系统</strong>，能够创建、调度容器，监控、管理服务器。</p>
+<p>容器是什么？容器是软件，是应用，是进程。服务器是什么？服务器是硬件，是CPU、内存、硬盘、网卡。那么，既可以管理软件，也可以管理硬件，这样的东西应该是什么？</p>
+<p>你也许会脱口而出：这就是一个操作系统（Operating System）！</p>
+<p>没错，从某种角度来看，Kubernetes可以说是一个集群级别的操作系统，主要功能就是资源管理和作业调度。但Kubernetes不是运行在单机上管理单台计算资源和进程，而是运行在多台服务器上管理几百几千台的计算资源，以及在这些资源上运行的上万上百万的进程，规模要大得多。</p>
+<p><img alt="图片" src="/assets/31df80796e5ca6d6f87ceab6.png" title="图片来自网络"/></p>
+<p>所以，你可以把Kubernetes与Linux对比起来学习，而这个新的操作系统里自然会有一系列新名词、新术语，你也需要使用新的思维方式来考虑问题，必要的时候还得和过去的习惯“说再见”。</p>
+<p>Kubernetes这个操作系统与Linux还有一点区别你值得注意。Linux的用户通常是两类人：<strong>Dev</strong>和<strong>Ops</strong>，而在Kubernetes里则只有一类人：<strong>DevOps</strong>。</p>
+<p>在以前的应用实施流程中，开发人员和运维人员分工明确，开发完成后需要编写详细的说明文档，然后交给运维去部署管理，两者之间不能随便“越线”。</p>
+<p>而在Kubernetes这里，开发和运维的界限变得不那么清晰了。由于云原生的兴起，开发人员从一开始就必须考虑后续的部署运维工作，而运维人员也需要在早期介入开发，才能做好应用的运维监控工作。</p>
+<p>这就会导致很多Kubernetes的新用户会面临身份的转变，一开始可能会有点困难。不过不用担心，这也非常正常，任何的学习过程都有个适应期，只要过了最初的概念理解阶段就好了。</p>
+<h2 id="kubernetes的基本架构">Kubernetes的基本架构</h2>
+<p>操作系统的一个重要功能就是抽象，从繁琐的底层事务中抽象出一些简洁的概念，然后基于这些概念去管理系统资源。</p>
+<p>Kubernetes也是这样，它的管理目标是大规模的集群和应用，必须要能够把系统抽象到足够高的层次，分解出一些松耦合的对象，才能简化系统模型，减轻用户的心智负担。</p>
+<p>所以，Kubernetes扮演的角色就如同一个“大师级别”的系统管理员，具有丰富的集群运维经验，独创了自己的一套工作方式，不需要太多的外部干预，就能够自主实现原先许多复杂的管理工作。</p>
+<p>下面我们就来看看这位资深管理员的“内功心法”。</p>
+<p>Kubernetes官网上有一张架构图，但我觉得不是太清晰、重点不突出，所以另外找了一份（<a href="https://medium.com/@keshiha/k8s-architecture-bb6964767c12" target="_blank">图片来源</a>）。虽然这张图有点“老”，但对于我们初学Kubernetes还是比较合适的。</p>
+<p><img alt="图片" src="/assets/7ee75348e023715b80513555.png"/></p>
+<p>Kubernetes采用了现今流行的“<strong>控制面/数据面</strong>”（Control Plane / Data Plane）架构，集群里的计算机被称为“<strong>节点</strong>”（Node），可以是实机也可以是虚机，少量的节点用作控制面来执行集群的管理维护工作，其他的大部分节点都被划归数据面，用来跑业务应用。</p>
+<p>控制面的节点在Kubernetes里叫做<strong>Master Node</strong>，一般简称为<strong>Master</strong>，它是整个集群里最重要的部分，可以说是Kubernetes的大脑和心脏。</p>
+<p>数据面的节点叫做<strong>Worker Node</strong>，一般就简称为<strong>Worker</strong>或者<strong>Node</strong>，相当于Kubernetes的手和脚，在Master的指挥下干活。</p>
+<p>Node的数量非常多，构成了一个资源池，Kubernetes就在这个池里分配资源，调度应用。因为资源被“池化”了，所以管理也就变得比较简单，可以在集群中任意添加或者删除节点。</p>
+<p>在这张架构图里，我们还可以看到有一个kubectl，它就是Kubernetes的客户端工具，用来操作Kubernetes，但它位于集群之外，理论上不属于集群。</p>
+<p>你可以使用命令 <code>kubectl get node</code> 来查看Kubernetes的节点状态：</p>
+<pre><code>kubectl get node
+</code></pre>
+<p><img alt="图片" src="/assets/d47f874ac1887dbb8d96174e.png"/></p>
+<p>可以看到当前的minikube集群里只有一个Master，那Node怎么不见了？</p>
+<p>这是因为Master和Node的划分不是绝对的。当集群的规模较小，工作负载较少的时候，Master也可以承担Node的工作，就像我们搭建的minikube环境，它就只有一个节点，这个节点既是Master又是Node。</p>
+<h2 id="节点内部的结构">节点内部的结构</h2>
+<p>Kubernetes的节点内部也具有复杂的结构，是由很多的模块构成的，这些模块又可以分成组件（Component）和插件（Addon）两类。</p>
+<p>组件实现了Kubernetes的核心功能特性，没有这些组件Kubernetes就无法启动，而插件则是Kubernetes的一些附加功能，属于“锦上添花”，不安装也不会影响Kubernetes的正常运行。</p>
+<p>接下来我先来讲讲Master和Node里的组件，然后再捎带提一下插件，理解了它们的工作流程，你就会明白为什么Kubernetes有如此强大的自动化运维能力。</p>
+<h3 id="master里的组件有哪些">Master里的组件有哪些</h3>
+<p>Master里有4个组件，分别是<strong>apiserver</strong>、<strong>etcd</strong>、<strong>scheduler</strong>、<strong>controller-manager</strong>。</p>
+<p><img alt="图片" src="/assets/5b5da92b664f38861f71ce1d.jpg"/></p>
+<p>apiserver是Master节点——同时也是整个Kubernetes系统的唯一入口，它对外公开了一系列的RESTful API，并且加上了验证、授权等功能，所有其他组件都只能和它直接通信，可以说是Kubernetes里的联络员。</p>
+<p>etcd是一个高可用的分布式Key-Value数据库，用来持久化存储系统里的各种资源对象和状态，相当于Kubernetes里的配置管理员。注意它只与apiserver有直接联系，也就是说任何其他组件想要读写etcd里的数据都必须经过apiserver。</p>
+<p>scheduler负责容器的编排工作，检查节点的资源状态，把Pod调度到最适合的节点上运行，相当于部署人员。因为节点状态和Pod信息都存储在etcd里，所以scheduler必须通过apiserver才能获得。</p>
+<p>controller-manager负责维护容器和节点等资源的状态，实现故障检测、服务迁移、应用伸缩等功能，相当于监控运维人员。同样地，它也必须通过apiserver获得存储在etcd里的信息，才能够实现对资源的各种操作。</p>
+<p>这4个组件也都被容器化了，运行在集群的Pod里，我们可以用kubectl来查看它们的状态，使用命令：</p>
+<pre><code>kubectl get pod -n kube-system
+</code></pre>
+<p><img alt="图片" src="/assets/8eb4f717f51c8cf8be7d9a9b.png"/></p>
+<p>注意命令行里要用 <code>-n kube-system</code> 参数，表示检查“kube-system”名字空间里的Pod，至于名字空间是什么，我们后面会讲到。</p>
+<h3 id="node里的组件有哪些">Node里的组件有哪些</h3>
+<p>Master里的apiserver、scheduler等组件需要获取节点的各种信息才能够作出管理决策，那这些信息该怎么来呢？</p>
+<p>这就需要Node里的3个组件了，分别是<strong>kubelet</strong>、<strong>kube-proxy</strong>、<strong>container-runtime</strong>。</p>
+<p>kubelet是Node的代理，负责管理Node相关的绝大部分操作，Node上只有它能够与apiserver通信，实现状态报告、命令下发、启停容器等功能，相当于是Node上的一个“小管家”。</p>
+<p>kube-proxy的作用有点特别，它是Node的网络代理，只负责管理容器的网络通信，简单来说就是为Pod转发TCP/UDP数据包，相当于是专职的“小邮差”。</p>
+<p>第三个组件container-runtime我们就比较熟悉了，它是容器和镜像的实际使用者，在kubelet的指挥下创建容器，管理Pod的生命周期，是真正干活的“苦力”。</p>
+<p><img alt="图片" src="/assets/a7f757d1204ed6568bd5b424.jpg"/></p>
+<p>我们一定要注意，因为Kubernetes的定位是容器编排平台，所以它没有限定container-runtime必须是Docker，完全可以替换成任何符合标准的其他容器运行时，例如containerd、CRI-O等等，只不过在这里我们使用的是Docker。</p>
+<p>这3个组件中只有kube-proxy被容器化了，而kubelet因为必须要管理整个节点，容器化会限制它的能力，所以它必须在container-runtime之外运行。</p>
+<p>使用 <code>minikube ssh</code> 命令登录到节点后，可以用 <code>docker ps</code> 看到kube-proxy：</p>
+<pre><code>minikube ssh
+docker ps |grep kube-proxy
+</code></pre>
+<p><img alt="图片" src="/assets/a1e9e113afaf3c831c7b920b.png"/></p>
+<p>而kubelet用 <code>docker ps</code> 是找不到的，需要用操作系统的 <code>ps</code> 命令：</p>
+<pre><code>ps -ef|grep kubelet
+</code></pre>
+<p><img alt="图片" src="/assets/d45b7e268538385588fda4f1.png"/></p>
+<p>现在，我们再把Node里的组件和Master里的组件放在一起来看，就能够明白Kubernetes的大致工作流程了：</p>
+<ul>
+<li>每个Node上的kubelet会定期向apiserver上报节点状态，apiserver再存到etcd里。</li>
+<li>每个Node上的kube-proxy实现了TCP/UDP反向代理，让容器对外提供稳定的服务。</li>
+<li>scheduler通过apiserver得到当前的节点状态，调度Pod，然后apiserver下发命令给某个Node的kubelet，kubelet调用container-runtime启动容器。</li>
+<li>controller-manager也通过apiserver得到实时的节点状态，监控可能的异常情况，再使用相应的手段去调节恢复。</li>
+</ul>
+<p><img alt="图片" src="/assets/7ee75348e023715b80513555.png"/></p>
+<p>其实，这和我们在Kubernetes出现之前的操作流程也差不了多少，但Kubernetes的高明之处就在于把这些都抽象化规范化了。</p>
+<p>于是，这些组件就好像是无数个不知疲倦的运维工程师，把原先繁琐低效的人力工作搬进了高效的计算机里，就能够随时发现集群里的变化和异常，再互相协作，维护集群的健康状态。</p>
+<h3 id="插件-addons-有哪些">插件（Addons）有哪些</h3>
+<p>只要服务器节点上运行了apiserver、scheduler、kubelet、kube-proxy、container-runtime等组件，就可以说是一个功能齐全的Kubernetes集群了。</p>
+<p>不过就像Linux一样，操作系统提供的基础功能虽然“可用”，但想达到“好用”的程度，还是要再安装一些附加功能，这在Kubernetes里就是插件（Addon）。</p>
+<p>由于Kubernetes本身的设计非常灵活，所以就有大量的插件用来扩展、增强它对应用和集群的管理能力。</p>
+<p>minikube也支持很多的插件，使用命令 <code>minikube addons list</code> 就可以查看插件列表：</p>
+<pre><code>minikube addons list
+</code></pre>
+<p><img alt="图片" src="/assets/627d0d0baf05acc63ab6b2ec.png"/></p>
+<p>插件中我个人认为比较重要的有两个：<strong>DNS</strong>和<strong>Dashboard</strong>。</p>
+<p>DNS你应该比较熟悉吧，它在Kubernetes集群里实现了域名解析服务，能够让我们以域名而不是IP地址的方式来互相通信，是服务发现和负载均衡的基础。由于它对微服务、服务网格等架构至关重要，所以基本上是Kubernetes的必备插件。</p>
+<p>Dashboard就是仪表盘，为Kubernetes提供了一个图形化的操作界面，非常直观友好，虽然大多数Kubernetes工作都是使用命令行kubectl，但有的时候在Dashboard上查看信息也是挺方便的。</p>
+<p>你只要在minikube环境里执行一条简单的命令，就可以自动用浏览器打开Dashboard页面，而且还支持中文：</p>
+<pre><code>minikube dashboard
+</code></pre>
+<p><img alt="图片" src="/assets/5a6fffe705ae1bb6066681a1.png"/></p>
+<h2 id="小结">小结</h2>
+<p>好了，今天我们一起来研究了Kubernetes的内部架构和工作机制，可以看到它的功能非常完善，实现了大部分常见的运维管理工作，而且是全自动化的，能够节约大量的人力成本。</p>
+<p>由于Kubernetes的抽象程度比较高，有很多陌生的新术语，不太好理解，所以我画了一张思维导图，你可以对照着再加深理解。</p>
+<p><img alt="图片" src="/assets/d7e59b48feb36d3d6d680f81.jpg"/></p>
+<p>最后小结一下今天的要点：</p>
+<ol>
+<li>Kubernetes能够在集群级别管理应用和服务器，可以认为是一种集群操作系统。它使用“控制面/数据面”的基本架构，Master节点实现管理控制功能，Worker节点运行具体业务。</li>
+<li>Kubernetes由很多模块组成，可分为核心的组件和选配的插件两类。</li>
+<li>Master里有4个组件，分别是apiserver、etcd、scheduler、controller-manager。</li>
+<li>Node里有3个组件，分别是kubelet、kube-proxy、container-runtime。</li>
+<li>通常必备的插件有DNS和Dashboard。</li>
+</ol>
+<h2 id="课下作业">课下作业</h2>
+<p>最后是课下作业时间，给你留两个思考题：</p>
+<ol>
+<li>你觉得Kubernetes算得上是一种操作系统吗？和真正的操作系统相比有什么差异？</li>
+<li>说说你理解的Kubernetes组件的作用，你觉得哪几个最重要？</li>
+</ol>
+<p>欢迎积极留言或者提问，和其他同学一起参与讨论，我们下节课见。</p>
+<p><img alt="" src="/assets/be4be274e5d2fc62f758cd09.jpg"/></p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

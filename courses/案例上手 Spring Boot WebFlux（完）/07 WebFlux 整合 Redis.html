@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>07 WebFlux 整合 Redis · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">案例上手 Spring Boot WebFlux（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">11 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>案例上手 Spring Boot WebFlux（完）</strong><ul><li><a href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E5%AF%BC%E8%AF%BB%EF%BC%9A%E8%AF%BE%E7%A8%8B%E6%A6%82%E8%A6%81.html">01 导读：课程概要</a></li><li><a href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/02%20WebFlux%20%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5.html">02 WebFlux 快速入门实践</a></li><li><a href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/03%20WebFlux%20Web%20CRUD%20%E5%AE%9E%E8%B7%B5.html">03 WebFlux Web CRUD 实践</a></li><li><a href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/04%20WebFlux%20%E6%95%B4%E5%90%88%20MongoDB.html">04 WebFlux 整合 MongoDB</a></li><li><a href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/05%20WebFlux%20%E6%95%B4%E5%90%88%20Thymeleaf.html">05 WebFlux 整合 Thymeleaf</a></li><li><a href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/06%20WebFlux%20%E4%B8%AD%20Thymeleaf%20%E5%92%8C%20MongoDB%20%E5%AE%9E%E8%B7%B5.html">06 WebFlux 中 Thymeleaf 和 MongoDB 实践</a></li><li><a class="active" aria-current="page" href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/07%20WebFlux%20%E6%95%B4%E5%90%88%20Redis.html">07 WebFlux 整合 Redis</a></li><li><a href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/08%20WebFlux%20%E4%B8%AD%20Redis%20%E5%AE%9E%E7%8E%B0%E7%BC%93%E5%AD%98.html">08 WebFlux 中 Redis 实现缓存</a></li><li><a href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/09%20WebFlux%20%E4%B8%AD%20WebSocket%20%E5%AE%9E%E7%8E%B0%E9%80%9A%E4%BF%A1.html">09 WebFlux 中 WebSocket 实现通信</a></li><li><a href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/10%20WebFlux%20%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E5%8F%8A%E9%83%A8%E7%BD%B2.html">10 WebFlux 集成测试及部署</a></li><li><a href="/courses/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/11%20WebFlux%20%E5%AE%9E%E6%88%98%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F.html">11 WebFlux 实战图书管理系统</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%A1%88%E4%BE%8B%E4%B8%8A%E6%89%8B%20Spring%20Boot%20WebFlux%EF%BC%88%E5%AE%8C%EF%BC%89/07%20WebFlux%20%E6%95%B4%E5%90%88%20Redis.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="07 WebFlux 整合 Redis" id="title">07 WebFlux 整合 Redis</h1>
+<div><h3 id="前言">前言</h3>
+<p>上一篇内容讲了如何整合 MongoDB，这里继续讲如何操作 Redis 这个数据源，那什么是 Reids？</p>
+<p>Redis 是一个高性能的 key-value 数据库，<a href="https://github.com/antirez/redis" target="_blank">GitHub 地址详见这里</a>。GitHub 是这么描述的：</p>
+<p>Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps.</p>
+<p>Redis 是内存式数据库，存储在磁盘，支持的数据类型很多：Strings、Lists、Sets、Sorted Sets、Hashes、HyperLogLogs、Bitmaps 等。</p>
+<h4 id="安装简易教程-适用-mac-linux">安装简易教程（适用 Mac/Linux）</h4>
+<p>下载并解压：</p>
+<pre><code>下载安装包 redis-x.x.x.tar.gz
+## 解压
+tar zxvf redis-2.8.17.tar.gz
+
+</code></pre>
+<p>编译安装：</p>
+<pre><code>cd redis-x.x.x/
+make ## 编译
+
+</code></pre>
+<p>启动 Redis：</p>
+<pre><code>cd src/
+redis-server
+
+</code></pre>
+<p>如果需要运行在守护进程，设置 daemonize 从 no 修改成 yes，并指定运行：redis-server redis.conf。</p>
+<p><img alt="file" src="/assets/91890173ed416fd711ca7f22.png"/></p>
+<h3 id="结构">结构</h3>
+<p>类似上面讲的工程搭建，新建一个工程编写此案例，工程如图：</p>
+<p><img alt="file" src="/assets/0f01cc676faa6d017255b42b.png"/></p>
+<p>目录核心如下：</p>
+<ul>
+<li>pom.xml maven 配置</li>
+<li>application.properties 配置文件</li>
+<li>domain 实体类</li>
+<li>controller 控制层，本文要点</li>
+</ul>
+<h3 id="新增-pom-依赖与配置">新增 POM 依赖与配置</h3>
+<p>在 pom.xml 配置新的依赖：</p>
+<pre><code>    &lt;!-- Spring Boot 响应式 Redis 依赖 --&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-data-redis-reactive&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+</code></pre>
+<p>类似 MongoDB 配置，在 application.properties 配置连接 Redis：</p>
+<pre><code>## Redis 配置
+## Redis服务器地址
+spring.redis.host=127.0.0.1
+## Redis服务器连接端口
+spring.redis.port=6379
+## Redis服务器连接密码（默认为空）
+spring.redis.password=
+# 连接超时时间（毫秒）
+spring.redis.timeout=5000
+
+</code></pre>
+<p>默认 密码为空，这里注意的是连接超时时间不能太少或者为 0，不然会引起异常 RedisCommandTimeoutException: Command timed out。</p>
+<h3 id="对象">对象</h3>
+<p>修改 org.spring.springboot.domain 包里面的城市实体对象类，城市（City）对象 City，代码如下：</p>
+<pre><code>import org.springframework.data.annotation.Id;
+
+import java.io.Serializable;
+
+/**
+ * 城市实体类
+ *
+ */
+public class City implements Serializable {
+
+    private static final long serialVersionUID = -2081742442561524068L;
+
+    /**
+     * 城市编号
+     */
+    @Id
+    private Long id;
+
+    /**
+     * 省份编号
+     */
+    private Long provinceId;
+
+    /**
+     * 城市名称
+     */
+    private String cityName;
+
+    /**
+     * 描述
+     */
+    private String description;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Long provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+}
+
+</code></pre>
+<p>值得注意点：</p>
+<ul>
+<li>@Id 注解标记对应库表的主键或者唯一标识符。因为这个是我们的 DO，数据访问对象一一映射到数据存储。</li>
+<li>City 必须实现序列化，因为需要将对象序列化后存储到 Redis。如果没实现 Serializable，会引出异常：java.lang.IllegalArgumentException: DefaultSerializer requires a Serializable payload but received an object of type。</li>
+<li>如果不是用默认的序列化，需要自定义序列化实现，只要实现 RedisSerializer 接口去实现即可，然后在使用 RedisTemplate.setValueSerializer 方法去设置你实现的序列化实现，支持 JSON、XML 等。</li>
+</ul>
+<h3 id="控制层-citywebfluxcontroller">控制层 CityWebFluxController</h3>
+<p>代码如下：</p>
+<pre><code>import org.spring.springboot.domain.City;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
+
+import java.util.concurrent.TimeUnit;
+
+@RestController
+@RequestMapping(value = "/city")
+public class CityWebFluxController {
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @GetMapping(value = "/{id}")
+    public Mono&lt;City&gt; findCityById(@PathVariable("id") Long id) {
+        String key = "city_" + id;
+        ValueOperations&lt;String, City&gt; operations = redisTemplate.opsForValue();
+        boolean hasKey = redisTemplate.hasKey(key);
+        City city = operations.get(key);
+
+        if (!hasKey) {
+            return Mono.create(monoSink -&gt; monoSink.success(null));
+        }
+        return Mono.create(monoSink -&gt; monoSink.success(city));
+    }
+
+    @PostMapping()
+    public Mono&lt;City&gt; saveCity(@RequestBody City city) {
+        String key = "city_" + city.getId();
+        ValueOperations&lt;String, City&gt; operations = redisTemplate.opsForValue();
+        operations.set(key, city, 60, TimeUnit.SECONDS);
+
+        return Mono.create(monoSink -&gt; monoSink.success(city));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public Mono&lt;Long&gt; deleteCity(@PathVariable("id") Long id) {
+        String key = "city_" + id;
+        boolean hasKey = redisTemplate.hasKey(key);
+        if (hasKey) {
+            redisTemplate.delete(key);
+        }
+        return Mono.create(monoSink -&gt; monoSink.success(id));
+    }
+}
+
+</code></pre>
+<p>代码详解：</p>
+<ul>
+<li>使用 @Autowired 注入 RedisTemplate 对象，这个对象和 Spring 的 JdbcTemplate 功能十分相似，RedisTemplate 封装了 RedisConnection，具有连接管理、序列化和各个操作等，还有针对 String 的支持对象 StringRedisTemplate。</li>
+<li>删除 Redis 某对象，直接通过 key 值调用 delete(key)。</li>
+<li>Redis 操作视图接口类用的是 ValueOperations，对应的是 Redis String/Value 操作，get 是获取数据；set 是插入数据，可以设置失效时间，这里设置的失效时间是 60 s。</li>
+<li>还有其他的操作视图，ListOperations、SetOperations、ZSetOperations 和 HashOperations。</li>
+</ul>
+<h3 id="运行工程">运行工程</h3>
+<p>一个操作 Redis 工程就开发完毕了，下面运行工程验证一下，使用 IDEA 右侧工具栏，单击 Maven Project Tab，单击使用下 Maven 插件的 install 命令。或者使用命令行的形式，在工程根目录下，执行 Maven 清理和安装工程的指令：</p>
+<pre><code>cd springboot-webflux-6-redis
+mvn clean install
+
+</code></pre>
+<p>在控制台中看到成功的输出：</p>
+<pre><code>... 省略
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 01:30 min
+[INFO] Finished at: 2018-10-15T10:00:54+08:00
+[INFO] Final Memory: 31M/174M
+[INFO] ------------------------------------------------------------------------
+
+</code></pre>
+<p>在 IDEA 中执行 Application 类启动，任意正常模式或者 Debug 模式，可以在控制台看到成功运行的输出：</p>
+<pre><code>... 省略
+2018-04-10 08:43:39.932  INFO 2052 --- [ctor-http-nio-1] r.ipc.netty.tcp.BlockingNettyContext     : Started HttpServer on /0:0:0:0:0:0:0:0:8080
+2018-04-10 08:43:39.935  INFO 2052 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port(s): 8080
+2018-04-10 08:43:39.960  INFO 2052 --- [           main] org.spring.springboot.Application        : Started Application in 6.547 seconds (JVM running for 9.851)
+
+</code></pre>
+<p>打开 POST MAN 工具，开发必备。进行下面操作：</p>
+<h4 id="新增城市信息-post-http-127-0-0-1-8080-city">新增城市信息 POST <a href="http://127.0.0.1:8080/city" target="_blank">http://127.0.0.1:8080/city</a></h4>
+<p><img alt="file" src="/assets/f094f7f82b9fe20f3349e9c4.png"/></p>
+<h4 id="获取城市信息-get-http-127-0-0-1-8080-city-2">获取城市信息 GET <a href="http://127.0.0.1:8080/city/2" target="_blank">http://127.0.0.1:8080/city/2</a></h4>
+<p><img alt="file" src="/assets/6a4d8a1a064c52b7eb01f6c8.png"/></p>
+<p>如果等待 60s 以后，再次则会获取为空，因为保存的时候设置了失效时间是 60 s。</p>
+<h3 id="总结">总结</h3>
+<p>这里探讨了 Spring WebFlux 的如何整合 Redis，介绍了如何通过 RedisTemplate 去操作 Redis。因为 Redis 在获取资源性能极佳，常用 Redis 作为缓存存储对象，下面我们利用 Reids 实现缓存操作。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

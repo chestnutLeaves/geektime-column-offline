@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>09 应用2：如何在编辑器中使用正则完成工作？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/index.html">正则表达式入门课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">16 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>正则表达式入门课</strong><ul><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/00%20%E5%AF%BC%E8%AF%BB%20%E4%BD%99%E6%99%9F%EF%BC%9A%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%AD%A6%E4%B9%A0%E5%92%8C%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E7%9A%84%EF%BC%9F.html">00 导读 余晟：我是怎么学习和使用正则的？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%E4%B8%A8%E5%AD%A6%E4%B9%A0%E6%AD%A3%E5%88%99%EF%BC%8C%E6%88%91%E4%BB%AC%E5%88%B0%E5%BA%95%E8%A6%81%E5%AD%A6%E4%BB%80%E4%B9%88%EF%BC%9F.html">00 开篇词丨学习正则，我们到底要学什么？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/01%20%E5%85%83%E5%AD%97%E7%AC%A6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%B7%A7%E5%A6%99%E8%AE%B0%E5%BF%86%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E4%BB%B6%EF%BC%9F.html">01 元字符：如何巧妙记忆正则表达式的基本元件？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/02%E4%B8%A8%E9%87%8F%E8%AF%8D%E4%B8%8E%E8%B4%AA%E5%A9%AA%EF%BC%9A%E5%B0%8F%E5%B0%8F%E7%9A%84%E6%AD%A3%E5%88%99%EF%BC%8C%E4%B9%9F%E5%8F%AF%E8%83%BD%E6%8A%8ACPU%E6%8B%96%E5%9E%AE%EF%BC%81.html">02丨量词与贪婪：小小的正则，也可能把CPU拖垮！</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/03%20%E5%88%86%E7%BB%84%E4%B8%8E%E5%BC%95%E7%94%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%AD%A3%E5%88%99%E5%AE%9E%E7%8E%B0%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E6%93%8D%E4%BD%9C%EF%BC%9F.html">03 分组与引用：如何用正则实现更复杂的查找和替换操作？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/04%20%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%80%E6%AC%A1%E6%80%A7%E6%8E%8C%E6%8F%A1%E6%AD%A3%E5%88%99%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%844%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F.html">04 匹配模式：一次性掌握正则中常见的4种匹配模式</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/05%20%E6%96%AD%E8%A8%80%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%96%AD%E8%A8%80%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%AE%9E%E7%8E%B0%E6%9B%BF%E6%8D%A2%E9%87%8D%E5%A4%8D%E5%87%BA%E7%8E%B0%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%9F.html">05 断言：如何用断言更好地实现替换重复出现的单词？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/06%20%E8%BD%AC%E4%B9%89%EF%BC%9A%E6%AD%A3%E5%88%99%E4%B8%AD%E8%BD%AC%E4%B9%89%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98%EF%BC%9F.html">06 转义：正则中转义需要注意哪些问题？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/07%20%E6%AD%A3%E5%88%99%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%81%E6%B4%BE%E5%8F%8A%E5%85%B6%E7%89%B9%E6%80%A7%EF%BC%9F.html">07 正则有哪些常见的流派及其特性？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/08%20%E5%BA%94%E7%94%A81%EF%BC%9A%E6%AD%A3%E5%88%99%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%20Unicode%20%E7%BC%96%E7%A0%81%E7%9A%84%E6%96%87%E6%9C%AC%EF%BC%9F.html">08 应用1：正则如何处理 Unicode 编码的文本？</a></li><li><a class="active" aria-current="page" href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/09%20%E5%BA%94%E7%94%A82%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E5%AE%8C%E6%88%90%E5%B7%A5%E4%BD%9C%EF%BC%9F.html">09 应用2：如何在编辑器中使用正则完成工作？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/10%20%E5%BA%94%E7%94%A83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%94%A8%E6%AD%A3%E5%88%99%E8%AE%A9%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E8%83%BD%E5%8A%9B%E4%B8%8A%E4%B8%80%E4%B8%AA%E5%8F%B0%E9%98%B6%EF%BC%9F.html">10 应用3：如何在语言中用正则让文本处理能力上一个台阶？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/11%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%AD%A3%E5%88%99%E7%9A%84%E5%8C%B9%E9%85%8D%E5%8E%9F%E7%90%86%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99%EF%BC%9F.html">11 如何理解正则的匹配原理以及优化原则？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/12%20%E9%97%AE%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%9A%E8%AF%A6%E8%A7%A3%E6%AD%A3%E5%88%99%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">12 问题集锦：详解正则常见问题及解决方案</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E4%BB%8E%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E8%A7%92%E5%BA%A6%E6%9D%A5%E7%90%86%E8%A7%A3%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html">加餐 从编程语言的角度来理解正则表达式</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E6%8F%90%E9%AB%98%E4%BD%A0%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%88%E7%8E%87.html">结束语 使用正则提高你的人生效率</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/09%20%E5%BA%94%E7%94%A82%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E5%AE%8C%E6%88%90%E5%B7%A5%E4%BD%9C%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="09 应用2：如何在编辑器中使用正则完成工作？" id="title">09 应用2：如何在编辑器中使用正则完成工作？</h1>
+<div><p>你好，我是伟忠。今天我来和你分享一下，在常见的编辑器中如何使用正则来完成工作。</p>
+<p>你可能要问了，这是正则专栏，为啥不直接开始讲正则？其实我给你讲的编辑器使用技巧，能够帮助我们更好地完成工作。因为我们学习正则的目的，就是想高效地完成文本处理。</p>
+<p>但在实际工作中，我们一般不会只用正则，而是通常将编辑器的特性和正则结合起来，这样可以让文本处理工作更加高效。正所谓“工欲善其事，必先利其器”，你花点时间来了解一下编辑器的各种特性，可以少写很多代码。</p>
+<h2 id="编辑器功能">编辑器功能</h2>
+<p>接下来，我以Sublime Text 3 为例，给你讲讲一些在编辑器里的强大功能，这些功能在Sublime Text、Atom、VS Code、JetBrains 系列（IntelliJ IDEA/PyCharm/Goland等) 中都是支持的。</p>
+<h3 id="光标移动和文本选择">光标移动和文本选择</h3>
+<p>在常见的编辑器、IDE、甚至Chrome等浏览器中，我们编辑文本时，使用键盘的左右箭头移动光标，可以<strong>按住Shift键</strong>来选中文本。在左右移动时，如果你按住<strong>Alt（macOS的option）</strong>，你会发现光标可以“按块移动”，快速移动到下一个单词。两种方式组合起来，你可以快速选择引号里面的内容。-
+<img alt="" src="/assets/2795cdf07801ab9e868ab074.png"/></p>
+<p>你可以动手练习一下，熟悉一下这些操作。你可能会说，有必要么，我用鼠标拖一下不就可以了？你说得没错，但这个功能和后面我要讲的多焦点编辑、竖向编辑等结合起来，就可以快速多行操作，这是鼠标做不到的。</p>
+<h3 id="多焦点编辑">多焦点编辑</h3>
+<p>在IDE中，我们如果想对某个变量或函数重命名，通常可以使用重构（refactor）功能。但如果处理的不是代码，而是普通文本，比如JSON字符串的时候，就没法这么用了。不过现在很多编辑器都提供了多焦点编辑的功能。</p>
+<p>比如选择单词 route 之后，点击菜单 Find -&gt; Quick Find All 就可以选中所有的 route 了。你可以进行多焦点编辑，非常方便。我给了你一个测试文本，你可以点击<a href="https://github.com/gin-gonic/gin/blob/5e40c1d49c21bf989e8d54dbd555086f06d4fb8a/README.md#bind-uri" target="_blank">这里</a>获取。</p>
+<p><img alt="" src="/assets/38b15832c3f3d0be9777af69.png"/></p>
+<p>这个特性结合光标移动，可以快速提取某些内容，比如提取 JSON中的姓名和手机号。选中所有的字段和值之间的字符（”: “） 之后，按住 Shift+Alt（macOS上是Shift + Option），用箭头移动光标，可以快速选择到另外一个引号前，然后剪切，再找个空白地方粘贴就可以了。</p>
+<pre><code>{
+  "error_code": 0,
+  "result": {
+    "data": [
+      {
+        "name": "朱小明",
+        "tel": "138xx138000"
+      },
+      {
+        "name": "王五",
+        "tel": "139xx139000"
+      }
+    ]
+  }
+}
+</code></pre>
+<p><img alt="" src="/assets/ad3571ad6417818d144caed0.png"/></p>
+<p>详细操作你可以看一下这个小视频。-</p>
+<h3 id="竖向编辑">竖向编辑</h3>
+<p>在编辑多行时，如果我们需要编辑的内容都是纵向上同一个位置，就可以使用 Alt (macOS上是 Option）加上鼠标拖拽的方式来选择（或者尝试按下鼠标中键拖拽）。比如下图，当你选择了左侧的两个空格之后，可以批量编辑，比如修改成四个空格。将竖向编辑和刚刚上面说到的光标移动结合起来，会非常方便。</p>
+<p><img alt="" src="/assets/9f183fc728035ef3aeb3362f.png"/></p>
+<h2 id="在编辑器中使用正则">在编辑器中使用正则</h2>
+<p>正则是一种文本处理工具，常见的功能有文本验证、文本提取、文本替换、文本切割等。有一些地方说的正则匹配，其实是包括了校验和提取两个功能。</p>
+<p>校验常用于验证整个文本的组成是不是符合规则，比如密码规则校验。提取则是从大段的文本中抽取出需要的内容，比如提取网页上所有的链接。在使用正则进行内容提取时，要做到不能提取到错误的内容（准确性），不能漏掉正确的内容（完备性）。这就要求我们写正则的时候尽量考虑周全。但是考虑周全并不容易，需要我们不断地练习、思考和总结。</p>
+<h3 id="内容提取">内容提取</h3>
+<p>我以编辑器 Sublime Text 3 为例来进行讲解，下图是编辑器 Sublime Text 查找界面的介绍。</p>
+<p><img alt="" src="/assets/d21ad0d598f982584681b79f.png"/></p>
+<p>我们来尝试使用 sublime 提取文本中所有的邮箱地址，这里并不要求你写出一个完美的正则，因此演示时，使用<code>\S+@\S+.\S+</code> 这个正则。另外我们可以加上环视，去掉尾部的分号。你可以<a href="http://www.zhongguosou.com/mailharddisk/mail_address_creator.aspx" target="_blank">在这里</a>随机生成一些邮箱用于测试。</p>
+<p><img alt="" src="/assets/2c982ed01228f4f7834ba18d.png"/></p>
+<p>你可能会有疑问，我直接找到最后的分号，然后删除掉不就可以了么？这个例子是没问题的，但如果文本中除了邮箱之外，还有其它的内容这样就不行了，这也是正则比普通文本强大的地方。</p>
+<p><img alt="" src="/assets/5a9c6a1b7e390f0c9d2115b1.png"/></p>
+<h3 id="内容替换">内容替换</h3>
+<p>说完了查找，我们再来看一下替换。之前课程里我们也有讲过，这里再来回顾一下。下图是编辑器 Sublime Text 替换界面的介绍。</p>
+<p><img alt="" src="/assets/3e1a5dc0e9b5f815f122dae5.png"/></p>
+<p>同样是上面邮箱的例子，我们可以使用子组和引用，直接替换得到移除了分号之后的邮箱，我们还可以在邮箱前把邮箱类型加上。操作前和操作后的示意图如下：</p>
+<p><img alt="" src="/assets/24504fc5bfb66b77862c6fb6.png"/></p>
+<p><img alt="" src="/assets/935624a7216698cf55322a9c.png"/></p>
+<p>替换和提取的不同在于，替换可以对内容进行拼接和改造，而提取是从原来的内容中抽取出一个子集，不会改变原来的内容。当然在实际应用中，可以两个结合起来一起使用。</p>
+<h3 id="内容验证">内容验证</h3>
+<p>在编辑器中进行内容验证，本质上和内容提取一样，只不过要求编辑器中全部内容都匹配上，并且匹配次数是一次。</p>
+<p><img alt="" src="/assets/2db684146b89aba738b9be85.png"/></p>
+<h3 id="内容切割">内容切割</h3>
+<p>在编辑器中进行内容切割，本质上也和内容提取一样，用什么切割，我们就提取什么，选中全部之后，把选中的内容删除掉或者编辑成其它的字符。</p>
+<p><img alt="" src="/assets/72350985bc3db129fec65c24.png"/></p>
+<p>刚刚我们讲解了在 Sublime Text 中使用正则处理文本的方法，其它的编辑器或IDE，如 Atom、VS Code、JetBrains系列（IntelliJ IDEA/PyCharm/Goland等）等，也都是类似的，你可以在自己喜欢的编辑器中练习一下今天讲到的内容。</p>
+<p>这里给出一些主流跨平台编辑器/IDE对正则的支持情况，你可以参考一下。</p>
+<p><img alt="" src="/assets/e8e71847bc08d226adbc744a.jpg"/></p>
+<h2 id="总结">总结</h2>
+<p>好了，今天的内容讲完了，我来带你总结回顾一下。</p>
+<p>今天我们学习了编辑器中一些提高文本处理效率的操作方式：光标移动和选择、多焦点编辑以及竖向编辑。学会了这些，即使不使用正则，我们在编辑器中处理文本效率也会大大提高。接着通过一些示例，我们学习了在编辑器中使用正则来进行文本内容提取，内容替换等操作。正则的使用一般会和其它的方法结合起来，最终帮助我们高效地完成文本的处理工作。</p>
+<p>今天所讲的内容总结脑图如下，你可以回顾一下：</p>
+<p><img alt="" src="/assets/2d5d11d7bfbb075cabbd6db7.png"/></p>
+<h2 id="课后思考">课后思考</h2>
+<p>最后，我们来做一个小练习吧：统计一篇英文文章中每个单词出现的次数，使用Sublime Text 等编辑器提取文章里所有的单词，处理成一行一个单词，保存到文件中，然后再使用sort、uniq 等命令统计单词出现的次数。</p>
+<p>为了帮你更好地完成这个任务，你可以参考一下下面的提示：</p>
+<ol>
+<li><p>windows上的同学可以使用 <a href="https://gitforwindows.org/" target="_blank">git for windows</a> 工具。</p></li>
+<li><p>使用 uniq 前需要先用 sort 命令排序，uniq -c 可以统计次数。</p>
+<p>sort words.txt | uniq -c
+如果想取前10名，可以继续对结果排序
+sort words.txt | uniq -c | sort -nrk1 | head -n10
+至于为什么要加 n、r 和 k1 你可以通过 man sort 看一下说明</p></li>
+</ol>
+<p>好，今天的课程就结束了，希望可以帮助到你，也希望你在下方的留言区和我参与讨论，并把文章分享给你的朋友或者同事，一起交流一下。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>39 语法扩展：通过JSX来做语法扩展 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">JavaScript 进阶实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">45 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>JavaScript 进阶实战课</strong><ul><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20JavaScript%E7%9A%84%E8%BF%9B%E9%98%B6%E4%B9%8B%E8%B7%AF.html">00 开篇词 JavaScript的进阶之路</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E5%87%BD%E6%95%B0%E5%BC%8Fvs.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%9A%E5%93%8D%E5%BA%94%E6%9C%AA%E7%9F%A5%E5%92%8C%E4%B8%8D%E7%A1%AE%E5%AE%9A.html">01 函数式vs.面向对象：响应未知和不确定</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E9%97%AD%E5%8C%85%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%8A%B6%E6%80%81%E7%9A%84%E5%8F%98%E5%8C%96%EF%BC%9F.html">02 如何通过闭包对象管理程序中状态的变化？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E5%92%8C%E6%9F%AF%E9%87%8C%E5%8C%96%E8%AE%A9%E5%87%BD%E6%95%B0%E5%85%B7%E8%B1%A1%E5%8C%96%EF%BC%9F.html">03 如何通过部分应用和柯里化让函数具象化？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E7%BB%84%E5%90%88%E3%80%81%E7%AE%A1%E9%81%93%E5%92%8Creducer%E8%AE%A9%E5%87%BD%E6%95%B0%E6%8A%BD%E8%B1%A1%E5%8C%96%EF%BC%9F.html">04 如何通过组合、管道和reducer让函数抽象化？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/05%20map%E3%80%81reduce%E5%92%8Cmonad%E5%A6%82%E4%BD%95%E5%9B%B4%E7%BB%95%E5%80%BC%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C%EF%BC%9F.html">05 map、reduce和monad如何围绕值进行操作？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%A8%A1%E5%9D%97%E5%8C%96%E3%80%81%E5%BC%82%E6%AD%A5%E5%92%8C%E8%A7%82%E5%AF%9F%E5%81%9A%E5%88%B0%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%EF%BC%9F.html">06 如何通过模块化、异步和观察做到动态加载？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A7%81%E6%9C%89%E5%92%8C%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7.html">07 深入理解对象的私有和静态属性</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E7%BB%A7%E6%89%BF%E3%80%81Delegation%E5%92%8C%E7%BB%84%E5%90%88.html">08 深入理解继承、Delegation和组合</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%9A%E9%80%9A%E8%BF%87%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E8%B0%83%E7%94%A8%E7%82%B9%E7%90%86%E8%A7%A3this%E7%BB%91%E5%AE%9A.html">09 面向对象：通过词法作用域和调用点理解this绑定</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/10%20JS%E6%9C%89%E5%93%AA8%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 JS有哪8种数据类型，你需要注意什么？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E9%80%9A%E8%BF%87JS%E5%BC%95%E6%93%8E%E7%9A%84%E5%A0%86%E6%A0%88%E4%BA%86%E8%A7%A3%E9%97%AD%E5%8C%85%E5%8E%9F%E7%90%86.html">11 通过JS引擎的堆栈了解闭包原理</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/12%20JS%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E8%AF%A5%E7%94%A8%E8%BF%AD%E4%BB%A3%E8%BF%98%E6%98%AF%E9%80%92%E5%BD%92%EF%BC%9F.html">12 JS语义分析该用迭代还是递归？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/13%20JS%E5%BC%95%E6%93%8E%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F%EF%BC%9F.html">13 JS引擎如何实现数组的稳定排序？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E9%80%9A%E8%BF%87SparkPlug%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3%E8%B0%83%E7%94%A8%E6%A0%88.html">14 通过SparkPlug深入了解调用栈</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/15%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%93%88%E5%B8%8C%E6%9F%A5%E6%89%BEJS%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80%EF%BC%9F.html">15 如何通过哈希查找JS对象内存地址？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/16%20%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E9%80%82%E5%90%88%E5%81%9ANode%E6%95%B0%E6%8D%AE%E6%B5%81%E7%BC%93%E5%AD%98%EF%BC%9F.html">16 为什么环形队列适合做Node数据流缓存？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/17%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E9%93%BE%E8%A1%A8%E5%81%9ALRU_LFU%E7%BC%93%E5%AD%98%EF%BC%9F.html">17 如何通过链表做LRU_LFU缓存？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/18%20TurboFan%E5%A6%82%E4%BD%95%E7%94%A8%E5%9B%BE%E5%81%9AJS%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96%EF%BC%9F.html">18 TurboFan如何用图做JS编译优化？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/19%20%E9%80%9A%E8%BF%87%E6%A0%91%E5%92%8C%E5%9B%BE%E7%9C%8B%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%BA%8F%E4%B8%AD%E6%89%BE%E5%88%B0%E8%B7%AF%E5%BE%84%E5%92%8C%E7%A7%A9%E5%BA%8F.html">19 通过树和图看如何在无序中找到路径和秩序</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/20%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3%EF%BC%9AJS%E4%B8%AD%E5%88%86%E6%B2%BB%E3%80%81%E8%B4%AA%E5%BF%83%E3%80%81%E5%9B%9E%E6%BA%AF%E5%92%8C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92.html">20 算法思想：JS中分治、贪心、回溯和动态规划</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/21%20%E5%88%9B%E5%BB%BA%E5%9E%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4Redux%E5%8F%AF%E4%BB%A5%E6%9B%BF%E4%BB%A3%E5%8D%95%E4%BE%8B%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86.html">21 创建型：为什么说Redux可以替代单例状态管理</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/22%20%E7%BB%93%E6%9E%84%E5%9E%8B%EF%BC%9AVue.js%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B.html">22 结构型：Vue.js如何通过代理实现响应式编程</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E7%BB%93%E6%9E%84%E5%9E%8B%EF%BC%9A%E9%80%9A%E8%BF%87jQuery%E7%9C%8B%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F.html">23 结构型：通过jQuery看结构型模式</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E8%A1%8C%E4%B8%BA%E5%9E%8B%EF%BC%9A%E9%80%9A%E8%BF%87%E8%A7%82%E5%AF%9F%E8%80%85%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9C%8BJS%E5%BC%82%E6%AD%A5%E5%9B%9E%E8%B0%83.html">24 行为型：通过观察者、迭代器模式看JS异步回调</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/25%20%E8%A1%8C%E4%B8%BA%E5%9E%8B%EF%BC%9A%E6%A8%A1%E7%89%88%E3%80%81%E7%AD%96%E7%95%A5%E5%92%8C%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">25 行为型：模版、策略和状态模式有什么区别？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/26%20%E7%89%B9%E6%AE%8A%E5%9E%8B%EF%BC%9A%E5%89%8D%E7%AB%AF%E6%9C%89%E5%93%AA%E4%BA%9B%E5%A4%84%E7%90%86%E5%8A%A0%E8%BD%BD%E5%92%8C%E6%B8%B2%E6%9F%93%E7%9A%84%E7%89%B9%E6%AE%8A%E2%80%9C%E6%A8%A1%E5%BC%8F%E2%80%9D%EF%BC%9F.html">26 特殊型：前端有哪些处理加载和渲染的特殊“模式”？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E6%80%A7%E8%83%BD%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3JavaScript%E4%B8%AD%E7%9A%84%E5%B9%B6%E8%A1%8C%E3%80%81%E5%B9%B6%E5%8F%91%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">27 性能：如何理解JavaScript中的并行、并发？（上）</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E6%80%A7%E8%83%BD%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3JavaScript%E4%B8%AD%E7%9A%84%E5%B9%B6%E8%A1%8C%E3%80%81%E5%B9%B6%E5%8F%91%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">28 性能：如何理解JavaScript中的并行、并发？（下）</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E6%80%A7%E8%83%BD%EF%BC%9A%E9%80%9A%E8%BF%87Orinoco%E3%80%81Jank%20Busters%E7%9C%8B%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6.html">29 性能：通过Orinoco、Jank Busters看垃圾回收</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E7%BD%91%E7%BB%9C%EF%BC%9A%E4%BB%8EHTTP_1%E5%88%B0HTTP_3%EF%BC%8C%E4%BD%A0%E9%83%BD%E9%9C%80%E8%A6%81%E4%BA%86%E8%A7%A3%E4%BB%80%E4%B9%88%EF%BC%9F.html">30 网络：从HTTP_1到HTTP_3，你都需要了解什么？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E5%AE%89%E5%85%A8%EF%BC%9AJS%E4%BB%A3%E7%A0%81%E5%92%8C%E7%A8%8B%E5%BA%8F%E9%83%BD%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%EF%BC%9F.html">31 安全：JS代码和程序都需要注意哪些安全问题？</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/32%20%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%BC%80%E5%8F%91%E5%88%B0%E9%87%8D%E6%9E%84%E4%B8%AD%E7%9A%84%E6%B5%8B%E8%AF%95.html">32 测试（一）：开发到重构中的测试</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/33%20%E6%B5%8B%E8%AF%95%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%8A%9F%E8%83%BD%E6%80%A7%E6%B5%8B%E8%AF%95.html">33 测试（二）：功能性测试</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%80%A7%E6%B5%8B%E8%AF%95.html">34 测试（三）：非功能性测试</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/35%20%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5%EF%BC%9AESLint%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99%E5%92%8C%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E7%9A%84%E6%A3%80%E6%9F%A5.html">35 静态类型检查：ESLint语法规则和代码风格的检查</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/36%20Flow%EF%BC%9A%E9%80%9A%E8%BF%87Flow%E7%B1%BB%E7%9C%8BJS%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5.html">36 Flow：通过Flow类看JS的类型检查</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E5%8C%85%E7%AE%A1%E7%90%86%E5%92%8C%E5%88%86%E5%8F%91%EF%BC%9A%E9%80%9A%E8%BF%87NPM%E5%81%9A%E5%8C%85%E7%9A%84%E7%AE%A1%E7%90%86%E5%92%8C%E5%88%86%E5%8F%91.html">37 包管理和分发：通过NPM做包的管理和分发</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%93%E5%8C%85%EF%BC%9A%E9%80%9A%E8%BF%87Webpack%E3%80%81Babel%E5%81%9A%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%93%E5%8C%85.html">38 编译和打包：通过Webpack、Babel做编译和打包</a></li><li><a class="active" aria-current="page" href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E8%AF%AD%E6%B3%95%E6%89%A9%E5%B1%95%EF%BC%9A%E9%80%9A%E8%BF%87JSX%E6%9D%A5%E5%81%9A%E8%AF%AD%E6%B3%95%E6%89%A9%E5%B1%95.html">39 语法扩展：通过JSX来做语法扩展</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/40%20Polyfill%EF%BC%9A%E9%80%9A%E8%BF%87Polyfill%E8%AE%A9%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%90%E4%BE%9B%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81.html">40 Polyfill：通过Polyfill让浏览器提供原生支持</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/41%20%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%9A%E4%BB%8EMVC%E8%B4%AB%E8%A1%80%E6%A8%A1%E5%BC%8F%E5%88%B0DDD%E5%85%85%E8%A1%80%E6%A8%A1%E5%BC%8F.html">41 微前端：从MVC贫血模式到DDD充血模式</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/42%20%E5%A4%A7%E5%89%8D%E7%AB%AF%EF%BC%9A%E9%80%9A%E8%BF%87%E4%B8%80%E4%BA%91%E5%A4%9A%E7%AB%AF%E6%90%AD%E5%BB%BA%E8%B7%A8PC_%E7%A7%BB%E5%8A%A8%E7%9A%84%E5%B9%B3%E5%8F%B0%E5%BA%94%E7%94%A8.html">42 大前端：通过一云多端搭建跨PC_移动的平台应用</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/43%20%E5%85%83%E7%BC%96%E7%A8%8B%EF%BC%9A%E9%80%9A%E8%BF%87Proxies%E5%92%8CReflect%E8%B5%8B%E8%83%BD%E5%85%83%E7%BC%96%E7%A8%8B.html">43 元编程：通过Proxies和Reflect赋能元编程</a></li><li><a href="/courses/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20JavaScript%E7%9A%84%E6%9C%AA%E6%9D%A5%E4%B9%8B%E8%B7%AF%EF%BC%9A%E6%BA%90%E4%BA%8E%E4%B8%80%E4%B8%AA%E4%BB%A5%E7%BB%88%E4%B8%BA%E5%A7%8B%E7%9A%84%E5%88%9D%E5%BF%83.html">结束语 JavaScript的未来之路：源于一个以终为始的初心</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/JavaScript%20%E8%BF%9B%E9%98%B6%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E8%AF%AD%E6%B3%95%E6%89%A9%E5%B1%95%EF%BC%9A%E9%80%9A%E8%BF%87JSX%E6%9D%A5%E5%81%9A%E8%AF%AD%E6%B3%95%E6%89%A9%E5%B1%95.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="39 语法扩展：通过JSX来做语法扩展" id="title">39 语法扩展：通过JSX来做语法扩展</h1>
+<div><p>你好，我是石川。</p>
+<p>在前面一讲中，我们提到了 React 也有一个 JavaScript 的语法扩展，叫做 JSX。它的全称是 JavaScript XML，顾名思义，它是以 XML 为格式设计的。它最主要的目的是与 React 框架结合，用于应用中 Web UI 相关的开发。在React中，DOM 树是通过 JSX 来定义的，最终会在浏览器中渲染成 HTML。基于 React 的普及率，即使你没有用过 React，估计对 JSX 也有所耳闻。</p>
+<p>今天，我们就来看看 JSX 是如何用在 Web UI 开发中的。即使你不使用 React，这样的模版模式也有很大的借鉴意义。</p>
+<h2 id="类html的元素">类HTML的元素</h2>
+<p>首先，我们来看下 JSX 的基本使用，它是如何创建元素、相关的属性和子元素的。</p>
+<p>你可以把 JSX 元素当成一种新的 JavaScript 语法表达。我们知道在标准的 JavaScript 中，字符串的字面量是通过双引号来分隔的，正则表达式的字面量是通过斜线号来分隔的。类似的，JSX 的字面量则是通过<strong>角括号</strong>来分隔的。比如下面的 <h1></h1> 标签就是一个简单的例子，通过这种方式，我们就创建了一个 React 的标题元素。</p>
+<pre><code class="language-javascript">var title = &lt;h1 className="title"&gt;页面标题&lt;/h1&gt;;
+</code></pre>
+<p>但是像上面这样的标签，我们知道JS引擎是没办法理解的，那它如何被运行呢？这时，我们可以通过我们在上一讲提到的 Babel 把 JSX 的表达<strong>先转译成标准的 JavaScript，然后才会给到浏览器做编译和执行</strong>。Babel 会把上面变量声明赋值中的 JSX 表达，转换成一个符合 JavaScript 规范的 createElement() 函数，来进行函数的调用。</p>
+<pre><code class="language-javascript">var title = React.createElement("h1", {className: 'title'}, "页面标题");
+</code></pre>
+<p>因为通过 JSX 来创建的 React 元素和 HTML 的标签元素类似，所以 JSX 生成的 React 元素表达也可以带有属性。当一个元素有一个或多个属性的时候，会作为 createElement() 的第二个参数传入，参数的值是一个带有元素相关属性的对象。</p>
+<pre><code class="language-javascript">// 转译前
+var image = &lt;img src="logo.png" alt="company logo" /&gt;;
+
+// 转译后
+var image = React.createElement("img", {
+              src: "logo.png",
+              alt: "company logo"
+            });
+</code></pre>
+<p>像 HTML 的元素一样，除了字符串，React 的元素中也可以有子元素。React 元素也可以通过层级的嵌套，来创建 DOM 树。在转译的过程中，上面的这些 JSX 嵌套的 DOM 子元素，将作为 createElement() 调用的第三个参数及以后的参数来传递。</p>
+<pre><code class="language-javascript">// 转译前
+var sidebar = (
+  &lt;div className="sidebar"&gt;
+    &lt;h2 className="menu"&gt;菜单&lt;/h2&gt;
+    &lt;p className="text"&gt;菜单内容&lt;/p&gt;
+  &lt;/div&gt;
+);
+
+// 转译后
+var sidebar = React.createElement(
+    "div", { className: "sidebar"},  
+    React.createElement("h1", className: "menu"},  
+                        "菜单"),    
+    React.createElement("p", className: "text"},   
+                        "菜单内容"));
+</code></pre>
+<p>React 中的 createElement() 函数所返回的值是一个 JavaScript 对象，React 使用它在浏览器窗口中输出渲染的UI。在下面的例子中，我们可以看到一个通过 JSX 表达的 React 元素，在转译后，通过 createElement() 生成为对象。之后，再将对象通过 React 中的 render() 渲染到页面上。</p>
+<pre><code class="language-javascript">// 转译前
+var element = &lt;h1 class"title"&gt;页面标题&lt;/h1&gt;;
+
+// 转译后
+var element = React.createElement(
+  'h1',
+  {className: 'title'},
+  '页面标题'
+);
+
+// createElement 返回的对象
+var element = {
+  type: 'h1',
+  props: {
+    className: 'title',
+    children: '页面标题'
+  }
+};
+
+// createElement 返回对象的渲染
+var root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+root.render(element);
+</code></pre>
+<p>因为今天我们主要讲的是 JSX 的语法扩展，而不是 React 本身，所以我们就不对返回的 element 对象和渲染过程的细节做赘述了。不过，有一点值得注意的是，你可以用 Babel 配置对 React 中 createElement() 以外的创建元素的函数做转译。这样做，就可以在 React 以外的地方来使用类似的 JSX 表达了。</p>
+<h2 id="js和css的表达">JS和CSS的表达</h2>
+<p>上面，我们学习了 JSX 语法扩展的核心概念，下面，我们再来看看它是如何与 JavaScript 以及 CSS 的表达来结合使用的。</p>
+<p>React 元素的一个重要特性是可以在 JSX 表达式中嵌入标准的 JavaScript 表达式。你可以使用<strong>大括号</strong>来嵌入标准的 JavaScript 表达式。大括号内的脚本，会在转译的环节被解释为标准的 JavaScript。React 元素中的嵌套表达式可以作为属性值和子元素。下面就是一个例子：</p>
+<pre><code class="language-javascript">function article(className, title, content, linebreak=true) {
+  return (
+    &lt;div className={className}&gt;
+      &lt;h1&gt;{title}&lt;/h1&gt;
+      { linebreak &amp;&amp; &lt;br /&gt; }
+      &lt;p&gt;{content}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+function article(className, title, content, subtitle=true) {
+  return React.createElement("div", { className: className },
+                             React.createElement("h1", null, title),
+                             subtitle &amp;&amp; React.createElement("br", null),
+                             React.createElement("p", null, content));
+}
+</code></pre>
+<p>在这个例子中，article() 函数的作用是返回一个 JSX 元素，它有四个参数。Babel 会将例子中的代码翻译为以下内容。</p>
+<p><strong>这段代码很容易阅读和理解：</strong>转译后，大括号消失了，生成的代码将 article() 函数传入的参数传递给 React.createElement()。请注意我们在这里对 linebreak 参数和 &amp;&amp; 运算符的使用。在实际的调用中，如果只有三个实参传入 article()，则 <br/> 默认为 true，外部 createElement() 调用的第四个参数是 <br/> 元素。但是，如果我们将 false 作为第四个参数传递给 article()，那么外部 createElement() 调用的第四个自变量的值将为 false，就不会创建 <br/> 元素。使用 &amp;&amp; 运算符是 JSX 中常见的习惯用法，它可以根据其它表达式的值有条件地包含或排除子元素。这个习惯用法适用于 React，因为 React 会忽略 false 或 null 的子级，而不会为它们生成任何输出。</p>
+<p>在 JSX 表达式中使用 JavaScript 表达式的时候，不限于前面例子中如字符串和布尔的基础类型值，也可以是对象类型的 JavaScript 值。实际上，使用对象、数组和函数值在 React 中很常见。例如在下面的函数中，JavaScript 和 CSS 的表达如下：</p>
+<pre><code class="language-javascript">function list(items, callback) {
+  return (
+    &lt;ul style={ {padding:10, border:"solid red 4px"} }&gt;
+      {items.map((item,index) =&gt; {
+        &lt;li onClick={() =&gt; callback(index)} key={index}&gt;{item}&lt;/li&gt;
+      })}
+    &lt;/ul&gt;
+  );
+}
+</code></pre>
+<p>这里，函数使用对象字面量作为 ＜ul＞ 元素上 CSS 样式（style）的属性的值。注意，这里需要用到的是双大括号。＜ul＞元素有一个子元素，但该子元素的值是一个数组。输出的数组是通过在输入的数组上使用 map() 的映射方法来创建 ＜li＞ 子元素的。并且在这里，每个嵌套的 ＜li＞ 子元素都有一个 onClick 事件处理程序属性，其值是一个箭头函数。</p>
+<p>如果我们将上面的 JSX 代码编译为标准的 JavaScript 代码，则会是以下的形式：</p>
+<pre><code class="language-javascript">function list(items, callback) {
+  return React.createElement(
+    "ul",
+    { style: { padding: 5, border: "dotted green 3px" } },
+    items.map((item, index) =&gt;
+      React.createElement(
+        "li",
+        { onClick: () =&gt; callback(index), key: index },
+        item
+      )
+    )
+  );
+}
+</code></pre>
+<h2 id="react元素类型">React元素类型</h2>
+<p>另外，JSX 还有一个更重要的特性，就是定义 React 元素的类型。</p>
+<p>所有 JSX 元素都以一个<strong>标识符</strong>开头，紧跟在<strong>开口角括号</strong>之后。如果该标识符的第一个字母是小写的，那么该标识符将作为字符串传递给 createElement()。但是，如果标识符的第一个字母是大写的，那么它将被视为实际标识符，并且该标识符的 JavaScript 值将作为第一个参数传递给 createElement()。</p>
+<p>这意味着 JSX 表达式 ＜CustomButton/＞ 编译为 JavaScript 代码，将全局 CustomButton 对象传递给 React.createElement()。对于 React 来说，这种将<strong>非字符串值</strong>作为第一个参数传递给 createElement() 的能力可以用来创建组件。</p>
+<p>在React中定义新组件的最简单方法是编写一个函数，该函数将 props 对象作为参数并返回 JSX 表达式。props 对象只是一个表示属性值的 JavaScript 对象，就像作为第二个参数传递给createElement() 的对象一样。例如，这里是我们的 article() 函数的另外一种写法：</p>
+<pre><code class="language-javascript">function Article(props) {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{props.title}&lt;/h1&gt;
+      { props.linebreak &amp;&amp; &lt;br /&gt; }
+      &lt;p&gt;{props.content}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+function article(className, title, content, linebreak=true) {
+  return (
+    &lt;div className={className}&gt;
+      &lt;h1&gt;{title}&lt;/h1&gt;
+      { linebreak &amp;&amp; &lt;br /&gt; }
+      &lt;p&gt;{content}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p>这个新的 Article() 函数很像以前的 article() 函数。但它的名称以大写字母开头，并且只有一个对象作为参数。这可以使得它成为一个 React 的组件，这就意味着它可以用来代替 JSX 表达式中标准的 HTML 标记：</p>
+<pre><code class="language-javascript">var article = &lt;Article title="文章标题" content="文章内容"/&gt;;
+</code></pre>
+<p><strong>这个 ＜Article/＞ 元素在转译后如下：</strong></p>
+<pre><code class="language-javascript">var article = React.createElement(Article, {
+  title: "文章标题",
+  content: "文章内容"
+});
+</code></pre>
+<p>这是一个简单的 JSX 表达式，但当 React 渲染它时，它会将第二个参数，也就是 props 对象，传递给第一个参数，也就是 Article() 函数，并将使用该函数返回的 JSX 函数代替 <article> 表达式。</article></p>
+<p>另外，如果我们的一个模块中有多个组件的话，也可以用 <strong>dot notation</strong> 的方式，来表达模块中的组件。</p>
+<pre><code class="language-javascript">import React from 'react';
+var MyComponents = {
+  Calendar: function Calendar(props) {
+    return &lt;div&gt;一个{props.color}颜色的日历.&lt;/div&gt;;
+  }
+}
+function GreenCalendar() {
+  return &lt;MyComponents.DatePicker color="绿" /&gt;;
+}
+
+</code></pre>
+<p>JSX 中对象表达式的另一个用途是使用对象扩展运算符一次指定多个属性。如果你编写了一组带有可能被重用的公共属性的 JSX 表达式，则可以通过将属性抽象定义为一个属性对象，并将其“扩展”到 JSX 元素中，来简化表达式。</p>
+<pre><code class="language-javascript">var greeting = &lt;div firstName="三" lastName="张" /&gt;;
+
+var props = {firstName: '三', lastName: '张'};
+var greeting = &lt;div className = "greeting" {...props} /&gt;;
+</code></pre>
+<p>Babel 会将其编译为一个使用 _extends() 的函数，该函数将 className 属性与 props 对象中包含的属性相结合。</p>
+<pre><code class="language-javascript">var greeting = React.createElement("div",
+                                 _extends({className: "greeting"}, props)
+                                );
+</code></pre>
+<h2 id="总结">总结</h2>
+<p>今天，我们看到了在JavaScript中，如何通过JavaScript的扩展 JSX，在 JavaScript 中表达 DOM 元素。这样做有几点好处：</p>
+<ol>
+<li><strong>它可以更好地赋能以UI和事件驱动的开发</strong>，并且通过我们在上节讲到的 Babel 编译器，将相关的表达转译成 createElement() 的函数表达。再利用 createElement() 的函数调用，创建并返回包含相关元素属性定义的对象。最后再通过 render() 的方式将元素对象在浏览器中做渲染。同时，它可以和 JavaScript 和 CSS 的表达交叉使用，我们可以在 JSX 的表达中参入 JS 和 CSS 的表达。并且，除了基础类型的值，我们也可以使用数组、函数等对象的数据类型。</li>
+<li>通过对 JSX 的使用，也<strong>有助于模块化和组件化的开发</strong>。</li>
+<li>最后，从安全性上来看，JSX 的好处是所有的内容在渲染前都被转换成了字符串，这样也可以有效地防止我们在安全的一讲中提到的跨站脚本攻击（XSS），让我们的应用更安全。</li>
+</ol>
+<h2 id="思考题">思考题</h2>
+<p>最后，留给你一道思考题，其实在 JSX 之前，基于 JavaScript 就有很多的模版引擎，例如jQuery Template 和 Mustache.js 等。你觉得 JSX 和传统的 JavaScript 模版引擎有什么区别吗？各自的优劣势是怎样的？</p>
+<p>欢迎在留言区分享你的经验、交流学习心得或者提出问题，如果觉得有收获，也欢迎你把今天的内容分享给更多的朋友。我们下节课再见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

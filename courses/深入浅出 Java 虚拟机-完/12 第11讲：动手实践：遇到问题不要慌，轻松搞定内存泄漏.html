@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/index.html">深入浅出 Java 虚拟机-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">27 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入浅出 Java 虚拟机-完</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9AJVM%EF%BC%8C%E4%B8%80%E5%9D%97%E9%9A%BE%E5%95%83%E7%9A%84%E9%AA%A8%E5%A4%B4.html">00 开篇词：JVM，一块难啃的骨头</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/01%20%E4%B8%80%E6%8E%A2%E7%A9%B6%E7%AB%9F%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%20JVM%EF%BC%9F%E5%AE%83%E5%A4%84%E5%9C%A8%E4%BB%80%E4%B9%88%E4%BD%8D%E7%BD%AE%EF%BC%9F.html">01 一探究竟：为什么需要 JVM？它处在什么位置？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/02%20%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E4%BD%A0%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8E%8C%E6%8F%A1%E7%9A%84%20JVM%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html">02 大厂面试题：你不得不掌握的 JVM 内存管理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/03%20%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E4%BB%8E%E8%A6%86%E7%9B%96%20JDK%20%E7%9A%84%E7%B1%BB%E5%BC%80%E5%A7%8B%E6%8E%8C%E6%8F%A1%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6.html">03 大厂面试题：从覆盖 JDK 的类开始掌握类的加载机制</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/04%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E6%A0%88%E5%B8%A7%E7%9C%8B%E5%AD%97%E8%8A%82%E7%A0%81%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%20JVM%20%E4%B8%AD%E8%BF%9B%E8%A1%8C%E6%B5%81%E8%BD%AC%E7%9A%84.html">04 动手实践：从栈帧看字节码是如何在 JVM 中进行流转的</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/05%20%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E5%BE%97%E5%BF%83%E5%BA%94%E6%89%8B%E5%BA%94%E5%AF%B9%20OOM%20%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87.html">05 大厂面试题：得心应手应对 OOM 的疑难杂症</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/06%20%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%EF%BC%9A%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">06 深入剖析：垃圾回收你真的了解吗？（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/07%20%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%EF%BC%9A%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">07 深入剖析：垃圾回收你真的了解吗？（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/08%20%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E6%9C%89%E4%BA%86%20G1%20%E8%BF%98%E9%9C%80%E8%A6%81%E5%85%B6%E4%BB%96%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%90%97%EF%BC%9F.html">08 大厂面试题：有了 G1 还需要其他垃圾回收器吗？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/09%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BC%B0%E7%AE%97%E5%92%8C%E8%B0%83%E4%BC%98.html">09 案例实战：亿级流量高并发下如何进行估算和调优</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/10%20%E7%AC%AC09%E8%AE%B2%EF%BC%9A%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E9%9D%A2%E5%AF%B9%E7%AA%81%E5%A6%82%E5%85%B6%E6%9D%A5%E7%9A%84%20GC%20%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E4%B8%8B%E6%89%8B%E8%A7%A3%E5%86%B3.html">10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/11%20%E7%AC%AC10%E8%AE%B2%EF%BC%9A%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%87%AA%E5%B7%B1%E6%A8%A1%E6%8B%9F%20JVM%20%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%9C%BA%E6%99%AF.html">11 第10讲：动手实践：自己模拟 JVM 内存溢出场景</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/12%20%E7%AC%AC11%E8%AE%B2%EF%BC%9A%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E4%B8%8D%E8%A6%81%E6%85%8C%EF%BC%8C%E8%BD%BB%E6%9D%BE%E6%90%9E%E5%AE%9A%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F.html">12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/13%20%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20MAT%20%E6%89%BE%E5%88%B0%E9%97%AE%E9%A2%98%E5%8F%91%E7%94%9F%E7%9A%84%E6%A0%B9%E6%9C%AC%E5%8E%9F%E5%9B%A0.html">13 工具进阶：如何利用 MAT 找到问题发生的根本原因</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/14%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%AE%A9%E9%9D%A2%E8%AF%95%E5%AE%98%E5%88%AE%E7%9B%AE%E7%9B%B8%E7%9C%8B%E7%9A%84%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98%E6%8E%92%E6%9F%A5.html">14 动手实践：让面试官刮目相看的堆外内存排查</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/15%20%E9%A2%84%E8%AD%A6%E4%B8%8E%E8%A7%A3%E5%86%B3%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20GC%20%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98.html">15 预警与解决：深入浅出 GC 监控与调优</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/16%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%80%E4%B8%AA%E9%AB%98%E6%AD%BB%E4%BA%A1%E7%8E%87%E7%9A%84%E6%8A%A5%E8%A1%A8%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BC%98%E5%8C%96%E4%B9%8B%E8%B7%AF.html">16 案例分析：一个高死亡率的报表系统的优化之路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/17%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%90%8E%EF%BC%8C%E6%88%91%E7%9A%84%E5%BA%94%E7%94%A8%E5%B4%A9%E6%BA%83%E4%BA%86.html">17 案例分析：分库分表后，我的应用崩溃了</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/18%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E5%AD%97%E8%8A%82%E7%A0%81%E7%9C%8B%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0.html">18 动手实践：从字节码看方法调用的底层实现</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/19%20%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E4%B8%8D%E8%A6%81%E6%90%9E%E6%B7%B7%20JMM%20%E4%B8%8E%20JVM.html">19 大厂面试题：不要搞混 JMM 与 JVM</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BB%8E%E5%AD%97%E8%8A%82%E7%A0%81%E7%9C%8B%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0.html">20 动手实践：从字节码看并发编程的底层实现</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/21%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%B8%8D%E4%B8%BA%E4%BA%BA%E7%86%9F%E7%9F%A5%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4.html">21 动手实践：不为人熟知的字节码指令</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/22%20%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Java%20Agent%20%E6%8A%80%E6%9C%AF%E5%AF%B9%E5%AD%97%E8%8A%82%E7%A0%81%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%94%B9.html">22 深入剖析：如何使用 Java Agent 技术对字节码进行修改</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/23%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9AJIT%20%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%EF%BC%9F.html">23 动手实践：JIT 参数配置如何影响程序运行？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/24%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E5%A4%A7%E5%9E%8B%E9%A1%B9%E7%9B%AE%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%E8%B0%83%E4%BC%98%EF%BC%9F.html">24 案例分析：大型项目如何进行性能瓶颈调优？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/25%20%E6%9C%AA%E6%9D%A5%EF%BC%9AJVM%20%E7%9A%84%E5%8E%86%E5%8F%B2%E4%B8%8E%E5%B1%95%E6%9C%9B.html">25 未来：JVM 的历史与展望</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/26%20%E7%A6%8F%E5%88%A9%EF%BC%9A%E5%B8%B8%E8%A7%81%20JVM%20%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A1%A5%E5%85%85.html">26 福利：常见 JVM 面试题补充</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%20Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AE%8C/12%20%E7%AC%AC11%E8%AE%B2%EF%BC%9A%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%EF%BC%9A%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E4%B8%8D%E8%A6%81%E6%85%8C%EF%BC%8C%E8%BD%BB%E6%9D%BE%E6%90%9E%E5%AE%9A%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏" id="title">12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏</h1>
+<div><p>当一个系统在发生 OOM 的时候，行为可能会让你感到非常困惑。因为 JVM 是运行在操作系统之上的，操作系统的一些限制，会严重影响 JVM 的行为。<strong>故障排查是一个综合性的技术问题，在日常工作中要增加自己的知识广度</strong>。多总结、多思考、多记录，这才是正确的晋级方式。</p>
+<p>现在的互联网服务，一般都做了负载均衡。如果一个实例发生了问题，不要着急去重启。万能的重启会暂时缓解问题，但如果不保留现场，可能就错失了解决问题的根本，担心的事情还会到来。</p>
+<p>所以，当实例发生问题的时候，第一步是隔离，第二步才是问题排查。什么叫隔离呢？就是把你的这台机器从请求列表里摘除，比如把 nginx 相关的权重设成零。在微服务中，也有相应的隔离机制，这里默认你已经有了（面试也默认你已经有隔离功能了）。</p>
+<p>本课时的内容将涉及非常多的 Linux 命令，对 JVM 故障排查的帮助非常大，你可以逐个击破。</p>
+<h2 id="1-gc-引起-cpu-飙升">1. GC 引起 CPU 飙升</h2>
+<p>我们有个线上应用，单节点在运行一段时间后，CPU 的使用会飙升，一旦飙升，一般怀疑某个业务逻辑的计算量太大，或者是触发了死循环（比如著名的 HashMap 高并发引起的死循环），但排查到最后其实是 GC 的问题。</p>
+<p>在 Linux 上，分析哪个线程引起的 CPU 问题，通常有一个固定的步骤。我们下面来分解这个过程，<strong>这是面试频率极高的一个问题</strong>。
+<img alt="img" src="/assets/80eed82f2c3567627dce4aaa.jpg"/><br/>
+（1）使用 top 命令，查找到使用 CPU 最多的某个进程，记录它的 pid。使用 Shift + P 快捷键可以按 CPU 的使用率进行排序。</p>
+<pre><code>top
+</code></pre>
+<p>（2）再次使用 top 命令，加 -H 参数，查看某个进程中使用 CPU 最多的某个线程，记录线程的 ID。</p>
+<pre><code>top -Hp $pid
+</code></pre>
+<p>（3）使用 printf 函数，将十进制的 tid 转化成十六进制。</p>
+<pre><code>printf %x $tid
+</code></pre>
+<p>（4）使用 jstack 命令，查看 Java 进程的线程栈。</p>
+<pre><code>jstack $pid &gt;$pid.log
+</code></pre>
+<p>（5）使用 less 命令查看生成的文件，并查找刚才转化的十六进制 tid，找到发生问题的线程上下文。</p>
+<pre><code>less $pid.log
+</code></pre>
+<p>我们在 jstack 日志中找到了 CPU 使用最多的几个线程。</p>
+<p><img alt="img" src="/assets/7a3ce9c49ab1d39617c4ce99.jpg"/></p>
+<p>可以看到问题发生的根源，是我们的堆已经满了，但是又没有发生 OOM，于是 GC 进程就一直在那里回收，回收的效果又非常一般，造成 CPU 升高应用假死。</p>
+<p>接下来的具体问题排查，就需要把内存 dump 一份下来，使用 MAT 等工具分析具体原因了（将在第 12 课时讲解）。</p>
+<h2 id="2-现场保留">2. 现场保留</h2>
+<p>可以看到这个过程是繁杂而冗长的，需要记忆很多内容。现场保留可以使用自动化方式将必要的信息保存下来，那一般在线上系统会保留哪些信息呢？下面我进行一下总结。</p>
+<h3 id="2-1-瞬时态和历史态">2.1. 瞬时态和历史态</h3>
+<p>为了协助我们的分析，这里创造了两个名词：<strong>瞬时态和历史态</strong>。瞬时态是指当时发生的、快照类型的元素；历史态是指按照频率抓取的，有固定监控项的资源变动图。</p>
+<p>有很多信息，比如 CPU、系统内存等，瞬时态的价值就不如历史态来的直观一些。因为瞬时状态无法体现一个趋势性问题（比如斜率、求导等），而这些信息的获取一般依靠监控系统的协作。</p>
+<p>但对于 lsof、heap 等，这种没有时间序列概念的混杂信息，体积都比较大，无法进入监控系统产生有用价值，就只能通过瞬时态进行分析。在这种情况下，瞬时态的价值反而更大一些。我们常见的堆快照，就属于瞬时状态。</p>
+<p>问题不是凭空产生的，在分析时，一般要收集系统的整体变更集合，比如代码变更、网络变更，甚至数据量的变化。</p>
+<p><img alt="img" src="/assets/a63ebe48819da67405265017.jpg"/></p>
+<p>接下来对每一项资源的获取方式进行介绍。</p>
+<h3 id="2-2-保留信息">2.2. 保留信息</h3>
+<p>（1）系统当前网络连接</p>
+<pre><code>ss -antp &gt; $DUMP_DIR/ss.dump 2&gt;&amp;1
+</code></pre>
+<p>其中，ss 命令将系统的所有网络连接输出到 ss.dump 文件中。使用 ss 命令而不是 netstat 的原因，是因为 netstat 在网络连接非常多的情况下，执行非常缓慢。</p>
+<p>后续的处理，可通过查看各种网络连接状态的梳理，来排查 TIME_WAIT 或者 CLOSE_WAIT，或者其他连接过高的问题，非常有用。</p>
+<p>线上有个系统更新之后，监控到 CLOSE_WAIT 的状态突增，最后整个 JVM 都无法响应。CLOSE_WAIT 状态的产生一般都是代码问题，使用 jstack 最终定位到是因为 HttpClient 的不当使用而引起的，多个连接不完全主动关闭。</p>
+<p>（2）网络状态统计</p>
+<pre><code>netstat -s &gt; $DUMP_DIR/netstat-s.dump 2&gt;&amp;1
+</code></pre>
+<p>此命令将网络统计状态输出到 netstat-s.dump 文件中。它能够按照各个协议进行统计输出，对把握当时整个网络状态，有非常大的作用。</p>
+<pre><code>sar -n DEV 1 2 &gt; $DUMP_DIR/sar-traffic.dump 2&gt;&amp;1
+</code></pre>
+<p>上面这个命令，会使用 sar 输出当前的网络流量。在一些速度非常高的模块上，比如 Redis、Kafka，就经常发生跑满网卡的情况。如果你的 Java 程序和它们在一起运行，资源则会被挤占，表现形式就是网络通信非常缓慢。</p>
+<p>（3）进程资源</p>
+<pre><code>lsof -p $PID &gt; $DUMP_DIR/lsof-$PID.dump
+</code></pre>
+<p>这是个非常强大的命令，通过查看进程，能看到打开了哪些文件，这是一个神器，可以以进程的维度来查看整个资源的使用情况，包括每条网络连接、每个打开的文件句柄。同时，也可以很容易的看到连接到了哪些服务器、使用了哪些资源。这个命令在资源非常多的情况下，输出稍慢，请耐心等待。</p>
+<p>（4）CPU 资源</p>
+<pre><code>mpstat &gt; $DUMP_DIR/mpstat.dump 2&gt;&amp;1
+vmstat 1 3 &gt; $DUMP_DIR/vmstat.dump 2&gt;&amp;1
+sar -p ALL  &gt; $DUMP_DIR/sar-cpu.dump  2&gt;&amp;1
+uptime &gt; $DUMP_DIR/uptime.dump 2&gt;&amp;1
+</code></pre>
+<p>主要用于输出当前系统的 CPU 和负载，便于事后排查。这几个命令的功能，有不少重合，使用者要注意甄别。</p>
+<p>（5）I/O 资源</p>
+<pre><code>iostat -x &gt; $DUMP_DIR/iostat.dump 2&gt;&amp;1
+</code></pre>
+<p>一般，以计算为主的服务节点，I/O 资源会比较正常，但有时也会发生问题，比如日志输出过多，或者磁盘问题等。此命令可以输出每块磁盘的基本性能信息，用来排查 I/O 问题。在第 8 课时介绍的 GC 日志分磁盘问题，就可以使用这个命令去发现。</p>
+<p>（6）内存问题</p>
+<pre><code>free -h &gt; $DUMP_DIR/free.dump 2&gt;&amp;1
+</code></pre>
+<p>free 命令能够大体展现操作系统的内存概况，这是故障排查中一个非常重要的点，比如 SWAP 影响了 GC，SLAB 区挤占了 JVM 的内存。</p>
+<p>（7）其他全局</p>
+<pre><code>ps -ef &gt; $DUMP_DIR/ps.dump 2&gt;&amp;1
+dmesg &gt; $DUMP_DIR/dmesg.dump 2&gt;&amp;1
+sysctl -a &gt; $DUMP_DIR/sysctl.dump 2&gt;&amp;1
+</code></pre>
+<p>dmesg 是许多静悄悄死掉的服务留下的最后一点线索。当然，ps 作为执行频率最高的一个命令，它当时的输出信息，也必然有一些可以参考的价值。</p>
+<p>另外，由于内核的配置参数，会对系统和 JVM 产生影响，所以我们也输出了一份。</p>
+<p>（8）进程快照，最后的遗言（jinfo）</p>
+<pre><code>${JDK_BIN}jinfo $PID &gt; $DUMP_DIR/jinfo.dump 2&gt;&amp;1
+</code></pre>
+<p>此命令将输出 Java 的基本进程信息，包括环境变量和参数配置，可以查看是否因为一些错误的配置造成了 JVM 问题。</p>
+<p>（9）dump 堆信息</p>
+<pre><code>${JDK_BIN}jstat -gcutil $PID &gt; $DUMP_DIR/jstat-gcutil.dump 2&gt;&amp;1
+${JDK_BIN}jstat -gccapacity $PID &gt; $DUMP_DIR/jstat-gccapacity.dump 2&gt;&amp;1
+</code></pre>
+<p>jstat 将输出当前的 gc 信息。一般，基本能大体看出一个端倪，如果不能，可将借助 jmap 来进行分析。</p>
+<p>（10）堆信息</p>
+<pre><code>${JDK_BIN}jmap $PID &gt; $DUMP_DIR/jmap.dump 2&gt;&amp;1
+${JDK_BIN}jmap -heap $PID &gt; $DUMP_DIR/jmap-heap.dump 2&gt;&amp;1
+${JDK_BIN}jmap -histo $PID &gt; $DUMP_DIR/jmap-histo.dump 2&gt;&amp;1
+${JDK_BIN}jmap -dump:format=b,file=$DUMP_DIR/heap.bin $PID &gt; /dev/null  2&gt;&amp;1
+</code></pre>
+<p>jmap 将会得到当前 Java 进程的 dump 信息。如上所示，其实最有用的就是第 4 个命令，但是前面三个能够让你初步对系统概况进行大体判断。</p>
+<p>因为，第 4 个命令产生的文件，一般都非常的大。而且，需要下载下来，导入 MAT 这样的工具进行深入分析，才能获取结果。这是分析内存泄漏一个必经的过程。</p>
+<p>（11）JVM 执行栈</p>
+<pre><code>${JDK_BIN}jstack $PID &gt; $DUMP_DIR/jstack.dump 2&gt;&amp;1
+</code></pre>
+<p>jstack 将会获取当时的执行栈。一般会多次取值，我们这里取一次即可。这些信息非常有用，能够还原 Java 进程中的线程情况。</p>
+<pre><code>top -Hp $PID -b -n 1 -c &gt;  $DUMP_DIR/top-$PID.dump 2&gt;&amp;1
+</code></pre>
+<p>为了能够得到更加精细的信息，我们使用 top 命令，来获取进程中所有线程的 CPU 信息，这样，就可以看到资源到底耗费在什么地方了。</p>
+<p>（12）高级替补</p>
+<pre><code>kill -3 $PID
+</code></pre>
+<p>有时候，jstack 并不能够运行，有很多原因，比如 Java 进程几乎不响应了等之类的情况。我们会尝试向进程发送 kill -3 信号，这个信号将会打印 jstack 的 trace 信息到日志文件中，是 jstack 的一个替补方案。</p>
+<pre><code>gcore -o $DUMP_DIR/core $PID
+</code></pre>
+<p>对于 jmap 无法执行的问题，也有替补，那就是 GDB 组件中的 gcore，将会生成一个 core 文件。我们可以使用如下的命令去生成 dump：</p>
+<pre><code>${JDK_BIN}jhsdb jmap --exe ${JDK}java  --core $DUMP_DIR/core --binaryheap
+</code></pre>
+<h2 id="3-内存泄漏的现象">3. 内存泄漏的现象</h2>
+<p>稍微提一下 jmap 命令，它在 9 版本里被干掉了，取而代之的是 jhsdb，你可以像下面的命令一样使用。</p>
+<pre><code>jhsdb jmap  --heap --pid  37340
+jhsdb jmap  --pid  37288
+jhsdb jmap  --histo --pid  37340
+jhsdb jmap  --binaryheap --pid  37340
+</code></pre>
+<p>heap 参数能够帮我们看到大体的内存布局，以及每一个年代中的内存使用情况。这和我们前面介绍的内存布局，以及在 VisualVM 中看到的 没有什么不同。但由于它是命令行，所以使用更加广泛。</p>
+<p><img alt="img" src="/assets/2585eab478b14a8b7b1f4cdf.jpg"/></p>
+<p>histo 能够大概的看到系统中每一种类型占用的空间大小，用于初步判断问题。比如某个对象 instances 数量很小，但占用的空间很大，这就说明存在大对象。但它也只能看大概的问题，要找到具体原因，还是要 dump 出当前 live 的对象。</p>
+<p><img alt="img" src="/assets/32fcfb54a67ba9547ea98a28.jpg"/></p>
+<p>一般内存溢出，表现形式就是 Old 区的占用持续上升，即使经过了多轮 GC 也没有明显改善。我们在前面提到了 GC Roots，内存泄漏的根本就是，有些对象并没有切断和 GC Roots 的关系，可通过一些工具，能够看到它们的联系。</p>
+<h2 id="4-一个卡顿实例">4. 一个卡顿实例</h2>
+<p>有一个关于服务的某个实例，经常发生服务卡顿。由于服务的并发量是比较高的，所以表现也非常明显。这个服务和我们第 8 课时的高并发服务类似，每多停顿 1 秒钟，几万用户的请求就会感到延迟。</p>
+<p>我们统计、类比了此服务其他实例的 CPU、内存、网络、I/O 资源，区别并不是很大，所以一度怀疑是机器硬件的问题。</p>
+<p>接下来我们对比了节点的 GC 日志，发现无论是 Minor GC，还是 Major GC，这个节点所花费的时间，都比其他实例长得多。</p>
+<p>通过仔细观察，我们发现在 GC 发生的时候，vmstat 的 si、so 飙升的非常严重，这和其他实例有着明显的不同。</p>
+<p>使用 free 命令再次确认，发现 SWAP 分区，使用的比例非常高，引起的具体原因是什么呢？</p>
+<p>更详细的操作系统内存分布，从 /proc/meminfo 文件中可以看到具体的逻辑内存块大小，有多达 40 项的内存信息，这些信息都可以通过遍历 /proc 目录的一些文件获取。我们注意到 slabtop 命令显示的有一些异常，dentry（目录高速缓冲）占用非常高。</p>
+<p>问题最终定位到是由于某个运维工程师执行了一句命令：</p>
+<pre><code>find / | grep "x"
+</code></pre>
+<p>他是想找一个叫做 x 的文件，看看在哪台服务器上，结果，这些老服务器由于文件太多，扫描后这些文件信息都缓存到了 slab 区上。而服务器开了 swap，操作系统发现物理内存占满后，并没有立即释放 cache，导致每次 GC 都要和硬盘打一次交道。</p>
+<p>解决方式就是关闭 SWAP 分区。</p>
+<p><strong>swap</strong> <strong>是很多性能场景的万恶之源，建议禁用</strong>。当你的应用真正高并发了，SWAP 绝对能让你体验到它魔鬼性的一面：<strong>进程倒是死不了了，但</strong> <strong>GC</strong> <strong>时间长的却让人无法忍受。</strong></p>
+<h2 id="5-内存泄漏">5. 内存泄漏</h2>
+<p><img alt="img" src="/assets/9f906f12deb9bf8020e45d33.jpg"/></p>
+<p>我们再来聊一下内存溢出和内存泄漏的区别。</p>
+<p><strong>内存溢出是一个结果，而内存泄漏是一个原因</strong>。内存溢出的原因有内存空间不足、配置错误等因素。</p>
+<p>不再被使用的对象、没有被回收、没有及时切断与 GC Roots 的联系，这就是内存泄漏。内存泄漏是一些错误的编程方式，或者过多的无用对象创建引起的。</p>
+<p>举个例子，有团队使用了 HashMap 做缓存，但是并没有设置超时时间或者 LRU 策略，造成了放入 Map 对象的数据越来越多，而产生了内存泄漏。</p>
+<p>再来看一个经常发生的内存泄漏的例子，也是由于 HashMap 产生的。代码如下，由于没有重写 Key 类的 hashCode 和 equals 方法，造成了放入 HashMap 的所有对象都无法被取出来，它们和外界<strong>失联了</strong>。所以下面的代码结果是 null。</p>
+<pre><code>//leak example
+import java.util.HashMap;
+import java.util.Map;
+
+public class HashMapLeakDemo {
+    public static class Key {
+        String title;
+
+        public Key(String title) {
+            this.title = title;
+        }
+    }
+
+    public static void main(String[] args) {
+        Map&lt;Key, Integer&gt; map = new HashMap&lt;&gt;();
+
+        map.put(new Key("1"), 1);
+        map.put(new Key("2"), 2);
+        map.put(new Key("3"), 2);
+
+        Integer integer = map.get(new Key("2"));
+        System.out.println(integer);
+    }
+}
+</code></pre>
+<p>即使提供了 equals 方法和 hashCode 方法，也要非常小心，尽量避免使用自定义的对象作为 Key。仓库中 dog 目录有一个实际的、有问题的例子，你可以尝试排查一下。</p>
+<p>再看一个例子，关于文件处理器的应用，在读取或者写入一些文件之后，由于发生了一些异常，close 方法又没有放在 finally 块里面，造成了文件句柄的泄漏。由于文件处理十分频繁，产生了严重的内存泄漏问题。</p>
+<p>另外，对 Java API 的一些不当使用，也会造成内存泄漏。很多同学喜欢使用 String 的 intern 方法，但如果字符串本身是一个非常长的字符串，而且创建之后不再被使用，则会造成内存泄漏。</p>
+<pre><code>import java.util.UUID;
+
+public class InternDemo {
+    static String getLongStr() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i &lt; 100000; i++) {
+            sb.append(UUID.randomUUID().toString());
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        while (true) {
+            getLongStr().intern();
+        }
+    }
+}
+</code></pre>
+<h2 id="6-小结">6. 小结</h2>
+<p><img alt="img" src="/assets/c03048672ec557653e6d6ea0.jpg"/></p>
+<p>本课时介绍了很多 Linux 命令，用于定位分析问题，所有的命令都是可以实际操作的，能够让你详细地把握整个 JVM 乃至操作系统的运行状况。其中，jinfo、jstat、jstack、jhsdb（jmap）等是经常被使用的一些工具，尤其是 jmap，在分析处理内存泄漏问题的时候，是必须的。</p>
+<p>同时还介绍了保留现场的工具和辅助分析的方法论，遇到问题不要慌，记得隔离保存现场。</p>
+<p>接下来我们看了一个实际的例子，由于 SWAP 的启用造成的服务卡顿。SWAP 会引起很多问题，在高并发服务中一般是关掉它。从这个例子中也可以看到，影响 GC，甚至是整个 JVM 行为的因素，可能不仅限于 JVM 内部，故障排查也是一个综合性的技能。</p>
+<p>最后，我们详细看了下内存泄漏的概念和几个实际的例子，从例子中能明显的看到内存泄漏的结果，但是反向去找这些问题代码就不是那么容易了。在后面的课时内容中，我们将使用 MAT 工具具体分析这个捉虫的过程。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

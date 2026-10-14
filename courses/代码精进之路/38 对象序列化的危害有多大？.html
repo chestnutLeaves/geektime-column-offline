@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>38 对象序列化的危害有多大？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/index.html">代码精进之路</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">47 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>代码精进之路</strong><ul><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BD%A0%E5%86%99%E7%9A%84%E6%AF%8F%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8C%E9%83%BD%E6%98%AF%E4%BD%A0%E7%9A%84%E5%90%8D%E7%89%87.html">00 开篇词 你写的每一行代码，都是你的名片</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/01%20%E4%BB%8E%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6%E8%AF%B4%E8%B5%B7%EF%BC%8C%E5%8F%8D%E6%80%9D%E4%BB%80%E4%B9%88%E6%98%AF%E5%A5%BD%E4%BB%A3%E7%A0%81.html">01 从条件运算符说起，反思什么是好代码</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/02%20%E6%8A%8A%E9%94%99%E8%AF%AF%E5%85%B3%E5%9C%A8%E7%AC%BC%E5%AD%90%E9%87%8C%E7%9A%84%E4%BA%94%E9%81%93%E5%85%B3%E5%8D%A1.html">02 把错误关在笼子里的五道关卡</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/03%20%E4%BC%98%E7%A7%80%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E5%85%AD%E4%B8%AA%E5%85%B3%E9%94%AE%E7%89%B9%E8%B4%A8.html">03 优秀程序员的六个关键特质</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/04%20%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E7%9A%84%E4%BB%B7%E5%80%BC%EF%BC%9A%E5%A4%8D%E7%9B%98%E8%8B%B9%E6%9E%9C%E5%85%AC%E5%8F%B8%E7%9A%84GoToFail%E6%BC%8F%E6%B4%9E.html">04 代码规范的价值：复盘苹果公司的GoToFail漏洞</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/05%20%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BB%99%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E8%B5%B7%E5%A5%BD%E5%90%8D%E5%AD%97%EF%BC%9F.html">05 经验总结：如何给你的代码起好名字？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/06%20%E4%BB%A3%E7%A0%81%E6%95%B4%E7%90%86%E7%9A%84%E5%85%B3%E9%94%AE%E9%80%BB%E8%BE%91%E5%92%8C%E6%9C%80%E4%BD%B3%E6%A1%88%E4%BE%8B.html">06 代码整理的关键逻辑和最佳案例</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/07%20%E5%86%99%E5%A5%BD%E6%B3%A8%E9%87%8A%EF%BC%8C%E7%9C%9F%E7%9A%84%E6%98%AF%E5%B0%8F%E8%8F%9C%E4%B8%80%E7%A2%9F%E5%90%97%EF%BC%9F.html">07 写好注释，真的是小菜一碟吗？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/08%20%E5%86%99%E5%A5%BD%E5%A3%B0%E6%98%8E%E7%9A%84%E2%80%9C%E5%85%AB%E9%A1%B9%E7%BA%AA%E5%BE%8B%E2%80%9D.html">08 写好声明的“八项纪律”</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/09%20%E6%80%8E%E4%B9%88%E7%94%A8%E5%A5%BDJava%E6%B3%A8%E8%A7%A3%EF%BC%9F.html">09 怎么用好Java注解？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/10%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E9%99%B7%E9%98%B1%EF%BC%9F.html">10 异常处理都有哪些陷阱？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/11%20%E7%BB%84%E7%BB%87%E5%A5%BD%E4%BB%A3%E7%A0%81%E6%AE%B5%EF%BC%8C%E8%AE%A9%E4%BA%BA%E5%AF%B9%E5%AE%83%E2%80%9C%E4%B8%80%E8%A7%81%E9%92%9F%E6%83%85%E2%80%9D.html">11 组织好代码段，让人对它“一见钟情”</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/12%E4%B8%A8%E7%BB%84%E7%BB%87%E5%A5%BD%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%EF%BC%8C%E8%A6%81%E6%9C%89%E2%80%9C%E7%94%A8%E6%88%B7%E6%80%9D%E7%BB%B4%E2%80%9D.html">12丨组织好代码文件，要有“用户思维”</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/13%20%E6%8E%A5%E5%8F%A3%E8%A7%84%E8%8C%83%EF%BC%8C%E6%98%AF%E5%8D%8F%E4%BD%9C%E7%9A%84%E5%90%88%E7%BA%A6.html">13 接口规范，是协作的合约</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/14%20%E6%80%8E%E4%B9%88%E5%86%99%E5%A5%BD%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97%EF%BC%9F.html">14 怎么写好用户指南？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/15%20%E7%BC%96%E5%86%99%E8%A7%84%E8%8C%83%E4%BB%A3%E7%A0%81%E7%9A%84%E6%A3%80%E6%9F%A5%E6%B8%85%E5%8D%95.html">15 编写规范代码的检查清单</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/16%E4%B8%A8%E4%BB%A3%E7%A0%81%E2%80%9C%E8%A7%84%E8%8C%83%E2%80%9D%E7%AF%87%E7%94%A8%E6%88%B7%E7%AD%94%E7%96%91.html">16丨代码“规范”篇用户答疑</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/17%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E7%BB%8F%E6%B5%8E%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%9F.html">17 为什么需要经济的代码？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/18%E4%B8%A8%E6%80%9D%E8%80%83%E6%A1%86%E6%9E%B6%EF%BC%9A%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%8D%E6%98%AF%E9%AB%98%E6%95%88%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%9F.html">18丨思考框架：什么样的代码才是高效的代码？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/19%20%E6%80%8E%E4%B9%88%E9%81%BF%E5%85%8D%E8%BF%87%E5%BA%A6%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">19 怎么避免过度设计？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/20%20%E7%AE%80%E5%8D%95%E5%92%8C%E7%9B%B4%E8%A7%82%EF%BC%8C%E6%98%AF%E6%B0%B8%E6%81%92%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">20 简单和直观，是永恒的解决方案</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/21%20%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E5%8F%88%E7%9B%B4%E8%A7%82%E7%9A%84%E6%8E%A5%E5%8F%A3%EF%BC%9F.html">21 怎么设计一个简单又直观的接口？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/22%E4%B8%A8%E9%AB%98%E6%95%88%E7%8E%87%EF%BC%8C%E4%BB%8E%E8%B6%85%E8%B6%8A%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E5%BC%80%E5%A7%8B%EF%BC%81.html">22丨高效率，从超越线程同步开始！</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/23%20%E6%80%8E%E4%B9%88%E5%87%8F%E5%B0%91%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%87%8F%E8%BD%BB%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%B4%9F%E6%8B%85%EF%BC%9F.html">23 怎么减少内存使用，减轻内存管理负担？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/24%20%E9%BB%91%E7%99%BD%E7%81%B0%EF%BC%8C%E7%90%86%E8%A7%A3%E5%BB%B6%E8%BF%9F%E5%88%86%E9%85%8D%E7%9A%84%E4%B8%A4%E9%9D%A2%E6%80%A7.html">24 黑白灰，理解延迟分配的两面性</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/25%20%E4%BD%BF%E7%94%A8%E6%9C%89%E5%BA%8F%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%8C%E8%B0%83%E5%8A%A8%E5%BC%82%E6%AD%A5%E7%9A%84%E4%BA%8B%E4%BB%B6.html">25 使用有序的代码，调动异步的事件</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/26%20%E6%9C%89%E5%93%AA%E4%BA%9B%E6%8B%9B%E6%83%B9%E9%BA%BB%E7%83%A6%E7%9A%84%E6%80%A7%E8%83%BD%E9%99%B7%E9%98%B1%EF%BC%9F.html">26 有哪些招惹麻烦的性能陷阱？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/27%20%E6%80%8E%E4%B9%88%E7%BC%96%E5%86%99%E5%8F%AF%E6%8C%81%E7%BB%AD%E5%8F%91%E5%B1%95%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%9F.html">27 怎么编写可持续发展的代码？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/28%20%E6%80%8E%E4%B9%88%E5%B0%BD%E9%87%8F%E2%80%9C%E4%B8%8D%E5%86%99%E2%80%9D%E4%BB%A3%E7%A0%81%EF%BC%9F.html">28 怎么尽量“不写”代码？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/29%20%E7%BC%96%E5%86%99%E7%BB%8F%E6%B5%8E%E4%BB%A3%E7%A0%81%E7%9A%84%E6%A3%80%E6%9F%A5%E6%B8%85%E5%8D%95.html">29 编写经济代码的检查清单</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/30%E4%B8%A8%E2%80%9C%E4%BB%A3%E7%A0%81%E7%BB%8F%E6%B5%8E%E7%AF%87%E2%80%9D%E7%AD%94%E7%96%91%E6%B1%87%E6%80%BB.html">30丨“代码经济篇”答疑汇总</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/31%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%89%E5%85%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E8%BF%99%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F.html">31 为什么安全的代码这么重要？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/32%20%E5%A6%82%E4%BD%95%E8%AF%84%E4%BC%B0%E4%BB%A3%E7%A0%81%E7%9A%84%E5%AE%89%E5%85%A8%E7%BC%BA%E9%99%B7%EF%BC%9F.html">32 如何评估代码的安全缺陷？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/33%20%E6%95%B4%E6%95%B0%E7%9A%84%E8%BF%90%E7%AE%97%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81%EF%BC%9F.html">33 整数的运算有哪些安全威胁？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/34%20%E6%95%B0%E7%BB%84%E5%92%8C%E9%9B%86%E5%90%88%EF%BC%8C%E5%8F%AF%E5%8F%98%E9%87%8F%E7%9A%84%E5%AE%89%E5%85%A8%E9%99%B7%E9%98%B1.html">34 数组和集合，可变量的安全陷阱</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/35%20%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%EF%BC%9F.html">35 怎么处理敏感信息？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/36%20%E7%BB%A7%E6%89%BF%E6%9C%89%E4%BB%80%E4%B9%88%E5%AE%89%E5%85%A8%E7%BC%BA%E9%99%B7%EF%BC%9F.html">36 继承有什么安全缺陷？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/37%20%E8%BE%B9%E7%95%8C%EF%BC%8C%E4%BF%A1%E4%BB%BB%E7%9A%84%E5%88%86%E6%B0%B4%E5%B2%AD.html">37 边界，信任的分水岭</a></li><li><a class="active" aria-current="page" href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/38%20%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E5%8D%B1%E5%AE%B3%E6%9C%89%E5%A4%9A%E5%A4%A7%EF%BC%9F.html">38 对象序列化的危害有多大？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/39%20%E6%80%8E%E4%B9%88%E6%8E%A7%E5%88%B6%E5%A5%BD%E4%BB%A3%E7%A0%81%E7%9A%84%E6%9D%83%E5%8A%9B%EF%BC%9F.html">39 怎么控制好代码的权力？</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/40%20%E8%A7%84%E8%8C%83%EF%BC%8C%E4%BB%A3%E7%A0%81%E9%95%BF%E6%B2%BB%E4%B9%85%E5%AE%89%E7%9A%84%E5%9F%BA%E7%A1%80.html">40 规范，代码长治久安的基础</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/41%20%E9%A2%84%E6%A1%88%EF%BC%8C%E4%BB%A3%E7%A0%81%E7%9A%84%E4%B8%BB%E5%8A%A8%E9%A3%8E%E9%99%A9%E7%AE%A1%E7%90%86.html">41 预案，代码的主动风险管理</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/42%20%E7%BA%B5%E6%B7%B1%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8%E7%9A%84%E6%B7%B1%E5%BA%A6%E9%98%B2%E5%BE%A1.html">42 纵深，代码安全的深度防御</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/43%20%E7%BC%96%E5%86%99%E5%AE%89%E5%85%A8%E4%BB%A3%E7%A0%81%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%B8%85%E5%8D%95.html">43 编写安全代码的最佳实践清单</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/44%20%E2%80%9C%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8%E7%AF%87%E2%80%9D%E7%AD%94%E7%96%91%E6%B1%87%E6%80%BB.html">44 “代码安全篇”答疑汇总</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/Q%26A%E5%8A%A0%E9%A4%90%E4%B8%A8%E5%85%B3%E4%BA%8E%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%EF%BC%8C%E4%BD%A0%E5%85%B3%E5%BF%83%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">Q&amp;A加餐丨关于代码质量，你关心的那些事儿</a></li><li><a href="/courses/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E4%B8%80%E4%B8%AA%E7%BC%96%E7%A8%8B%E5%A5%BD%E6%89%8B%EF%BC%9F.html">结束语 如何成为一个编程好手？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E4%BB%A3%E7%A0%81%E7%B2%BE%E8%BF%9B%E4%B9%8B%E8%B7%AF/38%20%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E5%8D%B1%E5%AE%B3%E6%9C%89%E5%A4%9A%E5%A4%A7%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="38 对象序列化的危害有多大？" id="title">38 对象序列化的危害有多大？</h1>
+<div><p>如果一个函数或者对象，不管它位于多么遥远的地方，都可以在本地直接被调用，那该有多好呀！这是一个非常朴素、美好的想法。基于这个设想，诞生了很多伟大的技术和协议，比如远程过程调用（RPC）、远程方法调用（RMI）、分布式对象（Distributed Object）、组件对象模型（COM）、公共对象请求代理（CORBA）和简单对象访问协议（SOAP）等……这个列表还可以很长很长。</p>
+<p>躲在这些协议背后的核心技术之一，就是<strong>序列化</strong>。简单地说，序列化就是要把一个使用场景中的一个函数或者对象以及它们的执行环境，打包成一段可以传输的数据，然后把该数据传输给另外一个使用场景。在这个使用场景中，该数据被拆解成适当的函数或者对象，包括该函数或者对象的执行环境。这样，该函数或者对象就可以在不同的场景下使用了。</p>
+<p><strong>数据拆解的过程，就是反序列化</strong>。<strong>打包、传输、拆解是序列化技术的三个关键步骤</strong>。由于传输的是数据，打包和拆解可能使用不同的编程语言，运行在不同的操作系统上。这样就带来了跨平台和跨语言的好处。而数据能够传输，就意味着可以带来分布式的好处。数据当然也可以存储，而可以存储意味着相关对象的生命周期的延长，这是不是也是一个非常值得兴奋的特点？</p>
+<p>的确是一个美妙的想法，对吧？ <strong>如果一个想法不是足够好，它也不会造成足够坏的影响。</strong></p>
+<h2 id="评审案例">评审案例</h2>
+<p>我们用Java语言的例子来看看序列化的问题。先一起来看一段节选的Java代码。你能看出这段代码有什么问题吗？该怎么解决这个问题？</p>
+<pre><code>public class Person implements Serializable {
+    // &lt;snipped&gt;
+
+    private String firstName;
+    private String lastName;
+    private String birthday;
+    private String socialSecurityNumber;
+
+    public Person(String firstName, String lastName,
+            String birthday, String socialSecurityNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.socialSecurityNumber = socialSecurityNumber;
+    }
+
+    // &lt;snipped&gt;
+}
+</code></pre>
+<p>注意，socialSecurityNumber表示社会保障号，是一个高度敏感、需要高度安全保护的数据。如果社会保障号以及姓名、生日等信息被泄露，那么冒名顶替者就可以用这个号码举债买房、买车，而真实用户则要背负相关的债务。一旦社会保障号被泄露，想要证明并不是你申请了贷款，远远不是一件轻而易举的事情。在有些国家，社会保障号的保护本身甚至都是一个不小的生意。 在一个信息系统中，除了本人以及授权用户，任何其他人都不应该获知社会保障号以及相关的个人信息。</p>
+<p>上述的代码，存在泄露社会保障号以及相关的个人信息的巨大风险。</p>
+<h2 id="案例分析">案例分析</h2>
+<p>打包、传输、拆解是序列化技术的三个关键步骤。我们来分别看看这三个步骤。</p>
+<p>首先，打包环节会把一个Person实例里的姓名、生日、社会保障号等信息转化为二进制数据。这段数据可以被传输、存储和拆解。任何人看到这段二进制数据，都可以拆解，还原成一个Person实例，从而获得个人敏感信息。这段二进制数据在传输和存储的过程中，有可能被恶意的攻击者修改，从而影响Person实例的还原。如果这个实例涉及到具体的商业交易，那么通过这样的攻击，还可以修改交易对象。</p>
+<p>你看，序列化后的每一个环节，都有可能遭受潜在的攻击。序列化的问题有多严重呢？据说，<strong>大约有一半的Java漏洞和序列化技术有直接或者间接的关系</strong>。而且，由于序列化可以使用的场景非常多，序列化对象既可以看又可以改，这样就导致序列化安全漏洞的等级往往非常高，影响非常大。甚至每年都会有公司专门收集、整理和分析序列化漏洞，这就加剧了序列化安全漏洞的影响，特别是对于那些没有及时修复的系统来说。</p>
+<p>1997年，Java引入序列化技术，至今二十多年里，由于序列化技术本身的安全问题，Java尝尽了其中的酸楚。这是一个“美妙”的想法带来的可怕错误。如果有一天，Java废弃了序列化技术，那一点儿也不值得惊讶。毕竟，和得到的好处相比，要付出的代价实在是太沉重了！</p>
+<p>如果你的应用还没有开始使用序列化技术，这很好，<strong>不要惦记序列化的好处，坚持不要使用序列化</strong>。如果你的应用已经使用了序列化技术，那么可以做些什么来防范或者降低序列化的风险呢？</p>
+<h2 id="额外的防护">额外的防护</h2>
+<p>序列化技术本身并没有内在的安全防护措施，这也是Java序列化为什么会这么令人诅丧的原因之一。如果一定要使用序列化技术，我们就需要设计、部署、加固序列化的安全防线。</p>
+<p>我们先聊聊面对序列化带来的种种问题，该如何保护被序列化的敏感数据。</p>
+<p><strong>首先推荐的方式是，含有敏感数据的类，不要支持序列化</strong>。当然，这也就主动放弃了序列化带来的好处。</p>
+<p><strong>次优的方式是，不要序列化敏感数据，把敏感数据排除在序列化数据之外</strong>。比如，案例中的序列化数据可以抽象地表述为如下的四项：</p>
+<pre><code>  firstName | lastName | birthday | socialSecurityNumber
+</code></pre>
+<p>能不能把敏感的socialSecurityNumber和birthday排除在外呢？Java语言的关键字transient就是为这一功能设计的。</p>
+<pre><code>public class Person implements Serializable {
+    // &lt;snipped&gt;
+
+    private String firstName;
+    private String lastName;
+    private transient String birthday;              // sensitive data
+    private transient String socialSecurityNumber;  // sensitive data
+
+    public Person(String firstName, String lastName,
+            String birthday, String socialSecurityNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.socialSecurityNumber = socialSecurityNumber;
+    }
+
+    // &lt;snipped&gt;
+}
+</code></pre>
+<p>如果把socialSecurityNumber和birthday变量声明为transient，对象实例的序列化就会把这两个变量排除在外。这个时候，序列化数据就不包含敏感数据了。</p>
+<pre><code>  firstName | lastName
+</code></pre>
+<p><strong>排除敏感数据的序列化，还有另一种办法，那就是指定可以序列化的非敏感数据</strong>。如果把transient关键字提供的变量声明看成一个黑名单模式，Java还提供了一个白名单模式。使用静态的serialPersistentFields变量，可以指定哪些变量可以序列化。上面的案例中，如果只序列化firstName和lastName变量，那么敏感的socialSecurityNumber和birthday变量自然就被排除在外了。</p>
+<pre><code>public class Person implements Serializable {
+    // &lt;snipped&gt;
+
+    private String firstName;
+    private String lastName;
+    private String birthday;              // sensitive data
+    private String socialSecurityNumber;  // sensitive data
+
+    // list of serializable fields
+    private static final ObjectStreamField[]
+        serialPersistentFields = {
+            new ObjectStreamField("firstName", Person.class),
+            new ObjectStreamField("lastName", Person.class)
+        };
+
+    // &lt;snipped&gt;
+}
+</code></pre>
+<p>可是，如果把敏感数据排除在序列化数据之外，也就意味着敏感数据不会在拆解后的对象实例中出现。这就使得序列化之前的实例和反序列化之后的实例并不一致。这种差异的存在，就足以使得序列化名存实亡，反序列化后的对象实例可能就没有太多的实际意义了。</p>
+<p>那么有没有一种方法，既可以保护敏感数据，也能保持对象实例序列化前后的等价呢？办法还是有的。</p>
+<p>如果在一个完全可信任的环境下，既不用担心敏感信息的泄露，也不用担心敏感信息的修改，更不用担心对象会被用于非可信的环境，敏感数据可以正常实例化了。然而，这严重限制了对象的使用环境，如果用错了环境，就会面临严肃的安全问题。</p>
+<p>如果对象有可能适用于非可信的环境，就要使用复杂一些的技术。比如使用加密和签名技术，解决“谁能看”和“谁能改”的安全问题。可是，复杂技术的使用，几乎意味着我们对性能要求做出了妥协。面对这样的妥协，是否还需要使用序列化，有时候也是一个两难的选择。</p>
+<h2 id="小结">小结</h2>
+<p>通过对这个评审案例的讨论，我想和你分享下面两点个人看法。</p>
+<ol>
+<li><p><strong>序列化技术不是一个有安全保障的技术，序列化数据的传输和拆解过程都可能被攻击者利用</strong>；</p></li>
+<li><p><strong>要尽量避免敏感信息的序列化</strong>。</p></li>
+</ol>
+<p>除了上述我们说到的方法，敏感信息在序列化过程中的处理和保护，还有三种常见的方法：</p>
+<ol>
+<li><p>实现writeObject，主动地、有选择地序列化指定数据。writeObject和serialPersistentFields变量都是指定序列化数据，但区别在于writeObject()覆盖了序列化的缺省函数，所以编码可以更自由；</p></li>
+<li><p>实现writeReplace， 使用序列化代理；</p></li>
+<li><p>实现Externalizable接口。</p></li>
+</ol>
+<p>我们把这三种方法的使用，留给讨论区，欢迎你对这三种方法做总结、分析，并与我一起交流。</p>
+<h2 id="一起来动手">一起来动手</h2>
+<p>下面的这段Java代码，有一个隐藏的序列化安全问题。你能找到这个问题，并且解决掉这个问题吗？</p>
+<pre><code>public class Person extends HashMap&lt;String, String&gt; {
+    // &lt;snipped&gt;
+
+    public Person(String firstName, String lastName,
+            String birthday, String socialSecurityNumber) {
+        super();
+        super.put("firstName", firstName);
+        super.put("lastName", lastName);
+        super.put("birthday", birthday);
+        super.put("socialSecurityNumber", socialSecurityNumber);
+    }
+    // &lt;snipped&gt;
+}
+</code></pre>
+<p>欢迎你把自己看到的问题和想到的解决方案写在留言区，我们一起来学习、思考、精进！</p>
+<p>如果你觉得这篇文章有所帮助，欢迎点击“请朋友读”，把它分享给你的朋友或者同事。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

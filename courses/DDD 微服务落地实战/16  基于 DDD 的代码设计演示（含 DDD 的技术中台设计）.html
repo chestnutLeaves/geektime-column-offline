@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16  基于 DDD 的代码设计演示（含 DDD 的技术中台设计） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/index.html">DDD 微服务落地实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">19 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>DDD 微服务落地实战</strong><ul><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E8%AE%A9%E6%88%91%E4%BB%AC%E6%8A%8A%20DDD%20%E7%9A%84%E6%80%9D%E6%83%B3%E7%9C%9F%E6%AD%A3%E8%90%BD%E5%9C%B0.html">00 开篇词  让我们把 DDD 的思想真正落地</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/01%20%20DDD%20%EF%BC%9A%E6%9D%9C%E7%BB%9D%E8%BD%AF%E4%BB%B6%E9%80%80%E5%8C%96%E7%9A%84%E5%88%A9%E5%99%A8.html">01  DDD ：杜绝软件退化的利器</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/02%20%20%E4%BB%A5%E7%94%B5%E5%95%86%E6%94%AF%E4%BB%98%E5%8A%9F%E8%83%BD%E4%B8%BA%E4%BE%8B%E6%BC%94%E7%BB%83%20DDD.html">02  以电商支付功能为例演练 DDD</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/03%20%20DDD%20%E6%98%AF%E5%A6%82%E4%BD%95%E8%90%BD%E5%9C%B0%E5%88%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F.html">03  DDD 是如何落地到数据库设计的？</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/04%20%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E6%8C%87%E5%AF%BC%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F.html">04  领域模型是如何指导程序设计的？</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/05%20%20%E8%81%9A%E5%90%88%E3%80%81%E4%BB%93%E5%BA%93%E4%B8%8E%E5%B7%A5%E5%8E%82%EF%BC%9A%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A.html">05  聚合、仓库与工厂：傻傻分不清楚</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/06%20%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%9A%E5%86%B2%E7%A0%B4%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E5%9B%B0%E5%B1%80%E7%9A%84%E5%88%A9%E5%99%A8.html">06  限界上下文：冲破微服务设计困局的利器</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/07%20%20%E5%9C%A8%E7%BA%BF%E8%AE%A2%E9%A4%90%E5%9C%BA%E6%99%AF%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E5%BC%80%E4%BA%8B%E4%BB%B6%E9%A3%8E%E6%9A%B4%E4%BC%9A%E8%AE%AE%E7%9A%84%EF%BC%9F.html">07  在线订餐场景中是如何开事件风暴会议的？</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/08%20%20DDD%20%E6%98%AF%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E9%9A%BE%E9%A2%98%E7%9A%84%EF%BC%9F.html">08  DDD 是如何解决微服务拆分难题的？</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/09%20%20DDD%20%E6%98%AF%E5%A6%82%E4%BD%95%E8%90%BD%E5%9C%B0%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">09  DDD 是如何落地微服务设计实现的？</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/10%20%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">10  微服务落地的技术实践</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/11%20%20%E8%A7%A3%E5%86%B3%E6%8A%80%E6%9C%AF%E6%94%B9%E9%80%A0%E5%9B%B0%E5%B1%80%E7%9A%84%E9%92%A5%E5%8C%99%EF%BC%9A%E6%95%B4%E6%B4%81%E6%9E%B6%E6%9E%84.html">11  解决技术改造困局的钥匙：整洁架构</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/12%20%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%94%AF%E6%8C%81%E5%BF%AB%E9%80%9F%E4%BA%A4%E4%BB%98%E7%9A%84%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%8F%B0%E6%88%98%E7%95%A5%EF%BC%9F.html">12  如何设计支持快速交付的技术中台战略？</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/13%20%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%94%AF%E6%8C%81%E5%BF%AB%E9%80%9F%E4%BA%A4%E4%BB%98%E7%9A%84%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%8F%B0%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">13  如何实现支持快速交付的技术中台设计？</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/14%20%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%94%AF%E6%8C%81%20DDD%20%E7%9A%84%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%8F%B0%EF%BC%9F.html">14  如何设计支持 DDD 的技术中台？</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/15%20%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%94%AF%E6%8C%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%8F%B0%EF%BC%9F.html">15  如何设计支持微服务的技术中台？</a></li><li><a class="active" aria-current="page" href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/16%20%20%E5%9F%BA%E4%BA%8E%20DDD%20%E7%9A%84%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1%E6%BC%94%E7%A4%BA%EF%BC%88%E5%90%AB%20DDD%20%E7%9A%84%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%8F%B0%E8%AE%BE%E8%AE%A1%EF%BC%89.html">16  基于 DDD 的代码设计演示（含 DDD 的技术中台设计）</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/17%20%20%E5%9F%BA%E4%BA%8E%20DDD%20%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%BC%94%E7%A4%BA%EF%BC%88%E5%90%AB%E6%94%AF%E6%8C%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%20DDD%20%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%8F%B0%E8%AE%BE%E8%AE%A1%EF%BC%89.html">17  基于 DDD 的微服务设计演示（含支持微服务的 DDD 技术中台设计）</a></li><li><a href="/courses/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/18%20%20%E5%9F%BA%E4%BA%8E%E4%BA%8B%E4%BB%B6%E6%BA%AF%E6%BA%90%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%BC%80%E5%8F%91.html">18  基于事件溯源的设计开发</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/DDD%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%90%BD%E5%9C%B0%E5%AE%9E%E6%88%98/16%20%20%E5%9F%BA%E4%BA%8E%20DDD%20%E7%9A%84%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1%E6%BC%94%E7%A4%BA%EF%BC%88%E5%90%AB%20DDD%20%E7%9A%84%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%8F%B0%E8%AE%BE%E8%AE%A1%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="16  基于 DDD 的代码设计演示（含 DDD 的技术中台设计）" id="title">16  基于 DDD 的代码设计演示（含 DDD 的技术中台设计）</h1>
+<div><p>我这些年的从业经历，起初是作为项目经理带团队做软件研发，后来转型成为架构师，站在更高的层面去思考软件研发的那些事儿。我认为，一个成熟的软件研发团队：</p>
+<ul>
+<li>不仅在于团队成员<strong>研发水平</strong>的提高；</li>
+<li>更在于将不断积累的通用的<strong>设计方法</strong>与<strong>技术框架</strong>，沉淀到底层的技术中台中。</li>
+</ul>
+<p>只要有了这样的技术中台作为支撑，才能让研发团队具备更强的能力，用更快的速度，研发出更多的产业，以快速适应激烈竞争而快速变化的市场。</p>
+<p>譬如，团队某次接到了一个<strong>数据推送</strong>的需求，在完成了该需求并交付用户以后，就在这个功能设计的基础上，抽取共性、保留个性，将其下沉到技术中台形成“数据共享平台”的设计。有了这个功能，团队日后在接到类似需求时，只需要进行一些配置或者简单开发，就能交付用户啦。</p>
+<p>这样，团队的研发能力就大大提升了。团队研发的功能越多，沉淀到技术中台的功能就越多，团队研发能力的提升就越大。只有这样的技术中台才能支撑研发团队的快速交付，关键是要有人、有意识地去做这些工作的整理，而我们团队是在“使能故事”中完成这些工作的。</p>
+<p>现如今，越来越多的团队采用敏捷开发，在 2~3 周的迭代周期中规划并完成“用户故事”。“用户故事”是需要紧急应对的用户需求，但如果不能提升团队的能力，那么团队就会像救火队员一样永远是在应对用户需求的“火”而疲于奔命。</p>
+<p>相反，“使能故事（Enabler Story）”就是为了提升我们的能力，从而更快速地应对用户需求。俗话说：“磨刀不误砍柴工”，“使能故事”就是“磨刀”，它虽然要耗费一些时间，但可以让日后的“砍柴”更快更好，是很值得的。</p>
+<p>因此，一个成熟的团队在每次的迭代中不能只是完成“用户故事”，而应该拿出一定比例的时间完成“使能故事”，使团队日后的“用户故事”做得更快，实现快速交付。</p>
+<p>我的支持 DDD + 微服务的技术中台就是在这种指导下逐渐形成的。之前在我的团队实践 DDD + 微服务的过程中，遇到了很多的阻力。这种阻力要求团队成员花更多的时间学习 DDD 相关知识，用正确的方法与步骤去设计开发，并做到位。然而，当他们真正做到位以后，却发现 DDD 的设计开发非常烦琐，要频繁地实现各种工厂、仓库、数据补填等开发工作，使开发人员对 DDD 的开发心生厌恶。以往项目经理在面对这些问题时，只能从管理上制定开发规范，但这样的措施于事无补。</p>
+<p>而我站在架构师的角度，去设计技术框架，在原有代码的基础上，抽取共性、保留个性，将烦琐的 DDD 开发封装在了技术中台中。这样做，不仅简化了设计开发，使得 DDD 更容易在项目中落地，还规范了代码，使得业务开发人员没有机会去编写 Controller 与 Dao 代码，自然而然地将业务代码基于领域模型设计在了 Service 与领域对象中了。接着，来看看这个框架的设计。</p>
+<h3 id="整个演示代码的架构">整个演示代码的架构</h3>
+<p>我把整个演示代码分享在了 <a href="https://github.com/mooodo" target="_blank">GitHub</a> 中，它分为这样几个项目。</p>
+<ul>
+<li>demo-ddd-trade：一个基于 DDD 设计的单体应用。</li>
+<li>demo-parent：本示例所有微服务项目的父项目。</li>
+<li>demo-service-eureka：微服务注册中心 eureka。</li>
+<li>demo-service-config：微服务配置中心 config。</li>
+<li>demo-service-turbine：各微服务断路器监控 turbine。</li>
+<li>demo-service-zuul：服务网关 zuul。</li>
+<li>demo-service-parent：各业务微服务（无数据库访问）的父项目。</li>
+<li>demo-service-support：各业务微服务（无数据库访问）底层技术框架。</li>
+<li>demo-service-customer：用户管理微服务（无数据库访问）。</li>
+<li>demo-service-product：产品管理微服务（无数据库访问）。</li>
+<li>demo-service-supplier：供应商管理微服务（无数据库访问）。</li>
+<li>demo-service2-parent：各业务微服务（有数据库访问）的父项目。</li>
+<li>demo-service2-support：各业务微服务（有数据库访问）底层技术框架。</li>
+<li>demo-service2-customer：用户管理微服务（有数据库访问）。</li>
+<li>demo-service2-product：产品管理微服务（有数据库访问）。</li>
+<li>demo-service2-supplier：供应商管理微服务（有数据库访问）。</li>
+<li>demo-service2-order：订单管理微服务（有数据库访问）。</li>
+</ul>
+<p>总之，这里有一个基于 DDD 的单体应用与一个完整的微服务应用。在微服务应用中：</p>
+<ul>
+<li>demo-service-xxx 是我基于一个早期的框架设计的，你可以看到我们以往设计开发的原始状态；</li>
+<li>而 demo-service2-xxx 是我需要重点讲解的基于 DDD 的微服务设计。</li>
+</ul>
+<p>其中，demo-service2-support 是这个框架的核心，即底层技术中台，而其他都是演示对它的具体应用。</p>
+<h3 id="单-controller-的设计实现">单 Controller 的设计实现</h3>
+<p>与以往不同，在整个系统中只有几个 Controller，并下沉到了底层技术中台 demo-service2-support 中，它们包括以下几部分。</p>
+<ul>
+<li>OrmController：用于增删改操作，以及基于 key 值的 load、get 操作，它们通常基于DDD 进行设计。</li>
+<li>QueryController：用于基于 SQL 语句形成的查询分析报表，它们通常不基于 DDD 进行设计，但查询结果会形成领域对象，并基于 DDD 进行数据补填。</li>
+<li>其他 Controller，用于如 ExcelController 等特殊的操作，是继承以上两个类的功能扩展。</li>
+</ul>
+<p>OrmController 接收诸如 orm/{bean}/{method} 的请求，bean 是配置在 Spring 中的 bean，method 是 bean 中要调用的方法。由于这是一个基础框架，没有限定前端可以调用哪些方法，因此实际项目需要在此之上增加权限校验。该方法既可以接收 GET 方法，也可以接收 POST 方法，因此其他的参数可以根据 GET/POST 各自的方式进行传递。</p>
+<p>这里的 bean 对应的是后台的 Service。Service 的编写要求所有的方法，如果需要使用领域对象必须放在第一个参数上。如果第一个参数是简单的数字、字符串、日期等类型，就不是领域对象，否则就作为领域对象，依次从前端上传的 JSON 中获取相应的数据予以填充。这里暂时不支持集合，也不支持具有继承关系的领域对象，待我日后完善。判定代码如下：</p>
+<pre><code class="language-java"> /**
+
+  * check a parameter whether is a value object.
+
+  * @param clazz
+
+  * @return yes or no
+
+  * @throws IllegalAccessException 
+
+  * @throws InstantiationException 
+
+  */
+
+ private boolean isValueObject(Class&lt;?&gt; clazz) {
+
+  if(clazz==null) return false;
+
+  if(clazz.equals(long.class)||clazz.equals(int.class)||
+
+    clazz.equals(double.class)||clazz.equals(float.class)||
+
+    clazz.equals(short.class)) return false;
+
+  if(clazz.isInterface()) return false;
+
+  if(Number.class.isAssignableFrom(clazz)) return false;
+
+  if(String.class.isAssignableFrom(clazz)) return false;
+
+  if(Date.class.isAssignableFrom(clazz)) return false;
+
+  if(Collection.class.isAssignableFrom(clazz)) return false;
+
+  return true;
+
+ }
+</code></pre>
+<p>这里的开发规范除了要求 Service 的所有方法中的领域对象放第一个参数，还要求前端的 JSON 与领域对象中的属性一致，这样才能完成自动转换，而不需要为每个模块编写 Controller。</p>
+<p>QueryController 接收诸如 query/{bean} 的请求，这里的 bean 依然是 Spring 中配置的bean。同样，该方法也是既可以接收 GET 方法，也可以接收 POST 方法，并用各自的方式传递查询所需的参数。</p>
+<p>如果该查询需要分页，那么在传递查询参数以外，还要传递 page（第几页）与 size（每页多少条记录）。第一次查询时，除了分页，还会计算 count 并返回前端。这样，在下次分页查询时，将 count 也作为参数传递，将不再计算 count，从而提升查询效率。此外，这里还将提供求和功能，敬请期待。</p>
+<h3 id="单-dao-的设计实现">单 Dao 的设计实现</h3>
+<p>以往系统设计的硬伤在于一头一尾：Controller 与 Dao。它既要为每个模块编写大量代码，也使得系统设计非常不 DDD，令日后的变更维护成本巨大。因此，我在大量系统设计问题分析的基础上，提出了单 Controller 与单 Dao 的设计思路。前面讲解了单 Controller 的设计，现在来看一看单 Dao 的设计。</p>
+<p>诚然，当今的主流是使用注解。然而，注解的使用存在诸多的问题。</p>
+<ul>
+<li>首先，它会带来业务代码与技术框架的依赖，因此当在 Service 中加入注解时，就不得不与 Spring、Springcloud 耦合，使得日后转型其他技术框架困难重重。</li>
+<li>此外，注解往往适用于一对一、多对一的场景，而一对多、多对多的场景往往非常麻烦。而本框架存在大量一对多、多对多的场景，因此我建议你还是回归到 XML 的配置方式。</li>
+</ul>
+<p>在项目中的所有 Service 都要有一个 BasicDao 的属性变量，例如：</p>
+<pre><code class="language-java">public class CustomerServiceImpl implements CustomerService {
+
+ private BasicDao dao;
+
+ /**
+
+  * @return the dao
+
+  */
+
+ public BasicDao getDao() {
+
+  return dao;
+
+ }
+
+ /**
+
+  * @param dao the dao to set
+
+  */
+
+ public void setDao(BasicDao dao) {
+
+  this.dao = dao;
+
+ }
+
+    ...
+
+}
+</code></pre>
+<p>接着，在 applicationContext-orm.xml 中，配置业务操作的 Service：</p>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;beans xmlns="http://www.springframework.org/schema/beans" ...&gt;
+
+ &lt;description&gt;The application context for orm&lt;/description&gt;
+
+ &lt;bean id="customer" class="com.demo2.trade.service.impl.CustomerServiceImpl"&gt;
+
+  &lt;property name="dao" ref="repositoryWithCache"&gt;&lt;/property&gt;
+
+ &lt;/bean&gt;
+
+ &lt;bean id="product" class="com.demo2.trade.service.impl.ProductServiceImpl"&gt;
+
+  &lt;property name="dao" ref="repositoryWithCache"&gt;&lt;/property&gt;
+
+ &lt;/bean&gt;
+
+ &lt;bean id="supplier" class="com.demo2.trade.service.impl.SupplierServiceImpl"&gt;
+
+  &lt;property name="dao" ref="basicDao"&gt;&lt;/property&gt;
+
+ &lt;/bean&gt;
+
+ &lt;bean id="order" class="com.demo2.trade.service.impl.OrderServiceImpl"&gt;
+
+  &lt;property name="dao" ref="repository"&gt;&lt;/property&gt;
+
+ &lt;/bean&gt;
+
+&lt;/beans&gt;
+</code></pre>
+<p>这里可以看到，每个 Service 都要注入 Dao，但可以根据需求注入不同的 Dao。</p>
+<ul>
+<li>如果该 Service 是纯贫血模型，那么注入 BasicDao 就可以了。</li>
+<li>如果采用了充血模型，包含了一些聚合的操作，那么注入 repository 从而实现仓库与工厂的功能。</li>
+<li>但如果还希望该仓库与工厂能提供缓存的功能，那么就注入 repositoryWithCache。</li>
+</ul>
+<p>例如，在以上案例中：</p>
+<ul>
+<li>SupplierService 实现的是非常简单的功能，注入 BasicDao 就可以了；</li>
+<li>OrderService 实现了订单与明细的聚合，但数据量大不适合使用缓存，所以注入 repository；</li>
+<li>CustomerService 实现了用户与地址的聚合，并且需要缓存，所以注入 repositoryWithCache；</li>
+<li>ProductService 虽然没有聚合，但在查询产品时需要补填供应商，因此也注入repositoryWithCache。</li>
+</ul>
+<p>这里需要注意，是否使用缓存，也可以在日后的运维过程中，让运维人员通过修改配置去决定，从而提高系统的可维护性。</p>
+<p>完成配置以后，核心是<strong>将领域建模映射成程序设计的模型</strong>。开发人员首先编写各个领域对象。譬如，产品要关联供应商，那么在增加 supplier_id 的同时，还要增加一个 Supplier 的属性：</p>
+<pre><code class="language-java">public class Product extends Entity&lt;Long&gt; {
+
+ private static final long serialVersionUID = 7149822235159719740L;
+
+ private Long id;
+
+ private String name;
+
+ private Double price;
+
+ private String unit;
+
+ private Long supplier_id;
+
+ private String classify;
+
+ private Supplier supplier;
+
+    ...
+
+}
+</code></pre>
+<p>注意，在本框架中的每个领域对象都必须要实现 Entity 这个接口，系统才知道你的主键是哪个。</p>
+<p>接着，配置 vObj.xml，将领域对象与数据库对应起来：</p>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;vobjs&gt;
+
+  &lt;vo class="com.demo2.trade.entity.Customer" tableName="Customer"&gt;
+
+    &lt;property name="id" column="id" isPrimaryKey="true"&gt;&lt;/property&gt;
+
+    &lt;property name="name" column="name"&gt;&lt;/property&gt;
+
+    &lt;property name="sex" column="sex"&gt;&lt;/property&gt;
+
+    &lt;property name="birthday" column="birthday"&gt;&lt;/property&gt;
+
+    &lt;property name="identification" column="identification"&gt;&lt;/property&gt;
+
+    &lt;property name="phone_number" column="phone_number"&gt;&lt;/property&gt;
+
+    &lt;join name="addresses" joinKey="customer_id" joinType="oneToMany" isAggregation="true" class="com.demo2.trade.entity.Address"&gt;&lt;/join&gt;
+
+  &lt;/vo&gt;
+
+  &lt;vo class="com.demo2.trade.entity.Address" tableName="Address"&gt;
+
+   &lt;property name="id" column="id" isPrimaryKey="true"&gt;&lt;/property&gt;
+
+   &lt;property name="customer_id" column="customer_id"&gt;&lt;/property&gt;
+
+   &lt;property name="country" column="country"&gt;&lt;/property&gt;
+
+   &lt;property name="province" column="province"&gt;&lt;/property&gt;
+
+   &lt;property name="city" column="city"&gt;&lt;/property&gt;
+
+   &lt;property name="zone" column="zone"&gt;&lt;/property&gt;
+
+   &lt;property name="address" column="address"&gt;&lt;/property&gt;
+
+   &lt;property name="phone_number" column="phone_number"&gt;&lt;/property&gt;
+
+  &lt;/vo&gt;
+
+  &lt;vo class="com.demo2.trade.entity.Product" tableName="Product"&gt;
+
+    &lt;property name="id" column="id" isPrimaryKey="true"&gt;&lt;/property&gt;
+
+    &lt;property name="name" column="name"&gt;&lt;/property&gt;
+
+    &lt;property name="price" column="price"&gt;&lt;/property&gt;
+
+    &lt;property name="unit" column="unit"&gt;&lt;/property&gt;
+
+    &lt;property name="classify" column="classify"&gt;&lt;/property&gt;
+
+    &lt;property name="supplier_id" column="supplier_id"&gt;&lt;/property&gt;
+
+    &lt;join name="supplier" joinKey="supplier_id" joinType="manyToOne" class="com.demo2.trade.entity.Supplier"&gt;&lt;/join&gt;
+
+  &lt;/vo&gt;
+
+  &lt;vo class="com.demo2.trade.entity.Supplier" tableName="Supplier"&gt;
+
+    &lt;property name="id" column="id" isPrimaryKey="true"&gt;&lt;/property&gt;
+
+    &lt;property name="name" column="name"&gt;&lt;/property&gt;
+
+  &lt;/vo&gt;
+
+  &lt;vo class="com.demo2.trade.entity.Order" tableName="Order"&gt;
+
+   &lt;property name="id" column="id" isPrimaryKey="true"&gt;&lt;/property&gt;
+
+   &lt;property name="customer_id" column="customer_id"&gt;&lt;/property&gt;
+
+   &lt;property name="address_id" column="address_id"&gt;&lt;/property&gt;
+
+   &lt;property name="amount" column="amount"&gt;&lt;/property&gt;
+
+   &lt;property name="order_time" column="order_time"&gt;&lt;/property&gt;
+
+   &lt;property name="flag" column="flag"&gt;&lt;/property&gt;
+
+   &lt;join name="customer" joinKey="customer_id" joinType="manyToOne" class="com.demo2.trade.entity.Customer"&gt;&lt;/join&gt;
+
+   &lt;join name="address" joinKey="address_id" joinType="manyToOne" class="com.demo2.trade.entity.Address"&gt;&lt;/join&gt;
+
+   &lt;join name="orderItems" joinKey="order_id" joinType="oneToMany" isAggregation="true" class="com.demo2.trade.entity.OrderItem"&gt;&lt;/join&gt;
+
+  &lt;/vo&gt;
+
+  &lt;vo class="com.demo2.trade.entity.OrderItem" tableName="OrderItem"&gt;
+
+   &lt;property name="id" column="id" isPrimaryKey="true"&gt;&lt;/property&gt;
+
+   &lt;property name="order_id" column="order_id"&gt;&lt;/property&gt;
+
+   &lt;property name="product_id" column="product_id"&gt;&lt;/property&gt;
+
+   &lt;property name="quantity" column="quantity"&gt;&lt;/property&gt;
+
+   &lt;property name="price" column="price"&gt;&lt;/property&gt;
+
+   &lt;property name="amount" column="amount"&gt;&lt;/property&gt;
+
+   &lt;join name="product" joinKey="product_id" joinType="manyToOne" class="com.demo2.trade.entity.Product"&gt;&lt;/join&gt;
+
+  &lt;/vo&gt;
+
+&lt;/vobjs&gt;
+</code></pre>
+<p>注意，在这里，所有用到 join 或 ref 标签的领域对象，其 Service 都必须使用 repository 或repositoryWithCache，以实现数据的自动补填，或者有聚合的地方实现聚合的操作，而注入 BasicDao 是无法实现这些操作的。</p>
+<p>此外，各属性中的 name 配置的是该领域对象私有属性变量的名字，而不是 GET 方法的名字。例如，OrderItem 中配置的是 product_id，而不是 productId，并且该名字必须与数据库字段一致（这是 MyBatis 的要求，我也很无奈）。</p>
+<p>有了以上的配置，就可以轻松实现 Service 对数据库的操作，以及 DDD 中那些烦琐的缓存、仓库、工厂、聚合、补填等操作。通过底层技术中台的封装，上层业务开发人员就可以专注于业务理解、领域建模，以及基于领域模型的业务开发，让 DDD 能更好、更快、风险更低地落地到实际项目中。</p>
+<h3 id="总结">总结</h3>
+<p>本讲为你讲解了我设计的支持 DDD 的技术中台的设计开发思路，包括如何设计单 Controller、如何设计单 Dao，以及它们在项目中的应用。</p>
+<p>下一讲我将更进一步讲解该框架如何设计单 Service 进行查询、通用仓库与通用工厂的设计，以及它们对微服务架构的支持。</p>
+<p><a href="https://github.com/mooodo/demo-service2-support" target="_blank">点击 GitHub 链接</a>，查看源码。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

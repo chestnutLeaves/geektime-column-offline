@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>07  表的访问设计：你该选择 SQL 还是 NoSQL？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/index.html">MySQL实战宝典</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">28 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>MySQL实战宝典</strong><ul><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%BB%8E%E4%B8%9A%E5%8A%A1%E5%87%BA%E5%8F%91%EF%BC%8C%E5%BC%80%E5%90%AF%E6%B5%B7%E9%87%8F%20MySQL%20%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">00 开篇词  从业务出发，开启海量 MySQL 架构设计</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/01%20%20%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8B%EF%BC%9A%E9%81%BF%E5%85%8D%E8%87%AA%E5%A2%9E%E8%B8%A9%E5%9D%91.html">01  数字类型：避免自增踩坑</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/02%20%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%B8%8D%E8%83%BD%E5%BF%BD%E7%95%A5%E7%9A%84%20COLLATION.html">02  字符串类型：不能忽略的 COLLATION</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/03%20%20%E6%97%A5%E6%9C%9F%E7%B1%BB%E5%9E%8B%EF%BC%9ATIMESTAMP%20%E5%8F%AF%E8%83%BD%E6%98%AF%E5%B7%A8%E5%9D%91.html">03  日期类型：TIMESTAMP 可能是巨坑</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/04%20%20%E9%9D%9E%E7%BB%93%E6%9E%84%E5%AD%98%E5%82%A8%EF%BC%9A%E7%94%A8%E5%A5%BD%20JSON%20%E8%BF%99%E5%BC%A0%E7%89%8C.html">04  非结构存储：用好 JSON 这张牌</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/05%20%20%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%BF%98%E8%AE%B0%E8%8C%83%E5%BC%8F%E5%87%86%E5%88%99.html">05  表结构设计：忘记范式准则</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/06%20%20%E8%A1%A8%E5%8E%8B%E7%BC%A9%EF%BC%9A%E4%B8%8D%E4%BB%85%E4%BB%85%E6%98%AF%E7%A9%BA%E9%97%B4%E5%8E%8B%E7%BC%A9.html">06  表压缩：不仅仅是空间压缩</a></li><li><a class="active" aria-current="page" href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/07%20%20%E8%A1%A8%E7%9A%84%E8%AE%BF%E9%97%AE%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BD%A0%E8%AF%A5%E9%80%89%E6%8B%A9%20SQL%20%E8%BF%98%E6%98%AF%20NoSQL%EF%BC%9F.html">07  表的访问设计：你该选择 SQL 还是 NoSQL？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/08%20%20%E7%B4%A2%E5%BC%95%EF%BC%9A%E6%8E%92%E5%BA%8F%E7%9A%84%E8%89%BA%E6%9C%AF.html">08  索引：排序的艺术</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/09%20%20%E7%B4%A2%E5%BC%95%E7%BB%84%E7%BB%87%E8%A1%A8%EF%BC%9A%E4%B8%87%E7%89%A9%E7%9A%86%E7%B4%A2%E5%BC%95.html">09  索引组织表：万物皆索引</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/10%20%20%E7%BB%84%E5%90%88%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%94%A8%E5%A5%BD%EF%BC%8C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%2010%20%E5%80%8D%EF%BC%81.html">10  组合索引：用好，性能提升 10 倍！</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/11%20%20%E7%B4%A2%E5%BC%95%E5%87%BA%E9%94%99%EF%BC%9A%E8%AF%B7%E7%90%86%E8%A7%A3%20CBO%20%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">11  索引出错：请理解 CBO 的工作原理</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/12%20%20JOIN%20%E8%BF%9E%E6%8E%A5%EF%BC%9A%E5%88%B0%E5%BA%95%E8%83%BD%E4%B8%8D%E8%83%BD%E5%86%99%20JOIN%EF%BC%9F.html">12  JOIN 连接：到底能不能写 JOIN？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/13%20%20%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%9A%E6%94%BE%E5%BF%83%E5%9C%B0%E4%BD%BF%E7%94%A8%E5%AD%90%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD%E5%90%A7%EF%BC%81.html">13  子查询：放心地使用子查询功能吧！</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/14%20%20%E5%88%86%E5%8C%BA%E8%A1%A8%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%9C%BA%E6%99%AF%E6%88%91%E4%B8%8D%E5%BB%BA%E8%AE%AE%E7%94%A8%E5%88%86%E5%8C%BA%E8%A1%A8%EF%BC%9F.html">14  分区表：哪些场景我不建议用分区表？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/15%20%20MySQL%20%E5%A4%8D%E5%88%B6%EF%BC%9A%E6%9C%80%E7%AE%80%E5%8D%95%E4%B9%9F%E6%9C%80%E5%AE%B9%E6%98%93%E9%85%8D%E7%BD%AE%E5%87%BA%E9%94%99.html">15  MySQL 复制：最简单也最容易配置出错</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/16%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A4%8D%E5%88%B6%E5%BB%B6%E8%BF%9F%EF%BC%9F%E5%85%B6%E5%AE%9E%E6%98%AF%E4%BD%A0%E7%94%A8%E9%94%99%E4%BA%86.html">16  读写分离设计：复制延迟？其实是你用错了</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/17%20%20%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BD%A0%E6%80%8E%E4%B9%88%E6%B4%BB%E7%94%A8%E4%B8%89%E5%A4%A7%E6%9E%B6%E6%9E%84%E6%96%B9%E6%A1%88%EF%BC%9F.html">17  高可用设计：你怎么活用三大架构方案？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/18%20%20%E9%87%91%E8%9E%8D%E7%BA%A7%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%BF%85%E4%B8%8D%E5%8F%AF%E5%B0%91%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A0%B8%E5%AF%B9.html">18  金融级高可用架构：必不可少的数据核对</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/19%20%20%E9%AB%98%E5%8F%AF%E7%94%A8%E5%A5%97%E4%BB%B6%EF%BC%9A%E9%80%89%E6%8B%A9%E8%BF%99%E4%B9%88%E5%A4%9A%EF%BC%8C%E4%BD%A0%E8%AF%A5%E5%A6%82%E4%BD%95%E9%80%89%EF%BC%9F.html">19  高可用套件：选择这么多，你该如何选？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/20%20%20InnoDB%20Cluster%EF%BC%9A%E6%94%B9%E5%8F%98%E5%8E%86%E5%8F%B2%E7%9A%84%E6%96%B0%E4%BA%A7%E5%93%81.html">20  InnoDB Cluster：改变历史的新产品</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/21%20%20%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%87%E4%BB%BD%EF%BC%9A%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%E4%B9%9F%E8%A6%81%E6%A3%80%E6%9F%A5%EF%BC%81.html">21  数据库备份：备份文件也要检查！</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/22%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%BD%BB%E5%BA%95%E7%90%86%E8%A7%A3%E4%BB%80%E4%B9%88%E5%8F%AB%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93.html">22  分布式数据库架构：彻底理解什么叫分布式数据库</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/23%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%9C%B0%E5%B0%86%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9F.html">23  分布式数据库表结构设计：如何正确地将数据分片？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/24%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95%E3%80%81%E5%85%A8%E5%B1%80%E7%B4%A2%E5%BC%95%E7%9A%84%E6%9C%80%E4%BD%B3%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5.html">24  分布式数据库索引设计：二级索引、全局索引的最佳设计实践</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/25%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%EF%BC%9A%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%20or%20%E4%B8%AD%E9%97%B4%E4%BB%B6%20%EF%BC%9F.html">25  分布式数据库架构选型：分库分表 or 中间件 ？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/26%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BE%E8%AE%A1%E4%B9%8B%E7%A6%85%EF%BC%9A%E5%85%A8%E9%93%BE%E8%B7%AF%E7%9A%84%E6%9D%A1%E5%B8%A6%E5%8C%96%E8%AE%BE%E8%AE%A1.html">26  分布式设计之禅：全链路的条带化设计</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/27%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E6%88%91%E4%BB%AC%E5%88%B0%E5%BA%95%E8%A6%81%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%202PC%EF%BC%9F.html">27  分布式事务：我们到底要不要使用 2PC？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/07%20%20%E8%A1%A8%E7%9A%84%E8%AE%BF%E9%97%AE%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BD%A0%E8%AF%A5%E9%80%89%E6%8B%A9%20SQL%20%E8%BF%98%E6%98%AF%20NoSQL%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="07  表的访问设计：你该选择 SQL 还是 NoSQL？" id="title">07  表的访问设计：你该选择 SQL 还是 NoSQL？</h1>
+<div><p>到目前为止，我已经带你学习了表结构的字段类型选择和表的物理存储设计，这一讲我们将继续学习表的访问选型。这样一来，字段类型选择 + 物理存储设计 + 表的访问设计，就完成了表结构设计的所有内容。</p>
+<p>前面 6 讲，我演示的都是通过 SQL 的方式对表进行访问，但从 MySQL 5.6 版本开始，就支持除 SQL 外的其他访问方式，比如 NoSQL，甚至可以把 MySQL 打造成一个百万级并发访问的 KV 数据库或文档数据库。</p>
+<p>今天这一讲，我就带你从全局角度看 MySQL 数据库中表的访问方式，以及它们各自的使用场景，希望你能有所收获。</p>
+<h3 id="mysql-中表的访问方式">MySQL 中表的访问方式</h3>
+<p>SQL 是访问数据库的一个通用接口，虽然数据库有很多种，但数据库中的 SQL 却是类似的，因为 SQL 有标准存在，如 SQL92、SQL2003 等。</p>
+<p>虽然有些数据库会扩展支持 SQL 标准外的语法，但 90% 的语法是兼容的，所以，不同数据库在 SQL 层面的学习成本是比较低的。也因为上述原因，从一种关系型数据库迁移到另一种关系型数据库，开发的迁移成本并不高。比如去 IOE，将 Oracle 数据库迁移到 MySQL 数据库，通常 SQL 语法并不是难题。</p>
+<p>MySQL 8.0 版本前，有不少同学会吐槽 MySQL 对于 SQL 标准的支持的程度。但是在当前 8.0 版本下，MySQL 对于 SQL 语法的支持度已经越来越好，甚至在某些方面超过了商业数据库 Oracle。</p>
+<p><img alt="Drawing 1.png" src="/assets/c9dcab881b7d51e638b35d6a.png"/></p>
+<p>上图是专家评估的不同数据库对 SQL 的支持程度，可以看到，MySQL 8.0 在这一块非常完善，特别是对 JSON_TABLE 的支持功能。</p>
+<p>通常来说，MySQL 数据库用于 OLTP 的在线系统中，不用特别复杂的 SQL 语法支持。但 MySQL 8.0 完备的 SQL 支持意味着 MySQL 未来将逐渐补齐在 OLAP 业务方面的短板，让我们一起拭目以待。</p>
+<p>当然，通过 SQL 访问表，你肯定并不陌生，这也不是本讲的重点。<strong>接下来我重点带你了解 MySQL 怎么通过 NoSQL 的方式访问表中的数据。</strong></p>
+<p>我们先来看看当前 MySQL 版本中支持的不同表的访问方式：</p>
+<p><img alt="Drawing 3.png" src="/assets/c104a60ddd42141c15dcc3b7.png"/></p>
+<p>MySQL 三种表的访问方式</p>
+<p>可以看到，除了标准的 SQL 访问，MySQL 5.6 版本开始还支持通过 Memcached 通信协议访问表中的数据，这时 MySQL 可以作为一个 KV 数据库使用。此外，MySQL 5.7 版本开始还支持通过新的 MySQL X 通信协议访问表中的数据，这时 MySQL 可以作为一个文档数据库使用。</p>
+<p>但无论哪种 NoSQL 的访问方式，其访问的数据都是以表的方式进行存储。SQL 和 NoSQL 之间通过某种映射关系进行绑定。</p>
+<p>对比传统的 NoSQL 数据库（比如 Memcached、MongoDB），MySQL 这样的访问更具有灵活性，在通过简单的 NoSQL 接口保障性能的前提下，又可以通过 SQL 的方式丰富对于数据的查询。另外，MySQL 提供的成熟事务特性、高可用解决方案，又能弥补 NoSQL 数据库在这方面的不足。</p>
+<p>那接下来，我们先来看一看基于 Memcache 协议的 NoSQL 访问方式。</p>
+<h3 id="通过-memcached-协议访问表">通过 Memcached 协议访问表</h3>
+<p>MySQL 5.6 版本开始支持通过插件 Memcached Plugin，以 KV 方式访问表，这时可以将 MySQL视作一个 Memcached KV 数据库。</p>
+<p>对于数据的访问不再是通过 SQL 接口，而是通过 KV 数据库中常见的 get、set、incr 等请求。</p>
+<p>但为什么要通过 KV 的方式访问数据呢？因为有些业务对于数据库的访问本质上都是一个 KV 操作。比如用户登录系统，大多是用于信息确认，这时其 SQL 大多都是通过主键或唯一索引进行数据的查询，如：</p>
+<pre><code>SELECT * FROM User WHERE PK = ?
+</code></pre>
+<p>若在海量并发访问的系统中，通过 SQL 访问这些表，由于通过主键索引进行访问，速度很快。但 SQL 解析（哪怕是软解析）却要耗费不少时间，这时单数据库实例性能会受到一定的限制。</p>
+<p>基于 Memcached 的 KV 访问，可以绕过 SQL 解析，通过映射关系，直接访问存储在 InnoDB 引擎中的数据，这样数据库的整体性能会在不花费额外成本的前提下得到极大的提升。</p>
+<p>那么要启用 Memcached 协议访问 MySQL 需要做两件事情：</p>
+<ul>
+<li>开启 Memcached 插件；</li>
+<li>配置表与 KV 的映射关系。</li>
+</ul>
+<p>具体操作如下所示：</p>
+<pre><code>-- 安装映射表
+
+mysql&gt; source MYSQL_HOME/share/innodb_memcached_config.sql
+
+-- 安装插件，默认会启动11211端口
+
+mysql&gt; INSTALL PLUGIN daemon_memcached soname "libmemcached.so";
+</code></pre>
+<p>执行完上述操作后，会新增一个库 innodb_memcache，里面的表 containers 就是需要配置的KV映射表。如果业务常见的主键查询 SQL 如下，其中列 user_id 是主键：</p>
+<pre><code>SELECT user_id,cellphone,last_login 
+
+FROM test.User 
+
+WHERE user_id = ？
+</code></pre>
+<p>那么我们可以在表 Containers 中插入一条记录：</p>
+<pre><code>INSERT INTO containers
+
+VALUES ('User','test','user_id','user_id|cellphone|last_login','0','0','0','PRIAMRY')
+</code></pre>
+<p>上面的映射关系表示通过 Memcached 的 KV 方式访问，其本质是通过 PRIAMRY 索引访问 key 值，key 就是 user_id，value 值返回的是由列 user_id、cellphone、last_login 组合而成，分隔符为”|“的字符串。</p>
+<p>最后，通过 SQL 和 KV 的对比性能测试，可以发现通过 KV 的方式访问，性能要好非常多，在我的测试服务器上结果如下所示：</p>
+<p><img alt="Drawing 5.png" src="/assets/7dd1845098d7677311e7e64a.png"/></p>
+<p>从测试结果可以看到，<strong>基于 Memcached 的 KV 访问方式比传统的 SQL 方式要快54.33%</strong>，而且CPU 的开销反而还要低20%。</p>
+<p>当然了，上述操作只是将表 User 作为 KV 访问，如果想将其他表通过 KV 的方式访问，可以继续在表 Containers 中进行配置。但是在使用时，务必先通过 GET 命令指定要访问的表：</p>
+<pre><code># Python伪代码
+
+mc = Client('127.0.0.1:11211')
+
+mc.get('@@User') # 读取映射表User
+
+mc.get('key1')
+
+mc.get('@@sbtest1') # 读取映射表sbtest1
+
+mc.set('sb1_key1','aa|bbb|ccc')
+
+......
+</code></pre>
+<p>另一种使用 Memcached Plugin 的场景是原先使用原生 Memcached KV 数据库的用户。这些用户可以考虑将 Memcached 数据库迁移到 MySQL 。这样的好处是：</p>
+<ul>
+<li>通过 MySQL 进行访问的性能比原生 Memcached 好，数据库并发优化做得更好；</li>
+<li>存储可以持久化，支持事务，数据一致性和安全性更好；</li>
+<li>利用 MySQL 复制技术，可以弥补原生 Memcached 不支持数据复制的短板；</li>
+</ul>
+<h3 id="通过-x-protocol-访问表">通过 X Protocol 访问表</h3>
+<p>MySQL 5.7 版本开始原生支持 JSON 二进制数据类型，同时也提供将表格映射为一个 JSON 文档。同时，MySQL 也提供了 X Protocol 这样的 NoSQL 访问方式，所以，现在我们 MySQL 打造成一个<strong>SQL &amp; NoSQL</strong>的文档数据库。</p>
+<p>对比 MongoDB 文档数据库，将 MySQL 打造为文档数据库与 MongoDB 的对比在于：</p>
+<p><img alt="Drawing 6.png" src="/assets/4813e30e1186e16703026b94.png"/></p>
+<p>可以看到，除了 MySQL 目前还无法支持数据分片功能外，其他方面 MySQL 的优势会更大一些，特别是 MySQL 是通过二维表格存储 JSON 数据，从而实现文档数据库功能。这样可以通过 SQL 进行很多复杂维度的查询，特别是结合 MySQL 8.0 的 CTE（Common Table Expression）、窗口函数（Window Function）等功能，而这在 MongoDB 中是无法原生实现的。</p>
+<p>另外，和 Memcached Plugin 不同的是，MySQL 默认会自动启用 X Plugin 插件，接着就可以通过新的 X Protocol 协议访问 MySQL 中的数据，默认端口 33060，你可以通过下面命令查看有关 X Plugin 的配置：</p>
+<pre><code>mysql&gt; SHOW VARIABLES LIEK '%mysqlx%';
+
++-----------------------------------+--------------------+
+
+| Variable_name                     | Value              |
+
++-----------------------------------+--------------------+
+
+| mysqlx_bind_address               | *                  |
+
+| mysqlx_compression_algorithms     | 
+
+DEFLATE_STREAM,LZ4_MESSAGE,ZSTD_STREAM                   |
+
+| mysqlx_connect_timeout            | 30                 |
+
+| mysqlx_document_id_unique_prefix  | 0                  |
+
+| mysqlx_enable_hello_notice        | ON                 |
+
+| mysqlx_idle_worker_thread_timeout | 60                 |
+
+| mysqlx_interactive_timeout        | 28800              |
+
+| mysqlx_max_allowed_packet         | 67108864           |
+
+| mysqlx_max_connections            | 100                |
+
+| mysqlx_min_worker_threads         | 2                  |
+
+| mysqlx_port                       | 33060              |
+
+| mysqlx_port_open_timeout          | 0                  |
+
+| mysqlx_read_timeout               | 30                 |
+
+| mysqlx_socket                     | /tmp/mysqlx.sock   |
+
+......
+</code></pre>
+<p>要通过 X Protocol 管理 MySQL 需要通过新的 MySQL Shell 命令，默认并不安装，需要单独安装。下载地址：<a href="https://dev.mysql.com/downloads/shell/?fileGuid=xxQTRXtVcqtHK6j8" target="_blank">https://dev.mysql.com/downloads/shell/</a>。安装后就可以通过命令 mysqlsh 通过新的 X Protocol 访问 MySQL 数据库：</p>
+<pre><code>root@MBP-Windows:# mysqlsh root@localhost/test
+</code></pre>
+<p>X Protocol 协议支持通过 JS、Python、SQL 的方式管理和访问 MySQL，具体操作你可以参见官方文档。</p>
+<p><img alt="Drawing 8.png" src="/assets/7a7f947a86dda903ceca04d8.png"/></p>
+<p>开发同学若要通过 X Protocol 协议管理文档数据，也需要下载新的 MySQL Connector，并引入新的 X 驱动库，如 Python 驱动：</p>
+<pre><code>import mysqlx
+
+# Connect to server on localhost
+
+session = mysqlx.get_session({
+
+    'host': 'localhost',
+
+    'port': 33060
+
+})
+
+schema = session.get_schema('test')
+
+# Use the collection 'my_collection'
+
+collection = schema.get_collection('my_collection')
+
+# Specify which document to find with Collection.find()
+
+result = collection.find('name like :param').bind('param', 'S%').limit(1).execute()
+
+# Print document
+
+docs = result.fetch_all()
+
+print('Name: {0}'.format(docs[0]['name']))
+
+session.close()
+</code></pre>
+<h3 id="总结">总结</h3>
+<p>这一讲我带你了解了通过 SQL、Memcache 协议、X Protocol 访问 MySQL 中的表，即我们可以将 MySQL 打造成一个关系型数据库、KV 数据库、文档数据库，但底层都是通过表格的方式进行数据的存储，并且数据都存储在 InnoDB 引擎中。</p>
+<p>还在使用 Memcached、MongoDB 数据库的同学可以考虑将数据迁移到 MySQL，这样能在兼容原有业务的前提下，使用到 InnoDB 存储引擎的高并发、事务安全、数据复制等高级功能。</p>
+<p>或许有同学会问为什么 KV 数据库、文档数据库不单独使用额外的数据库呢？这是因为在企业的数据中心部门，会要求尽可能的收敛技术栈。这样对后续技术架构的稳定性，人员培养，长远来看，会有更大的收益。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>18  Executor 才是执行 SQL 语句的幕后推手（下） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/index.html">深入剖析 MyBatis 核心原理-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入剖析 MyBatis 核心原理-完</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E9%A2%86%E7%95%A5%20MyBatis%20%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4%EF%BC%8C%E7%AA%81%E7%A0%B4%E6%8C%81%E4%B9%85%E5%8C%96%E6%8A%80%E6%9C%AF%E7%93%B6%E9%A2%88.html">00 开篇词  领略 MyBatis 设计思维，突破持久化技术瓶颈</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/01%20%20%E5%B8%B8%E8%A7%81%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6%E8%B5%8F%E6%9E%90%EF%BC%8C%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%AE%A9%E4%BD%A0%E9%80%89%E6%8B%A9%20MyBatis%EF%BC%9F.html">01  常见持久层框架赏析，到底是什么让你选择 MyBatis？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/02%20%20%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E6%8C%81%E4%B9%85%E5%B1%82%E7%A4%BA%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%8C20%20%E5%88%86%E9%92%9F%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%20MyBatis.html">02  订单系统持久层示例分析，20 分钟带你快速上手 MyBatis</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/03%20%20MyBatis%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90.html">03  MyBatis 源码环境搭建及整体架构解析</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/04%20%20MyBatis%20%E5%8F%8D%E5%B0%84%E5%B7%A5%E5%85%B7%E7%AE%B1%EF%BC%9A%E5%B8%A6%E4%BD%A0%E9%A2%86%E7%95%A5%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E5%8F%8D%E5%B0%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF.html">04  MyBatis 反射工具箱：带你领略不一样的反射设计思路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/05%20%20%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB%E5%9E%8B%E4%BD%93%E7%B3%BB%E4%B8%8E%20Java%20%E7%B1%BB%E5%9E%8B%E4%BD%93%E7%B3%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E2%80%9C%E7%88%B1%E6%81%A8%E6%83%85%E4%BB%87%E2%80%9D.html">05  数据库类型体系与 Java 类型体系之间的“爱恨情仇”</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/06%20%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%8D%83%E5%8D%83%E4%B8%87%EF%BC%8CMyBatis%20%E9%83%BD%E8%83%BD%E5%85%BC%E5%AE%B9%E7%9A%84%E7%A7%98%E5%AF%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">06  日志框架千千万，MyBatis 都能兼容的秘密是什么？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/07%20%20%E6%B7%B1%E5%85%A5%E6%95%B0%E6%8D%AE%E6%BA%90%E5%92%8C%E4%BA%8B%E5%8A%A1%EF%BC%8C%E6%8A%8A%E6%8F%A1%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%85%B3%E9%94%AE%E5%91%BD%E8%84%89.html">07  深入数据源和事务，把握持久化框架的两个关键命脉</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/08%20%20Mapper%20%E6%96%87%E4%BB%B6%E4%B8%8E%20Java%20%E6%8E%A5%E5%8F%A3%E7%9A%84%E4%BC%98%E9%9B%85%E6%98%A0%E5%B0%84%E4%B9%8B%E9%81%93.html">08  Mapper 文件与 Java 接口的优雅映射之道</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/09%20%20%E5%9F%BA%E4%BA%8E%20MyBatis%20%E7%BC%93%E5%AD%98%E5%88%86%E6%9E%90%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.html">09  基于 MyBatis 缓存分析装饰器模式的最佳实践</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/10%20%20%E9%B8%9F%E7%9E%B0%20MyBatis%20%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E6%8A%8A%E6%8F%A1%20MyBatis%20%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E8%84%89%E7%BB%9C%EF%BC%88%E4%B8%8A%EF%BC%89.html">10  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/11%20%20%E9%B8%9F%E7%9E%B0%20MyBatis%20%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E6%8A%8A%E6%8F%A1%20MyBatis%20%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E8%84%89%E7%BB%9C%EF%BC%88%E4%B8%8B%EF%BC%89.html">11  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/12%20%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E5%8A%A8%E6%80%81%20SQL%20%E8%AF%AD%E5%8F%A5%E8%A7%A3%E6%9E%90%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">12  深入分析动态 SQL 语句解析全流程（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/13%20%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E5%8A%A8%E6%80%81%20SQL%20%E8%AF%AD%E5%8F%A5%E8%A7%A3%E6%9E%90%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">13  深入分析动态 SQL 语句解析全流程（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/14%20%20%E6%8E%A2%E7%A9%B6%20MyBatis%20%E7%BB%93%E6%9E%9C%E9%9B%86%E6%98%A0%E5%B0%84%E6%9C%BA%E5%88%B6%E8%83%8C%E5%90%8E%E7%9A%84%E7%A7%98%E5%AF%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">14  探究 MyBatis 结果集映射机制背后的秘密（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/15%20%20%E6%8E%A2%E7%A9%B6%20MyBatis%20%E7%BB%93%E6%9E%9C%E9%9B%86%E6%98%A0%E5%B0%84%E6%9C%BA%E5%88%B6%E8%83%8C%E5%90%8E%E7%9A%84%E7%A7%98%E5%AF%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">15  探究 MyBatis 结果集映射机制背后的秘密（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/16%20%20StatementHandler%EF%BC%9A%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A%E3%80%81SQL%20%E6%89%A7%E8%A1%8C%E5%92%8C%E7%BB%93%E6%9E%9C%E6%98%A0%E5%B0%84%E7%9A%84%E5%A5%A0%E5%9F%BA%E8%80%85.html">16  StatementHandler：参数绑定、SQL 执行和结果映射的奠基者</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/17%20%20Executor%20%E6%89%8D%E6%98%AF%E6%89%A7%E8%A1%8C%20SQL%20%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%B9%95%E5%90%8E%E6%8E%A8%E6%89%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">17  Executor 才是执行 SQL 语句的幕后推手（上）</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/18%20%20Executor%20%E6%89%8D%E6%98%AF%E6%89%A7%E8%A1%8C%20SQL%20%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%B9%95%E5%90%8E%E6%8E%A8%E6%89%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">18  Executor 才是执行 SQL 语句的幕后推手（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/19%20%20%E6%B7%B1%E5%85%A5%20MyBatis%20%E5%86%85%E6%A0%B8%E4%B8%8E%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E7%9A%84%E6%A1%A5%E6%A2%81%E2%80%94%E2%80%94%E6%8E%A5%E5%8F%A3%E5%B1%82.html">19  深入 MyBatis 内核与业务逻辑的桥梁——接口层</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/20%20%20%E6%8F%92%E4%BB%B6%E4%BD%93%E7%B3%BB%E8%AE%A9%20MyBatis%20%E4%B8%96%E7%95%8C%E6%9B%B4%E5%8A%A0%E7%B2%BE%E5%BD%A9.html">20  插件体系让 MyBatis 世界更加精彩</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/21%20%20%E6%B7%B1%E6%8C%96%20MyBatis%20%E4%B8%8E%20Spring%20%E9%9B%86%E6%88%90%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86.html">21  深挖 MyBatis 与 Spring 集成底层原理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/22%20%20%E5%9F%BA%E4%BA%8E%20MyBatis%20%E7%9A%84%E8%A1%8D%E7%94%9F%E6%A1%86%E6%9E%B6%E4%B8%80%E8%A7%88.html">22  基于 MyBatis 的衍生框架一览</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/23%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E4%BC%9A%E4%BD%BF%E7%94%A8%E5%8F%AA%E8%83%BD%E9%BB%98%E9%BB%98%E2%80%9C%E6%90%AC%E7%A0%96%E2%80%9D%EF%BC%8C%E6%87%82%E5%8E%9F%E7%90%86%E6%89%8D%E8%83%BD%E5%BF%AB%E9%80%9F%E6%99%8B%E5%8D%87.html">23 结束语  会使用只能默默“搬砖”，懂原理才能快速晋升</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/18%20%20Executor%20%E6%89%8D%E6%98%AF%E6%89%A7%E8%A1%8C%20SQL%20%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%B9%95%E5%90%8E%E6%8E%A8%E6%89%8B%EF%BC%88%E4%B8%8B%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="18  Executor 才是执行 SQL 语句的幕后推手（下）" id="title">18  Executor 才是执行 SQL 语句的幕后推手（下）</h1>
+<div><p>在上一讲中，我们首先介绍了模板方法模式的相关知识，然后介绍了 Executor 接口的核心方法，最后分析了 BaseExecutor 抽象类是如何利用模板方法模式为其他 Executor 抽象了一级缓存和事务管理的能力。这一讲，我们再来介绍剩余的四个重点 Executor 实现。</p>
+<p><img alt="图片13.png" src="/assets/eadba3117b49d0863af4de9f.png"/></p>
+<p>Executor 接口继承关系图</p>
+<h3 id="simpleexecutor">SimpleExecutor</h3>
+<p>我们来看 BaseExecutor 的第一个子类—— SimpleExecutor，同时<strong>它也是 Executor 接口最简单的实现</strong>。</p>
+<p>正如上一讲中分析的那样，BaseExecutor 通过模板方法模式实现了读写一级缓存、事务管理等不随场景变化的基础方法，在 SimpleExecutor、ReuseExecutor、BatchExecutor 等实现类中，不再处理这些不变的逻辑，而只要关注 4 个 do*() 方法的实现即可。</p>
+<p>这里我们重点来看 SimpleExecutor 中 doQuery() 方法的实现逻辑。</p>
+<ol>
+<li>通过 newStatementHandler() 方法创建 StatementHandler 对象，其中会根据 MappedStatement.statementType 配置创建相应的 StatementHandler 实现对象，并添加 RoutingStatementHandler 装饰器。</li>
+<li>通过 prepareStatement() 方法初始化 Statement 对象，其中还依赖 ParameterHandler 填充 SQL 语句中的占位符。</li>
+<li>通过 StatementHandler.query() 方法执行 SQL 语句，并通过我们前面[14]和[15]讲介绍的 DefaultResultSetHandler 将 ResultSet 映射成结果对象并返回。</li>
+</ol>
+<p>doQuery() 方法的核心代码实现如下所示：</p>
+<pre><code>public &lt;E&gt; List&lt;E&gt; doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
+
+    Statement stmt = null;
+
+    try {
+
+        Configuration configuration = ms.getConfiguration();
+
+        // 创建StatementHandler对象，实际返回的是RoutingStatementHandler对象（我们在第16讲介绍过）
+
+        // 其中根据MappedStatement.statementType选择具体的StatementHandler实现
+
+        StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameter, rowBounds, resultHandler, boundSql);
+
+        // 完成StatementHandler的创建和初始化，该方法会调用StatementHandler.prepare()方法创建
+
+        // Statement对象，然后调用StatementHandler.parameterize()方法处理占位符
+
+        stmt = prepareStatement(handler, ms.getStatementLog());
+
+        // 调用StatementHandler.query()方法，执行SQL语句，并通过ResultSetHandler完成结果集的映射
+
+        return handler.query(stmt, resultHandler);
+
+    } finally {
+
+        closeStatement(stmt);
+
+    }
+
+}
+</code></pre>
+<p>SimpleExecutor 中的 doQueryCursor()、update() 等方法实现与 doQuery() 方法的实现基本类似，这里不再展开介绍，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/mybatis?fileGuid=xxQTRXtVcqtHK6j8" target="_blank">源码</a>进行分析。</p>
+<h3 id="reuseexecutor">ReuseExecutor</h3>
+<p>你如果有过 JDBC 优化经验的话，可能会知道重用 Statement 对象是一种常见的优化手段，主要目的是减少 SQL 预编译开销，同时还会降低 Statement 对象的创建和销毁频率，这在一定程度上可以提升系统性能。</p>
+<p>ReuseExecutor 这个 BaseExecutor 实现就<strong>实现了重用 Statement 的优化</strong>，ReuseExecutor 维护了一个 statementMap 字段（HashMap<string, statement="">类型）来缓存已有的 Statement 对象，该缓存的 Key 是 SQL 模板，Value 是 SQL 模板对应的 Statement 对象。这样在执行相同 SQL 模板时，我们就可以复用 Statement 对象了。</string,></p>
+<p>ReuseExecutor 中的 do*() 方法实现与前面介绍的 SimpleExecutor 实现完全一样，两者唯一的<strong>区别在于其中依赖的 prepareStatement() 方法</strong>：SimpleExecutor 每次都会创建全新的 Statement 对象，ReuseExecutor 则是先尝试查询 statementMap 缓存，如果缓存命中，则会重用其中的 Statement 对象。</p>
+<p>另外，在事务提交/回滚以及 Executor 关闭的时候，需要同时关闭 statementMap 集合中缓存的全部 Statement 对象，这部分逻辑是在 doFlushStatements() 方法中实现的，核心代码如下：</p>
+<pre><code>public List&lt;BatchResult&gt; doFlushStatements(boolean isRollback) {
+
+        // 关闭statementMap集合中缓存的全部Statement对象
+
+        for (Statement stmt : statementMap.values()) {
+
+            closeStatement(stmt);
+
+        }
+
+        // 清空statementMap集合
+
+        statementMap.clear();
+
+        return Collections.emptyList();
+
+    }
+</code></pre>
+<h3 id="batchexecutor">BatchExecutor</h3>
+<p>批处理是 JDBC 编程中的另一种优化手段。</p>
+<p>JDBC 在执行 SQL 语句时，会将 SQL 语句以及实参通过网络请求的方式发送到数据库，一次执行一条 SQL 语句，一方面会减小请求包的有效负载，另一个方面会增加耗费在网络通信上的时间。通过批处理的方式，我们就可以在 JDBC 客户端缓存多条 SQL 语句，然后在 flush 或缓存满的时候，将多条 SQL 语句打包发送到数据库执行，这样就可以有效地降低上述两方面的损耗，从而提高系统性能。</p>
+<p>不过，有一点需要特别注意：每次向数据库发送的 SQL 语句的条数是有上限的，如果批量执行的时候超过这个上限值，数据库就会抛出异常，拒绝执行这一批 SQL 语句，所以我们<strong>需要控制批量发送 SQL 语句的条数和频率</strong>。</p>
+<p><strong>BatchExecutor 是用于实现批处理的 Executor 实现</strong>，其中维护了一个 List<code>&lt;Statement&gt;</code> 集合（statementList 字段）用来缓存一批 SQL，每个 Statement 可以写入多条 SQL。</p>
+<p>我们知道 JDBC 的批处理操作只支持 insert、update、delete 等修改操作，也就是说 BatchExecutor 对批处理的实现集中在 doUpdate() 方法中。在 doUpdate() 方法中追加一条待执行的 SQL 语句时，BatchExecutor 会先将该条 SQL 语句与最近一次追加的 SQL 语句进行比较，如果相同，则追加到最近一次使用的 Statement 对象中；如果不同，则追加到一个全新的 Statement 对象，同时会将新建的 Statement 对象放入 statementList 缓存中。</p>
+<p>下面是 BatchExecutor.doUpdate() 方法的核心逻辑：</p>
+<pre><code>public int doUpdate(MappedStatement ms, Object parameterObject) throws SQLException {
+
+  final Configuration configuration = ms.getConfiguration();
+
+  // 创建StatementHandler对象
+
+  final StatementHandler handler = configuration.newStatementHandler(this, ms, parameterObject, RowBounds.DEFAULT, null, null);
+
+  final BoundSql boundSql = handler.getBoundSql();
+
+    // 获取此次追加的SQL模板
+
+    final String sql = boundSql.getSql();
+
+    final Statement stmt;
+
+    // 比较此次追加的SQL模板与最近一次追加的SQL模板，以及两个MappedStatement对象
+
+    if (sql.equals(currentSql) &amp;&amp; ms.equals(currentStatement)) {
+
+        // 两者相同，则获取statementList集合中最后一个Statement对象
+
+        int last = statementList.size() - 1;
+
+        stmt = statementList.get(last);
+
+        applyTransactionTimeout(stmt);
+
+        handler.parameterize(stmt); // 设置实参
+
+        // 查找该Statement对象对应的BatchResult对象，并记录用户传入的实参
+
+        BatchResult batchResult = batchResultList.get(last);
+
+        batchResult.addParameterObject(parameterObject);
+
+    } else {
+
+        Connection connection = getConnection(ms.getStatementLog());
+
+        // 创建新的Statement对象
+
+        stmt = handler.prepare(connection, transaction.getTimeout());
+
+        handler.parameterize(stmt);// 设置实参
+
+        // 更新currentSql和currentStatement
+
+        currentSql = sql;
+
+        currentStatement = ms;
+
+        // 将新创建的Statement对象添加到statementList集合中
+
+        statementList.add(stmt);
+
+        // 为新Statement对象添加新的BatchResult对象
+
+        batchResultList.add(new BatchResult(ms, sql, parameterObject));
+
+    }
+
+    handler.batch(stmt);
+
+    return BATCH_UPDATE_RETURN_VALUE;
+
+}
+</code></pre>
+<p>这里使用到的 BatchResult 用于记录批处理的结果，一个 BatchResult 对象与一个 Statement 对象对应，BatchResult 中维护了一个 updateCounts 字段（int[] 数组类型）来记录关联 Statement 对象执行批处理的结果。</p>
+<p>添加完待执行的 SQL 语句之后，我们再来看一下 doFlushStatements() 方法，其中会通过 Statement.executeBatch() 方法批量执行 SQL，然后 SQL 语句影响行数以及数据库生成的主键填充到相应的 BatchResult 对象中返回。下面是其核心实现：</p>
+<pre><code>public List&lt;BatchResult&gt; doFlushStatements(boolean isRollback) throws SQLException {
+
+    try {
+
+        // 用于储存批处理的结果
+
+        List&lt;BatchResult&gt; results = new ArrayList&lt;&gt;();
+
+        // 如果明确指定了要回滚事务，则直接返回空集合，忽略statementList集合中记录的SQL语句
+
+        if (isRollback) {
+
+            return Collections.emptyList();
+
+        }
+
+        for (int i = 0, n = statementList.size(); i &lt; n; i++) { // 遍历statementList集合
+
+            Statement stmt = statementList.get(i);// 获取Statement对象
+
+            applyTransactionTimeout(stmt);
+
+            BatchResult batchResult = batchResultList.get(i); // 获取对应BatchResult对象
+
+            try {
+
+                // 调用Statement.executeBatch()方法批量执行其中记录的SQL语句，并使用返回的int数组
+
+                // 更新BatchResult.updateCounts字段，其中每一个元素都表示一条SQL语句影响的记录条数
+
+                batchResult.setUpdateCounts(stmt.executeBatch());
+
+                MappedStatement ms = batchResult.getMappedStatement();
+
+                List&lt;Object&gt; parameterObjects = batchResult.getParameterObjects();
+
+                // 获取配置的KeyGenerator对象
+
+                KeyGenerator keyGenerator = ms.getKeyGenerator();
+
+                if (Jdbc3KeyGenerator.class.equals(keyGenerator.getClass())) {
+
+                    // 获取数据库生成的主键，并记录到实参中对应的字段
+
+                    Jdbc3KeyGenerator jdbc3KeyGenerator = (Jdbc3KeyGenerator) keyGenerator;
+
+                    jdbc3KeyGenerator.processBatch(ms, stmt, parameterObjects);
+
+                } else if (!NoKeyGenerator.class.equals(keyGenerator.getClass())) {
+
+                    // 其他类型的KeyGenerator，会调用其processAfter()方法
+
+                    for (Object parameter : parameterObjects) {
+
+                        keyGenerator.processAfter(this, ms, stmt, parameter);
+
+                    }
+
+                }
+
+                closeStatement(stmt);
+
+            } catch (BatchUpdateException e) {
+
+                // 异常处理逻辑
+
+            }
+
+            // 添加BatchResult到results集合
+
+            results.add(batchResult);
+
+        }
+
+        return results;
+
+    } finally {
+
+        // 释放资源
+
+    }
+
+}
+</code></pre>
+<h3 id="cachingexecutor">CachingExecutor</h3>
+<p>CachingExecutor 是我们最后一个要介绍的 Executor 接口实现类，它是<strong>一个 Executor 装饰器实现，会在其他 Executor 的基础之上添加二级缓存的相关功能</strong>。在上一讲中，我们已经介绍过了一级缓存，下面就接着讲解二级缓存相关的内容。</p>
+<h4 id="1-二级缓存">1. 二级缓存</h4>
+<p>我们知道一级缓存的生命周期默认与 SqlSession 相同，而这里介绍的 MyBatis 中的二级缓存则与应用程序的生命周期相同。与二级缓存相关的配置主要有下面三项。</p>
+<p><strong>第一项，二级缓存全局开关</strong>。这个全局开关是 mybatis-config.xml 配置文件中的 cacheEnabled 配置项。当 cacheEnabled 被设置为 true 时，才会开启二级缓存功能，开启二级缓存功能之后，下面两项的配置才会控制二级缓存的行为。</p>
+<p><strong>第二项，命名空间级别开关</strong>。在 Mapper 配置文件中，可以通过配置 <code>&lt;cache&gt;</code> 标签或 <code>&lt;cache-ref&gt;</code> 标签开启二级缓存功能。</p>
+<ul>
+<li>在解析到 <code>&lt;cache&gt;</code> 标签时，MyBatis 会为当前 Mapper.xml 文件对应的命名空间创建一个关联的 Cache 对象（默认为 PerpetualCache 类型的对象），作为其二级缓存的实现。此外，<code>&lt;cache&gt;</code> 标签中还提供了一个 type 属性，我们可以通过该属性使用自定义的 Cache 类型。</li>
+<li>在解析到 <code>&lt;cache-ref&gt;</code> 标签时，MyBatis 并不会创建新的 Cache 对象，而是根据 <code>&lt;cache-ref&gt;</code> 标签的 namespace 属性查找指定命名空间对应的 Cache 对象，然后让当前命名空间与指定命名空间共享同一个 Cache 对象。</li>
+</ul>
+<p><strong>第三项，语句级别开关</strong>。我们可以通过 <code>&lt;select&gt;</code> 标签中的 useCache 属性，控制该 select 语句查询到的结果对象是否保存到二级缓存中，useCache 属性默认值为 true。</p>
+<h4 id="2-transactionalcache">2. TransactionalCache</h4>
+<p>了解了二级缓存的生命周期、基本概念以及相关配置之后，我们开始介绍 CachingExecutor 依赖的底层组件。</p>
+<p>CachingExecutor 底层除了依赖 PerpetualCache 实现来缓存数据之外，还会<strong>依赖 TransactionalCache 和 TransactionalCacheManager 两个组件</strong>，下面我们就一一详细介绍下。</p>
+<p>TransactionalCache 是 Cache 接口众多实现之一，它也是一个装饰器，用来记录一个事务中添加到二级缓存中的缓存。</p>
+<p>TransactionalCache 中的 entriesToAddOnCommit 字段（Map<code>&lt;Object, Object&gt;</code> 类型）用来暂存当前事务中添加到二级缓存中的数据，这些数据在事务提交时才会真正添加到底层的 Cache 对象（也就是二级缓存）中。这一点我们可以从 TransactionalCache 的 putObject() 方法以及 flushPendingEntries() 方法（commit() 方法会调用该方法）中看到相关代码实现：</p>
+<pre><code>public void putObject(Object key, Object object) {
+
+    // 将数据暂存到entriesToAddOnCommit集合
+
+    entriesToAddOnCommit.put(key, object);
+
+}
+
+private void flushPendingEntries() {
+
+    for (Map.Entry&lt;Object, Object&gt; entry : entriesToAddOnCommit.entrySet()) {
+
+        // 将entriesToAddOnCommit集合中的数据添加到二级缓存
+
+        delegate.putObject(entry.getKey(), entry.getValue());
+
+    }
+
+    ... // 其他逻辑
+
+}
+</code></pre>
+<p>那为什么要在事务提交时才将 entriesToAddOnCommit 集合中的缓存数据写入底层真正的二级缓存中，而不是像操作一级缓存那样，每次查询都直接写入缓存呢？其实这是<strong>为了防止出现“脏读”</strong>。</p>
+<p>我们假设当前数据库的隔离级别是“不可重复读”，如下图所示，两个业务线程分别开启了 T1、T2 两个事务：</p>
+<ul>
+<li>在事务 T1 中添加了记录 A，之后查询记录 A；</li>
+<li>事务 T2 会查询记录 A。</li>
+</ul>
+<p><img alt="图片12.png" src="/assets/c892bb550e653538e3b4fe3e.png"/></p>
+<p>两事务并发操作的示意图</p>
+<p>如果事务 T1 查询记录 A 时，就将 A 对应的结果对象写入二级缓存，那在事务 T2 查询记录 A 时，会从二级缓存中直接拿到结果对象。此时的事务 T1 仍然未提交，也就出现了“脏读”。</p>
+<p>我们按照 TransactionalCache 的实现再来分析下，事务 T1 查询 A 数据的时候，未命中二级缓存，就会击穿到数据库，因为写入和读取 A 都是在事务 T1 中，所以能够查询成功，同时更新 entriesToAddOnCommit 集合。事务 T2 查询记录 A 时，同样也会击穿二级缓存，访问数据库，因为此时写入和读取 A 是不同的事务，且数据库的事务隔离级别为“不可重复读”，这就导致事务 T2 无法查询到记录 A，也就避免了“脏读”。</p>
+<p>如上图所示，事务 T1 在提交时，会将 entriesToAddOnCommit 中的数据添加到二级缓存中，所以事务 T2 第二次查询记录 A 时，会命中二级缓存，也就出现了同一事务中多次读取的结果不同的现象，也就是我们说的“不可重复读”。</p>
+<p>TransactionalCache 中的另一个核心字段是 entriesMissedInCache，它用来记录未命中的 CacheKey 对象。在 getObject() 方法中，我们可以看到写入 entriesMissedInCache 集合的相关代码片段：</p>
+<pre><code>public Object getObject(Object key) {
+
+    Object object = delegate.getObject(key);
+
+    if (object == null) {
+
+        entriesMissedInCache.add(key);
+
+    }
+
+    ... // 其他逻辑
+
+}
+</code></pre>
+<p>在事务提交的时候，会将 entriesMissedInCache 集合中的 CacheKey 写入底层的二级缓存（写入时的 Value 为 null）。在事务回滚时，会调用底层二级缓存的 removeObject() 方法，删除 entriesMissedInCache 集合中 CacheKey。</p>
+<p>你可能会问，为什么要用 entriesMissedInCache 集合记录未命中缓存的 CacheKey 呢？为什么还要在缓存结束时处理这些 CacheKey 呢？这主要是与[第 9 讲]介绍的 BlockingCache 装饰器相关。在前面介绍 Cache 时我们提到过，CacheBuilder 默认会添加 BlockingCache 这个装饰器，而 BlockingCache 的 getObject() 方法会有给 CacheKey 加锁的逻辑，需要在 putObject() 方法或 removeObject() 方法中解锁，<strong>否则这个 CacheKey 会被一直锁住，无法使用</strong>。</p>
+<p>看完 TransactionalCache 的核心实现之后，我们再来看 TransactionalCache 的管理者—— TransactionalCacheManager，其中定义了一个 transactionalCaches 字段（HashMap<cache, transactionalcache="">类型）维护当前 CachingExecutor 使用到的二级缓存，该集合的 Key 是二级缓存对象，Value 是装饰二级缓存的 TransactionalCache 对象。</cache,></p>
+<p>TransactionalCacheManager 中的方法实现都比较简单，都是基于 transactionalCaches 集合以及 TransactionalCache 的同名方法实现的，这里不再展开介绍，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/mybatis?fileGuid=xxQTRXtVcqtHK6j8" target="_blank">源码</a>进行分析。</p>
+<h4 id="3-核心实现">3. 核心实现</h4>
+<p>了解了二级缓存基本概念以及 TransactionalCache 核心实现之后，我们再来看 CachingExecutor 的核心实现。</p>
+<p>CachingExecutor 作为一个装饰器，其中自然会维护一个 Executor 类型字段指向被装饰的 Executor 对象，同时它还创建了一个 TransactionalCacheManager 对象来管理使用到的二级缓存。</p>
+<p><strong>CachingExecutor 的核心在于 query() 方法</strong>，其核心操作大致可总结为如下。</p>
+<ul>
+<li>获取 BoundSql 对象，创建查询语句对应的 CacheKey 对象。</li>
+<li>尝试获取当前命名空间使用的二级缓存，如果没有指定二级缓存，则表示未开启二级缓存功能。如果未开启二级缓存功能，则直接使用被装饰的 Executor 对象进行数据库查询操作。如果开启了二级缓存功能，则继续后面的步骤。</li>
+<li>查询二级缓存，这里使用到 TransactionalCacheManager.getObject() 方法，如果二级缓存命中，则直接将该结果对象返回。</li>
+<li>如果二级缓存未命中，则通过被装饰的 Executor 对象进行查询。正如前面介绍的那样，BaseExecutor 会先查询一级缓存，如果一级缓存未命中时，才会真正查询数据库。最后，会将查询到的结果对象放入 TransactionalCache.entriesToAddOnCommit 集合中暂存，等待事务提交时再写入二级缓存。</li>
+</ul>
+<p>下面是 CachingExecutor.query() 方法的核心代码片段：</p>
+<pre><code>public &lt;E&gt; List&lt;E&gt; query(MappedStatement ms, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler) throws SQLException {
+
+    // 获取BoundSql对象
+
+    BoundSql boundSql = ms.getBoundSql(parameterObject);
+
+    // 创建相应的CacheKey
+
+    CacheKey key = createCacheKey(ms, parameterObject, rowBounds, boundSql);
+
+    // 调用下面的query()方法重载
+
+    return query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
+
+}
+
+public &lt;E&gt; List&lt;E&gt; query(MappedStatement ms, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql)
+
+        throws SQLException {
+
+    Cache cache = ms.getCache(); // 获取该命名空间使用的二级缓存
+
+    if (cache != null) { // 是否开启了二级缓存功能
+
+        flushCacheIfRequired(ms); // 根据&lt;select&gt;标签配置决定是否需要清空二级缓存
+
+        // 检测useCache配置以及是否使用了resultHandler配置
+
+        if (ms.isUseCache() &amp;&amp; resultHandler == null) {
+
+            ensureNoOutParams(ms, boundSql); // 是否包含输出参数
+
+            // 查询二级缓存
+
+            List&lt;E&gt; list = (List&lt;E&gt;) tcm.getObject(cache, key);
+
+            if (list == null) {
+
+                // 二级缓存未命中，通过被装饰的Executor对象查询结果对象
+
+                list = delegate.query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
+
+                // 将查询结果放入TransactionalCache.entriesToAddOnCommit集合中暂存
+
+                tcm.putObject(cache, key, list);
+
+            }
+
+            return list;
+
+        }
+
+    }
+
+    // 如果未开启二级缓存，直接通过被装饰的Executor对象查询结果对象
+
+    return delegate.query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
+
+}
+</code></pre>
+<h3 id="总结">总结</h3>
+<p>紧接上一讲的内容，我们详细分析了 Executor 接口的核心实现类。</p>
+<ul>
+<li>首先介绍了最常用、也是最简单的 Executor 实现类—— SimpleExecutor 实现，它底层完全依赖 StatementHandler、DefaultResultSetHandler 和 JDBC API 完成数据库查询和结果集映射。</li>
+<li>接下来讲解了 ReuseExecutor 和 BatchExecutor 实现，其中 ReuseExecutor 实现了 Statement 对象的重用，而 BatchExecutor 实现了批处理的相关逻辑。</li>
+<li>最后讲解了 CachingExecutor 实现，其中重点介绍了二级缓存的内容以及 CachingExecutor 底层的 TransactionalCache、TransactionalCacheManager 等核心组件。</li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

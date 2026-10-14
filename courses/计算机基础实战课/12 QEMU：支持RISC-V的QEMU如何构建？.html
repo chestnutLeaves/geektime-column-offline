@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12 QEMU：支持RISC-V的QEMU如何构建？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">计算机基础实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">55 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>计算机基础实战课</strong><ul><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E7%BB%83%E5%A5%BD%E5%9F%BA%E6%9C%AC%E5%8A%9F%EF%BC%8C%E4%BC%98%E7%A7%80%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF%E7%AC%AC%E4%B8%80%E6%AD%A5.html">00 开篇词 练好基本功，优秀工程师成长第一步</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/01%20CISC%20%26%20RISC%EF%BC%9A%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5%EF%BC%8C%E4%BD%95%E8%87%B3%E4%BA%8E%E6%AD%A4.html">01 CISC &amp; RISC：从何而来，何至于此</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/02%20RISC%E7%89%B9%E6%80%A7%E4%B8%8E%E5%8F%91%E5%B1%95%EF%BC%9ARISC-V%E5%87%AD%E4%BB%80%E4%B9%88%E6%88%90%E4%B8%BA%E2%80%9C%E5%8D%8A%E5%AF%BC%E4%BD%93%E8%A1%8C%E4%B8%9A%E7%9A%84Linux%E2%80%9D%EF%BC%9F.html">02 RISC特性与发展：RISC-V凭什么成为“半导体行业的Linux”？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E7%A1%AC%E4%BB%B6%E8%AF%AD%E8%A8%80%E7%AD%91%E5%9F%BA%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%A1%AC%E4%BB%B6%E8%AF%AD%E8%A8%80%E5%BC%80%E5%90%AF%E6%89%8B%E5%86%99CPU%E4%B9%8B%E6%97%85.html">03 硬件语言筑基（一）：从硬件语言开启手写CPU之旅</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E7%A1%AC%E4%BB%B6%E8%AF%AD%E8%A8%80%E7%AD%91%E5%9F%BA%EF%BC%88%E4%BA%8C%EF%BC%89_%20%E4%BB%A3%E7%A0%81%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%9F%E6%88%90%E5%85%B7%E4%BD%93%E7%94%B5%E8%B7%AF%E7%9A%84%EF%BC%9F.html">04 硬件语言筑基（二）_ 代码是怎么生成具体电路的？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E6%8C%87%E4%BB%A4%E6%9E%B6%E6%9E%84%EF%BC%9ARISC-V%E5%9C%A8CPU%E8%AE%BE%E8%AE%A1%E4%B8%8A%E5%88%B0%E5%BA%95%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8A%BF%EF%BC%9F.html">05 指令架构：RISC-V在CPU设计上到底有哪些优势？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%BF%B7%E4%BD%A0CPU%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%96%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0.html">06 手写CPU（一）：迷你CPU架构设计与取指令实现</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%87%E4%BB%A4%E8%AF%91%E7%A0%81%E6%A8%A1%E5%9D%97%EF%BC%9F.html">07 手写CPU（二）：如何实现指令译码模块？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%87%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9D%97%EF%BC%9F.html">08 手写CPU（三）：如何实现指令执行模块？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0CPU%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E8%AE%BF%E5%AD%98%E9%98%B6%E6%AE%B5%EF%BC%9F.html">09 手写CPU（四）：如何实现CPU流水线的访存阶段？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9ACPU%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%86%99%E5%9B%9E%E6%A8%A1%E5%9D%97%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">10 手写CPU（五）：CPU流水线的写回模块如何实现？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E6%88%91%E4%BB%AC%E7%9A%84CPU%E8%B7%91%E8%B5%B7%E6%9D%A5%EF%BC%9F.html">11 手写CPU（六）：如何让我们的CPU跑起来？</a></li><li><a class="active" aria-current="page" href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/12%20QEMU%EF%BC%9A%E6%94%AF%E6%8C%81RISC-V%E7%9A%84QEMU%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%EF%BC%9F.html">12 QEMU：支持RISC-V的QEMU如何构建？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/13%20%E5%B0%8F%E8%AF%95%E7%89%9B%E5%88%80%EF%BC%9A%E8%B7%91%E9%80%9ARISC-V%E5%B9%B3%E5%8F%B0%E7%9A%84Hello%20World%E7%A8%8B%E5%BA%8F.html">13 小试牛刀：跑通RISC-V平台的Hello World程序</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E8%B5%B0%E8%BF%9BC%E8%AF%AD%E8%A8%80%EF%BC%9A%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80%E6%80%8E%E6%A0%B7%E6%8A%BD%E8%B1%A1%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91%EF%BC%9F.html">14 走进C语言：高级语言怎样抽象执行逻辑？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/15%20C%E4%B8%8E%E6%B1%87%E7%BC%96%EF%BC%9A%E6%8F%AD%E7%A7%98C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E2%80%9C%E6%90%AC%E7%A0%96%E2%80%9D%E6%97%A5%E5%B8%B8.html">15 C与汇编：揭秘C语言编译器的“搬砖”日常</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/16%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%AE%97%E6%9C%AF%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">16 RISC-V指令精讲（一）：算术指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/17%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%AE%97%E6%9C%AF%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">17 RISC-V指令精讲（二）：算术指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/18%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">18 RISC-V指令精讲（三）：跳转指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/19%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">19 RISC-V指令精讲（四）：跳转指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/20%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E5%8E%9F%E5%AD%90%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">20 RISC-V指令精讲（五）：原子指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/21%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%8A%A0%E8%BD%BD%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">21 RISC-V指令精讲（六）：加载指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/22%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%B8%83%EF%BC%89%EF%BC%9A%E8%AE%BF%E5%AD%98%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">22 RISC-V指令精讲（七）：访存指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%EF%BC%9A%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%9C%B0%E5%9D%80%E7%9A%84%E4%B8%89%E7%A7%8D%E4%BA%A7%E7%94%9F%E6%96%B9%E5%BC%8F.html">23 内存地址空间：程序中地址的三种产生方式</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E8%99%9A%E5%AE%9E%E7%BB%93%E5%90%88%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98.html">24 虚实结合：虚拟内存和物理内存</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/25%20%E5%A0%86%26%E6%A0%88%EF%BC%9A%E5%A0%86%E4%B8%8E%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8.html">25 堆&amp;栈：堆与栈的区别和应用</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/26%20%E5%BB%B6%E8%BF%9F%E5%88%86%E9%85%8D%EF%BC%9A%E6%8F%90%E9%AB%98%E5%86%85%E5%AD%98%E5%88%A9%E7%94%A8%E7%8E%87%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6.html">26 延迟分配：提高内存利用率的三种机制</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E5%BA%94%E7%94%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9ALinux%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html">27 应用内存管理：Linux的应用与内存管理</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%B9%B6%E8%A1%8C%E6%89%A7%E8%A1%8C%EF%BC%9F.html">28 进程调度：应用为什么能并行执行？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E5%BA%94%E7%94%A8%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%AF%A6%E8%A7%A3Linux%E8%BF%9B%E7%A8%8BIPC.html">29 应用间通信（一）：详解Linux进程IPC</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%20%E5%BA%94%E7%94%A8%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%A6%E8%A7%A3Linux%E8%BF%9B%E7%A8%8BIPC.html">30  应用间通信（二）：详解Linux进程IPC</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E5%A4%96%E8%AE%BE%E9%80%9A%E4%BF%A1%EF%BC%9AIO%20Cache%E4%B8%8EIO%E8%B0%83%E5%BA%A6.html">31 外设通信：IO Cache与IO调度</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/32%20IO%E7%AE%A1%E7%90%86%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E5%A4%96%E8%AE%BE%EF%BC%9F.html">32 IO管理：Linux如何管理多个外设？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/33%20lotop%E4%B8%8Elostat%E5%91%BD%E4%BB%A4%EF%BC%9A%E8%81%8A%E8%81%8A%E5%91%BD%E4%BB%A4%E8%83%8C%E5%90%8E%E7%9A%84%E6%95%85%E4%BA%8B%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">33 lotop与lostat命令：聊聊命令背后的故事与工作原理</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E6%96%87%E4%BB%B6%E4%BB%93%E5%BA%93%EF%BC%9A%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html">34 文件仓库：初识文件与文件系统</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/35%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E5%AD%98%E6%94%BE%E6%96%87%E4%BB%B6%EF%BC%9F.html">35 Linux文件系统（一）：Linux如何存放文件？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/36%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E5%AD%98%E6%94%BE%E6%96%87%E4%BB%B6%EF%BC%9F.html">36 Linux文件系统（二）：Linux如何存放文件？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">37 浏览器原理（一）：浏览器为什么要用多进程模型？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%B8%B2%E6%9F%93%E8%AF%A6%E8%A7%A3.html">38 浏览器原理（二）：浏览器进程通信与网络渲染详解</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%EF%BC%9AV8%20%E6%89%A7%E8%A1%8C%20JS%20%E4%BB%A3%E7%A0%81%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B.html">39 源码解读：V8 执行 JS 代码的全过程</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/40%20%E5%86%85%E5%8A%9F%E5%BF%83%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%86%85%E6%A0%B8%E5%92%8C%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">40 内功心法（一）：内核和后端通用的设计思想有哪些？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/41%20%E5%86%85%E5%8A%9F%E5%BF%83%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%86%85%E6%A0%B8%E5%92%8C%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">41 内功心法（二）：内核和后端通用的设计思想有哪些？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/42%20%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%EF%BC%9A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E5%B7%A5%E5%85%B7eBPF%E5%92%8C%E8%B0%83%E4%BC%98%E6%96%B9%E6%B3%95.html">42 性能调优：性能调优工具eBPF和调优方法</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%85%88%E7%9D%B9%E4%B8%BA%E5%BF%AB%EF%BC%9A%E8%BF%B7%E4%BD%A0CPU%E9%A1%B9%E7%9B%AE%E6%95%88%E6%9E%9C%E6%BC%94%E7%A4%BA.html">先睹为快：迷你CPU项目效果演示</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9001%20%E4%BA%91%E8%AE%A1%E7%AE%97%E5%9F%BA%E7%A1%80%EF%BC%9A%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E6%90%AD%E5%BB%BA%E4%B8%80%E6%AC%BEIAAS%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0.html">加餐01 云计算基础：自己动手搭建一款IAAS虚拟化平台</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9002%20%E5%AD%A6%E4%B9%A0%E6%94%BB%E7%95%A5%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%26%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%8C%E7%A9%B6%E7%AB%9F%E6%80%8E%E4%B9%88%E5%AD%A6%EF%BC%9F.html">加餐02 学习攻略（一）：大数据&amp;云计算，究竟怎么学？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9003%20%E5%AD%A6%E4%B9%A0%E6%94%BB%E7%95%A5%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%26%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%8C%E7%A9%B6%E7%AB%9F%E6%80%8E%E4%B9%88%E5%AD%A6%EF%BC%9F.html">加餐03 学习攻略（二）：大数据&amp;云计算，究竟怎么学？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9004%20%E8%B0%88%E8%B0%88%E5%AE%B9%E5%99%A8%E4%BA%91%E4%B8%8E%E5%92%8CCaaS%E5%B9%B3%E5%8F%B0.html">加餐04 谈谈容器云与和CaaS平台</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9005%20%E5%88%86%E5%B8%83%E5%BC%8F%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%8E%E6%99%BA%E8%83%BDSaaS.html">加餐05 分布式微服务与智能SaaS</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%9B%BD%E5%BA%86%E7%AD%96%E5%88%9201%20%E7%9F%A5%E8%AF%86%E6%8C%91%E6%88%98%E8%B5%9B%EF%BC%9A%E6%A3%80%E9%AA%8C%E4%B8%80%E4%B8%8B%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C%E5%90%A7%EF%BC%81.html">国庆策划01 知识挑战赛：检验一下学习成果吧！</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%9B%BD%E5%BA%86%E7%AD%96%E5%88%9202%20%E6%9D%A5%E8%87%AA%E8%AF%BE%E4%BB%A3%E8%A1%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A.html">国庆策划02 来自课代表的学习锦囊</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%9B%BD%E5%BA%86%E7%AD%96%E5%88%9203%20%E6%8F%AD%E7%A7%98%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%93%8D%E4%BD%9C%E5%92%8C%E6%A0%88%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6.html">国庆策划03 揭秘代码优化操作和栈保护机制</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%20%E6%80%9D%E8%80%83%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%80%EF%BC%89.html">温故知新 思考题参考答案（一）</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%88%91%E6%98%AF%E6%80%8E%E6%A0%B7%E5%AD%A6%E4%B9%A0Verilog%E7%9A%84%EF%BC%9F.html">用户故事 我是怎样学习Verilog的？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%BF%83%E8%8B%A5%E6%9C%89%E6%89%80%E5%90%91%E5%BE%80%EF%BC%8C%E4%BD%95%E6%83%A7%E9%81%93%E9%98%BB%E4%B8%94%E9%95%BF.html">结束语 心若有所向往，何惧道阻且长</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/12%20QEMU%EF%BC%9A%E6%94%AF%E6%8C%81RISC-V%E7%9A%84QEMU%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12 QEMU：支持RISC-V的QEMU如何构建？" id="title">12 QEMU：支持RISC-V的QEMU如何构建？</h1>
+<div><p>你好，我是LMOS。</p>
+<p>工欲善其事，必先利其器。作为开发者，学习过程中我们尤其要重视动手实践，不断巩固和验证自己学到的知识点。而动手实践的前提，就是要建立一个开发环境，这个环境具体包括编译环境、执行环境，以及各种常用的工具软件。</p>
+<p>我会用两节课带你动手搭好环境，今天这节课咱们先热个身，搞清楚什么是主环境，还有怎么基于它生成交叉编译工具。</p>
+<p>代码你可以从<a href="https://gitee.com/lmos/Geek-time-computer-foundation/tree/master/lesson12~13" target="_blank">这里</a>下载。</p>
+<h2 id="主环境">主环境</h2>
+<p>主环境，有时也叫作HOST环境，也就是我们使用的计算机环境，即使用什么样的操作系统、什么架构的计算机作为开发环境。</p>
+<p>比方说我们经常用PC机作为开发机使用，它实际就是一个基于x86架构（或其他架构）的硬件平台，再加上Windows或者Linux等操作系统共同组成的开发环境。</p>
+<p>普通用户的电脑上经常安装的操作系统是Windows，因为界面友好方便、操作简单且娱乐影音、游戏办公等应用软件也是不胜枚举。</p>
+<p>Windows对普通用户来说的确非常友好。但是作为软件开发者，对于志存高远、想要精研技术的我们而言，更喜欢用的是Linux系统。</p>
+<p>它虽然没有漂亮的GUI，却暴露了更多的计算机底层接口，也生产了更多的开发工具和各种各样的工具软件。比如大名鼎鼎的编译器GCC、声名远扬的编辑器EMACS、VIM，还有自动化的脚本工具shell、make等。这些工具对开发者非常友好，配合使用可以让我们的工作事半功倍，后面你会逐渐体会到这点。</p>
+<p>当然Linux只是一个内核，我们不能直接使用，还需要各种工具、库和桌面GUI，把这些和Linux打包在一起发行，这就构成了我们常说的Linux发行版。</p>
+<p>我最喜欢的Linux发行版是Deepin和Ubuntu。为了统一，我建议你使用Deepin最新版，你也可以使用Ubuntu，它们是差不多的。只是操作界面稍有不同。我先给你展示下我的Deepin，如下图，刚装上它的时候，我就觉得它颇为惊艳。</p>
+<p><img alt="图片" src="/assets/4bac1fc3d75281292274c12f.jpg"/></p>
+<p>这里最基础的安装我就不讲了，因为安装Deepin十分简单，无论是虚拟机还是在物理机上安装，我相信你通过互联网都可以自行解决，搞不定也可以看看<a href="https://www.deepin.org/zh/installation/" target="_blank">这里</a>。</p>
+<p>这两种方式我也替你对比过，虚拟机中的Linux较物理机上的Linux性能稍差一点，但并不影响我们实验操作和结果。</p>
+<h2 id="为什么需要交叉编译">为什么需要交叉编译</h2>
+<p>虽然主环境搞定了，但现在我们还不能直接跑代码。为什么呢？</p>
+<p>先回想一下，平时我们正常开发软件需要什么？我猜，哪怕你不能抢答，也会知道个大概：需要电脑（PC）、特定的操作系统（比如Windows或Linux等），在这个操作系统上还能运行相应的编辑器和编译器。编辑器用来编写源代码，而编译器用来把源代码编译成可执行程序。</p>
+<p>似乎不需要更多东西了，毕竟我们日常开发的软件，宿主平台和目标平台是相同的。如果我们把限制条件变一变，情况就不同了。如果我们想尝试在RISC-V平台上跑程序，要怎么办呢？</p>
+<p>你或许会说，这简单，买一台RISC-V的机器不就行了。可是先不说购买硬件的经济成本，实际上，很多RISC-V平台硬件资源（如内存、SD卡容量）有限，不足以运行复杂的编译器软件，有的甚至没有操作系统，更别说在上面运行编译器或者编辑器软件了。</p>
+<p>面对这样的困境，就要用到<strong>交叉编译</strong>了。什么是交叉编译呢？简单来说，就是在一个硬件平台上，生成另一个硬件平台的可执行程序。</p>
+<p>举个例子，我们在x86平台上编译生成ARM平台的可执行程序；再比如说，之后的课里我们将在x86平台上，生成RISC-V的可执行程序。这些都属于交叉编译，在这个过程中编译生成可执行程序的平台，称为宿主机或者主机；执行特定程序的平台（如ARM或者RISC-V平台），称为目标机。</p>
+<p>我特意准备了图解，为你展示在x86平台上，交叉编译生成RISC-V平台可执行程序的过程，你可以仔细看看：</p>
+<p><img alt="图片" src="/assets/177f5546fa640baaa10159bc.jpg"/></p>
+<h2 id="如何构建risc-v交叉编译器">如何构建RISC-V交叉编译器</h2>
+<p>前面说了交叉编译的本质就是生成其他平台体系上的可执行程序，这个体系又不同于我们宿主平台。我们的目的很简单，就是要<strong>在x86平台上编写源代码，然后编译出RISC-V平台的可执行程序，最后放在RISC-V平台上去运行</strong>。</p>
+<p>因此，我们需要用宿主机编译器A，编译出一个编译器B，这个编译器B是本地平台上的可执行程序。</p>
+<p>说得再具体点，你可以把编译器B看作是 <strong>x86 Linux上的一个应用</strong>。但它的特殊之处就是，能根据源代码生成RISC-V平台上的可执行程序。补充一句，这里的编译器A和B都是C语言编译器。</p>
+<p>下面我们开始构造编译器B。编译器B不仅仅是C语言编译器，还有很多额外的程序。比如RISC-V平台上使用的二进制文件分析（objcopy）、反汇编（objdump）、elf结构分析工具（readelf）、静态库归档（ar）、汇编器（as）、链接器（ld）、GDB、C语言库（Newlib、Glib、Multlib）等。</p>
+<p>为了简单、便于区分，我们把这些对应于RISC-V平台的编译器相关的软件，统称为 <strong>RISC-V工具链</strong>。</p>
+<p>构建RISC-V工具链的主要步骤如下：</p>
+<ol>
+<li>安装依赖工具：在宿主平台上安装编译器A，以及相应的工具和库。-</li>
+<li>下载RISC-V工具链的源代码；-</li>
+<li>配置RISC-V工具链；-</li>
+<li>编译RISC-V工具链，并安装在宿主平台上。</li>
+</ol>
+<h3 id="第一步-安装依赖工具">第一步：安装依赖工具</h3>
+<p>我们先从第一步开始，编译器A主要是宿主平台上的GCC，工具主要是Make、Git、Autoconf、Automake、CURL、Python3、Bison、Flex等。这里GCC主要在build-essential包中，我们只要在Linux终端中输入如下指令就可以了：</p>
+<pre><code>sudo apt-get install git autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf patchutils bc libexpat-dev libglib2.0-dev ninja-build zlib1g-dev pkg-config libboost-all-dev libtool libssl-dev libpixman-1-dev libpython-dev virtualenv libmount-dev libsdl2-dev
+</code></pre>
+<p><img alt="图片" src="/assets/f0e6f17e3dc83c8f70815c41.jpg"/></p>
+<p>如果不出意外，这些工具和库会通过网络由Linux的apt包管理器，全自动地给你安装完毕。</p>
+<h3 id="第二步-下载工具链源代码">第二步：下载工具链源代码</h3>
+<p>接着进入第二步下载RISC-V工具链源代码。通常来说，我们只要用Git克隆一个riscv-gnu-toolchain仓库即可，其它的由riscv-gnu-toolchain仓库中的仓库子模块自动处理。</p>
+<h4 id="手动配置环节">手动配置环节</h4>
+<p>由于众所周知的网络原因，你可能连riscv-gnu-toolchain仓库都下载不下来，更别说自动下载仓库子模块了。为了照顾卡壳的人，我把手动处理的情况也顺便讲一下，能够直接自动安装的同学可以跳过这部分，直接翻到7条指令之后的最终截图对一下结果就行。</p>
+<p>子模块如下：</p>
+<pre><code>riscv-qemu（虚拟机）
+riscv-newlib (用嵌入式的轻量级C库)
+riscv-binutils(包含一些二进制工具集合，如objcopy等)
+riscv-gdb(用于调试代码的调试器)
+riscv-dejagnu(用于测试其它程序的框架)
+riscv-glibc(GNU的C库)
+riscv-gcc (C语言编译器)
+</code></pre>
+<p>这些子模块我们需要手动从Gitee网站上下载。下载前，我们先在终端上输入后面的指令，建立一个目录，并切换到该目录中：</p>
+<pre><code>mkdir RISCV_TOOLS
+cd RISCV_TOOLS
+</code></pre>
+<p>把RISC-V工具链的源代码手动下载好，步骤稍微多了一些，我在后面分步骤列出，方便你跟上节奏。</p>
+<p>其实也就是7条指令的事儿，并不复杂。先统一说明下，<strong>后面这些命令都是切换到riscv-gnu-toolchain目录的终端下</strong>，输入我给你列出的指令即可。</p>
+<ol>
+<li>开始下载riscv-gnu-toolchain，命令如下：</li>
+</ol>
+<pre><code class="language-bash">    git clone https://gitee.com/mirrors/riscv-gnu-toolchain
+    cd riscv-gnu-toolchain
+</code></pre>
+<ol>
+<li>下载RISC-V平台的C语言编译器源代码仓库，输入如下指令：</li>
+</ol>
+<pre><code class="language-bash">    git clone -b riscv-gcc-10.2.0 https://gitee.com/mirrors/riscv-gcc
+</code></pre>
+<ol>
+<li>下载测试框架源代码仓库，即riscv-dejagnu。输入如下指令：</li>
+</ol>
+<pre><code class="language-bash">    git clone https://gitee.com/mirrors/riscv-dejagnu
+</code></pre>
+<ol>
+<li>下载GNU的C库源代码仓库，也就是riscv-glibc，输入如下指令：</li>
+</ol>
+<pre><code class="language-bash">    git clone -b riscv-glibc-2.29 https://gitee.com/mirrors/riscv-glibc
+</code></pre>
+<ol>
+<li>下载用于嵌入式的轻量级C库源代码仓库，即riscv-newlib。输入如下指令：</li>
+</ol>
+<pre><code class="language-bash">    git clone https://gitee.com/mirrors/riscv-newlib
+</code></pre>
+<ol>
+<li>下载二进制工具集合源代码仓库riscv-binutils，输入如下指令：</li>
+</ol>
+<pre><code class="language-bash">    git clone -b riscv-binutils-2.35 https://gitee.com/mirrors/riscv-binutils-gdb riscv-binutils
+</code></pre>
+<ol>
+<li>最后，下载GDB软件调试器源代码仓库riscv-gdb，输入如下指令：</li>
+</ol>
+<pre><code class="language-bash">    git clone -b fsf-gdb-10.1-with-sim https://gitee.com/mirrors/riscv-binutils-gdb riscv-gdb
+</code></pre>
+<p>好，现在所有的RISC-V工具链的源代码，我们已经下载完了。我们一起来同步一下，确保你我的riscv-gnu-toolchain目录下的目录和文件，完全一致。</p>
+<p>在riscv-gnu-toolchain目录的终端下输入ls指令，你应该得到和后面这张图一样的结果。</p>
+<p><img alt="图片" src="/assets/0a792910da12e51e0e670468.jpg"/></p>
+<h3 id="第三步-配置工具链">第三步：配置工具链</h3>
+<p>在我们用宿主编译器编译所有的RISC-V工具链的源代码之前，还有最重要的一步，那就是配置RISC-V工具链的功能。</p>
+<p>RISC-V工具链有很多配置选项，不同的配置操作会生成具有特定功能的RISC-V工具链。此外，配置操作还有一个功能，就是检查编译RISC-V工具链所依赖的工具和库。检查通过，就会生成相应的配置选项文件，还有用于编译操作的Makefile文件。</p>
+<p>下面我们开始配置操作。为了不污染源代码目录，我们可以在riscv-gnu-toolchain目录下建立一个build目录，用于存放编译RISC-V工具链所产生的文件。还是在切换到riscv-gnu-toolchain目录的终端下，输入如下指令：</p>
+<pre><code class="language-bash">    mkdir build  #建立build目录
+    #配置操作，终端一定要切换到build目录下再执行如下指令
+    ../configure --prefix=/opt/riscv/gcc --enable-multilib --target=riscv64-multlib-elf
+</code></pre>
+<p>我给你解释一下指令里的关键内容。</p>
+<p>–prefix表示RISC-V的工具链的安装目录，我们一起约定为“/opt/riscv/gcc”这个目录。</p>
+<p>–enable-multilib表示使用multlib库，使用该库编译出的RISC-V工具链，既可以生成RISCV32的可执行程序，也可以生成RISCV64的可执行程序，而默认的Newlib库则不行，它只能生成RISCV（32/64）其中之一的可执行程序。</p>
+<p>–target表示生成的RISC-V工具链中，软件名称的前缀是riscv64-multlib-elf-xxxx。若配置操作执行成功了，build目录中会出现如下所示的文件：</p>
+<p><img alt="图片" src="/assets/fd3716a58f76a0290ec68b1b.jpg"/></p>
+<h3 id="第四步-编译工具链">第四步：编译工具链</h3>
+<p>最后我们来完成第四步，编译RISC-V工具链。只要配置操作成功了，就已经成功了90%。其实编译操作是简单且高度自动化的，我们只要在切换到build目录的终端下，输入如下指令即可：</p>
+<pre><code>sudo make -j8
+</code></pre>
+<p>这个指令在编译完成后会自动安装到“/opt/riscv/gcc”目录，由于要操作“/opt/riscv/gcc”目录需要超级管理员权限，所以我们要记得加上sudo。</p>
+<p>另外，如果你的宿主机的CPU有n个核心，就在make 后面加-j（n*2），这样才能使用多线程加速编译。</p>
+<p>好了，一通操作猛如虎，现在最重要的事情是等待计算机“搬砖”了。你不妨播放音乐，泡上一杯新鲜的热茶，一边听歌，一边喝茶……估计要喝很多杯茶，才会编译完成。最最重要的是这期间不能断电，否则几个小时就白费了。</p>
+<p>如果终端中不出现任何错误，就说明编译成功了。我们在终端中切换到“/opt/riscv/gcc/bin”目录下，执行如下指令：</p>
+<pre><code>riscv64-unknown-elf-gcc -v
+</code></pre>
+<p>上述指令执行以后，会输出riscv64-unknown-elf-gcc的版本信息，这证明RISC-V工具链构建成功了。如下所示：</p>
+<p><img alt="图片" src="/assets/f4f12875c2e3f6606d3d434c.jpg"/></p>
+<p>到这里，我们环境已经成功了一半，有了交叉编译器，并且这种交叉编译器能生成32位的RISC-V平台的可执行程序，也能生成64位的RISC-V平台的可执行程序。</p>
+<p>你可能会好奇，成功了一半，那另一半呢？这需要我们接着干另一件事。什么事呢？容我先在这里卖个关子，下节课再揭秘。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>通过这节课的学习，我们成功构建了RISC-V工具链，这样就能在X86平台上生成RISC-V平台的可执行程序了。下面让我们一起回顾一下，这节课中都做了些什么。</p>
+<p>我们首先约定了宿主环境，需要用到Ubuntu或者Deepin的Linux发行版，无论你是将它们安装在物理PC上，还是安装在虚拟机上。</p>
+<p>然后我们了解了什么是交叉编译。为了方便后面课程学习动手实践，我们要在x86平台的宿主机上编译生成RISC-V平台的可执行程序。</p>
+<p>明确了目标，我们一起动手开始构建了一个RISC-V交叉编译器。你会发现其中不只是C/C++编译器，还有很多处理二进制可执行程序的工具，我们把这些统称为RISC-V工具链。</p>
+<h2 id="思考题">思考题</h2>
+<p>请你说一说交叉编译的过程？</p>
+<p>期待你再留言区分享自己的实验笔记，或者与我交流讨论。也推荐你把这节课分享给更多朋友，我们一起玩转交叉编译。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04 匹配模式：一次性掌握正则中常见的4种匹配模式 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/index.html">正则表达式入门课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">16 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>正则表达式入门课</strong><ul><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/00%20%E5%AF%BC%E8%AF%BB%20%E4%BD%99%E6%99%9F%EF%BC%9A%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%AD%A6%E4%B9%A0%E5%92%8C%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E7%9A%84%EF%BC%9F.html">00 导读 余晟：我是怎么学习和使用正则的？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%E4%B8%A8%E5%AD%A6%E4%B9%A0%E6%AD%A3%E5%88%99%EF%BC%8C%E6%88%91%E4%BB%AC%E5%88%B0%E5%BA%95%E8%A6%81%E5%AD%A6%E4%BB%80%E4%B9%88%EF%BC%9F.html">00 开篇词丨学习正则，我们到底要学什么？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/01%20%E5%85%83%E5%AD%97%E7%AC%A6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%B7%A7%E5%A6%99%E8%AE%B0%E5%BF%86%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E4%BB%B6%EF%BC%9F.html">01 元字符：如何巧妙记忆正则表达式的基本元件？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/02%E4%B8%A8%E9%87%8F%E8%AF%8D%E4%B8%8E%E8%B4%AA%E5%A9%AA%EF%BC%9A%E5%B0%8F%E5%B0%8F%E7%9A%84%E6%AD%A3%E5%88%99%EF%BC%8C%E4%B9%9F%E5%8F%AF%E8%83%BD%E6%8A%8ACPU%E6%8B%96%E5%9E%AE%EF%BC%81.html">02丨量词与贪婪：小小的正则，也可能把CPU拖垮！</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/03%20%E5%88%86%E7%BB%84%E4%B8%8E%E5%BC%95%E7%94%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%AD%A3%E5%88%99%E5%AE%9E%E7%8E%B0%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E6%93%8D%E4%BD%9C%EF%BC%9F.html">03 分组与引用：如何用正则实现更复杂的查找和替换操作？</a></li><li><a class="active" aria-current="page" href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/04%20%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%80%E6%AC%A1%E6%80%A7%E6%8E%8C%E6%8F%A1%E6%AD%A3%E5%88%99%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%844%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F.html">04 匹配模式：一次性掌握正则中常见的4种匹配模式</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/05%20%E6%96%AD%E8%A8%80%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%96%AD%E8%A8%80%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%AE%9E%E7%8E%B0%E6%9B%BF%E6%8D%A2%E9%87%8D%E5%A4%8D%E5%87%BA%E7%8E%B0%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%9F.html">05 断言：如何用断言更好地实现替换重复出现的单词？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/06%20%E8%BD%AC%E4%B9%89%EF%BC%9A%E6%AD%A3%E5%88%99%E4%B8%AD%E8%BD%AC%E4%B9%89%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98%EF%BC%9F.html">06 转义：正则中转义需要注意哪些问题？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/07%20%E6%AD%A3%E5%88%99%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%81%E6%B4%BE%E5%8F%8A%E5%85%B6%E7%89%B9%E6%80%A7%EF%BC%9F.html">07 正则有哪些常见的流派及其特性？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/08%20%E5%BA%94%E7%94%A81%EF%BC%9A%E6%AD%A3%E5%88%99%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%20Unicode%20%E7%BC%96%E7%A0%81%E7%9A%84%E6%96%87%E6%9C%AC%EF%BC%9F.html">08 应用1：正则如何处理 Unicode 编码的文本？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/09%20%E5%BA%94%E7%94%A82%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E5%AE%8C%E6%88%90%E5%B7%A5%E4%BD%9C%EF%BC%9F.html">09 应用2：如何在编辑器中使用正则完成工作？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/10%20%E5%BA%94%E7%94%A83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%94%A8%E6%AD%A3%E5%88%99%E8%AE%A9%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E8%83%BD%E5%8A%9B%E4%B8%8A%E4%B8%80%E4%B8%AA%E5%8F%B0%E9%98%B6%EF%BC%9F.html">10 应用3：如何在语言中用正则让文本处理能力上一个台阶？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/11%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%AD%A3%E5%88%99%E7%9A%84%E5%8C%B9%E9%85%8D%E5%8E%9F%E7%90%86%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99%EF%BC%9F.html">11 如何理解正则的匹配原理以及优化原则？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/12%20%E9%97%AE%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%9A%E8%AF%A6%E8%A7%A3%E6%AD%A3%E5%88%99%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">12 问题集锦：详解正则常见问题及解决方案</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E4%BB%8E%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E8%A7%92%E5%BA%A6%E6%9D%A5%E7%90%86%E8%A7%A3%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html">加餐 从编程语言的角度来理解正则表达式</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E6%8F%90%E9%AB%98%E4%BD%A0%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%88%E7%8E%87.html">结束语 使用正则提高你的人生效率</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/04%20%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%80%E6%AC%A1%E6%80%A7%E6%8E%8C%E6%8F%A1%E6%AD%A3%E5%88%99%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%844%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="04 匹配模式：一次性掌握正则中常见的4种匹配模式" id="title">04 匹配模式：一次性掌握正则中常见的4种匹配模式</h1>
+<div><p>你好，我是涂伟忠。今天我们一起来学习正则中的匹配模式（Match Mode）。</p>
+<p>所谓匹配模式，指的是正则中一些<strong>改变元字符匹配行为</strong>的方式，比如匹配时不区分英文字母大小写。常见的匹配模式有4种，分别是不区分大小写模式、点号通配模式、多行模式和注释模式。我们今天主要来讲一下这4种模式。</p>
+<p>需要注意的是，这里的“模式”对应的是英文中的mode，而不是pattern。有些地方会把正则表达式pattern也翻译成模式，你在网上看到的技术文章中讲的正则模式，有可能指的是正则表达式本身，这一点你需要注意区别。</p>
+<h2 id="不区分大小写模式-case-insensitive">不区分大小写模式（Case-Insensitive）</h2>
+<p>首先，我们来看一下不区分大小写模式。它有什么用呢？学一个知识的时候，我一般喜欢先从它的应用出发，这样有时候更能激发我学习的兴趣，也更容易看到学习成果。</p>
+<p>下面我来举个例子说明一下。在进行文本匹配时，我们要关心单词本身的意义。比如要查找单词cat，我们并不需要关心单词是CAT、Cat，还是cat。根据之前我们学到的知识，你可能会把正则写成这样：<strong>[Cc][Aa][Tt]</strong>，这样写虽然可以达到目的，但不够直观，如果单词比较长，写起来容易出错，阅读起来也比较困难。</p>
+<p><img alt="" src="/assets/b119808bb83bb438cfe13fb2.png"/></p>
+<p>那么有没有更好的办法来实现这个需求呢？这时候不区分大小写模式就派上用场了。</p>
+<p>我们前面说了，不区分大小写是匹配模式的一种。当我们把<strong>模式修饰符</strong>放在整个正则前面时，就表示整个正则表达式都是不区分大小写的。模式修饰符是通过<strong>(?模式标识)</strong>的方式来表示的。 我们只需要把模式修饰符放在对应的正则前，就可以使用指定的模式了。在不区分大小写模式中，由于不分大小写的英文是Case-<strong>I</strong>nsensitive，那么对应的模式标识就是 I 的小写字母 i，所以不区分大小写的 cat 就可以写成 <strong>(?i)</strong>cat。</p>
+<p><img alt="" src="/assets/c10165af79d0443ac45432da.png"/></p>
+<p>你看，和<strong>[Cc][Aa][Tt]</strong> 相比，这样是不是清晰简洁了很多呢？</p>
+<p>我们也可以用它来尝试匹配两个连续出现的 cat，如下图所示，你会发现，即便是第一个 cat 和第二个 cat 大小写不一致，也可以匹配上。</p>
+<p><img alt="" src="/assets/da29d4f43e3a6eac9abf0403.png"/></p>
+<p>我给到了你一个测试链接，你可以在这里试试不区分大小写模式：</p>
+<p><a href="https://regex101.com/r/x1lg4P/1" target="_blank">https://regex101.com/r/x1lg4P/1</a>。</p>
+<p>如果我们想要前面匹配上的结果，和第二次重复时的大小写一致，那该怎么做呢？我们只需要用括号把<strong>修饰符和正则cat部分</strong>括起来，加括号相当于作用范围的限定，让不区分大小写只作用于这个括号里的内容。同样的，我在<a href="https://regex101.com/r/x1lg4P/2" target="_blank">这里</a>给你放了一个测试链接，你可以自己看一下。</p>
+<p><img alt="" src="/assets/f53431048acaee240bda7330.png"/>-
+需要注意的是，这里正则写成了 ((?i)cat) \1，而不是((?i)(cat)) \1。也就是说，我们给修饰符和cat整体加了个括号，而原来 cat 部分的括号去掉了。如果 cat 保留原来的括号，即 ((?i)(cat)) \1，这样正则中就会有两个子组，虽然结果也是对的，但这其实没必要。在上一讲里我们已经讲解了相关的内容，如果忘记了你可以回去复习一下。</p>
+<p>到这里，我们再进阶一下。如果用正则匹配，实现部分区分大小写，另一部分不区分大小写，这该如何操作呢？就比如说我现在想要，the cat 中的 the 不区分大小写，cat 区分大小写。</p>
+<p>通过上面的学习，你应该能很快写出相应的正则，也就是 (<strong>(?i)</strong>the) cat。实现的效果如下：</p>
+<p><img alt="" src="/assets/6d8b202a5e41f02ee30e24ee.png"/></p>
+<p>我把部分区分大小写，部分不区分大小写的测试链接放在<a href="https://regex101.com/r/x1lg4P/3" target="_blank">这里</a>，你可以看一下。</p>
+<p>有一点需要你注意一下，上面讲到的通过<strong>修饰符指定匹配模式</strong>的方式，在大部分编程语言中都是可以直接使用的，但在 JS 中我们需要使用 /regex/<strong>i</strong> 来指定匹配模式。在编程语言中通常会提供一些预定义的常量，来进行匹配模式的指定。比如 Python 中可以使用 re.IGNORECASE 或 re.I ，来传入正则函数中来表示不区分大小写。我下面给出了你一个示例，你可以看一下。</p>
+<pre><code>&gt;&gt;&gt; import re
+&gt;&gt;&gt; re.findall(r"cat", "CAT Cat cat", re.IGNORECASE)
+['CAT', 'Cat', 'cat']
+</code></pre>
+<p>到这里我简单总结一下不区分大小写模式的要点：</p>
+<ol>
+<li>不区分大小写模式的指定方式，使用模式修饰符 (?i)；</li>
+<li>修饰符如果在括号内，作用范围是这个括号内的正则，而不是整个正则；</li>
+<li>使用编程语言时可以使用预定义好的常量来指定匹配模式。</li>
+</ol>
+<h2 id="点号通配模式-dot-all">点号通配模式（Dot All）</h2>
+<p>在基础篇的第一讲里，我为你讲解了元字符相关的知识，你还记得英文的点（.）有什么用吗？它可以匹配上任何符号，但不能匹配换行。当我们需要匹配真正的“任意”符号的时候，可以使用 [\s\S] 或 [\d\D] 或 [\w\W] 等。</p>
+<p><img alt="" src="/assets/39d29b349a671015d080c305.png"/></p>
+<p>但是这么写不够简洁自然，所以正则中提供了一种模式，让英文的点（.）可以匹配上包括换行的任何字符。</p>
+<p>这个模式就是<strong>点号通配模式</strong>，有很多地方把它称作单行匹配模式，但这么说容易造成误解，毕竟它与多行匹配模式没有联系，因此在课程中我们统一用更容易理解的“点号通配模式”。</p>
+<p>单行的英文表示是 <strong>S</strong>ingle Line，单行模式对应的修饰符是 <strong>(?s)</strong>，我还是选择用the cat来给你举一个点号通配模式的例子。如下图所示：</p>
+<p><img alt="" src="/assets/32a373e78b44edc116e4daf5.png"/></p>
+<p>需要注意的是，JavaScript不支持此模式，那么我们就可以使用前面说的[\s\S]等方式替代。在Ruby中则是用Multiline，来表示点号通配模式（单行匹配模式），我猜测设计者的意图是把点（.）号理解成“能匹配多行”。</p>
+<h2 id="多行匹配模式-multiline">多行匹配模式（Multiline）</h2>
+<p>讲完了点号通配模式，我们再来看看多行匹配模式。通常情况下，<code>^</code>匹配整个字符串的开头，<span class="math inline">\( 匹配整个字符串的结尾。多行匹配模式改变的就是 `^` 和 \)</span> 的匹配行为。</p>
+<p><img alt="" src="/assets/2eb5f0a1d9eef165752a47c7.png"/></p>
+<p>多行模式的作用在于，使 ^ 和 $ 能匹配上<strong>每行</strong>的开头或结尾，我们可以使用模式修饰符号 (?m) 来指定这个模式。</p>
+<p><img alt="" src="/assets/9b72ddf7f5138ead6e47329c.png"/></p>
+<p>这个模式有什么用呢？在处理日志时，如果日志以时间开头，有一些日志打印了堆栈信息，占用了多行，我们就可以使用多行匹配模式，在日志中匹配到以时间开头的每一行日志。</p>
+<p>值得一提的是，正则中还有 \A 和 \z（Python中是 \Z） 这两个元字符容易混淆，\A 仅匹配整个字符串的开始，\z 仅匹配整个字符串的结束，在多行匹配模式下，它们的匹配行为不会改变，如果只想匹配整个字符串，而不是匹配每一行，用这个更严谨一些。</p>
+<h2 id="注释模式-comment">注释模式（Comment）</h2>
+<p>在实际工作中，正则可能会很复杂，这就导致编写、阅读和维护正则都会很困难。我们在写代码的时候，通常会在一些关键的地方加上注释，让代码更易于理解。很多语言也支持在正则中添加注释，让正则更容易阅读和维护，这就是正则的注释模式。正则中注释模式是使用(?#comment) 来表示。</p>
+<p>比如我们可以把单词重复出现一次的正则 (\w+) \1 写成下面这样，这样的话，就算不是很懂正则的人也可以通过注释看懂正则的意思。</p>
+<pre><code>(\w+)(?#word) \1(?#word repeat again)
+</code></pre>
+<p><img alt="" src="/assets/7c75f4e1979d7f2cb79c9510.png"/></p>
+<p>在很多编程语言中也提供了x模式来书写正则，也可以起到注释的作用。我用Python3给你举了一个例子，你可以参考一下。</p>
+<pre><code>import re
+
+regex = r'''(?mx)  # 使用多行模式和x模式
+^          # 开头
+(\d{4})    # 年
+(\d{2})    # 月
+$          # 结尾
+'''
+
+re.findall(regex, '202006\n202007')
+# 输出结果 [('2020', '06'), ('2020', '07')]
+</code></pre>
+<p>需要注意的是在x模式下，所有的换行和空格都会被忽略。为了换行和空格的正确使用，我们可以通过把空格放入字符组中，或将空格转义来解决换行和空格的忽略问题。我下面给了你一个示例，你可以看看。</p>
+<pre><code>regex = r'''(?mx)
+^          # 开头
+(\d{4})    # 年
+[ ]        # 空格
+(\d{2})    # 月
+$          # 结尾
+'''
+
+re.findall(regex, '2020 06\n2020 07')
+# 输出结果 [('2020', '06'), ('2020', '07')]
+</code></pre>
+<h2 id="总结">总结</h2>
+<p>最后，我来给你总结一下，正则中常见的四种匹配模式，分别是：不区分大小写、点号通配模式、多行模式和注释模式。</p>
+<ol>
+<li>不区分大小写模式，它可以让整个正则或正则中某一部分进行不区分大小写的匹配。</li>
+<li>点号通配模式也叫单行匹配，改变的是点号的匹配行为，让其可以匹配任何字符，包括换行。</li>
+<li>多行匹配说的是 ^ 和 $ 的匹配行为，让其可以匹配上每行的开头或结尾。</li>
+<li>注释模式则可以在正则中添加注释，让正则变得更容易阅读和维护。</li>
+</ol>
+<p><img alt="" src="/assets/860041dfa53341a9ea1b7ab5.png"/></p>
+<h2 id="思考题">思考题</h2>
+<p>最后，我们来做一个小练习吧。HTML标签是不区分大小写的，比如我们要提取网页中的head 标签中的内容，用正则如何实现呢？</p>
+<p><img alt="" src="/assets/01180334d2544f4a89e35b34.png"/></p>
+<p>你可以动手试一试，用文本编辑器或你熟悉的编程语言来实现，经过不断练习你才能更好地掌握学习的内容。</p>
+<p>今天的课程就结束了，希望可以帮助到你，也希望你在下方的留言区和我参与讨论。也欢迎把这篇文章分享给你的朋友或者同事，一起交流一下。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

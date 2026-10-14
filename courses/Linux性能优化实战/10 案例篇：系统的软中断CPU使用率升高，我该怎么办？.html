@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 案例篇：系统的软中断CPU使用率升高，我该怎么办？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/index.html">Linux性能优化实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">64 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Linux性能优化实战</strong><ul><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%88%AB%E5%86%8D%E8%AE%A9Linux%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E6%88%90%E4%B8%BA%E4%BD%A0%E7%9A%84%E7%BB%8A%E8%84%9A%E7%9F%B3.html">00 开篇词 别再让Linux性能问题成为你的绊脚石</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/01%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F.html">01 如何学习Linux性能优化？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/02%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E5%88%B0%E5%BA%95%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3%E2%80%9C%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD%E2%80%9D%EF%BC%9F.html">02 基础篇：到底应该怎么理解“平均负载”？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/03%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E7%BB%8F%E5%B8%B8%E8%AF%B4%E7%9A%84%20CPU%20%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">03 基础篇：经常说的 CPU 上下文切换是什么意思？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/04%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E7%BB%8F%E5%B8%B8%E8%AF%B4%E7%9A%84%20CPU%20%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">04 基础篇：经常说的 CPU 上下文切换是什么意思？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/05%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%9F%90%E4%B8%AA%E5%BA%94%E7%94%A8%E7%9A%84CPU%E4%BD%BF%E7%94%A8%E7%8E%87%E5%B1%85%E7%84%B6%E8%BE%BE%E5%88%B0100%25%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">05 基础篇：某个应用的CPU使用率居然达到100%，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/06%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9A%84%20CPU%20%E4%BD%BF%E7%94%A8%E7%8E%87%E5%BE%88%E9%AB%98%EF%BC%8C%E4%BD%86%E4%B8%BA%E5%95%A5%E5%8D%B4%E6%89%BE%E4%B8%8D%E5%88%B0%E9%AB%98%20CPU%20%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9F.html">06 案例篇：系统的 CPU 使用率很高，但为啥却找不到高 CPU 的应用？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/07%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%87%BA%E7%8E%B0%E5%A4%A7%E9%87%8F%E4%B8%8D%E5%8F%AF%E4%B8%AD%E6%96%AD%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">07 案例篇：系统中出现大量不可中断进程和僵尸进程怎么办？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/08%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%87%BA%E7%8E%B0%E5%A4%A7%E9%87%8F%E4%B8%8D%E5%8F%AF%E4%B8%AD%E6%96%AD%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">08 案例篇：系统中出现大量不可中断进程和僵尸进程怎么办？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/09%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3Linux%E8%BD%AF%E4%B8%AD%E6%96%AD%EF%BC%9F.html">09 基础篇：怎么理解Linux软中断？</a></li><li><a class="active" aria-current="page" href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/10%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BD%AF%E4%B8%AD%E6%96%ADCPU%E4%BD%BF%E7%94%A8%E7%8E%87%E5%8D%87%E9%AB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">10 案例篇：系统的软中断CPU使用率升高，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/11%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%85%E9%80%9F%E5%88%86%E6%9E%90%E5%87%BA%E7%B3%BB%E7%BB%9FCPU%E7%9A%84%E7%93%B6%E9%A2%88%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">11 套路篇：如何迅速分析出系统CPU的瓶颈在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/12%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9ACPU%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF.html">12 套路篇：CPU 性能优化的几个思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/13%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%97%A0%E6%B3%95%E6%A8%A1%E6%8B%9F%E5%87%BA%20RES%20%E4%B8%AD%E6%96%AD%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">13 答疑（一）：无法模拟出 RES 中断的问题，怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8perf%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90Java%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">14 答疑（二）：如何用perf工具分析Java程序？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/15%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%E5%86%85%E5%AD%98%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">15 基础篇：Linux内存是怎么工作的？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/16%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84Buffer%E5%92%8CCache%EF%BC%9F.html">16 基础篇：怎么理解内存中的Buffer和Cache？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/17%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87%EF%BC%9F.html">17 案例篇：如何利用系统缓存优化程序的运行效率？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/18%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E4%BA%86%EF%BC%8C%E6%88%91%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%A4%84%E7%90%86%EF%BC%9F.html">18 案例篇：内存泄漏了，我该如何定位和处理？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/19%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%B3%BB%E7%BB%9F%E7%9A%84Swap%E5%8F%98%E9%AB%98%E4%BA%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">19 案例篇：为什么系统的Swap变高了（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/20%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%B3%BB%E7%BB%9F%E7%9A%84Swap%E5%8F%98%E9%AB%98%E4%BA%86%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">20 案例篇：为什么系统的Swap变高了？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/21%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E2%80%9C%E5%BF%AB%E5%87%86%E7%8B%A0%E2%80%9D%E6%89%BE%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F.html">21 套路篇：如何“快准狠”找到系统内存的问题？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/22%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%A3%81%E7%9B%98%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">22 答疑（三）：文件系统与磁盘的区别是什么？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/23%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">23 基础篇：Linux 文件系统是怎么工作的？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/24%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E7%A3%81%E7%9B%98I_O%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%88%E4%B8%8A%EF%BC%89.html">24 基础篇：Linux 磁盘I_O是怎么工作的（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/25%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E7%A3%81%E7%9B%98I_O%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%88%E4%B8%8B%EF%BC%89.html">25 基础篇：Linux 磁盘I_O是怎么工作的（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/26%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%BE%E5%87%BA%E7%8B%82%E6%89%93%E6%97%A5%E5%BF%97%E7%9A%84%E2%80%9C%E5%86%85%E9%AC%BC%E2%80%9D%EF%BC%9F.html">26 案例篇：如何找出狂打日志的“内鬼”？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/27%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E7%A3%81%E7%9B%98I_O%E5%BB%B6%E8%BF%9F%E5%BE%88%E9%AB%98%EF%BC%9F.html">27 案例篇：为什么我的磁盘I_O延迟很高？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/28%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%80%E4%B8%AASQL%E6%9F%A5%E8%AF%A2%E8%A6%8115%E7%A7%92%EF%BC%8C%E8%BF%99%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">28 案例篇：一个SQL查询要15秒，这是怎么回事？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/29%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9ARedis%E5%93%8D%E5%BA%94%E4%B8%A5%E9%87%8D%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F.html">29 案例篇：Redis响应严重延迟，如何解决？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/30%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%85%E9%80%9F%E5%88%86%E6%9E%90%E5%87%BA%E7%B3%BB%E7%BB%9FI_O%E7%9A%84%E7%93%B6%E9%A2%88%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">30 套路篇：如何迅速分析出系统I_O的瓶颈在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/31%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%A3%81%E7%9B%98%20I_O%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF.html">31 套路篇：磁盘 I_O 性能优化的几个思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/32%20%E7%AD%94%E7%96%91%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E9%98%BB%E5%A1%9E%E3%80%81%E9%9D%9E%E9%98%BB%E5%A1%9E%20I_O%20%E4%B8%8E%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%20I_O%20%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB.html">32 答疑（四）：阻塞、非阻塞 I_O 与同步、异步 I_O 的区别和联系</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/33%20%E5%85%B3%E4%BA%8E%20Linux%20%E7%BD%91%E7%BB%9C%EF%BC%8C%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E8%BF%99%E4%BA%9B%EF%BC%88%E4%B8%8A%EF%BC%89.html">33 关于 Linux 网络，你必须知道这些（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/34%20%E5%85%B3%E4%BA%8E%20Linux%20%E7%BD%91%E7%BB%9C%EF%BC%8C%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E8%BF%99%E4%BA%9B%EF%BC%88%E4%B8%8B%EF%BC%89.html">34 关于 Linux 网络，你必须知道这些（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/35%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9AC10K%20%E5%92%8C%20C1000K%20%E5%9B%9E%E9%A1%BE.html">35 基础篇：C10K 和 C1000K 回顾</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/36%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AF%84%E4%BC%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%EF%BC%9F.html">36 套路篇：怎么评估系统的网络性能？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/37%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9ADNS%20%E8%A7%A3%E6%9E%90%E6%97%B6%E5%BF%AB%E6%97%B6%E6%85%A2%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">37 案例篇：DNS 解析时快时慢，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/38%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%20tcpdump%20%E5%92%8C%20Wireshark%20%E5%88%86%E6%9E%90%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%EF%BC%9F.html">38 案例篇：怎么使用 tcpdump 和 Wireshark 分析网络流量？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/39%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%BC%93%E8%A7%A3%20DDoS%20%E6%94%BB%E5%87%BB%E5%B8%A6%E6%9D%A5%E7%9A%84%E6%80%A7%E8%83%BD%E4%B8%8B%E9%99%8D%E9%97%AE%E9%A2%98%EF%BC%9F.html">39 案例篇：怎么缓解 DDoS 攻击带来的性能下降问题？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/40%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%BB%B6%E8%BF%9F%E5%8F%98%E5%A4%A7%E4%BA%86%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">40 案例篇：网络请求延迟变大了，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/41%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%20NAT%20%E6%80%A7%E8%83%BD%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">41 案例篇：如何优化 NAT 性能？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/42%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%20NAT%20%E6%80%A7%E8%83%BD%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">42 案例篇：如何优化 NAT 性能？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/43%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF%EF%BC%88%E4%B8%8A%EF%BC%89.html">43 套路篇：网络性能优化的几个思路（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/44%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF%EF%BC%88%E4%B8%8B%EF%BC%89.html">44 套路篇：网络性能优化的几个思路（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/45%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%94%B6%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BD%8D%E7%BD%AE%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">45 答疑（五）：网络收发过程中，缓冲区位置在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/46%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8%E5%8C%96%E5%90%8E%EF%BC%8C%E5%90%AF%E5%8A%A8%E6%85%A2%E4%BA%86%E5%BE%88%E5%A4%9A%EF%BC%9F.html">46 案例篇：为什么应用容器化后，启动慢了很多？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/47%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%BB%E6%98%AF%E6%97%B6%E4%B8%8D%E6%97%B6%E4%B8%A2%E5%8C%85%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">47 案例篇：服务器总是时不时丢包，我该怎么办？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/48%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%BB%E6%98%AF%E6%97%B6%E4%B8%8D%E6%97%B6%E4%B8%A2%E5%8C%85%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">48 案例篇：服务器总是时不时丢包，我该怎么办？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/49%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%86%85%E6%A0%B8%E7%BA%BF%E7%A8%8B%20CPU%20%E5%88%A9%E7%94%A8%E7%8E%87%E5%A4%AA%E9%AB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">49 案例篇：内核线程 CPU 利用率太高，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/50%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%8A%A8%E6%80%81%E8%BF%BD%E8%B8%AA%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">50 案例篇：动态追踪怎么用？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/51%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%8A%A8%E6%80%81%E8%BF%BD%E8%B8%AA%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">51 案例篇：动态追踪怎么用？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/52%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%90%9E%E5%90%90%E9%87%8F%E4%B8%8B%E9%99%8D%E5%BE%88%E5%8E%89%E5%AE%B3%EF%BC%8C%E6%80%8E%E4%B9%88%E5%88%86%E6%9E%90%EF%BC%9F.html">52 案例篇：服务吞吐量下降很厉害，怎么分析？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/53%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%E7%9A%84%E7%BB%BC%E5%90%88%E6%80%9D%E8%B7%AF.html">53 套路篇：系统监控的综合思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/54%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%BA%94%E7%94%A8%E7%9B%91%E6%8E%A7%E7%9A%84%E4%B8%80%E8%88%AC%E6%80%9D%E8%B7%AF.html">54 套路篇：应用监控的一般思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/55%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%88%86%E6%9E%90%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4.html">55 套路篇：分析性能问题的一般步骤</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/56%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%96%B9%E6%B3%95.html">56 套路篇：优化性能问题的一般方法</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/57%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9ALinux%20%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7%E9%80%9F%E6%9F%A5.html">57 套路篇：Linux 性能工具速查</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/58%20%E7%AD%94%E7%96%91%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%86%B7%E5%90%AF%E5%8A%A8%E5%A6%82%E4%BD%95%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%9F.html">58 答疑（六）：容器冷启动如何性能分析？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%EF%BC%88%E4%B8%80%EF%BC%89%20%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90%EF%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%92%8CLinux%20%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html">加餐（一） 书单推荐：性能优化和Linux 系统原理</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%EF%BC%88%E4%BA%8C%EF%BC%89%20%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90%EF%BC%9A%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%92%8C%20Linux%20%E5%86%85%E6%A0%B8%E5%AE%9E%E7%8E%B0.html">加餐（二） 书单推荐：网络原理和 Linux 内核实现</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E2%80%9C%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%20%E2%80%9D%EF%BC%8C%E4%B9%9F%E8%A6%81%E9%A1%BA%E5%88%A9%E6%8B%BF%E4%B8%8B%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%81.html">用户故事 “半路出家 ”，也要顺利拿下性能优化！</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E8%BF%90%E7%BB%B4%E5%92%8C%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4%EF%BC%9F.html">用户故事 运维和开发工程师们怎么说？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%84%BF%E4%BD%A0%E6%94%BB%E5%85%8B%E6%80%A7%E8%83%BD%E9%9A%BE%E5%85%B3.html">结束语 愿你攻克性能难关</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/10%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BD%AF%E4%B8%AD%E6%96%ADCPU%E4%BD%BF%E7%94%A8%E7%8E%87%E5%8D%87%E9%AB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="10 案例篇：系统的软中断CPU使用率升高，我该怎么办？" id="title">10 案例篇：系统的软中断CPU使用率升高，我该怎么办？</h1>
+<div><p>你好，我是倪朋飞。</p>
+<p>上一期我给你讲了软中断的基本原理，我们先来简单复习下。</p>
+<p>中断是一种异步的事件处理机制，用来提高系统的并发处理能力。中断事件发生，会触发执行中断处理程序，而中断处理程序被分为上半部和下半部这两个部分。</p>
+<ul>
+<li><p>上半部对应硬中断，用来快速处理中断；</p></li>
+<li><p>下半部对应软中断，用来异步处理上半部未完成的工作。</p></li>
+</ul>
+<p>Linux 中的软中断包括网络收发、定时、调度、RCU锁等各种类型，我们可以查看 proc 文件系统中的 /proc/softirqs ，观察软中断的运行情况。</p>
+<p>在 Linux 中，每个 CPU 都对应一个软中断内核线程，名字是 ksoftirqd/CPU编号。当软中断事件的频率过高时，内核线程也会因为CPU 使用率过高而导致软中断处理不及时，进而引发网络收发延迟、调度缓慢等性能问题。</p>
+<p>软中断 CPU 使用率过高也是一种最常见的性能问题。今天，我就用最常见的反向代理服务器 Nginx 的案例，教你学会分析这种情况。</p>
+<h2 id="案例">案例</h2>
+<h3 id="你的准备">你的准备</h3>
+<p>接下来的案例基于 Ubuntu 18.04，也同样适用于其他的 Linux 系统。我使用的案例环境是这样的：</p>
+<ul>
+<li><p>机器配置：2 CPU、8 GB 内存。</p></li>
+<li><p>预先安装 docker、sysstat、sar 、hping3、tcpdump 等工具，比如 apt-get install <a href="http://docker.io" target="_blank">docker.io</a> sysstat hping3 tcpdump。</p></li>
+</ul>
+<p>这里我又用到了三个新工具，sar、 hping3 和 tcpdump，先简单介绍一下：</p>
+<ul>
+<li><p>sar 是一个系统活动报告工具，既可以实时查看系统的当前活动，又可以配置保存和报告历史统计数据。</p></li>
+<li><p>hping3 是一个可以构造 TCP/IP 协议数据包的工具，可以对系统进行安全审计、防火墙测试等。</p></li>
+<li><p>tcpdump 是一个常用的网络抓包工具，常用来分析各种网络问题。</p></li>
+</ul>
+<p>本次案例用到两台虚拟机，我画了一张图来表示它们的关系。</p>
+<p><img alt="" src="/assets/a13728534d6b7deda187461d.png"/></p>
+<p>你可以看到，其中一台虚拟机运行 Nginx ，用来模拟待分析的 Web 服务器；而另一台当作Web 服务器的客户端，用来给 Nginx 增加压力请求。使用两台虚拟机的目的，是为了相互隔离，避免“交叉感染”。</p>
+<p>接下来，我们打开两个终端，分别 SSH 登录到两台机器上，并安装上面提到的这些工具。</p>
+<p>同以前的案例一样，下面的所有命令都默认以 root 用户运行，如果你是用普通用户身份登陆系统，请运行 sudo su root 命令切换到 root 用户。</p>
+<p>如果安装过程中有什么问题，同样鼓励你先自己搜索解决，解决不了的，可以在留言区向我提问。如果你以前已经安装过了，就可以忽略这一点了。</p>
+<h3 id="操作和分析">操作和分析</h3>
+<p>安装完成后，我们先在第一个终端，执行下面的命令运行案例，也就是一个最基本的 Nginx 应用：</p>
+<pre><code># 运行Nginx服务并对外开放80端口
+$ docker run -itd --name=nginx -p 80:80 nginx
+</code></pre>
+<p>然后，在第二个终端，使用 curl 访问 Nginx 监听的端口，确认 Nginx 正常启动。假设 192.168.0.30 是 Nginx 所在虚拟机的 IP 地址，运行 curl 命令后你应该会看到下面这个输出界面：</p>
+<pre><code>$ curl http://192.168.0.30/
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+...
+</code></pre>
+<p>接着，还是在第二个终端，我们运行 hping3 命令，来模拟 Nginx 的客户端请求：</p>
+<pre><code># -S参数表示设置TCP协议的SYN（同步序列号），-p表示目的端口为80
+# -i u100表示每隔100微秒发送一个网络帧
+# 注：如果你在实践过程中现象不明显，可以尝试把100调小，比如调成10甚至1
+$ hping3 -S -p 80 -i u100 192.168.0.30
+</code></pre>
+<p>现在我们再回到第一个终端，你应该发现了异常。是不是感觉系统响应明显变慢了，即便只是在终端中敲几个回车，都得很久才能得到响应？这个时候应该怎么办呢？</p>
+<p>虽然在运行 hping3 命令时，我就已经告诉你，这是一个 SYN FLOOD 攻击，你肯定也会想到从网络方面入手，来分析这个问题。不过，在实际的生产环境中，没人直接告诉你原因。</p>
+<p>所以，我希望你把 hping3 模拟 SYN FLOOD 这个操作暂时忘掉，然后重新从观察到的问题开始，分析系统的资源使用情况，逐步找出问题的根源。</p>
+<p>那么，该从什么地方入手呢？刚才我们发现，简单的 SHELL 命令都明显变慢了，先看看系统的整体资源使用情况应该是个不错的注意，比如执行下 top 看看是不是出现了 CPU 的瓶颈。我们在第一个终端运行 top 命令，看一下系统整体的资源使用情况。</p>
+<pre><code># top运行后按数字1切换到显示所有CPU
+$ top
+top - 10:50:58 up 1 days, 22:10,  1 user,  load average: 0.00, 0.00, 0.00
+Tasks: 122 total,   1 running,  71 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.0 us,  0.0 sy,  0.0 ni, 96.7 id,  0.0 wa,  0.0 hi,  3.3 si,  0.0 st
+%Cpu1  :  0.0 us,  0.0 sy,  0.0 ni, 95.6 id,  0.0 wa,  0.0 hi,  4.4 si,  0.0 st
+...
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+    7 root      20   0       0      0      0 S   0.3  0.0   0:01.64 ksoftirqd/0
+   16 root      20   0       0      0      0 S   0.3  0.0   0:01.97 ksoftirqd/1
+ 2663 root      20   0  923480  28292  13996 S   0.3  0.3   4:58.66 docker-containe
+ 3699 root      20   0       0      0      0 I   0.3  0.0   0:00.13 kworker/u4:0
+ 3708 root      20   0   44572   4176   3512 R   0.3  0.1   0:00.07 top
+    1 root      20   0  225384   9136   6724 S   0.0  0.1   0:23.25 systemd
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.03 kthreadd
+...
+</code></pre>
+<p>这里你有没有发现异常的现象？我们从第一行开始，逐个看一下：</p>
+<ul>
+<li><p>平均负载全是0，就绪队列里面只有一个进程（1 running）。</p></li>
+<li><p>每个CPU的使用率都挺低，最高的CPU1的使用率也只有4.4%，并不算高。</p></li>
+<li><p>再看进程列表，CPU使用率最高的进程也只有 0.3%，还是不高呀。</p></li>
+</ul>
+<p>那为什么系统的响应变慢了呢？既然每个指标的数值都不大，那我们就再来看看，这些指标对应的更具体的含义。毕竟，哪怕是同一个指标，用在系统的不同部位和场景上，都有可能对应着不同的性能问题。</p>
+<p>仔细看 top 的输出，两个 CPU的使用率虽然分别只有 3.3%和4.4%，但都用在了软中断上；而从进程列表上也可以看到，CPU使用率最高的也是软中断进程 ksoftirqd。看起来，软中断有点可疑了。</p>
+<p>根据上一期的内容，既然软中断可能有问题，那你先要知道，究竟是哪类软中断的问题。停下来想想，上一节我们用了什么方法，来判断软中断类型呢？没错，还是proc文件系统。观察 /proc/softirqs 文件的内容，你就能知道各种软中断类型的次数。</p>
+<p>不过，这里的各类软中断次数，又是什么时间段里的次数呢？它是系统运行以来的<strong>累积中断次数</strong>。所以我们直接查看文件内容，得到的只是累积中断次数，对这里的问题并没有直接参考意义。因为，这些<strong>中断次数的变化速率</strong>才是我们需要关注的。</p>
+<p>那什么工具可以观察命令输出的变化情况呢？我想你应该想起来了，在前面案例中用过的 watch 命令，就可以定期运行一个命令来查看输出；如果再加上 -d 参数，还可以高亮出变化的部分，从高亮部分我们就可以直观看出，哪些内容变化得更快。</p>
+<p>比如，还是在第一个终端，我们运行下面的命令：</p>
+<pre><code>$ watch -d cat /proc/softirqs
+                    CPU0       CPU1
+          HI:          0          0
+       TIMER:    1083906    2368646
+      NET_TX:         53          9
+      NET_RX:    1550643    1916776
+       BLOCK:          0          0
+    IRQ_POLL:          0          0
+     TASKLET:     333637       3930
+       SCHED:     963675    2293171
+     HRTIMER:          0          0
+         RCU:    1542111    1590625
+</code></pre>
+<p>通过 /proc/softirqs 文件内容的变化情况，你可以发现， TIMER（定时中断）、NET_RX（网络接收）、SCHED（内核调度）、RCU（RCU锁）等这几个软中断都在不停变化。</p>
+<p>其中，NET_RX，也就是网络数据包接收软中断的变化速率最快。而其他几种类型的软中断，是保证 Linux 调度、时钟和临界区保护这些正常工作所必需的，所以它们有一定的变化倒是正常的。</p>
+<p>那么接下来，我们就从网络接收的软中断着手，继续分析。既然是网络接收的软中断，第一步应该就是观察系统的网络接收情况。这里你可能想起了很多网络工具，不过，我推荐今天的主人公工具 sar 。</p>
+<p>sar 可以用来查看系统的网络收发情况，还有一个好处是，不仅可以观察网络收发的吞吐量（BPS，每秒收发的字节数），还可以观察网络收发的 PPS，即每秒收发的网络帧数。</p>
+<p>我们在第一个终端中运行 sar 命令，并添加 -n DEV 参数显示网络收发的报告：</p>
+<pre><code># -n DEV 表示显示网络收发的报告，间隔1秒输出一组数据
+$ sar -n DEV 1
+15:03:46        IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s   %ifutil
+15:03:47         eth0  12607.00   6304.00    664.86    358.11      0.00      0.00      0.00      0.01
+15:03:47      docker0   6302.00  12604.00    270.79    664.66      0.00      0.00      0.00      0.00
+15:03:47           lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+15:03:47    veth9f6bbcd   6302.00  12604.00    356.95    664.66      0.00      0.00      0.00      0.05
+</code></pre>
+<p>对于 sar 的输出界面，我先来简单介绍一下，从左往右依次是：</p>
+<ul>
+<li><p>第一列：表示报告的时间。</p></li>
+<li><p>第二列：IFACE 表示网卡。</p></li>
+<li><p>第三、四列：rxpck/s 和 txpck/s 分别表示每秒接收、发送的网络帧数，也就是 PPS。</p></li>
+<li><p>第五、六列：rxkB/s 和 txkB/s 分别表示每秒接收、发送的千字节数，也就是 BPS。</p></li>
+<li><p>后面的其他参数基本接近0，显然跟今天的问题没有直接关系，你可以先忽略掉。</p></li>
+</ul>
+<p>我们具体来看输出的内容，你可以发现：</p>
+<ul>
+<li><p>对网卡 eth0来说，每秒接收的网络帧数比较大，达到了 12607，而发送的网络帧数则比较小，只有 6304；每秒接收的千字节数只有 664 KB，而发送的千字节数更小，只有 358 KB。</p></li>
+<li><p>docker0 和 veth9f6bbcd 的数据跟 eth0 基本一致，只是发送和接收相反，发送的数据较大而接收的数据较小。这是 Linux 内部网桥转发导致的，你暂且不用深究，只要知道这是系统把 eth0 收到的包转发给 Nginx 服务即可。具体工作原理，我会在后面的网络部分详细介绍。</p></li>
+</ul>
+<p>从这些数据，你有没有发现什么异常的地方？</p>
+<p>既然怀疑是网络接收中断的问题，我们还是重点来看 eth0 ：接收的 PPS 比较大，达到 12607，而接收的 BPS 却很小，只有 664 KB。直观来看网络帧应该都是比较小的，我们稍微计算一下，664*<sup>1024</sup>⁄<sub>12607</sub> = 54 字节，说明平均每个网络帧只有 54 字节，这显然是很小的网络帧，也就是我们通常所说的小包问题。</p>
+<p>那么，有没有办法知道这是一个什么样的网络帧，以及从哪里发过来的呢？</p>
+<p>使用 tcpdump 抓取 eth0 上的包就可以了。我们事先已经知道， Nginx 监听在 80 端口，它所提供的 HTTP 服务是基于 TCP 协议的，所以我们可以指定 TCP 协议和 80 端口精确抓包。</p>
+<p>接下来，我们在第一个终端中运行 tcpdump 命令，通过 -i eth0 选项指定网卡 eth0，并通过 tcp port 80 选项指定 TCP 协议的 80 端口：</p>
+<pre><code># -i eth0 只抓取eth0网卡，-n不解析协议名和主机名
+# tcp port 80表示只抓取tcp协议并且端口号为80的网络帧
+$ tcpdump -i eth0 -n tcp port 80
+15:11:32.678966 IP 192.168.0.2.18238 &gt; 192.168.0.30.80: Flags [S], seq 458303614, win 512, length 0
+...
+</code></pre>
+<p>从 tcpdump 的输出中，你可以发现</p>
+<ul>
+<li><p>192.168.0.2.18238 &gt; 192.168.0.30.80 ，表示网络帧从 192.168.0.2 的 18238 端口发送到 192.168.0.30 的 80 端口，也就是从运行 hping3 机器的 18238 端口发送网络帧，目的为 Nginx 所在机器的 80 端口。</p></li>
+<li><p>Flags [S] 则表示这是一个 SYN 包。</p></li>
+</ul>
+<p>再加上前面用 sar 发现的， PPS 超过 12000的现象，现在我们可以确认，这就是从 192.168.0.2 这个地址发送过来的 SYN FLOOD 攻击。</p>
+<p>到这里，我们已经做了全套的性能诊断和分析。从系统的软中断使用率高这个现象出发，通过观察 /proc/softirqs 文件的变化情况，判断出软中断类型是网络接收中断；再通过 sar 和 tcpdump ，确认这是一个 SYN FLOOD 问题。</p>
+<p>SYN FLOOD 问题最简单的解决方法，就是从交换机或者硬件防火墙中封掉来源 IP，这样 SYN FLOOD 网络帧就不会发送到服务器中。</p>
+<p>至于 SYN FLOOD 的原理和更多解决思路，你暂时不需要过多关注，后面的网络章节里我们都会学到。</p>
+<p>案例结束后，也不要忘了收尾，记得停止最开始启动的 Nginx 服务以及 hping3 命令。</p>
+<p>在第一个终端中，运行下面的命令就可以停止 Nginx 了：</p>
+<pre><code># 停止 Nginx 服务
+$ docker rm -f nginx
+</code></pre>
+<p>然后到第二个终端中按下 Ctrl+C 就可以停止 hping3。</p>
+<h2 id="小结">小结</h2>
+<p>软中断CPU使用率（softirq）升高是一种很常见的性能问题。虽然软中断的类型很多，但实际生产中，我们遇到的性能瓶颈大多是网络收发类型的软中断，特别是网络接收的软中断。</p>
+<p>在碰到这类问题时，你可以借用 sar、tcpdump 等工具，做进一步分析。不要害怕网络性能，后面我会教你更多的分析方法。</p>
+<h2 id="思考">思考</h2>
+<p>最后，我想请你一起来聊聊，你所碰到的软中断问题。你所碰到的软中问题是哪种类型，是不是这个案例中的小包问题？你又是怎么分析它们的来源并解决的呢？可以结合今天的案例，总结你自己的思路和感受。如果遇到过其他问题，也可以留言给我一起解决。</p>
+<p>欢迎在留言区和我讨论，也欢迎你把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p>
+<p><img alt="" src="/assets/f1a5fbfecfabcf10ec99d1f1.jpg"/></p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>11 链路追踪：如何定制一个分布式链路跟踪系统 ？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">高并发系统实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">27 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>高并发系统实战课</strong><ul><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%EF%BC%8C%E6%8A%80%E6%9C%AF%E5%AE%9E%E5%8A%9B%E7%9A%84%E8%AF%95%E9%87%91%E7%9F%B3.html">00 开篇词 高并发系统，技术实力的试金石</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E7%BB%93%E6%9E%84%E6%A2%B3%E7%90%86%EF%BC%9A%E5%A4%A7%E5%B9%B6%E5%8F%91%E4%B8%8B%EF%BC%8C%E4%BD%A0%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%8F%AF%E8%83%BD%E6%88%90%E4%B8%BA%E6%80%A7%E8%83%BD%E9%9A%90%E6%82%A3.html">01 结构梳理：大并发下，你的数据库表可能成为性能隐患</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%EF%BC%9A%E8%AF%BB%E5%A4%9A%E5%86%99%E5%B0%91%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E6%9B%B4%E6%96%B0%E7%BC%93%E5%AD%98%E4%B8%8D%E5%90%8C%E6%AD%A5%EF%BC%9F.html">02 缓存一致：读多写少时，如何解决数据更新缓存不同步？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/03%20Token%EF%BC%9A%E5%A6%82%E4%BD%95%E9%99%8D%E4%BD%8E%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E9%89%B4%E6%9D%83%E7%9A%84%E6%B5%81%E9%87%8F%E5%8E%8B%E5%8A%9B%EF%BC%9F.html">03 Token：如何降低用户身份鉴权的流量压力？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E5%90%8C%E5%9F%8E%E5%8F%8C%E6%B4%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%BA%E6%88%BF%E4%B9%8B%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%EF%BC%9F.html">04 同城双活：如何实现机房之间的数据同步？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E5%85%B1%E8%AF%86Raft%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%A4%9A%E6%9C%BA%E6%88%BF%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F.html">05 共识Raft：如何保证多机房数据的一致性？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E9%A2%86%E5%9F%9F%E6%8B%86%E5%88%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%90%88%E7%90%86%E5%9C%B0%E6%8B%86%E5%88%86%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">06 领域拆分：如何合理地拆分系统？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E5%BC%BA%E4%B8%80%E8%87%B4%E9%94%81%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E7%9A%84%E5%BA%93%E5%AD%98%E4%BA%89%E6%8A%A2%E9%97%AE%E9%A2%98%EF%BC%9F.html">07 强一致锁：如何解决高并发下的库存争抢问题？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E7%B3%BB%E7%BB%9F%E9%9A%94%E7%A6%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%E9%AB%98%E5%B9%B6%E5%8F%91%E6%B5%81%E9%87%8F%E5%86%B2%E5%87%BB%EF%BC%9F.html">08 系统隔离：如何应对高并发流量冲击？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E5%A4%9A%E6%9C%8D%E5%8A%A1%E7%9A%842PC%E3%80%81TCC%E9%83%BD%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">09 分布式事务：多服务的2PC、TCC都是怎么实现的？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E7%A8%80%E7%96%8F%E7%B4%A2%E5%BC%95%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%AB%98%E5%B9%B6%E5%8F%91%E5%86%99%E4%B8%8D%E6%8E%A8%E8%8D%90%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9F.html">10 稀疏索引：为什么高并发写不推荐关系数据库？</a></li><li><a class="active" aria-current="page" href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9A%E5%88%B6%E4%B8%80%E4%B8%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%E7%B3%BB%E7%BB%9F%20%EF%BC%9F.html">11 链路追踪：如何定制一个分布式链路跟踪系统 ？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/12%20%E5%BC%95%E6%93%8E%E5%88%86%E7%89%87%EF%BC%9AElasticsearch%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A3%80%E7%B4%A2%EF%BC%9F.html">12 引擎分片：Elasticsearch如何实现大数据检索？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/13%20%E5%AE%9E%E6%97%B6%E7%BB%9F%E8%AE%A1%EF%BC%9A%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%94%A8%E7%AE%97%E6%B3%95.html">13 实时统计：链路跟踪实时计算中的实用算法</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E8%B7%B3%E6%95%B0%E7%B4%A2%E5%BC%95%EF%BC%9A%E5%90%8E%E8%B5%B7%E6%96%B0%E7%A7%80ClickHouse.html">14 跳数索引：后起新秀ClickHouse</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/15%20%E5%AE%9E%E8%B7%B5%E6%96%B9%E6%A1%88%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8C%2B%2B%E8%87%AA%E5%AE%9E%E7%8E%B0%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%EF%BC%9F.html">15 实践方案：如何用C++自实现链路跟踪？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/16%20%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%EF%BC%9A%E7%94%A8%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E5%81%9A%E6%9C%8D%E5%8A%A1%E4%BC%9A%E9%81%87%E5%88%B0%E5%93%AA%E4%BA%9B%E5%9D%91%EF%BC%9F.html">16 本地缓存：用本地缓存做服务会遇到哪些坑？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/17%20%E4%B8%9A%E5%8A%A1%E8%84%9A%E6%9C%AC%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4%E5%8F%AF%E7%BC%96%E7%A8%8B%E8%AE%A2%E9%98%85%E5%BC%8F%E7%BC%93%E5%AD%98%E6%9C%8D%E5%8A%A1%E6%9B%B4%E6%9C%89%E7%94%A8%EF%BC%9F.html">17 业务脚本：为什么说可编程订阅式缓存服务更有用？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/18%20%E6%B5%81%E9%87%8F%E6%8B%86%E5%88%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%BC%93%E8%A7%A3%E6%B5%81%E9%87%8F%E5%8E%8B%E5%8A%9B%EF%BC%9F.html">18 流量拆分：如何通过架构设计缓解流量压力？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/19%20%E6%B5%81%E9%87%8F%E8%B0%83%E5%BA%A6%EF%BC%9ADNS%E3%80%81%E5%85%A8%E7%AB%99%E5%8A%A0%E9%80%9F%E5%8F%8A%E6%9C%BA%E6%88%BF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1.html">19 流量调度：DNS、全站加速及机房负载均衡</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/20%20%E6%95%B0%E6%8D%AE%E5%BC%95%E6%93%8E%EF%BC%9A%E7%BB%9F%E4%B8%80%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0.html">20 数据引擎：统一缓存数据平台</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/21%20%E4%B8%9A%E5%8A%A1%E7%BC%93%E5%AD%98%EF%BC%9A%E5%85%83%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">21 业务缓存：元数据服务如何实现？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/22%20%E5%AD%98%E5%82%A8%E6%88%90%E6%9C%AC%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8E%A8%E7%AE%97%E6%97%A5%E5%BF%97%E4%B8%AD%E5%BF%83%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%88%90%E6%9C%AC%EF%BC%9F.html">22 存储成本：如何推算日志中心的实现成本？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E7%BD%91%E5%85%B3%E7%BC%96%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E7%94%A8%E6%88%B7%E7%BD%91%E5%85%B3%E5%92%8C%E7%BC%93%E5%AD%98%E9%99%8D%E4%BD%8E%E7%A0%94%E5%8F%91%E6%88%90%E6%9C%AC%EF%BC%9F.html">23 网关编程：如何通过用户网关和缓存降低研发成本？</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B%EF%BC%9A%E5%8E%8B%E6%B5%8B%E4%B8%8D%E5%AE%8C%E5%96%84%EF%BC%8C%E6%95%88%E6%9E%9C%E5%87%8F%E4%B8%80%E5%8D%8A.html">24 性能压测：压测不完善，效果减一半</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%AD%94%E7%96%91%E8%AF%BE%E5%A0%82%20%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%80%EF%BC%89.html">答疑课堂 思考题答案（一）</a></li><li><a href="/courses/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%B8%BA%E8%80%85%E5%B8%B8%E6%88%90%EF%BC%8C%E8%A1%8C%E8%80%85%E5%B8%B8%E8%87%B3.html">结束语 为者常成，行者常至</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9A%E5%88%B6%E4%B8%80%E4%B8%AA%E5%88%86%E5%B8%83%E5%BC%8F%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA%E7%B3%BB%E7%BB%9F%20%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="11 链路追踪：如何定制一个分布式链路跟踪系统 ？" id="title">11 链路追踪：如何定制一个分布式链路跟踪系统 ？</h1>
+<div><p>你好，我是徐长龙，这节课我们讲一讲如何实现分布式链路跟踪。</p>
+<p>分布式链路跟踪服务属于写多读少的服务，是我们线上排查问题的重要支撑。我经历过的一个系统，同时支持着多条业务线，实际用上的服务器有两百台左右，这种量级的系统想排查故障，难度可想而知。</p>
+<p>因此，我结合ELK特性设计了一套十分简单的全量日志分布式链路跟踪，把日志串了起来，大大降低了系统排查难度。</p>
+<p>目前市面上开源提供的分布式链路跟踪都很抽象，当业务复杂到一定程度的时候，为核心系统定制一个符合自己业务需要的链路跟踪，还是很有必要的。</p>
+<p>事实上，实现一个分布式链路跟踪并不难，而是难在埋点、数据传输、存储、分析上，如果你的团队拥有这些能力，也可以很快制作出一个链路跟踪系统。所以下面我们一起看看，如何实现一个简单的定制化分布式链路跟踪。</p>
+<h2 id="监控行业发展现状">监控行业发展现状</h2>
+<p>在学习如何制作一个简单的分布式链路跟踪之前，为了更好了解这个链路跟踪的设计特点，我们先简单了解一下监控行业的现状。</p>
+<p>最近监控行业有一次大革新，现代的链路跟踪标准已经不拘泥于请求的链路跟踪，目前已经开始进行融合，新的标准和我们定制化的分布式链路跟踪的设计思路很相似，即Trace、Metrics、日志合并成一套系统进行建设。</p>
+<p><img alt="图片" src="/assets/d77f3acc77a0b58e0c64b198.jpg"/></p>
+<p><strong>在此之前，常见监控系统主要有三种类型：Metrics、Tracing和Logging。</strong></p>
+<p><img alt="图片" src="/assets/4922610e4cb0635064a25b23.jpg"/></p>
+<p>常见的开源Metrics有Zabbix、Nagios、Prometheus、InfluxDb、OpenFalcon，主要做各种量化指标汇总统计，比如监控系统的容量剩余、每秒请求量、平均响应速度、某个时段请求量多少。</p>
+<p>常见的开源链路跟踪有Jaeger、Zipkin、Pinpoint、Skywalking，主要是通过分析每次请求链路监控分析的系统，我么可以通过TraceID查找一次请求的依赖及调用链路，分析故障点和传导过程的耗时。</p>
+<p><img alt="图片" src="/assets/3e40839bfde1018e85da513c.jpg"/></p>
+<p><img alt="图片" src="/assets/d9daab02ef9fd2bec81cfbba.jpg"/></p>
+<p>而常见的开源Logging有ELK、Loki、Loggly，主要是对文本日志的收集归类整理，可以对错误日志进行汇总、警告，并分析系统错误异常等情况。</p>
+<p>这三种监控系统可以说是大服务集群监控的主要支柱，它们各有优点，但一直是分别建设的。这让我们的系统监控存在一些割裂和功能重复，而且每一个标准都需要独立建设一个系统，然后在不同界面对同一个故障进行分析，排查问题时十分不便。</p>
+<p>随着行业发展，三位一体的标准应运而生，这就是 <a href="https://opentelemetry.io/" target="_blank">OpenTelemetry</a> 标准（集成了OpenCensus、OpenTracing标准）。这个标准将Metrics+Tracing+Logging集成一体，这样我们监控系统的时候就可以通过三个维度综合观测系统运转情况。</p>
+<p>常见OpenTelemetry开源项目中的Prometheus、Jaeger正在遵循这个标准逐步改进实现OpenTelemetry 实现的结构如下图所示：</p>
+<p><img alt="图片" src="/assets/fe67db4c7d85fcc95e7f68a4.jpg"/></p>
+<p>事实上，分布式链路跟踪系统及监控主要提供了以下支撑服务：</p>
+<ul>
+<li>监控日志标准</li>
+<li>埋点SDK（AOP或侵入式）</li>
+<li>日志收集</li>
+<li>分布式日志传输</li>
+<li>分布式日志存储</li>
+<li>分布式检索计算</li>
+<li>分布式实时分析</li>
+<li>个性化定制指标盘</li>
+<li>系统警告</li>
+</ul>
+<p>我建议使用ELK提供的功能去实现分布式链路跟踪系统，因为它已经完整提供了如下功能：</p>
+<ul>
+<li>日志收集（Filebeat）</li>
+<li>日志传输（Kafka+Logstash）</li>
+<li>日志存储（Elasticsearch）</li>
+<li>检索计算（Elasticsearch + Kibana）</li>
+<li>实时分析（Kibana）</li>
+<li>个性定制表格查询（Kibana）</li>
+</ul>
+<p>这样一来，我只需要制定日志格式、埋点SDK，即可实现一个具有分布式链路跟踪、Metrics、日志分析系统。</p>
+<p>事实上，Log、Metrics、trace三种监控体系最大的区别就是日志格式标准，底层实现其实是很相似的。既然ELK已提供我们需要的分布式相关服务，下面我简单讲讲日志格式和SDK埋点，通过这两个点我们就可以窥见分布式链路跟踪的全貌。</p>
+<h2 id="traceid单次请求标识">TraceID单次请求标识</h2>
+<p>可以说，要想构建一个简单的Trace系统，我们首先要做的就是生成并传递TraceID。</p>
+<p><img alt="图片" src="/assets/c7d5fa9197820bc61f46bd20.jpg"/></p>
+<p>分布式链路跟踪的原理其实很简单，就是在请求发起方发送请求时或服务被请求时生成一个UUID，被请求期间的业务产生的任何日志（Warning、Info、Debug、Error）、任何<strong>依赖资源请求</strong>（MySQL、Kafka、Redis）、任何内部接口调用（Restful、Http、RPC）都会带上这个UUID。</p>
+<p>这样，当我们把所有拥有同样UUID的日志收集起来时，就可以根据时间（有误差）、RPCID（后续会介绍RPCID）或SpanID，将它们按依赖请求顺序串起来。</p>
+<p>只要日志足够详细，我们就能监控到系统大部分的工作状态，比如用户请求一个服务会调用多少个接口，每个数据查询的SQL以及具体耗时调用的内网请求参数是什么、调用的内网请求返回是什么、内网被请求的接口又做了哪些操作、产生了哪些异常信息等等。</p>
+<p>同时，我们可以通过对这些日志做归类分析，分析项目之间的调用关系、项目整体健康程度、对链路深挖自动识别出故障点等，帮助我们主动、快速地查找问题。</p>
+<h2 id="rpcid-vs-spanid-链路标识">“RPCID” VS “SpanID 链路标识”</h2>
+<p>那么如何将汇总起来的日志串联起来呢？有两种方式：span（链式记录依赖）和RPCID（层级计数器）。我们在记录日志带上UUID的同时，也带上RPCID这个信息，通过它帮我们把日志关联关系串联起来，那么这两种方式有什么区别呢？</p>
+<p>我们先看看span实现，具体如下图：</p>
+<p><img alt="图片" src="/assets/9583fb09ba602fc0933ccdf6.jpg"/></p>
+<p>结合上图，我们分析一下span的链式依赖记录方式。对于代码来说，写的很多功能会被封装成功能模块（Service、Model），我们通过组合不同的模块实现业务功能，并且记录这两个模块、两个服务间或是资源的调用依赖关系。</p>
+<p>span这个设计会通过记录自己上游依赖服务的SpanID实现上下游关系关联（放在Parent ID中），通过整理span之间的依赖关系就能组合成一个调用链路树。</p>
+<p>那RPCID方式是什么样的呢？RPCID也叫层级计数器，我在微博和好未来时都用过，为了方便理解，我们来看下面这张图：</p>
+<p><img alt="图片" src="/assets/d0373afe0705b3834b93c134.jpg"/></p>
+<p>你看，RPCID的层级计数器实现很简单，第一个接口生成RPCID为 <strong>1.1</strong> ，RPCID的<strong>前缀</strong>是1，<strong>计数器</strong>是1（日志记录为 1.1）。</p>
+<p>当所在接口请求其他接口或数据服务（MySQL、Redis、API、Kafka）时，<strong>计数器</strong>+1，并在请求当中带上1.2这个数值（因为当前的<strong>前缀</strong> + “.” + <strong>计数器值 = 1.2）</strong>，等到返回结果后，继续请求下一个资源时继续+1，期间产生的任何日志都会记录当前 <strong>前缀</strong>+“.”+<strong>计数器值</strong>。</p>
+<p>每一层收到了前缀后，都在后面加了一个累加的计数器，实际效果如下图所示：</p>
+<p><img alt="图片" src="/assets/282ea44117a94e876c89dbcc.jpg"/></p>
+<p>而被请求的接口收到请求时，如果请求传递了TraceID，那么被请求的服务会继续使用传递过来的TraceID，如果请求没有TraceID则自己生成一个。同样地，如果传递了RPCID，那么被请求的服务会将传递来的RPCID当作前缀，计数器从1开始计数。</p>
+<p>相对于span，通过这个层级计数器做出来的RPCID有两个优点。</p>
+<p>第一个优点是我们可以记录请求方日志，如果被请求方没有记录日志，那么还可以通过请求方日志观测分析被调用方性能（MySQL、Redis）。</p>
+<p>另一个优点是哪怕日志收集得不全，丢失了一些，我们还可以通过前缀有几个分隔符，判断出日志所在层级进行渲染。举个例子，假设我们不知道上图的1.5.1是谁调用的，但是根据它的UUID和层级1.5.1这些信息，渲染的时候，我们仍旧可以渲染它大概的链路位置。</p>
+<p>除此之外，我们可以利用AOP顺便将各个模块做一个Metrics性能统计分析，分析各个模块的耗时、调用次数做周期统计。</p>
+<p>同时，通过这个维度采样统计数据，能够帮助我们分析这个模块的性能和错误率。由于Metrics 这个方式产生的日志量很小，有些统计是每10秒才会产生一条Metrics统计日志，统计的数值很方便对比，很有参考价值。</p>
+<p>但是你要注意，对于一个模块内有多个分支逻辑时，Metrics很多时候取的是平均数，偶发的超时在平均数上看不出来，所以我们需要另外记录一下最大最小的延迟，才可以更好地展现。同时，这种统计只是让我们知道这个模块是否有性能问题，但是无法帮助我们分析具体的原因。</p>
+<p>回到之前的话题，我们前面提到，请求和被请求方通过传递TraceID和RPCID（或SpanID）来实现链路的跟踪，我列举几个常见的方式供你参考：</p>
+<ul>
+<li>HTTP协议放在Header；</li>
+<li>RPC协议放在meta中传递；</li>
+<li>队列可以放在消息体的Header中，或直接在消息体中传递；</li>
+<li>其他特殊情况下可以通过网址请求参数传递。</li>
+</ul>
+<p>那么应用内多线程和多协程之间如何传递TraceID呢？一般来说，我们会通过复制一份Context传递进入线程或协程，并且如果它们之前是并行关系，我们复制之后需要对下发之前的RPCID计数器加1，并把前缀和计数器合并成新的前缀，以此区分并行的链路。</p>
+<p>除此之外，我们还做了一些特殊设计，当我们的请求中带一个特殊的密语，并且设置类似X-DEBUG Header等于1时，我们可以开启在线debug模式，在被调用接口及所有依赖的服务都会输出debug级别的日志，这样我们临时排查线上问题会更方便。</p>
+<h2 id="日志类型定义">日志类型定义</h2>
+<p>可以说，只要让日志输出当前的TraceId和RPCID（SpanID），并在请求所有依赖资源时把计数传递给它们，就完成了大部分的分布式链路跟踪。下面是我定制的一些日志类型和日志格式，供你参考：</p>
+<pre><code class="language-php">## 日志类型
+
+* request.info 当前被请求接口的相关信息，如被请求接口，耗时，参数，返回值，客户端信息
+* mysql.connect mysql连接时长
+* mysql.connect.error mysql链接错误信息
+* mysql.request mysql执行查询命令时长及相关信息
+* mysql.request.error mysql操作时报错的相关信息
+* redis.connect redis 链接时长
+* redis.connect.error redis链接错误信息
+* redis.request redis执行命令
+* redis.request.error redis操作时错误
+* memcache.connect
+* memcache.connect.error
+* memcache.request.error
+* http.get 另外可以支持restful操作get put delete 
+* http.post
+* http.*.error
+
+## Metric日志类型
+
+* metric.counter
+...略
+
+## 分级日志类型
+* log.debug: debug log
+* log.trace: trace log
+* log.notice: notice log
+* log.info: info log
+* log.error: application error log
+* log.alarm: alarm log
+* log.exception: exception log
+</code></pre>
+<p>你会发现，所有对依赖资源的请求都有相关日志，这样可以帮助我们分析所有依赖资源的耗时及返回内容。此外，我们的分级日志也在trace跟踪范围内，通过日志信息可以更好地分析问题。而且，如果我们监控的是静态语言，还可以像之前说的那样，对一些模块做Metrics，定期产生日志。</p>
+<h2 id="日志格式样例">日志格式样例</h2>
+<p>日志建议使用JSON格式，所有字段除了标注为string的都建议保存为字符串类型，每个字段必须是固定数据类型，选填内容如果没有内容就直接不输出。</p>
+<p>这样设计其实是为了适配Elasticsearch+Kibana，Kibana提供了日志的聚合、检索、条件检索和数值聚合，但是对字段格式很敏感，不是数值类型就无法聚合对比。</p>
+<p>下面我给你举一个例子用于链路跟踪和监控，你主要关注它的类型和字段用途。</p>
+<pre><code class="language-json">{
+    "name": "string:全量字段介绍,必填，用于区分日志类型，上面的日志列表内容写这里",
+    "trace_id": "string:traceid，必填",
+    "rpc_id": "string:RPCID，服务端链路必填，客户端非必填",
+    "department":"部门缩写如client_frontend 必填",
+    "version": "string:当前服务版本 cpp-client-1.1 php-baseserver-1.4 java-rti-1.9，建议都填",
+    "timestamp": "int:日志记录时间，单位秒，必填",
+    
+    "duration": "float:消耗时间，浮点数 单位秒，能填就填",
+    "module": "string:模块路径，建议格式应用名称_模块名称_函数名称_动作，必填",
+    "source": "string:请求来源 如果是网页可以记录ref page，选填",
+    "uid": "string:当前用户uid，如果没有则填写为 0长度字符串，可选填，能够帮助分析用户一段时间行为",
+    "pid": "string:进程pid，如果没有填写为 0长度字符串，如果有线程可以为pid-tid格式，可选填",
+    "server_ip": "string 当前服务器ip，必填",
+    "client_ip": "string 客户端ip，选填",
+    "user_agent": "string curl/7.29.0 选填",
+    "host": "string 链接目标的ip及端口号，用于区分环境12.123.23.1:3306，选填",
+    "instance_name": "string 数据库连接配置的标识，比如rti的数据库连接，选填",
+    "db": "string 数据库名称如：peiyou_stastic，选填",
+    "code": "string:各种驱动或错误或服务的错误码，选填，报错误必填",
+    "msg": "string 错误信息或其他提示信息，选填，报错误必填",
+    "backtrace": "string 错误的backtrace信息，选填，报错误必填",
+    "action": "string 可以是url、sql、redis命令、所有让远程执行的命令，必填",
+    "param": "string 通用参数模板，用于和script配合，记录所有请求参数，必填",
+    "file": "string userinfo.php，选填",
+    "line": "string 232，选填",
+    "response": "string:请求返回的结果，可以是本接口或其他资源返回的数据，如果数据太长会影响性能，选填",
+    "response_length": "int:相应内容结果的长度，选填",
+    "dns_duration": "float dns解析时间，一般http mysql请求域名的时候会出现此选项，选填",
+    "extra": "json 放什么都可以,用户所有附加数据都扔这里"
+}
+
+## 样例
+被请求日志
+{
+    "x_name": "request.info",
+    "x_trace_id": "123jiojfdsao",
+    "x_rpc_id": "0.1",
+    "x_version": "php-baseserver-4.0",
+    "x_department":"tal_client_frontend",
+    "x_timestamp": 1506480162,
+    "x_duration": 0.021,
+    "x_uid": "9527",
+    "x_pid": "123",
+    "x_module": "js_game1_start",
+    "x_user_agent": "string curl/7.29.0",
+    "x_action": "http://testapi.speiyou.com/v3/user/getinfo?id=9527",
+    "x_server_ip": "192.168.1.1:80",
+    "x_client_ip": "192.168.1.123",
+     "x_param": "json string",
+    "x_source": "www.baidu.com",
+    "x_code": "200",
+    "x_response": "json:api result",
+    "x_response_len": 12324
+}
+
+### mysql 链接性能日志
+{
+    "x_name": "mysql.connect",
+    "x_trace_id": "123jiojfdsao",
+    "x_rpc_id": "0.2",
+    "x_version": "php-baseserver-4",
+    "x_department":"tal_client_frontend",
+    "x_timestamp": 1506480162,
+    "x_duration": 0.024,
+    "x_uid": "9527",
+    "x_pid": "123",
+    "x_module": "js_mysql_connect",
+    "x_instance_name": "default",
+    "x_host": "12.123.23.1:3306",
+    "x_db": "tal_game_round",
+    "x_msg": "ok",
+    "x_code": "1",
+    "x_response": "json:****"
+}
+
+### Mysql 请求日志
+{
+    "x_name": "mysql.request",
+    "x_trace_id": "123jiojfdsao",
+    "x_rpc_id": "0.2",
+    "x_version": "php-4",
+    "x_department":"tal_client_frontend",
+    "x_timestamp": 1506480162,
+    "x_duration": 0.024,
+    "x_uid": "9527",
+    "x_pid": "123",
+    "x_module": "js_game1_round_sigup",
+    "x_instance_name": "default",
+    "x_host": "12.123.23.1:3306",
+    "x_db": "tal_game_round",
+    "x_action": "select * from xxx where xxxx",
+    "x_param": "json string",
+    "x_code": "1",
+    "x_msg": "ok",
+    "x_response": "json:****"
+}
+
+### http 请求日志
+{
+    "x_name": "http.post",
+    "x_trace_id": "123jiojfdsao",
+    "x_department":"tal_client_frontend",
+    "x_rpc_id": "0.3",
+    "x_version": "php-4",
+    "x_timestamp": 1506480162,
+    "x_duration": 0.214,
+    "x_uid": "9527",
+    "x_pid": "123",
+    "x_module": "js_game1_round_win_report",
+    "x_action": "http://testapi.speiyou.com/v3/game/report",
+    "x_param": "json:",
+    "x_server_ip": "192.168.1.1",
+    "x_msg": "ok",
+    "x_code": "200",
+    "x_response_len": 12324,
+    "x_response": "json:responsexxxx",
+    "x_dns_duration": 0.001
+}
+
+### level log info日志
+{
+    "x_name": "log.info",
+    "x_trace_id": "123jiojfdsao",
+    "x_department":"tal_client_frontend",
+    "x_rpc_id": "0.3",
+    "x_version": "php-4",
+    "x_timestamp": 1506480162,
+    "x_duration": 0.214,
+    "x_uid": "9527",
+    "x_pid": "123",
+    "x_module": "game1_round_win_round_end",
+    "x_file": "userinfo.php",
+    "x_line": "232",
+    "x_msg": "ok",
+    "x_code": "201",
+    "extra": "json game_id lesson_num  xxxxx"
+}
+
+### exception 异常日志
+{
+    "x_name": "log.exception",
+    "x_trace_id": "123jiojfdsao",
+    "x_department":"tal_client_frontend",
+    "x_rpc_id": "0.3",
+    "x_version": "php-4",
+    "x_timestamp": 1506480162,
+    "x_duration": 0.214,
+    "x_uid": "9527",
+    "x_pid": "123",
+    "x_module": "game1_round_win",
+    "x_file": "userinfo.php",
+    "x_line": "232",
+    "x_msg": "exception:xxxxx call stack",
+    "x_code": "hy20001",
+    "x_backtrace": "xxxxx.php(123) gotError:..."
+}
+
+### 业务自发告警日志
+{
+    "x_name": "log.alarm",
+    "x_trace_id": "123jiojfdsao",
+    "x_department":"tal_client_frontend",
+    "x_rpc_id": "0.3",
+    "x_version": "php-4",
+    "x_timestamp": 1506480162,
+    "x_duration": 0.214,
+    "x_uid": "9527",
+    "x_pid": "123",
+    "x_module": "game1_round_win_round_report",
+    "x_file": "game_win_notify.php",
+    "x_line": "123",
+    "x_msg": "game report request fail! retryed three time..",
+    "x_code": "201",
+    "x_extra": "json game_id lesson_num  xxxxx"
+}
+
+### matrics 计数器
+
+{
+    "x_name": "metrix.count",
+    "x_trace_id": "123jiojfdsao",
+    "x_department":"tal_client_frontend",
+    "x_rpc_id": "0.3",
+    "x_version": "php-4",
+    "x_timestamp": 1506480162,
+    "x_uid": "9527",
+    "x_pid": "123",
+    "x_module": "game1_round_win_click",
+    "x_extra": "json curl invoke count"
+}
+</code></pre>
+<p>这个日志不仅可以用在服务端，还可以用在客户端。客户端每次被点击或被触发时，都可以自行生成一个新的TraceID，在请求服务端时就会带上它。通过这个日志，我们可以分析不同地域访问服务的性能，也可以用作用户行为日志，仅仅需添加我们的日志类型即可。</p>
+<p>上面的日志例子基本把我们依赖的资源情况描述得很清楚了。另外，我补充一个技巧，性能记录日志可以将被请求的接口也记录成一个日志，记录自己的耗时等信息，方便之后跟请求方的请求日志对照，这样可分析出两者之间是否有网络延迟等问题。</p>
+<p>除此之外，这个设计还有一个核心要点：研发并不一定完全遵守如上字段规则生成日志，业务只要保证项目范围内输出的日志输出所有必填项目（TraceID，RPCID/SpanID，TimeStamp），同时保证数值型字段功能及类型稳定，即可实现trace。</p>
+<p>我们完全可以汇总日志后，再对不同的日志字段做自行解释，定制出不同业务所需的统计分析，这正是ELK最强大的地方。</p>
+<p>为什么大部分设计都是记录依赖资源的日志呢？原因在于在没有IO的情况下，程序大部分都是可控的（侧重计算的服务除外）。只有IO类操作容易出现不稳定因素，并且日志记录过多也会影响系统性能，通过记录对数据源的操作能帮助我们排查业务逻辑的错误。</p>
+<p>我们刚才提到日志如果过多会影响接口性能，那如何提高日志的写吞吐能力呢？这里我为你归纳了几个注意事项和技巧：</p>
+<p>1.提高写线程的个数，一个线程写一个日志，也可以每个日志文件单独放一个磁盘，但是你要注意控制系统的IOPS不要超过100；</p>
+<p>2.当写入日志长度超过1kb时，不要使用多个线程高并发写同一个文件。原因参考 <a href="https://www.notthewizard.com/2014/06/17/are-files-appends-really-atomic/" target="_blank">append is not Atomic</a>，简单来说就是文件的append操作对于写入长度超过缓冲区长度的操作不是原子性的，多线程并发写长内容到同一个文件，会导致日志乱序；</p>
+<p>3.日志可以通过内存暂存，汇总达到一定数据量或缓存超过2秒后再落盘，这样可以减少过小日志写磁盘系统的调用次数，但是代价是被强杀时会丢日志；</p>
+<p>4.日志缓存要提前malloc使用固定长度缓存，不要频繁分配回收，否则会导致系统整体缓慢；</p>
+<p>5.服务被kill时，记得拦截信号，快速fsync内存中日志到磁盘，以此减少日志丢失的可能。</p>
+<h2 id="侵入式埋点sdk-vs-aop方式埋点">“侵入式埋点SDK”VS“AOP方式埋点”</h2>
+<p>最后，我们再说说SDK。事实上，使用“ELK+自定义的标准”基本上已经能实现大多数的分布式链路跟踪系统，使用Kibana可以很快速地对各种日志进行聚合分析统计。</p>
+<p>虽然行业中出现过很多链路跟踪系统服务公司，做了很多APM等类似产品，但是能真正推广开的服务实际占少数，究其原因，我认为是以下几点：</p>
+<ul>
+<li>分布式链路跟踪的日志吞吐很大，需要耗费大量的资源，成本高昂；</li>
+<li>通用分布式链路跟踪服务很难做贴近业务的个性化，不能定制的第三方服务不如用开源；</li>
+<li>分布式链路跟踪的埋点库对代码的侵入性大，需要研发手动植入到业务代码里，操作很麻烦，而且不够灵活。</li>
+<li>另外，这种做法对语言也有相关的限制，因为目前只有Java通过动态启动注入agent，才实现了静态语言AOP注入。我之前推广时，也是统一了内网项目的开源框架，才实现了统一的链路跟踪。</li>
+</ul>
+<p>那么如果底层代码不能更新，如何简单暴力地实现链路跟踪呢？</p>
+<p>这时候我们可以改造分级日志，让它每次在落地的时候都把TraceId和RPCID（或SpanID）带上，就会有很好的效果。如果数据底层做了良好的封装，我们可以在发起请求部分中写一些符合标准性能的日志，在框架的统一异常处理中也注入我们的标准跟踪，即可实现关键点的监控。</p>
+<p>当然如果条件允许，我们最好提供一个标准的SDK，让业务研发伙伴按需调用，这能帮助我们统一日志结构。毕竟手写很容易格式错乱，需要人工梳理，不过即使混乱，也仍旧有规律可言，这是ELK架构的强大之处，它的全文检索功能其实不在乎你的输入格式，但是数据统计类却需要我们确保各个字段用途固定。</p>
+<p>最后再讲点其他日志的注意事项，可能你已经注意到了，这个设计日志是全量的。很多链路跟踪其实都是做的采样方式，比如Jaeger在应用本地会部署一个Agent，对数据暂存汇总，统计出每个接口的平均响应时间，对具有同样特征的请求进行归类汇总，这样可以大大降低服务端压力。</p>
+<p>但这么做也有缺点，当我们有一些小概率的业务逻辑错误，在采样中会被遗漏。所以很多核心系统会记录全量日志，周边业务记录采样日志。</p>
+<p>由于我们日志结构很简单，如有需要可以自行实现一个类似Agent的功能，降低我们存储计算压力。甚至我们可以在服务端本地保存原始日志7天，当我们查找某个Trace日志的时候，直接请求所有服务器在本地查找。事实上，在写多读少的情况下，为了追一个Trace详细过程而去请求200个服务器，这时候即使等十秒钟都是可以接受的。</p>
+<p>最后，为了方便理解，这里给你提供一个我之前写的laravel框架的Aop trace SDK 例子 <a href="https://github.com/137-rick/laravel-aop-trace/tree/master" target="_blank">laravel-aop-trace</a> 供你参考</p>
+<h2 id="总结">总结</h2>
+<p>系统监控一直是服务端重点关注的功能，我们常常会根据链路跟踪和过程日志，去分析排查线上问题。也就是说，监控越是贴近业务、越定制化，我们对线上业务运转情况的了解就越直观。</p>
+<p>不过，实现一个更符合业务的监控系统并不容易，因为基础运维监控只会监控线上请求流量、响应速度、系统报错、系统资源等基础监控指标，当我们要监控业务时，还需要人工在业务系统中嵌入大量代码。而且，因为这些服务属于开源，还要求我们必须对监控有较深的了解，投入大量精力才可以。</p>
+<p>好在技术逐渐成熟，通用的简单日志传输索引统计服务开始流行，其中最强的组合就是ELK。通过这类分布式日志技术，能让我们轻松实现个性化监控需求。日志格式很杂乱也没关系，只要将<strong>TraceID</strong>和<strong>RPCID</strong>（或SpanID）在请求依赖资源时传递下去，并将沿途的日志都记录对应的字段即可。也正因如此，ELK流行起来，很多公司的核心业务，都会依托ELK自定义一套自己的监控系统。</p>
+<p>不过这么做，只能让我们建立起一个粗旷的跟踪系统，后续分析的难度和投入成本依然很大，因为ELK需要投入<strong>大量硬件资源</strong>来帮我们处理海量数据，相关知识我们后续章节再探讨，</p>
+<h2 id="思考题">思考题</h2>
+<p>请你思考一下，既然我们通过ELK实现Trace那么简单，为什么会在当年那么难实现？</p>
+<p>欢迎你在评论区与我交流讨论，我们下节课见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>09 实战：利用OAuth 2.0实现一个OpenID Connect用户身份认证协议. · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">OAuth2.0实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">16 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>OAuth2.0实战课</strong><ul><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6OAuth%202.0%EF%BC%9F.html">00 开篇词 为什么要学OAuth 2.0？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/01%20OAuth%202.0%E6%98%AF%E8%A6%81%E9%80%9A%E8%BF%87%E4%BB%80%E4%B9%88%E6%96%B9%E5%BC%8F%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">01 OAuth 2.0是要通过什么方式解决什么问题？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E6%8E%88%E6%9D%83%E7%A0%81%E8%AE%B8%E5%8F%AF%E7%B1%BB%E5%9E%8B%E4%B8%AD%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%89%E6%8E%88%E6%9D%83%E7%A0%81%EF%BC%9F.html">02 授权码许可类型中，为什么一定要有授权码？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1%EF%BC%9A%E6%8E%88%E6%9D%83%E7%A0%81%E5%92%8C%E8%AE%BF%E9%97%AE%E4%BB%A4%E7%89%8C%E7%9A%84%E9%A2%81%E5%8F%91%E6%B5%81%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">03 授权服务：授权码和访问令牌的颁发流程是怎样的？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E5%9C%A8OAuth%202.0%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8JWT%E7%BB%93%E6%9E%84%E5%8C%96%E4%BB%A4%E7%89%8C%EF%BC%9F.html">04 在OAuth 2.0中，如何使用JWT结构化令牌？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E5%A6%82%E4%BD%95%E5%AE%89%E5%85%A8%E3%80%81%E5%BF%AB%E9%80%9F%E5%9C%B0%E6%8E%A5%E5%85%A5OAuth%202.0%EF%BC%9F.html">05 如何安全、快速地接入OAuth 2.0？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E9%99%A4%E4%BA%86%E6%8E%88%E6%9D%83%E7%A0%81%E8%AE%B8%E5%8F%AF%E7%B1%BB%E5%9E%8B%EF%BC%8COAuth%202.0%E8%BF%98%E6%94%AF%E6%8C%81%E4%BB%80%E4%B9%88%E6%8E%88%E6%9D%83%E6%B5%81%E7%A8%8B%EF%BC%9F.html">06 除了授权码许可类型，OAuth 2.0还支持什么授权流程？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A7%BB%E5%8A%A8App%E4%B8%AD%E4%BD%BF%E7%94%A8OAuth%202.0%EF%BC%9F.html">07 如何在移动App中使用OAuth 2.0？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E5%AE%9E%E8%B7%B5OAuth%202.0%E6%97%B6%EF%BC%8C%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%BD%93%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%EF%BC%9F.html">08 实践OAuth 2.0时，使用不当可能会导致哪些安全漏洞？</a></li><li><a class="active" aria-current="page" href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%88%A9%E7%94%A8OAuth%202.0%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAOpenID%20Connect%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E5%8D%8F%E8%AE%AE..html">09 实战：利用OAuth 2.0实现一个OpenID Connect用户身份认证协议.</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E4%B8%B2%E8%AE%B2%EF%BC%9AOAuth%202.0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E4%B8%8E%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98.html">10 串讲：OAuth 2.0的工作流程与安全问题</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8Spring%20Security%E6%90%AD%E5%BB%BA%E4%B8%80%E5%A5%97%E5%9F%BA%E4%BA%8EJWT%E7%9A%84OAuth%202.0%E6%9E%B6%E6%9E%84.html">11 实战案例：使用Spring Security搭建一套基于JWT的OAuth 2.0架构</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/12%20%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%9F%BA%E4%BA%8EOAuth%202.0_JWT%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84.html">12 架构案例：基于OAuth 2.0_JWT的微服务参考架构</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/13%20%E5%90%84%E5%A4%A7%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8OAuth%202.0%E7%9A%84%EF%BC%9F.html">13 各大开放平台是如何使用OAuth 2.0的？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA%EF%BC%9AOAuth%202.0%20%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">14 查漏补缺：OAuth 2.0 常见问题答疑</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%8A%E5%AD%A6%E4%B9%A0%E5%BD%93%E6%88%90%E4%B8%80%E7%A7%8D%E4%B9%A0%E6%83%AF.html">结束语 把学习当成一种习惯</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%88%A9%E7%94%A8OAuth%202.0%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAOpenID%20Connect%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E5%8D%8F%E8%AE%AE..md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="09 实战：利用OAuth 2.0实现一个OpenID Connect用户身份认证协议." id="title">09 实战：利用OAuth 2.0实现一个OpenID Connect用户身份认证协议.</h1>
+<div><p>　　你好，我是王新栋。</p>
+<p>　　如果你是一个第三方软件开发者，在实现用户登录的逻辑时，除了可以让用户新注册一个账号再登录外，还可以接入微信、微博等平台，让用户使用自己的微信、微博账号去登录。同时，如果你的应用下面又有多个子应用，还可以让用户只登录一次就能访问所有的子应用，来提升用户体验。</p>
+<p>　　这就是联合登录和单点登录了。再继续深究，它们其实都是 OpenID Connect（简称 OIDC）的应用场景的实现。那 OIDC 又是什么呢？</p>
+<p>　　今天，我们就来学习下 OIDC 和 OAuth 2.0 的关系，以及如何用 OAuth 2.0 来实现一个 OIDC 用户身份认证协议。</p>
+<h2 id="oidc-是什么">OIDC 是什么？</h2>
+<p>　　OIDC 其实就是一种用户身份认证的开放标准。使用微信账号登录极客时间的场景，就是这种开放标准的实践。</p>
+<p>　　说到这里，你可能要发问了：“不对呀，使用微信登录第三方 App 用的不是 OAuth 2.0 开放协议吗，怎么又扯上 OIDC 了呢？”</p>
+<p>　　没错，用微信登录某第三方软件，确实使用的是 OAuth 2.0。但 OAuth2.0 是一种授权协议，而不是身份认证协议。OIDC 才是身份认证协议，而且是基于 OAuth 2.0 来执行用户身份认证的互通协议。更概括地说，OIDC 就是直接基于 OAuth 2.0 构建的身份认证框架协议。</p>
+<p>　　换种表述方式，<strong>OIDC= 授权协议 + 身份认证</strong>，是 OAuth 2.0 的超集。为方便理解，我们可以把 OAuth 2.0 理解为面粉，把 OIDC 理解为面包。这下，你是不是就理解它们的关系了？因此，我们说“第三方 App 使用微信登录用到了 OAuth 2.0”没有错，说“使用到了 OIDC”更没有错。</p>
+<p>　　考虑到单点登录、联合登录，都遵循的是 OIDC 的标准流程，因此今天我们就讲讲如何利用 OAuth2.0 来实现一个 OIDC，“高屋建瓴” 地去看问题。掌握了这一点，我们再去做单点登录、联合登录的场景，以及其他更多关于身份认证的场景，就都不再是问题了。</p>
+<h2 id="oidc-和-oauth-2-0-的角色对应关系">OIDC 和 OAuth 2.0 的角色对应关系</h2>
+<p>　　说到“如何利用 OAuth 2.0 来构建 OIDC 这样的认证协议”，我们可以想到一个切入点，这个切入点就是 OAuth 2.0 的四种角色。</p>
+<p>　　OAuth 2.0 的授权码许可流程的运转，需要资源拥有者、第三方软件、授权服务、受保护资源这 4 个角色间的顺畅通信、配合才能够完成。如果我们要想在 OAuth 2.0 的授权码许可类型的基础上，来构建 OIDC 的话，这 4 个角色仍然要继续发挥 “它们的价值”。那么，这 4 个角色又是怎么对应到 OIDC 中的参与方的呢？</p>
+<p>　　那么，我们就先想想一个关于身份认证的协议框架，应该有什么角色。你可能已经想出来了，它需要一个登录第三方软件的最终用户、一个第三方软件，以及一个认证服务来为这个用户提供身份证明的验证判断。</p>
+<p>　　没错，这就是 OIDC 的三个主要角色了。在 OIDC 的官方标准框架中，这三个角色的名字是：</p>
+<p>　　EU（End User），代表最终用户。</p>
+<p>　　RP（Relying Party），代表认证服务的依赖方，就是上面我提到的第三方软件。</p>
+<p>　　OP（OpenID Provider），代表提供身份认证服务方。</p>
+<p>　　EU、RP 和 OP 这三个角色对于 OIDC 非常重要，我后面也会时常使用简称来描述，希望你能先记住。</p>
+<p>　　现在很多 App 都接入了微信登录，那么微信登录就是一个大的身份认证服务（OP）。一旦我们有了微信账号，就可以登录所有接入了微信登录体系的 App（RP），这就是我们常说的联合登录。</p>
+<p>　　现在，我们就借助极客时间的例子，来看一下 OAuth 2.0 的 4 个角色和 OIDC 的 3 个角色之间的对应关系：</p>
+<p>　　<img alt="" src="/assets/edb13f309a330a03afb10412.webp"/></p>
+<p>　　图1 OAuth 2.0和OIDC的角色对应关系</p>
+<h2 id="oidc-和-oauth-2-0-的关键区别">OIDC 和 OAuth 2.0 的关键区别</h2>
+<p>　　看到这张角色对应关系图，你是不是有点 “恍然大悟” 的感觉：要实现一个 OIDC 协议，不就是直接实现一个 OAuth 2.0 协议吗。没错，我在这一讲的开始也说了，OIDC 就是基于 OAuth 2.0 来实现的一个身份认证协议框架。</p>
+<p>　　我再继续给你画一张 OIDC 的通信流程图，你就更清楚 OIDC 和 OAuth 2.0 的关系了：</p>
+<p>　　<img alt="" src="/assets/aae517e3c8e79ec1caebcb67.webp"/></p>
+<p>　　图2 基于授权码流程的OIDC通信流程</p>
+<p>　　可以发现，一个基于授权码流程的 OIDC 协议流程，跟 OAuth 2.0 中的授权码许可的流程几乎完全一致，唯一的区别就是多返回了一个 <strong>ID_TOKEN</strong>，我们称之为 <strong>ID 令牌</strong>。这个令牌是身份认证的关键。所以，接下来我就着重和你讲一下这个令牌，而不再细讲 OIDC 的整个流程。</p>
+<h3 id="oidc-中的-id-令牌生成和解析方法">OIDC 中的 ID 令牌生成和解析方法</h3>
+<p>　　在图 2 的 OIDC 通信流程的第 6 步，我们可以看到 ID 令牌（ID_TOKEN）和访问令牌（ACCESS_TOKEN）是一起返回的。关于为什么要同时返回两个令牌，我后面再和你分析。我们先把焦点放在 ID 令牌上。</p>
+<p>　　我们知道，访问令牌不需要被第三方软件解析，因为它对第三方软件来说是不透明的。但 ID 令牌需要能够被第三方软件解析出来，因为第三方软件需要获取 ID 令牌里面的内容，来处理用户的登录态逻辑。</p>
+<p>　　那 <strong>ID 令牌的内容是什么呢</strong>？</p>
+<p>　　首先，ID 令牌是一个 JWT 格式的令牌。你可以到[第 4 讲]中复习下 JWT 的相关内容。这里需要强调的是，虽然 JWT 令牌是一种自包含信息体的令牌，为将其作为 ID 令牌带来了方便性，但是因为 ID 令牌需要能够标识出用户、失效时间等属性来达到身份认证的目的，所以要将其作为 OIDC 的 ID 令牌时，下面这 5 个 JWT 声明参数也是必须要有的。</p>
+<p>　　iss，令牌的颁发者，其值就是身份认证服务（OP）的 URL。</p>
+<p>　　sub，令牌的主题，其值是一个能够代表最终用户（EU）的全局唯一标识符。</p>
+<p>　　aud，令牌的目标受众，其值是三方软件（RP）的 app_id。</p>
+<p>　　exp，令牌的到期时间戳，所有的 ID 令牌都会有一个过期时间。</p>
+<p>　　iat，颁发令牌的时间戳。</p>
+<p>　　生成 ID 令牌这部分的示例代码如下：</p>
+<pre><code class="language-java">　　String id_token=genrateIdToken(appId,user);
+　　private String genrateIdToken(String appId,String user){
+　　    String sharedTokenSecret="hellooauthhellooauthhellooauthhellooauth";
+　　    Key key = new SecretKeySpec(sharedTokenSecret.getBytes(),
+　　            SignatureAlgorithm.HS256.getJcaName());
+　　  
+       Map&lt;String, Object&gt; headerMap = new HashMap&lt;&gt;();
+　　    headerMap.put("typ", "JWT");
+　　    headerMap.put("alg", "HS256");
+
+　　    Map&lt;String, Object&gt; payloadMap = new HashMap&lt;&gt;();
+　　    payloadMap.put("iss", "http://localhost:8081/");
+　　    payloadMap.put("sub", user);
+　　    payloadMap.put("aud", appId);
+　　    payloadMap.put("exp", 1584105790703L);
+　　    payloadMap.put("iat", 1584105948372L);
+　　    return Jwts.builder().setHeaderParams(headerMap).setClaims(payloadMap).signWith(key,SignatureAlgorithm.HS256).compact();
+　　}
+</code></pre>
+<p>　　接下来，我们再看看<strong>处理用户登录状态的逻辑是如何处理的</strong>。</p>
+<p>　　你可以先试想一下，如果 “不跟 OIDC 扯上关系”，也就是 “单纯” 构建一个用户身份认证登录系统，我们是不是得保存用户登录的会话关系。一般的做法是，要么放在远程服务器上，要么写进浏览器的 cookie 中，同时为会话 ID 设置一个过期时间。</p>
+<p>　　但是，当我们有了一个 JWT 这样的结构化信息体的时候，尤其是包含了令牌的主题和过期时间后，不就是有了一个“天然”的会话关系信息么。</p>
+<p>　　所以，依靠 JWT 格式的 ID 令牌，就足以让我们解决身份认证后的登录态问题。这也就是为什么在 OIDC 协议里面要返回 ID 令牌的原因，<strong>ID 令牌才是 OIDC 作为身份认证协议的关键所在</strong>。</p>
+<p>　　那么有了 ID 令牌后，第三方软件应该如何解析它呢？接下来，我们看一段解析 ID 令牌的具体代码，如下：</p>
+<pre><code class="language-java">　　private Map&lt;String,String&gt; parseJwt(String jwt){
+　　        String sharedTokenSecret="hellooauthhellooauthhellooauthhellooauth";
+　　        Key key = new SecretKeySpec(sharedTokenSecret.getBytes(),
+　　                SignatureAlgorithm.HS256.getJcaName());
+
+　　        Map&lt;String,String&gt; map = new HashMap&lt;String, String&gt;();
+　　        Jws&lt;Claims&gt; claimsJws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
+　　        Claims body = claimsJws.getBody();
+　　        map.put("sub",body.getSubject());
+　　        map.put("aud",body.getAudience());
+　　        map.put("iss",body.getIssuer());
+　　        map.put("exp",String.valueOf(body.getExpiration().getTime()));
+　　        map.put("iat",String.valueOf(body.getIssuedAt().getTime()));
+　　        return map;
+　　    }
+</code></pre>
+<p>　　需要特别指出的是，第三方软件解析并验证 ID 令牌的合法性之后，不需要将整个 JWT 信息保存下来，只需保留 JWT 中的 PAYLOAD（数据体）部分就可以了。因为正是这部分内容，包含了身份认证所需要的用户唯一标识等信息。</p>
+<p>　　另外，在验证 JWT 合法性的时候，因为 ID 令牌本身已经被身份认证服务（OP）的密钥签名过，所以关键的一点是合法性校验时需要做签名校验。具体的加密方法和校验方法，你可以回顾下[第 4 讲]。</p>
+<p>　　这样当第三方软件（RP）拿到 ID 令牌之后，就已经获得了处理身份认证标识动作的信息，也就是拿到了那个能够唯一标识最终用户（EU）的 ID 值，比如 3521。</p>
+<h3 id="用访问令牌获取-id-令牌之外的信息">用访问令牌获取 ID 令牌之外的信息</h3>
+<p>　　但是，为了提升第三方软件对用户的友好性，在页面上显示 “您好，3521” 肯定不如显示 “您好，小明同学”的体验好。这里的 “小明同学”，恰恰就是用户的昵称。</p>
+<p>　　那如何来获取“小明同学”这个昵称呢。这也很简单，就是<strong>通过返回的访问令牌 access_token 来重新发送一次请求</strong>。当然，这个流程我们现在也已经很熟悉了，它属于 OAuth 2.0 标准流程中的请求受保护资源服务的流程。</p>
+<p>　　这也就是为什么在 OIDC 协议里面，既给我们返回 ID 令牌又返回访问令牌的原因了。在保证用户身份认证功能的前提下，如果想获取更多的用户信息，就再通过访问令牌获取。在 OIDC 框架里，这部分内容叫做创建 UserInfo 端点和获取 UserInfo 信息。</p>
+<p>　　这样看下来，细粒度地去看 OIDC 的流程就是：<strong>生成 ID 令牌 -&gt; 创建 UserInfo 端点 -&gt; 解析 ID 令牌 -&gt; 记录登录状态 -&gt; 获取 UserInfo</strong>。</p>
+<p>　　好了，利用 OAuth 2.0 实现一个 OIDC 框架的工作，我们就做完了。你可以到<a href="https://github.com/xindongbook/oauth2-code/tree/master/src/com/oauth/ch09" target="_blank">GitHub</a>上查看这些流程的完整代码。现在，我再来和你小结下。</p>
+<p>　　用 OAuth 2.0 实现 OIDC 的最关键的方法是：在原有 OAuth 2.0 流程的基础上增加 ID 令牌和 UserInfo 端点，以保障 OIDC 中的第三方软件能够记录用户状态和获取用户详情的功能。</p>
+<p>　　因为第三方软件可以通过解析 ID 令牌的关键用户标识信息来记录用户状态，同时可以通过 Userinfo 端点来获取更详细的用户信息。有了用户态和用户信息，也就理所当然地实现了一个身份认证。</p>
+<p>　　接下来，我们就具体看看如何实现单点登录（Single Sign On，SSO）。</p>
+<h2 id="单点登录">单点登录</h2>
+<p>　　一个用户 G 要登录第三方软件 A，A 有三个子应用，域名分别是 a1.com、a2.com、a3.com。如果 A 想要为用户提供更流畅的登录体验，让用户 G 登录了 a1.com 之后也能顺利登录其他两个域名，就可以创建一个身份认证服务，来支持 a1.com、a2.com 和 a3.com 的登录。</p>
+<p>　　这就是我们说的单点登录，“一次登录，畅通所有”。</p>
+<p>　　那么，可以使用 OIDC 协议标准来实现这样的单点登录吗？我只能说 “太可以了”。如下图所示，只需要让第三方软件（RP）重复我们 OIDC 的通信流程就可以了。</p>
+<p>　　<img alt="" src="/assets/ea5c1aad1bdc14191a63497a.webp"/></p>
+<p>　　图3 单点登录的通信流程</p>
+<p>　　你看，单点登录就是 OIDC 的一种具体应用方式，只要掌握了 OIDC 框架的原理，实现单点登录就不在话下了。关于单点登录的具体实现，在 GitHub 上搜索“通过 OIDC 来实现单点登录”，你就可以看到很多相关的开源内容。</p>
+<h2 id="总结">总结</h2>
+<p>　　在一些较大的、已经具备身份认证服务的平台上，你可能并没有发现 OIDC 的描述，但大可不必纠结。有时候，我们可能会困惑于，到底是先有 OIDC 这样的标准，还是先有类似微信登录这样的身份认证实现方式呢？</p>
+<p>　　其实，要理解这层先后关系，我们可以拿设计模式来举例。当你想设计一个较为松耦合、可扩展的系统时，即使没有接触过设计模式，通过不断地尝试修改后，也会得出一个逐渐符合了设计模式那样“味道”的代码架构思路。理解 OIDC 解决身份认证问题的思路，也是同样的道理。</p>
+<p>　　今天，我们在 OAuth2.0 的基础上实现了一个 OIDC 的流程，我希望你能记住以下两点。</p>
+<p>　　<strong>OAuth 2.0 不是一个身份认证协议</strong>，请一定要记住这点。身份认证强调的是“谁的问题”，而 OAuth2.0 强调的是授权，是“可不可以”的问题。但是，我们可以在 OAuth2.0 的基础上，通过增加 ID 令牌来获取用户的唯一标识，从而就能够去实现一个身份认证协议。</p>
+<p>　　有些 App 不想非常麻烦地自己设计一套注册和登录认证流程，就会寻求统一的解决方案，然后势必会出现一个平台来收揽所有类似的认证登录场景。我们再反过来理解也是成立的。如果有个拥有海量用户的、大流量的访问平台，来<strong>提供一套统一的登录认证服务</strong>，让其他第三方应用来对接，不就可以解决一个用户使用同一个账号来登录众多第三方 App 的问题了吗？而 OIDC，就是这样的登录认证场景的开放解决方案。</p>
+<p>　　说到这里，你是不是对 OIDC 理解得更透彻了呢？好了，让我们看看今天我为了大家留了什么思考题吧。</p>
+<h2 id="思考题">思考题</h2>
+<p>　　如果你自己通过 OAuth 2.0 来实现一个类似 OIDC 的身份认证协议，你觉得需要注意哪些事项呢？</p>
+<p>　　欢迎你在留言区分享你的观点，也欢迎你把今天的内容分享给其他朋友，我们一起交流。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

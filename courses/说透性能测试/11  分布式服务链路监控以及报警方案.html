@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>11  分布式服务链路监控以及报警方案 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/index.html">说透性能测试</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">21 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>说透性能测试</strong><ul><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E4%B8%AA%E6%B5%8B%E8%AF%95%E4%BA%BA%E9%83%BD%E8%A6%81%E5%AD%A6%E5%A5%BD%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%EF%BC%9F.html">00 开篇词  为什么每个测试人都要学好性能测试？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/01%20%20JMeter%20%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5.html">01  JMeter 的核心概念</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/02%20%20JMeter%20%E5%8F%82%E6%95%B0%E5%8C%96%E7%AD%96%E7%95%A5.html">02  JMeter 参数化策略</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/03%20%20%E6%9E%84%E5%BB%BA%E5%B9%B6%E6%89%A7%E8%A1%8C%20JMeter%20%E8%84%9A%E6%9C%AC%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF.html">03  构建并执行 JMeter 脚本的正确姿势</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/04%20%20JMeter%20%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91%E5%85%B6%E5%AE%9E%E5%B9%B6%E4%B8%8D%E9%9A%BE.html">04  JMeter 二次开发其实并不难</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/05%20%20%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20JMeter%20API%20%E5%BC%80%E5%8F%91%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%EF%BC%9F.html">05  如何基于 JMeter API 开发性能测试平台？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/06%20%20Nginx%20%E5%9C%A8%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8.html">06  Nginx 在系统架构中的作用</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/07%20%20%E4%BD%A0%E7%9C%9F%E7%9A%84%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E5%88%B6%E5%AE%9A%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%84%E7%9B%AE%E6%A0%87%E5%90%97%EF%BC%9F.html">07  你真的知道如何制定性能测试的目标吗？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/08%20%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E6%84%8F%E4%B9%89.html">08  性能测试场景的分类和意义</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/09%20%20%E5%A6%82%E4%BD%95%E5%88%B6%E5%AE%9A%E4%B8%80%E4%BB%BD%E6%9C%89%E6%95%88%E7%9A%84%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88%EF%BC%9F.html">09  如何制定一份有效的性能测试方案？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/10%20%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9B%91%E6%8E%A7%20Linux%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%A6%81%E7%82%B9.html">10  命令行监控 Linux 服务器的要点</a></li><li><a class="active" aria-current="page" href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/11%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%E4%BB%A5%E5%8F%8A%E6%8A%A5%E8%AD%A6%E6%96%B9%E6%A1%88.html">11  分布式服务链路监控以及报警方案</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/12%20%20%E5%A6%82%E4%BD%95%E6%8A%8A%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%91%E6%8E%A7%E4%B9%9F%E5%81%9A%E5%BE%97%E9%85%B7%E7%82%AB%EF%BC%9F.html">12  如何把可视化监控也做得酷炫？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/13%20%20Docker%20%E7%9A%84%E5%88%B6%E4%BD%9C%E3%80%81%E8%BF%90%E8%A1%8C%E4%BB%A5%E5%8F%8A%E7%9B%91%E6%8E%A7.html">13  Docker 的制作、运行以及监控</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/14%20%20%E5%A6%82%E4%BD%95%E4%BB%8E%20CPU%20%E9%A3%99%E5%8D%87%E5%AE%9A%E4%BD%8D%E5%88%B0%E7%83%AD%E7%82%B9%E6%96%B9%E6%B3%95%EF%BC%9F.html">14  如何从 CPU 飙升定位到热点方法？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/15%20%20%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20JVM%20%E5%88%86%E6%9E%90%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E5%AF%B9%E8%B1%A1%EF%BC%9F.html">15  如何基于 JVM 分析内存使用对象？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/16%20%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20Arthas%20%E5%AE%9A%E4%BD%8D%E4%BB%A3%E7%A0%81%E9%93%BE%E8%B7%AF%E9%97%AE%E9%A2%98%EF%BC%9F.html">16  如何通过 Arthas 定位代码链路问题？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/17%20%20%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%20Redis%20%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E5%92%8C%E9%9B%AA%E5%B4%A9%EF%BC%9F.html">17  如何应对 Redis 缓存穿透、击穿和雪崩？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/18%20%20%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E4%BC%98%E5%8C%96%20MySQL%20%E6%80%A7%E8%83%BD%EF%BC%9F.html">18  如何才能优化 MySQL 性能？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/19%20%20%E5%A6%82%E4%BD%95%E6%A0%B9%E6%B2%BB%E6%85%A2%20SQL%EF%BC%9F.html">19  如何根治慢 SQL？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/20%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E7%BA%BF%E4%B8%8A%E5%85%A8%E9%93%BE%E8%B7%AF%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93.html">20 结束语  线上全链路性能测试实践总结</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/11%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%E4%BB%A5%E5%8F%8A%E6%8A%A5%E8%AD%A6%E6%96%B9%E6%A1%88.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="11  分布式服务链路监控以及报警方案" id="title">11  分布式服务链路监控以及报警方案</h1>
+<div><p>上一讲我们主要讲解了硬件的命令行资源监控，相信你已经学会了通过命令行的方式查看硬件瓶颈。</p>
+<p>那我提一个问题，为什么会有硬件瓶颈呢？或者我说得更直白一点，如果服务器上没有应用还会造成硬件瓶颈吗？显然是不会的，所以我想向你传递一个观点：<strong>呈现出来的硬件瓶颈绝大多数是表象问题</strong>，我们往往需要在系统应用上寻找问题的根因。而寻找系统问题的根因，对于系统链路监控也是必不可少的，所以这一讲我将带你学习如何进行基于系统链路的监控。</p>
+<h3 id="为什么要链路监控">为什么要链路监控？</h3>
+<p>随着微服务的流行，链路监控越来越受重视。微服务架构是根据业务进行拆分，对外统一暴露API 接口，而内部可能是分布式服务、分布式对象存储等，如图 1 所示。</p>
+<p><img alt="1shangchuan.png" src="/assets/be8944287b7a00d1b9697e0d.png"/></p>
+<p>图 1：微服务架构</p>
+<p>这些组件共同构成了复杂的分布式网络。而分布式系统一旦出现问题，比如一个请求经过多个微服务之后出现了调用失败的问题，或者一个请求经过多个微服务之后 Response 时间过长，但具体是哪个微服务节点的问题我们并不知道。只能去服务器上查看调用经过的每个微服务的日志，当然这种方式的效率是比较低的，相当于人肉运维。</p>
+<p>随着业务体系越来越复杂，加上服务间的相互依赖关系，微服务其中一个节点出现了问题，很可能牵一发而动全身，导致严重的后果。在这样的情况下，分布式链路监控的价值就体现出来了，它可以让你清晰地知道跨服务调用的链路耗时信息、执行方法等，并从整体到局部将信息呈现出来，可以帮助你节约故障排查时间。</p>
+<h3 id="全链路监控选择依据">全链路监控选择依据</h3>
+<p>全链路监控系统有很多，可以从这几方面选择：</p>
+<ul>
+<li><strong>探针的性能消耗</strong>，探针是搜集信息的“情报员”，尤其是在多节点情况下，搜集数据的成本会越来越高，监控组件服务的影响应该做到足够小、数据分析快、性能占用小；</li>
+<li>对代码的<strong>非侵入性</strong>，减少开发的维护成本；</li>
+<li>监控、分析的维度尽可能多。</li>
+</ul>
+<p>目前市面上的全链路监控工具很多，比如 CAT、SkyWalking、Pinpoint 等，对于工具的选型来说最重要的是采样数据对系统的性能消耗足够小、数据分析和展示快、监控的维度尽可能丰富，<strong>简单比较下这几个工具。</strong></p>
+<ul>
+<li>CAT：是由美团和携程的同学开发的，通过代码埋点的侵入式方式，对应用日志分析、监控、展示等，不过侵入式的方式会带来开发以及维护成本的增加。</li>
+<li>SkyWalking：也是由国人开发，目前项目已经提交到 Apache 孵化组织，无侵入性、UI 展示简洁清晰。</li>
+<li>Pinpoint：由韩国人开发，相对于 SkyWalkingg 提供了更为详尽的链路监控信息，不过数据采集带来的性能损耗相对于 SkyWalking 来说比较大。</li>
+</ul>
+<p>综上我将以 SkyWalking 为例给你介绍下链路监控，希望通过介绍，你可以掌握 SkyWalking 的具体使用步骤和链路监控工具可以给我们带来什么好处，通过本讲的学习你也可以自由选择链路监控工具去实践。</p>
+<h3 id="skywalking-的模块分析">SkyWalking 的模块分析</h3>
+<p>首先来看下 SkyWalking 的组件示意图：</p>
+<p><img alt="Drawing 1.png" src="/assets/a8af8ac57c96827c5d42ad31.png"/></p>
+<p>图 2：SkyWalking 的组件示意图</p>
+<ul>
+<li><strong>Tracing 和 Metric ：</strong> 在应用上采集 Tracing（调用链数据）和 Metric（指标）信息通过 HTTP 或者 gRPC 方式发送数据到 Analysis Platform。</li>
+<li><strong>Analysis Platform</strong>：数据的采集和计算，将传输的 Tracing 和 Metric 数据进行整合分析，通过 Analysis Core 模块把数据写入相关的数据库中。</li>
+<li><strong>Storage</strong>：SkyWalking 的存储，支持以 ElasticSearch、MySQL、TiDB 等数据库进行数据存储，其中 ElasticSearch、MySQL 用的居多。</li>
+<li><strong>SkyWalking UI</strong>：Web 可视化平台，用来展示落地的数据以及图表，比如链路调用、服务结构等。</li>
+</ul>
+<h4 id="1-安装部署过程以及相关的注意事项">1.安装部署过程以及相关的注意事项</h4>
+<p>首先下载 <strong>SkyWalking</strong> 安装包并进行解压：</p>
+<pre><code>wget https://github.com/apache/SkyWalking/archive/v8.0.1.tar.gz
+
+tar -zxvf v8.0.1.tar.gz
+</code></pre>
+<p>解压后可以看到如下文件夹：</p>
+<p><img alt="Drawing 2.png" src="/assets/12ea9e03dba84c4b912a7d36.png"/></p>
+<p>我们讲解下这个主要文件的作用。</p>
+<p>（1）<strong>修改配置文件 config/application.yml</strong>。在这里先进行数据库的配置，我使用当前服务器上的 mysql 来进行存储：</p>
+<pre><code>    mysql:
+
+    properties:
+
+      jdbcUrl: ${SW_JDBC_URL:"jdbc:mysql://127.0.0.1:3306/swtest"}
+
+      dataSource.user: ${SW_DATA_SOURCE_USER:root}
+
+      dataSource.password: ${SW_DATA_SOURCE_PASSWORD:123456}
+</code></pre>
+<p>将上述的配置文件根据自己的数据库实际地址修改，修改完成后进行启动：</p>
+<pre><code>$ bin/oapService.sh
+
+SkyWalking OAP started successfully!
+</code></pre>
+<p>（2）接着来看 SkyWalking UI 的相关配置，由于 SkyWalking UI 的默认端口是 8080，这个端口是很多应用的默认端口，容易产生冲突，你可以修改一下，如下所示：</p>
+<pre><code># 修改webapp/webapp.yml
+
+server:
+
+  port: 18080
+</code></pre>
+<p>然后启动 SkyWalking UI 服务，启动完成后你会看到如下信息：</p>
+<pre><code>$ bin/webappService.sh
+
+SkyWalking Web Application started successfully!
+</code></pre>
+<p>这里我强烈建议，不管是第一步还是第二步中的 started successfully，都并不意味着真正的启动成功，一般在提示 started successfully 后，还需要去 logs 文件夹下查看相关日志来判断启动过程中是否存在异常。</p>
+<p>UI 界面启动成功后示意图如下：</p>
+<p><img alt="Drawing 3.png" src="/assets/f4b3cab45e66ac119db80b2a.png"/></p>
+<p>（3）<strong>本地启动微服务</strong>。我 demo 里包含 system、auth、user 等服务，通过配置 SkyWalking Agent 的方式启动服务，示意如下：</p>
+<pre><code>nohup java -server -Xms256m -Xmx256m -Dspring.profiles.active=dev -Dspring.cloud.nacos.discovery.server-addr=127.0.0.1:8848 -javaagent:/root/apm/apache-SkyWalking-apm-bin/agent/SkyWalking-agent.jar=agent.service_name=cctuser -Dspring.cloud.nacos.config.server-addr=127.0.0.1:8848 -jar blade-user.jar  &gt; log.file 2&gt;&amp;1 &amp;
+</code></pre>
+<p>-javaagent 后的启动参数是 SkyWalking 的 agent 配置路径。</p>
+<p>启动本地的微服务成功后，就可以访问服务，同时通过 SkyWalking 监控你可以看到服务部署图以及链路监控等，如下图所示：</p>
+<p><img alt="" src="/assets/b2dcbe0a8222b72548b7655f.png"/></p>
+<p>图 3：服务部署图</p>
+<p><img alt="Drawing 5.png" src="/assets/b49e6528cc54cd8d2a0d52e3.png"/></p>
+<p>图 4：链路追踪图</p>
+<p>在我们进行链路追踪后，可能会出现一些超时、访问错误等异常，那我们如何能够更快地收到这些异常信息呢？</p>
+<h4 id="2-常见的报警方式">2.常见的报警方式</h4>
+<p>首先很多人想到了报警机制，那我带你了解下常见的几种报警方式。</p>
+<p><strong>（1）短信或者电话报警</strong></p>
+<p>这样的报警方式更适合高级别的报警提醒，用于处理紧急情况。出现级别不高而又频繁地发送短信会让人产生排斥感，而且电话或者短信的报警方式也存在一定的成本。</p>
+<p><strong>（2）邮件报警</strong></p>
+<p>邮件报警更适用于工作时的提醒，但是系统往往是不能区分你是不是在工作，有时候夜间的报警邮件你很难及时关注到，所以说邮件报警也存在一定的局限性。</p>
+<p><strong>（3）钉钉报警</strong></p>
+<p>随着钉钉越来越普及，很多公司都已经使用钉钉。员工在公司需要使用钉钉管理自己的考勤以及进行工作上的沟通，如果将监控报警信息推送到钉钉上其实就很方便的。不过也存在有的企业用的是其他沟通工具，不过对于报警推送到沟通软件上的原理都是类似的，接下来我会以钉钉作为模版来讲解如何进行报警信息的推送。</p>
+<h4 id="3-如何配置钉钉机器人">3.如何配置钉钉机器人？</h4>
+<p>（1）<strong>打开机器人管理页面</strong>。以 PC 端为例，打开 PC 端钉钉，进入首页面点击头像，在弹出框里选择机器人管理，打开管理页面后可以选择自定义，如下图所示：</p>
+<p><img alt="Drawing 6.png" src="/assets/b28f163286e2cff670d43d27.png"/></p>
+<p>（2）在打开的机器人详情页面点击添加按钮，如下图所示：</p>
+<p><img alt="Drawing 7.png" src="/assets/467a356d77e7449383a38942.png"/></p>
+<p>（3）在打开的添加机器人页面输入机器人名字，选择要接收报警的钉钉群 ，设置机器人头像。根据需要勾选安全设置等就可以，点击完成之后，在页面拷贝出 Webhook 地址保存好，向这个地址发送 HTTP POST 请求，设置的 SkyWalking 钉钉报警群便能收到钉钉报警消息，如下图所示：</p>
+<p><img alt="Drawing 8.png" src="/assets/8c3faf9c724f5ffbbcb1d2ac.png"/></p>
+<p>配置好之后我们可以看到设置报警的钉钉群“SkyWalking 钉钉报警”出现了报警机器人消息，如下图所示：</p>
+<p><img alt="Drawing 9.png" src="/assets/f2613410d1ffe40d7a883ee1.png"/></p>
+<p>我们可以用 Linux 命令行工具 curl 快速验证是否可以推送成功，curl 命令行示意如下：</p>
+<pre><code>[root@JD ~]# curl 'https://oapi.dingtalk.com/robot/send?access_token=xxxxxxx' -H 'CONTENT-TyPE: application/json' -d '{"msgtype": "text","text": {"content": "业务报警"}}'
+
+{"errcode":0,"errmsg":"ok"}
+</code></pre>
+<p>你可以看到通过 curl 后可以得到基本响应 {“errcode”:0,“errmsg”:“ok”}。</p>
+<h4 id="4-如何将-skywalking-和钉钉报警完美结合">4.如何将 SkyWalking 和钉钉报警完美结合？</h4>
+<p>上述已经配置完成了钉钉机器人，那如何将 SkyWalking 的报警信息自动推送到钉钉机器人呢？我们可以实现一个接口作为它们沟通的“桥梁”。</p>
+<p>首先在 pom 里面引入相关的 jar 包，如下所示：</p>
+<pre><code>&lt;dependency&gt; 
+
+    &lt;groupId&gt;com.aliyun&lt;/groupId&gt; 
+
+    &lt;artifactId&gt;alibaba-dingtalk-service-sdk&lt;/artifactId&gt; 
+
+&lt;/dependency&gt;
+</code></pre>
+<p>然后自定义 DingTalkUtils 工具类，暴露接口访问路径 /dingdingAlarm。</p>
+<pre><code>@RequestMapping(value = "/dingdingAlarm", method = RequestMethod.POST)
+
+public void alarm(@RequestBody List&lt;AlarmDto&gt; alarmList){
+
+    //示意代码
+
+    alarmList.forEach(alarm-&gt; {
+
+        DingTalkUtils.sendMsg(alarm.getAlarmMessage());
+
+    });
+
+}
+</code></pre>
+<p><strong>SkyWalking 告警推送到钉钉</strong></p>
+<p>SkyWalking 提供了告警的配置，我们可以很方便地配置上面暴露的接口。在 SkyWalking 程序包里的 config 文件夹下有个 alarm-settings.yml 文件，该文件专门用来配置相关的报警。在该配置文件中我们可以搜索到 webhooks，把上面暴露的接口写上去就好了。</p>
+<pre><code> webhooks:-http://ip:port/dingdingAlarm
+</code></pre>
+<p>接下来我们测试下，比如 auth 服务获取验证码的接口出现错误，我们是可以在 SkyWalking 追踪页面清楚地看到的。同时对于其他相关的业务同学，也都可以在钉钉群收到报警信息，这样的方式在实际工作中非常实用。业务报错图和钉钉报警图如下所示：</p>
+<p><img alt="Drawing 10.png" src="/assets/3f75027b57ae8d6910182fee.png"/></p>
+<p>图 5：业务报错图</p>
+<p><img alt="Drawing 11.png" src="/assets/97173dbff9dd55ade9432867.png"/></p>
+<p>图 6：钉钉报警图</p>
+<h3 id="总结">总结</h3>
+<p>这一讲主要讲解了关于 SkyWalking 的使用背景以及价值，在实操层面讲解了 SkyWalking 是如何追踪监控中出现的错误，并且把出现的错误通过钉钉通知给相关人员，相信通过这一讲的学习，你也对微服务下的报警方案会有一个更深刻的认识。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

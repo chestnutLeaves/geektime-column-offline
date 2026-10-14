@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>02 日志（上）：日志究竟是如何加载日志段的？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/index.html">Kafka核心源码解读</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">42 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kafka核心源码解读</strong><ul><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E5%AF%BC%E8%AF%BB%20%E6%9E%84%E5%BB%BAKafka%E5%B7%A5%E7%A8%8B%E5%92%8C%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E3%80%81Scala%E8%AF%AD%E8%A8%80%E7%83%AD%E8%BA%AB.html">00 导读 构建Kafka工程和源码阅读环境、Scala语言热身</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E9%98%85%E8%AF%BB%E6%BA%90%E7%A0%81%EF%BC%8C%E9%80%90%E6%B8%90%E6%88%90%E4%BA%86%E8%81%8C%E4%B8%9A%E8%BF%9B%E9%98%B6%E9%81%93%E8%B7%AF%E4%B8%8A%E7%9A%84%E2%80%9C%E5%BF%85%E9%80%89%E9%A1%B9%E2%80%9D.html">00 开篇词  阅读源码，逐渐成了职业进阶道路上的“必选项”</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E9%87%8D%E7%A3%85%E5%8A%A0%E9%A4%90%20%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8Scala%E8%AF%AD%E8%A8%80.html">00 重磅加餐 带你快速入门Scala语言</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/01%20%E6%97%A5%E5%BF%97%E6%AE%B5%EF%BC%9A%E4%BF%9D%E5%AD%98%E6%B6%88%E6%81%AF%E6%96%87%E4%BB%B6%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">01 日志段：保存消息文件的对象是怎么实现的？</a></li><li><a class="active" aria-current="page" href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/02%20%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%97%A5%E5%BF%97%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BD%E6%97%A5%E5%BF%97%E6%AE%B5%E7%9A%84%EF%BC%9F.html">02 日志（上）：日志究竟是如何加载日志段的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/03%20%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82Log%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C.html">03 日志（下）：彻底搞懂Log对象的常见操作</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/04%20%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%94%B9%E8%BF%9B%E7%9A%84%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%E5%9C%A8Kafka%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BA%94%E7%94%A8.html">04 索引（上）：改进的二分查找算法在Kafka索引的应用</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/05%20%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BD%8D%E7%A7%BB%E7%B4%A2%E5%BC%95%E5%92%8C%E6%97%B6%E9%97%B4%E6%88%B3%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">05 索引（下）：位移索引和时间戳索引的区别是什么？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/06%20%E8%AF%B7%E6%B1%82%E9%80%9A%E9%81%93%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0Kafka%E8%AF%B7%E6%B1%82%E9%98%9F%E5%88%97%EF%BC%9F.html">06 请求通道：如何实现Kafka请求队列？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/07%20SocketServer%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AKafka%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E5%BA%94%E7%94%A8NIO%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E7%9A%84%EF%BC%9F.html">07 SocketServer（上）：Kafka到底是怎么应用NIO实现网络通信的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/08%20SocketServer%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E8%AF%B7%E6%B1%82%E8%BF%98%E8%A6%81%E5%8C%BA%E5%88%86%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%9F.html">08 SocketServer（中）：请求还要区分优先级？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/09%20SocketServer%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E5%85%A8%E6%B5%81%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html">09 SocketServer（下）：请求处理全流程源码分析</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/10%20KafkaApis%EF%BC%9AKafka%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E6%BA%90%E7%A0%81%E5%85%A5%E5%8F%A3%EF%BC%8C%E6%B2%A1%E6%9C%89%E4%B9%8B%E4%B8%80.html">10 KafkaApis：Kafka最重要的源码入口，没有之一</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/11%20Controller%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9AController%E9%83%BD%E4%BF%9D%E5%AD%98%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%9C%E8%A5%BF%EF%BC%9F%E6%9C%89%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81%EF%BC%9F.html">11 Controller元数据：Controller都保存有哪些东西？有几种状态？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/12%20ControllerChannelManager%EF%BC%9AController%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81%EF%BC%9F.html">12 ControllerChannelManager：Controller如何管理请求发送？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/13%20ControllerEventManager%EF%BC%9A%E5%8F%98%E8%BA%AB%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%90%8E%E7%9A%84Controller%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BA%8B%E4%BB%B6%EF%BC%9F.html">13 ControllerEventManager：变身单线程后的Controller如何处理事件？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/14%20Controller%E9%80%89%E4%B8%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">14 Controller选举是怎么实现的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/15%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Controller%E5%9C%A8Kafka%E9%9B%86%E7%BE%A4%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F.html">15 如何理解Controller在Kafka集群中的作用？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/16%20TopicDeletionManager%EF%BC%9A%20Topic%E6%98%AF%E6%80%8E%E4%B9%88%E8%A2%AB%E5%88%A0%E9%99%A4%E7%9A%84%EF%BC%9F.html">16 TopicDeletionManager： Topic是怎么被删除的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/17%20ReplicaStateMachine%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%89%AF%E6%9C%AC%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">17 ReplicaStateMachine：揭秘副本状态机实现原理</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/18%20PartitionStateMachine%EF%BC%9A%E5%88%86%E5%8C%BA%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">18 PartitionStateMachine：分区状态转换如何实现？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/19%20TimingWheel%EF%BC%9A%E6%8E%A2%E7%A9%B6Kafka%E5%AE%9A%E6%97%B6%E5%99%A8%E8%83%8C%E5%90%8E%E7%9A%84%E9%AB%98%E6%95%88%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95.html">19 TimingWheel：探究Kafka定时器背后的高效时间轮算法</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/20%20DelayedOperation%EF%BC%9ABroker%E6%98%AF%E6%80%8E%E4%B9%88%E5%BB%B6%E6%97%B6%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84%EF%BC%9F.html">20 DelayedOperation：Broker是怎么延时处理请求的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/21%20AbstractFetcherThread%EF%BC%9A%E6%8B%89%E5%8F%96%E6%B6%88%E6%81%AF%E5%88%86%E5%87%A0%E6%AD%A5%EF%BC%9F.html">21 AbstractFetcherThread：拉取消息分几步？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/22%20ReplicaFetcherThread%EF%BC%9AFollower%E5%A6%82%E4%BD%95%E6%8B%89%E5%8F%96Leader%E6%B6%88%E6%81%AF%EF%BC%9F.html">22 ReplicaFetcherThread：Follower如何拉取Leader消息？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/23%20ReplicaManager%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%BF%85%E9%A1%BB%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E7%B1%BB%E5%AE%9A%E4%B9%89%E5%92%8C%E6%A0%B8%E5%BF%83%E5%AD%97%E6%AE%B5.html">23 ReplicaManager（上）：必须要掌握的副本管理类定义和核心字段</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/24%20ReplicaManager%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%AF%BB%E5%86%99%E5%89%AF%E6%9C%AC%E7%9A%84%EF%BC%9F.html">24 ReplicaManager（中）：副本管理器是如何读写副本的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/25%20ReplicaManager%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%89%AF%E6%9C%AC%E7%9A%84%EF%BC%9F.html">25 ReplicaManager（下）：副本管理器是如何管理副本的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/26%20MetadataCache%EF%BC%9ABroker%E6%98%AF%E6%80%8E%E4%B9%88%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0%E5%85%83%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E7%9A%84%EF%BC%9F.html">26 MetadataCache：Broker是怎么异步更新元数据缓存的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/27%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9F.html">27 消费者组元数据（上）：消费者组都有哪些元数据？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/28%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AKafka%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E8%BF%99%E4%BA%9B%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9F.html">28 消费者组元数据（下）：Kafka如何管理这些元数据？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/29%20GroupMetadataManager%EF%BC%9A%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E4%B8%AA%E4%BB%80%E4%B9%88%E4%B8%9C%E8%A5%BF%EF%BC%9F.html">29 GroupMetadataManager：组元数据管理器是个什么东西？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/30%20GroupMetadataManager%EF%BC%9A%E4%BD%8D%E7%A7%BB%E4%B8%BB%E9%A2%98%E4%BF%9D%E5%AD%98%E7%9A%84%E5%8F%AA%E6%98%AF%E4%BD%8D%E7%A7%BB%E5%90%97%EF%BC%9F.html">30 GroupMetadataManager：位移主题保存的只是位移吗？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/31%20GroupMetadataManager%EF%BC%9A%E6%9F%A5%E8%AF%A2%E4%BD%8D%E7%A7%BB%E6%97%B6%EF%BC%8C%E4%B8%8D%E7%94%A8%E8%AF%BB%E5%8F%96%E4%BD%8D%E7%A7%BB%E4%B8%BB%E9%A2%98%EF%BC%9F.html">31 GroupMetadataManager：查询位移时，不用读取位移主题？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/32%20GroupCoordinator%EF%BC%9A%E5%9C%A8Rebalance%E4%B8%AD%EF%BC%8CCoordinator%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%88%90%E5%91%98%E5%85%A5%E7%BB%84%EF%BC%9F.html">32 GroupCoordinator：在Rebalance中，Coordinator如何处理成员入组？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/33%20GroupCoordinator%EF%BC%9A%E5%9C%A8Rebalance%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%BB%84%E5%90%8C%E6%AD%A5%EF%BC%9F.html">33 GroupCoordinator：在Rebalance中，如何进行组同步？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%B8%80%EF%BC%89%E7%BB%8F%E5%85%B8%E7%9A%84Kafka%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">特别放送（一）经典的Kafka学习资料有哪些？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%B8%89%EF%BC%89%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%BA%A6%E8%BF%87%E6%97%A5%E5%B8%B8%E4%B8%80%E5%A4%A9%E7%9A%84%EF%BC%9F.html">特别放送（三）我是怎么度过日常一天的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%8F%82%E4%B8%8E%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E7%9A%84%E5%85%A8%E9%83%A8%E6%B5%81%E7%A8%8B.html">特别放送（二）一篇文章带你了解参与开源社区的全部流程</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%BA%94%EF%BC%89%20Kafka%20%E7%A4%BE%E5%8C%BA%E7%9A%84%E9%87%8D%E7%A3%85%E5%8A%9F%E8%83%BD%EF%BC%9A%E7%A7%BB%E9%99%A4%20ZooKeeper%20%E4%BE%9D%E8%B5%96.html">特别放送（五） Kafka 社区的重磅功能：移除 ZooKeeper 依赖</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E5%9B%9B%EF%BC%8920%E9%81%93%E7%BB%8F%E5%85%B8%E7%9A%84Kafka%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AF%A6%E8%A7%A3.html">特别放送（四）20道经典的Kafka面试题详解</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%88%91%E4%BB%AC%E6%89%8D%E5%88%9A%E4%B8%8A%E8%B7%AF%E5%91%A2.html">结束语 源码学习，我们才刚上路呢</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/02%20%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%97%A5%E5%BF%97%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BD%E6%97%A5%E5%BF%97%E6%AE%B5%E7%9A%84%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="02 日志（上）：日志究竟是如何加载日志段的？" id="title">02 日志（上）：日志究竟是如何加载日志段的？</h1>
+<div><p>你好，我是胡夕。今天我来讲讲Kafka源码的日志（Log）对象。</p>
+<p>上节课，我们学习了日志段部分的源码，你可以认为，<strong>日志是日志段的容器，里面定义了很多管理日志段的操作</strong>。坦率地说，如果看Kafka源码却不看Log，就跟你买了这门课却不知道作者是谁一样。在我看来，Log对象是Kafka源码（特别是Broker端）最核心的部分，没有之一。</p>
+<p>它到底有多重要呢？我和你分享一个例子，你先感受下。我最近正在修复一个Kafka的Bug（<a href="https://issues.apache.org/jira/browse/KAFKA-9157" target="_blank">KAFKA-9157</a>）：在某些情况下，Kafka的Compaction操作会产生很多空的日志段文件。如果要避免这些空日志段文件被创建出来，就必须搞懂创建日志段文件的原理，而这些代码恰恰就在Log源码中。</p>
+<p>既然Log源码要管理日志段对象，那么它就必须先把所有日志段对象加载到内存里面。这个过程是怎么实现的呢？今天，我就带你学习下日志加载日志段的过程。</p>
+<p>首先，我们来看下Log对象的源码结构。</p>
+<h2 id="log源码结构">Log源码结构</h2>
+<p>Log源码位于Kafka core工程的log源码包下，文件名是Log.scala。总体上，该文件定义了10个类和对象，如下图所示：</p>
+<p><img alt="" src="/assets/32d559ac25e1903f9a9b6588.jpg"/></p>
+<p>那么，这10个类和对象都是做什么的呢？我先给你简单介绍一下，你可以对它们有个大致的了解。</p>
+<p>不过，在介绍之前，我先提一句，图中括号里的C表示Class，O表示Object。还记得我在上节课提到过的伴生对象吗？没错，同时定义同名的Class和Object，就属于Scala中的伴生对象用法。</p>
+<p>我们先来看伴生对象，也就是LogAppendInfo、Log和RollParams。</p>
+<p><strong>1. LogAppendInfo</strong></p>
+<ul>
+<li>LogAppendInfo（C）：保存了一组待写入消息的各种元数据信息。比如，这组消息中第一条消息的位移值是多少、最后一条消息的位移值是多少；再比如，这组消息中最大的消息时间戳又是多少。总之，这里面的数据非常丰富（下节课我再具体说说）。</li>
+<li>LogAppendInfo（O）: 可以理解为其对应伴生类的工厂方法类，里面定义了一些工厂方法，用于创建特定的LogAppendInfo实例。</li>
+</ul>
+<p><strong>2. Log</strong></p>
+<ul>
+<li>Log（C）: Log源码中最核心的代码。这里我先卖个关子，一会儿细聊。</li>
+<li>Log（O）：同理，Log伴生类的工厂方法，定义了很多常量以及一些辅助方法。</li>
+</ul>
+<p><strong>3. RollParams</strong></p>
+<ul>
+<li>RollParams（C）：定义用于控制日志段是否切分（Roll）的数据结构。</li>
+<li>RollParams（O）：同理，RollParams伴生类的工厂方法。</li>
+</ul>
+<p>除了这3组伴生对象之外，还有4类源码。</p>
+<ul>
+<li>LogMetricNames：定义了Log对象的监控指标。</li>
+<li>LogOffsetSnapshot：封装分区所有位移元数据的容器类。</li>
+<li>LogReadInfo：封装读取日志返回的数据及其元数据。</li>
+<li>CompletedTxn：记录已完成事务的元数据，主要用于构建事务索引。</li>
+</ul>
+<h2 id="log-class-object">Log Class &amp; Object</h2>
+<p>下面，我会按照这些类和对象的重要程度，对它们一一进行拆解。首先，咱们先说说Log类及其伴生对象。</p>
+<p>考虑到伴生对象多用于保存静态变量和静态方法（比如静态工厂方法等），因此我们先看伴生对象（即Log Object）的实现。毕竟，柿子先找软的捏！</p>
+<pre><code>object Log {
+  val LogFileSuffix = ".log"
+  val IndexFileSuffix = ".index"
+  val TimeIndexFileSuffix = ".timeindex"
+  val ProducerSnapshotFileSuffix = ".snapshot"
+  val TxnIndexFileSuffix = ".txnindex"
+  val DeletedFileSuffix = ".deleted"
+  val CleanedFileSuffix = ".cleaned"
+  val SwapFileSuffix = ".swap"
+  val CleanShutdownFile = ".kafka_cleanshutdown"
+  val DeleteDirSuffix = "-delete"
+  val FutureDirSuffix = "-future"
+……
+}
+</code></pre>
+<p>这是Log Object定义的所有常量。如果有面试官问你Kafka中定义了多少种文件类型，你可以自豪地把这些说出来。耳熟能详的.log、.index、.timeindex和.txnindex我就不解释了，我们来了解下其他几种文件类型。</p>
+<ul>
+<li>.snapshot是Kafka为幂等型或事务型Producer所做的快照文件。鉴于我们现在还处于阅读源码的初级阶段，事务或幂等部分的源码我就不详细展开讲了。</li>
+<li>.deleted是删除日志段操作创建的文件。目前删除日志段文件是异步操作，Broker端把日志段文件从.log后缀修改为.deleted后缀。如果你看到一大堆.deleted后缀的文件名，别慌，这是Kafka在执行日志段文件删除。</li>
+<li>.cleaned和.swap都是Compaction操作的产物，等我们讲到Cleaner的时候再说。</li>
+<li>-delete则是应用于文件夹的。当你删除一个主题的时候，主题的分区文件夹会被加上这个后缀。</li>
+<li>-future是用于变更主题分区文件夹地址的，属于比较高阶的用法。</li>
+</ul>
+<p>总之，记住这些常量吧。记住它们的主要作用是，以后不要被面试官唬住！开玩笑，其实这些常量最重要的地方就在于，它们能够让你了解Kafka定义的各种文件类型。</p>
+<p>Log Object还定义了超多的工具类方法。由于它们都很简单，这里我只给出一个方法的源码，我们一起读一下。</p>
+<pre><code>def filenamePrefixFromOffset(offset: Long): String = {
+    val nf = NumberFormat.getInstance()
+    nf.setMinimumIntegerDigits(20)
+    nf.setMaximumFractionDigits(0)
+    nf.setGroupingUsed(false)
+    nf.format(offset)
+  }
+</code></pre>
+<p>这个方法的作用是<strong>通过给定的位移值计算出对应的日志段文件名</strong>。Kafka日志文件固定是20位的长度，filenamePrefixFromOffset方法就是用前面补0的方式，把给定位移值扩充成一个固定20位长度的字符串。</p>
+<p>举个例子，我们给定一个位移值是12345，那么Broker端磁盘上对应的日志段文件名就应该是00000000000000012345.log。怎么样，很简单吧？其他的工具类方法也很简单，我就不一一展开说了。</p>
+<p>下面我们来看Log源码部分的重头戏：<strong>Log类</strong>。这是一个2000多行的大类。放眼整个Kafka源码，像Log这么大的类也不多见，足见它的重要程度。我们先来看这个类的定义：</p>
+<pre><code>class Log(@volatile var dir: File,
+          @volatile var config: LogConfig,
+          @volatile var logStartOffset: Long,
+          @volatile var recoveryPoint: Long,
+          scheduler: Scheduler,
+          brokerTopicStats: BrokerTopicStats,
+          val time: Time,
+          val maxProducerIdExpirationMs: Int,
+          val producerIdExpirationCheckIntervalMs: Int,
+          val topicPartition: TopicPartition,
+          val producerStateManager: ProducerStateManager,
+          logDirFailureChannel: LogDirFailureChannel) extends Logging with KafkaMetricsGroup {
+……
+}
+</code></pre>
+<p>看着好像有很多属性，但其实，你只需要记住两个属性的作用就够了：<strong>dir和logStartOffset</strong>。dir就是这个日志所在的文件夹路径，也就是<strong>主题分区的路径</strong>。而logStartOffset，表示<strong>日志的当前最早位移</strong>。dir和logStartOffset都是volatile var类型，表示它们的值是变动的，而且可能被多个线程更新。</p>
+<p>你可能听过日志的当前末端位移，也就是Log End Offset（LEO），它是表示日志下一条待插入消息的位移值，而这个Log Start Offset是跟它相反的，它表示日志当前对外可见的最早一条消息的位移值。我用一张图来标识它们的区别：</p>
+<p><img alt="" src="/assets/53740289eb07f4b36de38a76.jpg"/></p>
+<p>图中绿色的位移值3是日志的Log Start Offset，而位移值15表示LEO。另外，位移值8是高水位值，它是区分已提交消息和未提交消息的分水岭。</p>
+<p>有意思的是，Log End Offset可以简称为LEO，但Log Start Offset却不能简称为LSO。因为在Kafka中，LSO特指Log Stable Offset，属于Kafka事务的概念。这个课程中不会涉及LSO，你只需要知道Log Start Offset不等于LSO即可。</p>
+<p>Log类的其他属性你暂时不用理会，因为它们要么是很明显的工具类属性，比如timer和scheduler，要么是高阶用法才会用到的高级属性，比如producerStateManager和logDirFailureChannel。工具类的代码大多是做辅助用的，跳过它们也不妨碍我们理解Kafka的核心功能；而高阶功能代码设计复杂，学习成本高，性价比不高。</p>
+<p>其实，除了Log类签名定义的这些属性之外，Log类还定义了一些很重要的属性，比如下面这段代码：</p>
+<pre><code>    @volatile private var nextOffsetMetadata: LogOffsetMetadata = _
+    @volatile private var highWatermarkMetadata: LogOffsetMetadata = LogOffsetMetadata(logStartOffset)
+    private val segments: ConcurrentNavigableMap[java.lang.Long, LogSegment] = new ConcurrentSkipListMap[java.lang.Long, LogSegment]
+    @volatile var leaderEpochCache: Option[LeaderEpochFileCache] = None
+</code></pre>
+<p>第一个属性nextOffsetMetadata，它封装了下一条待插入消息的位移值，你基本上可以把这个属性和LEO等同起来。</p>
+<p>第二个属性highWatermarkMetadata，是分区日志高水位值。关于高水位的概念，我们在《Kafka核心技术与实战》这个课程中做过详细解释，你可以看一下[这篇文章]（下节课我还会再具体给你介绍下）。</p>
+<p>第三个属性segments，我认为这是Log类中最重要的属性。它保存了分区日志下所有的日志段信息，只不过是用Map的数据结构来保存的。Map的Key值是日志段的起始位移值，Value则是日志段对象本身。Kafka源码使用ConcurrentNavigableMap数据结构来保存日志段对象，就可以很轻松地利用该类提供的线程安全和各种支持排序的方法，来管理所有日志段对象。</p>
+<p>第四个属性是Leader Epoch Cache对象。Leader Epoch是社区于0.11.0.0版本引入源码中的，主要是用来判断出现Failure时是否执行日志截断操作（Truncation）。之前靠高水位来判断的机制，可能会造成副本间数据不一致的情形。这里的Leader Epoch Cache是一个缓存类数据，里面保存了分区Leader的Epoch值与对应位移值的映射关系，我建议你查看下LeaderEpochFileCache类，深入地了解下它的实现原理。</p>
+<p>掌握了这些基本属性之后，我们看下Log类的初始化逻辑：</p>
+<pre><code> locally {
+        val startMs = time.milliseconds
+
+
+        // create the log directory if it doesn't exist
+        Files.createDirectories(dir.toPath)
+
+
+        initializeLeaderEpochCache()
+
+
+        val nextOffset = loadSegments()
+
+
+        /* Calculate the offset of the next message */
+        nextOffsetMetadata = LogOffsetMetadata(nextOffset, activeSegment.baseOffset, activeSegment.size)
+
+
+        leaderEpochCache.foreach(_.truncateFromEnd(nextOffsetMetadata.messageOffset))
+
+
+        logStartOffset = math.max(logStartOffset, segments.firstEntry.getValue.baseOffset)
+
+
+        // The earliest leader epoch may not be flushed during a hard failure. Recover it here.
+        leaderEpochCache.foreach(_.truncateFromStart(logStartOffset))
+
+
+        // Any segment loading or recovery code must not use producerStateManager, so that we can build the full state here
+        // from scratch.
+        if (!producerStateManager.isEmpty)
+          throw new IllegalStateException("Producer state must be empty during log initialization")
+        loadProducerState(logEndOffset, reloadFromCleanShutdown = hasCleanShutdownFile)
+
+
+        info(s"Completed load of log with ${segments.size} segments, log start offset $logStartOffset and " +
+          s"log end offset $logEndOffset in ${time.milliseconds() - startMs} 
+</code></pre>
+<p>在详细解释这段初始化代码之前，我使用一张图来说明它到底做了什么：</p>
+<p><img alt="" src="/assets/5e705948a9bf17df883f472b.jpg"/></p>
+<p>这里我们重点说说第三步，即加载日志段的实现逻辑，以下是loadSegments的实现代码：</p>
+<pre><code> private def loadSegments(): Long = {
+        // first do a pass through the files in the log directory and remove any temporary files
+        // and find any interrupted swap operations
+        val swapFiles = removeTempFilesAndCollectSwapFiles()
+
+
+        // Now do a second pass and load all the log and index files.
+        // We might encounter legacy log segments with offset overflow (KAFKA-6264). We need to split such segments. When
+        // this happens, restart loading segment files from scratch.
+        retryOnOffsetOverflow {
+          // In case we encounter a segment with offset overflow, the retry logic will split it after which we need to retry
+          // loading of segments. In that case, we also need to close all segments that could have been left open in previous
+          // call to loadSegmentFiles().
+          logSegments.foreach(_.close())
+          segments.clear()
+          loadSegmentFiles()
+        }
+
+
+        // Finally, complete any interrupted swap operations. To be crash-safe,
+        // log files that are replaced by the swap segment should be renamed to .deleted
+        // before the swap file is restored as the new segment file.
+        completeSwapOperations(swapFiles)
+
+
+        if (!dir.getAbsolutePath.endsWith(Log.DeleteDirSuffix)) {
+          val nextOffset = retryOnOffsetOverflow {
+            recoverLog()
+          }
+
+
+          // reset the index size of the currently active log segment to allow more entries
+          activeSegment.resizeIndexes(config.maxIndexSize)
+          nextOffset
+        } else {
+           if (logSegments.isEmpty) {
+              addSegment(LogSegment.open(dir = dir,
+                baseOffset = 0,
+                config,
+                time = time,
+                fileAlreadyExists = false,
+                initFileSize = this.initFileSize,
+                preallocate = false))
+           }
+          0
+        }
+</code></pre>
+<p>这段代码会对分区日志路径遍历两次。</p>
+<p>首先，它会移除上次Failure遗留下来的各种临时文件（包括.cleaned、.swap、.deleted文件等），removeTempFilesAndCollectSwapFiles方法实现了这个逻辑。</p>
+<p>之后，它会清空所有日志段对象，并且再次遍历分区路径，重建日志段segments Map并删除无对应日志段文件的孤立索引文件。</p>
+<p>待执行完这两次遍历之后，它会完成未完成的swap操作，即调用completeSwapOperations方法。等这些都做完之后，再调用recoverLog方法恢复日志段对象，然后返回恢复之后的分区日志LEO值。</p>
+<p>如果你现在觉得有点蒙，也没关系，我把这段代码再进一步拆解下，以更小的粒度跟你讲下它们做了什么。理解了这段代码之后，你大致就能搞清楚大部分的分区日志操作了。所以，这部分代码绝对值得我们多花一点时间去学习。</p>
+<p>我们首先来看第一步，removeTempFilesAndCollectSwapFiles方法的实现。我用注释的方式详细解释了每行代码的作用：</p>
+<pre><code> private def removeTempFilesAndCollectSwapFiles(): Set[File] = {
+
+    // 在方法内部定义一个名为deleteIndicesIfExist的方法，用于删除日志文件对应的索引文件
+
+    def deleteIndicesIfExist(baseFile: File, suffix: String = ""): Unit = {
+
+    info(s"Deleting index files with suffix $suffix for baseFile $baseFile")
+
+    val offset = offsetFromFile(baseFile)
+
+    Files.deleteIfExists(Log.offsetIndexFile(dir, offset, suffix).toPath)
+
+    Files.deleteIfExists(Log.timeIndexFile(dir, offset, suffix).toPath)
+
+    Files.deleteIfExists(Log.transactionIndexFile(dir, offset, suffix).toPath)
+
+    }
+
+    var swapFiles = Set[File]()
+
+    var cleanFiles = Set[File]()
+
+    var minCleanedFileOffset = Long.MaxValue
+
+    // 遍历分区日志路径下的所有文件
+
+    for (file &lt;- dir.listFiles if file.isFile) {
+
+    if (!file.canRead) // 如果不可读，直接抛出IOException
+
+    throw new IOException(s"Could not read file $file")
+
+    val filename = file.getName
+
+    if (filename.endsWith(DeletedFileSuffix)) { // 如果以.deleted结尾
+
+    debug(s"Deleting stray temporary file ${file.getAbsolutePath}")
+
+    Files.deleteIfExists(file.toPath) // 说明是上次Failure遗留下来的文件，直接删除
+
+    } else if (filename.endsWith(CleanedFileSuffix)) { // 如果以.cleaned结尾
+
+    minCleanedFileOffset = Math.min(offsetFromFileName(filename), minCleanedFileOffset) // 选取文件名中位移值最小的.cleaned文件，获取其位移值，并将该文件加入待删除文件集合中
+
+    cleanFiles += file
+
+    } else if (filename.endsWith(SwapFileSuffix)) { // 如果以.swap结尾
+
+    val baseFile = new File(CoreUtils.replaceSuffix(file.getPath, SwapFileSuffix, ""))
+
+    info(s"Found file ${file.getAbsolutePath} from interrupted swap operation.")
+
+    if (isIndexFile(baseFile)) { // 如果该.swap文件原来是索引文件
+
+    deleteIndicesIfExist(baseFile) // 删除原来的索引文件
+
+    } else if (isLogFile(baseFile)) { // 如果该.swap文件原来是日志文件
+
+    deleteIndicesIfExist(baseFile) // 删除掉原来的索引文件
+
+    swapFiles += file // 加入待恢复的.swap文件集合中
+
+    }
+
+    }
+
+    }
+
+    // 从待恢复swap集合中找出那些起始位移值大于minCleanedFileOffset值的文件，直接删掉这些无效的.swap文件
+
+    val (invalidSwapFiles, validSwapFiles) = swapFiles.partition(file =&gt; offsetFromFile(file) &gt;= minCleanedFileOffset)
+
+    invalidSwapFiles.foreach { file =&gt;
+
+    debug(s"Deleting invalid swap file ${file.getAbsoluteFile} minCleanedFileOffset: $minCleanedFileOffset")
+
+    val baseFile = new File(CoreUtils.replaceSuffix(file.getPath, SwapFileSuffix, ""))
+
+    deleteIndicesIfExist(baseFile, SwapFileSuffix)
+
+    Files.deleteIfExists(file.toPath)
+
+    }
+
+    // Now that we have deleted all .swap files that constitute an incomplete split operation, let's delete all .clean files
+
+    // 清除所有待删除文件集合中的文件
+
+    cleanFiles.foreach { file =&gt;
+
+    debug(s"Deleting stray .clean file ${file.getAbsolutePath}")
+
+    Files.deleteIfExists(file.toPath)
+
+    }
+
+    // 最后返回当前有效的.swap文件集合
+
+    validSwapFiles
+
+    }
+</code></pre>
+<p>执行完了removeTempFilesAndCollectSwapFiles逻辑之后，源码开始清空已有日志段集合，并重新加载日志段文件。这就是第二步。这里调用的主要方法是loadSegmentFiles。</p>
+<pre><code>   private def loadSegmentFiles(): Unit = {
+
+    // 按照日志段文件名中的位移值正序排列，然后遍历每个文件
+
+    for (file &lt;- dir.listFiles.sortBy(_.getName) if file.isFile) {
+
+    if (isIndexFile(file)) { // 如果是索引文件
+
+    val offset = offsetFromFile(file)
+
+    val logFile = Log.logFile(dir, offset)
+
+    if (!logFile.exists) { // 确保存在对应的日志文件，否则记录一个警告，并删除该索引文件
+
+    warn(s"Found an orphaned index file ${file.getAbsolutePath}, with no corresponding log file.")
+
+    Files.deleteIfExists(file.toPath)
+
+    }
+
+    } else if (isLogFile(file)) { // 如果是日志文件
+
+    val baseOffset = offsetFromFile(file)
+
+    val timeIndexFileNewlyCreated = !Log.timeIndexFile(dir, baseOffset).exists()
+
+    // 创建对应的LogSegment对象实例，并加入segments中
+
+    val segment = LogSegment.open(dir = dir,
+
+    baseOffset = baseOffset,
+
+    config,
+
+    time = time,
+
+    fileAlreadyExists = true)
+
+    try segment.sanityCheck(timeIndexFileNewlyCreated)
+
+    catch {
+
+    case _: NoSuchFileException =&gt;
+
+    error(s"Could not find offset index file corresponding to log file ${segment.log.file.getAbsolutePath}, " +
+
+    "recovering segment and rebuilding index files...")
+
+    recoverSegment(segment)
+
+    case e: CorruptIndexException =&gt;
+
+    warn(s"Found a corrupted index file corresponding to log file ${segment.log.file.getAbsolutePath} due " +
+
+    s"to ${e.getMessage}}, recovering segment and rebuilding index files...")
+
+    recoverSegment(segment)
+
+    }
+
+    addSegment(segment)
+
+    }
+
+    }
+
+    }
+</code></pre>
+<p>第三步是处理第一步返回的有效.swap文件集合。completeSwapOperations方法就是做这件事的：</p>
+<pre><code>  private def completeSwapOperations(swapFiles: Set[File]): Unit = {
+
+    // 遍历所有有效.swap文件
+
+    for (swapFile &lt;- swapFiles) {
+
+    val logFile = new File(CoreUtils.replaceSuffix(swapFile.getPath, SwapFileSuffix, "")) // 获取对应的日志文件
+
+    val baseOffset = offsetFromFile(logFile) // 拿到日志文件的起始位移值
+
+    // 创建对应的LogSegment实例
+
+    val swapSegment = LogSegment.open(swapFile.getParentFile,
+
+    baseOffset = baseOffset,
+
+    config,
+
+    time = time,
+
+    fileSuffix = SwapFileSuffix)
+
+    info(s"Found log file ${swapFile.getPath} from interrupted swap operation, repairing.")
+
+    // 执行日志段恢复操作
+
+    recoverSegment(swapSegment)
+
+    // We create swap files for two cases:
+
+    // (1) Log cleaning where multiple segments are merged into one, and
+
+    // (2) Log splitting where one segment is split into multiple.
+
+    //
+
+    // Both of these mean that the resultant swap segments be composed of the original set, i.e. the swap segment
+
+    // must fall within the range of existing segment(s). If we cannot find such a segment, it means the deletion
+
+    // of that segment was successful. In such an event, we should simply rename the .swap to .log without having to
+
+    // do a replace with an existing segment.
+
+    // 确认之前删除日志段是否成功，是否还存在老的日志段文件
+
+    val oldSegments = logSegments(swapSegment.baseOffset, swapSegment.readNextOffset).filter { segment =&gt;
+
+    segment.readNextOffset &gt; swapSegment.baseOffset
+
+    }
+
+    // 将生成的.swap文件加入到日志中，删除掉swap之前的日志段
+
+    replaceSegments(Seq(swapSegment), oldSegments.toSeq, isRecoveredSwapFile = true)
+
+    }
+
+    }
+</code></pre>
+<p>最后一步是recoverLog操作：</p>
+<pre><code> private def recoverLog(): Long = {
+        // if we have the clean shutdown marker, skip recovery
+        // 如果不存在以.kafka_cleanshutdown结尾的文件。通常都不存在
+        if (!hasCleanShutdownFile) {
+          // 获取到上次恢复点以外的所有unflushed日志段对象
+          val unflushed = logSegments(this.recoveryPoint, Long.MaxValue).toIterator
+          var truncated = false
+
+
+          // 遍历这些unflushed日志段
+          while (unflushed.hasNext &amp;&amp; !truncated) {
+            val segment = unflushed.next
+            info(s"Recovering unflushed segment ${segment.baseOffset}")
+            val truncatedBytes =
+              try {
+                // 执行恢复日志段操作
+                recoverSegment(segment, leaderEpochCache)
+              } catch {
+                case _: InvalidOffsetException =&gt;
+                  val startOffset = segment.baseOffset
+                  warn("Found invalid offset during recovery. Deleting the corrupt segment and " +
+                    s"creating an empty one with starting offset $startOffset")
+                  segment.truncateTo(startOffset)
+              }
+            if (truncatedBytes &gt; 0) { // 如果有无效的消息导致被截断的字节数不为0，直接删除剩余的日志段对象
+              warn(s"Corruption found in segment ${segment.baseOffset}, truncating to offset ${segment.readNextOffset}")
+              removeAndDeleteSegments(unflushed.toList, asyncDelete = true)
+              truncated = true
+            }
+          }
+        }
+
+
+        // 这些都做完之后，如果日志段集合不为空
+        if (logSegments.nonEmpty) {
+          val logEndOffset = activeSegment.readNextOffset
+          if (logEndOffset &lt; logStartOffset) { // 验证分区日志的LEO值不能小于Log Start Offset值，否则删除这些日志段对象
+            warn(s"Deleting all segments because logEndOffset ($logEndOffset) is smaller than logStartOffset ($logStartOffset). " +
+              "This could happen if segment files were deleted from the file system.")
+            removeAndDeleteSegments(logSegments, asyncDelete = true)
+          }
+        }
+
+
+        // 这些都做完之后，如果日志段集合为空了
+        if (logSegments.isEmpty) {
+        // 至少创建一个新的日志段，以logStartOffset为日志段的起始位移，并加入日志段集合中
+          addSegment(LogSegment.open(dir = dir,
+            baseOffset = logStartOffset,
+            config,
+            time = time,
+            fileAlreadyExists = false,
+            initFileSize = this.initFileSize,
+            preallocate = config.preallocate))
+        }
+
+
+        // 更新上次恢复点属性，并返回
+        recoveryPoint = activeSegment.readNextOffset
+        recoveryPoint
+</code></pre>
+<h2 id="总结">总结</h2>
+<p>今天，我重点向你介绍了Kafka的Log源码，主要包括：</p>
+<ol>
+<li><strong>Log文件的源码结构</strong>：你可以看下下面的导图，它展示了Log类文件的架构组成，你要重点掌握Log类及其相关方法。</li>
+<li><strong>加载日志段机制</strong>：我结合源码重点分析了日志在初始化时是如何加载日志段的。前面说过了，日志是日志段的容器，弄明白如何加载日志段是后续学习日志段管理的前提条件。</li>
+</ol>
+<p><img alt="" src="/assets/bf92a90f6086f53898ab0522.jpg"/></p>
+<p>总的来说，虽然洋洋洒洒几千字，但我也只讲了最重要的部分。我建议你多看几遍Log.scala中加载日志段的代码，这对后面我们理解Kafka Broker端日志段管理原理大有裨益。在下节课，我会继续讨论日志部分的源码，带你学习常见的Kafka日志操作。</p>
+<h2 id="课后讨论">课后讨论</h2>
+<p>Log源码中有个maybeIncrementHighWatermark方法，你能说说它的实现原理吗？</p>
+<p>欢迎你在留言区畅所欲言，跟我交流讨论，也欢迎你把今天的内容分享给你的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

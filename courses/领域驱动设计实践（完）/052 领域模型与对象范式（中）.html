@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>052 领域模型与对象范式（中） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">领域驱动设计实践（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">109 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>领域驱动设计实践（完）</strong><ul><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/001%20%E3%80%8C%E6%88%98%E7%95%A5%E7%AF%87%E3%80%8D%E8%AE%BF%E8%B0%88%20%20DDD%20%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">001 「战略篇」访谈  DDD 和微服务是什么关系？</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/002%20%E3%80%8C%E6%88%98%E7%95%A5%E7%AF%87%E3%80%8D%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9A%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%EF%BC%8C%E9%87%8D%E7%84%95%E9%9D%92%E6%98%A5%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%BB%8F%E5%85%B8.html">002 「战略篇」开篇词：领域驱动设计，重焕青春的设计经典</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/003%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A7%88.html">003 领域驱动设计概览</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/004%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6.html">004 深入分析软件的复杂度</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/005%20%E6%8E%A7%E5%88%B6%E8%BD%AF%E4%BB%B6%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%8E%9F%E5%88%99.html">005 控制软件复杂度的原则</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/006%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AF%B9%E8%BD%AF%E4%BB%B6%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%BA%94%E5%AF%B9%EF%BC%88%E4%B8%8A%EF%BC%89.html">006 领域驱动设计对软件复杂度的应对（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/007%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AF%B9%E8%BD%AF%E4%BB%B6%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%BA%94%E5%AF%B9%EF%BC%88%E4%B8%8B%EF%BC%89.html">007 领域驱动设计对软件复杂度的应对（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/008%20%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%9B%A2%E9%98%9F%E7%9A%84%E6%B2%9F%E9%80%9A%E4%B8%8E%E5%8D%8F%E4%BD%9C.html">008 软件开发团队的沟通与协作</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/009%20%E8%BF%90%E7%94%A8%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%E6%8F%90%E7%82%BC%E9%A2%86%E5%9F%9F%E7%9F%A5%E8%AF%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">009 运用领域场景分析提炼领域知识（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/010%20%E8%BF%90%E7%94%A8%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%E6%8F%90%E7%82%BC%E9%A2%86%E5%9F%9F%E7%9F%A5%E8%AF%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">010 运用领域场景分析提炼领域知识（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/011%20%E5%BB%BA%E7%AB%8B%E7%BB%9F%E4%B8%80%E8%AF%AD%E8%A8%80.html">011 建立统一语言</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/012%20%E7%90%86%E8%A7%A3%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87.html">012 理解限界上下文</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/013%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E6%8E%A7%E5%88%B6%E5%8A%9B%EF%BC%88%E4%B8%8A%EF%BC%89.html">013 限界上下文的控制力（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/014%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E6%8E%A7%E5%88%B6%E5%8A%9B%EF%BC%88%E4%B8%8B%EF%BC%89.html">014 限界上下文的控制力（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/015%20%E8%AF%86%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88%E4%B8%8A%EF%BC%89.html">015 识别限界上下文（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/016%20%E8%AF%86%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88%E4%B8%8B%EF%BC%89.html">016 识别限界上下文（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/017%20%E7%90%86%E8%A7%A3%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84.html">017 理解上下文映射</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/018%20%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84%E7%9A%84%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%A8%A1%E5%BC%8F.html">018 上下文映射的团队协作模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/019%20%E4%B8%8A%E4%B8%8B%E6%96%87%E6%98%A0%E5%B0%84%E7%9A%84%E9%80%9A%E4%BF%A1%E9%9B%86%E6%88%90%E6%A8%A1%E5%BC%8F.html">019 上下文映射的通信集成模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/020%20%E8%BE%A8%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB%EF%BC%88%E4%B8%8A%EF%BC%89.html">020 辨别限界上下文的协作关系（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/021%20%E8%BE%A8%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB%EF%BC%88%E4%B8%8B%EF%BC%89.html">021 辨别限界上下文的协作关系（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/022%20%E8%AE%A4%E8%AF%86%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84.html">022 认识分层架构</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/023%20%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E5%8C%96.html">023 分层架构的演化</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/024%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E8%BF%9B.html">024 领域驱动架构的演进</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/025%20%E6%A1%88%E4%BE%8B%20%20%E5%B1%82%E6%AC%A1%E7%9A%84%E8%81%8C%E8%B4%A3%E4%B8%8E%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB%EF%BC%88%E5%9B%BE%E6%96%87%E7%AF%87%EF%BC%89.html">025 案例  层次的职责与协作关系（图文篇）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/026%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E6%9E%B6%E6%9E%84.html">026 限界上下文与架构</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/027%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AF%B9%E6%9E%B6%E6%9E%84%E7%9A%84%E5%BD%B1%E5%93%8D.html">027 限界上下文对架构的影响</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/028%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B.html">028 领域驱动设计的代码模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/029%20%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%9E%B6%E6%9E%84%E5%86%B3%E7%AD%96.html">029 代码模型的架构决策</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/030%20%E5%AE%9E%E8%B7%B5%20%20%E5%85%88%E5%90%AF%E9%98%B6%E6%AE%B5%E7%9A%84%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.html">030 实践  先启阶段的需求分析</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/031%20%E5%AE%9E%E8%B7%B5%20%20%E5%85%88%E5%90%AF%E9%98%B6%E6%AE%B5%E7%9A%84%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89.html">031 实践  先启阶段的领域场景分析（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/032%20%E5%AE%9E%E8%B7%B5%20%20%E5%85%88%E5%90%AF%E9%98%B6%E6%AE%B5%E7%9A%84%E9%A2%86%E5%9F%9F%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89.html">032 实践  先启阶段的领域场景分析（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/033%20%E5%AE%9E%E8%B7%B5%20%20%E8%AF%86%E5%88%AB%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87.html">033 实践  识别限界上下文</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/034%20%E5%AE%9E%E8%B7%B5%20%20%E7%A1%AE%E5%AE%9A%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%8D%8F%E4%BD%9C%E5%85%B3%E7%B3%BB.html">034 实践  确定限界上下文的协作关系</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/035%20%E5%AE%9E%E8%B7%B5%20%20EAS%20%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.html">035 实践  EAS 的整体架构</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/036%20%E3%80%8C%E6%88%98%E6%9C%AF%E7%AF%87%E3%80%8D%E8%AE%BF%E8%B0%88%EF%BC%9ADDD%20%E8%83%BD%E5%B8%AE%E5%BC%80%E5%8F%91%E5%9B%A2%E9%98%9F%E6%8F%90%E9%AB%98%E8%AE%BE%E8%AE%A1%E6%B0%B4%E5%B9%B3%E5%90%97%EF%BC%9F.html">036 「战术篇」访谈：DDD 能帮开发团队提高设计水平吗？</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/037%20%E3%80%8C%E6%88%98%E6%9C%AF%E7%AF%87%E3%80%8D%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9A%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7.html">037 「战术篇」开篇词：领域驱动设计的不确定性</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/038%20%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9E%8B.html">038 什么是模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/039%20%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B.html">039 数据分析模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/040%20%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B.html">040 数据设计模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/041%20%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B.html">041 数据模型与对象模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/042%20%E6%95%B0%E6%8D%AE%E5%AE%9E%E7%8E%B0%E6%A8%A1%E5%9E%8B.html">042 数据实现模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/043%20%E6%A1%88%E4%BE%8B%20%20%E5%9F%B9%E8%AE%AD%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F.html">043 案例  培训管理系统</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/044%20%E6%9C%8D%E5%8A%A1%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9E%8B.html">044 服务资源模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/045%20%E6%9C%8D%E5%8A%A1%E8%A1%8C%E4%B8%BA%E6%A8%A1%E5%9E%8B.html">045 服务行为模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/046%20%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B.html">046 服务设计模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/047%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1.html">047 领域模型驱动设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/048%20%E9%A2%86%E5%9F%9F%E5%AE%9E%E7%8E%B0%E6%A8%A1%E5%9E%8B.html">048 领域实现模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/049%20%E7%90%86%E8%A7%A3%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B.html">049 理解领域模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/050%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%BB%93%E6%9E%84%E8%8C%83%E5%BC%8F.html">050 领域模型与结构范式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/051%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%EF%BC%88%E4%B8%8A%EF%BC%89.html">051 领域模型与对象范式（上）</a></li><li><a class="active" aria-current="page" href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/052%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%EF%BC%88%E4%B8%AD%EF%BC%89.html">052 领域模型与对象范式（中）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/053%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%EF%BC%88%E4%B8%8B%EF%BC%89.html">053 领域模型与对象范式（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/054%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%87%BD%E6%95%B0%E8%8C%83%E5%BC%8F.html">054 领域模型与函数范式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/055%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B.html">055 领域驱动分层架构与对象模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/056%20%E7%BB%9F%E4%B8%80%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B.html">056 统一语言与领域分析模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/057%20%E7%B2%BE%E7%82%BC%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B.html">057 精炼领域分析模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/058%20%E5%BD%A9%E8%89%B2%20UML%20%E4%B8%8E%E5%BD%A9%E8%89%B2%E5%BB%BA%E6%A8%A1.html">058 彩色 UML 与彩色建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/059%20%E5%9B%9B%E8%89%B2%E5%BB%BA%E6%A8%A1%E6%B3%95.html">059 四色建模法</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/060%20%E6%A1%88%E4%BE%8B%20%20%E8%AE%A2%E5%8D%95%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E7%9A%84%E5%9B%9B%E8%89%B2%E5%BB%BA%E6%A8%A1.html">060 案例  订单核心流程的四色建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/061%20%E4%BA%8B%E4%BB%B6%E9%A3%8E%E6%9A%B4%E4%B8%8E%E4%B8%9A%E5%8A%A1%E5%85%A8%E6%99%AF%E6%8E%A2%E7%B4%A2.html">061 事件风暴与业务全景探索</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/062%20%E4%BA%8B%E4%BB%B6%E9%A3%8E%E6%9A%B4%E4%B8%8E%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E5%BB%BA%E6%A8%A1.html">062 事件风暴与领域分析建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/063%20%E6%A1%88%E4%BE%8B%20%20%E8%AE%A2%E5%8D%95%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E7%9A%84%E4%BA%8B%E4%BB%B6%E9%A3%8E%E6%9A%B4.html">063 案例  订单核心流程的事件风暴</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/064%20%E8%A1%A8%E8%BE%BE%E9%A2%86%E5%9F%9F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B.html">064 表达领域设计模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/065%20%E5%AE%9E%E4%BD%93.html">065 实体</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/066%20%E5%80%BC%E5%AF%B9%E8%B1%A1.html">066 值对象</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/067%20%E5%AF%B9%E8%B1%A1%E5%9B%BE%E4%B8%8E%E8%81%9A%E5%90%88.html">067 对象图与聚合</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/068%20%E8%81%9A%E5%90%88%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html">068 聚合设计原则</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/069%20%E8%81%9A%E5%90%88%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.html">069 聚合之间的关系</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/070%20%E8%81%9A%E5%90%88%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%BF%87%E7%A8%8B.html">070 聚合的设计过程</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/071%20%E6%A1%88%E4%BE%8B%20%20%E5%9F%B9%E8%AE%AD%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%81%9A%E5%90%88%E8%AE%BE%E8%AE%A1.html">071 案例  培训领域模型的聚合设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/072%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E5%B7%A5%E5%8E%82.html">072 领域模型对象的生命周期-工厂</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/073%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%B5%84%E6%BA%90%E5%BA%93.html">073 领域模型对象的生命周期-资源库</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/074%20%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1.html">074 领域服务</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/075%20%E6%A1%88%E4%BE%8B%20%20%E9%A2%86%E5%9F%9F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BB%B7%E5%80%BC.html">075 案例  领域设计模型的价值</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/076%20%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1.html">076 应用服务</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/077%20%E5%9C%BA%E6%99%AF%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A9%B1%E5%8A%A8%E5%8A%9B.html">077 场景的设计驱动力</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/078%20%E6%A1%88%E4%BE%8B%20%20%E8%96%AA%E8%B5%84%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9C%BA%E6%99%AF%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1.html">078 案例  薪资管理系统的场景驱动设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/079%20%E5%9C%BA%E6%99%AF%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E4%B8%8E%20DCI%20%E6%A8%A1%E5%BC%8F.html">079 场景驱动设计与 DCI 模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/080%20%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6.html">080 领域事件</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/081%20%E5%8F%91%E5%B8%83%E8%80%85%E2%80%94%E8%AE%A2%E9%98%85%E8%80%85%E6%A8%A1%E5%BC%8F.html">081 发布者—订阅者模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/082%20%E4%BA%8B%E4%BB%B6%E6%BA%AF%E6%BA%90%E6%A8%A1%E5%BC%8F.html">082 事件溯源模式</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/083%20%E6%B5%8B%E8%AF%95%E4%BC%98%E5%85%88%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AE%9E%E7%8E%B0%E5%BB%BA%E6%A8%A1.html">083 测试优先的领域实现建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/084%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E7%AE%80%E5%8D%95%E8%AE%BE%E8%AE%A1.html">084 深入理解简单设计</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/085%20%E6%A1%88%E4%BE%8B%20%20%E8%96%AA%E8%B5%84%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89.html">085 案例  薪资管理系统的测试驱动开发（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/086%20%E6%A1%88%E4%BE%8B%20%20%E8%96%AA%E8%B5%84%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8B%EF%BC%89.html">086 案例  薪资管理系统的测试驱动开发（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/087%20%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84%EF%BC%88%E4%B8%8A%EF%BC%89.html">087 对象关系映射（上）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/088%20%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84%EF%BC%88%E4%B8%8B%EF%BC%89.html">088 对象关系映射（下）</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/089%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.html">089 领域模型与数据模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/090%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AF%B9%E6%8C%81%E4%B9%85%E5%8C%96%E7%9A%84%E5%BD%B1%E5%93%8D.html">090 领域驱动设计对持久化的影响</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/091%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E4%BD%93%E7%B3%BB.html">091 领域驱动设计体系</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/092%20%E5%AD%90%E9%A2%86%E5%9F%9F%E4%B8%8E%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87.html">092 子领域与限界上下文</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/093%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E8%BE%B9%E7%95%8C%E4%B8%8E%E5%8D%8F%E4%BD%9C.html">093 限界上下文的边界与协作</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/094%20%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B9%8B%E9%97%B4%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1.html">094 限界上下文之间的分布式通信</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/095%20%E5%91%BD%E4%BB%A4%E6%9F%A5%E8%AF%A2%E8%81%8C%E8%B4%A3%E5%88%86%E7%A6%BB.html">095 命令查询职责分离</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/096%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1.html">096 分布式柔性事务</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/097%20%E8%AE%BE%E8%AE%A1%E6%A6%82%E5%BF%B5%E7%9A%84%E7%BB%9F%E4%B8%80%E8%AF%AD%E8%A8%80.html">097 设计概念的统一语言</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/098%20%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%B1%A1.html">098 模型对象</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/099%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%8F%82%E8%80%83%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B.html">099 领域驱动设计参考过程模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/100%20%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%B2%BE%E9%AB%93.html">100 领域驱动设计的精髓</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/101%20%E5%AE%9E%E8%B7%B5%20%20%E5%91%98%E5%B7%A5%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%BB%BA%E6%A8%A1.html">101 实践  员工上下文的领域建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/102%20%E5%AE%9E%E8%B7%B5%20%20%E8%80%83%E5%8B%A4%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%BB%BA%E6%A8%A1.html">102 实践  考勤上下文的领域建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/103%20%E5%AE%9E%E8%B7%B5%20%20%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%BB%BA%E6%A8%A1.html">103 实践  项目上下文的领域建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/104%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E4%B8%9A%E5%8A%A1%E9%9C%80%E6%B1%82.html">104 实践  培训上下文的业务需求</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/105%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90%E5%BB%BA%E6%A8%A1.html">105 实践  培训上下文的领域分析建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/106%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E8%AE%BE%E8%AE%A1%E5%BB%BA%E6%A8%A1.html">106 实践  培训上下文的领域设计建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/107%20%E5%AE%9E%E8%B7%B5%20%20%E5%9F%B9%E8%AE%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AE%9E%E7%8E%B0%E5%BB%BA%E6%A8%A1.html">107 实践  培训上下文的领域实现建模</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/108%20%E5%AE%9E%E8%B7%B5%20%20EAS%20%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B.html">108 实践  EAS 系统的代码模型</a></li><li><a href="/courses/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/109%20%E5%90%8E%E8%AE%B0%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1.html">109 后记：如何学习领域驱动设计</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5%EF%BC%88%E5%AE%8C%EF%BC%89/052%20%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%EF%BC%88%E4%B8%AD%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="052 领域模型与对象范式（中）" id="title">052 领域模型与对象范式（中）</h1>
+<div><h3 id="分治">分治</h3>
+<p>Christepher Alexander 建议，在遇到设计问题时“尽量少用集权的机制”，这样能避免形式和内容的不一致。自治对象并不意味着权利的大一统，因为这会导致职责的绝对控制，形成无所不知的集权的“上帝对象”，这就违背了面向对象设计的基本原则：单一职责原则（Single Responsibility Principle，SRP）。遵循单一职责原则有利于对象的稳定：</p>
+<ul>
+<li>对象的职责越少，则对该对象的依赖就越少，耦合度减弱，受其他对象的约束与牵制就越少，从而保证了系统的可扩展性；</li>
+<li>单一职责原则并不是极端地要求我们只能为对象定义一个职责，单一职责指的是公开在外的与该对象紧密相关的一组职责。</li>
+</ul>
+<p>遵循自治原则设计的对象必然需要<strong>分治</strong>，甚至可以说正是自治才为系统各个对象之间的分治提供了良好的基础。对象的分治意味着参与实现一个业务场景的对象需要各依其自治的本色履行本当属于自己的职责，同时将不属于自己职责范围的工作委派给别的对象，形成良好的协作关系。通过参与协作的多个对象之间的默契配合，就可以履行更大的职责；同时，对象通过相互作用和共享职责联系在一起，建立简单、一致的通信机制，就可以避免集权似的解决方案。</p>
+<h3 id="以行为进行协作">以行为进行协作</h3>
+<p>对象之间若要默契配合，形成良好的协作关系，就需要<strong>通过行为进行协作，而不是让参与协作的对象成为数据的提供者</strong>。设想在超市购物的场景——顾客（Customer）通过钱包（Wallet）付款给超市收银员（Cashier）。这三个对象之间的协作如下代码所示：</p>
+<pre><code class="language-java">public class Wallet {
+    private float value;
+    public Wallet(float value) {
+        this.value = value;
+    }
+    public float getTotalMoney() {
+        return value;
+    }
+    public void setTotalMoney(float newValue) {
+        value = newValue;
+    }
+    public void addMoney(float deposit) {
+        value += deposit;
+    }
+    public void subtractMoney(float debit) {
+        value -= debit;
+    }
+}
+
+public class Customer {
+    private String firstName;
+    private String lastName;
+    private Wallet myWallet;
+    public Customer(String firstName, String lastName) {
+        this(firstName, lastName, new Wallet(0f));
+    }
+    public Customer(String firstName, String lastName, Wallet wallet) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.myWallet = wallet;
+    }
+    public String getFirstName(){
+        return firstName;
+    }
+    public String getLastName(){
+        return lastName;
+    }
+    public Wallet getWallet(){
+        return myWallet;
+    }
+}
+
+public class Cashier {
+    public void charge(Customer customer, float payment) {
+        Wallet theWallet = customer.getWallet();
+        if (theWallet.getTotalMoney() &gt; payment) {
+            theWallet.subtractMoney(payment);
+        } else {
+            throw new NotEnoughMoneyException();
+        }
+    }
+}
+
+</code></pre>
+<p>在购买超市商品的业务场景下，Cashier 与 Customer 对象之间产生了协作；然而，这种协作关系却是很不合理的。站在顾客的角度讲，他在付钱时必须将自己的钱包交给收银员，暴露了自己的隐私，让钱包处于危险的境地；站在收银员的角度讲，他需要像一个劫匪一般要求顾客把钱包交出来，检查钱包内的钱够了之后，还要从顾客的钱包中掏钱出来完成支付。双方对这次协作都不满意，原因就在于参与协作的 Customer 对象仅仅作为了数据提供者，它为 Cashier 对象提供了 Wallet 数据。</p>
+<p>这种职责协作方式违背了“迪米特法则（Demeter Law）”。该法则要求任何一个对象或者方法，只能调用下列对象：</p>
+<ul>
+<li>该对象本身</li>
+<li>作为参数传进来的对象</li>
+<li>在方法内创建的对象</li>
+</ul>
+<p>作为参数传入的 Customer 对象，可以被 Cashier 调用，但 Wallet 对象既非通过参数传递，又非方法内创建的对象，当然也不是 Cashier 对象本身。遵循迪米特法则，Cashier 不应该与 Wallet 协作，它甚至都不应该知道 Wallet 对象的存在。</p>
+<p>如果从代码坏味道的角度来讲，以上代码属于典型的“依恋情结（Feature Envy）”坏味道。Cashier 对 Customer 的 Wallet 给予了过度的“热情”，Cashier 的 charge() 方法操作的几乎都是 Customer 对象的数据。该坏味道说明职责的分配有误，应该将这些特性“归还”给 Customer 对象：</p>
+<pre><code class="language-java">public class Customer {
+    private String firstName;
+    private String lastName;
+    private Wallet myWallet;
+
+    public void pay(float payment) { 
+        // 注意这里不再调用 getWallet()，因为 Wallet 本身就是 Customer 拥有的数据
+        if (myWallet.getTotalMoney() &gt;= payment) {
+            myWallet.subtractMoney(payment);
+        } else {
+            throw new NotEnoughMoneyException();
+        }
+    }
+}
+
+public class Cashier {
+    // charge 行为与 pay 行为进行协作
+    public void charge(Customer customer, float payment) {
+        customer.pay(payment);
+    }
+}
+
+</code></pre>
+<p>当我们将支付行为分配给 Customer 之后，收银员的工作就变轻松了，顾客也不担心钱包被收银员看到了。协作的方式之所以焕然一新，就在于 Customer 不再作为数据的提供者，而是通过支付行为参与协作。Cashier 负责收钱，Customer 负责交钱，二者只需关注协作行为的接口，而不需要了解具体实现该行为的细节。这就是封装概念提到的“隐藏细节”。这些被隐藏的细节其实就是对象的“隐私”，不允许被轻易公开。当 Cashier 不需要了解支付的细节之后，Cashier的工作就变得更加简单，符合 Unix 之父 Dennis Ritchie 和 Ken Thompson 提出的 KISS 原则，即“保持简单和直接（Keep it simple stupid）”的原则。</p>
+<p>注意区分重构前后的 Customer 类定义。当我们将 pay() 方法转移到 Customer 类后，去掉了 getWallet() 方法，因为 Customer 不需要将自己的钱包公开出去，至于对 Wallet 钱包的访问，由于 pay() 与 myWallet 字段都定义在 Customer 类中，就可以直接访问定义在类中的私有变量。</p>
+<p>《ThoughtWorks 软件开发沉思录》中的“对象健身操”提出了优秀软件设计的九条规则，其中最后一条提出：</p>
+<blockquote>
+<p>不使用任何 Getter/Setter/Property。</p>
+</blockquote>
+<p>这个规则的提出是否打破了许多 Java 或 C# 开发人员的编程习惯？能做到这一点吗？为何要这样要求呢？作者 Jeff Bay 认为：</p>
+<blockquote>
+<p>“如果可以从对象之外随便询问实例变量的值，那么行为与数据就不可能被封装到一处。在严格的封装边界背后，真正的动机是迫使程序员在完成编码之后，一定有为这段代码的行为找到一个适合的位置，确保它在对象模型中的唯一性。”</p>
+</blockquote>
+<p>这一原则其实就是为了避免一个对象在协作场景中“沦落”为一个低级的数据提供者。虽然在面向对象设计中，对象才是一等公民，但对象的行为才是让对象社区活起来的唯一动力。基于这个原则，我们可以继续优化以上代码。我们发现，Wallet 的 totalMoney 属性也无需公开给 Customer。采用行为协作模式，Wallet 应该自己定义判断钱是否足够的方法，而非直接返回 totalMoney：</p>
+<pre><code class="language-java">public class Wallet {
+    private float value;
+    public boolean isEnough(float payment) {
+        return value &gt;= payment;
+    }
+    public void addMoney(float deposit) {
+        value += deposit;
+    }
+    public void subtractMoney(float debit) {
+        value -= debit;
+    }
+}
+
+</code></pre>
+<p>Customer 的 pay() 方法就可以修改为：</p>
+<pre><code class="language-java">public class Customer {
+    public void pay(float payment) {  
+        if (myWallet.isEnough(payment)) {
+            myWallet.subtractMoney(payment);
+        } else {
+            throw new NotEnoughMoneyException();
+        }
+    }
+}
+
+</code></pre>
+<p>以行为进行协作的方式满足<strong>命令而非询问（Tell, don’t ask）</strong>原则。这个原则要求一个对象应该命令其他对象做什么，而不是去查询其他对象的状态来决定做什么。显然，顾客应该命令钱包：钱够吗？而不是去查询钱包中装了多少钱，然后由顾客自己来判断钱是否足够。看到了吗？在现实世界，钱包是一个没有生命的东西；但在对象的世界里，钱包拥有了智能意识，它<strong>自己知道</strong>自己钱是否足够。这就是前面所讲的<strong>自治对象</strong>的意义。</p>
+<p>因此，在进行面向对象设计时，<strong>设计者具有“拟人化”的设计思想至为关键</strong>。我们需要代入设计对象，就好像它们都是一个个可以自我思考的人一般——Cashier 不需要“知道”支付的细节，因为这些细节是 Customer 的“隐私”。这些隐藏的细节其实就是 Customer 拥有的“知识”，它能够很好地“理解（Understand）”这些知识，并作出符合自身角色的智能判断。因此，对象的分治其实决定于职责的分配。该如何分配职责，要看哪个对象真正“理解”这个职责。</p>
+<p>怎么才能理解呢？就是看对象是否拥有理解该职责的知识。知识即信息，信息就是对象所拥有的数据。这就是“信息专家模式（Information Expert Pattern）”的核心内容：信息的持有者即为操作该信息的专家。</p>
+<p><img alt="img" src="/assets/9900c957cb24764d1bdf602a.png"/></p>
+<p>如果在设计时能够遵循“信息专家模式”，就可以避免设计出贫血模型，也可以防止将大量的领域逻辑封装到一个大的事务脚本中。每个对象成为了操作信息的专家，就能审时度势地决定职责的履行者究竟是谁，并发出行为协作的请求。由于完成一个完整的职责往往需要分布在不同对象类中的信息，这就意味着需要多个“局部”的信息专家通过协作来完成任务，从而形成了对象的分治。</p>
+<h3 id="以角色决定行为">以角色决定行为</h3>
+<p>对象分治的核心还是对职责的分配。要做到职责的良好分配，我们应站在角色的角度来安排职责。<strong>角色是对象的身份</strong>，若以拟人化的方式思考对象世界，就可以设想：究竟是怎样的身份，需得承担怎样的职责，才会与其身份相当，不至于乱了规矩。</p>
+<p>确定对象的角色，必须结合具体的业务场景来考虑。相同对象在不同的场景扮演的角色可能完全不同，履行的职责也不相同，角色之间的协作方式自然亦有所不同。<strong>角色、职责、协作，这是对象分治需要考虑的核心三要素，</strong>它们共同组成了一个完整的<strong>业务场景</strong>。</p>
+<p>例如在设计转账业务场景时，需要考虑参与到转账业务的角色是什么。是账户（Account）吗？如果是账户，该如何区分转出方和转入方？假设是 Bob 要转账给 Mary，那么 Bob 是转出方，Mary 是转入方，他（她）们又都是 Account 对象。显然，在这个业务场景中，对象不能替代角色，否则会抹去协作双方参与业务场景的身份差异：</p>
+<p><img alt="img" src="/assets/0e56f53a275525e1863e5802.png"/></p>
+<p>SourceAccount 与 DestinationAccount 是两个完全不同的角色，一个履行转出的职责，一个履行转入的职责：</p>
+<pre><code class="language-java">public interface SourceAccount {
+    void transferMoneyTo(DestinationAccount dest, Amount amount);
+}
+
+public interface DestinationAccount {
+    void transferMoneyFrom(AccountId srcAccountId, Amount amount);
+}
+
+</code></pre>
+<p>账户对象可以同时扮演这两个角色，即 Account 类同时实现这两个接口：</p>
+<p><img alt="img" src="/assets/5f1399f6b7b74b12868ec734.png"/></p>
+<p>代码实现为：</p>
+<pre><code class="language-java">public class Account implements SourceAccount, DestinationAccount {
+    private AccountId accountId;
+    private Amount amount;
+    private Phone phone;
+
+    public void transferMoneyTo(DestinationAccount dest, Amount amount) {
+        if (amount.lessThan(getAvailableBalance()) {
+            throw new InsufficientFundsException();
+        }
+        dest.transferMoneyFrom(accountId, amount);
+        // 此时的 balance 与 phone 属于 SourceAccount
+        balance.decreaseBalance(amount);
+        phone.sendTransferToMessage(accountId, amount);
+    }
+
+    public void transferMoneyFrom(AccountId srcAccountId, Amount amount) {
+        // 此时的 balance 和 phone 属于 DestinationAccount
+        balance.increaseBalance(amount);
+        phone.sendTransferFromMessage(srcAccountId, amount);
+    }
+}
+
+</code></pre>
+<p>由于接口的定义完全不同，即使 Account 类同时实现了这两个接口，二者也不能互相替换：</p>
+<pre><code class="language-java">SourceAccount src = new Account();
+// 不能替换，如下代码不能通过编译
+DestinationAccount dest = src;
+
+</code></pre>
+<p>SourceAccount 与 DestinationAccount 接口就是 Martin Fowler 所说的<strong>角色接口（Role Interface）</strong>。角色接口是从供应者（Supplier）与消费者（Consumer）二者之间协作的角度来定义的接口，这时的接口代表了业务场景中与其他类型协作的角色。通常，一个供应者对象会实现多个角色接口，每个角色接口对应一种协作模式。与之相反的是头部接口（Header Interface），即一个供应者对应一个头部接口。考虑收发邮件的场景，如果收邮件和发邮件会被用到不同的使用场景，就说明这两个职责不会“捆绑”出现，不是高内聚的，可以被分别定义为两个接口 EmailSender 和 EmailReceiver：</p>
+<pre><code class="language-java">public interface EmailSender {
+    void send(Message message);
+}
+
+public interface EmailReciever {
+    Message[] receive();
+}
+
+</code></pre>
+<p>此时定义的接口就是角色接口。在提供功能实现时，可以定义一个类 EmailService 同时实现这两个角色接口。相反，如果先定义 EmailService 类，提供收邮件和发邮件功能，然后通过抽象将这个类的所有公有方法都提取到一个接口中，这样的接口就是头部接口。例如：</p>
+<pre><code class="language-java">public interface EmailService {
+    void send(Message message);
+    Message[] receive();
+}
+
+public class EmailServiceImpl implements EmailService {}
+
+</code></pre>
+<p>角色接口体现了<strong>接口隔离原则（Interface Segregation Principle，ISP）</strong>。站在消费者（客户端）的角度讲，接口隔离原则不会强迫消费者依赖于它不使用的方法，这就意味着需要设计最小粒度的接口。例如，消费者 EmailNotifier 仅需要调用 send() 方法，但它要消费的 EmailService 接口却提供了 receive() 这个不需要的方法。如果是消费 EmailSender 接口，就不存在这个问题。</p>
+<p>遵循接口隔离原则设计角色接口，就可以针对不同变化独立演化，这样的设计符合前面介绍的分离变化的设计原则。同时，这种角色接口还能提高编码可读性，加强类型验证来保证代码的健壮性。我们可以比较转账服务的两种接口方法定义：</p>
+<pre><code class="language-java">// 不使用角色接口
+void transfer(Account source, Account destination, Amount amount);
+
+// 使用角色接口
+void transfer(SourceAccount source, DestinationAccount destination, Amount amount);
+
+</code></pre>
+<p>显然，第一个接口方法定义只能通过形参区分转出方和转入方，且无法通过 Account 类型限制对转出和转入功能的调用，例如可能出现这样的潜在缺陷：</p>
+<pre><code class="language-java">public class TransferingService {
+    void transfer(Account source, Account destination, Amount amount) {
+        // 注意：这里应该调用 source 的 transferMoneyTo() 方法
+        // 但是，由于接口参数没有体现角色的意义，因而无法区分这两个方法
+        // 如果参数传入的是 SourceAccount 与 DestinationAccount，就能保证被正确调用
+        // 因为 destination 并没有 transferMoneyTo() 方法
+        destination.transferMoneyTo(source, amount);
+
+        accountRepository.save(source);
+        accountRepository.save(destination);
+    }
+}
+
+</code></pre>
+<p>对于转账业务场景来说，SourceAccount 与 DestinationAccount 是参与转账业务的两个主要角色，但它们都不能表达完整的转账业务场景。在领域驱动设计中，往往由领域服务如 TransferingService 来封装完整的具有业务价值的业务场景。</p>
+<p>从 DCI（Data、Context和Interaction）模式的角度看，Account 对象是一个数据（<strong>D</strong>ata），体现了系统的领域知识；SourceAccount 与 DestinationAccount 是参与协作（<strong>I</strong>nteraction）的角色，描述了系统究竟做什么；TransferingService 则是一个上下文（<strong>C</strong>ontext），代表了具体的业务场景。DCI 模式能够帮助我们理解对象分治的三要素——角色、职责和协作，因为这三个要素都在一个业务上下文的场景之中。至于什么是 DCI 模式，我会在专门的小节中详细介绍。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

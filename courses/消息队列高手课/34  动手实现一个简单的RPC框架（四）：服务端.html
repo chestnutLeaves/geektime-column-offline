@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>34  动手实现一个简单的RPC框架（四）：服务端 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/index.html">消息队列高手课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">39 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>消息队列高手课</strong><ul><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%BC%98%E7%A7%80%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98%EF%BC%8C%E4%BD%A0%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88%E4%B8%AD%E4%B8%8D%E8%83%BD%E5%8F%AA%E6%9C%89%E2%80%9C%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E2%80%9D.html">00 开篇词  优秀的程序员，你的技术栈中不能只有“增删改查”</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E9%A2%84%E4%B9%A0%20%20%E6%80%8E%E6%A0%B7%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%AD%A6%E4%B9%A0%E8%BF%99%E9%97%A8%E8%AF%BE%EF%BC%9F.html">00 预习  怎样更好地学习这门课？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/01%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%9F.html">01  为什么需要消息队列？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/02%20%20%E8%AF%A5%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%9F.html">02  该如何选择消息队列？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/03%20%20%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%B8%BB%E9%A2%98%E5%92%8C%E9%98%9F%E5%88%97%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">03  消息模型：主题和队列有什么区别？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/04%20%20%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">04  如何利用事务消息实现分布式事务？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/05%20%20%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%BC%9A%E4%B8%A2%E5%A4%B1.html">05  如何确保消息不会丢失</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/06%20%20%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%B6%88%E8%B4%B9%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%EF%BC%9F.html">06  如何处理消费过程中的重复消息？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/07%20%20%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B%E4%BA%86%E8%AF%A5%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%EF%BC%9F.html">07  消息积压了该如何处理？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/08%20%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%EF%BC%88%E4%B8%80%EF%BC%89%20%20%E7%BD%91%E5%85%B3%E5%A6%82%E4%BD%95%E6%8E%A5%E6%94%B6%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E7%A7%92%E6%9D%80%E7%BB%93%E6%9E%9C%EF%BC%9F.html">08  答疑解惑（一）  网关如何接收服务端的秒杀结果？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/09%20%20%E5%AD%A6%E4%B9%A0%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%AF%A5%E5%A6%82%E4%BD%95%E5%85%A5%E6%89%8B%EF%BC%9F.html">09  学习开源代码该如何入手？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/10%20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%BC%82%E6%AD%A5%E8%AE%BE%E8%AE%A1%E6%8F%90%E5%8D%87%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD%EF%BC%9F.html">10  如何使用异步设计提升系统性能？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/11%20%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%EF%BC%9F.html">11  如何实现高性能的异步网络传输？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/12%20%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F.html">12  序列化与反序列化：如何通过网络传输结构化的数据？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/13%20%20%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B9%8B%E9%97%B4%E5%AF%B9%E8%AF%9D%E7%9A%84%E8%AF%AD%E8%A8%80.html">13  传输协议：应用程序之间对话的语言</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/14%20%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%92%8C%E9%A2%91%E7%B9%81%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%9F.html">14  内存管理：如何避免内存溢出和频繁的垃圾回收？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/15%20%20Kafka%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%80%A7%E8%83%BDIO%EF%BC%9F.html">15  Kafka如何实现高性能IO？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/16%20%20%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98%E6%9D%A5%E5%87%8F%E5%B0%91%E7%A3%81%E7%9B%98IO%EF%BC%9F.html">16  缓存策略：如何使用缓存来减少磁盘IO？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/17%20%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E9%94%81%E4%BF%9D%E6%8A%A4%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%8D%8F%E8%B0%83%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">17  如何正确使用锁保护共享数据，协调异步线程？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/18%20%20%E5%A6%82%E4%BD%95%E7%94%A8%E7%A1%AC%E4%BB%B6%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD%EF%BC%88CAS%EF%BC%89%E6%9B%BF%E4%BB%A3%E9%94%81%EF%BC%9F.html">18  如何用硬件同步原语（CAS）替代锁？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/19%20%20%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9%EF%BC%9A%E6%97%B6%E9%97%B4%E6%8D%A2%E7%A9%BA%E9%97%B4%E7%9A%84%E6%B8%B8%E6%88%8F.html">19  数据压缩：时间换空间的游戏</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/20%20%20RocketMQ%20Producer%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%9A%E6%B6%88%E6%81%AF%E7%94%9F%E4%BA%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B.html">20  RocketMQ Producer源码分析：消息生产的实现过程</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/21%20%20Kafka%20Consumer%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%9A%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B.html">21  Kafka Consumer源码分析：消息消费的实现过程</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/22%20%20Kafka%E5%92%8CRocketMQ%E7%9A%84%E6%B6%88%E6%81%AF%E5%A4%8D%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%B7%AE%E5%BC%82%E7%82%B9%E5%9C%A8%E5%93%AA%EF%BC%9F.html">22  Kafka和RocketMQ的消息复制实现的差异点在哪？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/23%20%20RocketMQ%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E9%9B%86%E7%BE%A4%E4%B8%AD%E6%89%BE%E5%88%B0%E6%AD%A3%E7%A1%AE%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%9F.html">23  RocketMQ客户端如何在集群中找到正确的节点？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/24%20%20Kafka%E7%9A%84%E5%8D%8F%E8%B0%83%E6%9C%8D%E5%8A%A1ZooKeeper%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E2%80%9C%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80%E2%80%9D.html">24  Kafka的协调服务ZooKeeper：实现分布式系统的“瑞士军刀”</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/25%20%20RocketMQ%E4%B8%8EKafka%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">25  RocketMQ与Kafka中如何实现事务？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/26%20%20MQTT%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E6%B5%B7%E9%87%8F%E7%9A%84%E5%9C%A8%E7%BA%BFIoT%E8%AE%BE%E5%A4%87.html">26  MQTT协议：如何支持海量的在线IoT设备</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/27%20%20Pulsar%E7%9A%84%E5%AD%98%E5%82%A8%E8%AE%A1%E7%AE%97%E5%88%86%E7%A6%BB%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%85%A8%E6%96%B0%E7%9A%84%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF.html">27  Pulsar的存储计算分离设计：全新的消息队列设计思路</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/28%20%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%88%91%E7%9A%84100%E5%85%83%E5%93%AA%E5%84%BF%E5%8E%BB%E4%BA%86%EF%BC%9F.html">28  答疑解惑（二）：我的100元哪儿去了？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/29%20%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B6%88%E6%81%AF%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E9%80%9A%E8%BF%87Flink%E7%90%86%E8%A7%A3%E6%B5%81%E8%AE%A1%E7%AE%97%E7%9A%84%E5%8E%9F%E7%90%86.html">29  流计算与消息（一）：通过Flink理解流计算的原理</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/30%20%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B6%88%E6%81%AF%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%9C%A8%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E4%BD%BF%E7%94%A8Kafka%E9%93%BE%E6%8E%A5%E8%AE%A1%E7%AE%97%E4%BB%BB%E5%8A%A1.html">30  流计算与消息（二）：在流计算中使用Kafka链接计算任务</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/31%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%8E%9F%E7%90%86%E5%92%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BB%93%E6%9E%84.html">31  动手实现一个简单的RPC框架（一）：原理和程序的结构</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/32%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%80%9A%E4%BF%A1%E4%B8%8E%E5%BA%8F%E5%88%97%E5%8C%96.html">32  动手实现一个简单的RPC框架（二）：通信与序列化</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/33%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF.html">33  动手实现一个简单的RPC框架（三）：客户端</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/34%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">34  动手实现一个简单的RPC框架（四）：服务端</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/35%20%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E4%B8%BB%E6%B5%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%83%BD%E6%98%AF%E5%A6%82%E4%BD%95%E5%AD%98%E5%82%A8%E6%B6%88%E6%81%AF%E7%9A%84%EF%BC%9F.html">35  答疑解惑（三）：主流消息队列都是如何存储消息的？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%20JMQ%E7%9A%84Broker%E6%98%AF%E5%A6%82%E4%BD%95%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%E7%9A%84%EF%BC%9F.html">加餐  JMQ的Broker是如何异步处理消息的？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%EF%BC%9F.html">结束语  程序员如何构建知识体系？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/34%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%9C%8D%E5%8A%A1%E7%AB%AF.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="34  动手实现一个简单的RPC框架（四）：服务端" id="title">34  动手实现一个简单的RPC框架（四）：服务端</h1>
+<div><p>你好，我是李玥。</p>
+<p>上节课我们一起学习了如何来构建这个 RPC 框架中最关键的部分，也就是：在客户端，如何根据用户注册的服务接口来动态生成桩的方法。在这里，除了和语言特性相关的一些动态编译小技巧之外，你更应该掌握的是其中动态代理这种设计思想，它的使用场景以及实现方法。</p>
+<p>这节课我们一起来实现这个框架的最后一部分：服务端。对于我们这个 RPC 框架来说，服务端可以分为两个部分：注册中心和 RPC 服务。其中，注册中心的作用是帮助客户端来寻址，找到对应 RPC 服务的物理地址，RPC 服务用于接收客户端桩的请求，调用业务服务的方法，并返回结果。</p>
+<h2 id="注册中心是如何实现的">注册中心是如何实现的？</h2>
+<p>我们先来看看注册中心是如何实现的。一般来说，一个完整的注册中心也是分为客户端和服务端两部分的，客户端给调用方提供 API，并实现与服务端的通信；服务端提供真正的业务功能，记录每个 RPC 服务发来的注册信息，并保存到它的元数据中。当有客户端来查询服务地址的时候，它会从元数据中获取服务地址，返回给客户端。</p>
+<p>由于注册中心并不是这个 RPC 框架的重点内容，所以在这里，我们只实现了一个单机版的注册中心，它只有客户端没有服务端，所有的客户端依靠读写同一个元数据文件来实现元数据共享。所以，我们这个注册中心只能支持单机运行，并不支持跨服务器调用。</p>
+<p>但是，我们在这里，同样采用的是“面向接口编程”的设计模式，这样，你可以在不改动一行代码的情况下，就可以通过增加一个 SPI 插件的方式，提供一个可以跨服务器调用的真正的注册中心实现，比如说，一个基于 HTTP 协议实现的注册中心。我们再来复习一下，这种面向接口编程的设计是如何在注册中心中来应用的。</p>
+<p>首先，我们在 RPC 服务的接入点，接口 RpcAccessPoint 中增加一个获取注册中心实例的方法：</p>
+<pre><code>public interface RpcAccessPoint extends Closeable{
+    /**
+     * 获取注册中心的引用
+     * @param nameServiceUri 注册中心 URI
+     * @return 注册中心引用
+     */
+    NameService getNameService(URI nameServiceUri);
+ 
+    // ...
+}
+</code></pre>
+<p>这个方法的参数就是注册中心的 URI，也就是它的地址，返回值就是访问这个注册中心的实例。然后我们再给 NameService 接口增加两个方法：</p>
+<pre><code>public interface NameService {
+ 
+    /**
+     * 所有支持的协议
+     */
+    Collection&lt;String&gt; supportedSchemes();
+ 
+    /**
+     * 连接注册中心
+     * @param nameServiceUri 注册中心地址
+     */
+    void connect(URI nameServiceUri);
+ 
+    // ...
+}
+</code></pre>
+<p>其中 supportedSchemes 方法，返回可以支持的所有协议，比如我们在这个例子中的实现，它的协议是“file”。connect 方法就是给定注册中心服务端的 URI，去建立与注册中心服务端的连接。</p>
+<p>下面我们来看获取注册中心的方法 getNameService 的实现，它的实现也很简单，就是通过 SPI 机制加载所有的 NameService 的实现类，然后根据给定的 URI 中的协议，去匹配支持这个协议的实现类，然后返回这个实现的引用就可以了。由于这部分实现是通用并且不会改变的，我们直接把实现代码放在 RpcAccessPoint 这个接口中。</p>
+<p>这样我们就实现了一个可扩展的注册中心接口，系统可以根据 URI 中的协议，动态地来选择不同的注册中心实现。增加一种注册中心的实现，也不需要修改任何代码，只要按照 SPI 的规范，把协议的实现加入到运行时 CLASSPATH 中就可以了。（这里设置 CLASSPATH 的目的，在于告诉 Java 执行环境，在哪些目录下可以找到你所要执行的 Java 程序所需要的类或者包。）</p>
+<p>我们这个例子中注册中心的实现类是 LocalFileNameService，它的实现比较简单，就是去读写一个本地文件，实现注册服务 registerService 方法时，把服务提供者保存到本地文件中；实现查找服务 lookupService 时，就是去本地文件中读出所有的服务提供者，找到对应的服务提供者，然后返回。</p>
+<p>这里面有一点需要注意的是，由于这个本地文件它是一个共享资源，它会被 RPC 框架所有的客户端和服务端并发读写。所以，这时你要怎么做呢？对，<strong>必须要加锁！</strong></p>
+<p>由于我们这个文件可能被多个进程读写，所以这里不能使用我们之前讲过的，编程语言提供的那些锁，原因是这些锁只能在进程内起作用，它锁不住其他进程。我们这里面必须使用由操作系统提供的文件锁。这个锁的使用和其他的锁并没有什么区别，同样是在访问共享文件之前先获取锁，访问共享资源结束后必须释放锁。具体的代码你可以去查看 LocalFileNameService 这个实现类。</p>
+<h2 id="rpc-服务是怎么实现的">RPC 服务是怎么实现的？</h2>
+<p>接下来，我们再来看看 RPC 服务是怎么实现的。RPC 服务也就是 RPC 框架的服务端。我们在之前讲解这个 RPC 框架的实现原理时讲到过，RPC 框架的服务端主要需要实现下面这两个功能：</p>
+<ol>
+<li>服务端的业务代码把服务的实现类注册到 RPC 框架中 ;</li>
+<li>接收客户端桩发出的请求，调用服务的实现类并返回结果。</li>
+</ol>
+<p>把服务的实现类注册到 RPC 框架中，这个逻辑的实现很简单，我们只要使用一个合适的数据结构，记录下所有注册的实例就可以了，后面在处理客户端请求的时候，会用到这个数据结构来查找服务实例。</p>
+<p>然后我们来看，RPC 框架的服务端如何来处理客户端发送的 RPC 请求。首先来看服务端中，使用 Netty 接收所有请求数据的处理类 RequestInvocation 的 channelRead0 方法。</p>
+<pre><code>@Override
+protected void channelRead0(ChannelHandlerContext channelHandlerContext, Command request) throws Exception {
+    RequestHandler handler = requestHandlerRegistry.get(request.getHeader().getType());
+    if(null != handler) {
+        Command response = handler.handle(request);
+        if(null != response) {
+            channelHandlerContext.writeAndFlush(response).addListener((ChannelFutureListener) channelFuture -&gt; {
+                if (!channelFuture.isSuccess()) {
+                    logger.warn("Write response failed!", channelFuture.cause());
+                    channelHandlerContext.channel().close();
+                }
+            });
+        } else {
+            logger.warn("Response is null!");
+        }
+    } else {
+        throw new Exception(String.format("No handler for request with type: %d!", request.getHeader().getType()));
+    }
+}
+</code></pre>
+<p>这段代码的处理逻辑就是，根据请求命令的 Hdader 中的请求类型 type，去 requestHandlerRegistry 中查找对应的请求处理器 RequestHandler，然后调用请求处理器去处理请求，最后把结果发送给客户端。</p>
+<p>这种通过“请求中的类型”，把请求分发到对应的处理类或者处理方法的设计，我们在 RocketMQ 和 Kafka 的源代码中都见到过，在服务端处理请求的场景中，这是一个很常用的方法。我们这里使用的也是同样的设计，不同的是，我们使用了一个命令注册机制，让这个路由分发的过程省略了大量的 if-else 或者是 switch 代码。这样做的好处是，可以很方便地扩展命令处理器，而不用修改路由分发的方法，并且代码看起来更加优雅。这个命令注册机制的实现类是 RequestHandlerRegistry，你可以自行去查看。</p>
+<p>因为我们这个 RPC 框架中只需要处理一种类型的请求：RPC 请求，所以我们只实现了一个命令处理器：RpcRequestHandler。这部分代码是这个 RPC 框架服务端最核心的部分，你需要重点掌握。另外，为了便于你理解，在这里我只保留了核心业务逻辑，你在充分理解这部分核心业务逻辑之后，可以再去查看项目中完整的源代码，补全错误处理部分。</p>
+<p>我们先来看它处理客户端请求，也就是这个 handle 方法的实现。</p>
+<pre><code>@Override
+public Command handle(Command requestCommand) {
+    Header header = requestCommand.getHeader();
+    // 从 payload 中反序列化 RpcRequest
+    RpcRequest rpcRequest = SerializeSupport.parse(requestCommand.getPayload());
+    // 查找所有已注册的服务提供方，寻找 rpcRequest 中需要的服务
+    Object serviceProvider = serviceProviders.get(rpcRequest.getInterfaceName());
+    // 找到服务提供者，利用 Java 反射机制调用服务的对应方法
+    String arg = SerializeSupport.parse(rpcRequest.getSerializedArguments());
+    Method method = serviceProvider.getClass().getMethod(rpcRequest.getMethodName(), String.class);
+    String result = (String ) method.invoke(serviceProvider, arg);
+    // 把结果封装成响应命令并返回
+    return new Command(new ResponseHeader(type(), header.getVersion(), header.getRequestId()), SerializeSupport.serialize(result));
+    // ...
+}
+</code></pre>
+<ol>
+<li>把 requestCommand 的 payload 属性反序列化成为 RpcRequest；</li>
+<li>根据 rpcRequest 中的服务名，去成员变量 serviceProviders 中查找已注册服务实现类的实例；</li>
+<li>找到服务提供者之后，利用 Java 反射机制调用服务的对应方法；</li>
+<li>把结果封装成响应命令并返回，在 RequestInvocation 中，它会把这个响应命令发送给客户端。</li>
+</ol>
+<p>再来看成员变量 serviceProviders，它的定义是：Map<string *service="" ,="" name*="" object="" provider*=""></string> serviceProviders。它实际上就是一个 Map，Key 就是服务名，Value 就是服务提供方，也就是服务实现类的实例。这个 Map 的数据从哪儿来的呢？我们来看一下 RpcRequestHandler 这个类的定义：</p>
+<pre><code>@Singleton
+public class RpcRequestHandler implements RequestHandler, ServiceProviderRegistry {
+    @Override
+    public synchronized &lt;T&gt; void addServiceProvider(Class&lt;? extends T&gt; serviceClass, T serviceProvider) {
+        serviceProviders.put(serviceClass.getCanonicalName(), serviceProvider);
+        logger.info("Add service: {}, provider: {}.",
+                serviceClass.getCanonicalName(),
+                serviceProvider.getClass().getCanonicalName());
+    }
+    // ...
+}
+</code></pre>
+<p>可以看到，这个类不仅实现了处理客户端请求的 RequestHandler 接口，同时还实现了注册 RPC 服务 ServiceProviderRegistry 接口，也就是说，RPC 框架服务端需要实现的两个功能——注册 RPC 服务和处理客户端 RPC 请求，都是在这一个类 RpcRequestHandler 中实现的，所以说，这个类是这个 RPC 框架服务端最核心的部分。成员变量 serviceProviders 这个 Map 中的数据，也就是在 addServiceProvider 这个方法的实现中添加进去的。</p>
+<p>还有一点需要注意的是，我们 RpcRequestHandler 上增加了一个注解 @Singleton，限定这个类它是一个单例模式，这样确保在进程中任何一个地方，无论通过 ServiceSupport 获取 RequestHandler 或者 ServiceProviderRegistry 这两个接口的实现类，拿到的都是 RpcRequestHandler 这个类的唯一的一个实例。这个 @Singleton 的注解和获取单例的实现在 ServiceSupport 中，你可以自行查看代码。顺便说一句，在 Spring 中，也提供了单例 Bean 的支持，它的实现原理也是类似的。</p>
+<h2 id="小结">小结</h2>
+<p>以上就是实现这个 RPC 框架服务端的全部核心内容，照例我们来做一个总结。</p>
+<p>首先我们一起来实现了一个注册中心，注册中心的接口设计采用了依赖倒置的设计原则（也就是“面向接口编程”的设计），并且还提供了一个“根据 URI 协议，自动加载对应实现类”的机制，使得我们可以通过扩展不同的协议，增加不同的注册中心实现。</p>
+<p>这种“通过请求参数中的类型，来动态加载对应实现”的设计，在我们这个 RPC 框架中不止这一处用到，在“处理客户端命令并路由到对应的处理类”这部分代码中，使用的也是这样一种设计。</p>
+<p>在 RPC 框架的服务端处理客户端请求的业务逻辑中，我们分两层做了两次请求分发：</p>
+<ol>
+<li>在 RequestInvocation 类中，根据请求命令中的请求类型 (command.getHeader().getType())，分发到对应的请求处理器 RequestHandler 中；</li>
+<li>RpcRequestHandler 类中，根据 RPC 请求中的服务名，把 RPC 请求分发到对应的服务实现类的实例中去。</li>
+</ol>
+<p>这两次分发采用的设计是差不多的，但你需要注意的是，这并不是一种过度设计。原因是，我们这两次分发分别是在不同的业务抽象分层中，第一次分发是在服务端的网络传输层抽象中，它是网络传输的一部分，而第二次分发是 RPC 框架服务端的业务层，是 RPC 框架服务端的一部分。良好的分层设计，目的也是让系统各部分更加的“松耦合，高内聚”。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

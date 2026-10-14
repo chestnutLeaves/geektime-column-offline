@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16 基础篇：怎么理解内存中的Buffer和Cache？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/index.html">Linux性能优化实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">64 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Linux性能优化实战</strong><ul><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%88%AB%E5%86%8D%E8%AE%A9Linux%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E6%88%90%E4%B8%BA%E4%BD%A0%E7%9A%84%E7%BB%8A%E8%84%9A%E7%9F%B3.html">00 开篇词 别再让Linux性能问题成为你的绊脚石</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/01%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F.html">01 如何学习Linux性能优化？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/02%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E5%88%B0%E5%BA%95%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3%E2%80%9C%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD%E2%80%9D%EF%BC%9F.html">02 基础篇：到底应该怎么理解“平均负载”？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/03%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E7%BB%8F%E5%B8%B8%E8%AF%B4%E7%9A%84%20CPU%20%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">03 基础篇：经常说的 CPU 上下文切换是什么意思？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/04%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E7%BB%8F%E5%B8%B8%E8%AF%B4%E7%9A%84%20CPU%20%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">04 基础篇：经常说的 CPU 上下文切换是什么意思？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/05%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%9F%90%E4%B8%AA%E5%BA%94%E7%94%A8%E7%9A%84CPU%E4%BD%BF%E7%94%A8%E7%8E%87%E5%B1%85%E7%84%B6%E8%BE%BE%E5%88%B0100%25%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">05 基础篇：某个应用的CPU使用率居然达到100%，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/06%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9A%84%20CPU%20%E4%BD%BF%E7%94%A8%E7%8E%87%E5%BE%88%E9%AB%98%EF%BC%8C%E4%BD%86%E4%B8%BA%E5%95%A5%E5%8D%B4%E6%89%BE%E4%B8%8D%E5%88%B0%E9%AB%98%20CPU%20%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9F.html">06 案例篇：系统的 CPU 使用率很高，但为啥却找不到高 CPU 的应用？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/07%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%87%BA%E7%8E%B0%E5%A4%A7%E9%87%8F%E4%B8%8D%E5%8F%AF%E4%B8%AD%E6%96%AD%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">07 案例篇：系统中出现大量不可中断进程和僵尸进程怎么办？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/08%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%87%BA%E7%8E%B0%E5%A4%A7%E9%87%8F%E4%B8%8D%E5%8F%AF%E4%B8%AD%E6%96%AD%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">08 案例篇：系统中出现大量不可中断进程和僵尸进程怎么办？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/09%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3Linux%E8%BD%AF%E4%B8%AD%E6%96%AD%EF%BC%9F.html">09 基础篇：怎么理解Linux软中断？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/10%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BD%AF%E4%B8%AD%E6%96%ADCPU%E4%BD%BF%E7%94%A8%E7%8E%87%E5%8D%87%E9%AB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">10 案例篇：系统的软中断CPU使用率升高，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/11%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%85%E9%80%9F%E5%88%86%E6%9E%90%E5%87%BA%E7%B3%BB%E7%BB%9FCPU%E7%9A%84%E7%93%B6%E9%A2%88%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">11 套路篇：如何迅速分析出系统CPU的瓶颈在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/12%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9ACPU%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF.html">12 套路篇：CPU 性能优化的几个思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/13%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%97%A0%E6%B3%95%E6%A8%A1%E6%8B%9F%E5%87%BA%20RES%20%E4%B8%AD%E6%96%AD%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">13 答疑（一）：无法模拟出 RES 中断的问题，怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8perf%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90Java%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">14 答疑（二）：如何用perf工具分析Java程序？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/15%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%E5%86%85%E5%AD%98%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">15 基础篇：Linux内存是怎么工作的？</a></li><li><a class="active" aria-current="page" href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/16%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84Buffer%E5%92%8CCache%EF%BC%9F.html">16 基础篇：怎么理解内存中的Buffer和Cache？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/17%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87%EF%BC%9F.html">17 案例篇：如何利用系统缓存优化程序的运行效率？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/18%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E4%BA%86%EF%BC%8C%E6%88%91%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%A4%84%E7%90%86%EF%BC%9F.html">18 案例篇：内存泄漏了，我该如何定位和处理？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/19%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%B3%BB%E7%BB%9F%E7%9A%84Swap%E5%8F%98%E9%AB%98%E4%BA%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">19 案例篇：为什么系统的Swap变高了（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/20%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%B3%BB%E7%BB%9F%E7%9A%84Swap%E5%8F%98%E9%AB%98%E4%BA%86%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">20 案例篇：为什么系统的Swap变高了？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/21%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E2%80%9C%E5%BF%AB%E5%87%86%E7%8B%A0%E2%80%9D%E6%89%BE%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F.html">21 套路篇：如何“快准狠”找到系统内存的问题？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/22%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%A3%81%E7%9B%98%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">22 答疑（三）：文件系统与磁盘的区别是什么？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/23%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">23 基础篇：Linux 文件系统是怎么工作的？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/24%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E7%A3%81%E7%9B%98I_O%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%88%E4%B8%8A%EF%BC%89.html">24 基础篇：Linux 磁盘I_O是怎么工作的（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/25%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9ALinux%20%E7%A3%81%E7%9B%98I_O%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%88%E4%B8%8B%EF%BC%89.html">25 基础篇：Linux 磁盘I_O是怎么工作的（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/26%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%BE%E5%87%BA%E7%8B%82%E6%89%93%E6%97%A5%E5%BF%97%E7%9A%84%E2%80%9C%E5%86%85%E9%AC%BC%E2%80%9D%EF%BC%9F.html">26 案例篇：如何找出狂打日志的“内鬼”？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/27%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E7%A3%81%E7%9B%98I_O%E5%BB%B6%E8%BF%9F%E5%BE%88%E9%AB%98%EF%BC%9F.html">27 案例篇：为什么我的磁盘I_O延迟很高？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/28%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%80%E4%B8%AASQL%E6%9F%A5%E8%AF%A2%E8%A6%8115%E7%A7%92%EF%BC%8C%E8%BF%99%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">28 案例篇：一个SQL查询要15秒，这是怎么回事？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/29%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9ARedis%E5%93%8D%E5%BA%94%E4%B8%A5%E9%87%8D%E5%BB%B6%E8%BF%9F%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F.html">29 案例篇：Redis响应严重延迟，如何解决？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/30%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%85%E9%80%9F%E5%88%86%E6%9E%90%E5%87%BA%E7%B3%BB%E7%BB%9FI_O%E7%9A%84%E7%93%B6%E9%A2%88%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">30 套路篇：如何迅速分析出系统I_O的瓶颈在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/31%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%A3%81%E7%9B%98%20I_O%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF.html">31 套路篇：磁盘 I_O 性能优化的几个思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/32%20%E7%AD%94%E7%96%91%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E9%98%BB%E5%A1%9E%E3%80%81%E9%9D%9E%E9%98%BB%E5%A1%9E%20I_O%20%E4%B8%8E%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%20I_O%20%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB.html">32 答疑（四）：阻塞、非阻塞 I_O 与同步、异步 I_O 的区别和联系</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/33%20%E5%85%B3%E4%BA%8E%20Linux%20%E7%BD%91%E7%BB%9C%EF%BC%8C%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E8%BF%99%E4%BA%9B%EF%BC%88%E4%B8%8A%EF%BC%89.html">33 关于 Linux 网络，你必须知道这些（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/34%20%E5%85%B3%E4%BA%8E%20Linux%20%E7%BD%91%E7%BB%9C%EF%BC%8C%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E8%BF%99%E4%BA%9B%EF%BC%88%E4%B8%8B%EF%BC%89.html">34 关于 Linux 网络，你必须知道这些（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/35%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9AC10K%20%E5%92%8C%20C1000K%20%E5%9B%9E%E9%A1%BE.html">35 基础篇：C10K 和 C1000K 回顾</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/36%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AF%84%E4%BC%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%EF%BC%9F.html">36 套路篇：怎么评估系统的网络性能？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/37%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9ADNS%20%E8%A7%A3%E6%9E%90%E6%97%B6%E5%BF%AB%E6%97%B6%E6%85%A2%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">37 案例篇：DNS 解析时快时慢，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/38%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%20tcpdump%20%E5%92%8C%20Wireshark%20%E5%88%86%E6%9E%90%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%EF%BC%9F.html">38 案例篇：怎么使用 tcpdump 和 Wireshark 分析网络流量？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/39%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%BC%93%E8%A7%A3%20DDoS%20%E6%94%BB%E5%87%BB%E5%B8%A6%E6%9D%A5%E7%9A%84%E6%80%A7%E8%83%BD%E4%B8%8B%E9%99%8D%E9%97%AE%E9%A2%98%EF%BC%9F.html">39 案例篇：怎么缓解 DDoS 攻击带来的性能下降问题？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/40%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%BB%B6%E8%BF%9F%E5%8F%98%E5%A4%A7%E4%BA%86%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">40 案例篇：网络请求延迟变大了，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/41%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%20NAT%20%E6%80%A7%E8%83%BD%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">41 案例篇：如何优化 NAT 性能？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/42%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%20NAT%20%E6%80%A7%E8%83%BD%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">42 案例篇：如何优化 NAT 性能？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/43%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF%EF%BC%88%E4%B8%8A%EF%BC%89.html">43 套路篇：网络性能优化的几个思路（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/44%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E4%B8%AA%E6%80%9D%E8%B7%AF%EF%BC%88%E4%B8%8B%EF%BC%89.html">44 套路篇：网络性能优化的几个思路（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/45%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%94%B6%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E7%BC%93%E5%86%B2%E5%8C%BA%E4%BD%8D%E7%BD%AE%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">45 答疑（五）：网络收发过程中，缓冲区位置在哪里？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/46%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8%E5%8C%96%E5%90%8E%EF%BC%8C%E5%90%AF%E5%8A%A8%E6%85%A2%E4%BA%86%E5%BE%88%E5%A4%9A%EF%BC%9F.html">46 案例篇：为什么应用容器化后，启动慢了很多？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/47%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%BB%E6%98%AF%E6%97%B6%E4%B8%8D%E6%97%B6%E4%B8%A2%E5%8C%85%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">47 案例篇：服务器总是时不时丢包，我该怎么办？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/48%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%BB%E6%98%AF%E6%97%B6%E4%B8%8D%E6%97%B6%E4%B8%A2%E5%8C%85%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">48 案例篇：服务器总是时不时丢包，我该怎么办？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/49%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%86%85%E6%A0%B8%E7%BA%BF%E7%A8%8B%20CPU%20%E5%88%A9%E7%94%A8%E7%8E%87%E5%A4%AA%E9%AB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">49 案例篇：内核线程 CPU 利用率太高，我该怎么办？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/50%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%8A%A8%E6%80%81%E8%BF%BD%E8%B8%AA%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">50 案例篇：动态追踪怎么用？（上）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/51%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E5%8A%A8%E6%80%81%E8%BF%BD%E8%B8%AA%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">51 案例篇：动态追踪怎么用？（下）</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/52%20%E6%A1%88%E4%BE%8B%E7%AF%87%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%90%9E%E5%90%90%E9%87%8F%E4%B8%8B%E9%99%8D%E5%BE%88%E5%8E%89%E5%AE%B3%EF%BC%8C%E6%80%8E%E4%B9%88%E5%88%86%E6%9E%90%EF%BC%9F.html">52 案例篇：服务吞吐量下降很厉害，怎么分析？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/53%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%E7%9A%84%E7%BB%BC%E5%90%88%E6%80%9D%E8%B7%AF.html">53 套路篇：系统监控的综合思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/54%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%BA%94%E7%94%A8%E7%9B%91%E6%8E%A7%E7%9A%84%E4%B8%80%E8%88%AC%E6%80%9D%E8%B7%AF.html">54 套路篇：应用监控的一般思路</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/55%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E5%88%86%E6%9E%90%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4.html">55 套路篇：分析性能问题的一般步骤</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/56%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9A%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%96%B9%E6%B3%95.html">56 套路篇：优化性能问题的一般方法</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/57%20%E5%A5%97%E8%B7%AF%E7%AF%87%EF%BC%9ALinux%20%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7%E9%80%9F%E6%9F%A5.html">57 套路篇：Linux 性能工具速查</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/58%20%E7%AD%94%E7%96%91%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%86%B7%E5%90%AF%E5%8A%A8%E5%A6%82%E4%BD%95%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%9F.html">58 答疑（六）：容器冷启动如何性能分析？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%EF%BC%88%E4%B8%80%EF%BC%89%20%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90%EF%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%92%8CLinux%20%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86.html">加餐（一） 书单推荐：性能优化和Linux 系统原理</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%EF%BC%88%E4%BA%8C%EF%BC%89%20%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90%EF%BC%9A%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%92%8C%20Linux%20%E5%86%85%E6%A0%B8%E5%AE%9E%E7%8E%B0.html">加餐（二） 书单推荐：网络原理和 Linux 内核实现</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E2%80%9C%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%20%E2%80%9D%EF%BC%8C%E4%B9%9F%E8%A6%81%E9%A1%BA%E5%88%A9%E6%8B%BF%E4%B8%8B%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%81.html">用户故事 “半路出家 ”，也要顺利拿下性能优化！</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E8%BF%90%E7%BB%B4%E5%92%8C%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4%EF%BC%9F.html">用户故事 运维和开发工程师们怎么说？</a></li><li><a href="/courses/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%84%BF%E4%BD%A0%E6%94%BB%E5%85%8B%E6%80%A7%E8%83%BD%E9%9A%BE%E5%85%B3.html">结束语 愿你攻克性能难关</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Linux%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98/16%20%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84Buffer%E5%92%8CCache%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="16 基础篇：怎么理解内存中的Buffer和Cache？" id="title">16 基础篇：怎么理解内存中的Buffer和Cache？</h1>
+<div><p>你好，我是倪朋飞。</p>
+<p>上一节，我们梳理了 Linux 内存管理的基本原理，并学会了用 free 和 top 等工具，来查看系统和进程的内存使用情况。</p>
+<p>内存和 CPU 的关系非常紧密，而内存管理本身也是很复杂的机制，所以感觉知识很硬核、很难啃，都是正常的。但还是那句话，初学时不用非得理解所有内容，继续往后学，多理解相关的概念并配合一定的实践之后，再回头复习往往会容易不少。当然，基本功不容放弃。</p>
+<p>在今天的内容开始之前，我们先来回顾一下系统的内存使用情况，比如下面这个 free 输出界面：</p>
+<pre><code># 注意不同版本的free输出可能会有所不同
+$ free
+              total        used        free      shared  buff/cache   available
+Mem:        8169348      263524     6875352         668     1030472     7611064
+Swap:             0           0           0
+</code></pre>
+<p>显然，这个界面包含了物理内存Mem和交换分区Swap的具体使用情况，比如总内存、已用内存、缓存、可用内存等。其中缓存是 Buffer和Cache两部分的总和 。</p>
+<p>这里的大部分指标都比较容易理解，但 Buffer和 Cache可能不太好区分。从字面上来说，Buffer是缓冲区，而Cache是缓存，两者都是数据在内存中的临时存储。那么，你知道这两种“临时存储”有什么区别吗？</p>
+<p>注：今天内容接下来的部分，Buffer和Cache我会都用英文来表示，避免跟文中的“缓存”一词混淆。而文中的“缓存”，则通指内存中的临时存储。</p>
+<h2 id="free数据的来源">free数据的来源</h2>
+<p>在我正式讲解两个概念前，你可以先想想，你有没有什么途径来进一步了解它们？除了中文翻译直接得到概念，别忘了，Buffer和Cache还是我们用free获得的指标。</p>
+<p>还记得我之前讲过的，碰到看不明白的指标时该怎么办吗？</p>
+<p>估计你想起来了，不懂就去查手册。用 man 命令查询 free 的文档，就可以找到对应指标的详细说明。比如，我们执行 man free ，就可以看到下面这个界面。</p>
+<pre><code>buffers
+              Memory used by kernel buffers (Buffers in /proc/meminfo)
+
+       cache  Memory used by the page cache and slabs (Cached and SReclaimable in /proc/meminfo)
+
+       buff/cache
+              Sum of buffers and cache
+</code></pre>
+<p>从free的手册中，你可以看到 buffer 和 cache 的说明。</p>
+<ul>
+<li><p>Buffers 是内核缓冲区用到的内存，对应的是 <code>/proc/meminfo</code> 中的 Buffers 值。</p></li>
+<li><p>Cache 是内核页缓存和Slab用到的内存，对应的是 <code>/proc/meminfo</code> 中的 Cached 与 SReclaimable 之和。</p></li>
+</ul>
+<p>这里的说明告诉我们，这些数值都来自 <code>/proc/meminfo</code>，但更具体的 Buffers、Cached和SReclaimable 的含义，还是没有说清楚。</p>
+<p>要弄明白它们到底是什么，我估计你第一反应就是去百度或者 Google一下。虽然大部分情况下，网络搜索能给出一个答案。但是，且不说筛选信息花费的时间精力，对你来说，这个答案的准确性也是很难保证的。</p>
+<p>要注意，网上的结论可能是对的，但是很可能跟你的环境并不匹配。最简单来说，同一个指标的具体含义，就可能因为内核版本、性能工具版本的不同而有挺大差别。这也是为什么，我总在专栏中强调通用思路和方法，而不是让你死记结论。对于案例实践来说，机器环境就是我们的最大限制。</p>
+<p>那么，有没有更简单、更准确的方法，来查询它们的含义呢？</p>
+<h2 id="proc文件系统">proc文件系统</h2>
+<p>我在前面 CPU 性能模块就曾经提到过，/proc 是 Linux 内核提供的一种特殊文件系统，是用户跟内核交互的接口。比方说，用户可以从 /proc 中查询内核的运行状态和配置选项，查询进程的运行状态、统计数据等，当然，你也可以通过 /proc 来修改内核的配置。</p>
+<p>proc 文件系统同时也是很多性能工具的最终数据来源。比如我们刚才看到的 free ，就是通过读取<code>/proc/meminfo</code>，得到内存的使用情况。</p>
+<p>继续说回<code>/proc/meminfo</code>，既然 Buffers、Cached、SReclaimable 这几个指标不容易理解，那我们还得继续查 proc 文件系统，获取它们的详细定义。</p>
+<p>执行 <code>man proc</code>，你就可以得到 proc 文件系统的详细文档。</p>
+<p>注意这个文档比较长，你最好搜索一下（比如搜索 meminfo），以便更快定位到内存部分。</p>
+<pre><code>Buffers %lu
+    Relatively temporary storage for raw disk blocks that shouldn't get tremendously large (20MB or so).
+
+Cached %lu
+   In-memory cache for files read from the disk (the page cache).  Doesn't include SwapCached.
+...
+SReclaimable %lu (since Linux 2.6.19)
+    Part of Slab, that might be reclaimed, such as caches.
+    
+SUnreclaim %lu (since Linux 2.6.19)
+    Part of Slab, that cannot be reclaimed on memory pressure.
+</code></pre>
+<p>通过这个文档，我们可以看到：</p>
+<ul>
+<li><p>Buffers 是对原始磁盘块的临时存储，也就是用来<strong>缓存磁盘的数据</strong>，通常不会特别大（20MB左右）。这样，内核就可以把分散的写集中起来，统一优化磁盘的写入，比如可以把多次小的写合并成单次大的写等等。</p></li>
+<li><p>Cached 是从磁盘读取文件的页缓存，也就是用来<strong>缓存从文件读取的数据</strong>。这样，下次访问这些文件数据时，就可以直接从内存中快速获取，而不需要再次访问缓慢的磁盘。</p></li>
+<li><p>SReclaimable 是 Slab 的一部分。Slab包括两部分，其中的可回收部分，用 SReclaimable 记录；而不可回收部分，用 SUnreclaim 记录。</p></li>
+</ul>
+<p>好了，我们终于找到了这三个指标的详细定义。到这里，你是不是长舒一口气，满意地想着，总算弄明白Buffer 和 Cache了。不过，知道这个定义就真的理解了吗？这里我给你提了两个问题，你先想想能不能回答出来。</p>
+<p>第一个问题，Buffer 的文档没有提到这是磁盘读数据还是写数据的缓存，而在很多网络搜索的结果中都会提到 Buffer 只是对<strong>将要写入磁盘数据</strong>的缓存。那反过来说，它会不会也缓存从磁盘中读取的数据呢？</p>
+<p>第二个问题，文档中提到，Cache 是对从文件读取数据的缓存，那么它是不是也会缓存写文件的数据呢？</p>
+<p>为了解答这两个问题，接下来，我将用几个案例来展示， Buffer 和 Cache 在不同场景下的使用情况。</p>
+<h2 id="案例">案例</h2>
+<h3 id="你的准备">你的准备</h3>
+<p>跟前面实验一样，今天的案例也是基于 Ubuntu 18.04，当然，其他 Linux 系统也适用。我的案例环境是这样的。</p>
+<ul>
+<li><p>机器配置：2 CPU，8GB 内存。</p></li>
+<li><p>预先安装 sysstat 包，如 apt install sysstat。</p></li>
+</ul>
+<p>之所以要安装 sysstat ，是因为我们要用到 vmstat ，来观察 Buffer 和 Cache 的变化情况。虽然从 /proc/meminfo 里也可以读到相同的结果，但毕竟还是 vmstat 的结果更加直观。</p>
+<p>另外，这几个案例使用了 dd 来模拟磁盘和文件的 I/O，所以我们也需要观测 I/O 的变化情况。</p>
+<p>上面的工具安装完成后，你可以打开两个终端，连接到 Ubuntu 机器上。</p>
+<p>准备环节的最后一步，为了减少缓存的影响，记得在第一个终端中，运行下面的命令来清理系统缓存：</p>
+<pre><code># 清理文件页、目录项、Inodes等各种缓存
+$ echo 3 &gt; /proc/sys/vm/drop_caches
+</code></pre>
+<p>这里的 <code>/proc/sys/vm/drop_caches</code> ，就是通过 proc 文件系统修改内核行为的一个示例，写入 3 表示清理文件页、目录项、Inodes等各种缓存。这几种缓存的区别你暂时不用管，后面我们都会讲到。</p>
+<h3 id="场景1-磁盘和文件写案例">场景1：磁盘和文件写案例</h3>
+<p>我们先来模拟第一个场景。首先，在第一个终端，运行下面这个vmstat 命令：</p>
+<pre><code># 每隔1秒输出1组数据
+$ vmstat 1
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+0  0      0 7743608   1112  92168    0    0     0     0   52  152  0  1 100  0  0
+ 0  0      0 7743608   1112  92168    0    0     0     0   36   92  0  0 100  0  0
+</code></pre>
+<p>输出界面里， 内存部分的 buff 和 cache ，以及 io 部分的 bi 和 bo 就是我们要关注的重点。</p>
+<ul>
+<li><p>buff 和 cache 就是我们前面看到的 Buffers 和 Cache，单位是 KB。</p></li>
+<li><p>bi 和 bo 则分别表示块设备读取和写入的大小，单位为块/秒。因为 Linux 中块的大小是 1KB，所以这个单位也就等价于 KB/s。</p></li>
+</ul>
+<p>正常情况下，空闲系统中，你应该看到的是，这几个值在多次结果中一直保持不变。</p>
+<p>接下来，到第二个终端执行 dd 命令，通过读取随机设备，生成一个500MB大小的文件：</p>
+<pre><code>$ dd if=/dev/urandom of=/tmp/file bs=1M count=500
+</code></pre>
+<p>然后再回到第一个终端，观察Buffer和Cache的变化情况：</p>
+<pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+0  0      0 7499460   1344 230484    0    0     0     0   29  145  0  0 100  0  0
+ 1  0      0 7338088   1752 390512    0    0   488     0   39  558  0 47 53  0  0
+ 1  0      0 7158872   1752 568800    0    0     0     4   30  376  1 50 49  0  0
+ 1  0      0 6980308   1752 747860    0    0     0     0   24  360  0 50 50  0  0
+ 0  0      0 6977448   1752 752072    0    0     0     0   29  138  0  0 100  0  0
+ 0  0      0 6977440   1760 752080    0    0     0   152   42  212  0  1 99  1  0
+...
+ 0  1      0 6977216   1768 752104    0    0     4 122880   33  234  0  1 51 49  0
+ 0  1      0 6977440   1768 752108    0    0     0 10240   38  196  0  0 50 50  0
+</code></pre>
+<p>通过观察 vmstat 的输出，我们发现，在dd命令运行时， Cache在不停地增长，而Buffer基本保持不变。</p>
+<p>再进一步观察I/O的情况，你会看到，</p>
+<ul>
+<li><p>在 Cache 刚开始增长时，块设备 I/O 很少，bi 只出现了一次 488 KB/s，bo 则只有一次 4KB。而过一段时间后，才会出现大量的块设备写，比如 bo 变成了122880。</p></li>
+<li><p>当 dd 命令结束后，Cache 不再增长，但块设备写还会持续一段时间，并且，多次 I/O 写的结果加起来，才是 dd 要写的 500M 的数据。</p></li>
+</ul>
+<p>把这个结果，跟我们刚刚了解到的Cache的定义做个对比，你可能会有点晕乎。为什么前面文档上说 Cache 是文件读的页缓存，怎么现在写文件也有它的份？</p>
+<p>这个疑问，我们暂且先记下来，接着再来看另一个磁盘写的案例。两个案例结束后，我们再统一进行分析。</p>
+<p>不过，对于接下来的案例，我必须强调一点：</p>
+<p>下面的命令对环境要求很高，需要你的系统配置多块磁盘，并且磁盘分区 /dev/sdb1 还要处于未使用状态。如果你只有一块磁盘，千万不要尝试，否则将会对你的磁盘分区造成损坏。</p>
+<p>如果你的系统符合标准，就可以继续在第二个终端中，运行下面的命令。清理缓存后，向磁盘分区/dev/sdb1 写入2GB的随机数据：</p>
+<pre><code># 首先清理缓存
+$ echo 3 &gt; /proc/sys/vm/drop_caches
+# 然后运行dd命令向磁盘分区/dev/sdb1写入2G数据
+$ dd if=/dev/urandom of=/dev/sdb1 bs=1M count=2048
+</code></pre>
+<p>然后，再回到终端一，观察内存和I/O的变化情况：</p>
+<pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+1  0      0 7584780 153592  97436    0    0   684     0   31  423  1 48 50  2  0
+ 1  0      0 7418580 315384 101668    0    0     0     0   32  144  0 50 50  0  0
+ 1  0      0 7253664 475844 106208    0    0     0     0   20  137  0 50 50  0  0
+ 1  0      0 7093352 631800 110520    0    0     0     0   23  223  0 50 50  0  0
+ 1  1      0 6930056 790520 114980    0    0     0 12804   23  168  0 50 42  9  0
+ 1  0      0 6757204 949240 119396    0    0     0 183804   24  191  0 53 26 21  0
+ 1  1      0 6591516 1107960 123840    0    0     0 77316   22  232  0 52 16 33  0
+</code></pre>
+<p>从这里你会看到，虽然同是写数据，写磁盘跟写文件的现象还是不同的。写磁盘时（也就是bo大于 0 时），Buffer和Cache都在增长，但显然Buffer的增长快得多。</p>
+<p>这说明，写磁盘用到了大量的Buffer，这跟我们在文档中查到的定义是一样的。</p>
+<p>对比两个案例，我们发现，写文件时会用到 Cache 缓存数据，而写磁盘则会用到 Buffer 来缓存数据。所以，回到刚刚的问题，虽然文档上只提到，Cache是文件读的缓存，但实际上，Cache也会缓存写文件时的数据。</p>
+<h3 id="场景2-磁盘和文件读案例">场景2：磁盘和文件读案例</h3>
+<p>了解了磁盘和文件写的情况，我们再反过来想，磁盘和文件读的时候，又是怎样的呢？</p>
+<p>我们回到第二个终端，运行下面的命令。清理缓存后，从文件/tmp/file中，读取数据写入空设备：</p>
+<pre><code># 首先清理缓存
+$ echo 3 &gt; /proc/sys/vm/drop_caches
+# 运行dd命令读取文件数据
+$ dd if=/tmp/file of=/dev/null
+</code></pre>
+<p>然后，再回到终端一，观察内存和I/O的变化情况：</p>
+<pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  1      0 7724164   2380 110844    0    0 16576     0   62  360  2  2 76 21  0
+ 0  1      0 7691544   2380 143472    0    0 32640     0   46  439  1  3 50 46  0
+ 0  1      0 7658736   2380 176204    0    0 32640     0   54  407  1  4 50 46  0
+ 0  1      0 7626052   2380 208908    0    0 32640    40   44  422  2  2 50 46  0
+</code></pre>
+<p>观察 vmstat 的输出，你会发现读取文件时（也就是bi大于0时），Buffer保持不变，而Cache则在不停增长。这跟我们查到的定义“Cache是对文件读的页缓存”是一致的。</p>
+<p>那么，磁盘读又是什么情况呢？我们再运行第二个案例来看看。</p>
+<p>首先，回到第二个终端，运行下面的命令。清理缓存后，从磁盘分区 /dev/sda1中读取数据，写入空设备：</p>
+<pre><code># 首先清理缓存
+$ echo 3 &gt; /proc/sys/vm/drop_caches
+# 运行dd命令读取文件
+$ dd if=/dev/sda1 of=/dev/null bs=1M count=1024
+</code></pre>
+<p>然后，再回到终端一，观察内存和I/O的变化情况：</p>
+<pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+0  0      0 7225880   2716 608184    0    0     0     0   48  159  0  0 100  0  0
+ 0  1      0 7199420  28644 608228    0    0 25928     0   60  252  0  1 65 35  0
+ 0  1      0 7167092  60900 608312    0    0 32256     0   54  269  0  1 50 49  0
+ 0  1      0 7134416  93572 608376    0    0 32672     0   53  253  0  0 51 49  0
+ 0  1      0 7101484 126320 608480    0    0 32748     0   80  414  0  1 50 49  0
+</code></pre>
+<p>观察 vmstat 的输出，你会发现读磁盘时（也就是bi大于0时），Buffer和Cache都在增长，但显然Buffer的增长快很多。这说明读磁盘时，数据缓存到了 Buffer 中。</p>
+<p>当然，我想，经过上一个场景中两个案例的分析，你自己也可以对比得出这个结论：读文件时数据会缓存到 Cache 中，而读磁盘时数据会缓存到 Buffer 中。</p>
+<p>到这里你应该发现了，虽然文档提供了对Buffer和Cache的说明，但是仍不能覆盖到所有的细节。比如说，今天我们了解到的这两点：</p>
+<ul>
+<li><p>Buffer既可以用作“将要写入磁盘数据的缓存”，也可以用作“从磁盘读取数据的缓存”。</p></li>
+<li><p>Cache既可以用作“从文件读取数据的页缓存”，也可以用作“写文件的页缓存”。</p></li>
+</ul>
+<p>这样，我们就回答了案例开始前的两个问题。</p>
+<p>简单来说，<strong>Buffer是对磁盘数据的缓存，而Cache是文件数据的缓存，它们既会用在读请求中，也会用在写请求中</strong>。</p>
+<h2 id="小结">小结</h2>
+<p>今天，我们一起探索了内存性能中 Buffer 和 Cache 的详细含义。Buffer和Cache分别缓存磁盘和文件系统的读写数据。</p>
+<ul>
+<li><p>从写的角度来说，不仅可以优化磁盘和文件的写入，对应用程序也有好处，应用程序可以在数据真正落盘前，就返回去做其他工作。</p></li>
+<li><p>从读的角度来说，既可以加速读取那些需要频繁访问的数据，也降低了频繁I/O对磁盘的压力。</p></li>
+</ul>
+<p>除了探索的内容本身，这个探索过程对你应该也有所启发。在排查性能问题时，由于各种资源的性能指标太多，我们不可能记住所有指标的详细含义。那么，准确高效的手段——查文档，就非常重要了。</p>
+<p>你一定要养成查文档的习惯，并学会解读这些性能指标的详细含义。此外，proc 文件系统也是我们的好帮手。它为我们呈现了系统内部的运行状态，同时也是很多性能工具的数据来源，是辅助排查性能问题的好方法。</p>
+<h2 id="思考">思考</h2>
+<p>最后，我想给你留一个思考题。</p>
+<p>我们已经知道，可以使用 ps、top 或者 proc 文件系统，来获取进程的内存使用情况。那么，如何统计出所有进程的物理内存使用量呢？</p>
+<p>提示：要避免重复计算多个进程同时占用的内存，像是页缓存、共享内存这类。如果你把 ps、top 得到的数据直接相加，就会出现重复计算的问题。</p>
+<p>这里，我推荐从 <code>/proc/&lt;pid&gt;/smaps</code> 入手。前面内容里，我并没有直接讲过<code>/proc/&lt;pid&gt;/smaps</code>文件中各个指标含义，所以，需要你自己动手查 proc 文件系统的文档，解读并回答这个问题。</p>
+<p>欢迎在留言区和我讨论，也欢迎你把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

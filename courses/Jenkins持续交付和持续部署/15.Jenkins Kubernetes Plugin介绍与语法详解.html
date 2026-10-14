@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>15.Jenkins Kubernetes Plugin介绍与语法详解 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/index.html">Jenkins持续交付和持续部署</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">18 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Jenkins持续交付和持续部署</strong><ul><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/01.Jenkins%E7%9A%84%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%97%A5%E5%B8%B8%E7%BB%B4%E6%8A%A4.html">01.Jenkins的安装配置与日常维护</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/02.Jenkins%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%8F%92%E4%BB%B6%E5%8A%9F%E8%83%BD.html">02.Jenkins强大的插件功能</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/03.Devops%E5%B7%A5%E5%85%B7%E9%93%BE.html">03.Devops工具链</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/04.%E5%88%9D%E6%8E%A2Jenkins%20CD%E5%AE%9E%E8%B7%B5.html">04.初探Jenkins CD实践</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/05.Jenkins%E5%B8%B8%E7%94%A8%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0.html">05.Jenkins常用项目配置参数</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/06.Jenkins%E9%83%A8%E7%BD%B2%E4%B9%8BDocker%E8%A6%81%E7%82%B9.html">06.Jenkins部署之Docker要点</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/07.Jenkins%E9%9B%86%E6%88%90%E4%B9%8BAnsible%E8%A6%81%E7%82%B9.html">07.Jenkins集成之Ansible要点</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/08.Jenkins%E9%9B%86%E6%88%90Ansible%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%88%B0Docker%E5%AE%B9%E5%99%A8.html">08.Jenkins集成Ansible持续部署服务到Docker容器</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/09.%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BC%95%E6%93%8E%E4%B9%8BJenkins%20Pipeline%E5%A3%B0%E6%98%8E%E5%BC%8F%E8%AF%AD%E6%B3%95.html">09.实现自动化引擎之Jenkins Pipeline声明式语法</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/10.%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BC%95%E6%93%8E%E4%B9%8BJenkins%20Pipeline%E8%84%9A%E6%9C%AC%E5%BC%8F%E8%AF%AD%E6%B3%95.html">10.实现自动化引擎之Jenkins Pipeline脚本式语法</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/11.Pipeline%E8%AF%AD%E6%B3%95%E8%BF%9B%E8%A1%8C%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%AE%9E%E8%B7%B5.html">11.Pipeline语法进行持续交付与基础实践</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/12.Jenkins%20Docker%20Pipeline%E6%8F%92%E4%BB%B6%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90Slave%E8%8A%82%E7%82%B9%E8%AF%AD%E6%B3%95%E5%89%96%E6%9E%90.html">12.Jenkins Docker Pipeline插件动态生成Slave节点语法剖析</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/13.%E4%BD%BF%E7%94%A8%20Docker%20Pipeline%E6%8F%92%E4%BB%B6%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90Jenkins%20Slave%20%E5%AE%9E%E8%B7%B5.html">13.使用 Docker Pipeline插件动态生成Jenkins Slave 实践</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/14.%E6%90%9E%E5%AE%9A%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84Jenkins%E4%B8%8EKubernetes%E9%9B%86%E7%BE%A4%E8%BF%9E%E6%8E%A5%E9%85%8D%E7%BD%AE.html">14.搞定不同环境下的Jenkins与Kubernetes集群连接配置</a></li><li><a class="active" aria-current="page" href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/15.Jenkins%20Kubernetes%20Plugin%E4%BB%8B%E7%BB%8D%E4%B8%8E%E8%AF%AD%E6%B3%95%E8%AF%A6%E8%A7%A3.html">15.Jenkins Kubernetes Plugin介绍与语法详解</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/16.%E4%BD%BF%E7%94%A8Kubernetes%E7%BC%96%E6%8E%92Jenkins%20Slave%E8%8A%82%E7%82%B9%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E9%A1%B9%E7%9B%AE.html">16.使用Kubernetes编排Jenkins Slave节点持续交付项目</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/17.%E4%BD%BF%E7%94%A8Kubernetes%E6%8F%92%E4%BB%B6%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%88%B0Kubernetes%E9%9B%86%E7%BE%A4.html">17.使用Kubernetes插件持续部署服务到Kubernetes集群</a></li><li><a href="/courses/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/18.Ansible%20Plugin%E6%8F%92%E4%BB%B6%E8%AF%AD%E6%B3%95%E8%AF%A6%E8%A7%A3%E4%B8%8E%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%88%B0kubernetes%E9%9B%86%E7%BE%A4.html">18.Ansible Plugin插件语法详解与持续部署服务到kubernetes集群</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Jenkins%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98%E5%92%8C%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2/15.Jenkins%20Kubernetes%20Plugin%E4%BB%8B%E7%BB%8D%E4%B8%8E%E8%AF%AD%E6%B3%95%E8%AF%A6%E8%A7%A3.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="15.Jenkins Kubernetes Plugin介绍与语法详解" id="title">15.Jenkins Kubernetes Plugin介绍与语法详解</h1>
+<div><p>在上一节中介绍了jenkins使用不同的安装方式配置连接kubernetes集群的方法以及简单的示例，根据kubernetes插件用途的不同，对于插件语法的介绍也会区分开来，本节主要介绍一下使用kubernetes集群动态生成Jenkins slave pod的插件<code>Kubernetes plugin</code>。</p>
+<h1 id="kubernetes-plugin">kubernetes plugin</h1>
+<p>编写pipeline脚本集成kubernetes插件生成动态slave时，对于启动agent代理部分的代码编写根据pipeline语法类型的不同会有所差异。但无论有什么差异，有一个核心方法不变，那就是PodTemplate，顾名思义，就是pod的模板。</p>
+<p>PodTemplate是使用<code>kubernetes</code>插件生成动态slave节点的核心方法。用于配置启动的agent代理（Pod）的资源对象定义。熟悉kubernetes的应该都知道，kubernetes资源对象pod的定义严格来说主要包含两部分：Pod各项配置定义和容器各项配置定义。而在Jenkins中则通过kubernetes插件的PodTemplate()方法，对这两部分进行定义，并启动代理。</p>
+<p>下面会根据不同的语法类型分别介绍PodTemplate的配置方法。</p>
+<h1 id="基本语法">基本语法</h1>
+<h2 id="脚本式语法">脚本式语法</h2>
+<p>首先看一个在脚本式pipeline中使用kubernetes插件的基本语法。</p>
+<pre><code>podTemplate(label: 'xxx',cloud:'',&lt;pod_option1&gt;,&lt;pod_option2&gt;,...,containers: [
+    &lt;containerTemplate(name: 'c1',&lt;container_option1&gt;,&lt;container_option2&gt;...)&gt;,
+    &lt;containerTemplate(&lt;name: 'c2',&lt;container_option1&gt;,&lt;container_option2&gt;...)&gt;,
+    ....
+    ]){
+        node('xxx'){
+            stage('test'){
+            ....
+            }
+        }
+        container('c1') {
+            stage('c1'){
+            ....
+            }
+        }
+        container('c2') {
+            stage('c2'){
+            ....
+            }
+        }
+     }
+</code></pre>
+<p><strong>说明</strong>：</p>
+<p>上面<code>PodTemplate</code>包含两部分：</p>
+<p>第一部分为对kubernetes资源对象Pod自身的一些定义，包括pod的标签，pod的名称，使用的云（cloud）名称，挂载的volume等。</p>
+<p>第二部分（container）为对该pod下container的定义。container是一个列表，可以包含一个或多个<code>containerTemplate</code>，用于详细描述container的配置参数，比如镜像地址，容器名称，镜像拉取策略等。</p>
+<p><code>podTemplate()</code>定义了一个label名称，该lable用于在node()中引用，用于生成一个唯一的pod名称。</p>
+<p><code>containerTemplate()</code>定义了该container的名称，用于作为流水线执行的环境，通过<code>container('container_name')</code>引用给容器。</p>
+<h2 id="声明式语法">声明式语法</h2>
+<p>相对于脚本式语法，声明式的语法就显得相对比较混乱。是因为声明式最基础的配置是将kubernetes中资源对象pod的定义的内容通过yaml方式直接放到流水线脚本中，如下所示(只展示了部分定义)。</p>
+<pre><code>pipeline {
+    agent {
+        kubernetes {
+            label &lt;label_name&gt;
+            yaml """
+    kind: Pod
+    metadata:
+      name: &lt;pod_name&gt;
+    spec:
+      containers:
+      - name: &lt;container_name&gt;
+        image: &lt;image_name&gt;
+        imagePullPolicy: IfNotPresent
+        command:
+        - xxxx
+        tty: true
+        volumeMounts:
+          ....
+      restartPolicy: Never
+      volumes:
+        ......
+    """
+       }
+    }
+    stages {
+        stage('one') {
+          steps {
+            container('container_name') {
+              &lt;command1&gt;
+            }
+            container('container_name') {
+              &lt;command2&gt;
+            }
+          }
+          steps {
+          sh 'hostname'
+        }
+   }       
+}
+</code></pre>
+<p><strong>说明</strong></p>
+<p><code>agent{}</code>代理配置使用<code>kubernetes</code>关键字通过yaml指令将yaml文件内容直接放到PodTemplate中。</p>
+<p>在不同的stage中引用容器的方式也是通过<code>container('container_name')</code>语法格式。</p>
+<p>以上便是使用脚本式与声明式流水线集成kubernetes插件动态生成jenkins slave节点的基础语法。<strong>需要说明的是，对于PodTemplage方法中Pod Template和Container Tempalte的配置，既可以在常规的Jenkins UI中配置，也可以在pipeline script中通过脚本定义配置信息。</strong>本节主要介绍在pipeline script中使用脚本的方式定义PodTemplate；在Jenkins UI中配置PodTemplate的方法将在以后介绍，并且如果会使用脚本定义PodTemplate后，在Jenkins UI中配置相对会简单一些。</p>
+<h2 id="参数说明">参数说明</h2>
+<p><code>PodTemplate()</code>既然是方法，那么肯定会涉及到参数配置，所以接下来先了解一下PodTemplate方法的参数配置，为了区分pod配置和container配置，下面会将<code>PodTemplate()</code>总体配置拆分为<code>Pod Template</code>配置和<code>container Template</code>配置分别进行说明。</p>
+<p><strong>Pod Template 配置部分参数说明</strong>-
+<strong>cloud</strong> ：用来指定在jenkins的系统配置中设置的云名称，默认为kubernetes。在上一节中对于该设置已经做个说明，这里不在重复介绍。</p>
+<p><strong>name</strong> ：pod名称。</p>
+<p><strong>namespace</strong> ：pod运行的namespace（命名空间）。</p>
+<p><strong>label</strong> ：pod的标签. 可以自己定义，也可以使用插件内置的 <code>POD_LABEL</code> 变量。</p>
+<p><strong>yaml</strong> ：Pod定义的yaml表现形式，可参考<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#pod-v1-core" target="_blank">kubernetes官网</a>。</p>
+<p><strong>yamlMergeStrategy</strong> ：包含<code>merge()</code> 和 <code>override()</code>属性。控制yaml定义是覆盖还是与从声明（或者继承）的pod模板的yaml定义合并。默认为<code>override()</code>。</p>
+<p><strong>containers</strong> ：Pod内容器模板的定义。</p>
+<p><strong>serviceAccount</strong> ：Pod使用的服务账户。</p>
+<p><strong>nodeSelector</strong> ：生成的Pod绑定到的node节点，以<code>key：value</code>的形式表现。</p>
+<p><strong>nodeUsageMode</strong> ：包括<code>NORMAL</code>和<code>EXCLUSIVE</code>两个值，它控制Jenkins在选择到这个代理的方式是：只有指定该节点标签时使用这个节点，还是尽可能多地使用该节点。</p>
+<p><strong>volumes</strong> ：定义的数据卷，用于pod和所有容器。</p>
+<p><strong>envVars</strong>：应用于<strong>所有</strong>容器的环境变量。</p>
+<p><strong>envVar</strong> ：可以理解为在pipeline内定义的环境变量。</p>
+<p><strong>secretEnvVar</strong> ：secret变量，其值是从Kubernetes 的secret获取的。</p>
+<p><strong>imagePullSecrets</strong> ：一个存放私有仓库认证信息的secret，用于从私有仓库拉取镜像时对私有仓库认证。</p>
+<p><strong>annotations</strong>：Pod的注解。</p>
+<p><strong>InheritFrom</strong>：继承的一个或多个Pod模板的列表。</p>
+<p><strong>slaveConnectTimeout</strong> ：代理pod连接jenkins的超时时间（以秒为单位_）_。</p>
+<p><strong>podRetention</strong> ：控制保留Pod的行为，用户设置在agent执行完毕后是否保留该pod。有多个选项，可以是<code>never()</code>，<code>onFailure()</code>，<code>always()</code>或<code>default()</code>。如果为空，则默认为在经过<code>activeDeadlineSeconds</code>指定的时间之后删除pod 。</p>
+<p><strong>activeDeadlineSeconds</strong> ：如果 <code>podRetention</code> 参数设置为<code>never()</code> 或者 <code>onFailure()</code>，pod经过该参数设置的时间后会自动删除。</p>
+<p><strong>idleMinutes</strong> ：允许Pod保持活动状态以供重用，直到时间达到从开始执行到经过该值设置时间为止，默认为分钟。</p>
+<p><strong>showRawYaml</strong> ：启用或禁用原始yaml文件的输出。默认为<code>true</code>。</p>
+<p><strong>runAsUser</strong> ：用于设置Pod中所有容器运行的用户ID。</p>
+<p><strong>runAsGroup</strong> ：用于设置Pod中所有容器运行的组ID。</p>
+<p><strong>hostNetwork</strong> ：使用宿主机网络，类似docker中的<code>network=host</code>。</p>
+<p><strong>workspaceVolume</strong> ：用于工作空间的卷的类型。也就是kubernetes中volume的挂载类型，可以是：</p>
+<p><code>emptyDirWorkspaceVolume</code> (default)-
+<code>dynamicPVC()</code>-
+<code>hostPathWorkspaceVolume()</code>-
+<code>nfsWorkspaceVolume()</code>-
+<code>persistentVolumeClaimWorkspaceVolume()</code></p>
+<p><strong>container Template配置部分参数说明</strong></p>
+<p><strong>name</strong> ：容器名称。-
+<strong>image</strong> ：容器使用的镜像。-
+<strong>envVars</strong>：应用于容器的环境变量<strong>（补充和覆盖在pod级别设置的envvar）</strong>。-
+<strong>envVar</strong> ：同上。-
+<strong>secretEnvVar</strong> ：同上。-
+<strong>command</strong> ：容器要执行的命令。-
+<strong>args</strong> ：执行命令要传的参数。-
+<strong>ttyEnabled</strong> ：标记容器开启tty。-
+<strong>livenessProbe</strong> ：容器探针。-
+<strong>ports</strong> ：容器端口。-
+<strong>alwaysPullImage</strong> ：拉取镜像策略-
+<strong>runAsUser</strong> ：用于运行容器的用户ID。-
+<strong>runAsGroup</strong> ：用于运行容器的用户组ID。.</p>
+<p>上面的参数对于脚本式和声明式pipeline都是适用的。对于声明式的语法，也可以通过在前面介绍的片段生成器生成相应的PodTemplate语法片段。</p>
+<p>有关<code>Pod Template</code>和<code>Container Template</code>的更多参数可以参考kubernetes中资源对象pod的yaml定义，默认情况下，Pod中支持的参数，在pipeline中都是可以使用的。</p>
+<p>了解了基本语法，下面通过一些基本的示例来加深一下理解。</p>
+<h1 id="语法示例">语法示例</h1>
+<p>针对脚本式语法和声明式语法的不同，对于示例也会分开介绍。</p>
+<h2 id="脚本式语法-1">脚本式语法</h2>
+<p>基础示例如下：</p>
+<pre><code>podTemplate {
+    node(POD_LABEL) {
+        stage('Run shell') {
+            sh 'echo hello world'
+        }
+    }
+}
+</code></pre>
+<p><strong>说明</strong></p>
+<p>对于脚本式语法，<code>node()</code>块是被包含在<code>PodTemplate</code>方法里的。</p>
+<p>该示例会启动一个kubernetes Pod，并输出<code>hello world</code>。</p>
+<p><code>node(POD_LABEL)</code> ：<code>POD_LABEL</code>用于给pipeline的agent代理(kubernetes pod)指定一个标签，确保pod名称的唯一性，这个标签可以自定义（通过<code>podTemplate</code> 的label参数指定），也可以像上面示例一样，使用<code>POD_LABEL</code>，这个是在<code>kubernetes plugin</code>插件的1.17及以后版本添加的功能，用于自动生成pod 标签，标签的格式为<code>${JOB_NAME)-${BUILD_NUMBER}-hash_number</code>。</p>
+<p>通过上面的示例会发现，PodTemplate既没有定义Pod参数配置，也没有定义container的参数配置。在没有配置这些参数的情况下，pipeline会使用默认的PodTemplate配置，在执行上面的pipeline后，Jenkins的构建日志中会列出该Pod的yaml定义（可参考上面最初的示例），包括镜像版本，jenkins的环境变量等。由于是默认的配置，对我们编写pipeline 持续交付脚本帮助不大，我们需要自己定义Pod运行参数，所以这里就不在重复介绍默认的pod定义。有兴趣的可以执行上面的示例，结果会通过jenkins的console日志显示出来。</p>
+<p>对于上面的基础示例，可以添加container参数，用来自定义pod内容器的启动参数，比如：</p>
+<pre><code>podTemplate(containers: […]) {
+  node(POD_LABEL) {
+    stage('Run shell') {
+      container('mycontainer') {
+        sh 'echo hello world'
+      }
+    }
+  }
+}
+</code></pre>
+<p>该示例中，container参数定义了启动容器用到的镜像配置模板，在不填写container参数的情况，默认的jnlp代理(container)的配置参数如下所示：</p>
+<pre><code>containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:3.35-5-alpine', args: '${computer.jnlpmac} ${computer.name}')
+</code></pre>
+<p><strong>需要注意的是</strong>：</p>
+<p>对于<code>${computer.jnlpmac} ${computer.name}</code>这两个参数是<code>jnlp-agent</code>（该示例为<code>jnlp-slave:3.35-5-alpine</code>）镜像运行必须的参数，如果不写或少写一个，都会导致slave pod生成失败。</p>
+<p>另一个要说明的点是，该contianer的名称，实际工作中我们可能需要使用自己定义的一些镜像，这些镜像如果是<code>jnlp-agent</code>类型（启动时通过slave agent包启动并连接Jenkins master节点）的镜像，则容器名称就必须为jnlp，否则有可能会导致pod生成失败，至于原因将在下一章节进行说明。</p>
+<p>对于默认的jnlp代理(container)相应的声明式语法如下：</p>
+<pre><code>apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: jnlp
+    image: 'jenkins/jnlp-slave:3.35-5-alpine'
+    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+</code></pre>
+<p>通过该示例，可以知道上面脚本式语法中的两个参数是做什么用的了吧。如果还不知道，可参考jenkins的<a href="https://github.com/jenkinsci/docker-jnlp-slave" target="_blank">docker-jnlp-slave</a></p>
+<p>默认的container配置就只包含上面的三个参数，name，image，args，除了这些参数外，还有一些经常用到的，比如用于分配伪终端的ttyEnabled参数、设置拉取镜像策略的<code>alwaysPullImage</code>参数、配置是否使用privileged特权模式的参数、设置容器启动内存和cpu等。</p>
+<p>更多与容器相关的参数配置可参考如下示例：</p>
+<pre><code> containerTemplate(
+        name: 'mariadb',
+        image: 'mariadb:10.1',
+        ttyEnabled: true,
+        privileged: false,
+        alwaysPullImage: false,
+        workingDir: '/home/jenkins/agent',
+        resourceRequestCpu: '50m',
+        resourceLimitCpu: '100m',
+        resourceRequestMemory: '100Mi',
+        resourceLimitMemory: '200Mi',
+        envVars: [
+            envVar(key: 'MYSQL_ALLOW_EMPTY_PASSWORD', value: 'true'),
+            secretEnvVar(key: 'MYSQL_PASSWORD', secretName: 'mysql-secret', secretKey: 'password'),
+            ...
+        ],
+        ports: [portMapping(name: 'mysql', containerPort: 3306, hostPort: 3306)]
+    ),
+</code></pre>
+<p>与pod Template相关的参数配置如下：</p>
+<pre><code>podTemplate(cloud: 'kubernetes', label: 'my-defined', containers: [....
+],
+volumes: [
+    emptyDirVolume(mountPath: '/etc/mount1', memory: false),
+    secretVolume(mountPath: '/etc/mount2', secretName: 'my-secret'),
+    configMapVolume(mountPath: '/etc/mount3', configMapName: 'my-config'),
+    hostPathVolume(mountPath: '/etc/mount4', hostPath: '/mnt/my-mount'),
+    nfsVolume(mountPath: '/etc/mount5', serverAddress: '127.0.0.1', serverPath: '/', readOnly: true),
+    persistentVolumeClaim(mountPath: '/etc/mount6', claimName: 'myClaim', readOnly: true)
+],
+namesapce: default,
+serviceaccount: default,
+imagePullSecrets: [ 'pull-secret' ],  //用于在启动容器时从私有仓库拉取镜像，而无需在宿主机对私有仓库进行认证登录
+annotations: [
+    podAnnotation(key: "my-key", value: "my-value")
+    ...
+]) 
+</code></pre>
+<p>编写pipeline脚本时对于PodTemplate方法中的某个参数如果不知道如何定义，都可以参考上面展示的模版范例，或者通过在前面的介绍的片段生成器通过jenkins ui定义来生成语法片段。</p>
+<p>podTemplate方法的配置除了直接使用<code>key:value</code>方式定义外，也可以通过以yaml（kubernetes中资源对象文件的默认后缀）文件的方式定义，比如下面示例：</p>
+<pre><code>podTemplate(yaml: """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command:
+    - cat
+    tty: true
+"""
+) {
+    node(POD_LABEL) {
+      container('busybox') {
+        sh "hostname"
+      }
+    }
+}
+</code></pre>
+<p>除了使用yaml关键字外，也可以使用yamlFile关键字，用于指定一个yaml文件，该文件通常与jenkinsfile文件一起存在于源码仓库中。通过从源码仓库中拉取Jenkinsfile文件和该参数指定的文件，下载后会自动执行。这种方式需要改变pipeline job中脚本定义的类型，默认使用<code>Pipeline script</code>，使用yamlFile的方式就该使用<code>Pipeline script from SCM</code>（前面章节有介绍）的方式了。</p>
+<p><strong>运行多个容器</strong></p>
+<p>对于不同的代码要是使用不同的构建环境怎么办？在container参数中可以定义多个<code>containerTemplate</code>来满足此需求。也就是在一个pod中运行多个容器，熟悉kubernetes的应该都知道，同一个pod内的容器共享主机名、网络、vloume等信息，所以在pod内运行一个或者多个容器，它们之间并没有什么区别。如下示例：</p>
+<pre><code>podTemplate(label:'test', containers: [
+    containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'golang', image: 'golang:1.8.0', ttyEnabled: true, command: 'cat')
+  ]) {
+
+    node('test') {
+        stage('Get a Maven project') {
+            git 'https://github.com/jenkinsci/kubernetes-plugin.git'
+            container('maven') {
+                stage('Build a Maven project') {
+                    sh 'echo build maven'
+                }
+            }
+        }
+
+        stage('Get a Golang project') {
+            git url: 'https://github.com/hashicorp/terraform.git'
+            container('golang') {
+                stage('Build a Go project') {
+                    sh 'echo build go'
+                }
+            }
+        }
+
+    }
+}
+</code></pre>
+<p><strong>说明：</strong></p>
+<p>该示例定义多个容器，在不同的stage通过定义的容器的名称来使用该容器作为流水线执行的环境。</p>
+<h2 id="声明式语法-1">声明式语法</h2>
+<p>在声明式语法中使用PodTemplate方法与在脚本式语法中使用该方法的方式基本一致。主要区别在于agent的定义方式上。</p>
+<p>首先看一个在声明式脚本中使用<code>PodTemplate</code>的基础示例：</p>
+<pre><code>pipeline {
+  agent {
+    kubernetes {
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: maven
+    image: maven:alpine
+    command:
+    - cat
+    tty: true
+  - name: busybox
+    image: busybox
+    command:
+    - cat
+    tty: true
+"""
+    }
+  }
+  stages {
+    stage('Run maven') {
+      steps {
+        container('maven') {
+          sh 'mvn -version'
+        }
+        container('busybox') {
+          sh '/bin/busybox'
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p><strong>说明：</strong></p>
+<p>使用声明式脚本，agent的type必须是”any, docker, dockerfile, kubernetes, label, none”中的一种，本节为kubernetes插件的使用，所以agent的type为kubernetes。</p>
+<p>kubernetes使用yaml方式定义Pod和container模板配置信息，在stage阶段使用container指令指定运行的容器提供流水线执行的环境。</p>
+<p>该pod定义未指定pod工作的namespace（命名空间），这里需要说明一下的是，如果yaml定义没有指定namespace，则默认使用在jenkins系统配置中添加kubernetes云时指定的namespace，如果这里也没设定namespace的名称，则默认使用default namespace；如果都指定了，则默认使用在pipeline脚本中定义的namespace。</p>
+<p>上面示例 stage阶段对容器的引用方式与脚本式流水线引用容器的方式一样。</p>
+<p>有关yaml更全面的定义，可以参考kubernetes中对资源对象pod的定义，参考<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#pod-v1-core" target="_blank">kubernetes官网</a></p>
+<p>除了可以在脚本式语法中使用yamlFile指令外，在声明式语法中也可以使用<code>yamlFile</code>指令。如下示例：</p>
+<pre><code>pipeline {
+  agent {
+    kubernetes {
+      yamlFile 'KubernetesPod.yaml'
+    }
+  }
+  stages {
+      ...
+  }
+}
+</code></pre>
+<p><strong>说明</strong></p>
+<p>示例中指定<code>KubernetesPod.yaml</code>文件与jenkinsfile文件放在同一源码仓库的同级目录下，配置job pipeline时使用<code>Pipeline script from SCM</code>。如果指定的<code>kubernetesPod.yaml</code>文件与Jenkinsfile文件没在同一级目录，指定该文件时需要加上相对路径。</p>
+<p><strong>使用多个容器</strong></p>
+<p>默认情况下，声明式脚本的模板不会从父模板继承。所以即便在定义了全局agent代理的情况下，也可以在指定的stage单独定义agent。</p>
+<p>如下示例，定义了全局agent，也可以在stage定义agent，互不影响。</p>
+<pre><code>pipeline {
+  agent {
+    kubernetes {
+      label 'parent-pod'
+      yaml """
+spec:
+  containers:
+  - name: golang
+    image: golang:1.6.3-alpine
+    command:
+    - cat 
+    tty: true
+"""
+    }
+  }
+  stages {
+    stage('Run maven') {
+        agent {
+            kubernetes {
+                label 'nested-pod'
+                yaml """
+spec:
+  containers:
+  - name: maven
+    image: maven:3.3.9-jdk-8-alpine
+    command:
+    - cat 
+    tty: true
+"""
+            }
+        }
+      steps {
+        container('maven') {
+          sh 'mvn -version'
+        }
+      }
+    }
+    stage('run go'){
+        steps {
+        container('golang') {
+          sh 'go --version'
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>以上就是使用<code>kubernetes</code>插件动态生成jenkins slave节点时用到的一些语法示例。在学会了前面jenkins与docker pipeline插件集成的语法及示例后，对于本章节的内容学习应该相对简单很多。</p>
+<p>有关在jenkins ui中定义PodTemplate以及自定义image镜像等内容会在下一章以实际案例的方式说明。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

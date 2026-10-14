@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>24 Web 服务：Web 服务核心功能有哪些，如何实现？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/index.html">Go 语言项目开发实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">60 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Go 语言项目开发实战</strong><ul><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%200%20%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BC%81%E4%B8%9A%E7%BA%A7%20Go%20%E5%BA%94%E7%94%A8.html">00 开篇词 从 0 开始搭建一个企业级 Go 应用</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/01%20IAM%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0%EF%BC%9A%E6%88%91%E4%BB%AC%E8%A6%81%E5%AE%9E%E7%8E%B0%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%20Go%20%E9%A1%B9%E7%9B%AE%EF%BC%9F.html">01 IAM系统概述：我们要实现什么样的 Go 项目？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/02%20%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84%20Go%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%9F.html">02 环境准备：如何安装和配置一个基本的 Go 开发环境？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/03%20%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%20IAM%20%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">03 项目部署：如何快速部署 IAM 系统？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/04%20%E8%A7%84%E8%8C%83%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%9D%82%E4%B9%B1%E6%97%A0%E7%AB%A0%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%EF%BC%9F.html">04 规范设计（上）：项目开发杂乱无章，如何规范？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/05%20%E8%A7%84%E8%8C%83%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9Acommit%20%E4%BF%A1%E6%81%AF%E9%A3%8E%E6%A0%BC%E8%BF%A5%E5%BC%82%E3%80%81%E9%9A%BE%E4%BB%A5%E9%98%85%E8%AF%BB%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%EF%BC%9F.html">05 规范设计（下）：commit 信息风格迥异、难以阅读，如何规范？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/06%20%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E4%B8%80%E4%B8%AA%E5%8F%AF%E7%BB%B4%E6%8A%A4%E3%80%81%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%EF%BC%9F.html">06 目录结构设计：如何组织一个可维护、可扩展的代码目录？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/07%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%90%88%E7%90%86%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">07 工作流设计：如何设计合理的多人开发模式？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/08%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%20Go%20%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B%EF%BC%9F.html">08 研发流程设计（上）：如何设计 Go 项目的开发流程？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/09%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%BA%94%E7%94%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F.html">09 研发流程设计（下）：如何管理应用的生命周期？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/10%20%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%EF%BC%9A%E6%80%8E%E4%B9%88%E5%86%99%E5%87%BA%E4%BC%98%E9%9B%85%E7%9A%84%20Go%20%E9%A1%B9%E7%9B%AE%EF%BC%9F.html">10 设计方法：怎么写出优雅的 Go 项目？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/11%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.html">11 设计模式：Go常用设计模式概述</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/12%20API%20%E9%A3%8E%E6%A0%BC%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1RESTful%20API%EF%BC%9F.html">12 API 风格（上）：如何设计RESTful API？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/13%20API%20%E9%A3%8E%E6%A0%BC%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ARPC%20API%E4%BB%8B%E7%BB%8D.html">13 API 风格（下）：RPC API介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/14%20%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84Makefile%EF%BC%9F.html">14 项目管理：如何编写高质量的Makefile？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/15%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E5%AE%9E%E6%88%98%EF%BC%9AIAM%E9%A1%B9%E7%9B%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E7%9A%84%EF%BC%9F.html">15 研发流程实战：IAM项目是如何进行研发流程管理的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/16%20%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9F.html">16 代码检查：如何进行静态代码检查？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/17%20API%20%E6%96%87%E6%A1%A3%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%20Swagger%20API%20%E6%96%87%E6%A1%A3%20%EF%BC%9F.html">17 API 文档：如何生成 Swagger API 文档 ？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/18%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E5%A5%97%E7%A7%91%E5%AD%A6%E7%9A%84%E9%94%99%E8%AF%AF%E7%A0%81%EF%BC%9F.html">18 错误处理（上）：如何设计一套科学的错误码？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/19%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E9%94%99%E8%AF%AF%E5%8C%85%EF%BC%9F.html">19 错误处理（下）：如何设计错误包？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/20%20%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%97%A5%E5%BF%97%E5%8C%85%E5%B9%B6%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97%EF%BC%9F.html">20 日志处理（上）：如何设计日志包并记录日志？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/21%20%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BB%8E%200%20%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97%E5%8C%85.html">21 日志处理（下）：手把手教你从 0 编写一个日志包</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/22%20%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E4%B8%89%E5%89%91%E5%AE%A2%EF%BC%9APflag%E3%80%81Viper%E3%80%81Cobra%20%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html">22 应用构建三剑客：Pflag、Viper、Cobra 核心功能介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/23%20%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BC%98%E7%A7%80%E7%9A%84%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6%EF%BC%9F.html">23 应用构建实战：如何构建一个优秀的企业应用框架？</a></li><li><a class="active" aria-current="page" href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/24%20Web%20%E6%9C%8D%E5%8A%A1%EF%BC%9AWeb%20%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">24 Web 服务：Web 服务核心功能有哪些，如何实现？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/25%20%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%EF%BC%9F.html">25 认证机制：应用程序如何进行访问认证？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/26%20IAM%E9%A1%B9%E7%9B%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%E5%8A%9F%E8%83%BD%E7%9A%84%EF%BC%9F.html">26 IAM项目是如何设计和实现访问认证功能的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/27%20%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%EF%BC%9A5%E5%A4%A7%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%B5%84%E6%BA%90%E6%8E%88%E6%9D%83%E7%9A%84%EF%BC%9F.html">27 权限模型：5大权限模型是如何进行资源授权的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/28%20%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%80%9A%E8%BF%87iam-apiserver%E8%AE%BE%E8%AE%A1%EF%BC%8C%E7%9C%8BWeb%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9E%84%E5%BB%BA.html">28 控制流（上）：通过iam-apiserver设计，看Web服务的构建</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/29%20%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9Aiam-apiserver%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E8%AE%B2%E8%A7%A3.html">29 控制流（下）：iam-apiserver服务核心功能实现讲解</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/30%20ORM%EF%BC%9ACURD%20%E7%A5%9E%E5%99%A8%20GORM%20%E5%8C%85%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%9E%E6%88%98.html">30 ORM：CURD 神器 GORM 包介绍及实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/31%20%E6%95%B0%E6%8D%AE%E6%B5%81%EF%BC%9A%E9%80%9A%E8%BF%87iam-authz-server%E8%AE%BE%E8%AE%A1%EF%BC%8C%E7%9C%8B%E6%95%B0%E6%8D%AE%E6%B5%81%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1.html">31 数据流：通过iam-authz-server设计，看数据流服务的设计</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/32%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%A4%84%E7%90%86%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%A7%E7%94%9F%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F.html">32 数据处理：如何高效处理应用程序产生的数据？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/33%20%20SDK%20%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%87%BA%E4%B8%80%E4%B8%AA%E4%BC%98%E7%A7%80%E7%9A%84%20Go%20SDK%EF%BC%9F.html">33  SDK 设计（上）：如何设计出一个优秀的 Go SDK？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/34%20SDK%20%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AIAM%E9%A1%B9%E7%9B%AEGo%20SDK%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0.html">34 SDK 设计（下）：IAM项目Go SDK设计和实现</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/35%20%E6%95%88%E7%8E%87%E7%A5%9E%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%9F.html">35 效率神器：如何设计和实现一个命令行客户端工具？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/36%20%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%20Go%20%E8%AF%AD%E8%A8%80%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%92%8C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F.html">36 代码测试（上）：如何编写 Go 语言单元测试和性能测试用例？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/37%20%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%85%B6%E4%BB%96%E6%B5%8B%E8%AF%95%E7%B1%BB%E5%9E%8B%E5%8F%8A%20IAM%20%E6%B5%8B%E8%AF%95%E4%BB%8B%E7%BB%8D.html">37 代码测试（下）：Go 语言其他测试类型及 IAM 测试介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/38%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%20Go%20%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">38 性能分析（上）：如何分析 Go 语言代码的性能？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/39%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AAPI%20Server%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%92%8C%E8%B0%83%E4%BC%98%E5%AE%9E%E6%88%98.html">39 性能分析（下）：API Server性能测试和调优实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/40%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E3%80%81%E9%AB%98%E5%8F%AF%E7%94%A8%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D.html">40 软件部署实战（上）：部署方案及负载均衡、高可用组件介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/41%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9AIAM%20%E7%B3%BB%E7%BB%9F%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">41 软件部署实战（中）：IAM 系统生产环境部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/42%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AIAM%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA%E3%80%81%E6%B0%B4%E5%B9%B3%E6%89%A9%E7%BC%A9%E5%AE%B9%E5%AE%9E%E6%88%98.html">42 软件部署实战（下）：IAM系统安全加固、水平扩缩容实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/43%20%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.html">43 技术演进（上）：虚拟化技术演进之路</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/44%20%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E5%92%8C%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.html">44 技术演进（下）：软件架构和应用生命周期技术演进之路</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/45%20%E5%9F%BA%E4%BA%8EKubernetes%E7%9A%84%E4%BA%91%E5%8E%9F%E7%94%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">45 基于Kubernetes的云原生架构设计</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/46%20%E5%A6%82%E4%BD%95%E5%88%B6%E4%BD%9CDocker%E9%95%9C%E5%83%8F%EF%BC%9F.html">46 如何制作Docker镜像？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/47%20%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99Kubernetes%E8%B5%84%E6%BA%90%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%EF%BC%9F.html">47 如何编写Kubernetes资源定义文件？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/48%20IAM%20%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">48 IAM 容器化部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/49%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AHelm%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html">49 服务编排（上）：Helm服务编排基础知识</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/50%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%9F%BA%E4%BA%8EHelm%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">50 服务编排（下）：基于Helm的服务编排部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/51%20%E5%9F%BA%E4%BA%8E%20GitHub%20Actions%20%E7%9A%84%20CI%20%E5%AE%9E%E6%88%98.html">51 基于 GitHub Actions 的 CI 实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Go%20Modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86%E5%85%A8%E8%AE%B2.html">特别放送 Go Modules依赖包管理全讲</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Go%20Modules%E5%AE%9E%E6%88%98.html">特别放送 Go Modules实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20IAM%E6%8E%92%E9%9A%9C%E6%8C%87%E5%8D%97.html">特别放送 IAM排障指南</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BD%9C%E4%B8%9A%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0.html">特别放送 分布式作业系统设计和实现</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%BB%99%E4%BD%A0%E4%B8%80%E4%BB%BDGo%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84Makefile%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95.html">特别放送 给你一份Go项目中最常用的Makefile核心语法</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%BB%99%E4%BD%A0%E4%B8%80%E4%BB%BD%E6%B8%85%E6%99%B0%E3%80%81%E5%8F%AF%E7%9B%B4%E6%8E%A5%E5%A5%97%E7%94%A8%E7%9A%84Go%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.html">特别放送 给你一份清晰、可直接套用的Go编码规范</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%9B%B4%E6%92%AD%E5%8A%A0%E9%A4%90%20%E5%A6%82%E4%BD%95%E4%BB%8E%E5%B0%8F%E7%99%BD%E8%BF%9B%E9%98%B6%E6%88%90%20Go%20%E8%AF%AD%E8%A8%80%E4%B8%93%E5%AE%B6%EF%BC%9F.html">直播加餐 如何从小白进阶成 Go 语言专家？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%A6%82%E4%BD%95%E8%AE%A9%E8%87%AA%E5%B7%B1%E7%9A%84%20Go%20%E7%A0%94%E5%8F%91%E4%B9%8B%E8%B7%AF%E8%B5%B0%E5%BE%97%E6%9B%B4%E8%BF%9C%EF%BC%9F.html">结束语 如何让自己的 Go 研发之路走得更远？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/24%20Web%20%E6%9C%8D%E5%8A%A1%EF%BC%9AWeb%20%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="24 Web 服务：Web 服务核心功能有哪些，如何实现？" id="title">24 Web 服务：Web 服务核心功能有哪些，如何实现？</h1>
+<div><p>你好，我是孔令飞。从今天开始，我们进入实战第三站：服务开发。在这个部分，我会讲解 IAM项目各个服务的构建方式，帮助你掌握Go 开发阶段的各个技能点。</p>
+<p>在Go项目开发中，绝大部分情况下，我们是在写能提供某种功能的后端服务，这些功能以RPC API 接口或者RESTful API接口的形式对外提供，能提供这两种API接口的服务也统称为Web服务。今天这一讲，我就通过介绍RESTful API风格的Web服务，来给你介绍下如何实现Web服务的核心功能。</p>
+<p>那今天我们就来看下，Web服务的核心功能有哪些，以及如何开发这些功能。</p>
+<h2 id="web服务的核心功能">Web服务的核心功能</h2>
+<p>Web服务有很多功能，为了便于你理解，我将这些功能分成了基础功能和高级功能两大类，并总结在了下面这张图中：</p>
+<p><img alt="" src="/assets/553fee1d37fe896bcc51e6b8.jpg"/></p>
+<p>下面，我就按图中的顺序，来串讲下这些功能。</p>
+<p>要实现一个Web服务，首先我们要选择通信协议和通信格式。在Go项目开发中，有HTTP+JSON 和 gRPC+Protobuf两种组合可选。因为iam-apiserver主要提供的是REST风格的API接口，所以选择的是HTTP+JSON组合。</p>
+<p><strong>Web服务最核心的功能是路由匹配。</strong>路由匹配其实就是根据<code>(HTTP方法, 请求路径)</code>匹配到处理这个请求的函数，最终由该函数处理这次请求，并返回结果，过程如下图所示：</p>
+<p><img alt="" src="/assets/0108f52f4d3743942d155a38.jpg"/></p>
+<p>一次HTTP请求经过路由匹配，最终将请求交由<code>Delete(c *gin.Context)</code>函数来处理。变量<code>c</code>中存放了这次请求的参数，在Delete函数中，我们可以进行参数解析、参数校验、逻辑处理，最终返回结果。</p>
+<p>对于大型系统，可能会有很多个API接口，API接口随着需求的更新迭代，可能会有多个版本，为了便于管理，我们需要<strong>对路由进行分组</strong>。</p>
+<p>有时候，我们需要在一个服务进程中，同时开启HTTP服务的80端口和HTTPS的443端口，这样我们就可以做到：对内的服务，访问80端口，简化服务访问复杂度；对外的服务，访问更为安全的HTTPS服务。显然，我们没必要为相同功能启动多个服务进程，所以这时候就需要Web服务能够支持<strong>一进程多服务</strong>的功能。</p>
+<p>我们开发Web服务最核心的诉求是：输入一些参数，校验通过后，进行业务逻辑处理，然后返回结果。所以Web服务还应该能够进行<strong>参数解析</strong>、<strong>参数校验</strong>、<strong>逻辑处理</strong>、<strong>返回结果</strong>。这些都是Web服务的业务处理功能。</p>
+<p>上面这些是Web服务的基本功能，此外，我们还需要支持一些高级功能。</p>
+<p>在进行HTTP请求时，经常需要针对每一次请求都设置一些通用的操作，比如添加Header、添加RequestID、统计请求次数等，这就要求我们的Web服务能够支持<strong>中间件</strong>特性。</p>
+<p>为了保证系统安全，对于每一个请求，我们都需要进行<strong>认证</strong>。Web服务中，通常有两种认证方式，一种是基于用户名和密码，一种是基于Token。认证通过之后，就可以继续处理请求了。</p>
+<p>为了方便定位和跟踪某一次请求，需要支持<strong>RequestID</strong>，定位和跟踪RequestID主要是为了排障。</p>
+<p>最后，当前的软件架构中，很多采用了前后端分离的架构。在前后端分离的架构中，前端访问地址和后端访问地址往往是不同的，浏览器为了安全，会针对这种情况设置跨域请求，所以Web服务需要能够处理浏览器的<strong>跨域</strong>请求。</p>
+<p>到这里，我就把Web服务的基础功能和高级功能串讲了一遍。当然，上面只介绍了Web服务的核心功能，还有很多其他的功能，你可以通过学习<a href="https://github.com/gin-gonic/gin" target="_blank">Gin的官方文档</a>来了解。</p>
+<p>你可以看到，Web服务有很多核心功能，这些功能我们可以基于net/http包自己封装。但在实际的项目开发中， 我们更多会选择使用基于net/http包进行封装的优秀开源Web框架。本实战项目选择了Gin框架。</p>
+<p>接下来，我们主要看下Gin框架是如何实现以上核心功能的，这些功能我们在实际的开发中可以直接拿来使用。</p>
+<h2 id="为什么选择gin框架">为什么选择Gin框架？</h2>
+<p>优秀的Web框架有很多，我们为什么要选择Gin呢？在回答这个问题之前，我们先来看下选择Web框架时的关注点。</p>
+<p>在选择Web框架时，我们可以关注如下几点：</p>
+<ul>
+<li>路由功能；</li>
+<li>是否具备middleware/filter能力；</li>
+<li>HTTP 参数（path、query、form、header、body）解析和返回；</li>
+<li>性能和稳定性；</li>
+<li>使用复杂度；</li>
+<li>社区活跃度。</li>
+</ul>
+<p>按 GitHub Star 数来排名，当前比较火的 Go Web 框架有 Gin、Beego、Echo、Revel 、Martini。经过调研，我从中选择了Gin框架，原因是Gin具有如下特性：</p>
+<ul>
+<li>轻量级，代码质量高，性能比较高；</li>
+<li>项目目前很活跃，并有很多可用的 Middleware；</li>
+<li>作为一个 Web 框架，功能齐全，使用起来简单。</li>
+</ul>
+<p>那接下来，我就先详细介绍下Gin框架。</p>
+<p><a href="https://github.com/gin-gonic/gin" target="_blank">Gin</a>是用Go语言编写的Web框架，功能完善，使用简单，性能很高。Gin核心的路由功能是通过一个定制版的<a href="https://github.com/julienschmidt/httprouter" target="_blank">HttpRouter</a>来实现的，具有很高的路由性能。</p>
+<p>Gin有很多功能，这里我给你列出了它的一些核心功能：</p>
+<ul>
+<li>支持HTTP方法：GET、POST、PUT、PATCH、DELETE、OPTIONS。</li>
+<li>支持不同位置的HTTP参数：路径参数（path）、查询字符串参数（query）、表单参数（form）、HTTP头参数（header）、消息体参数（body）。</li>
+<li>支持HTTP路由和路由分组。</li>
+<li>支持middleware和自定义middleware。</li>
+<li>支持自定义Log。</li>
+<li>支持binding和validation，支持自定义validator。可以bind如下参数：query、path、body、header、form。</li>
+<li>支持重定向。</li>
+<li>支持basic auth middleware。</li>
+<li>支持自定义HTTP配置。</li>
+<li>支持优雅关闭。</li>
+<li>支持HTTP2。</li>
+<li>支持设置和获取cookie。</li>
+</ul>
+<h2 id="gin是如何支持web服务基础功能的">Gin是如何支持Web服务基础功能的？</h2>
+<p>接下来，我们先通过一个具体的例子，看下Gin是如何支持Web服务基础功能的，后面再详细介绍这些功能的用法。</p>
+<p>我们创建一个webfeature目录，用来存放示例代码。因为要演示HTTPS的用法，所以需要创建证书文件。具体可以分为两步。</p>
+<p>第一步，执行以下命令创建证书：</p>
+<pre><code>cat &lt;&lt; 'EOF' &gt; ca.pem
+-----BEGIN CERTIFICATE-----
+MIICSjCCAbOgAwIBAgIJAJHGGR4dGioHMA0GCSqGSIb3DQEBCwUAMFYxCzAJBgNV
+BAYTAkFVMRMwEQYDVQQIEwpTb21lLVN0YXRlMSEwHwYDVQQKExhJbnRlcm5ldCBX
+aWRnaXRzIFB0eSBMdGQxDzANBgNVBAMTBnRlc3RjYTAeFw0xNDExMTEyMjMxMjla
+Fw0yNDExMDgyMjMxMjlaMFYxCzAJBgNVBAYTAkFVMRMwEQYDVQQIEwpTb21lLVN0
+YXRlMSEwHwYDVQQKExhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQxDzANBgNVBAMT
+BnRlc3RjYTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwEDfBV5MYdlHVHJ7
++L4nxrZy7mBfAVXpOc5vMYztssUI7mL2/iYujiIXM+weZYNTEpLdjyJdu7R5gGUu
+g1jSVK/EPHfc74O7AyZU34PNIP4Sh33N+/A5YexrNgJlPY+E3GdVYi4ldWJjgkAd
+Qah2PH5ACLrIIC6tRka9hcaBlIECAwEAAaMgMB4wDAYDVR0TBAUwAwEB/zAOBgNV
+HQ8BAf8EBAMCAgQwDQYJKoZIhvcNAQELBQADgYEAHzC7jdYlzAVmddi/gdAeKPau
+sPBG/C2HCWqHzpCUHcKuvMzDVkY/MP2o6JIW2DBbY64bO/FceExhjcykgaYtCH/m
+oIU63+CFOTtR7otyQAWHqXa7q4SbCDlG7DyRFxqG0txPtGvy12lgldA2+RgcigQG
+Dfcog5wrJytaQ6UA0wE=
+-----END CERTIFICATE-----
+EOF
+
+cat &lt;&lt; 'EOF' &gt; server.key
+-----BEGIN PRIVATE KEY-----
+MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAOHDFScoLCVJpYDD
+M4HYtIdV6Ake/sMNaaKdODjDMsux/4tDydlumN+fm+AjPEK5GHhGn1BgzkWF+slf
+3BxhrA/8dNsnunstVA7ZBgA/5qQxMfGAq4wHNVX77fBZOgp9VlSMVfyd9N8YwbBY
+AckOeUQadTi2X1S6OgJXgQ0m3MWhAgMBAAECgYAn7qGnM2vbjJNBm0VZCkOkTIWm
+V10okw7EPJrdL2mkre9NasghNXbE1y5zDshx5Nt3KsazKOxTT8d0Jwh/3KbaN+YY
+tTCbKGW0pXDRBhwUHRcuRzScjli8Rih5UOCiZkhefUTcRb6xIhZJuQy71tjaSy0p
+dHZRmYyBYO2YEQ8xoQJBAPrJPhMBkzmEYFtyIEqAxQ/o/A6E+E4w8i+KM7nQCK7q
+K4JXzyXVAjLfyBZWHGM2uro/fjqPggGD6QH1qXCkI4MCQQDmdKeb2TrKRh5BY1LR
+81aJGKcJ2XbcDu6wMZK4oqWbTX2KiYn9GB0woM6nSr/Y6iy1u145YzYxEV/iMwff
+DJULAkB8B2MnyzOg0pNFJqBJuH29bKCcHa8gHJzqXhNO5lAlEbMK95p/P2Wi+4Hd
+aiEIAF1BF326QJcvYKmwSmrORp85AkAlSNxRJ50OWrfMZnBgzVjDx3xG6KsFQVk2
+ol6VhqL6dFgKUORFUWBvnKSyhjJxurlPEahV6oo6+A+mPhFY8eUvAkAZQyTdupP3
+XEFQKctGz+9+gKkemDp7LBBMEMBXrGTLPhpEfcjv/7KPdnFHYmhYeBTBnuVmTVWe
+F98XJ7tIFfJq
+-----END PRIVATE KEY-----
+EOF
+
+cat &lt;&lt; 'EOF' &gt; server.pem
+-----BEGIN CERTIFICATE-----
+MIICnDCCAgWgAwIBAgIBBzANBgkqhkiG9w0BAQsFADBWMQswCQYDVQQGEwJBVTET
+MBEGA1UECBMKU29tZS1TdGF0ZTEhMB8GA1UEChMYSW50ZXJuZXQgV2lkZ2l0cyBQ
+dHkgTHRkMQ8wDQYDVQQDEwZ0ZXN0Y2EwHhcNMTUxMTA0MDIyMDI0WhcNMjUxMTAx
+MDIyMDI0WjBlMQswCQYDVQQGEwJVUzERMA8GA1UECBMISWxsaW5vaXMxEDAOBgNV
+BAcTB0NoaWNhZ28xFTATBgNVBAoTDEV4YW1wbGUsIENvLjEaMBgGA1UEAxQRKi50
+ZXN0Lmdvb2dsZS5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAOHDFSco
+LCVJpYDDM4HYtIdV6Ake/sMNaaKdODjDMsux/4tDydlumN+fm+AjPEK5GHhGn1Bg
+zkWF+slf3BxhrA/8dNsnunstVA7ZBgA/5qQxMfGAq4wHNVX77fBZOgp9VlSMVfyd
+9N8YwbBYAckOeUQadTi2X1S6OgJXgQ0m3MWhAgMBAAGjazBpMAkGA1UdEwQCMAAw
+CwYDVR0PBAQDAgXgME8GA1UdEQRIMEaCECoudGVzdC5nb29nbGUuZnKCGHdhdGVy
+em9vaS50ZXN0Lmdvb2dsZS5iZYISKi50ZXN0LnlvdXR1YmUuY29thwTAqAEDMA0G
+CSqGSIb3DQEBCwUAA4GBAJFXVifQNub1LUP4JlnX5lXNlo8FxZ2a12AFQs+bzoJ6
+hM044EDjqyxUqSbVePK0ni3w1fHQB5rY9yYC5f8G7aqqTY1QOhoUk8ZTSTRpnkTh
+y4jjdvTZeLDVBlueZUTDRmy2feY5aZIU18vFDK08dTG0A87pppuv1LNIR3loveU8
+-----END CERTIFICATE-----
+EOF
+</code></pre>
+<p>第二步，创建main.go文件：</p>
+<pre><code>package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+	"sync"
+	"time"
+
+	"github.com/gin-gonic/gin"
+	"golang.org/x/sync/errgroup"
+)
+
+type Product struct {
+	Username    string    `json:"username" binding:"required"`
+	Name        string    `json:"name" binding:"required"`
+	Category    string    `json:"category" binding:"required"`
+	Price       int       `json:"price" binding:"gte=0"`
+	Description string    `json:"description"`
+	CreatedAt   time.Time `json:"createdAt"`
+}
+
+type productHandler struct {
+	sync.RWMutex
+	products map[string]Product
+}
+
+func newProductHandler() *productHandler {
+	return &amp;productHandler{
+		products: make(map[string]Product),
+	}
+}
+
+func (u *productHandler) Create(c *gin.Context) {
+	u.Lock()
+	defer u.Unlock()
+
+	// 1. 参数解析
+	var product Product
+	if err := c.ShouldBindJSON(&amp;product); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// 2. 参数校验
+	if _, ok := u.products[product.Name]; ok {
+		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Sprintf("product %s already exist", product.Name)})
+		return
+	}
+	product.CreatedAt = time.Now()
+
+	// 3. 逻辑处理
+	u.products[product.Name] = product
+	log.Printf("Register product %s success", product.Name)
+
+	// 4. 返回结果
+	c.JSON(http.StatusOK, product)
+}
+
+func (u *productHandler) Get(c *gin.Context) {
+	u.Lock()
+	defer u.Unlock()
+
+	product, ok := u.products[c.Param("name")]
+	if !ok {
+		c.JSON(http.StatusNotFound, gin.H{"error": fmt.Errorf("can not found product %s", c.Param("name"))})
+		return
+	}
+
+	c.JSON(http.StatusOK, product)
+}
+
+func router() http.Handler {
+	router := gin.Default()
+	productHandler := newProductHandler()
+	// 路由分组、中间件、认证
+	v1 := router.Group("/v1")
+	{
+		productv1 := v1.Group("/products")
+		{
+			// 路由匹配
+			productv1.POST("", productHandler.Create)
+			productv1.GET(":name", productHandler.Get)
+		}
+	}
+
+	return router
+}
+
+func main() {
+	var eg errgroup.Group
+
+	// 一进程多端口
+	insecureServer := &amp;http.Server{
+		Addr:         ":8080",
+		Handler:      router(),
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
+	}
+
+	secureServer := &amp;http.Server{
+		Addr:         ":8443",
+		Handler:      router(),
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
+	}
+
+	eg.Go(func() error {
+		err := insecureServer.ListenAndServe()
+		if err != nil &amp;&amp; err != http.ErrServerClosed {
+			log.Fatal(err)
+		}
+		return err
+	})
+
+	eg.Go(func() error {
+		err := secureServer.ListenAndServeTLS("server.pem", "server.key")
+		if err != nil &amp;&amp; err != http.ErrServerClosed {
+			log.Fatal(err)
+		}
+		return err
+	})
+
+	if err := eg.Wait(); err != nil {
+		log.Fatal(err)
+	}
+}
+</code></pre>
+<p>运行以上代码：</p>
+<pre><code>$ go run main.go
+</code></pre>
+<p>打开另外一个终端，请求HTTP接口：</p>
+<pre><code># 创建产品
+$ curl -XPOST -H"Content-Type: application/json" -d'{"username":"colin","name":"iphone12","category":"phone","price":8000,"description":"cannot afford"}' http://127.0.0.1:8080/v1/products
+{"username":"colin","name":"iphone12","category":"phone","price":8000,"description":"cannot afford","createdAt":"2021-06-20T11:17:03.818065988+08:00"}
+
+# 获取产品信息
+$ curl -XGET http://127.0.0.1:8080/v1/products/iphone12
+{"username":"colin","name":"iphone12","category":"phone","price":8000,"description":"cannot afford","createdAt":"2021-06-20T11:17:03.818065988+08:00"}
+</code></pre>
+<p>示例代码存放地址为<a href="https://github.com/marmotedu/gopractise-demo/tree/master/gin/webfeature" target="_blank">webfeature</a>。</p>
+<p>另外，Gin项目仓库中也包含了很多使用示例，如果你想详细了解，可以参考 <a href="https://github.com/gin-gonic/examples" target="_blank">gin examples</a>。</p>
+<p>下面，我来详细介绍下Gin是如何支持Web服务基础功能的。</p>
+<h3 id="http-https支持">HTTP/HTTPS支持</h3>
+<p>因为Gin是基于net/http包封装的一个Web框架，所以它天然就支持HTTP/HTTPS。在上述代码中，通过以下方式开启一个HTTP服务：</p>
+<pre><code>insecureServer := &amp;http.Server{
+	Addr:         ":8080",
+	Handler:      router(),
+	ReadTimeout:  5 * time.Second,
+	WriteTimeout: 10 * time.Second,
+}
+...
+err := insecureServer.ListenAndServe()
+</code></pre>
+<p>通过以下方式开启一个HTTPS服务：</p>
+<pre><code>secureServer := &amp;http.Server{
+	Addr:         ":8443",
+	Handler:      router(),
+	ReadTimeout:  5 * time.Second,
+	WriteTimeout: 10 * time.Second,
+}
+...
+err := secureServer.ListenAndServeTLS("server.pem", "server.key")
+</code></pre>
+<h3 id="json数据格式支持">JSON数据格式支持</h3>
+<p>Gin支持多种数据通信格式，例如application/json、application/xml。可以通过<code>c.ShouldBindJSON</code>函数，将Body中的JSON格式数据解析到指定的Struct中，通过<code>c.JSON</code>函数返回JSON格式的数据。</p>
+<h3 id="路由匹配">路由匹配</h3>
+<p>Gin支持两种路由匹配规则。</p>
+<p><strong>第一种匹配规则是精确匹配。</strong>例如，路由为/products/:name，匹配情况如下表所示：</p>
+<p><img alt="" src="/assets/4dec167994453b5b0f7c40df.jpg"/></p>
+<p><strong>第二种匹配规则是模糊匹配。</strong>例如，路由为/products/*name，匹配情况如下表所示：</p>
+<p><img alt="" src="/assets/c0f1eef60f0e2608c573deaf.jpg"/></p>
+<h3 id="路由分组">路由分组</h3>
+<p>Gin通过Group函数实现了路由分组的功能。路由分组是一个非常常用的功能，可以将相同版本的路由分为一组，也可以将相同RESTful资源的路由分为一组。例如：</p>
+<pre><code>v1 := router.Group("/v1", gin.BasicAuth(gin.Accounts{"foo": "bar", "colin": "colin404"}))
+{
+    productv1 := v1.Group("/products")
+    {
+        // 路由匹配
+        productv1.POST("", productHandler.Create)
+        productv1.GET(":name", productHandler.Get)
+    }
+
+    orderv1 := v1.Group("/orders")
+    {
+        // 路由匹配
+        orderv1.POST("", orderHandler.Create)
+        orderv1.GET(":name", orderHandler.Get)
+    }
+}
+
+v2 := router.Group("/v2", gin.BasicAuth(gin.Accounts{"foo": "bar", "colin": "colin404"}))
+{
+    productv2 := v2.Group("/products")
+    {
+        // 路由匹配
+        productv2.POST("", productHandler.Create)
+        productv2.GET(":name", productHandler.Get)
+    }
+}
+</code></pre>
+<p>通过将路由分组，可以对相同分组的路由做统一处理。比如上面那个例子，我们可以通过代码</p>
+<pre><code>v1 := router.Group("/v1", gin.BasicAuth(gin.Accounts{"foo": "bar", "colin": "colin404"}))
+</code></pre>
+<p>给所有属于v1分组的路由都添加gin.BasicAuth中间件，以实现认证功能。中间件和认证，这里你先不用深究，下面讲高级功能的时候会介绍到。</p>
+<h3 id="一进程多服务">一进程多服务</h3>
+<p>我们可以通过以下方式实现一进程多服务：</p>
+<pre><code>var eg errgroup.Group
+insecureServer := &amp;http.Server{...}
+secureServer := &amp;http.Server{...}
+
+eg.Go(func() error {
+	err := insecureServer.ListenAndServe()
+	if err != nil &amp;&amp; err != http.ErrServerClosed {
+		log.Fatal(err)
+	}
+	return err
+})
+eg.Go(func() error {
+	err := secureServer.ListenAndServeTLS("server.pem", "server.key")
+	if err != nil &amp;&amp; err != http.ErrServerClosed {
+		log.Fatal(err)
+	}
+	return err
+}
+
+if err := eg.Wait(); err != nil {
+	log.Fatal(err)
+})
+</code></pre>
+<p>上述代码实现了两个相同的服务，分别监听在不同的端口。这里需要注意的是，为了不阻塞启动第二个服务，我们需要把ListenAndServe函数放在goroutine中执行，并且调用eg.Wait()来阻塞程序进程，从而让两个HTTP服务在goroutine中持续监听端口，并提供服务。</p>
+<h3 id="参数解析-参数校验-逻辑处理-返回结果">参数解析、参数校验、逻辑处理、返回结果</h3>
+<p>此外，Web服务还应该具有参数解析、参数校验、逻辑处理、返回结果4类功能，因为这些功能联系紧密，我们放在一起来说。</p>
+<p>在productHandler的Create方法中，我们通过<code>c.ShouldBindJSON</code>来解析参数，接下来自己编写校验代码，然后将product信息保存在内存中（也就是业务逻辑处理），最后通过<code>c.JSON</code>返回创建的product信息。代码如下：</p>
+<pre><code>func (u *productHandler) Create(c *gin.Context) {
+	u.Lock()
+	defer u.Unlock()
+
+	// 1. 参数解析
+	var product Product
+	if err := c.ShouldBindJSON(&amp;product); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// 2. 参数校验
+	if _, ok := u.products[product.Name]; ok {
+		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Sprintf("product %s already exist", product.Name)})
+		return
+	}
+	product.CreatedAt = time.Now()
+
+	// 3. 逻辑处理
+	u.products[product.Name] = product
+	log.Printf("Register product %s success", product.Name)
+
+	// 4. 返回结果
+	c.JSON(http.StatusOK, product)
+}
+</code></pre>
+<p>那这个时候，你可能会问：HTTP的请求参数可以存在不同的位置，Gin是如何解析的呢？这里，我们先来看下HTTP有哪些参数类型。HTTP具有以下5种参数类型：</p>
+<ul>
+<li>路径参数（path）。例如<code>gin.Default().GET("/user/:name", nil)</code>， name就是路径参数。</li>
+<li>查询字符串参数（query）。例如<code>/welcome?firstname=Lingfei&amp;lastname=Kong</code>，firstname和lastname就是查询字符串参数。</li>
+<li>表单参数（form）。例如<code>curl -X POST -F 'username=colin' -F 'password=colin1234' http://mydomain.com/login</code>，username和password就是表单参数。</li>
+<li>HTTP头参数（header）。例如<code>curl -X POST -H 'Content-Type: application/json' -d '{"username":"colin","password":"colin1234"}' http://mydomain.com/login</code>，Content-Type就是HTTP头参数。</li>
+<li>消息体参数（body）。例如<code>curl -X POST -H 'Content-Type: application/json' -d '{"username":"colin","password":"colin1234"}' http://mydomain.com/login</code>，username和password就是消息体参数。</li>
+</ul>
+<p>Gin提供了一些函数，来分别读取这些HTTP参数，每种类别会提供两种函数，一种函数可以直接读取某个参数的值，另外一种函数会把同类HTTP参数绑定到一个Go结构体中。比如，有如下路径参数：</p>
+<pre><code>gin.Default().GET("/:name/:id", nil)
+</code></pre>
+<p>我们可以直接读取每个参数：</p>
+<pre><code>name := c.Param("name")
+action := c.Param("action")
+</code></pre>
+<p>也可以将所有的路径参数，绑定到结构体中：</p>
+<pre><code>type Person struct {
+    ID string `uri:"id" binding:"required,uuid"`
+    Name string `uri:"name" binding:"required"`
+}
+
+if err := c.ShouldBindUri(&amp;person); err != nil {
+    // normal code
+    return
+}
+</code></pre>
+<p>Gin在绑定参数时，是通过结构体的tag来判断要绑定哪类参数到结构体中的。这里要注意，不同的HTTP参数有不同的结构体tag。</p>
+<ul>
+<li>路径参数：uri。</li>
+<li>查询字符串参数：form。</li>
+<li>表单参数：form。</li>
+<li>HTTP头参数：header。</li>
+<li>消息体参数：会根据Content-Type，自动选择使用json或者xml，也可以调用ShouldBindJSON或者ShouldBindXML直接指定使用哪个tag。</li>
+</ul>
+<p>针对每种参数类型，Gin都有对应的函数来获取和绑定这些参数。这些函数都是基于如下两个函数进行封装的：</p>
+<ol>
+<li>ShouldBindWith(obj interface{}, b binding.Binding) error</li>
+</ol>
+<p>非常重要的一个函数，很多ShouldBindXXX函数底层都是调用ShouldBindWith函数来完成参数绑定的。该函数会根据传入的绑定引擎，将参数绑定到传入的结构体指针中，<strong>如果绑定失败，只返回错误内容，但不终止HTTP请求。</strong>ShouldBindWith支持多种绑定引擎，例如 binding.JSON、binding.Query、binding.Uri、binding.Header等，更详细的信息你可以参考 <a href="https://github.com/gin-gonic/gin/blob/v1.7.2/binding/binding.go#L72" target="_blank">binding.go</a>。</p>
+<ol>
+<li>MustBindWith(obj interface{}, b binding.Binding) error</li>
+</ol>
+<p>这是另一个非常重要的函数，很多BindXXX函数底层都是调用MustBindWith函数来完成参数绑定的。该函数会根据传入的绑定引擎，将参数绑定到传入的结构体指针中，<strong>如果绑定失败，返回错误并终止请求，返回HTTP 400错误。</strong>MustBindWith所支持的绑定引擎跟ShouldBindWith函数一样。</p>
+<p>Gin基于ShouldBindWith和MustBindWith这两个函数，又衍生出很多新的Bind函数。这些函数可以满足不同场景下获取HTTP参数的需求。Gin提供的函数可以获取5个类别的HTTP参数。</p>
+<ul>
+<li>路径参数：ShouldBindUri、BindUri；</li>
+<li>查询字符串参数：ShouldBindQuery、BindQuery；</li>
+<li>表单参数：ShouldBind；</li>
+<li>HTTP头参数：ShouldBindHeader、BindHeader；</li>
+<li>消息体参数：ShouldBindJSON、BindJSON等。</li>
+</ul>
+<p>每个类别的Bind函数，详细信息你可以参考<a href="https://github.com/marmotedu/geekbang-go/blob/master/Gin%E6%8F%90%E4%BE%9B%E7%9A%84Bind%E5%87%BD%E6%95%B0.md" target="_blank">Gin提供的Bind函数</a>。</p>
+<p>这里要注意，Gin并没有提供类似ShouldBindForm、BindForm这类函数来绑定表单参数，但我们可以通过ShouldBind来绑定表单参数。当HTTP方法为GET时，ShouldBind只绑定Query类型的参数；当HTTP方法为POST时，会先检查content-type是否是json或者xml，如果不是，则绑定Form类型的参数。</p>
+<p>所以，ShouldBind可以绑定Form类型的参数，但前提是HTTP方法是POST，并且content-type不是application/json、application/xml。</p>
+<p>在Go项目开发中，我建议使用ShouldBindXXX，这样可以确保我们设置的HTTP Chain（Chain可以理解为一个HTTP请求的一系列处理插件）能够继续被执行。</p>
+<h2 id="gin是如何支持web服务高级功能的">Gin是如何支持Web服务高级功能的？</h2>
+<p>上面介绍了Web服务的基础功能，这里我再来介绍下高级功能。Web服务可以具备多个高级功能，但比较核心的高级功能是中间件、认证、RequestID、跨域和优雅关停。</p>
+<h3 id="中间件">中间件</h3>
+<p>Gin支持中间件，HTTP请求在转发到实际的处理函数之前，会被一系列加载的中间件进行处理。在中间件中，可以解析HTTP请求做一些逻辑处理，例如：跨域处理或者生成X-Request-ID并保存在context中，以便追踪某个请求。处理完之后，可以选择中断并返回这次请求，也可以选择将请求继续转交给下一个中间件处理。当所有的中间件都处理完之后，请求才会转给路由函数进行处理。具体流程如下图：</p>
+<p><img alt="" src="/assets/7a0b7cf62c4eb031642a1950.jpg"/></p>
+<p>通过中间件，可以实现对所有请求都做统一的处理，提高开发效率，并使我们的代码更简洁。但是，因为所有的请求都需要经过中间件的处理，可能会增加请求延时。对于中间件特性，我有如下建议：</p>
+<ul>
+<li>中间件做成可加载的，通过配置文件指定程序启动时加载哪些中间件。</li>
+<li>只将一些通用的、必要的功能做成中间件。</li>
+<li>在编写中间件时，一定要保证中间件的代码质量和性能。</li>
+</ul>
+<p>在Gin中，可以通过gin.Engine的Use方法来加载中间件。中间件可以加载到不同的位置上，而且不同的位置作用范围也不同，例如：</p>
+<pre><code>router := gin.New()
+router.Use(gin.Logger(), gin.Recovery()) // 中间件作用于所有的HTTP请求
+v1 := router.Group("/v1").Use(gin.BasicAuth(gin.Accounts{"foo": "bar", "colin": "colin404"})) // 中间件作用于v1 group
+v1.POST("/login", Login).Use(gin.BasicAuth(gin.Accounts{"foo": "bar", "colin": "colin404"})) //中间件只作用于/v1/login API接口
+</code></pre>
+<p>Gin框架本身支持了一些中间件。</p>
+<ul>
+<li><strong>gin.Logger()：</strong>Logger中间件会将日志写到gin.DefaultWriter，gin.DefaultWriter默认为 os.Stdout。</li>
+<li><strong>gin.Recovery()：</strong>Recovery中间件可以从任何panic恢复，并且写入一个500状态码。</li>
+<li><strong>gin.CustomRecovery(handle gin.RecoveryFunc)：</strong>类似Recovery中间件，但是在恢复时还会调用传入的handle方法进行处理。</li>
+<li><strong>gin.BasicAuth()：</strong>HTTP请求基本认证（使用用户名和密码进行认证）。</li>
+</ul>
+<p>另外，Gin还支持自定义中间件。中间件其实是一个函数，函数类型为gin.HandlerFunc，HandlerFunc底层类型为func(*Context)。如下是一个Logger中间件的实现：</p>
+<pre><code>package main
+
+import (
+	"log"
+	"time"
+
+	"github.com/gin-gonic/gin"
+)
+
+func Logger() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		t := time.Now()
+
+		// 设置变量example
+		c.Set("example", "12345")
+
+		// 请求之前
+
+		c.Next()
+
+		// 请求之后
+		latency := time.Since(t)
+		log.Print(latency)
+
+		// 访问我们发送的状态
+		status := c.Writer.Status()
+		log.Println(status)
+	}
+}
+
+func main() {
+	r := gin.New()
+	r.Use(Logger())
+
+	r.GET("/test", func(c *gin.Context) {
+		example := c.MustGet("example").(string)
+
+		// it would print: "12345"
+		log.Println(example)
+	})
+
+	// Listen and serve on 0.0.0.0:8080
+	r.Run(":8080")
+}
+</code></pre>
+<p>另外，还有很多开源的中间件可供我们选择，我把一些常用的总结在了表格里：</p>
+<p><img alt="" src="/assets/a1e37aeecc16ce6db6791c0c.jpg"/></p>
+<h3 id="认证-requestid-跨域">认证、RequestID、跨域</h3>
+<p>认证、RequestID、跨域这三个高级功能，都可以通过Gin的中间件来实现，例如：</p>
+<pre><code>router := gin.New()
+
+// 认证
+router.Use(gin.BasicAuth(gin.Accounts{"foo": "bar", "colin": "colin404"}))
+
+// RequestID
+router.Use(requestid.New(requestid.Config{
+    Generator: func() string {
+        return "test"
+    },
+}))
+
+// 跨域
+// CORS for https://foo.com and https://github.com origins, allowing:
+// - PUT and PATCH methods
+// - Origin header
+// - Credentials share
+// - Preflight requests cached for 12 hours
+router.Use(cors.New(cors.Config{
+    AllowOrigins:     []string{"https://foo.com"},
+    AllowMethods:     []string{"PUT", "PATCH"},
+    AllowHeaders:     []string{"Origin"},
+    ExposeHeaders:    []string{"Content-Length"},
+    AllowCredentials: true,
+    AllowOriginFunc: func(origin string) bool {
+        return origin == "https://github.com"
+    },
+    MaxAge: 12 * time.Hour,
+}))
+</code></pre>
+<h3 id="优雅关停">优雅关停</h3>
+<p>Go项目上线后，我们还需要不断迭代来丰富项目功能、修复Bug等，这也就意味着，我们要不断地重启Go服务。对于HTTP服务来说，如果访问量大，重启服务的时候可能还有很多连接没有断开，请求没有完成。如果这时候直接关闭服务，这些连接会直接断掉，请求异常终止，这就会对用户体验和产品口碑造成很大影响。因此，这种关闭方式不是一种优雅的关闭方式。</p>
+<p>这时候，我们期望HTTP服务可以在处理完所有请求后，正常地关闭这些连接，也就是优雅地关闭服务。我们有两种方法来优雅关闭HTTP服务，分别是借助第三方的Go包和自己编码实现。</p>
+<p>方法一：借助第三方的Go包</p>
+<p>如果使用第三方的Go包来实现优雅关闭，目前用得比较多的包是<a href="https://github.com/fvbock/endless" target="_blank">fvbock/endless</a>。我们可以使用fvbock/endless来替换掉net/http的ListenAndServe方法，例如：</p>
+<pre><code>router := gin.Default()
+router.GET("/", handler)
+// [...]
+endless.ListenAndServe(":4242", router)
+</code></pre>
+<p>方法二：编码实现</p>
+<p>借助第三方包的好处是可以稍微减少一些编码工作量，但缺点是引入了一个新的依赖包，因此我更倾向于自己编码实现。Go 1.8版本或者更新的版本，http.Server内置的Shutdown方法，已经实现了优雅关闭。下面是一个示例：</p>
+<pre><code>// +build go1.8
+
+package main
+
+import (
+	"context"
+	"log"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	router := gin.Default()
+	router.GET("/", func(c *gin.Context) {
+		time.Sleep(5 * time.Second)
+		c.String(http.StatusOK, "Welcome Gin Server")
+	})
+
+	srv := &amp;http.Server{
+		Addr:    ":8080",
+		Handler: router,
+	}
+
+	// Initializing the server in a goroutine so that
+	// it won't block the graceful shutdown handling below
+	go func() {
+		if err := srv.ListenAndServe(); err != nil &amp;&amp; err != http.ErrServerClosed {
+			log.Fatalf("listen: %s\n", err)
+		}
+	}()
+
+	// Wait for interrupt signal to gracefully shutdown the server with
+	// a timeout of 5 seconds.
+	quit := make(chan os.Signal, 1)
+	// kill (no param) default send syscall.SIGTERM
+	// kill -2 is syscall.SIGINT
+	// kill -9 is syscall.SIGKILL but can't be catch, so don't need add it
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	&lt;-quit
+	log.Println("Shutting down server...")
+
+	// The context is used to inform the server it has 5 seconds to finish
+	// the request it is currently handling
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatal("Server forced to shutdown:", err)
+	}
+
+	log.Println("Server exiting")
+}
+</code></pre>
+<p>上面的示例中，需要把srv.ListenAndServe放在goroutine中执行，这样才不会阻塞到srv.Shutdown函数。因为我们把srv.ListenAndServe放在了goroutine中，所以需要一种可以让整个进程常驻的机制。</p>
+<p>这里，我们借助了有缓冲channel，并且调用signal.Notify函数将该channel绑定到SIGINT、SIGTERM信号上。这样，收到SIGINT、SIGTERM信号后，quilt通道会被写入值，从而结束阻塞状态，程序继续运行，执行srv.Shutdown(ctx)，优雅关停HTTP服务。</p>
+<h2 id="总结">总结</h2>
+<p>今天我们主要学习了Web服务的核心功能，以及如何开发这些功能。在实际的项目开发中， 我们一般会使用基于net/http包进行封装的优秀开源Web框架。</p>
+<p>当前比较火的Go Web框架有 Gin、Beego、Echo、Revel、Martini。你可以根据需要进行选择。我比较推荐Gin，Gin也是目前比较受欢迎的Web框架。Gin Web框架支持Web服务的很多基础功能，例如 HTTP/HTTPS、JSON格式的数据、路由分组和匹配、一进程多服务等。</p>
+<p>另外，Gin还支持Web服务的一些高级功能，例如 中间件、认证、RequestID、跨域和优雅关停等。</p>
+<h2 id="课后练习">课后练习</h2>
+<ol>
+<li>使用 Gin 框架编写一个简单的Web服务，要求该Web服务可以解析参数、校验参数，并进行一些简单的业务逻辑处理，最终返回处理结果。欢迎在留言区分享你的成果，或者遇到的问题。</li>
+<li>思考下，如何给iam-apiserver的/healthz接口添加一个限流中间件，用来限制请求/healthz的频率。</li>
+</ol>
+<p>欢迎你在留言区与我交流讨论，我们下一讲见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

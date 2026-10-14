@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>06 ZooKeeper 的网络通信协议详解 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/index.html">ZooKeeper源码分析与实战-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">34 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>ZooKeeper源码分析与实战-完</strong><ul><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9A%E9%80%89%E6%8B%A9%20ZooKeeper%EF%BC%8C%E4%B8%80%E6%AD%A5%E5%88%B0%E4%BD%8D%E6%8E%8C%E6%8F%A1%E5%88%86%E5%B8%83%E5%BC%8F%E5%BC%80%E5%8F%91.html">00 开篇词：选择 ZooKeeper，一步到位掌握分布式开发</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/01%20ZooKeeper%20%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%EF%BC%9A%E8%8A%82%E7%82%B9%E7%9A%84%E7%89%B9%E6%80%A7%E4%B8%8E%E5%BA%94%E7%94%A8.html">01 ZooKeeper 数据模型：节点的特性与应用</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/02%20%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Watch%20%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E7%9F%A5.html">02 发布订阅模式：如何使用 Watch 机制实现分布式通知</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/03%20ACL%20%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%9C%AA%E7%BB%8F%E6%8E%88%E6%9D%83%E7%9A%84%E8%AE%BF%E9%97%AE%EF%BC%9F.html">03 ACL 权限控制：如何避免未经授权的访问？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/04%20ZooKeeper%20%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9F.html">04 ZooKeeper 如何进行序列化？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/05%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%20Jute%20%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">05 深入分析 Jute 的底层实现原理</a></li><li><a class="active" aria-current="page" href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20ZooKeeper%20%E7%9A%84%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3.html">06 ZooKeeper 的网络通信协议详解</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/07%20%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E4%BB%8E%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%B0%E5%AF%B9%E5%A4%96%E6%8F%90%E4%BE%9B%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">07 单机模式：服务器如何从初始化到对外提供服务？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/08%20%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E4%BB%8E%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%B0%E5%AF%B9%E5%A4%96%E6%8F%90%E4%BE%9B%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">08 集群模式：服务器如何从初始化到对外提供服务？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/09%20%E5%88%9B%E5%BB%BA%E4%BC%9A%E8%AF%9D%EF%BC%9A%E9%81%BF%E5%BC%80%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E7%9A%84%E9%82%A3%E4%BA%9B%E2%80%9C%E5%9D%91%E2%80%9D.html">09 创建会话：避开日常开发的那些“坑”</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/10%20ClientCnxn%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E7%B1%BB%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.html">10 ClientCnxn：客户端核心工作类工作原理解析</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/11%20%E5%88%86%E6%A1%B6%E7%AD%96%E7%95%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E7%9A%84%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86%EF%BC%9F.html">11 分桶策略：如何实现高效的会话管理？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/12%20%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%B8%80%E6%AC%A1%E4%BC%9A%E8%AF%9D%E8%AF%B7%E6%B1%82%E7%9A%84%EF%BC%9F.html">12 服务端是如何处理一次会话请求的？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/13%20Curator%EF%BC%9A%E5%A6%82%E4%BD%95%E9%99%8D%E4%BD%8E%20ZooKeeper%20%E4%BD%BF%E7%94%A8%E7%9A%84%E5%A4%8D%E6%9D%82%E6%80%A7%EF%BC%9F.html">13 Curator：如何降低 ZooKeeper 使用的复杂性？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/14%20Leader%20%E9%80%89%E4%B8%BE%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F.html">14 Leader 选举：如何保证分布式数据的一致性？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/15%20ZooKeeper%20%E7%A9%B6%E7%AB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E9%80%89%E4%B8%AD%20Leader%20%E7%9A%84%EF%BC%9F.html">15 ZooKeeper 究竟是怎么选中 Leader 的？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/16%20ZooKeeper%20%E9%9B%86%E7%BE%A4%E4%B8%AD%20Leader%20%E4%B8%8E%20Follower%20%E7%9A%84%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5.html">16 ZooKeeper 集群中 Leader 与 Follower 的数据同步策略</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/17%20%E9%9B%86%E7%BE%A4%E4%B8%AD%20Leader%20%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9A%E4%BA%8B%E5%8A%A1%E7%9A%84%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E4%B8%8E%E8%B0%83%E5%BA%A6%E5%88%86%E6%9E%90.html">17 集群中 Leader 的作用：事务的请求处理与调度分析</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/18%20%E9%9B%86%E7%BE%A4%E4%B8%AD%20Follow%20%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9A%E9%9D%9E%E4%BA%8B%E5%8A%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86%E4%B8%8E%20Leader%20%E7%9A%84%E9%80%89%E4%B8%BE%E5%88%86%E6%9E%90.html">18 集群中 Follow 的作用：非事务请求的处理与 Leader 的选举分析</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/19%20Observer%20%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%20Follow%20%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%EF%BC%9F.html">19 Observer 的作用与 Follow 有哪些不同？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/20%20%E4%B8%80%E4%B8%AA%E8%BF%90%E8%A1%8C%E4%B8%AD%E7%9A%84%20ZooKeeper%20%E6%9C%8D%E5%8A%A1%E4%BC%9A%E4%BA%A7%E7%94%9F%E5%93%AA%E4%BA%9B%E6%95%B0%E6%8D%AE%E5%92%8C%E6%96%87%E4%BB%B6%EF%BC%9F.html">20 一个运行中的 ZooKeeper 服务会产生哪些数据和文件？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/21%20ZooKeeper%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.html">21 ZooKeeper 分布式锁：实现和原理解析</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/22%20%E5%9F%BA%E4%BA%8E%20ZooKeeper%20%E5%91%BD%E5%90%8D%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID%20%E7%94%9F%E6%88%90%E5%99%A8.html">22 基于 ZooKeeper 命名服务的应用：分布式 ID 生成器</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/23%20%E4%BD%BF%E7%94%A8%20ZooKeeper%20%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8A%9F%E8%83%BD.html">23 使用 ZooKeeper 实现负载均衡服务器功能</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/24%20ZooKeeper%20%E5%9C%A8%20Kafka%20%E5%92%8C%20Dubbo%20%E4%B8%AD%E7%9A%84%E5%B7%A5%E4%B8%9A%E7%BA%A7%E5%AE%9E%E7%8E%B0%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90.html">24 ZooKeeper 在 Kafka 和 Dubbo 中的工业级实现案例分析</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/25%20%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84%20ZooKeeper%20%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%EF%BC%9F.html">25 如何搭建一个高可用的 ZooKeeper 生产环境？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/26%20JConsole%20%E4%B8%8E%E5%9B%9B%E5%AD%97%E6%AF%8D%E5%91%BD%E4%BB%A4%EF%BC%9A%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%20ZooKeeper%20%E7%9A%84%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81%EF%BC%9F.html">26 JConsole 与四字母命令：如何监控服务器上 ZooKeeper 的运行状态？</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/27%20crontab%20%E4%B8%8E%20PurgeTxnLog%EF%BC%9A%E7%BA%BF%E4%B8%8A%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97%E6%B8%85%E7%90%86%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E9%97%B4%E5%92%8C%E6%96%B9%E5%BC%8F.html">27 crontab 与 PurgeTxnLog：线上系统日志清理的最佳时间和方式</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/28%20%E5%BD%BB%E5%BA%95%E6%8E%8C%E6%8F%A1%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E4%B8%89%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86.html">28 彻底掌握二阶段提交三阶段提交算法原理</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/29%20ZAB%20%E5%8D%8F%E8%AE%AE%E7%AE%97%E6%B3%95%EF%BC%9A%E5%B4%A9%E6%BA%83%E6%81%A2%E5%A4%8D%E5%92%8C%E6%B6%88%E6%81%AF%E5%B9%BF%E6%92%AD.html">29 ZAB 协议算法：崩溃恢复和消息广播</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/30%20ZAB%20%E4%B8%8E%20Paxos%20%E7%AE%97%E6%B3%95%E7%9A%84%E8%81%94%E7%B3%BB%E4%B8%8E%E5%8C%BA%E5%88%AB.html">30 ZAB 与 Paxos 算法的联系与区别</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/31%20ZooKeeper%20%E4%B8%AD%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90.html">31 ZooKeeper 中二阶段提交算法的实现分析</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/32%20ZooKeeper%20%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E8%A7%A3%E6%9E%90.html">32 ZooKeeper 数据存储底层实现解析</a></li><li><a href="/courses/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/33%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E5%88%86%E5%B8%83%E6%8A%80%E6%9C%AF%E5%8F%91%E5%B1%95%E4%B8%8E%20ZooKeeper%20%E5%BA%94%E7%94%A8%E5%89%8D%E6%99%AF.html">33 结束语  分布技术发展与 ZooKeeper 应用前景</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/ZooKeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20ZooKeeper%20%E7%9A%84%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="06 ZooKeeper 的网络通信协议详解" id="title">06 ZooKeeper 的网络通信协议详解</h1>
+<div><p>本节课我们将学习 ZooKeeper 的网络通信协议。同时，本节课也是基础篇中的最后一节课。在 ZooKeeper 中无论是客户端和服务器之间的通信，还是集群之间服务器的内部协同工作都是基于网络进行通信的。而网络通信协议则是影响 ZooKeeper 性能和稳定性的核心点。</p>
+<h3 id="zookeeper-协议简述">ZooKeeper 协议简述</h3>
+<p>说到网络通信协议我们最为熟悉的应该就是 TCP/IP 协议。而 ZooKeeper 则是在 TCP/IP 协议的基础上实现了自己特有的通信协议格式。在 ZooKeeper 中一次客户端的请求协议由请求头、请求体组成。而在一次服务端的响应协议中由响应头和响应体组成。</p>
+<h3 id="zookeeper-协议的底层实现">ZooKeeper 协议的底层实现</h3>
+<p>我们大概了解了 ZooKeeper 中的网络通信协议的结构后。接下来我们看一下在 ZooKeeper 中的内部对于网络通信协议的底层是怎么样实现的。</p>
+<h4 id="请求协议">请求协议</h4>
+<p>请求协议就是客户端向服务端发送的协议。比如我们经常用到的会话创建、数据节点查询等操作。都是客户端通过网络向 ZooKeeper 服务端发送请求协议完成的。</p>
+<h4 id="客户端请求头底层解析">客户端请求头底层解析</h4>
+<p>首先，我们先看一下请求头的内部的实现原理。在 ZooKeeper 中请求头是通过 RequestHeader 类实现的。首先 RequestHeader 类实现了 Record 接口，用于之后在网络传输中进行序列化操作。</p>
+<p>我们可以看到 RequestHeader 类中只有两个属性字段分别是 xid 和 type。这两个字段在我们第一节课 ZooKeeper 的数据模型中介绍过，分别代表客户端序号用于记录客户端请求的发起顺序以及请求操作的类型。</p>
+<pre><code class="language-java">class RequestHeader implements Record{
+
+  private int xid;
+
+  private int type;
+
+}
+</code></pre>
+<h4 id="客户端请求体底层解析">客户端请求体底层解析</h4>
+<p>我们接下来再看一下客户端请求协议的请求体，协议的请求体包括了协议处理逻辑的全部内容，一次会话请求的所有操作内容都涵盖在请求体中。在 ZooKeeper 的内部实现中，根据不同的请求操作类型，会采用不同的结构封装请求体。接下来我们就以最常用的创建一次会话和数据节点的查询和更新这三种操作来介绍，深入底层看看 ZooKeeper 在内部是如何实现的。</p>
+<p><strong>会话创建</strong></p>
+<p>前面的课程我们已经介绍了 ZooKeeper 中的会话创建以及会话管理等相关知识。通过之前的学习我们知道了在 ZooKeeper 客户端发起会话时，会向服务端发送一个会话创建请求，该请求的作用就是通知 ZooKeeper 服务端需要处理一个来自客户端的访问链接。</p>
+<p>而服务端处理会话创建请求时所需要的所有信息都包括在请求体内。在 ZooKeeper 中该请求体是通过 ConnectRequest 类实现的，其内部一共包括了五种属性字段。分别是 protocolVersion 表示该请求协议的版本信息、lastZxidSeen 最后一次接收到的服务器的 zxid 序号、timeOut 会话的超时时间、会话标识符 sessionId 以及会话的密码 password。有了这些信息 ZooKeeper 服务端在接收一个请求时，就可以根据请求体的信息进行相关的操作了。</p>
+<pre><code class="language-java">ConnectRequest implements Record {
+
+  private int protocolVersion;
+
+  private long lastZxidSeen;
+
+  private int timeOut;
+
+  private long sessionId;
+
+  private byte[] passwd;
+
+ }
+</code></pre>
+<p><strong>节点查询</strong></p>
+<p>在我们通过客户端 API 查询 ZooKeeper 服务器上的数据节点时，客户端会向服务端发送 GetDataRequest 会话请求。与上面介绍的会话请求不同。ZooKeeper 在处理获取数据节点会话请求时，选择了另一种结构作为该协议的请求体。而具体的实现类则是 GetDataRequest 。在 GetDataRequest 类中首先实现了 Record 接口用于序列化操作。其具有两个属性分别是字符类型 path 表示要请求的数据节点路径以及布尔类型 watch 表示该节点是否注册了 Watch 监控。</p>
+<p>节点路径如下：</p>
+<pre><code class="language-java">public class GetDataRequest implements Record {
+
+  private String path;
+
+  private boolean watch;
+</code></pre>
+<p><strong>节点更新</strong></p>
+<p>最后，我们来看一下最后一种会话操作类型即节点的更新操作，同样的在客户端向服务端发送一个数据节点更新操作时，其在网络上实际发送的是更新操作的请求协议。而在 ZooKeeper 中对于协议内部的请求体，ZooKeeper 通过 SetDataRequest 类进行了封装。在 SetDataRequest 内部也包含了三种属性，分别是 path 表示节点的路径、data 表示节点数据信息以及 version 表示节点期望的版本号用于锁的验证。</p>
+<pre><code class="language-java">public class SetDataRequest implements Record {
+
+  private String path;
+
+  private byte[] data;
+
+  private int version;
+
+ }
+</code></pre>
+<p>到目前为止我们就对 ZooKeeper 客户端在一次网络会话请求中所发送的请求协议的内部结构和底层实现都做了介绍，然而这些都是客户端向服务器端的请求协议，接下来我们就继续分析 ZooKeeper 服务端向客户端发送的响应协议是如何实现的。</p>
+<h4 id="响应协议">响应协议</h4>
+<p>响应协议可以理解为服务端在处理客户端的请求后，返回相关信息给客户端。而服务端所采用的响应协议类型则要根据客户端的请求协议类型来选择。</p>
+<h4 id="服务端请求头解析">服务端请求头解析</h4>
+<p>在服务端接收到客户端的请求后，执行相关操作将结果通知给客户端。而在 ZooKeeper 服务端向客户单发送的响应协议中，也是包括了请求头和请求体。而与客户端的请求头不同的是在 ZooKeeper 服务端的请求头多了一个错误状态字段。具体的实现类是 ReplyHeader。</p>
+<pre><code class="language-java">public class ReplyHeader implements Record {
+
+  private int xid;
+
+  private long zxid;
+
+  private int err;
+
+  }
+</code></pre>
+<h4 id="服务端请求体解析">服务端请求体解析</h4>
+<p>下面我们再看一下响应协议的请求体部分，服务端的请求体可以理解为对客户端所请求内容的封装，一个服务端的请求体包含了客户端所要查询的数据而对于不同的请求类型，在 ZooKeeper 的服务端也是采用了不同的结构进行处理的。与上面我们讲解客户端请求体的方法一样，我们还是通过会话的创建、数据节点的查询和修改这三种请求操作来介绍，看看 ZooKeeper 服务端是如何响应客户端请求的。</p>
+<p><strong>响应会话创建</strong></p>
+<p>对于客户端发起的一次会话连接操作，ZooKeeper 服务端在处理后，会返回给客户端一个 Response 响应。而在底层代码中 ZooKeeper 是通过 ConnectRespose 类来实现的。在该类中有四个属性，分别是 protocolVersion 请求协议的版本信息、timeOut 会话超时时间、sessionId 会话标识符以及 passwd 会话密码。</p>
+<pre><code class="language-java">public class ConnectResponse implements Record {
+
+  private int protocolVersion;
+
+  private int timeOut;
+
+  private long sessionId;
+
+  private byte[] passwd;
+
+  }
+</code></pre>
+<p><strong>响应节点查询</strong></p>
+<p>在客户端发起查询节点数据的请求时，服务端根据客户端发送的节点路径，并验证客户端具有相应的权限后，会将节点数据返回给客户端。而 ZooKeeper 服务端通过 GetDataResponse 类来封装查询到的节点相关信息到响应协议的请求体中。在 GetDataResponse 内部有两种属性字段分别是 data 属性表示节点数据的内容和 stat 属性表示节点的状态信息。</p>
+<pre><code class="language-java">public class GetDataResponse implements Record {
+
+  private byte[] data;
+
+  private org.apache.zookeeper.data.Stat stat;
+
+  }
+</code></pre>
+<p><strong>响应节点更新</strong></p>
+<p>在客户端发送一个节点变更操作后， ZooKeeper 服务端在处理完相关逻辑后，会发送一个响应给客户端。而在 ZooKeeper 中更新完节点后会将操作结果返回给客户端，节点更新操作的响应协议请求体通过 SetDataResponse 类来实现。而在该类的内部只有一个属性就是 stat 字段，表示该节点数据更新后的最新状态信息。</p>
+<pre><code class="language-java">public class SetDataResponse implements Record {
+
+  private org.apache.zookeeper.data.Stat stat;
+
+  }
+</code></pre>
+<h3 id="结束">结束</h3>
+<p>会话相关的知识点在之前的课程中我们已经讲到过了，从客户端到服务端的处理过程我们都已经很熟悉了。本节课我们从网络传输的角度来分析 ZooKeeper 底层的实现，通过本节课的学习后，我们就将 ZooKeeper 会话请求的全部过程都介绍完了。</p>
+<p>通过本节课的学习，我们知道了 ZooKeeper 中的网络通信协议是通过不同的类具体实现的。那么我们思考这样一个问题。如果一个会话的超时时间是在服务器端实现的。会话超时服务器端会主动关闭会话。所以在会话请求的请求体中包括了设置会话超时的属性字段，而我们经常会遇到一个问题就是明明通过客户端将超时时间设置了一个值，而在实际执行的时候会话超时的时间可能远远小于我们设置的时间。这是因为在 ZooKeeper 处理会话超时时间的时候不只是简单地使用客户端传来的超时时间还会根据 minSessionTimeout 和 maxSessionTimeout 这两个参数来调整时间的设置。这里请大家在日常设置中多注意。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

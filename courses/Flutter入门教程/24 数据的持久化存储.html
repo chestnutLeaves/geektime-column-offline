@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>24 数据的持久化存储 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/index.html">Flutter入门教程</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">26 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Flutter入门教程</strong><ul><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/01%20%E5%89%8D%E8%A8%80-%E6%95%99%E7%A8%8B%E5%86%85%E5%AE%B9%E5%AF%BC%E8%AF%BB.html">01 前言-教程内容导读</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/02%20Flutter%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA.html">02 Flutter 开发环境的搭建</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/03%20%E6%96%B0%E6%89%8B%E6%9D%91%E5%9F%BA%E7%A1%80%20Dart%20%E8%AF%AD%E6%B3%95%20%28%E4%B8%8A%29.html">03 新手村基础 Dart 语法 (上)</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/04%20%E6%96%B0%E6%89%8B%E6%9D%91%E5%9F%BA%E7%A1%80%20Dart%20%E8%AF%AD%E6%B3%95%20%28%E4%B8%8B%29.html">04 新手村基础 Dart 语法 (下)</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/05%20Flutter%20%E8%AE%A1%E6%95%B0%E5%99%A8%E9%A1%B9%E7%9B%AE%E8%A7%A3%E8%AF%BB.html">05 Flutter 计数器项目解读</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/06%20%E7%8C%9C%E6%95%B0%E5%AD%97%E7%95%8C%E9%9D%A2%E4%BA%A4%E4%BA%92%E4%B8%8E%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.html">06 猜数字界面交互与需求分析</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/07%20%E4%BD%BF%E7%94%A8%E7%BB%84%E4%BB%B6%E6%9E%84%E5%BB%BA%E9%9D%99%E6%80%81%E7%95%8C%E9%9D%A2.html">07 使用组件构建静态界面</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/08%20%E7%8A%B6%E6%80%81%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%95%8C%E9%9D%A2%E6%9B%B4%E6%96%B0.html">08 状态数据与界面更新</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/09%20%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%9C%E4%B8%8E%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF.html">09 校验结果与提示信息</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/10%20%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%8A%B6%E6%80%81%E5%91%A8%E6%9C%9F.html">10 动画使用与状态周期</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/11%20%E7%8C%9C%E6%95%B0%E5%AD%97%E6%95%B4%E7%90%86%E4%B8%8E%E6%80%BB%E7%BB%93.html">11 猜数字整理与总结</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/12%20%E7%94%B5%E5%AD%90%E6%9C%A8%E9%B1%BC%E7%95%8C%E9%9D%A2%E4%BA%A4%E4%BA%92%E4%B8%8E%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.html">12 电子木鱼界面交互与需求分析</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/13%20%E7%94%B5%E5%AD%90%E6%9C%A8%E9%B1%BC%E9%9D%99%E6%80%81%E7%95%8C%E9%9D%A2%E6%9E%84%E5%BB%BA.html">13 电子木鱼静态界面构建</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/14%20%E8%AE%A1%E6%95%B0%E5%8F%98%E5%8C%96%E4%B8%8E%E9%9F%B3%E6%95%88%E6%92%AD%E6%94%BE.html">14 计数变化与音效播放</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/15%20%E5%BC%B9%E5%87%BA%E9%80%89%E9%A1%B9%E4%B8%8E%E5%88%87%E6%8D%A2%E7%8A%B6%E6%80%81.html">15 弹出选项与切换状态</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/16%20%E7%94%A8%E6%BB%91%E5%8A%A8%E5%88%97%E8%A1%A8%E5%B1%95%E7%A4%BA%E8%AE%B0%E5%BD%95.html">16 用滑动列表展示记录</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/17%20%E7%94%B5%E5%AD%90%E6%9C%A8%E9%B1%BC%E6%95%B4%E7%90%86%E4%B8%8E%E6%80%BB%E7%BB%93.html">17 电子木鱼整理与总结</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/18%20%E7%99%BD%E6%9D%BF%E7%BB%98%E5%88%B6%E7%95%8C%E9%9D%A2%E4%BA%A4%E4%BA%92%E4%B8%8E%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.html">18 白板绘制界面交互与需求分析</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/19%20%E8%AE%A4%E8%AF%86%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%98%E5%88%B6%E7%BB%84%E4%BB%B6.html">19 认识自定义绘制组件</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/20%20%E9%80%9A%E8%BF%87%E6%89%8B%E5%8A%BF%E5%9C%A8%E7%99%BD%E6%9D%BF%E4%B8%8A%E7%BB%98%E5%88%B6.html">20 通过手势在白板上绘制</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/21%20%E7%99%BD%E6%9D%BF%E7%94%BB%E7%AC%94%E7%9A%84%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.html">21 白板画笔的参数设置</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/22%20%E6%92%A4%E9%94%80%E5%8A%9F%E8%83%BD%E4%B8%8E%E7%94%BB%E6%9D%BF%E4%BC%98%E5%8C%96.html">22 撤销功能与画板优化</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/23%20%E5%BA%94%E7%94%A8%E7%95%8C%E9%9D%A2%E6%95%B4%E5%90%88.html">23 应用界面整合</a></li><li><a class="active" aria-current="page" href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/24%20%E6%95%B0%E6%8D%AE%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8.html">24 数据的持久化存储</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/25%20%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E7%9A%84%E8%AE%BF%E9%97%AE.html">25 网络数据的访问</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/26%20%E6%95%99%E7%A8%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B.html">26 教程总结与展望</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/24%20%E6%95%B0%E6%8D%AE%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="24 数据的持久化存储" id="title">24 数据的持久化存储</h1>
+<div><h4 id="一-猜数字项目的配置信息存储">一、猜数字项目的配置信息存储</h4>
+<p>在猜数字项目中，界面的状态数据有三个：</p>
+<table>
+<thead>
+<tr>
+<th>数据名</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_guessing</code></td>
+<td>bool</td>
+<td>是否在猜数字游戏中</td>
+</tr>
+<tr>
+<td><code>_value</code></td>
+<td>int</td>
+<td>待猜测的数字</td>
+</tr>
+<tr>
+<td><code>_isBig</code></td>
+<td>bool?</td>
+<td>是否更大</td>
+</tr>
+</tbody>
+</table>
+<p>现在的目的是，在退出应用后：可以继续上次的游戏进程，那么需要记录 <code>_guessing</code> 和 <code>_value</code> 两个数据。对于这种简单的配置数据，可以通过 <a href="https://pub.flutter-io.cn/packages/shared_preferences" target="_blank">shared_preferences</a> 插件存储为 xml 配置文件。首先需要添加依赖：</p>
+<pre><code class="language-yaml">dependencies:
+  ...
+  shared_preferences: ^2.1.1
+</code></pre>
+<hr/>
+<h5 id="1-单例模式访问对象和存储配置">1. 单例模式访问对象和存储配置</h5>
+<p>数据的持久化中，我们需要在很多地方对数据进行读取和写入。这里将该功能封装为一个类进行操作，并提供唯一的静态对象，方便访问。 如下所示，创建一个 <code>SpStorage</code> 的类，私有化构造并提供实例对象的访问途径：</p>
+<pre><code class="language-dart">----&gt;[lib/storage]----
+class SpStorage {
+  SpStorage._(); // 私有化构造
+
+  static SpStorage? _storage;
+
+  // 提供实例对象的访问途径
+  static SpStorage get instance {
+    _storage = _storage ?? SpStorage._();
+    return _storage!;
+  }
+}
+</code></pre>
+<hr/>
+<h5 id="2-配置信息的存储">2. 配置信息的存储</h5>
+<p>如下所示，在类中提供 <code>saveGuessConfig</code> 方法用于保存猜数字的配置信息。核心方法是使用 <code>SharedPreferences</code> 对象的 setString 方法，根据 key 值存储字符串。这里通过 <code>json.encode</code> 方法将 Map 对象编码成字符串：</p>
+<pre><code class="language-dart">const String kGuessSpKey = 'guess-config';
+
+class SpStorage {
+  SpStorage._();
+
+  // 略同...
+
+  SharedPreferences? _sp;
+
+  Future&lt;void&gt; initSpWhenNull() async {
+    if (_sp != null) return;
+    _sp = _sp ?? await SharedPreferences.getInstance();
+  }
+
+  Future&lt;bool&gt; saveGuess({
+    required bool guessing,
+    required int value,
+  }) async {
+    await initSpWhenNull();
+    String content = json.encode({'guessing': guessing, 'value': value});
+    return _sp!.setString(kGuessSpKey, content);
+  }
+}
+</code></pre>
+<hr/>
+<p>由于 SpStorage 提供了静态的单例对象，所以在任何类中都可以通过 <code>SpStorage.instance</code> 得到实例对象。比如下面在 <code>_GuessPageState</code> 中生成随机数时，调用 <code>saveGuessConfig</code> 方法来存储记录，在如下文件中可以看到存储的配置信息：</p>
+<blockquote>
+<p>/data/data/com.toly1994.flutter_first_station/shared_prefs/FlutterSharedPreferences.xml</p>
+</blockquote>
+<p><img alt="image.png" src="/assets/35277d0b6afbcfdc211a86df.webp"/></p>
+<pre><code class="language-ini">----&gt;[_GuessPageState#_generateRandomValue]----
+void _generateRandomValue() {
+  setState(() {
+    _guessing = true;
+    _value = _random.nextInt(100);
+    SpStorage.instance.saveGuessConfig(guessing: _guessing,value: _value);
+    print(_value);
+  });
+}
+</code></pre>
+<hr/>
+<h5 id="3-访问配置与恢复状态">3. 访问配置与恢复状态</h5>
+<p>光存储起来，只完成了一半，还需要读取配置，并根据配置来设置猜数字的状态数据。如下所示，在 SpStorage 类中提供 <code>readGuessConfig</code> 方法用于读取猜数字的配置信息。核心方法是使用 <code>SharedPreferences</code> 对象的 getString 方法，根据 key 值获取存储的字符串。这里通过 <code>json.decode</code> 方法将字符串解码成 Map 对象：</p>
+<pre><code class="language-dart">class SpStorage {
+
+  // 略同...
+  
+  Future&lt;Map&lt;String,dynamic&gt;&gt; readGuessConfig() async {
+    await initSpWhenNull();
+    String content = _sp!.getString(kGuessSpKey)??"{}";
+    return json.decode(content);
+  }
+
+}
+</code></pre>
+<hr/>
+<p>方便起见，这里在 <code>_GuessPageState</code> 的 <code>initState</code> 中读取配置文件，并为状态类赋值，完成存储数据的回显。在实际项目中，这些配置信息可以在闪屏页中提前读取。</p>
+<pre><code class="language-scala">class _GuessPageState extends State&lt;GuessPage&gt; with SingleTickerProviderStateMixin,AutomaticKeepAliveClientMixin{
+
+  @override
+  void initState() {
+    // 略...
+    _initConfig();
+  }
+
+  void _initConfig() async{
+    Map&lt;String,dynamic&gt; config = await SpStorage.instance.readGuessConfig();
+    _guessing = config['guessing']??false;
+    _value = config['value']??0;
+    setState(() {
+
+    });
+  }
+</code></pre>
+<p>这样，在生成数字之后，杀死应用，然后打开应用，就可以看到仍会恢复到之前的猜数字状态中，这就是数据持久化的意义所在。当前代码位置: <a href="https://github.com/toly1994328/flutter_first_station/blob/98524f8ca1817166cae1e380739811d23d0921dd/lib/storage/sp_storage.dart" target="_blank">sp_storage.dart</a></p>
+<hr/>
+<h4 id="二-电子木鱼项目的配置信息存储">二、电子木鱼项目的配置信息存储</h4>
+<p>在电子木鱼项目中，需要存储的配置数据有：</p>
+<table>
+<thead>
+<tr>
+<th>数据名</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>counter</td>
+<td>int</td>
+<td>功德总数</td>
+</tr>
+<tr>
+<td>activeImageIndex</td>
+<td>int</td>
+<td>激活图片索引</td>
+</tr>
+<tr>
+<td>activeAudioIndex</td>
+<td>int</td>
+<td>激活音频索引</td>
+</tr>
+</tbody>
+</table>
+<h5 id="1-配置信息的存储">1. 配置信息的存储</h5>
+<p>同样，在 <code>SpStorage</code> 中定义 <code>saveMuYUConfig</code> 方法存储木鱼配置的信息。通过 <code>SpStorage</code> 统一对配置信息进行操作，一方面可以集中配置读写的代码逻辑，方便使用，另一方面可以避免在每个状态类内部都获取 <code>SharedPreferences</code> 对象进行操作。</p>
+<pre><code class="language-dart">const String kMuYUSpKey = 'muyu-config';
+
+class SpStorage {
+  // 略...
+
+  Future&lt;bool&gt; saveMuYUConfig({
+    required int counter,
+    required int activeImageIndex,
+    required int activeAudioIndex,
+  }) async {
+    await initSpWhenNull();
+    String content = json.encode({
+      'counter': counter,
+      'activeImageIndex': activeImageIndex,
+      'activeAudioIndex': activeAudioIndex,
+    });
+    return _sp!.setString(kMuYUSpKey, content);
+  }
+}
+</code></pre>
+<p>然后需要在配置数据发生变化的事件中保存配置，也就是在 <code>_MuyuPageState</code> 类中敲击木鱼、选择音频，选择图片三个场景，这三处的代码位置大家应该非常清楚。为了方便调用，这里写一个 <code>saveConfig</code> 方法来触发。然后操作界面，配置文件中就会存储对应的信息：</p>
+<p><img alt="image.png" src="/assets/3e2a3e3b1227da2f9bd8b353.webp"/></p>
+<pre><code class="language-less">---&gt;[_MuyuPageState]---
+void saveConfig() {
+  SpStorage.instance.saveMuYUConfig(
+    counter: _counter,
+    activeImageIndex: activeAudioIndex,
+    activeAudioIndex: _activeAudioIndex,
+  );
+}
+</code></pre>
+<hr/>
+<h5 id="2-配置信息的读取">2. 配置信息的读取</h5>
+<p>同理，在 <code>SpStorage</code> 中读取配置信息：</p>
+<pre><code class="language-dart">class SpStorage {
+  // 略同...
+  Future&lt;Map&lt;String, dynamic&gt;&gt; readMuYUConfig() async {
+    await initSpWhenNull();
+    String content = _sp!.getString(kMuYUSpKey) ?? "{}";
+    return json.decode(content);
+  }
+}
+</code></pre>
+<p>并在 <code>_MuyuPageState</code> 初始化状态回调中，读取配置对状态数据进行设置。</p>
+<pre><code class="language-scss">class _MuyuPageState extends State&lt;MuyuPage&gt;
+    with AutomaticKeepAliveClientMixin {
+  // 略同...
+  @override
+  void initState() {
+    super.initState();
+    _initAudioPool();
+    _initConfig();
+  }
+
+  void _initConfig() async{
+    Map&lt;String,dynamic&gt; config = await SpStorage.instance.readMuYUConfig();
+    _counter = config['counter']??0;
+    _activeImageIndex = config['activeImageIndex']??0;
+    _activeAudioIndex = config['activeAudioIndex']??0;
+    setState(() {
+    });
+  }
+</code></pre>
+<p>这样，电子木鱼的配置信息就存储和读取的功能就实现完毕了，当前代码位置: <a href="https://github.com/toly1994328/flutter_first_station/blob/fe21bfcba3add7006d331ce6092228019d8cef2a/lib/storage/sp_storage.dart" target="_blank">sp_storage.dart</a></p>
+<blockquote>
+<p>小练习：自己尝试完成白板绘制中颜色、线宽配置的数据持久化。</p>
+</blockquote>
+<hr/>
+<h4 id="三-通过数据库进行存储">三、通过数据库进行存储</h4>
+<p>上面属于通过文件的方式来持久化数据，比较适合存储一些小的配置数据。如果想存储大量的数据，并且希望可以进行复杂的查询，最好使用数据库来存储。这里将对木鱼点击时的功德数记录，使用 sqlite 数据库进行存储。不过不会介绍的太深，会创建数据库和表，存储数据、读取数据即可。毕竟数据库的操作是另一门学问，感兴趣的可以系统地学习一下。</p>
+<hr/>
+<h5 id="1-sqlite-数据库插件">1. sqlite 数据库插件</h5>
+<p>目前来说，最完善的 sqlite 数据库插件是 <a href="https://pub.flutter-io.cn/packages/sqflite" target="_blank">sqlite</a> , 使用前首先需要添加依赖：</p>
+<pre><code class="language-yaml">dependencies:
+  ...
+  sqflite: ^2.2.8+2
+</code></pre>
+<p><img alt="image.png" src="/assets/bf8c7c696bdeae12b8ec73e6.webp"/></p>
+<p>对于数据库操作来说，全局提供一个访问对象即可，也可以通过单例模式来处理，如下定义 <code>DbStorage</code> 类：</p>
+<pre><code class="language-dart">----&gt;[storage/db_storage/db_storage.dart]----
+class DbStorage {
+  DbStorage._();
+
+  static DbStorage? _storage;
+
+  static DbStorage get instance {
+    _storage = _storage ?? DbStorage._();
+    return _storage!;
+  }
+}
+</code></pre>
+<hr/>
+<h5 id="2-数据库操作对象-dao">2. 数据库操作对象 Dao</h5>
+<p>由于应用程序中可能存在多个数据表，一般每个表会通过一个类来单独操作。比如电子木鱼中的功德记录，是对一条条的 <code>MeritRecord</code> 对象进行记录，这里通过 <code>MeritRecordDao</code> 进行维护。在其构造函数中传入 <code>Database</code> 对象，以便在方法中操作数据库。</p>
+<p>首先是数据库的创建语句，通过下面的 <code>createTable</code> 方法完成；使用 <code>Database</code> 的 <code>execute</code> 方法执行 sql 语句：</p>
+<pre><code class="language-ini">----&gt;[storage/db_storage/dao/merit_record_dao.dart]----
+import 'package:sqflite/sqflite.dart';
+
+class MeritRecordDao {
+  final Database database;
+
+  MeritRecordDao(this.database);
+
+  static String tableName = 'merit_record';
+
+  static String tableSql = """
+CREATE TABLE $tableName (
+id VARCHAR(64) PRIMARY KEY,
+value INTEGER, 
+image TEXT,
+audio TEXT,
+timestamp INTEGER
+)""";
+
+  static Future&lt;void&gt; createTable(Database db) async{
+   return db.execute(tableSql);
+  }
+}
+</code></pre>
+<hr/>
+<p>然后在 DbStorage 中提供 open 方法打开数据库，如果数据库不存在的话 <code>openDatabase</code> 方法会创建数据库，并触发 <code>_onCreate</code> 回调。在其中可以使用 MeritRecordDao 执行数据表创建的逻辑。另外 DbStorage 持有 MeritRecordDao 类型对象，在数据库打开之后，初始化对象：</p>
+<pre><code class="language-dart">----&gt;[storage/db_storage/db_storage.dart]----
+
+class DbStorage {
+  //略同...
+  
+  late Database _db;
+
+  late MeritRecordDao _meritRecordDao;
+  MeritRecordDao get meritRecordDao =&gt; _meritRecordDao;
+
+  void open() async {
+    String databasesPath = await getDatabasesPath();
+    String dbPath = path.join(databasesPath, 'first_station.db');
+    _db = await openDatabase(dbPath, version: 1, onCreate: _onCreate);
+    _meritRecordDao = MeritRecordDao(_db);
+  }
+
+  void _onCreate(Database db, int version) async {
+   await MeritRecordDao.createTable(db);
+  }
+
+}
+</code></pre>
+<p>像打开数据库、加载本地资源的操作，在实际项目中可以放在闪屏页中处理。不过这里方便起见，直接程序开始时打开数据库。现在运行项目之后，就可以看到数据库已经创建了：</p>
+<p><img alt="image.png" src="/assets/2fe85d83dbad670a71fa6571.webp"/></p>
+<pre><code class="language-csharp">void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await DbStorage.instance.open(); // 打开数据库
+  runApp(const MyApp());
+}
+</code></pre>
+<p>在 AndroidStudio 的 App inspection 中，可以查看当前运行项目在的数据库情况：</p>
+<p><img alt="image.png" src="/assets/9aefc7ee32793583b00bb08f.webp"/></p>
+<hr/>
+<h5 id="3-数据的存储和读取方法">3. 数据的存储和读取方法</h5>
+<p>如下所示，在 <code>MeritRecordDao</code> 中定义 <code>insert</code> 方法插入记录数据；定义 <code>query</code> 方法读取记录列表。</p>
+<pre><code class="language-scss">class MeritRecordDao {
+  // 略同...
+  Future&lt;int&gt; insert(MeritRecord record) {
+    return database.insert(
+      tableName,
+      record.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future&lt;List&lt;MeritRecord&gt;&gt; query() async {
+    List&lt;Map&lt;String, Object?&gt;&gt; data = await database.query(
+      tableName,
+    );
+    return data
+        .map((e) =&gt; MeritRecord(
+              e['id'].toString(),
+              e['timestamp'] as int,
+              e['value'] as int,
+              e['image'].toString(),
+              e['audio'].toString(),
+            ))
+        .toList();
+  }
+}
+</code></pre>
+<p>插入时需要传入 Map 对象，这里为 <code>MeritRecord</code> 类提供一个 toJson 的方法，以便将对象转为 Map :</p>
+<pre><code class="language-arduino">class MeritRecord {
+  final String id;
+  final int timestamp;
+  final int value;
+  final String image;
+  final String audio;
+
+  MeritRecord(this.id, this.timestamp, this.value, this.image, this.audio);
+
+  Map&lt;String, dynamic&gt; toJson() =&gt; {
+    "id":id,
+    "timestamp": timestamp,
+    "value": value,
+    "image": image,
+    "audio": audio,
+  };
+}
+</code></pre>
+<hr/>
+<h5 id="4-使用-dao-完成数据读写功能">4.使用 Dao 完成数据读写功能</h5>
+<p>前面数据操作层准备完毕之后，使用起来就非常简单了。就剩两件事：</p>
+<ul>
+<li>在 <code>_MuyuPageState</code> 中点击时存入数据库。</li>
+</ul>
+<p><img alt="image.png" src="/assets/92e1022f6d182b7bc85574c7.webp"/></p>
+<ul>
+<li>在 <code>_MuyuPageState</code> 中状态初始化时读取数据。</li>
+</ul>
+<p><img alt="image.png" src="/assets/d2b6b964e93b0daf4bb7b11d.webp"/></p>
+<p>然后点击木鱼后就可以看到数据表中会存储对于的数据，应用退出之后也能从数据库中加载数据。</p>
+<p><img alt="image.png" src="/assets/5220f3e7689251a1a82c8ced.webp"/></p>
+<hr/>
+<h4 id="四-本章小结">四、 本章小结</h4>
+<p>本章主要介绍使用 shared_preferences 通过 xml 存储配置数据；以及使用 sqflite 通过 sqlite3 数据库存储数据记录。其中也涉及了对单例模式的使用，让程序中只有一个数据的访问对象，一方面可以简化使用方式，另一方面也可以避免多次连接数据库，造成无意义的浪费。</p>
+<p>到这里数据的本地持久化就介绍的差不多了，当前代码位置 <a href="https://github.com/toly1994328/flutter_first_station/tree/f1b902ab5831d82477908ed1068ace2afd3bab4d/lib/storage/db_storage" target="_blank">db_storage.dart</a> 。对于新手而言这算比较复杂的，希望大家可以好好消化。当然这些只是最简单的 Demo 级应用，怎么简单怎么来。对实际项目来说，整体的应用结构，数据维护和传递的方式，逻辑触发的时机都需要认真的考量，本教程只在新手的指引，就不展开介绍了。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

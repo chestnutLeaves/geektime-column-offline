@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>23 你真的懂Python GIL（全局解释器锁）吗？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Python核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Python核心技术与实战</strong><ul><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%E5%B7%A5%E7%A8%8B%E7%9A%84%E8%A7%92%E5%BA%A6%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python.html">00 开篇词 从工程的角度深入理解Python</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%E5%A6%82%E4%BD%95%E9%80%90%E6%AD%A5%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%88%90%E4%B8%BAPython%E9%AB%98%E6%89%8B%EF%BC%9F.html">01 如何逐步突破，成为Python高手？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20Jupyter%20Notebook%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%8E%B0%E4%BB%A3Python%E7%9A%84%E5%BF%85%E5%AD%A6%E6%8A%80%E6%9C%AF%EF%BC%9F.html">02 Jupyter Notebook为什么是现代Python的必学技术？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%EF%BC%8C%E5%88%B0%E5%BA%95%E7%94%A8%E5%93%AA%E4%B8%80%E4%B8%AA%EF%BC%9F.html">03 列表和元组，到底用哪一个？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20%E5%AD%97%E5%85%B8%E3%80%81%E9%9B%86%E5%90%88%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F.html">04 字典、集合，你真的了解吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2.html">05 深入浅出字符串</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20Python%20%E2%80%9C%E9%BB%91%E7%AE%B1%E2%80%9D%EF%BC%9A%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA.html">06 Python “黑箱”：输入与输出</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E4%BF%AE%E7%82%BC%E5%9F%BA%E6%9C%AC%E5%8A%9F%EF%BC%9A%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%BE%AA%E7%8E%AF.html">07 修炼基本功：条件与循环</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9F.html">08 异常处理：如何提高程序的稳定性？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%E4%B8%8D%E5%8F%AF%E6%88%96%E7%BC%BA%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0.html">09 不可或缺的自定义函数</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%E7%AE%80%E7%BA%A6%E4%B8%8D%E7%AE%80%E5%8D%95%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0.html">10 简约不简单的匿名函数</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E7%B1%BB%E6%AF%94%E8%AF%B4%E8%B5%B7.html">11 面向对象（上）：从生活中的类比说起</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9F.html">12 面向对象（下）：如何实现一个搜索引擎？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E6%90%AD%E5%BB%BA%E7%A7%AF%E6%9C%A8%EF%BC%9APython%20%E6%A8%A1%E5%9D%97%E5%8C%96.html">13 搭建积木：Python 模块化</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%E7%9A%84%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">14 答疑（一）：列表和元组的内部实现是怎样的？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20Python%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%AF%94%E8%BE%83%E3%80%81%E6%8B%B7%E8%B4%9D.html">15 Python对象的比较、拷贝</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E5%80%BC%E4%BC%A0%E9%80%92%EF%BC%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92or%E5%85%B6%E4%BB%96%EF%BC%8CPython%E9%87%8C%E5%8F%82%E6%95%B0%E6%98%AF%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E7%9A%84%EF%BC%9F.html">16 值传递，引用传递or其他，Python里参数是如何传递的？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%E5%BC%BA%E5%A4%A7%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8.html">17 强大的装饰器</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20metaclass%EF%BC%8C%E6%98%AF%E6%BD%98%E5%A4%9A%E6%8B%89%E9%AD%94%E7%9B%92%E8%BF%98%E6%98%AF%E9%98%BF%E6%8B%89%E4%B8%81%E7%A5%9E%E7%81%AF%EF%BC%9F.html">18 metaclass，是潘多拉魔盒还是阿拉丁神灯？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8.html">19 深入理解迭代器和生成器</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E6%8F%AD%E7%A7%98%20Python%20%E5%8D%8F%E7%A8%8B.html">20 揭秘 Python 协程</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20Python%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8BFutures.html">21 Python并发编程之Futures</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8BAsyncio.html">22 并发编程之Asyncio</a></li><li><a class="active" aria-current="page" href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%87%82Python%20GIL%EF%BC%88%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81%EF%BC%89%E5%90%97%EF%BC%9F.html">23 你真的懂Python GIL（全局解释器锁）吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20%E5%B8%A6%E4%BD%A0%E8%A7%A3%E6%9E%90%20Python%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6.html">24 带你解析 Python 垃圾回收机制</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AGIL%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%E5%91%A2%EF%BC%9F.html">25 答疑（二）：GIL与多线程是什么关系呢？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E6%B4%BB%E9%83%BD%E6%9D%A5%E4%B8%8D%E5%8F%8A%E5%B9%B2%E4%BA%86%EF%BC%8C%E8%BF%98%E6%9C%89%E7%A9%BA%E6%B3%A8%E6%84%8F%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%EF%BC%9F%EF%BC%81.html">26 活都来不及干了，还有空注意代码风格？！</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E5%AD%A6%E4%BC%9A%E5%90%88%E7%90%86%E5%88%86%E8%A7%A3%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E5%8F%AF%E8%AF%BB%E6%80%A7.html">27 学会合理分解代码，提高代码可读性</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E5%90%88%E7%90%86%E5%88%A9%E7%94%A8assert%EF%BC%9F.html">28 如何合理利用assert？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E5%B7%A7%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8%E5%92%8CWith%E8%AF%AD%E5%8F%A5%E7%B2%BE%E7%AE%80%E4%BB%A3%E7%A0%81.html">29 巧用上下文管理器和With语句精简代码</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E7%9C%9F%E7%9A%84%E6%9C%89%E5%BF%85%E8%A6%81%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%90%97%EF%BC%9F.html">30 真的有必要写单元测试吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20pdb%20%26%20cProfile%EF%BC%9A%E8%B0%83%E8%AF%95%E5%92%8C%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E7%9A%84%E6%B3%95%E5%AE%9D.html">31 pdb &amp; cProfile：调试和性能分析的法宝</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F%EF%BC%9F.html">32 答疑（三）：如何选择合适的异常处理方式？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%B8%A6%E4%BD%A0%E5%88%9D%E6%8E%A2%E9%87%8F%E5%8C%96%E4%B8%96%E7%95%8C.html">33 带你初探量化世界</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20RESTful%20%26%20Socket%EF%BC%9A%E6%90%AD%E5%BB%BA%E4%BA%A4%E6%98%93%E6%89%A7%E8%A1%8C%E5%B1%82%E6%A0%B8%E5%BF%83.html">34 RESTful &amp; Socket：搭建交易执行层核心</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20RESTful%20%26%20Socket%EF%BC%9A%E8%A1%8C%E6%83%85%E6%95%B0%E6%8D%AE%E5%AF%B9%E6%8E%A5%E5%92%8C%E6%8A%93%E5%8F%96.html">35 RESTful &amp; Socket：行情数据对接和抓取</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20Pandas%20%26%20Numpy%EF%BC%9A%E7%AD%96%E7%95%A5%E4%B8%8E%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F.html">36 Pandas &amp; Numpy：策略与回测系统</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20Kafka%20%26%20ZMQ%EF%BC%9A%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E6%B5%81%E6%B0%B4%E7%BA%BF.html">37 Kafka &amp; ZMQ：自动化交易流水线</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20MySQL%EF%BC%9A%E6%97%A5%E5%BF%97%E5%92%8C%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F.html">38 MySQL：日志和数据存储系统</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20Django%EF%BC%9A%E6%90%AD%E5%BB%BA%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0.html">39 Django：搭建监控平台</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E6%80%BB%E7%BB%93%EF%BC%9APython%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%A8%E6%99%AF.html">40 总结：Python中的数据结构与算法全景</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E4%BA%92%E8%81%94%E7%BD%91%E5%85%AC%E5%8F%B8%E7%9A%84%E5%B7%A5%E4%BD%9C%E4%BD%93%E9%AA%8C.html">41 硅谷一线互联网公司的工作体验</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E7%BB%86%E6%95%B0%E6%8A%80%E6%9C%AF%E7%A0%94%E5%8F%91%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">42 细数技术研发的注意事项</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/43%20Q%26A%EF%BC%9A%E8%81%8A%E4%B8%80%E8%81%8A%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E5%92%8C%E9%80%89%E6%8B%A9.html">43 Q&amp;A：聊一聊职业发展和选择</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%20%E5%B8%A6%E4%BD%A0%E4%B8%8A%E6%89%8BSWIG%EF%BC%9A%E4%B8%80%E4%BB%BD%E6%B8%85%E6%99%B0%E5%A5%BD%E7%94%A8%E7%9A%84SWIG%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97.html">加餐 带你上手SWIG：一份清晰好用的SWIG编程实践指南</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%A4%96%E7%9A%84%E5%87%A0%E7%82%B9%E6%88%90%E9%95%BF%E5%BB%BA%E8%AE%AE.html">结束语 技术之外的几点成长建议</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%87%82Python%20GIL%EF%BC%88%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81%EF%BC%89%E5%90%97%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="23 你真的懂Python GIL（全局解释器锁）吗？" id="title">23 你真的懂Python GIL（全局解释器锁）吗？</h1>
+<div><p>你好，我是景霄。</p>
+<p>前面几节课，我们学习了Python的并发编程特性，也了解了多线程编程。事实上，Python多线程另一个很重要的话题——GIL（Global Interpreter Lock，即全局解释器锁）却鲜有人知，甚至连很多Python“老司机”都觉得GIL就是一个谜。今天我就来为你解谜，带你一起来看GIL。</p>
+<h2 id="一个不解之谜">一个不解之谜</h2>
+<p>耳听为虚，眼见为实。我们不妨先来看一个例子，让你感受下GIL为什么会让人不明所以。</p>
+<p>比如下面这段很简单的cpu-bound代码：</p>
+<pre><code>def CountDown(n):
+    while n &gt; 0:
+        n -= 1
+</code></pre>
+<p>现在，假设一个很大的数字n = 100000000，我们先来试试单线程的情况下执行CountDown(n)。在我手上这台号称8核的MacBook上执行后，我发现它的耗时为5.4s。</p>
+<p>这时，我们想要用多线程来加速，比如下面这几行操作：</p>
+<pre><code>from threading import Thread
+
+n = 100000000
+
+t1 = Thread(target=CountDown, args=[n // 2])
+t2 = Thread(target=CountDown, args=[n // 2])
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+</code></pre>
+<p>我又在同一台机器上跑了一下，结果发现，这不仅没有得到速度的提升，反而让运行变慢，总共花了9.6s。</p>
+<p>我还是不死心，决定使用四个线程再试一次，结果发现运行时间还是9.8s，和2个线程的结果几乎一样。</p>
+<p>这是怎么回事呢？难道是我买了假的MacBook吗？你可以先自己思考一下这个问题，也可以在自己电脑上测试一下。我当然也要自我反思一下，并且提出了下面两个猜想。</p>
+<p>第一个怀疑：我的机器出问题了吗？</p>
+<p>这不得不说也是一个合理的猜想。因此我又找了一个单核CPU的台式机，跑了一下上面的实验。这次我发现，在单核CPU电脑上，单线程运行需要11s时间，2个线程运行也是11s时间。虽然不像第一台机器那样，多线程反而比单线程更慢，但是这两次整体效果几乎一样呀！</p>
+<p>看起来，这不像是电脑的问题，而是Python的线程失效了，没有起到并行计算的作用。</p>
+<p>顺理成章，我又有了第二个怀疑：Python的线程是不是假的线程？</p>
+<p>Python的线程，的的确确封装了底层的操作系统线程，在Linux系统里是Pthread（全称为POSIX Thread），而在Windows系统里是Windows Thread。另外，Python的线程，也完全受操作系统管理，比如协调何时执行、管理内存资源、管理中断等等。</p>
+<p>所以，虽然Python的线程和C++的线程本质上是不同的抽象，但它们的底层并没有什么不同。</p>
+<h2 id="为什么有gil">为什么有GIL？</h2>
+<p>看来我的两个猜想，都不能解释开头的这个未解之谜。那究竟谁才是“罪魁祸首”呢？事实上，正是我们今天的主角，也就是GIL，导致了Python线程的性能并不像我们期望的那样。</p>
+<p>GIL，是最流行的Python解释器CPython中的一个技术术语。它的意思是全局解释器锁，本质上是类似操作系统的Mutex。每一个Python线程，在CPython解释器中执行时，都会先锁住自己的线程，阻止别的线程执行。</p>
+<p>当然，CPython会做一些小把戏，轮流执行Python线程。这样一来，用户看到的就是“伪并行”——Python线程在交错执行，来模拟真正并行的线程。</p>
+<p>那么，为什么CPython需要GIL呢？这其实和CPython的实现有关。下一节我们会讲Python的内存管理机制，今天先稍微提一下。</p>
+<p>CPython使用引用计数来管理内存，所有Python脚本中创建的实例，都会有一个引用计数，来记录有多少个指针指向它。当引用计数只有0时，则会自动释放内存。</p>
+<p>什么意思呢？我们来看下面这个例子：</p>
+<pre><code>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; a = []
+&gt;&gt;&gt; b = a
+&gt;&gt;&gt; sys.getrefcount(a)
+3
+</code></pre>
+<p>这个例子中，a的引用计数是3，因为有a、b和作为参数传递的getrefcount这三个地方，都引用了一个空列表。</p>
+<p>这样一来，如果有两个Python线程同时引用了a，就会造成引用计数的race condition，引用计数可能最终只增加1，这样就会造成内存被污染。因为第一个线程结束时，会把引用计数减少1，这时可能达到条件释放内存，当第二个线程再试图访问a时，就找不到有效的内存了。</p>
+<p>所以说，CPython 引进 GIL 其实主要就是这么两个原因：</p>
+<ul>
+<li>一是设计者为了规避类似于内存管理这样的复杂的竞争风险问题（race condition）；</li>
+<li>二是因为CPython大量使用C语言库，但大部分C语言库都不是原生线程安全的（线程安全会降低性能和增加复杂度）。</li>
+</ul>
+<h2 id="gil是如何工作的">GIL是如何工作的？</h2>
+<p>下面这张图，就是一个GIL在Python程序的工作示例。其中，Thread 1、2、3轮流执行，每一个线程在开始执行时，都会锁住GIL，以阻止别的线程执行；同样的，每一个线程执行完一段后，会释放GIL，以允许别的线程开始利用资源。</p>
+<p><img alt="" src="/assets/2c45affa95e61c52ba7e6762.png"/></p>
+<p>细心的你可能会发现一个问题：为什么Python线程会去主动释放GIL呢？毕竟，如果仅仅是要求Python线程在开始执行时锁住GIL，而永远不去释放GIL，那别的线程就都没有了运行的机会。</p>
+<p>没错，CPython中还有另一个机制，叫做check_interval，意思是CPython解释器会去轮询检查线程GIL的锁住情况。每隔一段时间，Python解释器就会强制当前线程去释放GIL，这样别的线程才能有执行的机会。</p>
+<p>不同版本的Python中，check interval的实现方式并不一样。早期的Python是100个ticks，大致对应了1000个bytecodes；而 Python 3以后，interval是15毫秒。当然，我们不必细究具体多久会强制释放GIL，这不应该成为我们程序设计的依赖条件，我们只需明白，CPython解释器会在一个“合理”的时间范围内释放GIL就可以了。</p>
+<p><img alt="" src="/assets/e8977a74e3288d42805c1df4.png"/></p>
+<p>整体来说，每一个Python线程都是类似这样循环的封装，我们来看下面这段代码：</p>
+<pre><code>for (;;) {
+    if (--ticker &lt; 0) {
+        ticker = check_interval;
+    
+        /* Give another thread a chance */
+        PyThread_release_lock(interpreter_lock);
+    
+        /* Other threads may run now */
+    
+        PyThread_acquire_lock(interpreter_lock, 1);
+    }
+
+    bytecode = *next_instr++;
+    switch (bytecode) {
+        /* execute the next instruction ... */ 
+    }
+}
+</code></pre>
+<p>从这段代码中，我们可以看到，每个Python线程都会先检查ticker计数。只有在ticker大于0的情况下，线程才会去执行自己的bytecode。</p>
+<h2 id="python的线程安全">Python的线程安全</h2>
+<p>不过，有了GIL，并不意味着我们Python编程者就不用去考虑线程安全了。即使我们知道，GIL仅允许一个Python线程执行，但前面我也讲到了，Python还有check interval这样的抢占机制。我们来考虑这样一段代码：</p>
+<pre><code>import threading
+
+n = 0
+
+def foo():
+    global n
+    n += 1
+
+threads = []
+for i in range(100):
+    t = threading.Thread(target=foo)
+    threads.append(t)
+
+for t in threads:
+    t.start()
+
+for t in threads:
+    t.join()
+
+print(n)
+</code></pre>
+<p>如果你执行的话，就会发现，尽管大部分时候它能够打印100，但有时侯也会打印99或者98。</p>
+<p>这其实就是因为，<code>n+=1</code>这一句代码让线程并不安全。如果你去翻译foo这个函数的bytecode，就会发现，它实际上由下面四行bytecode组成：</p>
+<pre><code>&gt;&gt;&gt; import dis
+&gt;&gt;&gt; dis.dis(foo)
+LOAD_GLOBAL              0 (n)
+LOAD_CONST               1 (1)
+INPLACE_ADD
+STORE_GLOBAL             0 (n)
+</code></pre>
+<p>而这四行bytecode中间都是有可能被打断的！</p>
+<p>所以，千万别想着，有了GIL你的程序就可以高枕无忧了，我们仍然需要去注意线程安全。正如我开头所说，<strong>GIL的设计，主要是为了方便CPython解释器层面的编写者，而不是Python应用层面的程序员</strong>。作为Python的使用者，我们还是需要lock等工具，来确保线程安全。比如我下面的这个例子：</p>
+<pre><code>n = 0
+lock = threading.Lock()
+
+def foo():
+    global n
+    with lock:
+        n += 1
+</code></pre>
+<h2 id="如何绕过gil">如何绕过GIL？</h2>
+<p>学到这里，估计有的Python使用者感觉自己像被废了武功一样，觉得降龙十八掌只剩下了一掌。其实大可不必，你并不需要太沮丧。Python的GIL，是通过CPython的解释器加的限制。如果你的代码并不需要CPython解释器来执行，就不再受GIL的限制。</p>
+<p>事实上，很多高性能应用场景都已经有大量的C实现的Python库，例如NumPy的矩阵运算，就都是通过C来实现的，并不受GIL影响。</p>
+<p>所以，大部分应用情况下，你并不需要过多考虑GIL。因为如果多线程计算成为性能瓶颈，往往已经有Python库来解决这个问题了。</p>
+<p>换句话说，如果你的应用真的对性能有超级严格的要求，比如100us就对你的应用有很大影响，那我必须要说，Python可能不是你的最优选择。</p>
+<p>当然，可以理解的是，我们难以避免的有时候就是想临时给自己松松绑，摆脱GIL，比如在深度学习应用里，大部分代码就都是Python的。在实际工作中，如果我们想实现一个自定义的微分算子，或者是一个特定硬件的加速器，那我们就不得不把这些关键性能（performance-critical）代码在C++中实现（不再受GIL所限），然后再提供Python的调用接口。</p>
+<p>总的来说，你只需要重点记住，绕过GIL的大致思路有这么两种就够了：</p>
+<ol>
+<li>绕过CPython，使用JPython（Java实现的Python解释器）等别的实现；</li>
+<li>把关键性能代码，放到别的语言（一般是C++）中实现。</li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>今天这节课，我们先通过一个实际的例子，了解了GIL对于应用的影响；之后我们适度剖析了GIL的实现原理，你不必深究一些原理的细节，明白其主要机制和存在的隐患即可。</p>
+<p>自然，我也为你提供了绕过GIL的两种思路。不过还是那句话，很多时候，我们并不需要过多纠结GIL的影响。</p>
+<h2 id="思考题">思考题</h2>
+<p>最后，我给你留下两道思考题。</p>
+<p>第一问，在我们处理cpu-bound的任务（文中第一个例子）时，为什么有时候使用多线程会比单线程还要慢些？</p>
+<p>第二问，你觉得GIL是一个好的设计吗？事实上，在Python 3之后，确实有很多关于GIL改进甚至是取消的讨论，你的看法是什么呢？你在平常工作中有被GIL困扰过的场景吗？</p>
+<p>欢迎在留言区写下你的想法，也欢迎你把今天的内容分享给你的同事朋友，我们一起交流、一起进步。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

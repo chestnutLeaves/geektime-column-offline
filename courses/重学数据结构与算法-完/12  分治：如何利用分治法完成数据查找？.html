@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12  分治：如何利用分治法完成数据查找？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/index.html">重学数据结构与算法-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">23 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>重学数据结构与算法-完</strong><ul><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/00%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%8C%E5%BA%94%E8%AF%A5%E8%BF%99%E6%A0%B7%E5%AD%A6%EF%BC%81.html">00 数据结构与算法，应该这样学！</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/01%20%20%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A1%A1%E9%87%8F%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E6%95%88%E7%8E%87%EF%BC%9F.html">01  复杂度：如何衡量程序运行的效率？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/02%20%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E5%B0%86%E2%80%9C%E6%98%82%E8%B4%B5%E2%80%9D%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%BD%AC%E6%8D%A2%E6%88%90%E2%80%9C%E5%BB%89%E4%BB%B7%E2%80%9D%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.html">02  数据结构：将“昂贵”的时间复杂度转换成“廉价”的空间复杂度</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/03%20%20%E5%A2%9E%E5%88%A0%E6%9F%A5%EF%BC%9A%E6%8E%8C%E6%8F%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%2C%E4%BB%A5%E4%B8%8D%E5%8F%98%E5%BA%94%E4%B8%87%E5%8F%98.html">03  增删查：掌握数据处理的基本操作,以不变应万变</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/04%20%20%E5%A6%82%E4%BD%95%E5%AE%8C%E6%88%90%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%BB%93%E6%9E%84%E4%B8%8B%E7%9A%84%E5%A2%9E%E5%88%A0%E6%9F%A5%EF%BC%9F.html">04  如何完成线性表结构下的增删查？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/05%20%20%E6%A0%88%EF%BC%9A%E5%90%8E%E8%BF%9B%E5%85%88%E5%87%BA%E7%9A%84%E7%BA%BF%E6%80%A7%E8%A1%A8%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%9F%A5%EF%BC%9F.html">05  栈：后进先出的线性表，如何实现增删查？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/06%20%20%E9%98%9F%E5%88%97%EF%BC%9A%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BA%E7%9A%84%E7%BA%BF%E6%80%A7%E8%A1%A8%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%9F%A5%EF%BC%9F.html">06  队列：先进先出的线性表，如何实现增删查？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/07%20%20%E6%95%B0%E7%BB%84%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%9F%BA%E4%BA%8E%E7%B4%A2%E5%BC%95%E7%9A%84%E6%9F%A5%E6%89%BE%EF%BC%9F.html">07  数组：如何实现基于索引的查找？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/08%20%20%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%9B%9E%E7%AD%94%E9%9D%A2%E8%AF%95%E4%B8%AD%E9%AB%98%E9%A2%91%E8%80%83%E5%AF%9F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95%EF%BC%9F.html">08  字符串：如何正确回答面试中高频考察的字符串匹配算法？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/09%20%20%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%9A%E5%88%86%E6%94%AF%E5%85%B3%E7%B3%BB%E4%B8%8E%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E4%B8%8B%EF%BC%8C%E5%A6%82%E4%BD%95%E6%9C%89%E6%95%88%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%9F%A5%EF%BC%9F.html">09  树和二叉树：分支关系与层次结构下，如何有效实现增删查？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/10%20%20%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E5%A5%BD%E9%AB%98%E6%95%88%E7%8E%87%E6%9F%A5%E6%89%BE%E7%9A%84%E2%80%9C%E5%88%A9%E5%99%A8%E2%80%9D%EF%BC%9F.html">10  哈希表：如何利用好高效率查找的“利器”？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/11%20%20%E9%80%92%E5%BD%92%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E9%80%92%E5%BD%92%E6%B1%82%E8%A7%A3%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98%EF%BC%9F.html">11  递归：如何利用递归求解汉诺塔问题？</a></li><li><a class="active" aria-current="page" href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/12%20%20%E5%88%86%E6%B2%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E5%88%86%E6%B2%BB%E6%B3%95%E5%AE%8C%E6%88%90%E6%95%B0%E6%8D%AE%E6%9F%A5%E6%89%BE%EF%BC%9F.html">12  分治：如何利用分治法完成数据查找？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/13%20%20%E6%8E%92%E5%BA%8F%EF%BC%9A%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%E4%B8%8E%E4%BC%98%E5%8A%A3%E5%AF%B9%E6%AF%94.html">13  排序：经典排序算法原理解析与优劣对比</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/14%20%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%9C%80%E4%BC%98%E5%AD%90%E7%BB%93%E6%9E%84%EF%BC%8C%E5%AE%8C%E6%88%90%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E6%B1%82%E8%A7%A3%EF%BC%9F.html">14  动态规划：如何通过最优子结构，完成复杂问题求解？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/15%20%20%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E6%89%8D%E8%83%BD%E6%9B%B4%E5%A5%BD%E5%9C%B0%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%EF%BC%9A%E5%BC%80%E5%8F%91%E5%89%8D%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90%E4%B8%8E%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B.html">15  定位问题才能更好地解决问题：开发前的复杂度分析与技术选型</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/16%20%20%E7%9C%9F%E9%A2%98%E6%A1%88%E4%BE%8B%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%AE%97%E6%B3%95%E6%80%9D%E7%BB%B4%E8%AE%AD%E7%BB%83.html">16  真题案例（一）：算法思维训练</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/17%20%20%E7%9C%9F%E9%A2%98%E6%A1%88%E4%BE%8B%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AE%AD%E7%BB%83.html">17  真题案例（二）：数据结构训练</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/18%20%20%E7%9C%9F%E9%A2%98%E6%A1%88%E4%BE%8B%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%8A%9B%E6%89%A3%E7%9C%9F%E9%A2%98%E8%AE%AD%E7%BB%83.html">18  真题案例（三）：力扣真题训练</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/19%20%20%E7%9C%9F%E9%A2%98%E6%A1%88%E4%BE%8B%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%A4%A7%E5%8E%82%E7%9C%9F%E9%A2%98%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83.html">19  真题案例（四）：大厂真题实战演练</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/20%20%20%E4%BB%A3%E7%A0%81%E4%B9%8B%E5%A4%96%EF%BC%8C%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E4%B8%AD%E4%BD%A0%E5%BA%94%E8%AF%A5%E5%85%B7%E5%A4%87%E5%93%AA%E4%BA%9B%E8%BD%AF%E7%B4%A0%E8%B4%A8%EF%BC%9F.html">20  代码之外，技术面试中你应该具备哪些软素质？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/21%20%20%E9%9D%A2%E8%AF%95%E4%B8%AD%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E5%85%A8%E5%B1%80%E8%A7%82%EF%BC%8C%E5%BF%AB%E9%80%9F%E5%AE%8C%E6%88%90%E4%BC%98%E8%B4%A8%E7%9A%84%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%9F.html">21  面试中如何建立全局观，快速完成优质的手写代码？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/%E5%8A%A0%E9%A4%90%20%20%E8%AF%BE%E5%90%8E%E7%BB%83%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3.html">加餐  课后练习题详解</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%87%8D%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AE%8C/12%20%20%E5%88%86%E6%B2%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E5%88%86%E6%B2%BB%E6%B3%95%E5%AE%8C%E6%88%90%E6%95%B0%E6%8D%AE%E6%9F%A5%E6%89%BE%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12  分治：如何利用分治法完成数据查找？" id="title">12  分治：如何利用分治法完成数据查找？</h1>
+<div><p>前面课时中，我们学习了递归的思想，它是一种函数自我调用缩小问题规模的方法。这一课时我们继续学习另一种算法思维，分治法。</p>
+<p>从定性的角度来看，分治法的核心思想就是“分而治之”。利用分而治之的思想，就可以把一个大规模、高难度的问题，分解为若干个小规模、低难度的小问题。随后，开发者将面对多个简单的问题，并很快地找到答案各个击破。在把这些简单问题解决好之后，我们通过把这些小问题的答案合并，就得到了原问题的答案。</p>
+<p>分治法应用很广泛，很多高效率的算法都是以分治法作为其基础思想，例如排序算法中的快速排序和归并排序。</p>
+<h3 id="分治法是什么">分治法是什么？</h3>
+<p>计算机求解问题所需的计算时间，与其涉及的数据规模强相关。简而言之，问题所涉及的数据规模越小，它所需的计算时间也越少；反之亦然。</p>
+<p>我们来看一个例子：<strong>在一个包含 n 个元素的无序数组中，要求按照从小到大的顺序打印其 n 个元素。</strong></p>
+<p>假设我们采用 n 个元素之间的两两比较的计算方法，去得到从小到大的序列。分析如下：</p>
+<p>当数据量 n = 1 时，不需任何计算，直接打印即可；</p>
+<p>当数据量 n = 2 时 ，那需要做 1 次比较即可达成目标；</p>
+<p>当数据量 n = 3 时，要对这 3 个元素进行两两比较，共计 3 次比较；</p>
+<p>而当数据量 n = 10 时，问题就不那么容易处理了，我们需要 45 次比较（计算方式是 0.5*n(n-1) ）。</p>
+<p>因此，要想通过上述方法直接解决一个规模较大的问题，其实是相当困难的。</p>
+<p>基于此，<strong>分治法的核心思想就是分而治之</strong>。具体来说，它先将一个难以直接解决的大问题，分割成一些可以直接解决的小问题。如果分割后的问题仍然无法直接解决，那么就继续递归地分割，直到每个小问题都可解。</p>
+<p>通常而言，这些子问题具备互相独立、形式相同的特点。这样，我们就可以采用同一种解法，递归地去解决这些子问题。最后，再将每个子问题的解合并，就得到了原问题的解。</p>
+<h4 id="分治法的价值">分治法的价值</h4>
+<p>关于分治法，很多同学都有这样一个误区。那就是，当你的计算机性能还不错的时候，采用分治法相对于全局遍历一遍没有什么差别。</p>
+<p>例如下面这个问题，<strong>在 1000 个有序数字构成的数组 a 中，判断某个数字 c 是否出现过。</strong></p>
+<p><strong>第一种方法，全局遍历。</strong> 复杂度 O(n)。采用 for 循环，对 1000 个数字全部判断一遍。</p>
+<p><strong>第二种方法，采用二分查找。</strong> 复杂度 O(logn)。递归地判断 c 与 a 的中位数的大小关系，并不断缩小范围。</p>
+<p>这两种方法，对时间的消耗几乎一样。那分治法的价值又是什么呢？</p>
+<p>其实，在小数据规模上，分治法没有什么特殊价值。无非就是让代码显得更牛一些。只有在大数据集上，分治法的价值才能显现出来。</p>
+<p>下面我们通过一个经典的案例带你感受分治法的价值。</p>
+<p><strong>假如有一张厚度为 1 毫米且足够柔软的纸，问将它对折多少次之后，厚度能达到地球到月球的距离？</strong></p>
+<p>这个问题看起来很异想天开。根据百度百科，地月平均距离是 384,403.9 千米，大约 39 万千米。粗看怎么也需要对折 1 万次吧？但实际上，根据计算，我们只需要对折 39 次就够了。计算的过程是 2^39 = 549,755,813,888 = 55 万千米 &gt; 39 万千米。那么，这个例子意味着什么呢？</p>
+<p>我们回到前面讲到的在数组 a 中查找数字 c 的例子，如果数组 a 的大小拓展到 549,755,813,888 这个量级上，使用第二种的二分查找方法，仅仅需要 39 次判断，就能找到最终结果。相比暴力搜索的方法，性能优势高的不是一星半点！这也证明了，<strong>复杂度为 O(logn) 相比复杂度为 O(n) 的算法，在大数据集合中性能有着爆发式的提高。</strong></p>
+<h3 id="分治法的使用方法">分治法的使用方法</h3>
+<p>前面我们讲到分治法的核心思想是“分而治之”，当你需要采用分治法时，<strong>一般原问题都需要具备以下几个特征：</strong></p>
+<ol>
+<li><strong>难度在降低</strong>，即原问题的解决难度，随着数据的规模的缩小而降低。这个特征绝大多数问题都是满足的。</li>
+<li><strong>问题可分</strong>，原问题可以分解为若干个规模较小的同类型问题。这是应用分治法的前提。</li>
+<li><strong>解可合并</strong>，利用所有子问题的解，可合并出原问题的解。这个特征很关键，能否利用分治法完全取决于这个特征。</li>
+<li><strong>相互独立</strong>，各个子问题之间相互独立，某个子问题的求解不会影响到另一个子问题。如果子问题之间不独立，则分治法需要重复地解决公共的子问题，造成效率低下的结果。</li>
+</ol>
+<p>根据前面我们对分治法的分析，你一定能迅速联想到递归。分治法需要递归地分解问题，再去解决问题。因此，<strong>分治法在每轮递归上，都包含了分解问题、解决问题和合并结果这 3 个步骤。</strong></p>
+<p>为了让大家对分治法有更清晰地了解，我们以二分查找为例，看一下分治法如何使用。关于分治法在排序中的使用，我们会在第 11 课时中讲到。查找问题指的是，在一个有序的数列中，判断某个待查找的数字是否出现过。二分查找，则是利用分治法去解决查找问题。通常二分查找需要一个前提，那就是输入的数列是有序的。</p>
+<p><strong>二分查找的思路比较简单，步骤如下</strong>：</p>
+<ol>
+<li>选择一个标志 i 将集合 L 分为二个子集合，一般可以使用中位数；</li>
+<li>判断标志 L(i) 是否能与要查找的值 des 相等，相等则直接返回结果；</li>
+<li>如果不相等，需要判断 L(i) 与 des 的大小；</li>
+<li>基于判断的结果决定下步是向左查找还是向右查找。如果向某个方向查找的空间为 0，则返回结果未查到；</li>
+<li>回到步骤 1。</li>
+</ol>
+<p>我们对二分查找的复杂度进行分析。二分查找的最差情况是，不断查找到最后 1 个数字才完成判断。那么此时需要的最大的复杂度就是 O(logn)。</p>
+<h3 id="分治法的案例">分治法的案例</h3>
+<p>下面我们一起来看一个例子。<strong>在数组 { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } 中，查找 8 是否出现过。</strong></p>
+<p>首先判断 8 和中位数 5 的大小关系。因为 8 更大，所以在更小的范围 6, 7, 8, 9, 10 中继续查找。此时更小的范围的中位数是 8。由于 8 等于中位数 8，所以查找到并打印查找到的 8 对应在数组中的 index 值。如下图所示。</p>
+<p><img alt="Lark20200624-163712.gif" src="/assets/bdb98e813eddc48411f328a7.gif"/></p>
+<p>从代码实现的角度来看，我们可以采用两个索引 low 和 high，确定查找范围。最初 low 为 0，high 为数组长度减 1。在一个循环体内，判断 low 到 high 的中位数与目标变量 targetNumb 的大小关系。根据结果确定向左走（high = middle - 1）或者向右走（low = middle + 1），来调整 low 和 high 的值。直到 low 反而比 high 更大时，说明查找不到并跳出循环。我们给出代码如下：</p>
+<pre><code>public static void main(String[] args) {
+	// 需要查找的数字
+	int targetNumb = 8;
+	// 目标有序数组
+	int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	int middle = 0;
+	int low = 0;
+	int high = arr.length - 1;
+    int isfind = 0;
+
+	while (low &lt;= high) {
+		middle = (high + low) / 2;
+		if (arr[middle] == targetNumb) {
+			System.out.println(targetNumb + " 在数组中,下标值为: " + middle);
+            isfind = 1;
+			break;
+		} else if (arr[middle] &gt; targetNumb) {
+			// 说明该数在low~middle之间
+			high = middle - 1;
+		} else {
+			// 说明该数在middle~high之间
+			low = middle + 1;
+		}
+    }
+    if (isfind == 0) {
+			System.out.println("数组不含 " + targetNumb);
+	}
+}
+</code></pre>
+<p>我们基于这个例子，可以对它进行一些经验和规律的总结，这些经验会辅助大家在面试时找到解题思路。</p>
+<ol>
+<li><strong>二分查找的时间复杂度是 O(logn)，这也是分治法普遍具备的特性。当你面对某个代码题，而且约束了时间复杂度是 O(logn) 或者是 O(nlogn) 时，可以想一下分治法是否可行。</strong></li>
+<li><strong>二分查找的循环次数并不确定。一般是达到某个条件就跳出循环。因此，编码的时候，多数会采用 while 循环加 break 跳出的代码结构。</strong></li>
+<li><strong>二分查找处理的原问题必须是有序的。因此，当你在一个有序数据环境中处理问题时，可以考虑分治法。相反，如果原问题中的数据并不是有序的，则使用分治法的可能性就会很低了。</strong></li>
+</ol>
+<p>以上 3 点经验和规律的总结，可以帮助你快速找到解决方案，做好技术选型。在实际工作和参加面试时，都是非常重要的经验。</p>
+<h3 id="练习题">练习题</h3>
+<p>最后，我们给出一个进阶的问题，供大家练习。题目如下：</p>
+<p><strong>在一个有序数组中，查找出第一个大于 9 的数字，假设一定存在。例如，arr = { -1, 3, 3, 7, 10, 14, 14 }; 则返回 10。</strong></p>
+<p>在这里提醒一下，带查找的目标数字具备这样的性质：</p>
+<p>第一，它比 9 大；</p>
+<p>第二，它前面的数字（除非它是第一个数字），比 9 小。</p>
+<p>因此，当我们作出向左走或向右走的决策时，必须满足这两个条件。</p>
+<pre><code>public static void main(String[] args) {
+	int targetNumb = 9;
+	// 目标有序数组
+	int[] arr = { -1, 3, 3, 7, 10, 14, 14 };
+	int middle = 0;
+	int low = 0;
+	int high = arr.length - 1;
+	while (low &lt;= high) {
+		middle = (high + low) / 2;
+		if (arr[middle] &gt; targetNumb &amp;&amp; (middle == 0 || arr[middle - 1] &lt;= targetNumb)) {
+			System.out.println("第一个比 " + targetNumb + " 大的数字是 " + arr[middle]);
+			break;
+		} else if (arr[middle] &gt; targetNumb) {
+			// 说明该数在low~middle之间
+			high = middle - 1;
+		} else {
+			// 说明该数在middle~high之间
+			low = middle + 1;
+		}
+	}	
+}
+</code></pre>
+<h3 id="总结">总结</h3>
+<p>分治法经常会用在海量数据处理中。这也是它显著区别于遍历查找方法的优势。<strong>在面对陌生问题时，需要注意原问题的数据是否有序，预期的时间复杂度是否带有 logn 项，是否可以通过小问题的答案合并出原问题的答案。如果这些先决条件都满足，你就应该第一时间想到分治法。</strong></p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

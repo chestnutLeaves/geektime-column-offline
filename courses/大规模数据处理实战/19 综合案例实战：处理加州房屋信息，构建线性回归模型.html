@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>19 综合案例实战：处理加州房屋信息，构建线性回归模型 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/index.html">大规模数据处理实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>大规模数据处理实战</strong><ul><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%B8%A6%E4%BD%A0%E8%B5%B0%E4%B8%8A%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8B%E8%B7%AF.html">00 开篇词 从这里开始，带你走上硅谷一线系统架构师之路</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/01%20%E4%B8%BA%E4%BB%80%E4%B9%88MapReduce%E4%BC%9A%E8%A2%AB%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E5%85%AC%E5%8F%B8%E6%B7%98%E6%B1%B0%EF%BC%9F.html">01 为什么MapReduce会被硅谷一线公司淘汰？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/02%20MapReduce%E5%90%8E%E8%B0%81%E4%B8%BB%E6%B2%89%E6%B5%AE%EF%BC%9A%E6%80%8E%E6%A0%B7%E8%AE%BE%E8%AE%A1%E4%B8%8B%E4%B8%80%E4%BB%A3%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF%EF%BC%9F.html">02 MapReduce后谁主沉浮：怎样设计下一代数据处理技术？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/03%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9A%E6%80%8E%E6%A0%B7%E5%AE%9E%E7%8E%B0%E5%A4%A7%E5%9E%8B%E7%94%B5%E5%95%86%E7%83%AD%E9%94%80%E6%A6%9C%EF%BC%9F.html">03 大规模数据处理初体验：怎样实现大型电商热销榜？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/04%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%AD%A6%E4%BC%9A%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%AD%89%E7%BA%A7%E5%8D%8F%E8%AE%AESLA%E6%9D%A5%E8%AF%84%E4%BC%B0%E4%BD%A0%E7%9A%84%E7%B3%BB%E7%BB%9F.html">04 分布式系统（上）：学会用服务等级协议SLA来评估你的系统</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/05%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B8%8D%E5%BE%97%E4%B8%8D%E7%9F%A5%E7%9A%84%E4%B8%89%E5%A4%A7%E6%8C%87%E6%A0%87.html">05 分布式系统（下）：架构师不得不知的三大指标</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/06%20%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86%E6%89%B9%E5%A4%84%E7%90%86%E8%BF%98%E6%98%AF%E6%B5%81%E5%A4%84%E7%90%86%EF%BC%9F.html">06 如何区分批处理还是流处理？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/07%20Workflow%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%AE%A9%E4%BD%A0%E5%9C%A8%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E4%B8%96%E7%95%8C%E4%B8%AD%E5%90%9B%E4%B8%B4%E5%A4%A9%E4%B8%8B.html">07 Workflow设计模式：让你在大规模数据世界中君临天下</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/08%20%E5%8F%91%E5%B8%83_%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%B5%81%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80.html">08 发布_订阅模式：流处理架构中的瑞士军刀</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/09%20CAP%E5%AE%9A%E7%90%86%EF%BC%9A%E4%B8%89%E9%80%89%E4%BA%8C%EF%BC%8C%E6%9E%B6%E6%9E%84%E5%B8%88%E5%BF%85%E9%A1%BB%E5%AD%A6%E4%BC%9A%E7%9A%84%E5%8F%96%E8%88%8D.html">09 CAP定理：三选二，架构师必须学会的取舍</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/10%20Lambda%E6%9E%B6%E6%9E%84%EF%BC%9ATwitter%E4%BA%BF%E7%BA%A7%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%9E%B6%E6%9E%84%E8%83%8C%E5%90%8E%E7%9A%84%E5%80%9A%E5%A4%A9%E5%89%91.html">10 Lambda架构：Twitter亿级实时数据分析架构背后的倚天剑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/11%20Kappa%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%88%A9%E7%94%A8Kafka%E9%94%BB%E9%80%A0%E7%9A%84%E5%B1%A0%E9%BE%99%E5%88%80.html">11 Kappa架构：利用Kafka锻造的屠龙刀</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/12%20%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81Spark%EF%BC%9F.html">12 我们为什么需要Spark？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/13%20%E5%BC%B9%E6%80%A7%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%9ASpark%E5%A4%A7%E5%8E%A6%E7%9A%84%E5%9C%B0%E5%9F%BA%EF%BC%88%E4%B8%8A%EF%BC%89.html">13 弹性分布式数据集：Spark大厦的地基（上）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/14%20%E5%BC%B9%E6%80%A7%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%9ASpark%E5%A4%A7%E5%8E%A6%E7%9A%84%E5%9C%B0%E5%9F%BA%EF%BC%88%E4%B8%8B%EF%BC%89.html">14 弹性分布式数据集：Spark大厦的地基（下）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/15%20Spark%20SQL%EF%BC%9ASpark%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%88%A9%E5%99%A8.html">15 Spark SQL：Spark数据查询的利器</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/16%20Spark%20Streaming%EF%BC%9ASpark%E7%9A%84%E5%AE%9E%E6%97%B6%E6%B5%81%E8%AE%A1%E7%AE%97API.html">16 Spark Streaming：Spark的实时流计算API</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/17%20Structured%20Streaming%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8DataFrame%20API%E8%BF%9B%E8%A1%8C%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90_.html">17 Structured Streaming：如何用DataFrame API进行实时数据分析_</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/18%20Word%20Count%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%BF%90%E8%A1%8C%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AASpark%E5%BA%94%E7%94%A8.html">18 Word Count：从零开始运行你的第一个Spark应用</a></li><li><a class="active" aria-current="page" href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/19%20%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A4%84%E7%90%86%E5%8A%A0%E5%B7%9E%E6%88%BF%E5%B1%8B%E4%BF%A1%E6%81%AF%EF%BC%8C%E6%9E%84%E5%BB%BA%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">19 综合案例实战：处理加州房屋信息，构建线性回归模型</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/20%20%E6%B5%81%E5%A4%84%E7%90%86%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E5%88%86%E6%9E%90%E7%BA%BD%E7%BA%A6%E5%B8%82%E5%87%BA%E7%A7%9F%E8%BD%A6%E8%BD%BD%E5%AE%A2%E4%BF%A1%E6%81%AF.html">20 流处理案例实战：分析纽约市出租车载客信息</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/21%20%E6%B7%B1%E5%85%A5%E5%AF%B9%E6%AF%94Spark%E4%B8%8EFlink%EF%BC%9A%E5%B8%AE%E4%BD%A0%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%A4%E5%BC%80%E8%8A%B1.html">21 深入对比Spark与Flink：帮你系统设计两开花</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/22%20Apache%20Beam%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F.html">22 Apache Beam的前世今生</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/23%20%E7%AB%99%E5%9C%A8Google%E7%9A%84%E8%82%A9%E8%86%80%E4%B8%8A%E5%AD%A6%E4%B9%A0Beam%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.html">23 站在Google的肩膀上学习Beam编程模型</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/24%20PCollection%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Beam%E8%A6%81%E5%A6%82%E6%AD%A4%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E6%95%B0%E6%8D%AE%EF%BC%9F.html">24 PCollection：为什么Beam要如此抽象封装数据？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/25%20Transform%EF%BC%9ABeam%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95.html">25 Transform：Beam数据转换操作的抽象方法</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/26%20Pipeline%EF%BC%9ABeam%E5%A6%82%E4%BD%95%E6%8A%BD%E8%B1%A1%E5%A4%9A%E6%AD%A5%E9%AA%A4%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9F.html">26 Pipeline：Beam如何抽象多步骤的数据流水线？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/27%20Pipeline%20I_O_%20Beam%E6%95%B0%E6%8D%AE%E4%B8%AD%E8%BD%AC%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">27 Pipeline I_O_ Beam数据中转的设计模式</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%88%9B%E5%BB%BA%E5%A5%BD%E4%B8%80%E4%B8%AABeam%20Pipeline%EF%BC%9F.html">28 如何设计创建好一个Beam Pipeline？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/29%20%E5%A6%82%E4%BD%95%E6%B5%8B%E8%AF%95Beam%20Pipeline%EF%BC%9F.html">29 如何测试Beam Pipeline？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/30%20Apache%20Beam%E5%AE%9E%E6%88%98%E5%86%B2%E5%88%BA%EF%BC%9ABeam%E5%A6%82%E4%BD%95run%20everywhere_.html">30 Apache Beam实战冲刺：Beam如何run everywhere_</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/31%20WordCount%20Beam%20Pipeline%E5%AE%9E%E6%88%98.html">31 WordCount Beam Pipeline实战</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/32%20Beam%20Window%EF%BC%9A%E6%89%93%E9%80%9A%E6%B5%81%E5%A4%84%E7%90%86%E7%9A%84%E4%BB%BB%E7%9D%A3%E4%BA%8C%E8%84%89.html">32 Beam Window：打通流处理的任督二脉</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/33%20%E6%A8%AA%E7%9C%8B%E6%88%90%E5%B2%AD%E4%BE%A7%E6%88%90%E5%B3%B0%EF%BC%9A%E5%86%8D%E6%88%98Streaming%20WordCount.html">33 横看成岭侧成峰：再战Streaming WordCount</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/34%20Amazon%E7%83%AD%E9%94%80%E6%A6%9CBeam%20Pipeline%E5%AE%9E%E6%88%98.html">34 Amazon热销榜Beam Pipeline实战</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/35%20Facebook%E6%B8%B8%E6%88%8F%E5%AE%9E%E6%97%B6%E6%B5%81%E5%A4%84%E7%90%86Beam%20Pipeline%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8A%EF%BC%89.html">35 Facebook游戏实时流处理Beam Pipeline实战（上）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/36%20Facebook%E6%B8%B8%E6%88%8F%E5%AE%9E%E6%97%B6%E6%B5%81%E5%A4%84%E7%90%86Beam%20Pipeline%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8B%EF%BC%89.html">36 Facebook游戏实时流处理Beam Pipeline实战（下）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/37%205G%E6%97%B6%E4%BB%A3%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%89%A9%E8%81%94%E7%BD%91%E6%95%B0%E6%8D%AE.html">37 5G时代，如何处理超大规模物联网数据</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/38%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%9C%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%A6%82%E4%BD%95%E5%BA%94%E7%94%A8%EF%BC%9F.html">38 大规模数据处理在深度学习中如何应用？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/39%20%E4%BB%8ESQL%E5%88%B0Streaming%20SQL%EF%BC%9A%E7%AA%81%E7%A0%B4%E9%9D%99%E6%80%81%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%AC%A1%E5%85%83.html">39 从SQL到Streaming SQL：突破静态数据查询的次元</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/40%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9C%AA%E6%9D%A5%E4%B9%8B%E8%B7%AF.html">40 大规模数据处理未来之路</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%B8%80%E6%9C%9F%20%E5%AD%A6%E4%B9%A0%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%E5%9F%BA%E7%A1%80%EF%BC%9F.html">FAQ第一期 学习大规模数据处理需要什么基础？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%B8%89%E6%9C%9F%20Apache%20Beam%E5%9F%BA%E7%A1%80%E7%AD%94%E7%96%91.html">FAQ第三期 Apache Beam基础答疑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%BA%8C%E6%9C%9F%20Spark%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%E7%AD%94%E7%96%91.html">FAQ第二期 Spark案例实战答疑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/%E5%8A%A0%E6%B2%B9%E7%AB%99%20Practice%20makes%20perfect%EF%BC%81.html">加油站 Practice makes perfect！</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%B8%96%E9%97%B4%E6%89%80%E6%9C%89%E7%9A%84%E7%9B%B8%E9%81%87%EF%BC%8C%E9%83%BD%E6%98%AF%E4%B9%85%E5%88%AB%E9%87%8D%E9%80%A2.html">结束语 世间所有的相遇，都是久别重逢</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/19%20%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A4%84%E7%90%86%E5%8A%A0%E5%B7%9E%E6%88%BF%E5%B1%8B%E4%BF%A1%E6%81%AF%EF%BC%8C%E6%9E%84%E5%BB%BA%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="19 综合案例实战：处理加州房屋信息，构建线性回归模型" id="title">19 综合案例实战：处理加州房屋信息，构建线性回归模型</h1>
+<div><p>你好，我是蔡元楠。</p>
+<p>今天我要与你分享的主题是“综合案例实战：处理加州房屋信息，构建线性回归模型”。</p>
+<p>通过之前的学习，我们对Spark各种API的基本用法有了一定的了解，还通过统计词频的实例掌握了如何从零开始写一个Spark程序。那么现在，让我们从一个真实的数据集出发，看看如何用Spark解决实际问题。</p>
+<h2 id="数据集介绍">数据集介绍</h2>
+<p>为了完成今天的综合案例实战，我使用的是美国加州1990年房屋普查的数据集。</p>
+<p><img alt="" src="/assets/8ed2faa05a861b2f17d71bf8.png"/></p>
+<p>数据集中的每一个数据都代表着一块区域内房屋和人口的基本信息，总共包括9项：</p>
+<ol>
+<li>该地区中心的纬度（latitude）</li>
+<li>该地区中心的经度（longitude）</li>
+<li>区域内所有房屋屋龄的中位数（housingMedianAge）</li>
+<li>区域内总房间数（totalRooms）</li>
+<li>区域内总卧室数（totalBedrooms）</li>
+<li>区域内总人口数（population）</li>
+<li>区域内总家庭数（households）</li>
+<li>区域内人均收入中位数（medianIncome）</li>
+<li>该区域房价的中位数（medianHouseValue）</li>
+</ol>
+<p>也就是说，我们可以把每一个数据看作一个地区，它含有9项我们关心的信息，也就是上面提到的9个指标。比如下面这个数据：</p>
+<pre><code>-122.230000,37.880000,41.000000,880.000000,129.000000,322.000000,126.000000,8.325200,452600.000000'
+</code></pre>
+<p>这个数据代表该地区的经纬度是（-122.230000,37.880000），这个地区房屋历史的中位数是41年，所有房屋总共有880个房间，其中有129个卧室。这个地区内共有126个家庭和322位居民，人均收入中位数是8.3252万，房价中位数是45.26万。</p>
+<p>这里的地域单位是美国做人口普查的最小地域单位，平均一个地域单位中有1400多人。在这个数据集中共有两万多个这样的数据。显然，这样小的数据量我们并“不需要”用Spark来处理，但是，它可以起到一个很好的示例作用。这个数据集可以从<a href="http://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html" target="_blank">网上</a>下载到。这个数据集是在1997年的一篇学术论文中创建的，感兴趣的同学可以去亲自下载，并加以实践。</p>
+<p>那么我们今天的目标是什么呢？就是用已有的数据，构建一个<strong>线性回归模型</strong>，来预测房价。</p>
+<p>我们可以看到，前8个属性都可能对房价有影响。这里，我们假设这种影响是线性的，我们就可以找到一个类似<strong>A=b_B+c_C+d_D+…+i_I</strong>的公式，A代表房价，B到I分别代表另外八个属性。这样，对于不在数据集中的房子，我们可以套用这个公式来计算出一个近似的房价。由于专栏的定位是大规模数据处理专栏，所以我们不会细讲统计学的知识。如果你对统计学知识感兴趣，或者还不理解什么是线性回归的话，可以去自行学习一下。</p>
+<h2 id="进一步了解数据集">进一步了解数据集</h2>
+<p>每当我们需要对某个数据集进行处理时，不要急着写代码。你一定要先观察数据集，了解它的特性，并尝试对它做一些简单的预处理，让数据的可读性更好。这些工作我们最好在Spark的交互式Shell上完成，而不是创建python的源文件并执行。因为，在Shell上我们可以非常直观而简便地看到每一步的输出。</p>
+<p>首先，让我们把数据集读入Spark。</p>
+<pre><code>from pyspark.sql import SparkSession
+
+# 初始化SparkSession和SparkContext
+spark = SparkSession.builder
+  .master("local")
+  .appName("California Housing ")
+  .config("spark.executor.memory", "1gb")
+  .getOrCreate()
+sc = spark.sparkContext
+
+# 读取数据并创建RDD
+rdd = sc.textFile('/Users/yourName/Downloads/CaliforniaHousing/cal_housing.data')
+
+# 读取数据每个属性的定义并创建RDD
+header = sc.textFile('/Users/yourName/Downloads/CaliforniaHousing/cal_housing.domain')
+</code></pre>
+<p>这样，我们就把房屋信息数据和每个属性的定义读入了Spark，并创建了两个相应的RDD。你还记得吧？RDD是有一个惰性求值的特性的，所以，我们可以用collect()函数来把数据输出在Shell上。</p>
+<pre><code>header.collect()
+
+[u'longitude: continuous.', u'latitude: continuous.', u'housingMedianAge: continuous. ', u'totalRooms: continuous. ', u'totalBedrooms: continuous. ', u'population: continuous. ', u'households: continuous. ', u'medianIncome: continuous. ', u'medianHouseValue: continuous. ']
+</code></pre>
+<p>这样，我们就得到了每个数据所包含的信息，这和我们前面提到的9个属性的顺序是一致的，而且它们都是连续的值，而不是离散的。你需要注意的是，collect()函数会把所有数据都加载到内存中，如果数据很大的话，有可能会造成内存泄漏，所以要小心使用。平时比较常见的方法是用take()函数去只读取RDD中的某几个元素。</p>
+<p>由于RDD中的数据可能会比较大，所以接下来让我们读取它的前两个数据。</p>
+<pre><code>rdd.take(2)
+
+[u'-122.230000,37.880000,41.000000,880.000000,129.000000,322.000000,126.000000,8.325200,452600.000000', u'-122.220000,37.860000,21.000000,7099.000000,1106.000000,2401.000000,1138.000000,8.301400,358500.000000']
+</code></pre>
+<p>由于我们是用SparkContext的textFile函数去创建RDD，所以每个数据其实是一个大的字符串，各个属性之间用逗号分隔开来。这不利于我们之后的处理，因为我们可能会需要分别读取每个对象的各个属性。所以，让我们用map函数把大字符串分隔成数组，这会方便我们的后续操作。</p>
+<pre><code>rdd = rdd.map(lambda line: line.split(","))
+rdd.take(2)
+
+[[u'-122.230000', u'37.880000', u'41.000000', u'880.000000', u'129.000000', u'322.000000', u'126.000000', u'8.325200', u'452600.000000'], [u'-122.220000', u'37.860000', u'21.000000', u'7099.000000', u'1106.000000', u'2401.000000', u'1138.000000', u'8.301400', u'358500.000000']]
+</code></pre>
+<p>我们在前面学过，Spark SQL的DataFrame API在查询结构化数据时更方便使用，而且性能更好。在这个例子中你可以看到，数据的schema是定义好的，我们需要去查询各个列，所以DataFrame API显然更加适用。所以，我们需要先把RDD转换为DataFrame。</p>
+<p>具体来说，就是需要把之前用数组代表的对象，转换成为Row对象，再用toDF()函数转换成DataFrame。</p>
+<pre><code>from pyspark.sql import Row
+
+df = rdd.map(lambda line: Row(longitude=line[0],
+                             latitude=line[1],
+                             housingMedianAge=line[2],
+                             totalRooms=line[3],
+                             totalBedRooms=line[4],
+                             population=line[5],
+                             households=line[6],
+                             medianIncome=line[7],
+                             medianHouseValue=line[8])).toDF()
+</code></pre>
+<p>现在我们可以用show()函数打印出这个DataFrame所含的数据表。</p>
+<pre><code>df.show()
+</code></pre>
+<p><img alt="" src="/assets/d6cb66c1b6fb848fe2f42c1c.png"/></p>
+<p>这里每一列的数据格式都是string，但是，它们其实都是数字，所以我们可以通过cast()函数把每一列的类型转换成float。</p>
+<pre><code>def convertColumn(df, names, newType)
+ for name in names:
+    df = df.withColumn(name, df[name].cast(newType))
+ return df
+
+columns = ['households', 'housingMedianAge', 'latitude', 'longitude', 'medianHouseValue', 'medianIncome', 'population', 'totalBedRooms', 'totalRooms']
+
+df = convertColumn(df, columns, FloatType())
+</code></pre>
+<p>转换成数字有很多优势。比如，我们可以按某一列，对所有对象进行排序，也可以计算平均值等。比如，下面这段代码就可以统计出所有建造年限各有多少个房子。</p>
+<pre><code>df.groupBy("housingMedianAge").count().sort("housingMedianAge",ascending=False).show()
+</code></pre>
+<h2 id="预处理">预处理</h2>
+<p>通过上面的数据分析，你可能会发现这些数据还是不够直观。具体的问题有：</p>
+<ol>
+<li>房价的值普遍都很大，我们可以把它调整成相对较小的数字；</li>
+<li>有的属性没什么意义，比如所有房子的总房间数和总卧室数，我们更加关心的是平均房间数；</li>
+<li>在我们想要构建的线性模型中，房价是结果，其他属性是输入参数。所以我们需要把它们分离处理；</li>
+<li>有的属性最小值和最大值范围很大，我们可以把它们标准化处理。</li>
+</ol>
+<p>对于第一点，我们观察到大多数房价都是十万起的，所以可以用withColumn()函数把所有房价都除以100000。</p>
+<pre><code>df = df.withColumn("medianHouseValue", col("medianHouseValue")/100000)
+</code></pre>
+<p>对于第二点，我们可以添加如下三个新的列：</p>
+<ul>
+<li>每个家庭的平均房间数：roomsPerHousehold</li>
+<li>每个家庭的平均人数：populationPerHousehold</li>
+<li>卧室在总房间的占比：bedroomsPerRoom</li>
+</ul>
+<p>当然，你们可以自由添加你们觉得有意义的列，这里的三个是我觉得比较典型的。同样，用withColumn()函数可以容易地新建列。</p>
+<pre><code>df = df.withColumn("roomsPerHousehold", col("totalRooms")/col("households"))
+  .withColumn("populationPerHousehold", col("population")/col("households"))
+  .withColumn("bedroomsPerRoom", col("totalBedRooms")/col("totalRooms"))
+</code></pre>
+<p>同样，有的列是我们并不关心的，比如经纬度，这个数值很难有线性的意义。所以我们可以只留下重要的信息列。</p>
+<pre><code>df = df.select("medianHouseValue",
+             "totalBedRooms",
+             "population",
+             "households",
+             "medianIncome",
+             "roomsPerHousehold",
+             "populationPerHousehold",
+             "bedroomsPerRoom")
+</code></pre>
+<p>对于第三点，最简单的办法就是把DataFrame转换成RDD，然后用map()函数把每个对象分成两部分：房价和一个包含其余属性的列表，然后在转换回DataFrame。</p>
+<pre><code>from pyspark.ml.linalg import DenseVector
+
+input_data = df.rdd.map(lambda x: (x[0], DenseVector(x[1:])))
+df = spark.createDataFrame(input_data, ["label", "features"])
+</code></pre>
+<p>我们重新把两部分重新标记为“label”和“features”，label代表的是房价，features代表包括其余参数的列表。</p>
+<p>对于第四点，数据的标准化我们可以借助Spark的机器学习库Spark ML来完成。Spark ML也是基于DataFrame，它提供了大量机器学习的算法实现、数据流水线（pipeline）相关工具和很多常用功能。由于本专栏的重点是大数据处理，所以我们并没有介绍Spark ML，但是我强烈推荐同学们有空去了解一下它。</p>
+<p>在这个AI和机器学习的时代，我们不能落伍。</p>
+<pre><code>from pyspark.ml.feature import StandardScaler
+
+standardScaler = StandardScaler(inputCol="features", outputCol="features_scaled")
+scaler = standardScaler.fit(df)
+scaled_df = scaler.transform(df)
+</code></pre>
+<p>在第二行，我们创建了一个StandardScaler，它的输入是features列，输出被我们命名为features_scaled。第三、第四行，我们把这个scaler对已有的DataFrame进行处理，让我们看下代码块里显示的输出结果。</p>
+<pre><code>scaled_df.take(1)
+
+[Row(label=4.526, features=DenseVector([129.0, 322.0, 126.0, 8.3252, 6.9841, 2.5556, 0.1466]), features_scaled=DenseVector([0.3062, 0.2843, 0.3296, 4.3821, 2.8228, 0.2461, 2.5264]))]
+</code></pre>
+<p>我们可以清楚地看到，这一行新增了一个features_scaled的列，它里面每个数据都是标准化过的，我们应该用它，而非features来训练模型。</p>
+<h2 id="创建模型">创建模型</h2>
+<p>上面的预处理都做完后，我们终于可以开始构建线性回归模型了。</p>
+<p>首先，我们需要把数据集分为训练集和测试集，训练集用来训练模型，测试集用来评估模型的正确性。DataFrame的randomSplit()函数可以很容易的随机分割数据，这里我们将80%的数据用于训练，剩下20%作为测试集。</p>
+<pre><code>train_data, test_data = scaled_df.randomSplit([.8,.2],seed=123)
+</code></pre>
+<p>用Spark ML提供的LinearRegression功能，我们可以很容易得构建一个线性回归模型，如下所示。</p>
+<pre><code>from pyspark.ml.regression import LinearRegression
+
+lr = LinearRegression(featuresCol='features_scaled', labelCol="label", maxIter=10, regParam=0.3, elasticNetParam=0.8)
+linearModel = lr.fit(train_data)
+</code></pre>
+<p>LinearRegression可以调节的参数还有很多，你可以去<a href="https://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.regression.LinearRegression" target="_blank">官方API文档</a>查阅，这里我们只是示范一下。</p>
+<h2 id="模型评估">模型评估</h2>
+<p>现在有了模型，我们终于可以用linearModel的transform()函数来预测测试集中的房价，并与真实情况进行对比。代码如下所示。</p>
+<pre><code>predicted = linearModel.transform(test_data)
+predictions = predicted.select("prediction").rdd.map(lambda x: x[0])
+labels = predicted.select("label").rdd.map(lambda x: x[0])
+predictionAndLabel = predictions.zip(labels).collect()
+</code></pre>
+<p>我们用RDD的zip()函数把预测值和真实值放在一起，这样可以方便地进行比较。比如让我们看一下前两个对比结果。</p>
+<pre><code>predictionAndLabel.take(2)
+
+[(1.4491508524918457, 1.14999), (1.5831547768979277, 0.964)]
+</code></pre>
+<p>这里可以看出，我们的模型预测的结果有些偏小，这可能有多个因素造成。最直接的原因就是房价与我们挑选的列并没有强线性关系，而且我们使用的参数也可能不够准确。</p>
+<p>这一讲我只是想带着你一起体验下处理真实数据集和解决实际问题的感觉，想要告诉你的是这种通用的思想，并帮助你继续熟悉Spark各种库的用法，并不是说房价一定就是由这些参数线性决定了。感兴趣的同学可以去继续优化，或者尝试别的模型。</p>
+<h2 id="小结">小结</h2>
+<p>这一讲我们通过一个真实的数据集，通过以下步骤解决了一个实际的数据处理问题：</p>
+<ol>
+<li>观察并了解数据集</li>
+<li>数据清洗</li>
+<li>数据的预处理</li>
+<li>训练模型</li>
+<li>评估模型</li>
+</ol>
+<p>其实这里还可以有与“优化与改进”相关的内容，这里没有去阐述是因为我们的首要目的依然是熟悉与使用Spark各类API。相信通过今天的学习，你初步了解了数据处理问题的一般思路，并强化了对RDD、DataFrame和机器学习API的使用。</p>
+<h2 id="实践与思考题">实践与思考题</h2>
+<p>今天请你下载这个数据集，按文章的介绍去动手实践一次。如果有时间的话，还可以对这个过程的优化和改进提出问题并加以解决。</p>
+<p>欢迎你在留言板贴出自己的idea。如果你觉得有所收获，也欢迎你把文章分享给朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

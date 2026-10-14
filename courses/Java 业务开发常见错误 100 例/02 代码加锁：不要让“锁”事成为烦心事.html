@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>02 代码加锁：不要让“锁”事成为烦心事 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/index.html">Java 业务开发常见错误 100 例</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java 业务开发常见错误 100 例</strong><ul><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9C%9F%E7%9A%84%E4%BC%9A%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E5%9D%91%EF%BC%9F.html">00 开篇词 业务代码真的会有这么多坑？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/01%20%E4%BD%BF%E7%94%A8%E4%BA%86%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%BA%93%EF%BC%8C%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%B0%B1%E9%AB%98%E6%9E%95%E6%97%A0%E5%BF%A7%E4%BA%86%E5%90%97%EF%BC%9F.html">01 使用了并发工具类库，线程安全就高枕无忧了吗？</a></li><li><a class="active" aria-current="page" href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/02%20%E4%BB%A3%E7%A0%81%E5%8A%A0%E9%94%81%EF%BC%9A%E4%B8%8D%E8%A6%81%E8%AE%A9%E2%80%9C%E9%94%81%E2%80%9D%E4%BA%8B%E6%88%90%E4%B8%BA%E7%83%A6%E5%BF%83%E4%BA%8B.html">02 代码加锁：不要让“锁”事成为烦心事</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/03%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E6%9C%80%E5%B8%B8%E7%94%A8%E4%B9%9F%E6%9C%80%E5%AE%B9%E6%98%93%E7%8A%AF%E9%94%99%E7%9A%84%E7%BB%84%E4%BB%B6.html">03 线程池：业务代码最常用也最容易犯错的组件</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/04%20%E8%BF%9E%E6%8E%A5%E6%B1%A0%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%B8%AE%E4%BA%86%E5%80%92%E5%BF%99.html">04 连接池：别让连接池帮了倒忙</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/05%20HTTP%E8%B0%83%E7%94%A8%EF%BC%9A%E4%BD%A0%E8%80%83%E8%99%91%E5%88%B0%E8%B6%85%E6%97%B6%E3%80%81%E9%87%8D%E8%AF%95%E3%80%81%E5%B9%B6%E5%8F%91%E4%BA%86%E5%90%97%EF%BC%9F.html">05 HTTP调用：你考虑到超时、重试、并发了吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/06%202%E6%88%90%E7%9A%84%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9A%84Spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%8C%E5%8F%AF%E8%83%BD%E9%83%BD%E6%B2%A1%E5%A4%84%E7%90%86%E6%AD%A3%E7%A1%AE.html">06 2成的业务代码的Spring声明式事务，可能都没处理正确</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/07%20%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E5%B9%B6%E4%B8%8D%E6%98%AF%E4%B8%87%E8%83%BD%E8%8D%AF.html">07 数据库索引：索引并不是万能药</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/08%20%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98%EF%BC%9A%E7%A8%8B%E5%BA%8F%E9%87%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%BD%A0%E5%B0%B1%E6%98%AF%E4%BD%A0%EF%BC%9F.html">08 判等问题：程序里如何确定你就是你？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/09%20%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%EF%BC%9A%E6%B3%A8%E6%84%8F%E7%B2%BE%E5%BA%A6%E3%80%81%E8%88%8D%E5%85%A5%E5%92%8C%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98.html">09 数值计算：注意精度、舍入和溢出问题</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/10%20%E9%9B%86%E5%90%88%E7%B1%BB%EF%BC%9A%E5%9D%91%E6%BB%A1%E5%9C%B0%E7%9A%84List%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C.html">10 集合类：坑满地的List列表操作</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/11%20%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A%E7%9A%84null%E5%92%8C%E6%81%BC%E4%BA%BA%E7%9A%84%E7%A9%BA%E6%8C%87%E9%92%88.html">11 空值处理：分不清楚的null和恼人的空指针</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/12%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%87%AA%E5%B7%B1%E5%9C%A8%E5%87%BA%E9%97%AE%E9%A2%98%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%98%E4%B8%BA%E7%9E%8E%E5%AD%90.html">12 异常处理：别让自己在出问题的时候变为瞎子</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/13%20%E6%97%A5%E5%BF%97%EF%BC%9A%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95%E7%9C%9F%E6%B2%A1%E4%BD%A0%E6%83%B3%E8%B1%A1%E7%9A%84%E9%82%A3%E4%B9%88%E7%AE%80%E5%8D%95.html">13 日志：日志记录真没你想象的那么简单</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/14%20%E6%96%87%E4%BB%B6IO%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E6%AD%A3%E7%A1%AE%E7%9A%84%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%B9%B6%E9%9D%9E%E6%98%93%E4%BA%8B.html">14 文件IO：实现高效正确的文件读写并非易事</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/15%20%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9A%E4%B8%80%E6%9D%A5%E4%B8%80%E5%9B%9E%E4%BD%A0%E8%BF%98%E6%98%AF%E5%8E%9F%E6%9D%A5%E7%9A%84%E4%BD%A0%E5%90%97%EF%BC%9F.html">15 序列化：一来一回你还是原来的你吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/16%20%E7%94%A8%E5%A5%BDJava%208%E7%9A%84%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%EF%BC%8C%E5%B0%91%E8%B8%A9%E4%B8%80%E4%BA%9B%E2%80%9C%E8%80%81%E4%B8%89%E6%A0%B7%E2%80%9D%E7%9A%84%E5%9D%91.html">16 用好Java 8的日期时间类，少踩一些“老三样”的坑</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/17%20%E5%88%AB%E4%BB%A5%E4%B8%BA%E2%80%9C%E8%87%AA%E5%8A%A8%E6%8C%A1%E2%80%9D%E5%B0%B1%E4%B8%8D%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0OOM.html">17 别以为“自动挡”就不可能出现OOM</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/18%20%E5%BD%93%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E5%92%8C%E6%B3%9B%E5%9E%8B%E9%81%87%E5%88%B0OOP%E6%97%B6%EF%BC%8C%E4%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91%EF%BC%9F.html">18 当反射、注解和泛型遇到OOP时，会有哪些坑？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/19%20Spring%E6%A1%86%E6%9E%B6%EF%BC%9AIoC%E5%92%8CAOP%E6%98%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%A0%B8%E5%BF%83.html">19 Spring框架：IoC和AOP是扩展的核心</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/20%20Spring%E6%A1%86%E6%9E%B6%EF%BC%9A%E6%A1%86%E6%9E%B6%E5%B8%AE%E6%88%91%E4%BB%AC%E5%81%9A%E4%BA%86%E5%BE%88%E5%A4%9A%E5%B7%A5%E4%BD%9C%E4%B9%9F%E5%B8%A6%E6%9D%A5%E4%BA%86%E5%A4%8D%E6%9D%82%E5%BA%A6.html">20 Spring框架：框架帮我们做了很多工作也带来了复杂度</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/21%20%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%EF%BC%9A%E6%90%9E%E5%AE%9A%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BB%9D%E6%8B%9B.html">21 代码重复：搞定代码重复的三个绝招</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/22%20%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%B3%BB%E7%BB%9F%E9%97%B4%E5%AF%B9%E8%AF%9D%E7%9A%84%E8%AF%AD%E8%A8%80%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%BB%9F%E4%B8%80.html">22 接口设计：系统间对话的语言，一定要统一</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/23%20%E7%BC%93%E5%AD%98%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%94%A6%E4%B8%8A%E6%B7%BB%E8%8A%B1%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%90%BD%E4%BA%95%E4%B8%8B%E7%9F%B3.html">23 缓存设计：缓存可以锦上添花也可以落井下石</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/24%20%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%86%99%E5%AE%8C%EF%BC%8C%E5%B0%B1%E6%84%8F%E5%91%B3%E7%9D%80%E7%94%9F%E4%BA%A7%E5%B0%B1%E7%BB%AA%E4%BA%86%EF%BC%9F.html">24 业务代码写完，就意味着生产就绪了？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/25%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E5%A5%BD%E7%94%A8%EF%BC%8C%E4%BD%86%E9%9D%9E%E5%B8%B8%E5%AE%B9%E6%98%93%E7%94%A8%E9%94%99.html">25 异步处理好用，但非常容易用错</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/26%20%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9ANoSQL%E4%B8%8ERDBMS%E5%A6%82%E4%BD%95%E5%8F%96%E9%95%BF%E8%A1%A5%E7%9F%AD%E3%80%81%E7%9B%B8%E8%BE%85%E7%9B%B8%E6%88%90%EF%BC%9F.html">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/27%20%E6%95%B0%E6%8D%AE%E6%BA%90%E5%A4%B4%EF%BC%9A%E4%BB%BB%E4%BD%95%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E4%B8%9C%E8%A5%BF%E9%83%BD%E4%B8%8D%E5%8F%AF%E4%BF%A1%E4%BB%BB.html">27 数据源头：任何客户端的东西都不可信任</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/28%20%E5%AE%89%E5%85%A8%E5%85%9C%E5%BA%95%EF%BC%9A%E6%B6%89%E5%8F%8A%E9%92%B1%E6%97%B6%EF%BC%8C%E5%BF%85%E9%A1%BB%E8%80%83%E8%99%91%E9%98%B2%E5%88%B7%E3%80%81%E9%99%90%E9%87%8F%E5%92%8C%E9%98%B2%E9%87%8D.html">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/29%20%E6%95%B0%E6%8D%AE%E5%92%8C%E4%BB%A3%E7%A0%81%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%B0%B1%E6%98%AF%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%B0%B1%E6%98%AF%E4%BB%A3%E7%A0%81.html">29 数据和代码：数据就是数据，代码就是代码</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/30%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E4%BC%A0%E8%BE%93%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%EF%BC%9F.html">30 如何正确保存和传输敏感数据？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/31%20%E5%8A%A0%E9%A4%901%EF%BC%9A%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E8%AF%BE%E7%A8%8B%E4%B8%ADJava%208%E7%9A%84%E9%82%A3%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E4%B8%80%EF%BC%89.html">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/32%20%E5%8A%A0%E9%A4%902%EF%BC%9A%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E8%AF%BE%E7%A8%8B%E4%B8%ADJava%208%E7%9A%84%E9%82%A3%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E4%BA%8C%EF%BC%89.html">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/33%20%E5%8A%A0%E9%A4%903%EF%BC%9A%E5%AE%9A%E4%BD%8D%E5%BA%94%E7%94%A8%E9%97%AE%E9%A2%98%EF%BC%8C%E6%8E%92%E9%94%99%E5%A5%97%E8%B7%AF%E5%BE%88%E9%87%8D%E8%A6%81.html">33 加餐3：定位应用问题，排错套路很重要</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/34%20%E5%8A%A0%E9%A4%904%EF%BC%9A%E5%88%86%E6%9E%90%E5%AE%9A%E4%BD%8DJava%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E5%A5%BD%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89.html">34 加餐4：分析定位Java问题，一定要用好这些工具（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/35%20%E5%8A%A0%E9%A4%905%EF%BC%9A%E5%88%86%E6%9E%90%E5%AE%9A%E4%BD%8DJava%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E5%A5%BD%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89.html">35 加餐5：分析定位Java问题，一定要用好这些工具（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/36%20%E5%8A%A0%E9%A4%906%EF%BC%9A%E8%BF%9915%E5%B9%B4%E6%9D%A5%EF%BC%8C%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E5%92%8C%E8%8B%B1%E8%AF%AD%E7%9A%84%EF%BC%9F.html">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/37%20%E5%8A%A0%E9%A4%907%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E6%88%90%E9%95%BF28%E8%AE%A1.html">37 加餐7：程序员成长28计</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/38%20%E5%8A%A0%E9%A4%908%EF%BC%9AJava%E7%A8%8B%E5%BA%8F%E4%BB%8E%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%81%E7%A7%BB%E5%88%B0Kubernetes%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91.html">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%B8%80%EF%BC%89.html">答疑篇：代码篇思考题集锦（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%B8%89%EF%BC%89.html">答疑篇：代码篇思考题集锦（三）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%BA%8C%EF%BC%89.html">答疑篇：代码篇思考题集锦（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%8A%A0%E9%A4%90%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：加餐篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%AE%89%E5%85%A8%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：安全篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E8%AE%BE%E8%AE%A1%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：设计篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%86%99%E4%BB%A3%E7%A0%81%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E5%B0%BD%E9%87%8F%E9%81%BF%E5%85%8D%E8%B8%A9%E5%9D%91%EF%BC%9F.html">结束语 写代码时，如何才能尽量避免踩坑？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/02%20%E4%BB%A3%E7%A0%81%E5%8A%A0%E9%94%81%EF%BC%9A%E4%B8%8D%E8%A6%81%E8%AE%A9%E2%80%9C%E9%94%81%E2%80%9D%E4%BA%8B%E6%88%90%E4%B8%BA%E7%83%A6%E5%BF%83%E4%BA%8B.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="02 代码加锁：不要让“锁”事成为烦心事" id="title">02 代码加锁：不要让“锁”事成为烦心事</h1>
+<div><p>在上一讲中，我与你介绍了使用并发容器等工具解决线程安全的误区。今天，我们来看看解决线程安全问题的另一种重要手段——锁，在使用上比较容易犯哪些错。</p>
+<p>我先和你分享一个有趣的案例吧。有一天，一位同学在群里说“见鬼了，疑似遇到了一个 JVM 的 Bug”，我们都很好奇是什么 Bug。</p>
+<p>于是，他贴出了这样一段代码：在一个类里有两个 int 类型的字段 a 和 b，有一个 add 方法循环 1 万次对 a 和 b 进行 ++ 操作，有另一个 compare 方法，同样循环 1 万次判断 a 是否小于 b，条件成立就打印 a 和 b 的值，并判断 a&gt;b 是否成立。</p>
+<pre><code class="language-java">@Slf4j
+public class Interesting {
+    volatile int a = 1;
+    volatile int b = 1;
+    public void add() {
+        log.info("add start");
+        for (int i = 0; i &lt; 10000; i++) {
+            a++;
+            b++;
+        }
+        log.info("add done");
+    }
+    public void compare() {
+        log.info("compare start");
+        for (int i = 0; i &lt; 10000; i++) {
+            //a始终等于b吗？
+            if (a &lt; b) {
+                log.info("a:{},b:{},{}", a, b, a &gt; b);
+                //最后的a&gt;b应该始终是false吗？
+            }
+        }
+        log.info("compare done");
+    }
+}
+</code></pre>
+<p>他起了两个线程来分别执行 add 和 compare 方法：</p>
+<pre><code class="language-java">Interesting interesting = new Interesting();
+new Thread(() -&gt; interesting.add()).start();
+new Thread(() -&gt; interesting.compare()).start();
+</code></pre>
+<p>按道理，a 和 b 同样进行累加操作，应该始终相等，compare 中的第一次判断应该始终不会成立，不会输出任何日志。但，执行代码后发现不但输出了日志，而且更诡异的是，compare 方法在判断 a<b a="" 成立的情况下还输出了="">b 也成立：</b></p>
+<p><img alt="img" src="/assets/4c324f19870650351064fc34.png"/></p>
+<p>群里一位同学看到这个问题笑了，说：“这哪是 JVM 的 Bug，分明是线程安全问题嘛。很明显，你这是在操作两个字段 a 和 b，有线程安全问题，应该为 add 方法加上锁，确保 a 和 b 的 ++ 是原子性的，就不会错乱了。”随后，他为 add 方法加上了锁：</p>
+<pre><code class="language-java">public synchronized void add()
+</code></pre>
+<p>但，加锁后问题并没有解决。</p>
+<p>我们来仔细想一下，为什么锁可以解决线程安全问题呢。因为只有一个线程可以拿到锁，所以加锁后的代码中的资源操作是线程安全的。但是，<strong>这个案例中的 add 方法始终只有一个线程在操作，显然只为 add 方法加锁是没用的。</strong></p>
+<p>之所以出现这种错乱，是因为两个线程是交错执行 add 和 compare 方法中的业务逻辑，而且这些业务逻辑不是原子性的：a++ 和 b++ 操作中可以穿插在 compare 方法的比较代码中；更需要注意的是，a 这种比较操作在字节码层面是加载 a、加载 b 和比较三步，代码虽然是一行但也不是原子性的。</p>
+<p>所以，正确的做法应该是，为 add 和 compare 都加上方法锁，确保 add 方法执行时，compare 无法读取 a 和 b：</p>
+<pre><code class="language-java">public synchronized void add()
+public synchronized void compare()
+</code></pre>
+<p>所以，使用锁解决问题之前一定要理清楚，我们要保护的是什么逻辑，多线程执行的情况又是怎样的。</p>
+<h2 id="加锁前要清楚锁和被保护的对象是不是一个层面的">加锁前要清楚锁和被保护的对象是不是一个层面的</h2>
+<p>除了没有分析清线程、业务逻辑和锁三者之间的关系随意添加无效的方法锁外，还有一种比较常见的错误是，没有理清楚锁和要保护的对象是否是一个层面的。</p>
+<p>我们知道<strong>静态字段属于类，类级别的锁才能保护；而非静态字段属于类实例，实例级别的锁就可以保护。</strong></p>
+<p>先看看这段代码有什么问题：在类 Data 中定义了一个静态的 int 字段 counter 和一个非静态的 wrong 方法，实现 counter 字段的累加操作。</p>
+<pre><code class="language-java">class Data {
+    @Getter
+    private static int counter = 0;
+    
+    public static int reset() {
+        counter = 0;
+        return counter;
+    }
+    public synchronized void wrong() {
+        counter++;
+    }
+}
+</code></pre>
+<p>写一段代码测试下：</p>
+<pre><code class="language-java">@GetMapping("wrong")
+public int wrong(@RequestParam(value = "count", defaultValue = "1000000") int count) {
+    Data.reset();
+    //多线程循环一定次数调用Data类不同实例的wrong方法
+    IntStream.rangeClosed(1, count).parallel().forEach(i -&gt; new Data().wrong());
+    return Data.getCounter();
+}
+</code></pre>
+<p>因为默认运行 100 万次，所以执行后应该输出 100 万，但页面输出的是 639242：</p>
+<p><img alt="img" src="/assets/3938c1491ec39f71ea4742fc.png"/></p>
+<p>我们来分析下为什么会出现这个问题吧。</p>
+<p>在非静态的 wrong 方法上加锁，只能确保多个线程无法执行同一个实例的 wrong 方法，却不能保证不会执行不同实例的 wrong 方法。而静态的 counter 在多个实例中共享，所以必然会出现线程安全问题。</p>
+<p>理清思路后，修正方法就很清晰了：同样在类中定义一个 Object 类型的静态字段，在操作 counter 之前对这个字段加锁。</p>
+<pre><code class="language-java">class Data {
+    @Getter
+    private static int counter = 0;
+    private static Object locker = new Object();
+    public void right() {
+        synchronized (locker) {
+            counter++;
+        }
+    }
+}
+</code></pre>
+<p>你可能要问了，把 wrong 方法定义为静态不就可以了，这个时候锁是类级别的。可以是可以，但我们不可能为了解决线程安全问题改变代码结构，把实例方法改为静态方法。</p>
+<p>感兴趣的同学还可以从字节码以及 JVM 的层面继续探索一下，代码块级别的 synchronized 和方法上标记 synchronized 关键字，在实现上有什么区别。</p>
+<h2 id="加锁要考虑锁的粒度和场景问题">加锁要考虑锁的粒度和场景问题</h2>
+<p>在方法上加 synchronized 关键字实现加锁确实简单，也因此我曾看到一些业务代码中几乎所有方法都加了 synchronized，但这种滥用 synchronized 的做法：</p>
+<ul>
+<li><p>一是，没必要。通常情况下 60% 的业务代码是三层架构，数据经过无状态的 Controller、Service、Repository 流转到数据库，没必要使用 synchronized 来保护什么数据。</p></li>
+<li><p>二是，可能会极大地降低性能。使用 Spring 框架时，默认情况下 Controller、Service、Repository 是单例的，加上 synchronized 会导致整个程序几乎就只能支持单线程，造成极大的性能问题。</p></li>
+</ul>
+<p><strong>即使我们确实有一些共享资源需要保护，也要尽可能降低锁的粒度，仅对必要的代码块甚至是需要保护的资源本身加锁。</strong></p>
+<p>比如，在业务代码中，有一个 ArrayList 因为会被多个线程操作而需要保护，又有一段比较耗时的操作（代码中的 slow 方法）不涉及线程安全问题，应该如何加锁呢？</p>
+<p>错误的做法是，给整段业务逻辑加锁，把 slow 方法和操作 ArrayList 的代码同时纳入 synchronized 代码块；更合适的做法是，把加锁的粒度降到最低，只在操作 ArrayList 的时候给这个 ArrayList 加锁。</p>
+<pre><code class="language-java">private List&lt;Integer&gt; data = new ArrayList&lt;&gt;();
+//不涉及共享资源的慢方法
+private void slow() {
+    try {
+        TimeUnit.MILLISECONDS.sleep(10);
+    } catch (InterruptedException e) {
+    }
+}
+//错误的加锁方法
+@GetMapping("wrong")
+public int wrong() {
+    long begin = System.currentTimeMillis();
+    IntStream.rangeClosed(1, 1000).parallel().forEach(i -&gt; {
+        //加锁粒度太粗了
+        synchronized (this) {
+            slow();
+            data.add(i);
+        }
+    });
+    log.info("took:{}", System.currentTimeMillis() - begin);
+    return data.size();
+}
+//正确的加锁方法
+@GetMapping("right")
+public int right() {
+    long begin = System.currentTimeMillis();
+    IntStream.rangeClosed(1, 1000).parallel().forEach(i -&gt; {
+        slow();
+        //只对List加锁
+        synchronized (data) {
+            data.add(i);
+        }
+    });
+    log.info("took:{}", System.currentTimeMillis() - begin);
+    return data.size();
+}
+</code></pre>
+<p>执行这段代码，同样是 1000 次业务操作，正确加锁的版本耗时 1.4 秒，而对整个业务逻辑加锁的话耗时 11 秒。</p>
+<p><img alt="img" src="/assets/6904b35f686e6a68dd5f258c.png"/></p>
+<p><strong>如果精细化考虑了锁应用范围后，性能还无法满足需求的话，我们就要考虑另一个维度的粒度问题了，即：区分读写场景以及资源的访问冲突，考虑使用悲观方式的锁还是乐观方式的锁。</strong></p>
+<p>一般业务代码中，很少需要进一步考虑这两种更细粒度的锁，所以我只和你分享几个大概的结论，你可以根据自己的需求来考虑是否有必要进一步优化：</p>
+<ul>
+<li><p>对于读写比例差异明显的场景，考虑使用 ReentrantReadWriteLock 细化区分读写锁，来提高性能。</p></li>
+<li><p>如果你的 JDK 版本高于 1.8、共享资源的冲突概率也没那么大的话，考虑使用 StampedLock 的乐观读的特性，进一步提高性能。</p></li>
+<li><p>JDK 里 ReentrantLock 和 ReentrantReadWriteLock 都提供了公平锁的版本，在没有明确需求的情况下不要轻易开启公平锁特性，在任务很轻的情况下开启公平锁可能会让性能下降上百倍。</p></li>
+</ul>
+<h2 id="多把锁要小心死锁问题">多把锁要小心死锁问题</h2>
+<p>刚才我们聊到锁的粒度够用就好，这就意味着我们的程序逻辑中有时会存在一些细粒度的锁。但一个业务逻辑如果涉及多把锁，容易产生死锁问题。</p>
+<p>之前我遇到过这样一个案例：下单操作需要锁定订单中多个商品的库存，拿到所有商品的锁之后进行下单扣减库存操作，全部操作完成之后释放所有的锁。代码上线后发现，下单失败概率很高，失败后需要用户重新下单，极大影响了用户体验，还影响到了销量。</p>
+<p>经排查发现是死锁引起的问题，背后原因是扣减库存的顺序不同，导致并发的情况下多个线程可能相互持有部分商品的锁，又等待其他线程释放另一部分商品的锁，于是出现了死锁问题。</p>
+<p>接下来，我们剖析一下核心的业务代码。</p>
+<p>首先，定义一个商品类型，包含商品名、库存剩余和商品的库存锁三个属性，每一种商品默认库存 1000 个；然后，初始化 10 个这样的商品对象来模拟商品清单：</p>
+<pre><code class="language-java">@Data
+@RequiredArgsConstructor
+static class Item {
+    final String name; //商品名
+    int remaining = 1000; //库存剩余
+    @ToString.Exclude //ToString不包含这个字段 
+    ReentrantLock lock = new ReentrantLock();
+}
+</code></pre>
+<p>随后，写一个方法模拟在购物车进行商品选购，每次从商品清单（items 字段）中随机选购三个商品（为了逻辑简单，我们不考虑每次选购多个同类商品的逻辑，购物车中不体现商品数量）：</p>
+<pre><code class="language-java">private List&lt;Item&gt; createCart() {
+    return IntStream.rangeClosed(1, 3)
+            .mapToObj(i -&gt; "item" + ThreadLocalRandom.current().nextInt(items.size()))
+            .map(name -&gt; items.get(name)).collect(Collectors.toList());
+}
+</code></pre>
+<p>下单代码如下：先声明一个 List 来保存所有获得的锁，然后遍历购物车中的商品依次尝试获得商品的锁，最长等待 10 秒，获得全部锁之后再扣减库存；如果有无法获得锁的情况则解锁之前获得的所有锁，返回 false 下单失败。</p>
+<pre><code class="language-java">private boolean createOrder(List&lt;Item&gt; order) {
+    //存放所有获得的锁
+    List&lt;ReentrantLock&gt; locks = new ArrayList&lt;&gt;();
+    for (Item item : order) {
+        try {
+            //获得锁10秒超时
+            if (item.lock.tryLock(10, TimeUnit.SECONDS)) {
+                locks.add(item.lock);
+            } else {
+                locks.forEach(ReentrantLock::unlock);
+                return false;
+            }
+        } catch (InterruptedException e) {
+        }
+    }
+    //锁全部拿到之后执行扣减库存业务逻辑
+    try {
+        order.forEach(item -&gt; item.remaining--);
+    } finally {
+        locks.forEach(ReentrantLock::unlock);
+    }
+    return true;
+}
+</code></pre>
+<p>我们写一段代码测试这个下单操作。模拟在多线程情况下进行 100 次创建购物车和下单操作，最后通过日志输出成功的下单次数、总剩余的商品个数、100 次下单耗时，以及下单完成后的商品库存明细：</p>
+<pre><code class="language-java">@GetMapping("wrong")
+public long wrong() {
+    long begin = System.currentTimeMillis();
+    //并发进行100次下单操作，统计成功次数
+    long success = IntStream.rangeClosed(1, 100).parallel()
+            .mapToObj(i -&gt; {
+                List&lt;Item&gt; cart = createCart();
+                return createOrder(cart);
+            })
+            .filter(result -&gt; result)
+            .count();
+    log.info("success:{} totalRemaining:{} took:{}ms items:{}",
+            success,
+            items.entrySet().stream().map(item -&gt; item.getValue().remaining).reduce(0, Integer::sum),
+            System.currentTimeMillis() - begin, items);
+    return success;
+}
+</code></pre>
+<p>运行程序，输出如下日志：</p>
+<p><img alt="img" src="/assets/95839551ca5558fb1b923338.png"/></p>
+<p>可以看到，100 次下单操作成功了 65 次，10 种商品总计 10000 件，库存总计为 9805，消耗了 195 件符合预期（65 次下单成功，每次下单包含三件商品），总耗时 50 秒。</p>
+<p>为什么会这样呢？</p>
+<p>使用 JDK 自带的 VisualVM 工具来跟踪一下，重新执行方法后不久就可以看到，线程 Tab 中提示了死锁问题，根据提示点击右侧线程 Dump 按钮进行线程抓取操作：</p>
+<p><img alt="img" src="/assets/ed7e802a6e4fe6c8611fc765.png"/></p>
+<p>查看抓取出的线程栈，在页面中部可以看到如下日志：</p>
+<p><img alt="img" src="/assets/c55f9063f11112af10e12404.png"/></p>
+<p>显然，<strong>是出现了死锁，线程 4 在等待的一个锁被线程 3 持有，线程 3 在等待的另一把锁被线程 4 持有。</strong></p>
+<p>那为什么会有死锁问题呢？</p>
+<p>我们仔细回忆一下购物车添加商品的逻辑，随机添加了三种商品，假设一个购物车中的商品是 item1 和 item2，另一个购物车中的商品是 item2 和 item1，一个线程先获取到了 item1 的锁，同时另一个线程获取到了 item2 的锁，然后两个线程接下来要分别获取 item2 和 item1 的锁，这个时候锁已经被对方获取了，只能相互等待一直到 10 秒超时。</p>
+<p>其实，避免死锁的方案很简单，<strong>为购物车中的商品排一下序，让所有的线程一定是先获取 item1 的锁然后获取 item2 的锁，就不会有问题了。</strong>所以，我只需要修改一行代码，对 createCart 获得的购物车按照商品名进行排序即可：</p>
+<pre><code class="language-java">@GetMapping("right")
+public long right() {
+    ....    
+    long success = IntStream.rangeClosed(1, 100).parallel()
+            .mapToObj(i -&gt; {
+                List&lt;Item&gt; cart = createCart().stream()
+                        .sorted(Comparator.comparing(Item::getName))
+                        .collect(Collectors.toList());
+                return createOrder(cart);
+            })
+            .filter(result -&gt; result)
+            .count();
+    ...
+    return success;
+}
+</code></pre>
+<p>测试一下 right 方法，不管执行多少次都是 100 次成功下单，而且性能相当高，达到了 3000 以上的 TPS：</p>
+<p><img alt="img" src="/assets/5d4a5d63a6700f663ce2e898.png"/></p>
+<p>这个案例中，虽然产生了死锁问题，但因为尝试获取锁的操作并不是无限阻塞的，所以没有造成永久死锁，之后的改进就是避免循环等待，通过对购物车的商品进行排序来实现有顺序的加锁，避免循环等待。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>我们一起总结回顾下，使用锁来解决多线程情况下线程安全问题的坑吧。</p>
+<p>第一，使用 synchronized 加锁虽然简单，但我们首先要弄清楚共享资源是类还是实例级别的、会被哪些线程操作，synchronized 关联的锁对象或方法又是什么范围的。</p>
+<p>第二，加锁尽可能要考虑粒度和场景，锁保护的代码意味着无法进行多线程操作。对于 Web 类型的天然多线程项目，对方法进行大范围加锁会显著降级并发能力，要考虑尽可能地只为必要的代码块加锁，降低锁的粒度；而对于要求超高性能的业务，还要细化考虑锁的读写场景，以及悲观优先还是乐观优先，尽可能针对明确场景精细化加锁方案，可以在适当的场景下考虑使用 ReentrantReadWriteLock、StampedLock 等高级的锁工具类。</p>
+<p>第三，业务逻辑中有多把锁时要考虑死锁问题，通常的规避方案是，避免无限等待和循环等待。</p>
+<p>此外，<strong>如果业务逻辑中锁的实现比较复杂的话，要仔细看看加锁和释放是否配对，是否有遗漏释放或重复释放的可能性；并且对于分布式锁要考虑锁自动超时释放了，而业务逻辑却还在进行的情况下，如果别的线线程或进程拿到了相同的锁，可能会导致重复执行。</strong></p>
+<p>为演示方便，今天的案例是在 Controller 的逻辑中开新的线程或使用线程池进行并发模拟，我们当然可以意识到哪些对象是并发操作的。但对于 Web 应用程序的天然多线程场景，你可能更容易忽略这点，并且也可能因为误用锁降低应用整体的吞吐量。Argentina</p>
+<p>今天用到的代码，我都放在了 GitHub 上，你可以点击<a href="https://github.com/JosephZhu1983/java-common-mistakes" target="_blank">这个链接</a>查看。</p>
+<h2 id="思考与讨论">思考与讨论</h2>
+<ol>
+<li><p>本文开头的例子里，变量 a、b 都使用了 volatile 关键字，你知道原因吗？我之前遇到过这样一个坑：我们开启了一个线程无限循环来跑一些任务，有一个 bool 类型的变量来控制循环的退出，默认为 true 代表执行，一段时间后主线程将这个变量设置为了 false。如果这个变量不是 volatile 修饰的，子线程可以退出吗？你能否解释其中的原因呢？</p></li>
+<li><p>文末我们又提了两个坑，一是加锁和释放没有配对的问题，二是锁自动释放导致的重复逻辑执行的问题。你有什么方法来发现和解决这两种问题吗？</p></li>
+</ol>
+<p>在使用锁的过程中，你还遇到过其他坑吗？我是朱晔，欢迎在评论区与我留言分享你的想法，也欢迎你把这篇文章分享给你的朋友或同事，一起交流。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

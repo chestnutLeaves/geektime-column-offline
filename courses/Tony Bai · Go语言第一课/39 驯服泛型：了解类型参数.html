@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>39 驯服泛型：了解类型参数 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/index.html">Tony Bai · Go语言第一课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">59 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Tony Bai · Go语言第一课</strong><ul><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E8%BF%99%E6%A0%B7%E5%85%A5%E9%97%A8Go%EF%BC%8C%E6%89%8D%E8%83%BD%E5%B0%91%E8%B5%B0%E5%BC%AF%E8%B7%AF.html">00 开篇词 这样入门Go，才能少走弯路</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/01%20%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F%EF%BC%9A%E4%BD%A0%E4%B8%8D%E5%BE%97%E4%B8%8D%E4%BA%86%E8%A7%A3%E7%9A%84Go%E7%9A%84%E5%8E%86%E5%8F%B2%E5%92%8C%E7%8E%B0%E7%8A%B6.html">01 前世今生：你不得不了解的Go的历史和现状</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/02%20%E6%8B%92%E7%BB%9D%E2%80%9CHello%20and%20Bye%E2%80%9D%EF%BC%9AGo%E8%AF%AD%E8%A8%80%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6%E6%98%AF%E6%80%8E%E4%B9%88%E4%B8%80%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">02 拒绝“Hello and Bye”：Go语言的设计哲学是怎么一回事？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/03%20%E9%85%8D%E5%A5%BD%E7%8E%AF%E5%A2%83%EF%BC%9A%E9%80%89%E6%8B%A9%E4%B8%80%E7%A7%8D%E6%9C%80%E9%80%82%E5%90%88%E4%BD%A0%E7%9A%84Go%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95.html">03 配好环境：选择一种最适合你的Go安装方法</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/04%20%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84%EF%BC%9A%E4%B8%80%E4%B8%AAGo%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BB%93%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">04 初窥门径：一个Go程序的结构是怎样的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/05%20%E6%A0%87%E5%87%86%E5%85%88%E8%A1%8C%EF%BC%9AGo%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%B8%83%E5%B1%80%E6%A0%87%E5%87%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">05 标准先行：Go项目的布局标准是什么？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/06%20%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%E6%98%AF%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E5%8C%85%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E9%97%AE%E9%A2%98%E7%9A%84%EF%BC%9F.html">06 构建模式：Go是怎么解决包依赖管理问题的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/07%20%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%20Module%E7%9A%846%E7%B1%BB%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C.html">07 构建模式：Go Module的6类常规操作</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/08%20%E5%85%A5%E5%8F%A3%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8C%85%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9A%E6%90%9E%E6%B8%85Go%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%E6%AC%A1%E5%BA%8F.html">08 入口函数与包初始化：搞清Go程序的执行次序</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/09%20%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%BB%83%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AAWeb%E6%9C%8D%E5%8A%A1%E5%B0%B1%E6%98%AF%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95.html">09 即学即练：构建一个Web服务就是这么简单</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/10%20%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E%EF%BC%9A%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80%E6%9C%89%E5%88%AB%E4%BA%8E%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E7%9A%84%E9%87%8D%E8%A6%81%E7%89%B9%E5%BE%81.html">10 变量声明：静态语言有别于动态语言的重要特征</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/11%20%E4%BB%A3%E7%A0%81%E5%9D%97%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%8F%98%E9%87%8F%E4%B8%8D%E4%BC%9A%E8%A2%AB%E9%81%AE%E8%94%BD%EF%BC%9F.html">11 代码块与作用域：如何保证变量不会被遮蔽？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/12%20%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9AGo%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E7%9A%84%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">12 基本数据类型：Go原生支持的数值类型有哪些？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/13%20%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Go%E8%A6%81%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B%EF%BC%9F.html">13 基本数据类型：为什么Go要原生支持字符串类型？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/14%20%E5%B8%B8%E9%87%8F%EF%BC%9AGo%E5%9C%A8%E2%80%9C%E5%B8%B8%E9%87%8F%E2%80%9D%E8%AE%BE%E8%AE%A1%E4%B8%8A%E7%9A%84%E5%88%9B%E6%96%B0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">14 常量：Go在“常量”设计上的创新有哪些？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/15%20%E5%90%8C%E6%9E%84%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%BB%8E%E5%AE%9A%E9%95%BF%E6%95%B0%E7%BB%84%E5%88%B0%E5%8F%98%E9%95%BF%E5%88%87%E7%89%87.html">15 同构复合类型：从定长数组到变长切片</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/16%20%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%8E%9F%E7%94%9Fmap%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">16 复合数据类型：原生map类型的实现机制是怎样的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/17%20%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E7%94%A8%E7%BB%93%E6%9E%84%E4%BD%93%E5%BB%BA%E7%AB%8B%E5%AF%B9%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E6%8A%BD%E8%B1%A1.html">17 复合数据类型：用结构体建立对真实世界的抽象</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/18%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9Aif%E7%9A%84%E2%80%9C%E5%BF%AB%E4%B9%90%E8%B7%AF%E5%BE%84%E2%80%9D%E5%8E%9F%E5%88%99.html">18 控制结构：if的“快乐路径”原则</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/19%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9AGo%E7%9A%84for%E5%BE%AA%E7%8E%AF%EF%BC%8C%E4%BB%85%E6%AD%A4%E4%B8%80%E7%A7%8D.html">19 控制结构：Go的for循环，仅此一种</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/20%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9AGo%E4%B8%AD%E7%9A%84switch%E8%AF%AD%E5%8F%A5%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8F%98%E5%8C%96%EF%BC%9F.html">20 控制结构：Go中的switch语句有哪些变化？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/21%20%E5%87%BD%E6%95%B0%EF%BC%9A%E8%AF%B7%E5%8F%AB%E6%88%91%E2%80%9C%E4%B8%80%E7%AD%89%E5%85%AC%E6%B0%91%E2%80%9D.html">21 函数：请叫我“一等公民”</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/22%20%E5%87%BD%E6%95%B0%EF%BC%9A%E6%80%8E%E4%B9%88%E7%BB%93%E5%90%88%E5%A4%9A%E8%BF%94%E5%9B%9E%E5%80%BC%E8%BF%9B%E8%A1%8C%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9F.html">22 函数：怎么结合多返回值进行错误处理？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/23%20%E5%87%BD%E6%95%B0%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AE%A9%E5%87%BD%E6%95%B0%E6%9B%B4%E7%AE%80%E6%B4%81%E5%81%A5%E5%A3%AE%EF%BC%9F.html">23 函数：怎么让函数更简洁健壮？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/24%20%E6%96%B9%E6%B3%95%EF%BC%9A%E7%90%86%E8%A7%A3%E2%80%9C%E6%96%B9%E6%B3%95%E2%80%9D%E7%9A%84%E6%9C%AC%E8%B4%A8.html">24 方法：理解“方法”的本质</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/25%20%E6%96%B9%E6%B3%95%EF%BC%9A%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88%E4%B8%8E%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9receiver%E7%B1%BB%E5%9E%8B%EF%BC%9F.html">25 方法：方法集合与如何选择receiver类型？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/26%20%E6%96%B9%E6%B3%95%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%B5%8C%E5%85%A5%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E2%80%9C%E7%BB%A7%E6%89%BF%E2%80%9D%EF%BC%9F.html">26 方法：如何用类型嵌入模拟实现“继承”？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/27%20%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%BB%83%EF%BC%9A%E8%B7%9F%E8%B8%AA%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E9%93%BE%EF%BC%8C%E7%90%86%E8%A7%A3%E4%BB%A3%E7%A0%81%E6%9B%B4%E7%9B%B4%E8%A7%82.html">27 即学即练：跟踪函数调用链，理解代码更直观</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/28%20%E6%8E%A5%E5%8F%A3%EF%BC%9A%E6%8E%A5%E5%8F%A3%E5%8D%B3%E5%A5%91%E7%BA%A6.html">28 接口：接口即契约</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/29%20%E6%8E%A5%E5%8F%A3%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88nil%E6%8E%A5%E5%8F%A3%E4%B8%8D%E7%AD%89%E4%BA%8Enil%EF%BC%9F.html">29 接口：为什么nil接口不等于nil？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/30%20%E6%8E%A5%E5%8F%A3%EF%BC%9AGo%E4%B8%AD%E6%9C%80%E5%BC%BA%E5%A4%A7%E7%9A%84%E9%AD%94%E6%B3%95.html">30 接口：Go中最强大的魔法</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/31%20%E5%B9%B6%E5%8F%91%EF%BC%9AGo%E7%9A%84%E5%B9%B6%E5%8F%91%E6%96%B9%E6%A1%88%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">31 并发：Go的并发方案实现方案是怎样的？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/32%20%E5%B9%B6%E5%8F%91%EF%BC%9A%E8%81%8A%E8%81%8AGoroutine%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E5%8E%9F%E7%90%86.html">32 并发：聊聊Goroutine调度器的原理</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%EF%BC%9A%E5%B0%8Fchannel%E4%B8%AD%E8%95%B4%E5%90%AB%E5%A4%A7%E6%99%BA%E6%85%A7.html">33 并发：小channel中蕴含大智慧</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%EF%BC%9F.html">34 并发：如何使用共享变量？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/35%20%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%BB%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">35 即学即练：如何实现一个轻量级线程池？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/36%20%E6%89%93%E7%A8%B3%E6%A0%B9%E5%9F%BA%EF%BC%9A%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">36 打稳根基：怎么实现一个TCP服务器？（上）</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/37%20%E4%BB%A3%E7%A0%81%E6%93%8D%E7%BB%83%EF%BC%9A%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%EF%BC%88%E4%B8%AD%EF%BC%89.html">37 代码操练：怎么实现一个TCP服务器？（中）</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/38%20%E6%88%90%E6%9E%9C%E4%BC%98%E5%8C%96%EF%BC%9A%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AATCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">38 成果优化：怎么实现一个TCP服务器？（下）</a></li><li><a class="active" aria-current="page" href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/39%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E4%BA%86%E8%A7%A3%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0.html">39 驯服泛型：了解类型参数</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/40%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E5%AE%9A%E4%B9%89%E6%B3%9B%E5%9E%8B%E7%BA%A6%E6%9D%9F.html">40 驯服泛型：定义泛型约束</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/41%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E6%98%8E%E7%A1%AE%E4%BD%BF%E7%94%A8%E6%97%B6%E6%9C%BA.html">41 驯服泛型：明确使用时机</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%85%83%E6%97%A6%E5%BF%AB%E4%B9%90%20%E8%BF%99%E6%98%AF%E4%B8%80%E4%BB%BD%E6%9A%82%E6%97%B6%E5%81%9C%E6%9B%B4%E7%9A%84%E5%A3%B0%E6%98%8E.html">元旦快乐 这是一份暂时停更的声明</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E4%BD%9C%E4%B8%BAGo%20Module%E7%9A%84%E4%BD%9C%E8%80%85%EF%BC%8C%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B.html">加餐 作为Go Module的作者，你应该知道的几件事</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%A6%82%E4%BD%95%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E7%9A%84Go%20Module%EF%BC%9F.html">加餐 如何拉取私有的Go Module？</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%88%91%E2%80%9C%E7%A7%81%E8%97%8F%E2%80%9D%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BC%98%E8%B4%A8%E4%B8%94%E6%9D%83%E5%A8%81%E7%9A%84Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99.html">加餐 我“私藏”的那些优质且权威的Go语言学习资料</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%81%8A%E8%81%8AGo%201.17%E7%89%88%E6%9C%AC%E7%9A%84%E9%82%A3%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7.html">加餐 聊聊Go 1.17版本的那些新特性</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%81%8A%E8%81%8AGo%E8%AF%AD%E8%A8%80%E7%9A%84%E6%8C%87%E9%92%88.html">加餐 聊聊Go语言的指针</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%81%8A%E8%81%8A%E6%9C%80%E8%BF%91%E5%A4%A7%E7%83%AD%E7%9A%84Go%E6%B3%9B%E5%9E%8B.html">加餐 聊聊最近大热的Go泛型</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%8F%B6%E5%89%91%E5%B3%B0%EF%BC%9AGo%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E7%82%B9.html">大咖助阵 叶剑峰：Go语言中常用的那些代码优化点</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%A4%A7%E6%98%8E%EF%BC%9AGo%E6%B3%9B%E5%9E%8B%EF%BC%8C%E6%B3%9B%E4%BA%86%EF%BC%8C%E4%BD%86%E6%B2%A1%E6%9C%89%E5%AE%8C%E5%85%A8%E6%B3%9B.html">大咖助阵 大明：Go泛型，泛了，但没有完全泛</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%AD%94%E4%BB%A4%E9%A3%9E%EF%BC%9A%E4%BB%8E%E5%B0%8F%E7%99%BD%E5%88%B0%E2%80%9C%E8%80%81%E9%B8%9F%E2%80%9D%EF%BC%8C%E6%88%91%E7%9A%84Go%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6%E4%B9%8B%E8%B7%AF.html">大咖助阵 孔令飞：从小白到“老鸟”，我的Go语言进阶之路</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E5%BE%90%E7%A5%A5%E6%9B%A6%EF%BC%9A%E4%BB%8E%E9%94%80%E5%94%AE%E5%88%B0%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%8C%E6%88%91%E4%B8%8E%20Go%20%20%E7%9A%84%E6%95%85%E4%BA%8B.html">大咖助阵 徐祥曦：从销售到分布式存储工程师，我与 Go  的故事</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E6%9B%B9%E6%98%A5%E6%99%96%EF%BC%9A%E8%81%8A%E8%81%8A%20Go%20%E8%AF%AD%E8%A8%80%E7%9A%84%20GC%20%E5%AE%9E%E7%8E%B0.html">大咖助阵 曹春晖：聊聊 Go 语言的 GC 实现</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E9%98%B5%20%E6%B5%B7%E7%BA%B3%EF%BC%9A%E8%81%8A%E8%81%8A%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%B3%9B%E5%9E%8B.html">大咖助阵 海纳：聊聊语言中的类型系统与泛型</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E6%9C%9F%E4%B8%AD%E6%B5%8B%E8%AF%95%20%E4%B8%80%E8%B5%B7%E6%A3%80%E9%AA%8C%E4%B8%8B%E4%BD%A0%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C%E5%90%A7.html">期中测试 一起检验下你的学习成果吧</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E7%BD%97%E6%9D%B0%EF%BC%9A%E6%88%91%E7%9A%84Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF.html">用户故事 罗杰：我的Go语言学习之路</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%92%8C%E4%BD%A0%E4%B8%80%E8%B5%B7%E8%BF%8E%E6%8E%A5Go%E7%9A%84%E9%BB%84%E9%87%91%E5%8D%81%E5%B9%B4.html">结束语 和你一起迎接Go的黄金十年</a></li><li><a href="/courses/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%BB%93%E8%AF%BE%E6%B5%8B%E8%AF%95%20%E5%BF%AB%E6%9D%A5%E6%A3%80%E9%AA%8C%E4%B8%8B%E4%BD%A0%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C%E5%90%A7%EF%BC%81.html">结课测试 快来检验下你的学习成果吧！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Tony%20Bai%20%C2%B7%20Go%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B8%80%E8%AF%BE/39%20%E9%A9%AF%E6%9C%8D%E6%B3%9B%E5%9E%8B%EF%BC%9A%E4%BA%86%E8%A7%A3%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="39 驯服泛型：了解类型参数" id="title">39 驯服泛型：了解类型参数</h1>
+<div><p>你好，我是Tony Bai。</p>
+<p>在专栏的<a href="https://time.geekbang.org/column/article/486536" target="_blank">结束语</a>中，我曾承诺要补充“泛型篇”，帮助你入门Go泛型语法。在经历了2022年3月Go 1.18版本的泛型落地以及8月份Go 1.19对泛型问题的一轮修复后，我认为<strong>是时候开讲Go泛型篇了</strong>。</p>
+<p>虽说目前的Go泛型实现和最后一版的<a href="https://github.com/golang/proposal/blob/master/design/43651-type-parameters.md" target="_blank">泛型设计方案</a>相比还有差距，<a href="https://tonybai.com/2022/04/20/some-changes-in-go-1-18" target="_blank">依旧不是完全版</a>，还有一些特性没有加入，<a href="https://go101.org/generics/888-the-status-quo-of-go-custom-generics.html" target="_blank">还有问题亟待解决</a>，但对于入门Go泛型语法来说，我认为已经是足够了。</p>
+<p>不过在正式开讲之前，我还有一些友情提示：和支持泛型的主流编程语言之间的泛型设计与实现存在差异一样，Go的泛型与其他主流编程语言的泛型也是不同的。我希望你在学习之前，先看一下Go泛型设计方案已经明确<a href="https://github.com/golang/proposal/blob/master/design/43651-type-parameters.md#omissions" target="_blank">不支持的若干特性</a>，比如：</p>
+<ul>
+<li><strong>不支持泛型特化（specialization）</strong>，即不支持编写一个泛型函数针对某个具体类型的特殊版本；</li>
+<li><strong>不支持元编程（metaprogramming）</strong>，即不支持编写在编译时执行的代码来生成在运行时执行的代码；</li>
+<li><strong>不支持操作符方法（operator method）</strong>，即只能用普通的方法（method）操作类型实例（比如：getIndex(k)），而不能将操作符视为方法并自定义其实现，比如一个容器类型的下标访问c[k]；</li>
+<li><strong>不支持变长的类型参数（type parameters）</strong>；</li>
+<li>… …</li>
+</ul>
+<p>这些特性如今不支持，后续大概率也不会支持。所以小伙伴们，尤其是来自Java、C++等语言阵营的小伙伴，在进入Go泛型语法学习之前，你一定要先了解Go团队的这些设计决策。</p>
+<p>泛型篇的内容共有三讲，我们将从泛型的基本语法，也就是<strong>类型参数</strong>（type parameter）开启驯服泛型之旅，接下来再搞定泛型的难点<strong>定义约束</strong>（constraints），最后我们再来谈谈Go泛型的使用时机。如果你还想Go泛型的演化简史，请移步<a href="https://time.geekbang.org/column/article/485140" target="_blank">《加餐｜聊聊最近大热的Go泛型》</a>，这里我也做了详细分析。</p>
+<p>那么，今天这泛型篇的第一讲，我们就来聚焦Go泛型的基本语法，<strong>类型参数</strong>。下面我们通过一个最常见的泛型应用场景来开启今天的学习之旅。一个小提醒需要你注意，<strong>泛型篇这三讲的所有示例代码均基于Go 1.19.1版本。</strong></p>
+<h2 id="例子-返回切片中值最大的元素">例子：返回切片中值最大的元素</h2>
+<p>正如小标题写的那样，我们这个例子要实现一个函数，该函数接受一个切片作为输入参数，然后返回该切片中值最大的那个元素。题目并没有明确使用什么元素类型的切片，我们就先以最常见的整型切片为例，实现一个maxInt函数：</p>
+<pre><code class="language-plain">// max_int.go
+func maxInt(sl []int) int { 
+    if len(sl) == 0 { 
+        panic("slice is empty")
+    } 
+
+    max := sl[0]
+    for _, v := range sl[1:] { 
+        if v &gt; max { 
+            max = v 
+        } 
+    } 
+    return max
+}
+
+func main() {
+    fmt.Println(maxInt([]int{1, 2, -4, -6, 7, 0})) // 输出：7
+}
+</code></pre>
+<p>maxInt的逻辑十分简单。我们使用第一个元素值(max := sl[0])作为max变量初值，然后与切片后面的元素(sl[1:])进行逐一比较，如果后面的元素大于max，则将其值赋给max，这样到切片遍历结束，我们就得到了这个切片中值最大的那个元素（即变量max）。</p>
+<p>我们现在给它加一个新需求：能否针对元素为string类型的切片返回其最大（按字典序）的元素值呢？</p>
+<p>答案肯定是能！我们来实现这个maxString函数：</p>
+<pre><code class="language-plain">// max_string.go
+func maxString(sl []string) string {
+    if len(sl) == 0 {
+        panic("slice is empty")
+    }
+
+    max := sl[0]
+    for _, v := range sl[1:] {
+        if v &gt; max {
+            max = v
+        }
+    }
+    return max
+}
+
+func main() {
+    fmt.Println(maxString([]string{"11", "22", "44", "66", "77", "10"})) // 输出：77
+}
+</code></pre>
+<p>maxString实现了返回string切片中值最大元素的需求。不过从实现上来看，maxString与maxInt异曲同工，只是切片元素类型不同罢了。这时如果让你参考上述maxInt或maxString实现一个返回浮点类型切片中最大值的函数maxFloat，你肯定“秒秒钟”就可以给出一个正确的实现：</p>
+<pre><code class="language-plain">// max_float.go
+func maxFloat(sl []float64) float64 {
+    if len(sl) == 0 {
+        panic("slice is empty")
+    }
+
+    max := sl[0]
+    for _, v := range sl[1:] {
+        if v &gt; max {
+            max = v
+        }
+    }
+    return max
+}
+
+func main() {
+    fmt.Println(maxFloat([]float64{1.01, 2.02, 3.03, 5.05, 7.07, 0.01})) // 输出：7.07
+}
+</code></pre>
+<p>问题来了！有代码洁癖的同学肯定已经嗅到了上面三个函数散发的“糟糕味道”：<strong>代码重复</strong>。上面三个函数除了切片的元素类型不同，其他逻辑都一样。</p>
+<p>那么能否实现一个“通用”的函数，可以处理上面三种元素类型的切片呢？提到“通用”，你一定想到了Go语言提供的any（interface{}的别名），我们来试试：</p>
+<pre><code class="language-plain">// max_any.go
+func maxAny(sl []any) any {
+    if len(sl) == 0 {
+        panic("slice is empty")
+    }
+
+    max := sl[0]
+    for _, v := range sl[1:] {
+        switch v.(type) {
+        case int:
+            if v.(int) &gt; max.(int) {
+                max = v
+            }
+        case string:
+            if v.(string) &gt; max.(string) {
+                max = v
+            }
+        case float64:
+            if v.(float64) &gt; max.(float64) {
+                max = v
+            }
+        }
+    }
+    return max
+}
+
+func main() {
+    i := maxAny([]any{1, 2, -4, -6, 7, 0})
+    m := i.(int)
+    fmt.Println(m) // 输出：7
+    fmt.Println(maxAny([]any{"11", "22", "44", "66", "77", "10"})) // 输出：77
+    fmt.Println(maxAny([]any{1.01, 2.02, 3.03, 5.05, 7.07, 0.01})) // 输出：7.07
+}
+</code></pre>
+<p>我们看到，maxAny利用any、type switch和类型断言（type assertion）实现了我们预期的目标。不过这个实现并不理想，它至少有如下几个问题：</p>
+<ul>
+<li>若要支持其他元素类型的切片，我们需对该函数进行修改；</li>
+<li>maxAny的返回值类型为any（interface{}），要得到其实际类型的值还需要通过类型断言转换；</li>
+<li>使用any（interface{}）作为输入参数的元素类型和返回值的类型，由于存在装箱和拆箱操作，其性能与maxInt等比起来要逊色不少，实测数据如下：</li>
+</ul>
+<pre><code class="language-plain">// max_test.go
+func BenchmarkMaxInt(b *testing.B) {
+    sl := []int{1, 2, 3, 4, 7, 8, 9, 0}
+    for i := 0; i &lt; b.N; i++ {
+        maxInt(sl)
+    }
+}
+
+func BenchmarkMaxAny(b *testing.B) {
+    sl := []any{1, 2, 3, 4, 7, 8, 9, 0}
+    for i := 0; i &lt; b.N; i++ {
+        maxAny(sl)
+    }
+}
+
+$go test -v -bench . ./max_test.go max_any.go max_int.go
+goos: darwin
+goarch: amd64
+... ...
+BenchmarkMaxInt
+BenchmarkMaxInt-8   	398996863	         2.982 ns/op
+BenchmarkMaxAny
+BenchmarkMaxAny-8   	85883875	        13.91 ns/op
+PASS
+ok  	command-line-arguments	2.710s
+</code></pre>
+<p>我们看到，基于any(interface{})实现的maxAny其执行性能要比像maxInt这样的函数慢上数倍。</p>
+<p>在Go 1.18版本之前，Go的确没有比较理想的解决类似上述“通用”问题的手段，直到Go 1.18版本泛型落地后，我们可以用泛型语法实现maxGenerics函数：</p>
+<pre><code class="language-plain">// max_generics.go
+type ordered interface {
+    ~int | ~int8 | ~int16 | ~int32 | ~int64 |
+        ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr |
+        ~float32 | ~float64 |
+        ~string
+}
+
+func maxGenerics[T ordered](sl []T) T {
+    if len(sl) == 0 {
+        panic("slice is empty")
+    }
+
+    max := sl[0]
+    for _, v := range sl[1:] {
+        if v &gt; max {
+            max = v
+        }
+    }
+    return max
+}
+
+type myString string
+
+func main() {
+    var m int = maxGenerics([]int{1, 2, -4, -6, 7, 0})
+    fmt.Println(m) // 输出：7
+    fmt.Println(maxGenerics([]string{"11", "22", "44", "66", "77", "10"})) // 输出：77
+    fmt.Println(maxGenerics([]float64{1.01, 2.02, 3.03, 5.05, 7.07, 0.01})) // 输出：7.07
+    fmt.Println(maxGenerics([]int8{1, 2, -4, -6, 7, 0})) // 输出：7
+    fmt.Println(maxGenerics([]myString{"11", "22", "44", "66", "77", "10"})) // 输出：77
+}
+</code></pre>
+<p>我们看到，从功能角度看，泛型版本的maxGenerics实现了预期的特性，对于ordered接口中声明的那些原生类型以及以这些原生类型为底层类型（underlying type）的类型（比如示例中的myString），maxGenerics都可以无缝支持。并且，maxGenerics返回的类型与传入的切片的元素类型一致，调用者也无需通过类型断言做转换。</p>
+<p>此外，通过下面的性能基准测试我们也可以看出，与maxAny相比，泛型版本的maxGenerics性能要好很多，但与原生版函数如maxInt等还有差距。关于泛型的运行时性能损耗问题，我们在泛型篇第三讲中会有说明。性能测试如下：</p>
+<pre><code class="language-plain">$go test -v -bench . ./max_test.go max_any.go max_int.go max_generics.go
+goos: darwin
+goarch: amd64
+BenchmarkMaxInt
+BenchmarkMaxInt-8        	400910706	         2.983 ns/op
+BenchmarkMaxAny
+BenchmarkMaxAny-8        	85257433	        14.04 ns/op
+BenchmarkMaxGenerics
+BenchmarkMaxGenerics-8   	209468593	         5.701 ns/op
+PASS
+ok  	command-line-arguments	4.492s
+</code></pre>
+<p>通过这个例子，我们也可以看到Go泛型十分<strong>适合实现一些操作容器类型（比如切片、map等）的算法</strong>，这也是<a href="https://go.dev/blog/when-generics" target="_blank">Go官方推荐的第一种泛型应用场景</a>，此类容器算法的泛型实现使得容器算法与容器内元素类型彻底解耦！</p>
+<p>不过看到这里，很多同学可能会抱怨：看不懂maxGenerics的语法！别急，接下来，我们就来基于这个例子进行泛型基本语法的学习。</p>
+<h2 id="类型参数-type-parameters">类型参数（type parameters）</h2>
+<p>根据官方说法，由于泛型（generic）一词在Go社区中被广泛使用，所以官方也就接纳了这一说法。<strong>但Go泛型方案的实质是对类型参数（type parameter）的支持</strong>，包括：</p>
+<ul>
+<li>泛型函数（generic function）：带有类型参数的函数；</li>
+<li>泛型类型（generic type）：带有类型参数的自定义类型；</li>
+<li>泛型方法（generic method）：泛型类型的方法。</li>
+</ul>
+<p>下面我们先以泛型函数为例来具体说明一下什么是类型参数。</p>
+<h3 id="泛型函数">泛型函数</h3>
+<p>我们回顾一下上面的示例，maxGenerics就是一个泛型函数，我们看一下maxGenerics的函数原型：</p>
+<pre><code class="language-plain">func maxGenerics[T ordered](sl []T) T {
+    // ... ...
+}
+</code></pre>
+<p>我们看到，maxGenerics这个函数与我们之前学过的普通Go函数（ordinary function）相比，至少有两点不同：</p>
+<ul>
+<li>maxGenerics函数在函数名称与函数参数列表之间多了一段由方括号括起的代码：[T ordered]；</li>
+<li>maxGenerics参数列表中的参数类型以及返回值列表中的返回值类型都是T，而不是某个具体的类型。</li>
+</ul>
+<p>maxGenerics函数原型中多出的这段代码[T ordered]就是Go泛型的<strong>类型参数列表（type parameters list）</strong>，示例中这个列表中仅有一个<strong>类型参数T</strong>，ordered为类型参数的类型约束（type constraint）。类型约束之于类型参数，就好比常规参数列表中的类型之于常规参数。关于类型约束，我们还会在下一讲中详细说明。</p>
+<p>Go语言规范规定：<strong>函数的类型参数列表位于函数名与函数参数列表之间，由方括号括起的固定个数的、由逗号分隔的类型参数声明组成</strong>，其一般形式如下：</p>
+<pre><code class="language-plain">func genericsFunc[T1 constraint1, T2, constraint2, ..., Tn constraintN](ordinary parameters list) (return values list)
+</code></pre>
+<p>函数一旦拥有类型参数，就可以用该参数作为常规参数列表和返回值列表中修饰参数和返回值的类型。我们继续maxGenerics泛型函数为例分析，它拥有一个类型参数T，在常规参数列表中，T被用作切片的元素类型；在返回值列表中，T被用作返回值的类型。</p>
+<p>按Go惯例，<strong>类型参数名的首字母通常采用大写形式</strong>，并且类型参数必须是具名的，即便你在后续的函数参数列表、返回值列表和函数体中没有使用该类型参数，也是这样。比如下面例子中的类型参数T：</p>
+<pre><code class="language-plain">func print[T any]() { // 正确
+}     
+
+func print[any]() {   // 编译错误：all type parameters must be named 
+}
+</code></pre>
+<p>和常规参数列表中的参数名唯一一样，在同一个类型参数列表中，类型参数名字也要唯一，下面这样的代码将会导致Go编译器报错：</p>
+<pre><code class="language-plain">func print[T1 any, T1 comparable](sl []T) { //  编译错误：T1 redeclared in this block
+    //...
+}
+</code></pre>
+<p>常规参数列表中的参数有其特定作用域，即从参数声明处开始到函数体结束。和常规参数类似，泛型函数中类型参数也有其作用域范围，这个范围从类型参数列表左侧的方括号<strong>[</strong>开始，一直持续到函数体结束，如下图所示：</p>
+<p><img alt="图片" src="/assets/b3628a6e55847e8e411fdf43.png"/></p>
+<p>类型参数的作用域也决定了类型参数的声明顺序并不重要，也不会影响泛型函数的行为，于是下面的泛型函数声明与上图中的函数是等价的：</p>
+<pre><code class="language-plain">func foo[M map[E]T, T any, E comparable](m M)(E, T) {
+    //... ...
+}
+</code></pre>
+<p>到这里，泛型函数的结构我们已经了解完了，接下来我们来看一下如何调用泛型函数。</p>
+<h4 id="调用泛型函数">调用泛型函数</h4>
+<p>在前面的讲解中，我一直使用“类型参数”这个名称。但在学习调用泛型函数之前，我们需要对“类型参数”做一下细分。</p>
+<p>和普通函数有形式参数与实际参数一样，类型参数也有<strong>类型形参</strong>（type parameter）和<strong>类型实参</strong>（type argument）之分。其中类型形参就是泛型函数声明中的类型参数，以前面示例中的maxGenerics泛型函数为例，如下面代码，maxGenerics的类型形参就是T，而类型实参则是在调用maxGenerics时实际传递的类型int：</p>
+<pre><code class="language-plain">// 泛型函数声明：T为类型形参
+func maxGenerics[T ordered](sl []T) T
+
+// 调用泛型函数：int为类型实参
+m := maxGenerics[int]([]int{1, 2, -4, -6, 7, 0})
+</code></pre>
+<p>从上面这段代码我们也可以看出调用泛型函数与调用普通函数的区别。<strong>在调用泛型函数时，除了要传递普通参数列表对应的实参之外，还要显式传递类型实参，比如这里的int</strong>。并且，显式传递的类型实参要放在函数名和普通参数列表前的方括号中。</p>
+<p>在反复揣摩上面代码和说明后，你可能会提出这样的一个问题：如果泛型函数的类型形参较多，那么逐一显式传入类型实参会让泛型函数的调用显得十分冗长，比如：</p>
+<pre><code class="language-plain">foo[int, string, uint32, float64](1, "hello", 17, 3.14)
+</code></pre>
+<p>这样的写法对开发者而言显然谈不上十分友好。其实不光大家想到了这个问题，Go团队的泛型实现者们也考虑了这个问题，并给出了解决方法：<strong>函数类型实参的自动推断（function argument type inference）</strong>。</p>
+<p>顾名思义，这个机制就是通过判断传递的函数实参的类型来推断出类型实参的类型，从而允许开发者不必显式提供类型实参，下面是以maxGenerics函数为例的类型实参推断过程示意图：</p>
+<p><img alt="图片" src="/assets/1326b5577f55b3ce6ff6d5f5.png"/></p>
+<p>我们看到，当maxGenerics函数传入的实际参数为[]int{…}时，Go编译器会将其类型[]int与泛型函数参数列表中对应参数的类型（[]T）作比较，并推断出T == int这一结果。当然这个例子的推断过程较为简单，那些有难度的，甚至无法肉眼可见的就交给Go编译器去处理吧，我们没有必要过于深入。</p>
+<p>不过，这个类型实参自动推断有一个前提，你一定要记牢，那就是它必须是<strong>函数的参数列表中使用了的类型形参</strong>，否则就会像下面的示例中的代码，编译器将报无法推断类型实参的错误：</p>
+<pre><code class="language-plain">func foo[T comparable, E any](a int, s E) {
+}
+
+foo(5, "hello") // 编译器错误：cannot infer T
+</code></pre>
+<p>在编译器无法推断出结果时，我们可以给予编译器“部分提示”，比如既然编译器无法推断出T的实参类型，那我们就显式告诉编译器T的实参类型，即在泛型函数调用时，在类型实参列表中显式传入T的实参类型，但E的实参类型依然由编译器自动推断，示例代码如下：</p>
+<pre><code class="language-plain">var s = "hello"
+foo[int](5, s)  //ok
+foo[int,](5, s) //ok
+</code></pre>
+<p>那么，除了函数参数列表中的参数类型可以作为类型实参推断的依据外，函数返回值的类型是否也可以呢？我们看下面示例：</p>
+<pre><code class="language-plain">func foo[T any](a int) T {
+    var zero T
+    return zero
+}
+
+var a int = foo(5) // 编译器错误：cannot infer T
+println(a)
+</code></pre>
+<p>我们看到，这个函数仅在返回值中使用了类型参数，但编译器没能推断出T的类型，所以我们切记：<strong>不能通过返回值类型来推断类型实参</strong>。</p>
+<p>有了函数类型实参推断后，在大多数情况下，我们调用泛型函数就无须显式传递类型实参了，开发者也因此获得了与普通函数调用几乎一致的体验。</p>
+<p>其实泛型函数调用是一个不同于普通函数调用的过程，为了揭开其中的“奥秘”，接下来我们就把镜头放慢，看看泛型函数调用过程究竟发生了什么。</p>
+<h4 id="泛型函数实例化-instantiation">泛型函数实例化（instantiation）</h4>
+<p>我们还以maxGenerics为例来演示一下这个过程：</p>
+<pre><code class="language-plain">maxGenerics([]int{1, 2, -4, -6, 7, 0})
+</code></pre>
+<p>上面代码是对maxGenerics泛型函数的一次调用，Go对这段泛型函数调用代码的处理分为两个阶段，如下图所示：</p>
+<p><img alt="图片" src="/assets/0f039a173b1e9d63aafdf21a.png"/></p>
+<p>我们看到，Go首先会对泛型函数进行实例化（instantiation），即根据自动推断出的类型实参生成一个新函数（当然这一过程是在编译阶段完成的，不会对运行时性能产生影响），然后才会调用这个新函数对输入的函数参数进行处理。</p>
+<p>我们也可以用一种<strong>更形象的方式</strong>来描述上述泛型函数的实例化过程。实例化就<strong>好比一家生产“求最大值”机器的工厂</strong>，它会根据要比较大小的对象的类型将这样的机器生产出来。以上面的例子来说，整个实例化过程如下：</p>
+<ul>
+<li>工厂接单：调用maxGenerics([]int{…})，工厂师傅发现要比较大小的对象类型为int；</li>
+<li>模具检查与匹配：检查int类型是否满足模具的约束要求，即int是否满足ordered约束，如满足，则将其作为类型实参替换maxGenerics函数中的类型形参T，结果为<strong>maxGenerics[int]</strong>；</li>
+<li>生产机器：将泛型函数maxGenerics实例化为一个<strong>新函数</strong>，这里将其起名为<strong>maxGenericsInt</strong>，其函数原型为<strong>func([]int)int</strong>。本质上<strong>maxGenericsInt := maxGenerics[int]</strong>。</li>
+</ul>
+<p>我们实际的Go代码也可以真实得到这台新生产出的“机器”，如下面代码所示：</p>
+<pre><code class="language-plain">maxGenericsInt := maxGenerics[int] // 实例化后得到的新“机器”：maxGenericsInt
+fmt.Printf("%T\n", maxGenericsInt) // func([]int) int
+</code></pre>
+<p>一旦针对int对象的“求最大值”的机器被生产出来了，它就可以对目标对象进行处理了，这和普通的函数调用没有区别。这里就相当于调用如下代码：</p>
+<pre><code class="language-plain">maxGenericsInt([]int{1, 2, -4, -6, 7, 0}) // 输出：7
+</code></pre>
+<p>整个过程只需检查传入的函数实参（[]int{1, 2, …}）的类型与maxGenericsInt函数原型中的形参类型（[]int）是否匹配即可。</p>
+<p>另外要注意，当我们使用相同类型实参对泛型函数进行多次调用时，Go仅会做一次实例化，并复用实例化后的函数，比如：</p>
+<pre><code class="language-plain">maxGenerics([]int{1, 2, -4, -6, 7, 0})
+maxGenerics([]int{11, 12, 14, -36,27, 0}) // 复用第一次调用后生成的原型为func([]int) int的函数
+</code></pre>
+<p>好了，关于泛型函数的讲解就先告一段落，接下来我们再来看Go对类型参数的另一类支持：带有类型参数的自定义类型，即泛型类型。</p>
+<h3 id="泛型类型">泛型类型</h3>
+<p>所谓泛型类型，就是在类型声明中带有类型参数的Go类型，比如下面代码中的maxableSlice：</p>
+<pre><code class="language-plain">// maxable_slice.go
+
+type maxableSlice[T ordered] struct {
+    elems []T
+}
+</code></pre>
+<p>顾名思义，maxableSlice是一个自定义切片类型，这个类型的特点是总可以获取其内部元素的最大值，其唯一的要求是其内部元素是可排序的，它<strong>通过带有ordered约束的类型参数来明确这一要求</strong>。像这样在定义中带有类型参数的类型就被称为泛型类型（generic type）。</p>
+<p>从例子中的maxableSlice类型声明中我们可以看到，在泛型类型中，类型参数列表放在类型名字后面的方括号中。和泛型函数一样，泛型类型可以有多个类型参数，类型参数名通常是首字母大写的，这些类型参数也必须是具名的，且命名唯一。其一般形式如下：</p>
+<pre><code class="language-plain">type TypeName[T1 constraint1, T2 constraint2, ..., Tn constraintN] TypeLiteral
+</code></pre>
+<p>和泛型函数中类型参数有其作用域一样，泛型类型中类型参数的作用域范围也是从类型参数列表左侧的方括号<strong>[</strong>开始，一直持续到类型定义结束的位置，如下图所示：</p>
+<p><img alt="图片" src="/assets/5fa21e68d3afcd3754ebb709.png"/></p>
+<p>这样的作用域将方便我们在各个字段中灵活使用类型参数，下面是一些自定义泛型类型的示例：</p>
+<pre><code class="language-plain">type Set[T comparable] map[T]struct{}
+
+type sliceFn[T any] struct {
+	s   []T
+	cmp func(T, T) bool
+}
+
+type Map[K, V any] struct {
+	root    *node[K, V]
+	compare func(K, K) int
+}
+
+type element[T any] struct {
+	next *element[T]
+	val  T
+}
+
+type Numeric interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64 |
+		~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr |
+		~float32 | ~float64 |
+		~complex64 | ~complex128
+}
+
+type NumericAbs[T Numeric] interface {
+	Abs() T
+}
+</code></pre>
+<p>我们看到，泛型类型中的类型参数可以用来作为类型声明中字段的类型（比如上面的element类型）、复合类型的元素类型（比如上面的Set和Map类型）或方法的参数和返回值类型（如NumericAbs接口类型）等。</p>
+<p>如果要在泛型类型声明的内部引用该类型名，必须要带上类型参数，如上面的element结构体中的next字段的类型：*element[T]。按照泛型设计方案，如果泛型类型有不止一个类型参数，那么在其声明内部引用该类型名时，不仅要带上所有类型参数，类型参数的顺序也要与声明中类型参数列表中的顺序一致，比如：</p>
+<pre><code class="language-plain">type P[T1, T2 any] struct {
+    F *P[T1, T2]  // ok
+}
+</code></pre>
+<p>不过从实测结果来看，Go 1.19版本对于下面不符合技术方案的泛型类型声明也并未报错：</p>
+<pre><code class="language-plain">type P[T1, T2 any] struct {
+    F *P[T2, T1] // 不符合技术方案，但Go 1.19编译器并未报错
+}
+</code></pre>
+<p>了解了如何声明一个泛型类型后，我们再来看看如何使用这些泛型类型。</p>
+<h4 id="使用泛型类型">使用泛型类型</h4>
+<p>和泛型函数一样，使用泛型类型时也会有一个<strong>实例化</strong>（instantiation）过程，比如：</p>
+<pre><code class="language-plain">var sl = maxableSlice[int]{
+    elems: []int{1, 2, -4, -6, 7, 0},
+} 
+</code></pre>
+<p>Go会根据传入的类型实参（int）生成一个新的类型并创建该类型的变量实例，sl的类型等价于下面代码：</p>
+<pre><code class="language-plain">type maxableIntSlice struct {
+    elems []int
+}
+</code></pre>
+<p>看到这里你可能会问：泛型类型是否可以像泛型函数那样实现类型实参的自动推断呢？很遗憾，目前的Go 1.19尚不支持，下面代码会遭到Go编译器的报错：</p>
+<pre><code class="language-plain">var sl = maxableSlice {
+    elems: []int{1, 2, -4, -6, 7, 0}, // 编译器错误：cannot use generic type maxableSlice[T ordered] without instantiation
+} 
+</code></pre>
+<p>不过这一特性在Go的未来版本中可能会得到支持。</p>
+<p>既然涉及到了类型，你肯定会想到诸如类型别名、类型嵌入等Go语言机制，那么这些语言机制对泛型类型的支持情况又是如何呢？我们逐一来看一下。</p>
+<ul>
+<li><strong>泛型类型与类型别名</strong>-
+在专栏前面的讲解中，我们学习过类型别名（type alias）。我们知道类型别名与其绑定的原类型是完全等价的，但这仅限于原类型是一个直接类型，即可直接用于声明变量的类型。那么将类型别名与泛型类型绑定是否可行呢？我们来看一个示例：</li>
+</ul>
+<pre><code class="language-plain">type foo[T1 any, T2 comparable] struct {
+    a T1
+    b T2
+}
+  
+type fooAlias = foo // 编译器错误：cannot use generic type foo[T1 any, T2 comparable] without instantiation
+</code></pre>
+<p>在上述代码中，我们为泛型类型foo建立了类型别名fooAlias，但编译这段代码时，编译器还是报了错误！</p>
+<p>这是因为，泛型类型只是一个生产真实类型的“工厂”，它自身在未实例化之前是不能直接用于声明变量的，因此不符合类型别名机制的要求。泛型类型只有实例化后才能得到一个真实类型，例如下面的代码就是合法的：</p>
+<pre><code class="language-plain">type fooAlias = foo[int, string]
+</code></pre>
+<p>也就是说，我们只能为泛型类型实例化后的类型创建类型别名，实际上上述fooAlias等价于实例化后的类型fooInstantiation：</p>
+<pre><code class="language-plain">type fooInstantiation struct {
+    a int   
+    b string
+}
+</code></pre>
+<ul>
+<li><strong>泛型类型与类型嵌入</strong>-
+类型嵌入是运用Go组合设计哲学的一个重要手段。引入泛型类型之后，我们依然可以在泛型类型定义中嵌入普通类型，比如下面示例中Lockable类型中嵌入的sync.Mutex：</li>
+</ul>
+<pre><code class="language-plain">type Lockable[T any] struct {
+    t T
+    sync.Mutex
+}
+
+func (l *Lockable[T]) Get() T {
+    l.Lock()
+    defer l.Unlock()
+    return l.t
+}
+
+func (l *Lockable[T]) Set(v T) {
+    l.Lock()
+    defer l.Unlock()
+    l.t = v
+}
+</code></pre>
+<p>在泛型类型定义中，我们也可以将其他泛型类型实例化后的类型作为成员。现在我们改写一下上面的Lockable，为其嵌入另外一个泛型类型实例化后的类型Slice[int]：</p>
+<pre><code class="language-plain">type Slice[T any] []T
+  
+func (s Slice[T]) String() string {
+    if len(s) == 0 {
+        return ""
+    }
+    var result = fmt.Sprintf("%v", s[0])
+    for _, v := range s[1:] {
+        result = fmt.Sprintf("%v, %v", result, v)
+    }
+    return result
+}
+
+type Lockable[T any] struct {
+    t T
+    Slice[int]
+    sync.Mutex
+}
+
+func main() {
+    n := Lockable[string]{
+        t:     "hello",
+        Slice: []int{1, 2, 3},
+    }
+    println(n.String()) // 输出：1, 2, 3
+}
+</code></pre>
+<p>我们看到，代码使用泛型类型名（Slice）作为嵌入后的字段名，并且Slice[int]的方法String被提升为Lockable实例化后的类型的方法了。同理，在普通类型定义中，我们也可以使用实例化后的泛型类型作为成员，比如让上面的Slice[int]嵌入到一个普通类型Foo中，示例代码如下：</p>
+<pre><code class="language-plain">type Foo struct {
+    Slice[int]
+}
+
+func main() {
+    f := Foo{
+        Slice: []int{1, 2, 3},
+    }
+    println(f.String()) // 输出：1, 2, 3
+}
+</code></pre>
+<p>此外，Go泛型设计方案支持在泛型类型定义中嵌入类型参数作为成员，比如下面的泛型类型Lockable内嵌了一个类型T，且T恰为其类型参数：</p>
+<pre><code class="language-plain">type Lockable[T any] struct {
+    T
+    sync.Mutex
+}
+</code></pre>
+<p>不过，Go 1.19版本编译上述代码时会针对嵌入T的那一行报如下错误：</p>
+<pre><code class="language-plain">编译器报错：embedded field type cannot be a (pointer to a) type parameter
+</code></pre>
+<p>关于这个错误，Go官方在<a href="https://github.com/golang/go/issues/49030" target="_blank">其issue</a>中给出了临时的结论：暂不支持。</p>
+<h4 id="泛型方法">泛型方法</h4>
+<p>在专栏基础篇的学习中，我们知道Go类型可以拥有自己的方法（method），泛型类型也不例外，为泛型类型定义的方法称为<strong>泛型方法（generic method）</strong>，接下来我们就来讲讲如何定义和使用泛型方法。</p>
+<p>我们用一个示例，给maxableSlice泛型类型定义max方法，看一下泛型方法的结构：</p>
+<pre><code class="language-plain">func (sl *maxableSlice[T]) max() T {
+    if len(sl.elems) == 0 {
+        panic("slice is empty")
+    }
+
+    max := sl.elems[0]
+    for _, v := range sl.elems[1:] {
+        if v &gt; max {
+            max = v
+        }
+    }
+    return max
+}
+</code></pre>
+<p>我们看到，在定义泛型类型的方法时，方法的receiver部分不仅要带上类型名称，还需要带上完整的类型形参列表（如maxableSlice[T]），这些类型形参后续可以用在方法的参数列表和返回值列表中。</p>
+<p>不过在Go泛型目前的设计中，泛型方法自身不可以再支持类型参数了，不能像下面这样定义泛型方法：</p>
+<pre><code class="language-plain">func (f *foo[T]) M1[E any](e E) T { // 编译器错误：syntax error: method must have no type parameters
+    //... ...
+}
+</code></pre>
+<p>关于泛型方法未来是否能支持类型参数，目前Go团队倾向于否，但最终结果Go团队还要根据Go社区在使用泛型过程中的反馈而定。</p>
+<p>在泛型方法中，receiver中某个类型参数如果没有在方法参数列表和返回值中使用，可以用“_”代替，但不能不写，比如：</p>
+<pre><code class="language-plain">type foo[A comparable, B any] struct{}
+
+func (foo[A, B]) M1() { // ok
+}
+
+或
+
+func (foo[_, _]) M1() { // ok
+}
+
+或
+
+func (foo[A, _]) M1() { // ok
+}
+
+但
+
+func (foo[]) M1() { // 错误：receiver部分缺少类型参数
+
+}
+</code></pre>
+<p>另外，泛型方法中的receiver中类型参数名字可以与泛型类型中的类型形参名字不同，位置和数量对上即可。我们还以上面的泛型类型foo为例，可以为它添加下面方法：</p>
+<pre><code class="language-plain">type foo[A comparable, B any] struct{}
+
+func (foo[First, Second]) M1(a First, b Second) { // First对应类型参数A，Second对应类型参数B
+
+}
+</code></pre>
+<h2 id="小结">小结</h2>
+<p>好了，今天的课讲到这里就结束了，现在我们一起来回顾一下吧。</p>
+<p>在这一讲中，我们一起学习了Go泛型的基本语法：类型参数。<strong>类型参数是Go泛型方案的具体实现</strong>，通过类型参数，我们可以定义泛型函数、泛型类型以及对应的泛型方法。</p>
+<p>泛型函数是带有类型参数的函数，在函数名称与参数列表之间声明的类型参数列表使得泛型函数的运行逻辑与参数/返回值类型解耦。调用泛型函数与普通函数略有不同，泛型函数需要进行实例化后才能生成真正执行的、带有类型信息的函数。同时，Go泛型支持的类型实参推断也使得开发者在大多数情况下无需显式传递类型实参，获得与普通函数调用几乎一致的体验。</p>
+<p>泛型类型是带有类型参数的类型，泛型类型的类型参数放在类型名称后面的类型参数列表中声明，类型参数后续可以在泛型类型声明中用作成员字段的类型或复合类型成员元素的类型。不过目前（Go 1.19版本）Go尚不支持泛型类型的类型实参的自动推断，我们在泛型类型实例化时需要显式传入类型实参。</p>
+<p>与泛型类型绑定的方法被称为泛型方法，泛型方法的参数列表和返回值列表中可以使用泛型类型的类型参数，但泛型方法目前尚不支持声明自己的类型参数列表。</p>
+<p>Go泛型的引入，使得Go开发人员在interface{}之后又拥有了一种编写“通用代码”的手段，并且这种新手段因其更多在编译阶段的检查而变得更加安全，也因其减少了运行时的额外开销使得代码性能更好。</p>
+<h2 id="思考题">思考题</h2>
+<p>使用过其他编程语言泛型语法特性的小伙伴们可能会问：为什么Go在方括号“[]”中声明类型参数，而不是使用其他语言都用的尖括号“&lt;&gt;”呢？你可以思考一下。</p>
+<p>欢迎在评论区写下你的想法，我们泛型篇的第二讲见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

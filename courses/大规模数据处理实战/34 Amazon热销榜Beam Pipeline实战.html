@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>34 Amazon热销榜Beam Pipeline实战 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/index.html">大规模数据处理实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>大规模数据处理实战</strong><ul><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%B8%A6%E4%BD%A0%E8%B5%B0%E4%B8%8A%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8B%E8%B7%AF.html">00 开篇词 从这里开始，带你走上硅谷一线系统架构师之路</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/01%20%E4%B8%BA%E4%BB%80%E4%B9%88MapReduce%E4%BC%9A%E8%A2%AB%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E5%85%AC%E5%8F%B8%E6%B7%98%E6%B1%B0%EF%BC%9F.html">01 为什么MapReduce会被硅谷一线公司淘汰？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/02%20MapReduce%E5%90%8E%E8%B0%81%E4%B8%BB%E6%B2%89%E6%B5%AE%EF%BC%9A%E6%80%8E%E6%A0%B7%E8%AE%BE%E8%AE%A1%E4%B8%8B%E4%B8%80%E4%BB%A3%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF%EF%BC%9F.html">02 MapReduce后谁主沉浮：怎样设计下一代数据处理技术？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/03%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9A%E6%80%8E%E6%A0%B7%E5%AE%9E%E7%8E%B0%E5%A4%A7%E5%9E%8B%E7%94%B5%E5%95%86%E7%83%AD%E9%94%80%E6%A6%9C%EF%BC%9F.html">03 大规模数据处理初体验：怎样实现大型电商热销榜？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/04%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%AD%A6%E4%BC%9A%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%AD%89%E7%BA%A7%E5%8D%8F%E8%AE%AESLA%E6%9D%A5%E8%AF%84%E4%BC%B0%E4%BD%A0%E7%9A%84%E7%B3%BB%E7%BB%9F.html">04 分布式系统（上）：学会用服务等级协议SLA来评估你的系统</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/05%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B8%8D%E5%BE%97%E4%B8%8D%E7%9F%A5%E7%9A%84%E4%B8%89%E5%A4%A7%E6%8C%87%E6%A0%87.html">05 分布式系统（下）：架构师不得不知的三大指标</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/06%20%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86%E6%89%B9%E5%A4%84%E7%90%86%E8%BF%98%E6%98%AF%E6%B5%81%E5%A4%84%E7%90%86%EF%BC%9F.html">06 如何区分批处理还是流处理？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/07%20Workflow%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%AE%A9%E4%BD%A0%E5%9C%A8%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E4%B8%96%E7%95%8C%E4%B8%AD%E5%90%9B%E4%B8%B4%E5%A4%A9%E4%B8%8B.html">07 Workflow设计模式：让你在大规模数据世界中君临天下</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/08%20%E5%8F%91%E5%B8%83_%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%B5%81%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80.html">08 发布_订阅模式：流处理架构中的瑞士军刀</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/09%20CAP%E5%AE%9A%E7%90%86%EF%BC%9A%E4%B8%89%E9%80%89%E4%BA%8C%EF%BC%8C%E6%9E%B6%E6%9E%84%E5%B8%88%E5%BF%85%E9%A1%BB%E5%AD%A6%E4%BC%9A%E7%9A%84%E5%8F%96%E8%88%8D.html">09 CAP定理：三选二，架构师必须学会的取舍</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/10%20Lambda%E6%9E%B6%E6%9E%84%EF%BC%9ATwitter%E4%BA%BF%E7%BA%A7%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%9E%B6%E6%9E%84%E8%83%8C%E5%90%8E%E7%9A%84%E5%80%9A%E5%A4%A9%E5%89%91.html">10 Lambda架构：Twitter亿级实时数据分析架构背后的倚天剑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/11%20Kappa%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%88%A9%E7%94%A8Kafka%E9%94%BB%E9%80%A0%E7%9A%84%E5%B1%A0%E9%BE%99%E5%88%80.html">11 Kappa架构：利用Kafka锻造的屠龙刀</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/12%20%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81Spark%EF%BC%9F.html">12 我们为什么需要Spark？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/13%20%E5%BC%B9%E6%80%A7%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%9ASpark%E5%A4%A7%E5%8E%A6%E7%9A%84%E5%9C%B0%E5%9F%BA%EF%BC%88%E4%B8%8A%EF%BC%89.html">13 弹性分布式数据集：Spark大厦的地基（上）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/14%20%E5%BC%B9%E6%80%A7%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%9ASpark%E5%A4%A7%E5%8E%A6%E7%9A%84%E5%9C%B0%E5%9F%BA%EF%BC%88%E4%B8%8B%EF%BC%89.html">14 弹性分布式数据集：Spark大厦的地基（下）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/15%20Spark%20SQL%EF%BC%9ASpark%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%88%A9%E5%99%A8.html">15 Spark SQL：Spark数据查询的利器</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/16%20Spark%20Streaming%EF%BC%9ASpark%E7%9A%84%E5%AE%9E%E6%97%B6%E6%B5%81%E8%AE%A1%E7%AE%97API.html">16 Spark Streaming：Spark的实时流计算API</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/17%20Structured%20Streaming%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8DataFrame%20API%E8%BF%9B%E8%A1%8C%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90_.html">17 Structured Streaming：如何用DataFrame API进行实时数据分析_</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/18%20Word%20Count%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%BF%90%E8%A1%8C%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AASpark%E5%BA%94%E7%94%A8.html">18 Word Count：从零开始运行你的第一个Spark应用</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/19%20%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A4%84%E7%90%86%E5%8A%A0%E5%B7%9E%E6%88%BF%E5%B1%8B%E4%BF%A1%E6%81%AF%EF%BC%8C%E6%9E%84%E5%BB%BA%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">19 综合案例实战：处理加州房屋信息，构建线性回归模型</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/20%20%E6%B5%81%E5%A4%84%E7%90%86%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E5%88%86%E6%9E%90%E7%BA%BD%E7%BA%A6%E5%B8%82%E5%87%BA%E7%A7%9F%E8%BD%A6%E8%BD%BD%E5%AE%A2%E4%BF%A1%E6%81%AF.html">20 流处理案例实战：分析纽约市出租车载客信息</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/21%20%E6%B7%B1%E5%85%A5%E5%AF%B9%E6%AF%94Spark%E4%B8%8EFlink%EF%BC%9A%E5%B8%AE%E4%BD%A0%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%A4%E5%BC%80%E8%8A%B1.html">21 深入对比Spark与Flink：帮你系统设计两开花</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/22%20Apache%20Beam%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F.html">22 Apache Beam的前世今生</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/23%20%E7%AB%99%E5%9C%A8Google%E7%9A%84%E8%82%A9%E8%86%80%E4%B8%8A%E5%AD%A6%E4%B9%A0Beam%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.html">23 站在Google的肩膀上学习Beam编程模型</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/24%20PCollection%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Beam%E8%A6%81%E5%A6%82%E6%AD%A4%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E6%95%B0%E6%8D%AE%EF%BC%9F.html">24 PCollection：为什么Beam要如此抽象封装数据？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/25%20Transform%EF%BC%9ABeam%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95.html">25 Transform：Beam数据转换操作的抽象方法</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/26%20Pipeline%EF%BC%9ABeam%E5%A6%82%E4%BD%95%E6%8A%BD%E8%B1%A1%E5%A4%9A%E6%AD%A5%E9%AA%A4%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9F.html">26 Pipeline：Beam如何抽象多步骤的数据流水线？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/27%20Pipeline%20I_O_%20Beam%E6%95%B0%E6%8D%AE%E4%B8%AD%E8%BD%AC%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">27 Pipeline I_O_ Beam数据中转的设计模式</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%88%9B%E5%BB%BA%E5%A5%BD%E4%B8%80%E4%B8%AABeam%20Pipeline%EF%BC%9F.html">28 如何设计创建好一个Beam Pipeline？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/29%20%E5%A6%82%E4%BD%95%E6%B5%8B%E8%AF%95Beam%20Pipeline%EF%BC%9F.html">29 如何测试Beam Pipeline？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/30%20Apache%20Beam%E5%AE%9E%E6%88%98%E5%86%B2%E5%88%BA%EF%BC%9ABeam%E5%A6%82%E4%BD%95run%20everywhere_.html">30 Apache Beam实战冲刺：Beam如何run everywhere_</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/31%20WordCount%20Beam%20Pipeline%E5%AE%9E%E6%88%98.html">31 WordCount Beam Pipeline实战</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/32%20Beam%20Window%EF%BC%9A%E6%89%93%E9%80%9A%E6%B5%81%E5%A4%84%E7%90%86%E7%9A%84%E4%BB%BB%E7%9D%A3%E4%BA%8C%E8%84%89.html">32 Beam Window：打通流处理的任督二脉</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/33%20%E6%A8%AA%E7%9C%8B%E6%88%90%E5%B2%AD%E4%BE%A7%E6%88%90%E5%B3%B0%EF%BC%9A%E5%86%8D%E6%88%98Streaming%20WordCount.html">33 横看成岭侧成峰：再战Streaming WordCount</a></li><li><a class="active" aria-current="page" href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/34%20Amazon%E7%83%AD%E9%94%80%E6%A6%9CBeam%20Pipeline%E5%AE%9E%E6%88%98.html">34 Amazon热销榜Beam Pipeline实战</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/35%20Facebook%E6%B8%B8%E6%88%8F%E5%AE%9E%E6%97%B6%E6%B5%81%E5%A4%84%E7%90%86Beam%20Pipeline%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8A%EF%BC%89.html">35 Facebook游戏实时流处理Beam Pipeline实战（上）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/36%20Facebook%E6%B8%B8%E6%88%8F%E5%AE%9E%E6%97%B6%E6%B5%81%E5%A4%84%E7%90%86Beam%20Pipeline%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8B%EF%BC%89.html">36 Facebook游戏实时流处理Beam Pipeline实战（下）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/37%205G%E6%97%B6%E4%BB%A3%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%89%A9%E8%81%94%E7%BD%91%E6%95%B0%E6%8D%AE.html">37 5G时代，如何处理超大规模物联网数据</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/38%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%9C%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%A6%82%E4%BD%95%E5%BA%94%E7%94%A8%EF%BC%9F.html">38 大规模数据处理在深度学习中如何应用？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/39%20%E4%BB%8ESQL%E5%88%B0Streaming%20SQL%EF%BC%9A%E7%AA%81%E7%A0%B4%E9%9D%99%E6%80%81%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%AC%A1%E5%85%83.html">39 从SQL到Streaming SQL：突破静态数据查询的次元</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/40%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9C%AA%E6%9D%A5%E4%B9%8B%E8%B7%AF.html">40 大规模数据处理未来之路</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%B8%80%E6%9C%9F%20%E5%AD%A6%E4%B9%A0%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%E5%9F%BA%E7%A1%80%EF%BC%9F.html">FAQ第一期 学习大规模数据处理需要什么基础？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%B8%89%E6%9C%9F%20Apache%20Beam%E5%9F%BA%E7%A1%80%E7%AD%94%E7%96%91.html">FAQ第三期 Apache Beam基础答疑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%BA%8C%E6%9C%9F%20Spark%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%E7%AD%94%E7%96%91.html">FAQ第二期 Spark案例实战答疑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/%E5%8A%A0%E6%B2%B9%E7%AB%99%20Practice%20makes%20perfect%EF%BC%81.html">加油站 Practice makes perfect！</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%B8%96%E9%97%B4%E6%89%80%E6%9C%89%E7%9A%84%E7%9B%B8%E9%81%87%EF%BC%8C%E9%83%BD%E6%98%AF%E4%B9%85%E5%88%AB%E9%87%8D%E9%80%A2.html">结束语 世间所有的相遇，都是久别重逢</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/34%20Amazon%E7%83%AD%E9%94%80%E6%A6%9CBeam%20Pipeline%E5%AE%9E%E6%88%98.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="34 Amazon热销榜Beam Pipeline实战" id="title">34 Amazon热销榜Beam Pipeline实战</h1>
+<div><p>你好，我是蔡元楠。</p>
+<p>今天我要与你分享的主题是“Amazon热销榜Beam Pipeline实战”。</p>
+<p>两个月前，亚马逊（Amazon）宣布将关闭中国国内电商业务的消息你一定还记忆犹新。虽然亚马逊遗憾离场，但它依然是目前全球市值最高的电商公司。</p>
+<p>作为美国最大的一家网络电子商务公司，亚马逊的总部位于华盛顿州的西雅图。类似于BAT在国内的地位，亚马逊也是北美互联网FAANG五大巨头之一，其他四个分别是Facebook、Apple、Netflix和Google。</p>
+<p>亚马逊的热销商品系统就如下图所示。</p>
+<p><img alt="" src="/assets/aac60cb47cc53e44f3eb822d.png"/></p>
+<p>当我搜索“攀岩鞋”时，搜索结果的第三个被打上了“热销商品”的标签，这样能帮助消费者快速做出购买决策。</p>
+<p>当我点击这个“Best Seller”的标签时，我可以浏览“攀岩鞋”这个商品分类中浏览销量最高的前100个商品。</p>
+<p><img alt="" src="/assets/1c2b5648e06eb0339d60cfe2.png"/></p>
+<p>这些贴心的功能都是由热销商品系统实现的。</p>
+<p>这一讲我们就来看看在这样的热销商品系统中，怎样应用之前所学的Beam数据处理技术吧。今天，我们主要会解决一个热销商品系统数据处理架构中的这几个问题：</p>
+<ol>
+<li>怎样用批处理计算基础的热销商品列表、热销商品的存储和serving设计？</li>
+<li>怎样设计每小时更新的热销榜单？</li>
+<li>怎样设计商品去重处理流水线和怎样根据商品在售状态过滤热销商品？</li>
+<li>怎样按不同的商品门类生成榜单？</li>
+</ol>
+<h3 id="1-怎样用批处理计算基础的热销商品列表-热销商品的存储和serving设计">1.怎样用批处理计算基础的热销商品列表、热销商品的存储和serving设计？</h3>
+<p>我们先来看最简单的问题设置，怎样用批处理计算基础的热销商品列表。</p>
+<p>假设你的电商网站销售着10亿件商品，并且已经跟踪了网站的销售记录：商品id和购买时间 {product_id, timestamp}，整个交易记录是1000亿行数据，TB级。举个例子，假设我们的数据是这样的：</p>
+<p><img alt="" src="/assets/f9ae8f1280fed9b92205858f.png"/></p>
+<p>我们可以把热销榜按 product_id 排名为：1，2，3。</p>
+<p>你现在有没有觉得这个问题似曾相识呢？的确，我们在<a href="https://time.geekbang.org/column/article/91125" target="_blank">第3讲“大规模数据初体验”</a>中用这个例子引出了数据处理框架设计的基本需求。</p>
+<p>这一讲中，我们会从这个基本问题设置开始，逐步深入探索。</p>
+<p>在第3讲中，我们把我们的数据处理流程分成了两个步骤，分别是：</p>
+<ol>
+<li>统计每个商品的销量</li>
+<li>找出销量前K</li>
+</ol>
+<p>我们先来看第一个步骤的统计商品销量应该如何在Beam中实现。我们在第3讲中是画了这样的计算集群的示意图：</p>
+<p><img alt="" src="/assets/373474a59f9f2d8ab6cd1ab0.jpg"/></p>
+<p>如果你暂时没有思路的话，我们不妨试试换一个角度来思考这个问题。</p>
+<p>统计商品的销量，换句话说，其实就是计算同样的商品id在我们的销售记录数据库中出现了多少次。这有没有让你联想到什么呢？没错，就是我们在<a href="https://time.geekbang.org/column/article/105324" target="_blank">第31讲</a>中讲到的WordCount例子。WordCount是统计同样的单词出现的次数，而商品销量就是统计同样的商品id出现的次数。</p>
+<p>所以，我们完全可以用WordCount中的部分代码解决商品销量统计的这部分数据处理逻辑。</p>
+<p>在WordCount中，我们用words.apply(Count.perElement())把一个分词后的PCollection转换成了“单词为key，count为value”的一个key/value组合。</p>
+<p>在这里呢，我们同样使用salesRecords.apply(Count.perElement())把一个商品id的PCollection转换成“key为商品id，value为count”的key/value组合。</p>
+<p>Java</p>
+<pre><code>// WordCount的统计词频步骤
+wordCount = words.apply(Count.perElement())
+
+// 我们这里的统计销量步骤
+salesCount = salesRecords.apply(Count.perElement())
+</code></pre>
+<p>解决了统计每个商品的销量步骤，我们再来看看怎样统计销量前K的商品。在第3讲中，我们是画了一个计算集群来解决这个问题。</p>
+<p><img alt="" src="/assets/2933360b01ee7d4e8e461dfe.jpg"/></p>
+<p>但是Beam提供了很好的API供我们使用。我们可以使用Top() 这个Transform。</p>
+<p>Top接受的第一个参数就是我们这里的K，也就是我们最终要输出的前几个元素。我们需要实现的是一个Java Comparator interface。</p>
+<p>Java</p>
+<pre><code>PCollection&lt;KV&lt;String, Long&gt;&gt; topK =
+      salesCount.apply(Top.of(K, new Comparator&lt;KV&lt;String, Long&gt;&gt;() {
+          @Override
+          public int compare(KV&lt;String, Long&gt; a, KV&lt;String, Long&gt; b) {
+            return b.getValue.compareTo(a.getValue());
+          }
+      }));
+</code></pre>
+<p>到这里，销量前K的产品就已经被计算出来了。</p>
+<p>和所有数据处理流水线一样，我们需要的是一个完整的系统。那么你就不能仅仅满足于计算出结果，必须要考虑你的数据处理结果将怎样被使用。在本文开头的截图中，你能看到，热销商品都被打上了“Best Seller”的标签，点击“Best Seller”标签我们还能看到完整的热销榜单。</p>
+<p>那么你可以考虑两种serving的方案。</p>
+<p>一种是把热销商品的结果存储在一个单独的数据库中。但是在serving时候，你需要把商品搜索结果和热销商品结果进行交叉查询。如果搜索结果存在于热销商品数据库中，你就在返回的搜索结果元素中把它标注成“Best Seller”。</p>
+<p>另一个可能不太灵活，就是把热销商品的结果写回原来的商品数据库中。如果是热销商品，你就在“是热销商品”这一列做标记。这种方案的缺点是每次更新热销结果后，都要去原来的数据库进行大量更新，不仅要把新成为热销的商品进行标记，还要将落选商品的标记去除。</p>
+<p>两种serving方案的选择影响了你对于数据处理输出的业务需求。相应的，你可以把输出的前K销量产品使用Pipeline output输出到一个单独数据库，也可以统一更新所有数据库中的商品。</p>
+<h3 id="2-怎样设计每小时更新的热销榜单">2.怎样设计每小时更新的热销榜单？</h3>
+<p>在设计完基础的热销商品处理系统后，我们注意到在Amazon的热销榜上有一行小字 “Updated hourly”，也就是“每小时更新”。的确，热销商品往往是有时效性的。去年热销的iPhone X今年就变成了iPhone XS。Amazon选择了以小时为单位更新热销榜单确实是合理的产品设计。</p>
+<p>那么怎样用Beam实现这种定时更新的数据处理系统呢？</p>
+<p>可能你在看到“时间”这个关键词的时候，就马上联想到了第32讲介绍的Beam Window。确实，用基于Window的流处理模式是一个值得考虑的方案。我在这里故意把问题设置得比较模糊。其实是因为这需要取决于具体的业务需求，实际上你也可以选择批处理或者流处理的方式。</p>
+<p>我们先从简单的批处理模式开始。</p>
+<p>在处理工程问题时，我们都是先看最简单的方案能否支撑起来业务需求，避免为了体现工程难度而故意将系统复杂化。采用批处理的方式的话，我们可以每隔一个小时运行一遍上一个小标题中的基础版热销商品系统，也就是部署成cron job的模式。</p>
+<p>但你要注意，如果我们不修改代码的话，每一次运行都会计算目前为止所有销售的商品。如果这不是你的业务需求，你可以在批处理的数据输入步骤中，根据你的销售记录表的时间戳来筛选想要计算的时间段。比如，你可以设置成每一次运行都只计算从运行时间前6个月到该运行时间为止。</p>
+<p>其实，批处理的模式已经能解决我们目前为止的大部分业务需求。但有时候我们不得不去使用流处理。比如，如果存储销售记录的团队和你属于不同的部门，你没有权限去直接读取他们的数据库，他们部门只对外分享一个Pub/Sub的消息队列。这时候就是流处理应用的绝佳场景。</p>
+<p>不知道你还记不记得第33讲中我提到过，在Streaming版本的WordCount中监听一个Kafka消息队列的例子。同样的，这时候你可以订阅来自这个部门的销售消息。</p>
+<p>Java</p>
+<pre><code>pipeline
+    .apply(KafkaIO.&lt;String, Long&gt;read()
+       .withBootstrapServers("broker_1:9092,broker_2:9092")
+       .withTopic("sales_record")  // use withTopics(List&lt;String&gt;) to read from multiple topics.
+       .withKeyDeserializer(StringDeserializer.class)
+       .withValueDeserializer(StringDeserializer.class)
+       .withLogAppendTime()
+    )
+</code></pre>
+<p>之后你可以为你的输入PCollection添加窗口，和WordCount一样。不过这时候你很有可能需要滑动窗口，因为你的窗口是每小时移动一次。</p>
+<p>Java</p>
+<pre><code>PCollection&lt;String&gt; windowedProductIds = input
+  .apply(Window.&lt;String&gt;into(
+    SlidingWindows.of(Duration.standardMonths(options.getWindowSize()))));
+</code></pre>
+<h3 id="3-怎样设计商品去重处理流水线和怎样根据商品在售状态过滤热销商品">3.怎样设计商品去重处理流水线和怎样根据商品在售状态过滤热销商品？</h3>
+<p>通过前面的内容，我们已经设计出了能够每小时更新的热销榜单。但不知道你有没有注意到，其实我们之前的问题设置是过于简化了，忽略了很多现实而重要的问题，比如：</p>
+<ul>
+<li>怎样处理退货的商品？</li>
+<li>怎样处理店家因为收到差评故意把商品下架换个马甲重新上架？</li>
+<li>怎样处理那些虽然曾经热销但是现在已经不再出售的商品？</li>
+</ul>
+<p>这些问题都需要使用第28讲中介绍的Pipeline的基本设计模式：过滤模式。</p>
+<p><img alt="" src="/assets/f532015d36d207e41d93e202.jpg"/></p>
+<p>我们这个案例中所需要的过滤条件是：</p>
+<ul>
+<li>把退货的商品销量减去</li>
+<li>把重复的商品销量进行叠加</li>
+<li>将在售商品过滤出来</li>
+</ul>
+<p>一起来想想这些过滤条件应该怎么实现吧。</p>
+<p>对于退货商品，我们可以把所有退货的记录挑出来进行统计。同样对于每一个商品id，如果我们把出售的计数减去退货的计数就可以得到成功销售的计数。</p>
+<p>而事实上，实际交易系统对于商品状态的跟踪会详细得多，每一个订单最终落在退货状态还是成功销售状态都可以在交易数据库中查询得到。我们可以把这个封装在isSuccessfulSale()方法中。</p>
+<p>重复的商品在一个成熟的交易系统中一般会有另外一个去重的数据处理流水线。它能根据商品描述、商品图片等推测重复的商品。我们假设在我们系统中已经有了product_unique_id这样一个记录，那么我们只要把之前进行统计的product_id替换成统计product_unique_id就行了。</p>
+<p>过滤在售的商品可能有多种实现方式，取决于你的小组有没有权限读取所需的数据库。</p>
+<p>假如你可以读取一个商品状态的数据库列，那你可以直接根据 [商品状态=在售] 这样的判断条件进行过滤。假如你不能读取商品状态，那你可能需要查询在售的商品中是否有你的这个商品id来进行判断。但在这一讲中，我们先忽略实现细节，把这个过滤逻辑封装在isInStock()方法中。</p>
+<p>最终我们的过滤处理步骤会是类似下面这样的。只有同时满足isSuccessfulSale()和isInStock()的product_unique_id，才会被我们后续的销量统计步骤所计算。</p>
+<p>Java</p>
+<pre><code>PCollection&lt;Product&gt; productCollection = ...;
+
+PCollection&lt;Product&gt; qualifiedProductCollection = productCollection
+  .apply(“uniqueProductTransform”, Distinct.withRepresentativeValueFn(
+      new SerializableFunction&lt;Product, Long&gt;() {
+        @Override
+        public Long apply(Product input) {
+          return input.productUniqueId();
+        }
+      }).withRepresentativeType(TypeDescriptor.of(Long.class))
+  )
+    .apply("filterProductTransform", ParDo.of(new DoFn&lt;Product, Product&gt;(){
+    @ProcessElement
+    public void processElement(ProcessContext c) {
+      if (isSuccessfulSale(c.element()) &amp;&amp; isInStockc.element())) {
+        c.output(c.element());
+      }
+    }
+  }));
+</code></pre>
+<h3 id="4-怎样按不同的商品门类生成榜单">4.怎样按不同的商品门类生成榜单？</h3>
+<p>我们还注意到亚马逊的热销榜是按照不同的商品种类的。也就说每一个商品分类都有自己的榜单。这是很合理的业务设计，因为你不可能会去把飞机的销量和手机的销量相比，手机可能人手一个，飞机无法人手一个。</p>
+<p>这时候我们在第28讲所学的分离模式设计就能大显身手了。分离模式把一个PCollection按照类别分离成了几个小的子PCollection。</p>
+<p><img alt="" src="/assets/23cd63d4ca10eb60d1add9b9.jpg"/></p>
+<p>在这个案例里，我们也需要对商品进行分离。</p>
+<p>与经典的分离模式不同，我们这里每一个商品可能都属于多个类别。比如一双鞋子，它可能既归类为“户外”，也归类为“潮鞋”。还记得分离模式在Beam中怎么实现吗？没错就是使用output tag。我们先要为每一种分类定义tag，比如刚才说的outdoorTag和fashionTag。再把相应的商品输出进对应的tag中。示例如下：</p>
+<p>Java</p>
+<pre><code>// 首先定义每一个output的tag
+final TupleTag&lt;Product&gt; outdoorTag = new TupleTag&lt;Product&gt;(){};
+final TupleTag&lt;Product&gt; fashionTag = new TupleTag&lt;Product&gt;(){};
+
+PCollection&lt;Product&gt; salesCollection = ...;
+
+PCollectionTuple mixedCollection =
+    userCollection.apply(ParDo
+        .of(new DoFn&lt;Product, Product&gt;() {
+          @ProcessElement
+          public void processElement(ProcessContext c) {
+            if (isOutdoorProduct(c.element())) {
+              c.output(c.element());
+            } else if (isFashionProduct(c.element())) {
+              c.output(fashionTag, c.element());
+	        }
+          }
+        })
+        .withOutputTags(outdoorTag, TupleTagList.of(fashionTag)));
+
+// 分离出不同的商品分类
+mixedCollection.get(outdoorTag).apply(...);
+
+mixedCollection.get(fashionTag).apply(...);
+</code></pre>
+<h2 id="小结">小结</h2>
+<p>这一讲我们从基础商品排行榜系统出发，利用到了之前学的数据处理设计模式和Beam编程方法。</p>
+<p>同时，探索了以批处理计算为基础的热销商品列表。我们设计了每小时更新的热销榜单、商品去重处理流水线，根据商品在售状态过滤出热销商品，并按不同的商品门类生成榜单。</p>
+<h2 id="思考题">思考题</h2>
+<p>一个商品排名系统中还有太多需要解决的工程问题，你觉得哪些也可以利用大规模数据处理技术设计解决？</p>
+<p>欢迎你把答案写在留言区，与我和其他同学一起讨论。如果你觉得有所收获，也欢迎把文章分享给你的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

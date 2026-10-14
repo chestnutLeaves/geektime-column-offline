@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>15 Linux初始化（下）：从_start到第一个进程 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/index.html">操作系统实战45讲</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">57 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>操作系统实战45讲</strong><ul><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E5%86%99%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">00 开篇词 为什么要学写一个操作系统？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/00%20%E7%BC%96%E8%BE%91%E6%89%8B%E8%AE%B0%20%E5%8D%87%E7%BA%A7%E8%AE%A4%E7%9F%A5%EF%BC%8C%E8%BF%AD%E4%BB%A3%E8%87%AA%E5%B7%B1%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">00 编辑手记 升级认知，迭代自己的操作系统</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/01%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%9A%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%BA%E5%99%A8%E8%BF%90%E8%A1%8C.html">01 程序的运行过程：从代码到机器运行</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/02%20%E5%87%A0%E8%A1%8C%E6%B1%87%E7%BC%96%E5%87%A0%E8%A1%8CC%EF%BC%9A%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E6%A0%B8.html">02 几行汇编几行C：实现一个最简单的内核</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/03%20%E9%BB%91%E7%9B%92%E4%B9%8B%E4%B8%AD%E6%9C%89%E4%BB%80%E4%B9%88%EF%BC%9A%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84%E4%B8%8E%E8%AE%BE%E8%AE%A1.html">03 黑盒之中有什么：内核结构与设计</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/04%20%E9%9C%87%E6%92%BC%E7%9A%84Linux%E5%85%A8%E6%99%AF%E5%9B%BE%EF%BC%9A%E4%B8%9A%E7%95%8C%E6%88%90%E7%86%9F%E7%9A%84%E5%86%85%E6%A0%B8%E6%9E%B6%E6%9E%84%E9%95%BF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%9F.html">04 震撼的Linux全景图：业界成熟的内核架构长什么样？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/05%20CPU%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F.html">05 CPU工作模式：执行程序的三种模式</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/06%20%E8%99%9A%E5%B9%BB%E4%B8%8E%E7%9C%9F%E5%AE%9E%EF%BC%9A%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9D%80%E5%A6%82%E4%BD%95%E8%BD%AC%E6%8D%A2%EF%BC%9F.html">06 虚幻与真实：程序中的地址如何转换？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/07%20Cache%E4%B8%8E%E5%86%85%E5%AD%98%EF%BC%9A%E7%A8%8B%E5%BA%8F%E6%94%BE%E5%9C%A8%E5%93%AA%E5%84%BF%EF%BC%9F.html">07 Cache与内存：程序放在哪儿？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/08%20%E9%94%81%EF%BC%9A%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C%E4%B8%AD%EF%BC%8C%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E6%B3%95.html">08 锁：并发操作中，解决数据同步的四种方法</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/09%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9ALinux%E7%9A%84%E8%87%AA%E6%97%8B%E9%94%81%E5%92%8C%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">09 瞧一瞧Linux：Linux的自旋锁和信号量如何实现？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/10%20%E8%AE%BE%E7%BD%AE%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%BB%BA%E7%AB%8B%E8%AE%A1%E7%AE%97%E6%9C%BA.html">10 设置工作模式与环境（上）：建立计算机</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/11%20%E8%AE%BE%E7%BD%AE%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%BB%BA%E9%80%A0%E4%BA%8C%E7%BA%A7%E5%BC%95%E5%AF%BC%E5%99%A8.html">11 设置工作模式与环境（中）：建造二级引导器</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/12%20%E8%AE%BE%E7%BD%AE%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%8E%A2%E6%9F%A5%E5%92%8C%E6%94%B6%E9%9B%86%E4%BF%A1%E6%81%AF.html">12 设置工作模式与环境（下）：探查和收集信息</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/13%20%E7%AC%AC%E4%B8%80%E4%B8%AAC%E5%87%BD%E6%95%B0%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9D%BF%E7%BA%A7%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9F.html">13 第一个C函数：如何实现板级初始化？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/14%20Linux%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AGRUB%E4%B8%8Evmlinuz%E7%9A%84%E7%BB%93%E6%9E%84.html">14 Linux初始化（上）：GRUB与vmlinuz的结构</a></li><li><a class="active" aria-current="page" href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/15%20Linux%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BB%8E_start%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B.html">15 Linux初始化（下）：从_start到第一个进程</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/16%20%E5%88%92%E5%88%86%E5%9C%9F%E5%9C%B0%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%92%E5%88%86%E4%B8%8E%E7%BB%84%E7%BB%87%E5%86%85%E5%AD%98%EF%BC%9F.html">16 划分土地（上）：如何划分与组织内存？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/17%20%E5%88%92%E5%88%86%E5%9C%9F%E5%9C%B0%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E9%A1%B5%E9%9D%A2%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9F.html">17 划分土地（中）：如何实现内存页面初始化？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/18%20%E5%88%92%E5%88%86%E5%9C%9F%E5%9C%B0%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E9%A1%B5%E7%9A%84%E5%88%86%E9%85%8D%E4%B8%8E%E9%87%8A%E6%94%BE%EF%BC%9F.html">18 划分土地（下）：如何实现内存页的分配与释放？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/19%20%E5%9C%9F%E5%9C%B0%E4%B8%8D%E8%83%BD%E6%B5%AA%E8%B4%B9%EF%BC%9A%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%86%85%E5%AD%98%E5%AF%B9%E8%B1%A1%EF%BC%9F.html">19 土地不能浪费：如何管理内存对象？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/20%20%E5%9C%9F%E5%9C%B0%E9%9C%80%E6%B1%82%E6%89%A9%E5%A4%A7%E4%B8%8E%E4%BF%9D%E9%9A%9C%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%EF%BC%9F.html">20 土地需求扩大与保障：如何表示虚拟内存？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/21%20%E5%9C%9F%E5%9C%B0%E9%9C%80%E6%B1%82%E6%89%A9%E5%A4%A7%E4%B8%8E%E4%BF%9D%E9%9A%9C%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E5%92%8C%E9%87%8A%E6%94%BE%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%EF%BC%9F.html">21 土地需求扩大与保障：如何分配和释放虚拟内存？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/22%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E4%BC%99%E4%BC%B4%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%EF%BC%9F.html">22 瞧一瞧Linux：伙伴系统如何分配内存？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/23%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9ASLAB%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98%EF%BC%9F.html">23 瞧一瞧Linux：SLAB如何分配内存？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/24%20%E6%B4%BB%E5%8A%A8%E7%9A%84%E6%8F%8F%E8%BF%B0%EF%BC%9A%E5%88%B0%E5%BA%95%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%9B%E7%A8%8B%EF%BC%9F.html">24 活动的描述：到底什么是进程？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/25%20%E5%A4%9A%E4%B8%AA%E6%B4%BB%E5%8A%A8%E8%A6%81%E5%AE%89%E6%8E%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%A6%82%E4%BD%95%E8%B0%83%E5%BA%A6%EF%BC%9F.html">25 多个活动要安排（上）：多进程如何调度？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/26%20%E5%A4%9A%E4%B8%AA%E6%B4%BB%E5%8A%A8%E8%A6%81%E5%AE%89%E6%8E%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%AD%89%E5%BE%85%E4%B8%8E%E5%94%A4%E9%86%92%E6%9C%BA%E5%88%B6%EF%BC%9F.html">26 多个活动要安排（下）：如何实现进程的等待与唤醒机制？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/27%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E4%B8%8E%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6_.html">27 瞧一瞧Linux：Linux如何实现进程与进程调度_</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/28%20%E9%83%A8%E9%97%A8%E5%88%86%E7%B1%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E8%AE%BE%E5%A4%87%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%EF%BC%9F.html">28 部门分类：如何表示设备类型与设备驱动？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/29%20%E9%83%A8%E9%97%A8%E5%BB%BA%E7%AB%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E5%86%85%E6%A0%B8%E4%B8%AD%E6%B3%A8%E5%86%8C%E8%AE%BE%E5%A4%87%EF%BC%9F.html">29 部门建立：如何在内核中注册设备？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/30%20%E9%83%A8%E9%97%A8%E5%93%8D%E5%BA%94%EF%BC%9A%E8%AE%BE%E5%A4%87%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%86%85%E6%A0%B8I_O%E5%8C%85%EF%BC%9F.html">30 部门响应：设备如何处理内核I_O包？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/31%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF%EF%BC%9F.html">31 瞧一瞧Linux：如何获取所有设备信息？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/32%20%E4%BB%93%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E6%96%87%E4%BB%B6_.html">32 仓库结构：如何组织文件_</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/33%20%E4%BB%93%E5%BA%93%E5%88%92%E5%88%86%EF%BC%9A%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%93%8D%E4%BD%9C.html">33 仓库划分：文件系统的格式化操作</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/34%20%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E5%85%AD%E5%A4%A7%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%EF%BC%9F.html">34 仓库管理：如何实现文件的六大基本操作？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/35%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E6%96%87%E4%BB%B6%EF%BC%9F.html">35 瞧一瞧Linux：虚拟文件系统如何管理文件？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/36%20%E4%BB%8EURL%E5%88%B0%E7%BD%91%E5%8D%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E5%85%A8%E5%B1%80%E8%A7%82%E5%AF%9F%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%8A%A8%EF%BC%9F.html">36 从URL到网卡：如何全局观察网络数据流动？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/37%20%E4%BB%8E%E5%86%85%E6%A0%B8%E5%88%B0%E5%BA%94%E7%94%A8%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%86%85%E6%A0%B8%E4%B8%AD%E5%A6%82%E4%BD%95%E6%B5%81%E8%BD%AC.html">37 从内核到应用：网络数据在内核中如何流转</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/38%20%E4%BB%8E%E5%8D%95%E6%8E%92%E5%88%B0%E5%9B%A2%E6%88%98%EF%BC%9A%E8%AF%A6%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%8F%E8%A7%82%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84.html">38 从单排到团战：详解操作系统的宏观网络架构</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/39%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E8%AF%A6%E8%A7%A3socket%E5%AE%9E%E7%8E%B0%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3.html">39 瞧一瞧Linux：详解socket实现与网络编程接口</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/40%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E8%AF%A6%E8%A7%A3socket%E7%9A%84%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0.html">40 瞧一瞧Linux：详解socket的接口实现</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/41%20%E6%9C%8D%E5%8A%A1%E6%8E%A5%E5%8F%A3%EF%BC%9A%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E6%B2%9F%E9%80%9A%E6%A1%A5%E6%A2%81%EF%BC%9F.html">41 服务接口：如何搭建沟通桥梁？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/42%20%E7%9E%A7%E4%B8%80%E7%9E%A7Linux%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%B3%BB%E7%BB%9FAPI%EF%BC%9F.html">42 瞧一瞧Linux：如何实现系统API？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/43%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E6%A0%B8%EF%BC%9AKVM%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">43 虚拟机内核：KVM是什么？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/44%20%E5%AE%B9%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%AE%B9%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%EF%BC%9F.html">44 容器：如何理解容器的实现机制？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/45%20ARM%E6%96%B0%E5%AE%A0%EF%BC%9A%E8%8B%B9%E6%9E%9C%E7%9A%84M1%E8%8A%AF%E7%89%87%E5%9B%A0%E4%BD%95%E8%80%8C%E5%BF%AB%EF%BC%9F.html">45 ARM新宠：苹果的M1芯片因何而快？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/46%20AArch64%E4%BD%93%E7%B3%BB%EF%BC%9AARM%E6%9C%80%E6%96%B0%E7%BC%96%E7%A8%8B%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B%E5%89%96%E6%9E%90.html">46 AArch64体系：ARM最新编程架构模型剖析</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/LMOS%E6%9D%A5%E4%BF%A1%EF%BC%9A%E7%AC%AC%E4%BA%8C%E5%AD%A3%E8%AF%BE%E7%A8%8B%E5%B8%A6%E4%BD%A0%E2%80%9C%E6%89%8B%E6%92%95%E2%80%9D%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80.html">LMOS来信：第二季课程带你“手撕”计算机基础</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E5%A4%A7%E5%92%96%E5%8A%A9%E5%9C%BA%20%E4%BB%A5%E6%97%A0%E6%B3%95%E4%B8%BA%E6%9C%89%E6%B3%95%EF%BC%8C%E4%BB%A5%E6%97%A0%E9%99%90%E4%B8%BA%E6%9C%89%E9%99%90.html">大咖助场 以无法为有法，以无限为有限</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20yiyang%EF%BC%9A%E6%88%91%E7%9A%84%E4%B8%8A%E6%9C%BA%E5%AE%9E%E9%AA%8C%E2%80%9C%E7%88%AC%E5%9D%91%E6%8C%87%E5%8D%97%E2%80%9D.html">用户故事 yiyang：我的上机实验“爬坑指南”</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%88%90%E4%B8%BA%E9%9D%A2%E5%90%91%E2%80%9C%E7%9F%A5%E8%AF%86%E5%BA%93%E2%80%9D%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B8%88.html">用户故事 成为面向“知识库”的工程师</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%A6%82%E4%BD%95%E5%81%9A%E9%80%89%E6%8B%A9%EF%BC%8C%E8%B7%AF%E6%89%8D%E8%B6%8A%E8%B5%B0%E8%B6%8A%E5%AE%BD%EF%BC%9F.html">用户故事 技术人如何做选择，路才越走越宽？</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%91%E7%83%A7%E5%8F%8B%EF%BC%9A%E7%9C%8B%E4%B8%8D%E6%87%82%EF%BC%9F%E5%9B%A0%E4%B8%BA%E4%BD%A0%E6%B2%A1%E5%8A%A8%E6%89%8B.html">用户故事 操作系统发烧友：看不懂？因为你没动手</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E7%94%A8%E5%A5%BD%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%EF%BC%8C%E5%8A%A9%E5%8A%9B%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0.html">用户故事 用好动态调试，助力课程学习</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E8%89%BE%E5%90%8C%E5%AD%A6%EF%BC%9A%E8%B7%AF%E8%99%BD%E8%BF%9C%EF%BC%8C%E8%A1%8C%E5%88%99%E5%B0%86%E8%87%B3.html">用户故事 艾同学：路虽远，行则将至</a></li><li><a href="/courses/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E7%94%9F%E6%B4%BB%E5%8F%AF%E4%BB%A5%E4%B8%80%E5%9C%B0%E9%B8%A1%E6%AF%9B%EF%BC%8C%E4%BD%86%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8D%B4%E6%98%AF%E5%BF%83%E4%B8%AD%E7%9A%84%E5%85%89.html">结束语 生活可以一地鸡毛，但操作系统却是心中的光</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E6%88%9845%E8%AE%B2/15%20Linux%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BB%8E_start%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="15 Linux初始化（下）：从_start到第一个进程" id="title">15 Linux初始化（下）：从_start到第一个进程</h1>
+<div><p>15 Linux初始化（下）：从_start到第一个进程</p>
+<p>你好，我是LMOS。</p>
+<p>今天我们继续来研究Linux的初始化流程，为你讲解如何解压内核，然后讲解Linux内核第一个C函数。最后，我们会用Linux的第一个用户进程的建立来收尾。</p>
+<p>如果用你上手去玩一款新游戏做类比的话，那么上节课只是新手教程，而这节课就是更深入的实战了。后面你会看到很多熟悉的“面孔”，像是我们前面讲过的CPU工作模式、MMU页表等等基础知识，这节课都会得到运用。</p>
+<h2 id="解压后内核初始化">解压后内核初始化</h2>
+<p>下面，我们先从setup.bin文件的入口_start开始，了解启动信息结构，接着由16位main函数切换CPU到保护模式，然后跳入vmlinux.bin文件中的startup_32函数重新加载段描述符。</p>
+<p>如果是64位的系统，就要进入startup_64函数，切换到CPU到长模式，最后调用extract_kernel函数解压Linux内核，并进入内核的startup_64函数，由此Linux内核开始运行。</p>
+<h3 id="为何要从-start开始">为何要从_start开始</h3>
+<p>通过上节课对vmlinuz文件结构的研究，我们已经搞清楚了其中的vmlinux.bin是如何产生的，它是由linux/arch/x86/boot/compressed目录下的一些目标文件，以及piggy.S包含的一个vmlinux.bin.gz的压缩文件一起生成的。</p>
+<p>vmlinux.bin.gz文件则是由编译的Linux内核所生成的elf格式的vmlinux文件，去掉了文件的符号信息和重定位信息后，压缩得到的。</p>
+<p>CPU是无法识别压缩文件中的指令直接运行的，必须先进行解压后，然后解析elf格式的文件，把其中的指令段和数据段加载到指定的内存空间中，才能由CPU执行。</p>
+<p>这就需要用到前面的setup.bin文件了，_start正是setup.bin文件的入口，在head.S文件中定义，代码如下。</p>
+<pre><code>#linux/arch/x86/boot/head.S
+	.code16
+	.section ".bstext", "ax"
+	.global bootsect_start
+bootsect_start:
+	ljmp	$BOOTSEG, $start2
+start2:
+#……
+#这里的512字段bootsector对于硬盘启动是用不到的
+#……
+	.globl	_start
+_start:
+		.byte	0xeb		# short (2-byte) jump
+		.byte	start_of_setup-1f #这指令是用.byte定义出来的，跳转start_of_setup-1f
+#……
+#这里是一个庞大的数据结构，没展示出来，与linux/arch/x86/include/uapi/asm/bootparam.h文件中的struct setup_header一一对应。这个数据结构定义了启动时所需的默认参数
+#……
+start_of_setup:
+	movw	%ds, %ax
+	movw	%ax, %es   #ds = es
+	cld               #主要指定si、di寄存器的自增方向，即si++ di++
+
+	movw	%ss, %dx
+	cmpw	%ax, %dx	# ds 是否等于 ss
+	movw	%sp, %dx     
+	je	2f		
+	# 如果ss为空则建立新栈
+	movw	$_end, %dx
+	testb	$CAN_USE_HEAP, loadflags
+	jz	1f
+	movw	heap_end_ptr, %dx
+1:	addw	$STACK_SIZE, %dx
+	jnc	2f
+	xorw	%dx, %dx	
+2:
+	andw	$~3, %dx
+	jnz	3f
+	movw	$0xfffc, %dx	
+3:	movw	%ax, %ss
+	movzwl	%dx, %esp	
+	sti			# 栈已经初始化好，开中断
+	pushw	%ds
+	pushw	$6f
+	lretw      # cs=ds ip=6：跳转到标号6处
+6:
+	cmpl	$0x5a5aaa55, setup_sig #检查setup标记
+	jne	setup_bad
+	movw	$__bss_start, %di
+	movw	$_end+3, %cx
+	xorl	%eax, %eax
+	subw	%di, %cx
+	shrw	$2, %cx
+	rep; stosl          #清空setup程序的bss段
+	calll	main  #调用C语言main函数 
+</code></pre>
+<h3 id="setup-header结构">setup_header结构</h3>
+<p>下面我们重点研究一下setup_header结构，这对我们后面的流程很关键。它定义在linux/arch/x86/include/uapi/asm/bootparam.h文件中，如下所示。</p>
+<pre><code>struct setup_header {    
+__u8    setup_sects;        //setup大小
+__u16   root_flags;         //根标志   
+__u32   syssize;            //系统文件大小
+__u16   ram_size;           //内存大小
+__u16   vid_mode;    
+__u16   root_dev;           //根设备号
+__u16   boot_flag;          //引导标志
+//……
+__u32   realmode_swtch;     //切换回实模式的函数地址     
+__u16   start_sys_seg;    
+__u16   kernel_version;     //内核版本    
+__u8    type_of_loader;     //引导器类型 我们这里是GRUB
+__u8    loadflags;          //加载内核的标志 
+__u16   setup_move_size;    //移动setup的大小
+__u32   code32_start;       //将要跳转到32位模式下的地址 
+__u32   ramdisk_image;      //初始化内存盘映像地址，里面有内核驱动模块 
+__u32   ramdisk_size;       //初始化内存盘映像大小
+//……
+} __attribute__((packed));
+</code></pre>
+<p>前面提到过，硬盘中MBR是由GRUB写入的boot.img，因此这里的linux/arch/x86/boot/head.S中的bootsector对于硬盘启动是无用的。</p>
+<p>GRUB将vmlinuz的setup.bin部分读到内存地址0x90000处，然后跳转到0x90200开始执行，恰好跳过了前面512字节的bootsector，从_start开始。</p>
+<h3 id="16位的main函数">16位的main函数</h3>
+<p>我们通常用C编译器编译的代码，是32位保护模式下的或者是64位长模式的，却很少编译成16位实模式下的，其实setup.bin大部分代码都是16位实模式下的。</p>
+<p>从前面的代码里，我们能够看到在linux/arch/x86/boot/head.S中调用了main函数，该函数在linux/arch/x86/boot/main.c文件中，代码如下 。</p>
+<pre><code>//定义boot_params变量
+struct boot_params boot_params __attribute__((aligned(16)));
+char *HEAP = _end;
+char *heap_end = _end; 
+//……
+void main(void){
+    //把先前setup_header结构复制到boot_params结构中的hdr变量中，在linux/arch/x86/include/uapi/asm/bootparam.h文件中你会发现boot_params结构中的hdr的类型正是setup_header结构  
+    copy_boot_params();
+    //初始化早期引导所用的console    
+    console_init();    
+    //初始化堆 
+    init_heap();
+    //检查CPU是否支持运行Linux    
+    if (validate_cpu()) {        
+        puts("Unable to boot - please use a kernel appropriate "             "for your CPU.\n");        
+        die();    
+    }
+    //告诉BIOS我们打算在什么CPU模式下运行它
+    set_bios_mode();
+    //查看物理内存空间布局    
+    detect_memory();
+    //初始化键盘
+    keyboard_init();
+    //查询Intel的(IST)信息。    
+    query_ist();
+    /*查询APM BIOS电源管理信息。*/
+    #if defined(CONFIG_APM) || defined(CONFIG_APM_MODULE)   
+    query_apm_bios();
+    #endif
+    //查询EDD BIOS扩展数据区域的信息
+    #if defined(CONFIG_EDD) || defined(CONFIG_EDD_MODULE) 
+    query_edd();
+    #endif
+    //设置显卡的图形模式    
+    set_video();
+    //进入CPU保护模式，不会返回了       
+    go_to_protected_mode();
+}
+</code></pre>
+<p>上面这些函数都在linux/arch/x86/boot/目录对应的文件中，都是调用BIOS中断完成的，具体细节，你可以自行查看。</p>
+<p>我这里列出的代码只是帮助你理清流程，我们继续看看go_to_protected_mode()函数，在linux/arch/x86/boot/pm.c中，代码如下。</p>
+<pre><code>//linux/arch/x86/boot/pm.c
+void go_to_protected_mode(void){    
+    //安装切换实模式的函数
+    realmode_switch_hook();
+    //开启a20地址线，是为了能访问1MB以上的内存空间
+    if (enable_a20()) {        
+        puts("A20 gate not responding, unable to boot...\n");
+        die();    
+    }
+    //重置协处理器，早期x86上的浮点运算单元是以协处理器的方式存在的    
+    reset_coprocessor();
+    //屏蔽8259所示的中断源   
+    mask_all_interrupts();
+    //安装中断描述符表和全局描述符表，    
+    setup_idt();    
+    setup_gdt();
+    //保护模式下长跳转到boot_params.hdr.code32_start
+    protected_mode_jump(boot_params.hdr.code32_start,                (u32)&amp;boot_params + (ds() &lt;&lt; 4));
+}
+</code></pre>
+<p>protected_mode_jump是个汇编函数，在linux/arch/x86/boot/pmjump.S文件中。代码逻辑和我们前面（<a href="https://time.geekbang.org/column/article/375278" target="_blank">第5节课</a>）学到的保护模式切换是一样的。只是多了<strong>处理参数的逻辑</strong>，即跳转到boot_params.hdr.code32_start中的地址。</p>
+<p>这个地址在linux/arch/x86/boot/head.S文件中设为0x100000，如下所示。</p>
+<pre><code>code32_start:
+long	0x100000
+</code></pre>
+<p><strong>需要注意的是，GRUB会把vmlinuz中的vmlinux.bin部分，放在1MB开始的内存空间中。通过这一跳转，正式进入vmlinux.bin中。</strong></p>
+<h3 id="startup-32函数">startup_32函数</h3>
+<p>startup_32中需要重新加载段描述符，之后计算vmlinux.bin文件的编译生成的地址和实际加载地址的偏移，然后重新设置内核栈，检测CPU是否支持长模式，接着再次计算vmlinux.bin加载地址的偏移，来确定对其中vmlinux.bin.gz解压缩的地址。</p>
+<p>如果CPU支持长模式的话，就要设置64位的全局描述表，开启CPU的PAE物理地址扩展特性。再设置最初的MMU页表，最后开启分页并进入长模式，跳转到startup_64，代码如下。</p>
+<pre><code>	.code32
+SYM_FUNC_START(startup_32)
+	cld
+	cli
+	leal	(BP_scratch+4)(%esi), %esp
+	call	1f
+1:	popl	%ebp
+	subl	$ rva(1b), %ebp
+    #重新加载全局段描述符表
+	leal	rva(gdt)(%ebp), %eax
+	movl	%eax, 2(%eax)
+	lgdt	(%eax)
+    #……篇幅所限未全部展示代码
+    #重新设置栈
+	leal	rva(boot_stack_end)(%ebp), %esp
+    #检测CPU是否支持长模式
+	call	verify_cpu
+	testl	%eax, %eax
+	jnz	.Lno_longmode
+    #……计算偏移的代码略过
+    #开启PAE
+    movl	%cr4, %eax
+	orl	$X86_CR4_PAE, %eax
+	movl	%eax, %cr4
+    #……建立MMU页表的代码略过
+    #开启长模式
+    movl	$MSR_EFER, %ecx
+	rdmsr
+	btsl	$_EFER_LME, %eax
+    #获取startup_64的地址
+    leal	rva(startup_64)(%ebp), %eax
+    #……篇幅所限未全部展示代码
+    #内核代码段描述符索和startup_64的地址引压入栈
+    pushl	$__KERNEL_CS
+	pushl	%eax
+    #开启分页和保护模式
+	movl	$(X86_CR0_PG | X86_CR0_PE), %eax 
+	movl	%eax, %cr0
+    #弹出刚刚栈中压入的内核代码段描述符和startup_64的地址到CS和RIP中，实现跳转，真正进入长模式。
+	lret
+SYM_FUNC_END(startup_32）
+</code></pre>
+<h3 id="startup-64函数">startup_64函数</h3>
+<p>现在，我们终于开启了CPU长模式，从startup_64开始真正进入了64位的时代，可喜可贺。</p>
+<p>startup_64函数同样也是在linux/arch/x86/boot/compressed/head64.S文件中定义的。</p>
+<p>startup_64函数中，初始化长模式下数据段寄存器，确定最终解压缩地址，然后拷贝压缩vmlinux.bin到该地址，跳转到decompress_kernel地址处，开始解压vmlinux.bin.gz，代码如下。</p>
+<pre><code>	.code64
+	.org 0x200
+SYM_CODE_START(startup_64)
+	cld
+	cli
+	#初始化长模式下数据段寄存器
+	xorl	%eax, %eax
+	movl	%eax, %ds
+	movl	%eax, %es
+	movl	%eax, %ss
+	movl	%eax, %fs
+	movl	%eax, %gs
+    #……重新确定内核映像加载地址的代码略过
+    #重新初始化64位长模式下的栈
+    leaq	rva(boot_stack_end)(%rbx), %rsp
+    #……建立最新5级MMU页表的代码略过
+    #确定最终解压缩地址，然后拷贝压缩vmlinux.bin到该地址
+    pushq	%rsi
+	leaq	(_bss-8)(%rip), %rsi
+	leaq	rva(_bss-8)(%rbx), %rdi
+	movl	$(_bss - startup_32), %ecx
+	shrl	$3, %ecx
+	std
+	rep	movsq
+	cld
+	popq	%rsi
+    #跳转到重定位的Lrelocated处
+    leaq	rva(.Lrelocated)(%rbx), %rax
+	jmp	*%rax
+SYM_CODE_END(startup_64)
+
+	.text
+SYM_FUNC_START_LOCAL_NOALIGN(.Lrelocated)
+    #清理程序文件中需要的BSS段
+	xorl	%eax, %eax
+	leaq    _bss(%rip), %rdi
+	leaq    _ebss(%rip), %rcx
+	subq	%rdi, %rcx
+	shrq	$3, %rcx
+	rep	stosq
+    #……省略无关代码
+	pushq	%rsi			
+	movq	%rsi, %rdi		
+	leaq	boot_heap(%rip), %rsi
+    #准备参数：被解压数据的开始地址 	
+	leaq	input_data(%rip), %rdx
+    #准备参数：被解压数据的长度 	
+	movl	input_len(%rip), %ecx
+    #准备参数：解压数据后的开始地址 		
+	movq	%rbp, %r8
+    #准备参数：解压数据后的长度
+	movl	output_len(%rip), %r9d
+    #调用解压函数解压vmlinux.bin.gz，返回入口地址
+    call	extract_kernel
+	popq	%rsi
+    #跳转到内核入口地址 
+	jmp	*%rax
+SYM_FUNC_END(.Lrelocated)
+</code></pre>
+<p>上述代码中最后到了extract_kernel函数，它就是解压内核的函数，下面我们就来研究它。</p>
+<h3 id="extract-kernel函数">extract_kernel函数</h3>
+<p>从startup_32函数到startup_64函数，其间经过了保护模式、长模式，最终到达了extract_kernel函数，extract_kernel函数根据piggy.o中的信息从vmlinux.bin.gz中解压出vmlinux。</p>
+<p>根据前面的知识点，我们知道vmlinux正是编译出Linux内核elf格式的文件，只不过它被去掉了符号信息。所以，extract_kernel函数不仅仅是解压，还需要解析elf格式。</p>
+<p>extract_kernel函数是在linux/arch/x86/boot/compressed/misc.c文件中定义的。</p>
+<pre><code>asmlinkage __visible void *extract_kernel(
+                                void *rmode, memptr heap,
+                                unsigned char *input_data,
+                                unsigned long input_len,
+                                unsigned char *output,
+                                unsigned long output_len
+                                ){    
+    const unsigned long kernel_total_size = VO__end - VO__text;
+    unsigned long virt_addr = LOAD_PHYSICAL_ADDR;    
+    unsigned long needed_size;
+    //省略了无关性代码
+    debug_putstr("\nDecompressing Linux... ");    
+    //调用具体的解压缩算法解压
+    __decompress(input_data, input_len, NULL, NULL, output, output_len,            NULL, error);
+    //解压出的vmlinux是elf格式，所以要解析出里面的指令数据段和常规数据段
+    //返回vmlinux的入口点即Linux内核程序的开始地址  
+    parse_elf(output); 
+    handle_relocations(output, output_len, virt_addr);    debug_putstr("done.\nBooting the kernel.\n");
+    return output;
+}
+</code></pre>
+<p>正如上面代码所示，extract_kernel函数调用__decompress函数，对vmlinux.bin.gz使用特定的解压算法进行解压。解压算法是编译内核的配置选项决定的。</p>
+<p>但是，__decompress函数解压出来的是vmlinux文件是elf格式的，所以还要调用parse_elf函数进一步解析elf格式，把vmlinux中的指令段、数据段、BSS段，根据elf中信息和要求放入特定的内存空间，返回指令段的入口地址。</p>
+<p>请你注意，在Lrelocated函数的最后一条指令：jmp *rax，其中的rax中就是保存的extract_kernel函数返回的入口点，就是从这里开始进入了Linux内核。</p>
+<h3 id="linux内核的startup-64">Linux内核的startup_64</h3>
+<p><strong>这里我提醒你留意，此时的startup_64函数并不是之前的startup_64函数，也不参与前面的链接工作。</strong></p>
+<p>这个startup_64函数定义在linux/arch/x86/kernel/head_64.S文件中，它是内核的入口函数，如下所示。</p>
+<pre><code>#linux/arch/x86/kernel/head_64.S	
+    .code64
+SYM_CODE_START_NOALIGN(startup_64)
+	#切换栈
+    leaq	(__end_init_task - SIZEOF_PTREGS)(%rip), %rsp
+	#跳转到.Lon_kernel_cs:
+    pushq	$__KERNEL_CS
+	leaq	.Lon_kernel_cs(%rip), %rax
+	pushq	%rax
+	lretq
+.Lon_kernel_cs:
+    #对于第一个CPU，则会跳转secondary_startup_64函数中1标号处
+	jmp 1f
+SYM_CODE_END(startup_64)
+</code></pre>
+<p>上述代码中省略了和流程无关的代码，对于SMP系统加电之后，总线仲裁机制会选出多个CPU中的一个CPU，称为BSP，也叫第一个CPU。它负责让BSP CPU先启动，其它CPU则等待BSP CPU的唤醒。</p>
+<p>这里我来分情况给你说说。对于第一个启动的CPU，会跳转secondary_startup_64函数中1标号处，对于其它被唤醒的CPU则会直接执行secondary_startup_64函数。</p>
+<p>接下来，我给你快速过一遍secondary_startup_64函数，后面的代码我省略了这个函数对更多CPU特性（设置GDT、IDT，处理了MMU页表等）的检查，因为这些工作我们早已很熟悉了，代码如下所示。</p>
+<pre><code>SYM_CODE_START(secondary_startup_64)
+    #省略了大量无关性代码
+1:
+	movl	$(X86_CR4_PAE | X86_CR4_PGE), %ecx
+#ifdef CONFIG_X86_5LEVEL
+	testl	$1, __pgtable_l5_enabled(%rip)
+	jz	1f
+	orl	$X86_CR4_LA57, %ecx
+1:
+#endif
+    #省略了大量无关性代码
+.Ljump_to_C_code:
+	pushq	$.Lafter_lret	
+	xorl	%ebp, %ebp
+    #获取x86_64_start_kernel函数地址赋给rax	
+	movq	initial_code(%rip), %rax
+	pushq	$__KERNEL_CS	
+    #将x86_64_start_kernel函数地址压入栈中
+	pushq	%rax
+    #弹出__KERNEL_CS	和x86_64_start_kernel函数地址到CS：RIP完成调用	
+    lretq
+.Lafter_lret:
+SYM_CODE_END(secondary_startup_64)
+#保存了x86_64_start_kernel函数地址
+SYM_DATA(initial_code,	.quad x86_64_start_kernel)
+</code></pre>
+<p>在secondary_startup_64函数一切准备就绪之后，最后就会调用x86_64_start_kernel函数，看它的名字好像是内核的开始函数，但真的是这样吗，我们一起看看才知道。</p>
+<h2 id="linux内核的第一个c函数">Linux内核的第一个C函数</h2>
+<p>若不是经历了前面的分析讲解。要是我问你Linux内核的第一个C函数是什么，你可能无从说起，就算一通百度之后，仍然无法确定。</p>
+<p>但是，只要我们跟着代码的执行流程，就会发现<strong>在secondary_startup_64函数的最后，调用的x86_64_start_kernel函数是用C语言写的，那么它一定就是Linux内核的第一个C函数。</strong>它在linux/arch/x86/kernel/head64.c文件中被定义，这个文件名你甚至都能猜出来，如下所示。</p>
+<pre><code>asmlinkage __visible void __init x86_64_start_kernel(char * real_mode_data){    
+    //重新设置早期页表
+    reset_early_page_tables();
+    //清理BSS段
+    clear_bss();
+    //清理之前的顶层页目录
+    clear_page(init_top_pgt);
+    //复制引导信息
+    copy_bootdata(__va(real_mode_data));
+    //加载BSP CPU的微码
+    load_ucode_bsp();
+    //让顶层页目录指向重新设置早期页表
+    init_top_pgt[511] = early_top_pgt[511];
+    x86_64_start_reservations(real_mode_data);
+}
+void __init x86_64_start_reservations(char *real_mode_data){  
+   //略过无关的代码
+    start_kernel();
+}
+</code></pre>
+<p>x86_64_start_kernel函数中又一次处理了页表，处理页表就是处理Linux内核虚拟地址空间，Linux虚拟地址空间是一步步完善的。</p>
+<p>然后，x86_64_start_kernel函数复制了引导信息，即struct boot_params结构体。最后调用了x86_64_start_reservations函数，其中处理了平台固件相关的东西，就是调用了大名鼎鼎的start_kernel函数。</p>
+<h2 id="有名的start-kernel函数">有名的start_kernel函数</h2>
+<p>start_kernel函数之所以有名，这是因为在互联网上，在各大Linux名著之中，都会大量宣传它Linux内核中的地位和作用，正如其名字表达的含意，这是内核的开始。</p>
+<p>但是问题来了。我们一路走来，发现start_kernel函数之前有大量的代码执行，那这些代码算不算内核的开始呢？当然也可以说那就是内核的开始，也可以说是前期工作。</p>
+<p>其实，start_kernel函数中调用了大量Linux内核功能的初始化函数，它定义在/linux/init/main.c文件中。</p>
+<pre><code>void start_kernel(void){    
+    char *command_line;    
+    char *after_dashes;
+    //CPU组早期初始化
+    cgroup_init_early();
+    //关中断
+    local_irq_disable();
+    //ARCH层初始化
+    setup_arch(&amp;command_line);
+    //日志初始化      
+    setup_log_buf(0);    
+    sort_main_extable();
+    //陷阱门初始化    
+    trap_init();
+    //内存初始化    
+    mm_init();
+    ftrace_init();
+    //调度器初始化
+    sched_init();
+    //工作队列初始化
+    workqueue_init_early();
+    //RCU锁初始化
+    rcu_init();
+    //IRQ 中断请求初始化
+    early_irq_init();    
+    init_IRQ();    
+    tick_init();    
+    rcu_init_nohz();
+    //定时器初始化 
+    init_timers();    
+    hrtimers_init();
+    //软中断初始化    
+    softirq_init();    
+    timekeeping_init();
+    mem_encrypt_init();
+    //每个cpu页面集初始化
+    setup_per_cpu_pageset();    
+    //fork初始化建立进程的 
+    fork_init();    
+    proc_caches_init();    
+    uts_ns_init();
+    //内核缓冲区初始化    
+    buffer_init();    
+    key_init();    
+    //安全相关的初始化
+    security_init();  
+    //VFS数据结构内存池初始化  
+    vfs_caches_init();
+    //页缓存初始化    
+    pagecache_init();
+    //进程信号初始化    
+    signals_init();    
+    //运行第一个进程 
+    arch_call_rest_init();
+}
+</code></pre>
+<p>start_kernel函数我如果不做精简，会有200多行，全部都是初始化函数，我只留下几个主要的初始化函数，这些函数的实现细节我们无需关心。</p>
+<p>可以看到，Linux内核所有功能的初始化函数都是在start_kernel函数中调用的，这也是它如此出名，如此重要的原因。</p>
+<p>一旦start_kernel函数执行完成，Linux内核就具备了向应用程序提供一系列功能服务的能力。这里对我们而言，我们只关注一个arch_call_rest_init函数。下面我们就来研究它。 如下所示。</p>
+<pre><code>void __init __weak arch_call_rest_init(void){    
+    rest_init();
+}
+</code></pre>
+<p>这个函数其实非常简单，它是一个<strong>包装函数</strong>，其中只是直接调用了rest_init函数。</p>
+<p>rest_init函数的重要功能就是建立了两个Linux内核线程，我们看看精简后的rest_init函数：</p>
+<pre><code>noinline void __ref rest_init(void){    struct task_struct *tsk;
+    int pid;
+    //建立kernel_init线程
+    pid = kernel_thread(kernel_init, NULL, CLONE_FS);   
+    //建立khreadd线程 
+    pid = kernel_thread(kthreadd, NULL, CLONE_FS | CLONE_FILES);
+}
+</code></pre>
+<p>Linux内核线程可以执行一个内核函数， 只不过这个函数有独立的线程上下文，可以被Linux的进程调度器调度，对于kernel_init线程来说，执行的就是kernel_init函数。</p>
+<h2 id="linux的第一个用户进程">Linux的第一个用户进程</h2>
+<p>当我们可以建立第一个用户进程的时候，就代表Linux内核的初始流程已经基本完成。</p>
+<p>经历了“长途跋涉”，我们也终于走到了这里<strong>。Linux内核的第一个用户态进程是在kernel_init线程建立的，而kernel_init线程执行的就是kernel_init函数。</strong>那kernel_init函数到底做了什么呢？</p>
+<pre><code>static int __ref kernel_init(void *unused){   
+     int ret;
+     if (ramdisk_execute_command) {       
+         ret = run_init_process(ramdisk_execute_command);        
+         if (!ret)            
+             return 0;        
+         pr_err("Failed to execute %s (error %d)\n",ramdisk_execute_command, ret);    
+     }
+     if (execute_command) {        
+         ret = run_init_process(execute_command);        
+         if (!ret)            
+         return 0;        
+         panic("Requested init %s failed (error %d).",              execute_command, ret);    
+     }
+    if (!try_to_run_init_process("/sbin/init") ||                    !try_to_run_init_process("/etc/init") ||        !try_to_run_init_process("/bin/init") ||        !try_to_run_init_process("/bin/sh"))        
+    return 0;
+panic("No working init found.  Try passing init= option to kernel. "          "See Linux Documentation/admin-guide/init.rst for guidance.");
+}
+</code></pre>
+<p>结合上述代码，可以发现ramdisk_execute_command和execute_command都是内核启动时传递的参数，它们可以在GRUB启动选项中设置。</p>
+<p>比方说，通常引导内核时向command line传递的参数都是 init=xxx ，而对于initrd 则是传递 rdinit=xxx 。</p>
+<p>但是，通常我们不会传递参数，所以这个函数会执行到上述代码的15行，依次尝试以/sbin/init、/etc/init、/bin/init、/bin/sh这些文件为可执行文件建立进程，但是只要其中之一成功就行了。</p>
+<p>try_to_run_init_process和run_init_process函数的核心都是调用sys_fork函数建立进程的，这里我们不用关注它的实现细节。</p>
+<p>到这里，Linux内核已经建立了第一个进程，Linux内核的初始化流程也到此为止了。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>又到了课程尾声，Linux初始化流程的学习我们就告一段落了，我来给你做个总结。</p>
+<p>今天我们讲得内容有点多，我们从_start开始到startup32、startup64函数 ，到extract_kernel函数解压出真正的Linux内核文件vmlinux开始，然后从Linux内核的入口函数startup_64到Linux内核第一个C函数，最后接着从Linux内核start_kernel函数的建立 ，说到了第一个用户进程。</p>
+<p>一起来回顾一下这节课的重点：</p>
+<p>1.GRUB加载vmlinuz文件之后，会把控制权交给vmlinuz文件的setup.bin的部分中_start，它会设置好栈，清空bss，设置好setup_header结构，调用16位main切换到保护模式，最后跳转到1MB处的vmlinux.bin文件中。</p>
+<p>2.从vmlinux.bin文件中startup32、startup64函数开始建立新的全局段描述符表和MMU页表，切换到长模式下解压vmlinux.bin.gz。释放出vmlinux文件之后，由解析elf格式的函数进行解析，释放vmlinux中的代码段和数据段到指定的内存。然后调用其中的startup_64函数，在这个函数的最后调用Linux内核的第一个C函数。</p>
+<p>3.Linux内核第一个C函数重新设置MMU页表，随后便调用了最有名的start_kernel函数， start_kernel函数中调用了大多数 Linux内核功能性初始化函数，在最后调用rest_init函数建立了两个内核线程，在其中的kernel_init线程建立了第一个用户态进程。</p>
+<p><img alt="" src="/assets/5963c0a89431826d8402f37b.jpg"/></p>
+<p>不知道你感觉到没有，Linux的启动流程相比于我们的Cosmos启动流程复杂得多。</p>
+<p>Linux之所以如此复杂，是因为它把完成各种功能的模块组装了一起，而我们Cosmos则把内核之前的初始化工作，分离出来，形成二级引导器，二级引导器也是由多文件模块组成的，最后用我们的映像工具把它们封装在一起。</p>
+<p>对比之下，你就可以明白，<strong>软件工程模块化</strong>是多么重要了。</p>
+<h2 id="思考题">思考题</h2>
+<p>你能指出上文中Linux初始化流程里，主要函数都被链接到哪些对应的二进制文件中了？</p>
+<p>欢迎你在留言区跟我交流互动，也欢迎你把这节课分享给同事、朋友。</p>
+<p>我是LMOS，我们下节课见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

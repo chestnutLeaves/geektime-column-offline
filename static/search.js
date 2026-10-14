@@ -1,0 +1,2 @@
+/* 本地筛选课程名称，不上传搜索内容。 */
+document.querySelector(".search")?.addEventListener("input",function(){const q=this.value.trim().toLowerCase();document.querySelectorAll(".card").forEach(e=>e.hidden=!e.dataset.title.includes(q));});

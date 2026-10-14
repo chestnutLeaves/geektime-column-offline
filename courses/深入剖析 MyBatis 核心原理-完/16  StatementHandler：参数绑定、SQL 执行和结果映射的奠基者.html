@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16  StatementHandler：参数绑定、SQL 执行和结果映射的奠基者 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/index.html">深入剖析 MyBatis 核心原理-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入剖析 MyBatis 核心原理-完</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E9%A2%86%E7%95%A5%20MyBatis%20%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4%EF%BC%8C%E7%AA%81%E7%A0%B4%E6%8C%81%E4%B9%85%E5%8C%96%E6%8A%80%E6%9C%AF%E7%93%B6%E9%A2%88.html">00 开篇词  领略 MyBatis 设计思维，突破持久化技术瓶颈</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/01%20%20%E5%B8%B8%E8%A7%81%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6%E8%B5%8F%E6%9E%90%EF%BC%8C%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%AE%A9%E4%BD%A0%E9%80%89%E6%8B%A9%20MyBatis%EF%BC%9F.html">01  常见持久层框架赏析，到底是什么让你选择 MyBatis？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/02%20%20%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E6%8C%81%E4%B9%85%E5%B1%82%E7%A4%BA%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%8C20%20%E5%88%86%E9%92%9F%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%20MyBatis.html">02  订单系统持久层示例分析，20 分钟带你快速上手 MyBatis</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/03%20%20MyBatis%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90.html">03  MyBatis 源码环境搭建及整体架构解析</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/04%20%20MyBatis%20%E5%8F%8D%E5%B0%84%E5%B7%A5%E5%85%B7%E7%AE%B1%EF%BC%9A%E5%B8%A6%E4%BD%A0%E9%A2%86%E7%95%A5%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E5%8F%8D%E5%B0%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF.html">04  MyBatis 反射工具箱：带你领略不一样的反射设计思路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/05%20%20%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB%E5%9E%8B%E4%BD%93%E7%B3%BB%E4%B8%8E%20Java%20%E7%B1%BB%E5%9E%8B%E4%BD%93%E7%B3%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E2%80%9C%E7%88%B1%E6%81%A8%E6%83%85%E4%BB%87%E2%80%9D.html">05  数据库类型体系与 Java 类型体系之间的“爱恨情仇”</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/06%20%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%8D%83%E5%8D%83%E4%B8%87%EF%BC%8CMyBatis%20%E9%83%BD%E8%83%BD%E5%85%BC%E5%AE%B9%E7%9A%84%E7%A7%98%E5%AF%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">06  日志框架千千万，MyBatis 都能兼容的秘密是什么？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/07%20%20%E6%B7%B1%E5%85%A5%E6%95%B0%E6%8D%AE%E6%BA%90%E5%92%8C%E4%BA%8B%E5%8A%A1%EF%BC%8C%E6%8A%8A%E6%8F%A1%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%85%B3%E9%94%AE%E5%91%BD%E8%84%89.html">07  深入数据源和事务，把握持久化框架的两个关键命脉</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/08%20%20Mapper%20%E6%96%87%E4%BB%B6%E4%B8%8E%20Java%20%E6%8E%A5%E5%8F%A3%E7%9A%84%E4%BC%98%E9%9B%85%E6%98%A0%E5%B0%84%E4%B9%8B%E9%81%93.html">08  Mapper 文件与 Java 接口的优雅映射之道</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/09%20%20%E5%9F%BA%E4%BA%8E%20MyBatis%20%E7%BC%93%E5%AD%98%E5%88%86%E6%9E%90%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.html">09  基于 MyBatis 缓存分析装饰器模式的最佳实践</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/10%20%20%E9%B8%9F%E7%9E%B0%20MyBatis%20%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E6%8A%8A%E6%8F%A1%20MyBatis%20%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E8%84%89%E7%BB%9C%EF%BC%88%E4%B8%8A%EF%BC%89.html">10  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/11%20%20%E9%B8%9F%E7%9E%B0%20MyBatis%20%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E6%8A%8A%E6%8F%A1%20MyBatis%20%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E8%84%89%E7%BB%9C%EF%BC%88%E4%B8%8B%EF%BC%89.html">11  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/12%20%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E5%8A%A8%E6%80%81%20SQL%20%E8%AF%AD%E5%8F%A5%E8%A7%A3%E6%9E%90%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">12  深入分析动态 SQL 语句解析全流程（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/13%20%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E5%8A%A8%E6%80%81%20SQL%20%E8%AF%AD%E5%8F%A5%E8%A7%A3%E6%9E%90%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">13  深入分析动态 SQL 语句解析全流程（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/14%20%20%E6%8E%A2%E7%A9%B6%20MyBatis%20%E7%BB%93%E6%9E%9C%E9%9B%86%E6%98%A0%E5%B0%84%E6%9C%BA%E5%88%B6%E8%83%8C%E5%90%8E%E7%9A%84%E7%A7%98%E5%AF%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">14  探究 MyBatis 结果集映射机制背后的秘密（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/15%20%20%E6%8E%A2%E7%A9%B6%20MyBatis%20%E7%BB%93%E6%9E%9C%E9%9B%86%E6%98%A0%E5%B0%84%E6%9C%BA%E5%88%B6%E8%83%8C%E5%90%8E%E7%9A%84%E7%A7%98%E5%AF%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">15  探究 MyBatis 结果集映射机制背后的秘密（下）</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/16%20%20StatementHandler%EF%BC%9A%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A%E3%80%81SQL%20%E6%89%A7%E8%A1%8C%E5%92%8C%E7%BB%93%E6%9E%9C%E6%98%A0%E5%B0%84%E7%9A%84%E5%A5%A0%E5%9F%BA%E8%80%85.html">16  StatementHandler：参数绑定、SQL 执行和结果映射的奠基者</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/17%20%20Executor%20%E6%89%8D%E6%98%AF%E6%89%A7%E8%A1%8C%20SQL%20%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%B9%95%E5%90%8E%E6%8E%A8%E6%89%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">17  Executor 才是执行 SQL 语句的幕后推手（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/18%20%20Executor%20%E6%89%8D%E6%98%AF%E6%89%A7%E8%A1%8C%20SQL%20%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%B9%95%E5%90%8E%E6%8E%A8%E6%89%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">18  Executor 才是执行 SQL 语句的幕后推手（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/19%20%20%E6%B7%B1%E5%85%A5%20MyBatis%20%E5%86%85%E6%A0%B8%E4%B8%8E%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E7%9A%84%E6%A1%A5%E6%A2%81%E2%80%94%E2%80%94%E6%8E%A5%E5%8F%A3%E5%B1%82.html">19  深入 MyBatis 内核与业务逻辑的桥梁——接口层</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/20%20%20%E6%8F%92%E4%BB%B6%E4%BD%93%E7%B3%BB%E8%AE%A9%20MyBatis%20%E4%B8%96%E7%95%8C%E6%9B%B4%E5%8A%A0%E7%B2%BE%E5%BD%A9.html">20  插件体系让 MyBatis 世界更加精彩</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/21%20%20%E6%B7%B1%E6%8C%96%20MyBatis%20%E4%B8%8E%20Spring%20%E9%9B%86%E6%88%90%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86.html">21  深挖 MyBatis 与 Spring 集成底层原理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/22%20%20%E5%9F%BA%E4%BA%8E%20MyBatis%20%E7%9A%84%E8%A1%8D%E7%94%9F%E6%A1%86%E6%9E%B6%E4%B8%80%E8%A7%88.html">22  基于 MyBatis 的衍生框架一览</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/23%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E4%BC%9A%E4%BD%BF%E7%94%A8%E5%8F%AA%E8%83%BD%E9%BB%98%E9%BB%98%E2%80%9C%E6%90%AC%E7%A0%96%E2%80%9D%EF%BC%8C%E6%87%82%E5%8E%9F%E7%90%86%E6%89%8D%E8%83%BD%E5%BF%AB%E9%80%9F%E6%99%8B%E5%8D%87.html">23 结束语  会使用只能默默“搬砖”，懂原理才能快速晋升</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/16%20%20StatementHandler%EF%BC%9A%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A%E3%80%81SQL%20%E6%89%A7%E8%A1%8C%E5%92%8C%E7%BB%93%E6%9E%9C%E6%98%A0%E5%B0%84%E7%9A%84%E5%A5%A0%E5%9F%BA%E8%80%85.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="16  StatementHandler：参数绑定、SQL 执行和结果映射的奠基者" id="title">16  StatementHandler：参数绑定、SQL 执行和结果映射的奠基者</h1>
+<div><p><strong>StatementHandler 接口是 MyBatis 中非常重要的一个接口</strong>，其实现类完成 SQL 语句执行中最核心的一系列操作，这也是后面我们要介绍的 Executor 接口实现的基础。</p>
+<p>StatementHandler 接口的定义如下图所示：</p>
+<p><img alt="Drawing 0.png" src="/assets/07143f155851aa63a2b77a1d.png"/></p>
+<p>StatementHandler 接口中定义的方法</p>
+<p>可以看到，其中提供了创建 Statement 对象（prepare() 方法）、为 SQL 语句绑定实参（parameterize() 方法）、执行单条 SQL 语句（query() 方法和 update() 方法）、批量执行 SQL 语句（batch() 方法）等多种功能。</p>
+<p>下图展示了 MyBatis 中提供的所有 StatementHandler 接口实现类，以及它们的继承关系：</p>
+<p><img alt="图片3.png" src="/assets/37808997b109d28fbf9e49c3.png"/></p>
+<p>StatementHandler 接口继承关系图</p>
+<p>今天这一讲我们就来详细分析该继承关系图中每个 StatementHandler 实现的核心逻辑。</p>
+<h3 id="routingstatementhandler">RoutingStatementHandler</h3>
+<p>RoutingStatementHandler 这个 StatementHandler 实现，有点<strong>策略模式</strong>的意味。在 RoutingStatementHandler 的构造方法中，会根据 MappedStatement 中的 statementType 字段值，选择相应的 StatementHandler 实现进行创建，这个新建的 StatementHandler 对象由 RoutingStatementHandler 中的 delegate 字段维护。</p>
+<p>RoutingStatementHandler 的构造方法如下：</p>
+<pre><code>public RoutingStatementHandler(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
+
+    // 下面就是根据MappedStatement的配置，生成一个相应的StatementHandler对
+
+    // 象，并设置到delegate字段中维护
+
+    switch (ms.getStatementType()) {
+
+        case STATEMENT:
+
+            // 创建SimpleStatementHandler对象
+
+            delegate = new SimpleStatementHandler(executor, ms, parameter, rowBounds, resultHandler, boundSql);
+
+            break;
+
+        case PREPARED:
+
+            // 创建PreparedStatementHandler对象
+
+            delegate = new PreparedStatementHandler(executor, ms, parameter, rowBounds, resultHandler, boundSql);
+
+            break;
+
+        case CALLABLE:
+
+            // 创建CallableStatementHandler对象
+
+            delegate = new CallableStatementHandler(executor, ms, parameter, rowBounds, resultHandler, boundSql);
+
+            break;
+
+        default: // 抛出异常
+
+            throw new ExecutorException("...");
+
+    }
+
+}
+</code></pre>
+<p>在 RoutingStatementHandler 的其他方法中，<strong>都会委托给底层的 delegate 对象来完成具体的逻辑</strong>。</p>
+<h3 id="basestatementhandler">BaseStatementHandler</h3>
+<p>作为一个抽象类，BaseStatementHandler 只实现了 StatementHandler 接口的 prepare() 方法，其 prepare() 方法实现为新建的 Statement 对象设置了一些参数，例如，timeout、fetchSize 等。BaseStatementHandler 还新增了一个 instantiateStatement() 抽象方法给子类实现，来完成 Statement 对象的其他初始化操作。不过，BaseStatementHandler 中并没有实现 StatementHandler 接口中的数据库操作等核心方法。</p>
+<p>了解了 BaseStatementHandler 对 StatementHandler 接口的实现情况之后，我们再来看一下 BaseStatementHandler 的构造方法，其中会<strong>初始化执行 SQL 需要的 Executor 对象</strong>、<strong>为 SQL 绑定实参的 ParameterHandler 对象</strong>以及<strong>生成结果对象的 ResultSetHandler 对象</strong>。这三个核心对象中，ResultSetHandler 对象我们已经在[《14 | 探究 MyBatis 结果集映射机制背后的秘密（上）》]中介绍过了，ParameterHandler 和 Executor 在后面会展开介绍。</p>
+<h4 id="1-keygenerator">1. KeyGenerator</h4>
+<p>这里需要关注的是 generateKeys() 方法，其中会<strong>通过 KeyGenerator 接口生成主键</strong>，下面我们就来看看 KeyGenerator 接口的相关内容。</p>
+<p>我们知道不同数据库的自增 id 生成策略并不完全一样。例如，我们常见的 Oracle DB 是通过sequence 实现自增 id 的，如果使用自增 id 作为主键，就需要我们先获取到这个自增的 id 值，然后再使用；MySQL 在使用自增 id 作为主键的时候，insert 语句中可以不指定主键，在插入过程中由 MySQL 自动生成 id。KeyGenerator 接口支持 insert 语句执行前后获取自增的 id，分别对应 processBefore() 方法和 processAfter() 方法，下图展示了 MyBatis 提供的两个 KeyGenerator 接口实现：</p>
+<p><img alt="图片4.png" src="/assets/16c575018204fa6a1012189f.png"/></p>
+<p>KeyGenerator 接口继承关系图</p>
+<p><strong>Jdbc3KeyGenerator 用于获取数据库生成的自增 id（例如 MySQL 那种生成模式）</strong>，其 processBefore() 方法是空实现，processAfter() 方法会将 insert 语句执行后生成的主键保存到用户传递的实参中。我们在使用 MyBatis 执行单行 insert 语句时，一般传入的实参是一个 POJO 对象或是 Map 对象，生成的主键会设置到对应的属性中；执行多条 insert 语句时，一般传入实参是 POJO 对象集合或 Map 对象的数组或集合，集合中每一个元素都对应一次插入操作，生成的多个自增 id 也会设置到每个元素的相应属性中。</p>
+<p>Jdbc3KeyGenerator 中获取数据库自增 id 的核心代码片段如下：</p>
+<pre><code>// 将数据库生成的自增id作为结果集返回
+
+try (ResultSet rs = stmt.getGeneratedKeys()) { 
+
+    final ResultSetMetaData rsmd = rs.getMetaData();
+
+    final Configuration configuration = ms.getConfiguration();
+
+    if (rsmd.getColumnCount() &lt; keyProperties.length) {
+
+    } else {
+
+        // 处理rs这个结果集，将生成的id设置到对应的属性中
+
+        assignKeys(configuration, rs, rsmd, keyProperties, parameter);
+
+    }
+
+} catch (Exception e) {
+
+    throw new ExecutorException("...");
+
+}
+</code></pre>
+<p><strong>如果使用像 Oracle 这种不支持自动生成主键自增 id 的数据库时，我们可以使用 SelectkeyGenerator 来生成主键 id</strong>。Mapper 映射文件中的<code>&lt;selectKey&gt;</code>标签会被解析成 SelectkeyGenerator 对象，其中的 executeBefore 属性（boolean 类型）决定了是在 insert 语句执行之前获取主键，还是在 insert 语句执行之后获取主键 id。</p>
+<p>SelectkeyGenerator 中的 processBefore() 方法和 processAfter() 方法都是通过 processGeneratedKeys() 这个私有方法获取主键 id 的，processGeneratedKeys() 方法会执行<code>&lt;selectKey&gt;</code>标签中指定的 select 语句，查询主键信息，并记录到用户传入的实参对象的对应属性中，核心代码片段如下所示：</p>
+<pre><code>// 创建一个新的Executor对象来执行指定的select语句
+
+Executor keyExecutor = configuration.newExecutor(executor.getTransaction(), ExecutorType.SIMPLE);
+
+// 拿到主键信息
+
+List&lt;Object&gt; values = keyExecutor.query(keyStatement, parameter, RowBounds.DEFAULT, Executor.NO_RESULT_HANDLER);
+
+if (values.size() == 0) {
+
+    throw new ExecutorException("SelectKey returned no data.");
+
+} else if (values.size() &gt; 1) {
+
+    throw new ExecutorException("SelectKey returned more than one value.");
+
+} else {
+
+    // 创建实参对象的MetaObject对象
+
+    final MetaObject metaParam = configuration.newMetaObject(parameter);
+
+    MetaObject metaResult = configuration.newMetaObject(values.get(0));
+
+    if (keyProperties.length == 1) {
+
+        // 将主键信息记录到用户传入的实参对象中
+
+        if (metaResult.hasGetter(keyProperties[0])) {
+
+            setValue(metaParam, keyProperties[0], metaResult.getValue(keyProperties[0]));
+
+        } else {
+
+            setValue(metaParam, keyProperties[0], values.get(0));
+
+        }
+
+    } else {
+
+        ... // 多结果集的处理
+
+    }
+
+}
+</code></pre>
+<h4 id="2-parameterhandler">2. ParameterHandler</h4>
+<p>介绍完 KeyGenerator 接口之后，我们再来看一下 BaseStatementHandler 中依赖的另一个辅助类—— ParameterHandler。</p>
+<p>经过前面[《13 | 深入分析动态 SQL 语句解析全流程（下）》]介绍的一系列 SqlNode 的处理之后，我们得到的 SQL 语句（维护在 BoundSql 对象中）可能包含多个“?”占位符，与此同时，用于替换每个“?”占位符的实参都记录在 BoundSql.parameterMappings 集合中。</p>
+<p>ParameterHandler 接口中定义了两个方法：一个是 getParameterObject() 方法，用来获取传入的实参对象；另一个是 setParameters() 方法，用来替换“?”占位符，这是 ParameterHandler 的<strong>核心方法</strong>。</p>
+<p><strong>DefaultParameterHandler 是 ParameterHandler 接口的唯一实现，其 setParameters() 方法会遍历 BoundSql.parameterMappings 集合</strong>，根据参数名称查找相应实参，最后会通过 PreparedStatement.set*() 方法与 SQL 语句进行绑定。setParameters() 方法的具体代码如下：</p>
+<pre><code>for (int i = 0; i &lt; parameterMappings.size(); i++) {
+
+    ParameterMapping parameterMapping = parameterMappings.get(i);
+
+    Object value;
+
+    String propertyName = parameterMapping.getProperty();
+
+    // 获取实参值
+
+    if (boundSql.hasAdditionalParameter(propertyName)) {
+
+        value = boundSql.getAdditionalParameter(propertyName);
+
+    } else if (parameterObject == null) {
+
+        value = null;
+
+    } else if (typeHandlerRegistry.hasTypeHandler(parameterObject.getClass())) {
+
+        value = parameterObject;
+
+    } else {
+
+        MetaObject metaObject = configuration.newMetaObject(parameterObject);
+
+        value = metaObject.getValue(propertyName);
+
+    }
+
+    // 获取TypeHandler
+
+    TypeHandler typeHandler = parameterMapping.getTypeHandler();
+
+    JdbcType jdbcType = parameterMapping.getJdbcType();
+
+    // 底层会调用PreparedStatement.set*()方法完成绑定
+
+    typeHandler.setParameter(ps, i + 1, value, jdbcType);
+
+}
+</code></pre>
+<h3 id="simplestatementhandler">SimpleStatementHandler</h3>
+<p>SimpleStatementHandler 是 StatementHandler 的具体实现之一，继承了 BaseStatementHandler 抽象类。SimpleStatementHandler 各个方法接收的是 java.sql.Statement 对象，并通过该对象来完成 CRUD 操作，所以在 SimpleStatementHandler 中<strong>维护的 SQL 语句不能存在“?”占位符</strong>，填充占位符的 parameterize() 方法也是空实现。</p>
+<p>在 instantiateStatement() 这个初始化方法中，SimpleStatementHandler 会直接通过 JDBC Connection 创建 Statement 对象，这个对象也是后续 SimpleStatementHandler 其他方法的入参。</p>
+<p>在 query() 方法实现中，SimpleStatementHandler 会直接通过上面创建的 Statement 对象，执行 SQL 语句，返回的结果集由 ResultSetHandler 完成映射，核心代码如下：</p>
+<pre><code>public &lt;E&gt; List&lt;E&gt; query(Statement statement, ResultHandler resultHandler) throws SQLException {、
+
+    // 获取SQL语句
+
+    String sql = boundSql.getSql();
+
+    // 执行SQL语句
+
+    statement.execute(sql);
+
+    // 处理ResultSet映射，得到结果对象
+
+    return resultSetHandler.handleResultSets(statement);
+
+}
+</code></pre>
+<p>queryCursor() 方法与 query() 方法实现类似，这里就不再赘述。</p>
+<p>batch() 方法调用的是 Statement.addBatch() 方法添加批量执行的 SQL 语句，但并不是立即执行，而是等待 Statement.executeBatch() 方法执行时才会批量执行，这点你稍微注意一下即可。</p>
+<p>至于 update() 方法，首先会通过 Statement.execute() 方法执行 insert、update 或 delete 类型的 SQL 语句，然后执行 KeyGenerator.processAfter() 方法查询主键并填充相应属性（processBefore() 方法已经在 prepare() 方法中执行过了），最后通过 Statement.getUpdateCount() 方法获取 SQL 语句影响的行数并返回。</p>
+<h3 id="preparedstatementhandler">PreparedStatementHandler</h3>
+<p>PreparedStatementHandler 是 StatementHandler 的具体实现之一，也是最常用的 StatementHandler 实现，它同样继承了 BaseStatementHandler 抽象类。PreparedStatementHandler 各个方法接收的是 java.sql.PreparedStatement 对象，并通过该对象来完成 CRUD 操作，在其 parameterize() 方法中会通过前面介绍的 ParameterHandler调用 PreparedStatement.set*() 方法为 SQL 语句绑定参数，所以在 PreparedStatementHandler 中<strong>维护的 SQL 语句是可以包含“?”占位符的</strong>。</p>
+<p>在 instantiateStatement() 方法中，PreparedStatementHandler 会直接通过 JDBC Connection 的 prepareStatement() 方法创建 PreparedStatement 对象，该对象就是 PreparedStatementHandler 其他方法的入参。</p>
+<p>PreparedStatementHandler 的 query() 方法、batch() 方法以及 update() 方法与 SimpleStatementHandler 的实现基本相同，只不过是把 Statement API 换成了 PrepareStatement API 而已。下面我们以 update() 方法为例进行简单介绍：</p>
+<pre><code>public int update(Statement statement) throws SQLException {
+
+    PreparedStatement ps = (PreparedStatement) statement;
+
+    ps.execute(); // 执行SQL语句，修改数据
+
+    int rows = ps.getUpdateCount(); // 获取影响行数
+
+    // 获取实参对象
+
+    Object parameterObject = boundSql.getParameterObject();
+
+    // 执行KeyGenerator
+
+    KeyGenerator keyGenerator = mappedStatement.getKeyGenerator();
+
+    keyGenerator.processAfter(executor, mappedStatement, ps, parameterObject);
+
+    return rows; // 返回影响行数
+
+}
+</code></pre>
+<h3 id="callablestatementhandler">CallableStatementHandler</h3>
+<p><strong>CallableStatementHandler 是处理存储过程的 StatementHandler 实现</strong>，其 instantiateStatement() 方法会通过 JDBC Connection 的 prepareCall() 方法为指定存储过程创建对应的 java.sql.CallableStatement 对象。在 parameterize() 方法中，CallableStatementHandler 除了会通过 ParameterHandler 完成实参的绑定之外，还会指定输出参数的位置和类型。</p>
+<p>在 CallableStatementHandler 的 query()、queryCursor()、update() 方法中，除了处理 SQL 语句本身的结果集（ResultSet 结果集或是影响行数），还会通过 ResultSetHandler 的 handleOutputParameters() 方法处理输出参数，这是与 PreparedStatementHandler 最大的不同。下面我们以 query() 方法为例进行简单分析：</p>
+<pre><code>public &lt;E&gt; List&lt;E&gt; query(Statement statement, ResultHandler resultHandler) throws SQLException {
+
+    CallableStatement cs = (CallableStatement) statement;
+
+    cs.execute(); // 执行存储过程
+
+    // 处理存储过程返回的结果集
+
+    List&lt;E&gt; resultList = resultSetHandler.handleResultSets(cs);
+
+    // 处理输出参数，可能修改resultList集合
+
+    resultSetHandler.handleOutputParameters(cs);
+
+    // 返回最后的结果对象
+
+    return resultList;
+
+}
+</code></pre>
+<h3 id="总结">总结</h3>
+<p>这一讲我们重点讲解了 MyBatis 中的 StatementHandler 接口及其核心实现，StatementHandler 接口中定义了执行一条 SQL 语句的核心方法。</p>
+<ul>
+<li>首先，分析了 RoutingStatementHandler 实现，它可以帮助我们选择真正的 StatementHandler 实现类。</li>
+<li>接下来，介绍了 BaseStatementHandler 这个抽象类的实现，同时还详细阐述了其中使用到的 KeyGenerator 和 ParameterHandler。</li>
+<li>最后，又介绍了 SimpleStatementHandler、PreparedStatementHandler 等实现，它们基于 JDBC API 接口，实现了完整的 StatementHandler 功能。</li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

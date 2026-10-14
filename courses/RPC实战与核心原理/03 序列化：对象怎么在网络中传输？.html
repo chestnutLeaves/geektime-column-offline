@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 序列化：对象怎么在网络中传输？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/index.html">RPC实战与核心原理</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">29 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>RPC实战与核心原理</strong><ul><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%88%AB%E8%80%81%E6%83%B3%E7%9D%80%E6%80%8E%E4%B9%88%E7%94%A8%E5%A5%BDRPC%E6%A1%86%E6%9E%B6%EF%BC%8C%E4%BD%A0%E5%BE%97%E5%A4%9A%E8%8A%B1%E6%97%B6%E9%97%B4%E7%90%A2%E7%A3%A8%E5%8E%9F%E7%90%86.html">00 开篇词 别老想着怎么用好RPC框架，你得多花时间琢磨原理</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/01%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%EF%BC%9A%E8%83%BD%E5%90%A6%E7%94%BB%E5%BC%A0%E5%9B%BE%E8%A7%A3%E9%87%8A%E4%B8%8BRPC%E7%9A%84%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B%EF%BC%9F.html">01 核心原理：能否画张图解释下RPC的通信流程？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/02%20%E5%8D%8F%E8%AE%AE%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E5%8F%AF%E6%89%A9%E5%B1%95%E4%B8%94%E5%90%91%E5%90%8E%E5%85%BC%E5%AE%B9%E7%9A%84%E5%8D%8F%E8%AE%AE%EF%BC%9F.html">02 协议：怎么设计可扩展且向后兼容的协议？</a></li><li><a class="active" aria-current="page" href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/03%20%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9A%E5%AF%B9%E8%B1%A1%E6%80%8E%E4%B9%88%E5%9C%A8%E7%BD%91%E7%BB%9C%E4%B8%AD%E4%BC%A0%E8%BE%93%EF%BC%9F.html">03 序列化：对象怎么在网络中传输？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/04%20%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%EF%BC%9ARPC%E6%A1%86%E6%9E%B6%E5%9C%A8%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E4%B8%8A%E6%9B%B4%E5%80%BE%E5%90%91%E4%BA%8E%E5%93%AA%E7%A7%8D%E7%BD%91%E7%BB%9CIO%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">04 网络通信：RPC框架在网络通信上更倾向于哪种网络IO模型？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/05%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%EF%BC%9A%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B%EF%BC%8C%E5%B1%8F%E8%94%BDRPC%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.html">05 动态代理：面向接口编程，屏蔽RPC处理流程</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/06%20RPC%E5%AE%9E%E6%88%98%EF%BC%9A%E5%89%96%E6%9E%90gRPC%E6%BA%90%E7%A0%81%EF%BC%8C%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84RPC.html">06 RPC实战：剖析gRPC源码，动手实现一个完整的RPC</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/07%20%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%81%B5%E6%B4%BB%E7%9A%84RPC%E6%A1%86%E6%9E%B6.html">07 架构设计：设计一个灵活的RPC框架</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/08%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%EF%BC%9A%E5%88%B0%E5%BA%95%E6%98%AF%E8%A6%81CP%E8%BF%98%E6%98%AFAP%EF%BC%9F.html">08 服务发现：到底是要CP还是AP？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/09%20%E5%81%A5%E5%BA%B7%E6%A3%80%E6%B5%8B%EF%BC%9A%E8%BF%99%E4%B8%AA%E8%8A%82%E7%82%B9%E9%83%BD%E6%8C%82%E4%BA%86%EF%BC%8C%E4%B8%BA%E5%95%A5%E8%BF%98%E8%A6%81%E7%96%AF%E7%8B%82%E5%8F%91%E8%AF%B7%E6%B1%82%EF%BC%9F.html">09 健康检测：这个节点都挂了，为啥还要疯狂发请求？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/10%20%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AE%A9%E8%AF%B7%E6%B1%82%E6%8C%89%E7%85%A7%E8%AE%BE%E5%AE%9A%E7%9A%84%E8%A7%84%E5%88%99%E5%8F%91%E5%88%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E8%8A%82%E7%82%B9%E4%B8%8A%EF%BC%9F.html">10 路由策略：怎么让请求按照设定的规则发到不同的节点上？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/11%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E8%8A%82%E7%82%B9%E8%B4%9F%E8%BD%BD%E5%B7%AE%E8%B7%9D%E8%BF%99%E4%B9%88%E5%A4%A7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%B6%E5%88%B0%E7%9A%84%E6%B5%81%E9%87%8F%E8%BF%98%E4%B8%80%E6%A0%B7%EF%BC%9F.html">11 负载均衡：节点负载差距这么大，为什么收到的流量还一样？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/12%20%E5%BC%82%E5%B8%B8%E9%87%8D%E8%AF%95%EF%BC%9A%E5%9C%A8%E7%BA%A6%E5%AE%9A%E6%97%B6%E9%97%B4%E5%86%85%E5%AE%89%E5%85%A8%E5%8F%AF%E9%9D%A0%E5%9C%B0%E9%87%8D%E8%AF%95.html">12 异常重试：在约定时间内安全可靠地重试</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/13%20%E4%BC%98%E9%9B%85%E5%85%B3%E9%97%AD%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%9C%8D%E5%8A%A1%E5%81%9C%E6%9C%BA%E5%B8%A6%E6%9D%A5%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%8D%9F%E5%A4%B1%EF%BC%9F.html">13 优雅关闭：如何避免服务停机带来的业务损失？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/14%20%E4%BC%98%E9%9B%85%E5%90%AF%E5%8A%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%B5%81%E9%87%8F%E6%89%93%E5%88%B0%E6%B2%A1%E6%9C%89%E5%90%AF%E5%8A%A8%E5%AE%8C%E6%88%90%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%9F.html">14 优雅启动：如何避免流量打到没有启动完成的节点？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/15%20%E7%86%94%E6%96%AD%E9%99%90%E6%B5%81%EF%BC%9A%E4%B8%9A%E5%8A%A1%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4_.html">15 熔断限流：业务如何实现自我保护_</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/16%20%E4%B8%9A%E5%8A%A1%E5%88%86%E7%BB%84%EF%BC%9A%E5%A6%82%E4%BD%95%E9%9A%94%E7%A6%BB%E6%B5%81%E9%87%8F%EF%BC%9F.html">16 业务分组：如何隔离流量？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/17%20%E5%BC%82%E6%AD%A5RPC%EF%BC%9A%E5%8E%8B%E6%A6%A8%E5%8D%95%E6%9C%BA%E5%90%9E%E5%90%90%E9%87%8F.html">17 异步RPC：压榨单机吞吐量</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/18%20%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%EF%BC%9F.html">18 安全体系：如何建立可靠的安全体系？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/19%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%EF%BC%9F.html">19 分布式环境下如何快速定位问题？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/20%20%E8%AF%A6%E8%A7%A3%E6%97%B6%E9%92%9F%E8%BD%AE%E5%9C%A8RPC%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">20 详解时钟轮在RPC中的应用</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/21%20%E6%B5%81%E9%87%8F%E5%9B%9E%E6%94%BE%EF%BC%9A%E4%BF%9D%E9%9A%9C%E4%B8%9A%E5%8A%A1%E6%8A%80%E6%9C%AF%E5%8D%87%E7%BA%A7%E7%9A%84%E7%A5%9E%E5%99%A8.html">21 流量回放：保障业务技术升级的神器</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/22%20%E5%8A%A8%E6%80%81%E5%88%86%E7%BB%84%EF%BC%9A%E8%B6%85%E9%AB%98%E6%95%88%E5%AE%9E%E7%8E%B0%E7%A7%92%E7%BA%A7%E6%89%A9%E7%BC%A9%E5%AE%B9.html">22 动态分组：超高效实现秒级扩缩容</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/23%20%E5%A6%82%E4%BD%95%E5%9C%A8%E6%B2%A1%E6%9C%89%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E8%BF%9B%E8%A1%8CRPC%E8%B0%83%E7%94%A8%EF%BC%9F.html">23 如何在没有接口的情况下进行RPC调用？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/24%20%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E4%B8%8A%E7%8E%AF%E5%A2%83%E9%87%8C%E5%85%BC%E5%AE%B9%E5%A4%9A%E7%A7%8DRPC%E5%8D%8F%E8%AE%AE%EF%BC%9F.html">24 如何在线上环境里兼容多种RPC协议？</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/%E5%8A%A0%E9%A4%90%20RPC%E6%A1%86%E6%9E%B6%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3.html">加餐 RPC框架代码实例详解</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/%E5%8A%A0%E9%A4%90%20%E8%B0%88%E8%B0%88%E6%88%91%E6%89%80%E7%BB%8F%E5%8E%86%E8%BF%87%E7%9A%84RPC.html">加餐 谈谈我所经历过的RPC</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/%E7%AD%94%E7%96%91%E8%AF%BE%E5%A0%82%20%E5%9F%BA%E7%A1%80%E7%AF%87%E4%B8%8E%E8%BF%9B%E9%98%B6%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑课堂 基础篇与进阶篇思考题答案合集</a></li><li><a href="/courses/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%AD%A6%E4%BC%9A%E4%BB%8E%E4%BC%98%E7%A7%80%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%BA%90%E4%BB%A3%E7%A0%81%E4%B8%AD%E6%8C%96%E6%8E%98%E7%9F%A5%E8%AF%86.html">结束语 学会从优秀项目的源代码中挖掘知识</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/RPC%E5%AE%9E%E6%88%98%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/03%20%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9A%E5%AF%B9%E8%B1%A1%E6%80%8E%E4%B9%88%E5%9C%A8%E7%BD%91%E7%BB%9C%E4%B8%AD%E4%BC%A0%E8%BE%93%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="03 序列化：对象怎么在网络中传输？" id="title">03 序列化：对象怎么在网络中传输？</h1>
+<div><p>你好，我是何小锋。上一讲我讲解了在RPC框架中，如何设计可扩展的、向后兼容的协议，其关键点就是利用好Header中的扩展字段以及Payload中的扩展字段，通过扩展字段向后兼容。</p>
+<p>那么承接上一讲的一个重点，今天我会讲解下RPC框架中的序列化。要知道，在不同的场景下合理地选择序列化方式，对提升RPC框架整体的稳定性和性能是至关重要的。</p>
+<h2 id="为什么需要序列化">为什么需要序列化？</h2>
+<p>首先，我们得知道什么是序列化与反序列化。</p>
+<p>我们先回顾下<a href="https://time.geekbang.org/column/article/199650" target="_blank">[第 01 讲]</a> 介绍过的RPC原理的内容，在描述RPC通信流程的时候我说过：</p>
+<p>网络传输的数据必须是二进制数据，但调用方请求的出入参数都是对象。对象是不能直接在网络中传输的，所以我们需要提前把它转成可传输的二进制，并且要求转换算法是可逆的，这个过程我们一般叫做“序列化”。 这时，服务提供方就可以正确地从二进制数据中分割出不同的请求，同时根据请求类型和序列化类型，把二进制的消息体逆向还原成请求对象，这个过程我们称之为“反序列化”。</p>
+<p>这两个过程如下图所示：</p>
+<p><img alt="" src="/assets/1200e613c0d1b2ce7015b52d.jpg"/></p>
+<p><strong>总结来说，</strong>序列化就是将对象转换成二进制数据的过程，而反序列就是反过来将二进制转换为对象的过程。</p>
+<p>那么RPC框架为什么需要序列化呢？还是请你回想下RPC的通信流程：</p>
+<p><img alt="" src="/assets/61132ec71c7cabbdc84dc2fc.jpg"/></p>
+<p>不妨借用个例子帮助你理解，比如发快递，我们要发一个需要自行组装的物件。发件人发之前，会把物件拆开装箱，这就好比序列化；这时候快递员来了，不能磕碰呀，那就要打包，这就好比将序列化后的数据进行编码，封装成一个固定格式的协议；过了两天，收件人收到包裹了，就会拆箱将物件拼接好，这就好比是协议解码和反序列化。</p>
+<p>所以现在你清楚了吗？因为网络传输的数据必须是二进制数据，所以在RPC调用中，对入参对象与返回值对象进行序列化与反序列化是一个必须的过程。</p>
+<h2 id="有哪些常用的序列化">有哪些常用的序列化？</h2>
+<p>那这么看来，你会不会觉得这个过程很简单呢？实则不然，很复杂。我们可以先看看都有哪些常用的序列化，下面我来简单地介绍下几种常用的序列化方式。</p>
+<h3 id="jdk原生序列化">JDK原生序列化</h3>
+<p>如果你会使用Java语言开发，那么你一定知道JDK原生的序列化，下面是JDK序列化的一个例子：</p>
+<pre><code>import java.io.*;
+
+public class Student implements Serializable {
+    //学号
+    private int no;
+    //姓名
+    private String name;
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "no=" + no +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        String home = System.getProperty("user.home");
+        String basePath = home + "/Desktop";
+        FileOutputStream fos = new FileOutputStream(basePath + "student.dat");
+        Student student = new Student();
+        student.setNo(100);
+        student.setName("TEST_STUDENT");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(student);
+        oos.flush();
+        oos.close();
+
+        FileInputStream fis = new FileInputStream(basePath + "student.dat");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        Student deStudent = (Student) ois.readObject();
+        ois.close();
+
+        System.out.println(deStudent);
+
+    }
+}
+</code></pre>
+<p>我们可以看到，JDK自带的序列化机制对使用者而言是非常简单的。序列化具体的实现是由ObjectOutputStream完成的，而反序列化的具体实现是由ObjectInputStream完成的。</p>
+<p>那么JDK的序列化过程是怎样完成的呢？我们看下下面这张图：</p>
+<p><img alt="" src="/assets/d73e56fed7980a0e3cc8f313.jpg"/></p>
+<p>序列化过程就是在读取对象数据的时候，不断加入一些特殊分隔符，这些特殊分隔符用于在反序列化过程中截断用。</p>
+<ul>
+<li>头部数据用来声明序列化协议、序列化版本，用于高低版本向后兼容</li>
+<li>对象数据主要包括类名、签名、属性名、属性类型及属性值，当然还有开头结尾等数据，除了属性值属于真正的对象值，其他都是为了反序列化用的元数据</li>
+<li>存在对象引用、继承的情况下，就是递归遍历“写对象”逻辑</li>
+</ul>
+<p><strong>实际上任何一种序列化框架，核心思想就是设计一种序列化协议</strong>，将对象的类型、属性类型、属性值一一按照固定的格式写到二进制字节流中来完成序列化，再按照固定的格式一一读出对象的类型、属性类型、属性值，通过这些信息重新创建出一个新的对象，来完成反序列化。</p>
+<h3 id="json">JSON</h3>
+<p>JSON可能是我们最熟悉的一种序列化格式了，JSON是典型的Key-Value方式，没有数据类型，是一种文本型序列化框架，JSON的具体格式和特性，网上相关的资料非常多，这里就不再介绍了。</p>
+<p>他在应用上还是很广泛的，无论是前台Web用Ajax调用、用磁盘存储文本类型的数据，还是基于HTTP协议的RPC框架通信，都会选择JSON格式。</p>
+<p>但用JSON进行序列化有这样两个问题，你需要格外注意：</p>
+<ul>
+<li>JSON进行序列化的额外空间开销比较大，对于大数据量服务这意味着需要巨大的内存和磁盘开销；</li>
+<li>JSON没有类型，但像Java这种强类型语言，需要通过反射统一解决，所以性能不会太好。</li>
+</ul>
+<p>所以如果RPC框架选用JSON序列化，服务提供者与服务调用者之间传输的数据量要相对较小，否则将严重影响性能。</p>
+<h3 id="hessian">Hessian</h3>
+<p>Hessian是动态类型、二进制、紧凑的，并且可跨语言移植的一种序列化框架。Hessian协议要比JDK、JSON更加紧凑，性能上要比JDK、JSON序列化高效很多，而且生成的字节数也更小。</p>
+<p>使用代码示例如下：</p>
+<pre><code>Student student = new Student();
+student.setNo(101);
+student.setName("HESSIAN");
+
+//把student对象转化为byte数组
+ByteArrayOutputStream bos = new ByteArrayOutputStream();
+Hessian2Output output = new Hessian2Output(bos);
+output.writeObject(student);
+output.flushBuffer();
+byte[] data = bos.toByteArray();
+bos.close();
+
+//把刚才序列化出来的byte数组转化为student对象
+ByteArrayInputStream bis = new ByteArrayInputStream(data);
+Hessian2Input input = new Hessian2Input(bis);
+Student deStudent = (Student) input.readObject();
+input.close();
+
+System.out.println(deStudent);
+</code></pre>
+<p>相对于JDK、JSON，由于Hessian更加高效，生成的字节数更小，有非常好的兼容性和稳定性，所以Hessian更加适合作为RPC框架远程通信的序列化协议。</p>
+<p>但Hessian本身也有问题，官方版本对Java里面一些常见对象的类型不支持，比如：</p>
+<ul>
+<li>Linked系列，LinkedHashMap、LinkedHashSet等，但是可以通过扩展CollectionDeserializer类修复；</li>
+<li>Locale类，可以通过扩展ContextSerializerFactory类修复；</li>
+<li>Byte/Short反序列化的时候变成Integer。</li>
+</ul>
+<p>以上这些情况，你在实践时需要格外注意。</p>
+<h3 id="protobuf">Protobuf</h3>
+<p>Protobuf 是 Google 公司内部的混合语言数据标准，是一种轻便、高效的结构化数据存储格式，可以用于结构化数据序列化，支持Java、Python、C++、Go等语言。Protobuf使用的时候需要定义IDL（Interface description language），然后使用不同语言的IDL编译器，生成序列化工具类，它的优点是：</p>
+<ul>
+<li>序列化后体积相比 JSON、Hessian小很多；</li>
+<li>IDL能清晰地描述语义，所以足以帮助并保证应用程序之间的类型不会丢失，无需类似 XML 解析器；</li>
+<li>序列化反序列化速度很快，不需要通过反射获取类型；</li>
+<li>消息格式升级和兼容性不错，可以做到向后兼容。</li>
+</ul>
+<p>使用代码示例如下：</p>
+<pre><code>/**
+ *
+ * // IDl 文件格式
+ * synax = "proto3";
+ * option java_package = "com.test";
+ * option java_outer_classname = "StudentProtobuf";
+ *
+ * message StudentMsg {
+ * //序号
+ * int32 no = 1;
+ * //姓名
+ * string name = 2;
+ * }
+ * 
+ */
+ 
+StudentProtobuf.StudentMsg.Builder builder = StudentProtobuf.StudentMsg.newBuilder();
+builder.setNo(103);
+builder.setName("protobuf");
+
+//把student对象转化为byte数组
+StudentProtobuf.StudentMsg msg = builder.build();
+byte[] data = msg.toByteArray();
+
+//把刚才序列化出来的byte数组转化为student对象
+StudentProtobuf.StudentMsg deStudent = StudentProtobuf.StudentMsg.parseFrom(data);
+
+System.out.println(deStudent);
+</code></pre>
+<p>Protobuf 非常高效，但是对于具有反射和动态能力的语言来说，这样用起来很费劲，这一点就不如Hessian，比如用Java的话，这个预编译过程不是必须的，可以考虑使用Protostuff。</p>
+<p>Protostuff不需要依赖IDL文件，可以直接对Java领域对象进行反/序列化操作，在效率上跟Protobuf差不多，生成的二进制格式和Protobuf是完全相同的，可以说是一个Java版本的Protobuf序列化框架。但在使用过程中，我遇到过一些不支持的情况，也同步给你：</p>
+<ul>
+<li>不支持null；</li>
+<li>ProtoStuff不支持单纯的Map、List集合对象，需要包在对象里面。</li>
+</ul>
+<h2 id="rpc框架中如何选择序列化">RPC框架中如何选择序列化？</h2>
+<p>我刚刚简单地介绍了几种最常见的序列化协议，其实远不止这几种，还有 Message pack、kryo等。那么面对这么多的序列化协议，在RPC框架中我们该如何选择呢？</p>
+<p>首先你可能想到的是性能和效率，不错，这的确是一个非常值得参考的因素。我刚才讲过，序列化与反序列化过程是RPC调用的一个必须过程，那么序列化与反序列化的性能和效率势必将直接关系到RPC框架整体的性能和效率。</p>
+<p>那除了这点，你还想到了什么？</p>
+<p>对，还有空间开销，也就是序列化之后的二进制数据的体积大小。序列化后的字节数据体积越小，网络传输的数据量就越小，传输数据的速度也就越快，由于RPC是远程调用，那么网络传输的速度将直接关系到请求响应的耗时。</p>
+<p>现在请你再想想，还有什么因素可以影响到我们的选择？</p>
+<p>没错，就是序列化协议的通用性和兼容性。在RPC的运营中，序列化问题恐怕是我碰到的和解答过的最多的问题了，经常有业务会向我反馈这个问题，比如某个类型为集合类的入参服务调用者不能解析了，服务提供方将入参类加一个属性之后服务调用方不能正常调用，升级了RPC版本后发起调用时报序列化异常了…</p>
+<p>在序列化的选择上，与序列化协议的效率、性能、序列化协议后的体积相比，其通用性和兼容性的优先级会更高，因为他是会直接关系到服务调用的稳定性和可用率的，对于服务的性能来说，服务的可靠性显然更加重要。我们更加看重这种序列化协议在版本升级后的兼容性是否很好，是否支持更多的对象类型，是否是跨平台、跨语言的，是否有很多人已经用过并且踩过了很多的坑，其次我们才会去考虑性能、效率和空间开销。</p>
+<p>还有一点我要特别强调。除了序列化协议的通用性和兼容性，序列化协议的安全性也是非常重要的一个参考因素，甚至应该放在第一位去考虑。以JDK原生序列化为例，它就存在漏洞。如果序列化存在安全漏洞，那么线上的服务就很可能被入侵。</p>
+<p><img alt="" src="/assets/fddf1e1110d0c2314d473990.jpg"/></p>
+<p>综合上面几个参考因素，现在我们再来总结一下这几个序列化协议。</p>
+<p>我们首选的还是Hessian与Protobuf，因为他们在性能、时间开销、空间开销、通用性、兼容性和安全性上，都满足了我们的要求。其中Hessian在使用上更加方便，在对象的兼容性上更好；Protobuf则更加高效，通用性上更有优势。</p>
+<h2 id="rpc框架在使用时要注意哪些问题">RPC框架在使用时要注意哪些问题？</h2>
+<p>了解了在RPC框架中如何选择序列化，那么我们在使用过程中需要注意哪些序列化上的问题呢？</p>
+<p>我刚才讲过，在RPC的运营中，我遇到的最多的问题就是序列化问题了，除了早期RPC框架本身出现的问题以外，大多数问题都是使用方使用不正确导致的，接下来我们就盘点下这些高频出现的人为问题。</p>
+<p><strong>对象构造得过于复杂：</strong>属性很多，并且存在多层的嵌套，比如A对象关联B对象，B对象又聚合C对象，C对象又关联聚合很多其他对象，对象依赖关系过于复杂。序列化框架在序列化与反序列化对象时，对象越复杂就越浪费性能，消耗CPU，这会严重影响RPC框架整体的性能；另外，对象越复杂，在序列化与反序列化的过程中，出现问题的概率就越高。</p>
+<p><strong>对象过于庞大：</strong>我经常遇到业务过来咨询，为啥他们的RPC请求经常超时，排查后发现他们的入参对象非常得大，比如为一个大List或者大Map，序列化之后字节长度达到了上兆字节。这种情况同样会严重地浪费了性能、CPU，并且序列化一个如此大的对象是很耗费时间的，这肯定会直接影响到请求的耗时。</p>
+<p><strong>使用序列化框架不支持的类作为入参类：</strong>比如Hessian框架，他天然是不支持LinkedHashMap、LinkedHashSet等，而且大多数情况下最好不要使用第三方集合类，如Guava中的集合类，很多开源的序列化框架都是优先支持编程语言原生的对象。因此如果入参是集合类，应尽量选用原生的、最为常用的集合类，如HashMap、ArrayList。</p>
+<p><strong>对象有复杂的继承关系：</strong>大多数序列化框架在序列化对象时都会将对象的属性一一进行序列化，当有继承关系时，会不停地寻找父类，遍历属性。就像问题1一样，对象关系越复杂，就越浪费性能，同时又很容易出现序列化上的问题。</p>
+<p>在RPC框架的使用过程中，我们要尽量构建简单的对象作为入参和返回值对象，避免上述问题。</p>
+<h2 id="总结">总结</h2>
+<p>今天我们深入学习了什么是序列化，并介绍了如JDK原生序列化、JSON、Hessian以及Protobuf等几种常见的序列化方式。</p>
+<p>除了这些基础知识之外，我们重点讲解了在RPC框架中如何去选择序列化协议，我们有这样几个很重要的参考因素，优先级从高到低依次是安全性、通用性和兼容性，之后我们会再考虑序列化框架的性能、效率和空间开销。</p>
+<p>这归根结底还是因为服务调用的稳定性与可靠性，要比服务的性能与响应耗时更加重要。另外对于RPC调用来说，整体调用上，最为耗时、最消耗性能的操作大多都是服务提供者执行业务逻辑的操作，这时序列化的开销对于服务整体的开销来说影响相对较小。</p>
+<p>在使用RPC框架的过程中，我们构造入参、返回值对象，主要记住以下几点：</p>
+<ol>
+<li>对象要尽量简单，没有太多的依赖关系，属性不要太多，尽量高内聚；</li>
+<li>入参对象与返回值对象体积不要太大，更不要传太大的集合；</li>
+<li>尽量使用简单的、常用的、开发语言原生的对象，尤其是集合类；</li>
+<li>对象不要有复杂的继承关系，最好不要有父子类的情况。</li>
+</ol>
+<p>实际上，虽然RPC框架可以让我们发起远程调用就像调用本地一样，但在RPC框架的传输过程中，入参与返回值的根本作用就是用来传递信息的，为了提高RPC调用整体的性能和稳定性，我们的入参与返回值对象要构造得尽量简单，这很重要。</p>
+<h2 id="课后思考">课后思考</h2>
+<p>RPC框架在序列化框架的选型上，你认为还需要考虑哪些因素？你还知道哪些优秀的序列化框架，它们又是否适合在RPC调用中使用？</p>
+<p>欢迎留言和我分享你的答案和经验，也欢迎你把文章分享给你的朋友，邀请他加入学习。我们下节课再见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

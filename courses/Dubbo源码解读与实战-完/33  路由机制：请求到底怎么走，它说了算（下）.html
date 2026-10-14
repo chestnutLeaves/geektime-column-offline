@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>33  路由机制：请求到底怎么走，它说了算（下） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/index.html">Dubbo源码解读与实战-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">50 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Dubbo源码解读与实战-完</strong><ul><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E6%B7%B1%E5%85%A5%E6%8E%8C%E6%8F%A1%20Dubbo%20%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8F%90%E5%8D%87%E4%BD%A0%E7%9A%84%E8%81%8C%E5%9C%BA%E7%AB%9E%E4%BA%89%E5%8A%9B.html">00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/01%20%20Dubbo%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%9A%E5%8D%83%E9%87%8C%E4%B9%8B%E8%A1%8C%EF%BC%8C%E5%A7%8B%E4%BA%8E%E8%B6%B3%E4%B8%8B.html">01  Dubbo 源码环境搭建：千里之行，始于足下</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/02%20Dubbo%20%E7%9A%84%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BA%BF%EF%BC%9A%E6%8A%93%E4%BD%8F%20URL%EF%BC%8C%E5%B0%B1%E7%90%86%E8%A7%A3%E4%BA%86%E5%8D%8A%E4%B8%AA%20Dubbo.html">02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/03%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8A%EF%BC%89.html">03  Dubbo SPI 精析，接口实现两极反转（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/04%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8B%EF%BC%89.html">04  Dubbo SPI 精析，接口实现两极反转（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/05%20%20%E6%B5%B7%E9%87%8F%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E8%BD%AE%E6%90%9E%E5%AE%9A.html">05  海量定时任务，一个时间轮搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/07%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/08%20%20%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0.html">08  代理模式与常见实现</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/09%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">09  Netty 入门，用它做网络编程都说好（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/10%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">10  Netty 入门，用它做网络编程都说好（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/11%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">11  简易版 RPC 框架实现（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/12%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">12  简易版 RPC 框架实现（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/13%20%20%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%EF%BC%9A%E9%99%8D%E4%BD%8E%20ZooKeeper%20%E5%8E%8B%E5%8A%9B%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5.html">13  本地缓存：降低 ZooKeeper 压力的一个常用手段</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/14%20%20%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%E6%98%AF%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BF%9D%E8%AF%81.html">14  重试机制是网络操作的基本保证</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/15%20%20ZooKeeper%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E8%B7%B5.html">15  ZooKeeper 注册中心实现，官方推荐注册中心实践</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/16%20%20Dubbo%20Serialize%20%E5%B1%82%EF%BC%9A%E5%A4%9A%E7%A7%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AE%97%E6%B3%95%EF%BC%8C%E6%80%BB%E6%9C%89%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E4%BD%A0.html">16  Dubbo Serialize 层：多种序列化算法，总有一款适合你</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/17%20%20Dubbo%20Remoting%20%E5%B1%82%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E5%88%86%E6%9E%90%EF%BC%9A%E8%BF%99%E5%B1%85%E7%84%B6%E6%98%AF%E4%B8%80%E5%A5%97%E5%85%BC%E5%AE%B9%E6%89%80%E6%9C%89%20NIO%20%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/18%20%20Buffer%20%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%9A%E6%88%91%E4%BB%AC%E4%B8%8D%E7%94%9F%E4%BA%A7%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AA%E6%98%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E6%90%AC%E8%BF%90%E5%B7%A5.html">18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/19%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/20%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">20  Transporter 层核心实现：编解码与线程模型一文打尽（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/21%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/22%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/23%20%20%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D%EF%BC%8CRPC%20%E5%B1%82%E9%AA%A8%E6%9E%B6%E6%A2%B3%E7%90%86.html">23  核心接口介绍，RPC 层骨架梳理</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/24%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/25%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/26%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8A%EF%BC%89.html">26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/27%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8B%EF%BC%89.html">27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/28%20%20%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%AE%80%E5%8D%95%E5%8C%96%EF%BC%8C%E4%BB%A3%E7%90%86%E5%B8%AE%E4%BD%A0%E9%9A%90%E8%97%8F%E4%BA%86%E5%A4%9A%E5%B0%91%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82%EF%BC%9F.html">28  复杂问题简单化，代理帮你隐藏了多少底层细节？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/29%20%20%E5%8A%A0%E9%A4%90%EF%BC%9AHTTP%20%E5%8D%8F%E8%AE%AE%20%2B%20JSON-RPC%EF%BC%8CDubbo%20%E8%B7%A8%E8%AF%AD%E8%A8%80%E5%B0%B1%E6%98%AF%E5%A6%82%E6%AD%A4%E7%AE%80%E5%8D%95.html">29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/30%20%20Filter%20%E6%8E%A5%E5%8F%A3%EF%BC%8C%E6%89%A9%E5%B1%95%20Dubbo%20%E6%A1%86%E6%9E%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5%E6%8C%87%E5%8C%97.html">30  Filter 接口，扩展 Dubbo 框架的常用手段指北</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/31%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E6%BD%9C%20Directory%20%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8E%A2%E7%A7%98%E6%9C%8D%E5%8A%A1%E7%9B%AE%E5%BD%95%E7%8E%84%E6%9C%BA.html">31  加餐：深潜 Directory 实现，探秘服务目录玄机</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/32%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8A%EF%BC%89.html">32  路由机制：请求到底怎么走，它说了算（上）</a></li><li><a class="active" aria-current="page" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/33%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8B%EF%BC%89.html">33  路由机制：请求到底怎么走，它说了算（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/34%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%88%9D%E6%8E%A2%20Dubbo%20%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">34  加餐：初探 Dubbo 动态配置的那些事儿</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/35%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8A%EF%BC%89.html">35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/36%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8B%EF%BC%89.html">36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/37%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8A%EF%BC%89.html">37  集群容错：一个好汉三个帮（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/38%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8B%EF%BC%89.html">38  集群容错：一个好汉三个帮（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/39%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%A4%9A%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%8D%E7%94%A8%E6%80%95%EF%BC%8CMerger%20%E5%90%88%E5%B9%B6%E5%99%A8%E6%9D%A5%E5%B8%AE%E5%BF%99.html">39  加餐：多个返回值不用怕，Merger 合并器来帮忙</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/40%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%A8%A1%E6%8B%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%EF%BC%8CMock%20%E6%9C%BA%E5%88%B6%E5%B8%AE%E4%BD%A0%E6%90%9E%E5%AE%9A.html">40  加餐：模拟远程调用，Mock 机制帮你搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/41%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E4%B8%80%E9%94%AE%E9%80%9A%E5%85%B3%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E5%85%A8%E6%B5%81%E7%A8%8B.html">41  加餐：一键通关服务发布全流程</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/42%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E6%B5%81%E7%A8%8B%E5%85%A8%E8%A7%A3%E6%9E%90.html">42  加餐：服务引用流程全解析</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/43%20%20%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9A%E6%96%B0%E7%89%88%E6%9C%AC%E6%96%B0%E6%96%B9%E6%A1%88.html">43  服务自省设计方案：新版本新方案</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/44%20%20%E5%85%83%E6%95%B0%E6%8D%AE%E6%96%B9%E6%A1%88%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E6%95%B0%E6%8D%AE%E9%87%8F%E8%86%A8%E8%83%80%EF%BC%9F.html">44  元数据方案深度剖析，如何避免注册中心数据量膨胀？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/45%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8A%EF%BC%89.html">45  加餐：深入服务自省方案中的服务发布订阅（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/46%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8B%EF%BC%89.html">46  加餐：深入服务自省方案中的服务发布订阅（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/47%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8A%EF%BC%89.html">47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/48%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8B%EF%BC%89.html">48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/49%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E8%AE%A4%E7%9C%9F%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BC%A9%E5%B0%8F%E5%B7%AE%E8%B7%9D.html">49 结束语  认真学习，缩小差距</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/33%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8B%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="33  路由机制：请求到底怎么走，它说了算（下）" id="title">33  路由机制：请求到底怎么走，它说了算（下）</h1>
+<div><p>在上一课时，我们介绍了 Router 接口的基本功能以及 RouterChain 加载多个 Router 的实现，之后介绍了 ConditionRouter 这个类对条件路由规则的处理逻辑以及 ScriptRouter 这个类对脚本路由规则的处理逻辑。本课时我们继续上一课时的内容，介绍剩余的三个 Router 接口实现类。</p>
+<h3 id="filerouterfactory">FileRouterFactory</h3>
+<p><strong>FileRouterFactory 是 ScriptRouterFactory 的装饰器</strong>，其扩展名为 file，FileRouterFactory 在 ScriptRouterFactory 基础上<strong>增加了读取文件的能力</strong>。我们可以将 ScriptRouter 使用的路由规则保存到文件中，然后在 URL 中指定文件路径，FileRouterFactory 从中解析到该脚本文件的路径并进行读取，调用 ScriptRouterFactory 去创建相应的 ScriptRouter 对象。</p>
+<p>下面我们来看 FileRouterFactory 对 getRouter() 方法的具体实现，其中完成了 file 协议的 URL 到 script 协议 URL 的转换，如下是一个转换示例，首先会将 file:// 协议转换成 script:// 协议，然后会添加 type 参数和 rule 参数，其中 type 参数值根据文件后缀名确定，该示例为 js，rule 参数值为文件内容。</p>
+<p><img alt="2.png" src="/assets/3eed189b3d78de389f4c5286.png"/></p>
+<p>我们可以再结合接下来这个示例分析 getRouter() 方法的具体实现：</p>
+<pre><code>public Router getRouter(URL url) {
+
+    // 默认使用script协议
+
+    String protocol = url.getParameter(ROUTER_KEY, ScriptRouterFactory.NAME); 
+
+    String type = null; 
+
+    String path = url.getPath(); 
+
+    if (path != null) { // 获取脚本文件的语言类型
+
+        int i = path.lastIndexOf('.');
+
+        if (i &gt; 0) {
+
+            type = path.substring(i + 1);
+
+        }
+
+    }
+
+    // 读取脚本文件中的内容
+
+    String rule = IOUtils.read(new FileReader(new File(url.getAbsolutePath())));
+
+    boolean runtime = url.getParameter(RUNTIME_KEY, false);
+
+    // 创建script协议的URL
+
+    URL script = URLBuilder.from(url)
+
+            .setProtocol(protocol)
+
+            .addParameter(TYPE_KEY, type)
+
+            .addParameter(RUNTIME_KEY, runtime)
+
+            .addParameterAndEncoded(RULE_KEY, rule)
+
+            .build();
+
+    // 获取script对应的Router实现
+
+    return routerFactory.getRouter(script);
+
+}
+</code></pre>
+<h3 id="tagrouterfactory-tagrouter">TagRouterFactory &amp; TagRouter</h3>
+<p><strong>TagRouterFactory 作为 RouterFactory 接口的扩展实现</strong>，其扩展名为 tag。但是需要注意的是，TagRouterFactory 与上一课时介绍的 ConditionRouterFactory、ScriptRouterFactory 的不同之处在于，它是<strong>通过继承 CacheableRouterFactory 这个抽象类，间接实现了 RouterFactory 接口</strong>。</p>
+<p>CacheableRouterFactory 抽象类中维护了一个 ConcurrentMap 集合（routerMap 字段）用来缓存 Router，其中的 Key 是 ServiceKey。在 CacheableRouterFactory 的 getRouter() 方法中，会优先根据 URL 的 ServiceKey 查询 routerMap 集合，查询失败之后会调用 createRouter() 抽象方法来创建相应的 Router 对象。在 TagRouterFactory.createRouter() 方法中，创建的自然就是 TagRouter 对象了。</p>
+<h4 id="基于-tag-的测试环境隔离方案">基于 Tag 的测试环境隔离方案</h4>
+<p><strong>通过 TagRouter，我们可以将某一个或多个 Provider 划分到同一分组，约束流量只在指定分组中流转，这样就可以轻松达到流量隔离的目的，从而支持灰度发布等场景。</strong></p>
+<p>目前，Dubbo 提供了动态和静态两种方式给 Provider 打标签，其中动态方式就是通过服务治理平台动态下发标签，静态方式就是在 XML 等静态配置中打标签。Consumer 端可以在 RpcContext 的 attachment 中添加 request.tag 附加属性，注意<strong>保存在 attachment 中的值将会在一次完整的远程调用中持续传递</strong>，我们只需要在起始调用时进行设置，就可以达到标签的持续传递。</p>
+<p>了解了 Tag 的基本概念和功能之后，我们再简单介绍一个 Tag 的使用示例。</p>
+<p>在实际的开发测试中，一个完整的请求会涉及非常多的 Provider，分属不同团队进行维护，这些团队每天都会处理不同的需求，并在其负责的 Provider 服务中进行修改，如果所有团队都使用一套测试环境，那么测试环境就会变得很不稳定。如下图所示，4 个 Provider 分属不同的团队管理，Provider 2 和 Provider 4 在测试环境测试，部署了有 Bug 的版本，这样就会导致整个测试环境无法正常处理请求，在这样一个不稳定的测试环境中排查 Bug 是非常困难的，因为可能排查到最后，发现是别人的 Bug。</p>
+<p><img alt="3.png" src="/assets/130f391fdc4ad427ae19950b.png"/></p>
+<p>不同状态的 Provider 节点</p>
+<p>为了解决上述问题，我们可以针对每个需求分别独立出一套测试环境，但是这个方案会占用大量机器，前期的搭建成本以及后续的维护成本也都非常高。</p>
+<p>下面是一个通过 Tag 方式实现环境隔离的架构图，其中，需求 1 对 Provider 2 的请求会全部落到有需求 1 标签的 Provider 上，其他 Provider 使用稳定测试环境中的 Provider；需求 2 对 Provider 4 的请求会全部落到有需求 2 标签的 Provider 4 上，其他 Provider 使用稳定测试环境中的 Provider。</p>
+<p><img alt="4.png" src="/assets/e726ae07c6f48c589277d50e.png"/></p>
+<p>依赖 Tag 实现的测试环境隔离方案</p>
+<p>在一些特殊场景中，会有 Tag 降级的场景，比如找不到对应 Tag 的 Provider，会按照一定的规则进行降级。如果在 Provider 集群中不存在与请求 Tag 对应的 Provider 节点，则默认将降级请求 Tag 为空的 Provider；如果希望在找不到匹配 Tag 的 Provider 节点时抛出异常的话，我们需设置 request.tag.force = true。</p>
+<p>如果请求中的 request.tag 未设置，只会匹配 Tag 为空的 Provider，也就是说即使集群中存在可用的服务，若 Tag 不匹配也就无法调用。一句话总结，<strong>携带 Tag 的请求可以降级访问到无 Tag 的 Provider，但不携带 Tag 的请求永远无法访问到带有 Tag 的 Provider</strong>。</p>
+<h4 id="tagrouter">TagRouter</h4>
+<p>下面我们再来看 TagRouter 的具体实现。在 TagRouter 中持有一个 TagRouterRule 对象的引用，在 TagRouterRule 中维护了一个 Tag 集合，而在每个 Tag 对象中又都维护了一个 Tag 的名称，以及 Tag 绑定的网络地址集合，如下图所示：</p>
+<p><img alt="5.png" src="/assets/907114a1d844fd483a5596b3.png"/></p>
+<p>TagRouter、TagRouterRule、Tag 与 address 映射关系图</p>
+<p>另外，在 TagRouterRule 中还维护了 addressToTagnames、tagnameToAddresses 两个集合（都是 Map<string, list`<string="">`&gt; 类型），分别记录了 Tag 名称到各个 address 的映射以及 address 到 Tag 名称的映射。在 TagRouterRule 的 init() 方法中，会根据 tags 集合初始化这两个集合。</string,></p>
+<p>了解了 TagRouterRule 的基本构造之后，我们继续来看 TagRouter 构造 TagRouterRule 的过程。TagRouter 除了实现了 Router 接口之外，还实现了 ConfigurationListener 接口，如下图所示：</p>
+<p><img alt="6.png" src="/assets/56682a4649b54eebd3fc87d0.png"/></p>
+<p>TagRouter 继承关系图</p>
+<p><strong>ConfigurationListener 用于监听配置的变化，其中就包括 TagRouterRule 配置的变更</strong>。当我们通过动态更新 TagRouterRule 配置的时候，就会触发 ConfigurationListener 接口的 process() 方法，TagRouter 对 process() 方法的实现如下：</p>
+<pre><code>public synchronized void process(ConfigChangedEvent event) {
+
+    // DELETED事件会直接清空tagRouterRule
+
+    if (event.getChangeType().equals(ConfigChangeType.DELETED)) {
+
+        this.tagRouterRule = null;
+
+    } else { // 其他事件会解析最新的路由规则，并记录到tagRouterRule字段中
+
+        this.tagRouterRule = TagRuleParser.parse(event.getContent());
+
+    }
+
+}
+</code></pre>
+<p>我们可以看到，如果是删除配置的操作，则直接将 tagRouterRule 设置为 null，如果是修改或新增配置，则通过 TagRuleParser 解析传入的配置，得到对应的 TagRouterRule 对象。TagRuleParser 可以解析 yaml 格式的 TagRouterRule 配置，下面是一个配置示例：</p>
+<pre><code>force: false
+
+runtime: true
+
+enabled: false
+
+priority: 1
+
+key: demo-provider
+
+tags:
+
+  - name: tag1
+
+    addresses: null
+
+  - name: tag2
+
+    addresses: ["30.5.120.37:20880"]
+
+  - name: tag3
+
+    addresses: []
+</code></pre>
+<p>经过 TagRuleParser 解析得到的 TagRouterRule 结构，如下所示：</p>
+<p><img alt="1.png" src="/assets/b557fe38d475b4c9f634c7dd.png"/></p>
+<p>TagRouterRule 结构图</p>
+<p>除了上图展示的几个集合字段，TagRouterRule 还从 AbstractRouterRule 抽象类继承了一些控制字段，后面介绍的 ConditionRouterRule 也继承了 AbstractRouterRule。</p>
+<p><img alt="9.png" src="/assets/bacb1071aab69596d3bbc5ed.png"/></p>
+<p>AbstractRouterRule继承关系图</p>
+<p>AbstractRouterRule 中核心字段的具体含义大致可总结为如下。</p>
+<ul>
+<li>key（string 类型）、scope（string 类型）：key 明确规则体作用在哪个服务或应用。scope 为 service 时，key 由 [{group}:]{service}[:{version}] 构成；scope 为 application 时，key 为 application 的名称。</li>
+<li>rawRule（string 类型）：记录了路由规则解析前的原始字符串配置。</li>
+<li>runtime（boolean 类型）：表示是否在每次调用时执行该路由规则。如果设置为 false，则会在 Provider 列表变更时预先执行并缓存结果，调用时直接从缓存中获取路由结果。</li>
+<li>force（boolean 类型）：当路由结果为空时，是否强制执行，如果不强制执行，路由结果为空的路由规则将自动失效。该字段默认值为 false。</li>
+<li>valid（boolean 类型）：用于标识解析生成当前 RouterRule 对象的配置是否合法。</li>
+<li>enabled（boolean 类型）：标识当前路由规则是否生效。</li>
+<li>priority（int 类型）：用于表示当前 RouterRule 的优先级。</li>
+<li>dynamic（boolean 类型）：表示该路由规则是否为持久数据，当注册方退出时，路由规则是否依然存在。</li>
+</ul>
+<p>我们可以看到，AbstractRouterRule 中的核心字段与前面的示例配置是一一对应的。</p>
+<p>我们知道，Router 最终目的是要过滤符合条件的 Invoker 对象，下面我们一起来看 TagRouter 是如何使用 TagRouterRule 路由逻辑进行 Invoker 过滤的，大致步骤如下。</p>
+<ol>
+<li>如果 invokers 为空，直接返回空集合。</li>
+<li>检查关联的 tagRouterRule 对象是否可用，如果不可用，则会直接调用 filterUsingStaticTag() 方法进行过滤，并返回过滤结果。在 filterUsingStaticTag() 方法中，会比较请求携带的 tag 值与 Provider URL 中的 tag 参数值。</li>
+<li>获取此次调用的 tag 信息，这里会尝试从 Invocation 以及 URL 的参数中获取。</li>
+<li>如果<strong>此次请求指定了 tag 信息</strong>，则首先会获取 tag 关联的 address 集合。
+
+<ol>
+<li>如果 address 集合不为空，则根据该 address 集合中的地址，匹配出符合条件的 Invoker 集合。如果存在符合条件的 Invoker，则直接将过滤得到的 Invoker 集合返回；如果不存在，就会根据 force 配置决定是否返回空 Invoker 集合。</li>
+<li>如果 address 集合为空，则会将请求携带的 tag 值与 Provider URL 中的 tag 参数值进行比较，匹配出符合条件的 Invoker 集合。如果存在符合条件的 Invoker，则直接将过滤得到的 Invoker 集合返回；如果不存在，就会根据 force 配置决定是否返回空 Invoker 集合。</li>
+<li>如果 force 配置为 false，且符合条件的 Invoker 集合为空，则返回所有不包含任何 tag 的 Provider 列表。</li>
+</ol></li>
+<li>如果<strong>此次请求未携带 tag 信息</strong>，则会先获取 TagRouterRule 规则中全部 tag 关联的 address 集合。如果 address 集合不为空，则过滤出不在 address 集合中的 Invoker 并添加到结果集合中，最后，将 Provider URL 中的 tag 值与 TagRouterRule 中的 tag 名称进行比较，得到最终的 Invoker 集合。</li>
+</ol>
+<p>上述流程的具体实现是在 TagRouter.route() 方法中，如下所示：</p>
+<pre><code>public &lt;T&gt; List&lt;Invoker&lt;T&gt;&gt; route(List&lt;Invoker&lt;T&gt;&gt; invokers, URL url, Invocation invocation) throws RpcException {
+
+    ... // 如果invokers为空，直接返回空集合(略)
+
+    final TagRouterRule tagRouterRuleCopy = tagRouterRule;
+
+    if (tagRouterRuleCopy == null || !tagRouterRuleCopy.isValid() || !tagRouterRuleCopy.isEnabled()) {
+
+        return filterUsingStaticTag(invokers, url, invocation);
+
+    }
+
+    // 检查关联的tagRouterRule对象是否可用，如果不可用，则会直接调用filterUsingStaticTag() 方法进行过滤
+
+    List&lt;Invoker&lt;T&gt;&gt; result = invokers;
+
+    // 获取此次调用的tag信息，尝试从Invocation以及URL中获取
+
+    String tag = StringUtils.isEmpty(invocation.getAttachment(TAG_KEY)) ? url.getParameter(TAG_KEY) :
+
+            invocation.getAttachment(TAG_KEY);
+
+    if (StringUtils.isNotEmpty(tag)) { // 此次请求一个特殊的tag
+
+        // 获取tag关联的address集合
+
+        List&lt;String&gt; addresses = tagRouterRuleCopy.getTagnameToAddresses().get(tag);
+
+        if (CollectionUtils.isNotEmpty(addresses)) {
+
+            // 根据上面的address集合匹配符合条件的Invoker
+
+            result = filterInvoker(invokers, invoker -&gt; addressMatches(invoker.getUrl(), addresses));
+
+            // 如果存在符合条件的Invoker，则直接将过滤得到的Invoker集合返回
+
+            // 如果不存在符合条件的Invoker，根据force配置决定是否返回空Invoker集合
+
+            if (CollectionUtils.isNotEmpty(result) || tagRouterRuleCopy.isForce()) {
+
+                return result;
+
+            }
+
+        } else {
+
+            // 如果 address 集合为空，则会将请求携带的 tag 与 Provider URL 中的 tag 参数值进行比较，匹配出符合条件的 Invoker 集合。
+
+            result = filterInvoker(invokers, invoker -&gt; tag.equals(invoker.getUrl().getParameter(TAG_KEY)));
+
+        }
+
+        if (CollectionUtils.isNotEmpty(result) || isForceUseTag(invocation)) {
+
+            return result; // 存在符合条件的Invoker或是force配置为true
+
+        }else { // 如果 force 配置为 false，且符合条件的 Invoker 集合为空，则返回所有不包含任何 tag 的 Provider 列表。
+
+            List&lt;Invoker&lt;T&gt;&gt; tmp = filterInvoker(invokers, invoker -&gt; addressNotMatches(invoker.getUrl(),
+
+                    tagRouterRuleCopy.getAddresses()));
+
+            return filterInvoker(tmp, invoker -&gt; StringUtils.isEmpty(invoker.getUrl().getParameter(TAG_KEY)));
+
+        }
+
+    } else {
+
+        // 如果此次请求未携带 tag 信息，则会先获取 TagRouterRule 规则中全部 tag 关联的 address 集合。
+
+        List&lt;String&gt; addresses = tagRouterRuleCopy.getAddresses();
+
+        if (CollectionUtils.isNotEmpty(addresses)) {
+
+            // 如果 address 集合不为空，则过滤出不在 address 集合中的 Invoker 并添加到结果集合中。
+
+            result = filterInvoker(invokers, invoker -&gt; addressNotMatches(invoker.getUrl(), addresses));
+
+            if (CollectionUtils.isEmpty(result)) {
+
+                return result;
+
+            }
+
+        }
+
+        // 如果不存在符合条件的 Invoker 或是 address 集合为空，则会将请求携带的 tag 与 Provider URL 中的 tag 参数值进行比较，得到最终的 Invoker 集合。
+
+        return filterInvoker(result, invoker -&gt; {
+
+            String localTag = invoker.getUrl().getParameter(TAG_KEY);
+
+            return StringUtils.isEmpty(localTag) || !tagRouterRuleCopy.getTagNames().contains(localTag);
+
+        });
+
+    }
+
+}
+</code></pre>
+<h3 id="servicerouter-approuter">ServiceRouter &amp; AppRouter</h3>
+<p>除了前文介绍的 TagRouterFactory 继承了 CacheableRouterFactory 之外，<strong>ServiceRouterFactory 也继承 CachabelRouterFactory，具有了缓存的能力</strong>，具体继承关系如下图所示：</p>
+<p><img alt="8.png" src="/assets/b02096d1b6de59b0edc0b2c2.png"/></p>
+<p>CacheableRouterFactory 继承关系图</p>
+<p>ServiceRouterFactory 创建的 Router 实现是 ServiceRouter，与 ServiceRouter 类似的是 AppRouter，<strong>两者都继承了 ListenableRouter 抽象类</strong>（虽然 ListenableRouter 是个抽象类，但是没有抽象方法留给子类实现），继承关系如下图所示：</p>
+<p><img alt="7.png" src="/assets/993d03aa644d4d3c7a36991c.png"/></p>
+<p>ListenableRouter 继承关系图</p>
+<p><strong>ListenableRouter 在 ConditionRouter 基础上添加了动态配置的能力</strong>，ListenableRouter 的 process() 方法与 TagRouter 中的 process() 方法类似，对于 ConfigChangedEvent.DELETE 事件，直接清空 ListenableRouter 中维护的 ConditionRouterRule 和 ConditionRouter 集合的引用；对于 ADDED、UPDATED 事件，则通过 ConditionRuleParser 解析事件内容，得到相应的 ConditionRouterRule 对象和 ConditionRouter 集合。这里的 ConditionRuleParser 同样是以 yaml 文件的格式解析 ConditionRouterRule 的相关配置。ConditionRouterRule 中维护了一个 conditions 集合（List<code>&lt;String&gt;</code> 类型），记录了多个 Condition 路由规则，对应生成多个 ConditionRouter 对象。</p>
+<p>整个解析 ConditionRouterRule 的过程，与前文介绍的解析 TagRouterRule 的流程类似，这里不再赘述。</p>
+<p>在 ListenableRouter 的 route() 方法中，会遍历全部 ConditionRouter 过滤出符合全部路由条件的 Invoker 集合，具体实现如下：</p>
+<pre><code>public &lt;T&gt; List&lt;Invoker&lt;T&gt;&gt; route(List&lt;Invoker&lt;T&gt;&gt; invokers, URL url, Invocation invocation) throws RpcException {
+
+    if (CollectionUtils.isEmpty(invokers) || conditionRouters.size() == 0) {
+
+        return invokers; // 检查边界条件，直接返回invokers集合
+
+    } 
+
+    for (Router router : conditionRouters) { // 路由规则进行过滤
+
+        invokers = router.route(invokers, url, invocation);
+
+    }
+
+    return invokers;
+
+}
+</code></pre>
+<p>ServiceRouter 和 AppRouter 都是简单地继承了 ListenableRouter 抽象类，且没有覆盖 ListenableRouter 的任何方法，两者只有以下两点区别。</p>
+<ul>
+<li><strong>一个是 priority 字段值不同</strong>。ServiceRouter 为 140，AppRouter 为 150，也就是说 ServiceRouter 要先于 AppRouter 执行。</li>
+<li><strong>另一个是获取 ConditionRouterRule 配置的 Key 不同</strong>。ServiceRouter 使用的 RuleKey 是由 {interface}:[version]:[group] 三部分构成，获取的是一个服务对应的 ConditionRouterRule。AppRouter 使用的 RuleKey 是 URL 中的 application 参数值，获取的是一个服务实例对应的 ConditionRouterRule。</li>
+</ul>
+<h3 id="总结">总结</h3>
+<p>本课时我们是紧接上一课时的内容，继续介绍了剩余 Router 接口实现的内容。</p>
+<p>我们首先介绍了基于文件的 FileRouter 实现，其底层会依赖上一课时介绍的 ScriptRouter；接下来又讲解了基于 Tag 的测试环境隔离方案，以及如何基于 TagRouter 实现该方案，同时深入分析了 TagRouter 的核心实现；最后我们还介绍了 ListenableRouter 抽象类以及 ServerRouter 和 AppRouter 两个实现，它们是在条件路由的基础上添加了动态变更路由规则的能力，同时区分了服务级别和服务实例级别的配置。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

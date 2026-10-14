@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>加餐  JMQ的Broker是如何异步处理消息的？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/index.html">消息队列高手课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">39 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>消息队列高手课</strong><ul><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%BC%98%E7%A7%80%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98%EF%BC%8C%E4%BD%A0%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88%E4%B8%AD%E4%B8%8D%E8%83%BD%E5%8F%AA%E6%9C%89%E2%80%9C%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E2%80%9D.html">00 开篇词  优秀的程序员，你的技术栈中不能只有“增删改查”</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E9%A2%84%E4%B9%A0%20%20%E6%80%8E%E6%A0%B7%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%AD%A6%E4%B9%A0%E8%BF%99%E9%97%A8%E8%AF%BE%EF%BC%9F.html">00 预习  怎样更好地学习这门课？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/01%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%9F.html">01  为什么需要消息队列？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/02%20%20%E8%AF%A5%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%9F.html">02  该如何选择消息队列？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/03%20%20%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%B8%BB%E9%A2%98%E5%92%8C%E9%98%9F%E5%88%97%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">03  消息模型：主题和队列有什么区别？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/04%20%20%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">04  如何利用事务消息实现分布式事务？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/05%20%20%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%BC%9A%E4%B8%A2%E5%A4%B1.html">05  如何确保消息不会丢失</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/06%20%20%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%B6%88%E8%B4%B9%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%EF%BC%9F.html">06  如何处理消费过程中的重复消息？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/07%20%20%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B%E4%BA%86%E8%AF%A5%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%EF%BC%9F.html">07  消息积压了该如何处理？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/08%20%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%EF%BC%88%E4%B8%80%EF%BC%89%20%20%E7%BD%91%E5%85%B3%E5%A6%82%E4%BD%95%E6%8E%A5%E6%94%B6%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E7%A7%92%E6%9D%80%E7%BB%93%E6%9E%9C%EF%BC%9F.html">08  答疑解惑（一）  网关如何接收服务端的秒杀结果？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/09%20%20%E5%AD%A6%E4%B9%A0%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%AF%A5%E5%A6%82%E4%BD%95%E5%85%A5%E6%89%8B%EF%BC%9F.html">09  学习开源代码该如何入手？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/10%20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%BC%82%E6%AD%A5%E8%AE%BE%E8%AE%A1%E6%8F%90%E5%8D%87%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD%EF%BC%9F.html">10  如何使用异步设计提升系统性能？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/11%20%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%EF%BC%9F.html">11  如何实现高性能的异步网络传输？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/12%20%20%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F.html">12  序列化与反序列化：如何通过网络传输结构化的数据？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/13%20%20%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B9%8B%E9%97%B4%E5%AF%B9%E8%AF%9D%E7%9A%84%E8%AF%AD%E8%A8%80.html">13  传输协议：应用程序之间对话的语言</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/14%20%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%92%8C%E9%A2%91%E7%B9%81%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%9F.html">14  内存管理：如何避免内存溢出和频繁的垃圾回收？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/15%20%20Kafka%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%80%A7%E8%83%BDIO%EF%BC%9F.html">15  Kafka如何实现高性能IO？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/16%20%20%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98%E6%9D%A5%E5%87%8F%E5%B0%91%E7%A3%81%E7%9B%98IO%EF%BC%9F.html">16  缓存策略：如何使用缓存来减少磁盘IO？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/17%20%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E9%94%81%E4%BF%9D%E6%8A%A4%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%8D%8F%E8%B0%83%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">17  如何正确使用锁保护共享数据，协调异步线程？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/18%20%20%E5%A6%82%E4%BD%95%E7%94%A8%E7%A1%AC%E4%BB%B6%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD%EF%BC%88CAS%EF%BC%89%E6%9B%BF%E4%BB%A3%E9%94%81%EF%BC%9F.html">18  如何用硬件同步原语（CAS）替代锁？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/19%20%20%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9%EF%BC%9A%E6%97%B6%E9%97%B4%E6%8D%A2%E7%A9%BA%E9%97%B4%E7%9A%84%E6%B8%B8%E6%88%8F.html">19  数据压缩：时间换空间的游戏</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/20%20%20RocketMQ%20Producer%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%9A%E6%B6%88%E6%81%AF%E7%94%9F%E4%BA%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B.html">20  RocketMQ Producer源码分析：消息生产的实现过程</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/21%20%20Kafka%20Consumer%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%9A%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B.html">21  Kafka Consumer源码分析：消息消费的实现过程</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/22%20%20Kafka%E5%92%8CRocketMQ%E7%9A%84%E6%B6%88%E6%81%AF%E5%A4%8D%E5%88%B6%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%B7%AE%E5%BC%82%E7%82%B9%E5%9C%A8%E5%93%AA%EF%BC%9F.html">22  Kafka和RocketMQ的消息复制实现的差异点在哪？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/23%20%20RocketMQ%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E9%9B%86%E7%BE%A4%E4%B8%AD%E6%89%BE%E5%88%B0%E6%AD%A3%E7%A1%AE%E7%9A%84%E8%8A%82%E7%82%B9%EF%BC%9F.html">23  RocketMQ客户端如何在集群中找到正确的节点？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/24%20%20Kafka%E7%9A%84%E5%8D%8F%E8%B0%83%E6%9C%8D%E5%8A%A1ZooKeeper%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E2%80%9C%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80%E2%80%9D.html">24  Kafka的协调服务ZooKeeper：实现分布式系统的“瑞士军刀”</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/25%20%20RocketMQ%E4%B8%8EKafka%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%BA%8B%E5%8A%A1%EF%BC%9F.html">25  RocketMQ与Kafka中如何实现事务？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/26%20%20MQTT%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E6%B5%B7%E9%87%8F%E7%9A%84%E5%9C%A8%E7%BA%BFIoT%E8%AE%BE%E5%A4%87.html">26  MQTT协议：如何支持海量的在线IoT设备</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/27%20%20Pulsar%E7%9A%84%E5%AD%98%E5%82%A8%E8%AE%A1%E7%AE%97%E5%88%86%E7%A6%BB%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%85%A8%E6%96%B0%E7%9A%84%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF.html">27  Pulsar的存储计算分离设计：全新的消息队列设计思路</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/28%20%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%88%91%E7%9A%84100%E5%85%83%E5%93%AA%E5%84%BF%E5%8E%BB%E4%BA%86%EF%BC%9F.html">28  答疑解惑（二）：我的100元哪儿去了？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/29%20%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B6%88%E6%81%AF%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E9%80%9A%E8%BF%87Flink%E7%90%86%E8%A7%A3%E6%B5%81%E8%AE%A1%E7%AE%97%E7%9A%84%E5%8E%9F%E7%90%86.html">29  流计算与消息（一）：通过Flink理解流计算的原理</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/30%20%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B6%88%E6%81%AF%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%9C%A8%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E4%BD%BF%E7%94%A8Kafka%E9%93%BE%E6%8E%A5%E8%AE%A1%E7%AE%97%E4%BB%BB%E5%8A%A1.html">30  流计算与消息（二）：在流计算中使用Kafka链接计算任务</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/31%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%8E%9F%E7%90%86%E5%92%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BB%93%E6%9E%84.html">31  动手实现一个简单的RPC框架（一）：原理和程序的结构</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/32%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%80%9A%E4%BF%A1%E4%B8%8E%E5%BA%8F%E5%88%97%E5%8C%96.html">32  动手实现一个简单的RPC框架（二）：通信与序列化</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/33%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF.html">33  动手实现一个简单的RPC框架（三）：客户端</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/34%20%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84RPC%E6%A1%86%E6%9E%B6%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">34  动手实现一个简单的RPC框架（四）：服务端</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/35%20%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E4%B8%BB%E6%B5%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%83%BD%E6%98%AF%E5%A6%82%E4%BD%95%E5%AD%98%E5%82%A8%E6%B6%88%E6%81%AF%E7%9A%84%EF%BC%9F.html">35  答疑解惑（三）：主流消息队列都是如何存储消息的？</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%20JMQ%E7%9A%84Broker%E6%98%AF%E5%A6%82%E4%BD%95%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%E7%9A%84%EF%BC%9F.html">加餐  JMQ的Broker是如何异步处理消息的？</a></li><li><a href="/courses/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%EF%BC%9F.html">结束语  程序员如何构建知识体系？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%20JMQ%E7%9A%84Broker%E6%98%AF%E5%A6%82%E4%BD%95%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF%E7%9A%84%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="加餐  JMQ的Broker是如何异步处理消息的？" id="title">加餐  JMQ的Broker是如何异步处理消息的？</h1>
+<div><p>你好，我是李玥。</p>
+<p>我们的课程更新到进阶篇之后，通过评论区的留言，我看到有一些同学不太理解，为什么在进阶篇中要讲这些“看起来和消息队列关系不大的”内容呢？</p>
+<p>在这里，我跟你分享一下这门课程的设计思路。我们这门课程的名称是“消息队列高手课”，我希望你在学习完这门课程之后，不仅仅只是成为一个使用消息队列的高手，而是<strong>设计和实现</strong>消息队列的高手。所以我们在设计课程的时候，分了基础篇、进阶篇和案例篇三部分。</p>
+<p>基础篇中我们给大家讲解消息队列的原理和一些使用方法，重点是让大家学会使用消息队列。</p>
+<p>你在进阶篇中，我们课程设计的重点是讲解实现消息队列必备的技术知识，通过分析源码讲解消息队列的实现原理。<strong>希望你通过进阶篇的学习能够掌握到设计、实现消息队列所必备的知识和技术，这些知识和技术也是设计所有高性能、高可靠的分布式系统都需要具备的。</strong></p>
+<p>进阶篇的上半部分，我们每一节课一个专题，来讲解设计实现一个高性能消息队列，必备的技术和知识。这里面每节课中讲解的技术点，不仅可以用来设计消息队列，同学们在设计日常的应用系统中也一定会用得到。</p>
+<p>前几天我在极客时间直播的时候也跟大家透露过，由我所在的京东基础架构团队开发的消息队列 JMQ，它的综合性能要显著优于目前公认性能非常好的 Kafka。虽然在开发 JMQ 的过程中有很多的创新，但是对于性能的优化这块，并没有什么全新的划时代的新技术，JMQ 之所以能做到这样的极致性能，靠的就是合理地设计和正确地使用已有的这些通用的底层技术和优化技巧。我把这些技术和知识点加以提炼和总结，放在进阶篇的上半部分中。</p>
+<p>进阶篇的下半部分，我们主要通过分析源码的方式，来学习优秀开源消息队列产品中的一些实现原理和它们的设计思想。</p>
+<p>在最后的案例篇，我会和大家一起，利用进阶篇中学习的知识，一起来开发一个简单的 RPC 框架。为什么我们要开发一个 RPC 框架，而不是一个消息队列？这里面就是希望大家不只是机械的去学习，仅仅是我告诉这个问题怎么解决，你就只是学会了这个问题怎么解决，而是能做到真正理解原理，掌握知识和技术，并且能融会贯通，灵活地去使用。只有这样，你才是真的“学会了”。</p>
+<p>有的同学在看了进阶篇中已更新的这几节课程之后，觉得只讲技术原理不过瘾，希望能看到这些技术是如何在消息队列中应用并落地的，看到具体的实现和代码，所以我以京东 JMQ 为例，将这些基础技术点在消息队列实现中的应用讲解一下。</p>
+<h2 id="jmq-的-broker-是如何异步处理消息的">JMQ 的 Broker 是如何异步处理消息的？</h2>
+<p>对于消息队列的 Broker，它最核心的两个流程就是接收生产者发来的消息，以及给消费者发送消息。后者的业务逻辑相对比较简单，影响消息队列性能的关键，就是消息生产的这个业务流程。在 JMQ 中，经过优化后的消息生产流程，实测它每秒钟可以处理超过 100 万次请求。</p>
+<p>我们在之前的课程中首先讲了异步的设计思想，这里给你分享一下我在设计这个流程时，是如何来将异步的设计落地的。</p>
+<p>消息生产的流程需要完成的功能是这样的：</p>
+<p><img alt="img" src="/assets/d3b8b08d45808ca2be4f2a65.jpg"/></p>
+<ul>
+<li>首先，生产者发送一批消息给 Broker 的主节点；</li>
+<li>Broker 收到消息之后，会对消息做一系列的解析、检查等处理；</li>
+<li>然后，把消息复制给所有的 Broker 从节点，并且需要把消息写入到磁盘中；</li>
+<li>主节点收到大多数从节点的复制成功确认后，给生产者回响应告知消息发送成功。</li>
+</ul>
+<p>由于使用各种异步框架或多或少都会有一些性能损失，所以我在设计这个流程的时候，没有使用任何的异步框架，而是自行设计一组互相配合的处理线程来实现，但使用的异步设计思想和我们之前课程中所讲的是一样的。</p>
+<p>对于这个流程，我们设计的线程模型是这样的：</p>
+<p><img alt="img" src="/assets/7c578e2ffef06f0a4ec7b1b3.png"/></p>
+<p>图中白色的细箭头是数据流，蓝色的箭头是控制流，白色的粗箭头代表远程调用。蓝白相间的方框代表的是处理的步骤，我在蓝色方框中标注了这个步骤是在什么线程中执行的。圆角矩形代表的是流程中需要使用的一些关键的数据结构。</p>
+<p>这里我们设计了 6 组线程，将一个大的流程拆成了 6 个小流程。并且整个过程完全是异步化的。</p>
+<p>流程的入口在图中的左上角，Broker 在收到来自生产者的发消息请求后，会在一个 Handler 中处理这些请求，这和我们在普通的业务系统中，用 Handler 接收 HTTP 请求是一样的，执行 Handler 中业务逻辑使用的是 Netty 的 IO 线程。</p>
+<p>收到请求后，我们在 Handler 中不做过多的处理，执行必要的检查后，将请求放到一个内存队列中，也就是图中的 Requests Queue。请求被放入队列后，Handler 的方法就结束了。可以看到，在 Handler 中只是把请求放到了队列中，没有太多的业务逻辑，这个执行过程是非常快的，所以即使是处理海量的请求，也不会过多的占用 IO 线程。</p>
+<p>由于要保证消息的有序性，整个流程的大部分过程是不能并发的，只能单线程执行。所以，接下来我们使用一个线程 WriteThread 从请求队列中按照顺序来获取请求，依次进行解析请求等其他的处理逻辑，最后将消息序列化并写入存储。序列化后的消息会被写入到一个内存缓存中，就是图中的 JournalCache，等待后续的处理。</p>
+<p>执行到这里，一条一条的消息已经被转换成一个连续的字节流，每一条消息都在这个字节流中有一个全局唯一起止位置，也就是这条消息的 Offset。后续的处理就不用关心字节流中的内容了，只要确保这个字节流能快速正确的被保存和复制就可以了。</p>
+<p>这里面还有一个工作需要完成，就是给生产者回响应，但在这一步，消息既没有落盘，也没有完成复制，还不能给客户端返回响应，所以我们把待返回的响应按照顺序放到一个内存的链表 Pending Callbacks 中，并记录每个请求中的消息对应的 Offset。</p>
+<p>然后，我们有 2 个线程，FlushThread 和 ReplicationThread，这两个线程是并行执行的，分别负责批量异步进行刷盘和复制，刷盘和复制又分别是 2 个比较复杂的流程，我们暂时不展开讲。刷盘线程不停地将新写入 Journal Cache 的字节流写到磁盘上，完成一批数据的刷盘，它就会更新一个刷盘位置的内存变量，确保这个刷盘位置之前数据都已经安全的写入磁盘中。复制线程的逻辑也是类似的，同样维护了一个复制位置的内存变量。</p>
+<p>最后，我们设计了一组专门用于发送响应的线程 ReponseThreads，在刷盘位置或者复制位置更新后，去检查待返回的响应链表 Pending Callbacks，根据 QOS 级别的设置（因为不同 QOS 基本对发送成功的定义不一样，有的设置需要消息写入磁盘才算成功，有的需要复制完成才算成功），将刷盘位置或者复制位置之前所有响应，以及已经超时的响应，利用这组线程 ReponseThreads 异步并行的发送给各个客户端。</p>
+<p>这样就完成了消息生产这个流程。整个流程中，除了 JournalCache 的加载和卸载需要对文件加锁以外，没有用到其他的锁。每个小流程都不会等待其他流程的共享资源，也就不用互相等待资源（没有数据需要处理时等待上游流程提供数据的情况除外），并且只要有数据就能第一时间处理。</p>
+<p>这个流程中，最核心的部分在于 WriteThread 执行处理的这个步骤，对每条消息进行处理的这些业务逻辑，都只能在 WriteThread 中单线程执行，虽然这里面干了很多的事儿，但是我们确保这些逻辑中，没有缓慢的磁盘和网络 IO，也没有使用任何的锁来等待资源，全部都是内存操作，这样即使单线程可以非常快速地执行所有的业务逻辑。</p>
+<p><strong>这个里面有很重要的几点优化：</strong></p>
+<ul>
+<li>一是我们使用异步设计，把刷盘和复制这两部分比较慢的操作从这个流程中分离出去异步执行；</li>
+<li>第二是，我们使用了一个写缓存 Journal Cache 将一个写磁盘的操作，转换成了一个写内存的操作，来提升数据写入的性能，关于如何使用缓存，后面我会专门用一节课来讲；</li>
+<li>第三是，这个处理的全流程是近乎无锁的设计，避免了线程因为等待锁导致的阻塞；</li>
+<li>第四是，我们把回复响应这个需要等待资源的操作，也异步放到其他的线程中去执行。</li>
+</ul>
+<p>你看，一个看起来很简单的接收请求写入数据并回响应的流程，需要涉及的技术包括：<strong>异步的设计、缓存设计、锁的正确使用、线程协调、序列化和内存管理</strong>，等等。你需要对这些技术都有深入的理解，并合理地使用，才能在确保逻辑正确、数据准确的前提下，做到极致的性能。这也是为什么我们在课程的进阶篇中，用这么多节课来逐一讲解这些“看起来和消息队列没什么关系”的知识点和技术。</p>
+<p>我也希望同学们在学习这些知识点的时候，不仅仅只是记住了，能说出来，用于回答面试问题，还要能真正理解这些知识点和技术背后深刻的思想，并使用在日常的设计和开发过程中。</p>
+<p>比如说，在面试的时候，很多同学都可以很轻松地讲 JVM 内存结构，也知道怎么用 jstat、jmap、jstack 这些工具来查看虚拟机的状态。但是，当我给出一个有内存溢出的问题程序和源代码，让他来分析原因并改正的时候，却很少有人能给出正确的答案。在我看来，对于 JVM 这些基础知识，这样的同学他以为自己已经掌握了，但是，无法领会技术背后的思想，做不到学以致用，那还只是别人知识，不是你的。</p>
+<p>再比如，我下面要说的这个俩大爷的作业，你是真的花时间把代码写出来了，还只是在脑子想了想怎么做，就算完成了呢？</p>
+<h2 id="俩大爷的思考题">俩大爷的思考题</h2>
+<p>我们在进阶篇的开始，花了 4 节课的内容，来讲解如何实现高性能的异步网络通信，在《<a href="http://time.geekbang.org/column/article/119988" target="_blank">13 | 传输协议：应用程序之间对话的语言</a>》中，我给大家留了一个思考题：写一个程序，让俩大爷在胡同口遇见 10 万次并记录下耗时。</p>
+<p>有几个同学在留言区分享了自己的代码，每一个同学分享的代码我都仔细读过，有的作业实现了异步的网络通信，有的作业序列化和协议设计实现得很好，但很遗憾的是，没有一份作业能在序列化、协议设计和异步网络传输这几方面都做到我期望的水平。</p>
+<p>在这个作业中，应用到了我们进阶篇中前四节课讲到的几个知识点：</p>
+<ul>
+<li>使用异步设计的方法；</li>
+<li>异步网络 IO；</li>
+<li>专用序列化、反序列化方法；</li>
+<li>设计良好的传输协议；</li>
+<li>双工通信。</li>
+</ul>
+<p>这里面特别是双工通信的方法，大家都没能正确的实现。所以，这些作业的实际执行性能也没能达到一个应有的水平。</p>
+<p>这里，我也给出一个作业的参考实现，我们用 Go 语言来实现这个作业：</p>
+<pre><code>package main
+ 
+import (
+	"encoding/binary"
+	"fmt"
+	"io"
+	"net"
+	"sync"
+	"time"
+)
+ 
+var count = uint32(0)      // 俩大爷已经遇见了多少次
+var total = uint32(100000) // 总共需要遇见多少次
+ 
+var z0 = " 吃了没，您吶?"
+var z3 = " 嗨！吃饱了溜溜弯儿。"
+var z5 = " 回头去给老太太请安！"
+var l1 = " 刚吃。"
+var l2 = " 您这，嘛去？"
+var l4 = " 有空家里坐坐啊。"
+ 
+var liWriteLock sync.Mutex    // 李大爷的写锁
+var zhangWriteLock sync.Mutex // 张大爷的写锁
+ 
+type RequestResponse struct {
+	Serial  uint32 // 序号
+	Payload string // 内容
+}
+ 
+// 序列化 RequestResponse，并发送
+// 序列化后的结构如下：
+// 	长度	4 字节
+// 	Serial 4 字节
+// 	PayLoad 变长
+func writeTo(r *RequestResponse, conn *net.TCPConn, lock *sync.Mutex) {
+	lock.Lock()
+	defer lock.Unlock()
+	payloadBytes := []byte(r.Payload)
+	serialBytes := make([]byte, 4)
+	binary.BigEndian.PutUint32(serialBytes, r.Serial)
+	length := uint32(len(payloadBytes) + len(serialBytes))
+	lengthByte := make([]byte, 4)
+	binary.BigEndian.PutUint32(lengthByte, length)
+ 
+	conn.Write(lengthByte)
+	conn.Write(serialBytes)
+	conn.Write(payloadBytes)
+	// fmt.Println(" 发送: " + r.Payload)
+}
+ 
+// 接收数据，反序列化成 RequestResponse
+func readFrom(conn *net.TCPConn) (*RequestResponse, error) {
+	ret := &amp;RequestResponse{}
+	buf := make([]byte, 4)
+	if _, err := io.ReadFull(conn, buf); err != nil {
+		return nil, fmt.Errorf(" 读长度故障：%s", err.Error())
+	}
+	length := binary.BigEndian.Uint32(buf)
+	if _, err := io.ReadFull(conn, buf); err != nil {
+		return nil, fmt.Errorf(" 读 Serial 故障：%s", err.Error())
+	}
+	ret.Serial = binary.BigEndian.Uint32(buf)
+	payloadBytes := make([]byte, length-4)
+	if _, err := io.ReadFull(conn, payloadBytes); err != nil {
+		return nil, fmt.Errorf(" 读 Payload 故障：%s", err.Error())
+	}
+	ret.Payload = string(payloadBytes)
+	return ret, nil
+}
+ 
+// 张大爷的耳朵
+func zhangDaYeListen(conn *net.TCPConn) {
+	for count &lt; total {
+		r, err := readFrom(conn)
+		if err != nil {
+			fmt.Println(err.Error())
+			break
+		}
+		// fmt.Println(" 张大爷收到：" + r.Payload)
+		if r.Payload == l2 { // 如果收到：您这，嘛去？
+			go writeTo(&amp;RequestResponse{r.Serial, z3}, conn, &amp;zhangWriteLock) // 回复：嗨！吃饱了溜溜弯儿。
+		} else if r.Payload == l4 { // 如果收到：有空家里坐坐啊。
+			go writeTo(&amp;RequestResponse{r.Serial, z5}, conn, &amp;zhangWriteLock) // 回复：回头去给老太太请安！
+		} else if r.Payload == l1 { // 如果收到：刚吃。
+			// 不用回复
+		} else {
+			fmt.Println(" 张大爷听不懂：" + r.Payload)
+			break
+		}
+	}
+}
+ 
+// 张大爷的嘴
+func zhangDaYeSay(conn *net.TCPConn) {
+	nextSerial := uint32(0)
+	for i := uint32(0); i &lt; total; i++ {
+		writeTo(&amp;RequestResponse{nextSerial, z0}, conn, &amp;zhangWriteLock)
+		nextSerial++
+	}
+}
+ 
+// 李大爷的耳朵，实现是和张大爷类似的
+func liDaYeListen(conn *net.TCPConn, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for count &lt; total {
+		r, err := readFrom(conn)
+		if err != nil {
+			fmt.Println(err.Error())
+			break
+		}
+		// fmt.Println(" 李大爷收到：" + r.Payload)
+		if r.Payload == z0 { // 如果收到：吃了没，您吶?
+			writeTo(&amp;RequestResponse{r.Serial, l1}, conn, &amp;liWriteLock) // 回复：刚吃。
+		} else if r.Payload == z3 {
+			// do nothing
+		} else if r.Payload == z5 {
+			//fmt.Println(" 俩人说完走了 ")
+			count++
+		} else {
+			fmt.Println(" 李大爷听不懂：" + r.Payload)
+			break
+		}
+	}
+}
+ 
+// 李大爷的嘴
+func liDaYeSay(conn *net.TCPConn) {
+	nextSerial := uint32(0)
+	for i := uint32(0); i &lt; total; i++ {
+		writeTo(&amp;RequestResponse{nextSerial, l2}, conn, &amp;liWriteLock)
+		nextSerial++
+		writeTo(&amp;RequestResponse{nextSerial, l4}, conn, &amp;liWriteLock)
+		nextSerial++
+	}
+}
+ 
+func startServer() {
+	tcpAddr, _ := net.ResolveTCPAddr("tcp", "127.0.0.1:9999")
+	tcpListener, _ := net.ListenTCP("tcp", tcpAddr)
+	defer tcpListener.Close()
+	fmt.Println(" 张大爷在胡同口等着 ...")
+	for {
+		conn, err := tcpListener.AcceptTCP()
+		if err != nil {
+			fmt.Println(err)
+			break
+		}
+		fmt.Println(" 碰见一个李大爷:" + conn.RemoteAddr().String())
+		go zhangDaYeListen(conn)
+		go zhangDaYeSay(conn)
+	}
+ 
+}
+ 
+func startClient() {
+	var tcpAddr *net.TCPAddr
+	tcpAddr, _ = net.ResolveTCPAddr("tcp", "127.0.0.1:9999")
+	conn, _ := net.DialTCP("tcp", nil, tcpAddr)
+ 
+	defer conn.Close()
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go liDaYeListen(conn, &amp;wg)
+	go liDaYeSay(conn)
+	wg.Wait()
+}
+ 
+func main() {
+	go startServer()
+	time.Sleep(time.Second)
+	t1 := time.Now()
+	startClient()
+	elapsed := time.Since(t1)
+	fmt.Println(" 耗时: ", elapsed)
+}
+</code></pre>
+<p>在我的 Mac 执行 10 万次大约需要不到 5 秒钟：</p>
+<pre><code>go run hutong.go
+张大爷在胡同口等着 ...
+碰见一个李大爷:127.0.0.1:50136
+耗时:  4.962786896s
+</code></pre>
+<p>在这段程序里面，<strong>我没有对程序做任何特殊的性能优化，只是使用了我们之前四节课中讲到的，上面列出来的那些知识点，完成了一个基本的实现。</strong></p>
+<p>在这段程序中，我们首先定义了 RequestResponse 这个结构体，代表请求或响应，它包括序号和内容两个字段。readFrom 方法的功能是，接收数据，反序列化成 RequestResponse。</p>
+<p>协议的设计是这样的：首先用 4 个字节来标明这个请求的长度，然后用 4 个字节来保存序号，最后变长的部分就是大爷说的话。这里面用到了使用前置长度的方式来进行断句，这种断句的方式我在之前的课程中专门讲到过。</p>
+<p>这里面我们使用了专有的序列化方法，原因我在之前的课程中重点讲过，专有的序列化方法具备最好的性能，序列化出来的字节数也更少，而我们这个作业比拼的就是性能，所以在这个作业中采用这种序列化方式是最合适的选择。</p>
+<p>zhangDaYeListen 和 liDaYeListen 这两个方法，它们的实现是差不多的，就是接收对方发出的请求，然后给出正确的响应。zhangDaYeSay 和 liDaYeSay 这两个方法的实现也是差不多的，当俩大爷遇见后，就开始不停地说各自的请求，<strong>并不等待对方的响应</strong>，连续说 10 万次。</p>
+<p>这 4 个方法，分别在 4 个不同的协程中并行运行，两收两发，实现了全双工的通信。在这个地方，不少同学还是摆脱不了“一问一答，再问再答”这种人类交流的自然方式对思维的影响，写出来的依然是单工通信的程序，单工通信的性能是远远不如双工通信的，所以，要想做到比较好的网络传输性能，双工通信的方式才是最佳的选择。</p>
+<p>为了避免并发向同一个 socket 中写入造成数据混乱，我们给俩大爷分别定义了一个写锁，确保每个大爷同一时刻只能有一个协程在发送数据。后面的课程中，我们会专门来讲，如何正确地使用锁。</p>
+<p>最后，我们给张大爷定义为服务端，李大爷定义为客户端，连接建立后，分别开启两个大爷的耳朵和嘴，来完成这 10 万次遇见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

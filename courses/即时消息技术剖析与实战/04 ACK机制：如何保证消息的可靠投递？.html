@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04 ACK机制：如何保证消息的可靠投递？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">即时消息技术剖析与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>即时消息技术剖析与实战</strong><ul><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E6%90%9E%E6%87%82%E2%80%9C%E5%AE%9E%E6%97%B6%E4%BA%A4%E4%BA%92%E2%80%9D%E7%9A%84IM%E6%8A%80%E6%9C%AF%EF%BC%8C%E5%B0%86%E4%BC%9A%E6%9C%89%E4%BB%80%E4%B9%88%E6%96%B0%E6%9C%BA%E9%81%87%EF%BC%9F.html">00 开篇词 搞懂“实时交互”的IM技术，将会有什么新机遇？</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%89%B9%E6%80%A7%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84IM%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">01 架构与特性：一个完整的IM系统是怎样的？</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/02%20%E6%B6%88%E6%81%AF%E6%94%B6%E5%8F%91%E6%9E%B6%E6%9E%84%EF%BC%9A%E4%B8%BA%E4%BD%A0%E7%9A%84App%EF%BC%8C%E5%8A%A0%E4%B8%8A%E5%AE%9E%E6%97%B6%E9%80%9A%E4%BF%A1%E5%8A%9F%E8%83%BD.html">02 消息收发架构：为你的App，加上实时通信功能</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%E8%BD%AE%E8%AF%A2%E4%B8%8E%E9%95%BF%E8%BF%9E%E6%8E%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9E%E6%97%B6%E5%88%B0%E8%BE%BE%E9%97%AE%E9%A2%98%EF%BC%9F.html">03 轮询与长连接：如何解决消息的实时到达问题？</a></li><li><a class="active" aria-current="page" href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/04%20ACK%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%8A%95%E9%80%92%EF%BC%9F.html">04 ACK机制：如何保证消息的可靠投递？</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E6%B6%88%E6%81%AF%E5%BA%8F%E5%8F%B7%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E4%BD%A0%E7%9A%84%E6%B6%88%E6%81%AF%E4%B8%8D%E4%BC%9A%E4%B9%B1%E5%BA%8F%EF%BC%9F.html">05 消息序号生成器：如何保证你的消息不会乱序？</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/06%20HttpDNS%E5%92%8CTLS%EF%BC%9A%E4%BD%A0%E7%9A%84%E6%B6%88%E6%81%AF%E8%81%8A%E5%A4%A9%E7%9C%9F%E7%9A%84%E5%AE%89%E5%85%A8%E5%90%97%EF%BC%9F.html">06 HttpDNS和TLS：你的消息聊天真的安全吗？</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%92%8C%E5%8E%9F%E5%AD%90%E6%80%A7%EF%BC%9A%E4%BD%A0%E7%9C%8B%E5%88%B0%E7%9A%84%E6%9C%AA%E8%AF%BB%E6%B6%88%E6%81%AF%E6%8F%90%E9%86%92%E6%98%AF%E7%9C%9F%E7%9A%84%E5%90%97%EF%BC%9F.html">07 分布式锁和原子性：你看到的未读消息提醒是真的吗？</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E6%99%BA%E8%83%BD%E5%BF%83%E8%B7%B3%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%A7%A3%E5%86%B3%E7%BD%91%E7%BB%9C%E7%9A%84%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7.html">08 智能心跳机制：解决网络的不确定性</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9A%E8%AE%A9%E4%BD%A0%E7%9A%84%E6%B6%88%E6%81%AF%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%88%E7%AB%AF%E6%BC%AB%E6%B8%B8.html">09 分布式一致性：让你的消息支持多终端漫游</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%E8%87%AA%E5%8A%A8%E6%99%BA%E8%83%BD%E6%89%A9%E7%BC%A9%E5%AE%B9%EF%BC%9A%E7%9B%B4%E6%92%AD%E4%BA%92%E5%8A%A8%E5%9C%BA%E6%99%AF%E4%B8%AD%E5%B3%B0%E5%80%BC%E6%B5%81%E9%87%8F%E7%9A%84%E5%BA%94%E5%AF%B9.html">10 自动智能扩缩容：直播互动场景中峰值流量的应对</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E6%9C%9F%E4%B8%AD%E5%AE%9E%E6%88%98%EF%BC%9A%E5%8A%A8%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93%E7%89%88%E7%9A%84IM%E7%B3%BB%E7%BB%9F.html">11 期中实战：动手写一个简易版的IM系统</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E6%9C%8D%E5%8A%A1%E9%AB%98%E5%8F%AF%E7%94%A8%EF%BC%9A%E4%BF%9D%E8%AF%81%E6%A0%B8%E5%BF%83%E9%93%BE%E8%B7%AF%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E6%B5%81%E6%8E%A7%E5%92%8C%E7%86%94%E6%96%AD%E6%9C%BA%E5%88%B6.html">12 服务高可用：保证核心链路稳定性的流控和熔断机制</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/13%20HTTP%20Tunnel%EF%BC%9A%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E4%B8%8B%E6%B6%88%E6%81%AF%E9%80%9A%E9%81%93%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83.html">13 HTTP Tunnel：复杂网络下消息通道高可用设计的思考</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E5%9B%BE%E7%89%87%E3%80%81%E9%9F%B3%E8%A7%86%E9%A2%91%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E5%BE%97%E6%9B%B4%E5%BF%AB%EF%BC%9F.html">14 分片上传：如何让你的图片、音视频消息发送得更快？</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/15%20CDN%E5%8A%A0%E9%80%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E5%9B%BE%E7%89%87%E3%80%81%E8%A7%86%E9%A2%91%E3%80%81%E8%AF%AD%E9%9F%B3%E6%B6%88%E6%81%AF%E6%B5%8F%E8%A7%88%E6%92%AD%E6%94%BE%E4%B8%8D%E5%8D%A1%EF%BC%9F.html">15 CDN加速：如何让你的图片、视频、语音消息浏览播放不卡？</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/16%20APNs%EF%BC%9A%E8%81%8A%E4%B8%80%E8%81%8A%E7%AC%AC%E4%B8%89%E6%96%B9%E7%B3%BB%E7%BB%9F%E7%BA%A7%E6%B6%88%E6%81%AF%E9%80%9A%E9%81%93%E7%9A%84%E4%BA%8B.html">16 APNs：聊一聊第三方系统级消息通道的事</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/17%20Cache%EF%BC%9A%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9E%B6%E6%9E%84%E5%9C%A8%E6%B6%88%E6%81%AF%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">17 Cache：多级缓存架构在消息系统中的应用</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/18%20Docker%E5%AE%B9%E5%99%A8%E5%8C%96%EF%BC%9A%E8%AF%B4%E4%B8%80%E8%AF%B4IM%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%A8%A1%E5%9D%97%E6%B0%B4%E5%B9%B3%E6%89%A9%E5%B1%95%E7%9A%84%E5%AE%9E%E7%8E%B0.html">18 Docker容器化：说一说IM系统中模块水平扩展的实现</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%E7%AB%AF%E5%88%B0%E7%AB%AFTrace%EF%BC%9A%E6%B6%88%E6%81%AF%E6%94%B6%E5%8F%91%E9%93%BE%E8%B7%AF%E7%9A%84%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB%E6%90%AD%E5%BB%BA.html">19 端到端Trace：消息收发链路的监控体系搭建</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E5%AD%98%E5%82%A8%E5%92%8C%E5%B9%B6%E5%8F%91%EF%BC%9A%E4%B8%87%E4%BA%BA%E7%BE%A4%E8%81%8A%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%AD%E7%9A%84%E5%87%A0%E4%B8%AA%E9%9A%BE%E7%82%B9.html">20 存储和并发：万人群聊系统设计中的几个难点</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/21%20%E6%9C%9F%E6%9C%AB%E5%AE%9E%E6%88%98%EF%BC%9A%E4%B8%BA%E4%BD%A0%E7%9A%84%E7%AE%80%E7%BA%A6%E7%89%88IM%E7%B3%BB%E7%BB%9F%EF%BC%8C%E5%8A%A0%E4%B8%8A%E5%8A%9F%E8%83%BD.html">21 期末实战：为你的简约版IM系统，加上功能</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%EF%BC%9A%E4%B8%8D%E5%90%8C%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E5%9C%BA%E6%99%AF%E4%B8%8B%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0%E4%B8%8A%E7%9A%84%E5%BC%82%E5%90%8C.html">22 答疑解惑：不同即时消息场景下架构实现上的异同</a></li><li><a href="/courses/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E7%9C%9F%E6%AD%A3%E7%9A%84%E9%AB%98%E8%B4%B5%EF%BC%8C%E4%B8%8D%E6%98%AF%E4%BC%98%E4%BA%8E%E5%88%AB%E4%BA%BA%EF%BC%8C%E8%80%8C%E6%98%AF%E4%BC%98%E4%BA%8E%E8%BF%87%E5%8E%BB%E7%9A%84%E8%87%AA%E5%B7%B1.html">结束语 真正的高贵，不是优于别人，而是优于过去的自己</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E5%8D%B3%E6%97%B6%E6%B6%88%E6%81%AF%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90%E4%B8%8E%E5%AE%9E%E6%88%98/04%20ACK%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%8A%95%E9%80%92%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="04 ACK机制：如何保证消息的可靠投递？" id="title">04 ACK机制：如何保证消息的可靠投递？</h1>
+<div><p>你好，我是袁武林。</p>
+<p>在第一节的课程中，我们说到了即时消息系统中的四个重要特性，实时性、可靠性、一致性、安全性。</p>
+<p>上一节课我们从如何保证消息实时性方面，了解了业界常用的一些方式以及背后具体的原理。那么今天我们接着来讲一讲，在即时消息的系统架构设计里，如何来保证消息的可靠投递。</p>
+<p>首先，我们来了解一下，什么是消息的可靠投递？</p>
+<p>站在使用者的角度来看，消息的可靠投递主要是指：消息在发送接收过程中，能够做到不丢消息、消息不重复两点。</p>
+<p>这两个特性对于用户来讲都是非常影响体验的。我们先说一下不丢消息。</p>
+<p>试想一下，你把辛辛苦苦攒到的零花钱打赏给了中意的“主播小姐姐”，但由于系统或者网络的问题，这条对你来说至关重要的打赏消息并没有成功投递给“主播小姐姐”，自然也就没有后续小姐姐和你一对一的互动环节了，想想是不是很悲剧？</p>
+<p>消息重复也不用多说，谁也不愿意浪费时间在查看一遍又一遍的重复内容上。</p>
+<p>那么在一般的IM系统的设计中，究竟是如何解决这两大难题的呢？下面我们结合一些简单的案例，来看一看“不丢消息”“消息不重复”这些能力，在技术上到底是怎么实现的。</p>
+<h2 id="消息丢失有哪几种情况">消息丢失有哪几种情况？</h2>
+<p>我们以最常见的“服务端路由中转”类型的IM系统为例（非P2P），这里解释一下，所谓的“服务端路由中转”是指：一条消息从用户A发出后，需要先经过IM服务器来进行中转，然后再由IM服务器推送给用户B，这个也是目前最常见的IM系统的消息分发类型。</p>
+<p>我们可以把它和少数P2P类型区别一下，P2P类型的消息投递是直接由用户A的网络发送到用户B的网络，不经过服务端路由。</p>
+<p>那么，我们来假设一个场景：用户A给用户B发送一条消息。接下来我们看看哪些环节可能存在丢消息的风险？</p>
+<p><img alt="" src="/assets/4265e2b203f065b9e847d208.png"/></p>
+<p>参考上面时序图，发消息大概整体上分为两部分：</p>
+<ul>
+<li>用户A发送消息到IM服务器，服务器将消息暂存，然后返回成功的结果给发送方A（步骤1、2、3）；</li>
+<li>IM服务器接着再将暂存的用户A发出的消息，推送给接收方用户B（步骤4）。</li>
+</ul>
+<p>其中可能丢失消息的场景有下面这些。</p>
+<p>在第一部分中。步骤1、2、3都可能存在失败的情况。</p>
+<p>由于用户A发消息是一个“请求”和“响应”的过程，如果用户A在把消息发送到IM服务器的过程中，由于网络不通等原因失败了；或者IM服务器接收到消息进行服务端存储时失败了；或者用户A等待IM服务器一定的超时时间，但IM服务器一直没有返回结果，那么这些情况用户A都会被提示发送失败。</p>
+<p>接下来，他可以通过重试等方式来弥补，注意这里可能会导致发送重复消息的问题。</p>
+<p>比如：客户端在超时时间内没有收到响应然后重试，但实际上，请求可能已经在服务端成功处理了，只是响应慢了，因此这种情况需要服务端有去重逻辑，一般发送端针对同一条重试消息有一个唯一的ID，便于服务端去重使用。</p>
+<p>在第二部分中。消息在IM服务器存储完后，响应用户A告知消息发送成功了，然后IM服务器把消息推送给用户B的在线设备。</p>
+<p>在推送的准备阶段或者把消息写入到内核缓冲区后，如果服务端出现掉电，也会导致消息不能成功推送给用户B。</p>
+<p>这种情况实际上由于连接的IM服务器可能已经无法正常运转，需要通过后期的补救措施来解决丢消息的问题，后续会详细讲到，这里先暂且不讨论。</p>
+<p>即使我们的消息成功通过TCP连接给到用户B的设备，但如果用户B的设备在接收后的处理过程出现问题，也会导致消息丢失。比如：用户B的设备在把消息写入本地DB时，出现异常导致没能成功入库，这种情况下，由于网络层面实际上已经成功投递了，但用户B却看不到消息。所以比较难处理。</p>
+<p>上面两种情况都可能导致消息丢失，那么怎么避免这些异常情况下丢消息的问题呢？-
+一般我们会用下面这些相应的解决方案：</p>
+<ol>
+<li><p>针对第一部分，我们通过客户端A的超时重发和IM服务器的去重机制，基本就可以解决问题；</p></li>
+<li><p>针对第二部分，业界一般参考TCP协议的ACK机制，实现一套业务层的ACK协议。</p></li>
+</ol>
+<h2 id="解决丢失的方案-业务层ack机制">解决丢失的方案：业务层ACK机制</h2>
+<p>我们先解释一下ACK，ACK全称 Acknowledge，是确认的意思。在TCP协议中，默认提供了ACK机制，通过一个协议自带的标准的ACK数据包，来对通信方接收的数据进行确认，告知通信发送方已经确认成功接收了数据。</p>
+<p>那么，业务层ACK机制也是类似，解决的是：IM服务推送后如何确认消息是否成功送达接收方。具体实现如下图：</p>
+<p><img alt="" src="/assets/35eb33c6cea4f8d20351ee55.png"/></p>
+<p>IM服务器在推送消息时，携带一个标识SID（安全标识符，类似TCP的sequenceId），推送出消息后会将当前消息添加到“待ACK消息列表”，客户端B成功接收完消息后，会给IM服务器回一个业务层的ACK包，包中携带有本条接收消息的SID，IM服务器接收后，会从“待ACK消息列表”记录中删除此条消息，本次推送才算真正结束。</p>
+<h3 id="ack机制中的消息重传">ACK机制中的消息重传</h3>
+<p>如果消息推给用户B的过程中丢失了怎么办？比如：</p>
+<ul>
+<li>B网络实际已经不可达，但IM服务器还没有感知到；</li>
+<li>用户B的设备还没从内核缓冲区取完数据就崩溃了；</li>
+<li>消息在中间网络途中被某些中间设备丢掉了，TCP层还一直重传不成功等。</li>
+</ul>
+<p>以上的问题都会导致用户B接收不到消息。</p>
+<p>解决这个问题的常用策略其实也是参考了TCP协议的重传机制。类似的，IM服务器的“等待ACK队列”一般都会维护一个超时计时器，一定时间内如果没有收到用户B回的ACK包，会从“等待ACK队列”中重新取出那条消息进行重推。</p>
+<h3 id="消息重复推送的问题">消息重复推送的问题</h3>
+<p>刚才提到，对于推送的消息，如果在一定时间内没有收到ACK包，就会触发服务端的重传。收不到ACK的情况有两种，除了推送的消息真正丢失导致用户B不回ACK外，还可能是用户B回的ACK包本身丢了。</p>
+<p>对于第二种情况，ACK包丢失导致的服务端重传，可能会让接收方收到重复推送的消息。</p>
+<p>针对这种情况，一般的解决方案是：服务端推送消息时携带一个Sequence ID，Sequence ID在本次连接会话中需要唯一，针对同一条重推的消息Sequence ID不变，接收方根据这个唯一的Sequence ID来进行业务层的去重，这样经过去重后，对于用户B来说，看到的还是接收到一条消息，不影响使用体验。</p>
+<h2 id="这样真的就不会丢消息了吗">这样真的就不会丢消息了吗？</h2>
+<p>细心的你可能发现，通过“ACK+超时重传+去重”的组合机制，能解决大部分用户在线时消息推送丢失的问题，那是不是就能完全覆盖所有丢消息的场景呢？</p>
+<p>设想一下，假设一台IM服务器在推送出消息后，由于硬件原因宕机了，这种情况下，如果这条消息真的丢了，由于负责的IM服务器宕机了无法触发重传，导致接收方B收不到这条消息。</p>
+<p>这就存在一个问题，当用户B再次重连上线后，可能并不知道之前有一条消息丢失的情况。对于这种重传失效的情况该如何处理？</p>
+<h3 id="补救措施-消息完整性检查">补救措施：消息完整性检查</h3>
+<p>针对服务器宕机可能导致的重传失效的问题我们来分析一下，这里的问题在于：服务器机器宕机，重传这条路走不通了。</p>
+<p>那如果在用户B在重新上线时，让服务端有能力进行完整性检查，发现用户B“有消息丢失”的情况，就可以重新同步或者修复丢失的数据。</p>
+<p>比较常见的消息完整性检查的实现机制有“时间戳比对”，具体的实现如下图：</p>
+<p><img alt="" src="/assets/b5e4f92e9551f003150d456f.png"/></p>
+<p>下面我们来看一下“时间戳机制”是如何对消息进行完整性检查的，我用这个例子来解释一下这个过程。</p>
+<ul>
+<li>IM服务器给接收方B推送msg1，顺便带上一个最新的时间戳timestamp1，接收方B收到msg1后，更新本地最新消息的时间戳为timestamp1。</li>
+<li>IM服务器推送第二条消息msg2，带上一个当前最新的时间戳timestamp2，msg2在推送过程中由于某种原因接收方B和IM服务器连接断开，导致msg2没有成功送达到接收方B。</li>
+<li>用户B重新连上线，携带本地最新的时间戳timestamp1，IM服务器将用户B暂存的消息中时间戳大于timestamp1的所有消息返回给用户B，其中就包括之前没有成功的msg2。</li>
+<li>用户B收到msg2后，更新本地最新消息的时间戳为timestamp2。</li>
+</ul>
+<p>通过上面的时间戳机制，用户B可以成功地让丢失的msg2进行补偿发送。</p>
+<p>需要说明的是，由于时间戳可能存在多机器时钟不同步的问题，所以可能存在一定的偏差，导致数据获取上不够精确。所以在实际的实现上，也可以使用全局的自增序列作为版本号来代替。</p>
+<h2 id="小结">小结</h2>
+<p>保证消息的可靠投递是IM系统设计中至关重要的一个环节，“不丢消息”“消息不重复”对用户体验的影响较大，我们可以通过以下手段来确保消息下推的可靠性。</p>
+<ul>
+<li>大部分场景和实际实现中，通过业务层的ACK确认和重传机制，能解决大部分推送过程中消息丢失的情况。</li>
+<li>通过客户端的去重机制，屏蔽掉重传过程中可能导致消息重复的问题，从而不影响用户体验。</li>
+<li>针对重传消息不可达的特殊场景，我们还可以通过“兜底”的完整性检查机制来及时发现消息丢失的情况并进行补推修复，消息完整性检查可以通过时间戳比对，或者全局自增序列等方式来实现。</li>
+</ul>
+<p>最后，给你留一个思考题：<strong>有了TCP协议本身的ACK机制，为什么还需要业务层的ACK机制？</strong></p>
+<p>你可以给我留言，我们一起讨论，感谢你的收听，我们下期再见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

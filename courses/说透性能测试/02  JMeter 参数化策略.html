@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>02  JMeter 参数化策略 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/index.html">说透性能测试</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">21 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>说透性能测试</strong><ul><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E4%B8%AA%E6%B5%8B%E8%AF%95%E4%BA%BA%E9%83%BD%E8%A6%81%E5%AD%A6%E5%A5%BD%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%EF%BC%9F.html">00 开篇词  为什么每个测试人都要学好性能测试？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/01%20%20JMeter%20%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5.html">01  JMeter 的核心概念</a></li><li><a class="active" aria-current="page" href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/02%20%20JMeter%20%E5%8F%82%E6%95%B0%E5%8C%96%E7%AD%96%E7%95%A5.html">02  JMeter 参数化策略</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/03%20%20%E6%9E%84%E5%BB%BA%E5%B9%B6%E6%89%A7%E8%A1%8C%20JMeter%20%E8%84%9A%E6%9C%AC%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF.html">03  构建并执行 JMeter 脚本的正确姿势</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/04%20%20JMeter%20%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91%E5%85%B6%E5%AE%9E%E5%B9%B6%E4%B8%8D%E9%9A%BE.html">04  JMeter 二次开发其实并不难</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/05%20%20%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20JMeter%20API%20%E5%BC%80%E5%8F%91%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%EF%BC%9F.html">05  如何基于 JMeter API 开发性能测试平台？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/06%20%20Nginx%20%E5%9C%A8%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8.html">06  Nginx 在系统架构中的作用</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/07%20%20%E4%BD%A0%E7%9C%9F%E7%9A%84%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E5%88%B6%E5%AE%9A%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%84%E7%9B%AE%E6%A0%87%E5%90%97%EF%BC%9F.html">07  你真的知道如何制定性能测试的目标吗？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/08%20%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E6%84%8F%E4%B9%89.html">08  性能测试场景的分类和意义</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/09%20%20%E5%A6%82%E4%BD%95%E5%88%B6%E5%AE%9A%E4%B8%80%E4%BB%BD%E6%9C%89%E6%95%88%E7%9A%84%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88%EF%BC%9F.html">09  如何制定一份有效的性能测试方案？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/10%20%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9B%91%E6%8E%A7%20Linux%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%A6%81%E7%82%B9.html">10  命令行监控 Linux 服务器的要点</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/11%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E9%93%BE%E8%B7%AF%E7%9B%91%E6%8E%A7%E4%BB%A5%E5%8F%8A%E6%8A%A5%E8%AD%A6%E6%96%B9%E6%A1%88.html">11  分布式服务链路监控以及报警方案</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/12%20%20%E5%A6%82%E4%BD%95%E6%8A%8A%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%91%E6%8E%A7%E4%B9%9F%E5%81%9A%E5%BE%97%E9%85%B7%E7%82%AB%EF%BC%9F.html">12  如何把可视化监控也做得酷炫？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/13%20%20Docker%20%E7%9A%84%E5%88%B6%E4%BD%9C%E3%80%81%E8%BF%90%E8%A1%8C%E4%BB%A5%E5%8F%8A%E7%9B%91%E6%8E%A7.html">13  Docker 的制作、运行以及监控</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/14%20%20%E5%A6%82%E4%BD%95%E4%BB%8E%20CPU%20%E9%A3%99%E5%8D%87%E5%AE%9A%E4%BD%8D%E5%88%B0%E7%83%AD%E7%82%B9%E6%96%B9%E6%B3%95%EF%BC%9F.html">14  如何从 CPU 飙升定位到热点方法？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/15%20%20%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20JVM%20%E5%88%86%E6%9E%90%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E5%AF%B9%E8%B1%A1%EF%BC%9F.html">15  如何基于 JVM 分析内存使用对象？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/16%20%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20Arthas%20%E5%AE%9A%E4%BD%8D%E4%BB%A3%E7%A0%81%E9%93%BE%E8%B7%AF%E9%97%AE%E9%A2%98%EF%BC%9F.html">16  如何通过 Arthas 定位代码链路问题？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/17%20%20%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%20Redis%20%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E5%92%8C%E9%9B%AA%E5%B4%A9%EF%BC%9F.html">17  如何应对 Redis 缓存穿透、击穿和雪崩？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/18%20%20%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E4%BC%98%E5%8C%96%20MySQL%20%E6%80%A7%E8%83%BD%EF%BC%9F.html">18  如何才能优化 MySQL 性能？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/19%20%20%E5%A6%82%E4%BD%95%E6%A0%B9%E6%B2%BB%E6%85%A2%20SQL%EF%BC%9F.html">19  如何根治慢 SQL？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/20%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E7%BA%BF%E4%B8%8A%E5%85%A8%E9%93%BE%E8%B7%AF%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93.html">20 结束语  线上全链路性能测试实践总结</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E8%AF%B4%E9%80%8F%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/02%20%20JMeter%20%E5%8F%82%E6%95%B0%E5%8C%96%E7%AD%96%E7%95%A5.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="02  JMeter 参数化策略" id="title">02  JMeter 参数化策略</h1>
+<div><p>上一讲我梳理了 JMeter 的核心概念，希望你能够通过课程去理解并灵活的应用到实际工作中。这一讲我会带你学习一个重要的知识点：参数化。无论是从使用频率还是从参数化对性能测试结果的影响，它都是你做性能测试必须要掌握的。</p>
+<h3 id="参数化是什么">参数化是什么</h3>
+<p>简单来说，参数化就是选取不同的参数作为请求内容输入。使用 JMeter 测试时，测试数据的准备是一项重要的 工作。若要求每次传入的数据不一样，就需要进行参数化了。</p>
+<h3 id="为什么要进行参数化">为什么要进行参数化</h3>
+<p>刚才说到，若要求每次传入的数据不一样，就需要进行参数化。那为什么会有这种要求呢？我们来看两个场景。</p>
+<ul>
+<li><strong>数据被缓存导致测试结果不准确</strong></li>
+</ul>
+<p>缓存原本是为了让数据访问的速度接近 CPU 的处理速度而设置的临时存储区域，比如 cache。如今缓存的概念变得更广了，很多空间都可以设置客户端缓存、CDN 缓存等等。</p>
+<p>当你频繁地请求某一条固定的数据时，这条数据就很容易被缓存，而不是每次都从数据库中去获取，这就可能导致和真实的场景有差别。</p>
+<p>比如大促有 10w 用户会从获取不同的商品信息，而你的压测中并没有进行充分的参数化，此时用大量线程反复请求同一件商品，极有可能访问的是缓存数据。从业务逻辑看接口返回并没有问题，但这样的场景几乎不会发生，这就会导致无效压测，测试的结果并没有多少意义。</p>
+<ul>
+<li><strong>流程不能正常执行</strong></li>
+</ul>
+<p>数据被缓存可能会导致测试结果不准确，但至少业务能够走通。还有的情况是，在没有参数化的情况下，会产生大量的业务报错。</p>
+<p>打个比方，你在测试限购商品抢购，如果用多线程模拟同一个用户操作可能会直接报错，因为在生成订单接口（支付等）都会判断是否是同一个用户。</p>
+<p>在要求每次传入的数据不一样时，如果不进行参数化会造成很多问题，以上我列举的两个场景基本概括了没有参数化时会发生的问题，希望你能在性能测试时多加注意。下面我们就来看如何实现 JMeter 参数化。</p>
+<h3 id="jmeter-参数化的实现方式">JMeter 参数化的实现方式</h3>
+<p>我列举了 3 种比较常见的 JMeter 参数化的实现方式，你可以根据自己的需要进行选择。</p>
+<ul>
+<li><strong>CSV Data Set Config</strong>：将参数化的数据放入文件中，参数化读取依赖于文件操作。这样的参数化方式很常用，<strong>尤其适用于参数化数据量较多的场景</strong>，而且维护比较简单灵活。</li>
+<li><strong>User Defined Variables</strong>：一般来说可以配置脚本中的公共参数，如域名，端口号，不需要随着压测进行动态改变，<strong>比较方便环境切换</strong>。</li>
+<li><strong>Function Helper 中的函数</strong>：使用函数的方式生成参数，如果你需要随机数、uuid 等都可以使用函数生成。JMeter 还提供了相应的接口给你二次开发，自定义需要的功能。</li>
+</ul>
+<h4 id="csv-data-set-config">CSV Data Set Config</h4>
+<p>CSV Data Set Config 的可配置选项较多，也是目前性能测试参数化时使用最多的插件，这里我就重点介绍一下 CSV Data Set Config。</p>
+<p>在配置组件中添加元件 CSV Data Set Config，如下图所示：</p>
+<p><img alt="Drawing 0.png" src="/assets/8a5a3931588839f983f3f5d8.png"/></p>
+<p>图 1：CSV Data Set Config</p>
+<p>我们来看一下 CSV Data Set Config 各项的含义。</p>
+<p><strong>文件名</strong>：顾名思义，这里填写文件的名字即可。</p>
+<p>保存参数化数据的文件目录，我这边是将 user.csv 和脚本放置在同一路径下。在这里我要推荐一个小技巧，就是“<strong>相对路径</strong>”。使用绝对路径，在做脚本迁移时大部分情况下都需要修改。如果你是先在 Windows 或 Mac 机器上修改脚本，再将脚本上传到 Linux 服务器上执行测试的，那你就可以用相对路径，这样就不用频繁修改该选项了。</p>
+<p><strong>文件编码</strong>：指定文件的编码格式，设置的格式一般需要和文件编码格式一致，大部分情况下保存编码格式为 UTF-8 即可。</p>
+<p><strong>变量名称</strong>：对应参数文件每列的变量名，类似 Excel 文件的文件头，主要是作为后续引用的标识符，一般使用英文。如下图所示：</p>
+<p><img alt="Drawing 1.png" src="/assets/022d6e66caf09340e0454409.png"/></p>
+<p>图 2：user.csv</p>
+<p>图中我标示了 name 和 password，相对应 user.csv 中的第一列和第二列。</p>
+<p>那如何引用需要的文件数据？通过“${变量名称}”就可以了，如下图所示：</p>
+<p><img alt="Drawing 2.png" src="/assets/2ea24cdaa3fa244d803a2522.png"/></p>
+<p>图 3：引用演示图</p>
+<p><strong>忽略首行</strong>： 第一行不读取。比如图 2 的第一行我只是标示这一列是什么类型的数据，实际上并不是需要读取的业务数据，此时就可以采用忽略首行。</p>
+<p><strong>分隔符</strong>：用来标示参数文件中的分隔符号，与参数文件中的分隔符保持一致即可。</p>
+<p><strong>遇到文件结束符再次循环</strong>：是否循环读取参数文件内容。因为 CSV Data Set Config 一次读入一行，如果设置的循环次数超过文本的行数，标示为 True 就是继续再从头开始读入。</p>
+<p><strong>遇到文件结束符停止线程</strong>：读取到参数文件末尾时，是否停止读取线程，默认为 False。如果“遇到文件结束符再次循环”已经设置为 True 了，这个选项就没有意义了。</p>
+<p><strong>线程共享模式</strong>：这个适用范围是一个脚本里多线程组的情况。所有线程是默认选项，代表当前测试计划中的所有线程中的所有的线程都有效；当前线程组代表当前线程组中的线程有效；当前线程则表示当前线程有效。一般情况下，我们选择默认选项“所有线程”就好，“当前线程组”和“当前线程”很少会用到。</p>
+<p>上面我介绍了参数化的意义以及常见用法，参数化对于性能测试是基础且必需的，因为在性能场景中，很多时候不进行参数化，脚本也是可以跑通的，所以有一些测试同学在这方面就会“偷工减料”，但这会造成性能数据不准确。下面，我们就来看一种特殊的参数化：关联。</p>
+<h3 id="特殊的参数化-关联">特殊的参数化：关联</h3>
+<p>关联是将上个请求的数据提取需要的部分放到下个请求中，通过关联我们可以获取到满足业务特性的不同数据，因此可以认为是一种特殊的参数化。</p>
+<h4 id="关联的使用场景">关联的使用场景</h4>
+<p>我们来看一个例子，从例子中了解关联解决了什么问题。</p>
+<p>我编写了一个查看订单接口，运行完成没有问题，并且返回正确的结果，如下所示：</p>
+<pre><code>{"data":{"code":0,"count":16,"items":[{"actualPrice":8900,"gmtCreate":1601448530000,"id":357,"orderNo":"1012020091448501002","skuList":[{"barCode":"150004","gmtCreate":1601448530000,"gmtUpdate":1601448530000,"id":389,"img":"https://demo.oss-cn-shenzhen.aliyuncs.com/bg/86338c9e576342baa0d079bc1caef9cc.jpg","num":1,"orderId":357,"orderNo":"1012020091448501002","originalPrice":10690,"price":8900,"skuId":2777,"spuId":1236771,"spuTitle":"昵趣 NaTruse 山羊奶配方狗狗洁齿骨 盒装 20g*40 支","title":"山羊奶","unit":"盒"}],"status":90},"msg":"第 1 页,共 1 条","pageNo":1,"pageSize":1，"total":1，"totalPageNo":2},"errmsg":"成功","errno":200,"timestamp":1609219480400}
+</code></pre>
+<p>一个小时之后，我再来运行这个接口时，却发现返回用户未登录：</p>
+<pre><code> {"errmsg":"用户尚未登录","errno":10001,"timestamp":1609220170295}
+</code></pre>
+<p>在所有入参都没有修改的情况下为什么会出现这样的情况呢？因为你看到返回的信息是用户未登录，也就是说用户信息是无效的。</p>
+<p>这个接口使用 Token 验证用户，Token 有效期为 15 分钟，刚刚问题产生的原因就是 Token 过期了。</p>
+<p>那如何保证查看订单接口信息中需要的 Token 都是有效的呢？其中一个方法就是查看订单接口之前调用登录接口获取 Token，把登录接口的 Token 传入查看订单接口中。这个过程其实就是“关联”。</p>
+<h4 id="jmeter-如何实现关联">JMeter 如何实现关联</h4>
+<p>JMeter实现关联有 3 种方式：边界提取器，通过左右边界的方式关联需要的数据；Json Extractor提取器，针对返回的 json 数据类型；正则表达式提取器，通过正则表达式去提取数据，实现关联。</p>
+<p>正则表达式提取器是最为常用，也是这里我要向你介绍的关联方式。我们来看下面的例子：</p>
+<p><img alt="Drawing 3.png" src="/assets/e41d603b3b4a01a469336943.png"/></p>
+<p>图 4：正则表达式提取器</p>
+<p>我们来看一下正则表达式提取器中每一项的含义。</p>
+<ul>
+<li><strong>引用名称</strong>：自己定义的变量名称以及后续请求将要引用到的变量名。在图中我填写的是“token”，则引用方式是“${token}”。</li>
+<li><strong>正则表达式</strong>：提取内容的正则表达式。“( )”括起来的部分就是需要提取的，“.”点号表示匹配任何字符串，“+”表示一次或多次，“？”表示找到第一个匹配项后停止。</li>
+<li><strong>模板</strong>：用“<span class="math inline">\( \)</span>”引用，表示解析到的第几个值给 token，图 4 中的正则表达式如下：</li>
+</ul>
+<pre><code>"accesstoken":(.+?),"gender":(.+?)
+</code></pre>
+<p><span class="math inline">\(1\)</span> 表示匹配的第一个值，即 accesstoken 后匹配后的值，模板 <span class="math inline">\(2\)</span> 则匹配 gender 后的值。图 4 演示的实例中只有 1 个 token 值，所以使用的 <span class="math inline">\(1\)</span>。</p>
+<ul>
+<li><strong>匹配数字</strong>：0 代表随机取值，1 代表第一个值。假设我返回数据的结构是：</li>
+</ul>
+<pre><code>[{"accesstoken":"ABDS88WDWHJEHJSHWJW","gender":null},{{"accesstoken":"NDJNW3U98SJWKISXIWN","gender":null}]
+</code></pre>
+<p>此时提取结果是一个数组，accesstoken 对应了多个值相当于数组，1 代表匹配第一个 accsstoken 的值“ABDS88WDWHJEHJSHWJW”。</p>
+<ul>
+<li><strong>缺省值</strong>：正则匹配失败时的取值。比如这里我设置的是 null（token 值取不到时就会用 null 代替）。上面我们已经匹配了 token 值，在被测接口传参处直接用“${token}”就可以了。</li>
+</ul>
+<p><img alt="Drawing 4.png" src="/assets/0149a0d9f9ae316972346b42.png"/></p>
+<p>图 5：关联 Token</p>
+<p>关联后就可以看到，每次都能进行正常的业务返回了。</p>
+<p><img alt="Drawing 5.png" src="/assets/e4fc0243d431decd1005a15d.png"/></p>
+<p>图 6：关联后正常业务返回</p>
+<h3 id="总结">总结</h3>
+<p>这一讲我介绍了参数化策略以及使用场景。作为性能测试中最常用到的操作，你不仅要学会基本操作，还需要思考参数化策略适合的场景以及参数化数据对性能测试的影响。说到这里，我就要问一个问题了：不同的参数对性能结果会不会有影响？</p>
+<p>举个例子，在电商系统中，你准备了不同的用户数据，用户又分为不同的等级，不同的等级可能有不一样的优惠规则和对应的优惠券，每个会员的优惠券数量可能也不一样，那这些不同的会员信息分布会对性能测试的结果有什么样的的影响？欢迎在评论区给出你的思考。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

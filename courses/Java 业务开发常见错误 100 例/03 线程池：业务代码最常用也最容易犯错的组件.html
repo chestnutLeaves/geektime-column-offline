@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 线程池：业务代码最常用也最容易犯错的组件 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/index.html">Java 业务开发常见错误 100 例</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java 业务开发常见错误 100 例</strong><ul><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9C%9F%E7%9A%84%E4%BC%9A%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E5%9D%91%EF%BC%9F.html">00 开篇词 业务代码真的会有这么多坑？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/01%20%E4%BD%BF%E7%94%A8%E4%BA%86%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%BA%93%EF%BC%8C%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%B0%B1%E9%AB%98%E6%9E%95%E6%97%A0%E5%BF%A7%E4%BA%86%E5%90%97%EF%BC%9F.html">01 使用了并发工具类库，线程安全就高枕无忧了吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/02%20%E4%BB%A3%E7%A0%81%E5%8A%A0%E9%94%81%EF%BC%9A%E4%B8%8D%E8%A6%81%E8%AE%A9%E2%80%9C%E9%94%81%E2%80%9D%E4%BA%8B%E6%88%90%E4%B8%BA%E7%83%A6%E5%BF%83%E4%BA%8B.html">02 代码加锁：不要让“锁”事成为烦心事</a></li><li><a class="active" aria-current="page" href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/03%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E6%9C%80%E5%B8%B8%E7%94%A8%E4%B9%9F%E6%9C%80%E5%AE%B9%E6%98%93%E7%8A%AF%E9%94%99%E7%9A%84%E7%BB%84%E4%BB%B6.html">03 线程池：业务代码最常用也最容易犯错的组件</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/04%20%E8%BF%9E%E6%8E%A5%E6%B1%A0%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%B8%AE%E4%BA%86%E5%80%92%E5%BF%99.html">04 连接池：别让连接池帮了倒忙</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/05%20HTTP%E8%B0%83%E7%94%A8%EF%BC%9A%E4%BD%A0%E8%80%83%E8%99%91%E5%88%B0%E8%B6%85%E6%97%B6%E3%80%81%E9%87%8D%E8%AF%95%E3%80%81%E5%B9%B6%E5%8F%91%E4%BA%86%E5%90%97%EF%BC%9F.html">05 HTTP调用：你考虑到超时、重试、并发了吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/06%202%E6%88%90%E7%9A%84%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E7%9A%84Spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%8C%E5%8F%AF%E8%83%BD%E9%83%BD%E6%B2%A1%E5%A4%84%E7%90%86%E6%AD%A3%E7%A1%AE.html">06 2成的业务代码的Spring声明式事务，可能都没处理正确</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/07%20%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E5%B9%B6%E4%B8%8D%E6%98%AF%E4%B8%87%E8%83%BD%E8%8D%AF.html">07 数据库索引：索引并不是万能药</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/08%20%E5%88%A4%E7%AD%89%E9%97%AE%E9%A2%98%EF%BC%9A%E7%A8%8B%E5%BA%8F%E9%87%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%BD%A0%E5%B0%B1%E6%98%AF%E4%BD%A0%EF%BC%9F.html">08 判等问题：程序里如何确定你就是你？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/09%20%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%EF%BC%9A%E6%B3%A8%E6%84%8F%E7%B2%BE%E5%BA%A6%E3%80%81%E8%88%8D%E5%85%A5%E5%92%8C%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98.html">09 数值计算：注意精度、舍入和溢出问题</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/10%20%E9%9B%86%E5%90%88%E7%B1%BB%EF%BC%9A%E5%9D%91%E6%BB%A1%E5%9C%B0%E7%9A%84List%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C.html">10 集合类：坑满地的List列表操作</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/11%20%E7%A9%BA%E5%80%BC%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%86%E4%B8%8D%E6%B8%85%E6%A5%9A%E7%9A%84null%E5%92%8C%E6%81%BC%E4%BA%BA%E7%9A%84%E7%A9%BA%E6%8C%87%E9%92%88.html">11 空值处理：分不清楚的null和恼人的空指针</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/12%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%AB%E8%AE%A9%E8%87%AA%E5%B7%B1%E5%9C%A8%E5%87%BA%E9%97%AE%E9%A2%98%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%98%E4%B8%BA%E7%9E%8E%E5%AD%90.html">12 异常处理：别让自己在出问题的时候变为瞎子</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/13%20%E6%97%A5%E5%BF%97%EF%BC%9A%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95%E7%9C%9F%E6%B2%A1%E4%BD%A0%E6%83%B3%E8%B1%A1%E7%9A%84%E9%82%A3%E4%B9%88%E7%AE%80%E5%8D%95.html">13 日志：日志记录真没你想象的那么简单</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/14%20%E6%96%87%E4%BB%B6IO%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E6%AD%A3%E7%A1%AE%E7%9A%84%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%B9%B6%E9%9D%9E%E6%98%93%E4%BA%8B.html">14 文件IO：实现高效正确的文件读写并非易事</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/15%20%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%9A%E4%B8%80%E6%9D%A5%E4%B8%80%E5%9B%9E%E4%BD%A0%E8%BF%98%E6%98%AF%E5%8E%9F%E6%9D%A5%E7%9A%84%E4%BD%A0%E5%90%97%EF%BC%9F.html">15 序列化：一来一回你还是原来的你吗？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/16%20%E7%94%A8%E5%A5%BDJava%208%E7%9A%84%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%EF%BC%8C%E5%B0%91%E8%B8%A9%E4%B8%80%E4%BA%9B%E2%80%9C%E8%80%81%E4%B8%89%E6%A0%B7%E2%80%9D%E7%9A%84%E5%9D%91.html">16 用好Java 8的日期时间类，少踩一些“老三样”的坑</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/17%20%E5%88%AB%E4%BB%A5%E4%B8%BA%E2%80%9C%E8%87%AA%E5%8A%A8%E6%8C%A1%E2%80%9D%E5%B0%B1%E4%B8%8D%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0OOM.html">17 别以为“自动挡”就不可能出现OOM</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/18%20%E5%BD%93%E5%8F%8D%E5%B0%84%E3%80%81%E6%B3%A8%E8%A7%A3%E5%92%8C%E6%B3%9B%E5%9E%8B%E9%81%87%E5%88%B0OOP%E6%97%B6%EF%BC%8C%E4%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91%EF%BC%9F.html">18 当反射、注解和泛型遇到OOP时，会有哪些坑？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/19%20Spring%E6%A1%86%E6%9E%B6%EF%BC%9AIoC%E5%92%8CAOP%E6%98%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%A0%B8%E5%BF%83.html">19 Spring框架：IoC和AOP是扩展的核心</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/20%20Spring%E6%A1%86%E6%9E%B6%EF%BC%9A%E6%A1%86%E6%9E%B6%E5%B8%AE%E6%88%91%E4%BB%AC%E5%81%9A%E4%BA%86%E5%BE%88%E5%A4%9A%E5%B7%A5%E4%BD%9C%E4%B9%9F%E5%B8%A6%E6%9D%A5%E4%BA%86%E5%A4%8D%E6%9D%82%E5%BA%A6.html">20 Spring框架：框架帮我们做了很多工作也带来了复杂度</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/21%20%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%EF%BC%9A%E6%90%9E%E5%AE%9A%E4%BB%A3%E7%A0%81%E9%87%8D%E5%A4%8D%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BB%9D%E6%8B%9B.html">21 代码重复：搞定代码重复的三个绝招</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/22%20%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%B3%BB%E7%BB%9F%E9%97%B4%E5%AF%B9%E8%AF%9D%E7%9A%84%E8%AF%AD%E8%A8%80%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%BB%9F%E4%B8%80.html">22 接口设计：系统间对话的语言，一定要统一</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/23%20%E7%BC%93%E5%AD%98%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%BC%93%E5%AD%98%E5%8F%AF%E4%BB%A5%E9%94%A6%E4%B8%8A%E6%B7%BB%E8%8A%B1%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%90%BD%E4%BA%95%E4%B8%8B%E7%9F%B3.html">23 缓存设计：缓存可以锦上添花也可以落井下石</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/24%20%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E5%86%99%E5%AE%8C%EF%BC%8C%E5%B0%B1%E6%84%8F%E5%91%B3%E7%9D%80%E7%94%9F%E4%BA%A7%E5%B0%B1%E7%BB%AA%E4%BA%86%EF%BC%9F.html">24 业务代码写完，就意味着生产就绪了？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/25%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E5%A5%BD%E7%94%A8%EF%BC%8C%E4%BD%86%E9%9D%9E%E5%B8%B8%E5%AE%B9%E6%98%93%E7%94%A8%E9%94%99.html">25 异步处理好用，但非常容易用错</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/26%20%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%EF%BC%9ANoSQL%E4%B8%8ERDBMS%E5%A6%82%E4%BD%95%E5%8F%96%E9%95%BF%E8%A1%A5%E7%9F%AD%E3%80%81%E7%9B%B8%E8%BE%85%E7%9B%B8%E6%88%90%EF%BC%9F.html">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/27%20%E6%95%B0%E6%8D%AE%E6%BA%90%E5%A4%B4%EF%BC%9A%E4%BB%BB%E4%BD%95%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E4%B8%9C%E8%A5%BF%E9%83%BD%E4%B8%8D%E5%8F%AF%E4%BF%A1%E4%BB%BB.html">27 数据源头：任何客户端的东西都不可信任</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/28%20%E5%AE%89%E5%85%A8%E5%85%9C%E5%BA%95%EF%BC%9A%E6%B6%89%E5%8F%8A%E9%92%B1%E6%97%B6%EF%BC%8C%E5%BF%85%E9%A1%BB%E8%80%83%E8%99%91%E9%98%B2%E5%88%B7%E3%80%81%E9%99%90%E9%87%8F%E5%92%8C%E9%98%B2%E9%87%8D.html">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/29%20%E6%95%B0%E6%8D%AE%E5%92%8C%E4%BB%A3%E7%A0%81%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%B0%B1%E6%98%AF%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%B0%B1%E6%98%AF%E4%BB%A3%E7%A0%81.html">29 数据和代码：数据就是数据，代码就是代码</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/30%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BF%9D%E5%AD%98%E5%92%8C%E4%BC%A0%E8%BE%93%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%EF%BC%9F.html">30 如何正确保存和传输敏感数据？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/31%20%E5%8A%A0%E9%A4%901%EF%BC%9A%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E8%AF%BE%E7%A8%8B%E4%B8%ADJava%208%E7%9A%84%E9%82%A3%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E4%B8%80%EF%BC%89.html">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/32%20%E5%8A%A0%E9%A4%902%EF%BC%9A%E5%B8%A6%E4%BD%A0%E5%90%83%E9%80%8F%E8%AF%BE%E7%A8%8B%E4%B8%ADJava%208%E7%9A%84%E9%82%A3%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%88%E4%BA%8C%EF%BC%89.html">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/33%20%E5%8A%A0%E9%A4%903%EF%BC%9A%E5%AE%9A%E4%BD%8D%E5%BA%94%E7%94%A8%E9%97%AE%E9%A2%98%EF%BC%8C%E6%8E%92%E9%94%99%E5%A5%97%E8%B7%AF%E5%BE%88%E9%87%8D%E8%A6%81.html">33 加餐3：定位应用问题，排错套路很重要</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/34%20%E5%8A%A0%E9%A4%904%EF%BC%9A%E5%88%86%E6%9E%90%E5%AE%9A%E4%BD%8DJava%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E5%A5%BD%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89.html">34 加餐4：分析定位Java问题，一定要用好这些工具（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/35%20%E5%8A%A0%E9%A4%905%EF%BC%9A%E5%88%86%E6%9E%90%E5%AE%9A%E4%BD%8DJava%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E5%A5%BD%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89.html">35 加餐5：分析定位Java问题，一定要用好这些工具（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/36%20%E5%8A%A0%E9%A4%906%EF%BC%9A%E8%BF%9915%E5%B9%B4%E6%9D%A5%EF%BC%8C%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E5%92%8C%E8%8B%B1%E8%AF%AD%E7%9A%84%EF%BC%9F.html">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/37%20%E5%8A%A0%E9%A4%907%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E6%88%90%E9%95%BF28%E8%AE%A1.html">37 加餐7：程序员成长28计</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/38%20%E5%8A%A0%E9%A4%908%EF%BC%9AJava%E7%A8%8B%E5%BA%8F%E4%BB%8E%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%81%E7%A7%BB%E5%88%B0Kubernetes%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91.html">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%B8%80%EF%BC%89.html">答疑篇：代码篇思考题集锦（一）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%B8%89%EF%BC%89.html">答疑篇：代码篇思考题集锦（三）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%88%E4%BA%8C%EF%BC%89.html">答疑篇：代码篇思考题集锦（二）</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%8A%A0%E9%A4%90%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：加餐篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E5%AE%89%E5%85%A8%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：安全篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%AD%94%E7%96%91%E7%AF%87%EF%BC%9A%E8%AE%BE%E8%AE%A1%E7%AF%87%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%90%88%E9%9B%86.html">答疑篇：设计篇思考题答案合集</a></li><li><a href="/courses/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%86%99%E4%BB%A3%E7%A0%81%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E5%B0%BD%E9%87%8F%E9%81%BF%E5%85%8D%E8%B8%A9%E5%9D%91%EF%BC%9F.html">结束语 写代码时，如何才能尽量避免踩坑？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%20%E4%B8%9A%E5%8A%A1%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%20100%20%E4%BE%8B/03%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%E6%9C%80%E5%B8%B8%E7%94%A8%E4%B9%9F%E6%9C%80%E5%AE%B9%E6%98%93%E7%8A%AF%E9%94%99%E7%9A%84%E7%BB%84%E4%BB%B6.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="03 线程池：业务代码最常用也最容易犯错的组件" id="title">03 线程池：业务代码最常用也最容易犯错的组件</h1>
+<div><p>今天，我来讲讲使用线程池需要注意的一些问题。</p>
+<p>在程序中，我们会用各种池化技术来缓存创建昂贵的对象，比如线程池、连接池、内存池。一般是预先创建一些对象放入池中，使用的时候直接取出使用，用完归还以便复用，还会通过一定的策略调整池中缓存对象的数量，实现池的动态伸缩。</p>
+<p>由于线程的创建比较昂贵，随意、没有控制地创建大量线程会造成性能问题，因此短平快的任务一般考虑使用线程池来处理，而不是直接创建线程。</p>
+<p>今天，我们就针对线程池这个话题展开讨论，通过三个生产事故，来看看使用线程池应该注意些什么。</p>
+<h2 id="线程池的声明需要手动进行">线程池的声明需要手动进行</h2>
+<p>Java 中的 Executors 类定义了一些快捷的工具方法，来帮助我们快速创建线程池。《阿里巴巴 Java 开发手册》中提到，禁止使用这些方法来创建线程池，而应该手动 new ThreadPoolExecutor 来创建线程池。这一条规则的背后，是大量血淋淋的生产事故，最典型的就是 newFixedThreadPool 和 newCachedThreadPool，可能因为资源耗尽导致 OOM 问题。</p>
+<p>首先，我们来看一下 newFixedThreadPool 为什么可能会出现 OOM 的问题。</p>
+<p>我们写一段测试代码，来初始化一个单线程的 FixedThreadPool，循环 1 亿次向线程池提交任务，每个任务都会创建一个比较大的字符串然后休眠一小时：</p>
+<pre><code class="language-java">@GetMapping("oom1")
+public void oom1() throws InterruptedException {
+
+    ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
+
+    //打印线程池的信息，稍后我会解释这段代码
+    printStats(threadPool); 
+
+    for (int i = 0; i &lt; 100000000; i++) {
+
+        threadPool.execute(() -&gt; {
+            String payload = IntStream.rangeClosed(1, 1000000)
+                    .mapToObj(__ -&gt; "a")
+                    .collect(Collectors.joining("")) + UUID.randomUUID().toString();
+            try {
+                TimeUnit.HOURS.sleep(1);
+            } catch (InterruptedException e) {
+            }
+
+            log.info(payload);
+
+        });
+    }
+
+    threadPool.shutdown();
+    threadPool.awaitTermination(1, TimeUnit.HOURS);
+}
+</code></pre>
+<p>执行程序后不久，日志中就出现了如下 OOM：</p>
+<pre><code class="language-java">Exception in thread "http-nio-45678-ClientPoller" java.lang.OutOfMemoryError: GC overhead limit exceeded
+</code></pre>
+<p>翻看 newFixedThreadPool 方法的源码不难发现，线程池的工作队列直接 new 了一个 LinkedBlockingQueue，而默认构造方法的 LinkedBlockingQueue 是一个 Integer.MAX_VALUE 长度的队列，可以认为是无界的：</p>
+<pre><code class="language-java">public static ExecutorService newFixedThreadPool(int nThreads) {
+
+    return new ThreadPoolExecutor(nThreads, nThreads,
+                                  0L, TimeUnit.MILLISECONDS,
+                                  new LinkedBlockingQueue&lt;Runnable&gt;());
+
+}
+
+public class LinkedBlockingQueue&lt;E&gt; extends AbstractQueue&lt;E&gt;
+        implements BlockingQueue&lt;E&gt;, java.io.Serializable {
+
+    ...
+
+
+
+    /**
+     * Creates a {@code LinkedBlockingQueue} with a capacity of
+     * {@link Integer#MAX_VALUE}.
+     */
+
+    public LinkedBlockingQueue() {
+        this(Integer.MAX_VALUE);
+    }
+...
+}
+</code></pre>
+<p>虽然使用 newFixedThreadPool 可以把工作线程控制在固定的数量上，但任务队列是无界的。如果任务较多并且执行较慢的话，队列可能会快速积压，撑爆内存导致 OOM。</p>
+<p>我们再把刚才的例子稍微改一下，改为使用 newCachedThreadPool 方法来获得线程池。程序运行不久后，同样看到了如下 OOM 异常：</p>
+<pre><code class="language-log">[11:30:30.487] [http-nio-45678-exec-1] [ERROR] [.a.c.c.C.[.[.[/].[dispatcherServlet]:175 ] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Handler dispatch failed; nested exception is java.lang.OutOfMemoryError: unable to create new native thread] with root cause
+
+java.lang.OutOfMemoryError: unable to create new native thread 
+</code></pre>
+<p>从日志中可以看到，这次 OOM 的原因是无法创建线程，翻看 newCachedThreadPool 的源码可以看到，这种线程池的最大线程数是 Integer.MAX_VALUE，可以认为是没有上限的，而其工作队列 SynchronousQueue 是一个没有存储空间的阻塞队列。这意味着，只要有请求到来，就必须找到一条工作线程来处理，如果当前没有空闲的线程就再创建一条新的。</p>
+<p>由于我们的任务需要 1 小时才能执行完成，大量的任务进来后会创建大量的线程。我们知道线程是需要分配一定的内存空间作为线程栈的，比如 1MB，因此无限制创建线程必然会导致 OOM：</p>
+<pre><code class="language-java">public static ExecutorService newCachedThreadPool() {
+
+    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                  60L, TimeUnit.SECONDS,
+                                  new SynchronousQueue&lt;Runnable&gt;());
+</code></pre>
+<p>其实，大部分 Java 开发同学知道这两种线程池的特性，只是抱有侥幸心理，觉得只是使用线程池做一些轻量级的任务，不可能造成队列积压或开启大量线程。</p>
+<p>但，现实往往是残酷的。我之前就遇到过这么一个事故：用户注册后，我们调用一个外部服务去发送短信，发送短信接口正常时可以在 100 毫秒内响应，TPS 100 的注册量，CachedThreadPool 能稳定在占用 10 个左右线程的情况下满足需求。在某个时间点，外部短信服务不可用了，我们调用这个服务的超时又特别长，比如 1 分钟，1 分钟可能就进来了 6000 用户，产生 6000 个发送短信的任务，需要 6000 个线程，没多久就因为无法创建线程导致了 OOM，整个应用程序崩溃。</p>
+<p>因此，我同样不建议使用 Executors 提供的两种快捷的线程池，原因如下：</p>
+<p>我们需要根据自己的场景、并发情况来评估线程池的几个核心参数，包括核心线程数、最大线程数、线程回收策略、工作队列的类型，以及拒绝策略，确保线程池的工作行为符合需求，一般都需要设置有界的工作队列和可控的线程数。</p>
+<p>任何时候，都应该为自定义线程池指定有意义的名称，以方便排查问题。当出现线程数量暴增、线程死锁、线程占用大量 CPU、线程执行出现异常等问题时，我们往往会抓取线程栈。此时，有意义的线程名称，就可以方便我们定位问题。</p>
+<p>除了建议手动声明线程池以外，我还建议用一些监控手段来观察线程池的状态。线程池这个组件往往会表现得任劳任怨、默默无闻，除非是出现了拒绝策略，否则压力再大都不会抛出一个异常。如果我们能提前观察到线程池队列的积压，或者线程数量的快速膨胀，往往可以提早发现并解决问题。</p>
+<h2 id="线程池线程管理策略详解">线程池线程管理策略详解</h2>
+<p>在之前的 Demo 中，我们用一个 printStats 方法实现了最简陋的监控，每秒输出一次线程池的基本内部信息，包括线程数、活跃线程数、完成了多少任务，以及队列中还有多少积压任务等信息：</p>
+<pre><code class="language-java">private void printStats(ThreadPoolExecutor threadPool) {
+
+   Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -&gt; {
+
+        log.info("=========================");
+        log.info("Pool Size: {}", threadPool.getPoolSize());
+        log.info("Active Threads: {}", threadPool.getActiveCount());
+        log.info("Number of Tasks Completed: {}", threadPool.getCompletedTaskCount());
+        log.info("Number of Tasks in Queue: {}", threadPool.getQueue().size());
+        log.info("=========================");
+
+    }, 0, 1, TimeUnit.SECONDS);
+
+}
+</code></pre>
+<p>接下来，我们就利用这个方法来观察一下线程池的基本特性吧。</p>
+<p>首先，自定义一个线程池。这个线程池具有 2 个核心线程、5 个最大线程、使用容量为 10 的 ArrayBlockingQueue 阻塞队列作为工作队列，使用默认的 AbortPolicy 拒绝策略，也就是任务添加到线程池失败会抛出 RejectedExecutionException。此外，我们借助了 Jodd 类库的 ThreadFactoryBuilder 方法来构造一个线程工厂，实现线程池线程的自定义命名。</p>
+<p>然后，我们写一段测试代码来观察线程池管理线程的策略。测试代码的逻辑为，每次间隔 1 秒向线程池提交任务，循环 20 次，每个任务需要 10 秒才能执行完成，代码如下：</p>
+<pre><code class="language-java">@GetMapping("right")
+public int right() throws InterruptedException {
+
+    //使用一个计数器跟踪完成的任务数
+    AtomicInteger atomicInteger = new AtomicInteger();
+
+    //创建一个具有2个核心线程、5个最大线程，使用容量为10的ArrayBlockingQueue阻塞队列作为工作队列的线程池，使用默认的AbortPolicy拒绝策略
+    ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
+            2, 5,
+            5, TimeUnit.SECONDS,
+            new ArrayBlockingQueue&lt;&gt;(10),
+            new ThreadFactoryBuilder().setNameFormat("demo-threadpool-%d").get(),
+            new ThreadPoolExecutor.AbortPolicy());
+
+    printStats(threadPool);
+
+    //每隔1秒提交一次，一共提交20次任务
+    IntStream.rangeClosed(1, 20).forEach(i -&gt; {
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+
+        int id = atomicInteger.incrementAndGet();
+
+        try {
+            threadPool.submit(() -&gt; {
+                log.info("{} started", id);
+
+                //每个任务耗时10秒
+                try {
+                    TimeUnit.SECONDS.sleep(10);
+                } catch (InterruptedException e) {
+
+                }
+                log.info("{} finished", id);
+            });
+
+        } catch (Exception ex) {
+
+            //提交出现异常的话，打印出错信息并为计数器减一
+            log.error("error submitting task {}", id, ex);
+            atomicInteger.decrementAndGet();
+
+        }
+
+    });
+
+    TimeUnit.SECONDS.sleep(60);
+
+    return atomicInteger.intValue();
+
+}
+</code></pre>
+<p>60 秒后页面输出了 17，有 3 次提交失败了：</p>
+<p><img alt="img" src="/assets/202f4103bb65194e80b5797e.png"/></p>
+<p>并且日志中也出现了 3 次类似的错误信息：</p>
+<pre><code class="language-log">[14:24:52.879] [http-nio-45678-exec-1] [ERROR] [.t.c.t.demo1.ThreadPoolOOMController:103 ] - error submitting task 18
+
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.FutureTask@163a2dec rejected from java.util.concurrent.ThreadPoolExecutor@18061ad2[Running, pool size = 5, active threads = 5, queued tasks = 10, completed tasks = 2]
+</code></pre>
+<p>我们把 printStats 方法打印出的日志绘制成图表，得出如下曲线：</p>
+<p><img alt="img" src="/assets/64de0aecf077311da1027abb.png"/></p>
+<p>至此，我们可以总结出线程池默认的工作行为：</p>
+<p>不会初始化 corePoolSize 个线程，有任务来了才创建工作线程；</p>
+<p>当核心线程满了之后不会立即扩容线程池，而是把任务堆积到工作队列中；</p>
+<p>当工作队列满了后扩容线程池，一直到线程个数达到 maximumPoolSize 为止；</p>
+<p>如果队列已满且达到了最大线程后还有任务进来，按照拒绝策略处理；</p>
+<p>当线程数大于核心线程数时，线程等待 keepAliveTime 后还是没有任务需要处理的话，收缩线程到核心线程数。</p>
+<p>了解这个策略，有助于我们根据实际的容量规划需求，为线程池设置合适的初始化参数。当然，我们也可以通过一些手段来改变这些默认工作行为，比如：</p>
+<p>声明线程池后立即调用 prestartAllCoreThreads 方法，来启动所有核心线程；</p>
+<p>传入 true 给 allowCoreThreadTimeOut 方法，来让线程池在空闲的时候同样回收核心线程。</p>
+<p>不知道你有没有想过：Java 线程池是先用工作队列来存放来不及处理的任务，满了之后再扩容线程池。当我们的工作队列设置得很大时，最大线程数这个参数显得没有意义，因为队列很难满，或者到满的时候再去扩容线程池已经于事无补了。</p>
+<p>那么，我们有没有办法让线程池更激进一点，优先开启更多的线程，而把队列当成一个后备方案呢？比如我们这个例子，任务执行得很慢，需要 10 秒，如果线程池可以优先扩容到 5 个最大线程，那么这些任务最终都可以完成，而不会因为线程池扩容过晚导致慢任务来不及处理。</p>
+<p>限于篇幅，这里我只给你一个大致思路：</p>
+<p>由于线程池在工作队列满了无法入队的情况下会扩容线程池，那么我们是否可以重写队列的 offer 方法，造成这个队列已满的假象呢？</p>
+<p>由于我们 Hack 了队列，在达到了最大线程后势必会触发拒绝策略，那么能否实现一个自定义的拒绝策略处理程序，这个时候再把任务真正插入队列呢？</p>
+<p>接下来，就请你动手试试看如何实现这样一个“弹性”线程池吧。Tomcat 线程池也实现了类似的效果，可供你借鉴。</p>
+<h2 id="务必确认清楚线程池本身是不是复用的">务必确认清楚线程池本身是不是复用的</h2>
+<p>不久之前我遇到了这样一个事故：某项目生产环境时不时有报警提示线程数过多，超过 2000 个，收到报警后查看监控发现，瞬时线程数比较多但过一会儿又会降下来，线程数抖动很厉害，而应用的访问量变化不大。</p>
+<p>为了定位问题，我们在线程数比较高的时候进行线程栈抓取，抓取后发现内存中有 1000 多个自定义线程池。一般而言，线程池肯定是复用的，有 5 个以内的线程池都可以认为正常，而 1000 多个线程池肯定不正常。</p>
+<p>在项目代码里，我们没有搜到声明线程池的地方，搜索 execute 关键字后定位到，原来是业务代码调用了一个类库来获得线程池，类似如下的业务代码：调用 ThreadPoolHelper 的 getThreadPool 方法来获得线程池，然后提交数个任务到线程池处理，看不出什么异常。</p>
+<pre><code class="language-java">@GetMapping("wrong")
+public String wrong() throws InterruptedException {
+
+    ThreadPoolExecutor threadPool = ThreadPoolHelper.getThreadPool();
+
+    IntStream.rangeClosed(1, 10).forEach(i -&gt; {
+        threadPool.execute(() -&gt; {
+            ...
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+
+            }
+        });
+    });
+
+    return "OK";
+}
+</code></pre>
+<p>但是，来到 ThreadPoolHelper 的实现让人大跌眼镜，getThreadPool 方法居然是每次都使用 Executors.newCachedThreadPool 来创建一个线程池。</p>
+<pre><code class="language-java">class ThreadPoolHelper {
+
+    public static ThreadPoolExecutor getThreadPool() {
+
+        //线程池没有复用
+        return (ThreadPoolExecutor) Executors.newCachedThreadPool();
+
+    }
+
+}
+</code></pre>
+<p>通过上一小节的学习，我们可以想到 newCachedThreadPool 会在需要时创建必要多的线程，业务代码的一次业务操作会向线程池提交多个慢任务，这样执行一次业务操作就会开启多个线程。如果业务操作并发量较大的话，的确有可能一下子开启几千个线程。</p>
+<p>那，为什么我们能在监控中看到线程数量会下降，而不会撑爆内存呢？</p>
+<p>回到 newCachedThreadPool 的定义就会发现，它的核心线程数是 0，而 keepAliveTime 是 60 秒，也就是在 60 秒之后所有的线程都是可以回收的。好吧，就因为这个特性，我们的业务程序死得没太难看。</p>
+<p>要修复这个 Bug 也很简单，使用一个静态字段来存放线程池的引用，返回线程池的代码直接返回这个静态字段即可。这里一定要记得我们的最佳实践，手动创建线程池。修复后的 ThreadPoolHelper 类如下：</p>
+<pre><code class="language-java">class ThreadPoolHelper {
+
+  private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+    10, 50,
+    2, TimeUnit.SECONDS,
+    new ArrayBlockingQueue&lt;&gt;(1000),
+    new ThreadFactoryBuilder().setNameFormat("demo-threadpool-%d").get());
+
+  public static ThreadPoolExecutor getRightThreadPool() {
+
+    return threadPoolExecutor;
+  }
+
+}
+</code></pre>
+<h2 id="需要仔细斟酌线程池的混用策略">需要仔细斟酌线程池的混用策略</h2>
+<p>线程池的意义在于复用，那这是不是意味着程序应该始终使用一个线程池呢？</p>
+<p>当然不是。通过第一小节的学习我们知道，要根据任务的“轻重缓急”来指定线程池的核心参数，包括线程数、回收策略和任务队列：</p>
+<p>对于执行比较慢、数量不大的 IO 任务，或许要考虑更多的线程数，而不需要太大的队列。</p>
+<p>而对于吞吐量较大的计算型任务，线程数量不宜过多，可以是 CPU 核数或核数 *2（理由是，线程一定调度到某个 CPU 进行执行，如果任务本身是 CPU 绑定的任务，那么过多的线程只会增加线程切换的开销，并不能提升吞吐量），但可能需要较长的队列来做缓冲。</p>
+<p>之前我也遇到过这么一个问题，业务代码使用了线程池异步处理一些内存中的数据，但通过监控发现处理得非常慢，整个处理过程都是内存中的计算不涉及 IO 操作，也需要数秒的处理时间，应用程序 CPU 占用也不是特别高，有点不可思议。</p>
+<p>经排查发现，业务代码使用的线程池，还被一个后台的文件批处理任务用到了。</p>
+<p>或许是够用就好的原则，这个线程池只有 2 个核心线程，最大线程也是 2，使用了容量为 100 的 ArrayBlockingQueue 作为工作队列，使用了 CallerRunsPolicy 拒绝策略：</p>
+<pre><code class="language-java">private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
+        2, 2,
+        1, TimeUnit.HOURS,
+        new ArrayBlockingQueue&lt;&gt;(100),
+        new ThreadFactoryBuilder().setNameFormat("batchfileprocess-threadpool-%d").get(),
+        new ThreadPoolExecutor.CallerRunsPolicy());
+</code></pre>
+<p>这里，我们模拟一下文件批处理的代码，在程序启动后通过一个线程开启死循环逻辑，不断向线程池提交任务，任务的逻辑是向一个文件中写入大量的数据：</p>
+<pre><code class="language-java">@PostConstruct
+public void init() {
+
+    printStats(threadPool);
+    new Thread(() -&gt; {
+
+        //模拟需要写入的大量数据
+        String payload = IntStream.rangeClosed(1, 1_000_000)
+                .mapToObj(__ -&gt; "a")
+                .collect(Collectors.joining(""));
+
+        while (true) {
+            threadPool.execute(() -&gt; {
+                try {
+
+                    //每次都是创建并写入相同的数据到相同的文件
+                    Files.write(Paths.get("demo.txt"), Collections.singletonList(LocalTime.now().toString() + ":" + payload), UTF_8, CREATE, TRUNCATE_EXISTING);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                }
+                log.info("batch file processing done");
+            });
+        }
+    }).start();
+
+}
+</code></pre>
+<p>可以想象到，这个线程池中的 2 个线程任务是相当重的。通过 printStats 方法打印出的日志，我们观察下线程池的负担：</p>
+<p><img alt="img" src="/assets/8bf2452d9815a518d763c827.png"/></p>
+<p>可以看到，线程池的 2 个线程始终处于活跃状态，队列也基本处于打满状态。因为开启了 CallerRunsPolicy 拒绝处理策略，所以当线程满载队列也满的情况下，任务会在提交任务的线程，或者说调用 execute 方法的线程执行，也就是说不能认为提交到线程池的任务就一定是异步处理的。如果使用了 CallerRunsPolicy 策略，那么有可能异步任务变为同步执行。从日志的第四行也可以看到这点。这也是这个拒绝策略比较特别的原因。</p>
+<p>不知道写代码的同学为什么设置这个策略，或许是测试时发现线程池因为任务处理不过来出现了异常，而又不希望线程池丢弃任务，所以最终选择了这样的拒绝策略。不管怎样，这些日志足以说明线程池是饱和状态。</p>
+<p>可以想象到，业务代码复用这样的线程池来做内存计算，命运一定是悲惨的。我们写一段代码测试下，向线程池提交一个简单的任务，这个任务只是休眠 10 毫秒没有其他逻辑：</p>
+<pre><code class="language-java">private Callable&lt;Integer&gt; calcTask() {
+
+    return () -&gt; {
+        TimeUnit.MILLISECONDS.sleep(10);
+        return 1;
+
+    };
+}
+
+@GetMapping("wrong")
+public int wrong() throws ExecutionException, InterruptedException {
+
+    return threadPool.submit(calcTask()).get();
+}
+</code></pre>
+<p>我们使用 wrk 工具对这个接口进行一个简单的压测，可以看到 TPS 为 75，性能的确非常差。</p>
+<p><img alt="img" src="/assets/0afaa70cbbcdee469faf7cec.png"/></p>
+<p>细想一下，问题其实没有这么简单。因为原来执行 IO 任务的线程池使用的是 CallerRunsPolicy 策略，所以直接使用这个线程池进行异步计算的话，当线程池饱和的时候，计算任务会在执行 Web 请求的 Tomcat 线程执行，这时就会进一步影响到其他同步处理的线程，甚至造成整个应用程序崩溃。</p>
+<p>解决方案很简单，使用独立的线程池来做这样的“计算任务”即可。计算任务打了双引号，是因为我们的模拟代码执行的是休眠操作，并不属于 CPU 绑定的操作，更类似 IO 绑定的操作，如果线程池线程数设置太小会限制吞吐能力：</p>
+<pre><code class="language-java">private static ThreadPoolExecutor asyncCalcThreadPool = new ThreadPoolExecutor(
+  200, 200,
+  1, TimeUnit.HOURS,
+  new ArrayBlockingQueue&lt;&gt;(1000),
+  new ThreadFactoryBuilder().setNameFormat("asynccalc-threadpool-%d").get());
+
+@GetMapping("right")
+public int right() throws ExecutionException, InterruptedException {
+  return asyncCalcThreadPool.submit(calcTask()).get();
+
+}
+</code></pre>
+<p>使用单独的线程池改造代码后再来测试一下性能，TPS 提高到了 1727：</p>
+<p><img alt="img" src="/assets/f465a0da59dc87274961893c.png"/></p>
+<p>可以看到，盲目复用线程池混用线程的问题在于，别人定义的线程池属性不一定适合你的任务，而且混用会相互干扰。这就好比，我们往往会用虚拟化技术来实现资源的隔离，而不是让所有应用程序都直接使用物理机。</p>
+<p>就线程池混用问题，我想再和你补充一个坑：Java 8 的 parallel stream 功能，可以让我们很方便地并行处理集合中的元素，其背后是共享同一个 ForkJoinPool，默认并行度是 CPU 核数 -1。对于 CPU 绑定的任务来说，使用这样的配置比较合适，但如果集合操作涉及同步 IO 操作的话（比如数据库操作、外部服务调用等），建议自定义一个 ForkJoinPool（或普通线程池）。你可以参考第一讲的相关 Demo。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>线程池管理着线程，线程又属于宝贵的资源，有许多应用程序的性能问题都来自线程池的配置和使用不当。在今天的学习中，我通过三个和线程池相关的生产事故，和你分享了使用线程池的几个最佳实践。</p>
+<p>第一，Executors 类提供的一些快捷声明线程池的方法虽然简单，但隐藏了线程池的参数细节。因此，使用线程池时，我们一定要根据场景和需求配置合理的线程数、任务队列、拒绝策略、线程回收策略，并对线程进行明确的命名方便排查问题。</p>
+<p>第二，既然使用了线程池就需要确保线程池是在复用的，每次 new 一个线程池出来可能比不用线程池还糟糕。如果你没有直接声明线程池而是使用其他同学提供的类库来获得一个线程池，请务必查看源码，以确认线程池的实例化方式和配置是符合预期的。</p>
+<p>第三，复用线程池不代表应用程序始终使用同一个线程池，我们应该根据任务的性质来选用不同的线程池。特别注意 IO 绑定的任务和 CPU 绑定的任务对于线程池属性的偏好，如果希望减少任务间的相互干扰，考虑按需使用隔离的线程池。</p>
+<p>最后我想强调的是，线程池作为应用程序内部的核心组件往往缺乏监控（如果你使用类似 RabbitMQ 这样的 MQ 中间件，运维同学一般会帮我们做好中间件监控），往往到程序崩溃后才发现线程池的问题，很被动。在设计篇中我们会重新谈及这个问题及其解决方案。</p>
+<p>今天用到的代码，我都放在了 GitHub 上，你可以点击这个链接查看。</p>
+<h2 id="思考与讨论">思考与讨论</h2>
+<p>在第一节中我们提到，或许一个激进创建线程的弹性线程池更符合我们的需求，你能给出相关的实现吗？实现后再测试一下，是否所有的任务都可以正常处理完成呢？</p>
+<p>在第二节中，我们改进了 ThreadPoolHelper 使其能够返回复用的线程池。如果我们不小心每次都创建了这样一个自定义的线程池（10 核心线程，50 最大线程，2 秒回收的），反复执行测试接口线程，最终可以被回收吗？会出现 OOM 问题吗？</p>
+<p>你还遇到过线程池相关的其他坑吗？我是朱晔，欢迎在评论区与我留言分享你的想法，也欢迎你把这篇文章分享给你的朋友或同事，一起交流。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

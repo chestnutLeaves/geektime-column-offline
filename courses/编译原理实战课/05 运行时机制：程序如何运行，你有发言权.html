@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>05 运行时机制：程序如何运行，你有发言权 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">编译原理实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">53 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理实战课</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E8%BF%99%E9%97%A8%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE%EF%BC%9F.html">00 学习指南 如何学习这门编译原理实战课？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%9C%A8%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%AD%E6%B8%B8%E5%8E%86.html">00 开篇词 在真实世界的编译器中游历</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E7%BC%96%E8%AF%91%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B%E9%83%BD%E6%82%84%E6%82%84%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85%EF%BC%9F.html">01 编译的全过程都悄悄做了哪些事情？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E7%94%A8%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9E%84%E9%80%A0%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA.html">02 词法分析：用两种方式构造有限自动机</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%9F%BA%E6%9C%AC%E5%8A%9F%E5%92%8C%E4%B8%A4%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF.html">03 语法分析：两个基本功和两种算法思路</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%9A%E8%AE%A9%E7%A8%8B%E5%BA%8F%E7%AC%A6%E5%90%88%E8%AF%AD%E4%B9%89%E8%A7%84%E5%88%99.html">04 语义分析：让程序符合语义规则</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%BD%A0%E6%9C%89%E5%8F%91%E8%A8%80%E6%9D%83.html">05 运行时机制：程序如何运行，你有发言权</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E4%B8%8D%E6%98%AF%E5%8F%AA%E6%9C%89%E4%B8%80%E5%89%AF%E9%9D%A2%E5%AD%94.html">06 中间代码：不是只有一副面孔</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E8%B7%9F%E7%BC%96%E8%AF%91%E5%99%A8%E5%81%9A%E6%9C%8B%E5%8F%8B%EF%BC%8C%E8%AE%A9%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E9%A3%9E%E8%B5%B7%E6%9D%A5.html">07 代码优化：跟编译器做朋友，让你的代码飞起来</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%9F.html">08 代码生成：如何实现机器相关的优化？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/09%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%89%8B%E5%86%99%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%EF%BC%9F.html">09 Java编译器（一）：手写的编译器有什么优势？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/10%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%BF%98%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Java编译器（二）：语法分析之后，还要做些什么？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/11%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%B1%9E%E6%80%A7%E5%88%86%E6%9E%90%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90.html">11 Java编译器（三）：属性分析和数据流分析</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/12%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%8E%BB%E9%99%A4%E8%AF%AD%E6%B3%95%E7%B3%96%E5%92%8C%E7%94%9F%E6%88%90%E5%AD%97%E8%8A%82%E7%A0%81.html">12 Java编译器（四）：去除语法糖和生成字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/13%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%8A%A8%E6%89%8B%E4%BF%AE%E6%94%B9Graal%E7%BC%96%E8%AF%91%E5%99%A8.html">13 Java JIT编译器（一）：动手修改Graal编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/14%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASea%20of%20Nodes%E4%B8%BA%E4%BD%95%E5%A6%82%E6%AD%A4%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">14 Java JIT编译器（二）：Sea of Nodes为何如此强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/15%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%8E%A2%E7%A9%B6%E5%86%85%E8%81%94%E5%92%8C%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%E7%9A%84%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86.html">15 Java JIT编译器（三）：探究内联和逃逸分析的算法原理</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/16%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9AGraal%E7%9A%84%E5%90%8E%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">16 Java JIT编译器（四）：Graal的后端是如何工作的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/17%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">17 Python编译器（一）：如何用工具生成编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/18%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E4%BB%8EAST%E5%88%B0%E5%AD%97%E8%8A%82%E7%A0%81.html">18 Python编译器（二）：从AST到字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/19%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6.html">19 Python编译器（三）：运行时机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/20%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E6%9E%90%E5%92%8C%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.html">20 JavaScript编译器（一）：V8的解析和编译过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/21%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E9%87%8A%E5%99%A8%E5%92%8C%E4%BC%98%E5%8C%96%E7%BC%96%E8%AF%91%E5%99%A8.html">21 JavaScript编译器（二）：V8的解释器和优化编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/22%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E6%80%A7%E8%83%BD%E5%BE%88%E9%AB%98%EF%BC%9F.html">22 Julia编译器（一）：如何让动态语言性能很高？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/23%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8LLVM%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E5%90%8E%E7%AB%AF%E5%8A%9F%E8%83%BD%EF%BC%9F.html">23 Julia编译器（二）：如何利用LLVM的优化和后端功能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/24%20Go%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A%E6%8A%8A%E5%AE%83%E5%BD%93%E4%BD%9C%E6%95%99%E7%A7%91%E4%B9%A6%E5%90%A7.html">24 Go语言编译器：把它当作教科书吧</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/25%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%A7%A3%E6%9E%90%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.html">25 MySQL编译器（一）：解析一条SQL语句的执行过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/26%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E5%A6%82%E4%BD%95%E5%B8%AE%E4%BD%A0%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%A7%E8%83%BD%EF%BC%9F.html">26 MySQL编译器（二）：编译技术如何帮你提升数据库性能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E8%AF%BE%E5%89%8D%E5%AF%BC%E8%AF%BB%EF%BC%9A%E5%AD%A6%E4%B9%A0%E7%8E%B0%E4%BB%A3%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF.html">27 课前导读：学习现代语言设计的正确姿势</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%89%8D%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E4%B9%9F%E6%9C%89%E4%BA%BA%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%AD%A6.html">28 前端总结：语言设计也有人机工程学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E4%B8%AD%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%8D%E9%81%97%E4%BD%99%E5%8A%9B%E5%9C%B0%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96.html">29 中端总结：不遗余力地进行代码优化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E5%85%85%E5%88%86%E5%8F%91%E6%8C%A5%E7%A1%AC%E4%BB%B6%E7%9A%84%E8%83%BD%E5%8A%9B.html">30 后端总结：充分发挥硬件的能力</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E0%E5%88%B0%E8%AF%AD%E8%A8%80%E7%BA%A7%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96.html">31 运行时（一）：从0到语言级的虚拟化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/32%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E6%80%A7%E6%9C%89%E5%85%B3%E5%90%97%EF%BC%9F.html">32 运行时（二）：垃圾收集与语言的特性有关吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">33 并发中的编译技术（一）：如何从语言层面支持线程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E5%8D%8F%E7%A8%8B%EF%BC%9F.html">34 并发中的编译技术（二）：如何从语言层面支持协程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/35%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9AErlang%E8%AF%AD%E8%A8%80%E5%8E%89%E5%AE%B3%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">35 并发中的编译技术（三）：Erlang语言厉害在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/36%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">36 高级特性（一）：揭秘元编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">37 高级特性（二）：揭秘泛型编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%9F.html">38 综合实现（一）：如何实现面向对象编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%9F.html">39 综合实现（二）：如何实现函数式编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/40%20%E6%88%90%E6%9E%9C%E6%A3%80%E9%AA%8C%EF%BC%9A%E6%96%B9%E8%88%9F%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%BC%98%E5%8A%BF%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">40 成果检验：方舟编译器的优势在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%901%20%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E9%9C%80%E8%A6%81%E4%BD%A0%E6%88%91%E5%85%B7%E5%A4%87%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%B4%A0%E8%B4%A8%EF%BC%9F.html">不定期加餐1 远程办公，需要你我具备什么样的素质？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%902%20%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%98%AF%E8%AE%AD%E7%BB%83%E5%BF%83%E7%90%86%E7%B4%A0%E8%B4%A8%E7%9A%84%E8%BF%87%E7%A8%8B.html">不定期加餐2 学习技术的过程，其实是训练心理素质的过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%903%20%E8%BF%99%E5%87%A0%E5%B9%B4%EF%BC%8C%E6%89%93%E5%8A%A8%E6%88%91%E7%9A%84%E4%B8%A4%E6%9C%AC%E5%A5%BD%E4%B9%A6.html">不定期加餐3 这几年，打动我的两本好书</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%904%20%E4%BB%8E%E8%BA%AB%E8%BE%B9%E7%9A%84%E7%89%9B%E4%BA%BA%E8%BA%AB%E4%B8%8A%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E7%A7%80%E5%93%81%E8%B4%A8.html">不定期加餐4 从身边的牛人身上，我学到的一些优秀品质</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%905%20%E5%80%9F%E5%8A%A9%E5%AE%9E%E4%BE%8B%EF%BC%8C%E6%8E%A2%E7%A9%B6C%2B%2B%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6.html">不定期加餐5 借助实例，探究C++编译器的内部机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%88%92%E9%87%8D%E7%82%B9%207%E7%A7%8D%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">划重点 7种编译器的核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%9C%9F%E6%9C%AB%E7%AD%94%E7%96%91%E4%B8%8E%E6%80%BB%E7%BB%93%20%E5%86%8D%E6%AC%A1%E5%AE%A1%E8%A7%86%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%9A%84%E4%BD%9C%E7%94%A8.html">期末答疑与总结 再次审视学习编译原理的作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%20%E5%A6%82%E4%BD%95%E5%90%83%E9%80%8F7%E7%A7%8D%E7%9C%9F%E5%AE%9E%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">热点问题答疑 如何吃透7种真实的编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%98%93%E6%98%8A%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8D%E6%AD%A2%E6%9C%89Bug%E5%92%8C%E5%8A%A0%E7%8F%AD%EF%BC%8C%E8%BF%98%E6%9C%89%E8%AF%97%E5%92%8C%E8%BF%9C%E6%96%B9.html">用户故事 易昊：程序员不止有Bug和加班，还有诗和远方</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%9F%A5%E8%AF%86%E5%9C%B0%E5%9B%BE%20%E4%B8%80%E8%B5%B7%E6%9D%A5%E5%A4%8D%E4%B9%A0%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">知识地图 一起来复习编译技术核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%AE%9E%E6%88%98%E6%98%AF%E5%94%AF%E4%B8%80%E6%A0%87%E5%87%86%EF%BC%81.html">结束语 实战是唯一标准！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%BD%A0%E6%9C%89%E5%8F%91%E8%A8%80%E6%9D%83.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="05 运行时机制：程序如何运行，你有发言权" id="title">05 运行时机制：程序如何运行，你有发言权</h1>
+<div><p>你好，我是宫文学。在语义分析之后，编译过程就开始进入中后端了。</p>
+<p>经过前端阶段的处理分析，编译器已经充分理解了源代码的含义，准备好把前端处理的结果（带有标注信息的AST、符号表）翻译成目标代码了。</p>
+<p>我在<a href="https://time.geekbang.org/column/article/242479" target="_blank">第1讲</a>也说过，如果想做好翻译工作，编译器必须理解目标代码。而要理解目标代码，它就必须要理解目标代码是如何被执行的。通常情况下，程序有两种执行模式。</p>
+<p>第一种执行模式是在物理机上运行。针对的是C、C++、Go这样的语言，编译器直接将源代码编译成汇编代码（或直接生成机器码），然后生成能够在操作系统上运行的可执行程序。为了实现它们的后端，编译器需要理解程序在底层的运行环境，包括CPU、内存、操作系统跟程序的互动关系，并要能理解汇编代码。</p>
+<p>第二种执行模式是在虚拟机上运行。针对的是Java、Python、Erlang和Lua等语言，它们能够在虚拟机上解释执行。这时候，编译器要理解该语言的虚拟机的运行机制，并生成能够被执行的IR。</p>
+<p>理解了这两种执行模式的特点，我们也就能弄清楚用高级语言编写的程序是如何运行的，进而也就理解了编译器在中后端的任务是什么。接下来，我们就从最基础的物理机模式开始学习吧。</p>
+<h2 id="在物理机上运行">在物理机上运行</h2>
+<p>在计算机发展的早期，科学家们确立了计算机的结构，并一直延续至今，这种结构就是<strong>冯·诺依曼结构</strong>。它的主要特点是：数据和指令不加区别，混合存储在同一个存储器中（即主存，或叫做内存）；用一个指令指针指向内存中指令的位置，CPU就能自动加载这个位置的指令并执行。</p>
+<p>在x86架构下，这个指针是eip寄存器（32位模式）或rip寄存器（64位模式）。一条指令执行完毕，指令指针自动增加，并执行下一条指令。如果遇到跳转指令，则跳转到另一个地址去执行。</p>
+<p><img alt="" src="/assets/e0e57db914c6b8ff59d3fbde.jpg"/></p>
+<p>图1：计算机的运行机制</p>
+<p>这其实就是计算机最基本的运行原理。这样，你就可以在大脑中建立起像图1那样的直观结构。</p>
+<p>通过图1，你会看到，<strong>计算机指令的执行基本上只跟两个硬件相关：一个是CPU，一个是内存。</strong></p>
+<h3 id="cpu">CPU</h3>
+<p>CPU是计算机的核心。从硬件构成方面，我们需要知道它的三个信息：</p>
+<ul>
+<li>第一，CPU上面有寄存器，并且可以直接由指令访问。寄存器的读写速度非常快，大约是内存的100倍。所以我们<strong>编译后的代码，要尽量充分利用寄存器</strong>，而不是频繁地去访问内存。</li>
+<li>第二，CPU有高速缓存，并且可能是多级的。高速缓存也比内存快。CPU在读取指令和数据的时候，不是一次读取一条，而是读取相邻的一批数据，放到高速缓存里。接下来要读取的数据，很可能已经在高速缓存里了，通过这种机制来提高运行性能。因此，<strong>编译器要尽量提高缓存的命中率</strong>。</li>
+<li>第三，CPU内部有多个功能单元，有的负责计算，有的负责解码，等等。所以，一个指令可以被切分成多个执行阶段，每个阶段在不同的功能单元上运行，这为实现指令级并行提供了硬件基础。在第8讲，我还会和你详细解释这个话题。</li>
+</ul>
+<p>好了，掌握了这个知识点，我们可以继续往下学习了。我们说，CPU是运行指令的地方，<strong>那指令到底是什么样子的呢？</strong></p>
+<p>我们知道，CPU有多种不同的架构，比如x86架构、ARM架构等。不同架构的CPU，它的指令是不一样的。不过它们的共性之处在于，指令都是01这样的机器码。为了便于理解，我们通常会用汇编代码来表示机器指令。比如，b=a+2指令对应的汇编码可能是这样的：</p>
+<pre><code>movl	-4(%rbp), %eax    #把%rbp-4内存地址的值拷贝到%eax寄存器
+addl	$2, %eax          #把2加到%eax寄存器
+movl	%eax, -8(%rbp)    #把%eax寄存器的值保存回内存，地址是%rbp-8
+</code></pre>
+<p>上面的汇编代码采用的是GNU汇编器规定的格式。每条指令都包含了两部分：<strong>操作码（opcode）和操作数（oprand）</strong>。</p>
+<p><img alt="" src="/assets/e97956f22b5a85008fa631e6.jpg"/></p>
+<p>图2：汇编代码示例</p>
+<p><strong>操作码是让CPU执行的动作</strong>。这段示例代码中，movl、addl是助记符（Assembly Mnemonic），其中的mov和add是指令，l是后缀，表示操作数的位数。</p>
+<p><strong>而操作数是指令的操作对象</strong>，它可以是常数、寄存器和某个内存地址。图2示例的汇编代码中，“$2”就是个常数，在指令里我们把它叫做立即数；而“%eax”是访问一个寄存器，其中eax是寄存器的名称；而带有括号的“-4(%rbp)”，则是对内存的访问方式，这个内存的地址是在rbp寄存器的值的基础上减去4。</p>
+<p>如果你还想对指令、汇编代码有更多的了解，可以再去查阅些资料学习，比如去参考下我的《编译原理之美》中的第<a href="https://time.geekbang.org/column/article/147854" target="_blank">22</a>、<a href="https://time.geekbang.org/column/article/150798" target="_blank">23</a>、<a href="https://time.geekbang.org/column/article/160990" target="_blank">31</a>这几讲。</p>
+<p><strong>这里要提一下</strong>，虽然程序觉得自己一直在使用CPU，但实际上，背后有操作系统在做调度。操作系统是管理系统资源的，而CPU是计算机的核心资源，操作系统会把CPU的时间划分成多个时间片，分配给不同的程序使用，每个程序实际上都是在“断断续续”地使用CPU，这就是操作系统的<strong>分时调度机制</strong>。在后面课程里讨论并发的时候，我们会更加深入地探讨这个机制。</p>
+<h3 id="内存">内存</h3>
+<p>好了，接下来我说说执行指令相关的另一个硬件：内存。</p>
+<p>程序在运行时，操作系统会给它分配一块虚拟的内存空间，让它可以在运行期内使用。内存中的每个位置都有一个地址，地址的长度决定了能够表示多大空间，这叫做<strong>寻址空间</strong>。我们目前使用的都是64位的机器，理论上，你可以用一个64位的长整型来表示内存地址。</p>
+<p>不过，由于我们根本用不了这么大的内存，所以AMD64架构的寻址空间只使用了48位。但这也有256TB，远远超出了一般情况下的需求。所以，像Windows这样的操作系统还会给予进一步的限制，缩小程序的寻址空间。</p>
+<p><img alt="" src="/assets/4ac700bbbe1c6344e79bdb4a.jpg"/></p>
+<p>图3：48位寻址空间有多大</p>
+<p>但即使是在加了限制的情况下，程序在逻辑上可使用的内存一般也会大于实际的物理内存。不过进程不会一下子使用那么多的内存，只有在向操作系统申请内存的时候，操作系统才会把一块物理内存，映射成进程寻址空间内的一块内存。对应到图4中，中间一条是物理内存，上下两条是两个进程的寻址空间，它们要比物理内存大。</p>
+<p>对于有些物理内存的内容，还可以映射进多个进程的地址空间，以减少内存的使用。比如说，如果进程1和进程2运行的是同一个可执行文件，那么程序的代码段是可以在两个进程之间共享的。你在图中可以看到这种情况。</p>
+<p><img alt="" src="/assets/3b07d30ae79cc5524cd74089.jpg"/></p>
+<p>图4：物理内存和逻辑内存的关系</p>
+<p>另外，对于已经分配给进程的内存，如果进程很长时间不用，操作系统会把它写到磁盘上，以便腾出更多可用的物理内存。在需要的时候，再把这块空间的数据从磁盘中读回来。这就是操作系统的<strong>虚拟内存机制</strong>。</p>
+<p>当然，也存在没有操作系统的情况，这个时候你的程序所使用的内存就是物理内存，我们必须自己做好内存的管理。</p>
+<p><strong>那么从程序角度来说，我们应该怎样使用内存呢？</strong></p>
+<p>本质上来说，你想怎么用就怎么用，并没有什么特别的限制。一个编译器的作者，可以决定在哪儿放代码，在哪儿放数据。当然了，别的作者也可能采用其他的策略。比如，C语言和Java虚拟机对内存的管理和使用策略就是不同的。</p>
+<p>不过尽管如此，大多数语言还是会采用一些通用的内存管理模式。以C语言为例，会把内存划分为代码区、静态数据区、栈和堆，如下所示。</p>
+<p><img alt="" src="/assets/d83c4cbc9379fb5f097d6828.jpg"/></p>
+<p>图5：C语言的内存布局方式</p>
+<p>其中，代码区（也叫做文本段），主要存放编译完成后的机器码，也就是CPU指令；静态数据区会保存程序中的全局变量和常量。这些内存是静态的、固定大小的，在编译完毕以后就能确定清楚所占用空间的大小、代码区每个函数的地址，以及静态数据区每个变量和常量的地址。这些内存在程序运行期间会一直被占用。</p>
+<p>而堆和栈，属于程序动态、按需获取的内存。我来和你分析下这两种内存。</p>
+<p>我们先看看<strong>栈</strong>（Stack）。使用栈的一个好处是，操作系统会根据程序使用内存的需求，自动地增加或减少栈的空间。通常来说，操作系统会用一个寄存器保存栈顶的地址，程序可以修改这个寄存器的值，来获取或者释放空间。有的CPU，还有专门的指令来管理栈，比如x86架构，会使用push和pop指令，把数据写入栈或弹出栈，并自动修改栈顶指针。</p>
+<p>在程序里使用栈的场景是这样的，程序的运行可以看做是在逐级调用函数（或者叫过程）。像下面的示例程序，存在着<strong>main-&gt;bar-&gt;foo</strong>的调用结构，这也就是<strong>控制流转移</strong>的过程。</p>
+<pre><code>int main(){
+  int a = 1;
+  foo(3);
+  bar();
+}
+
+int foo(int c){
+    int b = 2;
+    return b+c;
+}
+
+int bar(){
+    return foo(4) + 1;
+</code></pre>
+<p><img alt="" src="/assets/95da237b2117a787d9eb0851.jpg"/></p>
+<p>图6：程序逐级调用的过程</p>
+<p>每次调用函数的过程中，都需要一些空间来保存一些信息，比如参数、需要保护的寄存器的值、返回地址、本地变量等，这些信息叫做这个过程的<strong>活动记录</strong>（Activation Record）。</p>
+<p><strong>注意，活动记录是个逻辑概念。</strong>在物理实现上，一些信息可以保存在寄存器里，使得性能更高。比如说依据一些约定，返回值和少于6个的参数，是通过寄存器传递的。这里所说的“依据约定”，是指在调用一个函数时，如何传递参数、如何设定返回地址、如何获取返回值的这种约定，我们把它称之为ABI（Application Binary Interface，应用程序二进制接口）。利用ABI，使得我们可以用一种语言写的程序，去调用另外的语言写的程序。</p>
+<p>另一些信息会保存在栈里。每个函数（或过程）在栈里保存的信息，叫做<strong>栈帧</strong>（Stack Frame）。我们可以自由设计栈帧的结构，比如，下图就是一种常见的设计：</p>
+<p><img alt="" src="/assets/080770965d68709166203ecc.jpg"/></p>
+<p>图7：一种可能的栈帧结构</p>
+<ul>
+<li><strong>返回值：</strong>一般放在最顶上，这样它的地址是固定的。foo函数返回以后，它的调用者可以到这里来取到返回值。在实际情况中，ABI会规定优先通过寄存器来传递返回值，比通过内存传递性能更高。</li>
+<li><strong>参数：</strong>在调用foo函数时，我们把它所需要一个整型参数写到栈帧的这个位置。同样，我们也可以通过寄存器来传递参数，而不是通过内存。</li>
+<li><strong>控制链接：</strong>就是上一级栈帧（也就是main函数的栈帧）的地址。如果该函数用到了上一级作用域中的变量，那么就可以顺着这个链接找到上一级作用域的栈帧，并找到变量的值。</li>
+<li><strong>返回地址：</strong> foo函数执行完毕以后，继续执行哪条指令。同样，我们可以用寄存器来保存这个信息。</li>
+<li><strong>本地变量：</strong> foo函数的本地变量b的存储空间。</li>
+<li><strong>寄存器信息：</strong>我们还经常在栈帧里保存寄存器的数据。如果在foo函数里要使用某个寄存器，可能需要先把它的值保存下来，防止破坏了别的代码保存在这里的数据。<strong>这种约定叫做被调用者责任，</strong>也就是使用寄存器的函数要保护好寄存器里原有的信息。某个函数如果使用了某个寄存器，但它又要调用别的函数，为了防止别的函数把自己放在寄存器中的数据覆盖掉，这个函数就要自己把寄存器信息保存在栈帧中。<strong>这种约定叫做调用者责任。</strong></li>
+</ul>
+<p>对于示例程序，在多级调用以后，栈里的信息可能是下面这个样子。如果你想看到这个信息，通常可以在调试程序的时候打印出来。</p>
+<p><img alt="" src="/assets/8f389a02f3867130e9f53045.jpg"/></p>
+<p>图8：一个运行中的栈的示例</p>
+<p>理解了栈的机制以后，我们再来看看动态获取内存的第二种方式：<strong>堆</strong>（Heap）。</p>
+<p>操作系统一般会提供一个API，供应用申请内存。当应用程序用完之后，要通过另一个API释放。如果忘记释放，就会造成内存越用越少，这叫做<strong>内存泄漏</strong>。</p>
+<p>相对于栈来说，这是堆的一个缺点。不过，相应的好处是，<strong>应用在堆里申请的对象的生存期，可以由自己控制，不会像栈里的内存那样，在退出作用域之后就被自动收回。</strong>所以，如果数据的生存期超过了创建它的作用域的生存期，就必须在堆中申请内存。</p>
+<p>扩展：反之，如果数据的生存期跟创建它的作用域一致的话，那么在栈里和堆里申请都是可以的。当然，肯定在栈里申请更划算。所以，编译优化中的逃逸分析，本质就是分析出哪些对象的生存期是跟函数或方法的生存期一致的，那么就不需要到堆里申请了。</p>
+<p>另外，在并发的场景下，由于栈是线程独享的，而堆是多个线程共享的，所以在堆里申请内存的效率会更低，因为需要在多个线程之间同步，避免出现竞争。</p>
+<p>那为了避免内存泄漏，在设计一门语言的时候，通常需要提供内存管理的方案。</p>
+<p>一种方案是像C和C++那样，由程序员自己负责内存的释放，这对程序员的要求就比较高。另一种方案是，像Java语言那样自动地管理内存，这个特性也叫做<strong>垃圾收集</strong>。垃圾收集是语言的运行时功能，能够通过一定的算法来回收不用的内存。</p>
+<p>总结起来，在计算机上运行一个程序，我们需要跟两个硬件打交道：一个是CPU，它能够从内存中读取指令并顺序执行；第二个硬件是内存，内存使用模式有栈和堆两种方式，两种方式有各自的优点和适用场景。</p>
+<h3 id="运行时系统">运行时系统</h3>
+<p>除了硬件支撑，程序的运行还需要软件，这些软件叫做<strong>运行时系统</strong>（Runtime System），或者叫<strong>运行时</strong>（Runtime）。前面我们提到的垃圾收集器，就是一个运行时的软件。进行并发调度的软件，也是运行时的组成部分。</p>
+<p><strong>实际上，对于把源代码编译成机器码在操作系统上运行的语言来说（比如C、C++），操作系统本身就可以看做是它们的运行时系统</strong>。它可以帮助程序调度CPU资源、内存资源，以及其他一些资源，如IO端口。</p>
+<p>但也有很多语言，比如Java、Python、Erlang和Lua等，它们不是直接在操作系统上运行的，而是运行在虚拟机上。那么它们的执行模式有什么特点？对编译有什么影响呢？</p>
+<h2 id="在虚拟机上运行">在虚拟机上运行</h2>
+<p>虚拟机是计算机语言的一种运行时系统。虚拟机上运行的是<strong>中间代码</strong>，而不是CPU可以直接认识的指令。</p>
+<p>虚拟机有两种模型：一种叫做<strong>栈机</strong>（Stack Machine），一种叫做<strong>寄存器机</strong>（Register Machine）。它们的区别，主要在于如何获取指令的操作数。</p>
+<p>栈机是从栈里获取，而寄存器机是从寄存器里获取。这两种虚拟机各有优缺点。</p>
+<h3 id="基于栈的虚拟机">基于栈的虚拟机</h3>
+<p>首先说说栈机。JVM和Python中的解释器，都采用了栈机的模型。在本讲中，我主要介绍Java的虚拟机的运行机制。</p>
+<p>JVM中，每一个线程都有一个JVM栈，每次调用一个方法都会生成一个栈帧，来支持这个方法的运行。这跟C语言很相似。但JVM的栈帧比C语言的复杂，它包含了一个本地变量数组（包括方法的参数和本地变量）、操作数栈、到运行时常量池的引用等信息。</p>
+<p>对比JVM的栈帧和C语言栈帧的设计，你应该得到一些启示：栈帧的结构是语言的作者可以自己设计的，没有什么死规定。所以我们学知识也不要学死了，以为栈帧只有一种结构。</p>
+<p>注意，我们这里提到了两个栈，一个是类似于C语言的栈的方法栈，另一个是方法栈里每个栈帧中的操作数栈。而我们说的栈机中的“栈”，指的是这个操作数栈，不要弄混了。</p>
+<p><img alt="" src="/assets/a07ecad58831ebd8ca9023de.jpg"/></p>
+<p>图9：JVM中一个栈帧的结构</p>
+<p>对于每个指令，解释器先要把它的操作数压到栈里。在执行指令时，从栈里弹出操作数，计算完毕以后，再把结果压回栈里。</p>
+<p>以“2+3*5”为例，它对应的栈机的代码如下：</p>
+<pre><code>push 2  //把操作数2入栈
+push 3  //把操作数3入栈
+push 5  //把操作数5入栈, 栈里目前是2、 3、 5
+imul    //弹出5和3，执行整数乘法运算，得到15，然后把结果入栈，现在栈里是2、15
+iadd    //弹出15和2，执行整数加法运算，得到17，然后把结果入栈，最后栈里是17 
+</code></pre>
+<p>提示：对于不同大小的常量操作数，实际上生成的指令会不同。这里只是示意。</p>
+<p>注意一点，要从AST生成上面的代码，你只需要对AST做深度优先的遍历即可。先后经过的节点是：<strong>2-&gt;3-&gt;5-&gt;*-&gt;+</strong>（注：这种把操作符放在后面的写法，叫做<strong>逆波兰表达式</strong>，也叫<strong>后缀表达式</strong>）。</p>
+<p><img alt="" src="/assets/ac83ead375b5b7c4630e7b67.jpg"/></p>
+<p>图10：2+3*5对应的AST</p>
+<p>生成上述栈机代码，只需要深度优先地遍历AST，并且只需要进行两种操作：</p>
+<ul>
+<li>在遇到字面量或者变量的时候，生成push指令；</li>
+<li>在遇到操作符的时候，生成相应的操作指令即可。</li>
+</ul>
+<p>你能看出，这个算法相当简单，这也是栈机最大的优点。</p>
+<p>你还会注意到，像imul和iadd这样的指令，不需要带操作数，因为指令所需的操作数就在栈顶。这是栈机的指令跟汇编语言的指令的最大区别。</p>
+<p>注意：imul和iadd中的i，代表这两个指令是对整型值做操作。对浮点型、长整型等不同类型，分别对应不同的指令前缀。</p>
+<p>好了，现在你已经了解了栈机的原理。基于对栈机的认知，你再去阅读Java和Python的字节码，就会更加容易了。而关于Python的虚拟机，我还会在后续课程中详细展开。</p>
+<h3 id="基于寄存器的虚拟机">基于寄存器的虚拟机</h3>
+<p>除了栈机之外，另一种虚拟机是寄存器机。寄存器机使用寄存器名称来表示操作数，所以它的指令也跟汇编代码相似，像add这样的操作码后面要跟操作数。</p>
+<p>在实践中，早期版本的安卓系统中，用于解释执行代码的Dalvik虚拟机，就采用了寄存器模式，而Erlang和Lua语言的虚拟机也是寄存器机。JavaScript引擎V8的比较新的版本中，也引入了一个解释器Ignition，它也是个寄存器机。</p>
+<p><strong>与栈机相比</strong>，利用寄存器机编译所生成的代码更少，因为省去了很多push指令。</p>
+<p>不过，寄存器机所指的寄存器，不一定是真正的物理寄存器，有可能只是栈帧中的一个位置。当然，有的寄存器机在实现的时候，确实会用到物理寄存器，从而提高计算性能。我们在后面研究V8的Ignition解释器时，会看到这种实现。</p>
+<h2 id="课程小结">课程小结</h2>
+<p>本讲我带你了解了代码是如何被运行的，以及是在什么样的环境中运行的。这样，你才会知道如何让编译器生成正确的代码。</p>
+<p>现有的程序有两大类执行模式。<strong>一类是编译成本地代码（机器码），运行在物理机和操作系统上</strong>，这时候你需要掌握目标机器的汇编代码，知道指令是如何跟CPU和内存打交道的，也需要知道操作系统在其中扮演了什么角色。<strong>另一大类是在虚拟机上运行的</strong>，虚拟机又分为栈机和寄存器机两大类，你需要明确它们之间的区别，才能知道为什么它们的IR是不同的，又分别有什么优缺点。</p>
+<p>不过，现代程序的运行环境往往比较复杂。像Java等语言，既可以解释执行字节码，又能够即时编译成本地代码运行，所以它们的运行时机制就更复杂一些。你要综合两种运行时机制的知识，才能完整地理解JVM。</p>
+<p><img alt="" src="/assets/343034f0c37db8fbe2bae181.jpg"/></p>
+<h2 id="一课一思">一课一思</h2>
+<p>我们现在已经知道，栈是一种自动管理内存的机制，你只要修改栈顶指针，就可以获得所需的内存。那么，你能否结合操作系统的知识，研究一下这个过程是如何实现的呢？</p>
+<p>欢迎在留言区分享你的答案，如果这节课对你有帮助，也欢迎你把它分享给你的朋友。</p>
+<h2 id="参考资料">参考资料</h2>
+<p>1.关于JVM栈帧的结构，可以参考<a href="https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-2.html#jvms-2.6" target="_blank">JVM Specification</a>。-
+2. 关于Java字节码的指令集，可以参考<a href="https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-6.html" target="_blank">Java Language Specification</a>。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

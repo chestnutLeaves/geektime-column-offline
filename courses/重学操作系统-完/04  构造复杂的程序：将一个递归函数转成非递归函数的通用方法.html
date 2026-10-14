@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/index.html">重学操作系统-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">51 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>重学操作系统-完</strong><ul><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E5%BF%85%E8%80%83%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">00 开篇词  为什么大厂面试必考操作系统？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/00%20%E8%AF%BE%E5%89%8D%E5%BF%85%E8%AF%BB%20%20%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%BF%99%E6%A0%B7%E5%81%9A%EF%BC%81.html">00 课前必读  构建知识体系，可以这样做！</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/01%20%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9A%E2%80%9C%E5%A6%82%E4%BD%95%E6%8A%8A%E7%A8%8B%E5%BA%8F%E5%86%99%E5%A5%BD%E2%80%9D%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%E6%98%AF%E5%8F%AF%E8%AE%A1%E7%AE%97%E7%9A%84%E5%90%97%EF%BC%9F.html">01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/02%20%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%EF%BC%9A%E7%9B%B8%E6%AF%94%2032%20%E4%BD%8D%EF%BC%8C64%20%E4%BD%8D%E7%9A%84%E4%BC%98%E5%8A%BF%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">02  程序的执行：相比 32 位，64 位的优势是什么？（上）</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/03%20%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%EF%BC%9A%E7%9B%B8%E6%AF%94%2032%20%E4%BD%8D%EF%BC%8C64%20%E4%BD%8D%E7%9A%84%E4%BC%98%E5%8A%BF%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">03  程序的执行：相比 32 位，64 位的优势是什么？（下）</a></li><li><a class="active" aria-current="page" href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/04%20%20%E6%9E%84%E9%80%A0%E5%A4%8D%E6%9D%82%E7%9A%84%E7%A8%8B%E5%BA%8F%EF%BC%9A%E5%B0%86%E4%B8%80%E4%B8%AA%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0%E8%BD%AC%E6%88%90%E9%9D%9E%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95.html">04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/05%20%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%88%86%E7%BA%A7%EF%BC%9AL1%20Cache%20%E6%AF%94%E5%86%85%E5%AD%98%E5%92%8C%20SSD%20%E5%BF%AB%E5%A4%9A%E5%B0%91%E5%80%8D%EF%BC%9F.html">05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/05%20%281%29%20%E5%8A%A0%E9%A4%90%20%20%E7%BB%83%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89.html">05 (1) 加餐  练习题详解（一）</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/06%20%20%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%92%8C%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E6%8C%87%E4%BB%A4%EF%BC%9Arm%20%20-rf%20%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%EF%BC%9F.html">06  目录结构和文件管理指令：rm  -rf 指令的作用是？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/07%20%20%E8%BF%9B%E7%A8%8B%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E7%AE%A1%E9%81%93%E6%8C%87%E4%BB%A4%EF%BC%9Axargs%20%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%EF%BC%9F.html">07  进程、重定向和管道指令：xargs 指令的作用是？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/08%20%20%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%8C%87%E4%BB%A4%EF%BC%9A%20%E8%AF%B7%E7%AE%80%E8%BF%B0%20Linux%20%E6%9D%83%E9%99%90%E5%88%92%E5%88%86%E7%9A%84%E5%8E%9F%E5%88%99%EF%BC%9F.html">08  用户和权限管理指令： 请简述 Linux 权限划分的原则？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/09%20%20Linux%20%E4%B8%AD%E7%9A%84%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E4%B8%80%E4%B8%AA%E5%9F%9F%E5%90%8D%E6%9C%89%E5%93%AA%E4%BA%9B%20NS%20%E8%AE%B0%E5%BD%95%EF%BC%9F.html">09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/10%20%20%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%EF%BC%9A%20%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E5%92%8C%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8%E5%AE%89%E8%A3%85%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%E5%92%8C%E5%8A%A3%E5%8A%BF%EF%BC%9F.html">10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/11%20%20%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7%E4%B9%8B%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%EF%BC%9A%E5%88%A9%E7%94%A8%20Linux%20%E6%8C%87%E4%BB%A4%E5%88%86%E6%9E%90%20Web%20%E6%97%A5%E5%BF%97.html">11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/12%20%20%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7%E4%B9%8B%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%88%A9%E7%94%A8%20Linux%20%E6%8C%87%E4%BB%A4%E5%90%8C%E6%97%B6%E5%9C%A8%E5%A4%9A%E5%8F%B0%E6%9C%BA%E5%99%A8%E9%83%A8%E7%BD%B2%E7%A8%8B%E5%BA%8F.html">12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/12%20%281%29%E5%8A%A0%E9%A4%90%20%20%E7%BB%83%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%BA%8C%EF%BC%89.html">12 (1)加餐  练习题详解（二）</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/13%20%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8%EF%BC%9ALinux%20%E5%86%85%E6%A0%B8%E5%92%8C%20Windows%20%E5%86%85%E6%A0%B8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">13  操作系统内核：Linux 内核和 Windows 内核有什么区别？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/14%20%20%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81%EF%BC%9A%E7%94%A8%E6%88%B7%E6%80%81%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81%E7%BA%BF%E7%A8%8B%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">14  用户态和内核态：用户态线程和内核态线程有什么区别？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/15%20%20%E4%B8%AD%E6%96%AD%E5%92%8C%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%EF%BC%9AJavajs%20%E7%AD%89%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E6%8D%95%E8%8E%B7%E5%88%B0%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5%EF%BC%9F.html">15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/16%20%20WinMacUnixLinux%20%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%20Debian%20%E6%BC%8F%E6%B4%9E%E6%8E%92%E5%90%8D%E7%AC%AC%E4%B8%80%E8%BF%98%E8%BF%99%E4%B9%88%E5%A4%9A%E4%BA%BA%E7%94%A8%EF%BC%9F.html">16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/16%20%281%29%E5%8A%A0%E9%A4%90%20%20%E7%BB%83%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%89%EF%BC%89.html">16 (1)加餐  练习题详解（三）</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/17%20%20%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%EF%BC%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%BC%80%E9%94%80%E6%AF%94%E7%BA%BF%E7%A8%8B%E5%A4%A7%E5%9C%A8%E4%BA%86%E5%93%AA%E9%87%8C%EF%BC%9F.html">17  进程和线程：进程的开销比线程大在了哪里？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/18%20%20%E9%94%81%E3%80%81%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8E%A7%E5%88%B6%E5%90%8C%E4%B8%80%E6%97%B6%E9%97%B4%E5%8F%AA%E6%9C%89%202%20%E4%B8%AA%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%EF%BC%9F.html">18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/19%20%20%E4%B9%90%E8%A7%82%E9%94%81%E3%80%81%E5%8C%BA%E5%9D%97%E9%93%BE%EF%BC%9A%E9%99%A4%E4%BA%86%E4%B8%8A%E9%94%81%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95%EF%BC%9F.html">19  乐观锁、区块链：除了上锁还有哪些并发控制方法？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/20%20%20%E7%BA%BF%E7%A8%8B%E7%9A%84%E8%B0%83%E5%BA%A6%EF%BC%9A%E7%BA%BF%E7%A8%8B%E8%B0%83%E5%BA%A6%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95%EF%BC%9F.html">20  线程的调度：线程调度都有哪些方法？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/21%20%20%E5%93%B2%E5%AD%A6%E5%AE%B6%E5%B0%B1%E9%A4%90%E9%97%AE%E9%A2%98%EF%BC%9A%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E4%BC%9A%E8%A7%A6%E5%8F%91%E9%A5%A5%E9%A5%BF%E5%92%8C%E6%AD%BB%E9%94%81%EF%BC%9F.html">21  哲学家就餐问题：什么情况下会触发饥饿和死锁？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/22%20%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%9A%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95%EF%BC%9F.html">22  进程间通信： 进程间通信都有哪些方法？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/23%20%20%E5%88%86%E6%9E%90%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%89%B9%E6%80%A7%EF%BC%9A%E6%88%91%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%BA%94%E8%AF%A5%E5%BC%80%E5%A4%9A%E5%B0%91%E4%B8%AA%E8%BF%9B%E7%A8%8B%E3%80%81%E5%A4%9A%E5%B0%91%E4%B8%AA%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">23  分析服务的特性：我的服务应该开多少个进程、多少个线程？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/23%20%281%29%E5%8A%A0%E9%A4%90%20%20%E7%BB%83%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3%EF%BC%88%E5%9B%9B%EF%BC%89.html">23 (1)加餐  练习题详解（四）</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/24%20%20%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%20%EF%BC%9A%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%9C%80%E5%A4%9A%E8%83%BD%E4%BD%BF%E7%94%A8%E5%A4%9A%E5%B0%91%E5%86%85%E5%AD%98%EF%BC%9F.html">24  虚拟内存 ：一个程序最多能使用多少内存？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/25%20%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%8D%95%E5%85%83%EF%BC%9A%20%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E4%BD%BF%E7%94%A8%E5%A4%A7%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5%EF%BC%9F.html">25  内存管理单元： 什么情况下使用大内存分页？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/26%20%20%E7%BC%93%E5%AD%98%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%EF%BC%9A%20LRU%20%E7%94%A8%E4%BB%80%E4%B9%88%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E6%9B%B4%E5%90%88%E7%90%86%EF%BC%9F.html">26  缓存置换算法： LRU 用什么数据结构实现更合理？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/27%20%20%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%86%85%E5%AD%98%E7%9A%84%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98%EF%BC%9F.html">27  内存回收上篇：如何解决内存的循环引用问题？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/28%20%20%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E4%B8%8B%E7%AF%87%EF%BC%9A%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">28  内存回收下篇：三色标记-清除算法是怎么回事？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/28%20%281%29%E5%8A%A0%E9%A4%90%20%20%E7%BB%83%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%BA%94%EF%BC%89.html">28 (1)加餐  练习题详解（五）</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/29%20%20Linux%20%E4%B8%8B%E7%9A%84%E5%90%84%E4%B8%AA%E7%9B%AE%E5%BD%95%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F.html">29  Linux 下的各个目录有什么作用？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/30%20%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%EF%BC%9AFAT%E3%80%81NTFS%20%E5%92%8C%20Ext3%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/31%20%20%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%9E%E4%BE%8B%EF%BC%9AMySQL%20%E4%B8%AD%20B%20%E6%A0%91%E5%92%8C%20B%2B%20%E6%A0%91%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/32%20%20HDFS%20%E4%BB%8B%E7%BB%8D%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">32  HDFS 介绍：分布式文件系统是怎么回事？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/32%20%281%29%E5%8A%A0%E9%A4%90%20%20%E7%BB%83%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3%EF%BC%88%E5%85%AD%EF%BC%89.html">32 (1)加餐  练习题详解（六）</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/33%20%20%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E7%BE%A4%EF%BC%88TCPIP%EF%BC%89%EF%BC%9A%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">33  互联网协议群（TCPIP）：多路复用是怎么回事？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/34%20%20UDP%20%E5%8D%8F%E8%AE%AE%EF%BC%9AUDP%20%E5%92%8C%20TCP%20%E7%9B%B8%E6%AF%94%E5%BF%AB%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">34  UDP 协议：UDP 和 TCP 相比快在哪里？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/35%20%20Linux%20%E7%9A%84%20IO%20%E6%A8%A1%E5%BC%8F%EF%BC%9Aselectpollepoll%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">35  Linux 的 IO 模式：selectpollepoll 有什么区别？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/36%20%20%E5%85%AC%E7%A7%81%E9%92%A5%E4%BD%93%E7%B3%BB%E5%92%8C%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%EF%BC%9F.html">36  公私钥体系和网络安全：什么是中间人攻击？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/36%20%281%29%E5%8A%A0%E9%A4%90%20%20%E7%BB%83%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%83%EF%BC%89.html">36 (1)加餐  练习题详解（七）</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/37%20%20%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D%EF%BC%9AVMware%20%E5%92%8C%20Docker%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F.html">37  虚拟化技术介绍：VMware 和 Docker 的区别？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/38%20%20%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92%E6%8A%80%E6%9C%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20K8s%20%E5%92%8C%20Docker%20Swarm%20%E7%AE%A1%E7%90%86%E5%BE%AE%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/39%20%20Linux%20%E6%9E%B6%E6%9E%84%E4%BC%98%E7%A7%80%E5%9C%A8%E5%93%AA%E9%87%8C.html">39  Linux 架构优秀在哪里</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/40%20%20%E5%95%86%E4%B8%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%9A%E7%94%B5%E5%95%86%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%80%E4%B8%AA%E5%99%B1%E5%A4%B4%EF%BC%9F.html">40  商业操作系统：电商操作系统是不是一个噱头？</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/40%20%281%29%E5%8A%A0%E9%A4%90%20%20%E7%BB%83%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3%EF%BC%88%E5%85%AB%EF%BC%89.html">40 (1)加餐  练习题详解（八）</a></li><li><a href="/courses/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/41%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E8%AE%BA%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E5%8F%91%E5%B1%95%E2%80%94%E2%80%94%E4%BF%A1%E4%BB%B0%E3%80%81%E9%80%89%E6%8B%A9%E5%92%8C%E5%8D%9A%E5%BC%88.html">41 结束语  论程序员的发展——信仰、选择和博弈</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%87%8D%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%AE%8C/04%20%20%E6%9E%84%E9%80%A0%E5%A4%8D%E6%9D%82%E7%9A%84%E7%A8%8B%E5%BA%8F%EF%BC%9A%E5%B0%86%E4%B8%80%E4%B8%AA%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0%E8%BD%AC%E6%88%90%E9%9D%9E%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法" id="title">04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法</h1>
+<div><p><strong>我看到过一道非常不错的面试题：不支持递归的程序语言如何实现递归程序？</strong></p>
+<p>之所以说这道题好，是因为：</p>
+<ul>
+<li>首先，它不是纯粹考概念和死记硬背，求职者在回答问题之前需要进行一定的思考；</li>
+<li>其次，这道题目可以继续深挖，比如可以让求职者具体写一个程序，就变成了一道编程题；</li>
+<li>最后，这道题目有实战意义，它背后考察的是求职者的编程功底。</li>
+</ul>
+<p>为了弄清楚这道题目，你需要对程序有一个更深层次的认识，不仅仅停留在指令的执行层面，而是要灵活使用指令，去实现更加复杂的功能。</p>
+<h3 id="for-循环如何被执行">for 循环如何被执行</h3>
+<p>首先，我们来看 for 循环是如何实现的。</p>
+<p>下面是一个求 1 加到 100 的 Java 程序，请你思考如何将它转换为指令：</p>
+<pre><code>var i = 1, s = 0;
+
+for(; i &lt;= 100; i++) {
+
+  s+=i;
+
+}
+</code></pre>
+<p>指令是简单的，像积木一样，程序是复杂的，像房子一样。我们将简单的事情组合，然后去完成复杂的事情，这就是程序员每天在做的。在这个过程中，你会产生思考，比如如何排列组合，如何搭积木，才能更快更准地完成项目？所以这也是训练思维的一个过程。</p>
+<p>经过思考，如果按照顺序执行上面的程序，则需要很多指令，因为 for 循环可以执行 1 次，也可以执行 100W 次，还可以执行无数次。因此，指令的设计者提供了一种 <code>jump</code> 类型的指令，让你可以在程序间跳跃，比如:</p>
+<pre><code>loop:
+
+  jump loop
+</code></pre>
+<p>这就实现了一个无限循环，程序执行到 <code>jumploop</code> 的时候，就会跳回 <code>loop</code> 标签。</p>
+<p>用这种方法，我们可以将 <code>for</code> 循环用底层的指令实现：</p>
+<pre><code># var i = 1, s = 0
+
+# 对应 Java 代码，我们首先将 1 和 0 存储到两个地址
+
+# 这两个地址我们用 $i 和 $s 表示
+
+store #1 -&gt; $i // 将数字 1 存入i的地址
+
+store #0 -&gt; $s // 将数字 0 存入 s 的地址
+
+# 接下来循环要开始了，我们在这里预留一个 loop 标签
+
+# loop 是一个自定义标签，它代表指令的相对位置
+
+# 后续我们可以用 jump 指令跳转回这个位置实现循环
+
+loop: # 循环标签
+
+# for ... i &lt;= 100
+
+# 接下来我们开始实现循环控制
+
+# 我们先首先 i &lt;= 100的比较
+
+# 我们先将变量 i 的地址，也就是 $i 导入寄存器 R0
+
+load $i -&gt; R0
+
+# 然后我们用 cmp 比较指令 R0 和数字 100
+
+cmp R0 #100 // 比较 R0 和数字 100
+
+# 注意指令不会有返回值，它会进行计算，然后改变机器的状态（也就是寄存器）
+
+# 比较后，有几个特殊的寄存器会保存比较结果
+
+# 然后我们用 ja（jump above）, 如果比较结果 R0 比 100 大
+
+# 那么我们就跳转到 end 标签，实现循环的跳出
+
+ja end 
+
+nop
+
+# 如果 R0&lt;=100，那么ja end 没有生效，这时我们处理 s+=i
+
+# 首先我们把变量 s 所在地址的数据导入寄存器 R1
+
+load $s -&gt; R1
+
+# 然后我们把寄存器R0和R1加和，把结果存储寄存器 R2
+
+add R0 R1 R2 
+
+# 这时，我们把寄存器 R2 的值存入变量 s 所在的地址
+
+store R2 -&gt; $s
+
+# 刚才我们完成了一次循环
+
+# 我们还需要维护变量 i 的自增
+
+# 现在 i 的值在 R0 中，我们首先将整数 1 叠加到 R0 上
+
+add R0 #1 R0
+
+# 再把 R0 的值存入i所在的内存地址
+
+store R0 -&gt; $i
+
+# 这时我们的循环体已经全部执行完成，我们需要调转回上面 loop 标签所在的位置
+
+# 继续循环
+
+jump loop
+
+nop
+
+end:
+</code></pre>
+<p>通过上面的方法，我们成功将 for 循环的程序转换成了指令，然后再将它们编码成二进制，就可以存储到内存中了。</p>
+<p>讲到这里，我要强调几个事情：</p>
+<ol>
+<li>jump 指令直接操作 PC 指针，但是很多 CPU 会抢先执行下一条指令，因此通常我们在 jump 后面要跟随一条 nop 指令，让 CPU 空转一个周期，避免 jump 下面的指令被执行。<strong>是不是到了微观世界，和你所认识的程序还不太一样</strong>？</li>
+<li>上面我写指令的时候用到了 add/store 这些指令，它们叫作助记符，是帮助你记忆的。整体这段程序，我们就称作汇编程序。</li>
+<li>因为不同的机器助记符也不一样，所以你不用太关注我用的是什么汇编语言，也不用去记忆这些指令。当你拿到指定芯片的时候，直接去查阅芯片的说明书就可以了。</li>
+<li>虽然不同 CPU 的指令不一样，但也是有行业标准的。现在使用比较多的是 RISC（精简指令集）和 CISC（复杂指令集）。比如目前Inte 和 AMD 家族主要使用 CISC 指令集，ARM 和 MIPS 等主要使用RISC 指令集。</li>
+</ol>
+<h3 id="条件控制程序">条件控制程序</h3>
+<p>条件控制程序有两种典型代表，一种是 <code>if-else</code> ，另一种是 <code>switch-case</code> 。 总体来说， <code>if-else</code> 翻译成指令，是比较简单的，你需要用跳转指令和比较指令处理它的跳转逻辑。</p>
+<p>当然，它们的使用场景不同，这块我不展开了。在这里我主要想跟你说说，它们的内部实现是不一样的。<code>if-else</code> 是一个自上向下的执行逻辑， <code>switch-case</code>是一种精确匹配算法。比如你有 1000 个 case，如果用 <code>if-else</code> 你需要一个个比较，最坏情况下需要比较 <code>999</code> 次；而如果用 <code>switch-case</code> ，就不需要一个个比较，通过算法就可以直接定位到对应的<code>case</code> 。</p>
+<p>举个具体的例子，比如一个根据数字返回星期的程序。如果用<code>if-else</code>，那么你需要这样做：</p>
+<pre><code>if(week == 1) {
+
+  return "周一";
+
+} else if(week == 2) {
+
+  return "周二";
+
+}
+
+……
+</code></pre>
+<p>如果用 <code>switch-case</code> 的逻辑，你可能会这样计算：</p>
+<pre><code>跳转位置=当前PC + 4*(week * 2 - 1)
+</code></pre>
+<p>你不用太关心上面的数学关系，我只是举一个例子告诉你， <code>switch-case</code> 实现更多是依赖数学关系，直接算出 case 所在指令的位置，而不是一行行执行和比较。</p>
+<h3 id="函数">函数</h3>
+<p>了解了循环和条件判断，我们再来看看函数是如何被执行的。函数的执行过程必须深入到底层，也会涉及一种叫作栈的数据结构。</p>
+<p>下面是一段 C 程序，传入两个参数，然后返回两个参数的和：</p>
+<pre><code>int add(int a, int b){
+
+  return a + b;
+
+}
+</code></pre>
+<p>这里我先不说具体的解决方案，希望你可以先自己思考。其实到这里，你已经学了不少知识了。下面我们一起分析一下，一种思考的方向是：</p>
+<ol>
+<li>通过观察，我们发现函数的参数 a,b 本质是内存中的数据，因此需要给它们分配内存地址。</li>
+<li>函数返回值也是内存中的数据，也就是返回值也需要分配内存地址。</li>
+<li>调用函数其实就是跳转到函数体对应的指令所在的位置，因此函数名可以用一个标签，调用时，就用 <code>jump</code> 指令跟这个标签。</li>
+</ol>
+<p>比如上面函数进行了<code>a+b</code>的运算，我们可以这样构造指令：</p>
+<pre><code># 首先我们定义一个叫作add的标签
+
+add:
+
+# 然后我们将a和b所在地址中的数据都导入寄存器
+
+load $a -&gt; R0
+
+load $b -&gt; R1
+
+# 然后我们将寄存器求和，并将结果回写到返回地址
+
+add R0 R1 R2
+
+store R2 -&gt; $r
+</code></pre>
+<p>当我们需要调用这个函数的时候，我们就构造下面这样的指令：</p>
+<pre><code>jump add
+</code></pre>
+<p>细心的同学可能已经发现，这里有 2 个问题还没有解决：</p>
+<ol>
+<li>参数如何传递给函数？</li>
+<li>返回值如何传递给调用者？</li>
+</ol>
+<p>为了解决这 2 个问题，我们就需要用到前面提到的一个叫作栈的数据结构。栈的英文是 Stack，意思是码放整齐的一堆东西。首先在调用方，我们将参数传递给栈；然后在函数执行过程中，我们从栈中取出参数。</p>
+<p><img alt="Lark20200916-181251.png" src="/assets/1b93e3ae2ca069c3a3ce7feb.png"/></p>
+<p>函数执行过程中，先将执行结果写入栈中，然后在返回前把之前压入的参数出栈，调用方再从栈中取出执行结果。</p>
+<p><img alt="Lark20200916-181255.png" src="/assets/7c330336eb7749bd9f98f979.png"/></p>
+<p>将参数传递给 Stack 的过程，叫作压栈。取出结果的过程，叫作出栈。栈就好像你书桌上的一摞书，压栈就是把参数放到书上面，出栈就是把顶部的书拿下来。</p>
+<p>因为栈中的每个数据大小都一样，所以在函数执行的过程中，我们可以通过参数的个数和参数的序号去计算参数在栈中的位置。</p>
+<p>接下来我们来看看函数执行的整体过程：假设要计算 11 和 15 的和，我们首先在内存中开辟一块单独的空间，也就是栈。</p>
+<p><img alt="Drawing 2.png" src="/assets/8007664e37013010e5bbadd5.png"/></p>
+<p>就如前面所讲，栈的使用方法是不断往上堆数据，所以需要一个栈指针（Stack Pointer， SP）指向栈顶（也就是下一个可以写入的位置）。每次将数据写入栈时，就把数据写到栈指针指向的位置，然后将 SP 的值增加。</p>
+<p>为了提高效率，我们通常会用一个特殊的寄存器来存储栈指针，这个寄存器就叫作 Stack Pointer，在大多数芯片中都有这个特殊的寄存器。一开始，SP 指向 0x100 位置，而 0x100 位置还没有数据。</p>
+<ul>
+<li><strong>压栈参数11</strong></li>
+</ul>
+<p>接下来我们开始传参，我们先将 11 压栈，之所以称作压栈（ Push)，就好像我们把数据 11 堆在内存中一样。模拟压栈的过程是下面两条指令：</p>
+<pre><code>store #11 -&gt; $SP // 将11存入SP指向的地址0x100
+
+add SP, 4, SP  // 栈指针增加4（32位机器）
+</code></pre>
+<p>第一条 store 指令将 SP 寄存器指向的内存地址设置为常数 11。</p>
+<p>第二条指令将栈指针自增 4。</p>
+<p>这里用美元符号代表将 11 存入的是 SP 寄存器指向的内存地址，这是一次间接寻址。存入后，栈指针不是自增 1 而是自增了 4，因为我在这里给你讲解时，用的是一个 32 位宽的 CPU 。如果是 64 位宽的 CPU，那么栈指针就需要自增 8。</p>
+<p>压栈完成后，内存变成下图中所示的样子。11 被写入内存，并且栈指针指向了 0x104 位置。</p>
+<p><img alt="Drawing 3.png" src="/assets/2cfde1debf935468ecf66411.png"/></p>
+<ul>
+<li><strong>压栈参数15</strong></li>
+</ul>
+<p>然后我们用同样的方法将参数 15 压栈。</p>
+<p><img alt="Drawing 4.png" src="/assets/df53def978e3f852e8f02a0c.png"/></p>
+<p>压栈后，11 和 15 都被放入了对应的内存位置，并且栈指针指向了 0x108。</p>
+<ul>
+<li><strong>将返回值压栈</strong></li>
+</ul>
+<p>接下来，我们将返回值压栈。到这里你可能会问，返回值还没有计算呢，怎么就压栈了？其实这相当于一个占位，后面我们会改写这个地址。</p>
+<p><img alt="Drawing 5.png" src="/assets/2d45aa94b270eca42743cda3.png"/></p>
+<ul>
+<li><strong>调用函数</strong></li>
+</ul>
+<p>当我们完成了上面的压栈后，就开始调用函数，一种简单的做法是用 jump 指令直接跳转到函数的标签，比如：</p>
+<pre><code>jump add
+</code></pre>
+<p>这个时候，要加和在栈中的数据 11 和 15，我们可以利用 SP 指针寻找数据。11 距离当前 SP 指针差 3 个位置，15 距离 SP 指针差 2 个位置。这种寻址方式是一种复合的寻址方式，是间接 + 偏移量寻址。</p>
+<p>我们可以用下面的代码完成将 11 和 15 导入寄存器的过程：</p>
+<pre><code>load $(SP - 12) -&gt; R0
+
+load $(SP - 8) -&gt; R1
+</code></pre>
+<p>然后进行加和，将结果存入 R2。</p>
+<pre><code>load R0 R1 R2
+</code></pre>
+<p>最后我们可以再次利用数学关系将结果写入返回值所在的位置。</p>
+<pre><code>store R2 -&gt; $(SP-4)
+</code></pre>
+<p>上面我们用到了一种间接寻址的方式来进行加和运算，也就是利用 SP 中的地址做加减法操作内存。</p>
+<p>经过函数调用的结果如下图所示，运算结果 26 已经被写入了返回值的位置：</p>
+<p><img alt="Drawing 6.png" src="/assets/1426515e578d5d8063b9f806.png"/></p>
+<ul>
+<li><strong>发现-解决问题</strong></li>
+</ul>
+<p>一个好的解决方案，也会面临问题。现在我们就遇到了麻烦：</p>
+<ol>
+<li>函数计算完成，这时应该跳转回去。可是我们没有记录函数调用前 PC 指针的位置，因此这里需要改进，我们需要存储函数调用前的 PC 指针方便调用后恢复。</li>
+<li>栈不可以被无限使用，11和 15 作为参数，计算出了结果 26，那么它们就可以清空了。如果用调整栈指针的方式去清空，我们就会先清空 26。此时就会出现顺序问题，因此我们需要调整压栈的顺序。</li>
+</ol>
+<p>具体顺序你可以看下图。首先，我们将函数参数和返回值换位，这样在清空数据的时候，就会先清空参数，再清空返回值。</p>
+<p><img alt="Lark20201225-140329.png" src="/assets/965ed84846af7b45b09ed7aa.png"/></p>
+<p>然后我们在调用函数前，还需要将返回地址压栈。这样在函数计算完成前，就能跳转回对应的返回地址。翻译成指令，就是下面这样：</p>
+<pre><code>## 压栈返回值
+
+add SP, 4  -&gt; SP 
+
+# 计算返回地址
+
+# 我们需要跳转到清理堆栈那行，也就是16行
+
+MOV PC+4*(参数个数*2+1) -&gt; SP
+
+# 压栈参数的程序
+
+……
+
+# 执行函数，计算返回值
+
+call function
+
+# 清理堆栈
+
+add SP, -(参数个数+1)*4， SP
+</code></pre>
+<h3 id="递归函数如何被执行">递归函数如何被执行</h3>
+<p>我们刚刚使用了栈解决了函数的调用问题。但是这个方案究竟合不合理，还需要用更复杂的情况来验证。</p>
+<p>如下所示，我们给出一个递归函数，请你判断是否可以用上面的方法执行：</p>
+<pre><code>int sum(int n){
+
+  if(n == 1) {return 1;}
+
+  return n + sum(n-1);
+
+}
+</code></pre>
+<p>递归的时候，我们每次执行函数都形成一个如下所示的栈结构：</p>
+<p><img alt="Lark20201225-140329.png" src="/assets/5d22fc17c621d35b147ab5b5.png"/></p>
+<p>比如执行 sum(100)，我们就会形成一个复杂的栈，第一次调用 n = 100，第二次递归调用 n = 99：</p>
+<p><img alt="1.png" src="/assets/dda78542e855d96dc53c3b41.png"/></p>
+<p>它们堆在了一起，就形成了一个很大的栈，简化一下就是这样的一个模型，如下所示：</p>
+<p><img alt="2.png" src="/assets/c580f7a28bd05aaad3753332.png"/></p>
+<p>到这里，递归消耗了更多空间，但是也保证了中间计算的独立性。当递归执行到 100 次的时候，就会执行下面的语句：</p>
+<pre><code> if(n == 1) {return 1;}
+</code></pre>
+<p>于是触发第 99 次递归执行：</p>
+<pre><code>return 2 + sum(1) // sum(1) = 1
+</code></pre>
+<p>上面程序等价于<code>return 3</code>，接着再触发第 98 次递归的执行，然后是第 97 次，最终触发到第一次函数调用返回结果。</p>
+<p>由此可见，栈这种结构同样适合递归的计算。事实上，计算机编程语言就是用这种结构来实现递归函数。</p>
+<h3 id="类型-class-如何实现">类型（class）如何实现</h3>
+<p>按照我们之前已经学习到的知识：</p>
+<ul>
+<li>变量是一个内存地址，所以只需要分配内存就好了；</li>
+<li>循环控制可以用跳转加判断实现；</li>
+<li>条件控制也可以用跳转加判断实现，只不过如果是 <code>switch-case</code> 还需要一定的数学计算；</li>
+<li>函数调用需要压栈参数、返回值和返回地址。</li>
+</ul>
+<p>最后，我们来说说类型是如何实现的，也就是很多语言都支持的 class 如何被翻译成指令。其实 class 实现非常简单，首先一个 class 会分成两个部分，一部分是数据（也称作属性），另一部分是函数（也称作方法）。</p>
+<p><img alt="Lark20200916-181235.png" src="/assets/edc2acd8dd678b56189d8cd3.png"/></p>
+<p>class 有一个特殊的方法叫作构造函数，它会为 class 分配内存。构造函数执行的时候，开始扫描类型定义中所有的属性和方法。</p>
+<ul>
+<li>如果遇到属性，就为属性分配内存地址；</li>
+<li>如果遇到方法，方法本身需要存到正文段（也就是程序所在的内存区域），再将方法的值设置为方法指令所在的内存地址。</li>
+</ul>
+<p>当我们调用一个 class 方法的时候，本质上是执行了一个函数，因此和函数调用是一致的：</p>
+<ol>
+<li>首先把返回值和返回地址压栈；</li>
+<li>然后压栈参数；</li>
+<li>最后执行跳转。</li>
+</ol>
+<p>这里有一个小问题，有时候 class 的方法会用到<code>this</code> ，这其实并不复杂，你仔细想想， <code>this</code>指针不就是构造函数创建的一个指向 class 实例的地址吗？那么，有一种简单的实现，就是我们可以把 <code>this</code> 作为函数的第一个参数压栈。这样，类型的函数就可以访问类型的成员了，而类型也就可以翻译成指令了。</p>
+<h3 id="总结">总结</h3>
+<p>下面我们做一个简单的总结：</p>
+<ol>
+<li>我们写的程序需要翻译成指令才能被执行，在 03 课时中我们提到过，这个翻译工具叫作编译器。</li>
+<li>平时你编程做的事情，用机器指令也能做，所以从计算能力上来说它们是等价的，最终这种计算能力又和图灵机是等价的。如果一个语言的能力和图灵机等价，我们就说这个语言是图灵完备的语言。现在市面上的绝大多数语言都是图灵完备的语言，但也有一些不是，比如 HTML、正则表达式和 SQL 等。</li>
+<li>我们通过汇编语言构造高级程序；通过高级程序构造自己的业务逻辑，这些都是工程能力的一种体现。</li>
+</ol>
+<p>那么通过这节课的学习，你现在可以来回答本节关联的面试题目：<strong>一个程序语言如果不支持递归函数的话，该如何实现递归算法？</strong></p>
+<p>老规矩，请你先在脑海里思考问题的答案，并把你的思考写在留言区，然后再来看我接下来的分析。</p>
+<p><strong>【解析】</strong> 思路如下：</p>
+<ul>
+<li>我们需要用到一个栈（其实用数组就可以）；</li>
+<li>我们还需要一个栈指针，支持寄存器的编程语言能够直接用寄存器，而不支持直接用寄存器的编程语言，比如 Java，我们可以用一个变量；</li>
+<li>然后我们可以实现压栈、出栈的操作，并按照上面学习的函数调用方法操作我们的栈。</li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

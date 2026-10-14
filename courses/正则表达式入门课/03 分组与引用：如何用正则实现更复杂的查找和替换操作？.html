@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 分组与引用：如何用正则实现更复杂的查找和替换操作？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/index.html">正则表达式入门课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">16 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>正则表达式入门课</strong><ul><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/00%20%E5%AF%BC%E8%AF%BB%20%E4%BD%99%E6%99%9F%EF%BC%9A%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%AD%A6%E4%B9%A0%E5%92%8C%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E7%9A%84%EF%BC%9F.html">00 导读 余晟：我是怎么学习和使用正则的？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%E4%B8%A8%E5%AD%A6%E4%B9%A0%E6%AD%A3%E5%88%99%EF%BC%8C%E6%88%91%E4%BB%AC%E5%88%B0%E5%BA%95%E8%A6%81%E5%AD%A6%E4%BB%80%E4%B9%88%EF%BC%9F.html">00 开篇词丨学习正则，我们到底要学什么？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/01%20%E5%85%83%E5%AD%97%E7%AC%A6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%B7%A7%E5%A6%99%E8%AE%B0%E5%BF%86%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E4%BB%B6%EF%BC%9F.html">01 元字符：如何巧妙记忆正则表达式的基本元件？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/02%E4%B8%A8%E9%87%8F%E8%AF%8D%E4%B8%8E%E8%B4%AA%E5%A9%AA%EF%BC%9A%E5%B0%8F%E5%B0%8F%E7%9A%84%E6%AD%A3%E5%88%99%EF%BC%8C%E4%B9%9F%E5%8F%AF%E8%83%BD%E6%8A%8ACPU%E6%8B%96%E5%9E%AE%EF%BC%81.html">02丨量词与贪婪：小小的正则，也可能把CPU拖垮！</a></li><li><a class="active" aria-current="page" href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/03%20%E5%88%86%E7%BB%84%E4%B8%8E%E5%BC%95%E7%94%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%AD%A3%E5%88%99%E5%AE%9E%E7%8E%B0%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E6%93%8D%E4%BD%9C%EF%BC%9F.html">03 分组与引用：如何用正则实现更复杂的查找和替换操作？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/04%20%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%80%E6%AC%A1%E6%80%A7%E6%8E%8C%E6%8F%A1%E6%AD%A3%E5%88%99%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%844%E7%A7%8D%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F.html">04 匹配模式：一次性掌握正则中常见的4种匹配模式</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/05%20%E6%96%AD%E8%A8%80%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%96%AD%E8%A8%80%E6%9B%B4%E5%A5%BD%E5%9C%B0%E5%AE%9E%E7%8E%B0%E6%9B%BF%E6%8D%A2%E9%87%8D%E5%A4%8D%E5%87%BA%E7%8E%B0%E7%9A%84%E5%8D%95%E8%AF%8D%EF%BC%9F.html">05 断言：如何用断言更好地实现替换重复出现的单词？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/06%20%E8%BD%AC%E4%B9%89%EF%BC%9A%E6%AD%A3%E5%88%99%E4%B8%AD%E8%BD%AC%E4%B9%89%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98%EF%BC%9F.html">06 转义：正则中转义需要注意哪些问题？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/07%20%E6%AD%A3%E5%88%99%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%81%E6%B4%BE%E5%8F%8A%E5%85%B6%E7%89%B9%E6%80%A7%EF%BC%9F.html">07 正则有哪些常见的流派及其特性？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/08%20%E5%BA%94%E7%94%A81%EF%BC%9A%E6%AD%A3%E5%88%99%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%20Unicode%20%E7%BC%96%E7%A0%81%E7%9A%84%E6%96%87%E6%9C%AC%EF%BC%9F.html">08 应用1：正则如何处理 Unicode 编码的文本？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/09%20%E5%BA%94%E7%94%A82%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E5%AE%8C%E6%88%90%E5%B7%A5%E4%BD%9C%EF%BC%9F.html">09 应用2：如何在编辑器中使用正则完成工作？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/10%20%E5%BA%94%E7%94%A83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%94%A8%E6%AD%A3%E5%88%99%E8%AE%A9%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E8%83%BD%E5%8A%9B%E4%B8%8A%E4%B8%80%E4%B8%AA%E5%8F%B0%E9%98%B6%EF%BC%9F.html">10 应用3：如何在语言中用正则让文本处理能力上一个台阶？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/11%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%AD%A3%E5%88%99%E7%9A%84%E5%8C%B9%E9%85%8D%E5%8E%9F%E7%90%86%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99%EF%BC%9F.html">11 如何理解正则的匹配原理以及优化原则？</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/12%20%E9%97%AE%E9%A2%98%E9%9B%86%E9%94%A6%EF%BC%9A%E8%AF%A6%E8%A7%A3%E6%AD%A3%E5%88%99%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">12 问题集锦：详解正则常见问题及解决方案</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E4%BB%8E%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E8%A7%92%E5%BA%A6%E6%9D%A5%E7%90%86%E8%A7%A3%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html">加餐 从编程语言的角度来理解正则表达式</a></li><li><a href="/courses/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E6%8F%90%E9%AB%98%E4%BD%A0%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%88%E7%8E%87.html">结束语 使用正则提高你的人生效率</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E8%AF%BE/03%20%E5%88%86%E7%BB%84%E4%B8%8E%E5%BC%95%E7%94%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%AD%A3%E5%88%99%E5%AE%9E%E7%8E%B0%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E6%93%8D%E4%BD%9C%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="03 分组与引用：如何用正则实现更复杂的查找和替换操作？" id="title">03 分组与引用：如何用正则实现更复杂的查找和替换操作？</h1>
+<div><p>你好，我是伟忠。今天我打算和你聊聊分组与引用。那什么场合下会用到分组呢？</p>
+<p>假设我们现在要去查找15位或18位数字。根据前面学习的知识，使用量词可以表示出现次数，使用管道符号可以表示多个选择，你应该很快就能写出\d{15}|\d{18}。但经过测试，你会发现，这个正则并不能很好地完成任务，因为18位数字也会匹配上前15位，具体如下图所示。</p>
+<p><img alt="" src="/assets/35e5d6012a0a2e23ed3abfe9.png"/></p>
+<p>为了解决这个问题，你灵机一动，很快就想到了办法，就是把15和18调换顺序，即写成 <strong>\d{18}|\d{15}</strong>。你发现，这回符合要求了。</p>
+<p><img alt="" src="/assets/364833677a436457d6efa73f.png"/></p>
+<p>为什么会出现这种情况呢？因为在大多数正则实现中，多分支选择都是左边的优先。类似地，你可以使用 “北京市|北京” 来查找 “北京” 和 “北京市”。另外我们前面学习过，问号可以表示出现0次或1次，你发现可以使用“北京市?” 来实现来查找 “北京” 和 “北京市”。</p>
+<p><img alt="" src="/assets/688b5f36dc338255c8a8668c.png"/></p>
+<p>同样，针对15或18位数字这个问题，可以看成是15位数字，后面3位数据有或者没有，你应该很快写出了 <strong>\d{15}\d{3}?</strong> 。但这样写对不对呢？我们来看一下。</p>
+<p>在上一节我们学习了量词后面加问号表示非贪婪，而我们现在想要的是 \d{3} 出现0次或1次。</p>
+<p>示例一：-
+\d{15}\d{3}? 由于 \d{3} 表示三次，加问号非贪婪还是3次</p>
+<p>示例二：-
+\d{15}(\d{3})? 在 \d{3} 整体后加问号，表示后面三位有或无</p>
+<p>这时候，必须使用括号将来把表示“三个数字”的\d{3}这一部分括起来，也就是表示成\d{15}(\d{3})?这样。现在就比较清楚了：括号在正则中的功能就是用于分组。简单来理解就是，由多个元字符组成某个部分，应该被看成一个整体的时候，可以用括号括起来表示一个整体，这是括号的一个重要功能。其实用括号括起来还有另外一个作用，那就是“复用”，我接下来会给你讲讲这个作用。</p>
+<h2 id="分组与编号">分组与编号</h2>
+<p>括号在正则中可以用于分组，被括号括起来的部分“子表达式”会被保存成一个子组。</p>
+<p>那分组和编号的规则是怎样的呢？其实很简单，用一句话来说就是，第几个括号就是第几个分组。这么说可能不好理解，我们来举一个例子看一下。</p>
+<p>这里有个时间格式 2020-05-10 20:23:05。假设我们想要使用正则提取出里面的日期和时间。</p>
+<p><img alt="" src="/assets/21008b30c585f2560ab4d9d9.png"/></p>
+<p>我们可以写出如图所示的正则，将日期和时间都括号括起来。这个正则中一共有两个分组，日期是第 1 个，时间是第 2 个。</p>
+<h4 id="不保存子组">不保存子组</h4>
+<p>在括号里面的会保存成子组，但有些情况下，你可能只想用括号将某些部分看成一个整体，后续不用再用它，类似这种情况，在实际使用时，是没必要保存子组的。这时我们可以在括号里面使用 ?: 不保存子组。</p>
+<p>如果正则中出现了括号，那么我们就认为，这个子表达式在后续可能会再次被引用，所以不保存子组可以提高正则的性能。除此之外呢，这么做还有一些好处，由于子组变少了，正则性能会更好，在子组计数时也更不容易出错。</p>
+<p>那到底啥是不保存子组呢？我们可以理解成，括号只用于归组，把某个部分当成“单个元素”，不分配编号，后面不会再进行这部分的引用。</p>
+<p><img alt="" src="/assets/5e601279928c318f85abf1da.png"/></p>
+<p><img alt="" src="/assets/3c2bb5b0e18f2a7ef66d2ecf.png"/></p>
+<h4 id="括号嵌套">括号嵌套</h4>
+<p>前面讲完了子组和编号，但有些情况会比较复杂，比如在括号嵌套的情况里，我们要看某个括号里面的内容是第几个分组怎么办？不要担心，其实方法很简单，我们只需要数左括号（开括号）是第几个，就可以确定是第几个子组。</p>
+<p>在阿里云简单日志系统中，我们可以使用正则来匹配一行日志的行首。假设时间格式是 2020-05-10 20:23:05 。</p>
+<p><img alt="" src="/assets/724480919781f22c86878671.png"/></p>
+<p>日期分组编号是 1，时间分组编号是 5，年月日对应的分组编号分别是 2，3，4，时分秒的分组编号分别是 6，7，8。</p>
+<h4 id="命名分组">命名分组</h4>
+<p>前面我们讲了分组编号，但由于编号得数在第几个位置，后续如果发现正则有问题，改动了括号的个数，还可能导致编号发生变化，因此一些编程语言提供了命名分组（named grouping），这样和数字相比更容易辨识，不容易出错。命名分组的格式为<code>(?P&lt;分组名&gt;正则)</code>。</p>
+<p>比如在Django的路由中，命名分组示例如下：</p>
+<pre><code>url(r'^profile/(?P&lt;username&gt;\w+)/$', view_func)
+</code></pre>
+<p>需要注意的是，刚刚提到的方式命名分组和前面一样，给这个分组分配一个编号，不过你可以使用名称，不用编号，实际上命名分组的编号已经分配好了。不过命名分组并不是所有语言都支持的，在使用时，你需要查阅所用语言正则说明文档，如果支持，那你才可以使用。</p>
+<h3 id="分组引用">分组引用</h3>
+<p>在知道了分组引用的编号 （number）后，大部分情况下，我们就可以使用 “反斜扛 + 编号”，即 \number 的方式来进行引用，而 JavaScript中是通过<code>$</code>编号来引用，如<code>$</code>1。</p>
+<p>我给到了你一些在常见的编程语言中，分组查找和替换的引用方式：</p>
+<p><img alt="" src="/assets/6ac7bd7951fc377aa9d61694.jpg"/></p>
+<p>这些内容不要求你完全记住，只要有个印象就好，最关键的是要知道正则可以实现这样的功能，</p>
+<p>需要用到的时候查一下相应的文档，就知道怎么用了。</p>
+<h2 id="分组引用在查找中使用">分组引用在查找中使用</h2>
+<p>前面介绍了子组和引用的基本知识，现在我们来看下在正则查找时如何使用分组引用。比如我们要找重复出现的单词，我们使用正则可以很方便地使“前面出现的单词再次出现”，具体要怎么操作呢？我们可以使用 \w+ 来表示一个单词，针对刚刚的问题，我们就可以很容易写出 (\w+) \1 这个正则表达式了。</p>
+<p><img alt="" src="/assets/53f7f33492129d4884c362df.png"/></p>
+<h2 id="分组引用在替换中使用">分组引用在替换中使用</h2>
+<p>和查找类似，我们可以使用反向引用，在得到的结果中，去拼出来我们想要的结果。还是使用刚刚日期时间的例子，我们可以很方便地将它替换成， 2020年05月10日这样的格式。</p>
+<p><img alt="" src="/assets/f6e30876b60f4ac3e36b6576.png"/></p>
+<p>由于这个例子稍微复杂一些，这里我给出一个<a href="https://regex101.com/r/2RVPTJ/2" target="_blank">示例链接</a>方便你学习，不知道学到这里，你有没有觉得子组和引用非常强大呢？</p>
+<p>你可能很好奇，那在编程语言中如何实现这个功能呢？我下面以Python3为例，给出一个示例。</p>
+<pre><code>&gt;&gt;&gt; import re
+&gt;&gt;&gt; test_str = "2020-05-10 20:23:05"
+&gt;&gt;&gt; regex = r"((\d{4})-(\d{2})-(\d{2})) ((\d{2}):(\d{2}):(\d{2}))"
+&gt;&gt;&gt; subst = r"日期\1 时间\5   \2年\3月\4日 \6时\7分\8秒"
+&gt;&gt;&gt; re.sub(regex, subst, test_str)
+'日期2020-05-10 时间20:23:05   2020年05月10日 20时23分05秒'
+</code></pre>
+<p>在Python中 sub 函数用于正则的替换，使用起来也非常简单，和在网页上操作测试的几乎一样。</p>
+<h2 id="在文本编辑器中使用">在文本编辑器中使用</h2>
+<h3 id="sublime-text-3-简介">Sublime Text 3 简介</h3>
+<p>接下来我用Sublime Text 3 来当例子，给你讲解一下正则查找和替换的使用方式。Sublime Text 3 是一个跨平台编辑器，非常小巧、强悍，虽然是一个收费软件，但可以永久试用，你自行可以下载安装。</p>
+<p>当熟练使用编辑器之后，你会发现在很多工作里都可以使用它，不需要编写代码就可以完成。</p>
+<p>下面我以文本编辑器 Sublime Text 3 为例，来讲解正则查找和替换的使用方式。首先，我们要使用的“查找”或“替换”功能，在菜单 Find 中可以找到。</p>
+<p><img alt="" src="/assets/92f1a727ab2236dfad43baeb.png"/></p>
+<p>下面是对编辑器查找-替换界面的图标简介，Find 输入栏第一个 .* 图标，表示开启或关闭正则支持。</p>
+<p><img alt="" src="/assets/be28a79fa95327d46cc30917.png"/></p>
+<h3 id="编辑器中进行正则查找">编辑器中进行正则查找</h3>
+<p>接下来，我们来演示用编辑器查找引号引起来的内容，课程中使用到的文本，建议你用 chrome 等浏览器等，打开极客时间网页版本 <a href="https://time.geekbang.org/" target="_blank">https://time.geekbang.org</a>，点击右键查看源代码，把看到的代码复制到 Sublime Text 3 中。</p>
+<p><img alt="" src="/assets/da86aa85b69fb40c37c70f16.png"/></p>
+<p>输入相应的正则，我们就可以看到查找的效果了。这里给一个小提示，如果你点击 Find All，然后进行剪切，具体操作可以在菜单中找到 Edit -&gt; Cut，也可以使用快捷键操作。剪切之后，找一个空白的地方，粘贴就可以看到提取出的所有内容了。</p>
+<p>我们可以使用正则进行资源链接提取，比如从一个图片网站的源代码中查找到图片链接，然后再使用下载工具批量下载这些图片。</p>
+<h3 id="在编辑器中进行正则替换">在编辑器中进行正则替换</h3>
+<p>接着，我们再来看一下在编辑器中进行文本替换工作。你可以在编辑器中输入这些文本：</p>
+<p>the little cat cat is in the hat hat, we like it.</p>
+<p>如果我们要尝试从中查找连续重复出现两次的单词，我们可以用 \w+ 代表单词，利用我们刚刚学习的知识，相信你可以很快写出正则 <strong>(\w+)</strong> <strong>\1</strong>。**</p>
+<p><img alt="" src="/assets/08607edddafe60d2bb4a6743.png"/></p>
+<p>接着点击菜单中的 Find -&gt; Replace，在替换栏中输入子组的引用 <strong>\1</strong> ，然后点击 Replace All 就可以完成替换工作了。</p>
+<p><img alt="" src="/assets/84e8c4aa490a8194301b934f.png"/></p>
+<p>这样，通过少量的正则，我们就完成了文本的处理工作了。</p>
+<p>几乎所有主流编辑器都是支持正则的，你可以在你喜欢的编辑器中尝试一下这个例子，在后面的工作中，也可以尝试使用它来完成一些复杂的文本查找和替换工作。</p>
+<h2 id="总结">总结</h2>
+<p>好了，今天的内容讲完了，我来带你总结回顾一下。</p>
+<p>今天我们学习到了正则中的分组和子组编号相关内容。括号可以将某部分括起来，看成一个整体，也可以保存成一个子组，在后续查找替换的时候使用。分组编号是指，在正则中第几个括号内就是第几个分组，而嵌套括号我们只要看左括号是第几个就可以了。如果不想将括号里面的内容保存成子组，可以在括号里面加上?:来解决。</p>
+<p>搞懂了分组的内容，我们就可以利用分组引用，来实现将“原文本部分内容”，在查找或替换时进行再次利用，达到实现复杂文本的查找和替换工作。甚至在使用一些文本编辑器的时候，不写代码，我们就可以完成文本的查找替换处理工作，这往往可以节约很多开发时间。</p>
+<p><img alt="" src="/assets/b36520779d3da7ffee963092.png"/></p>
+<h2 id="课后思考">课后思考</h2>
+<p>最后，我们来做一个小练习吧。有一篇英文文章，里面有一些单词连续出现了多次，我们认为连续出现多次的单词应该是一次，比如：</p>
+<blockquote>
+<p>the little cat cat is in the hat hat hat, we like it.</p>
+<p>其中 cat 和 hat 连接出现多次，要求处理后结果是</p>
+<p>the little cat is in the hat, we like it.</p>
+</blockquote>
+<p><img alt="" src="/assets/deafc59d408c17da4e95075b.png"/></p>
+<p>这个题目我给出了相应的地址 <a href="https://regex101.com/r/2RVPTJ/3" target="_blank">https://regex101.com/r/2RVPTJ/3</a>，你可以直接在网页上进行测试，写入相应的 “正则查找部分” 和 “正则替换部分”，让结果符合预期。多动手练习，你才能更好地掌握学习的内容。</p>
+<p>好，今天的课程就结束了，希望可以帮助到你，也希望你在下方的留言区和我参与讨论。也欢迎把这篇文章分享给你的朋友或者同事，一起交流一下。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

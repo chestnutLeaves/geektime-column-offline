@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 语法分析：两个基本功和两种算法思路 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">编译原理实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">53 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>编译原理实战课</strong><ul><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97%20%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E8%BF%99%E9%97%A8%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE%EF%BC%9F.html">00 学习指南 如何学习这门编译原理实战课？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%9C%A8%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%AD%E6%B8%B8%E5%8E%86.html">00 开篇词 在真实世界的编译器中游历</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E7%BC%96%E8%AF%91%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B%E9%83%BD%E6%82%84%E6%82%84%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85%EF%BC%9F.html">01 编译的全过程都悄悄做了哪些事情？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E7%94%A8%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9E%84%E9%80%A0%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA.html">02 词法分析：用两种方式构造有限自动机</a></li><li><a class="active" aria-current="page" href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%9F%BA%E6%9C%AC%E5%8A%9F%E5%92%8C%E4%B8%A4%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF.html">03 语法分析：两个基本功和两种算法思路</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%EF%BC%9A%E8%AE%A9%E7%A8%8B%E5%BA%8F%E7%AC%A6%E5%90%88%E8%AF%AD%E4%B9%89%E8%A7%84%E5%88%99.html">04 语义分析：让程序符合语义规则</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%BD%A0%E6%9C%89%E5%8F%91%E8%A8%80%E6%9D%83.html">05 运行时机制：程序如何运行，你有发言权</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%EF%BC%9A%E4%B8%8D%E6%98%AF%E5%8F%AA%E6%9C%89%E4%B8%80%E5%89%AF%E9%9D%A2%E5%AD%94.html">06 中间代码：不是只有一副面孔</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%EF%BC%9A%E8%B7%9F%E7%BC%96%E8%AF%91%E5%99%A8%E5%81%9A%E6%9C%8B%E5%8F%8B%EF%BC%8C%E8%AE%A9%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E9%A3%9E%E8%B5%B7%E6%9D%A5.html">07 代码优化：跟编译器做朋友，让你的代码飞起来</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%9F.html">08 代码生成：如何实现机器相关的优化？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/09%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%89%8B%E5%86%99%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%BF%EF%BC%9F.html">09 Java编译器（一）：手写的编译器有什么优势？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/10%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%BF%98%E8%A6%81%E5%81%9A%E4%BA%9B%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Java编译器（二）：语法分析之后，还要做些什么？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/11%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%B1%9E%E6%80%A7%E5%88%86%E6%9E%90%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90.html">11 Java编译器（三）：属性分析和数据流分析</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/12%20Java%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%8E%BB%E9%99%A4%E8%AF%AD%E6%B3%95%E7%B3%96%E5%92%8C%E7%94%9F%E6%88%90%E5%AD%97%E8%8A%82%E7%A0%81.html">12 Java编译器（四）：去除语法糖和生成字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/13%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%8A%A8%E6%89%8B%E4%BF%AE%E6%94%B9Graal%E7%BC%96%E8%AF%91%E5%99%A8.html">13 Java JIT编译器（一）：动手修改Graal编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/14%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASea%20of%20Nodes%E4%B8%BA%E4%BD%95%E5%A6%82%E6%AD%A4%E5%BC%BA%E5%A4%A7%EF%BC%9F.html">14 Java JIT编译器（二）：Sea of Nodes为何如此强大？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/15%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%8E%A2%E7%A9%B6%E5%86%85%E8%81%94%E5%92%8C%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%E7%9A%84%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86.html">15 Java JIT编译器（三）：探究内联和逃逸分析的算法原理</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/16%20Java%20JIT%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9AGraal%E7%9A%84%E5%90%8E%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">16 Java JIT编译器（四）：Graal的后端是如何工作的？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/17%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%B7%A5%E5%85%B7%E7%94%9F%E6%88%90%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">17 Python编译器（一）：如何用工具生成编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/18%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E4%BB%8EAST%E5%88%B0%E5%AD%97%E8%8A%82%E7%A0%81.html">18 Python编译器（二）：从AST到字节码</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/19%20Python%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9C%BA%E5%88%B6.html">19 Python编译器（三）：运行时机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/20%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E6%9E%90%E5%92%8C%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.html">20 JavaScript编译器（一）：V8的解析和编译过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/21%20JavaScript%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AV8%E7%9A%84%E8%A7%A3%E9%87%8A%E5%99%A8%E5%92%8C%E4%BC%98%E5%8C%96%E7%BC%96%E8%AF%91%E5%99%A8.html">21 JavaScript编译器（二）：V8的解释器和优化编译器</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/22%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E6%80%A7%E8%83%BD%E5%BE%88%E9%AB%98%EF%BC%9F.html">22 Julia编译器（一）：如何让动态语言性能很高？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/23%20Julia%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8LLVM%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E5%90%8E%E7%AB%AF%E5%8A%9F%E8%83%BD%EF%BC%9F.html">23 Julia编译器（二）：如何利用LLVM的优化和后端功能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/24%20Go%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9A%E6%8A%8A%E5%AE%83%E5%BD%93%E4%BD%9C%E6%95%99%E7%A7%91%E4%B9%A6%E5%90%A7.html">24 Go语言编译器：把它当作教科书吧</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/25%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%A7%A3%E6%9E%90%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.html">25 MySQL编译器（一）：解析一条SQL语句的执行过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/26%20MySQL%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E5%A6%82%E4%BD%95%E5%B8%AE%E4%BD%A0%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%A7%E8%83%BD%EF%BC%9F.html">26 MySQL编译器（二）：编译技术如何帮你提升数据库性能？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E8%AF%BE%E5%89%8D%E5%AF%BC%E8%AF%BB%EF%BC%9A%E5%AD%A6%E4%B9%A0%E7%8E%B0%E4%BB%A3%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF.html">27 课前导读：学习现代语言设计的正确姿势</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%89%8D%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1%E4%B9%9F%E6%9C%89%E4%BA%BA%E6%9C%BA%E5%B7%A5%E7%A8%8B%E5%AD%A6.html">28 前端总结：语言设计也有人机工程学</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E4%B8%AD%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%8D%E9%81%97%E4%BD%99%E5%8A%9B%E5%9C%B0%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96.html">29 中端总结：不遗余力地进行代码优化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E5%90%8E%E7%AB%AF%E6%80%BB%E7%BB%93%EF%BC%9A%E5%85%85%E5%88%86%E5%8F%91%E6%8C%A5%E7%A1%AC%E4%BB%B6%E7%9A%84%E8%83%BD%E5%8A%9B.html">30 后端总结：充分发挥硬件的能力</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E0%E5%88%B0%E8%AF%AD%E8%A8%80%E7%BA%A7%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96.html">31 运行时（一）：从0到语言级的虚拟化</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/32%20%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E4%B8%8E%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E6%80%A7%E6%9C%89%E5%85%B3%E5%90%97%EF%BC%9F.html">32 运行时（二）：垃圾收集与语言的特性有关吗？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">33 并发中的编译技术（一）：如何从语言层面支持线程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BB%8E%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%94%AF%E6%8C%81%E5%8D%8F%E7%A8%8B%EF%BC%9F.html">34 并发中的编译技术（二）：如何从语言层面支持协程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/35%20%E5%B9%B6%E5%8F%91%E4%B8%AD%E7%9A%84%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9AErlang%E8%AF%AD%E8%A8%80%E5%8E%89%E5%AE%B3%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">35 并发中的编译技术（三）：Erlang语言厉害在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/36%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%85%83%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">36 高级特性（一）：揭秘元编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%8F%AD%E7%A7%98%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.html">37 高级特性（二）：揭秘泛型编程的实现机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%9F.html">38 综合实现（一）：如何实现面向对象编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E7%BB%BC%E5%90%88%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%9F.html">39 综合实现（二）：如何实现函数式编程？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/40%20%E6%88%90%E6%9E%9C%E6%A3%80%E9%AA%8C%EF%BC%9A%E6%96%B9%E8%88%9F%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%BC%98%E5%8A%BF%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">40 成果检验：方舟编译器的优势在哪里？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%901%20%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%EF%BC%8C%E9%9C%80%E8%A6%81%E4%BD%A0%E6%88%91%E5%85%B7%E5%A4%87%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%B4%A0%E8%B4%A8%EF%BC%9F.html">不定期加餐1 远程办公，需要你我具备什么样的素质？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%902%20%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%98%AF%E8%AE%AD%E7%BB%83%E5%BF%83%E7%90%86%E7%B4%A0%E8%B4%A8%E7%9A%84%E8%BF%87%E7%A8%8B.html">不定期加餐2 学习技术的过程，其实是训练心理素质的过程</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%903%20%E8%BF%99%E5%87%A0%E5%B9%B4%EF%BC%8C%E6%89%93%E5%8A%A8%E6%88%91%E7%9A%84%E4%B8%A4%E6%9C%AC%E5%A5%BD%E4%B9%A6.html">不定期加餐3 这几年，打动我的两本好书</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%904%20%E4%BB%8E%E8%BA%AB%E8%BE%B9%E7%9A%84%E7%89%9B%E4%BA%BA%E8%BA%AB%E4%B8%8A%EF%BC%8C%E6%88%91%E5%AD%A6%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E7%A7%80%E5%93%81%E8%B4%A8.html">不定期加餐4 从身边的牛人身上，我学到的一些优秀品质</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E5%8A%A0%E9%A4%905%20%E5%80%9F%E5%8A%A9%E5%AE%9E%E4%BE%8B%EF%BC%8C%E6%8E%A2%E7%A9%B6C%2B%2B%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6.html">不定期加餐5 借助实例，探究C++编译器的内部机制</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%88%92%E9%87%8D%E7%82%B9%207%E7%A7%8D%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">划重点 7种编译器的核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%9C%9F%E6%9C%AB%E7%AD%94%E7%96%91%E4%B8%8E%E6%80%BB%E7%BB%93%20%E5%86%8D%E6%AC%A1%E5%AE%A1%E8%A7%86%E5%AD%A6%E4%B9%A0%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%9A%84%E4%BD%9C%E7%94%A8.html">期末答疑与总结 再次审视学习编译原理的作用</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%20%E5%A6%82%E4%BD%95%E5%90%83%E9%80%8F7%E7%A7%8D%E7%9C%9F%E5%AE%9E%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F.html">热点问题答疑 如何吃透7种真实的编译器？</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%98%93%E6%98%8A%EF%BC%9A%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8D%E6%AD%A2%E6%9C%89Bug%E5%92%8C%E5%8A%A0%E7%8F%AD%EF%BC%8C%E8%BF%98%E6%9C%89%E8%AF%97%E5%92%8C%E8%BF%9C%E6%96%B9.html">用户故事 易昊：程序员不止有Bug和加班，还有诗和远方</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%9F%A5%E8%AF%86%E5%9C%B0%E5%9B%BE%20%E4%B8%80%E8%B5%B7%E6%9D%A5%E5%A4%8D%E4%B9%A0%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%AE%97%E6%B3%95.html">知识地图 一起来复习编译技术核心概念与算法</a></li><li><a href="/courses/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%AE%9E%E6%88%98%E6%98%AF%E5%94%AF%E4%B8%80%E6%A0%87%E5%87%86%EF%BC%81.html">结束语 实战是唯一标准！</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%9F%BA%E6%9C%AC%E5%8A%9F%E5%92%8C%E4%B8%A4%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="03 语法分析：两个基本功和两种算法思路" id="title">03 语法分析：两个基本功和两种算法思路</h1>
+<div><p>你好，我是宫文学。</p>
+<p>通过<a href="https://time.geekbang.org/column/article/242479" target="_blank">第1讲</a>的学习，现在你已经清楚了语法分析阶段的任务：依据语法规则，把Token串转化成AST。</p>
+<p>今天，我就带你来掌握语法分析阶段的核心知识点，也就是两个基本功和两种算法思路。理解了这些重要的知识点，对于语法分析，你就不是外行了。</p>
+<ul>
+<li><strong>两个基本功</strong>：第一，必须能够阅读和书写语法规则，也就是掌握上下文无关文法；第二，必须要掌握递归下降算法。</li>
+<li><strong>两种算法思路</strong>：一种是自顶向下的语法分析，另一种则是自底向上的语法分析。</li>
+</ul>
+<h2 id="上下文无关文法-context-free-grammar">上下文无关文法（Context-Free Grammar）</h2>
+<p>在开始语法分析之前，我们要解决的第一个问题，就是<strong>如何表达语法规则</strong>。在上一讲中，你已经了解了，我们可以用正则表达式来表达词法规则，语法规则其实也差不多。</p>
+<p>我还是以下面这个示例程序为例，里面用到了变量声明语句、加法表达式，我们看看语法规则应该怎么写：</p>
+<pre><code> int a = 2;
+ int b = a + 3;
+ return b;
+</code></pre>
+<p>第一种写法是下面这个样子，它看起来跟上一讲的词法规则差不多，都是左边是规则名称，右边是正则表达式。</p>
+<pre><code>start：blockStmts ;               //起始
+block : '{' blockStmts '}' ;      //语句块
+blockStmts : stmt* ;              //语句块中的语句
+stmt = varDecl | expStmt | returnStmt | block;   //语句
+varDecl : type Id varInitializer？ ';' ;         //变量声明
+type : Int | Long ;                              //类型
+varInitializer : '=' exp ;                       //变量初始化
+expStmt : exp ';' ;                              //表达式语句
+returnStmt : Return exp ';' ;                    //return语句
+exp : add ;                                      //表达式       
+add : add '+' mul | mul;                         //加法表达式
+mul : mul '*' pri | pri;                         //乘法表达式
+pri : IntLiteral | Id | '(' exp ')' ;            //基础表达式 
+</code></pre>
+<p>在语法规则里，我们把冒号左边的叫做<strong>非终结符</strong>（Non-terminal），又叫<strong>变元</strong>（Variable）。非终结符可以按照右边的正则表达式来逐步展开，直到最后都变成标识符、字面量、运算符这些不可再展开的符号，也就是<strong>终结符</strong>（Terminal）。终结符其实也是词法分析过程中形成的Token。</p>
+<p>提示：-
+1.在本课程，非终结符以小写字母开头，终结符则以大写字母开头，或者是一个原始的字符串格式。-
+2.在谈论语法分析的时候，我们可以把Token和终结符这两个术语互换使用。</p>
+<p>像这样左边是非终结符，右边是正则表达式的书写语法规则的方式，就叫做<strong>扩展巴科斯范式（EBNF）。</strong>你在ANTLR这样的语法分析器生成工具中，经常会看到这种格式的语法规则。</p>
+<p>对于EBNF的严格定义，你可以去参考<a href="https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F" target="_blank">Wikipedia</a>上的解释。</p>
+<p>在教科书中，我们还经常采用另一种写法，就是<strong>产生式</strong>（Production Rule），又叫做<strong>替换规则</strong>（Substitution Rule）。产生式的左边是非终结符（变元），它可以用右边的部分替代，中间通常会用箭头连接。</p>
+<p>为了避免跟EBNF中的“*”号、“+”号等冲突，在本节课中，凡是采用EBNF格式，就给字符串格式的终结符加引号，左右两边用“::=”或冒号分隔开；凡是采用产生式，字符串就不加引号，并且采用“-&gt;”分隔产生式的左右两侧。</p>
+<pre><code>add -&gt; add + mul
+add -&gt; mul
+mul -&gt; mul * pri
+mul -&gt; pri
+</code></pre>
+<p>也有个偷懒的写法，就是把同一个变元的多个产生式写在一起，用竖线分隔（但这时候，如果产生式里面原本就要用到“|”终结符，那么就要加引号来进行区分）。但也就仅此为止了，不会再引入“*”和“+”等符号，否则就成了EBNF了。</p>
+<pre><code>add -&gt; add + mul | mul
+mul -&gt; mul * pri | pri
+</code></pre>
+<p>产生式不用“ * ”和“+”来表示重复，而是用迭代，并引入“ε”（空字符串）。所以“blockStmts : stmt*”可以写成下面这个样子：</p>
+<pre><code>blockStmts -&gt; stmt blockStmts | ε
+</code></pre>
+<p>总结起来，语法规则是由4个部分组成的：</p>
+<ul>
+<li>一个有穷的非终结符（或变元）的集合；</li>
+<li>一个有穷的终结符的集合；</li>
+<li>一个有穷的产生式集合；</li>
+<li>一个起始非终结符（变元）。</li>
+</ul>
+<p>那么符合这四个特点的文法规则，就叫做<strong>上下文无关文法</strong>（Context-Free Grammar，CFG）。</p>
+<p>你可能会问，<strong>上下文无关文法和词法分析中用到的正则文法是否有一定的关系？</strong></p>
+<p><strong>是的，正则文法是上下文无关文法的一个子集。</strong>其实，正则文法也可以写成产生式的格式。比如，数字字面量（正则表达式为“[0-9]+”）可以写成：</p>
+<pre><code>IntLiteral -&gt; Digit IntLiteral1
+IntLiteral1 -&gt; Digit IntLiteral1 
+IntLiteral1 -&gt; ε
+Digit -&gt; [0-9]
+</code></pre>
+<p>但是，在上下文无关文法里，产生式的右边可以放置任意的终结符和非终结符，而正则文法只是其中的一个子集，叫做<strong>线性文法</strong>（Linear Grammar）。它的特点是产生式的右边部分最多只有一个非终结符，比如X-&gt;aYb，其中a和b是终结符。</p>
+<p><img alt="" src="/assets/330fd7c0abad9400a060e26c.jpg"/></p>
+<p>图1：正则文法是上下文无关文法的子集</p>
+<p>你可以试一下，把上一讲用到的正则表达式“a[a-zA-Z0-9]*bc”写成产生式的格式，它就符合线性文法的特点。</p>
+<pre><code>S0 -&gt; aS1bc          
+S1 -&gt; [a-zA-Z0-9]S1  
+S1 -&gt; ε
+</code></pre>
+<p>但对于常见的语法规则来说，正则文法是不够的。比如，你最常用的算术表达式的规则，就没法用正则文法表示，因为有的产生式需要包含两个非终结符（如“add + mul”）。你可以试试看，能把“2+3”“2+3*5”“2+3+4+5”等各种可能的算术表达式，用一个正则表达式写出来吗？实际是不可能的。</p>
+<pre><code>add -&gt; add + mul
+add -&gt; mul
+mul -&gt; mul * pri
+mul -&gt; pri
+</code></pre>
+<p>好，现在你已经了解了上下文无关文法，以及它与正则文法的区别。可是，<strong>为什么它会叫“上下文无关文法”这样一个奇怪的名字呢？难道还有上下文相关的文法吗？</strong></p>
+<p>答案的确是有的。举个例子来说，在高级语言里，本地变量必须先声明，才能在后面使用。这种制约关系就是上下文相关的。</p>
+<p>不过，在语法分析阶段，我们一般不管上下文之间的依赖关系，这样能使得语法分析的任务更简单。而对于上下文相关的情况，则放到语义分析阶段再去处理。</p>
+<p>好了，现在你已经知道，用上下文无关文法可以描述程序的语法结构。学习编译原理，阅读和书写语法规则是一项基本功。针对高级语言中的各种语句，你要都能够手写出它们的语法规则来才可以。</p>
+<p>接下来，我们就要<strong>依据语法规则，编写语法分析程序，把Token串转化成AST。</strong>语法分析的算法有很多，但有一个算法也是你必须掌握的一项基本功，这就是递归下降算法。</p>
+<h2 id="递归下降算法-recursive-descent-parsing">递归下降算法（Recursive Descent Parsing）</h2>
+<p>递归下降算法其实很简单，它的基本思路就是按照语法规则去匹配Token串。比如说，变量声明语句的规则如下：</p>
+<pre><code>varDecl : types Id varInitializer？ ';' ;        //变量声明
+varInitializer : '=' exp ;                       //变量初始化
+exp : add ;                                      //表达式       
+add : add '+' mul | mul;                         //加法表达式
+mul : mul '*' pri | pri;                         //乘法表达式
+pri : IntLiteral | Id | '(' exp ')' ;            //基础表达式
+</code></pre>
+<p>如果写成产生式格式，是下面这样：</p>
+<pre><code>varDecl -&gt; types Id varInitializer ';' 
+varInitializer -&gt; '=' exp              
+varInitializer -&gt; ε
+exp -&gt; add
+add -&gt; add + mul
+add -&gt; mul
+mul -&gt; mul * pri
+mul -&gt; pri
+pri -&gt; IntLiteral
+pri -&gt; Id
+pri -&gt; ( exp )
+</code></pre>
+<p>而基于这个规则做解析的算法如下：</p>
+<pre><code>匹配一个数据类型(types)
+匹配一个标识符(Id)，作为变量名称
+匹配初始化部分(varInitializer)，而这会导致下降一层，使用一个新的语法规则：
+   匹配一个等号
+   匹配一个表达式(在这个步骤会导致多层下降：exp-&gt;add-&gt;mul-&gt;pri-&gt;IntLiteral)
+   创建一个varInitializer对应的AST节点并返回
+如果没有成功地匹配初始化部分，则回溯，匹配ε，也就是没有初始化部分。
+匹配一个分号   
+创建一个varDecl对应的AST节点并返回
+</code></pre>
+<p>用上述算法解析“int a = 2”，就会生成下面的AST：</p>
+<p><img alt="" src="/assets/7adc250a7ec924d6aabaabea.jpg"/></p>
+<p>图2：“int a = 2”对应的AST</p>
+<p>那么总结起来，递归下降算法的特点是：</p>
+<ul>
+<li>对于一个非终结符，要从左到右依次匹配其产生式中的每个项，包括非终结符和终结符。</li>
+<li>在匹配产生式右边的非终结符时，要下降一层，继续匹配该非终结符的产生式。</li>
+<li>如果一个语法规则有多个可选的产生式，那么只要有一个产生式匹配成功就行。如果一个产生式匹配不成功，那就回退回来，尝试另一个产生式。这种回退过程，叫做<strong>回溯</strong>（Backtracking）。</li>
+</ul>
+<p>所以说，递归下降算法是非常容易理解的。它能非常有效地处理很多语法规则，但是它也有两个缺点。</p>
+<p><strong>第一个缺点，就是著名的左递归（Left Recursion）问题。</strong>比如，在匹配算术表达式时，产生式的第一项就是一个非终结符add，那么按照算法，要下降一层，继续匹配add。这个过程会一直持续下去，无限递归下去。</p>
+<pre><code>add -&gt; add + mul
+</code></pre>
+<p>所以，递归下降算法是无法处理左递归问题的。那么有什么解决办法吗？</p>
+<p>你可能会说，把产生式改成右递归不就可以了吗？也就是add这个递归项在右边：</p>
+<pre><code>add -&gt; mul + add
+</code></pre>
+<p>这样确实可以避免左递归问题，但它同时也会导致<strong>结合性</strong>的问题。</p>
+<p>举个例子来说，我们按照上面的语法规则来解析“2+3+4”这个表达式，会形成如下所示的AST。</p>
+<p><img alt="" src="/assets/3beb3575b361f7b365ef875e.jpg"/></p>
+<p>图3：结合性错误的AST</p>
+<p>它会先计算“3+4”，而不是先计算“2+3”。这破坏了加法的结合性规则，加法运算本来应该是左结合的。</p>
+<p>其实有一个标准的方法，能避免左递归问题。我们可以改写原来的语法规则，也就是引入<code>add'</code>，把左递归变成右递归：</p>
+<pre><code>add -&gt; mul add'
+add' -&gt; + mul add' | ε
+</code></pre>
+<p>接下来，我们用刚刚改写的规则再次解析一下 “2+3+4”这个表达式，会得到下图中的AST：</p>
+<p><img alt="" src="/assets/d5a9a5518dc586a9ca4cd16a.jpg"/></p>
+<p>图4：基于改写后的文法所生成的AST</p>
+<p>你能看出，这种改写方法虽然能够避免左递归问题，但由于<code>add'</code>的规则是右递归的，采用标准的递归下降算法，仍然会出现运算符结合性的错误。那么针对这点，我们有没有解决办法呢？</p>
+<p>有的，方法就是<strong>把递归调用转化成循环</strong>。这里利用了很多同学都知道的一个原理，即递归调用可以转化为循环。</p>
+<p>其实我把上面的规则换成用EBNF方式来表达就很清楚了。在EBNF格式里，允许用“*”号和“+”号表示重复：</p>
+<pre><code>add ： mul ('+' mul)*  ；
+</code></pre>
+<p>所以说，对于<code>('+'mul)*</code>这部分，我们其实可以写成一个循环。而在循环里，我们可以根据结合性的要求，手工生成正确的AST。它的伪代码如下：</p>
+<pre><code>左子节点 = 匹配一个mul
+while(下一个Token是+){
+  消化掉+
+  右子节点 = 匹配一个mul
+  用左、右子节点创建一个add节点
+  左子节点 = 该add节点
+}
+</code></pre>
+<p>采用上面的算法，就可以创建正确的AST，如下图所示：</p>
+<p><img alt="" src="/assets/87ecf389efe6a5780783e423.jpg"/></p>
+<p>图5：结合性正确的AST</p>
+<p><strong>递归下降算法的第二个缺点，就是当产生式匹配失败的时候，必须要“回溯”，这就可能导致浪费。</strong></p>
+<p>这个时候，我们有个针对性的解决办法，就是预读后续的一个Token，判断该选择哪个产生式。</p>
+<p>以stmt变元为例，考虑它的三个产生式，分别是变量声明语句、表达式语句和return语句。那么在递归下降算法中，我们可以在这里预读一个Token，看看能否根据这个Token来选择某个产生式。</p>
+<p>经过仔细观察，你发现如果预读的Token是Int或Long，就选择变量声明语句；如果是IntLiteral、Id或左括号，就选择表达式语句；而如果是Return，则肯定是选择return语句。因为这三个语句开头的Token是不重叠的，所以你可以很明确地做出选择。</p>
+<p>如果我们手写递归下降算法，可以用肉眼识别出每次应该基于哪个Token，选择用哪个产生式。但是，对于一些比较复杂的语法规则，我们要去看好几层规则，这样比较辛苦。</p>
+<p><strong>那么能否有一个算法，来自动计算出选择不同产生式的依据呢？</strong>当然是有的，这就是LL算法家族。</p>
+<h2 id="ll算法-计算first和follow集合">LL算法：计算First和Follow集合</h2>
+<p>LL算法的要点，就是计算First和Follow集合。</p>
+<p><strong>First集合是每个产生式开头可能会出现的Token的集合。</strong>就像stmt有三个产生式，它的First集合如下表所示。</p>
+<p><img alt="" src="/assets/e87c2c777780f70087ba007e.jpg"/></p>
+<p>而stmt的First集合，就是三个产生式的First集合的并集，也是Int Long IntLiteral Id ( Return。</p>
+<p>总体来说，针对非终结符x，它的First集合的计算规则是这样的：</p>
+<ul>
+<li>如果产生式以终结符开头，那么把这个终结符加入First(x)；</li>
+<li>如果产生式以非终结符y开头，那么把First(y)加入First(x);</li>
+<li>如果First(y)包含ε，那要把下一个项的First集合也加入进来，以此类推；</li>
+<li>如果x有多个产生式，那么First(x)是每个产生式的并集。</li>
+</ul>
+<p>在计算First集合的时候，具体可以采用“<strong>不动点法</strong>”。相关细节这里就不展开了，你可以参考示例程序<a href="https://github.com/RichardGong/PlayWithCompiler/blob/master/lab/16-18/src/main/java/play/parser/FirstFollowSet.java" target="_blank">FirstFollowSet</a>类的CalcFirstSets()方法，运行示例程序能打印各个非终结符的First集合。</p>
+<p>不过，这样是不是就万事大吉了呢？</p>
+<p>其实还有一种特殊情况我们需要考虑，那就是对于某个非终结符，它自身会产生ε的情况。比如说，示例文法中的blockStmts，它是可能产生ε的，也就是块中一个语句都没有。</p>
+<pre><code>block : '{' blockStmts '}' ;                 //语句块
+blockStmts : stmt* ;                         //语句块中的语句
+stmt = varDecl | expStmt | returnStmt;       //语句
+</code></pre>
+<p>语法解析器在这个时候预读的下一个Token是什么呢？是右花括号。这证明blockStmts产生了ε，所以才读到了后续跟着的花括号。</p>
+<p><strong>对于某个非终结符后面可能跟着的Token的集合，我们叫做Follow集合。</strong>如果预读到的Token在Follow中，那么我们就可以判断当前正在匹配的这个非终结符，产生了ε。</p>
+<p>Follow的算法也比较简单，以非终结符x为例：</p>
+<ul>
+<li>扫描语法规则，看看x后面都可能跟着哪些符号；</li>
+<li>对于后面跟着的终结符，都加到Follow(x)集合中去；</li>
+<li>如果后面是非终结符y，就把First(y)加Follow(x)集合中去；</li>
+<li>最后，如果First(y)中包含ε，就继续往后找；</li>
+<li>如果x可能出现在程序结尾，那么要把程序的终结符$加入到Follow(x)中去。</li>
+</ul>
+<p>这样在计算了First和Follow集合之后，你就可以通过预读一个Token，来完全确定采用哪个产生式。这种算法，就叫做<strong>LL(1)算法</strong>。</p>
+<p>LL(1)中的第一个L，是Left-to-right的缩写，代表从左向右处理Token串。第二个L，是Leftmost的缩写，意思是最左推导。<strong>最左推导是什么呢？</strong>就是它总是先把产生式中最左侧的非终结符展开完毕以后，再去展开下一个。这也就相当于对AST从左子节点开始的深度优先遍历。LL(1)中的1，指的是预读一个Token。</p>
+<h2 id="lr算法-移进和规约">LR算法：移进和规约</h2>
+<p>前面讲的递归下降和LL算法，都是自顶向下的算法。还有一类算法，是自底向上的，其中的代表就是<strong>LR算法</strong>。</p>
+<p>自顶向下的算法，是从根节点逐层往下分解，形成最后的AST；而LR算法的原理呢，则是从底下先拼凑出AST的一些局部拼图，并逐步组装成一棵完整的AST。<strong>所以，其中的关键之处在于如何“拼凑”。</strong></p>
+<p>假设我们采用下面的上下文无关文法，来推演一个实例，具体语法规则如下所示：</p>
+<pre><code>start-&gt;add
+add-&gt;add+mul
+add-&gt;mul
+mul-&gt;mul*pri
+mul-&gt;pri
+pri-&gt;Int
+pri-&gt;(add)
+</code></pre>
+<p>如果用于解析“2+3*5”，最终会形成下面的AST：</p>
+<p><img alt="" src="/assets/ff0d40a23760749e7f60c4d6.jpg"/></p>
+<p>图6：2+3*5对应的AST</p>
+<p>那算法是怎么从底部凑出这棵AST来的呢？</p>
+<p>LR算法和LL算法一样，也是从左到右地消化掉Token。在第1步，它会取出“2”这个Token，放到一个栈里，这个栈是用来组装AST的工作区。同时，它还会预读下一个Token，也就是“+”号，用来帮助算法做判断。</p>
+<p>在下面的示意图里，我画了一条橙色竖线，竖线的左边是栈，右边是预读到的一个Token。在做语法解析的过程中，竖线会不断地往右移动，把Token放到栈里，这个过程叫做“<strong>移进</strong>”（Shift）。</p>
+<p><img alt="" src="/assets/35b48835b5bacae19395928c.jpg"/></p>
+<p>图7：第1步，移进一个Token</p>
+<p>注意，我在图7中还用虚线框推测了AST的其他部分。也就是说，如果第一个Token遇到的是整型字面量，而后面跟着一个+号，那么这两个Token就决定了它们必然是这棵推测出来的AST的一部分。而图中右边就是它的推导过程，其中的每个步骤，都使用了一个产生式加了一个点（如“.add”）。这个点，就相当于图中左边的橙色竖线。</p>
+<p>所以你就可以根据这棵假想的AST，也就是依据假想的推导过程，给它反推回去。把Int还原为pri。这个还原过程，就叫做“<strong>规约</strong>”（Reduce）。工作区里的元素也随之更新成pri。</p>
+<p><img alt="" src="/assets/842a91675054f989372bc31f.jpg"/></p>
+<p>图8：第2步，Int规约为pri</p>
+<p>按照这样的思路，不断地移进和规约，这棵AST中推测出来的节点会不断地被证实。而随着读入的Token越来越多，这棵AST也会长得越来越高，整棵树变得更大。下图是推导过程中间的一个步骤。</p>
+<p><img alt="" src="/assets/f8a3979c5c6ff718bb64c6bf.jpg"/></p>
+<p>图9：移进和规约过程中的一个步骤</p>
+<p>最后，整个AST构造完毕，而工作区里也就只剩了一个Start节点。</p>
+<p><img alt="" src="/assets/6bdf233d15d4b188efd800f6.jpg"/></p>
+<p>图10：最后一步，add规约为start</p>
+<p>通过上面的介绍，你应该已经建立了对LR算法的直觉认识。如果要把这个推导过程写成严密的算法，你可以参考《编译原理之美》的<a href="https://time.geekbang.org/column/article/139628" target="_blank">第18讲</a>。</p>
+<p>从示例中，你应该已经看出来了，相对于LL算法，LR算法的优点是能够处理左递归文法。但它也有缺点，比如不利于输出全面的编译错误信息。因为在没有解析完毕之前，算法并不知道最后的AST是什么样子，所以也不清楚当前的语法错误在整体AST中的位置。</p>
+<p>最后我再提一下LR的意思，来帮你更完整地理解LR算法。L还是代表从左到右读入Token，而R是最右推导（Rightmost）的意思。我把“2+3*5”最右推导的过程写在了下面，而如果你从最后一行往前一步步地看，它恰好就是规约的过程。</p>
+<p><img alt="" src="/assets/75104b2d90c35b83b50d9b8b.jpg"/></p>
+<p>如果你见到LR(k)，那它的意思就是会预读k个Token，我们在示例中采用的是LR(1)。</p>
+<h2 id="课程小结">课程小结</h2>
+<p>今天花了一讲的时间，把语法分析的要点给你讲解了一下。</p>
+<p>对于上下文无关的文法，你要知道产生式、非终结符、终结符、EBNF这几个基本概念，能够熟练阅读各种语言的语法规则，这是一个基本功。</p>
+<p>递归下降算法是另一项基本功，所以也一定要掌握。<strong>你要注意，递归下降是深度优先的，只有最左边的子树都生成完了，才会往右生成它的兄弟节点。</strong>有的同学会在没有把左侧的非终结符匹配完毕的情况下，就开始匹配右边的项，从而不自觉地采用了宽度优先的思路，这是我发现很多同学会容易陷入的一个思维误区。</p>
+<p>对于LL算法和LR算法，我只做了简单的讲解，目的是为了帮助你建立直观的理解。我们在后面的课程中，还会遇到使用它们的实际例子，到时你可以与这一讲的内容相互印证。</p>
+<p><img alt="" src="/assets/e5a8fb519fb139477b979640.jpg"/></p>
+<h2 id="一课一思">一课一思</h2>
+<p>你可以计算一下示例文法中block、blockStmts、stmt、varDecl、returnStmt和expStmt的First和Follow集合吗？这样，你也可以熟悉一下First和Follow集合的计算方法。</p>
+<p>欢迎在留言区分享你的答案。如果觉得有收获，也欢迎你把这节课分享给你的朋友。</p>
+<h2 id="参考资料">参考资料</h2>
+<p>1.线性文法（Linear Grammar）：参见<a href="https://en.wikipedia.org/wiki/Linear_grammar" target="_blank">Wikipedia</a>。-
+2.左递归及其消除方法：参见<a href="https://en.wikipedia.org/wiki/Left_recursion" target="_blank">Wikipedia</a>。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

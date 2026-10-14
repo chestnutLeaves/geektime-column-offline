@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16 循环与文件目录管理：如何实现文件的批量重命名？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">Python自动化办公实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">36 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Python自动化办公实战课</strong><ul><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%AF%BC%E8%AF%BB%20%E5%85%A5%E9%97%A8Python%E7%9A%84%E5%BF%85%E5%A4%87%E7%9F%A5%E8%AF%86.html">00 导读 入门Python的必备知识</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E9%87%8D%E5%A4%8D%E5%B7%A5%E4%BD%9C%E8%BF%99%E4%B9%88%E5%A4%9A%EF%BC%8C%E6%80%8E%E6%A0%B7%E6%89%8D%E8%83%BD%E6%8F%90%E9%AB%98%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%EF%BC%9F.html">00 开篇词 重复工作这么多，怎样才能提高工作效率？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E6%8B%86%E5%88%86%E4%B8%8E%E5%90%88%E5%B9%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%9C%B0%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86%E5%86%85%E5%AE%B9%E7%9B%B8%E4%BC%BC%E7%9A%84Excel%EF%BC%9F.html">01 拆分与合并：如何快速地批量处理内容相似的Excel？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E5%96%84%E7%94%A8Python%E6%89%A9%E5%B1%95%E5%BA%93%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%B9%E9%87%8F%E5%90%88%E5%B9%B6%E5%A4%9A%E4%B8%AA%E6%96%87%E6%A1%A3%EF%BC%9F.html">02 善用Python扩展库：如何批量合并多个文档？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E5%9B%BE%E7%89%87%E8%BD%AC%E6%96%87%E5%AD%97%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E8%AF%86%E5%88%AB%E5%87%86%E7%A1%AE%E7%8E%87%EF%BC%9F.html">03 图片转文字：如何提高识别准确率？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%20%E5%87%BD%E6%95%B0%E4%B8%8E%E5%AD%97%E5%85%B8%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%AC%A1%E6%9B%BF%E6%8D%A2.html">04  函数与字典：如何实现多次替换</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%BA%93%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%95%BF%E5%9B%BE%E6%8B%BC%E6%8E%A5%EF%BC%9F.html">05 图像处理库：如何实现长图拼接？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/06%20jieba%E5%88%86%E8%AF%8D%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E6%84%9F%E6%83%85%E8%89%B2%E5%BD%A9%E8%BF%9B%E8%A1%8C%E5%8D%95%E8%AF%8D%E6%95%B0%E9%87%8F%E7%BB%9F%E8%AE%A1%EF%BC%9F.html">06 jieba分词：如何基于感情色彩进行单词数量统计？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E5%BF%AB%E9%80%9F%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%B7%A8%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%EF%BC%9F.html">07 快速读写文件：如何实现跨文件的字数统计？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%90%9C%E7%B4%A2%E5%86%85%E5%AE%B9%E7%9A%84%E7%B2%BE%E7%A1%AE%E5%BA%A6%EF%BC%9F.html">08 正则表达式：如何提高搜索内容的精确度？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E6%89%A9%E5%B1%95%E6%90%9C%E7%B4%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%89%BE%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E6%96%87%E4%BB%B6%EF%BC%9F.html">09 扩展搜索：如何快速找到想要的文件？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E6%8C%89%E6%8C%87%E5%AE%9A%E9%A1%BA%E5%BA%8F%E7%BB%99%E8%AF%8D%E8%AF%AD%E6%8E%92%E5%BA%8F%EF%BC%8C%E6%8F%90%E9%AB%98%E6%9F%A5%E6%89%BE%E6%95%88%E7%8E%87.html">10 按指定顺序给词语排序，提高查找效率</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%20%E9%80%9A%E8%BF%87%E7%A8%8B%E5%BA%8F%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%EF%BC%8C%E9%81%BF%E5%85%8DCPU%E8%B5%84%E6%BA%90%E6%B5%AA%E8%B4%B9.html">11  通过程序并行计算，避免CPU资源浪费</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/12%20%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9A%E4%B8%89%E6%8B%9B%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E5%AF%B9%E9%BD%90%E9%97%AE%E9%A2%98.html">12 文本处理函数：三招解决数据对齐问题</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/13%20Excel%E6%8F%92%E4%BB%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%A9%E5%B1%95Excel%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%EF%BC%9F.html">13 Excel插件：如何扩展Excel的基本功能？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/14%20VBA%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%A9%E5%B1%95Excel%EF%BC%8C%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%B9%E9%87%8F%E6%89%93%E5%8D%B0%EF%BC%9F.html">14 VBA脚本编程：如何扩展Excel，实现文件的批量打印？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/15%20PowerShell%E8%84%9A%E6%9C%AC%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%EF%BC%9F.html">15 PowerShell脚本：如何实现文件批量处理的自动化？</a></li><li><a class="active" aria-current="page" href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/16%20%E5%BE%AA%E7%8E%AF%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D%EF%BC%9F.html">16 循环与文件目录管理：如何实现文件的批量重命名？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/17%20%E4%B8%8D%E5%90%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8B%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5%E6%96%87%E4%BB%B6%EF%BC%9F.html">17 不同操作系统下，如何通过网络同步文件？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/18%20http%E5%BA%93%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%EF%BC%8C%E8%A7%A3%E6%94%BE%E9%BC%A0%E6%A0%87%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9F.html">18 http库：如何批量下载在线内容，解放鼠标（上）？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/19%20http%E5%BA%93%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E5%9C%A8%E7%BA%BF%E5%86%85%E5%AE%B9%EF%BC%8C%E8%A7%A3%E6%94%BE%E9%BC%A0%E6%A0%87%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9F.html">19 http库：如何批量下载在线内容，解放鼠标（下）？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/20%20%E4%B8%8D%E5%90%8C%E6%96%87%E4%BB%B6%E6%B7%B7%E5%9C%A8%E4%B8%80%E8%B5%B7%EF%BC%8C%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E5%88%86%E7%B1%BB%EF%BC%9F.html">20 不同文件混在一起，怎么快速分类？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/21%20SQLite%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9F.html">21 SQLite文本数据库：如何进行数据管理（上）？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/22%20SQLite%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9F.html">22 SQLite文本数据库：如何进行数据管理（下）？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E6%80%8E%E4%B9%88%E7%94%A8%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8%E6%9B%B4%E7%9B%B4%E8%A7%82%E5%9C%B0%E5%B1%95%E7%A4%BA%E6%B1%87%E6%8A%A5%E6%88%90%E6%9E%9C%EF%BC%9F.html">23 怎么用数据透视表更直观地展示汇报成果？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E6%9D%A1%E5%BD%A2%E3%80%81%E9%A5%BC%E7%8A%B6%E3%80%81%E6%9F%B1%E7%8A%B6%E5%9B%BE%E6%9C%80%E9%80%82%E5%90%88%E7%94%A8%E5%9C%A8%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%E4%B8%8B%EF%BC%9F.html">24 条形、饼状、柱状图最适合用在什么场景下？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/25%20%E5%9B%BE%E8%A1%A8%E5%BA%93%EF%BC%9A%E6%83%B3%E8%A6%81%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E5%9B%BE%E8%A1%A8%EF%BC%8C%E7%94%A8Echarts%E5%B0%B1%E5%A4%9F%E4%BA%86.html">25 图表库：想要生成动态图表，用Echarts就够了</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/26%20%E5%BF%AB%E9%80%9F%E6%8F%90%E5%8F%96%E5%9B%BE%E7%89%87%E4%B8%AD%E7%9A%84%E8%89%B2%E5%9D%97%EF%BC%8C%E6%A8%A1%E4%BB%BF%E4%B8%80%E5%BC%A0%E5%A4%A7%E5%B8%88%E7%9A%84%E7%85%A7%E7%89%87.html">26 快速提取图片中的色块，模仿一张大师的照片</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/27%20zipfile%E5%8E%8B%E7%BC%A9%E5%BA%93%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BB%99%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9%26%E5%8A%A0%E5%AF%86%E5%A4%87%E4%BB%BD%EF%BC%9F.html">27 zipfile压缩库：如何给数据压缩&amp;加密备份？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/28%20Celery%E5%BA%93%EF%BC%9A%E8%AE%A9%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1%EF%BC%8C%E8%A7%A3%E6%94%BE%E4%BA%BA%E5%8A%9B.html">28 Celery库：让计算机定时执行任务，解放人力</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E7%BD%91%E7%BB%9C%E5%92%8C%E9%82%AE%E4%BB%B6%E5%BA%93%EF%BC%9A%E5%AE%9A%E6%97%B6%E6%94%B6%E5%8F%91%E9%82%AE%E4%BB%B6%EF%BC%8C%E5%87%8F%E5%B0%91%E6%89%8B%E5%8A%A8%E6%93%8D%E4%BD%9C.html">29 网络和邮件库：定时收发邮件，减少手动操作</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E6%8A%8A%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%88%90PDF%EF%BC%8C%E5%B9%B6%E6%89%B9%E9%87%8F%E5%8A%A0%E6%B0%B4%E5%8D%B0%EF%BC%9F.html">30 怎么快速把任意文件格式转成PDF，并批量加水印？</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%98%A5%E8%8A%82%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%811%20%E5%AE%9E%E4%BD%93%E6%B0%B4%E6%9E%9C%E5%BA%97%E8%BD%AC%E7%BA%BF%E4%B8%8A%E9%94%80%E5%94%AE%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E9%97%AE%E9%A2%98.html">春节特别放送1 实体水果店转线上销售的数据统计问题</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%98%A5%E8%8A%82%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%812%20%E7%94%A8%E8%87%AA%E9%A1%B6%E8%87%B3%E5%BA%95%E7%9A%84%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E9%97%AE%E9%A2%98.html">春节特别放送2 用自顶至底的思路解决数据统计问题</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%98%A5%E8%8A%82%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%813%20%E6%8F%AD%E6%99%93%E9%A1%B9%E7%9B%AE%E4%BD%9C%E4%B8%9A%E7%9A%84%E7%AD%94%E6%A1%88.html">春节特别放送3 揭晓项目作业的答案</a></li><li><a href="/courses/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%92%8C%E6%88%91%E4%B8%80%E8%B5%B7%E6%88%90%E4%B8%BA10X%E6%95%88%E7%8E%87%E8%81%8C%E5%9C%BA%E4%BA%BA.html">结束语 和我一起成为10X效率职场人</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E5%AE%9E%E6%88%98%E8%AF%BE/16%20%E5%BE%AA%E7%8E%AF%E4%B8%8E%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="16 循环与文件目录管理：如何实现文件的批量重命名？" id="title">16 循环与文件目录管理：如何实现文件的批量重命名？</h1>
+<div><p>你好，我是尹会生。</p>
+<p>作为产品经理/运营，你经常需要做竞品调研，来跟自家产品对比优劣。这时，你就需要下载大量与该类产品相关的图片，并进行整理归类。而归类操作中，必须要走的一步就是对这些图片进行重命名。</p>
+<p>还有你在搜集资料时，往往会从网络中下载大量不同格式的文件，比如电子书、视频、音频等，为了方便归纳整理，你也需要对文件进行重命名。</p>
+<p>通过我例举的这两个场景，你应该发现了，这些需求都是把<strong>批量改名和网络功能</strong>结合，而且还需要Mac和Windows系统支持重命名。那怎么来实现批量重命名的操作呢？</p>
+<p>如果你还记得上节课的内容，肯定会说，使用PowerShell就可以了。不过你要是对PowerShell相关知识掌握得扎实的话，也会记得我说过，PowerShell适合在Windows平台下独立运行的临时性任务。所以在非Windows系统，以及需要和网络下载功能结合的需求上，它就没有Python的兼容性好。</p>
+<p>那么今天这节课，我会带你回到Python，使用Python来实现文件的批量重命名。</p>
+<h2 id="如何使用os库实现文件批量重命名">如何使用os库实现文件批量重命名</h2>
+<p>还是老规矩，我们学习一个新的功能，首先要学习它所需要的Python库和函数。</p>
+<p>例如，我把友商的产品介绍图片，通过网络批量下载后，存放在“/Users/user1/Desktop/pic”文件夹中，这些文件名称长短不一，那我希望能从数字1开始，为它们批量重命名。</p>
+<p>在第15节课我就说了，<strong>重命名是一种贴近操作系统层面的操作</strong>。因此在Python标准库中，我把“文件”和“操作系统”作为关键字，从官方文档中找到了“os”库，os库中包含了操作系统相关的操作。通过“os”库，你就可以轻松取得三个批量重命名必备操作，那就是目录中的文件名、文件名后缀处理以及文件改名。</p>
+<p>那我先把批量重命名的代码提供给你，让你更直观地理解运行过程，然后再来帮你分析这三个操作是怎么通过os库实现的。</p>
+<pre><code>import os
+# 保存图片的目录
+file_path = "/Users/user1/Desktop/pic"
+# 需要批量重命名的扩展名
+old_ext = ".jpg"
+# 取得指定文件夹下的文件列表
+old_names = os.listdir(file_path)
+# 新文件名称从1开始
+new_name = 1
+
+# 取得所有的文件名
+for old_name in old_names:
+
+    # 根据扩展名，判断文件是否需要改名
+    if old_name.endswith(old_ext):
+
+        # 完整的文件路径
+        old_path = os.path.join(file_path, old_name)
+
+        # 新的文件名
+        new_path = os.path.join(file_path, str(new_name)+".JPG")
+       
+        # 重命名
+        os.rename(old_path, new_path)
+
+        # 文件名数字加1
+        new_name = int(new_name)+1
+
+# 显示改名后的结果
+print(os.listdir(file_path))
+
+</code></pre>
+<p>这段代码会把”/Users/user1/Desktop/pic”目录中“jpg”扩展名的文件进行重命名，把它们分别命名为“1.jpg”，“2.jpg”，“3.jpg”，以此类推。</p>
+<p>那批量改名的这三个操作具体是怎么实现的呢？其实是通过os库中的三个函数来实现的，分别是listdir()、path.join() 、rename()。这是你在这节课要掌握的重点，我也会着重讲解。</p>
+<p>第一个是<strong>listdir()函数</strong>，它的功能是<strong>打印指定目录下的文件名称。如果再</strong>给这个函数指定一个参数file_path，那么它会把file_path中的所有文件名称以一个列表的类型返回。使用列表类型方便后续迭代，便于进行单个文件改名。</p>
+<p>为了只对“.jpg”扩展名的文件改名，我使用了endswith()函数对列表进一步筛选，过滤掉不需要改名的文件。</p>
+<p>第二个是<strong>path.join()函数</strong>，它可以连接路径和文件名，从而得到一个带有完整路径的文件名称格式。这里我要给你着重强调一下，改名操作必须要指定文件正确的路径，因此改名前必须要进行路径和文件名的连接。</p>
+<p>最后是改名函数<strong>rename()函数</strong>，它的两个参数分别为改名前文件的路径+文件名和改名后文件的路径+文件名，均为path.join()函数处理过的完整文件名称。通过rename()函数改名后，文件名称会自动变为新的文件名称。</p>
+<p>将上面三个操作放入for循环语句中，就能实现批量重命名的功能。</p>
+<p>这一段代码虽然功能正常，但是继续增加新功能时，必然要再增加新的代码，如果只是按照执行的前后顺序把<strong>多个不同功能的代码</strong>写入一个文件，它的可读性会变差，别人阅读你写的代码就会有障碍。</p>
+<p>就像我们从超市购买的各类商品一样，你一定会把调料放在厨房、把鸡蛋放在冰箱、把袜子放在衣柜，对商品分门别类放置，绝不会按照购买的时间顺序摆放在你的房间中。</p>
+<p>同理，代码的摆放位置，也不应该按照执行顺序依次存放。正确的做法是，你要把每一组功能相同或相近的代码写入到一个函数中，并把该功能中经常变动的部分作为函数的参数，乃至整个脚本的参数，这样才能给有多个功能的脚本带来更好的阅读体验。代码的整洁程度高，也为你排除代码的故障带来更高的效率。</p>
+<p>那么接下来，我就教你怎么重构批量改名脚本，提高代码的可读性。</p>
+<h2 id="重构程序">重构程序</h2>
+<p>首先，我来带你学习一下什么是重构代码，以及怎么重构代码。</p>
+<p>重构代码是指在代码可以正常实现的前提下，为了提高它的可维护性，需要对代码的结构进一步调整。就像你需要定期收拾房间一样，代码也需要进行维护。特别是经常修改和添加新的功能的代码，它的逻辑结构会像你炒菜之后的厨房一样，越来越混乱，为了代码和代码之间的逻辑关系更清晰，你需要掌握如何调整代码的结构。</p>
+<p>我来给你举个例子，比如我在批量改名的程序中又增加了新的需求，要求将改名的路径和扩展名从变量赋值改为从命令行参数赋值。这样就不用进入到脚本中修改代码了。</p>
+<p>根据这个新的需求，你会发现，当前的代码有3个地方需要调整。</p>
+<p>第一个是<strong>代码的结构层次</strong>需要调整。当前的代码只包含了一个批量改名的功能，当你再为代码增加命令行参数处理功能时，新的代码和当前代码放在一起，会破坏改名功能的完整性，这时候，你就可以把每个功能单独放在一个函数中，通过函数来让一个功能和另一个功能代码相互独立。</p>
+<p>第二个是<strong>代码开始执行的位置需要调整。</strong>由于函数定义的代码块会在函数调用以后才运行，但是根据Python的语法，你必须将函数定义写在函数调用的上方，这就导致了代码开始执行的位置出现在文件的中间和结尾。所以我需要一个更明显的标记，告诉阅读代码的人，从该位置开始阅读代码，该位置才是代码执行的第一条语句，而不是让阅读的人从代码文件开头一行以后的找程序的入口。</p>
+<p>第三个是<strong>命令行参数的处理需要调整。</strong>由于Python默认是不去处理命令行的参数的，因此我们需要增加一个专门处理命令行参数的函数，来读取用户输入的正确参数，而对错误的参数，则需要提示用户。</p>
+<p>这三个地方的调整，我会依次采用函数、内置变量和命令行参数来实现对代码的重构，我来依次带你看一下优化的具体代码。</p>
+<h3 id="封装到函数">封装到函数</h3>
+<p>为了让代码结构逻辑更加工整，我把每一个独立的功能都放入到单独的函数中。每个函数组成的语句块，就像自然段一样，将一整篇文章，按照功能进行了划分。由于当前的代码只有批量改名这一个功能，所以我就把改名功能的所有代码都放到一个函数当中。</p>
+<p>封装函数的时候，一个是要考虑功能的完整性，另一个要考虑函数用到的其他变量如何与它进行交互。调用函数时使用参数，就是函数和其他变量交互最好的办法。</p>
+<p>对于批量改名这一功能，主要交互的对象有两个，它们是批量改名的路径，以及要修改的文件扩展名。所以我就把这两个对象作为改名函数rename()函数的参数，rename()函数得到这两个参数后，会按照函数的定义，把这两个参数传入rename()函数中实现改名的逻辑，对文件进行批量改名。封装之后的核心代码如下：</p>
+<pre><code>def rename(file_path, old_ext):
+  # 批量改名的代码
+  ... ...
+
+rename("/Users/user1/Desktop/pic", ".jpg")
+
+</code></pre>
+<p>这段代码实现的功能和没有重构之前完全相同，都是对指定目录的指定扩展名文件进行批量重命名。但是在代码结构上，要比直接在文件实现的代码逻辑更清晰，可以看到，改名功能被放在函数定义中，执行的时候就可以直接调用rename()函数。</p>
+<p>将改名功能封装为函数的好处就是，代码更工整了，新的功能也可以继续采用函数的形式添加到当前代码中。比起把所有代码按执行顺序都写在一个文件中，这样的格式会让你更容易区分开代码中的每一个功能。</p>
+<h3 id="明确执行位置">明确执行位置</h3>
+<p>把批量改名的功能封装为函数之后，对程序的执行顺序也会带来一些变化。我把前后变化给你做个对比：</p>
+<ul>
+<li>封装函数之前，程序的执行顺序是导入库之后依次执行。</li>
+<li>封装为函数之后，执行顺序就变为导入库之后，就开始执行rename()函数的调用。</li>
+</ul>
+<p>当这个脚本再陆续添加新的函数的话，那么找到哪一行是脚本第一个执行的命令，就非常麻烦了。因此在Python中有一个参考C语言设置代码入口的方法，让你能快速定位代码是从哪一行开始执行的。这个方法就是通过对内置变量“<strong>name</strong>”的值进行判断，判断它是不是和字符串“<strong>main</strong>” 相等。</p>
+<p>在Python中，执行代码的方式有两种。</p>
+<ol>
+<li>一种是单独运行，也就是用Python加脚本的名称方式运行。</li>
+<li>另一种方式是把.py结尾的脚本文件作为自定义的模块使用“import”关键字导入，导入后通过“模块.函数()”的格式运行。</li>
+</ol>
+<p>如果一个脚本文件独立运行，那么它的内置变量“<strong>name</strong>”的值就是“<strong>main</strong>”，通过“if <strong>name</strong> == “<strong>main</strong>“” 的判断，结果必然为True，则该判断逻辑下的代码块就会执行。如果作为模块导入，那么“<strong>name</strong>”的值就是False，则不被执行。</p>
+<p>我们可以把函数的调用全部放入 “if <strong>name</strong> == “<strong>main</strong>“”语句块中，这样就可以指定这条if语句作为代码单独运行的入口，既方便你快速找到入口对程序进行修改，又方便你把它作为其他程序的模块进行导入。</p>
+<p>我把实现对“<strong>name</strong>”变量判断的脚本写在下方，你可以对照代码学习。</p>
+<pre><code>def rename():
+   ... ...
+def func1():
+   ... ...
+def func2():
+   ... ...
+def func3():
+   ... ...
+
+# func1() # 在__name__之外执行，不推荐
+
+if __name__ == "__main__":
+    func3()
+    rename("/Users/edz/Desktop/pic", ".jpg")
+    func1()
+    func2()
+</code></pre>
+<p>在代码中，我定义了4个函数，对于四个函数的调用，都放在了 “if <strong>name</strong> == “<strong>main</strong>“”语句块中。在使用这种方式设置程序入口时，有两点需要你特别注意。</p>
+<p>一方面，这种设置方法是人为指定程序入口，因此你需要把代码中所有函数调用都放在if语句块下，这样才能实现作为入口的功能。虽然放在if语句块之外也可以运行，但函数调用写在if语句块之外，就很容易给代码阅读带来障碍。</p>
+<p>另一方面，使用“<strong>name</strong>” 作为入口的判断变量，只能在单独运行的时候才为”<strong>main</strong>“，如果使用Python交互方式执行，就无法对“<strong>name</strong>” 变量进行判断。</p>
+<p>我们通过指定代码的入口，让程序的逻辑更加清晰。那么接下来就是为这段代码添加命令行参数，在不修改代码的前提下，通过命令行参数来设置批量改名的目录和扩展名。</p>
+<h3 id="命令行参数处理">命令行参数处理</h3>
+<p>使用命令行参数的优点，就是在调用脚本的时候一并传入要操作的对象，这会比修改配置文件和变量更直接。那么在原有代码基础上，我们还需要增加两个参数，也就是要操作的目录和扩展名，并使用argparse库实现对这两个参数的处理。</p>
+<p>参数处理是一个比较笼统的概念，它包括参数的接收、参数数量的判断和参数的解析三个部分。“argparse”库是命令行解析模块，它负责在脚本运行时，接收和处理脚本执行时的参数。</p>
+<p>首先是<strong>参数的接收</strong>，在本讲之前，我们执行Python脚本的方式是：</p>
+<pre><code>python3 脚本名称.py
+</code></pre>
+<p>在脚本中使用“argparse”库后，脚本能够支持在该命令后面增加参数，并在脚本内获取参数的内容。哪些参数能够被脚本处理，需要使用argparse库的add_argument()函数指定。</p>
+<p>接下来是<strong>参数的判断</strong>，add_argument()函数可以接收两种参数格式，分别是“-”和“–”，后面再跟着英文。按照惯例，一个“-”一般后面会使用单个英文字母， 两个“–”后面是完整名称。</p>
+<p>以对目录改名的参数为例，我需要接收“-p”或“–path”两种形式的参数指定的方法是：</p>
+<pre><code>add_argument("-p", "--path", required=True, help="path to rename")
+</code></pre>
+<p>同时，我还为“–path”参数所在的add_argument()增加了两个额外的参数，一个是要求用户执行程序，必须输入“-p”或“–path”，如果执行不指定会报错的required参数。</p>
+<p>另一个“-p”或“–path”参数含义的帮助信息“help”参数。</p>
+<p>增加参数处理后，如果你没有输入完整参数，argparse库会自报错，并提示你如何正确使用该脚本的参数。你也可以直接使用“-h”得到执行帮助。</p>
+<p>我把参数输入不完整和通过-h获取帮助的执行结果，贴在下面供你学习。</p>
+<pre><code>SHELL$ python3 rename_v2.py -p /path/to/rename/files -e
+usage: rename_v2.py [-h] -p PATH -e EXT
+rename_v2.py: error: argument -e/--ext: expected one argument
+
+SHELL$ python3 rename_v2.py -h
+usage: rename_v2.py [-h] -p PATH -e EXT
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PATH, --path PATH  path to rename
+  -e EXT, --ext EXT     files name extension, eg: jpg
+</code></pre>
+<p>最后是<strong>参数的解析</strong>，它是在参数数量正确的前提下自动完成的。完成解析后，会以“–path”参数后的英文字面“path”作为属性名称，以“–path”后面的参数，作为属性值。</p>
+<p>比如我在取得用户参数后，就可以使用“args.path”来得到命令行“-p”参数后面参数的值，以及使用“args.ext”得到“-e”参数后面参数的值。此外，我还把这两个属性作为批量改名函数rename()函数的参数，这样就可以把命令行参数作为重命名函数的参数使用了。</p>
+<p>获取命令行参数的核心代码我也为你整理了出来，放在下方供你参考：</p>
+<pre><code>import os
+import argparse
+
+def rename(file_path, old_ext):
+  """批量改名函数"""
+  ... ...
+def args_opt():
+  """获取命令行参数函数"""
+  
+    #定义参数对象
+    parser = argparse.ArgumentParser()
+    
+    # 增加参数选项、是否必须、帮助信息
+    parser.add_argument("-p", "--path", required=True, help="path to rename")
+    parser.add_argument("-e", "--ext", required=True, help="files name extension, eg: jpg")
+    
+    # 返回取得的所有参数
+    return  parser.parse_args()
+
+if __name__ == "__main__":
+
+    # args 对象包含所有参数，属性是命令行参数的完整名称
+    args = args_opt()
+    
+    # 调用重命名函数，将命令行参数作为重命名函数的参数
+    rename(args.path, "."+args.ext)
+    
+    # 输出改名之后的结果
+    print(os.listdir(args.path))
+</code></pre>
+<p>通过重构后，代码的整体结构就变成了导入库、函数定义、函数调用三个部分，对经常需要变动的替换路径和扩展名，也从修改变量改为命令行参数，无论从阅读代码还是后续继续扩展代码，整体结构都要比顺序执行代码逻辑更清晰。</p>
+<h2 id="小结">小结</h2>
+<p>最后让我来为你总结一下，这一讲我为你讲解了使用Python如何实现批量改名，以及如何对越写越长的代码进行重构。</p>
+<p>批量改名属于操作系统中的文件相关操作，这类功能在编程语言中往往会提供事先定义好的编程接口，无需自己实现从应用层到操作系统的全部代码，建议你在遇到这类需求时，先从标准库中搜索相关模块，再从第三方库搜索，尽量避免手工编写，提高工作效率。</p>
+<p>为了让批量改名的脚本逻辑更清晰，也更方便执行，我对代码还进行了三个方面的重构：</p>
+<ol>
+<li>通过使用函数增加代码的逻辑性。</li>
+<li>通过“<strong>name</strong>”变量增加了程序入口，便于你直接找到程序开始执行的位置。</li>
+<li>通过增加命令行参数，让你不用修改代码，就能实现函数的参数的修改。</li>
+</ol>
+<p>增加程序的可读性、提高执行便利性也能为以后编写代码效率提升带来改进，这些改进会在后续章节代码越来越多的时候起到更明显的效果。</p>
+<p>我把这节课的相关<a href="https://github.com/wilsonyin123/python_productivity/blob/main/%E6%96%87%E7%AB%A016%E4%BB%A3%E7%A0%81.zip" target="_blank">代码</a>都放在了GitHub上，供你学习参考。</p>
+<h2 id="思考题">思考题</h2>
+<p>最后我来为你留一道比较有趣的思考题，你能否通过命令行为代码指定两个参数，当这两个参数为整数时，脚本自动计算这两个参数的“和”和“差”，并将执行结果打印到屏幕上。</p>
+<p>欢迎把你的思考和想法写在评论区，我们一起交流讨论。此外，你还可以点击课程详情页的“戳我进群”，然后扫描二维码，加入我们的课程读者群，我也会在群里为你解疑答惑。我们下节课再见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

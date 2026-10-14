@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12  有一亿个keys要统计，应该用哪种集合？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Redis 核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">50 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Redis 核心技术与实战</strong><ul><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E8%BF%99%E6%A0%B7%E5%AD%A6Redis%EF%BC%8C%E6%89%8D%E8%83%BD%E6%8A%80%E9%AB%98%E4%B8%80%E7%AD%B9.html">00  开篇词  这样学Redis，才能技高一筹</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%20%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%EF%BC%9A%E4%B8%80%E4%B8%AA%E9%94%AE%E5%80%BC%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8C%85%E5%90%AB%E4%BB%80%E4%B9%88%EF%BC%9F.html">01  基本架构：一个键值数据库包含什么？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E5%BF%AB%E9%80%9F%E7%9A%84Redis%E6%9C%89%E5%93%AA%E4%BA%9B%E6%85%A2%E6%93%8D%E4%BD%9C%EF%BC%9F.html">02  数据结构：快速的Redis有哪些慢操作？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%20%E9%AB%98%E6%80%A7%E8%83%BDIO%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%95%E7%BA%BF%E7%A8%8BRedis%E8%83%BD%E9%82%A3%E4%B9%88%E5%BF%AB%EF%BC%9F.html">03  高性能IO模型：为什么单线程Redis能那么快？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20%20AOF%E6%97%A5%E5%BF%97%EF%BC%9A%E5%AE%95%E6%9C%BA%E4%BA%86%EF%BC%8CRedis%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1%EF%BC%9F.html">04  AOF日志：宕机了，Redis如何避免数据丢失？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%20%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7%EF%BC%9A%E5%AE%95%E6%9C%BA%E5%90%8E%EF%BC%8CRedis%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E6%81%A2%E5%A4%8D%EF%BC%9F.html">05  内存快照：宕机后，Redis如何实现快速恢复？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20%20%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%EF%BC%9A%E4%B8%BB%E4%BB%8E%E5%BA%93%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%EF%BC%9F.html">06  数据同步：主从库如何实现数据一致？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%20%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6%EF%BC%9A%E4%B8%BB%E5%BA%93%E6%8C%82%E4%BA%86%EF%BC%8C%E5%A6%82%E4%BD%95%E4%B8%8D%E9%97%B4%E6%96%AD%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">07  哨兵机制：主库挂了，如何不间断服务？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%20%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4%EF%BC%9A%E5%93%A8%E5%85%B5%E6%8C%82%E4%BA%86%EF%BC%8C%E4%B8%BB%E4%BB%8E%E5%BA%93%E8%BF%98%E8%83%BD%E5%88%87%E6%8D%A2%E5%90%97%EF%BC%9F.html">08  哨兵集群：哨兵挂了，主从库还能切换吗？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%20%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%A4%9A%E4%BA%86%EF%BC%8C%E6%98%AF%E8%AF%A5%E5%8A%A0%E5%86%85%E5%AD%98%E8%BF%98%E6%98%AF%E5%8A%A0%E5%AE%9E%E4%BE%8B%EF%BC%9F.html">09  切片集群：数据增多了，是该加内存还是加实例？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%20%E7%AC%AC1%EF%BD%9E9%E8%AE%B2%E8%AF%BE%E5%90%8E%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%8F%8A%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">10  第1～9讲课后思考题答案及常见问题答疑</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%20%E2%80%9C%E4%B8%87%E9%87%91%E6%B2%B9%E2%80%9D%E7%9A%84String%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%A5%BD%E7%94%A8%E4%BA%86%EF%BC%9F.html">11  “万金油”的String，为什么不好用了？</a></li><li><a class="active" aria-current="page" href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%20%E6%9C%89%E4%B8%80%E4%BA%BF%E4%B8%AAkeys%E8%A6%81%E7%BB%9F%E8%AE%A1%EF%BC%8C%E5%BA%94%E8%AF%A5%E7%94%A8%E5%93%AA%E7%A7%8D%E9%9B%86%E5%90%88%EF%BC%9F.html">12  有一亿个keys要统计，应该用哪种集合？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%20GEO%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E8%BF%98%E5%8F%AF%E4%BB%A5%E5%AE%9A%E4%B9%89%E6%96%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%90%97%EF%BC%9F.html">13  GEO是什么？还可以定义新的数据类型吗？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%20%E5%A6%82%E4%BD%95%E5%9C%A8Redis%E4%B8%AD%E4%BF%9D%E5%AD%98%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%EF%BC%9F.html">14  如何在Redis中保存时间序列数据？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E8%80%83%E9%AA%8C%EF%BC%9ARedis%E6%9C%89%E5%93%AA%E4%BA%9B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9F.html">15  消息队列的考验：Redis有哪些解决方案？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%20%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%98%BB%E5%A1%9E%EF%BC%9F.html">16  异步机制：如何避免单线程模型的阻塞？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%20%E4%B8%BA%E4%BB%80%E4%B9%88CPU%E7%BB%93%E6%9E%84%E4%B9%9F%E4%BC%9A%E5%BD%B1%E5%93%8DRedis%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">17  为什么CPU结构也会影响Redis的性能？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20%20%E6%B3%A2%E5%8A%A8%E7%9A%84%E5%93%8D%E5%BA%94%E5%BB%B6%E8%BF%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%E5%8F%98%E6%85%A2%E7%9A%84Redis%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">18  波动的响应延迟：如何应对变慢的Redis？（上）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%20%E6%B3%A2%E5%8A%A8%E7%9A%84%E5%93%8D%E5%BA%94%E5%BB%B6%E8%BF%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%E5%8F%98%E6%85%A2%E7%9A%84Redis%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">19  波动的响应延迟：如何应对变慢的Redis？（下）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%20%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%90%8E%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E7%8E%87%E8%BF%98%E6%98%AF%E5%BE%88%E9%AB%98%EF%BC%9F.html">20  删除数据后，为什么内存占用率还是很高？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20%20%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%8F%AF%E8%83%BD%E5%BC%95%E5%8F%91%E2%80%9C%E6%83%A8%E6%A1%88%E2%80%9D%E7%9A%84%E5%9C%B0%E6%96%B9.html">21  缓冲区：一个可能引发“惨案”的地方</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%20%E7%AC%AC11%EF%BD%9E21%E8%AE%B2%E8%AF%BE%E5%90%8E%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%8F%8A%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">22  第11～21讲课后思考题答案及常见问题答疑</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%20%E6%97%81%E8%B7%AF%E7%BC%93%E5%AD%98%EF%BC%9ARedis%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">23  旁路缓存：Redis是如何工作的？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20%20%E6%9B%BF%E6%8D%A2%E7%AD%96%E7%95%A5%EF%BC%9A%E7%BC%93%E5%AD%98%E6%BB%A1%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">24  替换策略：缓存满了怎么办？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%20%E7%BC%93%E5%AD%98%E5%BC%82%E5%B8%B8%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%80%E8%87%B4%E9%97%AE%E9%A2%98%EF%BC%9F.html">25  缓存异常（上）：如何解决缓存和数据库的数据不一致问题？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%20%E7%BC%93%E5%AD%98%E5%BC%82%E5%B8%B8%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E7%A9%BF%E9%80%8F%E9%9A%BE%E9%A2%98%EF%BC%9F.html">26  缓存异常（下）：如何解决缓存雪崩、击穿、穿透难题？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%20%E7%BC%93%E5%AD%98%E8%A2%AB%E6%B1%A1%E6%9F%93%E4%BA%86%EF%BC%8C%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">27  缓存被污染了，该怎么办？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%20Pika%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8ESSD%E5%AE%9E%E7%8E%B0%E5%A4%A7%E5%AE%B9%E9%87%8FRedis%EF%BC%9F.html">28  Pika：如何基于SSD实现大容量Redis？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%20%E6%97%A0%E9%94%81%E7%9A%84%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%EF%BC%9ARedis%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE%EF%BC%9F.html">29  无锁的原子操作：Redis如何应对并发访问？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%9F.html">30  如何使用Redis实现分布式锁？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20%20%E4%BA%8B%E5%8A%A1%E6%9C%BA%E5%88%B6%EF%BC%9ARedis%E8%83%BD%E5%AE%9E%E7%8E%B0ACID%E5%B1%9E%E6%80%A7%E5%90%97%EF%BC%9F.html">31  事务机制：Redis能实现ACID属性吗？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%20Redis%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E4%B8%8E%E6%95%85%E9%9A%9C%E5%88%87%E6%8D%A2%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9D%91%EF%BC%9F.html">32  Redis主从同步与故障切换，有哪些坑？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%20%E8%84%91%E8%A3%82%EF%BC%9A%E4%B8%80%E6%AC%A1%E5%A5%87%E6%80%AA%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1.html">33  脑裂：一次奇怪的数据丢失</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20%20%E7%AC%AC23~33%E8%AE%B2%E8%AF%BE%E5%90%8E%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%8F%8A%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">34  第23~33讲课后思考题答案及常见问题答疑</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20%20Codis%20VS%20Redis%20Cluster%EF%BC%9A%E6%88%91%E8%AF%A5%E9%80%89%E6%8B%A9%E5%93%AA%E4%B8%80%E4%B8%AA%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88%EF%BC%9F.html">35  Codis VS Redis Cluster：我该选择哪一个集群方案？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20%20Redis%E6%94%AF%E6%92%91%E7%A7%92%E6%9D%80%E5%9C%BA%E6%99%AF%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%92%8C%E5%AE%9E%E8%B7%B5%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">36  Redis支撑秒杀场景的关键技术和实践都有哪些？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E4%BC%98%E5%8C%96%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%EF%BC%9F.html">37  数据分布优化：如何应对数据倾斜？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20%20%E9%80%9A%E4%BF%A1%E5%BC%80%E9%94%80%EF%BC%9A%E9%99%90%E5%88%B6Redis%20Cluster%E8%A7%84%E6%A8%A1%E7%9A%84%E5%85%B3%E9%94%AE%E5%9B%A0%E7%B4%A0.html">38  通信开销：限制Redis Cluster规模的关键因素</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20%20Redis%206.0%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%BC%93%E5%AD%98%E4%B8%8E%E5%AE%89%E5%85%A8.html">39  Redis 6.0的新特性：多线程、客户端缓存与安全</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%20Redis%E7%9A%84%E4%B8%8B%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%9F%BA%E4%BA%8ENVM%E5%86%85%E5%AD%98%E7%9A%84%E5%AE%9E%E8%B7%B5.html">40  Redis的下一步：基于NVM内存的实践</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%20%20%E7%AC%AC35%EF%BD%9E40%E8%AE%B2%E8%AF%BE%E5%90%8E%E6%80%9D%E8%80%83%E9%A2%98%E7%AD%94%E6%A1%88%E5%8F%8A%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">41   第35～40讲课后思考题答案及常见问题答疑</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%2001%20%20%E7%BB%8F%E5%85%B8%E7%9A%84Redis%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">加餐 01  经典的Redis学习资料有哪些？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%2002%20%20%E7%94%A8%E6%88%B7Kaito%EF%BC%9A%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0Redis%E7%9A%84%EF%BC%9F.html">加餐 02  用户Kaito：我是如何学习Redis的？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%2003%20%20%E7%94%A8%E6%88%B7Kaito%EF%BC%9A%E6%88%91%E5%B8%8C%E6%9C%9B%E6%88%90%E4%B8%BA%E5%9C%A8%E5%8E%8B%E5%8A%9B%E4%B8%AD%E6%88%90%E9%95%BF%E7%9A%84%E4%BA%BA.html">加餐 03  用户Kaito：我希望成为在压力中成长的人</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%2004%20%20%20Redis%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%A6%82%E4%BD%95%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E4%BA%A4%E6%8D%A2%E5%91%BD%E4%BB%A4%E5%92%8C%E6%95%B0%E6%8D%AE%EF%BC%9F.html">加餐 04   Redis客户端如何与服务器端交换命令和数据？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%2005%20%20%20Redis%E6%9C%89%E5%93%AA%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7%EF%BC%9F.html">加餐 05   Redis有哪些好用的运维工具？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%2006%20%20%20Redis%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83%E5%B0%8F%E5%BB%BA%E8%AE%AE.html">加餐 06   Redis的使用规范小建议</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%2007%20%20%E4%BB%8E%E5%BE%AE%E5%8D%9A%E7%9A%84Redis%E5%AE%9E%E8%B7%B5%E4%B8%AD%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%AD%A6%E5%88%B0%E5%93%AA%E4%BA%9B%E7%BB%8F%E9%AA%8C%EF%BC%9F.html">加餐 07  从微博的Redis实践中，我们可以学到哪些经验？</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E4%BB%8E%E5%AD%A6%E4%B9%A0Redis%E5%88%B0%E5%90%91Redis%E5%AD%A6%E4%B9%A0.html">结束语  从学习Redis到向Redis学习</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Redis%20%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%20%E6%9C%89%E4%B8%80%E4%BA%BF%E4%B8%AAkeys%E8%A6%81%E7%BB%9F%E8%AE%A1%EF%BC%8C%E5%BA%94%E8%AF%A5%E7%94%A8%E5%93%AA%E7%A7%8D%E9%9B%86%E5%90%88%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12  有一亿个keys要统计，应该用哪种集合？" id="title">12  有一亿个keys要统计，应该用哪种集合？</h1>
+<div><p>在 Web 和移动应用的业务场景中，我们经常需要保存这样一种信息：一个 key 对应了一个数据集合。我举几个例子。</p>
+<ul>
+<li>手机 App 中的每天的用户登录信息：一天对应一系列用户 ID 或移动设备 ID；</li>
+<li>电商网站上商品的用户评论列表：一个商品对应了一系列的评论；</li>
+<li>用户在手机 App 上的签到打卡信息：一天对应一系列用户的签到记录；</li>
+<li>应用网站上的网页访问信息：一个网页对应一系列的访问点击。</li>
+</ul>
+<p>我们知道，Redis 集合类型的特点就是一个键对应一系列的数据，所以非常适合用来存取这些数据。但是，在这些场景中，除了记录信息，我们往往还需要对集合中的数据进行统计，例如：</p>
+<ul>
+<li>在移动应用中，需要统计每天的新增用户数和第二天的留存用户数；</li>
+<li>在电商网站的商品评论中，需要统计评论列表中的最新评论；</li>
+<li>在签到打卡中，需要统计一个月内连续打卡的用户数；</li>
+<li>在网页访问记录中，需要统计独立访客（Unique Visitor，UV）量。</li>
+</ul>
+<p>通常情况下，我们面临的用户数量以及访问量都是巨大的，比如百万、千万级别的用户数量，或者千万级别、甚至亿级别的访问信息。所以，我们必须要选择能够非常高效地统计大量数据（例如亿级）的集合类型。</p>
+<p><strong>要想选择合适的集合，我们就得了解常用的集合统计模式。</strong>这节课，我就给你介绍集合类型常见的四种统计模式，包括聚合统计、排序统计、二值状态统计和基数统计。我会以刚刚提到的这四个场景为例，和你聊聊在这些统计模式下，什么集合类型能够更快速地完成统计，而且还节省内存空间。掌握了今天的内容，之后再遇到集合元素统计问题时，你就能很快地选出合适的集合类型了。</p>
+<h2 id="聚合统计">聚合统计</h2>
+<p>我们先来看集合元素统计的第一个场景：聚合统计。</p>
+<p>所谓的聚合统计，就是指统计多个集合元素的聚合结果，包括：统计多个集合的共有元素（交集统计）；把两个集合相比，统计其中一个集合独有的元素（差集统计）；统计多个集合的所有元素（并集统计）。</p>
+<p>在刚才提到的场景中，统计手机 App 每天的新增用户数和第二天的留存用户数，正好对应了聚合统计。</p>
+<p>要完成这个统计任务，我们可以用一个集合记录所有登录过 App 的用户 ID，同时，用另一个集合记录每一天登录过 App 的用户 ID。然后，再对这两个集合做聚合统计。我们来看下具体的操作。</p>
+<p>记录所有登录过 App 的用户 ID 还是比较简单的，我们可以直接使用 Set 类型，把 key 设置为 user:id，表示记录的是用户 ID，value 就是一个 Set 集合，里面是所有登录过 App 的用户 ID，我们可以把这个 Set 叫作累计用户 Set，如下图所示：</p>
+<p><img alt="" src="/assets/7ba0348cff526bcfae5f59b2.webp"/></p>
+<p>需要注意的是，累计用户 Set 中没有日期信息，我们是不能直接统计每天的新增用户的。所以，我们还需要把每一天登录的用户 ID，记录到一个新集合中，我们把这个集合叫作每日用户 Set，它有两个特点：</p>
+<ul>
+<li><p>key 是 user:id 以及当天日期，例如 <code>user:id:20200803</code>；</p></li>
+<li><p>value 是 Set 集合，记录当天登录的用户 ID。</p></li>
+</ul>
+<p><img alt="" src="/assets/0bc9634655a104d1541d9159.webp"/></p>
+<p>在统计每天的新增用户时，我们只用计算每日用户 Set 和累计用户 Set 的差集就行。</p>
+<p>我借助一个具体的例子来解释一下。</p>
+<p>假设我们的手机 App 在 2020 年 8 月 3 日上线，那么，8 月 3 日前是没有用户的。此时，累计用户 Set 是空集，当天登录的用户 ID 会被记录到 key 为 <code>user:id:20200803</code> 的 Set 中。所以，<code>user:id:20200803</code> 这个 Set 中的用户就是当天的新增用户。</p>
+<p>然后，我们计算累计用户 Set 和 <code>user:id:20200803</code>  Set 的并集结果，结果保存在 user:id 这个累计用户 Set 中，如下所示：</p>
+<pre><code class="language-shell">SUNIONSTORE  user:id  user:id  user:id:20200803 
+</code></pre>
+<p>此时，user:id 这个累计用户 Set 中就有了 8 月 3 日的用户 ID。等到 8 月 4 日再统计时，我们把 8 月 4 日登录的用户 ID 记录到 <code>user:id:20200804</code> 的 Set 中。接下来，我们执行 SDIFFSTORE 命令计算累计用户 Set 和 <code>user:id:20200804</code> Set 的差集，结果保存在 key 为 <code>user:new</code> 的 Set 中，如下所示：</p>
+<pre><code class="language-shell">SDIFFSTORE  user:new  user:id:20200804 user:id  
+</code></pre>
+<p>可以看到，这个差集中的用户 ID 在 <code>user:id:20200804</code> 的 Set 中存在，但是不在累计用户 Set 中。所以，user:new 这个 Set 中记录的就是 8 月 4 日的新增用户。</p>
+<p>当要计算 8 月 4 日的留存用户时，我们只需要再计算 <code>user:id:20200803</code> 和 <code>user:id:20200804</code> 两个 Set 的交集，就可以得到同时在这两个集合中的用户 ID 了，这些就是在 8 月 3 日登录，并且在 8 月 4 日留存的用户。执行的命令如下：</p>
+<pre><code class="language-shell">
+SINTERSTORE user:id:rem user:id:20200803 user:id:20200804
+</code></pre>
+<p>当你需要对多个集合进行聚合计算时，Set 类型会是一个非常不错的选择。不过，我要提醒你一下，这里有一个潜在的风险。</p>
+<p>Set 的差集、并集和交集的计算复杂度较高，在数据量较大的情况下，如果直接执行这些计算，会导致 Redis 实例阻塞。所以，我给你分享一个小建议：<strong>你可以从主从集群中选择一个从库，</strong><strong>让它专门负责聚合计算，或者是把数据读取到客户端，在客户端来完成聚合统计</strong>，这样就可以规避阻塞主库实例和其他从库实例的风险了。</p>
+<h2 id="排序统计">排序统计</h2>
+<p>接下来，我们再来聊一聊应对集合元素排序需求的方法。我以在电商网站上提供最新评论列表的场景为例，进行讲解。</p>
+<p>最新评论列表包含了所有评论中的最新留言，<strong>这就要求集合类型能对元素保序</strong>，也就是说，集合中的元素可以按序排列，这种对元素保序的集合类型叫作有序集合。</p>
+<p>在 Redis 常用的 4 个集合类型中（List、Hash、Set、Sorted Set），List 和 Sorted Set 就属于有序集合。</p>
+<p><strong>List 是按照元素进入 List 的顺序进行排序的，</strong><strong>而 Sorted Set 可以根据元素的权重来排序</strong>，我们可以自己来决定每个元素的权重值。比如说，我们可以根据元素插入 Sorted Set 的时间确定权重值，先插入的元素权重小，后插入的元素权重大。</p>
+<p>看起来好像都可以满足需求，我们该怎么选择呢？</p>
+<p>我先说说用 List 的情况。每个商品对应一个 List，这个 List 包含了对这个商品的所有评论，而且会按照评论时间保存这些评论，每来一个新评论，就用 LPUSH 命令把它插入 List 的队头。</p>
+<p>在只有一页评论的时候，我们可以很清晰地看到最新的评论，但是，在实际应用中，网站一般会分页显示最新的评论列表，一旦涉及到分页操作，List 就可能会出现问题了。</p>
+<p>假设当前的评论 List 是{A, B, C, D, E, F}（其中，A 是最新的评论，以此类推，F 是最早的评论），在展示第一页的 3 个评论时，我们可以用下面的命令，得到最新的三条评论 A、B、C：</p>
+<pre><code class="language-shell">LRANGE product1 0 2
+1) "A"
+2) "B"
+3) "C"
+</code></pre>
+<p>然后，再用下面的命令获取第二页的 3 个评论，也就是 D、E、F。</p>
+<pre><code class="language-shell">LRANGE product1 3 5
+1) "D"
+2) "E"
+3) "F"
+</code></pre>
+<p>但是，如果在展示第二页前，又产生了一个新评论 G，评论 G 就会被 LPUSH 命令插入到评论 List 的队头，评论 List 就变成了{G, A, B, C, D, E, F}。此时，再用刚才的命令获取第二页评论时，就会发现，评论 C 又被展示出来了，也就是 C、D、E。</p>
+<pre><code class="language-shell">LRANGE product1 3 5
+1) "C"
+2) "D"
+3) "E"
+</code></pre>
+<p>之所以会这样，关键原因就在于，List 是通过元素在 List 中的位置来排序的，当有一个新元素插入时，原先的元素在 List 中的位置都后移了一位，比如说原来在第 1 位的元素现在排在了第 2 位。所以，对比新元素插入前后，List 相同位置上的元素就会发生变化，用 LRANGE 读取时，就会读到旧元素。</p>
+<p>和 List 相比，Sorted Set 就不存在这个问题，因为它是根据元素的实际权重来排序和获取数据的。</p>
+<p>我们可以按评论时间的先后给每条评论设置一个权重值，然后再把评论保存到 Sorted Set 中。Sorted Set 的 ZRANGEBYSCORE 命令就可以按权重排序后返回元素。这样的话，即使集合中的元素频繁更新，Sorted Set 也能通过 ZRANGEBYSCORE 命令准确地获取到按序排列的数据。</p>
+<p>假设越新的评论权重越大，目前最新评论的权重是 N，我们执行下面的命令时，就可以获得最新的 10 条评论：</p>
+<pre><code class="language-shell">ZRANGEBYSCORE comments N-9 N
+</code></pre>
+<p>所以，在面对需要展示最新列表、排行榜等场景时，如果数据更新频繁或者需要分页显示，建议你优先考虑使用 Sorted Set。</p>
+<h2 id="二值状态统计">二值状态统计</h2>
+<p>现在，我们再来分析下第三个场景：二值状态统计。这里的二值状态就是指集合元素的取值就只有 0 和 1 两种。在签到打卡的场景中，我们只用记录签到（1）或未签到（0），所以它就是非常典型的二值状态，</p>
+<p>在签到统计时，每个用户一天的签到用 1 个 bit 位就能表示，一个月（假设是 31 天）的签到情况用 31 个 bit 位就可以，而一年的签到也只需要用 365 个 bit 位，根本不用太复杂的集合类型。这个时候，我们就可以选择 Bitmap。这是 Redis 提供的扩展数据类型。我来给你解释一下它的实现原理。</p>
+<p>Bitmap 本身是用 String 类型作为底层数据结构实现的一种统计二值状态的数据类型。String 类型是会保存为二进制的字节数组，所以，Redis 就把字节数组的每个 bit 位利用起来，用来表示一个元素的二值状态。你可以把 Bitmap 看作是一个 bit 数组。</p>
+<p>Bitmap 提供了 GETBIT/SETBIT 操作，使用一个偏移值 offset 对 bit 数组的某一个 bit 位进行读和写。不过，需要注意的是，Bitmap 的偏移量是从 0 开始算的，也就是说 offset 的最小值是 0。当使用 SETBIT 对一个 bit 位进行写操作时，这个 bit 位会被设置为 1。Bitmap 还提供了 BITCOUNT 操作，用来统计这个 bit 数组中所有“1”的个数。</p>
+<p>那么，具体该怎么用 Bitmap 进行签到统计呢？我还是借助一个具体的例子来说明。</p>
+<p>假设我们要统计 ID 3000 的用户在 2020 年 8 月份的签到情况，就可以按照下面的步骤进行操作。</p>
+<p>第一步，执行下面的命令，记录该用户 8 月 3 号已签到。</p>
+<pre><code class="language-shell">SETBIT uid:sign:3000:202008 2 1 
+</code></pre>
+<p>第二步，检查该用户 8 月 3 日是否签到。</p>
+<pre><code class="language-shell">GETBIT uid:sign:3000:202008 2 
+</code></pre>
+<p>第三步，统计该用户在 8 月份的签到次数。</p>
+<pre><code class="language-shell">BITCOUNT uid:sign:3000:202008
+</code></pre>
+<p>这样，我们就知道该用户在 8 月份的签到情况了，是不是很简单呢？接下来，你可以再思考一个问题：如果记录了 1 亿个用户 10 天的签到情况，你有办法统计出这 10 天连续签到的用户总数吗？</p>
+<p>在介绍具体的方法之前，我们要先知道，Bitmap 支持用 BITOP 命令对多个 Bitmap 按位做“与”“或”“异或”的操作，操作的结果会保存到一个新的 Bitmap 中。</p>
+<p>我以按位“与”操作为例来具体解释一下。从下图中，可以看到，三个 Bitmap bm1、bm2 和 bm3，对应 bit 位做“与”操作，结果保存到了一个新的 Bitmap 中（示例中，这个结果 Bitmap 的 key 被设为“resmap”）。</p>
+<p><img alt="" src="/assets/5a881c44f1a800ac141f4de7.webp"/></p>
+<p>回到刚刚的问题，在统计 1 亿个用户连续 10 天的签到情况时，你可以把每天的日期作为 key，每个 key 对应一个 1 亿位的 Bitmap，每一个 bit 对应一个用户当天的签到情况。</p>
+<p>接下来，我们对 10 个 Bitmap 做“与”操作，得到的结果也是一个 Bitmap。在这个 Bitmap 中，只有 10 天都签到的用户对应的 bit 位上的值才会是 1。最后，我们可以用 BITCOUNT 统计下 Bitmap 中的 1 的个数，这就是连续签到 10 天的用户总数了。</p>
+<p>现在，我们可以计算一下记录了 10 天签到情况后的内存开销。每天使用 1 个 1 亿位的 Bitmap，大约占 12MB 的内存（10^8/8/1024/1024），10 天的 Bitmap 的内存开销约为 120MB，内存压力不算太大。不过，在实际应用时，最好对 Bitmap 设置过期时间，让 Redis 自动删除不再需要的签到记录，以节省内存开销。</p>
+<p>所以，如果只需要统计数据的二值状态，例如商品有没有、用户在不在等，就可以使用 Bitmap，因为它只用一个 bit 位就能表示 0 或 1。在记录海量数据时，Bitmap 能够有效地节省内存空间。</p>
+<h2 id="基数统计">基数统计</h2>
+<p>最后，我们再来看一个统计场景：基数统计。基数统计就是指统计一个集合中不重复的元素个数。对应到我们刚才介绍的场景中，就是统计网页的 UV。</p>
+<p>网页 UV 的统计有个独特的地方，就是需要去重，一个用户一天内的多次访问只能算作一次。在 Redis 的集合类型中，Set 类型默认支持去重，所以看到有去重需求时，我们可能第一时间就会想到用 Set 类型。</p>
+<p>我们来结合一个例子看一看用 Set 的情况。</p>
+<p>有一个用户 user1 访问 page1 时，你把这个信息加到 Set 中：`</p>
+<pre><code class="language-shell">SADD page1:uv user1
+</code></pre>
+<p>用户 1 再来访问时，Set 的去重功能就保证了不会重复记录用户 1 的访问次数，这样，用户 1 就算是一个独立访客。当你需要统计 UV 时，可以直接用 SCARD 命令，这个命令会返回一个集合中的元素个数。</p>
+<p>但是，如果 page1 非常火爆，UV 达到了千万，这个时候，一个 Set 就要记录千万个用户 ID。对于一个搞大促的电商网站而言，这样的页面可能有成千上万个，如果每个页面都用这样的一个 Set，就会消耗很大的内存空间。</p>
+<p>当然，你也可以用 Hash 类型记录 UV。</p>
+<p>例如，你可以把用户 ID 作为 Hash 集合的 key，当用户访问页面时，就用 HSET 命令（用于设置 Hash 集合元素的值），对这个用户 ID 记录一个值“1”，表示一个独立访客，用户 1 访问 page1 后，我们就记录为 1 个独立访客，如下所示：</p>
+<pre><code class="language-shell">HSET page1:uv user1 1
+</code></pre>
+<p>即使用户 1 多次访问页面，重复执行这个 HSET 命令，也只会把 user1 的值设置为 1，仍然只记为 1 个独立访客。当要统计 UV 时，我们可以用 HLEN 命令统计 Hash 集合中的所有元素个数。</p>
+<p>但是，和 Set 类型相似，当页面很多时，Hash 类型也会消耗很大的内存空间。那么，有什么办法既能完成统计，还能节省内存吗？</p>
+<p>这时候，就要用到 Redis 提供的 HyperLogLog 了。</p>
+<p>HyperLogLog 是一种用于统计基数的数据集合类型，它的最大优势就在于，当集合元素数量非常多时，它计算基数所需的空间总是固定的，而且还很小。</p>
+<p>在 Redis 中，每个 HyperLogLog 只需要花费 12 KB 内存，就可以计算接近 2^64 个元素的基数。你看，和元素越多就越耗费内存的 Set 和 Hash 类型相比，HyperLogLog 就非常节省空间。</p>
+<p>在统计 UV 时，你可以用 PFADD 命令（用于向 HyperLogLog 中添加新元素）把访问页面的每个用户都添加到 HyperLogLog 中。</p>
+<pre><code class="language-shell">PFADD page1:uv user1 user2 user3 user4 user5
+</code></pre>
+<p>接下来，就可以用 PFCOUNT 命令直接获得 page1 的 UV 值了，这个命令的作用就是返回 HyperLogLog 的统计结果。</p>
+<pre><code class="language-shell">PFCOUNT page1:uv
+</code></pre>
+<p>关于 HyperLogLog 的具体实现原理，你不需要重点掌握，不会影响到你的日常使用，我就不多讲了。如果你想了解一下，课下可以看看<a href="https://en.wikipedia.org/wiki/HyperLogLog" target="_blank">这条链接</a>。</p>
+<p>不过，有一点需要你注意一下，HyperLogLog 的统计规则是基于概率完成的，所以它给出的统计结果是有一定误差的，标准误算率是 0.81%。这也就意味着，你使用 HyperLogLog 统计的 UV 是 100 万，但实际的 UV 可能是 101 万。虽然误差率不算大，但是，如果你需要精确统计结果的话，最好还是继续用 Set 或 Hash 类型。</p>
+<h2 id="小结">小结</h2>
+<p>这节课，我们结合统计新增用户数和留存用户数、最新评论列表、用户签到数以及网页独立访客量这 4 种典型场景，学习了集合类型的 4 种统计模式，分别是聚合统计、排序统计、二值状态统计和基数统计。为了方便你掌握，我把 Set、Sorted Set、Hash、List、Bitmap、HyperLogLog 的支持情况和优缺点汇总在了下面的表格里，希望你把这张表格保存下来，时不时地复习一下。</p>
+<p><img alt="" src="/assets/2ba26d92e534219a5d70a5dc.webp"/></p>
+<p>可以看到，Set 和 Sorted Set 都支持多种聚合统计，不过，对于差集计算来说，只有 Set 支持。Bitmap 也能做多个 Bitmap 间的聚合计算，包括与、或和异或操作。</p>
+<p>当需要进行排序统计时，List 中的元素虽然有序，但是一旦有新元素插入，原来的元素在 List 中的位置就会移动，那么，按位置读取的排序结果可能就不准确了。而 Sorted Set 本身是按照集合元素的权重排序，可以准确地按序获取结果，所以建议你优先使用它。</p>
+<p>如果我们记录的数据只有 0 和 1 两个值的状态，Bitmap 会是一个很好的选择，这主要归功于 Bitmap 对于一个数据只用 1 个 bit 记录，可以节省内存。</p>
+<p>对于基数统计来说，如果集合元素量达到亿级别而且不需要精确统计时，我建议你使用 HyperLogLog。</p>
+<p>当然，Redis 的应用场景非常多，这张表中的总结不一定能覆盖到所有场景。我建议你也试着自己画一张表，把你遇到的其他场景添加进去。长久积累下来，你一定能够更加灵活地把集合类型应用到合适的实践项目中。</p>
+<h2 id="每课一问">每课一问</h2>
+<p>依照惯例，我给你留个小问题。这节课，我们学习了 4 种典型的统计模式，以及各种集合类型的支持情况和优缺点，我想请你聊一聊，你还遇到过其他的统计场景吗？用的是怎样的集合类型呢？</p>
+<p>欢迎你在留言区写下你的思考和答案，和我交流讨论。如果你身边还有需要解决这些统计问题的朋友或同事，也欢迎你把今天的内容分享给他 / 她，我们下节课见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

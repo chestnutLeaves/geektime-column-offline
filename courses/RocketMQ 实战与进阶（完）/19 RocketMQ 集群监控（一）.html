@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>19 RocketMQ 集群监控（一） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">RocketMQ 实战与进阶（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">30 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>RocketMQ 实战与进阶（完）</strong><ul><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E6%90%AD%E5%BB%BA%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E7%AF%87.html">01 搭建学习环境准备篇</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/02%20RocketMQ%20%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%89%AB%E7%9B%B2%E7%AF%87.html">02 RocketMQ 核心概念扫盲篇</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%20API%20%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.html">03 消息发送 API 详解与版本变迁说明</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/04%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E8%B0%88%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81.html">04 结合实际应用场景谈消息发送</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/05%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.html">05 消息发送核心参数与工作原理详解</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/06%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">06 消息发送常见错误与解决方案</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/07%20%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E4%BD%BF%E7%94%A8%E5%8F%8A%E6%96%B9%E6%A1%88%E9%80%89%E5%9E%8B%E6%80%9D%E8%80%83.html">07 事务消息使用及方案选型思考</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%20API%20%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.html">08 消息消费 API 与版本变迁说明</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/09%20DefaultMQPushConsumer%20%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">09 DefaultMQPushConsumer 核心参数与工作原理</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/10%20DefaultMQPushConsumer%20%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">10 DefaultMQPushConsumer 使用示例与注意事项</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/11%20DefaultLitePullConsumer%20%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%AE%9E%E6%88%98.html">11 DefaultLitePullConsumer 核心参数与实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E5%86%8D%E8%81%8A%20DefaultLitePullConsumer%20%E7%9A%84%E4%BD%BF%E7%94%A8.html">12 结合实际场景再聊 DefaultLitePullConsumer 的使用</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E3%80%81%E6%B6%88%E6%81%AF%E8%BF%87%E6%BB%A4%E5%AE%9E%E6%88%98.html">13 结合实际场景顺序消费、消息过滤实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/14%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%A7%AF%E5%8E%8B%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98.html">14 消息消费积压问题排查实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/15%20RocketMQ%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%AE%9E%E6%88%98.html">15 RocketMQ 常用命令实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/16%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E6%91%B8%E9%AB%98.html">16 RocketMQ 集群性能摸高</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/17%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98.html">17 RocketMQ 集群性能调优</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/18%20RocketMQ%20%E9%9B%86%E7%BE%A4%E5%B9%B3%E6%BB%91%E8%BF%90%E7%BB%B4.html">18 RocketMQ 集群平滑运维</a></li><li><a class="active" aria-current="page" href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/19%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%B8%80%EF%BC%89.html">19 RocketMQ 集群监控（一）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/20%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%BA%8C%EF%BC%89.html">20 RocketMQ 集群监控（二）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/21%20RocketMQ%20%E9%9B%86%E7%BE%A4%E5%91%8A%E8%AD%A6.html">21 RocketMQ 集群告警</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/22%20RocketMQ%20%E9%9B%86%E7%BE%A4%E8%B8%A9%E5%9D%91%E8%AE%B0.html">22 RocketMQ 集群踩坑记</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/23%20%E6%B6%88%E6%81%AF%E8%BD%A8%E8%BF%B9%E3%80%81ACL%20%E4%B8%8E%E5%A4%9A%E5%89%AF%E6%9C%AC%E6%90%AD%E5%BB%BA.html">23 消息轨迹、ACL 与多副本搭建</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/24%20RocketMQ-Console%20%E5%B8%B8%E7%94%A8%E9%A1%B5%E9%9D%A2%E6%8C%87%E6%A0%87%E8%8E%B7%E5%8F%96%E9%80%BB%E8%BE%91.html">24 RocketMQ-Console 常用页面指标获取逻辑</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/25%20RocketMQ%20Nameserver%20%E8%83%8C%E5%90%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5.html">25 RocketMQ Nameserver 背后的设计理念</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/26%20Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98.html">26 Java 并发编程实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/27%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">27 从 RocketMQ 学基于文件的编程模式（一）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/28%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">28 从 RocketMQ 学基于文件的编程模式（二）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/29%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%20Netty%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7.html">29 从 RocketMQ 学 Netty 网络编程技巧</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/30%20RocketMQ%20%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E6%88%91%E8%A7%81.html">30 RocketMQ 学习方法之我见</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/19%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%B8%80%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="19 RocketMQ 集群监控（一）" id="title">19 RocketMQ 集群监控（一）</h1>
+<div><h3 id="前言">前言</h3>
+<p>在 RocketMQ 体系中，有集群、主题、消费组，集群又包括 NameSrv 和 Broker。本篇主要介绍 RocketMQ 的集群监控设计应该考虑哪些方面，以及如何实现。下一篇文章介绍主题、消费组方面的监控。本篇的介绍基于实战中 4 主 4 从，主从异步复制的架构模式。</p>
+<h3 id="监控项设计">监控项设计</h3>
+<p>集群监控的目的记录集群健康状态，具体监控项见下图：</p>
+<p><img alt="img" src="/assets/2ccb694397225fddf6fb8f9b.png"/></p>
+<h4 id="节点数量"><strong>节点数量</strong></h4>
+<p>如果集群中是 4 主 4 从架构，那么集群中会有 8 个 Broker 节点，下面通过 clusterList 命令可以看到有 8 个节点。当集群中节点数量小于 8 时，说明集群中有节点掉线。</p>
+<pre><code>$ bin/mqadmin clusterList -n x.x.x.x:9876
+RocketMQLog:WARN No appenders could be found for logger (io.netty.util.internal.PlatformDependent0).
+RocketMQLog:WARN Please initialize the logger system properly.
+#Cluster Name  #Broker Name         #BID  #Addr                  #Version                #InTPS(LOAD)       #OutTPS(LOAD) #PCWait(ms) #Hour #SPACE
+demo_mq        demo_mq_a            0     10.111.89.111:10911    V4_7_0                 380.96(0,0ms)       383.16(0,0ms)          0 557.15 0.2298
+demo_mq        demo_mq_a            1     10.111.89.110:10915    V4_7_0                 380.76(0,0ms)         0.00(0,0ms)          0 557.15 0.4734
+demo_mq        demo_mq_b            0     10.111.89.112:10911    V4_7_0                 391.86(0,0ms)       381.66(0,0ms)          0 557.22 0.2437
+demo_mq        demo_mq_b            1     10.111.89.110:10925    V4_7_0                 391.26(0,0ms)         0.00(0,0ms)          0 557.22 0.4734
+demo_mq        demo_mq_c            0     10.111.26.96:10911     V4_7_0                 348.37(0,0ms)       342.77(0,0ms)          0 557.22 0.2428
+demo_mq        demo_mq_c            1     10.111.26.91:10925     V4_7_0                 357.66(0,0ms)         0.00(0,0ms)          0 557.22 0.4852
+demo_mq        demo_mq_d            0     10.111.26.81:10911     V4_7_0                 421.16(0,0ms)       409.86(0,0ms)          0 557.18 0.2424
+demo_mq        demo_mq_d            1     10.111.26.91:10915     V4_7_0                 423.30(0,0ms)         0.00(0,0ms)          0 557.18 0.4852
+
+</code></pre>
+<h4 id="节点可用性"><strong>节点可用性</strong></h4>
+<p>检测集群中节点的是否可用也很重要，Broker 节点数量或者进程的检测不能保证节点是否可用。这个容易理解，比如 Broker 进程在，但是可能不能提供正常服务或者假死状态。我们可以通过定时向集群中各个 Broker 节点发送心跳的方式来检测。另外，记录发送的响应时间也很关键，响应时间过长，例如超过 5 秒，往往伴随着集群抖动，具体体现为客户端发送超时。</p>
+<p>可用性心跳检测：</p>
+<ul>
+<li>发送成功：表示该节点运行正常</li>
+<li>发送失败：表示该节点运行异常</li>
+</ul>
+<p>响应时间检测：</p>
+<ul>
+<li>响应正常：响应时间在几毫秒到几十毫秒，是比较合理的范围</li>
+<li>响应过长：响应时间大于 1 秒，甚至超过 5 秒，是不正常的，需要介入调查</li>
+</ul>
+<h4 id="集群写入-tps"><strong>集群写入 TPS</strong></h4>
+<p>在前面的文章中介绍了 RocketMQ 集群的性能摸高，文章中测试场景最高为 12 万多 TPS。那我们预计承载范围 4 万~6 万，留有一定的增长空间。持续监测集群写入的 TPS，使集群保持在我们预计的承载范围。从 clusterList 命令中，可以看到每个节点的 InTPS，将各个 Master 节点求和即为集群的 TPS。</p>
+<h4 id="集群写入-tps-变化率"><strong>集群写入 TPS 变化率</strong></h4>
+<p>考虑到过高的瞬时流量会使集群发生流控，那么集群写入的 TPS 变化率监控就比较重要了。我们可以在集群写入 TPS 监控数据的基础上通过时序数据库函数统计集群 TPS 在某一段时间内的变化率。</p>
+<h3 id="监控开发实战">监控开发实战</h3>
+<p>本小节中会给出监控设计的架构图示和示例代码，通过采集服务采集 RocketMQ 监控指标，并将其存储在时序数据库中，例如 InfluxDB。</p>
+<p><img alt="img" src="/assets/c10ead4c81a8a5c71071649d.png"/></p>
+<h4 id="准备工作"><strong>准备工作</strong></h4>
+<p>\1. 定时任务调度，以 10 秒钟为例：</p>
+<pre><code>ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1, new ThreadFactory() {
+  @Override
+  public Thread newThread(Runnable r) {
+      return new Thread(r,  "rocketMQ metrics collector");
+  }
+});
+executorService.scheduleAtFixedRate(new Runnable() {
+  @Override
+  public void run() {
+      // 指标收集方法 1 collectClusterNum()
+      // 指标收集方法 2 collectMetric2()
+  }
+}, 60, 10, TimeUnit.SECONDS);
+
+</code></pre>
+<p>\2. 获取 Broker TPS 时用到了 MQAdmin，下面是初始化代码：</p>
+<pre><code>public DefaultMQAdminExt getMqAdmin() throws MQClientException {
+  DefaultMQAdminExt defaultMQAdminExt = new DefaultMQAdminExt();
+  defaultMQAdminExt.setNamesrvAddr("x.x.x.x:9876");
+  defaultMQAdminExt.setInstanceName(Long.toString(System.currentTimeMillis()));
+  defaultMQAdminExt.setVipChannelEnabled(false);
+  defaultMQAdminExt.start();
+  return defaultMQAdminExt;
+}
+
+</code></pre>
+<p>\3. 发送 Producer 启动代码：</p>
+<pre><code>public DefaultMQProducer getMqProducer(){
+    DefaultMQProducer producer = new DefaultMQProducer("rt_collect_producer");
+    producer.setNamesrvAddr("");
+    producer.setVipChannelEnabled(false);
+    producer.setClientIP("mq producer-client-id-1");
+    try {
+        producer.start();
+    } catch (MQClientException e) {
+        e.getErrorMessage();
+    }
+    return producer;
+}
+
+</code></pre>
+<h4 id="收集集群节点数量"><strong>收集集群节点数量</strong></h4>
+<p>下面代码中统计了集群中的主节点和从节点总数量，定时调用该收集方法，并将其记录在时序数据中。</p>
+<pre><code>public void collectClusterNum() throws Exception {
+  DefaultMQAdminExt mqAdmin = getMqAdmin();
+  ClusterInfo clusterInfo = mqAdmin.examineBrokerClusterInfo();
+  int brokers = 0;
+  Set&lt;Map.Entry&lt;String, BrokerData&gt;&gt; entries = clusterInfo.getBrokerAddrTable().entrySet();
+  for (Map.Entry&lt;String, BrokerData&gt; entry : entries) {
+  brokers += entry.getValue().getBrokerAddrs().entrySet().size();
+  }
+  // 将 brokers 存储到时序数据库即可
+  System.out.println(brokers);
+}
+
+</code></pre>
+<h4 id="收集节点可用性"><strong>收集节点可用性</strong></h4>
+<p>集群中的每个 Broker 的可用性，可以通过定时发送信息到该 Broker 特定的主题来实现。例如：集群中有 broker-a、broker-b、broker-c、broker-d。那每个 broker-a 上有一个名字为“broker-a”的主题，其他节点同理。通过定时向该主题发送心跳来实现可用性。</p>
+<p>下面两个 ClusterRtTime 和 RtTime 分别为集群和 Broker 的收集的数据填充类。</p>
+<pre><code>public class ClusterRtTime {
+    private String cluster;
+
+    private List&lt;RtTime&gt; times;
+
+    private long timestamp = System.currentTimeMillis();
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getCluster() {
+        return cluster;
+    }
+
+    public void setCluster(String cluster) {
+        this.cluster = cluster;
+    }
+
+    public List&lt;RtTime&gt; getTimes() {
+        return times;
+    }
+
+    public void setTimes(List&lt;RtTime&gt; times) {
+        this.times = times;
+    }
+}
+
+public class RtTime {
+    private long rt;
+
+    private String brokerName;
+
+    private String status;
+
+    private int result;
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public long getRt() {
+        return rt;
+    }
+    public void setRt(long rt) {
+        this.rt = rt;
+    }
+    public String getBrokerName() {
+        return brokerName;
+    }
+    public void setBrokerName(String brokerName) {
+        this.brokerName = brokerName;
+    }
+}
+
+</code></pre>
+<p>以下方法为同步发送心跳检测实现，以 broker-a 为例，time.setRt 表示每次发送心跳的耗时，time.setResult 表示每次发送心跳的结果，成功还是失败。</p>
+<pre><code> public void collectRtTime() throws Exception {
+   DefaultMQAdminExt mqAdmin = getMqAdmin();
+   ClusterRtTime clusterRtTime = new ClusterRtTime();
+   ClusterInfo clusterInfo = null;
+   try {
+   clusterInfo = mqAdmin.examineBrokerClusterInfo();
+   } catch (Exception e) {
+   e.printStackTrace();
+   return;
+   }
+   clusterRtTime.setCluster("demo_mq");
+   List&lt;RtTime&gt; times = Lists.newArrayList();
+   for (Map.Entry&lt;String, BrokerData&gt; stringBrokerDataEntry : clusterInfo.getBrokerAddrTable().entrySet()) {
+   BrokerData brokerData = stringBrokerDataEntry.getValue();
+   String brokerName = brokerData.getBrokerName();
+   long begin = System.currentTimeMillis();
+   SendResult sendResult = null;
+   RtTime time = new RtTime();
+   time.setBrokerName(brokerName);
+   try {
+   byte[] TEST_MSG = "helloworld".getBytes();
+   sendResult = getMqProducer().send(new Message(brokerName, TEST_MSG));
+   long end = System.currentTimeMillis() - begin;
+   SendStatus sendStatus = sendResult.getSendStatus();
+   // 记录发送耗时情况
+   time.setRt(end);
+   // 记录发送是否成功情况
+   time.setStatus(sendStatus.name());
+   time.setResult(sendStatus.ordinal());
+   } catch (Exception e) {
+   time.setRt(-1);
+   time.setStatus("FAILED");
+   time.setResult(5);
+   }
+   times.add(time);
+   }
+   clusterRtTime.setTimes(times);
+   // 将 clusterRtTime 信息存储到时序数据库即可
+ }
+
+</code></pre>
+<h4 id="收集集群-tps"><strong>收集集群 TPS</strong></h4>
+<p>结合定时任务调度下面的收集集群 TPS 方法，将其存储到时序数据库中。如果 10 秒收集一次，那么 1 分钟可以收集 6 次集群 TPS。</p>
+<pre><code> public void collectClusterTps() throws Exception {
+ DefaultMQAdminExt mqAdmin = getMqAdmin();
+ ClusterInfo clusterInfo = mqAdmin.examineBrokerClusterInfo();
+ double totalTps = 0d;
+ for (Map.Entry&lt;String, BrokerData&gt; stringBrokerDataEntry : clusterInfo.getBrokerAddrTable().entrySet()) {
+            BrokerData brokerData = stringBrokerDataEntry.getValue();
+            // 选择 Master 节点
+            String brokerAddr = brokerData.getBrokerAddrs().get(MixAll.MASTER_ID);
+            if (StringUtils.isBlank(brokerAddr)) continue;
+            KVTable runtimeStatsTable = mqAdmin.fetchBrokerRuntimeStats(brokerAddr);
+            HashMap&lt;String, String&gt; runtimeStatus = runtimeStatsTable.getTable();
+            Double putTps = Math.ceil(Double.valueOf(runtimeStatus.get("putTps").split(" ")[0]));
+            totalTps = totalTps + putTps;
+  }
+  // 将 totalTps 存储到时序数据库即可
+  System.out.println(totalTps);
+}
+
+</code></pre>
+<h4 id="计算集群-tps-的变化率"><strong>计算集群 TPS 的变化率</strong></h4>
+<p>集群 TPS 的变化情况，我们可以通过时序数据库函数来实现。假设我们上面采集到的集群 TPS 写入到 InfluxDB 的 cluster_number_info 表中。下面语句表示 5 分钟内集群 Tps 的变化率。示例中 5 分钟内集群 TPS 变化了 12%，如果变化超过 50%，甚至 200%、300%，是需要我们去关注的，以免瞬时流量过高使集群发生流控，对业务造成超时影响。</p>
+<p>写入 TPS 的变化率 = (最大值 - 最小值)/中位数</p>
+<pre><code>&gt; select SPREAD(value)/MEDIAN(value) from cluster_number_info where clusterName='demo_mq' and "name"='totalTps' and "time" &gt; now()-5m ;
+name: cluster_number_info
+time                spread_median
+----                -------------
+1572941783075915928 0.12213740458015267
+</code></pre>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

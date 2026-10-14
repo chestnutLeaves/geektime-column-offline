@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12 限流降级与流量效果控制器（下） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">深入理解 Sentinel（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">21 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入理解 Sentinel（完）</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BC%9A%E4%B8%80%E6%AC%A1%E6%9C%8D%E5%8A%A1%E9%9B%AA%E5%B4%A9%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E7%BB%8F%E5%8E%86.html">01 开篇词：一次服务雪崩问题排查经历</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/02%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%A0%E7%A7%8D%E9%99%8D%E7%BA%A7%E6%96%B9%E5%BC%8F.html">02 为什么需要服务降级以及常见的几种降级方式</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%20Sentinel%EF%BC%8CSentinel%20%E4%B8%8E%20Hystrix%20%E7%9A%84%E5%AF%B9%E6%AF%94.html">03 为什么选择 Sentinel，Sentinel 与 Hystrix 的对比</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/04%20Sentinel%20%E5%9F%BA%E4%BA%8E%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E5%AE%9E%E6%97%B6%E6%8C%87%E6%A0%87%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1.html">04 Sentinel 基于滑动窗口的实时指标数据统计</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/05%20Sentinel%20%E7%9A%84%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B1%BB%E4%BB%8B%E7%BB%8D.html">05 Sentinel 的一些概念与核心类介绍</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/06%20Sentinel%20%E4%B8%AD%E7%9A%84%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E4%B8%8E%20Sentinel%20%E7%9A%84%E6%95%B4%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.html">06 Sentinel 中的责任链模式与 Sentinel 的整体工作流程</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/07%20Java%20SPI%20%E5%8F%8A%20SPI%20%E5%9C%A8%20Sentinel%20%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">07 Java SPI 及 SPI 在 Sentinel 中的应用</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E8%B5%84%E6%BA%90%E6%8C%87%E6%A0%87%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89.html">08 资源指标数据统计的实现全解析（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/09%20%E8%B5%84%E6%BA%90%E6%8C%87%E6%A0%87%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%85%A8%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89.html">09 资源指标数据统计的实现全解析（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/10%20%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B5%81%E9%87%8F%E6%95%88%E6%9E%9C%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%88%E4%B8%8A%EF%BC%89.html">10 限流降级与流量效果控制器（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/11%20%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B5%81%E9%87%8F%E6%95%88%E6%9E%9C%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%88%E4%B8%AD%EF%BC%89.html">11 限流降级与流量效果控制器（中）</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B5%81%E9%87%8F%E6%95%88%E6%9E%9C%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%88%E4%B8%8B%EF%BC%89.html">12 限流降级与流量效果控制器（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%87%AA%E9%80%82%E5%BA%94%E9%99%90%E6%B5%81.html">13 熔断降级与系统自适应限流</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/14%20%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E9%99%90%E6%B5%81%E4%B8%8E%E7%83%AD%E7%82%B9%E5%8F%82%E6%95%B0%E9%99%90%E6%B5%81.html">14 黑白名单限流与热点参数限流</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/15%20%E8%87%AA%E5%AE%9A%E4%B9%89%20ProcessorSlot%20%E5%AE%9E%E7%8E%B0%E5%BC%80%E5%85%B3%E9%99%8D%E7%BA%A7.html">15 自定义 ProcessorSlot 实现开关降级</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/16%20Sentinel%20%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%9A%E8%A7%84%E5%88%99%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE.html">16 Sentinel 动态数据源：规则动态配置</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/17%20Sentinel%20%E4%B8%BB%E6%B5%81%E6%A1%86%E6%9E%B6%E9%80%82%E9%85%8D.html">17 Sentinel 主流框架适配</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/18%20Sentinel%20%E9%9B%86%E7%BE%A4%E9%99%90%E6%B5%81%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">18 Sentinel 集群限流的实现（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/19%20Sentinel%20%E9%9B%86%E7%BE%A4%E9%99%90%E6%B5%81%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">19 Sentinel 集群限流的实现（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/20%20%E7%BB%93%E6%9D%9F%E8%AF%AD%EF%BC%9ASentinel%20%E5%AF%B9%E5%BA%94%E7%94%A8%E7%9A%84%E6%80%A7%E8%83%BD%E5%BD%B1%E5%93%8D%E5%A6%82%E4%BD%95%EF%BC%9F.html">20 结束语：Sentinel 对应用的性能影响如何？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/21%20%E7%95%AA%E5%A4%96%E7%AF%87%EF%BC%9ASentinel%201.8.0%20%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7%E6%96%B0%E7%89%B9%E6%80%A7%E8%A7%A3%E8%AF%BB.html">21 番外篇：Sentinel 1.8.0 熔断降级新特性解读</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Sentinel%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E4%B8%8E%E6%B5%81%E9%87%8F%E6%95%88%E6%9E%9C%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%88%E4%B8%8B%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12 限流降级与流量效果控制器（下）" id="title">12 限流降级与流量效果控制器（下）</h1>
+<div><h3 id="warmupcontroller">WarmUpController</h3>
+<p>Warm Up，冷启动。在应用升级重启时，应用自身需要一个预热的过程，预热之后才能到达一个稳定的性能状态，比如说，接口预热阶段完成 JIT 即时编译、完成一些单例对象的创建、线程池的创建、各种连接池的初始化、或者执行首次需要加锁执行的代码块。</p>
+<p>冷启动并非只在应用重启时需要，在一段时间没有访问的情况下，连接池存在大量过期连接需要待下次使用才移除掉并创建新的连接、一些热点数据缓存过期需要重新查数据库写入缓存等，这些场景下也需要冷启动。</p>
+<p>WarmUpController 支持设置冷启动周期（冷启动时长），默认为 10 秒，WarmUpController 在这 10 秒内会控制流量平缓的增长到限量阈值。例如，对某个接口限制 QPS 为 200，10 秒预热时间，那么这 10 秒内，相当于每秒的限流阈值分别为：5qps、15qps、35qps、70qps、90qps、115qps、145qps、170qps、190qps、200qps，当然，这组数据只是假设。</p>
+<p>如果要使用 WarmUpController，则限量规则阈值类型必须配置为 GRADE_QPS，例如：</p>
+<pre><code class="language-java"> FlowRule flowRule = new FlowRule();
+ // 限流 QPS 阈值
+ flowRule.setCount(200);
+ // 流量控制效果配置为使用冷启动控制器
+ flowRule.setControlBehavior(RuleConstant.CONTROL_BEHAVIOR_WARM_UP);
+ // 冷启动周期，单位秒
+ flowRule.setWarmUpPeriodSec(10); 
+ flowRule.setResource("GET:/hello");
+ FlowRuleManager.loadRules(Collections.singletonList(flowRule));
+
+</code></pre>
+<p>Sentinel 冷启动限流算法参考了 Guava 的 SmoothRateLimiter 实现的冷启动限流算法，但实现上有很大的区别，Sentinel 主要用于控制每秒的 QPS，不会控制每个请求的间隔时间，只要满足每秒通过的 QPS 即可。正因为与 Guava 的不同，官方文档目前也没有很详细的介绍具体实现，单看源码很难揣摩作者的思路，加上笔者水平有限，没能切底理解 Sentinel 冷启动限流算法实现的细节，因此我们也不过深的去分析 WarmUpController 的源码，只是结合 Guava 的实现算法作个简单介绍。</p>
+<p>Guava 的 SmoothRateLimiter 基于 Token Bucket 算法实现冷启动。我们先看一张图，从而了解 SmoothRateLimiter 中的一些基础知识。</p>
+<p><img alt="12-01-warmup01" src="/assets/589ceece60b74ffa162f0c03.jpg"/></p>
+<ul>
+<li>横坐标 storedPermits 代表存储桶中的令牌数量。</li>
+<li>纵坐标代表获取一个令牌需要的时间，即请求通过的时间间隔。</li>
+<li>stableInterval：稳定产生令牌的时间间隔。</li>
+<li>coldInterval：冷启动产生令牌的最大时间隔间，等于稳定产生令牌的时间间隔乘以冷启动系数（stableInterval*coldFactor）。</li>
+<li>thresholdPermits：从冷启动到正常的令牌桶中令牌数量的阈值，是判断是否需要进入冷启动阶段的依据。</li>
+<li>maxPermits：最大允许令牌桶中存放的令牌数。</li>
+<li>slope：直线的斜率，即令牌生产的速率。</li>
+<li>warmupPeriod：预热时长，即冷启动周期，对应上图中的梯形面积。</li>
+</ul>
+<p>在 SmoothRateLimiter 中，冷启动系数（coldFactor）的值固定为 3，假设我们设置冷启动周期为 10s、限流为每秒钟生成令牌数 200 个。那么 warmupPeriod 为 10s，将 1 秒中内的微秒数除以每秒钟需要生产的令牌数计算出生产令牌的时间间隔（stableInterval）为 5000μs，冷启动阶段最长的生产令牌的时间间隔（coldInterval）等于稳定速率下生产令牌的时间间隔（stableInterval）乘以 3，即 15000μs。</p>
+<pre><code class="language-java">// stableIntervalMicros：stableInterval 转为微秒
+// permitsPerSecond: 每秒钟生成的令牌数上限为 200
+double stableIntervalMicros = SECONDS.toMicros(1L) / permitsPerSecond;
+
+</code></pre>
+<p>由于 coldFactor 等于 3，且 coldInterval 等于 stableInterval 乘以 coldFactor，所以（coldInterval-stableInterval）是 stableInterval 的两倍，所以从 thresholdPermits 到 0 的时间是从 maxPermits 到 thresholdPermits 时间的一半，也就是 warmupPeriod 的一半。因为梯形的面积等于 warmupPeriod，所以长方形面积是梯形面积的一半，长方形的面积是 warmupPeriod/2。</p>
+<p>根据长方形的面积计算公式：</p>
+<blockquote>
+<p>面积 = 长 * 宽</p>
+</blockquote>
+<p>可得：</p>
+<blockquote>
+<p>stableInterval*thresholdPermits = <sup>1</sup>⁄<sub>2</sub> * warmupPeriod</p>
+</blockquote>
+<p>所以：</p>
+<blockquote>
+<p>thresholdPermits = 0.5 * warmupPeriod/stableInterval</p>
+</blockquote>
+<pre><code class="language-java">// warmupPeriodMicros: warmupPeriod 转为微秒
+// stableIntervalMicros：stableInterval 转为微秒
+thresholdPermits = 0.5 * warmupPeriodMicros / stableIntervalMicros;
+
+</code></pre>
+<p>所以：</p>
+<blockquote>
+<p>thresholdPermits = 0.5 * 10s/5000μs = 1000</p>
+</blockquote>
+<p>由梯形面积公式：</p>
+<blockquote>
+<p>(上低 + 下低) * 高 / 2</p>
+</blockquote>
+<p>可得：</p>
+<blockquote>
+<p>warmupPeriod = ((stableInterval + coldInterval) * (maxPermits-thresholdPermits))/2</p>
+</blockquote>
+<p>推出：</p>
+<blockquote>
+<p>maxPermits=thresholdPermits+2*warmupPeriod/(stableInterval+coldInterval)</p>
+</blockquote>
+<pre><code class="language-java">// warmupPeriodMicros: warmupPeriod 转为微秒
+// stableIntervalMicros：stableInterval 转为微秒
+// coldIntervalMicros: coldInterval 转为微秒
+maxPermits = thresholdPermits + 2.0 * warmupPeriodMicros / (stableIntervalMicros + coldIntervalMicros);
+
+</code></pre>
+<p>所以：</p>
+<blockquote>
+<p>maxPermits = 1000 + 2.0 * 10s/(20000μs) = 2000</p>
+</blockquote>
+<p>由直线的斜率计算公式：</p>
+<blockquote>
+<p>斜率 = (y2-y1)/(x2-x1)</p>
+</blockquote>
+<p>可得：</p>
+<blockquote>
+<p>slope = (coldInterval - stableInterval)/(maxPermits - thresholdPermits)</p>
+</blockquote>
+<p>所以：</p>
+<blockquote>
+<p>slope = 10000μs/1000 = 10</p>
+</blockquote>
+<p>正常情况下，令牌以稳定时间间隔 stableInterval 生产令牌，一秒钟内能生产的令牌就刚好是限流的阈值。</p>
+<p>如果初始化令牌数为 maxPermits 时，系统直接进入冷启动阶段，此时生产令牌的间隔时间最长，等于 coldInterval。如果此时以稳定的速率消费存储桶中的令牌，由于消费速度大于生产速度，那么令牌桶中的令牌将会慢慢减少，当 storedPermits 中的令牌数慢慢下降到 thresholdPermits 时，冷启动周期结束，将会以稳定的时间间隔 stableInterval 生产令牌。当消费速度等于生产速度，则稳定在限量阈值，而当消费速度远小于生产速度时，存储桶中的令牌数就会堆积，如果堆积的令牌数超过 thresholdPermits，又会是一轮新的冷启动。</p>
+<p>SmoothRateLimiter 中，在每个请求获取令牌时根据当前时间与上一次获取令牌时间（nextFreeTicketMicros）的间隔时间计算需要生成新的令牌数并加入到令牌桶中。在应用重启时或者接口很久没有被访问后，nextFreeTicketMicros 的值要么为 0，要么远远小于当前时间，当前时间与 nextFreeTicketMicros 的间隔非常大，导致第一次生产令牌数就会达到 maxPermits，所以就会进入冷启动阶段。</p>
+<p>SmoothRateLimiter#resync 方法源码如下。</p>
+<pre><code class="language-java">// 该方法是被加锁同步调用的
+void resync(long nowMicros) {
+    // nextFreeTicket: 上次生产令牌的时间
+    if (nowMicros &gt; nextFreeTicketMicros) {
+      // coolDownIntervalMicros 的值为 stableInterval
+      // nowMicros - nextFreeTicketMicros: 当前时间与上次生产令牌的时间间隔
+      double newPermits = (nowMicros - nextFreeTicketMicros) / coolDownIntervalMicros();
+      // 存储桶的数量 = 桶中剩余的 + 新生产的， 与 maxPermits 取最小值
+      storedPermits = min(maxPermits, storedPermits + newPermits);
+      // 更新上次生产令牌的时间
+      nextFreeTicketMicros = nowMicros;
+    }
+}
+
+</code></pre>
+<p>了解了 Guava 的 SmoothRateLimiter 实现后，我们再来看下 Sentinel 的 WarmUpController。</p>
+<pre><code class="language-java">public class WarmUpController implements TrafficShapingController {
+
+    protected double count;
+    private int coldFactor;
+    protected int warningToken = 0;
+    private int maxToken;
+    protected double slope;
+
+    protected AtomicLong storedTokens = new AtomicLong(0);
+    protected AtomicLong lastFilledTime = new AtomicLong(0);
+}
+
+</code></pre>
+<ul>
+<li>warningToken：等同于 thresholdPermits，稳定的令牌生产速率下令牌桶中存储的令牌数。</li>
+<li>maxToken：等同于 maxPermits，令牌桶的最大容量。</li>
+<li>storedTokens：令牌桶当前存储的令牌数量。</li>
+<li>lastFilledTime：上一次生产令牌的时间戳。</li>
+<li>coldFactor：冷启动系数，默认也是 3。</li>
+<li>slope：斜率，每秒放行请求数的增长速率。</li>
+<li>count：限流阈值 QPS。</li>
+</ul>
+<p>warningToken、maxToken、slope 的计算可参考 Guava 的 SmoothRateLimiter。</p>
+<p>WarmUpController#canPass 方法源码如下：</p>
+<pre><code class="language-java">@Override
+    public boolean canPass(Node node, int acquireCount, boolean prioritized) {
+        // 当前时间窗口通过的 qps
+        long passQps = (long) node.passQps();
+        // 前一个时间窗口通过的 qps
+        long previousQps = (long) node.previousPassQps();
+        // resync
+        syncToken(previousQps);
+
+        long restToken = storedTokens.get();
+        // 如果令牌桶中存放的令牌数超过警戒线，则进入冷启动阶段，调整 QPS。
+        if (restToken &gt;= warningToken) {
+            // 超过 thresholdPermits 的当前令牌数
+            long aboveToken = restToken - warningToken;
+            double warningQps = Math.nextUp(1.0 / (aboveToken * slope + 1.0 / count));
+            // 小于 warningQps 才放行
+            if (passQps + acquireCount &lt;= warningQps) {
+                return true;
+            }
+        } else {
+            // 未超过警戒线的情况下按正常限流，如果放行当前请求之后会导致通过的 QPS 超过阈值则拦截当前请求，
+            // 否则放行。
+            if (passQps + acquireCount &lt;= count) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+</code></pre>
+<p>canPass 方法中，首先获取当前存储桶的令牌数，如果大于 warningToken，则控制 QPS。根据当前令牌桶中存储的令牌数量超出 warningToken 的令牌数计算当前秒需要控制的 QPS 的阈值，这两行代码是关键。</p>
+<pre><code class="language-java">// restToken：当前令牌桶中的令牌数量
+long aboveToken = restToken - warningToken;
+// 1.0 表示 1 秒
+double warningQps = Math.nextUp(1.0 / (aboveToken * slope + 1.0 / count));
+
+</code></pre>
+<p>我们看图理解这个公式。</p>
+<p><img alt="12-01-warmup02" src="/assets/ecb319774cdec4990c3f08d0.png"/></p>
+<p>结合上图我们可以看出：</p>
+<ul>
+<li>图中的 x1 虚线的长度就等于 aboveToken。</li>
+<li>此时生产令牌的间隔时间等于 y1 的长度加上 stableInterval，在 Sentinel 中单位为秒。</li>
+</ul>
+<p>根据斜率和 x1 可计算出 y1 的值为：</p>
+<blockquote>
+<p>y1 = slope * aboveToken</p>
+</blockquote>
+<p>而 1.0/count 计算出来的值是正常情况下每隔多少毫秒生产一个令牌，即 stableInterval。</p>
+<p>所以计算 warningQps 的公式等同于：</p>
+<pre><code class="language-java">// 当前生产令牌的间隔时间：aboveToken * slope + stableInterval
+// 1.0 / 生产令牌间隔时间 = 当前 1 秒所能生产的令牌数量
+double warningQps = Math.nextUp(1.0 / (aboveToken * slope + stableInterval));
+
+</code></pre>
+<p>当前生产令牌的间隔时间为：</p>
+<blockquote>
+<p>aboveToken * slope + stableInterval = stableInterval + y1；</p>
+</blockquote>
+<p>当前每秒所能生产的令牌数为：1.0/(stableInterval+y1)。</p>
+<p>所以 warningQps 就等于当前每秒所能生产的令牌数。</p>
+<p>Sentinel 中的 resync 与 SmoothRateLimiter 的 resync 方法不同，Sentinel 每秒只生产一次令牌。WarmUpController 的 syncToken 方法源码如下：</p>
+<pre><code class="language-java">   // passQps：上一秒通过的 QPS 总数 
+   protected void syncToken(long passQps) {
+        long currentTime = TimeUtil.currentTimeMillis();
+        // 去掉毫秒，取秒
+        currentTime = currentTime - currentTime % 1000;
+        long oldLastFillTime = lastFilledTime.get();
+        // 控制每秒只更新一次
+        if (currentTime &lt;= oldLastFillTime) {
+            return;
+        }
+
+        long oldValue = storedTokens.get();
+        // 计算新的存储桶存储的令牌数
+        long newValue = coolDownTokens(currentTime, passQps);
+        if (storedTokens.compareAndSet(oldValue, newValue)) {
+            // storedTokens 扣减上个时间窗口的 qps
+            long currentValue = storedTokens.addAndGet(-passQps);
+            if (currentValue &lt; 0) {
+                storedTokens.set(0L);
+            }
+            lastFilledTime.set(currentTime);
+        }
+    }
+
+</code></pre>
+<p>Sentinel 并不是在每个请求通过时从桶中移除 Token，而是每秒在更新存储桶的令牌数时，再扣除上一秒消耗的令牌数量，上一秒消耗的令牌数量等于上一秒通过的请求数，这就是官方文档所写的每秒会自动掉落令牌。减少每一次请求都使用 CAS 更新令牌桶的令牌数可以降低 Sentinel 对应用性能的影响，这是非常巧妙的做法。</p>
+<blockquote>
+<p>更新令牌桶中的令牌总数 = 当前令牌桶中剩余的令牌总数 + 当前需要生成的令牌数（1 秒时间可生产的令牌总数）。</p>
+</blockquote>
+<p>coolDownTokens 方法的源码如下：</p>
+<pre><code class="language-java">   //  currentTime： 当前时间戳，单位为秒，但后面 3 位全为 0
+   //  passQps：上一秒通过的 QPS
+   private long coolDownTokens(long currentTime, long passQps) {
+        long oldValue = storedTokens.get();
+        long newValue = oldValue;
+        // 添加令牌的判断前提条件: 当令牌的消耗远低于警戒线的时候
+        if (oldValue &lt; warningToken) {
+            newValue = (long) (oldValue + (currentTime - lastFilledTime.get()) * count / 1000);
+        } else if (oldValue &gt; warningToken) {
+            // 上一秒通过的请求数少于限流阈值的 1/coldFactor 时
+            if (passQps &lt; (int) count / coldFactor) {
+                newValue = (long) (oldValue + (currentTime - lastFilledTime.get()) * count / 1000);
+            }
+        }
+        return Math.min(newValue, maxToken);
+    }
+
+</code></pre>
+<p>其中 (currentTime - lastFilledTime.get()) 为当前时间与上一次生产令牌时间的间隔时间，虽然单位为毫秒，但是已经去掉了毫秒的部分（毫秒部分全为 0）。如果 currentTime - lastFilledTime.get() 等于 1 秒，根据 1 秒等于 1000 毫秒，那么新生成的令牌数（newValue）等于限流阈值（count）。</p>
+<pre><code class="language-java">newValue = oldValue + 1000 * count / 1000
+         = oldValue + count
+
+</code></pre>
+<p>如果是很久没有访问的情况下，lastFilledTime 远小于 currentTime，那么第一次生产的令牌数量将等于 maxToken。</p>
+<p>参考文献：</p>
+<ul>
+<li><a href="https://blog.wangqi.love/articles/Java/Guava RateLimiter分析.html" target="_blank">https://blog.wangqi.love/articles/Java/Guava RateLimiter 分析.html</a></li>
+<li><a href="https://www.javadoop.com/post/rate-limiter" target="_blank">https://www.javadoop.com/post/rate-limiter</a></li>
+<li><a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/util/concurrent/SmoothRateLimiter.java" target="_blank">https://github.com/google/guava/blob/master/guava/src/com/google/common/util/concurrent/SmoothRateLimiter.java</a></li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

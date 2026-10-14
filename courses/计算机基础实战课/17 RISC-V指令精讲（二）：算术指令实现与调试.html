@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>17 RISC-V指令精讲（二）：算术指令实现与调试 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">计算机基础实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">55 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>计算机基础实战课</strong><ul><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E7%BB%83%E5%A5%BD%E5%9F%BA%E6%9C%AC%E5%8A%9F%EF%BC%8C%E4%BC%98%E7%A7%80%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF%E7%AC%AC%E4%B8%80%E6%AD%A5.html">00 开篇词 练好基本功，优秀工程师成长第一步</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/01%20CISC%20%26%20RISC%EF%BC%9A%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5%EF%BC%8C%E4%BD%95%E8%87%B3%E4%BA%8E%E6%AD%A4.html">01 CISC &amp; RISC：从何而来，何至于此</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/02%20RISC%E7%89%B9%E6%80%A7%E4%B8%8E%E5%8F%91%E5%B1%95%EF%BC%9ARISC-V%E5%87%AD%E4%BB%80%E4%B9%88%E6%88%90%E4%B8%BA%E2%80%9C%E5%8D%8A%E5%AF%BC%E4%BD%93%E8%A1%8C%E4%B8%9A%E7%9A%84Linux%E2%80%9D%EF%BC%9F.html">02 RISC特性与发展：RISC-V凭什么成为“半导体行业的Linux”？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E7%A1%AC%E4%BB%B6%E8%AF%AD%E8%A8%80%E7%AD%91%E5%9F%BA%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%A1%AC%E4%BB%B6%E8%AF%AD%E8%A8%80%E5%BC%80%E5%90%AF%E6%89%8B%E5%86%99CPU%E4%B9%8B%E6%97%85.html">03 硬件语言筑基（一）：从硬件语言开启手写CPU之旅</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E7%A1%AC%E4%BB%B6%E8%AF%AD%E8%A8%80%E7%AD%91%E5%9F%BA%EF%BC%88%E4%BA%8C%EF%BC%89_%20%E4%BB%A3%E7%A0%81%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%9F%E6%88%90%E5%85%B7%E4%BD%93%E7%94%B5%E8%B7%AF%E7%9A%84%EF%BC%9F.html">04 硬件语言筑基（二）_ 代码是怎么生成具体电路的？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E6%8C%87%E4%BB%A4%E6%9E%B6%E6%9E%84%EF%BC%9ARISC-V%E5%9C%A8CPU%E8%AE%BE%E8%AE%A1%E4%B8%8A%E5%88%B0%E5%BA%95%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8A%BF%EF%BC%9F.html">05 指令架构：RISC-V在CPU设计上到底有哪些优势？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%BF%B7%E4%BD%A0CPU%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%96%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0.html">06 手写CPU（一）：迷你CPU架构设计与取指令实现</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%87%E4%BB%A4%E8%AF%91%E7%A0%81%E6%A8%A1%E5%9D%97%EF%BC%9F.html">07 手写CPU（二）：如何实现指令译码模块？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%87%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9D%97%EF%BC%9F.html">08 手写CPU（三）：如何实现指令执行模块？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0CPU%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E8%AE%BF%E5%AD%98%E9%98%B6%E6%AE%B5%EF%BC%9F.html">09 手写CPU（四）：如何实现CPU流水线的访存阶段？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9ACPU%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%86%99%E5%9B%9E%E6%A8%A1%E5%9D%97%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">10 手写CPU（五）：CPU流水线的写回模块如何实现？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E6%89%8B%E5%86%99CPU%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E6%88%91%E4%BB%AC%E7%9A%84CPU%E8%B7%91%E8%B5%B7%E6%9D%A5%EF%BC%9F.html">11 手写CPU（六）：如何让我们的CPU跑起来？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/12%20QEMU%EF%BC%9A%E6%94%AF%E6%8C%81RISC-V%E7%9A%84QEMU%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%EF%BC%9F.html">12 QEMU：支持RISC-V的QEMU如何构建？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/13%20%E5%B0%8F%E8%AF%95%E7%89%9B%E5%88%80%EF%BC%9A%E8%B7%91%E9%80%9ARISC-V%E5%B9%B3%E5%8F%B0%E7%9A%84Hello%20World%E7%A8%8B%E5%BA%8F.html">13 小试牛刀：跑通RISC-V平台的Hello World程序</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E8%B5%B0%E8%BF%9BC%E8%AF%AD%E8%A8%80%EF%BC%9A%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80%E6%80%8E%E6%A0%B7%E6%8A%BD%E8%B1%A1%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91%EF%BC%9F.html">14 走进C语言：高级语言怎样抽象执行逻辑？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/15%20C%E4%B8%8E%E6%B1%87%E7%BC%96%EF%BC%9A%E6%8F%AD%E7%A7%98C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E2%80%9C%E6%90%AC%E7%A0%96%E2%80%9D%E6%97%A5%E5%B8%B8.html">15 C与汇编：揭秘C语言编译器的“搬砖”日常</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/16%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E7%AE%97%E6%9C%AF%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">16 RISC-V指令精讲（一）：算术指令实现与调试</a></li><li><a class="active" aria-current="page" href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/17%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%AE%97%E6%9C%AF%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">17 RISC-V指令精讲（二）：算术指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/18%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">18 RISC-V指令精讲（三）：跳转指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/19%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">19 RISC-V指令精讲（四）：跳转指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/20%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E5%8E%9F%E5%AD%90%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">20 RISC-V指令精讲（五）：原子指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/21%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E5%85%AD%EF%BC%89%EF%BC%9A%E5%8A%A0%E8%BD%BD%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">21 RISC-V指令精讲（六）：加载指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/22%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%B8%83%EF%BC%89%EF%BC%9A%E8%AE%BF%E5%AD%98%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.html">22 RISC-V指令精讲（七）：访存指令实现与调试</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%EF%BC%9A%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%9C%B0%E5%9D%80%E7%9A%84%E4%B8%89%E7%A7%8D%E4%BA%A7%E7%94%9F%E6%96%B9%E5%BC%8F.html">23 内存地址空间：程序中地址的三种产生方式</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E8%99%9A%E5%AE%9E%E7%BB%93%E5%90%88%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98.html">24 虚实结合：虚拟内存和物理内存</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/25%20%E5%A0%86%26%E6%A0%88%EF%BC%9A%E5%A0%86%E4%B8%8E%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E5%BA%94%E7%94%A8.html">25 堆&amp;栈：堆与栈的区别和应用</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/26%20%E5%BB%B6%E8%BF%9F%E5%88%86%E9%85%8D%EF%BC%9A%E6%8F%90%E9%AB%98%E5%86%85%E5%AD%98%E5%88%A9%E7%94%A8%E7%8E%87%E7%9A%84%E4%B8%89%E7%A7%8D%E6%9C%BA%E5%88%B6.html">26 延迟分配：提高内存利用率的三种机制</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E5%BA%94%E7%94%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9ALinux%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html">27 应用内存管理：Linux的应用与内存管理</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%B9%B6%E8%A1%8C%E6%89%A7%E8%A1%8C%EF%BC%9F.html">28 进程调度：应用为什么能并行执行？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E5%BA%94%E7%94%A8%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E8%AF%A6%E8%A7%A3Linux%E8%BF%9B%E7%A8%8BIPC.html">29 应用间通信（一）：详解Linux进程IPC</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%20%E5%BA%94%E7%94%A8%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%AF%A6%E8%A7%A3Linux%E8%BF%9B%E7%A8%8BIPC.html">30  应用间通信（二）：详解Linux进程IPC</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E5%A4%96%E8%AE%BE%E9%80%9A%E4%BF%A1%EF%BC%9AIO%20Cache%E4%B8%8EIO%E8%B0%83%E5%BA%A6.html">31 外设通信：IO Cache与IO调度</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/32%20IO%E7%AE%A1%E7%90%86%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E5%A4%96%E8%AE%BE%EF%BC%9F.html">32 IO管理：Linux如何管理多个外设？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/33%20lotop%E4%B8%8Elostat%E5%91%BD%E4%BB%A4%EF%BC%9A%E8%81%8A%E8%81%8A%E5%91%BD%E4%BB%A4%E8%83%8C%E5%90%8E%E7%9A%84%E6%95%85%E4%BA%8B%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">33 lotop与lostat命令：聊聊命令背后的故事与工作原理</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/34%20%E6%96%87%E4%BB%B6%E4%BB%93%E5%BA%93%EF%BC%9A%E5%88%9D%E8%AF%86%E6%96%87%E4%BB%B6%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html">34 文件仓库：初识文件与文件系统</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/35%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E5%AD%98%E6%94%BE%E6%96%87%E4%BB%B6%EF%BC%9F.html">35 Linux文件系统（一）：Linux如何存放文件？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/36%20Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ALinux%E5%A6%82%E4%BD%95%E5%AD%98%E6%94%BE%E6%96%87%E4%BB%B6%EF%BC%9F.html">36 Linux文件系统（二）：Linux如何存放文件？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/37%20%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">37 浏览器原理（一）：浏览器为什么要用多进程模型？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/38%20%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%B8%B2%E6%9F%93%E8%AF%A6%E8%A7%A3.html">38 浏览器原理（二）：浏览器进程通信与网络渲染详解</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/39%20%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%EF%BC%9AV8%20%E6%89%A7%E8%A1%8C%20JS%20%E4%BB%A3%E7%A0%81%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B.html">39 源码解读：V8 执行 JS 代码的全过程</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/40%20%E5%86%85%E5%8A%9F%E5%BF%83%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%86%85%E6%A0%B8%E5%92%8C%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">40 内功心法（一）：内核和后端通用的设计思想有哪些？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/41%20%E5%86%85%E5%8A%9F%E5%BF%83%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%86%85%E6%A0%B8%E5%92%8C%E5%90%8E%E7%AB%AF%E9%80%9A%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">41 内功心法（二）：内核和后端通用的设计思想有哪些？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/42%20%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%EF%BC%9A%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E5%B7%A5%E5%85%B7eBPF%E5%92%8C%E8%B0%83%E4%BC%98%E6%96%B9%E6%B3%95.html">42 性能调优：性能调优工具eBPF和调优方法</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%85%88%E7%9D%B9%E4%B8%BA%E5%BF%AB%EF%BC%9A%E8%BF%B7%E4%BD%A0CPU%E9%A1%B9%E7%9B%AE%E6%95%88%E6%9E%9C%E6%BC%94%E7%A4%BA.html">先睹为快：迷你CPU项目效果演示</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9001%20%E4%BA%91%E8%AE%A1%E7%AE%97%E5%9F%BA%E7%A1%80%EF%BC%9A%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E6%90%AD%E5%BB%BA%E4%B8%80%E6%AC%BEIAAS%E8%99%9A%E6%8B%9F%E5%8C%96%E5%B9%B3%E5%8F%B0.html">加餐01 云计算基础：自己动手搭建一款IAAS虚拟化平台</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9002%20%E5%AD%A6%E4%B9%A0%E6%94%BB%E7%95%A5%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%26%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%8C%E7%A9%B6%E7%AB%9F%E6%80%8E%E4%B9%88%E5%AD%A6%EF%BC%9F.html">加餐02 学习攻略（一）：大数据&amp;云计算，究竟怎么学？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9003%20%E5%AD%A6%E4%B9%A0%E6%94%BB%E7%95%A5%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%A4%A7%E6%95%B0%E6%8D%AE%26%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%8C%E7%A9%B6%E7%AB%9F%E6%80%8E%E4%B9%88%E5%AD%A6%EF%BC%9F.html">加餐03 学习攻略（二）：大数据&amp;云计算，究竟怎么学？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9004%20%E8%B0%88%E8%B0%88%E5%AE%B9%E5%99%A8%E4%BA%91%E4%B8%8E%E5%92%8CCaaS%E5%B9%B3%E5%8F%B0.html">加餐04 谈谈容器云与和CaaS平台</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%9005%20%E5%88%86%E5%B8%83%E5%BC%8F%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%8E%E6%99%BA%E8%83%BDSaaS.html">加餐05 分布式微服务与智能SaaS</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%9B%BD%E5%BA%86%E7%AD%96%E5%88%9201%20%E7%9F%A5%E8%AF%86%E6%8C%91%E6%88%98%E8%B5%9B%EF%BC%9A%E6%A3%80%E9%AA%8C%E4%B8%80%E4%B8%8B%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C%E5%90%A7%EF%BC%81.html">国庆策划01 知识挑战赛：检验一下学习成果吧！</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%9B%BD%E5%BA%86%E7%AD%96%E5%88%9202%20%E6%9D%A5%E8%87%AA%E8%AF%BE%E4%BB%A3%E8%A1%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A.html">国庆策划02 来自课代表的学习锦囊</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%9B%BD%E5%BA%86%E7%AD%96%E5%88%9203%20%E6%8F%AD%E7%A7%98%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%93%8D%E4%BD%9C%E5%92%8C%E6%A0%88%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6.html">国庆策划03 揭秘代码优化操作和栈保护机制</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%B8%A9%E6%95%85%E7%9F%A5%E6%96%B0%20%E6%80%9D%E8%80%83%E9%A2%98%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%80%EF%BC%89.html">温故知新 思考题参考答案（一）</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E6%88%91%E6%98%AF%E6%80%8E%E6%A0%B7%E5%AD%A6%E4%B9%A0Verilog%E7%9A%84%EF%BC%9F.html">用户故事 我是怎样学习Verilog的？</a></li><li><a href="/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%BF%83%E8%8B%A5%E6%9C%89%E6%89%80%E5%90%91%E5%BE%80%EF%BC%8C%E4%BD%95%E6%83%A7%E9%81%93%E9%98%BB%E4%B8%94%E9%95%BF.html">结束语 心若有所向往，何惧道阻且长</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/17%20RISC-V%E6%8C%87%E4%BB%A4%E7%B2%BE%E8%AE%B2%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%AE%97%E6%9C%AF%E6%8C%87%E4%BB%A4%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B0%83%E8%AF%95.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="17 RISC-V指令精讲（二）：算术指令实现与调试" id="title">17 RISC-V指令精讲（二）：算术指令实现与调试</h1>
+<div><p>你好，我是LMOS。</p>
+<p>上节课，我们学习了算术指令中的加减指令和比较指令。不过一个CPU只能实现这两类指令还不够。如果你学过C语言，应该对“&lt;&lt;、&gt;&gt;、&amp;、|、!”这些运算符并不陌生，这些运算符都需要CPU提供逻辑和移位指令才可以实现。</p>
+<p>今天我们就继续学习逻辑指令（and、or、xor）和移位指令 （sll、srl、sra）。代码你可以从<a href="https://gitee.com/lmos/Geek-time-computer-foundation/tree/master/lesson16~17" target="_blank">这里</a>下载。话不多说，我们开始吧。</p>
+<h2 id="逻辑指令">逻辑指令</h2>
+<p>从CPU芯片电路角度来看，其实CPU更擅长执行逻辑操作，如与、或、异或。至于为什么，你可以看看CPU的基础门电路。</p>
+<p>RISC-V指令集中包含了三种逻辑指令，这些指令又分为立即数版本和寄存器版本，分别是andi、and、ori、or、xori、xor这六条指令。我们学习这些指令的方法和上节课类似，也涉及到写代码验证调试的部分。</p>
+<h3 id="按位与操作-andi-and指令">按位与操作：andi、and指令</h3>
+<p>首先我们来学习一下andi、and指令，它们的形式如下所示：</p>
+<pre><code>andi rd，rs1，imm
+#andi 立即数按位与指令
+#rd 目标寄存器
+#rs1 源寄存器1
+#imm 立即数
+and rd，rs1，rs2
+#and 寄存器按位与指令
+#rd 目标寄存器
+#rs1 源寄存器1
+#rs2 源寄存器2
+</code></pre>
+<p>上述代码中rd、rs1、rs2可以是任何通用寄存器，imm是立即数。</p>
+<p>andi、and这两个指令完成的操作，我们用伪代码描述如下：</p>
+<pre><code>//andi
+rd = rs1 &amp; imm
+//and
+rd = rs1 &amp; rs2
+</code></pre>
+<p>按位与的操作，就是把rs1与imm或者rs1与rs2其中的每个数据位两两相与。两个位都是1，结果为1，否则结果为0。</p>
+<p>下面我们在工程目录下建立一个and.S文件，写代码验证一下这两个指令，如下所示：</p>
+<pre><code>.globl andi_ins
+andi_ins:
+    andi a0，a0，0xff       #a0 = a0&amp;0xff，a0是C语言调用者传递的参数，a0也是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+
+.globl and_ins
+and_ins:
+    and a0，a0，a1          #a0 = a0&amp;a1，a0、a1是C语言调用者传递的参数，a0是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+</code></pre>
+<p>这里我们已经写好了andi_ins与and_ins函数，分别去执行andi和and指令。</p>
+<p>andi指令是拿a0寄存器和立即数0xff进行与操作。由于立即数是0xff，所以总是返回a0的低8位数据；and指令则是拿a0和a1寄存器进行与操作，再把结果写入到a0寄存器。</p>
+<p>下面我们用VSCode打开工程按下“F5”调试一下，如下所示：</p>
+<p><img alt="图片" src="/assets/7a3ae67294c6a029b2a0b09d.jpg"/></p>
+<p>上图中是执行完andi a0，a0，0xff指令之后，执行jr ra指令之前的状态。可以看到，a0寄存器中的值确实已经变成2了，这说明运算的结果是符合预期的。</p>
+<p>andi_ins函数返回后，输出的结果如下图所示：</p>
+<p><img alt="图片" src="/assets/1d7d448233772b37f8077612.jpg"/></p>
+<p>因为2的二进制数据是（0b00000000000000000000000000000010）与上0xff的二进制数据是（0b00000000000000000000000011111111）结果确实是2，所以返回2，结果是正确的。</p>
+<p>接下来，我们对and_ins函数进行调试。</p>
+<p><img alt="图片" src="/assets/d9f51b870f7e4da1b0adf48e.jpg"/></p>
+<p>上图展示的是执行完and a0，a0，a1指令之后，执行jr ra指令之前的状态。我们看到a0寄存器中的值已经变成了1，这说明运算的结果是正确的。</p>
+<p>and_ins函数返回后，输出的结果如下图所示：</p>
+<p><img alt="图片" src="/assets/c6583af65ed4d032834458ca.jpg"/></p>
+<p>上图中因为1的二进制数据是（0b00000000000000000000000000000001）与上1的二进制数据是（0b00000000000000000000000000000001）确实是1，所以返回1，结果完全正确。</p>
+<h3 id="按位或操作-ori-or指令">按位或操作：ori、or指令</h3>
+<p>按位与操作说完了，我们接着来学习一下或指令ori、or，它们的形式如下：</p>
+<pre><code>ori rd，rs1，imm
+#ori 立即数按位或指令
+#rd 目标寄存器
+#rs1 源寄存器1
+#imm 立即数
+or rd，rs1，rs2
+#or 寄存器按位或指令
+#rd 目标寄存器
+#rs1 源寄存器1
+#rs2 源寄存器2
+</code></pre>
+<p>同样地，上述代码中rd、rs1、rs2可以是任何通用寄存器，imm表示立即数。</p>
+<p>我们还是从伪代码的描述入手，看看ori、or完成的操作。</p>
+<pre><code>//ori
+rd = rs1 | imm
+//or
+rd = rs1 | rs2
+</code></pre>
+<p>按位或的操作就是把rs1与imm或者rs1与rs2其中的每个数据位两两相或，两个位有一位为1，结果为1，否则结果为0。</p>
+<p>我们在and.S文件中写写代码，做个验证，如下所示：</p>
+<pre><code>.globl ori_ins
+ori_ins:
+    ori a0，a0，0           #a0 = a0|0，a0是C语言调用者传递的参数，a0也是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+
+.globl or_ins
+or_ins:
+    or a0，a0，a1           #a0 = a0|a1，a0、a1是C语言调用者传递的参数，a0是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+</code></pre>
+<p>上述代码中ori_ins与or_ins函数，分别执行了ori和or指令。</p>
+<p>ori指令是拿a0寄存器和立即数0进行或操作，由于立即数是0，所以总是返回a0原本的数据；or指令是拿a0和a1寄存器进行或操作，再把结果写入到a0寄存器。</p>
+<p>我们还是到VSCode里，按下“F5”调试一下，如下所示：</p>
+<p><img alt="图片" src="/assets/2f4375b702420b64780e2352.jpg"/></p>
+<p>上图中是执行完ori a0，a0，0指令之后，执行jr ra指令之前的状态。如果a0寄存器中的值确实已经变成0xf0f0了，就说明运算的结果正确。</p>
+<p>ori_ins函数返回后，输出的结果如下图所示：</p>
+<p><img alt="图片" src="/assets/6b045298423d79d3144ae0be.jpg"/></p>
+<p>因为0xf0f0的二进制数据是（0b00000000000000001111000011110000）或上0的二进制数据是（0b00000000000000000000000000000000）按位或操作是“有1为1”，所以返回0xf0f0，结果是正确的。</p>
+<p>我们再用同样的方法调试一下or_ins函数，如下图所示：</p>
+<p><img alt="图片" src="/assets/a555a4c9c8de48569f314437.jpg"/></p>
+<p>上图展示的是执行完or a0，a0，a1指令之后，执行jr ra指令之前的状态。如果我们看到a0寄存器中的值确实已经变成0x1111了，就说明运算的结果正确，符合预期。</p>
+<p>or_ins函数返回后，输出的结果如下：</p>
+<p><img alt="图片" src="/assets/3610bdaa2d9c135bf8f8c5a3.jpg"/></p>
+<p>上图中or_ins函数第一个参数为0x1000的二进制数据是（0b00000000000000000001000000000000）第二个参数为0x1111的二进制数据是（0b00000000000000000001000100010001）两个参数相或，而按位或操作是“有1为1”，所以返回0x1111，结果是正确的。</p>
+<h3 id="按位异或操作-xori-xor指令">按位异或操作：xori、xor指令</h3>
+<p>最后，我们再说说逻辑指令中的最后两条指令xori、xor，即异或指令的立即数版本和寄存器版本，它们的形式如下所示：</p>
+<pre><code>xori rd，rs1，imm
+#xori 立即数按位异或指令
+#rd 目标寄存器
+#rs1 源寄存器1
+#imm 立即数
+xor rd，rs1，rs2
+#xor 寄存器按位异或指令
+#rd 目标寄存器
+#rs1 源寄存器1
+#rs2 源寄存器2
+</code></pre>
+<p>形式上和前面与操作、或操作差不多，就不过多重复了。</p>
+<p>xori、xor完成的操作用伪代码描述如下：</p>
+<pre><code>//xori
+rd = rs1 ^ imm
+//xor
+rd = rs1 ^ rs2
+</code></pre>
+<p>按位异或的操作是把rs1与imm或者rs1与rs2其中的每个数据位两两相异或，两个位如果不相同，结果为1。如果两个位相同，结果为0。</p>
+<p>在and.S文件中写代码验证一下，如下所示。</p>
+<pre><code>.globl xori_ins
+xori_ins:
+    xori a0，a0，0          #a0 = a0^0，a0是C语言调用者传递的参数，a0也是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+
+.globl xor_ins
+xor_ins:
+    xor a0，a0，a1          #a0 = a0^a1，a0、a1是C语言调用者传递的参数，a0是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+</code></pre>
+<p>我们已经写好了xori_ins与xor_ins函数，分别是执行xori和xor指令。xori指令是拿a0寄存器和立即数0进行异或操作，由于立即数是0，而且各个数据位相同为0，不同为1，所以同样会返回a0原本的数据 ；而xor指令是拿a0和a1寄存器进行或操作，再把结果写入到a0寄存器。</p>
+<p>下面我们按下“F5”调试一下，如下所示：</p>
+<p><img alt="图片" src="/assets/dbdbbc0229ee32532a28ae7a.jpg"/></p>
+<p>上图中是执行完xori a0，a0，0指令之后，执行jr ra指令之前的状态，我们已经看到a0寄存器中的值已经变成0xff了，这说明运算的结果正确。</p>
+<p>xori_ins函数返回后，输出的结果如下图所示：</p>
+<p><img alt="图片" src="/assets/88082cf6e3c8e7b2ba396aa7.jpg"/></p>
+<p>结合上面这张截图不难发现，我们传递给xori_ins函数的参数是0xff，因为0xff的二进制数据是（0b00000000000000000000000011111111）异或上0的二进制数据是（0b00000000000000000000000000000000）按位异或操作是“相同为0，不同为1”，所以返回0xff，结果是正确的。</p>
+<p>我们再来调试一下xor_ins函数。xor a0，a0，a1指令执行完成之后，执行jr ra指令之前的状态如图所示：</p>
+<p><img alt="图片" src="/assets/124efe7bd51c0976f544eaf2.jpg"/></p>
+<p>我们看到a0寄存器中的值已经变成0了，这说明运算的结果正确，符合预期。</p>
+<p>xor_ins函数返回后，输出的结果如下图所示：</p>
+<p><img alt="图片" src="/assets/1d1d275baaeb306faa4a8405.jpg"/></p>
+<p>由于我们给xor_ins函数传递了两个相同的参数都是0xffff。因为0xffff的二进制数据是（0b00000000000000001111111111111111）两者异或，按位异或操作是“相同为0，不同为1”，所以返回0，结果是正确的。</p>
+<p>下面我们看一下andi、and、ori、or、xori、xor这六条指令的二进制数据。</p>
+<p>我们打开工程目录下的and.bin文件，如下所示：</p>
+<p><img alt="图片" src="/assets/8be263afb17f9184dee29396.jpg"/></p>
+<p>上述图中的12个32位数据是12条指令，其中六个0x00008067数据是六个函数的返回指令。</p>
+<p>具体的指令形式，还有对应的汇编语句，我用表格帮你做了整理。</p>
+<p><img alt="" src="/assets/acb6cacb9c26be49a901d460.jpg"/></p>
+<p>同样地，我带你拆分一下andi、and、ori、or、xori、xor指令的各位段的数据，看看它们是如何编码的。</p>
+<p><img alt="图片" src="/assets/40e21102479752070f13a70b.jpg"/></p>
+<p>从上图中可以发现，立即数版本和寄存器版本的and、or、xor指令通过<strong>操作码</strong>区分，而它们之间的寄存器和立即数版本是靠<strong>功能位段</strong>来区分，立即数位段和源寄存器与目标寄存器位段和之前的指令是相同的。</p>
+<p>到这里六条逻辑指令已经拿下了，咱们继续学习移位指令。</p>
+<h2 id="移位指令">移位指令</h2>
+<p>移位指令和逻辑操作指令一样，都是CPU电路很容易就能实现的。</p>
+<p>RISC-V指令集中的移位指令包括逻辑左移、逻辑右移和算术右移，它们分别有立即数和寄存器版本，所以一共有六条。逻辑右移和算术右移是不同的，等我们后面用到时再专门讲解。</p>
+<h3 id="逻辑左移指令-slli-sll指令">逻辑左移指令：slli、sll指令</h3>
+<p>我们先看看逻辑左移指令，也就是slli、sll指令，它们的形式如下所示：</p>
+<pre><code>slli rd，rs1，imm
+#slli 立即数逻辑左移指令
+#rd 目标寄存器
+#rs1 源寄存器1
+#imm 立即数，rs1左移的位数，0~31
+sll rd，rs1，rs2
+#sll 寄存器逻辑左移指令
+#rd 目标寄存器
+#rs1 源寄存器1
+#rs2 源寄存器2，rs1左移的位数
+</code></pre>
+<p>上述代码中rd、rs1、rs2可以是任何通用寄存器。imm是立即数，其实在官方文档中，这里是shamt，表示rs1 左移 shamt 位。这里我为了和之前的形式保持一致，才继续沿用了imm。</p>
+<p><img alt="" src="/assets/11330f7afe5e8d8dd703f11c.jpg"/></p>
+<p>slli、sll它们俩完成的操作，用伪代码描述如下：</p>
+<pre><code>//slli
+rd = rs1 &lt;&lt; imm
+//sll
+rd = rs1 &lt;&lt; rs2
+</code></pre>
+<p>逻辑左移的操作是把rs1中的数据向左移动imm位，或者把rs1中的数据向左移动rs2位，右边多出的空位填 0 并写入 rd 中。</p>
+<p>我们用图解来表达这一过程，这样你就能一目了然了。</p>
+<p><img alt="图片" src="/assets/aa35e09a96bcb0bae60a5b95.jpg"/></p>
+<p>接下来我们在工程目录下，建立一个sll.S文件，写代码验证一下，如下所示：</p>
+<pre><code>.globl slli_ins
+slli_ins:
+    slli a0, a0, 4          #a0 = a0&lt;&lt;4，a0是C语言调用者传递的参数，a0也是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+
+.globl sll_ins
+sll_ins:
+    sll a0, a0, a1          #a0 = a0&lt;&lt;a1，a0、a1是C语言调用者传递的参数，a0是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+</code></pre>
+<p>这里已经写好了slli_ins与sll_ins函数，它们会分别执行slli和sll指令。立即数逻辑左移slli指令是把a0中的数据左移4位。而逻辑左移sll指令是把a0中的数据左移，左移多少位要取决于a1中的数据，完成移动后再把结果写入到a0寄存器。</p>
+<p>我们还是用VSCode打开工程，按下“F5”调试，如下所示：</p>
+<p><img alt="图片" src="/assets/14b3fa23072b6b923ed915f1.jpg"/></p>
+<p>上图中是进入slli_ins函数，执行完slli a0，a0，4指令之后，执行jr ra指令之前的状态，我们给slli_ins函数传进来的参数是0xffff。现在对照图示就能看到，a0寄存器中的值确实已经变成0xffff0了，这说明运算结果是正确的。</p>
+<p>slli_ins函数返回后，输出的结果如下：</p>
+<p><img alt="图片" src="/assets/88701e3d7c5b74e58f7b77c7.jpg"/></p>
+<p>因为0xffff二进制数据是（0b00000000000000001111111111111111），逻辑左移4位后的结果是0xffff0，它的二进制数据是（0b00000000000011111111111111110000），结果正确无误。</p>
+<p>下面我们接着对sll_ins函数进行调试，如下所示：</p>
+<p><img alt="图片" src="/assets/9c443db20e7177948abc24a0.jpg"/></p>
+<p>上图中是进入sll_ins函数，执行完sll a0，a0，a1指令之后，执行jr ra指令之前的状态，我们给sll_ins函数传进来的参数是0xeeeeeeee和31（a1寄存器）。如果看到a0寄存器中的值确实已经变成0了，这说明运算结果是正确的。</p>
+<p>sll_ins函数返回后，输出的结果如下图所示：</p>
+<p><img alt="图片" src="/assets/ca8a906a3695eb48d1155358.jpg"/></p>
+<p>第一个参数0xeeeeeeee的二进制数据是（0b11101110111011101110111011101110），逻辑左移31位后的结果是0，因为它把所有的二进制数据位都移出去了，然后空位补0，所以结果正确无误。</p>
+<h3 id="逻辑右移指令-srli-srl">逻辑右移指令：srli、srl</h3>
+<p>有逻辑左移就有逻辑右移。逻辑右移指令srli、srl，分别对应着立即数和寄存器版本，它们的形式如下：</p>
+<pre><code>srli rd，rs1，imm
+#srli 立即数逻辑右移指令
+#rd 目标寄存器
+#rs1 源寄存器1
+#imm 立即数，rs1右移的位数，0~31
+srl rd，rs1，rs2
+#srl 寄存器逻辑右移指令
+#rd 目标寄存器
+#rs1 源寄存器1
+#rs2 源寄存器2，rs1右移的位数
+</code></pre>
+<p>上述代码中rd、rs1、rs2可以是任何通用寄存器。imm是立即数。为了和之前的形式保持一致，我们还是沿用imm，而非官方文档中的shamt。</p>
+<p>srli、srl完成的操作，可以用后面的伪代码来描述：</p>
+<pre><code>//srli
+rd = rs1 &gt;&gt; imm
+//srl
+rd = rs1 &gt;&gt; rs2
+</code></pre>
+<p>逻辑右移的操作是把rs1中的数据向右移动imm位。或者把rs1中的数据向右移动rs2位，左边多出的空位填 0 并写入 rd 中。</p>
+<p>你可以对照我画的图示来理解这一过程。</p>
+<p><img alt="图片" src="/assets/c7449d3e2ab6c92ad0df68c7.jpg"/></p>
+<p>光看看格式自然不够，我们在sll.S文件中写段代码来验证一下，如下所示：</p>
+<pre><code>.globl srli_ins
+srli_ins:
+    srli a0, a0, 8          #a0 = a0&gt;&gt;8,a0是C语言调用者传递的参数，a0也是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+
+.globl srl_ins
+srl_ins:
+    srl a0, a0, a1          #a0 = a0&gt;&gt;a1,a0、a1是C语言调用者传递的参数，a0是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+</code></pre>
+<p>逻辑右移的两个函数srli_ins与srl_ins，我已经帮你写好了。代码中立即数逻辑右移srli指令是把a0中的数据右移8位。逻辑右移srl指令，则是把a0中的数据右移，右移多少位要看a1中数据表示的位数是多少，再把结果写入到a0寄存器。-
+两条右移指令做了哪些事儿咱们说完了，老规矩，打开工程按下“F5”就可以调试了，效果如图：</p>
+<p><img alt="图片" src="/assets/035fc00f24a9840e5c231765.jpg"/></p>
+<p>上图中是进入srli_ins函数，执行完srli a0，a0，8指令之后，执行jr ra指令之前的状态，我们给srli_ins函数传进来的参数是0xffff。现在，对照截图可以看到a0寄存器中的值确实已经变成0xff了，这说明运算结果正确。</p>
+<p>srli_ins函数返回后，输出的结果如下图所示：</p>
+<p><img alt="图片" src="/assets/d576af68a22c9e7d7425599b.jpg"/></p>
+<p>因为调用函数srli_ins的参数0xffff的二进制数据是（0b00000000000000001111111111111111），逻辑右移8位后的结果是0xff，它的二进制数据是（0b00000000000000000000000011111111），结果正确，符合我们的预期。</p>
+<p>拿下了srli_ins函数，接下来就是srl_ins函数的调试，如下所示：</p>
+<p><img alt="图片" src="/assets/8d6717db46fb9fb275e1ca98.jpg"/></p>
+<p>上图中是调用进入srl_ins函数，执行完srl a0，a0，a1指令之后，执行jr ra指令之前的状态，给srl_ins函数传进来的参数是0xaaaaaaaa。可以看到，a0寄存器中的值确实已经变成0xaaaa了，所以运算结果也是正确的。</p>
+<p>srl_ins函数返回后，输出的结果如下图所示：</p>
+<p><img alt="图片" src="/assets/b289470ae23417d6c9065c23.jpg"/></p>
+<p>给srl_ins函数传进来的第一个参数是0xaaaaaaaa的二进制数据是（0b10101010101010101010101010101010），逻辑右移16位后的结果是0xaaaa，其二进制数据为（0b00000000000000001010101010101010 ），因为它把低16位二进制数据位移出去了，然后高16位的空位补0，所以结果正确无误。</p>
+<h3 id="算术右移指令-srai-sra">算术右移指令：srai、sra</h3>
+<p>最后还有两个算术右移指令，它们和逻辑右移的最大区别是，<strong>数据在逻辑右移之后左边多出空位用0填充，而数据在算术右移之后左边多出的空位是用数据的符号位填充。</strong>如果数据的符号位为1就填充1，如果为0就填充0。</p>
+<p>它们的形式和伪代码与逻辑右移是一样的，只不过指令助记符由srli、srl，变成了srai、sra。</p>
+<p>下面我们直接在sll.S文件中，写代码进行验证。</p>
+<pre><code>.globl srai_ins
+srai_ins:
+    srai a0, a0, 8          #a0 = a0&gt;&gt;8,a0是C语言调用者传递的参数，a0也是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+
+.globl sra_ins
+sra_ins:
+    sra a0, a0, a1          #a0 = a0&gt;&gt;a1,a0、a1是C语言调用者传递的参数，a0是返回值，这样计算结果就返回了
+    jr ra                   #函数返回
+</code></pre>
+<p>上述代码中的两个函数srai_ins与sra_ins，可以实现算术右移。先看立即数算术右移srai指令，它把a0中的数据右移了8位。而算术右移srl指令是把a0中的数据右移，右移多少位由a1中的数据表示的位数来决定，之后再把结果写入到a0寄存器。</p>
+<p>我们按下“F5”，调试的结果如下：</p>
+<p><img alt="图片" src="/assets/59d1344593b9849ead2e0b4b.jpg"/></p>
+<p>上图中是进入立即数算术右移函数srai_ins，执行完srai a0，a0，8指令之后，执行jr ra指令之前的状态。对照图里红框的内容可以看到，给srai_ins函数传进来的参数是0x1111。如果a0寄存器中的值确实已经变成0x11了，就代表运算结果正确。</p>
+<p>srai_ins函数返回后，输出的结果如下：</p>
+<p><img alt="图片" src="/assets/380319ceb811bac35258863e.jpg"/></p>
+<p>因为我们给立即数算术右移函数srai_ins的参数0x1111，其二进制数据是（0b00000000000000000001000100010001），符号位为0，所以算术右移8位后的结果是0x11，它的二进制数据是（0b00000000000000000000000000010001），结果非常正确。</p>
+<p>我们接着调试一下sra_ins函数，如下所示：</p>
+<p><img alt="图片" src="/assets/db81993b1f3c0f81158ad93b.jpg"/></p>
+<p>上图中是进入算术右移函数sra_ins，执行完sra a0，a0，a1指令之后，执行jr ra指令之前的状态。对照图里左侧红框的部分，我们就能知道sra_ins函数传进来的参数是0xaaaaaaaa，你可能判断a0寄存器里输出的结果应该是0x0000aaaa，但调试显示的实际结果却是0xffffaaaa。</p>
+<p>出现这个结果，你很奇怪是不是？但这恰恰说明运算结果是正确的。我们先看看sra_ins函数返回后输出的结果是什么，然后再分析原因。</p>
+<p><img alt="图片" src="/assets/ad6ce15a19731781631966ba.jpg"/></p>
+<p>因为我们给算术右移函数sra_ins的参数是0xaaaaaaaa和16，这表明对0xaaaaaaaa算术右移16，0xaaaaaaaa的二进制数据是（0b10101010101010101010101010101010），注意<strong>其符号位为1，所以算术右移16位后的结果是0xffffaaaa</strong>，它的二进制数据是（0b11111111111111111010101010101010），结果是符合预期的。输出的结果也证实了这一点。</p>
+<p>下面我们还是要看一下slli、sll、srli、srl、srai、sra这六条指令的二进制数据，我们打开工程目录下的sll.bin文件。</p>
+<p><img alt="图片" src="/assets/c400b4f81413d7b6ad919d22.jpg"/></p>
+<p>可以看出，图中的12个32位数据是12条指令，其中六个0x00008067数据是六个函数的返回指令。具体的指令形式，还有对应的汇编语句，你可以参考后面的表格。</p>
+<p><img alt="图片" src="/assets/396173c3fb04f2e58403ea84.jpg"/></p>
+<p>我们拆分一下slli、sll、srli、srl、srai、sra指令的各位段的数据，看看它们是在内存中如何编码的，你可以结合示意图来理解。</p>
+<p><img alt="图片" src="/assets/9bb1af24c3dd34fe62468dbe.jpg"/></p>
+<p>我虽然给你详细展示了这些指令如何编码，但并不需要你把细节全部硬记下来，重点是观察其中的规律。</p>
+<p>从上图中我们可以发现，sll、srl、sra指令的立即数版本和寄存器版本要通过操作码区分，而它们之间是靠功能位段来区分的，<strong>源寄存器与目标寄存器所在的位段和之前的指令是相同的</strong>。需要注意的是，这些立即数版本的立即数位段在官方文档中叫shamt位段，并且只占5位，而其它指令的立即数占12位，这里为了一致性还是沿用立即数。</p>
+<p>到这里，六条移位指令我们就讲完了。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>今天我们学习了逻辑指令和移位指令。</p>
+<p>逻辑操作的指令包括andi、ori、or、xori、xor，分别能对寄存器与寄存器、寄存器与立即数进行与、或、异或操作。有了这些操作，CPU才能对数据进行逻辑运算，在一些情况下还能提升CPU的执行性能。更多的应用，后面课程里我们还会继续学习。</p>
+<p>数据移位指令包括slli、sll、srli、srl、srai、sra，也能分别能对寄存器与寄存器、寄存器与立即数进行逻辑左移、逻辑右移、算术右移操作。这些指令与逻辑指令一起执行数据的位运算时，相当有用，在特定情况下能代替乘除法指令。</p>
+<p><img alt="图片" src="/assets/a3b836255bada300affb463f.jpg"/></p>
+<p>经过漫长的学习，我们用两节课程的篇幅，一鼓作气学习了RISC-V全部的算术指令，分为加减、比较、逻辑、移位四大类别，一共有19条指令。这些指令作用于数据的运算，在应用程序中扮演着重要角色。</p>
+<p>但是CPU有了这些算术指令就够了吗？这显然是不行的，起码还需要流程控制指令和数据加载储存指令，我们会在后续课程中继续讨论。</p>
+<h2 id="思考题">思考题</h2>
+<p>为什么指令编码中，目标寄存器，源寄存器1，源寄存器2，占用的位宽都是5位呢？</p>
+<p>欢迎你在留言区记录自己的疑问或收获，参与越多，你对内容的理解也更深入。如果觉得这节课内容不错，别忘了分享给更多朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/index.html">22 讲通关 Go 语言-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>22 讲通关 Go 语言-完</strong><ul><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20Go%20%E4%B8%BA%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E9%9C%80%E6%B1%82%E8%AE%BE%E8%AE%A1%EF%BC%8C%E5%B8%A6%E4%BD%A0%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E5%B7%A5%E4%BD%9C.html">00 开篇词  Go 为开发者的需求设计，带你实现高效工作</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/01%20%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%EF%BC%9A%E7%BC%96%E5%86%99%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%20Go%20%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F.html">01  基础入门：编写你的第一个 Go 语言程序</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/02%20%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%BD%A0%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">02  数据类型：你必须掌握的数据类型有哪些？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/03%20%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9Aif%E3%80%81for%E3%80%81switch%20%E9%80%BB%E8%BE%91%E8%AF%AD%E5%8F%A5%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">03  控制结构：if、for、switch 逻辑语句的那些事儿</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/04%20%20%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%20array%E3%80%81slice%20%E5%92%8C%20map%EF%BC%9F.html">04  集合类型：如何正确使用 array、slice 和 map？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/05%20%20%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">05  函数和方法：Go 语言中的函数和方法到底有什么不同？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/06%20%20struct%20%E5%92%8C%20interface%EF%BC%9A%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E6%8E%A5%E5%8F%A3%E9%83%BD%E5%AE%9E%E7%8E%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E5%8A%9F%E8%83%BD%EF%BC%9F.html">06  struct 和 interface：结构体与接口都实现了哪些功能？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/07%20%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20error%E3%80%81deferred%E3%80%81panic%20%E7%AD%89%E5%A4%84%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%9F.html">07  错误处理：如何通过 error、deferred、panic 等处理错误？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/08%20%20%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%EF%BC%9AGoroutines%20%E5%92%8C%20Channels%20%E7%9A%84%E5%A3%B0%E6%98%8E%E4%B8%8E%E4%BD%BF%E7%94%A8.html">08  并发基础：Goroutines 和 Channels 的声明与使用</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/09%20%20%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD%EF%BC%9Async%20%E5%8C%85%E8%AE%A9%E4%BD%A0%E5%AF%B9%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E5%BE%97%E5%BF%83%E5%BA%94%E6%89%8B.html">09  同步原语：sync 包让你对并发控制得心应手</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/10%20%20Context%EF%BC%9A%E4%BD%A0%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E7%A5%9E%E5%99%A8.html">10  Context：你必须掌握的多线程并发控制神器</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/11%20%20%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%94%A8%E7%9A%84%E9%AB%98%E6%95%88%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F.html">11  并发模式：Go 语言中即学即用的高效并发模式</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/12%20%20%E6%8C%87%E9%92%88%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%9C%A8%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88%EF%BC%9F.html">12  指针详解：在什么情况下应该使用指针？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/13%20%20%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%EF%BC%9A%E5%80%BC%E3%80%81%E5%BC%95%E7%94%A8%E5%8F%8A%E6%8C%87%E9%92%88%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F.html">13  参数传递：值、引用及指针之间的区别？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/14%20%20%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%EF%BC%9Anew%20%E8%BF%98%E6%98%AF%20make%EF%BC%9F%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E8%AF%A5%E7%94%A8%E8%B0%81%EF%BC%9F.html">14  内存分配：new 还是 make？什么情况下该用谁？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/15%20%20%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%8D%E5%B0%84%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E8%BD%AC%E6%8D%A2%EF%BC%9F.html">15  运行时反射：字符串和结构体之间如何转换？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/16%20%20%E9%9D%9E%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%EF%BC%9A%E8%AE%A9%E4%BD%A0%E6%97%A2%E7%88%B1%E5%8F%88%E6%81%A8%E7%9A%84%20unsafe.html">16  非类型安全：让你既爱又恨的 unsafe</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/17%20%20SliceHeader%EF%BC%9Aslice%20%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE%EF%BC%9F.html">17  SliceHeader：slice 如何高效处理数据？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/18%20%20%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%B5%8B%E8%AF%95%E4%BF%9D%E8%AF%81%E8%B4%A8%E9%87%8F%EF%BC%9F.html">18  质量保证：Go 语言如何通过测试保证质量？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/19%20%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%9F.html">19  性能优化：Go 语言如何进行代码检查和优化？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/20%20%20%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%EF%BC%9A%E6%A8%A1%E5%9D%97%E5%8C%96%E7%AE%A1%E7%90%86%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%A4%9F%E6%8F%90%E5%8D%87%E7%A0%94%E5%8F%91%E6%95%88%E8%83%BD%EF%BC%9F.html">20  协作开发：模块化管理为什么能够提升研发效能？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/21%20%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E7%8E%A9%E8%BD%AC%20RESTful%20API%20%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">21  网络编程：Go 语言如何玩转 RESTful API 服务？</a></li><li><a class="active" aria-current="page" href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/22%20%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20RPC%20%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/23%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E4%BD%A0%E7%9A%84%20Go%20%E8%AF%AD%E8%A8%80%E6%88%90%E9%95%BF%E4%B9%8B%E8%B7%AF.html">23 结束语  你的 Go 语言成长之路</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/22%20%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20RPC%20%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%9C%8D%E5%8A%A1%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？" id="title">22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？</h1>
+<div><p>在上一讲中，我为你讲解了 RESTful API 的规范以及实现，并且留了两个作业，它们分别是删除和修改用户，现在我为你讲解这两个作业。</p>
+<p>删除一个用户比较简单，它的 API 格式和获取一个用户一样，但是 HTTP 方法换成了DELETE。删除一个用户的示例代码如下所示：</p>
+<p><em>ch21/main.go</em></p>
+<pre><code>func main() {
+
+   //省略没有修改的代码
+
+   r.DELETE("/users/:id", deleteUser)
+
+}
+
+func deleteUser(c *gin.Context) {
+
+   id := c.Param("id")
+
+   i := -1
+
+   //类似于数据库的SQL查询
+
+   for index, u := range users {
+
+      if strings.EqualFold(id, strconv.Itoa(u.ID)) {
+
+         i = index
+
+         break
+
+      }
+
+   }
+
+   if i &gt;= 0 {
+
+      users = append(users[:i], users[i+1:]...)
+
+      c.JSON(http.StatusNoContent, "")
+
+   } else {
+
+      c.JSON(http.StatusNotFound, gin.H{
+
+         "message": "用户不存在",
+
+      })
+
+   }
+
+}
+</code></pre>
+<p>这个示例的逻辑就是注册 DELETE 方法，达到删除用户的目的。删除用户的逻辑是通过ID 查询：</p>
+<ul>
+<li>如果可以找到要删除的用户，记录索引并跳出循环，然后根据索引删除该用户；</li>
+<li>如果找不到要删除的用户，则返回 404。</li>
+</ul>
+<p>实现了删除用户的逻辑后，相信你已经会修改一个用户的名字了，因为它和删除一个用户非常像，实现代码如下所示：</p>
+<pre><code>func main() {
+
+   //省略没有修改的代码
+
+   r.PATCH("/users/:id",updateUserName)
+
+}
+
+func updateUserName(c *gin.Context) {
+
+   id := c.Param("id")
+
+   i := -1
+
+   //类似于数据库的SQL查询
+
+   for index, u := range users {
+
+      if strings.EqualFold(id, strconv.Itoa(u.ID)) {
+
+         i = index
+
+         break
+
+      }
+
+   }
+
+   if i &gt;= 0 {
+
+      users[i].Name = c.DefaultPostForm("name",users[i].Name)
+
+      c.JSON(http.StatusOK, users[i])
+
+   } else {
+
+      c.JSON(http.StatusNotFound, gin.H{
+
+         "message": "用户不存在",
+
+      })
+
+   }
+
+}
+</code></pre>
+<p>整体代码逻辑和删除的差不多的，只不过这里使用的是 PATCH方法。</p>
+<h3 id="什么是rpc-服务">什么是RPC 服务</h3>
+<p>RPC，也就是<strong>远程过程调用</strong>，是分布式系统中不同节点调用的方式（进程间通信），属于 C/S 模式。RPC 由客户端发起，调用服务端的方法进行通信，然后服务端把结果返回给客户端。</p>
+<p>RPC的核心有两个：<strong>通信协议</strong>和<strong>序列化</strong>。在 HTTP 2 之前，一般采用自定义 TCP 协议的方式进行通信，HTTP 2 出来后，也有采用该协议的，比如流行的gRPC。</p>
+<p><strong>序列化</strong>和<strong>反序列化</strong>是一种把传输内容编码和解码的方式，常见的编解码方式有 JSON、Protobuf 等。</p>
+<p>在大多数 RPC的架构设计中，都有<strong>Client</strong>、<strong>Client Stub</strong>、<strong>Server</strong>、<strong>Server Stub</strong>这四个组件，Client 和 Server 之间通过 Socket 进行通信。RPC 架构如下图所示：</p>
+<p><img alt="图片2.png" src="/assets/e41f1219561cdc81d6212bb4.png"/></p>
+<p>（图片来自于 Google 搜索）</p>
+<p>下面我为你总结下 RPC 调用的流程：</p>
+<ul>
+<li>客户端（Client）调用客户端存根（Client Stub），同时把参数传给客户端存根；</li>
+<li>客户端存根将参数打包编码，并通过系统调用发送到服务端；</li>
+<li>客户端本地系统发送信息到服务器；</li>
+<li>服务器系统将信息发送到服务端存根（Server Stub）；</li>
+<li>服务端存根解析信息，也就是解码；</li>
+<li>服务端存根调用真正的服务端程序（Sever）；</li>
+<li>服务端（Server）处理后，通过同样的方式，把结果再返回给客户端（Client）。</li>
+</ul>
+<p>RPC 调用常用于大型项目，也就是我们现在常说的微服务，而且还会包含服务注册、治理、监控等功能，是一套完整的体系。</p>
+<h3 id="go-语言-rpc-简单入门">Go 语言 RPC 简单入门</h3>
+<p>RPC这么流行，Go 语言当然不会错过，在 Go SDK 中，已经<strong>内置了 net/rpc 包</strong>来帮助开发者实现 RPC。简单来说，net/rpc 包提供了通过网络访问服务端对象方法的能力。</p>
+<p>现在我通过一个加法运算来演示 RPC的使用，它的服务端代码如下所示：</p>
+<p><em>ch22/server/math_service.go</em></p>
+<pre><code>package server
+
+type MathService struct {
+
+}
+
+type Args struct {
+
+   A, B int
+
+}
+
+func (m *MathService) Add(args Args, reply *int) error {
+
+   *reply = args.A + args.B
+
+   return nil
+
+}
+</code></pre>
+<p>在以上代码中：</p>
+<ul>
+<li>定义了<strong>MathService</strong>，用于表示一个远程服务对象；</li>
+<li>Args 结构体用于表示参数；</li>
+<li>Add 这个方法实现了加法的功能，加法的结果通过 replay这个指针变量返回。</li>
+</ul>
+<p>有了这个定义好的服务对象，就可以把它注册到暴露的服务列表中，以供其他客户端使用了。在Go 语言中，要注册一个一个RPC 服务对象还是比较简单的，通过 RegisterName 方法即可，示例代码如下所示：</p>
+<p><em>ch22/server_main.go</em></p>
+<pre><code>package main
+
+import (
+
+   "gotour/ch22/server"
+
+   "log"
+
+   "net"
+
+   "net/rpc"
+
+)
+
+func main()  {
+
+   rpc.RegisterName("MathService",new(server.MathService))
+
+   l, e := net.Listen("tcp", ":1234")
+
+   if e != nil {
+
+      log.Fatal("listen error:", e)
+
+   }
+
+   rpc.Accept(l)
+
+}
+</code></pre>
+<p>以上示例代码中，通过 RegisterName 函数注册了一个服务对象，该函数接收两个参数：</p>
+<ul>
+<li>服务名称（MathService）；</li>
+<li>具体的服务对象，也就是我刚刚定义好的MathService 这个结构体。</li>
+</ul>
+<p>然后通过 net.Listen 函数建立一个TCP 链接，在 1234 端口进行监听，最后通过 rpc.Accept 函数在该 TCP 链接上提供 MathService 这个 RPC 服务。现在客户端就可以看到MathService这个服务以及它的Add 方法了。</p>
+<p>任何一个框架都有自己的规则，net/rpc 这个 Go 语言提供的RPC 框架也不例外。要想把一个对象注册为 RPC 服务，可以让<strong>客户端远程访问</strong>，那么该对象（类型）的方法必须满足如下条件：</p>
+<ul>
+<li>方法的类型是可导出的（公开的）；</li>
+<li>方法本身也是可导出的；</li>
+<li>方法必须有 2 个参数，并且参数类型是可导出或者内建的；</li>
+<li>方法必须返回一个 error 类型。</li>
+</ul>
+<p>总结下来，该方法的格式如下所示：</p>
+<pre><code>func (t *T) MethodName(argType T1, replyType *T2) error
+</code></pre>
+<p>这里面的 T1、T2都是可以被 encoding/gob 序列化的。</p>
+<ul>
+<li>第一个参数 argType 是调用者（客户端）提供的；</li>
+<li>第二个参数 replyType是返回给调用者结果，必须是指针类型。</li>
+</ul>
+<p>有了提供好的RPC 服务，现在再来看下客户端如何调用，它的代码如下所示：</p>
+<p><em>ch22/client_main.go</em></p>
+<pre><code>package main
+
+import (
+
+   "fmt"
+
+   "gotour/ch22/server"
+
+   "log"
+
+   "net/rpc"
+
+)
+
+func main()  {
+
+   client, err := rpc.Dial("tcp",  "localhost:1234")
+
+   if err != nil {
+
+      log.Fatal("dialing:", err)
+
+   }
+
+   args := server.Args{A:7,B:8}
+
+   var reply int
+
+   err = client.Call("MathService.Add", args, &amp;reply)
+
+   if err != nil {
+
+      log.Fatal("MathService.Add error:", err)
+
+   }
+
+   fmt.Printf("MathService.Add: %d+%d=%d", args.A, args.B, reply)
+
+}
+</code></pre>
+<p>在以上实例代码中，首先通过 rpc.Dial 函数建立 TCP 链接，需要注意的是这里的 IP、端口要和RPC 服务提供的一致，确保可以建立 RCP 链接。</p>
+<p>TCP 链接建立成功后，就需要准备远程方法需要的参数，也就是示例中的args 和 reply。参数准备好之后，就可以通过 Call 方法调用远程的RPC 服务了。Call 方法有 3 个参数，它们的作用分别如下所示：</p>
+<ol>
+<li>调用的远程方法的名字，这里是MathService.Add，点前面的部分是<strong>注册的服务的名称</strong>，点后面的部分是<strong>该服务的方法</strong>；</li>
+<li>客户端为了<strong>调用远程方法</strong>提供的参数，示例中是args；</li>
+<li>为了接收远程方法返回的结果，必须是一个指针，也就是示例中的&amp; replay，这样客户端就可以获得服务端返回的结果了。</li>
+</ol>
+<p>服务端和客户端的代码都写好了，现在就可以运行它们，测试 RPC调用的效果了。</p>
+<p>首先运行服务端的代码，提供 RPC 服务，运行命令如下所示：</p>
+<pre><code>➜ go run ch22/server_main.go
+</code></pre>
+<p>然后运行客户端代码，测试调用 RPC的结果，运行命令如下所示：</p>
+<pre><code>➜ go run ch22/client_main.go
+</code></pre>
+<p>如果你看到了 MathService.Add: 7+8=15的结果，那么恭喜你，你完成了一个完整的RPC 调用。</p>
+<h3 id="基于-http的rpc">基于 HTTP的RPC</h3>
+<p>RPC 除了可以通过 TCP 协议调用之外，还可以通过HTTP 协议进行调用，而且内置的net/rpc 包已经支持，现在我修改以上示例代码，支持 HTTP 协议的调用，服务端代码如下所示：</p>
+<p><em>ch22/server_main.go</em></p>
+<pre><code>func main() {
+
+   rpc.RegisterName("MathService", new(server.MathService))
+
+   rpc.HandleHTTP()//新增的
+
+   l, e := net.Listen("tcp", ":1234")
+
+   if e != nil {
+
+      log.Fatal("listen error:", e)
+
+   }
+
+   http.Serve(l, nil)//换成http的服务
+
+}
+</code></pre>
+<p>以上是服务端代码的修改，只需修改两处，我已经在代码中标注出来了，很容易理解。</p>
+<p>服务端修改的代码不算多，客户端修改的代码就更少了，只需要修改一处即可，修改的部分如下所示：</p>
+<p><em>ch22/client_main.go</em></p>
+<pre><code>func main()  {
+
+   client, err := rpc.DialHTTP("tcp",  "localhost:1234")
+
+   //省略了其他没有修改的代码
+
+}
+</code></pre>
+<p>从以上代码可以看到，只需要把建立链接的方法从 Dial 换成 DialHTTP 即可。</p>
+<p>现在分别运行服务端和客户端代码，就可以看到输出的结果了，和上面使用TCP 链接时是一样的。</p>
+<p>此外，Go 语言 net/rpc 包提供的 HTTP 协议的 RPC 还有一个调试的 URL，运行服务端代码后，在浏览器中输入 <a href="http://localhost:1234/debug/rpc" target="_blank">http://localhost:1234/debug/rpc</a> 回车，即可看到服务端注册的RPC 服务，以及每个服务的方法，如下图所示：</p>
+<p><img alt="image" src="/assets/2627917996ed4e79b66803c8.png"/></p>
+<p>如上图所示，<strong>注册的 RPC 服务</strong>、<strong>方法的签名</strong>、<strong>已经被调用的次数</strong>都可以看到。</p>
+<h3 id="json-rpc-跨平台通信">JSON RPC 跨平台通信</h3>
+<p>以上我实现的RPC 服务是基于 gob 编码的，这种编码在跨语言调用的时候比较困难，而当前在微服务架构中，RPC 服务的实现者和调用者都可能是不同的编程语言，因此我们实现的 RPC 服务要支持多语言的调用。</p>
+<h4 id="基于-tcp-的-json-rpc">基于 TCP 的 JSON RPC</h4>
+<p>实现跨语言 RPC 服务的核心在于选择一个<strong>通用的编码</strong>，这样大多数语言都支持，比如常用的JSON。在 Go 语言中，实现一个 JSON RPC 服务非常简单，只需要使用 net/rpc/jsonrpc 包即可。</p>
+<p>同样以上面的示例为例，我把它改造成支持 JSON的RPC 服务，服务端代码如下所示：</p>
+<p><em>ch22/server_main.go</em></p>
+<pre><code>func main() {
+
+   rpc.RegisterName("MathService", new(server.MathService))
+
+   l, e := net.Listen("tcp", ":1234")
+
+   if e != nil {
+
+      log.Fatal("listen error:", e)
+
+   }
+
+   for {
+
+      conn, err := l.Accept()
+
+      if err != nil {
+
+         log.Println("jsonrpc.Serve: accept:", err.Error())
+
+         return
+
+      }
+
+      //json rpc
+
+      go jsonrpc.ServeConn(conn)
+
+   }
+
+}
+</code></pre>
+<p>从以上代码可以看到，相比 gob 编码的RPC 服务，JSON 的 RPC 服务是把链接交给了jsonrpc.ServeConn这个函数处理，达到了基于 JSON 进行 RPC 调用的目的。</p>
+<p>JSON RPC 的客户端代码也非常少，只需要修改一处，修改的部分如下所示：</p>
+<p><em>ch22/client_main.go</em></p>
+<pre><code>func main()  {
+
+   client, err := jsonrpc.Dial("tcp",  "localhost:1234")
+
+   //省略了其他没有修改的代码
+
+}
+</code></pre>
+<p>从以上代码可以看到，只需要把建立链接的 Dial方法换成 jsonrpc 包中的即可。</p>
+<p>以上是使用 Go 语言作为客户端调用 RPC 服务的示例，其他编程语言也是类似的，只需要遵守 <a href="https://www.jsonrpc.org/specification" target="_blank">JSON-RPC 规范</a>即可。</p>
+<h4 id="基于-http的json-rpc">基于 HTTP的JSON RPC</h4>
+<p>相比基于 TCP 调用的RPC 来说，使用 HTTP肯定会更方便，也更通用。Go 语言内置的jsonrpc 并没有实现基于 HTTP的传输，所以就需要自己来实现，这里我参考 gob 编码的HTTP RPC 实现方式，来<strong>实现基于 HTTP的JSON RPC 服务</strong>。</p>
+<p>还是上面的示例，我改造下让其支持 HTTP 协议，RPC 服务端代码如下所示：</p>
+<p><em>ch22/server_main.go</em></p>
+<pre><code>func main() {
+
+   rpc.RegisterName("MathService", new(server.MathService))
+
+   //注册一个path，用于提供基于http的json rpc服务
+
+   http.HandleFunc(rpc.DefaultRPCPath, func(rw http.ResponseWriter, r *http.Request) {
+
+      conn, _, err := rw.(http.Hijacker).Hijack()
+
+      if err != nil {
+
+         log.Print("rpc hijacking ", r.RemoteAddr, ": ", err.Error())
+
+         return
+
+      }
+
+      var connected = "200 Connected to JSON RPC"
+
+      io.WriteString(conn, "HTTP/1.0 "+connected+"\n\n")
+
+      jsonrpc.ServeConn(conn)
+
+   })
+
+   l, e := net.Listen("tcp", ":1234")
+
+   if e != nil {
+
+      log.Fatal("listen error:", e)
+
+   }
+
+   http.Serve(l, nil)//换成http的服务
+
+}
+</code></pre>
+<p>以上代码的实现基于 HTTP 协议的核心，即使用 http.HandleFunc 注册了一个 path，对外提供基于 HTTP 的 JSON RPC 服务。在这个 HTTP 服务的实现中，通过Hijack方法劫持链接，然后转交给 jsonrpc 处理，这样就实现了基于 HTTP 协议的 JSON RPC 服务。</p>
+<p>实现了服务端的代码后，现在开始实现客户端调用，它的代码如下所示：</p>
+<pre><code>  func main()  {
+
+     client, err := DialHTTP("tcp",  "localhost:1234")
+
+     if err != nil {
+
+        log.Fatal("dialing:", err)
+
+     }
+
+     args := server.Args{A:7,B:8}
+
+     var reply int
+
+     err = client.Call("MathService.Add", args, &amp;reply)
+
+     if err != nil {
+
+        log.Fatal("MathService.Add error:", err)
+
+     }
+
+     fmt.Printf("MathService.Add: %d+%d=%d", args.A, args.B, reply)
+
+  }
+
+  // DialHTTP connects to an HTTP RPC server at the specified network address
+
+  // listening on the default HTTP RPC path.
+
+  func DialHTTP(network, address string) (*rpc.Client, error) {
+
+     return DialHTTPPath(network, address, rpc.DefaultRPCPath)
+
+  }
+
+  // DialHTTPPath connects to an HTTP RPC server
+
+  // at the specified network address and path.
+
+  func DialHTTPPath(network, address, path string) (*rpc.Client, error) {
+
+     var err error
+
+     conn, err := net.Dial(network, address)
+
+     if err != nil {
+
+        return nil, err
+
+     }
+
+     io.WriteString(conn, "GET "+path+" HTTP/1.0\n\n")
+
+     // Require successful HTTP response
+
+     // before switching to RPC protocol.
+
+     resp, err := http.ReadResponse(bufio.NewReader(conn), &amp;http.Request{Method: "GET"})
+
+     connected := "200 Connected to JSON RPC"
+
+     if err == nil &amp;&amp; resp.Status == connected {
+
+        return jsonrpc.NewClient(conn), nil
+
+     }
+
+     if err == nil {
+
+        err = errors.New("unexpected HTTP response: " + resp.Status)
+
+     }
+
+     conn.Close()
+
+     return nil, &amp;net.OpError{
+
+        Op:   "dial-http",
+
+        Net:  network + " " + address,
+
+        Addr: nil,
+
+        Err:  err,
+
+     }
+
+  }
+</code></pre>
+<p>以上这段代码的核心在于通过建立好的TCP 链接，发送 HTTP 请求调用远程的HTTP JSON RPC 服务，这里使用的是 HTTP GET 方法。</p>
+<p>分别运行服务端和客户端，就可以看到正确的HTTP JSON RPC 调用结果了。</p>
+<h3 id="总结">总结</h3>
+<p>这一讲基于 Go 语言自带的RPC 框架，讲解了 RPC 服务的实现以及调用。通过这一讲的学习相信你可以很好地了解什么是 RPC 服务，基于 TCP 和 HTTP 实现的RPC 服务有什么不同，它们是如何实现的等等。</p>
+<p>不过在实际的项目开发中，使用Go 语言自带的 RPC 框架并不多，但是这里我还是以自带的框架为例进行讲解，这样可以更好地理解 RPC 的使用以及实现原理。如果你可以很好地掌握它们，那么你使用第三方的 RPC 框架也可以很快上手。</p>
+<p>在实际的项目中，比较常用的是Google的gRPC 框架，它是通过Protobuf 序列化的，是基于 HTTP/2 协议的二进制传输，并且支持很多编程语言，效率也比较高。关于 gRPC的使用可以看官网的文档，入门是很容易的。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

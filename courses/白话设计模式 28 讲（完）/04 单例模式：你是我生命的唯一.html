@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04 单例模式：你是我生命的唯一 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">白话设计模式 28 讲（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">28 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>白话设计模式 28 讲（完）</strong><ul><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/00%20%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%90%AF%E7%A8%8B%E4%B9%8B%E5%89%8D%EF%BC%8C%E8%AF%B7%E4%B8%8D%E8%A6%81%E9%94%99%E8%BF%87%E6%88%91.html">00 生活中的设计模式：启程之前，请不要错过我</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E7%9B%91%E5%90%AC%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%9D%91%E7%88%B9%E7%9A%84%E7%83%AD%E6%B0%B4%E5%99%A8.html">01 监听模式：坑爹的热水器</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/02%20%E9%80%82%E9%85%8D%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%BA%AB%E9%AB%98%E4%B8%8D%E5%A4%9F%E9%9E%8B%E6%9D%A5%E5%87%91.html">02 适配模式：身高不够鞋来凑</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BA%BA%E4%B8%8E%E6%B0%B4%E7%9A%84%E4%B8%89%E6%80%81.html">03 状态模式：人与水的三态</a></li><li><a class="active" aria-current="page" href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/04%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E6%98%AF%E6%88%91%E7%94%9F%E5%91%BD%E7%9A%84%E5%94%AF%E4%B8%80.html">04 单例模式：你是我生命的唯一</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/05%20%E8%81%8C%E8%B4%A3%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%88%91%E7%9A%84%E5%81%87%E6%9D%A1%E5%8E%BB%E5%93%AA%E4%BA%86.html">05 职责模式：我的假条去哪了</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/06%20%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%89%BE%E6%88%BF%E5%AD%90%E9%97%AE%E4%B8%AD%E4%BB%8B.html">06 中介模式：找房子问中介</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/07%20%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B8%AE%E6%88%91%E6%8B%BF%E4%B8%80%E4%B8%8B%E5%BF%AB%E9%80%92.html">07 代理模式：帮我拿一下快递</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E7%A9%BF%E5%B0%B1%E6%80%8E%E4%B9%88%E7%A9%BF.html">08 装饰模式：你想怎么穿就怎么穿</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/09%20%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E8%A6%81%E6%8B%BF%E9%93%81%E8%BF%98%E6%98%AF%E6%91%A9%E5%8D%A1.html">09 工厂模式：你要拿铁还是摩卡</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/10%20%E8%BF%AD%E4%BB%A3%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%B0%B1%E6%98%AF%E4%BD%A0%E4%BA%86.html">10 迭代模式：下一个就是你了</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/11%20%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%87%AA%E5%B7%B1%E7%BB%84%E8%A3%85%E7%94%B5%E8%84%91.html">11 组合模式：自己组装电脑</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%83%B3%E8%A6%81%E8%BD%A6%E8%BF%98%E6%98%AF%E5%BA%84%E5%9B%AD.html">12 构建模式：想要车还是庄园</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E5%85%8B%E9%9A%86%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%BB%99%E4%BD%A0%E4%B8%80%E4%B8%AA%E5%88%86%E8%BA%AB%E6%9C%AF.html">13 克隆模式：给你一个分身术</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/14%20%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%80%8E%E4%B9%88%E6%9D%A5%E4%B8%8D%E9%87%8D%E8%A6%81%EF%BC%8C%E4%BA%BA%E5%88%B0%E5%B0%B1%E8%A1%8C.html">14 策略模式：怎么来不重要，人到就行</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/15%20%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A4%A7%E9%97%B8%E8%9F%B9%EF%BC%8C%E8%B5%B0%E8%B5%B7%EF%BC%81.html">15 命令模式：大闸蟹，走起！</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/16%20%E5%A4%87%E5%BF%98%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E7%83%82%E7%AC%94%E5%A4%B4.html">16 备忘模式：好记性不如烂笔头</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/17%20%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%EF%BC%9A%E9%A2%9C%E6%96%99%E5%BE%88%E8%B4%B5%E5%BF%85%E9%A1%BB%E5%85%85%E5%88%86%E5%88%A9%E7%94%A8.html">17 享元模式：颜料很贵必须充分利用</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/18%20%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%AD%A6%E5%A6%B9%E5%88%AB%E6%85%8C%EF%BC%8C%E5%AD%A6%E9%95%BF%E5%B8%AE%E4%BD%A0.html">18 外观模式：学妹别慌，学长帮你</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/19%20%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%80%E5%8D%83%E4%B8%AA%E8%AF%BB%E8%80%85%E4%B8%80%E5%8D%83%E4%B8%AA%E5%93%88%E5%A7%86%E9%9B%B7%E7%89%B9.html">19 访问模式：一千个读者一千个哈姆雷特</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/20%20%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%8E%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%B8%8D%E8%A7%A3%E6%B8%8A%E6%BA%90.html">20 生活中的设计模式：与经典设计模式的不解渊源</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/21%20%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E9%82%A3%E4%BA%9B%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">21 生活中的设计模式：那些未完待续的设计模式</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/22%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E8%AF%BB%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%88%B6%E4%BD%9C%E4%B8%80%E6%9D%AF%E9%B2%9C%E7%BA%AF%E7%BB%86%E8%85%BB%E7%9A%84%E8%B1%86%E6%B5%86.html">22 深入解读过滤器模式：制作一杯鲜纯细腻的豆浆</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/23%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E8%AF%BB%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF%EF%BC%9A%E5%85%B1%E4%BA%AB%E8%AE%A9%E7%94%9F%E6%B4%BB%E6%9B%B4%E4%BE%BF%E6%8D%B7.html">23 深入解读对象池技术：共享让生活更便捷</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/24%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E8%AF%BB%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6%EF%BC%9A%E6%8A%8A%E4%BD%A0%E6%8A%80%E8%83%BD%E4%BA%AE%E5%87%BA%E6%9D%A5.html">24 深入解读回调机制：把你技能亮出来</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/25%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3.html">25 谈谈我对设计模式的理解</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/26%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E7%9A%84%E6%80%9D%E8%80%83.html">26 谈谈我对设计原则的思考</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/27%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9%E9%A1%B9%E7%9B%AE%E9%87%8D%E6%9E%84%E7%9A%84%E7%9C%8B%E6%B3%95.html">27 谈谈我对项目重构的看法</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/04%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E6%98%AF%E6%88%91%E7%94%9F%E5%91%BD%E7%9A%84%E5%94%AF%E4%B8%80.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="04 单例模式：你是我生命的唯一" id="title">04 单例模式：你是我生命的唯一</h1>
+<div><p>【故事剧情】</p>
+<blockquote>
+<p>爱情是每一个都渴望的，Tony 也是一样！自从毕业后，Tony 就一直没再谈过恋爱，离上一次的初恋也已经过去两年。一个巧合的机会，Tony 终于遇上了自己的喜欢的人，她叫 Jenny，有一头长发，天生爱笑、声音甜美、性格温和……</p>
+<p>作为一个程序员的 Tony，直男癌的症状也很明显：天生木讷、不善言辞。Tony 自然不敢正面表白，但他也有自己的方式，以一种传统书信的方式，展开了一场暗流涌动的追求……经历了一次次屡战屡败，屡败屡战的追求之后，Tony 和 Jenny 终于在一起了！</p>
+<p>然而好景不太长，由于种种的原因，最后 Jenny 还是和 Tony 分开了……</p>
+<p>人生就像一种旅行，蜿蜒曲折，一路向前！沿途你会看到许多的风景，也会经历很多的黑夜，但我们无法回头！有一些风景可能很短暂，而有一些风景我们希望能够伴随自己走完余生。Tony 经历过一次被爱，也经历过一次追爱；他希望下次能找到一个可陪伴自己走完余生的她，也是<strong>他的唯一！</strong></p>
+</blockquote>
+<p><img alt="img" src="/assets/b3697e705c46f68b783238fa.jpg"/></p>
+<h3 id="用程序来模拟生活">用程序来模拟生活</h3>
+<p>相信每一个人都渴望有一个纯洁的爱情，希望找到唯一的她。不管你是单身狗一个，还是已经成双成对，肯定都希望你的伴侣是唯一的！程序如人生，程序也一样，有一些类你希望它只有一个实例。</p>
+<p>我们用程序来模拟一个真爱。</p>
+<p>源码示例：</p>
+<pre><code class="language-python">class MyBeautifulGril(object):
+    """我的漂亮女神"""
+    __instance = None
+    __isFirstInit = False
+
+    def __new__(cls, name):
+        if not cls.__instance:
+            MyBeautifulGril.__instance = super().__new__(cls)
+        return cls.__instance
+
+    def __init__(self, name):
+        if not self.__isFirstInit:
+            self.__name = name
+            print("遇见" + name + "，我一见钟情！")
+            MyBeautifulGril.__isFirstInit = True
+        else:
+            print("遇见" + name + "，我置若罔闻！")
+
+    def showMyHeart(self):
+        print(self.__name + "就我心中的唯一！")
+
+</code></pre>
+<p>测试代码：</p>
+<pre><code class="language-python">def TestLove():
+    jenny = MyBeautifulGril("Jenny")
+    jenny.showMyHeart()
+    kimi = MyBeautifulGril("Kimi")
+    kimi.showMyHeart()
+    print("id(jenny):", id(jenny), " id(kimi):", id(kimi))
+
+</code></pre>
+<p>输出结果：</p>
+<pre><code>遇见Jenny，我一见钟情！
+Jenny就我心中的唯一！
+遇见Kimi，我置若罔闻！
+Jenny就我心中的唯一！
+id(jenny): 47127888  id(kimi): 47127888
+
+</code></pre>
+<p>看到了没，一旦你初次选定了 Jenny，不管换几个女人，你心中念叨的还是 Jenny！这才是真爱啊！哈哈……</p>
+<h3 id="从剧情中思考单例模式">从剧情中思考单例模式</h3>
+<h4 id="单例模式">单例模式</h4>
+<blockquote>
+<p>Ensure a class has only one instance, and provide a global point of access to it.</p>
+<p>确保一个类只有一个实例，并且提供一个访问它的全局方法。</p>
+</blockquote>
+<h4 id="设计思想">设计思想</h4>
+<p>有一些人，你希望是唯一的，程序也一样，有一些类，你希望实例是唯一的。<strong>单例</strong>就是一个类只能有一个对象（实例），单例就是用来控制某些事物只允许有一个个体，比如在我们生活的世界中，有生命的星球只有一个——地球（至少到目前为止人类所发现的世界中是这样的）。</p>
+<p>人如果脚踏两只船，你的生活将会翻船！程序中的部分关键类如果有多个实例，将容易使逻辑混乱，程序崩溃！</p>
+<h3 id="单例模式的模型抽象">单例模式的模型抽象</h3>
+<h4 id="代码框架">代码框架</h4>
+<p>单例的实现方式有很多种，下面列出几种常见的方式。</p>
+<h5 id="1-重写-new-和-init-方法"><strong>1. 重写 <em>new</em> 和 <em>init</em> 方法</strong></h5>
+<p>源码示例：</p>
+<pre><code class="language-python">class Singleton1(object):
+    """单例实现方式一"""
+    __instance = None
+    __isFirstInit = False
+
+    def __new__(cls, name):
+        if not cls.__instance:
+            Singleton1.__instance = super().__new__(cls)
+        return cls.__instance
+
+    def __init__(self, name):
+        if not self.__isFirstInit:
+            self.__name = name
+            Singleton1.__isFirstInit = True
+
+    def getName(self):
+        return self.__name
+
+# Test
+tony = Singleton1("Tony")
+karry = Singleton1("Karry")
+print(tony.getName(), karry.getName())
+print("id(tony):", id(tony), "id(karry):", id(karry))
+print("tony == karry:", tony == karry)
+
+</code></pre>
+<p>输出结果：</p>
+<pre><code>Tony Tony
+id(tony): 46050320 id(karry): 46050320
+tony == karry: True
+
+</code></pre>
+<p>在 Python 3 的类中，<em>*new</em>* 负责对象的创建，而 <em>*init</em>* 负责对象的初始化；<em>*new</em>* 是一个类方法，而 <em>*init</em>* 是一个对象方法。</p>
+<p><em>*new</em>* 是我们通过类名进行实例化对象时自动调用的，<em>*init</em>* 是在每一次实例化对象之后调用的，<em>*new</em>* 方法创建一个实例之后返回这个实例对象，并将其传递给 <em>*init</em>* 方法的 self 参数。</p>
+<p>在上面的示例代码中，我们定义了一个静态的 <em>*instance</em>* 类变量，用来存放 Singleton1 的对象，<em>*new</em>* 方法每次返回同一个<em>*instance对象</em>*（若未初始化，则进行初始化）。因为每一次通过 s = Singleton1() 的方式创建对象时，都会自动调用 <em>*init</em>* 方法来初始化实例对象；因此 <em>*isFirstInit</em>* 的作用就是确保只对 <em>*instance</em>* 对象进行一次初始化，故事剧情中的代码就是用这种方式实现的单例。</p>
+<p>在 Java 和 C++ 这种静态语言中，实现单例模式的一个最简单的方法就是：将构造函数声明成 private，再定义一个 getInstance() 的静态方法返回一个对象，并确保 getInstance() 每次返回同一个对象即可，如下面的 Java 示例代码。</p>
+<pre><code class="language-java">/**
+ * Java中单例模式的实现，未考虑线程安全
+ */
+public class Singleton {
+    private static Singleton instance = null;
+
+    private String name;
+
+    private Singleton(String name) {
+        this.name = name;
+    }
+
+    public static Singleton getInstance(String name) {
+        if (instance == null) {
+            instance = new Singleton(name);
+        }
+        return instance;
+    }
+}
+
+</code></pre>
+<p>Python 中 <em>*new</em>* 和 <em>*init</em>* 都是 public 的，所以我们需要通过重写 <em>*new</em>* 和 <em>*init</em>* 方法来改造对象的创建过来，从而实现单例模式。如果你要更详细地了解 Python 中 <em>*new</em>* 和 <em>*init</em>* 的原理和用法，请参见《<a href="https://blog.csdn.net/luoweifu/article/details/82732313" target="_blank">深入理解 Python 中的 <strong>new</strong> 和 <strong>init</strong></a>》。</p>
+<h5 id="2-自定义-metaclass-的方法"><strong>2. 自定义 metaclass 的方法</strong></h5>
+<pre><code class="language-python">class Singleton2(type):
+    """单例实现方式二"""
+
+    def __init__(cls, what, bases=None, dict=None):
+        super().__init__(what, bases, dict)
+        cls._instance = None # 初始化全局变量cls._instance为None
+
+    def __call__(cls, *args, **kwargs):
+        # 控制对象的创建过程，如果cls._instance为None则创建，否则直接返回
+        if cls._instance is None:
+            cls._instance = super().__call__(*args, **kwargs)
+        return cls._instance
+
+class CustomClass(metaclass=Singleton2):
+    """用户自定义的类"""
+
+    def __init__(self, name):
+        self.__name = name
+
+    def getName(self):
+        return self.__name
+
+tony = CustomClass("Tony")
+karry = CustomClass("Karry")
+print(tony.getName(), karry.getName())
+print("id(tony):", id(tony), "id(karry):", id(karry))
+print("tony == karry:", tony == karry)
+
+</code></pre>
+<p>输出结果：</p>
+<pre><code>Tony Tony
+id(tony): 50794608 id(karry): 50794608
+tony == karry: True
+
+</code></pre>
+<p>在上面的代码中，我们定义了一个 metaclass（Singleton2）来控制对象的实例化过程。在定义自己的类时，我们通过 class CustomClass(metaclass=Singleton2) 来显示地指定 metaclass 为 Singleton2。如果你还不太熟悉 metaclass，想了解更多关于它的原理，请参见《[附录 Python 中 metaclass 的原理](》。</p>
+<h5 id="3-装饰器的方法"><strong>3. 装饰器的方法</strong></h5>
+<pre><code class="language-python">def singletonDecorator(cls, *args, **kwargs):
+    """定义一个单例装饰器"""
+    instance = {}
+
+    def wrapperSingleton(*args, **kwargs):
+        if cls not in instance:
+            instance[cls] = cls(*args, **kwargs)
+        return instance[cls]
+
+    return wrapperSingleton
+
+@singletonDecorator
+class Singleton3:
+    """使用单例装饰器修饰一个类"""
+
+    def __init__(self, name):
+        self.__name = name
+
+    def getName(self):
+        return self.__name
+
+tony = Singleton3("Tony")
+karry = Singleton3("Karry")
+print(tony.getName(), karry.getName())
+print("id(tony):", id(tony), "id(karry):", id(karry))
+print("tony == karry:", tony == karry)
+
+</code></pre>
+<p>输出结果：</p>
+<pre><code>Tony Tony
+id(tony): 46206704 id(karry): 46206704
+tony == karry: True
+
+</code></pre>
+<p>装饰器的实质就是对传进来的参数进行补充，可以在原有的类不做任何代码变动的前提下增加额外的功能，使用装饰器可以装饰多个类。用装饰器的方式来实现单例模式，通用性非常好，在实际项目中用的非常多。</p>
+<h4 id="类图">类图</h4>
+<p>上面的代码框架可用类图表示如下：</p>
+<p><img alt="enter image description here" src="/assets/d632df54b08b535ac967fcc1.png"/></p>
+<h4 id="基于框架的实现">基于框架的实现</h4>
+<p>通过上面的方式三，我们知道，定义通用的装饰器方法之后再用它去修饰一个类，这个类就成了一个单例类，使用起来非常方便。最开始的示例代码我们假设它为 version 1.0，那么再看看基于装饰器的 version 2.0 吧。</p>
+<pre><code class="language-python">@singletonDecorator
+class MyBeautifulGril(object):
+    """我的漂亮女神"""
+
+    def __init__(self, name):
+        self.__name = name
+        if self.__name == name:
+            print("遇见" + name + "，我一见钟情！")
+        else:
+            print("遇见" + name + "，我置若罔闻！")
+
+    def showMyHeart(self):
+        print(self.__name + "就我心中的唯一！")
+
+</code></pre>
+<p>输出结果：</p>
+<pre><code>遇见Jenny，我一见钟情！
+Jenny就我心中的唯一！
+Jenny就我心中的唯一！
+id(jenny): 58920752  id(kimi): 58920752
+
+</code></pre>
+<h3 id="应用场景">应用场景</h3>
+<ol>
+<li>你希望这个类只有一个且只能有一个实例；</li>
+<li>项目中的一些全局管理类（Manager）可以用单例来实现。</li>
+</ol>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

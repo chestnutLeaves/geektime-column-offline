@@ -1,0 +1,33 @@
+# 本地预览、原始仓库与可恢复缓存。
+/.dev/
+/.cache/
+/.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+
+# 图片与 PDF 单独管理，本地保留完整副本；恢复方式见 README。
+/assets/
+/downloads/*
+!/downloads/index.html
+
+# 镜像和资源包按需导出，不进入 Git 历史。
+/exports/
+/images/
+*.partial
+
+# 新的检查输出留本地，归档证据和说明保留。
+/reports/*
+!/reports/README.md
+!/reports/archive/
+!/reports/archive/**
+.env
+.env.*
+!.env.example
+
+# 镜像归档无论放在哪里，都不进入 Git。
+*.tar
+*.tar.gz
+*.tgz
+*.oci

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>28 谈谈你的GC调优思路_ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/index.html">Java核心技术面试精讲</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">42 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java核心技术面试精讲</strong><ul><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%A5%E9%9D%A2%E8%AF%95%E9%A2%98%E4%B8%BA%E5%88%87%E5%85%A5%E7%82%B9%EF%BC%8C%E6%9C%89%E6%95%88%E6%8F%90%E5%8D%87%E4%BD%A0%E7%9A%84Java%E5%86%85%E5%8A%9F.html">00 开篇词 以面试题为切入点，有效提升你的Java内功</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/01%20%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9Java%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F.html">01 谈谈你对Java平台的理解？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/02%20Exception%E5%92%8CError%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">02 Exception和Error有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/03%20%E8%B0%88%E8%B0%88final%E3%80%81finally%E3%80%81%20finalize%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">03 谈谈final、finally、 finalize有什么不同？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/04%20%E5%BC%BA%E5%BC%95%E7%94%A8%E3%80%81%E8%BD%AF%E5%BC%95%E7%94%A8%E3%80%81%E5%BC%B1%E5%BC%95%E7%94%A8%E3%80%81%E5%B9%BB%E8%B1%A1%E5%BC%95%E7%94%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">04 强引用、软引用、弱引用、幻象引用有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/05%20String%E3%80%81StringBuffer%E3%80%81StringBuilder%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">05 String、StringBuffer、StringBuilder有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/06%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%98%AF%E5%9F%BA%E4%BA%8E%E4%BB%80%E4%B9%88%E5%8E%9F%E7%90%86%EF%BC%9F.html">06 动态代理是基于什么原理？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/07%20int%E5%92%8CInteger%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">07 int和Integer有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/08%20%E5%AF%B9%E6%AF%94Vector%E3%80%81ArrayList%E3%80%81LinkedList%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB%EF%BC%9F.html">08 对比Vector、ArrayList、LinkedList有何区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/09%20%E5%AF%B9%E6%AF%94Hashtable%E3%80%81HashMap%E3%80%81TreeMap%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">09 对比Hashtable、HashMap、TreeMap有什么不同？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/10%20%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%9B%86%E5%90%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84_%20ConcurrentHashMap%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%9F.html">10 如何保证集合是线程安全的_ ConcurrentHashMap如何实现高效地线程安全？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/11%20Java%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9BIO%E6%96%B9%E5%BC%8F%EF%BC%9F%20NIO%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%EF%BC%9F.html">11 Java提供了哪些IO方式？ NIO如何实现多路复用？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/12%20Java%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D%E6%96%B9%E5%BC%8F%EF%BC%9F%E5%93%AA%E4%B8%80%E7%A7%8D%E6%9C%80%E9%AB%98%E6%95%88%EF%BC%9F.html">12 Java有几种文件拷贝方式？哪一种最高效？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/13%20%E8%B0%88%E8%B0%88%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">13 谈谈接口和抽象类有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/14%20%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9F%A5%E9%81%93%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">14 谈谈你知道的设计模式？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/15%20synchronized%E5%92%8CReentrantLock%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%91%A2%EF%BC%9F.html">15 synchronized和ReentrantLock有什么区别呢？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/16%20synchronized%E5%BA%95%E5%B1%82%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E9%94%81%E7%9A%84%E5%8D%87%E7%BA%A7%E3%80%81%E9%99%8D%E7%BA%A7%EF%BC%9F.html">16 synchronized底层如何实现？什么是锁的升级、降级？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/17%20%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E4%B8%A4%E6%AC%A1%E8%B0%83%E7%94%A8start%28%29%E6%96%B9%E6%B3%95%E4%BC%9A%E5%87%BA%E7%8E%B0%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%EF%BC%9F.html">17 一个线程两次调用start()方法会出现什么情况？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/18%20%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8BJava%E7%A8%8B%E5%BA%8F%E4%BC%9A%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%EF%BC%9F%E5%A6%82%E4%BD%95%E5%AE%9A%E4%BD%8D%E3%80%81%E4%BF%AE%E5%A4%8D%EF%BC%9F.html">18 什么情况下Java程序会产生死锁？如何定位、修复？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/19%20Java%E5%B9%B6%E5%8F%91%E5%8C%85%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%EF%BC%9F.html">19 Java并发包提供了哪些并发工具类？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/20%20%E5%B9%B6%E5%8F%91%E5%8C%85%E4%B8%AD%E7%9A%84ConcurrentLinkedQueue%E5%92%8CLinkedBlockingQueue%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">20 并发包中的ConcurrentLinkedQueue和LinkedBlockingQueue有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/21%20Java%E5%B9%B6%E5%8F%91%E7%B1%BB%E5%BA%93%E6%8F%90%E4%BE%9B%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%EF%BC%9F%20%E5%88%86%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">21 Java并发类库提供的线程池有哪几种？ 分别有什么特点？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/22%20AtomicInteger%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%A7%E5%93%81%E4%BB%A3%E7%A0%81%E4%B8%AD%E5%BA%94%E7%94%A8CAS%E6%93%8D%E4%BD%9C%EF%BC%9F.html">22 AtomicInteger底层实现原理是什么？如何在自己的产品代码中应用CAS操作？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/23%20%E8%AF%B7%E4%BB%8B%E7%BB%8D%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">23 请介绍类加载过程，什么是双亲委派模型？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/24%20%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AAJava%E7%B1%BB%EF%BC%9F.html">24 有哪些方法可以在运行时动态生成一个Java类？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/25%20%E8%B0%88%E8%B0%88JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E7%9A%84%E5%88%92%E5%88%86%EF%BC%8C%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%9F%9F%E5%8F%AF%E8%83%BD%E5%8F%91%E7%94%9FOutOfMemoryError_.html">25 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError_</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/26%20%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E5%92%8C%E8%AF%8A%E6%96%ADJVM%E5%A0%86%E5%86%85%E5%92%8C%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%EF%BC%9F.html">26 如何监控和诊断JVM堆内和堆外内存使用？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/27%20Java%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">27 Java常见的垃圾收集器有哪些？</a></li><li><a class="active" aria-current="page" href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/28%20%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9A%84GC%E8%B0%83%E4%BC%98%E6%80%9D%E8%B7%AF_.html">28 谈谈你的GC调优思路_</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/29%20Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84happen-before%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">29 Java内存模型中的happen-before是什么？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/30%20Java%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E5%9C%A8Docker%E7%AD%89%E5%AE%B9%E5%99%A8%E7%8E%AF%E5%A2%83%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E9%97%AE%E9%A2%98%EF%BC%9F.html">30 Java程序运行在Docker等容器环境有哪些新问题？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/31%20%E4%BD%A0%E4%BA%86%E8%A7%A3Java%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%E5%90%97%EF%BC%9F.html">31 你了解Java应用开发中的注入攻击吗？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/32%20%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E5%AE%89%E5%85%A8%E7%9A%84Java%E4%BB%A3%E7%A0%81%EF%BC%9F.html">32 如何写出安全的Java代码？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/33%20%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%87%BA%E7%8E%B0%E6%98%8E%E6%98%BE%E2%80%9C%E5%8F%98%E6%85%A2%E2%80%9D%EF%BC%8C%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9A%84%E8%AF%8A%E6%96%AD%E6%80%9D%E8%B7%AF%EF%BC%9F.html">33 后台服务出现明显“变慢”，谈谈你的诊断思路？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/34%20%E6%9C%89%E4%BA%BA%E8%AF%B4%E2%80%9CLambda%E8%83%BD%E8%AE%A9Java%E7%A8%8B%E5%BA%8F%E6%85%A230%E5%80%8D%E2%80%9D%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%9F.html">34 有人说“Lambda能让Java程序慢30倍”，你怎么看？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/35%20JVM%E4%BC%98%E5%8C%96Java%E4%BB%A3%E7%A0%81%E6%97%B6%E9%83%BD%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.html">35 JVM优化Java代码时都做了什么？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/36%20%E8%B0%88%E8%B0%88MySQL%E6%94%AF%E6%8C%81%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%82%B2%E8%A7%82%E9%94%81%E5%92%8C%E4%B9%90%E8%A7%82%E9%94%81%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F.html">36 谈谈MySQL支持的事务隔离级别，以及悲观锁和乐观锁的原理和应用场景？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/37%20%E8%B0%88%E8%B0%88Spring%20Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F.html">37 谈谈Spring Bean的生命周期和作用域？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/38%20%E5%AF%B9%E6%AF%94Java%E6%A0%87%E5%87%86NIO%E7%B1%BB%E5%BA%93%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93Netty%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9B%B4%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%90%97%EF%BC%9F.html">38 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/39%20%E8%B0%88%E8%B0%88%E5%B8%B8%E7%94%A8%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8FID%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9FSnowflake%E6%98%AF%E5%90%A6%E5%8F%97%E5%86%AC%E4%BB%A4%E6%97%B6%E5%88%87%E6%8D%A2%E5%BD%B1%E5%93%8D%EF%BC%9F.html">39 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/%E5%91%A8%E6%9C%AB%E7%A6%8F%E5%88%A9%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9Java%E5%AD%A6%E4%B9%A0%E5%92%8C%E9%9D%A2%E8%AF%95%E7%9A%84%E7%9C%8B%E6%B3%95.html">周末福利 谈谈我对Java学习和面试的看法</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%80%E6%9C%AF%E6%B2%A1%E6%9C%89%E7%BB%88%E7%82%B9.html">结束语 技术没有终点</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/28%20%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9A%84GC%E8%B0%83%E4%BC%98%E6%80%9D%E8%B7%AF_.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="28 谈谈你的GC调优思路_" id="title">28 谈谈你的GC调优思路_</h1>
+<div><p>我发现，目前不少外部资料对G1的介绍大多还停留在JDK 7或更早期的实现，很多结论已经存在较大偏差，甚至一些过去的GC选项已经不再推荐使用。所以，今天我会选取新版JDK中的默认G1 GC作为重点进行详解，并且我会从调优实践的角度，分析典型场景和调优思路。下面我们一起来更新下这方面的知识。</p>
+<p>今天我要问你的问题是，谈谈你的GC调优思路？</p>
+<h2 id="典型回答">典型回答</h2>
+<p>谈到调优，这一定是针对特定场景、特定目的的事情， 对于GC调优来说，首先就需要清楚调优的目标是什么？从性能的角度看，通常关注三个方面，内存占用（footprint）、延时（latency）和吞吐量（throughput），大多数情况下调优会侧重于其中一个或者两个方面的目标，很少有情况可以兼顾三个不同的角度。当然，除了上面通常的三个方面，也可能需要考虑其他GC相关的场景，例如，OOM也可能与不合理的GC相关参数有关；或者，应用启动速度方面的需求，GC也会是个考虑的方面。</p>
+<p>基本的调优思路可以总结为：</p>
+<ul>
+<li><p>理解应用需求和问题，确定调优目标。假设，我们开发了一个应用服务，但发现偶尔会出现性能抖动，出现较长的服务停顿。评估用户可接受的响应时间和业务量，将目标简化为，希望GC暂停尽量控制在200ms以内，并且保证一定标准的吞吐量。</p></li>
+<li><p>掌握JVM和GC的状态，定位具体的问题，确定真的有GC调优的必要。具体有很多方法，比如，通过jstat等工具查看GC等相关状态，可以开启GC日志，或者是利用操作系统提供的诊断工具等。例如，通过追踪GC日志，就可以查找是不是GC在特定时间发生了长时间的暂停，进而导致了应用响应不及时。</p></li>
+<li><p>这里需要思考，选择的GC类型是否符合我们的应用特征，如果是，具体问题表现在哪里，是Minor GC过长，还是Mixed GC等出现异常停顿情况；如果不是，考虑切换到什么类型，如CMS和G1都是更侧重于低延迟的GC选项。</p></li>
+<li><p>通过分析确定具体调整的参数或者软硬件配置。</p></li>
+<li><p>验证是否达到调优目标，如果达到目标，即可以考虑结束调优；否则，重复完成分析、调整、验证这个过程。</p></li>
+</ul>
+<h2 id="考点分析">考点分析</h2>
+<p>今天考察的GC调优问题是JVM调优的一个基础方面，很多JVM调优需求，最终都会落实在GC调优上或者与其相关，我提供的是一个常见的思路。</p>
+<p>真正快速定位和解决具体问题，还是需要对JVM和GC知识的掌握，以及实际调优经验的总结，有的时候甚至是源自经验积累的直觉判断。面试官可能会继续问项目中遇到的真实问题，如果你能清楚、简要地介绍其上下文，然后将诊断思路和调优实践过程表述出来，会是个很好的加分项。</p>
+<p>专栏虽然无法提供具体的项目经验，但是可以帮助你掌握常见的调优思路和手段，这不管是面试还是在实际工作中都是很有帮助的。另外，我会还会从下面不同角度进行补充：</p>
+<ul>
+<li><p>[上一讲]中我已经谈到，涉及具体的GC类型，JVM的实际表现要更加复杂。目前，G1已经成为新版JDK的默认选择，所以值得你去深入理解。</p></li>
+<li><p>因为G1 GC一直处在快速发展之中，我会侧重它的演进变化，尤其是行为和配置相关的变化。并且，同样是因为JVM的快速发展，即使是收集GC日志等方面也发生了较大改进，这也是为什么我在上一讲留给你的思考题是有关日志相关选项，看完讲解相信你会很惊讶。</p></li>
+<li><p>从GC调优实践的角度，理解通用问题的调优思路和手段。</p></li>
+</ul>
+<h2 id="知识扩展">知识扩展</h2>
+<p>首先，先来整体了解一下G1 GC的内部结构和主要机制。</p>
+<p>从内存区域的角度，G1同样存在着年代的概念，但是与我前面介绍的内存结构很不一样，其内部是类似棋盘状的一个个region组成，请参考下面的示意图。-
+<img alt="" src="/assets/22c3bf042b24570b483582e5.png"/></p>
+<p>region的大小是一致的，数值是在1M到32M字节之间的一个2的幂值数，JVM会尽量划分2048个左右、同等大小的region，这点可以从源码<a href="http://hg.openjdk.java.net/jdk/jdk/file/fa2f93f99dbc/src/hotspot/share/gc/g1/heapRegionBounds.hpp" target="_blank">heapRegionBounds.hpp</a>中看到。当然这个数字既可以手动调整，G1也会根据堆大小自动进行调整。</p>
+<p>在G1实现中，年代是个逻辑概念，具体体现在，一部分region是作为Eden，一部分作为Survivor，除了意料之中的Old region，G1会将超过region 50%大小的对象（在应用中，通常是byte或char数组）归类为Humongous对象，并放置在相应的region中。逻辑上，Humongous region算是老年代的一部分，因为复制这样的大对象是很昂贵的操作，并不适合新生代GC的复制算法。</p>
+<p>你可以思考下region设计有什么副作用？</p>
+<p>例如，region大小和大对象很难保证一致，这会导致空间的浪费。不知道你有没有注意到，我的示意图中有的区域是Humongous颜色，但没有用名称标记，这是为了表示，特别大的对象是可能占用超过一个region的。并且，region太小不合适，会令你在分配大对象时更难找到连续空间，这是一个长久存在的情况，请参考<a href="http://mail.openjdk.java.net/pipermail/hotspot-gc-use/2017-November/002726.html" target="_blank">OpenJDK社区的讨论</a>。这本质也可以看作是JVM的bug，尽管解决办法也非常简单，直接设置较大的region大小，参数如下：</p>
+<pre><code>    -XX:G1HeapRegionSize=&lt;N, 例如16&gt;M
+</code></pre>
+<p>从GC算法的角度，G1选择的是复合算法，可以简化理解为：</p>
+<ul>
+<li><p>在新生代，G1采用的仍然是并行的复制算法，所以同样会发生Stop-The-World的暂停。</p></li>
+<li><p>在老年代，大部分情况下都是并发标记，而整理（Compact）则是和新生代GC时捎带进行，并且不是整体性的整理，而是增量进行的。</p></li>
+</ul>
+<p>我在[上一讲]曾经介绍过，习惯上人们喜欢把新生代GC（Young GC）叫作Minor GC，老年代GC叫作Major GC，区别于整体性的Full GC。但是现代GC中，这种概念已经不再准确，对于G1来说：</p>
+<ul>
+<li><p>Minor GC仍然存在，虽然具体过程会有区别，会涉及Remembered Set等相关处理。</p></li>
+<li><p>老年代回收，则是依靠Mixed GC。并发标记结束后，JVM就有足够的信息进行垃圾收集，Mixed GC不仅同时会清理Eden、Survivor区域，而且还会清理部分Old区域。可以通过设置下面的参数，指定触发阈值，并且设定最多被包含在一次Mixed GC中的region比例。</p></li>
+</ul>
+<pre><code>    –XX:G1MixedGCLiveThresholdPercent
+    –XX:G1OldCSetRegionThresholdPercent
+</code></pre>
+<p>从G1内部运行的角度，下面的示意图描述了G1正常运行时的状态流转变化，当然，在发生逃逸失败等情况下，就会触发Full GC。-
+<img alt="" src="/assets/98307944c870a892a73450fa.png"/></p>
+<p>G1相关概念非常多，有一个重点就是Remembered Set，用于记录和维护region之间对象的引用关系。为什么需要这么做呢？试想，新生代GC是复制算法，也就是说，类似对象从Eden或者Survivor到to区域的“移动”，其实是“复制”，本质上是一个新的对象。在这个过程中，需要必须保证老年代到新生代的跨区引用仍然有效。下面的示意图说明了相关设计。-
+<img alt="" src="/assets/b4ddbcd3366517a703d49006.png"/></p>
+<p>G1的很多开销都是源自Remembered Set，例如，它通常约占用Heap大小的20%或更高，这可是非常可观的比例。并且，我们进行对象复制的时候，因为需要扫描和更改Card Table的信息，这个速度影响了复制的速度，进而影响暂停时间。</p>
+<p>描述G1内部的资料很多，我就不重复了，如果你想了解更多内部结构和算法等，我建议参考一些具体的<a href="https://www.infoq.com/articles/G1-One-Garbage-Collector-To-Rule-Them-All" target="_blank">介绍</a>，书籍方面我推荐Charlie Hunt等撰写的《Java Performance Companion》。</p>
+<p>接下来，我介绍下大家可能还不了解的G1行为变化，它们在一定程度上解决了专栏其他讲中提到的部分困扰，如类型卸载不及时的问题。</p>
+<ul>
+<li><p>上面提到了Humongous对象的分配和回收，这是很多内存问题的来源，Humongous region作为老年代的一部分，通常认为它会在并发标记结束后才进行回收，但是在新版G1中，Humongous对象回收采取了更加激进的策略。-
+我们知道G1记录了老年代region间对象引用，Humongous对象数量有限，所以能够快速的知道是否有老年代对象引用它。如果没有，能够阻止它被回收的唯一可能，就是新生代是否有对象引用了它，但这个信息是可以在Young GC时就知道的，所以完全可以在Young GC中就进行Humongous对象的回收，不用像其他老年代对象那样，等待并发标记结束。</p></li>
+<li><p>我在[专栏第5讲]，提到了在8u20以后字符串排重的特性，在垃圾收集过程中，G1会把新创建的字符串对象放入队列中，然后在Young GC之后，并发地（不会STW）将内部数据（char数组，JDK 9以后是byte数组）一致的字符串进行排重，也就是将其引用同一个数组。你可以使用下面参数激活：</p></li>
+</ul>
+<pre><code>    -XX:+UseStringDeduplication
+</code></pre>
+<p>注意，这种排重虽然可以节省不少内存空间，但这种并发操作会占用一些CPU资源，也会导致Young GC稍微变慢。</p>
+<ul>
+<li>类型卸载是个长期困扰一些Java应用的问题，在[专栏第25讲]中，我介绍了一个类只有当加载它的自定义类加载器被回收后，才能被卸载。元数据区替换了永久代之后有所改善，但还是可能出现问题。</li>
+</ul>
+<p>G1的类型卸载有什么改进吗？很多资料中都谈到，G1只有在发生Full GC时才进行类型卸载，但这显然不是我们想要的。你可以加上下面的参数查看类型卸载：</p>
+<pre><code>    -XX:+TraceClassUnloading
+</code></pre>
+<p>幸好现代的G1已经不是如此了，8u40以后，G1增加并默认开启下面的选项：</p>
+<pre><code>    -XX:+ClassUnloadingWithConcurrentMark
+</code></pre>
+<p>也就是说，在并发标记阶段结束后，JVM即进行类型卸载。</p>
+<ul>
+<li>我们知道老年代对象回收，基本要等待并发标记结束。这意味着，如果并发标记结束不及时，导致堆已满，但老年代空间还没完成回收，就会触发Full GC，所以触发并发标记的时机很重要。早期的G1调优中，通常会设置下面参数，但是很难给出一个普适的数值，往往要根据实际运行结果调整</li>
+</ul>
+<pre><code>    -XX:InitiatingHeapOccupancyPercent
+</code></pre>
+<p>在JDK 9之后的G1实现中，这种调整需求会少很多，因为JVM只会将该参数作为初始值，会在运行时进行采样，获取统计数据，然后据此动态调整并发标记启动时机。对应的JVM参数如下，默认已经开启：</p>
+<pre><code>    -XX:+G1UseAdaptiveIHOP
+</code></pre>
+<ul>
+<li>在现有的资料中，大多指出G1的Full GC是最差劲的单线程串行GC。其实，如果采用的是最新的JDK，你会发现Full GC也是并行进行的了，在通用场景中的表现还优于Parallel GC的Full GC实现。</li>
+</ul>
+<p>当然，还有很多其他的改变，比如更快的Card Table扫描等，这里不再展开介绍，因为它们并不带来行为的变化，基本不影响调优选择。</p>
+<p>前面介绍了G1的内部机制，并且穿插了部分调优建议，下面从整体上给出一些调优的建议。</p>
+<p>首先，<strong>建议尽量升级到较新的JDK版本</strong>，从上面介绍的改进就可以看到，很多人们常常讨论的问题，其实升级JDK就可以解决了。</p>
+<p>第二，掌握GC调优信息收集途径。掌握尽量全面、详细、准确的信息，是各种调优的基础，不仅仅是GC调优。我们来看看打开GC日志，这似乎是很简单的事情，可是你确定真的掌握了吗？</p>
+<p>除了常用的两个选项，</p>
+<pre><code>    -XX:+PrintGCDetails
+    -XX:+PrintGCDateStamps
+</code></pre>
+<p>还有一些非常有用的日志选项，很多特定问题的诊断都是要依赖这些选项：</p>
+<pre><code>    -XX:+PrintAdaptiveSizePolicy // 打印G1 Ergonomics相关信息
+</code></pre>
+<p>我们知道GC内部一些行为是适应性的触发的，利用PrintAdaptiveSizePolicy，我们就可以知道为什么JVM做出了一些可能我们不希望发生的动作。例如，G1调优的一个基本建议就是避免进行大量的Humongous对象分配，如果Ergonomics信息说明发生了这一点，那么就可以考虑要么增大堆的大小，要么直接将region大小提高。</p>
+<p>如果是怀疑出现引用清理不及时的情况，则可以打开下面选项，掌握到底是哪里出现了堆积。</p>
+<pre><code>    -XX:+PrintReferenceGC
+</code></pre>
+<p>另外，建议开启选项下面的选项进行并行引用处理。</p>
+<pre><code>    -XX:+ParallelRefProcEnabled
+</code></pre>
+<p>需要注意的一点是，JDK 9中JVM和GC日志机构进行了重构，其实我前面提到的<strong>PrintGCDetails已经被标记为废弃</strong>，而<strong>PrintGCDateStamps已经被移除</strong>，指定它会导致JVM无法启动。可以使用下面的命令查询新的配置参数。</p>
+<pre><code>    java -Xlog:help
+</code></pre>
+<p>最后，来看一些通用实践，理解了我前面介绍的内部结构和机制，很多结论就一目了然了，例如：</p>
+<ul>
+<li>如果发现Young GC非常耗时，这很可能就是因为新生代太大了，我们可以考虑减小新生代的最小比例。</li>
+</ul>
+<pre><code>    -XX:G1NewSizePercent
+</code></pre>
+<p>降低其最大值同样对降低Young GC延迟有帮助。</p>
+<pre><code>    -XX:G1MaxNewSizePercent
+</code></pre>
+<p>如果我们直接为G1设置较小的延迟目标值，也会起到减小新生代的效果，虽然会影响吞吐量。</p>
+<ul>
+<li>如果是Mixed GC延迟较长，我们应该怎么做呢？</li>
+</ul>
+<p>还记得前面说的，部分Old region会被包含进Mixed GC，减少一次处理的region个数，就是个直接的选择之一。-
+我在上面已经介绍了G1OldCSetRegionThresholdPercent控制其最大值，还可以利用下面参数提高Mixed GC的个数，当前默认值是8，Mixed GC数量增多，意味着每次被包含的region减少。</p>
+<pre><code>    -XX:G1MixedGCCountTarget
+</code></pre>
+<p>今天的内容算是抛砖引玉，更多内容你可以参考<a href="https://docs.oracle.com/javase/9/gctuning/garbage-first-garbage-collector-tuning.htm#JSGCT-GUID-4914A8D4-DE41-4250-B68E-816B58D4E278" target="_blank">G1调优指南</a>等，远不是几句话可以囊括的。需要注意的是，也要避免过度调优，G1对大堆非常友好，其运行机制也需要浪费一定的空间，有时候稍微多给堆一些空间，比进行苛刻的调优更加实用。</p>
+<p>今天我梳理了基本的GC调优思路，并对G1内部结构以及最新的行为变化进行了详解。总的来说，G1的调优相对简单、直观，因为可以直接设定暂停时间等目标，并且其内部引入了各种智能的自适应机制，希望这一切的努力，能够让你在日常应用开发时更加高效。</p>
+<h2 id="一课一练">一课一练</h2>
+<p>关于今天我们讨论的题目你做到心中有数了吗？今天的思考题是，定位Full GC发生的原因，有哪些方式？</p>
+<p>请你在留言区写写你对这个问题的思考，我会选出经过认真思考的留言，送给你一份学习奖励礼券，欢迎你与我一起讨论。</p>
+<p>你的朋友是不是也在准备面试呢？你可以“请朋友读”，把今天的题目分享给好友，或许你能帮到他。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

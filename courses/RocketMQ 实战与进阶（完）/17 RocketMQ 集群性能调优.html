@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>17 RocketMQ 集群性能调优 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">RocketMQ 实战与进阶（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">30 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>RocketMQ 实战与进阶（完）</strong><ul><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E6%90%AD%E5%BB%BA%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E7%AF%87.html">01 搭建学习环境准备篇</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/02%20RocketMQ%20%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%89%AB%E7%9B%B2%E7%AF%87.html">02 RocketMQ 核心概念扫盲篇</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%20API%20%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.html">03 消息发送 API 详解与版本变迁说明</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/04%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E8%B0%88%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81.html">04 结合实际应用场景谈消息发送</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/05%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3.html">05 消息发送核心参数与工作原理详解</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/06%20%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">06 消息发送常见错误与解决方案</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/07%20%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E4%BD%BF%E7%94%A8%E5%8F%8A%E6%96%B9%E6%A1%88%E9%80%89%E5%9E%8B%E6%80%9D%E8%80%83.html">07 事务消息使用及方案选型思考</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%20API%20%E4%B8%8E%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81%E8%AF%B4%E6%98%8E.html">08 消息消费 API 与版本变迁说明</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/09%20DefaultMQPushConsumer%20%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">09 DefaultMQPushConsumer 核心参数与工作原理</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/10%20DefaultMQPushConsumer%20%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">10 DefaultMQPushConsumer 使用示例与注意事项</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/11%20DefaultLitePullConsumer%20%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E4%B8%8E%E5%AE%9E%E6%88%98.html">11 DefaultLitePullConsumer 核心参数与实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E5%86%8D%E8%81%8A%20DefaultLitePullConsumer%20%E7%9A%84%E4%BD%BF%E7%94%A8.html">12 结合实际场景再聊 DefaultLitePullConsumer 的使用</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E5%9C%BA%E6%99%AF%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E3%80%81%E6%B6%88%E6%81%AF%E8%BF%87%E6%BB%A4%E5%AE%9E%E6%88%98.html">13 结合实际场景顺序消费、消息过滤实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/14%20%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%A7%AF%E5%8E%8B%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98.html">14 消息消费积压问题排查实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/15%20RocketMQ%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%AE%9E%E6%88%98.html">15 RocketMQ 常用命令实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/16%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E6%91%B8%E9%AB%98.html">16 RocketMQ 集群性能摸高</a></li><li><a class="active" aria-current="page" href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/17%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98.html">17 RocketMQ 集群性能调优</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/18%20RocketMQ%20%E9%9B%86%E7%BE%A4%E5%B9%B3%E6%BB%91%E8%BF%90%E7%BB%B4.html">18 RocketMQ 集群平滑运维</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/19%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%B8%80%EF%BC%89.html">19 RocketMQ 集群监控（一）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/20%20RocketMQ%20%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%EF%BC%88%E4%BA%8C%EF%BC%89.html">20 RocketMQ 集群监控（二）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/21%20RocketMQ%20%E9%9B%86%E7%BE%A4%E5%91%8A%E8%AD%A6.html">21 RocketMQ 集群告警</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/22%20RocketMQ%20%E9%9B%86%E7%BE%A4%E8%B8%A9%E5%9D%91%E8%AE%B0.html">22 RocketMQ 集群踩坑记</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/23%20%E6%B6%88%E6%81%AF%E8%BD%A8%E8%BF%B9%E3%80%81ACL%20%E4%B8%8E%E5%A4%9A%E5%89%AF%E6%9C%AC%E6%90%AD%E5%BB%BA.html">23 消息轨迹、ACL 与多副本搭建</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/24%20RocketMQ-Console%20%E5%B8%B8%E7%94%A8%E9%A1%B5%E9%9D%A2%E6%8C%87%E6%A0%87%E8%8E%B7%E5%8F%96%E9%80%BB%E8%BE%91.html">24 RocketMQ-Console 常用页面指标获取逻辑</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/25%20RocketMQ%20Nameserver%20%E8%83%8C%E5%90%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5.html">25 RocketMQ Nameserver 背后的设计理念</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/26%20Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98.html">26 Java 并发编程实战</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/27%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89.html">27 从 RocketMQ 学基于文件的编程模式（一）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/28%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%E5%9F%BA%E4%BA%8E%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89.html">28 从 RocketMQ 学基于文件的编程模式（二）</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/29%20%E4%BB%8E%20RocketMQ%20%E5%AD%A6%20Netty%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7.html">29 从 RocketMQ 学 Netty 网络编程技巧</a></li><li><a href="/courses/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/30%20RocketMQ%20%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E6%88%91%E8%A7%81.html">30 RocketMQ 学习方法之我见</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/RocketMQ%20%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6%EF%BC%88%E5%AE%8C%EF%BC%89/17%20RocketMQ%20%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="17 RocketMQ 集群性能调优" id="title">17 RocketMQ 集群性能调优</h1>
+<div><h3 id="前言">前言</h3>
+<p>本篇从系统参数和集群参数两个维度对 RocketMQ 集群进行优化，目的在于 RocketMQ 运行的更平稳。平稳往往比单纯提高 TPS 更重要，文中基于实际生产环境运行情况给出，另外在后面文章中会介绍由于参数设置而引发集群不稳定，业务受到影响的踩坑案例。</p>
+<h3 id="系统参数调优">系统参数调优</h3>
+<p>在解压 RocketMQ 安装包后，在 bin 目录中有个 os.sh 的文件，该文件由 RocketMQ 官方推荐系统参数配置。通常这些参数可以满足系统需求，也可以根据情况进行调整。需要强调的是不要使用 Linux 内核版本 2.6 及以下版本，建议使用 Linux 内核版本在 3.10 及以上，如果使用 CentOS，可以选择 CentOS 7 及以上版本。选择 Linux 内核版本 2.6 出现的问题会在后面踩坑案例中提到。</p>
+<h4 id="最大文件数"><strong>最大文件数</strong></h4>
+<p>设置用户的打开的最多文件数：</p>
+<pre><code>vim /etc/security/limits.conf
+# End of file
+baseuser soft nofile 655360
+baseuser hard nofile 655360
+* soft nofile 655360
+* hard nofile 655360
+
+</code></pre>
+<h4 id="系统参数设置"><strong>系统参数设置</strong></h4>
+<p>系统参数的调整以官方给出的为主，下面对各个参数做个说明。设置时可以直接执行 <code>sh os.sh</code> 完成系统参数设定，也可以编辑 <code>vim /etc/sysctl.conf</code> 文件手动添加如下内容，添加后执行 <code>sysctl -p</code> 让其生效。</p>
+<pre><code>vm.overcommit_memory=1
+vm.drop_caches=1
+vm.zone_reclaim_mode=0
+vm.max_map_count=655360
+vm.dirty_background_ratio=50
+vm.dirty_ratio=50
+vm.dirty_writeback_centisecs=360000
+vm.page-cluster=3
+vm.swappiness=1
+
+</code></pre>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">overcommit_memory</td>
+<td align="left">是否允许内存的过量分配 overcommit_memory=0 当用户申请内存的时候，内核会去检查是否有这么大的内存空间 overcommit_memory=1 内核始终认为，有足够大的内存空间，直到它用完了为止 overcommit_memory=2 内核禁止任何形式的过量分配内存</td>
+</tr>
+<tr>
+<td align="left">drop_caches</td>
+<td align="left">写入的时候，内核会清空缓存，腾出内存来，相当于 sync drop_caches=1 会清空页缓存，就是文件 drop_caches=2 会清空 inode 和目录树 drop_caches=3 都清空</td>
+</tr>
+<tr>
+<td align="left">zone_reclaim_mode</td>
+<td align="left">zone_reclaim_mode=0 系统会倾向于从其他节点分配内存 zone_reclaim_mode=1 系统会倾向于从本地节点回收 Cache 内存</td>
+</tr>
+<tr>
+<td align="left">max_map_count</td>
+<td align="left">定义了一个进程能拥有的最多的内存区域，默认为 65536</td>
+</tr>
+<tr>
+<td align="left">dirty_background_ratio/dirty_ratio</td>
+<td align="left">当 dirty cache 到了多少的时候，就启动 pdflush 进程，将 dirty cache 写回磁盘 当有 dirty_background_bytes/dirty_bytes 存在的时候，dirty_background_ratio/dirty_ratio 是被自动计算的</td>
+</tr>
+<tr>
+<td align="left">dirty_writeback_centisecs</td>
+<td align="left">pdflush 每隔多久，自动运行一次（单位是百分之一秒）</td>
+</tr>
+<tr>
+<td align="left">page-cluster</td>
+<td align="left">每次 swap in 或者 swap out 操作多少内存页为 2 的指数 page-cluster=0 表示 1 页 page-cluster=1 表示 2 页 page-cluster=2 表示 4 页 page-cluster=3 表示 8 页</td>
+</tr>
+<tr>
+<td align="left">swappiness</td>
+<td align="left">swappiness=0 仅在内存不足的情况下，当剩余空闲内存低于 vm.min_free_kbytes limit 时，使用交换空间 swappiness=1 内核版本 3.5 及以上、Red Hat 内核版本 2.6.32-303 及以上，进行最少量的交换，而不禁用交换 swappiness=10 当系统存在足够内存时，推荐设置为该值以提高性能 swappiness=60 默认值 swappiness=100 内核将积极的使用交换空间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="集群参数调优">集群参数调优</h3>
+<h4 id="生产环境配置"><strong>生产环境配置</strong></h4>
+<p>下面列出一份在生产环境使用的配置文件，并说明其参数所表示的含义，只需要稍加修改集群名称即可作为生产环境啊配置使用。</p>
+<p>配置示例：</p>
+<pre><code>brokerClusterName=testClusterA
+brokerName=broker-a
+brokerId=0
+listenPort=10911
+namesrvAddr=x.x.x.x:9876;x.x.x.x::9876
+defaultTopicQueueNums=16
+autoCreateTopicEnable=false
+autoCreateSubscriptionGroup=false
+deleteWhen=04
+fileReservedTime=48
+mapedFileSizeCommitLog=1073741824
+mapedFileSizeConsumeQueue=50000000
+destroyMapedFileIntervalForcibly=120000
+redeleteHangedFileInterval=120000
+diskMaxUsedSpaceRatio=88
+storePathRootDir=/data/rocketmq/store
+storePathCommitLog=/data/rocketmq/store/commitlog
+storePathConsumeQueue=/data/rocketmq/store/consumequeue
+storePathIndex=/data/rocketmq/store/index
+storeCheckpoint=/data/rocketmq/store/checkpoint
+abortFile=/data/rocketmq/store/abort
+maxMessageSize=65536
+flushCommitLogLeastPages=4
+flushConsumeQueueLeastPages=2
+flushCommitLogThoroughInterval=10000
+flushConsumeQueueThoroughInterval=60000
+brokerRole=ASYNC_MASTER
+flushDiskType=ASYNC_FLUSH
+maxTransferCountOnMessageInMemory=1000
+transientStorePoolEnable=false
+warmMapedFileEnable=false
+pullMessageThreadPoolNums=128
+slaveReadEnable=true
+transferMsgByHeap=true
+waitTimeMillsInSendQueue=1000
+
+</code></pre>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">brokerClusterName</td>
+<td align="left">集群名称</td>
+</tr>
+<tr>
+<td align="left">brokerName</td>
+<td align="left">broker 名称</td>
+</tr>
+<tr>
+<td align="left">brokerId</td>
+<td align="left">0 表示 Master 节点</td>
+</tr>
+<tr>
+<td align="left">listenPort</td>
+<td align="left">broker 监听端口</td>
+</tr>
+<tr>
+<td align="left">namesrvAddr</td>
+<td align="left">namesrvAddr 地址</td>
+</tr>
+<tr>
+<td align="left">defaultTopicQueueNums</td>
+<td align="left">创建 Topic 时默认的队列数量</td>
+</tr>
+<tr>
+<td align="left">autoCreateTopicEnable</td>
+<td align="left">是否允许自动创建主题，生产环境建议关闭，非生产环境可以开启</td>
+</tr>
+<tr>
+<td align="left">autoCreateSubscriptionGroup</td>
+<td align="left">是否允许自动创建消费组，生产环境建议关闭，非生产环境可以开启</td>
+</tr>
+<tr>
+<td align="left">deleteWhen</td>
+<td align="left">清理过期日志时间，04 表示凌晨 4 点开始清理</td>
+</tr>
+<tr>
+<td align="left">fileReservedTime</td>
+<td align="left">日志保留的时间单位小时，48 即 48 小时，保留 2 天</td>
+</tr>
+<tr>
+<td align="left">mapedFileSizeCommitLog</td>
+<td align="left">日志文件大小</td>
+</tr>
+<tr>
+<td align="left">mapedFileSizeConsumeQueue</td>
+<td align="left">ConsumeQueue 文件大小</td>
+</tr>
+<tr>
+<td align="left">destroyMapedFileIntervalForcibly</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">redeleteHangedFileInterval</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">diskMaxUsedSpaceRatio</td>
+<td align="left">磁盘最大使用率，超过使用率会发起日志清理操作</td>
+</tr>
+<tr>
+<td align="left">storePathRootDir</td>
+<td align="left">RocketMQ 日志等数据存储的根目录</td>
+</tr>
+<tr>
+<td align="left">storePathCommitLog</td>
+<td align="left">CommitLog 存储目录</td>
+</tr>
+<tr>
+<td align="left">storePathConsumeQueue</td>
+<td align="left">ConsumeQueue 存储目录</td>
+</tr>
+<tr>
+<td align="left">storePathIndex</td>
+<td align="left">索引文件存储目录</td>
+</tr>
+<tr>
+<td align="left">storeCheckpoint</td>
+<td align="left">checkpoint 文件存储目录</td>
+</tr>
+<tr>
+<td align="left">abortFile</td>
+<td align="left">abort 文件存储目录</td>
+</tr>
+<tr>
+<td align="left">maxMessageSize</td>
+<td align="left">单条消息允许的最大字节</td>
+</tr>
+<tr>
+<td align="left">flushCommitLogLeastPages</td>
+<td align="left">未 flush 的消息大小超过设置页时，才执行 flush 操作；一页大小为 4K</td>
+</tr>
+<tr>
+<td align="left">flushConsumeQueueLeastPages</td>
+<td align="left">未 flush 的消费队列大小超过设置页时，才执行 flush 操作；一页大小为 4K</td>
+</tr>
+<tr>
+<td align="left">flushCommitLogThoroughInterval</td>
+<td align="left">两次执行消息 flush 操作的间隔时间，默认为 10 秒</td>
+</tr>
+<tr>
+<td align="left">flushConsumeQueueThoroughInterval</td>
+<td align="left">两次执行消息队列 flush 操作的间隔时间，默认为 60 秒</td>
+</tr>
+<tr>
+<td align="left">brokerRole</td>
+<td align="left">broker 角色 ASYNC_MASTER 异步复制的 Master 节点 SYNC_MASTER 同步复制的 Master 节点 SLAVE 从节点</td>
+</tr>
+<tr>
+<td align="left">flushDiskType</td>
+<td align="left">刷盘类型 ASYNC_FLUSH 异步刷盘 SYNC_FLUSH 同步刷盘</td>
+</tr>
+<tr>
+<td align="left">maxTransferCountOnMessageInMemory</td>
+<td align="left">消费时允许一次拉取的最大消息数</td>
+</tr>
+<tr>
+<td align="left">transientStorePoolEnable</td>
+<td align="left">是否开启堆外内存传输</td>
+</tr>
+<tr>
+<td align="left">warmMapedFileEnable</td>
+<td align="left">是否开启文件预热</td>
+</tr>
+<tr>
+<td align="left">pullMessageThreadPoolNums</td>
+<td align="left">拉取消息线程池大小</td>
+</tr>
+<tr>
+<td align="left">slaveReadEnable</td>
+<td align="left">是否开启允许从 Slave 节点读取消息 内存的消息大小占物理内存的比率，当超过默认 40%会从 slave 的 0 节点读取 通过 accessMessageInMemoryMaxRatio 设置内存的消息大小占物理内存的比率</td>
+</tr>
+<tr>
+<td align="left">transferMsgByHeap</td>
+<td align="left">消息消费时是否从堆内存读取</td>
+</tr>
+<tr>
+<td align="left">waitTimeMillsInSendQueue</td>
+<td align="left">发送消息时在队列中等待时间，超过会抛出超时错误</td>
+</tr>
+</tbody>
+</table>
+<h4 id="调优建议"><strong>调优建议</strong></h4>
+<p>对 Broker 的几个属性可能影响到集群性能的稳定性，下面进行特别说明。</p>
+<p><strong>1. 开启异步刷盘</strong></p>
+<p>除了一些支付类场景、或者 TPS 较低的场景（例如：TPS 在 2000 以下）生产环境建议开启异步刷盘，提高集群吞吐。</p>
+<pre><code>flushDiskType=ASYNC_FLUSH
+
+</code></pre>
+<p><strong>2. 开启 Slave 读权限</strong></p>
+<p>消息占用物理内存的大小通过 accessMessageInMemoryMaxRatio 来配置默认为 40%；如果消费的消息不在内存中，开启 slaveReadEnable 时会从 slave 节点读取；提高 Master 内存利用率。</p>
+<pre><code>slaveReadEnable=true
+
+</code></pre>
+<p><strong>3. 消费一次拉取消息数量</strong></p>
+<p>消费时一次拉取的数量由 broker 和 consumer 客户端共同决定，默认为 32 条。Broker 端参数由 maxTransferCountOnMessageInMemory 设置。consumer 端由 pullBatchSize 设置。Broker 端建议设置大一些，例如 1000，给 consumer 端留有较大的调整空间。</p>
+<pre><code>maxTransferCountOnMessageInMemory=1000
+
+</code></pre>
+<p><strong>4. 发送队列等待时间</strong></p>
+<p>消息发送到 Broker 端，在队列的等待时间由参数 waitTimeMillsInSendQueue 设置，默认为 200ms。建议设置大一些，例如：1000ms~5000ms。设置过短，发送客户端会引起超时。</p>
+<pre><code>waitTimeMillsInSendQueue=1000
+
+</code></pre>
+<p><strong>5. 主从异步复制</strong></p>
+<p>为提高集群性能，在生成环境建议设置为主从异步复制，经过压力测试主从同步复制性能过低。</p>
+<pre><code>brokerRole=ASYNC_MASTER
+
+</code></pre>
+<p><strong>6. 提高集群稳定性</strong></p>
+<p>为了提高集群稳定性，对下面三个参数进行特别说明，在后面踩坑案例中也会提到。</p>
+<p>关闭堆外内存：</p>
+<pre><code>transientStorePoolEnable=false
+
+</code></pre>
+<p>关闭文件预热：</p>
+<pre><code>warmMapedFileEnable=false
+
+</code></pre>
+<p>开启堆内传输：</p>
+<pre><code>transferMsgByHeap=true
+</code></pre>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

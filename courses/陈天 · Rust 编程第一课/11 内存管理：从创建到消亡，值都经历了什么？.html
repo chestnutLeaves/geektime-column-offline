@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>11 内存管理：从创建到消亡，值都经历了什么？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/index.html">陈天 · Rust 编程第一课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">63 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>陈天 · Rust 编程第一课</strong><ul><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E8%AE%A9Rust%E6%88%90%E4%B8%BA%E4%BD%A0%E7%9A%84%E4%B8%8B%E4%B8%80%E9%97%A8%E4%B8%BB%E5%8A%9B%E8%AF%AD%E8%A8%80.html">00 开篇词 让Rust成为你的下一门主力语言</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/01%20%E5%86%85%E5%AD%98%EF%BC%9A%E5%80%BC%E6%94%BE%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%94%BE%E6%A0%88%E4%B8%8A%EF%BC%8C%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98.html">01 内存：值放堆上还是放栈上，这是一个问题</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/02%20%E4%B8%B2%E8%AE%B2%EF%BC%9A%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91%E4%B8%AD%EF%BC%8C%E9%82%A3%E4%BA%9B%E4%BD%A0%E9%9C%80%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html">02 串讲：编程开发中，那些你需要掌握的基本概念</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/03%20%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84%EF%BC%9A%E4%BB%8E%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AARust%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%A7%8B%EF%BC%81.html">03 初窥门径：从你的第一个Rust程序开始！</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/04%20get%20hands%20dirty%EF%BC%9A%E6%9D%A5%E5%86%99%E4%B8%AA%E5%AE%9E%E7%94%A8%E7%9A%84CLI%E5%B0%8F%E5%B7%A5%E5%85%B7.html">04 get hands dirty：来写个实用的CLI小工具</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/05%20get%20hands%20dirty%EF%BC%9A%E5%81%9A%E4%B8%80%E4%B8%AA%E5%9B%BE%E7%89%87%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9C%89%E5%A4%9A%E9%9A%BE%EF%BC%9F.html">05 get hands dirty：做一个图片服务器有多难？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/06%20get%20hands%20dirty%EF%BC%9ASQL%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7%E6%80%8E%E4%B9%88%E4%B8%80%E9%B1%BC%E5%A4%9A%E5%90%83%EF%BC%9F.html">06 get hands dirty：SQL查询工具怎么一鱼多吃？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/07%20%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E5%80%BC%E7%9A%84%E7%94%9F%E6%9D%80%E5%A4%A7%E6%9D%83%E5%88%B0%E5%BA%95%E5%9C%A8%E8%B0%81%E6%89%8B%E4%B8%8A%EF%BC%9F.html">07 所有权：值的生杀大权到底在谁手上？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/08%20%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E5%80%BC%E7%9A%84%E5%80%9F%E7%94%A8%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">08 所有权：值的借用是如何工作的？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/09%20%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%80%BC%E5%8F%AF%E4%BB%A5%E6%9C%89%E5%A4%9A%E4%B8%AA%E6%89%80%E6%9C%89%E8%80%85%E4%B9%88%EF%BC%9F.html">09 所有权：一个值可以有多个所有者么？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/10%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9A%E4%BD%A0%E5%88%9B%E5%BB%BA%E7%9A%84%E5%80%BC%E7%A9%B6%E7%AB%9F%E8%83%BD%E6%B4%BB%E5%A4%9A%E4%B9%85%EF%BC%9F.html">10 生命周期：你创建的值究竟能活多久？</a></li><li><a class="active" aria-current="page" href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/11%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9A%E4%BB%8E%E5%88%9B%E5%BB%BA%E5%88%B0%E6%B6%88%E4%BA%A1%EF%BC%8C%E5%80%BC%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.html">11 内存管理：从创建到消亡，值都经历了什么？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/12%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9ARust%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">12 类型系统：Rust的类型系统有什么特点？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/13%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8trait%E6%9D%A5%E5%AE%9A%E4%B9%89%E6%8E%A5%E5%8F%A3%EF%BC%9F.html">13 类型系统：如何使用trait来定义接口？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/14%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84trait%EF%BC%9F.html">14 类型系统：有哪些必须掌握的trait？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/15%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E8%BF%99%E4%BA%9B%E6%B5%93%E7%9C%89%E5%A4%A7%E7%9C%BC%E7%9A%84%E7%BB%93%E6%9E%84%E7%AB%9F%E7%84%B6%E9%83%BD%E6%98%AF%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%EF%BC%9F.html">15 数据结构：这些浓眉大眼的结构竟然都是智能指针？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/16%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9AVec_T_%E3%80%81%26%5BT%5D%E3%80%81Box_%5BT%5D_%20%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E9%9B%86%E5%90%88%E5%AE%B9%E5%99%A8%E4%B9%88%EF%BC%9F.html">16 数据结构：Vec_T_、&amp;[T]、Box_[T]_ ，你真的了解集合容器么？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/17%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A0%B8%E5%BF%83%E9%83%A8%E4%BB%B6%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%8C%E5%86%85%E5%AD%98%E5%A6%82%E4%BD%95%E5%B8%83%E5%B1%80%EF%BC%9F.html">17 数据结构：软件系统核心部件哈希表，内存如何布局？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/18%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Rust%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BC%97%E4%B8%8D%E5%90%8C%EF%BC%9F.html">18 错误处理：为什么Rust的错误处理与众不同？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/19%20%E9%97%AD%E5%8C%85%EF%BC%9AFnOnce%E3%80%81FnMut%E5%92%8CFn%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E7%B1%BB%E5%9E%8B%EF%BC%9F.html">19 闭包：FnOnce、FnMut和Fn，为什么有这么多类型？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/20%204%20Steps%20%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9B%B4%E5%A5%BD%E5%9C%B0%E9%98%85%E8%AF%BBRust%E6%BA%90%E7%A0%81%EF%BC%9F.html">20 4 Steps ：如何更好地阅读Rust源码？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/21%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%881%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B.html">21 阶段实操（1）：构建一个简单的KV server-基本流程</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/22%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%882%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B.html">22 阶段实操（2）：构建一个简单的KV server-基本流程</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/23%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%9E%E6%88%98%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B%EF%BC%9F.html">23 类型系统：如何在实战中使用泛型编程？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/24%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E5%AE%9E%E6%88%98%E4%B8%AD%E4%BD%BF%E7%94%A8trait%20object%EF%BC%9F.html">24 类型系统：如何在实战中使用trait object？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/25%20%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9B%B4%E7%BB%95trait%E6%9D%A5%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%9E%B6%E6%9E%84%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">25 类型系统：如何围绕trait来设计和架构系统？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/26%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%883%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E9%AB%98%E7%BA%A7trait%E6%8A%80%E5%B7%A7.html">26 阶段实操（3）：构建一个简单的KV server-高级trait技巧</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/27%20%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E6%9C%89%E7%9A%84Rust%E5%BA%93%E5%8F%AF%E4%BB%A5%E4%B8%BA%E6%88%91%E6%89%80%E7%94%A8%EF%BC%9F.html">27 生态系统：有哪些常有的Rust库可以为我所用？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/28%20%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Rust%E5%A4%84%E7%90%86%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%EF%BC%9F.html">28 网络开发（上）：如何使用Rust处理网络请求？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/29%20%E7%BD%91%E7%BB%9C%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Rust%E5%A4%84%E7%90%86%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%EF%BC%9F.html">29 网络开发（下）：如何使用Rust处理网络请求？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/30%20Unsafe%20Rust%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8C%2B%2B%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E5%BC%80Rust%EF%BC%9F.html">30 Unsafe Rust：如何用C++的方式打开Rust？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/31%20FFI%EF%BC%9ARust%E5%A6%82%E4%BD%95%E5%92%8C%E4%BD%A0%E7%9A%84%E8%AF%AD%E8%A8%80%E6%9E%B6%E8%B5%B7%E6%B2%9F%E9%80%9A%E6%A1%A5%E6%A2%81%EF%BC%9F.html">31 FFI：Rust如何和你的语言架起沟通桥梁？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/32%20%E5%AE%9E%E6%93%8D%E9%A1%B9%E7%9B%AE%EF%BC%9A%E4%BD%BF%E7%94%A8PyO3%E5%BC%80%E5%8F%91Python3%E6%A8%A1%E5%9D%97.html">32 实操项目：使用PyO3开发Python3模块</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/33%20%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8Eatomics%E5%88%B0Channel%EF%BC%8CRust%E9%83%BD%E6%8F%90%E4%BE%9B%E4%BA%86%E4%BB%80%E4%B9%88%E5%B7%A5%E5%85%B7%EF%BC%9F.html">33 并发处理（上）：从atomics到Channel，Rust都提供了什么工具？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/34%20%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BB%8Eatomics%E5%88%B0Channel%EF%BC%8CRust%E9%83%BD%E6%8F%90%E4%BE%9B%E4%BA%86%E4%BB%80%E4%B9%88%E5%B7%A5%E5%85%B7%EF%BC%9F.html">34 并发处理（下）：从atomics到Channel，Rust都提供了什么工具？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/35%20%E5%AE%9E%E6%93%8D%E9%A1%B9%E7%9B%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84MPSC%20channel%EF%BC%9F.html">35 实操项目：如何实现一个基本的MPSC channel？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/36%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%884%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E7%BD%91%E7%BB%9C%E5%A4%84%E7%90%86.html">36 阶段实操（4）：构建一个简单的KV server-网络处理</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/37%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%885%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8.html">37 阶段实操（5）：构建一个简单的KV server-网络安全</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/38%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%EF%BC%9AFuture%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%AE%83%E5%92%8Casync_await%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">38 异步处理：Future是什么？它和async_await是什么关系？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/39%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%EF%BC%9Aasync_await%E5%86%85%E9%83%A8%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">39 异步处理：async_await内部是怎么实现的？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/40%20%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%BC%82%E6%AD%A5IO%EF%BC%9F.html">40 异步处理：如何处理异步IO？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/41%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%886%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86.html">41 阶段实操（6）：构建一个简单的KV server-异步处理</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/42%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%887%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E5%A6%82%E4%BD%95%E5%81%9A%E5%A4%A7%E7%9A%84%E9%87%8D%E6%9E%84%EF%BC%9F.html">42 阶段实操（7）：构建一个简单的KV server-如何做大的重构？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/43%20%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%EF%BC%9A%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E4%B8%8B%E7%9A%84%E4%B8%80%E4%B8%AARust%E9%A1%B9%E7%9B%AE%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E8%A6%81%E7%B4%A0%EF%BC%9F.html">43 生产环境：真实世界下的一个Rust项目包含哪些要素？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/44%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E5%A6%82%E4%BD%95%E6%89%93%E4%BA%A4%E9%81%93%EF%BC%9F.html">44 数据处理：应用程序和数据如何打交道？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/45%20%E9%98%B6%E6%AE%B5%E5%AE%9E%E6%93%8D%EF%BC%888%EF%BC%89%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84KV%20server-%E9%85%8D%E7%BD%AE_%E6%B5%8B%E8%AF%95_%E7%9B%91%E6%8E%A7_CI_CD.html">45 阶段实操（8）：构建一个简单的KV server-配置_测试_监控_CI_CD</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/46%20%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8Rust%E6%9E%B6%E6%9E%84%E5%A4%8D%E6%9D%82%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">46 软件架构：如何用Rust架构复杂系统？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20Rust2021%E7%89%88%E6%AC%A1%E9%97%AE%E4%B8%96%E4%BA%86%EF%BC%81.html">加餐 Rust2021版次问世了！</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E4%BB%A3%E7%A0%81%E5%8D%B3%E6%95%B0%E6%8D%AE%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%AE%8F%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%EF%BC%9F.html">加餐 代码即数据：为什么我们需要宏编程能力？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%AE%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E7%94%A8%E6%9C%80%E2%80%9C%E7%AC%A8%E2%80%9D%E7%9A%84%E6%96%B9%E5%BC%8F%E6%92%B0%E5%86%99%E5%AE%8F.html">加餐 宏编程（上）：用最“笨”的方式撰写宏</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%AE%8F%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E7%94%A8%20syn_quote%20%E4%BC%98%E9%9B%85%E5%9C%B0%E6%9E%84%E5%BB%BA%E5%AE%8F.html">加餐 宏编程（下）：用 syn_quote 优雅地构建宏</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%84%9A%E6%98%A7%E4%B9%8B%E5%B7%85%EF%BC%9A%E4%BD%A0%E7%9A%84Rust%E5%AD%A6%E4%B9%A0%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html">加餐 愚昧之巅：你的Rust学习常见问题汇总</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%9C%9F%E4%B8%AD%E6%B5%8B%E8%AF%95%EF%BC%9A%E5%8F%82%E8%80%83%E5%AE%9E%E7%8E%B0%E8%AE%B2%E8%A7%A3.html">加餐 期中测试：参考实现讲解</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E6%9C%9F%E4%B8%AD%E6%B5%8B%E8%AF%95%EF%BC%9A%E6%9D%A5%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84grep%E5%91%BD%E4%BB%A4%E8%A1%8C.html">加餐 期中测试：来写一个简单的grep命令行</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%BF%99%E4%B8%AA%E4%B8%93%E6%A0%8F%E4%BD%A0%E5%8F%AF%E4%BB%A5%E6%80%8E%E4%B9%88%E5%AD%A6%EF%BC%8C%E4%BB%A5%E5%8F%8ARust%E6%98%AF%E5%90%A6%E5%80%BC%E5%BE%97%E5%AD%A6%EF%BC%9F.html">加餐 这个专栏你可以怎么学，以及Rust是否值得学？</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E5%9C%BA%20%E5%BC%80%E6%82%9F%E4%B9%8B%E5%9D%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9ARust%E7%9A%84%E7%8E%B0%E7%8A%B6%E3%80%81%E6%9C%BA%E9%81%87%E4%B8%8E%E6%8C%91%E6%88%98.html">大咖助场 开悟之坡（上）：Rust的现状、机遇与挑战</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E5%A4%A7%E5%92%96%E5%8A%A9%E5%9C%BA%20%E5%BC%80%E6%82%9F%E4%B9%8B%E5%9D%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ARust%E7%9A%84%E7%8E%B0%E7%8A%B6%E3%80%81%E6%9C%BA%E9%81%87%E4%B8%8E%E6%8C%91%E6%88%98.html">大咖助场 开悟之坡（下）：Rust的现状、机遇与挑战</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%89%B9%E5%88%AB%E7%AD%96%E5%88%92%20%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%90%AC%E5%90%AC%E8%AF%BE%E4%BB%A3%E8%A1%A8%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4.html">特别策划 学习锦囊（一）：听听课代表们怎么说</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%89%B9%E5%88%AB%E7%AD%96%E5%88%92%20%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%90%AC%E5%90%AC%E8%AF%BE%E4%BB%A3%E8%A1%A8%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4.html">特别策划 学习锦囊（三）：听听课代表们怎么说</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%89%B9%E5%88%AB%E7%AD%96%E5%88%92%20%E5%AD%A6%E4%B9%A0%E9%94%A6%E5%9B%8A%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%90%AC%E5%90%AC%E8%AF%BE%E4%BB%A3%E8%A1%A8%E4%BB%AC%E6%80%8E%E4%B9%88%E8%AF%B4.html">特别策划 学习锦囊（二）：听听课代表们怎么说</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E7%BB%9D%E6%9C%9B%E4%B9%8B%E8%B0%B7%EF%BC%9A%E6%94%B9%E5%8F%98%E4%BB%8E%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%A7%8B.html">用户故事 绝望之谷：改变从学习开始</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E8%AF%AD%E8%A8%80%E4%B8%8D%E4%BB%85%E6%98%AF%E5%B7%A5%E5%85%B7%EF%BC%8C%E8%BF%98%E6%98%AF%E6%80%9D%E7%BB%B4%E6%96%B9%E5%BC%8F.html">用户故事 语言不仅是工具，还是思维方式</a></li><li><a href="/courses/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%B0%B8%E7%BB%AD%E4%B9%8B%E5%8E%9F%EF%BC%9ARust%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%A6%82%E4%BD%95%E6%8C%81%E7%BB%AD%E7%B2%BE%E8%BF%9B%EF%BC%9F.html">结束语 永续之原：Rust学习，如何持续精进？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%99%88%E5%A4%A9%20%C2%B7%20Rust%20%E7%BC%96%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/11%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9A%E4%BB%8E%E5%88%9B%E5%BB%BA%E5%88%B0%E6%B6%88%E4%BA%A1%EF%BC%8C%E5%80%BC%E9%83%BD%E7%BB%8F%E5%8E%86%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="11 内存管理：从创建到消亡，值都经历了什么？" id="title">11 内存管理：从创建到消亡，值都经历了什么？</h1>
+<div><p>你好，我是陈天。</p>
+<p>初探 Rust 以来，我们一直在学习有关所有权和生命周期的内容，想必现在，你对 Rust 内存管理的核心思想已经有足够理解了。</p>
+<p>通过单一所有权模式，Rust 解决了堆内存过于灵活、不容易安全高效地释放的问题，既避免了手工释放内存带来的巨大心智负担和潜在的错误；又避免了全局引入追踪式 GC 或者 ARC 这样的额外机制带来的效率问题。</p>
+<p>不过所有权模型也引入了很多新概念，从 Move/Copy/Borrow 语义到生命周期管理，所以学起来有些难度。</p>
+<p>但是，你发现了吗，其实大部分新引入的概念，包括 Copy 语义和值的生命周期，在其它语言中都是隐式存在的，只不过 Rust <strong>把它们定义得更清晰，更明确地界定了使用的范围而已</strong>。</p>
+<p>今天我们沿着之前的思路，先梳理和总结 Rust 内存管理的基本内容，然后从一个值的奇幻之旅讲起，看看在内存中，一个值，从创建到消亡都经历了什么，把之前讲的融会贯通。</p>
+<p>到这里你可能有点不耐烦了吧，怎么今天又要讲内存的知识。其实是因为，<strong>内存管理是任何编程语言的核心</strong>，重要性就像武学中的内功。只有当我们把数据在内存中如何创建、如何存放、如何销毁弄明白，之后阅读代码、分析问题才会有一种游刃有余的感觉。</p>
+<h2 id="内存管理">内存管理</h2>
+<p>我们在[第一讲]说过堆和栈，它们是代码中使用内存的主要场合。</p>
+<p>栈内存“分配”和“释放”都很高效，在编译期就确定好了，因而它无法安全承载动态大小或者生命周期超出帧存活范围外的值。所以，我们需要运行时可以自由操控的内存，也就是堆内存，来弥补栈的缺点。</p>
+<p>堆内存足够灵活，然而堆上数据的生命周期该如何管理，成为了各门语言的心头大患。</p>
+<p>C 采用了未定义的方式，由开发者手工控制；C++ 在 C 的基础上改进，引入智能指针，半手工半自动。Java 和 DotNet 使用 GC 对堆内存全面接管，堆内存进入了受控（managed）时代。所谓受控代码（managed code），就是代码在一个“运行时”下工作，由运行时来保证堆内存的安全访问。</p>
+<p>整个堆内存生命周期管理的发展史如下图所示：<img alt="" src="/assets/80da573efd86335ba7eb7310.jpg"/></p>
+<p>而Rust 的创造者们，重新审视了堆内存的生命周期，发现<strong>大部分堆内存的需求在于动态大小，小部分需求是更长的生命周期</strong>。所以它默认将堆内存的生命周期和使用它的栈内存的生命周期绑在一起，并留了个小口子 leaked机制，让堆内存在需要的时候，可以有超出帧存活期的生命周期。</p>
+<p>我们看下图的对比总结：-
+<img alt="" src="/assets/02fe71f2505a99b76ffba300.jpg"/></p>
+<p>有了这些基本的认知，我们再看看在值的创建、使用和销毁的过程中， Rust 是如何管理内存的。</p>
+<p>希望学完今天的内容之后，看到一个 Rust 的数据结构，你就可以在脑海中大致浮现出，这个数据结构在内存中的布局：哪些字段在栈上、哪些在堆上，以及它大致的大小。</p>
+<h2 id="值的创建">值的创建</h2>
+<p>当我们为数据结构创建一个值，并将其赋给一个变量时，根据值的性质，它有可能被创建在栈上，也有可能被创建在堆上。</p>
+<p>简单回顾一下，我们在[第一]、[第二讲]说过，理论上，编译时可以确定大小的值都会放在栈上，包括 Rust 提供的原生类型比如字符、数组、元组（tuple）等，以及开发者自定义的固定大小的结构体（struct）、枚举（enum） 等。</p>
+<p>如果数据结构的大小无法确定，或者它的大小确定但是在使用时需要更长的生命周期，就最好放在堆上。</p>
+<p>接下来我们来看 struct/enum/vec<t>/String 这几种重要的数据结构在创建时的内存布局。</t></p>
+<h3 id="struct">struct</h3>
+<p>Rust 在内存中排布数据时，<strong>会根据每个域的对齐（aligment）对数据进行重排</strong>，使其内存大小和访问效率最好。比如，一个包含 A、B、C 三个域的 struct，它在内存中的布局可能是 A、C、B：<img alt="" src="/assets/f24bcbac8636852a5fb62995.jpg"/></p>
+<p>为什么 Rust 编译器会这么做呢？</p>
+<p>我们先看看 C 语言在内存中表述一个结构体时遇到的问题。来写一段代码，其中两个数据结构 S1 和 S2 都有三个域 a、b、c，其中 a 和 c 是 u8，占用一个字节，b 是 u16，占用两个字节。S1 在定义时顺序是 a、b、c，而 S2 在定义时顺序是 a、c、b：</p>
+<p>猜猜看 S1 和 S2 的大小是多少？</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+struct S1 {
+    u_int8_t a;
+    u_int16_t b;
+    u_int8_t c;
+};
+
+struct S2 {
+    u_int8_t a;
+    u_int8_t c;
+    u_int16_t b;
+};
+
+void main() {
+    printf("size of S1: %d, S2: %d", sizeof(struct S1), sizeof(struct S2));
+    }
+</code></pre>
+<p>正确答案是：6 和 4。</p>
+<p>为什么明明只用了 4 个字节，S1 的大小却是 6 呢？这是因为 CPU 在加载不对齐的内存时，性能会急剧下降，所以<strong>要避免用户定义不对齐的数据结构时，造成的性能影响</strong>。</p>
+<p>对于这个问题，C 语言会对结构体会做这样的处理：</p>
+<ol>
+<li>首先确定每个域的长度和对齐长度，原始类型的对齐长度和类型的长度一致。</li>
+<li>每个域的起始位置要和其对齐长度对齐，如果无法对齐，则添加 padding 直至对齐。</li>
+<li>结构体的对齐大小和其最大域的对齐大小相同，而结构体的长度则四舍五入到其对齐的倍数。</li>
+</ol>
+<p>字面上看这三条规则，你是不是觉得像绕口令，别担心，我们结合刚才的代码再来看，其实很容易理解。</p>
+<p>对于 S1，字段 a 是 u8 类型，所以其长度和对齐都是 1，b 是 u16，其长度和对齐是 2。然而因为 a 只占了一个字节，b 的偏移是 1，根据第二条规则，起始位置和 b 的长度无法对齐，所以编译器会添加一个字节的 padding，让 b 的偏移为 2，这样 b 就对齐了。<img alt="" src="/assets/4226147bb3866916fe6c9ecf.jpg"/></p>
+<p>随后 c 长度和对齐都是 1，不需要 padding。这样算下来，S1 的大小是 5，但根据上面的第三条规则，S1 的对齐是 2，和 5 最接近的“2 的倍数”是 6，所以 S1 最终的长度是 6。其实，这最后一条规则是为了让 S1 放在数组中，可以有效对齐。</p>
+<p>所以，<strong>如果结构体的定义考虑地不够周全，会为了对齐浪费很多空间</strong>。我们看到，保存同样的数据，S1 和 S2 的大小相差了 50%。</p>
+<p>使用 C 语言时，定义结构体的最佳实践是，充分考虑每一个域的对齐，合理地排列它们，使其内存使用最高效。这个工作由开发者做会很费劲，尤其是嵌套的结构体，需要仔细地计算才能得到最优解。</p>
+<p>而 Rust 编译器替我们自动完成了这个优化，这就是为什么 Rust 会自动重排你定义的结构体，来达到最高效率。我们看同样的代码，在 Rust 下，S1 和 S2 大小都是 4（<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=c82908a73aedc9b0d8ac2be0b43f6f6d" target="_blank">代码</a>）：</p>
+<pre><code>use std::mem::{align_of, size_of};
+
+struct S1 {
+    a: u8,
+    b: u16,
+    c: u8,
+}
+
+struct S2 {
+    a: u8,
+    c: u8,
+    b: u16,
+}
+
+fn main() {
+    println!("sizeof S1: {}, S2: {}", size_of::&lt;S1&gt;(), size_of::&lt;S2&gt;());
+    println!("alignof S1: {}, S2: {}", align_of::&lt;S1&gt;(), align_of::&lt;S2&gt;());
+}
+</code></pre>
+<p>你也可以看这张图来直观对比， C 和 Rust 的行为：<img alt="" src="/assets/9ec822dbceff94caaf7031c4.jpg"/></p>
+<p>虽然，Rust 编译器默认为开发者优化结构体的排列，但你也可以使用<code>#[repr]</code> 宏，强制让 Rust 编译器不做优化，和 C 的行为一致，这样，Rust 代码可以方便地和 C 代码无缝交互。</p>
+<p>在明白了 Rust 下 struct 的布局后（ tuple 类似），我们看看 enum 。</p>
+<h3 id="enum">enum</h3>
+<p>enum 我们之前讲过，在 Rust 下它是一个标签联合体（tagged union），它的大小是标签的大小，加上最大类型的长度。</p>
+<p>[第三讲]基础语法中，我们定义 enum 数据结构时，简单提到有 Option<t> 和 Result<t, e=""> 两种设计举例， Option 是有值/无值这种最简单的枚举类型，Result 包括成功返回数据和错误返回数据的枚举类型，后面会详细讲到。这里我们理解其内存设计就可以了。</t,></t></p>
+<p>根据刚才说的三条对齐规则，tag 后的内存，会根据其对齐大小进行对齐，所以对于 Option<u8>，其长度是 1 + 1 = 2 字节，而 Option<f64>，长度是 8 + 8 =16 字节。一般而言，64 位 CPU 下，enum 的最大长度是：最大类型的长度 + 8，因为 64 位 CPU 的最大对齐是 64bit，也就是 8 个字节。</f64></u8></p>
+<p>下图展示了 enum、Option<t>以及Result<t, e=""> 的布局：<img alt="" src="/assets/5116d46a13d8be6ffe9af53a.jpg"/></t,></t></p>
+<p>值得注意的是，Rust 编译器会对 enum 做一些额外的优化，让某些常用结构的内存布局更紧凑。我们先来写一段代码，帮你更好地了解不同数据结构占用的大小（<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=34c66e50a56c5e4bb3a3dd97c3a90358" target="_blank">代码</a>）：</p>
+<pre><code>use std::collections::HashMap;
+use std::mem::size_of;
+
+enum E {
+    A(f64),
+    B(HashMap&lt;String, String&gt;),
+    C(Result&lt;Vec&lt;u8&gt;, String&gt;),
+}
+
+// 这是一个声明宏，它会打印各种数据结构本身的大小，在 Option 中的大小，以及在 Result 中的大小
+macro_rules! show_size {
+    (header) =&gt; {
+        println!(
+            "{:&lt;24} {:&gt;4}    {}    {}",
+            "Type", "T", "Option&lt;T&gt;", "Result&lt;T, io::Error&gt;"
+        );
+        println!("{}", "-".repeat(64));
+    };
+    ($t:ty) =&gt; {
+        println!(
+            "{:&lt;24} {:4} {:8} {:12}",
+            stringify!($t),
+            size_of::&lt;$t&gt;(),
+            size_of::&lt;Option&lt;$t&gt;&gt;(),
+            size_of::&lt;Result&lt;$t, std::io::Error&gt;&gt;(),
+        )
+    };
+}
+
+fn main() {
+    show_size!(header);
+    show_size!(u8);
+    show_size!(f64);
+    show_size!(&amp;u8);
+    show_size!(Box&lt;u8&gt;);
+    show_size!(&amp;[u8]);
+
+    show_size!(String);
+    show_size!(Vec&lt;u8&gt;);
+    show_size!(HashMap&lt;String, String&gt;);
+    show_size!(E);
+}
+</code></pre>
+<p>这段代码包含了一个声明宏（declarative macro）show_size，我们先不必管它。运行这段代码时，你会发现，Option 配合带有引用类型的数据结构，比如 &amp;u8、Box、Vec、HashMap ，<strong>没有额外占用空间</strong>，这就很有意思了。</p>
+<pre><code>Type                        T    Option&lt;T&gt;    Result&lt;T, io::Error&gt;
+----------------------------------------------------------------
+u8                          1        2           24
+f64                         8       16           24
+&amp;u8                         8        8           24
+Box&lt;u8&gt;                     8        8           24
+&amp;[u8]                      16       16           24
+String                     24       24           32
+Vec&lt;u8&gt;                    24       24           32
+HashMap&lt;String, String&gt;    48       48           56
+E                          56       56           64
+</code></pre>
+<p>对于 Option 结构而言，它的 tag 只有两种情况：0 或 1， tag 为 0 时，表示 None，tag 为 1 时，表示 Some。</p>
+<p>正常来说，当我们把它和一个引用放在一起时，虽然 tag 只占 1 个 bit，但 64 位 CPU 下，引用结构的对齐是 8，所以它自己加上额外的 padding，会占据 8 个字节，一共16字节，这非常浪费内存。怎么办呢？</p>
+<p>Rust 是这么处理的，我们知道，引用类型的第一个域是个指针，而指针是不可能等于 0 的，但是我们<strong>可以复用这个指针：当其为 0 时，表示 None，否则是 Some</strong>，减少了内存占用，这是个非常巧妙的优化，我们可以学习。</p>
+<h3 id="vec-t-和-string">vec<t> 和 String</t></h3>
+<p>从刚才代码的结果中，我们也看到 String 和 Vec<u8> 占用相同的大小，都是 24 个字节。其实，如果你打开 String 结构的<a href="https://doc.rust-lang.org/src/alloc/string.rs.html#279-281" target="_blank">源码</a>，可以看到，它内部就是一个 Vec<u8>。</u8></u8></p>
+<p>而 <a href="https://doc.rust-lang.org/src/alloc/vec/mod.rs.html#294-302" target="_blank">Vec<t>结构</t></a>是 3 个 word 的胖指针，包含：一个指向堆内存的指针pointer、分配的堆内存的容量capacity，以及数据在堆内存的长度length，如下图所示：<img alt="" src="/assets/36b997f0e63553639569916c.jpg"/></p>
+<p>很多动态大小的数据结构，在创建时都有类似的内存布局：<strong>栈内存放的胖指针，指向堆内存分配出来的数据</strong>，我们之前介绍的 Rc 也是如此。</p>
+<p>关于值在创建时的内存布局，今天就先讲这么多。如果你对其它数据结构的内存布局感兴趣，可以访问 <a href="https://cheats.rs/#data-layout" target="_blank">cheats.rs</a>，它是 Rust 语言的备忘清单，非常适合随时翻阅。比如，引用类型的内存布局：<img alt="" src="/assets/ca28e15067f09758acbb57d9.png"/></p>
+<p>现在，值已经创建成功了，我们对它的内存布局有了足够的认识。那在使用期间，它的内存会发生什么样的变化呢，我们接着看。</p>
+<h2 id="值的使用">值的使用</h2>
+<p>在讲所有权的时候，我们知道了，对 Rust 而言，一个值如果没有实现 Copy，在赋值、传参以及函数返回时会被 Move。</p>
+<p><strong>其实 Copy 和 Move 在内部实现上，都是浅层的按位做内存复制</strong>，只不过 Copy 允许你访问之前的变量，而 Move 不允许。我们看图：<img alt="" src="/assets/b81c557a4a92bb9abe48a253.jpg"/></p>
+<p>在我们的认知中，内存复制是个很重的操作，效率很低。确实是这样，如果你的关键路径中的每次调用，都要复制几百 k 的数据，比如一个大数组，是很低效的。</p>
+<p>但是，如果你要复制的只是原生类型（Copy）或者栈上的胖指针（Move），不涉及堆内存的复制也就是深拷贝（deep copy），那这个效率是非常高的，我们不必担心每次赋值或者每次传参带来的性能损失。</p>
+<p>所以，无论是 Copy 还是 Move，它的效率都是非常高的。</p>
+<p>不过也有一个例外，要说明：对栈上的大数组传参，由于需要复制整个数组，会影响效率。所以，一般我们<strong>建议在栈上不要放大数组</strong>，如果实在需要，那么传递这个数组时，最好用传引用而不是传值。</p>
+<p>在使用值的过程中，除了 Move，你还需要注意值的动态增长。因为Rust 下，集合类型的数据结构，都会在使用过程中自动扩展。</p>
+<p>以一个 Vec<t> 为例，当你使用完堆内存目前的容量后，还继续添加新的内容，就会触发堆内存的自动增长。有时候，集合类型里的数据不断进进出出，导致集合一直增长，但只使用了很小部分的容量，内存的使用效率很低，所以你要考虑使用，比如 <code>shrink_to_fit</code> 方法，来节约对内存的使用。</t></p>
+<h2 id="值的销毁">值的销毁</h2>
+<p>好，这个值的旅程已经过半，创建和使用都已经讲完了，最后我们谈谈值的销毁。</p>
+<p>之前笼统地谈到，当所有者离开作用域，它拥有的值会被丢弃。那从代码层面讲，Rust 到底是如何丢弃的呢？</p>
+<p>这里用到了 Drop trait。Drop trait 类似面向对象编程中的析构函数，<strong>当一个值要被释放，它的 Drop trait 会被调用</strong>。比如下面的代码，变量 greeting 是一个字符串，在退出作用域时，其 drop() 函数被自动调用，释放堆上包含 “hello world” 的内存，然后再释放栈上的内存：<img alt="" src="/assets/4d45b437aecac91b75e3b383.jpg"/></p>
+<p>如果要释放的值是一个复杂的数据结构，比如一个结构体，那么这个结构体在调用 drop() 时，会依次调用每一个域的 drop() 函数，如果域又是一个复杂的结构或者集合类型，就会递归下去，直到每一个域都释放干净。</p>
+<p>我们可以看这个例子：<img alt="" src="/assets/03ab770b125de2184ae05132.jpg"/></p>
+<p>代码中的 student 变量是一个结构体，有 name、age、scores。其中 name 是 String，scores 是 HashMap，它们本身需要额外 drop()。又因为 HashMap 的 key 是 String，所以还需要进一步调用这些 key 的 drop()。整个释放顺序从内到外是：先释放 HashMap 下的 key，然后释放 HashMap 堆上的表结构，最后释放栈上的内存。</p>
+<h3 id="堆内存释放">堆内存释放</h3>
+<p>所有权机制规定了，一个值只能有一个所有者，所以在释放堆内存的时候，整个过程简单清晰，就是单纯调用 Drop trait，不需要有其他顾虑。这种对值安全，也没有额外负担的释放能力，是 Rust 独有的。</p>
+<p>我觉得 Rust 在内存管理方面的设计特别像蚁群。在蚁群中，每个个体的行为都遵循着非常简单死板的规范，最终，<strong>大量简单的个体能构造出一个高效且不出错的系统</strong>。</p>
+<p>反观其它语言，每个个体或者说值，都非常灵活，引用传来传去，最终却构造出来一个很难分析的复杂系统。单靠编译器无法决定，每个值在各个作用域中究竟能不能安全地释放，导致系统，要么像 C/C++ 一样将这个重担部分或者全部地交给开发者，要么像 Java 那样构建另一个系统来专门应对内存安全释放的问题。</p>
+<p>在Rust里，你自定义的数据结构，绝大多数情况下，不需要实现自己的 Drop trait，编译器缺省的行为就足够了。但是，如果你想自己控制 drop 行为，你也可以为这些数据结构实现它。</p>
+<p>如果你定义的 drop() 函数和系统自定义的 drop() 函数都 drop() 某个域，Rust 编译器会确保，这个域只会被 drop 一次。至于 Drop trait 怎么实现、有什么注意事项、什么场合下需要自定义，我们在后续的课程中会再详细展开。</p>
+<h3 id="释放其他资源">释放其他资源</h3>
+<p>我们刚才讲 Rust 的 Drop trait 主要是为了应对堆内存释放的问题，其实，它还可以释放任何资源，比如 socket、文件、锁等等。Rust 对所有的资源都有很好的 <a href="https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization" target="_blank">RAII 支持</a>。</p>
+<p>比如我们创建一个文件 file，往里面写入 “hello world”，当 file 离开作用域时，不但它的内存会被释放，它占用的资源、操作系统打开的文件描述符，也会被释放，也就是文件会自动被关闭。（<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=f24400d9341994809c8e568d4a54fc62" target="_blank">代码</a>）</p>
+<pre><code>use std::fs::File;
+use std::io::prelude::*;
+fn main() -&gt; std::io::Result&lt;()&gt; {
+    let mut file = File::create("foo.txt")?;
+    file.write_all(b"hello world")?;
+    Ok(())
+}
+</code></pre>
+<p>在其他语言中，无论 Java、Python 还是 Golang，你都需要显式地关闭文件，避免资源的泄露。这是因为，即便 GC 能够帮助开发者最终释放不再引用的内存，它并不能释放除内存外的其它资源。</p>
+<p>而 Rust，再一次地，因为其清晰的所有权界定，使编译器清楚地知道：当一个值离开作用域的时候，这个值不会有任何人引用，它占用的任何资源，包括内存资源，都可以立即释放，而不会导致问题（也有例外，感兴趣可以看这个 <a href="https://github.com/rust-lang/rfcs/blob/master/text/3128-io-safety.md" target="_blank">RFC</a>）。</p>
+<p>说到这，你也许觉得不用显式地关闭文件、关闭 socket、释放锁，不过是省了一句 “close()” 而已，有什么大不了的？</p>
+<p>然而，不要忘了，在庞大的业务代码中，还有很大一部分要用来处理错误。当错误处理搅和进来，我们面对的代码，逻辑更复杂，需要添加 close() 调用的上下文更多。虽然Python 的 with、Golang 的 defer，可以一定程度上解决资源释放的问题，但还不够完美。</p>
+<p><strong>一旦，多个变量和多种异常或者错误叠加，我们忘记释放资源的风险敞口会成倍增加</strong>，很多死锁或者资源泄露就是这么产生的。</p>
+<p>从 Drop trait 中我们再一次看到，从事物的本原出发解决问题，会极其优雅地解决掉很多其他关联问题。好比，所有权，几个简单规则，就让我们顺带处理掉了资源释放的大难题。</p>
+<h2 id="小结">小结</h2>
+<p>我们进一步探讨了 Rust 的内存管理，在所有权和生命周期管理的基础上，介绍了一个值在内存中创建、使用和销毁的过程，学习了数据结构在创建时，是如何在内存中布局的，大小和对齐之间的关系；数据在使用过程中，是如何 Move 和自动增长的；以及数据是如何销毁的。</p>
+<p><img alt="" src="/assets/188a290cd0853c27761013bc.jpg"/></p>
+<p>数据结构在内存中的布局，尤其是哪些部分放在栈上，哪些部分放在堆上，非常有助于我们理解代码的结构和效率。</p>
+<p>你不必强行记忆这些内容，只要有个思路，在需要的时候，翻阅本文或者 <a href="https://cheats.rs" target="_blank">cheats.rs</a> 即可。当我们掌握了数据结构如何创建、在使用过程中如何 Move 或者 Copy、最后如何销毁，我们在阅读别人的代码或者自己撰写代码时就会更加游刃有余。</p>
+<h2 id="思考题">思考题</h2>
+<p><code>Result&lt;String, ()&gt;</code> 占用多少内存？为什么？</p>
+<p>感谢你的收听，如果你觉得有收获，也欢迎你分享给你身边的朋友，邀他一起讨论。你的Rust学习第11次打卡完成，我们下节课见。</p>
+<h2 id="参考资料">参考资料</h2>
+<ol>
+<li>Rust 语言的备忘清单 <a href="https://cheats.rs" target="_blank">cheats.rs</a></li>
+<li>代码受这个<a href="https://stackoverflow.com/questions/27324821/why-does-an-enum-require-extra-memory-size" target="_blank">Stack Overflow 帖子</a>启发，有删改</li>
+<li>String 结构的<a href="https://doc.rust-lang.org/src/alloc/string.rs.html#279-281" target="_blank">源码</a></li>
+<li>Vec<t> 结构<a href="https://doc.rust-lang.org/src/alloc/vec/mod.rs.html#294-302" target="_blank">源码</a></t></li>
+<li><a href="https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization" target="_blank">RAII</a> 是一个拗口的名词，中文意思是“资源获取即初始化”。</li>
+</ol>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

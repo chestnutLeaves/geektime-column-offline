@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/index.html">容器实战高手课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">28 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>容器实战高手课</strong><ul><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%80%E4%B8%AA%E6%80%81%E5%BA%A6%E4%B8%A4%E4%B8%AA%E6%AD%A5%E9%AA%A4%EF%BC%8C%E6%88%90%E4%B8%BA%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B.html">00 开篇词 一个态度两个步骤，成为容器实战高手</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/01%20%E8%AE%A4%E8%AF%86%E5%AE%B9%E5%99%A8%EF%BC%9A%E5%AE%B9%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%92%8C%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">01 认识容器：容器的基本操作和实现原理</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/02%20%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B%EF%BC%881%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E4%B8%8D%E8%83%BDkill%201%E5%8F%B7%E8%BF%9B%E7%A8%8B%EF%BC%9F.html">02 理解进程（1）：为什么我在容器中不能kill 1号进程？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/03%20%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B%EF%BC%882%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E9%87%8C%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9F.html">03 理解进程（2）：为什么我的容器里有这么多僵尸进程？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/04%20%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B%EF%BC%883%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E8%A2%AB%E5%BC%BA%E5%88%B6%E6%9D%80%E6%AD%BB%E4%BA%86%EF%BC%9F.html">04 理解进程（3）：为什么我在容器中的进程被强制杀死了？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/05%20%E5%AE%B9%E5%99%A8CPU%EF%BC%881%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E9%99%90%E5%88%B6%E5%AE%B9%E5%99%A8%E7%9A%84CPU%E4%BD%BF%E7%94%A8%EF%BC%9F.html">05 容器CPU（1）：怎么限制容器的CPU使用？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/06%20%E5%AE%B9%E5%99%A8CPU%EF%BC%882%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%9C%B0%E6%8B%BF%E5%88%B0%E5%AE%B9%E5%99%A8CPU%E7%9A%84%E5%BC%80%E9%94%80%EF%BC%9F.html">06 容器CPU（2）：如何正确地拿到容器CPU的开销？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/07%20Load%20Average%EF%BC%9A%E5%8A%A0%E4%BA%86CPU%20Cgroup%E9%99%90%E5%88%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E8%BF%98%E6%98%AF%E5%BE%88%E6%85%A2%EF%BC%9F.html">07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/08%20%E5%AE%B9%E5%99%A8%E5%86%85%E5%AD%98%EF%BC%9A%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A2%AB%E6%9D%80%E4%BA%86%EF%BC%9F.html">08 容器内存：我的容器为什么被杀了？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/09%20Page%20Cache%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E9%87%8F%E6%80%BB%E6%98%AF%E5%9C%A8%E4%B8%B4%E7%95%8C%E7%82%B9.html">09 Page Cache：为什么我的容器内存使用量总是在临界点</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/10%20Swap%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8Swap%E7%A9%BA%E9%97%B4%E5%90%97%EF%BC%9F.html">10 Swap：容器可以使用Swap空间吗？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/11%20%E5%AE%B9%E5%99%A8%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%88%91%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E5%8F%98%E6%85%A2%E4%BA%86%EF%BC%9F.html">11 容器文件系统：我在容器中读写文件怎么变慢了？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/12%20%E5%AE%B9%E5%99%A8%E6%96%87%E4%BB%B6Quota%EF%BC%9A%E5%AE%B9%E5%99%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%8A%E5%AE%BF%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%A3%81%E7%9B%98%E5%86%99%E6%BB%A1%E4%BA%86%EF%BC%9F.html">12 容器文件Quota：容器为什么把宿主机的磁盘写满了？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/13%20%E5%AE%B9%E5%99%A8%E7%A3%81%E7%9B%98%E9%99%90%E9%80%9F%EF%BC%9A%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E9%87%8C%E7%A3%81%E7%9B%98%E8%AF%BB%E5%86%99%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%A8%B3%E5%AE%9A_.html">13 容器磁盘限速：我的容器里磁盘读写为什么不稳定_</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/14%20%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E4%B8%8EIO%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%86%99%E6%96%87%E4%BB%B6%E7%9A%84%E5%BB%B6%E6%97%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B3%A2%E5%8A%A8%E5%BE%88%E5%A4%A7%EF%BC%9F.html">14 容器中的内存与IO：容器写文件的延时为什么波动很大？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/15%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%EF%BC%9A%E6%88%91%E4%BF%AE%E6%94%B9%E4%BA%86_proc_sys_net%E4%B8%8B%E7%9A%84%E5%8F%82%E6%95%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E4%B8%8D%E8%B5%B7%E6%95%88%EF%BC%9F.html">15 容器网络：我修改了_proc_sys_net下的参数，为什么在容器中不起效？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/16%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%881%EF%BC%89%EF%BC%9A%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E4%B8%8D%E9%80%9A%E4%BA%86%E8%A6%81%E6%80%8E%E4%B9%88%E8%B0%83%E8%AF%95.html">16 容器网络配置（1）：容器网络不通了要怎么调试</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/17%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%882%EF%BC%89%EF%BC%9A%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E5%BB%B6%E6%97%B6%E8%A6%81%E6%AF%94%E5%AE%BF%E4%B8%BB%E6%9C%BA%E4%B8%8A%E7%9A%84%E9%AB%98%E5%90%97.html">17 容器网络配置（2）：容器网络延时要比宿主机上的高吗</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/18%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%883%EF%BC%89%EF%BC%9A%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E7%BD%91%E7%BB%9C%E4%B9%B1%E5%BA%8F%E5%8C%85%E6%80%8E%E4%B9%88%E8%BF%99%E4%B9%88%E9%AB%98%EF%BC%9F.html">18 容器网络配置（3）：容器中的网络乱序包怎么这么高？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/19%20%E5%AE%B9%E5%99%A8%E5%AE%89%E5%85%A8%EF%BC%881%EF%BC%89%EF%BC%9A%E6%88%91%E7%9A%84%E5%AE%B9%E5%99%A8%E7%9C%9F%E7%9A%84%E9%9C%80%E8%A6%81privileged%E6%9D%83%E9%99%90%E5%90%97.html">19 容器安全（1）：我的容器真的需要privileged权限吗</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/20%20%E5%AE%B9%E5%99%A8%E5%AE%89%E5%85%A8%EF%BC%882%EF%BC%89%EF%BC%9A%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%EF%BC%8C%E6%88%91%E4%B8%8D%E4%BB%A5root%E7%94%A8%E6%88%B7%E6%9D%A5%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E5%8F%AF%E4%BB%A5%E5%90%97%EF%BC%9F.html">20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9001%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E6%B5%B7%E9%87%8FIPVS%E8%A7%84%E5%88%99%E5%B8%A6%E6%9D%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E5%BB%B6%E6%97%B6%E6%8A%96%E5%8A%A8%E9%97%AE%E9%A2%98%EF%BC%9F.html">加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9002%20%E7%90%86%E8%A7%A3perf%EF%BC%9A%E6%80%8E%E4%B9%88%E7%94%A8perf%E8%81%9A%E7%84%A6%E7%83%AD%E7%82%B9%E5%87%BD%E6%95%B0%EF%BC%9F.html">加餐02 理解perf：怎么用perf聚焦热点函数？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9003%20%E7%90%86%E8%A7%A3ftrace%EF%BC%881%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E5%BA%94%E7%94%A8ftrace%E6%9F%A5%E7%9C%8B%E9%95%BF%E5%BB%B6%E6%97%B6%E5%86%85%E6%A0%B8%E5%87%BD%E6%95%B0%EF%BC%9F.html">加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？</a></li><li><a class="active" aria-current="page" href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9004%20%E7%90%86%E8%A7%A3ftrace%EF%BC%882%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3ftrace%E8%83%8C%E5%90%8E%E7%9A%84%E6%8A%80%E6%9C%AFtracepoint%E5%92%8Ckprobe%EF%BC%9F.html">加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9005%20eBPF%EF%BC%9A%E6%80%8E%E4%B9%88%E6%9B%B4%E5%8A%A0%E6%B7%B1%E5%85%A5%E5%9C%B0%E6%9F%A5%E7%9C%8B%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%9F.html">加餐05 eBPF：怎么更加深入地查看内核中的函数？</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9006%20BCC%EF%BC%9A%E5%85%A5%E9%97%A8eBPF%E7%9A%84%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7.html">加餐06 BCC：入门eBPF的前端工具</a></li><li><a href="/courses/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E8%B7%B3%E5%87%BA%E8%88%92%E9%80%82%E5%8C%BA%EF%BC%8C%E7%AA%81%E7%A0%B4%E6%80%9D%E8%80%83%E7%9A%84%E6%83%B0%E6%80%A7.html">结束语 跳出舒适区，突破思考的惰性</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%88%98%E9%AB%98%E6%89%8B%E8%AF%BE/%E5%8A%A0%E9%A4%9004%20%E7%90%86%E8%A7%A3ftrace%EF%BC%882%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3ftrace%E8%83%8C%E5%90%8E%E7%9A%84%E6%8A%80%E6%9C%AFtracepoint%E5%92%8Ckprobe%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？" id="title">加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？</h1>
+<div><p>你好，我是程远。</p>
+<p>前面两讲，我们分别学习了perf和ftrace这两个最重要 Linux tracing工具。在学习过程中，我们把重点放在了这两个工具最基本的功能点上。</p>
+<p>不过你学习完这些之后，我们内核调试版图的知识点还没有全部点亮。</p>
+<p>如果你再去查看一些perf、ftrace或者其他Linux tracing相关资料，你可能会常常看到两个单词，“tracepoint”和“kprobe”。你有没有好奇过，这两个名词到底是什么意思，它们和perf、ftrace这些工具又是什么关系呢？</p>
+<p>这一讲，我们就来学习这两个在Linux tracing系统中非常重要的概念，它们就是<strong>tracepoint</strong>和<strong>kprobe</strong>。</p>
+<h2 id="tracepoint和kprobe的应用举例">tracepoint和kprobe的应用举例</h2>
+<p>如果你深入地去看一些perf或者ftrace的功能，这时候你会发现它们都有跟tracepoint、kprobe相关的命令。我们先来看几个例子，通过这几个例子，你可以大概先了解一下tracepoint和kprobe的应用，这样我们后面做详细的原理介绍时，你也会更容易理解。</p>
+<p>首先看看tracepoint，tracepoint其实就是在Linux内核的一些关键函数中埋下的hook点，这样在tracing的时候，我们就可以在这些固定的点上挂载调试的函数，然后查看内核的信息。</p>
+<p>我们通过下面的这个 <code>perf list</code> 命令，就可以看到所有的tracepoints：</p>
+<pre><code class="language-shell"># perf list | grep Tracepoint
+  alarmtimer:alarmtimer_cancel                       [Tracepoint event]
+  alarmtimer:alarmtimer_fired                        [Tracepoint event]
+  alarmtimer:alarmtimer_start                        [Tracepoint event]
+  alarmtimer:alarmtimer_suspend                      [Tracepoint event]
+  block:block_bio_backmerge                          [Tracepoint event]
+  block:block_bio_bounce                             [Tracepoint event]
+  block:block_bio_complete                           [Tracepoint event]
+  block:block_bio_frontmerge                         [Tracepoint event]
+  block:block_bio_queue                              [Tracepoint event]
+…
+</code></pre>
+<p>至于ftrace，你在tracefs文件系统中，也会看到一样的tracepoints：</p>
+<pre><code class="language-shell"># find /sys/kernel/debug/tracing/events -type d | sort
+/sys/kernel/debug/tracing/events
+/sys/kernel/debug/tracing/events/alarmtimer
+/sys/kernel/debug/tracing/events/alarmtimer/alarmtimer_cancel
+/sys/kernel/debug/tracing/events/alarmtimer/alarmtimer_fired
+/sys/kernel/debug/tracing/events/alarmtimer/alarmtimer_start
+/sys/kernel/debug/tracing/events/alarmtimer/alarmtimer_suspend
+/sys/kernel/debug/tracing/events/block
+/sys/kernel/debug/tracing/events/block/block_bio_backmerge
+/sys/kernel/debug/tracing/events/block/block_bio_bounce
+/sys/kernel/debug/tracing/events/block/block_bio_complete
+/sys/kernel/debug/tracing/events/block/block_bio_frontmerge
+ 
+…
+</code></pre>
+<p>为了让你更好理解，我们就拿“do_sys_open”这个tracepoint做例子。在内核函数do_sys_open()中，有一个trace_do_sys_open()调用，其实它这就是一个tracepoint：</p>
+<pre><code class="language-shell">long do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode)
+{
+        struct open_flags op;
+        int fd = build_open_flags(flags, mode, &amp;op);
+        struct filename *tmp;
+ 
+        if (fd)
+                return fd;
+ 
+        tmp = getname(filename);
+        if (IS_ERR(tmp))
+                return PTR_ERR(tmp);
+ 
+        fd = get_unused_fd_flags(flags);
+        if (fd &gt;= 0) {
+                struct file *f = do_filp_open(dfd, tmp, &amp;op);
+                if (IS_ERR(f)) {
+                        put_unused_fd(fd);
+                        fd = PTR_ERR(f);
+                } else {
+                        fsnotify_open(f);
+                        fd_install(fd, f);
+                        trace_do_sys_open(tmp-&gt;name, flags, mode);
+                }
+        }
+        putname(tmp);
+        return fd;
+}
+</code></pre>
+<p>接下来，我们可以通过perf命令，利用tracepoint来查看一些内核函数发生的频率，比如在节点上，统计10秒钟内调用do_sys_open成功的次数，也就是打开文件的次数。</p>
+<pre><code class="language-shell"># # perf stat -a -e fs:do_sys_open -- sleep 10
+ 
+ Performance counter stats for 'system wide':
+ 
+                 7      fs:do_sys_open
+ 
+      10.001954100 seconds time elapsed
+</code></pre>
+<p>同时，如果我们把tracefs中do_sys_open的tracepoint打开，那么在ftrace的trace输出里，就可以看到具体do_sys_open每次调用成功时，打开的文件名、文件属性、对应的进程等信息。</p>
+<pre><code class="language-shell"># pwd
+/sys/kernel/debug/tracing
+# echo 1 &gt; events/fs/do_sys_open/enable
+ 
+# cat trace
+# tracer: nop
+#
+#                              _-----=&gt; irqs-off
+#                             / _----=&gt; need-resched
+#                            | / _---=&gt; hardirq/softirq
+#                            || / _--=&gt; preempt-depth
+#                            ||| /     delay
+#           TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION
+#              | |       |   ||||       |         |
+         systemd-1     [011] .... 17133447.451839: do_sys_open: "/proc/22597/cgroup" 88000 666
+            bash-4118  [009] .... 17133450.076026: do_sys_open: "/" 98800 0
+     salt-minion-7101  [010] .... 17133450.478659: do_sys_open: "/etc/hosts" 88000 666
+ systemd-journal-2199  [011] .... 17133450.487930: do_sys_open: "/proc/6989/cgroup" 88000 666
+ systemd-journal-2199  [011] .... 17133450.488019: do_sys_open: "/var/log/journal/d4f76e4bf5414ac78e1c534ebe5d0a72" 98800 0
+ systemd-journal-2199  [011] .... 17133450.488080: do_sys_open: "/proc/6989/comm" 88000 666
+ systemd-journal-2199  [011] .... 17133450.488114: do_sys_open: "/proc/6989/cmdline" 88000 666
+ systemd-journal-2199  [011] .... 17133450.488143: do_sys_open: "/proc/6989/status" 88000 666
+ systemd-journal-2199  [011] .... 17133450.488185: do_sys_open: "/proc/6989/sessionid" 88000 666
+…
+</code></pre>
+<p>请注意，Tracepoint是在内核中固定的hook点，并不是在所有的函数中都有tracepoint。</p>
+<p>比如在上面的例子里，我们看到do_sys_open()调用到了do_filp_open()，但是do_filp_open()函数里是没有tracepoint的。那如果想看到do_filp_open()函数被调用的频率，或者do_filp_open()在被调用时传入参数的情况，我们又该怎么办呢？</p>
+<p>这时候，我们就需要用到kprobe了。kprobe可以动态地在所有的内核函数（除了inline函数）上挂载probe函数。我们还是结合例子做理解，先看看perf和ftraces是怎么利用kprobe来做调试的。</p>
+<p>比如对于do_filp_open()函数，我们可以通过<code>perf probe</code>添加一下，然后用<code>perf stat</code> 看看在10秒钟的时间里，这个函数被调用到的次数。</p>
+<pre><code class="language-shell"># perf probe --add do_filp_open
+# perf stat -a -e probe:do_filp_open -- sleep 10
+ 
+ Performance counter stats for 'system wide':
+ 
+                11      probe:do_filp_open
+ 
+      10.001489223 seconds time elapsed
+</code></pre>
+<p>我们也可以通过ftrace的tracefs给do_filp_open()添加一个kprobe event，这样就能查看do_filp_open()每次被调用的时候，前面两个参数的值了。</p>
+<p>这里我要给你说明一下，在写入kprobe_event的时候，对于参数的定义我们用到了“%di”和“%si”。这是x86处理器里的寄存器，根据x86的<a href="https://github.com/hjl-tools/x86-psABI/wiki/x86-64-psABI-1.0.pdf" target="_blank">Application Binary Interface的文档</a>，在函数被调用的时候，%di存放了第一个参数，%si存放的是第二个参数。</p>
+<pre><code class="language-shell"># echo 'p:kprobes/myprobe do_filp_open dfd=+0(%di):u32 pathname=+0(+0(%si)):string' &gt; /sys/kernel/debug/tracing/kprobe_event
+</code></pre>
+<p>完成上面的写入之后，我们再enable这个新建的kprobe event。这样在trace中，我们就可以看到每次do_filp_open（）被调用时前两个参数的值了。</p>
+<pre><code class="language-shell"># echo 1 &gt; /sys/kernel/debug/tracing/events/kprobes/myprobe/enable
+ 
+# cat /sys/kernel/debug/tracing/trace
+…
+      irqbalance-1328  [005] .... 2773211.189573: myprobe: (do_filp_open+0x0/0x100) dfd=4294967295 pathname="/proc/interrupts"
+      irqbalance-1328  [005] .... 2773211.189740: myprobe: (do_filp_open+0x0/0x100) dfd=638399 pathname="/proc/stat"
+      irqbalance-1328  [005] .... 2773211.189800: myprobe: (do_filp_open+0x0/0x100) dfd=638399 pathname="/proc/irq/8/smp_affinity"
+            bash-15864 [004] .... 2773211.219048: myprobe: (do_filp_open+0x0/0x100) dfd=14819 pathname="/sys/kernel/debug/tracing/"
+            bash-15864 [004] .... 2773211.891472: myprobe: (do_filp_open+0x0/0x100) dfd=6859 pathname="/sys/kernel/debug/tracing/"
+            bash-15864 [004] .... 2773212.036449: myprobe: (do_filp_open+0x0/0x100) dfd=4294967295 pathname="/sys/kernel/debug/tracing/"
+            bash-15864 [004] .... 2773212.197525: myprobe: (do_filp_open+0x0/0x100) dfd=638259 pathname="/sys/kernel/debug/tracing/
+…
+</code></pre>
+<p>好了，我们通过perf和ftrace的几个例子，简单了解了tracepoint和kprobe是怎么用的。那下面我们再来看看它们的实现原理。</p>
+<h2 id="tracepoint">Tracepoint</h2>
+<p>刚才，我们已经看到了内核函数do_sys_open()里调用了trace_do_sys_open()这个treacepoint，那这个tracepoint是怎么实现的呢？我们还要再仔细研究一下。</p>
+<p>如果你在内核代码中，直接搜索“trace_do_sys_open”字符串的话，并不能找到这个函数的直接定义。这是因为在Linux中，每一个tracepoint的相关数据结构和函数，主要是通过”DEFINE_TRACE”和”DECLARE_TRACE”这两个宏来定义的。</p>
+<p>完整的“<a href="https://github.com/torvalds/linux/blob/v5.4/include/linux/tracepoint.h#L282" target="_blank">DEFINE_TRACE</a>”和“<a href="https://github.com/torvalds/linux/blob/v5.4/include/linux/tracepoint.h#L231" target="_blank">DECLARE_TRACE</a>”宏里，给每个tracepoint都定义了一组函数。在这里，我会选择最主要的几个函数，把定义一个tracepoint的过程给你解释一下。</p>
+<p>首先，我们来看“trace_##name”这个函数（提示一下，这里的“##”是C语言的预编译宏，表示把两个字符串连接起来）。</p>
+<p>对于每个命名为“name”的tracepoint，这个宏都会帮助它定一个函数。这个函数的格式是这样的，以“trace_”开头，再加上tracepoint的名字。</p>
+<p>我们举个例子吧。比如说，对于“do_sys_open”这个tracepoint，它生成的函数名就是trace_do_sys_open。而这个函数会被内核函数do_sys_open()调用，从而实现了一个内核的tracepoint。</p>
+<pre><code class="language-shell">static inline void trace_##name(proto)                          \
+        {                                                               \
+                if (static_key_false(&amp;__tracepoint_##name.key))         \
+                        __DO_TRACE(&amp;__tracepoint_##name,                \
+                                TP_PROTO(data_proto),                   \
+                                TP_ARGS(data_args),                     \
+                                TP_CONDITION(cond), 0);                 \
+                if (IS_ENABLED(CONFIG_LOCKDEP) &amp;&amp; (cond)) {             \
+                        rcu_read_lock_sched_notrace();                  \
+                        rcu_dereference_sched(__tracepoint_##name.funcs);\
+                        rcu_read_unlock_sched_notrace();                \
+                }                                                       \
+        }
+</code></pre>
+<p>在这个tracepoint函数里，主要的功能是这样实现的，通过__DO_TRACE来调用所有注册在这个tracepoint上的probe函数。</p>
+<pre><code class="language-shell">#define __DO_TRACE(tp, proto, args, cond, rcuidle)                      \
+…
+ 
+                it_func_ptr = rcu_dereference_raw((tp)-&gt;funcs);         \
+                                                                        \
+                if (it_func_ptr) {                                      \
+                        do {                                            \
+                                it_func = (it_func_ptr)-&gt;func;          \
+                                __data = (it_func_ptr)-&gt;data;           \
+                                ((void(*)(proto))(it_func))(args);      \
+                        } while ((++it_func_ptr)-&gt;func);                \
+                }
+…
+ 
+…
+</code></pre>
+<p>而probe函数的注册，它可以通过宏定义的“register<em>trace</em>##name”函数完成。</p>
+<pre><code class="language-shell">        static inline int                                               \
+        register_trace_##name(void (*probe)(data_proto), void *data)    \
+        {                                                               \
+                return tracepoint_probe_register(&amp;__tracepoint_##name,  \
+                                                (void *)probe, data);   \
+        }
+</code></pre>
+<p>我们可以自己写一个简单<a href="https://github.com/chengyli/training/tree/main/tracepoint" target="_blank">kernel module</a>来注册一个probe函数，把它注册到已有的treacepoint上。这样，这个probe函数在每次tracepoint点被调用到的时候就会被执行。你可以动手试一下。</p>
+<p>好了，说到这里，tracepoint的实现方式我们就讲完了。简单来说<strong>就是在内核代码中需要被trace的地方显式地加上hook点，然后再把自己的probe函数注册上去，那么在代码执行的时候，就可以执行probe函数。</strong></p>
+<h2 id="kprobe">Kprobe</h2>
+<p>我们已经知道了，tracepoint为内核trace提供了hook点，但是这些hook点需要在内核源代码中预先写好。如果在debug的过程中，我们需要查看的内核函数中没有hook点，就需要像前面perf/ftrace的例子中那样，要通过Linux kprobe机制来加载probe函数。</p>
+<p>那我们要怎么来理解kprobe的实现机制呢？</p>
+<p>你可以先从内核samples代码里，看一下</p>
+<p><a href="https://github.com/torvalds/linux/blob/v5.4/samples/kprobes/kprobe_example.c" target="_blank">kprobe_example.c</a>代码。这段代码里实现了一个kernel module，可以在内核中任意一个函数名/符号对应的代码地址上注册三个probe函数，分别是“pre_handler”、 “post_handler”和“fault_handler”。</p>
+<pre><code class="language-shell">#define MAX_SYMBOL_LEN   64
+static char symbol[MAX_SYMBOL_LEN] = "_do_fork";
+module_param_string(symbol, symbol, sizeof(symbol), 0644);
+ 
+/* For each probe you need to allocate a kprobe structure */
+static struct kprobe kp = {
+            .symbol_name = symbol,
+};
+ 
+…
+ 
+static int __init kprobe_init(void)
+{
+            int ret;
+            kp.pre_handler = handler_pre;
+            kp.post_handler = handler_post;
+            kp.fault_handler = handler_fault;
+ 
+            ret = register_kprobe(&amp;kp);
+            if (ret &lt; 0) {
+                        pr_err("register_kprobe failed, returned %d\n", ret);
+                        return ret;
+            }
+            pr_info("Planted kprobe at %p\n", kp.addr);
+            return 0;
+}
+</code></pre>
+<p>当这个内核函数被执行的时候，已经注册的probe函数也会被执行 （handler_fault只有在发生异常的时候才会被调用到）。</p>
+<p>比如，我们加载的这个kernel module不带参数，那么缺省的情况就是这样的：在“_do_fork”内核函数的入口点注册了这三个probe函数。</p>
+<p>当_do_fork()函数被调用到的时候，换句话说，也就是创建新的进程时，我们通过dmesg就可以看到probe函数的输出了。</p>
+<pre><code class="language-shell">[8446287.087641] &lt;_do_fork&gt; pre_handler: p-&gt;addr = 0x00000000d301008e, ip = ffffffffb1e8c9d1, flags = 0x246
+[8446287.087643] &lt;_do_fork&gt; post_handler: p-&gt;addr = 0x00000000d301008e, flags = 0x246
+[8446288.019731] &lt;_do_fork&gt; pre_handler: p-&gt;addr = 0x00000000d301008e, ip = ffffffffb1e8c9d1, flags = 0x246
+[8446288.019733] &lt;_do_fork&gt; post_handler: p-&gt;addr = 0x00000000d301008e, flags = 0x246
+[8446288.022091] &lt;_do_fork&gt; pre_handler: p-&gt;addr = 0x00000000d301008e, ip = ffffffffb1e8c9d1, flags = 0x246
+[8446288.022093] &lt;_do_fork&gt; post_handler: p-&gt;addr = 0x00000000d301008e, flags = 0x246
+</code></pre>
+<p>kprobe的基本工作原理其实也很简单。当kprobe函数注册的时候，其实就是把目标地址上内核代码的指令码，替换成了“cc”，也就是int3指令。这样一来，当内核代码执行到这条指令的时候，就会触发一个异常而进入到Linux int3异常处理函数do_int3()里。</p>
+<p>在do_int3()这个函数里，如果发现有对应的kprobe注册了probe，就会依次执行注册的pre_handler()，原来的指令，最后是post_handler()。</p>
+<p><img alt="img" src="/assets/85948d773f722606cc94cca5.jpg"/></p>
+<p>理论上kprobe其实只要知道内核代码中任意一条指令的地址，就可以为这个地址注册probe函数，kprobe结构中的“addr”成员就可以接受内核中的指令地址。</p>
+<pre><code class="language-shell">static int __init kprobe_init(void)
+{
+        int ret;
+        kp.addr = (kprobe_opcode_t *)0xffffffffb1e8ca02; /* 把一条指令的地址赋值给 kprobe.addr */
+        kp.pre_handler = handler_pre;
+        kp.post_handler = handler_post;
+        kp.fault_handler = handler_fault;
+ 
+        ret = register_kprobe(&amp;kp);
+        if (ret &lt; 0) {
+                pr_err("register_kprobe failed, returned %d\n", ret);
+                return ret;
+        }
+        pr_info("Planted kprobe at %p\n", kp.addr);
+        return 0;
+}
+</code></pre>
+<p>还要说明的是，如果内核可以使用我们上一讲ftrace对函数的trace方式，也就是函数头上预留了“callq &lt;<strong>fentry</strong>&gt;”的5个字节（在启动的时候被替换成了nop）。Kprobe对于函数头指令的trace方式，也会用“ftrace_caller”指令替换的方式，而不再使用int3指令替换。</p>
+<p>不论是哪种替换方式，kprobe的基本实现原理都是一样的，那就是<strong>把目标指令替换，替换的指令可以使程序跑到一个特定的handler里，去执行probe的函数。</strong></p>
+<h2 id="重点小结">重点小结</h2>
+<p>这一讲我们主要学习了tracepoint和kprobe，这两个概念在Linux tracing系统中非常重要。</p>
+<p>为什么说它们重要呢？因为从Linux tracing系统看，我的理解是可以大致分成大致这样三层。</p>
+<p>第一层是最基础的提供数据的机制，这里就包含了tracepoints、kprobes，还有一些别的events，比如perf使用的HW/SW events。</p>
+<p>第二层是进行数据收集的工具，这里包含了ftrace、perf，还有ebpf。</p>
+<p>第三层是用户层工具。虽然有了第二层，用户也可以得到数据。不过，对于大多数用户来说，第二层使用的友好程度还不够，所以又有了这一层。</p>
+<p><img alt="img" src="/assets/76af311952d3cb7c47c1fdab.jpg"/></p>
+<p>很显然，如果要对Linux内核调试，很难绕过tracepoint和kprobe。如果不刨根问底的话，前面我们讲的perf、trace工具对你来说还是黑盒。因为你只是知道了这些工具怎么用，但是并不知道它们依赖的底层技术。</p>
+<p>在后面介绍ebpf的时候，我们还会继续学习ebpf是如何使用tracepoint和kprobe来做Linux tracing的，希望你可以把相关知识串联起来。</p>
+<h2 id="思考题">思考题</h2>
+<p>想想看，当我们用kprobe为一个内核函数注册了probe之后，怎样能看到对应内核函数的第一条指令被替换了呢？</p>
+<p>欢迎你在留言区记录你的思考或者疑问。如果这一讲对你有帮助，也欢迎你转发给同事、朋友，跟他们一起交流、进步。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

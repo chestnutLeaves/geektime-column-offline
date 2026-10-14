@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>28 模型训练（下）：协同过滤与频繁项集算法详解 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/index.html">零基础入门Spark</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">37 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>零基础入门Spark</strong><ul><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%85%A5%E9%97%A8Spark%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E5%AD%A6%E4%BC%9A%E2%80%9C%E4%B8%89%E6%AD%A5%E8%B5%B0%E2%80%9D.html">00 开篇词 入门Spark，你需要学会“三步走”</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/01%20Spark%EF%BC%9A%E4%BB%8E%E2%80%9C%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9A%84Hello%20World%E2%80%9D%E5%BC%80%E5%A7%8B.html">01 Spark：从“大数据的Hello World”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/02%20RDD%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%BB%B6%E8%BF%9F%E8%AE%A1%E7%AE%97%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">02 RDD与编程模型：延迟计算是怎么回事？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/03%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ARDD%E5%86%85%E9%83%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2.html">03 RDD常用算子（一）：RDD内部的数据转换</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/04%20%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">04 进程模型与分布式部署：分布式计算是怎么回事？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/05%20%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9A%84%E7%B2%BE%E9%AB%93%EF%BC%9F.html">05 调度系统：如何把握分布式计算的精髓？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/06%20Shuffle%E7%AE%A1%E7%90%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Shuffle%E6%98%AF%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%EF%BC%9F.html">06 Shuffle管理：为什么Shuffle是性能瓶颈？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/07%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASpark%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%EF%BC%9F.html">07 RDD常用算子（二）：Spark如何实现数据聚合？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/08%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9ASpark%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98%EF%BC%9F.html">08 内存管理：Spark如何使用内存？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/09%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%9A%84%E5%87%86%E5%A4%87%E3%80%81%E9%87%8D%E5%88%86%E5%B8%83%E4%B8%8E%E6%8C%81%E4%B9%85%E5%8C%96.html">09 RDD常用算子（三）：数据的准备、重分布与持久化</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/10%20%E5%B9%BF%E6%92%AD%E5%8F%98%E9%87%8F%20%26%20%E7%B4%AF%E5%8A%A0%E5%99%A8%EF%BC%9A%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E6%98%AF%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F.html">10 广播变量 &amp; 累加器：共享变量是用来做什么的？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/11%20%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%88%B0%E5%BA%95%E9%83%BD%E5%AD%98%E5%93%AA%E5%84%BF%E4%BA%86%EF%BC%9F.html">11 存储系统：数据到底都存哪儿了？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/12%20%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9F.html">12 基础配置详解：哪些参数会影响应用程序稳定性？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/13%20Spark%20SQL%EF%BC%9A%E8%AE%A9%E6%88%91%E4%BB%AC%E4%BB%8E%E2%80%9C%E5%B0%8F%E6%B1%BD%E8%BD%A6%E6%91%87%E5%8F%B7%E5%88%86%E6%9E%90%E2%80%9D%E5%BC%80%E5%A7%8B.html">13 Spark SQL：让我们从“小汽车摇号分析”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/14%20%E5%8F%B0%E5%89%8D%E5%B9%95%E5%90%8E%EF%BC%9ADataFrame%E4%B8%8ESpark%20SQL%E7%9A%84%E7%94%B1%E6%9D%A5.html">14 台前幕后：DataFrame与Spark SQL的由来</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/15%20%E6%95%B0%E6%8D%AE%E6%BA%90%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%EF%BC%9ADataFrame%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5%EF%BC%9F.html">15 数据源与数据格式：DataFrame从何而来？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/16%20%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8DataFrame%E4%B9%8B%E4%B8%8A%E5%81%9A%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9F.html">16 数据转换：如何在DataFrame之上做数据处理？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/17%20%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%EF%BC%9A%E4%B8%8D%E5%90%8C%E7%9A%84%E5%85%B3%E8%81%94%E5%BD%A2%E5%BC%8F%E4%B8%8E%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E8%AF%A5%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F.html">17 数据关联：不同的关联形式与实现机制该怎么选？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/18%20%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%E4%BC%98%E5%8C%96%EF%BC%9A%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9BJoin%E7%AD%96%E7%95%A5%EF%BC%8C%E5%BC%80%E5%8F%91%E8%80%85%E8%AF%A5%E5%A6%82%E4%BD%95%E5%8F%96%E8%88%8D%EF%BC%9F.html">18 数据关联优化：都有哪些Join策略，开发者该如何取舍？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/19%20%E9%85%8D%E7%BD%AE%E9%A1%B9%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E6%80%A7%E8%83%BD%EF%BC%9F.html">19 配置项详解：哪些参数会影响应用程序执行性能？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/20%20Hive%20%2B%20Spark%E5%BC%BA%E5%BC%BA%E8%81%94%E5%90%88%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E4%BB%93%E7%9A%84%E4%B8%8D%E4%BA%8C%E4%B9%8B%E9%80%89.html">20 Hive + Spark强强联合：分布式数仓的不二之选</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/21%20Spark%20UI%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">21 Spark UI（上）：如何高效地定位性能问题？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/22%20Spark%20UI%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">22 Spark UI（下）：如何高效地定位性能问题？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/23%20Spark%20MLlib%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B%E2%80%9D%E5%BC%80%E5%A7%8B.html">23 Spark MLlib：从“房价预测”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/24%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F.html">24 特征工程（上）：有哪些常用的特征处理函数？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/25%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F.html">25 特征工程（下）：有哪些常用的特征处理函数？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/26%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">26 模型训练（上）：决策树系列算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/27%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%9B%9E%E5%BD%92%E3%80%81%E5%88%86%E7%B1%BB%E5%92%8C%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">27 模型训练（中）：回归、分类和聚类算法详解</a></li><li><a class="active" aria-current="page" href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/28%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E9%A2%91%E7%B9%81%E9%A1%B9%E9%9B%86%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">28 模型训练（下）：协同过滤与频繁项集算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/29%20Spark%20MLlib%20Pipeline%EF%BC%9A%E9%AB%98%E6%95%88%E5%BC%80%E5%8F%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8.html">29 Spark MLlib Pipeline：高效开发机器学习应用</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/30%20Structured%20Streaming%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%B5%81%E5%8A%A8%E7%9A%84Word%20Count%E2%80%9D%E5%BC%80%E5%A7%8B.html">30 Structured Streaming：从“流动的Word Count”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/31%20%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B5%81%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6%EF%BC%9ABatch%20mode%E5%92%8CContinuous%20mode%E5%93%AA%E5%AE%B6%E5%BC%BA%EF%BC%9F.html">31 新一代流处理框架：Batch mode和Continuous mode哪家强？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/32%20Window%E6%93%8D%E4%BD%9C%26Watermark%EF%BC%9A%E6%B5%81%E5%A4%84%E7%90%86%E5%BC%95%E6%93%8E%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E7%A7%80%E6%9C%BA%E5%88%B6%EF%BC%9F.html">32 Window操作&amp;Watermark：流处理引擎提供了哪些优秀机制？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/33%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%EF%BC%9A%E6%B5%81%E4%B8%8E%E6%B5%81%E3%80%81%E6%B5%81%E4%B8%8E%E6%89%B9.html">33 流计算中的数据关联：流与流、流与批</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/34%20Spark%20%2B%20Kafka%EF%BC%9A%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E2%80%9C%E4%B8%87%E9%87%91%E6%B2%B9%E2%80%9D.html">34 Spark + Kafka：流计算中的“万金油”</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E5%B0%8F%E7%8E%8B%EF%BC%9A%E4%BF%9D%E6%8C%81%E7%A9%BA%E6%9D%AF%E5%BF%83%E6%80%81%EF%BC%8C%E4%B8%8D%E5%81%9A%E4%BA%95%E5%BA%95%E4%B9%8B%E8%9B%99.html">用户故事 小王：保持空杯心态，不做井底之蛙</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E8%BF%9B%E5%85%A5%E6%97%B6%E9%97%B4%E8%A3%82%E7%BC%9D%EF%BC%8C%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0.html">结束语 进入时间裂缝，持续学习</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/28%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E9%A2%91%E7%B9%81%E9%A1%B9%E9%9B%86%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="28 模型训练（下）：协同过滤与频繁项集算法详解" id="title">28 模型训练（下）：协同过滤与频繁项集算法详解</h1>
+<div><p>你好，我是吴磊。</p>
+<p>如果你平时爱刷抖音，或者热衷看电影，不知道有没有过这样的体验：这类影视App你用得越久，它就好像会读心术一样，总能给你推荐对胃口的内容。其实这种迎合用户喜好的推荐，离不开机器学习中的推荐算法。</p>
+<p>今天是咱们模型训练的最后一讲，在今天这一讲，我们就结合两个有趣的电影推荐场景，为你讲解Spark MLlib支持的协同过滤与频繁项集算法。与上一讲一样，咱们还是先来贴出下面这张“全景图”，方便你对学过和即将要学的知识做到心中有数。</p>
+<p><img alt="图片" src="/assets/62e84c0e0c88df400c3fb08d.jpg" title="Spark MLlib支持的模型算法"/></p>
+<h2 id="电影推荐场景">电影推荐场景</h2>
+<p>今天这一讲，咱们结合Kaggle竞赛中的<a href="https://www.kaggle.com/jneupane12/movielens" target="_blank">MovieLens数据集</a>，使用不同算法来构建简易的电影推荐引擎。尽管MovieLens数据集包含了多个文件，但课程中主要用到的，是ratings.csv这个文件。文件中的每条数据条目，记录的都是用户对于电影的打分，如下表所示。</p>
+<p><img alt="图片" src="/assets/491d09fabaa6426fc68faa30.jpg" title="ratings.csv样本示例"/></p>
+<p>其中第一列userId为用户ID，movieId表示电影ID，而rating就是用户对于电影的评分。像这样，同时存有用户与物品（电影）信息的二维表，我们把它们统称为“交互矩阵”，或是“共现矩阵”。你可能会疑惑，通过这么一份简单的二维表，我们能干些什么呢？</p>
+<p>可别小瞧这份数据，与合适的模型算法搭配在一起，我就能根据它们构建初具模样的推荐引擎。在Spark MLlib框架下，至少有两种模型算法可以做到这一点，一个是协同过滤（Collaborative Filtering），另一个是频繁项集（Frequency Patterns）。其中，前者天生就是用来做推荐用的，而后者是一种常规的非监督学习算法，你可以结合数据特点，把这个算法灵活运用于推荐场景。</p>
+<h3 id="协同过滤">协同过滤</h3>
+<p>我们先说协同过滤，从字面上来说，“过滤”是目的，而“协同”是方式、方法。简单地说，协同过滤的目标，就是从物品集合（比如完整的电影候选集）中，“过滤”出那些用户可能感兴趣的物品子集。而“协同”，它指的是，利用群体行为（全部用户与全部物品的交互历史）来实现过滤。</p>
+<p>这样说有些绕，实际上，协同过滤的核心思想很简单，就是“<strong>相似的人倾向于喜好相似的物品集</strong>”。</p>
+<p>交互矩阵看上去简单，但其中隐含着大量的相似性信息，只要利用合适的模型算法，我们就能挖掘出用户与用户之间的相似性、物品与物品之间的相似性，以及用户与物品之间的相似性。一旦这些相似性可以被量化，我们自然就可以基于相似性去做推荐了。思路是不是很简单？</p>
+<p>那么问题来了，这些相似性，该怎么量化呢？答案是：矩阵分解。</p>
+<p><img alt="图片" src="/assets/b72b8246e1b3c0963841688a.jpg" title="交互矩阵、用户矩阵与物品矩阵"/></p>
+<p>在数学上，给定维度为（M，N）的交互矩阵C，我们可以把它分解为两个矩阵U与I的乘积。其中，我们可以把U称作“用户矩阵”，它的维度为（M，K）；而I可以看作是“物品矩阵”，它的维度是（K，N）。</p>
+<p>在用户矩阵与物品矩阵中，K是超参数，它是由开发者人为设定的。不难发现，对于用户矩阵U中的每一行， 都可以看作是用户的Embedding，也即刻画用户的特征向量。同理，物品矩阵中的每一列，也都可以看作是物品的Embedding，也即刻画物品的特征向量。</p>
+<p>正所谓，万物皆可Embedding。对于任何事物，一旦它们被映射到同一个向量空间，我们就可以使用欧氏距离或是余弦夹角等方法，来计算他们向量之间的相似度，从而实现上述各种相似性（用户与用户、物品与物品、用户与物品）的量化。</p>
+<p>基于相似度计算，我们就可以翻着花样地去实现各式各样的推荐。比方说，对于用户A来说，首先搜索与他/她最相似的前5个用户，然后把这些用户喜欢过的物品（电影）推荐给用户A，这样的推荐方式，又叫基于用户相似度的推荐。</p>
+<p>再比如，对于用户A喜欢过的物品，我们搜索与这些物品最相似的前5个物品，然后把这些搜索到的物品，再推荐给用户A，这叫做基于物品相似度的推荐。</p>
+<p>甚至，在一些情况下，我们还可以直接计算用户A与所有物品之间的相似度，然后把排名靠前的5个物品，直接推荐给用户A。</p>
+<p>基于上述逻辑，我们还可以反其道而行之，从物品的视角出发，给物品（电影）推荐用户。不难发现，一旦完成Embedding的转换过程，我们就可以根据相似度计算来灵活地设计推荐系统。</p>
+<p>那么，接下来的问题是，在Spark MLlib的框架下，我们具体要怎么做，才能从原始的互动矩阵，获得分解之后的用户矩阵、物品矩阵，进而获取到用户与物品的Embedding，并最终设计出简易的推荐引擎呢？</p>
+<p>按照惯例，我们还是先上代码，用代码来演示这个过程。</p>
+<pre><code>import org.apache.spark.sql.DataFrame
+
+// rootPath表示数据集根目录
+val rootPath: String = _
+val filePath: String = s"${rootPath}/ratings.csv"
+
+var data: DataFrame = spark.read.format("csv").option("header", true).load(filePath)
+
+// 类型转换
+import org.apache.spark.sql.types.IntegerType
+import org.apache.spark.sql.types.FloatType
+
+// 把ID类字段转换为整型，把Rating转换为Float类型
+data = data.withColumn(s"userIdInt",col("userId").cast(IntegerType)).drop("userId")
+data = data.withColumn(s"movieIdInt",col("movieId").cast(IntegerType)).drop("movieId")
+data = data.withColumn(s"ratingFloat",col("rating").cast(IntegerType)).drop("rating")
+
+// 切割训练与验证数据集
+val Array(trainingData, testData) = data.randomSplit(Array(0.8, 0.2))
+</code></pre>
+<p>第一步，还是准备训练样本，我们从ratings.csv创建DataFrame，然后对相应字段做类型转换，以备后面使用。第二步，我们定义并拟合模型，完成协同过滤中的矩阵分解。</p>
+<pre><code>import org.apache.spark.ml.recommendation.ALS
+
+// 基于ALS（Alternative Least Squares，交替最小二乘）构建模型，完成矩阵分解
+val als = new ALS()
+.setUserCol("userIdInt")
+.setItemCol("movieIdInt")
+.setRatingCol("ratingFloat")
+.setMaxIter(20)
+
+val alsModel = als.fit(trainingData)
+</code></pre>
+<p>值得一提的是，在Spark MLlib的框架下，对于协同过滤的实现，Spark并没有采用解析解的方式（数学上严格的矩阵分解），而是用了一种近似的方式来去近似矩阵分解。这种方式，就是ALS（Alternative Least Squares，交替最小二乘）。</p>
+<p>具体来说，给定交互矩阵C，对于用户矩阵U与物品矩阵I，Spark先给U设定一个初始值，然后假设U是不变的，在这种情况下，Spark把物品矩阵I的优化，转化为回归问题，不停地去拟合I，直到收敛。然后，固定住物品矩阵I，再用回归的思路去优化用户矩阵U，直至收敛。如此反复交替数次，U和I都逐渐收敛到最优解，Spark即宣告训练过程结束。</p>
+<p>因为Spark把矩阵分解转化成了回归问题，所以我们可以用回归相关的度量指标来衡量ALS模型的训练效果，如下所示。</p>
+<pre><code>import org.apache.spark.ml.evaluation.RegressionEvaluator
+
+val evaluator = new RegressionEvaluator()
+// 设定度量指标为RMSE
+.setMetricName("rmse")
+.setLabelCol("ratingFloat")
+.setPredictionCol("prediction")
+
+val predictions = alsModel.transform(trainingData)
+// 计算RMSE
+val rmse = evaluator.evaluate(predictions)
+</code></pre>
+<p>验证过模型效果之后，接下来，我们就可以放心地从模型当中，去获取训练好的用户矩阵U和物品矩阵I。这两个矩阵中，保存的正是用户Embedding与物品Embedding。</p>
+<pre><code>alsModel.userFactors
+// org.apache.spark.sql.DataFrame = [id: int, features: array&lt;float&gt;]
+
+alsModel.userFactors.show(1)
+/** 结果打印
++---+--------------------+
+| id| features|
++---+--------------------+
+| 10|[0.53652495, -1.0...|
++---+--------------------+
+*/
+
+alsModel.itemFactors
+// org.apache.spark.sql.DataFrame = [id: int, features: array&lt;float&gt;]
+
+alsModel.itemFactors.show(1)
+/** 结果打印
++---+--------------------+
+| id| features|
++---+--------------------+
+| 10|[1.1281404, -0.59...|
++---+--------------------+
+*/
+</code></pre>
+<p>就像我们之前说的，有了用户与物品的Embedding，我们就可以灵活地设计推荐引擎。如果我们想偷懒的话，还可以利用Spark MLlib提供的API来做推荐。具体来说，我们可以通过调用ALS Model的相关方法，来实现向用户推荐物品，或是向物品推荐用户，如下所示。</p>
+<pre><code>// 为所有用户推荐10部电影
+val userRecs = alsModel.recommendForAllUsers(10)
+
+// 为每部电影推荐10个用户
+val movieRecs = alsModel.recommendForAllItems(10)
+
+// 为指定用户推荐10部电影
+val users = data.select(als.getUserCol).distinct().limit(3)
+val userSubsetRecs = alsModel.recommendForUserSubset(users, 10)
+
+// 为指定电影推荐10个用户
+val movies = data.select(als.getItemCol).distinct().limit(3)
+val movieSubSetRecs = alsModel.recommendForItemSubset(movies, 10)
+</code></pre>
+<p>好啦，到此为止，我们介绍了协同过滤的核心思想与工作原理，并使用Spark MLlib提供的ALS算法，实现了一个简单的电影推荐引擎。接下来，我们再来想一想，还有没有其他的思路来打造一个不一样的推荐引擎。</p>
+<h3 id="频繁项集">频繁项集</h3>
+<p>频繁项集（Frequency Patterns），是一种经典的数据挖掘算法，我们可以把它归类到非监督学习的范畴。频繁项集可以挖掘数据集中那些经常“成群结队”出现的数据项，并尝试在它们之间建立关联规则（Association Rules），从而为决策提供支持。</p>
+<p>举例来说，基于对上百万条交易记录的统计分析，蔬果超市发现（“葱”，“姜”，“蒜”）这三种食材经常一起出现。换句话说，购买了“葱”、“姜”的人，往往也会再买上几头蒜，或是买了大葱的人，结账前还会再把姜、蒜也捎上。</p>
+<p>在这个购物篮的例子中，（“葱”，“姜”，“蒜”）就是频繁项（Frequency Itemset），也即经常一起共现的数据项集合。而像（“葱”、“姜”-&gt;“蒜”）和（“葱”-&gt;“姜”、“蒜”）这样的关联关系，就叫做关联规则。</p>
+<p>不难发现，基于频繁项与关联规则，我们能够提供简单的推荐能力。以刚刚的（“葱”，“姜”，“蒜”）为例，对于那些手中提着大葱、准备结账的人，精明的导购员完全可以向他/她推荐超市新上的河北白皮蒜或是山东大生姜。</p>
+<p>回到电影推荐的场景，我们同样可以基于历史，挖掘出频繁项和关联规则。比方说，电影（“八佰”、“金刚川”、“长津湖”）是频繁项，而（“八佰”、“金刚川”-&gt;“长津湖”）之间存在着关联关系。那么，对于看过“八佰”和“金刚川”的人，我们更倾向于判断他/她大概率也会喜欢“长津湖”，进而把这部电影推荐给他/她。</p>
+<p>那么，基于MovieLens数据集，在Spark MLlib的开发框架下，我们该如何挖掘其中的频繁项与关联规则呢？</p>
+<p>首先第一步，是数据准备。在蔬果超市的例子中，超市需要以交易为单位，收集顾客曾经一起购买过的各种蔬果。为了在MovieLens数据集上计算频繁项集，我们也需要以用户为粒度，收集同一个用户曾经看过的所有电影集合，如下图所示。</p>
+<p><img alt="图片" src="/assets/c3fb0b70a2d577bf8cf1144f.jpg" title="数据转换示意图"/></p>
+<p>要完成这样的转换，我们只需要一行代码即可搞定。</p>
+<pre><code>// data是从ratings.csv创建的DataFrame
+val movies: DataFrame = data
+// 按照用户分组
+.groupBy("userId")
+// 收集该用户看过的所有电影，把新的集合列命名为movieSeq
+.agg(collect_list("movieId").alias("movieSeq"))
+// 只保留movieSeq这一列，去掉其他列
+.select("movieSeq")
+
+// movies: org.apache.spark.sql.DataFrame = [movieSeq: array&lt;string&gt;]
+
+movies.show(1)
+/** 结果打印
++--------------------+
+| movieSeq|
++--------------------+
+|[151, 172, 236, 2...|
++--------------------+
+*/
+</code></pre>
+<p>数据准备好之后，接下来，我们就可以借助Spark MLlib框架来完成频繁项集的计算。</p>
+<pre><code>import org.apache.spark.ml.fpm.FPGrowth
+
+val fpGrowth = new FPGrowth()
+// 指定输入列
+.setItemsCol("movieSeq")
+// 超参数，频繁项最小支持系数
+.setMinSupport(0.1)
+// 超参数，关联规则最小信心系数
+.setMinConfidence(0.1)
+
+val model = fpGrowth.fit(movies)
+</code></pre>
+<p>可以看到，定义并拟合频繁项集模型，还是比较简单的，用法上与其他模型算法大同小异。不过，这里有两个超参数需要特别关注，一个是由setMinSupport设置的最小支持系数，另一个是由setMinConfidence指定的最小信心系数。</p>
+<p>最小支持系数，它用来设定频繁项的“选拔阈值”，这里我们把它设置为0.1。这是什么意思呢？</p>
+<p>举例来说，在MovieLens数据集中，总共有7120个用户，相应地，movies这个DataFrame中，就有7120条电影集合数据。对于（“八佰”、“金刚川”、“长津湖”）这个组合来说，当且仅当它出现的次数大于712（7120 * 0.1），这个组合才会被算法判定为频繁项。换句话说，<strong>最小支持系数越高，算法挖掘出的频繁项越少、越可靠，反之越多</strong>。</p>
+<p>相应地，最小信心系数，是用来约束关联规则的，例子中的取值也是0.1。我们再来举例说明，假设在7120条电影集合数据中，（“八佰”、“金刚川”）这对组合一起出现过1000次，那么要想（“八佰”、“金刚川”-&gt;“长津湖”）这条关联规则成立，则（“八佰”、“金刚川”、“长津湖”）这个组合必须至少出现过100次（1000 * 0.1）。同理，<strong>最小信心系数越高，算法挖掘出的关联规则越少、越可靠，反之越多</strong>。</p>
+<p>模型训练好之后，我们就可以从中获取经常出现的频繁项与关联规则，如下所示。</p>
+<pre><code>model.freqItemsets.show(1)
+/** 结果打印
++--------------------+----+
+| items|freq|
++--------------------+----+
+|[318, 593, 356, 296]|1465|
++--------------------+----+
+*/
+
+model.associationRules.show(1)
+/** 结果打印
++--------------------+----------+------------------+
+| antecedent|consequent| confidence|
++--------------------+----------+------------------+
+|[592, 780, 480, 593]| [296]|0.8910463861920173|
++--------------------+----------+------------------+
+*/
+</code></pre>
+<p>基于关联规则，我们就可以提供初步的推荐功能。比方说，对于看过（592、780、480、593）这四部电影的用户，我们可以把ID为296的电影推荐给他/她。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>好啦，到此为止，模型训练的上、中、下三讲，我们就全部讲完啦！这三讲的内容较多，涉及的算法也很多，为了让你对他们有一个整体的把握，我把这些算法的分类、原理、特点与适用场景，都整理到了如下的表格中，供你随时回顾。</p>
+<p><img alt="图片" src="/assets/f093c371ee17a21b3a7c6faf.jpg"/></p>
+<p>不难发现，机器学习的场景众多，不同的场景下，又有多种不同的算法供我们选择。掌握这些算法的原理与特性，有利于我们高效地进行模型选型与模型训练，从而去解决不同场景下的特定问题。</p>
+<p>对于算法的调优与应用，还需要你结合日常的实践去进一步验证、巩固，也欢迎你在留言区分享你的心得与体会，让我们一起加油！</p>
+<h2 id="每课一练">每课一练</h2>
+<p>对于本讲介绍的两种推荐思路（协同过滤与频繁项集），你能说说他们各自的优劣势吗？</p>
+<p>你有什么学习收获或者疑问，都可以跟我交流，咱们留言区见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

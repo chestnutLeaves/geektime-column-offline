@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>07 函数、类与运算符：Dart是如何处理信息的？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Flutter核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">47 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Flutter核心技术与实战</strong><ul><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E4%B8%80%E4%BD%8D%E5%A4%A7%E5%89%8D%E7%AB%AF%E4%BB%8E%E4%B8%9A%E8%80%85%E9%83%BD%E5%BA%94%E8%AF%A5%E5%AD%A6%E4%B9%A0Flutter%EF%BC%9F.html">00 开篇词 为什么每一位大前端从业者都应该学习Flutter？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BAFlutter%E5%B7%A5%E7%A8%8B%E7%8E%AF%E5%A2%83.html">01 预习篇 · 从0开始搭建Flutter工程环境</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20%E9%A2%84%E4%B9%A0%E7%AF%87%20%C2%B7%20Dart%E8%AF%AD%E8%A8%80%E6%A6%82%E8%A7%88.html">02 预习篇 · Dart语言概览</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%96%B9%E6%A1%88%E7%9A%84%E5%8E%86%E5%8F%B2%E5%8F%91%E5%B1%95%E9%80%BB%E8%BE%91.html">03 深入理解跨平台方案的历史发展逻辑</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20Flutter%E5%8C%BA%E5%88%AB%E4%BA%8E%E5%85%B6%E4%BB%96%E6%96%B9%E6%A1%88%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">04 Flutter区别于其他方案的关键技术是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E4%BB%8E%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%85%A5%E6%89%8B%EF%BC%8C%E4%BD%93%E4%BC%9AFlutter%E4%BB%A3%E7%A0%81%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E5%9C%A8%E5%8E%9F%E7%94%9F%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%84.html">05 从标准模板入手，体会Flutter代码是如何运行在原生系统上的</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E4%B8%8E%E7%B1%BB%E5%9E%8B%E5%8F%98%E9%87%8F%EF%BC%9ADart%E6%98%AF%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E4%BF%A1%E6%81%AF%E7%9A%84%EF%BC%9F.html">06 基础语法与类型变量：Dart是如何表示信息的？</a></li><li><a class="active" aria-current="page" href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E5%87%BD%E6%95%B0%E3%80%81%E7%B1%BB%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%9ADart%E6%98%AF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BF%A1%E6%81%AF%E7%9A%84%EF%BC%9F.html">07 函数、类与运算符：Dart是如何处理信息的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%EF%BC%9A%E6%8E%8C%E6%8F%A1Dart%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7.html">08 综合案例：掌握Dart核心特性</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20Widget%EF%BC%8C%E6%9E%84%E5%BB%BAFlutter%E7%95%8C%E9%9D%A2%E7%9A%84%E5%9F%BA%E7%9F%B3.html">09 Widget，构建Flutter界面的基石</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20Widget%E4%B8%AD%E7%9A%84State%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">10 Widget中的State到底是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E6%8F%90%E5%88%B0%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%8C%E6%88%91%E4%BB%AC%E6%98%AF%E5%9C%A8%E8%AF%B4%E4%BB%80%E4%B9%88%EF%BC%9F.html">11 提到生命周期，我们是在说什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E7%BB%8F%E5%85%B8%E6%8E%A7%E4%BB%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%96%87%E6%9C%AC%E3%80%81%E5%9B%BE%E7%89%87%E5%92%8C%E6%8C%89%E9%92%AE%E5%9C%A8Flutter%E4%B8%AD%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F.html">12 经典控件（一）：文本、图片和按钮在Flutter中怎么用？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E7%BB%8F%E5%85%B8%E6%8E%A7%E4%BB%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AUITableView_ListView%E5%9C%A8Flutter%E4%B8%AD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">13 经典控件（二）：UITableView_ListView在Flutter中是什么？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E7%BB%8F%E5%85%B8%E5%B8%83%E5%B1%80%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E5%AD%90%E6%8E%A7%E4%BB%B6%E5%9C%A8%E7%88%B6%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%8E%92%E7%89%88%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%9F.html">14 经典布局：如何定义子控件在父容器中排版的位置？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20%E7%BB%84%E5%90%88%E4%B8%8E%E8%87%AA%E7%BB%98%EF%BC%8C%E6%88%91%E8%AF%A5%E9%80%89%E7%94%A8%E4%BD%95%E7%A7%8D%E6%96%B9%E5%BC%8F%E8%87%AA%E5%AE%9A%E4%B9%89Widget%EF%BC%9F.html">15 组合与自绘，我该选用何种方式自定义Widget？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E4%BB%8E%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F%E8%AF%B4%E8%B5%B7%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9A%E5%88%B6%E4%B8%8D%E5%90%8C%E9%A3%8E%E6%A0%BC%E7%9A%84App%E4%B8%BB%E9%A2%98%EF%BC%9F.html">16 从夜间模式说起，如何定制不同风格的App主题？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9B%BE%E7%89%87%E3%80%81%E9%85%8D%E7%BD%AE%E5%92%8C%E5%AD%97%E4%BD%93%E5%9C%A8Flutter%E4%B8%AD%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F.html">17 依赖管理（一）：图片、配置和字体在Flutter中怎么用？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BB%84%E4%BB%B6%E5%BA%93%E5%9C%A8Flutter%E4%B8%AD%E8%A6%81%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%EF%BC%9F.html">18 依赖管理（二）：第三方组件库在Flutter中要如何管理？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E4%BA%8B%E4%BB%B6%E8%AF%A5%E5%A6%82%E4%BD%95%E5%93%8D%E5%BA%94%EF%BC%9F.html">19 用户交互事件该如何响应？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E5%85%B3%E4%BA%8E%E8%B7%A8%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BD%A0%E5%8F%AA%E9%9C%80%E8%A6%81%E8%AE%B0%E4%BD%8F%E8%BF%99%E4%B8%89%E6%8B%9B.html">20 关于跨组件传递数据，你只需要记住这三招</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%AF%BC%E8%88%AA%EF%BC%8CFlutter%E6%98%AF%E8%BF%99%E6%A0%B7%E5%AE%9E%E7%8E%B0%E9%A1%B5%E9%9D%A2%E5%88%87%E6%8D%A2%E7%9A%84.html">21 路由与导航，Flutter是这样实现页面切换的</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E5%A6%82%E4%BD%95%E6%9E%84%E9%80%A0%E7%82%AB%E9%85%B7%E7%9A%84%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%EF%BC%9F.html">22 如何构造炫酷的动画效果？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81UI%E8%BF%90%E8%A1%8C%E6%B5%81%E7%95%85%EF%BC%9F.html">23 单线程模型怎么保证UI运行流畅？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20HTTP%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B8%8EJSON%E8%A7%A3%E6%9E%90.html">24 HTTP网络编程与JSON解析</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96.html">25 本地存储与数据库的使用和优化</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E5%A6%82%E4%BD%95%E5%9C%A8Dart%E5%B1%82%E5%85%BC%E5%AE%B9Android_iOS%E5%B9%B3%E5%8F%B0%E7%89%B9%E5%AE%9A%E5%AE%9E%E7%8E%B0%EF%BC%9F%EF%BC%88%E4%B8%80%EF%BC%89.html">26 如何在Dart层兼容Android_iOS平台特定实现？（一）</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E5%A6%82%E4%BD%95%E5%9C%A8Dart%E5%B1%82%E5%85%BC%E5%AE%B9Android_iOS%E5%B9%B3%E5%8F%B0%E7%89%B9%E5%AE%9A%E5%AE%9E%E7%8E%B0%EF%BC%9F%EF%BC%88%E4%BA%8C%EF%BC%89.html">27 如何在Dart层兼容Android_iOS平台特定实现？（二）</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E5%9C%A8%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8%E4%B8%AD%E6%B7%B7%E7%BC%96Flutter%E5%B7%A5%E7%A8%8B%EF%BC%9F.html">28 如何在原生应用中混编Flutter工程？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%EF%BC%8C%E8%AF%A5%E7%94%A8%E4%BD%95%E7%A7%8D%E6%96%B9%E6%A1%88%E7%AE%A1%E7%90%86%E5%AF%BC%E8%88%AA%E6%A0%88%EF%BC%9F.html">29 混合开发，该用何种方案管理导航栈？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%81%9A%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F.html">30 为什么需要做状态管理，怎么做？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%94%9F%E6%8E%A8%E9%80%81%E8%83%BD%E5%8A%9B%EF%BC%9F.html">31 如何实现原生推送能力？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E9%80%82%E9%85%8D%E5%9B%BD%E9%99%85%E5%8C%96%EF%BC%8C%E9%99%A4%E4%BA%86%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%88%91%E4%BB%AC%E8%BF%98%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88_.html">32 适配国际化，除了多语言我们还需要注意什么_</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%A6%82%E4%BD%95%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8C%E5%88%86%E8%BE%A8%E7%8E%87%E7%9A%84%E6%89%8B%E6%9C%BA%E5%B1%8F%E5%B9%95%EF%BC%9F.html">33 如何适配不同分辨率的手机屏幕？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Flutter%E7%9A%84%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">34 如何理解Flutter的编译模式？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20Hot%20Reload%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E5%88%B0%E7%9A%84%EF%BC%9F.html">35 Hot Reload是怎么做到的？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BC%98%E5%8C%96%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95%E6%95%88%E7%8E%87%EF%BC%9F.html">36 如何通过工具链优化开发调试效率？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B%E5%B9%B6%E4%BC%98%E5%8C%96Flutter%20App%E7%9A%84%E6%95%B4%E4%BD%93%E6%80%A7%E8%83%BD%E8%A1%A8%E7%8E%B0%EF%BC%9F.html">37 如何检测并优化Flutter App的整体性能表现？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%8F%90%E9%AB%98%E4%BA%A4%E4%BB%98%E8%B4%A8%E9%87%8F%EF%BC%9F.html">38 如何通过自动化测试提高交付质量？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20%E7%BA%BF%E4%B8%8A%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E8%AF%A5%E5%A6%82%E4%BD%95%E5%81%9A%E5%A5%BD%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7%E4%B8%8E%E4%BF%A1%E6%81%AF%E9%87%87%E9%9B%86%EF%BC%9F.html">39 线上出现问题，该如何做好异常捕获与信息采集？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E8%A1%A1%E9%87%8FFlutter%20App%E7%BA%BF%E4%B8%8A%E8%B4%A8%E9%87%8F%EF%BC%8C%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8%E8%BF%99%E4%B8%89%E4%B8%AA%E6%8C%87%E6%A0%87.html">40 衡量Flutter App线上质量，我们需要关注这三个指标</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E7%BB%84%E4%BB%B6%E5%8C%96%E5%92%8C%E5%B9%B3%E5%8F%B0%E5%8C%96%EF%BC%8C%E8%AF%A5%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E5%90%88%E7%90%86%E7%A8%B3%E5%AE%9A%E7%9A%84Flutter%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%EF%BC%9F.html">41 组件化和平台化，该如何组织合理稳定的Flutter工程结构？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%9A%84Flutter%20App%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83%E7%8E%AF%E5%A2%83%EF%BC%9F.html">42 如何构建高效的Flutter App打包发布环境？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/43%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Flutter%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9F.html">43 如何构建自己的Flutter混合开发框架（一）？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/44%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84Flutter%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9F.html">44 如何构建自己的Flutter混合开发框架（二）？</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%20%20%E6%B8%A9%E6%95%85%E8%80%8C%E7%9F%A5%E6%96%B0%EF%BC%8C%E4%B8%8E%E4%BD%A0%E8%AF%B4%E8%AF%B4%E4%B8%93%E6%A0%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E6%80%9D%E8%80%83%E9%A2%98.html">特别放送   温故而知新，与你说说专栏的那些思考题</a></li><li><a href="/courses/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%8B%BF%E7%95%8F%E9%9A%BE%EF%BC%8C%E5%8B%BF%E8%BD%BB%E7%95%A5.html">结束语 勿畏难，勿轻略</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Flutter%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E5%87%BD%E6%95%B0%E3%80%81%E7%B1%BB%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%9ADart%E6%98%AF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BF%A1%E6%81%AF%E7%9A%84%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="07 函数、类与运算符：Dart是如何处理信息的？" id="title">07 函数、类与运算符：Dart是如何处理信息的？</h1>
+<div><p>你好，我是陈航。</p>
+<p>在上一篇文章中，我通过一个基本hello word的示例，带你体验了Dart的基础语法与类型变量，并与其他编程语言的特性进行对比，希望可以帮助你快速建立起对Dart的初步印象。</p>
+<p>其实，编程语言虽然千差万别，但归根结底，它们的设计思想无非就是回答两个问题：</p>
+<ul>
+<li>如何表示信息；</li>
+<li>如何处理信息。</li>
+</ul>
+<p>在上一篇文章中，我们已经解决了Dart如何表示信息的问题，今天这篇文章我就着重和你分享它是如何处理信息的。</p>
+<p>作为一门真正面向对象的编程语言，Dart将处理信息的过程抽象为了对象，以结构化的方式将功能分解，而函数、类与运算符就是抽象中最重要的手段。</p>
+<p>接下来，我就从函数、类与运算符的角度，来进一步和你讲述Dart面向对象设计的基本思路。</p>
+<h2 id="函数">函数</h2>
+<p>函数是一段用来独立地完成某个功能的代码。我在上一篇文章中和你提到，在Dart中，所有类型都是对象类型，函数也是对象，它的类型叫作Function。这意味着函数也可以被定义为变量，甚至可以被定义为参数传递给另一个函数。</p>
+<p>在下面这段代码示例中，我定义了一个判断整数是否为0的isZero函数，并把它传递了给另一个printInfo函数，完成格式化打印出判断结果的功能。</p>
+<pre><code>bool isZero(int number) { //判断整数是否为0
+  return number == 0; 
+}
+
+void printInfo(int number,Function check) { //用check函数来判断整数是否为0
+  print("$number is Zero: ${check(number)}");
+}
+
+Function f = isZero;
+int x = 10;
+int y = 0;
+printInfo(x,f);  // 输出 10 is Zero: false
+printInfo(y,f);  // 输出 0 is Zero: true
+</code></pre>
+<p>如果函数体只有一行表达式，就比如上面示例中的isZero和printInfo函数，我们还可以像JavaScript语言那样用箭头函数来简化这个函数：</p>
+<pre><code>bool isZero(int number) =&gt; number == 0;
+
+void printInfo(int number,Function check) =&gt; print("$number is Zero: ${check(number)}");
+</code></pre>
+<p>有时，一个函数中可能需要传递多个参数。那么，如何让这类函数的参数声明变得更加优雅、可维护，同时降低调用者的使用成本呢？</p>
+<p>C++与Java的做法是，提供函数的重载，即提供同名但参数不同的函数。但<strong>Dart认为重载会导致混乱，因此从设计之初就不支持重载，而是提供了可选命名参数和可选参数</strong>。</p>
+<p>具体方式是，在声明函数时：</p>
+<ul>
+<li>给参数增加{}，以paramName: value的方式指定调用参数，也就是可选命名参数；</li>
+<li>给参数增加[]，则意味着这些参数是可以忽略的，也就是可选参数。</li>
+</ul>
+<p>在使用这两种方式定义函数时，我们还可以在参数未传递时设置默认值。我以一个只有两个参数的简单函数为例，来和你说明这两种方式的具体用法：</p>
+<pre><code>//要达到可选命名参数的用法，那就在定义函数的时候给参数加上 {}
+void enable1Flags({bool bold, bool hidden}) =&gt; print("$bold , $hidden");
+
+//定义可选命名参数时增加默认值
+void enable2Flags({bool bold = true, bool hidden = false}) =&gt; print("$bold ,$hidden");
+
+//可忽略的参数在函数定义时用[]符号指定
+void enable3Flags(bool bold, [bool hidden]) =&gt; print("$bold ,$hidden");
+
+//定义可忽略参数时增加默认值
+void enable4Flags(bool bold, [bool hidden = false]) =&gt; print("$bold ,$hidden");
+
+//可选命名参数函数调用
+enable1Flags(bold: true, hidden: false); //true, false
+enable1Flags(bold: true); //true, null
+enable2Flags(bold: false); //false, false
+
+//可忽略参数函数调用
+enable3Flags(true, false); //true, false
+enable3Flags(true,); //true, null
+enable4Flags(true); //true, false
+enable4Flags(true,true); // true, true
+</code></pre>
+<p><strong>这里我要和你强调的是，在Flutter中会大量用到可选命名参数的方式，你一定要记住它的用法。</strong></p>
+<h2 id="类">类</h2>
+<p>类是特定类型的数据和方法的集合，也是创建对象的模板。与其他语言一样，Dart为类概念提供了内置支持。</p>
+<h3 id="类的定义及初始化">类的定义及初始化</h3>
+<p>Dart是面向对象的语言，每个对象都是一个类的实例，都继承自顶层类型Object。在Dart中，实例变量与实例方法、类变量与类方法的声明与Java类似，我就不再过多展开了。</p>
+<p>值得一提的是，Dart中并没有public、protected、private这些关键字，我们只要在声明变量与方法时，在前面加上“_”即可作为private方法使用。如果不加“_”，则默认为public。不过，<strong>“_”的限制范围并不是类访问级别的，而是库访问级别</strong>。</p>
+<p>接下来，我们以一个具体的案例看看<strong>Dart是如何定义和使用类的。</strong></p>
+<p>我在Point类中，定义了两个成员变量x和y，通过构造函数语法糖进行初始化，成员函数printInfo的作用是打印它们的信息；而类变量factor，则在声明时就已经赋好了默认值0，类函数printZValue会打印出它的信息。</p>
+<pre><code>class Point {
+  num x, y;
+  static num factor = 0;
+  //语法糖，等同于在函数体内：this.x = x;this.y = y;
+  Point(this.x,this.y);
+  void printInfo() =&gt; print('($x, $y)');
+  static void printZValue() =&gt; print('$factor');
+}
+
+var p = new Point(100,200); // new 关键字可以省略
+p.printInfo();  // 输出(100, 200);
+Point.factor = 10;
+Point.printZValue(); // 输出10
+</code></pre>
+<p>有时候类的实例化需要根据参数提供多种初始化方式。除了可选命名参数和可选参数之外，Dart还提供了<strong>命名构造函数</strong>的方式，使得类的实例化过程语义更清晰。</p>
+<p>此外，<strong>与C++类似，Dart支持初始化列表</strong>。在构造函数的函数体真正执行之前，你还有机会给实例变量赋值，甚至重定向至另一个构造函数。</p>
+<p>如下面实例所示，Point类中有两个构造函数Point.bottom与Point，其中：Point.bottom将其成员变量的初始化重定向到了Point中，而Point则在初始化列表中为z赋上了默认值0。</p>
+<pre><code>class Point {
+  num x, y, z;
+  Point(this.x, this.y) : z = 0; // 初始化变量z
+  Point.bottom(num x) : this(x, 0); // 重定向构造函数
+  void printInfo() =&gt; print('($x,$y,$z)');
+}
+
+var p = Point.bottom(100);
+p.printInfo(); // 输出(100,0,0)
+</code></pre>
+<h3 id="复用">复用</h3>
+<p>在面向对象的编程语言中，将其他类的变量与方法纳入本类中进行复用的方式一般有两种：<strong>继承父类和接口实现</strong>。当然，在Dart也不例外。</p>
+<p>在Dart中，你可以对同一个父类进行继承或接口实现：</p>
+<ul>
+<li>继承父类意味着，子类由父类派生，会自动获取父类的成员变量和方法实现，子类可以根据需要覆写构造函数及父类方法；</li>
+<li>接口实现则意味着，子类获取到的仅仅是接口的成员变量符号和方法符号，需要重新实现成员变量，以及方法的声明和初始化，否则编译器会报错。</li>
+</ul>
+<p>接下来，我以一个例子和你说明<strong>在Dart中继承和接口的差别</strong>。</p>
+<p>Vector通过继承Point的方式增加了成员变量，并覆写了printInfo的实现；而Coordinate，则通过接口实现的方式，覆写了Point的变量定义及函数实现：</p>
+<pre><code>class Point {
+  num x = 0, y = 0;
+  void printInfo() =&gt; print('($x,$y)');
+}
+
+//Vector继承自Point
+class Vector extends Point{
+  num z = 0;
+  @override
+  void printInfo() =&gt; print('($x,$y,$z)'); //覆写了printInfo实现
+}
+
+//Coordinate是对Point的接口实现
+class Coordinate implements Point {
+  num x = 0, y = 0; //成员变量需要重新声明
+  void printInfo() =&gt; print('($x,$y)'); //成员函数需要重新声明实现
+}
+
+var xxx = Vector(); 
+xxx
+  ..x = 1
+  ..y = 2
+  ..z = 3; //级联运算符，等同于xxx.x=1; xxx.y=2;xxx.z=3;
+xxx.printInfo(); //输出(1,2,3)
+
+var yyy = Coordinate();
+yyy
+  ..x = 1
+  ..y = 2; //级联运算符，等同于yyy.x=1; yyy.y=2;
+yyy.printInfo(); //输出(1,2)
+print (yyy is Point); //true
+print(yyy is Coordinate); //true
+</code></pre>
+<p>可以看出，子类Coordinate采用接口实现的方式，仅仅是获取到了父类Point的一个“空壳子”，只能从语义层面当成接口Point来用，但并不能复用Point的原有实现。那么，<strong>我们是否能够找到方法去复用Point的对应方法实现呢？</strong></p>
+<p>也许你很快就想到了，我可以让Coordinate继承Point，来复用其对应的方法。但，如果Coordinate还有其他的父类，我们又该如何处理呢？</p>
+<p>其实，<strong>除了继承和接口实现之外，Dart还提供了另一种机制来实现类的复用，即“混入”（Mixin）</strong>。混入鼓励代码重用，可以被视为具有实现方法的接口。这样一来，不仅可以解决Dart缺少对多重继承的支持问题，还能够避免由于多重继承可能导致的歧义（菱形问题）。</p>
+<blockquote>
+<p>备注：继承歧义，也叫菱形问题，是支持多继承的编程语言中一个相当棘手的问题。当B类和C类继承自A类，而D类继承自B类和C类时会产生歧义。如果A中有一个方法在B和C中已经覆写，而D没有覆写它，那么D继承的方法的版本是B类，还是C类的呢？</p>
+</blockquote>
+<p><strong>要使用混入，只需要with关键字即可。</strong>我们来试着改造Coordinate的实现，把类中的变量声明和函数实现全部删掉：</p>
+<pre><code>class Coordinate with Point {
+}
+
+var yyy = Coordinate();
+print (yyy is Point); //true
+print(yyy is Coordinate); //true
+</code></pre>
+<p>可以看到，通过混入，一个类里可以以非继承的方式使用其他类中的变量与方法，效果正如你想象的那样。</p>
+<h2 id="运算符">运算符</h2>
+<p>Dart和绝大部分编程语言的运算符一样，所以你可以用熟悉的方式去执行程序代码运算。不过，<strong>Dart多了几个额外的运算符，用于简化处理变量实例缺失（即null）的情况</strong>。</p>
+<ul>
+<li><strong>?.</strong>运算符：假设Point类有printInfo()方法，p是Point的一个可能为null的实例。那么，p调用成员方法的安全代码，可以简化为p?.printInfo() ，表示p为null的时候跳过，避免抛出异常。</li>
+<li><strong>??=</strong> 运算符：如果a为null，则给a赋值value，否则跳过。这种用默认值兜底的赋值语句在Dart中我们可以用a ??= value表示。</li>
+<li><strong>??</strong>运算符：如果a不为null，返回a的值，否则返回b。在Java或者C++中，我们需要通过三元表达式(a != null)? a : b来实现这种情况。而在Dart中，这类代码可以简化为a ?? b。</li>
+</ul>
+<p><strong>在Dart中，一切都是对象，就连运算符也是对象成员函数的一部分。</strong></p>
+<p>对于系统的运算符，一般情况下只支持基本数据类型和标准库中提供的类型。而对于用户自定义的类，如果想支持基本操作，比如比较大小、相加相减等，则需要用户自己来定义关于这个运算符的具体实现。</p>
+<p><strong>Dart提供了类似C++的运算符覆写机制</strong>，使得我们不仅可以覆写方法，还可以覆写或者自定义运算符。</p>
+<p>接下来，我们一起看一个Vector类中自定义“+”运算符和覆写”==“运算符的例子：</p>
+<pre><code>class Vector {
+  num x, y;
+  Vector(this.x, this.y);
+  // 自定义相加运算符，实现向量相加
+  Vector operator +(Vector v) =&gt;  Vector(x + v.x, y + v.y);
+  // 覆写相等运算符，判断向量相等
+  bool operator == (dynamic v) =&gt; x == v.x &amp;&amp; y == v.y;
+}
+
+final x = Vector(3, 3);
+final y = Vector(2, 2);
+final z = Vector(1, 1);
+print(x == (y + z)); //  输出true
+
+</code></pre>
+<p>operator是Dart的关键字，与运算符一起使用，表示一个类成员运算符函数。在理解时，我们应该把operator和运算符作为整体，看作是一个成员函数名。</p>
+<h2 id="总结">总结</h2>
+<p>函数、类与运算符是Dart处理信息的抽象手段。从今天的学习中你可以发现，Dart面向对象的设计吸纳了其他编程语言的优点，表达和处理信息的方式既简单又简洁，但又不失强大。</p>
+<p>通过这两篇文章的内容，相信你已经了解了Dart的基本设计思路，熟悉了在Flutter开发中常用的语法特性，也已经具备了快速上手实践的能力。</p>
+<p>接下来，我们简单回顾一下今天的内容，以便加深记忆与理解。</p>
+<p>首先，我们认识了函数。函数也是对象，可以被定义为变量，或者参数。Dart不支持函数重载，但提供了可选命名参数和可选参数的方式，从而解决了函数声明时需要传递多个参数的可维护性。</p>
+<p>然后，我带你学习了类。类提供了数据和函数的抽象复用能力，可以通过继承（父类继承，接口实现）和非继承（Mixin）方式实现复用。在类的内部，关于成员变量，Dart提供了包括命名构造函数和初始化列表在内的两种初始化方式。</p>
+<p>最后，需要注意的是，运算符也是对象成员函数的一部分，可以覆写或者自定义。</p>
+<h2 id="思考题">思考题</h2>
+<p>最后，请你思考以下两个问题。</p>
+<ol>
+<li>你是怎样理解父类继承，接口实现和混入的？我们应该在什么场景下使用它们？</li>
+<li>在父类继承的场景中，父类子类之间的构造函数执行顺序是怎样的？如果父类有多个构造函数，子类也有多个构造函数，如何从代码层面确保父类子类之间构造函数的正确调用？</li>
+</ol>
+<pre><code>class Point {
+  num x, y;
+  Point() : this.make(0,0);
+  Point.left(x) : this.make(x,0);
+  Point.right(y) : this.make(0,y);
+  Point.make(this.x, this.y);
+  void printInfo() =&gt; print('($x,$y)');
+}
+
+class Vector extends Point{
+  num z = 0;
+/*5个构造函数
+  Vector
+  Vector.left;
+  Vector.middle
+  Vector.right
+  Vector.make
+*/
+  @override
+  void printInfo() =&gt; print('($x,$y,$z)'); //覆写了printInfo实现
+}
+</code></pre>
+<p>欢迎将你的答案留言告诉我，我们一起讨论。感谢你的收听，也欢迎你把这篇文章分享给更多的朋友一起阅读。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

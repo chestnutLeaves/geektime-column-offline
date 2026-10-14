@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 广播变量 &amp; 累加器：共享变量是用来做什么的？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/index.html">零基础入门Spark</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">37 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>零基础入门Spark</strong><ul><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E5%85%A5%E9%97%A8Spark%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E5%AD%A6%E4%BC%9A%E2%80%9C%E4%B8%89%E6%AD%A5%E8%B5%B0%E2%80%9D.html">00 开篇词 入门Spark，你需要学会“三步走”</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/01%20Spark%EF%BC%9A%E4%BB%8E%E2%80%9C%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9A%84Hello%20World%E2%80%9D%E5%BC%80%E5%A7%8B.html">01 Spark：从“大数据的Hello World”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/02%20RDD%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%BB%B6%E8%BF%9F%E8%AE%A1%E7%AE%97%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">02 RDD与编程模型：延迟计算是怎么回事？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/03%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ARDD%E5%86%85%E9%83%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2.html">03 RDD常用算子（一）：RDD内部的数据转换</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/04%20%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F.html">04 进程模型与分布式部署：分布式计算是怎么回事？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/05%20%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8A%8A%E6%8F%A1%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%9A%84%E7%B2%BE%E9%AB%93%EF%BC%9F.html">05 调度系统：如何把握分布式计算的精髓？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/06%20Shuffle%E7%AE%A1%E7%90%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Shuffle%E6%98%AF%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%EF%BC%9F.html">06 Shuffle管理：为什么Shuffle是性能瓶颈？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/07%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASpark%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%EF%BC%9F.html">07 RDD常用算子（二）：Spark如何实现数据聚合？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/08%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9ASpark%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98%EF%BC%9F.html">08 内存管理：Spark如何使用内存？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/09%20RDD%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%9A%84%E5%87%86%E5%A4%87%E3%80%81%E9%87%8D%E5%88%86%E5%B8%83%E4%B8%8E%E6%8C%81%E4%B9%85%E5%8C%96.html">09 RDD常用算子（三）：数据的准备、重分布与持久化</a></li><li><a class="active" aria-current="page" href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/10%20%E5%B9%BF%E6%92%AD%E5%8F%98%E9%87%8F%20%26%20%E7%B4%AF%E5%8A%A0%E5%99%A8%EF%BC%9A%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E6%98%AF%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F.html">10 广播变量 &amp; 累加器：共享变量是用来做什么的？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/11%20%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%88%B0%E5%BA%95%E9%83%BD%E5%AD%98%E5%93%AA%E5%84%BF%E4%BA%86%EF%BC%9F.html">11 存储系统：数据到底都存哪儿了？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/12%20%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9F.html">12 基础配置详解：哪些参数会影响应用程序稳定性？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/13%20Spark%20SQL%EF%BC%9A%E8%AE%A9%E6%88%91%E4%BB%AC%E4%BB%8E%E2%80%9C%E5%B0%8F%E6%B1%BD%E8%BD%A6%E6%91%87%E5%8F%B7%E5%88%86%E6%9E%90%E2%80%9D%E5%BC%80%E5%A7%8B.html">13 Spark SQL：让我们从“小汽车摇号分析”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/14%20%E5%8F%B0%E5%89%8D%E5%B9%95%E5%90%8E%EF%BC%9ADataFrame%E4%B8%8ESpark%20SQL%E7%9A%84%E7%94%B1%E6%9D%A5.html">14 台前幕后：DataFrame与Spark SQL的由来</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/15%20%E6%95%B0%E6%8D%AE%E6%BA%90%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%EF%BC%9ADataFrame%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5%EF%BC%9F.html">15 数据源与数据格式：DataFrame从何而来？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/16%20%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8DataFrame%E4%B9%8B%E4%B8%8A%E5%81%9A%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9F.html">16 数据转换：如何在DataFrame之上做数据处理？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/17%20%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%EF%BC%9A%E4%B8%8D%E5%90%8C%E7%9A%84%E5%85%B3%E8%81%94%E5%BD%A2%E5%BC%8F%E4%B8%8E%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E8%AF%A5%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F.html">17 数据关联：不同的关联形式与实现机制该怎么选？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/18%20%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%E4%BC%98%E5%8C%96%EF%BC%9A%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9BJoin%E7%AD%96%E7%95%A5%EF%BC%8C%E5%BC%80%E5%8F%91%E8%80%85%E8%AF%A5%E5%A6%82%E4%BD%95%E5%8F%96%E8%88%8D%EF%BC%9F.html">18 数据关联优化：都有哪些Join策略，开发者该如何取舍？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/19%20%E9%85%8D%E7%BD%AE%E9%A1%B9%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E6%80%A7%E8%83%BD%EF%BC%9F.html">19 配置项详解：哪些参数会影响应用程序执行性能？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/20%20Hive%20%2B%20Spark%E5%BC%BA%E5%BC%BA%E8%81%94%E5%90%88%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E4%BB%93%E7%9A%84%E4%B8%8D%E4%BA%8C%E4%B9%8B%E9%80%89.html">20 Hive + Spark强强联合：分布式数仓的不二之选</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/21%20Spark%20UI%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">21 Spark UI（上）：如何高效地定位性能问题？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/22%20Spark%20UI%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%AE%9A%E4%BD%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">22 Spark UI（下）：如何高效地定位性能问题？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/23%20Spark%20MLlib%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B%E2%80%9D%E5%BC%80%E5%A7%8B.html">23 Spark MLlib：从“房价预测”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/24%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F.html">24 特征工程（上）：有哪些常用的特征处理函数？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/25%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%9F.html">25 特征工程（下）：有哪些常用的特征处理函数？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/26%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">26 模型训练（上）：决策树系列算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/27%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%9B%9E%E5%BD%92%E3%80%81%E5%88%86%E7%B1%BB%E5%92%8C%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">27 模型训练（中）：回归、分类和聚类算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/28%20%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E4%B8%8E%E9%A2%91%E7%B9%81%E9%A1%B9%E9%9B%86%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.html">28 模型训练（下）：协同过滤与频繁项集算法详解</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/29%20Spark%20MLlib%20Pipeline%EF%BC%9A%E9%AB%98%E6%95%88%E5%BC%80%E5%8F%91%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8.html">29 Spark MLlib Pipeline：高效开发机器学习应用</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/30%20Structured%20Streaming%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%B5%81%E5%8A%A8%E7%9A%84Word%20Count%E2%80%9D%E5%BC%80%E5%A7%8B.html">30 Structured Streaming：从“流动的Word Count”开始</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/31%20%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B5%81%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6%EF%BC%9ABatch%20mode%E5%92%8CContinuous%20mode%E5%93%AA%E5%AE%B6%E5%BC%BA%EF%BC%9F.html">31 新一代流处理框架：Batch mode和Continuous mode哪家强？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/32%20Window%E6%93%8D%E4%BD%9C%26Watermark%EF%BC%9A%E6%B5%81%E5%A4%84%E7%90%86%E5%BC%95%E6%93%8E%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E7%A7%80%E6%9C%BA%E5%88%B6%EF%BC%9F.html">32 Window操作&amp;Watermark：流处理引擎提供了哪些优秀机制？</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/33%20%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%EF%BC%9A%E6%B5%81%E4%B8%8E%E6%B5%81%E3%80%81%E6%B5%81%E4%B8%8E%E6%89%B9.html">33 流计算中的数据关联：流与流、流与批</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/34%20Spark%20%2B%20Kafka%EF%BC%9A%E6%B5%81%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E2%80%9C%E4%B8%87%E9%87%91%E6%B2%B9%E2%80%9D.html">34 Spark + Kafka：流计算中的“万金油”</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E5%B0%8F%E7%8E%8B%EF%BC%9A%E4%BF%9D%E6%8C%81%E7%A9%BA%E6%9D%AF%E5%BF%83%E6%80%81%EF%BC%8C%E4%B8%8D%E5%81%9A%E4%BA%95%E5%BA%95%E4%B9%8B%E8%9B%99.html">用户故事 小王：保持空杯心态，不做井底之蛙</a></li><li><a href="/courses/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E8%BF%9B%E5%85%A5%E6%97%B6%E9%97%B4%E8%A3%82%E7%BC%9D%EF%BC%8C%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0.html">结束语 进入时间裂缝，持续学习</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8Spark/10%20%E5%B9%BF%E6%92%AD%E5%8F%98%E9%87%8F%20%26%20%E7%B4%AF%E5%8A%A0%E5%99%A8%EF%BC%9A%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E6%98%AF%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="10 广播变量 &amp; 累加器：共享变量是用来做什么的？" id="title">10 广播变量 &amp; 累加器：共享变量是用来做什么的？</h1>
+<div><p>你好，我是吴磊。</p>
+<p>今天是国庆第一天，首先祝你节日快乐。专栏上线以来，有不少同学留言说期待后续内容，所以国庆期间我们仍旧更新正文内容，让我们一起把基础知识模块收个尾。</p>
+<p>学习过RDD常用算子之后，回顾这些算子，你会发现它们都是作用（Apply）在RDD之上的。RDD的计算以数据分区为粒度，依照算子的逻辑，Executors以相互独立的方式，完成不同数据分区的计算与转换。</p>
+<p>不难发现，对于Executors来说，分区中的数据都是局部数据。换句话说，在同一时刻，隶属于某个Executor的数据分区，对于其他Executors来说是不可见的。</p>
+<p>不过，在做应用开发的时候，总会有一些计算逻辑需要访问“全局变量”，比如说全局计数器，而这些全局变量在任意时刻对所有的Executors都是可见的、共享的。那么问题来了，像这样的全局变量，或者说共享变量，Spark又是如何支持的呢？</p>
+<p>今天这一讲，我就来和你聊聊Spark共享变量。按照创建与使用方式的不同，Spark提供了两类共享变量，分别是广播变量（Broadcast variables）和累加器（Accumulators）。接下来，我们就正式进入今天的学习，去深入了解这两种共享变量的用法、以及它们各自的适用场景。</p>
+<h2 id="广播变量-broadcast-variables">广播变量（Broadcast variables）</h2>
+<p>我们先来说说广播变量。广播变量的用法很简单，给定普通变量x，通过调用SparkContext下的broadcast API即可完成广播变量的创建，我们结合代码例子看一下。</p>
+<pre><code>val list: List[String] = List("Apache", "Spark")
+
+// sc为SparkContext实例
+val bc = sc.broadcast(list)
+</code></pre>
+<p>在上面的代码示例中，我们先是定义了一个字符串列表list，它包含“Apache”和“Spark”这两个单词。然后，我们使用broadcast函数来创建广播变量bc，bc封装的内容就是list列表。</p>
+<pre><code>// 读取广播变量内容
+bc.value
+// List[String] = List(Apache, Spark)
+
+// 直接读取列表内容
+list
+// List[String] = List(Apache, Spark)
+</code></pre>
+<p>使用broadcast API创建广播变量</p>
+<p>广播变量创建好之后，通过调用它的value函数，我们就可以访问它所封装的数据内容。可以看到调用bc.value的效果，这与直接访问字符串列表list的效果是完全一致的。</p>
+<p>看到这里，你可能会问：“明明通过访问list变量就可以直接获取字符串列表，为什么还要绕个大弯儿，先去封装广播变量，然后又通过它的value函数来获取同样的数据内容呢？”实际上，这是个非常好的问题，要回答这个问题，咱们需要做个推演，看看直接访问list变量会产生哪些弊端。</p>
+<p>在前面的几讲中，我们换着花样地变更Word Count的计算逻辑。尽管Word Count都快被我们“玩坏了”，不过，一以贯之地沿用同一个实例，有助于我们通过对比迅速掌握新的知识点、技能点。因此，为了让你迅速掌握广播变量的“精髓”，咱们不妨“故技重施”，继续在Word Count这个实例上做文章。</p>
+<h3 id="普通变量的痛点">普通变量的痛点</h3>
+<p>这一次，为了对比使用广播变量前后的差异，我们把Word Count变更为“定向计数”。</p>
+<p>所谓定向计数，它指的是只对某些单词进行计数，例如，给定单词列表list，我们只对文件wikiOfSpark.txt当中的“Apache”和“Spark”这两个单词做计数，其他单词我们可以忽略。结合[第1讲]Word Count的完整代码，这样的计算逻辑很容易实现，如下表所示。</p>
+<pre><code>import org.apache.spark.rdd.RDD
+val rootPath: String = _
+val file: String = s"${rootPath}/wikiOfSpark.txt"
+// 读取文件内容
+val lineRDD: RDD[String] = spark.sparkContext.textFile(file)
+// 以行为单位做分词
+val wordRDD: RDD[String] = lineRDD.flatMap(line =&gt; line.split(" "))
+
+// 创建单词列表list
+val list: List[String] = List("Apache", "Spark")
+// 使用list列表对RDD进行过滤
+val cleanWordRDD: RDD[String] = wordRDD.filter(word =&gt; list.contains(word))
+// 把RDD元素转换为（Key，Value）的形式
+val kvRDD: RDD[(String, Int)] = cleanWordRDD.map(word =&gt; (word, 1))
+// 按照单词做分组计数
+val wordCounts: RDD[(String, Int)] = kvRDD.reduceByKey((x, y) =&gt; x + y)
+// 获取计算结果
+wordCounts.collect
+// Array[(String, Int)] = Array((Apache,34), (Spark,63))
+</code></pre>
+<p>将上述代码丢进spark-shell，我们很快就能算出，在wikiOfSpark.txt文件中，“Apache”这个单词出现了34次，而“Spark”则出现了63次。虽说得出计算结果挺容易的，不过知其然，还要知其所以然，接下来，咱们一起来分析一下，这段代码在运行时是如何工作的。</p>
+<p><img alt="图片" src="/assets/7c7b522b65aad99e00a68e59.jpg" title="定向计数中list变量的全网分发"/></p>
+<p>如上图所示，list变量本身是在Driver端创建的，它并不是分布式数据集（如lineRDD、wordRDD）的一部分。因此，在分布式计算的过程中，Spark需要把list变量分发给每一个分布式任务（Task），从而对不同数据分区的内容进行过滤。</p>
+<p>在这种工作机制下，如果RDD并行度较高、或是变量的尺寸较大，那么重复的内容分发就会引入大量的网络开销与存储开销，而这些开销会大幅削弱作业的执行性能。为什么这么说呢？</p>
+<p>要知道，<strong>Driver端变量的分发是以Task为粒度的，系统中有多少个Task，变量就需要在网络中分发多少次</strong>。更要命的是，每个Task接收到变量之后，都需要把它暂存到内存，以备后续过滤之用。换句话说，在同一个Executor内部，多个不同的Task多次重复地缓存了同样的内容拷贝，毫无疑问，这对宝贵的内存资源是一种巨大的浪费。</p>
+<p>RDD并行度较高，意味着RDD的数据分区数量较多，而Task数量与分区数相一致，这就代表系统中有大量的分布式任务需要执行。如果变量本身尺寸较大，大量分布式任务引入的网络开销与内存开销会进一步升级。<strong>在工业级应用中，RDD的并行度往往在千、万这个量级，在这种情况下，诸如list这样的变量会在网络中分发成千上万次，作业整体的执行效率自然会很差</strong> 。</p>
+<p>面对这样的窘境，我们有没有什么办法，能够避免同一个变量的重复分发与存储呢？答案当然是肯定的，这个时候，我们就可以祭出广播变量这个“杀手锏”。</p>
+<h3 id="广播变量的优势">广播变量的优势</h3>
+<p>想要知道广播变量到底有啥优势，我们可以先用广播变量重写一下前面的代码实现，然后再做个对比，很容易就能发现广播变量为什么能解决普通变量的痛点。</p>
+<pre><code>import org.apache.spark.rdd.RDD
+val rootPath: String = _
+val file: String = s"${rootPath}/wikiOfSpark.txt"
+// 读取文件内容
+val lineRDD: RDD[String] = spark.sparkContext.textFile(file)
+// 以行为单位做分词
+val wordRDD: RDD[String] = lineRDD.flatMap(line =&gt; line.split(" "))
+
+// 创建单词列表list
+val list: List[String] = List("Apache", "Spark")
+// 创建广播变量bc
+val bc = sc.broadcast(list)
+// 使用bc.value对RDD进行过滤
+val cleanWordRDD: RDD[String] = wordRDD.filter(word =&gt; bc.value.contains(word))
+// 把RDD元素转换为（Key，Value）的形式
+val kvRDD: RDD[(String, Int)] = cleanWordRDD.map(word =&gt; (word, 1))
+// 按照单词做分组计数
+val wordCounts: RDD[(String, Int)] = kvRDD.reduceByKey((x, y) =&gt; x + y)
+// 获取计算结果
+wordCounts.collect
+// Array[(String, Int)] = Array((Apache,34), (Spark,63))
+</code></pre>
+<p>可以看到，代码的修改非常简单，我们先是使用broadcast函数来封装list变量，然后在RDD过滤的时候调用bc.value来访问list变量内容。<strong>你可不要小看这个改写，尽管代码的改动微乎其微，几乎可以忽略不计，但在运行时，整个计算过程却发生了翻天覆地的变化</strong>。</p>
+<p><img alt="图片" src="/assets/c167613cbcb4a5dc5dedd0a2.jpg" title="广播变量工作原理"/></p>
+<p>在使用广播变量之前，list变量的分发是以Task为粒度的，而在使用广播变量之后，变量分发的粒度变成了以Executors为单位，同一个Executor内多个不同的Tasks只需访问同一份数据拷贝即可。换句话说，变量在网络中分发与存储的次数，从RDD的分区数量，锐减到了集群中Executors的个数。</p>
+<p>要知道，在工业级系统中，Executors个数与RDD并行度相比，二者之间通常会相差至少两个数量级。在这样的量级下，广播变量节省的网络与内存开销会变得非常可观，省去了这些开销，对作业的执行性能自然大有裨益。</p>
+<p>好啦，到现在为止，我们讲解了广播变量的用法、工作原理，以及它的优势所在。在日常的开发工作中，<strong>当你遇到需要多个Task共享同一个大型变量（如列表、数组、映射等数据结构）的时候，就可以考虑使用广播变量来优化你的Spark作业</strong>。接下来，我们继续来说说Spark支持的第二种共享变量：累加器。</p>
+<h2 id="累加器-accumulators">累加器（Accumulators）</h2>
+<p>累加器，顾名思义，它的主要作用是全局计数（Global counter）。与单机系统不同，在分布式系统中，我们不能依赖简单的普通变量来完成全局计数，而是必须依赖像累加器这种特殊的数据结构才能达到目的。</p>
+<p>与广播变量类似，累加器也是在Driver端定义的，但它的更新是通过在RDD算子中调用add函数完成的。在应用执行完毕之后，开发者在Driver端调用累加器的value函数，就能获取全局计数结果。按照惯例，咱们还是通过代码来熟悉累加器的用法。</p>
+<p>聪明的你可能已经猜到了，我们又要对Word Count“动手脚”了。在第1讲的Word Count中，我们过滤掉了空字符串，然后对文件wikiOfSpark.txt中所有的单词做统计计数。</p>
+<p>不过这一次，我们在过滤掉空字符的同时，还想知道文件中到底有多少个空字符串，这样我们对文件中的“脏数据”就能做到心中有数了。</p>
+<p>注意，<strong>这里对于空字符串的计数，不是主代码逻辑，它的计算结果不会写入到Word Count最终的统计结果</strong>。所以，只是简单地去掉filter环节，是无法实现空字符计数的。</p>
+<p>那么，你自然会问：“不把filter环节去掉，怎么对空字符串做统计呢？”别着急，这样的计算需求，正是累加器可以施展拳脚的地方。你可以先扫一眼下表的代码实现，然后我们再一起来熟悉累加器的用法。</p>
+<pre><code>import org.apache.spark.rdd.RDD
+val rootPath: String = _
+val file: String = s"${rootPath}/wikiOfSpark.txt"
+// 读取文件内容
+val lineRDD: RDD[String] = spark.sparkContext.textFile(file)
+// 以行为单位做分词
+val wordRDD: RDD[String] = lineRDD.flatMap(line =&gt; line.split(" "))
+
+// 定义Long类型的累加器
+val ac = sc.longAccumulator("Empty string")
+
+// 定义filter算子的判定函数f，注意，f的返回类型必须是Boolean
+def f(x: String): Boolean = {
+if(x.equals("")) {
+// 当遇到空字符串时，累加器加1
+ac.add(1)
+return false
+} else {
+return true
+}
+}
+
+// 使用f对RDD进行过滤
+val cleanWordRDD: RDD[String] = wordRDD.filter(f)
+// 把RDD元素转换为（Key，Value）的形式
+val kvRDD: RDD[(String, Int)] = cleanWordRDD.map(word =&gt; (word, 1))
+// 按照单词做分组计数
+val wordCounts: RDD[(String, Int)] = kvRDD.reduceByKey((x, y) =&gt; x + y)
+// 收集计数结果
+wordCounts.collect
+
+// 作业执行完毕，通过调用value获取累加器结果
+ac.value
+// Long = 79
+</code></pre>
+<p>与第1讲的Word Count相比，这里的代码主要有4处改动：</p>
+<ul>
+<li>使用SparkContext下的longAccumulator来定义Long类型的累加器；</li>
+<li>定义filter算子的判定函数f，当遇到空字符串时，调用add函数为累加器计数；</li>
+<li>以函数f为参数，调用filter算子对RDD进行过滤；</li>
+<li>作业完成后，调用累加器的value函数，获取全局计数结果。</li>
+</ul>
+<p>你不妨把上面的代码敲入到spark-shell里，直观体验下累加器的用法与效果，ac.value给出的结果是79，这说明以空格作为分隔符切割源文件wikiOfSpark.txt之后，就会留下79个空字符串。</p>
+<p>另外，你还可以验证wordCounts这个RDD，它包含所有单词的计数结果，不过，你会发现它的元素并不包含空字符串，这与我们预期的计算逻辑是一致的。</p>
+<p>除了上面代码中用到的longAccumulator，SparkContext还提供了doubleAccumulator和collectionAccumulator这两种不同类型的累加器，用于满足不同场景下的计算需要，感兴趣的话你不妨自己动手亲自尝试一下。</p>
+<p>其中，doubleAccumulator用于对Double类型的数值做全局计数；而collectionAccumulator允许开发者定义集合类型的累加器，相比数值类型，集合类型可以为业务逻辑的实现，提供更多的灵活性和更大的自由度。</p>
+<p>不过，就这3种累加器来说，尽管类型不同，但它们的用法是完全一致的。都是<strong>先定义累加器变量，然后在RDD算子中调用add函数，从而更新累加器状态，最后通过调用value函数来获取累加器的最终结果</strong>。</p>
+<p>好啦，到这里，关于累加器的用法，我们就讲完了。在日常的开发中，当你遇到需要做全局计数的场景时，别忘了用上累加器这个实用工具。</p>
+<h2 id="重点回顾">重点回顾</h2>
+<p>今天的内容讲完了，我们一起来做个总结。今天这一讲，我们重点讲解了广播变量与累加器的用法与适用场景。</p>
+<p>广播变量由Driver端定义并初始化，各个Executors以只读（Read only）的方式访问广播变量携带的数据内容。累加器也是由Driver定义的，但Driver并不会向累加器中写入任何数据内容，累加器的内容更新，完全是由各个Executors以只写（Write only）的方式来完成，而Driver仅以只读的方式对更新后的内容进行访问。</p>
+<p>关于广播变量，你首先需要掌握它的基本用法。给定任意类型的普通变量，你都可以使用SparkContext下面的broadcast API来创建广播变量。接下来，在RDD的转换与计算过程中，你可以通过调用广播变量的value函数，来访问封装的数据内容，从而辅助RDD的数据处理。</p>
+<p>需要额外注意的是，<strong>在Driver与Executors之间，普通变量的分发与存储，是以Task为粒度的，因此，它所引入的网络与内存开销，会成为作业执行性能的一大隐患</strong>。在使用广播变量的情况下，数据内容的分发粒度变为以Executors为单位。相比前者，广播变量的优势高下立判，它可以大幅度消除前者引入的网络与内存开销，进而在整体上提升作业的执行效率。</p>
+<p>关于累加器，首先你要清楚它的适用场景，当你需要做全局计数的时候，累加器会是个很好的帮手。其次，你需要掌握累加器的具体用法，可以分为这样3步：</p>
+<ol>
+<li>使用SparkContext下的[long | double | collection]Accumulator来定义累加器；</li>
+<li>在RDD的转换过程中，调用add函数更新累加器状态；</li>
+<li>在作业完成后，调用value函数，获取累加器的全局结果。</li>
+</ol>
+<h2 id="每课一练">每课一练</h2>
+<ol>
+<li>在使用累加器对空字符串做全局计数的代码中，请你用普通变量去替换累加器，试一试，在不使用累加器的情况，能否得到预期的计算结果？</li>
+<li>累加器提供了Long、Double和Collection三种类型的支持，那么广播变量在类型支持上有限制吗？除了普通类型、集合类型之外，广播变量还支持其他类型吗？比如，Spark支持在RDD之上创建广播变量吗？</li>
+</ol>
+<p>欢迎你在留言区跟我交流互动，也推荐你把这一讲的内容分享给你身边的朋友，说不定就能帮他解决一个难题。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

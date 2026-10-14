@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>19 认识自定义绘制组件 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/index.html">Flutter入门教程</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">26 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Flutter入门教程</strong><ul><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/01%20%E5%89%8D%E8%A8%80-%E6%95%99%E7%A8%8B%E5%86%85%E5%AE%B9%E5%AF%BC%E8%AF%BB.html">01 前言-教程内容导读</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/02%20Flutter%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA.html">02 Flutter 开发环境的搭建</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/03%20%E6%96%B0%E6%89%8B%E6%9D%91%E5%9F%BA%E7%A1%80%20Dart%20%E8%AF%AD%E6%B3%95%20%28%E4%B8%8A%29.html">03 新手村基础 Dart 语法 (上)</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/04%20%E6%96%B0%E6%89%8B%E6%9D%91%E5%9F%BA%E7%A1%80%20Dart%20%E8%AF%AD%E6%B3%95%20%28%E4%B8%8B%29.html">04 新手村基础 Dart 语法 (下)</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/05%20Flutter%20%E8%AE%A1%E6%95%B0%E5%99%A8%E9%A1%B9%E7%9B%AE%E8%A7%A3%E8%AF%BB.html">05 Flutter 计数器项目解读</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/06%20%E7%8C%9C%E6%95%B0%E5%AD%97%E7%95%8C%E9%9D%A2%E4%BA%A4%E4%BA%92%E4%B8%8E%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.html">06 猜数字界面交互与需求分析</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/07%20%E4%BD%BF%E7%94%A8%E7%BB%84%E4%BB%B6%E6%9E%84%E5%BB%BA%E9%9D%99%E6%80%81%E7%95%8C%E9%9D%A2.html">07 使用组件构建静态界面</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/08%20%E7%8A%B6%E6%80%81%E6%95%B0%E6%8D%AE%E4%B8%8E%E7%95%8C%E9%9D%A2%E6%9B%B4%E6%96%B0.html">08 状态数据与界面更新</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/09%20%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%9C%E4%B8%8E%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF.html">09 校验结果与提示信息</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/10%20%E5%8A%A8%E7%94%BB%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%8A%B6%E6%80%81%E5%91%A8%E6%9C%9F.html">10 动画使用与状态周期</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/11%20%E7%8C%9C%E6%95%B0%E5%AD%97%E6%95%B4%E7%90%86%E4%B8%8E%E6%80%BB%E7%BB%93.html">11 猜数字整理与总结</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/12%20%E7%94%B5%E5%AD%90%E6%9C%A8%E9%B1%BC%E7%95%8C%E9%9D%A2%E4%BA%A4%E4%BA%92%E4%B8%8E%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.html">12 电子木鱼界面交互与需求分析</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/13%20%E7%94%B5%E5%AD%90%E6%9C%A8%E9%B1%BC%E9%9D%99%E6%80%81%E7%95%8C%E9%9D%A2%E6%9E%84%E5%BB%BA.html">13 电子木鱼静态界面构建</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/14%20%E8%AE%A1%E6%95%B0%E5%8F%98%E5%8C%96%E4%B8%8E%E9%9F%B3%E6%95%88%E6%92%AD%E6%94%BE.html">14 计数变化与音效播放</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/15%20%E5%BC%B9%E5%87%BA%E9%80%89%E9%A1%B9%E4%B8%8E%E5%88%87%E6%8D%A2%E7%8A%B6%E6%80%81.html">15 弹出选项与切换状态</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/16%20%E7%94%A8%E6%BB%91%E5%8A%A8%E5%88%97%E8%A1%A8%E5%B1%95%E7%A4%BA%E8%AE%B0%E5%BD%95.html">16 用滑动列表展示记录</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/17%20%E7%94%B5%E5%AD%90%E6%9C%A8%E9%B1%BC%E6%95%B4%E7%90%86%E4%B8%8E%E6%80%BB%E7%BB%93.html">17 电子木鱼整理与总结</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/18%20%E7%99%BD%E6%9D%BF%E7%BB%98%E5%88%B6%E7%95%8C%E9%9D%A2%E4%BA%A4%E4%BA%92%E4%B8%8E%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.html">18 白板绘制界面交互与需求分析</a></li><li><a class="active" aria-current="page" href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/19%20%E8%AE%A4%E8%AF%86%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%98%E5%88%B6%E7%BB%84%E4%BB%B6.html">19 认识自定义绘制组件</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/20%20%E9%80%9A%E8%BF%87%E6%89%8B%E5%8A%BF%E5%9C%A8%E7%99%BD%E6%9D%BF%E4%B8%8A%E7%BB%98%E5%88%B6.html">20 通过手势在白板上绘制</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/21%20%E7%99%BD%E6%9D%BF%E7%94%BB%E7%AC%94%E7%9A%84%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.html">21 白板画笔的参数设置</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/22%20%E6%92%A4%E9%94%80%E5%8A%9F%E8%83%BD%E4%B8%8E%E7%94%BB%E6%9D%BF%E4%BC%98%E5%8C%96.html">22 撤销功能与画板优化</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/23%20%E5%BA%94%E7%94%A8%E7%95%8C%E9%9D%A2%E6%95%B4%E5%90%88.html">23 应用界面整合</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/24%20%E6%95%B0%E6%8D%AE%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8.html">24 数据的持久化存储</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/25%20%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E7%9A%84%E8%AE%BF%E9%97%AE.html">25 网络数据的访问</a></li><li><a href="/courses/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/26%20%E6%95%99%E7%A8%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B.html">26 教程总结与展望</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Flutter%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/19%20%E8%AE%A4%E8%AF%86%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%98%E5%88%B6%E7%BB%84%E4%BB%B6.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="19 认识自定义绘制组件" id="title">19 认识自定义绘制组件</h1>
+<div><h4 id="1-从绘制点开始说起">1.从绘制点开始说起</h4>
+<p>我们先通过绘制点来了解一下 Flutter 中绘制的使用方式。左图中是新建的 <code>Paper</code> 组件作为白板主界面；右图在白板的指定坐标处绘制了四个方形的点：</p>
+<table>
+<thead>
+<tr>
+<th>空白</th>
+<th>绘制四个点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="36dfaf7d9180b3e211f2165699eb2c9.jpg" src="/assets/738e3f0ecc5da644e9084715.webp"/></td>
+<td><img alt="449fc7b2d4b3aeb8f35809b1016ffc9.jpg" src="/assets/818184252b36ef9044ad0144.webp"/></td>
+</tr>
+</tbody>
+</table>
+<p><code>Paper</code> 组件如下，由于之后需要进行切换画笔颜色、粗细的操作；涉及到界面中状态的变化，所以这里继承自 <code>StatefulWidget</code>，在状态类的 <code>build</code> 方法中，完成界面的构建逻辑。 <code>PaperAppBar</code> 是单独封装的头部标题组件，和之前类似，就不赘述了；现在主要是想让 <code>body</code> 处设置为可绘制的组件。</p>
+<pre><code class="language-dart">class Paper extends StatefulWidget {
+  const Paper({Key? key}) : super(key: key);
+
+  @override
+  State&lt;Paper&gt; createState() =&gt; _PaperState();
+}
+
+class _PaperState extends State&lt;Paper&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PaperAppBar(onClear: _clear,),
+      body: //TODO
+    );
+  }
+
+  void _clear() {}
+}
+</code></pre>
+<hr/>
+<p>我们已经知道， Flutter 中的所有界面呈现，都和 <code>Widget</code> 息息相关，绘制也不例外。在 Flutter 中接触到 Canvas 最常用的方式是 <code>CustomPaint</code> 组件 + <code>CustomPainter</code> 画板组合。下面代码，将 <code>body</code> 设置为 <code>CustomPaint</code> 组件；<code>CustomPaint</code> 在构造时传入 <code>painter</code> 参数是 <code>CustomPainter</code> 的子类。</p>
+<p>自定义绘制，就是指继承 <code>CustomPainter</code> 完成绘制逻辑，比如这里的 <code>PaperPainter</code> 画板。另外，我们希望画布的尺寸填充剩余空间，可以将 <code>child</code> 指定为 <code>ConstrainedBox</code> ，并通过 <code>BoxConstraints.expand()</code> 的约束。</p>
+<pre><code class="language-css">body: CustomPaint(
+  painter: PaperPainter(),
+  child: ConstrainedBox(constraints: const BoxConstraints.expand()),
+),
+</code></pre>
+<p>也就是说，对于自定义绘制来说，最重要的是 <code>CustomPainter</code> 子类代码的实现，这里通过 <code>PaperPainter</code> 来完成绘制逻辑。在 <code>paint</code> 回调中，可以访问到 Canvas 对象和画板的尺寸 Size 。
+在该方法中通过调用 <code>Canvas</code> 的相关方法就可以进行绘制。比如这里使用 <code>drawPoints</code> 绘制点集，其中需要传入三个参数，分别是:</p>
+<ul>
+<li>点的模式 <code>PointMode</code> : 共三种模式， points、lines、polygon</li>
+<li>点集 <code>List&lt;Offset&gt;</code> ： 点的坐标列表</li>
+<li>画笔 <code>Paint</code> : 绘制时的配置参数</li>
+</ul>
+<pre><code class="language-ini">class PaperPainter extends CustomPainter{
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    List&lt;Offset&gt; points = const [
+      Offset(100,100),
+      Offset(100,150),
+      Offset(150,150),
+      Offset(200,100),
+    ];
+
+    Paint paint = Paint();
+    paint.strokeWidth = 10;
+    canvas.drawPoints(PointMode.points, points , paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) =&gt; true;
+
+}
+</code></pre>
+<p>上面点模式是 <code>PointMode.points</code> ，也就是绘制一个个点。如下是另外两者模式的效果，看起来也很清晰：<code>PointMode.lines</code> 会将点集分为若干对，没对连接成线；<code>PointMode.polygon</code> 会将点依次连接；</p>
+<table>
+<thead>
+<tr>
+<th>PointMode.lines</th>
+<th>PointMode.polygon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="6eb54a2e70a56c27ac8a4e824b04ebb.jpg" src="/assets/3ef74778aa99e7d58c0bac33.webp"/></td>
+<td><img alt="ee2edaca86502310aaa34cd1ec4524d.jpg" src="/assets/e0ea7b69bf255ce652dc43e1.webp"/></td>
+</tr>
+</tbody>
+</table>
+<p>到这里，就通过 Canvas 完成了一个最基础的点集绘制案例，当前代码位置 <a href="https://github.com/toly1994328/flutter_first_station/blob/81d001c3eff1f287fd528ae4efe582e0ddcc5e68/lib/paper/paper.dart" target="_blank">paper.dart</a> 。接下来，介绍一下 <code>Paint</code> 对象，看看你的画笔有哪些功能。</p>
+<hr/>
+<h4 id="2-简单认识画笔的属性">2. 简单认识画笔的属性</h4>
+<p>可以先回想一下，我们现实中画画时用的笔有哪些特性：很自然的可以想到: <code>颜色</code>、<code>粗细</code> 。 这两个配置项分别对应 strokeWidth 和 color 属性，在绘制之前通过直接 paint 对象设置即可：</p>
+<pre><code class="language-ini">Paint paint = Paint();
+paint.strokeWidth = 10;
+paint.color = Colors.red;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>粗细 strokeWidth</th>
+<th>颜色 color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="52ddbd8b2596582bd838e78d5a27349.jpg" src="/assets/4aaa2df249ccc45edd37846b.webp"/></td>
+<td><img alt="8ff25b2a1eeb5ec757f67a9e84a535c.jpg" src="/assets/fa6b8d6f2fc47b669e046288.webp"/></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<p>之前线间的连接很突兀，可以使用将 <code>strokeCap</code> 设置为 <code>StrokeCap.round</code> 让线编程圆头：</p>
+<pre><code class="language-ini">paint.strokeCap = StrokeCap.round;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>StrokeCap.butt</th>
+<th>StrokeCap.round</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="ee2edaca86502310aaa34cd1ec4524d.jpg" src="/assets/8014dc145c6bb2617399bd19.webp"/></td>
+<td><img alt="cabfff1b8eadb65b60991bd946fd0b1.jpg" src="/assets/2b36284ea52e76fd38761f6b.webp"/></td>
+</tr>
+</tbody>
+</table>
+<p>这里面向新手，对于绘制的知识也点到为止，能满足当前需求即可，不会进行非常系统的介绍。不过感兴趣的可以看我的 <a href="https://juejin.cn/book/6844733827265331214/section" target="_blank">《Flutter 绘制指南 - 妙笔生花》</a> 小册，其中对于绘制方方面面都介绍的比较详细。</p>
+<hr/>
+<h4 id="3-简单的基础图形绘制">3. 简单的基础图形绘制</h4>
+<p>Canvas 中提供了一些基础图形的绘制，比如 <code>圆形</code>、<code>矩形</code>、<code>圆角矩形</code>、<code>椭圆</code>、<code>圆弧</code> 等，这里简单了解一下。</p>
+<blockquote>
+<p>drawCircle 绘制圆形: 三个入参分别是圆心坐标 Offset、半径 double 、 画笔 Paint。</p>
+</blockquote>
+<p>另外，Paint 默认是填充样式，如下左图会填满内部；可以将 <code>style</code> 设置为 <code>PaintingStyle.stroke</code>变成线型模式，如下右图：</p>
+<p><img alt="image.png" src="/assets/1d0c9a50539634d58600b380.webp"/></p>
+<pre><code class="language-ini">@override
+void paint(Canvas canvas, Size size) {
+  Paint paint = Paint();
+  canvas.drawCircle(Offset(100, 100), 50, paint);
+  paint.style = PaintingStyle.stroke;
+  canvas.drawCircle(Offset(250, 100), 50, paint);
+}
+</code></pre>
+<hr/>
+<blockquote>
+<p>drawRect 绘制矩形：两个入参分别是矩形 Rect、画笔 Paint。
+drawRRect 绘制圆角矩形：两个入参分别是矩形 RRect、画笔 Paint。</p>
+</blockquote>
+<p><img alt="image.png" src="/assets/d03babe98888155502bd6f22.webp"/></p>
+<pre><code class="language-ini">Paint paint = Paint();
+paint.style = PaintingStyle.stroke;
+paint.strokeWidth = 2;
+// 绘制矩形
+Rect rect = Rect.fromCenter(center: Offset(100, 100), width: 100, height: 80);
+canvas.drawRect(rect, paint);
+// 绘制圆角矩形
+paint.style = PaintingStyle.fill;
+RRect rrect = RRect.fromRectXY(rect.translate(150, 0), 8, 8);
+canvas.drawRRect(rrect, paint);
+</code></pre>
+<hr/>
+<blockquote>
+<p>drawOval 绘制椭圆：两个入参分别是矩形 Rect、画笔 Paint。
+drawArc 绘制圆弧：五个入参分别是矩形 RRect、起始弧度 double、扫描弧度 double、是否闭合 bool、画笔 Paint。</p>
+</blockquote>
+<p><img alt="image.png" src="/assets/e73bbabd24f94f9646d1bc6d.webp"/></p>
+<pre><code class="language-ini">Paint paint = Paint();
+paint.strokeWidth = 2;
+// 绘制椭圆
+Rect overRect = Rect.fromCenter(center: Offset(100, 100), width: 100, height: 80); 
+canvas.drawOval(overRect, paint);
+// 绘制圆弧
+canvas.drawArc(overRect.translate(150, 0), 0, pi*1.3,true,paint);
+</code></pre>
+<hr/>
+<h4 id="4-本章小结">4. 本章小结</h4>
+<p>本章主要介绍了如果在 Flutter 中通过 Canvas 自定义绘制内容。界面就相当于一张白纸、绘制接口方法就相当于画笔，使用已经存在的组件固然简单，但学会自己控制画笔绘制内容可以创造更多的精彩。当然，想要精通绘制也不是一朝一夕可以达成的，但凡工艺技能，都是熟能生巧。</p>
+<p>这里只是简单认识了在 Flutter 中使用 Canvas 绘制的方式，接下来将结合手势和绘制，完成在手指在界面上拖拽留下痕迹的绘制效果。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

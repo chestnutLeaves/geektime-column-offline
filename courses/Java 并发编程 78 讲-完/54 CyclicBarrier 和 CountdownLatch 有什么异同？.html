@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>54 CyclicBarrier 和 CountdownLatch 有什么异同？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/index.html">Java 并发编程 78 讲-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">79 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java 并发编程 78 讲-完</strong><ul><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/00%20%E7%94%B1%E7%82%B9%E5%8F%8A%E9%9D%A2%EF%BC%8C%E6%90%AD%E5%BB%BA%E4%BD%A0%E7%9A%84%20Java%20%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E7%BD%91.html">00 由点及面，搭建你的 Java 并发知识网</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/01%20%E4%B8%BA%E4%BD%95%E8%AF%B4%E5%8F%AA%E6%9C%89%201%20%E7%A7%8D%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F.html">01 为何说只有 1 种实现线程的方法？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/02%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%81%9C%E6%AD%A2%E7%BA%BF%E7%A8%8B%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%20volatile%20%E6%A0%87%E8%AE%B0%E4%BD%8D%E7%9A%84%E5%81%9C%E6%AD%A2%E6%96%B9%E6%B3%95%E6%98%AF%E9%94%99%E8%AF%AF%E7%9A%84%EF%BC%9F.html">02 如何正确停止线程？为什么 volatile 标记位的停止方法是错误的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/03%20%E7%BA%BF%E7%A8%8B%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%206%20%E7%A7%8D%E7%8A%B6%E6%80%81%E4%B9%8B%E9%97%B4%E8%BD%AC%E6%8D%A2%E7%9A%84%EF%BC%9F.html">03 线程是如何在 6 种状态之间转换的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/04%20waitnotifynotifyAll%20%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9F.html">04 waitnotifynotifyAll 方法的使用注意事项？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/05%20%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F.html">05 有哪几种实现生产者消费者模式的方法？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/06%20%E4%B8%80%E5%85%B1%E6%9C%89%E5%93%AA%203%20%E7%B1%BB%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%EF%BC%9F.html">06 一共有哪 3 类线程安全问题？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/07%20%E5%93%AA%E4%BA%9B%E5%9C%BA%E6%99%AF%E9%9C%80%E8%A6%81%E9%A2%9D%E5%A4%96%E6%B3%A8%E6%84%8F%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%EF%BC%9F.html">07 哪些场景需要额外注意线程安全问题？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/08%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BC%9A%E5%B8%A6%E6%9D%A5%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%9F.html">08 为什么多线程会带来性能问题？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/09%20%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%AF%94%E6%89%8B%E5%8A%A8%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E5%A5%BD%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.html">09 使用线程池比手动创建线程好在哪里？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/10%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%90%84%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E5%90%AB%E4%B9%89%EF%BC%9F.html">10 线程池的各个参数的含义？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/11%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%9C%89%E5%93%AA%204%20%E7%A7%8D%E6%8B%92%E7%BB%9D%E7%AD%96%E7%95%A5%EF%BC%9F.html">11 线程池有哪 4 种拒绝策略？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/12%20%E6%9C%89%E5%93%AA%206%20%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%20Java8%20%E7%9A%84%20ForkJoinPool%EF%BC%9F.html">12 有哪 6 种常见的线程池？什么是 Java8 的 ForkJoinPool？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/13%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%B8%B8%E7%94%A8%E7%9A%84%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">13 线程池常用的阻塞队列有哪些？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/14%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%BA%94%E8%AF%A5%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">14 为什么不应该自动创建线程池？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/15%20%E5%90%88%E9%80%82%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%95%B0%E9%87%8F%E6%98%AF%E5%A4%9A%E5%B0%91%EF%BC%9FCPU%20%E6%A0%B8%E5%BF%83%E6%95%B0%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%95%B0%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F.html">15 合适的线程数量是多少？CPU 核心数和线程数的关系？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/16%20%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E5%AE%9E%E9%99%85%E9%9C%80%E8%A6%81%EF%BC%8C%E5%AE%9A%E5%88%B6%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">16 如何根据实际需要，定制自己的线程池？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/17%20%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%85%B3%E9%97%AD%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9Fshutdown%20%E5%92%8C%20shutdownNow%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F.html">17 如何正确关闭线程池？shutdown 和 shutdownNow 的区别？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/18%20%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0%E2%80%9C%E7%BA%BF%E7%A8%8B%E5%A4%8D%E7%94%A8%E2%80%9D%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%9F.html">18 线程池实现“线程复用”的原理？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/19%20%E4%BD%A0%E7%9F%A5%E9%81%93%E5%93%AA%E5%87%A0%E7%A7%8D%E9%94%81%EF%BC%9F%E5%88%86%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">19 你知道哪几种锁？分别有什么特点？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/20%20%E6%82%B2%E8%A7%82%E9%94%81%E5%92%8C%E4%B9%90%E8%A7%82%E9%94%81%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">20 悲观锁和乐观锁的本质是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/21%20%E5%A6%82%E4%BD%95%E7%9C%8B%E5%88%B0%20synchronized%20%E8%83%8C%E5%90%8E%E7%9A%84%E2%80%9Cmonitor%20%E9%94%81%E2%80%9D%EF%BC%9F.html">21 如何看到 synchronized 背后的“monitor 锁”？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/22%20synchronized%20%E5%92%8C%20Lock%20%E5%AD%B0%E4%BC%98%E5%AD%B0%E5%8A%A3%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%EF%BC%9F.html">22 synchronized 和 Lock 孰优孰劣，如何选择？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/23%20Lock%20%E6%9C%89%E5%93%AA%E5%87%A0%E4%B8%AA%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9F%E5%88%86%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F.html">23 Lock 有哪几个常用方法？分别有什么用？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/24%20%E8%AE%B2%E4%B8%80%E8%AE%B2%E5%85%AC%E5%B9%B3%E9%94%81%E5%92%8C%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E2%80%9C%E9%9D%9E%E5%85%AC%E5%B9%B3%E2%80%9D%EF%BC%9F.html">24 讲一讲公平锁和非公平锁，为什么要“非公平”？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/25%20%E8%AF%BB%E5%86%99%E9%94%81%20ReadWriteLock%20%E8%8E%B7%E5%8F%96%E9%94%81%E6%9C%89%E5%93%AA%E4%BA%9B%E8%A7%84%E5%88%99%EF%BC%9F.html">25 读写锁 ReadWriteLock 获取锁有哪些规则？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/26%20%E8%AF%BB%E9%94%81%E5%BA%94%E8%AF%A5%E6%8F%92%E9%98%9F%E5%90%97%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E8%AF%BB%E5%86%99%E9%94%81%E7%9A%84%E5%8D%87%E9%99%8D%E7%BA%A7%EF%BC%9F.html">26 读锁应该插队吗？什么是读写锁的升降级？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/27%20%E4%BB%80%E4%B9%88%E6%98%AF%E8%87%AA%E6%97%8B%E9%94%81%EF%BC%9F%E8%87%AA%E6%97%8B%E7%9A%84%E5%A5%BD%E5%A4%84%E5%92%8C%E5%90%8E%E6%9E%9C%E6%98%AF%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F.html">27 什么是自旋锁？自旋的好处和后果是什么呢？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/28%20JVM%20%E5%AF%B9%E9%94%81%E8%BF%9B%E8%A1%8C%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8C%96%EF%BC%9F.html">28 JVM 对锁进行了哪些优化？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/29%20HashMap%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F.html">29 HashMap 为什么是线程不安全的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/30%20ConcurrentHashMap%20%E5%9C%A8%20Java7%20%E5%92%8C%208%20%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C%EF%BC%9F.html">30 ConcurrentHashMap 在 Java7 和 8 有何不同？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/31%20%E4%B8%BA%E4%BB%80%E4%B9%88%20Map%20%E6%A1%B6%E4%B8%AD%E8%B6%85%E8%BF%87%208%20%E4%B8%AA%E6%89%8D%E8%BD%AC%E4%B8%BA%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%9F.html">31 为什么 Map 桶中超过 8 个才转为红黑树？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/32%20%E5%90%8C%E6%A0%B7%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%8CConcurrentHashMap%20%E5%92%8C%20Hashtable%20%E7%9A%84%E5%8C%BA%E5%88%AB.html">32 同样是线程安全，ConcurrentHashMap 和 Hashtable 的区别</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/33%20CopyOnWriteArrayList%20%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">33 CopyOnWriteArrayList 有什么特点？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/34%20%E4%BB%80%E4%B9%88%E6%98%AF%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%EF%BC%9F.html">34 什么是阻塞队列？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/35%20%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9Fadd%E3%80%81offer%E3%80%81put%20%E7%AD%89%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F.html">35 阻塞队列包含哪些常用的方法？add、offer、put 等方法的区别？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/36%20%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%EF%BC%9F.html">36 有哪几种常见的阻塞队列？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/37%20%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E7%9A%84%E5%B9%B6%E5%8F%91%E5%AE%89%E5%85%A8%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">37 阻塞和非阻塞队列的并发安全原理是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/38%20%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%EF%BC%9F.html">38 如何选择适合自己的阻塞队列？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/39%20%E5%8E%9F%E5%AD%90%E7%B1%BB%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20CAS%20%E4%BF%9D%E8%AF%81%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F.html">39 原子类是如何利用 CAS 保证线程安全的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/40%20AtomicInteger%20%E5%9C%A8%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E6%80%A7%E8%83%BD%E4%B8%8D%E5%A5%BD%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F.html">40 AtomicInteger 在高并发下性能不好，如何解决？为什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/41%20%E5%8E%9F%E5%AD%90%E7%B1%BB%E5%92%8C%20volatile%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%82%E5%90%8C%EF%BC%9F.html">41 原子类和 volatile 有什么异同？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/42%20AtomicInteger%20%E5%92%8C%20synchronized%20%E7%9A%84%E5%BC%82%E5%90%8C%E7%82%B9%EF%BC%9F.html">42 AtomicInteger 和 synchronized 的异同点？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/43%20Java%208%20%E4%B8%AD%20Adder%20%E5%92%8C%20Accumulator%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">43 Java 8 中 Adder 和 Accumulator 有什么区别？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/44%20ThreadLocal%20%E9%80%82%E5%90%88%E7%94%A8%E5%9C%A8%E5%93%AA%E4%BA%9B%E5%AE%9E%E9%99%85%E7%94%9F%E4%BA%A7%E7%9A%84%E5%9C%BA%E6%99%AF%E4%B8%AD%EF%BC%9F.html">44 ThreadLocal 适合用在哪些实际生产的场景中？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/45%20ThreadLocal%20%E6%98%AF%E7%94%A8%E6%9D%A5%E8%A7%A3%E5%86%B3%E5%85%B1%E4%BA%AB%E8%B5%84%E6%BA%90%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AE%BF%E9%97%AE%E7%9A%84%E9%97%AE%E9%A2%98%E5%90%97%EF%BC%9F.html">45 ThreadLocal 是用来解决共享资源的多线程访问的问题吗？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/46%20%E5%A4%9A%E4%B8%AA%20ThreadLocal%20%E5%9C%A8%20Thread%20%E4%B8%AD%E7%9A%84%20threadlocals%20%E9%87%8C%E6%98%AF%E6%80%8E%E4%B9%88%E5%AD%98%E5%82%A8%E7%9A%84%EF%BC%9F.html">46 多个 ThreadLocal 在 Thread 中的 threadlocals 里是怎么存储的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/47%20%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E2%80%94%E2%80%94%E4%B8%BA%E4%BD%95%E6%AF%8F%E6%AC%A1%E7%94%A8%E5%AE%8C%20ThreadLocal%20%E9%83%BD%E8%A6%81%E8%B0%83%E7%94%A8%20remove%28%29%EF%BC%9F.html">47 内存泄漏——为何每次用完 ThreadLocal 都要调用 remove()？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/48%20Callable%20%E5%92%8C%20Runnable%20%E7%9A%84%E4%B8%8D%E5%90%8C%EF%BC%9F.html">48 Callable 和 Runnable 的不同？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/49%20Future%20%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">49 Future 的主要功能是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/50%20%E4%BD%BF%E7%94%A8%20Future%20%E6%9C%89%E5%93%AA%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9%EF%BC%9FFuture%20%E4%BA%A7%E7%94%9F%E6%96%B0%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BA%86%E5%90%97%EF%BC%9F.html">50 使用 Future 有哪些注意点？Future 产生新的线程了吗？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/51%20%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%20CompletableFuture%20%E5%AE%9E%E7%8E%B0%E2%80%9C%E6%97%85%E6%B8%B8%E5%B9%B3%E5%8F%B0%E2%80%9D%E9%97%AE%E9%A2%98%EF%BC%9F.html">51 如何利用 CompletableFuture 实现“旅游平台”问题？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/52%20%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%83%BD%E8%A2%AB%20FixedThreadPool%20%E6%9B%BF%E4%BB%A3%E5%90%97%EF%BC%9F.html">52 信号量能被 FixedThreadPool 替代吗？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/53%20CountDownLatch%20%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%89%E6%8E%92%E7%BA%BF%E7%A8%8B%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E7%9A%84%EF%BC%9F.html">53 CountDownLatch 是如何安排线程执行顺序的？</a></li><li><a class="active" aria-current="page" href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/54%20CyclicBarrier%20%E5%92%8C%20CountdownLatch%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%82%E5%90%8C%EF%BC%9F.html">54 CyclicBarrier 和 CountdownLatch 有什么异同？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/55%20Condition%E3%80%81object.wait%28%29%20%E5%92%8C%20notify%28%29%20%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F.html">55 Condition、object.wait() 和 notify() 的关系？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/56%20%E8%AE%B2%E4%B8%80%E8%AE%B2%E4%BB%80%E4%B9%88%E6%98%AF%20Java%20%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">56 讲一讲什么是 Java 内存模型？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/57%20%E4%BB%80%E4%B9%88%E6%98%AF%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E5%BA%8F%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%87%8D%E6%8E%92%E5%BA%8F%EF%BC%9F.html">57 什么是指令重排序？为什么要重排序？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/58%20Java%20%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E6%9C%89%E5%93%AA%E4%BA%9B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9F.html">58 Java 中的原子操作有哪些注意事项？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/59%20%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%9C%E5%86%85%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7%E2%80%9D%E9%97%AE%E9%A2%98%EF%BC%9F.html">59 什么是“内存可见性”问题？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/60%20%E4%B8%BB%E5%86%85%E5%AD%98%E5%92%8C%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AD%98%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F.html">60 主内存和工作内存的关系？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/61%20%E4%BB%80%E4%B9%88%E6%98%AF%20happens-before%20%E8%A7%84%E5%88%99%EF%BC%9F.html">61 什么是 happens-before 规则？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/62%20volatile%20%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%8E%20synchronized%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%82%E5%90%8C%EF%BC%9F.html">62 volatile 的作用是什么？与 synchronized 有什么异同？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/63%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8F%8C%E9%87%8D%E6%A3%80%E6%9F%A5%E9%94%81%E6%A8%A1%E5%BC%8F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E5%8A%A0%20volatile%EF%BC%9F.html">63 单例模式的双重检查锁模式为什么必须加 volatile？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/64%20%E4%BD%A0%E7%9F%A5%E9%81%93%E4%BB%80%E4%B9%88%E6%98%AF%20CAS%20%E5%90%97%EF%BC%9F.html">64 你知道什么是 CAS 吗？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/65%20CAS%20%E5%92%8C%E4%B9%90%E8%A7%82%E9%94%81%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BC%9A%E7%94%A8%E5%88%B0%20CAS%EF%BC%9F.html">65 CAS 和乐观锁的关系，什么时候会用到 CAS？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/66%20CAS%20%E6%9C%89%E4%BB%80%E4%B9%88%E7%BC%BA%E7%82%B9%EF%BC%9F.html">66 CAS 有什么缺点？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/67%20%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%85%E7%84%B6%E6%AD%BB%E9%94%81%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%9F.html">67 如何写一个必然死锁的例子？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/68%20%E5%8F%91%E7%94%9F%E6%AD%BB%E9%94%81%E5%BF%85%E9%A1%BB%E6%BB%A1%E8%B6%B3%E5%93%AA%204%20%E4%B8%AA%E6%9D%A1%E4%BB%B6%EF%BC%9F.html">68 发生死锁必须满足哪 4 个条件？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/69%20%E5%A6%82%E4%BD%95%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%92%8C%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%9F.html">69 如何用命令行和代码定位死锁？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/70%20%E6%9C%89%E5%93%AA%E4%BA%9B%E8%A7%A3%E5%86%B3%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98%E7%9A%84%E7%AD%96%E7%95%A5%EF%BC%9F.html">70 有哪些解决死锁问题的策略？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/71%20%E8%AE%B2%E4%B8%80%E8%AE%B2%E7%BB%8F%E5%85%B8%E7%9A%84%E5%93%B2%E5%AD%A6%E5%AE%B6%E5%B0%B1%E9%A4%90%E9%97%AE%E9%A2%98.html">71 讲一讲经典的哲学家就餐问题</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/72%20final%20%E7%9A%84%E4%B8%89%E7%A7%8D%E7%94%A8%E6%B3%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">72 final 的三种用法是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/73%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8A%A0%E4%BA%86%20final%20%E5%8D%B4%E4%BE%9D%E7%84%B6%E6%97%A0%E6%B3%95%E6%8B%A5%E6%9C%89%E2%80%9C%E4%B8%8D%E5%8F%98%E6%80%A7%E2%80%9D%EF%BC%9F.html">73 为什么加了 final 却依然无法拥有“不变性”？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/74%20%E4%B8%BA%E4%BB%80%E4%B9%88%20String%20%E8%A2%AB%E8%AE%BE%E8%AE%A1%E4%B8%BA%E6%98%AF%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84%EF%BC%9F.html">74 为什么 String 被设计为是不可变的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/75%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%20AQS%EF%BC%9FAQS%20%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E9%87%8D%E8%A6%81%E6%80%A7%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">75 为什么需要 AQS？AQS 的作用和重要性是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/76%20AQS%20%E7%9A%84%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F.html">76 AQS 的内部原理是什么样的？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/77%20AQS%20%E5%9C%A8%20CountDownLatch%20%E7%AD%89%E7%B1%BB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">77 AQS 在 CountDownLatch 等类中的应用原理是什么？</a></li><li><a href="/courses/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/78%20%E4%B8%80%E4%BB%BD%E7%8B%AC%E5%AE%B6%E7%9A%84%20Java%20%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E5%9B%BE%E8%B0%B1.html">78 一份独家的 Java 并发工具图谱</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%2078%20%E8%AE%B2-%E5%AE%8C/54%20CyclicBarrier%20%E5%92%8C%20CountdownLatch%20%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%82%E5%90%8C%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="54 CyclicBarrier 和 CountdownLatch 有什么异同？" id="title">54 CyclicBarrier 和 CountdownLatch 有什么异同？</h1>
+<div><p>本课时我们主要介绍 CyclicBarrier 和 CountDownLatch 有什么不同。</p>
+<h3 id="cyclicbarrier">CyclicBarrier</h3>
+<h4 id="作用">作用</h4>
+<p>CyclicBarrier 和 CountDownLatch 确实有一定的相似性，它们都能阻塞一个或者一组线程，直到某种预定的条件达到之后，这些之前在等待的线程才会统一出发，继续向下执行。正因为它们有这个相似点，你可能会认为它们的作用是完全一样的，其实并不是。</p>
+<p>CyclicBarrier 可以构造出一个集结点，当某一个线程执行 await() 的时候，它就会到这个集结点开始等待，等待这个栅栏被撤销。直到预定数量的线程都到了这个集结点之后，这个栅栏就会被撤销，之前等待的线程就在此刻统一出发，继续去执行剩下的任务。</p>
+<p>举一个生活中的例子。假设我们班级春游去公园里玩，并且会租借三人自行车，每个人都可以骑，但由于这辆自行车是三人的，所以要凑齐三个人才能骑一辆，而且从公园大门走到自行车驿站需要一段时间。那么我们模拟这个场景，写出如下代码：</p>
+<pre><code>public class CyclicBarrierDemo {
+
+    public static void main(String[] args) {
+
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(3);
+
+        for (int i = 0; i &lt; 6; i++) {
+
+            new Thread(new Task(i + 1, cyclicBarrier)).start();
+
+        }
+
+    }
+
+    static class Task implements Runnable {
+
+        private int id;
+
+        private CyclicBarrier cyclicBarrier;
+
+        public Task(int id, CyclicBarrier cyclicBarrier) {
+
+            this.id = id;
+
+            this.cyclicBarrier = cyclicBarrier;
+
+        }
+
+        @Override
+
+        public void run() {
+
+            System.out.println("同学" + id + "现在从大门出发，前往自行车驿站");
+
+            try {
+
+                Thread.sleep((long) (Math.random() * 10000));
+
+                System.out.println("同学" + id + "到了自行车驿站，开始等待其他人到达");
+
+                cyclicBarrier.await();
+
+                System.out.println("同学" + id + "开始骑车");
+
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+
+            } catch (BrokenBarrierException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
+    }
+
+}
+</code></pre>
+<p>在这段代码中可以看到，首先建了一个参数为 3 的 CyclicBarrier，参数为 3 的意思是需要等待 3 个线程到达这个集结点才统一放行；然后我们又在 for 循环中去开启了 6 个线程，每个线程中执行的 Runnable 对象就在下方的 Task 类中，直接看到它的 run 方法，它首先会打印出”同学某某现在从大门出发，前往自行车驿站”，然后是一个随机时间的睡眠，这就代表着从大门开始步行走到自行车驿站的时间，由于每个同学的步行速度不一样，所以时间用随机值来模拟。</p>
+<p>当同学们都到了驿站之后，比如某一个同学到了驿站，首先会打印出“同学某某到了自行车驿站，开始等待其他人到达”的消息，然后去调用 CyclicBarrier 的 await() 方法。一旦它调用了这个方法，它就会陷入等待，直到三个人凑齐，才会继续往下执行，一旦开始继续往下执行，就意味着 3 个同学开始一起骑车了，所以打印出“某某开始骑车”这个语句。</p>
+<p>接下来我们运行一下这个程序，结果如下所示：</p>
+<pre><code>同学1现在从大门出发，前往自行车驿站
+
+同学3现在从大门出发，前往自行车驿站
+
+同学2现在从大门出发，前往自行车驿站
+
+同学4现在从大门出发，前往自行车驿站
+
+同学5现在从大门出发，前往自行车驿站
+
+同学6现在从大门出发，前往自行车驿站
+
+同学5到了自行车驿站，开始等待其他人到达
+
+同学2到了自行车驿站，开始等待其他人到达
+
+同学3到了自行车驿站，开始等待其他人到达
+
+同学3开始骑车
+
+同学5开始骑车
+
+同学2开始骑车
+
+同学6到了自行车驿站，开始等待其他人到达
+
+同学4到了自行车驿站，开始等待其他人到达
+
+同学1到了自行车驿站，开始等待其他人到达
+
+同学1开始骑车
+
+同学6开始骑车
+
+同学4开始骑车
+</code></pre>
+<p>可以看到 6 个同学纷纷从大门出发走到自行车驿站，因为每个人的速度不一样，所以会有 3 个同学先到自行车驿站，不过在这 3 个先到的同学里面，前面 2 个到的都必须等待第 3 个人到齐之后，才可以开始骑车。后面的同学也一样，由于第一辆车已经被骑走了，第二辆车依然也要等待 3 个人凑齐才能统一发车。</p>
+<p>要想实现这件事情，如果你不利用 CyclicBarrier 去做的话，逻辑可能会非常复杂，因为你也不清楚哪个同学先到、哪个后到。而用了 CyclicBarrier 之后，可以非常简洁优雅的实现这个逻辑，这就是它的一个非常典型的应用场景。</p>
+<h4 id="执行动作-barrieraction">执行动作 barrierAction</h4>
+<p>public CyclicBarrier(int parties, Runnable barrierAction)：当 parties 线程到达集结点时，继续往下执行前，会执行这一次这个动作。</p>
+<p>接下来我们再介绍一下它的一个额外功能，就是执行动作 barrierAction 功能。CyclicBarrier 还有一个构造函数是传入两个参数的，第一个参数依然是 parties，代表需要几个线程到齐；第二个参数是一个 Runnable 对象，它就是我们下面所要介绍的 barrierAction。</p>
+<p>当预设数量的线程到达了集结点之后，在出发的时候，便会执行这里所传入的 Runnable 对象，那么假设我们把刚才那个代码的构造函数改成如下这个样子：</p>
+<pre><code>CyclicBarrier cyclicBarrier = new CyclicBarrier(3, new Runnable() {
+
+    @Override
+
+    public void run() {
+
+        System.out.println("凑齐3人了，出发！");
+
+    }
+
+});
+</code></pre>
+<p>可以看出，我们传入了第二个参数，它是一个 Runnable 对象，在这里传入了这个 Runnable 之后，这个任务就会在到齐的时候去打印”凑齐3人了，出发！”。上面的代码如果改成这个样子，则执行结果如下所示：</p>
+<pre><code>同学1现在从大门出发，前往自行车驿站
+
+同学3现在从大门出发，前往自行车驿站
+
+同学2现在从大门出发，前往自行车驿站
+
+同学4现在从大门出发，前往自行车驿站
+
+同学5现在从大门出发，前往自行车驿站
+
+同学6现在从大门出发，前往自行车驿站
+
+同学2到了自行车驿站，开始等待其他人到达
+
+同学4到了自行车驿站，开始等待其他人到达
+
+同学6到了自行车驿站，开始等待其他人到达
+
+凑齐3人了，出发！
+
+同学6开始骑车
+
+同学2开始骑车
+
+同学4开始骑车
+
+同学1到了自行车驿站，开始等待其他人到达
+
+同学3到了自行车驿站，开始等待其他人到达
+
+同学5到了自行车驿站，开始等待其他人到达
+
+凑齐3人了，出发！
+
+同学5开始骑车
+
+同学1开始骑车
+
+同学3开始骑车
+</code></pre>
+<p>可以看出，三个人凑齐了一组之后，就会打印出“凑齐 3 人了，出发！”这样的语句，该语句恰恰是我们在这边传入 Runnable 所执行的结果。</p>
+<p>值得注意的是，这个语句每个周期只打印一次，不是说你有几个线程在等待就打印几次，而是说这个任务只在“开闸”的时候执行一次。</p>
+<h3 id="cyclicbarrier-和-countdownlatch-的异同">CyclicBarrier 和 CountDownLatch 的异同</h3>
+<p>下面我们来总结一下 CyclicBarrier 和 CountDownLatch 有什么异同。</p>
+<p>相同点：都能阻塞一个或一组线程，直到某个预设的条件达成发生，再统一出发。</p>
+<p>但是它们也有很多不同点，具体如下。</p>
+<ul>
+<li><strong>作用对象不同</strong>：CyclicBarrier 要等固定数量的线程都到达了栅栏位置才能继续执行，而 CountDownLatch 只需等待数字倒数到 0，也就是说 CountDownLatch 作用于事件，但 CyclicBarrier 作用于线程；CountDownLatch 是在调用了 countDown 方法之后把数字倒数减 1，而 CyclicBarrier 是在某线程开始等待后把计数减 1。</li>
+<li><strong>可重用性不同</strong>：CountDownLatch 在倒数到 0  并且触发门闩打开后，就不能再次使用了，除非新建一个新的实例；而 CyclicBarrier 可以重复使用，在刚才的代码中也可以看出，每 3 个同学到了之后都能出发，并不需要重新新建实例。CyclicBarrier 还可以随时调用 reset 方法进行重置，如果重置时有线程已经调用了 await 方法并开始等待，那么这些线程则会抛出 BrokenBarrierException 异常。</li>
+<li><strong>执行动作不同</strong>：CyclicBarrier 有执行动作 barrierAction，而 CountDownLatch 没这个功能。</li>
+</ul>
+<h3 id="总结">总结</h3>
+<p>以上就是本课时的内容，在本课时中，首先介绍了 CyclicBarrier 的作用、代码示例和执行动作，然后对 CyclicBarrier 和 CountDownLatch 的异同进行了总结。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>11  编译提效：如何为 Webpack 编译阶段提速？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/index.html">前端工程化精讲-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>前端工程化精讲-完</strong><ul><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E5%BB%BA%E7%AB%8B%E4%B8%8A%E5%B8%9D%E8%A7%86%E8%A7%92%EF%BC%8C%E5%85%A8%E9%9D%A2%E7%B3%BB%E7%BB%9F%E6%8E%8C%E6%8F%A1%E5%89%8D%E7%AB%AF%E6%95%88%E7%8E%87%E5%B7%A5%E7%A8%8B%E5%8C%96.html">00 开篇词  建立上帝视角，全面系统掌握前端效率工程化</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/01%20%20%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%9F%B3%EF%BC%9A%E5%89%8D%E7%AB%AF%E8%84%9A%E6%89%8B%E6%9E%B6%E5%B7%A5%E5%85%B7%E6%8E%A2%E7%A7%98.html">01  项目基石：前端脚手架工具探秘</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/02%20%20%E7%95%8C%E9%9D%A2%E8%B0%83%E8%AF%95%EF%BC%9A%E7%83%AD%E6%9B%B4%E6%96%B0%E6%8A%80%E6%9C%AF%E5%A6%82%E4%BD%95%E5%BC%80%E7%9D%80%E9%A3%9E%E6%9C%BA%E4%BF%AE%E5%BC%95%E6%93%8E%EF%BC%9F.html">02  界面调试：热更新技术如何开着飞机修引擎？</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/03%20%20%E6%9E%84%E5%BB%BA%E6%8F%90%E9%80%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%20SourceMap%EF%BC%9F.html">03  构建提速：如何正确使用 SourceMap？</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/04%20%20%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95%EF%BC%9AMock%20%E5%B7%A5%E5%85%B7%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E8%B0%83%E8%AF%95%EF%BC%9F.html">04  接口调试：Mock 工具如何快速进行接口调试？</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/05%20%20%E7%BC%96%E7%A0%81%E6%95%88%E7%8E%87%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E6%95%88%E7%8E%87%EF%BC%9F.html">05  编码效率：如何提高编写代码的效率？</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/06%20%20%E5%9B%A2%E9%98%9F%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E4%BA%91%E5%BC%80%E5%8F%91%E6%8F%90%E5%8D%87%E5%9B%A2%E9%98%9F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87%EF%BC%9F.html">06  团队工具：如何利用云开发提升团队开发效率？</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/07%20%20%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E6%9B%B4%E5%B0%91%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E6%9B%B4%E7%81%B5%E6%B4%BB%E7%9A%84%E9%9C%80%E6%B1%82.html">07  低代码工具：如何用更少的代码实现更灵活的需求</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/08%20%20%E6%97%A0%E4%BB%A3%E7%A0%81%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E4%B8%8D%E5%86%99%E4%BB%A3%E7%A0%81%E5%B0%B1%E8%83%BD%E9%AB%98%E6%95%88%E4%BA%A4%E4%BB%98%EF%BC%9F.html">08  无代码工具：如何做到不写代码就能高效交付？</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/09%20%20%E6%9E%84%E5%BB%BA%E6%80%BB%E8%A7%88%EF%BC%9A%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%E7%9A%84%E6%BC%94%E8%BF%9B.html">09  构建总览：前端构建工具的演进</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/10%20%20%E6%B5%81%E7%A8%8B%E5%88%86%E8%A7%A3%EF%BC%9AWebpack%20%E7%9A%84%E5%AE%8C%E6%95%B4%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B.html">10  流程分解：Webpack 的完整构建流程</a></li><li><a class="active" aria-current="page" href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/11%20%20%E7%BC%96%E8%AF%91%E6%8F%90%E6%95%88%EF%BC%9A%E5%A6%82%E4%BD%95%E4%B8%BA%20Webpack%20%E7%BC%96%E8%AF%91%E9%98%B6%E6%AE%B5%E6%8F%90%E9%80%9F%EF%BC%9F.html">11  编译提效：如何为 Webpack 编译阶段提速？</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/12%20%20%E6%89%93%E5%8C%85%E6%8F%90%E6%95%88%EF%BC%9A%E5%A6%82%E4%BD%95%E4%B8%BA%20Webpack%20%E6%89%93%E5%8C%85%E9%98%B6%E6%AE%B5%E6%8F%90%E9%80%9F%EF%BC%9F.html">12  打包提效：如何为 Webpack 打包阶段提速？</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/13%20%20%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%9A%E9%82%A3%E4%BA%9B%E5%9F%BA%E4%BA%8E%E7%BC%93%E5%AD%98%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.html">13  缓存优化：那些基于缓存的优化方案</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/14%20%20%E5%A2%9E%E9%87%8F%E6%9E%84%E5%BB%BA%EF%BC%9AWebpack%20%E4%B8%AD%E7%9A%84%E5%A2%9E%E9%87%8F%E6%9E%84%E5%BB%BA.html">14  增量构建：Webpack 中的增量构建</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/15%20%20%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7%EF%BC%9AWebpack%205%20%E4%B8%AD%E7%9A%84%E4%BC%98%E5%8C%96%E7%BB%86%E8%8A%82.html">15  版本特性：Webpack 5 中的优化细节</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/16%20%20%E6%97%A0%E5%8C%85%E6%9E%84%E5%BB%BA%EF%BC%9A%E7%9B%98%E7%82%B9%E9%82%A3%E4%BA%9B%20No-bundle%20%E7%9A%84%E6%9E%84%E5%BB%BA%E6%96%B9%E6%A1%88.html">16  无包构建：盘点那些 No-bundle 的构建方案</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/17%20%20%E9%83%A8%E7%BD%B2%E5%88%9D%E6%8E%A2%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E8%88%AC%E4%B8%8D%E5%9C%A8%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%B8%8B%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%EF%BC%9F.html">17  部署初探：为什么一般不在开发环境下部署代码？</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/18%20%20%E5%B7%A5%E5%85%B7%E7%9B%98%E7%82%B9%EF%BC%9A%E6%8E%8C%E6%8F%A1%E9%82%A3%E4%BA%9B%E6%B5%81%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%85%B7.html">18  工具盘点：掌握那些流行的代码部署工具</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/19%20%20%E5%AE%89%E8%A3%85%E6%8F%90%E6%95%88%EF%BC%9A%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85%E6%95%88%E7%8E%87%E4%BC%98%E5%8C%96.html">19  安装提效：部署流程中的依赖安装效率优化</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/20%20%20%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96%EF%BC%9A%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B%E4%B8%AD%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96.html">20  流程优化：部署流程中的构建流程策略优化</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/21%20%20%E5%AE%B9%E5%99%A8%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BB%8E%E6%9E%84%E5%BB%BA%E5%88%B0%E9%83%A8%E7%BD%B2%EF%BC%8C%E5%AE%B9%E5%99%A8%E5%8C%96%E6%96%B9%E6%A1%88%E7%9A%84%E4%BC%98%E5%8A%BF%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">21  容器方案：从构建到部署，容器化方案的优势有哪些？</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/22%20%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%9A%E6%90%AD%E5%BB%BA%E5%9F%BA%E6%9C%AC%E7%9A%84%E5%89%8D%E7%AB%AF%E9%AB%98%E6%95%88%E9%83%A8%E7%BD%B2%E7%B3%BB%E7%BB%9F.html">22  案例分析：搭建基本的前端高效部署系统</a></li><li><a href="/courses/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/23%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E5%89%8D%E7%AB%AF%E6%95%88%E7%8E%87%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9A%84%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B.html">23 结束语  前端效率工程化的未来展望</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%B2%BE%E8%AE%B2-%E5%AE%8C/11%20%20%E7%BC%96%E8%AF%91%E6%8F%90%E6%95%88%EF%BC%9A%E5%A6%82%E4%BD%95%E4%B8%BA%20Webpack%20%E7%BC%96%E8%AF%91%E9%98%B6%E6%AE%B5%E6%8F%90%E9%80%9F%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="11  编译提效：如何为 Webpack 编译阶段提速？" id="title">11  编译提效：如何为 Webpack 编译阶段提速？</h1>
+<div><p>上一课我们聊了 Webpack 的基本工作流程，分析了其中几个主要源码文件的执行过程，并介绍了 Compiler 和 Compilation 两个核心模块中的生命周期 Hooks。</p>
+<p>上节课后的思考题是，在 Compiler 和 Compilation 的工作流程里，最耗时的阶段分别是哪个。对于 Compiler 实例而言，耗时最长的显然是生成编译过程实例后的 make 阶段，在这个阶段里，会执行模块编译到优化的完整过程。而对于 Compilation 实例的工作流程来说，不同的项目和配置各有不同，但总体而言，编译模块和后续优化阶段的生成产物并压缩代码的过程都是比较耗时的。</p>
+<p>从这个思考题的答案中你也可以发现，不同项目的构建，在整个流程的前期初始化阶段与最后的产物生成阶段的构建时间区别不大。真正影响整个构建效率的还是 Compilation 实例的处理过程，这一过程又可分为两个阶段：编译模块和优化处理。今天我们主要讨论第一个阶段：编译模块阶段的效率提升。</p>
+<h3 id="优化前的准备工作">优化前的准备工作</h3>
+<p>在进入实际优化分析之前，首先需要进行两项准备工作：</p>
+<ol>
+<li><strong>准备基于时间的分析工具</strong>：我们需要一类插件，来帮助我们统计项目构建过程中在编译阶段的耗时情况，这类工具可以是上一课中我们尝试手写的，也可以是使用第三方的工具。例如 <a href="https://github.com/stephencookdev/speed-measure-webpack-plugin" target="_blank">speed-measure-webpack-plugin</a>。</li>
+<li><strong>准备基于产物内容的分析工具</strong>：从产物内容着手分析是另一个可行的方式，因为从中我们可以找到对产物包体积影响最大的包的构成，从而找到那些冗余的、可以被优化的依赖项。通常，减少这些冗余的依赖包模块，不仅能减小最后的包体积大小，也能提升构建模块时的效率。通常可以使用 <a href="https://www.npmjs.com/package/webpack-bundle-analyzer" target="_blank">webpack-bundle-analyzer</a> 分析产物内容。</li>
+</ol>
+<p>在准备好相应的分析工具后，接下来，就开始分析编译阶段的具体提效方向。编译模块阶段所耗的时间是从单个入口点开始，编译每个模块的时间的总和。要提升这一阶段的构建效率，大致可以分为三个方向（这一节课的代码示例参见 <a href="https://github.com/fe-efficiency/lessons_fe_efficiency/tree/master/11_build_efficiency" target="_blank">11_build_efficiency</a>）：</p>
+<ol>
+<li>减少执行编译的模块。</li>
+<li>提升单个模块构建的速度。</li>
+<li>并行构建以提升总体效率。</li>
+</ol>
+<h3 id="减少执行构建的模块">减少执行构建的模块</h3>
+<p>提升编译模块阶段效率的第一个方向就是减少执行编译的模块。显而易见，如果一个项目每次构建都需要编译 1000 个模块，但是通过分析后发现其中有 500 个不需要编译，显而易见，经过优化后，构建效率可以大幅提升。当然，前提是找到原本不需要进行构建的模块，下面我们就来逐一分析。</p>
+<h4 id="ignoreplugin">IgnorePlugin</h4>
+<p>有的依赖包，除了项目所需的模块内容外，还会附带一些多余的模块。典型的例子是 <a href="https://www.npmjs.com/package/moment" target="_blank">moment</a> 这个包，一般情况下在构建时会自动引入其 locale 目录下的多国语言包，如下面的图片所示：</p>
+<p><img alt="Drawing 0.png" src="/assets/6684a385dcd04fae9290a024.png"/></p>
+<p>但对于大多数情况而言，项目中只需要引入本国语言包即可。而 Webpack 提供的 IgnorePlugin 即可在构建模块时直接剔除那些需要被排除的模块，从而提升构建模块的速度，并减少产物体积，如下面的图片所示。</p>
+<p><img alt="Drawing 1.png" src="/assets/e836cf7c987395b1fd0bdf41.png"/>
+<img alt="Drawing 2.png" src="/assets/88602e1412e3c7cd9d43cdc3.png"/></p>
+<p>除了 moment 包以外，其他一些带有国际化模块的依赖包，例如之前介绍 Mock 工具中提到的 Faker.js 等都可以应用这一优化方式。</p>
+<h4 id="按需引入类库模块">按需引入类库模块</h4>
+<p>第二种典型的减少执行模块的方式是按需引入。这种方式一般适用于工具类库性质的依赖包的优化，典型例子是<a href="https://www.npmjs.com/package/lodash" target="_blank"> lodash </a>依赖包。通常在项目里我们只用到了少数几个 lodash 的方法，但是构建时却发现构建时引入了整个依赖包，如下图所示：</p>
+<p><img alt="Drawing 3.png" src="/assets/5fecbf0ebe7019bfd0762f48.png"/></p>
+<p>要解决这个问题，效果最佳的方式是在导入声明时只导入依赖包内的特定模块，这样就可以大大减少构建时间，以及产物的体积，如下图所示。</p>
+<p><img alt="Drawing 4.png" src="/assets/a543822aea6c2e2d752e5b00.png"/></p>
+<p>除了在导入时声明特定模块之外，还可以使用 babel-plugin-lodash 或 babel-plugin-import 等插件达到同样的效果。</p>
+<p>另外，有同学也许会想到 <a href="https://webpack.js.org/guides/tree-shaking/" target="_blank">Tree Shaking</a>，这一特性也能减少产物包的体积，但是这里有两点需要注意：</p>
+<ol>
+<li>Tree Shaking 需要相应导入的依赖包使用 ES6 模块化，而 lodash 还是基于 CommonJS ，需要替换为 lodash-es 才能生效。</li>
+<li>相应的操作是在优化阶段进行的，换句话说，Tree Shaking 并不能减少模块编译阶段的构建时间。</li>
+</ol>
+<h4 id="dllplugin">DllPlugin</h4>
+<p>DllPlugin 是另一类减少构建模块的方式，它的核心思想是将项目依赖的框架等模块单独构建打包，与普通构建流程区分开。例如，原先一个依赖 React 与 react-dom 的文件，在构建时，会如下图般处理：</p>
+<p><img alt="Drawing 5.png" src="/assets/a8c6eff60f9a6ffe7ff7d499.png"/>
+而在通过 DllPlugin 和 DllReferencePlugin 分别配置后的构建时间就变成如下图所示，由于构建时减少了最耗时的模块，构建效率瞬间提升十倍。</p>
+<p><img alt="Drawing 6.png" src="/assets/59b29efab9d0e8a8dcb84046.png"/></p>
+<h4 id="externals">Externals</h4>
+<p>Webpack 配置中的 externals 和 DllPlugin 解决的是同一类问题：将依赖的框架等模块从构建过程中移除。它们的区别在于：</p>
+<ol>
+<li>在 Webpack 的配置方面，externals 更简单，而 DllPlugin 需要独立的配置文件。</li>
+<li>DllPlugin 包含了依赖包的独立构建流程，而 externals 配置中不包含依赖框架的生成方式，通常使用已传入 CDN 的依赖包。</li>
+<li>externals 配置的依赖包需要单独指定依赖模块的加载方式：全局对象、CommonJS、AMD 等。</li>
+<li>在引用依赖包的子模块时，DllPlugin 无须更改，而 externals 则会将子模块打入项目包中。</li>
+</ol>
+<p>externals 的示例如下面两张图，可以看到经过 externals 配置后，构建速度有了很大提升。</p>
+<p><img alt="Drawing 7.png" src="/assets/d6dff3acf8ad19a2aacdb385.png"/>
+<img alt="Drawing 8.png" src="/assets/d494bdbff16672ddb183cf79.png"/></p>
+<h3 id="提升单个模块构建的速度">提升单个模块构建的速度</h3>
+<p>提升编译阶段效率的第二个方向，是在保持构建模块数量不变的情况下，提升单个模块构建的速度。具体来说，是通过减少构建单个模块时的一些处理逻辑来提升速度。这个方向的优化主要有以下几种：</p>
+<h4 id="include-exclude">include/exclude</h4>
+<p>Webpack 加载器配置中的 include/exclude，是常用的优化特定模块构建速度的方式之一。</p>
+<p>include 的用途是只对符合条件的模块使用指定 Loader 进行转换处理。而 exclude 则相反，不对特定条件的模块使用该 Loader（例如不使用 babel-loader 处理 node_modules 中的模块）。如下面两张图片所示。</p>
+<p><img alt="Drawing 9.png" src="/assets/eeff39326c0f1fafc25bf180.png"/>
+<img alt="Drawing 10.png" src="/assets/92164558fe7d19bc51a75f0e.png"/>
+这里有两点需要注意：</p>
+<ol>
+<li>从上面的第二张图中可以看到，jquery 和 lodash 的编译过程仍然花费了数百毫秒，说明通过 include/exclude 排除的模块，并非不进行编译，而是使用 Webpack 默认的 js 模块编译器进行编译（例如推断依赖包的模块类型，加上装饰代码等）。</li>
+<li>在一个 loader 中的 include 与 exclude 配置存在冲突的情况下，优先使用 exclude 的配置，而忽略冲突的 include 部分的配置，具体可以参照示例代码中的 webpack.inexclude.config.js。</li>
+</ol>
+<h4 id="noparse">noParse</h4>
+<p>Webpack 配置中的 module.noParse 则是在上述 include/exclude 的基础上，进一步省略了使用默认 js 模块编译器进行编译的时间，如下面两张图片所示。</p>
+<p><img alt="Drawing 11.png" src="/assets/f0ab790b06a76f41b78d7f16.png"/>
+<img alt="Drawing 12.png" src="/assets/4d18d7df41f0d3025e4926d2.png"/></p>
+<h4 id="source-map">Source Map</h4>
+<p>Source Map 对于构建时间的影响在第三课中已经展开讨论过，这里再稍做总结：对于生产环境的代码构建而言，会根据项目实际情况判断是否开启 Source Map。在开启 Source Map 的情况下，优先选择与源文件分离的类型，例如 “source-map”。有条件也可以配合错误监控系统，将 Source Map 的构建和使用在线下监控后台中进行，以提升普通构建部署流程的速度。</p>
+<h4 id="typescript-编译优化">TypeScript 编译优化</h4>
+<p>Webpack 中编译 TS 有两种方式：使用 ts-loader 或使用 babel-loader。其中，在使用 ts-loader 时，由于 ts-loader 默认在编译前进行类型检查，因此编译时间往往比较慢，如下面的图片所示。</p>
+<p><img alt="Drawing 13.png" src="/assets/205c974ca8dbfc821fb04d1c.png"/>
+通过加上配置项 transpileOnly: true，可以在编译时忽略类型检查，从而大大提升 TS 模块的编译速度，如下面的图片所示。</p>
+<p><img alt="Drawing 14.png" src="/assets/43607d82eaceb611fbeb4249.png"/>
+而 babel-loader 则需要单独安装 @babel/preset-typescript 来支持编译 TS（Babel 7 之前的版本则还是需要使用 ts-loader）。babel-loader 的编译效率与上述 ts-loader 优化后的效率相当，如下面的图片所示。</p>
+<p><img alt="Drawing 15.png" src="/assets/582b968a20aecee823c10c36.png"/>
+不过单独使用这一功能就丧失了 TS 中重要的类型检查功能，因此在许多脚手架中往往配合 ForkTsCheckerWebpackPlugin 一同使用。</p>
+<h4 id="resolve">Resolve</h4>
+<p>Webpack 中的 resolve 配置制定的是在构建时指定查找模块文件的规则，例如：</p>
+<ul>
+<li><strong>resolve.modules</strong>：指定查找模块的目录范围。</li>
+<li><strong>resolve.extensions</strong>：指定查找模块的文件类型范围。</li>
+<li><strong>resolve.mainFields</strong>：指定查找模块的 package.json 中主文件的属性名。</li>
+<li><strong>resolve.symlinks</strong>：指定在查找模块时是否处理软连接。</li>
+</ul>
+<p>这些规则在处理每个模块时都会有所应用，因此尽管对小型项目的构建速度来说影响不大，但对于大型的模块众多的项目而言，这些配置的变化就可能产生客观的构建时长区别。例如下面的示例就展示了使用默认配置和增加了大量无效范围后，构建时长的变化情况：</p>
+<p><img alt="Drawing 16.png" src="/assets/84e3ac241f69dfc37835db92.png"/>
+<img alt="Drawing 17.png" src="/assets/68de9ffe865fc710ae9445e6.png"/></p>
+<h3 id="并行构建以提升总体效率">并行构建以提升总体效率</h3>
+<p>第三个编译阶段提效的方向是使用并行的方式来提升构建的效率。并行构建的方案早在 Webpack 2 时代已经出现，随着目前最新稳定版本 Webpack 4 的发布，人们发现在一般项目的开发阶段和小型项目的各构建流程中<a href="https://blog.johnnyreilly.com/2018/12/you-might-not-need-thread-loader.html" target="_blank">已经用不到这种并发的思路</a>了，因为在这些情况下，并发所需要的多进程管理与通信所带来的额外时间成本可能会超过使用工具带来的收益。但是在大中型项目的生产环境构建时，这类工具仍有发挥作用的空间。这里我们介绍两类并行构建的工具： HappyPack 与 thread-loader，以及 parallel-webpack。</p>
+<h4 id="happypack-与-thread-loader">HappyPack 与 thread-loader</h4>
+<p>这两种工具的本质作用相同，都作用于模块编译的 Loader 上，用于在特定 Loader 的编译过程中，以开启多进程的方式加速编译。HappyPack 诞生较早，而 thread-loader 参照它的效果实现了更符合 Webpack 中 Loader 的编写方式。下面就以 thread-loader 为例，来看下应用前后的构建时长对比，如下面的两张图所示。</p>
+<p><img alt="Drawing 18.png" src="/assets/c24be977dfbc1084b5025689.png"/>
+<img alt="Drawing 19.png" src="/assets/85a08610f8298e9c90c33d35.png"/></p>
+<h4 id="parallel-webpack">parallel-webpack</h4>
+<p>并发构建的第二种场景是针对与多配置构建。Webpack 的配置文件可以是一个包含多个子配置对象的数组，在执行这类多配置构建时，默认串行执行，而通过 parallel-webpack，就能实现相关配置的并行处理。从下图的示例中可以看到，通过不同配置的并行构建，构建时长缩短了 30%：</p>
+<p><img alt="Drawing 20.png" src="/assets/e5c440141f3d23b7e27139e3.png"/>
+<img alt="Drawing 21.png" src="/assets/6308d4bb4f0b063b65611fb8.png"/></p>
+<h3 id="总结">总结</h3>
+<p>这节课我们整理了 Webpack 构建中编译模块阶段的构建效率优化方案。对于这一阶段的构建效率优化可以分为三个方向：以减少执行构建的模块数量为目的的方向、以提升单个模块构建速度为目的的方向，以及通过并行构建以提升整体构建效率的方向。每个方向都包含了若干解决工具和配置。</p>
+<p>今天课后的<strong>思考题是</strong>：你的项目中是否都用到了这些解决方案呢？希望你结合课程的内容，和所开发的项目中用到的优化方案进行对比，查漏补缺。如果有这个主题方面其他新的解决方案，也欢迎在留言区讨论分享。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12 进程内协同：同步、互斥与通讯 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/index.html">许式伟的架构课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">87 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>许式伟的架构课</strong><ul><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E6%80%8E%E6%A0%B7%E6%88%90%E9%95%BF%E4%B8%BA%E4%BC%98%E7%A7%80%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E5%B8%88%EF%BC%9F.html">00 开篇词 怎样成长为优秀的软件架构师？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/01%20%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%AE%8F%E8%A7%82%E8%A7%86%E8%A7%92.html">01 架构设计的宏观视角</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/02%20%E5%A4%A7%E5%8E%A6%E5%9F%BA%E7%9F%B3%EF%BC%9A%E6%97%A0%E7%94%9F%E6%9C%89%EF%BC%8C%E6%9C%89%E7%94%9F%E4%B8%87%E7%89%A9.html">02 大厦基石：无生有，有生万物</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/03%20%E6%B1%87%E7%BC%96%EF%BC%9A%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E8%AF%9E%E7%94%9F.html">03 汇编：编程语言的诞生</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/04%20%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%9B%E5%8C%96.html">04 编程语言的进化</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/05%20%E6%80%9D%E8%80%83%E9%A2%98%E8%A7%A3%E8%AF%BB%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E8%87%AA%E6%88%91%E8%BF%AD%E4%BB%A3%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%EF%BC%9F.html">05 思考题解读：如何实现可自我迭代的计算机？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/06%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E5%9C%BA.html">06 操作系统进场</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/07%20%E8%BD%AF%E4%BB%B6%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E5%8F%8A%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.html">07 软件运行机制及内存管理</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/08%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3.html">08 操作系统内核与编程接口</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/09%20%E5%A4%96%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html">09 外存管理与文件系统</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/10%20%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E8%AE%BE%E5%A4%87%EF%BC%9A%E4%BA%A4%E4%BA%92%E7%9A%84%E6%BC%94%E8%BF%9B.html">10 输入和输出设备：交互的演进</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/11%20%E5%A4%9A%E4%BB%BB%E5%8A%A1%EF%BC%9A%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%8D%8F%E7%A8%8B.html">11 多任务：进程、线程与协程</a></li><li><a class="active" aria-current="page" href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/12%20%E8%BF%9B%E7%A8%8B%E5%86%85%E5%8D%8F%E5%90%8C%EF%BC%9A%E5%90%8C%E6%AD%A5%E3%80%81%E4%BA%92%E6%96%A5%E4%B8%8E%E9%80%9A%E8%AE%AF.html">12 进程内协同：同步、互斥与通讯</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/13%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E7%9A%84%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5%E3%80%81%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%E4%B8%8E%E9%80%9A%E8%AE%AF.html">13 进程间的同步互斥、资源共享与通讯</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/14%20IP%20%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%BF%9E%E6%8E%A5%E4%B8%96%E7%95%8C%E7%9A%84%E6%A1%A5%E6%A2%81.html">14 IP 网络：连接世界的桥梁</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/15%20%E5%8F%AF%E7%BC%96%E7%A8%8B%E7%9A%84%E4%BA%92%E8%81%94%E7%BD%91%E4%B8%96%E7%95%8C.html">15 可编程的互联网世界</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/16%20%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%EF%BC%9A%E6%95%B0%E5%AD%97%E4%B8%96%E7%95%8C%E7%9A%84%E5%AE%88%E6%8A%A4.html">16 安全管理：数字世界的守护</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/17%20%E6%9E%B6%E6%9E%84%EF%BC%9A%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%20%28%E4%B8%8A%29.html">17 架构：需求分析 (上)</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/18%20%E6%9E%B6%E6%9E%84%EF%BC%9A%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%20%28%E4%B8%8B%29%20%C2%B7%20%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B.html">18 架构：需求分析 (下) · 实战案例</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/19%20%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B0%E7%AF%87%EF%BC%9A%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%80%BB%E7%BB%93.html">19 基础平台篇：回顾与总结</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/20%20%E6%A1%8C%E9%9D%A2%E5%BC%80%E5%8F%91%E7%9A%84%E5%AE%8F%E8%A7%82%E8%A7%86%E8%A7%92.html">20 桌面开发的宏观视角</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/21%20%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%A1%86%E6%9E%B6.html">21 图形界面程序的框架</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/22%20%E6%A1%8C%E9%9D%A2%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%BB%BA%E8%AE%AE.html">22 桌面程序的架构建议</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/23%20Web%E5%BC%80%E5%8F%91%EF%BC%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E3%80%81%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%8EPWA.html">23 Web开发：浏览器、小程序与PWA</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/24%20%E8%B7%A8%E5%B9%B3%E5%8F%B0%E4%B8%8E%20Web%20%E5%BC%80%E5%8F%91%E7%9A%84%E5%BB%BA%E8%AE%AE.html">24 跨平台与 Web 开发的建议</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/25%20%E6%A1%8C%E9%9D%A2%E5%BC%80%E5%8F%91%E7%9A%84%E6%9C%AA%E6%9D%A5.html">25 桌面开发的未来</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/26%20%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E2%80%9C%E7%94%BB%E5%9B%BE%E2%80%9D%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">26 实战（一）：怎么设计一个“画图”程序？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/27%20%E5%AE%9E%E6%88%98%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E2%80%9C%E7%94%BB%E5%9B%BE%E2%80%9D%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">27 实战（二）：怎么设计一个“画图”程序？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/28%20%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E2%80%9C%E7%94%BB%E5%9B%BE%E2%80%9D%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">28 实战（三）：怎么设计一个“画图”程序？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/29%20%E5%AE%9E%E6%88%98%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E2%80%9C%E7%94%BB%E5%9B%BE%E2%80%9D%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">29 实战（四）：怎么设计一个“画图”程序？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/30%20%20%E5%AE%9E%E6%88%98%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E2%80%9C%E7%94%BB%E5%9B%BE%E2%80%9D%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">30  实战（五）：怎么设计一个“画图”程序？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/31%20%E8%BE%85%E5%8A%A9%E7%95%8C%E9%9D%A2%E5%85%83%E7%B4%A0%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">31 辅助界面元素的架构设计</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/32%20%E6%9E%B6%E6%9E%84%EF%BC%9A%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1.html">32 架构：系统的概要设计</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/33%20%E6%A1%8C%E9%9D%A2%E5%BC%80%E5%8F%91%E7%AF%87%EF%BC%9A%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%80%BB%E7%BB%93.html">33 桌面开发篇：回顾与总结</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/34%20%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E5%AE%8F%E8%A7%82%E8%A7%86%E8%A7%92.html">34 服务端开发的宏观视角</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/35%20%E6%B5%81%E9%87%8F%E8%B0%83%E5%BA%A6%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1.html">35 流量调度与负载均衡</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/36%20%E4%B8%9A%E5%8A%A1%E7%8A%B6%E6%80%81%E4%B8%8E%E5%AD%98%E5%82%A8%E4%B8%AD%E9%97%B4%E4%BB%B6.html">36 业务状态与存储中间件</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/37%20%E9%94%AE%E5%80%BC%E5%AD%98%E5%82%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93.html">37 键值存储与数据库</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/38%20%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8.html">38  文件系统与对象存储</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/39%20%20%E5%AD%98%E5%82%A8%E4%B8%8E%E7%BC%93%E5%AD%98.html">39  存储与缓存</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/40%20%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84%E5%BB%BA%E8%AE%AE.html">40 服务端的业务架构建议</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/41%20%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E2%80%9C%E7%94%BB%E5%9B%BE%E2%80%9D%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF%E5%AE%9E%E6%88%98.html">41 实战（一）：“画图”程序后端实战</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/42%20%E5%AE%9E%E6%88%98%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E2%80%9C%E7%94%BB%E5%9B%BE%E2%80%9D%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF%E5%AE%9E%E6%88%98.html">42 实战（二）：“画图”程序后端实战</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/43%20%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E2%80%9C%E7%94%BB%E5%9B%BE%E2%80%9D%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF%E5%AE%9E%E6%88%98.html">43 实战（三）：“画图”程序后端实战</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/44%20%E5%AE%9E%E6%88%98%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E2%80%9C%E7%94%BB%E5%9B%BE%E2%80%9D%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF%E5%AE%9E%E6%88%98.html">44 实战（四）：“画图”程序后端实战</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/45%20%E6%9E%B6%E6%9E%84%EF%BC%9A%E6%80%8E%E4%B9%88%E5%81%9A%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">45 架构：怎么做详细设计？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/46%20%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%BC%80%E5%8F%91%E7%AF%87%EF%BC%9A%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%80%BB%E7%BB%93.html">46 服务端开发篇：回顾与总结</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/47%20%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%E7%9A%84%E5%AE%8F%E8%A7%82%E8%A7%86%E8%A7%92.html">47 服务治理的宏观视角</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/48%20%E4%BA%8B%E5%8A%A1%E4%B8%8E%E5%B7%A5%E7%A8%8B%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%80%9D%E7%BB%B4%EF%BC%9F.html">48 事务与工程：什么是工程师思维？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/49%C2%A0%E5%8F%91%E5%B8%83%E3%80%81%E5%8D%87%E7%BA%A7%E4%B8%8E%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86.html">49 发布、升级与版本管理</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/50%C2%A0%E6%97%A5%E5%BF%97%E3%80%81%E7%9B%91%E6%8E%A7%E4%B8%8E%E6%8A%A5%E8%AD%A6.html">50 日志、监控与报警</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/51%C2%A0%E6%95%85%E9%9A%9C%E5%9F%9F%E4%B8%8E%E6%95%85%E9%9A%9C%E9%A2%84%E6%A1%88.html">51 故障域与故障预案</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/52%C2%A0%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E4%B8%8E%E6%A0%B9%E5%9B%A0%E5%88%86%E6%9E%90.html">52 故障排查与根因分析</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/53%C2%A0%E8%BF%87%E8%BD%BD%E4%BF%9D%E6%8A%A4%E4%B8%8E%E5%AE%B9%E9%87%8F%E8%A7%84%E5%88%92.html">53 过载保护与容量规划</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/54%20%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%8F%AF%E6%94%AF%E6%8C%81%E6%80%A7%E4%B8%8E%E6%8C%81%E7%BB%AD%E8%BF%90%E8%90%A5.html">54 业务的可支持性与持续运营</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/55%20%E4%BA%91%E8%AE%A1%E7%AE%97%E3%80%81%E5%AE%B9%E5%99%A8%E9%9D%A9%E5%91%BD%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E6%9C%AA%E6%9D%A5.html">55 云计算、容器革命与服务端的未来</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/56%20%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%E7%AF%87%EF%BC%9A%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%80%BB%E7%BB%93.html">56 服务治理篇：回顾与总结</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/57%C2%A0%E5%BF%83%E6%80%A7%EF%BC%9A%E6%9E%B6%E6%9E%84%E5%B8%88%E7%9A%84%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93.html">57 心性：架构师的修炼之道</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/58%C2%A0%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%BC%98%E5%8A%A3%EF%BC%9F.html">58 如何判断架构设计的优劣？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/59%C2%A0%E5%B0%91%E8%B0%88%E7%82%B9%E6%A1%86%E6%9E%B6%EF%BC%8C%E5%A4%9A%E8%B0%88%E7%82%B9%E4%B8%9A%E5%8A%A1.html">59 少谈点框架，多谈点业务</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/60%C2%A0%E6%9E%B6%E6%9E%84%E5%88%86%E8%A7%A3%EF%BC%9A%E8%BE%B9%E7%95%8C%EF%BC%8C%E4%B8%8D%E6%96%AD%E9%87%8D%E6%96%B0%E5%AE%A1%E8%A7%86%E8%BE%B9%E7%95%8C.html">60 架构分解：边界，不断重新审视边界</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/61%C2%A0%E5%85%A8%E5%B1%80%E6%80%A7%E5%8A%9F%E8%83%BD%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">61 全局性功能的架构设计</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/62%C2%A0%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99%20%28OCP%29.html">62 重新认识开闭原则 (OCP)</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/63%C2%A0%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%87%86%E5%88%99.html">63 接口设计的准则</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/64%C2%A0%E4%B8%8D%E6%96%AD%E5%AE%8C%E5%96%84%E7%9A%84%E6%9E%B6%E6%9E%84%E8%8C%83%E5%BC%8F.html">64 不断完善的架构范式</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/65%C2%A0%E6%9E%B6%E6%9E%84%E8%8C%83%E5%BC%8F%EF%BC%9A%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86.html">65 架构范式：文本处理</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/66%C2%A0%E6%9E%B6%E6%9E%84%E8%80%81%E5%8C%96%E4%B8%8E%E9%87%8D%E6%9E%84.html">66 架构老化与重构</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/67%20%E6%9E%B6%E6%9E%84%E6%80%9D%E7%BB%B4%E7%AF%87%EF%BC%9A%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%80%BB%E7%BB%93.html">67 架构思维篇：回顾与总结</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/68%20%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%AE%8F%E8%A7%82%E8%A7%86%E8%A7%92.html">68 软件工程的宏观视角</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/69%C2%A0%E5%9B%A2%E9%98%9F%E7%9A%84%E5%85%B1%E8%AF%86%E7%AE%A1%E7%90%86.html">69 团队的共识管理</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/70%20%E6%80%8E%E4%B9%88%E5%86%99%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3%EF%BC%9F.html">70 怎么写设计文档？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/71%C2%A0%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E5%88%AB%E4%BA%BA%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%9F.html">71 如何阅读别人的代码？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/72%C2%A0%E5%8F%91%E5%B8%83%E5%8D%95%E5%85%83%E4%B8%8E%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86.html">72 发布单元与版本管理</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/73%20%E8%BD%AF%E4%BB%B6%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86%EF%BC%9A%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E3%80%81%E6%8C%81%E7%BB%AD%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%8F%91%E5%B8%83.html">73 软件质量管理：单元测试、持续构建与发布</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/74%C2%A0%E5%BC%80%E6%BA%90%E3%80%81%E4%BA%91%E6%9C%8D%E5%8A%A1%E4%B8%8E%E5%A4%96%E5%8C%85%E7%AE%A1%E7%90%86.html">74 开源、云服务与外包管理</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/75%C2%A0%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E8%BF%AD%E4%BB%A3%E7%9A%84%E8%A7%84%E5%88%92.html">75 软件版本迭代的规划</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/76%C2%A0%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%9A%84%E6%9C%AA%E6%9D%A5.html">76 软件工程的未来</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/77%C2%A0%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%AF%87%EF%BC%9A%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%80%BB%E7%BB%93.html">77 软件工程篇：回顾与总结</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%A6%82%E4%BD%95%E5%81%9AHTTP%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%B5%8B%E8%AF%95%EF%BC%9F.html">加餐 如何做HTTP服务的测试？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E5%AE%9E%E6%88%98%EF%BC%9A%E2%80%9C%E7%94%BB%E5%9B%BE%E7%A8%8B%E5%BA%8F%E2%80%9D%20%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.html">加餐 实战：“画图程序” 的整体架构</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/%E5%8A%A0%E9%A4%90%C2%A0%E6%80%8E%E4%B9%88%E4%BF%9D%E9%9A%9C%E5%8F%91%E5%B8%83%E7%9A%84%E6%95%88%E7%8E%87%E4%B8%8E%E8%B4%A8%E9%87%8F%EF%BC%9F.html">加餐 怎么保障发布的效率与质量？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/%E7%83%AD%E7%82%B9%E8%A7%82%E5%AF%9F%20%E6%88%91%E7%9C%8BFacebook%E5%8F%91%E5%B8%81%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%8C%BA%E5%9D%97%E9%93%BE%E3%80%81%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%8ELibra%E5%B8%81.html">热点观察 我看Facebook发币（上）：区块链、比特币与Libra币</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/%E7%83%AD%E7%82%B9%E8%A7%82%E5%AF%9F%20%E6%88%91%E7%9C%8BFacebook%E5%8F%91%E5%B8%81%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%90%86%E8%A7%A3%20Libra%20%E5%B8%81.html">热点观察 我看Facebook发币（下）：深入浅出理解 Libra 币</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%20%E7%AB%99%E5%9C%A8%E6%9B%B4%E9%AB%98%E7%9A%84%E8%A7%86%E8%A7%92%E7%9C%8B%E6%9E%B6%E6%9E%84.html">用户故事 站在更高的视角看架构</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91%20%E6%83%B3%E5%BD%93%E6%9E%B6%E6%9E%84%E5%B8%88%EF%BC%8C%E6%88%91%E9%9C%80%E8%A6%81%E6%88%90%E4%B8%BA%E2%80%9C%E5%85%A8%E6%89%8D%E2%80%9D%E5%90%97%EF%BC%9F.html">答疑解惑 想当架构师，我需要成为“全才”吗？</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%94%BE%E4%B8%8B%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%9A%84%E8%BA%AB%E6%AE%B5%EF%BC%8C%E7%94%A8%E6%9E%81%E9%99%90%E6%80%9D%E7%BB%B4%E6%8F%90%E5%8D%87%E6%9E%B6%E6%9E%84%E8%83%BD%E5%8A%9B.html">结束语 放下技术人的身段，用极限思维提升架构能力</a></li><li><a href="/courses/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/%E8%AF%BE%E5%A4%96%E9%98%85%E8%AF%BB%20%E4%BB%8E%E3%80%8A%E5%AD%99%E5%AD%90%E5%85%B5%E6%B3%95%E3%80%8B%E7%9C%8B%E5%BA%95%E5%B1%82%E7%9A%84%E8%87%AA%E7%84%B6%E6%B3%95%E5%88%99.html">课外阅读 从《孙子兵法》看底层的自然法则</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E8%AE%B8%E5%BC%8F%E4%BC%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AF%BE/12%20%E8%BF%9B%E7%A8%8B%E5%86%85%E5%8D%8F%E5%90%8C%EF%BC%9A%E5%90%8C%E6%AD%A5%E3%80%81%E4%BA%92%E6%96%A5%E4%B8%8E%E9%80%9A%E8%AE%AF.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12 进程内协同：同步、互斥与通讯" id="title">12 进程内协同：同步、互斥与通讯</h1>
+<div><p>你好，我是七牛云许式伟。</p>
+<p>上一讲开始我们进入了多任务的世界，我们详细介绍了三类执行体：进程、线程和协程，并且介绍了每一种执行体的特点。</p>
+<p>既然启动了多个执行体，它们就需要相互协同，今天我们先讨论进程内的执行体协同。</p>
+<p>考虑到进程内的执行体有两类：用户态的协程（以 Go 语言的 goroutine 为代表）、操作系统的线程，我们对这两类执行体的协同机制做个概要。如下：</p>
+<p><img alt="" src="/assets/b4a0a4f06b99999b3eed8fec.jpg"/></p>
+<p>让我们逐一详细分析一下它们。</p>
+<h2 id="原子操作">原子操作</h2>
+<p>首先让我们看一下原子操作。需要注意的是，原子操作是 CPU 提供的能力，与操作系统无关。这里列上只是为了让你能够看到进程内通讯的全貌。</p>
+<p>顾名思义，原子操作的每一个操作都是原子的，不会中途被人打断，这个原子性是 CPU 保证的，与执行体的种类无关，无论 goroutine 还是操作系统线程都适用。</p>
+<p>从语义上来说，原子操作可以用互斥体来实现，只不过原子操作要快得多。</p>
+<p>例如：</p>
+<pre><code>var val int32
+...
+newval = atomic.AddInt32(&amp;val, delta)
+</code></pre>
+<p>等价于：</p>
+<pre><code>var val int32
+var mutex sync.Mutex
+...
+mutex.Lock()
+val += delta
+newval = val
+mutex.Unlock()
+</code></pre>
+<h2 id="执行体的互斥">执行体的互斥</h2>
+<p>互斥体也叫锁。锁用于多个执行体之间的互斥访问，避免多个执行体同时操作一组数据产生竞争。其使用界面上大概是这样的：</p>
+<pre><code>func (m *Mutex) Lock()
+func (m *Mutex) Unlock()
+</code></pre>
+<p>锁的使用范式比较简单：在操作需要互斥的数据前，先调用 Lock，操作完成后就调用 Unlock。但总是存在一些不求甚解的人，对锁存在各种误解。</p>
+<p>有的人会说锁很慢。甚至我曾看到有 Go 程序员用 channel 来模拟锁，理由就是锁太慢了，尽量不要用锁。产生“锁慢，channel 快”这种错觉的一个原因，可能是人们经常看到这样的忠告：</p>
+<blockquote>
+<p><strong>不要通过共享内存（锁）来通信，要通过通信（channel）来共享内存。</strong></p>
+</blockquote>
+<p>不明就里的人们看到这话后，可能就有了这样的印象：锁是坏的，锁是性能杀手，channel 是好的，是 Go 发明的先进武器，应该尽可能用 channel，而不要用锁。</p>
+<p>快慢是相对而言的。锁的确会导致代码串行执行，所以在某段代码并发度非常高的情况下，串行执行的确会导致性能的显著降低。但平心而论，相比其他的进程内通讯的原语来说，锁并不慢。从进程内通讯来说，比锁快的东西，只有原子操作。</p>
+<p>例如 channel，作为进程内执行体间传递数据的设施来说，它本身是共享变量，所以 channel 的每个操作必然是有锁的。事实上，channel 的每个操作都比较耗时。关于这一点，在下文解释 channel 背后的工作机理后，你就会清楚知道。</p>
+<p>那么锁的问题在哪里？锁的最大问题在于不容易控制。锁 Lock 了但是忘记 Unlock 后是灾难性的，因为相当于服务器挂了，所有和该锁相关的代码都不能被执行。</p>
+<p>比如：</p>
+<pre><code>mutex.Lock()
+doSth()
+mutex.Unlock()
+</code></pre>
+<p>在考虑异常的情况下，这段代码是不安全的，如果 doSth 抛出了异常，那么服务器就会出现问题。</p>
+<p>为此 Go 语言还专门发明了一个 defer 语法来保证配对：</p>
+<pre><code>mutex.Lock()
+defer mutex.Unlock()
+doSth()
+</code></pre>
+<p>这样可以保证即使 doSth 发生异常，mutex.Unlock 仍然会被正确地执行。这类在异常情况下也能够正常工作的代码，我们称之为 “对异常安全的代码”。如果语言不支持 defer，而是支持 try .. catch，那么代码可能是这样的：</p>
+<pre><code>mutex.Lock()
+try {
+    doSth()
+} catch (e Exception) {
+    mutex.Unlock()
+    throw e
+}
+mutex.Unlock()
+</code></pre>
+<p>锁不容易控制的另一个表现是锁粒度的问题。例如上面 doSth 函数里面如果调用了网络 IO 请求，而网络 IO 请求在少数特殊情况下可能会出现慢请求，要好几秒才返回。那么这几秒对服务器来说就好像挂了，无法处理请求。</p>
+<p>对服务器来说这是极为致命的。对后端程序员来说，有一句箴言要牢记：</p>
+<blockquote>
+<p><strong>不要在锁里面执行费时操作。</strong></p>
+</blockquote>
+<p>这里 “锁里面” 是指在<code>mutex.Lock</code>和<code>mutex.Unlock</code>之间的代码。</p>
+<p>在锁的最佳编程实践中，如果明确一组数据的并发访问符合 “绝大部分情况下是读操作，少量情况有写操作” ，这种 “读多写少” 特征，那么应该用读写锁。</p>
+<p>所谓读写锁，是把锁里面的操作分为读操作和写操作两种，对应调用不同的互斥操作。</p>
+<p>如果是读操作，代码如下：</p>
+<pre><code>mutex.RLock()
+defer mutex.RUnlock()
+doReadOnlyThings
+</code></pre>
+<p>如果是锁里面是写操作，代码就和普通锁一样，如下：</p>
+<pre><code>mutex.Lock()
+defer mutex.Unlock()
+doWriteThings
+</code></pre>
+<p>为什么在 “读多写少” 的情况下，这样的使用范式能够优化性能？</p>
+<p>因为从需求上来说，如果当前我们正在执行某个读操作，那么再来一个新的读操作，是不应该挡在外面的，大家都不修改数据，可以安全地并发执行。但如果来的是写操作，就应该挡在外面，等待读操作执行完。整体来说，读写锁的特性就是：</p>
+<blockquote>
+<p><strong>读操作不阻止读操作，阻止写操作；</strong>-
+<strong>写操作阻止一切，不管读操作还是写操作。</strong></p>
+</blockquote>
+<h2 id="执行体的同步">执行体的同步</h2>
+<p>聊完了执行体的互斥，我们再来看下执行体之间的同步。</p>
+<p>同步的一个最常见的场景是：把一个大任务分解为n个小任务，分配给n个执行体并行去做，等待它们一起做完。这种同步机制我们叫 “等待组”。</p>
+<p>其使用界面上大概是这样的：</p>
+<pre><code>func (wg *WaitGroup) Add(n int)
+func (wg *WaitGroup) Done()
+func (wg *WaitGroup) Wait()
+</code></pre>
+<p>用法上大概是这样的：</p>
+<pre><code>var wg WaitGroup
+...
+wg.Add(n)
+for 循环n次 {
+    go func() {
+        defer wg.Done()
+        doTaski  // 执行第i个任务
+    }()
+}
+wg.Wait()
+</code></pre>
+<p>简而言之，在每个任务开始的时候调用 wg.Add(1)，结束的时候调用 wg.Done()，然后在主执行体调用 wg.Wait() 等待这些任务结束。</p>
+<p>需要注意的是，wg.Add(1) 是要在任务的 goroutine 还没有开始就先调用，否则可能出现某个任务还没有开始执行就被认为结束了。</p>
+<p>条件变量（Condition Variable）是一个更通用的同步原语，设计精巧又极为强大。强大到什么程度？像 channel 这样的通讯机制都可以用它来实现。</p>
+<p>条件变量的使用界面上大概是这样的：</p>
+<pre><code>func NewCond(l Locker) *Cond
+func (c *Cond) Broadcast()
+func (c *Cond) Signal()
+func (c *Cond) Wait()
+</code></pre>
+<p>那么，怎么用条件变量？</p>
+<p>我们先看下初始化。条件变量初始化的时候需要传入一个互斥体，它可以是普通锁（Mutex)，也可以是读写锁（RWMutex）。如下：</p>
+<pre><code>var mutex sync.Mutex  // 也可以是 sync.RWMutex
+var cond = sync.NewCond(&amp;mutex)
+...
+</code></pre>
+<p>为什么创建条件变量需要传入锁？因为 cond.Wait() 的需要。Wait 内部实现逻辑是：</p>
+<pre><code>把自己加入到挂起队列
+mutex.Unlock()
+等待被唤醒  // 挂起的执行体会被后续的 cond.Broadcast 或 cond.Signal() 唤醒
+mutex.Lock()
+</code></pre>
+<p>初始化了条件变量后，我们再来看看它的使用方式。条件变量的用法有一个标准化的模板，看起来大概是这样的：</p>
+<pre><code>mutex.Lock()
+defer mutex.Unlock()
+for conditionNotMetToDo {
+    cond.Wait()
+}
+doSomething
+if conditionNeedNotify {
+    cond.Broadcast()
+    // 有时可以优化为 cond.Signal()
+}
+</code></pre>
+<p>看起来有些复杂，让我们来解释一下。加锁后，先用一个 for 循环判断当前是否能够做我们想做的事情，如果做不了就调用 cond.Wait() 进行等待。</p>
+<p>这里很重要的一个细节是注意用的是 for 循环，而不是 if 语句。这是因为 cond.Wait() 得到了执行权后不代表我们想做的事情就一定能够干了，所以要再重新判断一次条件是否满足。</p>
+<p>确定能够做事情了，于是 doSomething。在做的过程中间，如果我们判断可能挂起队列中的部分执行体满足了重新执行的条件，就用 cond.Broadcast 或 cond.Signal 唤醒它们。</p>
+<p>cond.Broadcast 比较粗暴，它唤醒了所有在这个条件变量挂起的执行体，而 cond.Signal 则只唤醒其中的一个。</p>
+<p>什么情况下应该用 cond.Broadcast，什么情况下应该用 cond.Signal？最偷懒的方式当然是不管三七二十一，用 cond.Broadcast 一定没问题。但是本着经济的角度，我们还是要交代清楚 cond.Signal 的适用范围：</p>
+<ul>
+<li>挂起在这个条件变量上的执行体，它们等待的条件是一致的；</li>
+<li>本次 doSomething 操作完成后，所释放的资源只够一个执行体来做事情。</li>
+</ul>
+<p>Cond 原语虽然叫条件变量，但是实际上它既没有明白说变量具体是什么样的，也没有说条件具体是什么样的。变量是指 “一组要在多个执行体之间协同的数据”。条件是指做任务前 Wait 的 “前置条件”，和做任务时需要唤醒其它人的 “唤醒条件”。</p>
+<p>这样的介绍相当的抽象。我们拿 Go 语言的 channel 开刀，自己实现一个。代码如下：</p>
+<pre><code>type Channel struct {
+    mutex sync.Mutex
+    cond *sync.Cond
+    queue *Queue
+    n int
+}
+
+func NewChannel(n int) *Channel {
+    if n &lt; 1 {
+        panic("todo: support unbuffered channel")
+    }
+    c := new(Channel)
+    c.cond = sync.NewCond(&amp;c.mutex)
+    c.queue = NewQueue()
+    // 这里 NewQueue 得到一个普通的队列
+    // 代码从略
+    c.n = n
+    return c
+}
+
+func (c *Channel) Push(v interface{}) {
+    c.mutex.Lock()
+    defer c.mutex.Unlock()
+    for c.queue.Len() == c.n { // 等待队列不满
+        c.cond.Wait()
+    }
+    if c.queue.Len() == 0 { // 原来队列是空的，可能有人等待数据，通知它们
+        c.cond.Broadcast()
+    }
+    c.queue.Push(v)
+}
+
+func (c *Channel) Pop() (v interface{}) {
+    c.mutex.Lock()
+    defer c.mutex.Unlock()
+    for c.queue.Len() == 0 { // 等待队列不空
+        c.cond.Wait()
+    }
+    if c.queue.Len() == c.n { // 原来队列是满的，可能有人等着写数据，通知它们
+        c.cond.Broadcast()
+    }
+    return c.queue.Pop()
+}
+
+func (c *Channel) TryPop() (v interface{}, ok bool) {
+    c.mutex.Lock()
+    defer c.mutex.Unlock()
+    if c.queue.Len() == 0 { // 如果队列为空，直接返回
+        return
+    }
+    if c.queue.Len() == c.n { // 原来队列是满的，可能有人等着写数据，通知它们
+        c.cond.Broadcast()
+    }
+    return c.queue.Pop(), true
+}
+
+func (c *Channel) TryPush(v interface{}) (ok bool) {
+    c.mutex.Lock()
+    defer c.mutex.Unlock()
+    if c.queue.Len() == c.n { // 如果队列满，直接返回
+        return
+    }
+    if c.queue.Len() == 0 { // 原来队列是空的，可能有人等待数据，通知它们
+        c.cond.Broadcast()
+    }
+    c.queue.Push(v)
+    return true
+}
+</code></pre>
+<p>对着这个 Channel 的实现，你是否对条件变量有感觉很多？顺便提醒一点，这个 Channel 的实现不支持无缓冲 channel，也就是不支持 NewChannel(0) 的情况。如果你感兴趣，可以改改这个问题。</p>
+<h2 id="执行体的通讯">执行体的通讯</h2>
+<p>聊完同步与互斥，我们接着聊执行体的通讯：怎么在执行体间收发消息。</p>
+<p>管道是大家都很熟知的执行体间的通讯机制。规格如下：</p>
+<pre><code>func Pipe() (pr *PipeReader, pw PipeWriter)
+</code></pre>
+<p>用法上，先调用<code>pr, pw := io.Pipe()</code>得到管道的写入端和读出端，分别传给两个并行执行的 goroutine（其他语言也类似），然后一个 goroutine 读，一个 goroutine 写就好了。</p>
+<p>管道用处很多。一个比较常见的用法是做读写转换，例如，假设我手头有一个算法：</p>
+<pre><code>func Foo(w io.Writer) error
+</code></pre>
+<p>这个算法生成的数据流，需要作为另一个函数的输入，但是这个函数的输入是 io.Reader，原型如下：</p>
+<pre><code>func Bar(r io.Reader)
+</code></pre>
+<p>那么怎么把它们串起来呢？用管道我们很容易实现这样的变换：</p>
+<pre><code>func FooReader() io.ReadCloser {
+    pr, pw := io.Pipe()
+    go func() {
+        err := Foo(pw)
+        pw.CloseWithError(err)
+    }()
+    return pr
+}
+</code></pre>
+<p>这个 FooReader 函数几句话就把 Foo 变成了一个符合 io.Reader 接口的对象，它就可以很方便的和 Bar 函数结合了。</p>
+<p>其实 Go 语言中引入的 channel 也是管道，只不过它是类型安全的管道。具体用法如下：</p>
+<pre><code>c := make(chan Type, n) // 创建一个能够传递 Type 类型数据的管道，缓冲大小为 n
+...
+go func() {
+    val := &lt;-c // 从管道读入
+}()
+...
+go func() {
+    c &lt;- val // 向管道写入
+}()
+</code></pre>
+<p>我们后面在 “服务端开发” 一章，我们还会比较详细讨论 channel，今天先了解一个大体的语义。</p>
+<h2 id="结语">结语</h2>
+<p>总结一下，我们今天主要聊了执行体间的协同机制：原子操作、同步、互斥与通讯。我们重点聊了锁和同步原语 “条件变量”。</p>
+<p>锁在一些人心中是有误解的，但实际上锁在服务端编程中的比重并不低，我们可能经常需要和它打交道，建议多花精力理解它们。</p>
+<p>条件变量是最复杂的同步原语，功能强大。虽然平常我们直接使用条件变量的机会不是太多，大部分常见的场景往往有更高阶的原语（例如 channel）可以取代。但是它的设计精巧而高效，值得细细体会。</p>
+<p>你会发现，操作系统课本上的信号量这样的同步原语，我们这里没有交代，这是因为它被更强大而且性能更好的同步原语 “条件变量” 所取代了。</p>
+<p>上面我们为了介绍条件变量的用法，我们实作了一个 channel，你也可以考虑用信号量这样的东西来实现一遍，然后分析一下为什么我们说基于 “条件变量” 的版本是更优的。</p>
+<p>如果你对今天的内容有什么思考与解读，欢迎给我留言，我们一起讨论。在下期，我们将讨论进程与进程之间的协同：进程间的同步互斥、资源共享与通讯。</p>
+<p>如果你觉得有所收获，也欢迎把文章分享给你的朋友。感谢你的收听，我们下期再见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

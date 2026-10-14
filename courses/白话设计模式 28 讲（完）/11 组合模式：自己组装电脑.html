@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>11 组合模式：自己组装电脑 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">白话设计模式 28 讲（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">28 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>白话设计模式 28 讲（完）</strong><ul><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/00%20%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%90%AF%E7%A8%8B%E4%B9%8B%E5%89%8D%EF%BC%8C%E8%AF%B7%E4%B8%8D%E8%A6%81%E9%94%99%E8%BF%87%E6%88%91.html">00 生活中的设计模式：启程之前，请不要错过我</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E7%9B%91%E5%90%AC%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%9D%91%E7%88%B9%E7%9A%84%E7%83%AD%E6%B0%B4%E5%99%A8.html">01 监听模式：坑爹的热水器</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/02%20%E9%80%82%E9%85%8D%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%BA%AB%E9%AB%98%E4%B8%8D%E5%A4%9F%E9%9E%8B%E6%9D%A5%E5%87%91.html">02 适配模式：身高不够鞋来凑</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BA%BA%E4%B8%8E%E6%B0%B4%E7%9A%84%E4%B8%89%E6%80%81.html">03 状态模式：人与水的三态</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/04%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E6%98%AF%E6%88%91%E7%94%9F%E5%91%BD%E7%9A%84%E5%94%AF%E4%B8%80.html">04 单例模式：你是我生命的唯一</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/05%20%E8%81%8C%E8%B4%A3%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%88%91%E7%9A%84%E5%81%87%E6%9D%A1%E5%8E%BB%E5%93%AA%E4%BA%86.html">05 职责模式：我的假条去哪了</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/06%20%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%89%BE%E6%88%BF%E5%AD%90%E9%97%AE%E4%B8%AD%E4%BB%8B.html">06 中介模式：找房子问中介</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/07%20%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B8%AE%E6%88%91%E6%8B%BF%E4%B8%80%E4%B8%8B%E5%BF%AB%E9%80%92.html">07 代理模式：帮我拿一下快递</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E7%A9%BF%E5%B0%B1%E6%80%8E%E4%B9%88%E7%A9%BF.html">08 装饰模式：你想怎么穿就怎么穿</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/09%20%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E8%A6%81%E6%8B%BF%E9%93%81%E8%BF%98%E6%98%AF%E6%91%A9%E5%8D%A1.html">09 工厂模式：你要拿铁还是摩卡</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/10%20%E8%BF%AD%E4%BB%A3%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%B0%B1%E6%98%AF%E4%BD%A0%E4%BA%86.html">10 迭代模式：下一个就是你了</a></li><li><a class="active" aria-current="page" href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/11%20%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%87%AA%E5%B7%B1%E7%BB%84%E8%A3%85%E7%94%B5%E8%84%91.html">11 组合模式：自己组装电脑</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%83%B3%E8%A6%81%E8%BD%A6%E8%BF%98%E6%98%AF%E5%BA%84%E5%9B%AD.html">12 构建模式：想要车还是庄园</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E5%85%8B%E9%9A%86%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%BB%99%E4%BD%A0%E4%B8%80%E4%B8%AA%E5%88%86%E8%BA%AB%E6%9C%AF.html">13 克隆模式：给你一个分身术</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/14%20%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%80%8E%E4%B9%88%E6%9D%A5%E4%B8%8D%E9%87%8D%E8%A6%81%EF%BC%8C%E4%BA%BA%E5%88%B0%E5%B0%B1%E8%A1%8C.html">14 策略模式：怎么来不重要，人到就行</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/15%20%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A4%A7%E9%97%B8%E8%9F%B9%EF%BC%8C%E8%B5%B0%E8%B5%B7%EF%BC%81.html">15 命令模式：大闸蟹，走起！</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/16%20%E5%A4%87%E5%BF%98%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E7%83%82%E7%AC%94%E5%A4%B4.html">16 备忘模式：好记性不如烂笔头</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/17%20%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%EF%BC%9A%E9%A2%9C%E6%96%99%E5%BE%88%E8%B4%B5%E5%BF%85%E9%A1%BB%E5%85%85%E5%88%86%E5%88%A9%E7%94%A8.html">17 享元模式：颜料很贵必须充分利用</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/18%20%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%AD%A6%E5%A6%B9%E5%88%AB%E6%85%8C%EF%BC%8C%E5%AD%A6%E9%95%BF%E5%B8%AE%E4%BD%A0.html">18 外观模式：学妹别慌，学长帮你</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/19%20%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%80%E5%8D%83%E4%B8%AA%E8%AF%BB%E8%80%85%E4%B8%80%E5%8D%83%E4%B8%AA%E5%93%88%E5%A7%86%E9%9B%B7%E7%89%B9.html">19 访问模式：一千个读者一千个哈姆雷特</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/20%20%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%8E%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%B8%8D%E8%A7%A3%E6%B8%8A%E6%BA%90.html">20 生活中的设计模式：与经典设计模式的不解渊源</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/21%20%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E9%82%A3%E4%BA%9B%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">21 生活中的设计模式：那些未完待续的设计模式</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/22%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E8%AF%BB%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%88%B6%E4%BD%9C%E4%B8%80%E6%9D%AF%E9%B2%9C%E7%BA%AF%E7%BB%86%E8%85%BB%E7%9A%84%E8%B1%86%E6%B5%86.html">22 深入解读过滤器模式：制作一杯鲜纯细腻的豆浆</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/23%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E8%AF%BB%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF%EF%BC%9A%E5%85%B1%E4%BA%AB%E8%AE%A9%E7%94%9F%E6%B4%BB%E6%9B%B4%E4%BE%BF%E6%8D%B7.html">23 深入解读对象池技术：共享让生活更便捷</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/24%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E8%AF%BB%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6%EF%BC%9A%E6%8A%8A%E4%BD%A0%E6%8A%80%E8%83%BD%E4%BA%AE%E5%87%BA%E6%9D%A5.html">24 深入解读回调机制：把你技能亮出来</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/25%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3.html">25 谈谈我对设计模式的理解</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/26%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E7%9A%84%E6%80%9D%E8%80%83.html">26 谈谈我对设计原则的思考</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/27%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9%E9%A1%B9%E7%9B%AE%E9%87%8D%E6%9E%84%E7%9A%84%E7%9C%8B%E6%B3%95.html">27 谈谈我对项目重构的看法</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/11%20%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%87%AA%E5%B7%B1%E7%BB%84%E8%A3%85%E7%94%B5%E8%84%91.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="11 组合模式：自己组装电脑" id="title">11 组合模式：自己组装电脑</h1>
+<div><p>【故事剧情】</p>
+<blockquote>
+<p>Tony 用的笔记本电脑还是大学时候买的，到现在已经用了5年，虽然后面加过一次内存，也换过一次硬盘，但仍然跟不上 Tony 对性能的要求，改变不了它被淘汰的命运，是时候该换一台新的电脑了……</p>
+<p>换什么电脑呢？MacBook，ThinkPad，还是台式机？经过几番思考之后，Tony 还是决定买台式机，因为作为软件开发，台式机性能会更高，编译程序也会更快。确定台式机后，一个新的问题又来了，是买一个整机呢，还是自己组装呢？在反复纠结两天之后，Tony 还是决定自己亲自动手组装。一来自己也了解一些硬件知识，正好趁这次机会对自己的知识做一个检验和实践；二来自己组装能便宜一大笔钱！</p>
+<p>于是 Tony 在京东上浏览了各个配件，花了一个星期进行精心挑选（这可真是一个精细的活，需要考虑各种型号的性能，还要考虑不同硬件之间的兼容性，还需知道各个配件的尺寸确保能正常放进机箱，因为选的是小机箱），终于确定了各个子配件：</p>
+<p>GIGABYTE Z170M M-ATX 的主板、Intel Core i5-6600K 的 CPU、Kingston Fury DDR4 的内存、Kingston V300 的 SSD 硬盘、Colorful iGame750 的显卡、DEEPCOOL 120T 水冷风扇、Antec VP 450P 的电源、AOC LV243XIP 的显示器、SAMA MATX 小板机箱……</p>
+<p>周末，Tony 花了一天的时间才把这些配件组装成一个完整的整机。一次点亮，Tony 成就感十足！与购买相同性能的整机相比，不仅价格减了三成，而且加深了对各个硬件的了解。</p>
+</blockquote>
+<p><img alt="enter image description here" src="/assets/31de9e9569d8f895349c56c8.jpg"/></p>
+<h3 id="用程序来模拟生活">用程序来模拟生活</h3>
+<p>只要你对硬件稍微有一些了解，或者打开过机箱换过组件，一定知道 CPU、内存、显卡是插在主板上的，而硬盘也是连在主板上的，在机箱的后面有一排的插口，可以连接鼠标、键盘、耳麦、摄像头等外接配件，而显示器需要单独插电源才能工作。我们可以用代码来模拟台式电脑的组成，这里假设每一个组件都有开始工作和结束工作两个功能，还可以显示自己的信息和组成结构。</p>
+<p>源码示例：</p>
+<pre><code class="language-python">class Component:
+    "组件，所有子配件的基类"
+
+    def __init__(self, name):
+        self._name = name
+
+    def showInfo(self, indent = ""):
+        pass
+
+    def isComposite(self):
+        return False
+
+    def startup(self, indent = ""):
+        print(indent + self._name + " 准备开始工作...")
+
+    def shutdown(self, indent = ""):
+        print(indent + self._name + " 即将结束工作...")
+
+class CPU(Component):
+    "中央处理器"
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def showInfo(self, indent):
+        print(indent, end="")
+        print("CPU:" + self._name + ",可以进行高速计算。")
+
+class MemoryCard(Component):
+    "内存条"
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def showInfo(self, indent):
+        print(indent, end="")
+        print("内存:" + self._name + ",可以缓存数据，读写速度快。")
+
+class HardDisk(Component):
+    "硬盘"
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def showInfo(self, indent):
+        print(indent, end="")
+        print("硬盘:" + self._name + ",可以永久存储数据，容量大。")
+
+class GraphicsCard(Component):
+    "显卡"
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def showInfo(self, indent):
+        print(indent, end="")
+        print("显卡:" + self._name + ",可以高速计算和处理图形图像。")
+
+class Battery(Component):
+    "电源"
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def showInfo(self, indent):
+        print(indent, end="")
+        print("电源:" + self._name + ",可以持续给主板和外接配件供电。")
+
+class Fan(Component):
+    "风扇"
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def showInfo(self, indent):
+        print(indent, end="")
+        print("风扇:" + self._name + "，辅助CPU散热。")
+
+class Displayer(Component):
+    "显示器"
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def showInfo(self, indent):
+        print(indent, end="")
+        print("显示器:" + self._name + "，负责内容的显示。")
+
+class Composite(Component):
+    "配件组合器"
+
+    def __init__(self, name):
+        super().__init__(name)
+        self._components = []
+
+    def showInfo(self, indent):
+        print(self._name + ",由以下部件组成:")
+        indent += "\t"
+        for element in self._components:
+            element.showInfo(indent)
+
+    def isComposite(self):
+        return True
+
+    def addComponent(self, component):
+        self._components.append(component)
+
+    def removeComponent(self, component):
+        self._components.remove(component)
+
+    def startup(self, indent):
+        super().startup(indent)
+        indent += "\t"
+        for element in self._components:
+            element.startup(indent)
+
+    def shutdown(self, indent):
+        super().startup(indent)
+        indent += "\t"
+        for element in self._components:
+            element.shutdown(indent)
+
+class Mainboard(Composite):
+    "主板"
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def showInfo(self, indent):
+        print(indent + "主板:", end="")
+        super().showInfo(indent)
+
+class ComputerCase(Composite):
+    "机箱"
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def showInfo(self, indent):
+        print(indent + "机箱:", end="")
+        super().showInfo(indent)
+
+class Computer(Composite):
+    "电脑"
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def showInfo(self, indent):
+        print(indent + "电脑:", end="")
+        super().showInfo(indent)
+
+</code></pre>
+<p>测试代码：</p>
+<pre><code class="language-python">def testComputer():
+    cpu = CPU("Intel Core i5-6600K")
+    memoryCard = MemoryCard("Kingston Fury DDR4")
+    hardDisk = HardDisk("Kingston V300 ")
+    graphicsCard = GraphicsCard("Colorful iGame750")
+    mainBoard = Mainboard("GIGABYTE Z170M M-ATX")
+    mainBoard.addComponent(cpu)
+    mainBoard.addComponent(memoryCard)
+    mainBoard.addComponent(hardDisk)
+    mainBoard.addComponent(graphicsCard)
+
+    battery = Battery("Antec VP 450P")
+    fan = Fan("DEEPCOOL 120T")
+    computerCase = ComputerCase("SAMA MATX")
+    computerCase.addComponent(battery)
+    computerCase.addComponent(mainBoard)
+    computerCase.addComponent(fan)
+
+    displayer = Displayer("AOC LV243XIP")
+
+    computer = Computer("Tony DIY电脑")
+    computer.addComponent(displayer)
+    computer.addComponent(computerCase)
+
+    computer.showInfo("")
+    print("\n开机过程:")
+    computer.startup("")
+    print("\n关机过程:")
+    computer.shutdown("")
+
+</code></pre>
+<p>输出结果：</p>
+<pre><code>电脑:Tony DIY电脑,由以下部件组成:
+    显示器:AOC LV243XIP，负责内容的显示。
+    机箱:SAMA MATX,由以下部件组成:
+        电源:Antec VP 450P,可以持续给主板和外接配件供电。
+        主板:GIGABYTE Z170M M-ATX,由以下部件组成:
+            CPU:Intel Core i5-6600K,可以进行高速计算。
+            内存:Kingston Fury DDR4,可以缓存数据，读写速度快。
+            硬盘:Kingston V300 ,可以永久存储数据，容量大。
+            显卡:Colorful iGame750,可以高速计算和处理图形图像。
+        风扇:DEEPCOOL 120T，辅助CPU散热。
+
+开机过程:
+Tony DIY电脑 准备开始工作...
+    AOC LV243XIP 准备开始工作...
+    SAMA MATX 准备开始工作...
+        Antec VP 450P 准备开始工作...
+        GIGABYTE Z170M M-ATX 准备开始工作...
+            Intel Core i5-6600K 准备开始工作...
+            Kingston Fury DDR4 准备开始工作...
+            Kingston V300  准备开始工作...
+            Colorful iGame750 准备开始工作...
+        DEEPCOOL 120T 准备开始工作...
+
+关机过程:
+Tony DIY电脑 准备开始工作...
+    AOC LV243XIP 即将结束工作...
+    SAMA MATX 准备开始工作...
+        Antec VP 450P 即将结束工作...
+        GIGABYTE Z170M M-ATX 准备开始工作...
+            Intel Core i5-6600K 即将结束工作...
+            Kingston Fury DDR4 即将结束工作...
+            Kingston V300  即将结束工作...
+            Colorful iGame750 即将结束工作...
+        DEEPCOOL 120T 即将结束工作...
+
+</code></pre>
+<h3 id="从剧情中思考组合模式">从剧情中思考组合模式</h3>
+<p>Tony 自己 DIY 组装的电脑是由各个配件组成的，在组装之前，就是一个个 CPU、硬盘、显卡等配件，不能称之为电脑，只有把它们按正确的方式组装在一起，配合操作系统才能正常运行。一般人使用电脑并不会关注内部的组成结构，只会关注一台整机。</p>
+<p>这里有明显的部分与整体的关系，主板、电源等是电脑的一部分，而主板上又有 CPU、硬盘、显卡，它们又可以认为是主板的一部分。像电脑一样，把对象组合成树形结构，以表示“部分-整体”的层次结构的程序设计模式就叫<strong>组合模式</strong>。组合模式使得用户对单个对象和组合对象的使用具有一致性，使用组合对象就像使用一般对象一样，不便关心内部的组织结构。</p>
+<p>如上面的示例中，组合的电脑具有明显层次组合关系，如：</p>
+<p><img alt="enter image description here" src="/assets/d73f1eb0a52e0707bb384db3.png"/></p>
+<p>我们将这种层次关系转换成对象的组合关系如下：</p>
+<p><img alt="enter image description here" src="/assets/2827b937d9ca2638ae20898a.png"/></p>
+<h3 id="组合模式的模型抽象">组合模式的模型抽象</h3>
+<h4 id="类图">类图</h4>
+<p>根据上面组装电脑的示例，将组合模式抽象成一般化的类图关系如下：</p>
+<p><img alt="enter image description here" src="/assets/1b14e6fac56963318f0d86c3.png"/></p>
+<p>这里 Composite 就是组合对象，组合对象可以添加或删除组件，它本身也是一个组件，因此组合对象可以像一般对象一样被使用，因为它也实现了 Component的feature() 方法。</p>
+<h4 id="模型说明">模型说明</h4>
+<p>组合模式是一个非常常用的模式，你可能在有意或无意间就已经用上了，比如公司（各个部门或各个子公司）的组织架构，学校各个学院-班级的关系。</p>
+<p>如在图形绘制系统中，图元（GraphicUnit）可以有多种不同的类型：Text、Line、Rect、Ellipse 等，还可以是矢量图（vectorgraph）。而矢量图本身又是由一个或多个 Text、Line、Rect、Ellipse 组成。但所有的图元都有一个共同的方法，那就是 draw()。这里就得用组合模式。</p>
+<p><img alt="enter image description here" src="/assets/a0a9f43a0d0c92ab5829cb1a.png"/></p>
+<h5 id="组合模式的优点"><strong>组合模式的优点</strong></h5>
+<ol>
+<li>调用简单，组合对象可以像一般对象一样使用。</li>
+<li>组合对象可以自由地增加、删除组件，可灵活地组合不同的对象。</li>
+</ol>
+<h5 id="组合模式的缺点"><strong>组合模式的缺点</strong></h5>
+<p>在一些层次结构太深的场景中，组合结构会变得太庞杂。</p>
+<h3 id="应用场景">应用场景</h3>
+<ol>
+<li>对象之间具有明显的“部分-整体”的关系时，或者具有层次关系时。</li>
+<li>组合对象与单个对象具有相同或类似行为（方法），用户希望统一地使用组合结构中的所有对象。</li>
+</ol>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

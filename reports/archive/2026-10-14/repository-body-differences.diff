@@ -1,0 +1,1456 @@
+--- Yvan: 专栏/Flutter入门教程/23 应用界面整合.md
++++ xixi: 专栏/Flutter入门教程/23 应用界面整合.md
+@@ -1,7 +1,8 @@
+ 
+-
+-23 应用界面整合
+-1. 界面整合的需求分析
+-如下所示，在应用的底部添加导航栏，进行界面间的切换操作。下面从数据和界面的角度对该进行分析：
++еӣ ж”¶еҲ°Googleзӣёе…ійҖҡзҹҘпјҢзҪ‘з«ҷе°ҶдјҡжӢ©жңҹе…ій—ӯгҖӮзӣёе…ійҖҡзҹҘеҶ…е®№
++
++23 еә”з”Ёз•Ңйқўж•ҙеҗҲ
++1. з•Ңйқўж•ҙеҗҲзҡ„йңҖжұӮеҲҶжһҗ
++еҰӮдёӢжүҖзӨәпјҢеңЁеә”з”Ёзҡ„еә•йғЁж·»еҠ еҜјиҲӘж ҸпјҢиҝӣиЎҢз•Ңйқўй—ҙзҡ„еҲҮжҚўж“ҚдҪңгҖӮдёӢйқўд»Һж•°жҚ®е’Ңз•Ңйқўзҡ„и§’еәҰеҜ№иҜҘиҝӣиЎҢеҲҶжһҗпјҡ
+ 
+ 
+@@ -16,15 +17,15 @@
+ 
+ 
+-当前界面中需要添加的数据有:
+-
+-底部栏的文字、图标资源列表
+-底部栏的激活索引
+-
+-在点击底部栏的按钮时，需要更新激活索引，并进行界面的重新构建。这里定义一个 MenuData 类，用于维护标签和图标数据：
++еҪ“еүҚз•ҢйқўдёӯйңҖиҰҒж·»еҠ зҡ„ж•°жҚ®жңү:
++
++еә•йғЁж Ҹзҡ„ж–Үеӯ—гҖҒеӣҫж Үиө„жәҗеҲ—иЎЁ
++еә•йғЁж Ҹзҡ„жҝҖжҙ»зҙўеј•
++
++еңЁзӮ№еҮ»еә•йғЁж Ҹзҡ„жҢүй’®ж—¶пјҢйңҖиҰҒжӣҙж–°жҝҖжҙ»зҙўеј•пјҢе№¶иҝӣиЎҢз•Ңйқўзҡ„йҮҚж–°жһ„е»әгҖӮиҝҷйҮҢе®ҡд№үдёҖдёӘ MenuData зұ»пјҢз”ЁдәҺз»ҙжҠӨж Үзӯҫе’Ңеӣҫж Үж•°жҚ®пјҡ
+ class MenuData {
+-  // 标签
++  // ж Үзӯҫ
+   final String label;
+ 
+-  // 图标数据
++  // еӣҫж Үж•°жҚ®
+   final IconData icon;
+ 
+@@ -36,9 +37,9 @@
+ 
+ 
+-对于界面构建逻辑来说，这是一个上下结构，上面是内容区域，下面是底部导航栏。所以，可以通过 Column 组件上下排列，其中内容区域通过 Expanded 组件进行延展，内容组件根据激活的索引值构建不同的界面。
+-
+-
+-2. 代码实现：第一版
+-Flutter 中提供了 BottomNavigationBar 组件可以展示底部栏，这里单独封装一个 AppBottomBar 组件用于维护底部栏的界面构建逻辑。其中需要传入激活索引、点击回调、菜单数据列表：
++еҜ№дәҺз•Ңйқўжһ„е»әйҖ»иҫ‘жқҘиҜҙпјҢиҝҷжҳҜдёҖдёӘдёҠдёӢз»“жһ„пјҢдёҠйқўжҳҜеҶ…е®№еҢәеҹҹпјҢдёӢйқўжҳҜеә•йғЁеҜјиҲӘж ҸгҖӮжүҖд»ҘпјҢеҸҜд»ҘйҖҡиҝҮ Column з»„д»¶дёҠдёӢжҺ’еҲ—пјҢе…¶дёӯеҶ…е®№еҢәеҹҹйҖҡиҝҮ Expanded з»„д»¶иҝӣиЎҢе»¶еұ•пјҢеҶ…е®№з»„д»¶ж №жҚ®жҝҖжҙ»зҡ„зҙўеј•еҖјжһ„е»әдёҚеҗҢзҡ„з•ҢйқўгҖӮ
++
++
++2. д»Јз Ғе®һзҺ°пјҡз¬¬дёҖзүҲ
++Flutter дёӯжҸҗдҫӣдәҶ BottomNavigationBar з»„д»¶еҸҜд»Ҙеұ•зӨәеә•йғЁж ҸпјҢиҝҷйҮҢеҚ•зӢ¬е°ҒиЈ…дёҖдёӘ AppBottomBar з»„д»¶з”ЁдәҺз»ҙжҠӨеә•йғЁж Ҹзҡ„з•Ңйқўжһ„е»әйҖ»иҫ‘гҖӮе…¶дёӯйңҖиҰҒдј е…ҘжҝҖжҙ»зҙўеј•гҖҒзӮ№еҮ»еӣһи°ғгҖҒиҸңеҚ•ж•°жҚ®еҲ—иЎЁпјҡ
+ class AppBottomBar extends StatelessWidget {
+   final int currentIndex;
+@@ -79,5 +80,5 @@
+ 
+ 
+-然后就是构建整体结构，这里创建一个 AppNavigation 组件来处理。由于激活索引数据需要在交互时改变，并重新构建界面，所以 AppNavigation 继承自 StatefulWidget，在状态类中处理界面构建和状态数据维护的逻辑。
++з„¶еҗҺе°ұжҳҜжһ„е»әж•ҙдҪ“з»“жһ„пјҢиҝҷйҮҢеҲӣе»әдёҖдёӘ AppNavigation з»„д»¶жқҘеӨ„зҗҶгҖӮз”ұдәҺжҝҖжҙ»зҙўеј•ж•°жҚ®йңҖиҰҒеңЁдәӨдә’ж—¶ж”№еҸҳпјҢе№¶йҮҚж–°жһ„е»әз•ҢйқўпјҢжүҖд»Ҙ AppNavigation з»§жүҝиҮӘ StatefulWidgetпјҢеңЁзҠ¶жҖҒзұ»дёӯеӨ„зҗҶз•Ңйқўжһ„е»әе’ҢзҠ¶жҖҒж•°жҚ®з»ҙжҠӨзҡ„йҖ»иҫ‘гҖӮ
+ class AppNavigation extends StatefulWidget {
+   const AppNavigation({Key? key}) : super(key: key);
+@@ -91,7 +92,7 @@
+ 
+   final List<MenuData> menus = const [
+-    MenuData(label: '猜数字', icon: Icons.question_mark),
+-    MenuData(label: '电子木鱼', icon: Icons.my_library_music_outlined),
+-    MenuData(label: '白板绘制', icon: Icons.palette_outlined),
++    MenuData(label: 'зҢңж•°еӯ—', icon: Icons.question_mark),
++    MenuData(label: 'з”өеӯҗжңЁйұј', icon: Icons.my_library_music_outlined),
++    MenuData(label: 'зҷҪжқҝз»ҳеҲ¶', icon: Icons.palette_outlined),
+   ];
+ 
+@@ -116,9 +117,9 @@
+   }
+ 
+-内容区域的构建使用 _buildContent 方法，根据不同的激活索引，返回创建不同的界面：
+-
+-index = 0 时，构建猜数字界面；
+-index = 1 时，构建电子木鱼界面；
+-index = 2 时，构建白板绘制界面；
++еҶ…е®№еҢәеҹҹзҡ„жһ„е»әдҪҝз”Ё _buildContent ж–№жі•пјҢж №жҚ®дёҚеҗҢзҡ„жҝҖжҙ»зҙўеј•пјҢиҝ”еӣһеҲӣе»әдёҚеҗҢзҡ„з•Ңйқўпјҡ
++
++index = 0 ж—¶пјҢжһ„е»әзҢңж•°еӯ—з•Ңйқўпјӣ
++index = 1 ж—¶пјҢжһ„е»әз”өеӯҗжңЁйұјз•Ңйқўпјӣ
++index = 2 ж—¶пјҢжһ„е»әзҷҪжқҝз»ҳеҲ¶з•Ңйқўпјӣ
+ 
+   Widget _buildContent(int index) {
+@@ -136,29 +137,29 @@
+ }
+ 
+-到这里就完成了点击底部导航，切换界面的功能，当前代码位置: navigation 。 但这种方式处理会有一些问题：伴随着界面的消失，状态类会被销毁；下次再到该界面时会重新初始化状态类，如下所示：
+-
+-
+-
+-在绘制面板绘制
+-切换后，状态重置
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-3. 状态类数据的保持
+-想要避免每次切换都会重置状态数据，大体上有三种解决方案：
+-
+-1.使用 AutomaticKeepAliveClientMixin 对状态类进行保活，这种方案只能用于可滑动组件中。这里可以使用 PageView 组件来实现切页并保活的效果。
+-2.将状态数据提升到上层，比如将三个界面的状态数据都交由 _AppNavigationState 状态类维护。如果直接用这种方式，很容易造成一个超级大的类，来维护很多数据。其实状态管理工具，就是基于这种思路，将数据交由上层维护，同时提供了分模块处理数据的能力。
+-3.保持数据的持久性，比如将数据保存到本地文件或数据库，每次初始化时进行加载复现。这种方式处理起来比较麻烦，初始化加载数据也需要一点时间。但这种方式在界面不可见时，可以释放内存中的数据。
+-
+-
+-这里使用 方式 1 来处理是最简单的。在 _buildContent 方法中返回 PageView 组件，并将三个内容界面作为 children 入参，通过 PageController 来控制界面的切换。注意一点：将 physics 设置设置为 NeverScrollableScrollPhysics 可以禁止 PageView 的滑动，如果想要运行滑动切页，可以去除。
++еҲ°иҝҷйҮҢе°ұе®ҢжҲҗдәҶзӮ№еҮ»еә•йғЁеҜјиҲӘпјҢеҲҮжҚўз•Ңйқўзҡ„еҠҹиғҪпјҢеҪ“еүҚд»Јз ҒдҪҚзҪ®: navigation гҖӮ дҪҶиҝҷз§Қж–№ејҸеӨ„зҗҶдјҡжңүдёҖдәӣй—®йўҳпјҡдјҙйҡҸзқҖз•Ңйқўзҡ„ж¶ҲеӨұпјҢзҠ¶жҖҒзұ»дјҡиў«й”ҖжҜҒпјӣдёӢж¬ЎеҶҚеҲ°иҜҘз•Ңйқўж—¶дјҡйҮҚж–°еҲқе§ӢеҢ–зҠ¶жҖҒзұ»пјҢеҰӮдёӢжүҖзӨәпјҡ
++
++
++
++еңЁз»ҳеҲ¶йқўжқҝз»ҳеҲ¶
++еҲҮжҚўеҗҺпјҢзҠ¶жҖҒйҮҚзҪ®
++
++
++
++
++
++
++
++
++
++
++3. зҠ¶жҖҒзұ»ж•°жҚ®зҡ„дҝқжҢҒ
++жғіиҰҒйҒҝе…ҚжҜҸж¬ЎеҲҮжҚўйғҪдјҡйҮҚзҪ®зҠ¶жҖҒж•°жҚ®пјҢеӨ§дҪ“дёҠжңүдёүз§Қи§ЈеҶіж–№жЎҲпјҡ
++
++1.дҪҝз”Ё AutomaticKeepAliveClientMixin еҜ№зҠ¶жҖҒзұ»иҝӣиЎҢдҝқжҙ»пјҢиҝҷз§Қж–№жЎҲеҸӘиғҪз”ЁдәҺеҸҜж»‘еҠЁз»„д»¶дёӯгҖӮиҝҷйҮҢеҸҜд»ҘдҪҝз”Ё PageView з»„д»¶жқҘе®һзҺ°еҲҮйЎөе№¶дҝқжҙ»зҡ„ж•ҲжһңгҖӮ
++2.е°ҶзҠ¶жҖҒж•°жҚ®жҸҗеҚҮеҲ°дёҠеұӮпјҢжҜ”еҰӮе°ҶдёүдёӘз•Ңйқўзҡ„зҠ¶жҖҒж•°жҚ®йғҪдәӨз”ұ _AppNavigationState зҠ¶жҖҒзұ»з»ҙжҠӨгҖӮеҰӮжһңзӣҙжҺҘз”Ёиҝҷз§Қж–№ејҸпјҢеҫҲе®№жҳ“йҖ жҲҗдёҖдёӘи¶…зә§еӨ§зҡ„зұ»пјҢжқҘз»ҙжҠӨеҫҲеӨҡж•°жҚ®гҖӮе…¶е®һзҠ¶жҖҒз®ЎзҗҶе·Ҙе…·пјҢе°ұжҳҜеҹәдәҺиҝҷз§ҚжҖқи·ҜпјҢе°Ҷж•°жҚ®дәӨз”ұдёҠеұӮз»ҙжҠӨпјҢеҗҢж—¶жҸҗдҫӣдәҶеҲҶжЁЎеқ—еӨ„зҗҶж•°жҚ®зҡ„иғҪеҠӣгҖӮ
++3.дҝқжҢҒж•°жҚ®зҡ„жҢҒд№…жҖ§пјҢжҜ”еҰӮе°Ҷж•°жҚ®дҝқеӯҳеҲ°жң¬ең°ж–Үд»¶жҲ–ж•°жҚ®еә“пјҢжҜҸж¬ЎеҲқе§ӢеҢ–ж—¶иҝӣиЎҢеҠ иҪҪеӨҚзҺ°гҖӮиҝҷз§Қж–№ејҸеӨ„зҗҶиө·жқҘжҜ”иҫғйә»зғҰпјҢеҲқе§ӢеҢ–еҠ иҪҪж•°жҚ®д№ҹйңҖиҰҒдёҖзӮ№ж—¶й—ҙгҖӮдҪҶиҝҷз§Қж–№ејҸеңЁз•ҢйқўдёҚеҸҜи§Ғж—¶пјҢеҸҜд»ҘйҮҠж”ҫеҶ…еӯҳдёӯзҡ„ж•°жҚ®гҖӮ
++
++
++иҝҷйҮҢдҪҝз”Ё ж–№ејҸ 1 жқҘеӨ„зҗҶжҳҜжңҖз®ҖеҚ•зҡ„гҖӮеңЁ _buildContent ж–№жі•дёӯиҝ”еӣһ PageView з»„д»¶пјҢе№¶е°ҶдёүдёӘеҶ…е®№з•ҢйқўдҪңдёә children е…ҘеҸӮпјҢйҖҡиҝҮ PageController жқҘжҺ§еҲ¶з•Ңйқўзҡ„еҲҮжҚўгҖӮжіЁж„ҸдёҖзӮ№пјҡе°Ҷ physics и®ҫзҪ®и®ҫзҪ®дёә NeverScrollableScrollPhysics еҸҜд»ҘзҰҒжӯў PageView зҡ„ж»‘еҠЁпјҢеҰӮжһңжғіиҰҒиҝҗиЎҢж»‘еҠЁеҲҮйЎөпјҢеҸҜд»ҘеҺ»йҷӨгҖӮ
+ ---->[_AppNavigationState]----
+ final PageController _ctrl = PageController();
+@@ -183,40 +184,40 @@
+ }
+ 
+-另外如果期望某个状态类保活，需要让其混入 AutomaticKeepAliveClientMixin, 并覆写 wantKeepAlive 返回 true 。如下是对画板状态类的处理，其他两个同理：
+-
+-
+-
+-
+-在绘制面板绘制
+-切换后，状态保活
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-到这里，就将之前的三个小案例，集成到了一个应用中，并且在切换界面的过程中，可以保持状态数据不被重置。当前代码位置 navigation。
+-上面可以保证程序运行期间，各界面状态类的保活，但是当应用关闭之后，内存中的数据会被清空。再次进入应用时还是无法恢复到之前的状态，想要记住用户的信息，就必须对数据进行持久化的存储。比如存储为本地文件、数据库、网络数据等，下一篇将介绍数据的持久化存储。
+-
+-4. 优化一些缺陷
+-如下所示，左侧是 Column 组件上下排列，当键盘顶起之后，底部会留出一块空白，高为底部导航高度。想解决这个问题，使用 Scaffold 组件即可，它有一个 bottomNavigationBar 的插槽，不会被键盘顶起。
+-
+-
+-
+-Column 结构
+-Scaffold 结构
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-这时，将 _AppNavigationState 的构建方法改为如下代码：
++еҸҰеӨ–еҰӮжһңжңҹжңӣжҹҗдёӘзҠ¶жҖҒзұ»дҝқжҙ»пјҢйңҖиҰҒи®©е…¶ж··е…Ҙ AutomaticKeepAliveClientMixin, е№¶иҰҶеҶҷ wantKeepAlive иҝ”еӣһ true гҖӮеҰӮдёӢжҳҜеҜ№з”»жқҝзҠ¶жҖҒзұ»зҡ„еӨ„зҗҶпјҢе…¶д»–дёӨдёӘеҗҢзҗҶпјҡ
++
++
++
++
++еңЁз»ҳеҲ¶йқўжқҝз»ҳеҲ¶
++еҲҮжҚўеҗҺпјҢзҠ¶жҖҒдҝқжҙ»
++
++
++
++
++
++
++
++
++
++еҲ°иҝҷйҮҢпјҢе°ұе°Ҷд№ӢеүҚзҡ„дёүдёӘе°ҸжЎҲдҫӢпјҢйӣҶжҲҗеҲ°дәҶдёҖдёӘеә”з”ЁдёӯпјҢе№¶дё”еңЁеҲҮжҚўз•Ңйқўзҡ„иҝҮзЁӢдёӯпјҢеҸҜд»ҘдҝқжҢҒзҠ¶жҖҒж•°жҚ®дёҚиў«йҮҚзҪ®гҖӮеҪ“еүҚд»Јз ҒдҪҚзҪ® navigationгҖӮ
++дёҠйқўеҸҜд»ҘдҝқиҜҒзЁӢеәҸиҝҗиЎҢжңҹй—ҙпјҢеҗ„з•ҢйқўзҠ¶жҖҒзұ»зҡ„дҝқжҙ»пјҢдҪҶжҳҜеҪ“еә”з”Ёе…ій—ӯд№ӢеҗҺпјҢеҶ…еӯҳдёӯзҡ„ж•°жҚ®дјҡиў«жё…з©әгҖӮеҶҚж¬Ўиҝӣе…Ҙеә”з”Ёж—¶иҝҳжҳҜж— жі•жҒўеӨҚеҲ°д№ӢеүҚзҡ„зҠ¶жҖҒпјҢжғіиҰҒи®°дҪҸз”ЁжҲ·зҡ„дҝЎжҒҜпјҢе°ұеҝ…йЎ»еҜ№ж•°жҚ®иҝӣиЎҢжҢҒд№…еҢ–зҡ„еӯҳеӮЁгҖӮжҜ”еҰӮеӯҳеӮЁдёәжң¬ең°ж–Үд»¶гҖҒж•°жҚ®еә“гҖҒзҪ‘з»ңж•°жҚ®зӯүпјҢдёӢдёҖзҜҮе°Ҷд»Ӣз»Қж•°жҚ®зҡ„жҢҒд№…еҢ–еӯҳеӮЁгҖӮ
++
++4. дјҳеҢ–дёҖдәӣзјәйҷ·
++еҰӮдёӢжүҖзӨәпјҢе·Ұдҫ§жҳҜ Column з»„д»¶дёҠдёӢжҺ’еҲ—пјҢеҪ“й”®зӣҳйЎ¶иө·д№ӢеҗҺпјҢеә•йғЁдјҡз•ҷеҮәдёҖеқ—з©әзҷҪпјҢй«ҳдёәеә•йғЁеҜјиҲӘй«ҳеәҰгҖӮжғіи§ЈеҶіиҝҷдёӘй—®йўҳпјҢдҪҝз”Ё Scaffold з»„д»¶еҚіеҸҜпјҢе®ғжңүдёҖдёӘ bottomNavigationBar зҡ„жҸ’ж§ҪпјҢдёҚдјҡиў«й”®зӣҳйЎ¶иө·гҖӮ
++
++
++
++Column з»“жһ„
++Scaffold з»“жһ„
++
++
++
++
++
++
++
++
++
++иҝҷж—¶пјҢе°Ҷ _AppNavigationState зҡ„жһ„е»әж–№жі•ж”№дёәеҰӮдёӢд»Јз Ғпјҡ
+  @override
+  Widget build(BuildContext context) {
+@@ -232,14 +233,14 @@
+ 
+ 
+-下面以 AppBar 的主题介绍一下 Flutter 默认配置的能力。项目中希望所有的 AppBar 都是白色背景、状态类透明、标题居中、图标颜色、文字颜色为黑色。
+-
+-如果每次使用 AppBar 组件就配置一次，那代码书写将会非常复杂。Flutter 在主题数据的功能，只要指定主题，其下节点中的对应组件，就会默认使用的配置数据。如下所示，在 MaterialApp 的 theme 入参中可以配置主题数据：
+-
+-这样，以前使用 AppBar 的地方就不用再配置那么多信息了。比如电子木鱼界面的 AppBar 就可以清爽多了：
+-
+-这里只是拿 AppBarTheme 举个例子，还有其他很多的主题可以配置，大家可以在以后慢慢了解。
+-
+-5. 本章小结
+-本章我们主要将之前的三个小案例整合到了一个项目中，通过底部导航栏 + PageView 实现界面间的切换。另外也就 State 的状态保活进行了简单地认识，这里只是程序运行期间，保证各界面状态类的活性，但是当应用关闭之后，内存中的数据会被清空。再次进入应用时还是无法恢复到之前的状态。
+-想要永久记住用户的信息，就必须对数据进行持久化的存储。比如存储为本地文件、数据库、网络数据等，在程序启动时进行加载，恢复状态数据。这是应用程序非常重要的一个部分，下一篇将介绍数据的持久化存储。
+-
++дёӢйқўд»Ҙ AppBar зҡ„дё»йўҳд»Ӣз»ҚдёҖдёӢ Flutter й»ҳи®Өй…ҚзҪ®зҡ„иғҪеҠӣгҖӮйЎ№зӣ®дёӯеёҢжңӣжүҖжңүзҡ„ AppBar йғҪжҳҜзҷҪиүІиғҢжҷҜгҖҒзҠ¶жҖҒзұ»йҖҸжҳҺгҖҒж Үйўҳеұ…дёӯгҖҒеӣҫж ҮйўңиүІгҖҒж–Үеӯ—йўңиүІдёәй»‘иүІгҖӮ
++
++еҰӮжһңжҜҸж¬ЎдҪҝз”Ё AppBar з»„д»¶е°ұй…ҚзҪ®дёҖж¬ЎпјҢйӮЈд»Јз Ғд№ҰеҶҷе°ҶдјҡйқһеёёеӨҚжқӮгҖӮFlutter еңЁдё»йўҳж•°жҚ®зҡ„еҠҹиғҪпјҢеҸӘиҰҒжҢҮе®ҡдё»йўҳпјҢе…¶дёӢиҠӮзӮ№дёӯзҡ„еҜ№еә”з»„д»¶пјҢе°ұдјҡй»ҳи®ӨдҪҝз”Ёзҡ„й…ҚзҪ®ж•°жҚ®гҖӮеҰӮдёӢжүҖзӨәпјҢеңЁ MaterialApp зҡ„ theme е…ҘеҸӮдёӯеҸҜд»Ҙй…ҚзҪ®дё»йўҳж•°жҚ®пјҡ
++
++иҝҷж ·пјҢд»ҘеүҚдҪҝз”Ё AppBar зҡ„ең°ж–№е°ұдёҚз”ЁеҶҚй…ҚзҪ®йӮЈд№ҲеӨҡдҝЎжҒҜдәҶгҖӮжҜ”еҰӮз”өеӯҗжңЁйұјз•Ңйқўзҡ„ AppBar е°ұеҸҜд»Ҙжё…зҲҪеӨҡдәҶпјҡ
++
++иҝҷйҮҢеҸӘжҳҜжӢҝ AppBarTheme дёҫдёӘдҫӢеӯҗпјҢиҝҳжңүе…¶д»–еҫҲеӨҡзҡ„дё»йўҳеҸҜд»Ҙй…ҚзҪ®пјҢеӨ§е®¶еҸҜд»ҘеңЁд»ҘеҗҺж…ўж…ўдәҶи§ЈгҖӮ
++
++5. жң¬з« е°Ҹз»“
++жң¬з« жҲ‘д»¬дё»иҰҒе°Ҷд№ӢеүҚзҡ„дёүдёӘе°ҸжЎҲдҫӢж•ҙеҗҲеҲ°дәҶдёҖдёӘйЎ№зӣ®дёӯпјҢйҖҡиҝҮеә•йғЁеҜјиҲӘж Ҹ + PageView е®һзҺ°з•Ңйқўй—ҙзҡ„еҲҮжҚўгҖӮеҸҰеӨ–д№ҹе°ұ State зҡ„зҠ¶жҖҒдҝқжҙ»иҝӣиЎҢдәҶз®ҖеҚ•ең°и®ӨиҜҶпјҢиҝҷйҮҢеҸӘжҳҜзЁӢеәҸиҝҗиЎҢжңҹй—ҙпјҢдҝқиҜҒеҗ„з•ҢйқўзҠ¶жҖҒзұ»зҡ„жҙ»жҖ§пјҢдҪҶжҳҜеҪ“еә”з”Ёе…ій—ӯд№ӢеҗҺпјҢеҶ…еӯҳдёӯзҡ„ж•°жҚ®дјҡиў«жё…з©әгҖӮеҶҚж¬Ўиҝӣе…Ҙеә”з”Ёж—¶иҝҳжҳҜж— жі•жҒўеӨҚеҲ°д№ӢеүҚзҡ„зҠ¶жҖҒгҖӮ
++жғіиҰҒж°ёд№…и®°дҪҸз”ЁжҲ·зҡ„дҝЎжҒҜпјҢе°ұеҝ…йЎ»еҜ№ж•°жҚ®иҝӣиЎҢжҢҒд№…еҢ–зҡ„еӯҳеӮЁгҖӮжҜ”еҰӮеӯҳеӮЁдёәжң¬ең°ж–Үд»¶гҖҒж•°жҚ®еә“гҖҒзҪ‘з»ңж•°жҚ®зӯүпјҢеңЁзЁӢеәҸеҗҜеҠЁж—¶иҝӣиЎҢеҠ иҪҪпјҢжҒўеӨҚзҠ¶жҖҒж•°жҚ®гҖӮиҝҷжҳҜеә”з”ЁзЁӢеәҸйқһеёёйҮҚиҰҒзҡ„дёҖдёӘйғЁеҲҶпјҢдёӢдёҖзҜҮе°Ҷд»Ӣз»Қж•°жҚ®зҡ„жҢҒд№…еҢ–еӯҳеӮЁгҖӮ
++
+
+--- Yvan: 专栏/Go 语言项目开发实战/04 规范设计（上）：项目开发杂乱无章，如何规范？.md
++++ xixi: 专栏/Go 语言项目开发实战/04 规范设计（上）：项目开发杂乱无章，如何规范？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 04 规范设计（上）：项目开发杂乱无章，如何规范？
+@@ -100,5 +101,5 @@
+ <!-- 这里链接上该项目的开源许可证 -->
+ 
+-更具体的示例，你可以参考 IAM 系统的 README.md 文件 。
++更具体的示例，你可以参考 IAM 系统的 README.md.html 文件 。
+ 这里，有个在线的README生成工具，你也可以参考下：readme.so。
+ 项目文档规范
+@@ -115,5 +116,5 @@
+ │   ├── en-US/                       # 英文版文档，可以根据需要组织文件结构
+ │   └── zh-CN                        # 中文版文档，可以根据需要组织文件结构
+-│       └── development.md           # 开发手册，可以说明如何编译、构建、运行项目
++│       └── development.md.html           # 开发手册，可以说明如何编译、构建、运行项目
+ ├── guide                            # 用户文档
+ │   ├── en-US/                       # 英文版文档，可以根据需要组织文件结构
+@@ -121,20 +122,20 @@
+ │       ├── api/                     # API文档
+ │       ├── best-practice            # 最佳实践，存放一些比较重要的实践文章
+-│       │   └── authorization.md
++│       │   └── authorization.md.html
+ │       ├── faq                      # 常见问题
+ │       │   ├── iam-apiserver
+ │       │   └── installation
+ │       ├── installation             # 安装文档
+-│       │   └── installation.md
++│       │   └── installation.md.html
+ │       ├── introduction/            # 产品介绍文档
+ │       ├── operation-guide          # 操作指南，里面可以根据RESTful资源再划分为更细的子目录，用来存放系统核心/全部功能的操作手册
+-│       │   ├── policy.md
+-│       │   ├── secret.md
+-│       │   └── user.md
++│       │   ├── policy.md.html
++│       │   ├── secret.md.html
++│       │   └── user.md.html
+ │       ├── quickstart               # 快速入门
+-│       │   └── quickstart.md
+-│       ├── README.md                # 用户文档入口文件
++│       │   └── quickstart.md.html
++│       ├── README.md.html                # 用户文档入口文件
+ │       └── sdk                      # SDK文档
+-│           └── golang.md
++│           └── golang.md.html
+ └── images                           # 图片存放目录
+     └── 部署架构v1.png
+@@ -157,12 +158,12 @@
+ 接口文档拆分为以下几个 Markdown 文件，并存放在目录 docs/guide/zh-CN/api 中：
+ 
+-README.md ：API 接口介绍文档，会分类介绍 IAM 支持的 API 接口，并会存放相关 API 接口文档的链接，方便开发者查看。
+-CHANGELOG.md ：API 接口文档变更历史，方便进行历史回溯，也可以使调用者决定是否进行功能更新和版本更新。
+-generic.md ：用来说明通用的请求参数、返回参数、认证方法和请求方法等。
+-struct.md ：用来列出接口文档中使用的数据结构。这些数据结构可能被多个 API 接口使用，会在 user.md、secret.md、policy.md 文件中被引用。
+-user.md 、 secret.md 、 policy.md ：API 接口文档，相同 REST 资源的接口会存放在一个文件中，以 REST 资源名命名文档名。
+-error_code.md ：错误码描述，通过程序自动生成。
+-
+-这里我拿 user.md 接口文档为例，和你解释下接口文档是如何写的。user.md 文件记录了用户相关的接口，每个接口按顺序排列，包含如下 5 部分。
++README.md.html ：API 接口介绍文档，会分类介绍 IAM 支持的 API 接口，并会存放相关 API 接口文档的链接，方便开发者查看。
++CHANGELOG.md.html ：API 接口文档变更历史，方便进行历史回溯，也可以使调用者决定是否进行功能更新和版本更新。
++generic.md.html ：用来说明通用的请求参数、返回参数、认证方法和请求方法等。
++struct.md.html ：用来列出接口文档中使用的数据结构。这些数据结构可能被多个 API 接口使用，会在 user.md.html、secret.md.html、policy.md.html 文件中被引用。
++user.md.html 、 secret.md.html 、 policy.md.html ：API 接口文档，相同 REST 资源的接口会存放在一个文件中，以 REST 资源名命名文档名。
++error_code.md.html ：错误码描述，通过程序自动生成。
++
++这里我拿 user.md.html 接口文档为例，和你解释下接口文档是如何写的。user.md.html 文件记录了用户相关的接口，每个接口按顺序排列，包含如下 5 部分。
+ 
+ 接口描述：描述接口实现了什么功能。
+
+--- Yvan: 专栏/Go 语言项目开发实战/05 规范设计（下）：commit 信息风格迥异、难以阅读，如何规范？.md
++++ xixi: 专栏/Go 语言项目开发实战/05 规范设计（下）：commit 信息风格迥异、难以阅读，如何规范？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 05 规范设计（下）：commit 信息风格迥异、难以阅读，如何规范？
+@@ -196,20 +197,20 @@
+ 这是我们的所有 commit 历史：
+ $ git log --oneline
+-7157e9e docs(docs): append test line 'update3' to README.md
+-5a26aa2 docs(docs): append test line 'update2' to README.md
+-55892fa docs(docs): append test line 'update1' to README.md
+-89651d4 docs(doc): add README.md
++7157e9e docs(docs): append test line 'update3' to README.md.html
++5a26aa2 docs(docs): append test line 'update2' to README.md.html
++55892fa docs(docs): append test line 'update1' to README.md.html
++89651d4 docs(doc): add README.md.html
+ 
+ 接着，我们在 feature/user分支进行功能的开发和测试，并遵循规范提交 commit，功能开发并测试完成后，Git 仓库的 commit 记录如下：
+ $ git log --oneline
+-4ee51d6 docs(user): update user/README.md
+-176ba5d docs(user): update user/README.md
+-5e829f8 docs(user): add README.md for user
++4ee51d6 docs(user): update user/README.md.html
++176ba5d docs(user): update user/README.md.html
++5e829f8 docs(user): add README.md.html for user
+ f40929f feat(user): add delete user function
+ fc70a21 feat(user): add create user function
+-7157e9e docs(docs): append test line 'update3' to README.md
+-5a26aa2 docs(docs): append test line 'update2' to README.md
+-55892fa docs(docs): append test line 'update1' to README.md
+-89651d4 docs(doc): add README.md
++7157e9e docs(docs): append test line 'update3' to README.md.html
++5a26aa2 docs(docs): append test line 'update2' to README.md.html
++55892fa docs(docs): append test line 'update1' to README.md.html
++89651d4 docs(doc): add README.md.html
+ 
+ 可以看到我们提交了 5 个 commit。接下来，我们需要将 feature/user分支的改动合并到 master 分支，但是 5 个 commit 太多了，我们想将这些 commit 合并后再提交到 master 分支。
+@@ -230,8 +231,8 @@
+ $ git log --oneline
+ d6b17e0 feat(user): add user module with all function implements
+-7157e9e docs(docs): append test line 'update3' to README.md
+-5a26aa2 docs(docs): append test line 'update2' to README.md
+-55892fa docs(docs): append test line 'update1' to README.md
+-89651d4 docs(doc): add README.md
++7157e9e docs(docs): append test line 'update3' to README.md.html
++5a26aa2 docs(docs): append test line 'update2' to README.md.html
++55892fa docs(docs): append test line 'update1' to README.md.html
++89651d4 docs(doc): add README.md.html
+ 
+ 最后，我们就可以将 feature 分支 feature/user 的改动合并到主干分支，从而完成新功能的开发。
+@@ -240,8 +241,8 @@
+ $ git log --oneline
+ d6b17e0 feat(user): add user module with all function implements
+-7157e9e docs(docs): append test line 'update3' to README.md
+-5a26aa2 docs(docs): append test line 'update2' to README.md
+-55892fa docs(docs): append test line 'update1' to README.md
+-89651d4 docs(doc): add README.md
++7157e9e docs(docs): append test line 'update3' to README.md.html
++5a26aa2 docs(docs): append test line 'update2' to README.md.html
++55892fa docs(docs): append test line 'update1' to README.md.html
++89651d4 docs(doc): add README.md.html
+ 
+ 这里给你一个小提示，如果你有太多的 commit 需要合并，那么可以试试这种方式：先撤销过去的 commit，然后再建一个新的。
+@@ -265,8 +266,8 @@
+ 
+ $ git log –oneline
+-418bd4 docs(docs): append test line 'update$i' to README.md
+-89651d4 docs(doc): add README.md
+-
+-可以看到，最近一次的 Commit Message 是 docs(docs): append test line 'update$i' to README.md，其中 update$i 正常应该是 update1。
++418bd4 docs(docs): append test line 'update$i' to README.md.html
++89651d4 docs(doc): add README.md.html
++
++可以看到，最近一次的 Commit Message 是 docs(docs): append test line 'update$i' to README.md.html，其中 update$i 正常应该是 update1。
+ 
+ 更新最近一次提交的 Commit Message
+@@ -275,5 +276,5 @@
+ 
+ 修改完成后执行:wq 保存，退出编辑器之后，会在命令行显示，该 commit 的 message 的更新结果如下：
+-[master 55892fa] docs(docs): append test line 'update1' to README.md
++[master 55892fa] docs(docs): append test line 'update1' to README.md.html
+  Date: Fri Sep 18 13:40:42 2020 +0800
+  1 file changed, 1 insertion(+)
+@@ -283,6 +284,6 @@
+ 
+ $ git log --oneline
+-55892fa docs(docs): append test line 'update1' to README.md
+-89651d4 docs(doc): add README.md
++55892fa docs(docs): append test line 'update1' to README.md.html
++89651d4 docs(doc): add README.md.html
+ 
+ 可以看到最近一次 commit 的 message 成功被修改为期望的内容。
+@@ -293,10 +294,10 @@
+ 
+ $ git log --oneline
+-1d6289f docs(docs): append test line 'update3' to README.md
+-a38f808 docs(docs): append test line 'update$i' to README.md
+-55892fa docs(docs): append test line 'update1' to README.md
+-89651d4 docs(doc): add README.md
+-
+-可以看到倒数第 3 次提交的 Commit Message 是：docs(docs): append test line 'update$i' to README.md，其中 update$i 正常应该是 update2。
++1d6289f docs(docs): append test line 'update3' to README.md.html
++a38f808 docs(docs): append test line 'update$i' to README.md.html
++55892fa docs(docs): append test line 'update1' to README.md.html
++89651d4 docs(doc): add README.md.html
++
++可以看到倒数第 3 次提交的 Commit Message 是：docs(docs): append test line 'update$i' to README.md.html，其中 update$i 正常应该是 update2。
+ 
+ 修改倒数第 3 次提交 commit 的 message。
+@@ -307,5 +308,5 @@
+ 
+ 修改完成后执行:wq 保存，退出编辑器之后，会在命令行显示该 commit 的 message 的更新结果：
+-[detached HEAD 5a26aa2] docs(docs): append test line 'update2' to README.md
++[detached HEAD 5a26aa2] docs(docs): append test line 'update2' to README.md.html
+  Date: Fri Sep 18 13:45:54 2020 +0800
+  1 file changed, 1 insertion(+)
+@@ -318,8 +319,8 @@
+ 
+ $ git log --oneline
+-7157e9e docs(docs): append test line 'update3' to README.md
+-5a26aa2 docs(docs): append test line 'update2' to README.md
+-55892fa docs(docs): append test line 'update1' to README.md
+-89651d4 docs(doc): add README.md
++7157e9e docs(docs): append test line 'update3' to README.md.html
++5a26aa2 docs(docs): append test line 'update2' to README.md.html
++55892fa docs(docs): append test line 'update1' to README.md.html
++89651d4 docs(doc): add README.md.html
+ 
+ 可以看到，倒数第 3 次 commit 的 message 成功被修改为期望的内容。
+
+--- Yvan: 专栏/Go 语言项目开发实战/06 目录结构设计：如何组织一个可维护、可扩展的代码目录？.md
++++ xixi: 专栏/Go 语言项目开发实战/06 目录结构设计：如何组织一个可维护、可扩展的代码目录？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 06 目录结构设计：如何组织一个可维护、可扩展的代码目录？
+@@ -17,5 +18,5 @@
+ 
+ $ ls internal/
+-app  pkg  README.md
++app  pkg  README.md.html
+ 
+ internal 目录用来实现内部代码，app 和 pkg 目录下的所有文件都属于内部代码。如果 internal 目录不管项目大小，永远只有 2 个文件 app 和 pkg，那么就说明 internal 目录是不可扩展的。
+@@ -60,5 +61,5 @@
+ │       └── pump.go
+ ├── configs
+-├── CONTRIBUTING.md
++├── CONTRIBUTING.md.html
+ ├── deployments
+ ├── docs
+@@ -70,5 +71,5 @@
+ │   │   └── zh-CN
+ │   ├── images
+-│   └── README.md
++│   └── README.md.html
+ ├── examples
+ ├── githooks
+@@ -115,5 +116,5 @@
+ │   ├── util
+ │   │   └── genutil
+-├── README.md
++├── README.md.html
+ ├── scripts
+ │   ├── lib
+@@ -297,5 +298,5 @@
+ 一个项目，也包含一些文档，这些文档有很多类别，也需要一些目录来存放这些文档，这里我们也一起来看下。
+ 
+-/README.md
++/README.md.html
+ 
+ 项目的 README 文件一般包含了项目的介绍、功能、快速安装和使用指引、详细的文档链接以及开发指引等。有时候 README 文档会比较长，为了能够快速定位到所需内容，需要添加 markdown toc 索引，可以借助工具 tocenize 来完成索引的添加。
+@@ -311,7 +312,7 @@
+ 
+ 
+-/CONTRIBUTING.md
+-
+-如果是一个开源就绪的项目，最好还要有一个 CONTRIBUTING.md 文件，用来说明如何贡献代码，如何开源协同等等。CONTRIBUTING.md 不仅能够规范协同流程，还能降低第三方开发者贡献代码的难度。
++/CONTRIBUTING.md.html
++
++如果是一个开源就绪的项目，最好还要有一个 CONTRIBUTING.md.html 文件，用来说明如何贡献代码，如何开源协同等等。CONTRIBUTING.md.html 不仅能够规范协同流程，还能降低第三方开发者贡献代码的难度。
+ 
+ /api
+@@ -319,8 +320,8 @@
+ /api 目录中存放的是当前项目对外提供的各种不同类型的 API 接口定义文件，其中可能包含类似 /api/protobuf-spec、/api/thrift-spec、/api/http-spec、openapi、swagger 的目录，这些目录包含了当前项目对外提供和依赖的所有 API 文件。例如，如下是 IAM 项目的/api 目录：
+ ├── openapi/
+-│   └── README.md
++│   └── README.md.html
+ └── swagger/
+     ├── docs/
+-    ├── README.md
++    ├── README.md.html
+     └── swagger.yaml
+ 
+@@ -361,5 +362,5 @@
+ ├── internal
+ ├── pkg
+-└── README.md
++└── README.md.html
+ 
+ 另外，在设计目录结构时，一些空目录无法提交到 Git 仓库中，但我们又想将这个空目录上传到 Git 仓库中，以保留目录结构。这时候，可以在空目录下加一个 .keep 文件，例如：
+
+--- Yvan: 专栏/Go 语言项目开发实战/07 工作流设计：如何设计合理的多人开发模式？.md
++++ xixi: 专栏/Go 语言项目开发实战/07 工作流设计：如何设计合理的多人开发模式？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 07 工作流设计：如何设计合理的多人开发模式？
+@@ -64,5 +65,5 @@
+ b. 需要新开发一个功能，使程序执行时向标准输出输出“hello world”字符串。
+ c. 在开发阶段，线上代码有 Bug 需要紧急修复。
+-假设我们的 Git 项目名为 gitflow-demo，项目目录下有 2 个文件，分别是 README.md 和 main.go，内容如下。
++假设我们的 Git 项目名为 gitflow-demo，项目目录下有 2 个文件，分别是 README.md.html 和 main.go，内容如下。
+ package main
+ 
+
+--- Yvan: 专栏/Go 语言项目开发实战/10 设计方法：怎么写出优雅的 Go 项目？.md
++++ xixi: 专栏/Go 语言项目开发实战/10 设计方法：怎么写出优雅的 Go 项目？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 10 设计方法：怎么写出优雅的 Go 项目？
+@@ -434,5 +435,5 @@
+ 代码在合并入主干时，应该有一套CI/CD流程来自动化地对代码进行检查、编译、单元测试等，只有通过后的代码才可以并入主干。通过CI/CD流程来保证代码的质量。当前比较流行的CI/CD工具有Jenkins、GitLab、Argo、Github Actions、JenkinsX等。在第51讲 和 第52讲中，我会详细介绍CI/CD的原理和实战。
+ 编写高质量的项目文档
+-最后，一个优雅的项目，还应该有完善的文档。例如 README.md、安装文档、开发文档、使用文档、API接口文档、设计文档等等。这些内容在第04讲的文档规范部分有详细介绍，你可以去复习下。
++最后，一个优雅的项目，还应该有完善的文档。例如 README.md.html、安装文档、开发文档、使用文档、API接口文档、设计文档等等。这些内容在第04讲的文档规范部分有详细介绍，你可以去复习下。
+ 总结
+ 使用Go语言做项目开发，核心目的其实就是开发一个优雅的Go项目。那么如何开发一个优雅的Go项目呢？Go项目包含三大内容，即 Go应用、项目管理、项目文档，因此开发一个优雅的Go项目，其实就是编写高质量的Go应用、高效管理项目和编写高质量的项目文档。针对每一项，我都给出了一些实现方式，这些方式详见下图：
+
+--- Yvan: 专栏/Go 语言项目开发实战/14 项目管理：如何编写高质量的Makefile？.md
++++ xixi: 专栏/Go 语言项目开发实战/14 项目管理：如何编写高质量的Makefile？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 14 项目管理：如何编写高质量的Makefile？
+@@ -202,5 +203,5 @@
+ 在我们IAM实战项目的golang.mk中，执行 make go.build 时能够构建cmd/目录下的所有组件，也就是说，当有新组件添加时， make go.build 仍然能够构建新增的组件，这就实现了上面说的第二点。
+ 具体实现方法如下：
+-COMMANDS ?= $(filter-out %.md, $(wildcard ${ROOT_DIR}/cmd/*))
++COMMANDS ?= $(filter-out %.md.html, $(wildcard ${ROOT_DIR}/cmd/*))
+ BINS ?= $(foreach cmd,${COMMANDS},$(notdir ${cmd}))
+ 
+@@ -221,5 +222,5 @@
+ 在 go.build.% 伪目标中，通过eval、word、subst函数组合，算出了COMMAND的值 iamctl/iam-apiserver/iam-authz-server/...，最终通过 $(ROOT_PACKAGE)/cmd/$(COMMAND) 定位到需要构建的组件的main函数所在目录。
+ 上述实现中有两个技巧，你可以注意下。首先，通过
+-COMMANDS ?= $(filter-out %.md, $(wildcard ${ROOT_DIR}/cmd/*))
++COMMANDS ?= $(filter-out %.md.html, $(wildcard ${ROOT_DIR}/cmd/*))
+ BINS ?= $(foreach cmd,${COMMANDS},$(notdir ${cmd}))
+ 
+
+--- Yvan: 专栏/Go 语言项目开发实战/15 研发流程实战：IAM项目是如何进行研发流程管理的？.md
++++ xixi: 专栏/Go 语言项目开发实战/15 研发流程实战：IAM项目是如何进行研发流程管理的？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 15 研发流程实战：IAM项目是如何进行研发流程管理的？
+@@ -278,5 +279,5 @@
+ 
+ 也可以通过以下命令，手动来生成CHANGELOG：
+-$ git-chglog v1.0.0 CHANGELOG/CHANGELOG-1.0.0.md
++$ git-chglog v1.0.0 CHANGELOG/CHANGELOG-1.0.0.md.html
+ 
+ 还可以执行gsemver来生成版本号：
+
+--- Yvan: 专栏/Go 语言项目开发实战/19 错误处理（下）：如何设计错误包？.md
++++ xixi: 专栏/Go 语言项目开发实战/19 错误处理（下）：如何设计错误包？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 19 错误处理（下）：如何设计错误包？
+@@ -385,5 +386,5 @@
+     HTTP: 200,
+     Ext:  "OK",
+-    Ref:  "https://github.com/marmotedu/sample-code/blob/master/README.md",
++    Ref:  "https://github.com/marmotedu/sample-code/blob/master/README.md.html",
+ }
+ 
+@@ -391,5 +392,5 @@
+ 一个项目有很多个错误码，如果每个错误码都手动调用MustRegister函数会很麻烦，这里我们通过代码自动生成的方法，来生成register函数调用：
+ //go:generate codegen -type=int
+-//go:generate codegen -type=int -doc -output ./error_code_generated.md
++//go:generate codegen -type=int -doc -output ./error_code_generated.md.html
+ 
+ //go:generate codegen -type=int 会调用codegen工具，生成sample_code_generated.go源码文件：
+@@ -404,14 +405,14 @@
+ 这些register调用放在init函数中，在加载程序的时候被初始化。
+ 这里要注意，在注册的时候，我们会检查HTTP Status Code，只允许定义200、400、401、403、404、500这6个HTTP错误码。这里通过程序保证了错误码是符合HTTP Status Code使用要求的。
+-//go:generate codegen -type=int -doc -output ./error_code_generated.md会生成错误码描述文档 error_code_generated.md。当我们提供API文档时，也需要记着提供一份错误码描述文档，这样客户端才可以根据错误码，知道请求是否成功，以及具体发生哪类错误，好针对性地做一些逻辑处理。
+-codegen工具会根据错误码注释生成sample_code_generated.go和error_code_generated.md文件：
++//go:generate codegen -type=int -doc -output ./error_code_generated.md.html会生成错误码描述文档 error_code_generated.md.html。当我们提供API文档时，也需要记着提供一份错误码描述文档，这样客户端才可以根据错误码，知道请求是否成功，以及具体发生哪类错误，好针对性地做一些逻辑处理。
++codegen工具会根据错误码注释生成sample_code_generated.go和error_code_generated.md.html文件：
+ // ErrSuccess - 200: OK.
+  ErrSuccess int = iota + 100001
+ 
+-codegen工具之所以能够生成sample_code_generated.go和error_code_generated.md，是因为我们的错误码注释是有规定格式的：// <错误码整型常量> - <对应的HTTP Status Code>: <External Message>.。
++codegen工具之所以能够生成sample_code_generated.go和error_code_generated.md.html，是因为我们的错误码注释是有规定格式的：// <错误码整型常量> - <对应的HTTP Status Code>: <External Message>.。
+ codegen工具可以在IAM项目根目录下，执行以下命令来安装：
+ $ make tools.install.codegen
+ 
+-安装完 codegen 工具后，可以在 github.com/marmotedu/sample-code 包根目录下执行 go generate 命令，来生成sample_code_generated.go和error_code_generated.md。这里有个技巧需要你注意：生成的文件建议统一用 xxxx_generated.xx 来命名，这样通过 generated ，我们就知道这个文件是代码自动生成的，有助于我们理解和使用。
++安装完 codegen 工具后，可以在 github.com/marmotedu/sample-code 包根目录下执行 go generate 命令，来生成sample_code_generated.go和error_code_generated.md.html。这里有个技巧需要你注意：生成的文件建议统一用 xxxx_generated.xx 来命名，这样通过 generated ，我们就知道这个文件是代码自动生成的，有助于我们理解和使用。
+ 在实际的开发中，我们可以将错误码独立成一个包，放在 internal/pkg/code/目录下，这样可以方便整个应用调用。例如IAM的错误码就放在IAM项目根目录下的internal/pkg/code/目录下。
+ 我们的错误码是分服务和模块的，所以这里建议你把相同的服务放在同一个Go源文件中，例如IAM的错误码存放文件：
+@@ -439,5 +440,5 @@
+ )
+ 
+-最后，我们还需要将错误码定义记录在项目的文件中，供开发者查阅、遵守和使用，例如IAM项目的错误码定义记录文档为code_specification.md。这个文档中记录了错误码说明、错误描述规范和错误记录规范等。
++最后，我们还需要将错误码定义记录在项目的文件中，供开发者查阅、遵守和使用，例如IAM项目的错误码定义记录文档为code_specification.md.html。这个文档中记录了错误码说明、错误描述规范和错误记录规范等。
+ 错误码实际使用方法示例
+ 上面，我讲解了错误包和错误码的实现方式，那你一定想知道在实际开发中我们是如何使用的。这里，我就举一个在gin web框架中使用该错误码的例子：
+
+--- Yvan: 专栏/Go 语言项目开发实战/33  SDK 设计（上）：如何设计出一个优秀的 Go SDK？.md
++++ xixi: 专栏/Go 语言项目开发实战/33  SDK 设计（上）：如何设计出一个优秀的 Go SDK？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 33  SDK 设计（上）：如何设计出一个优秀的 Go SDK？
+@@ -22,5 +23,5 @@
+ 不同项目SDK的目录结构也不相同，但一般需要包含下面这些文件或目录。目录名可能会有所不同，但目录功能是类似的。
+ 
+-README.md：SDK的帮助文档，里面包含了安装、配置和使用SDK的方法。
++README.md.html：SDK的帮助文档，里面包含了安装、配置和使用SDK的方法。
+ examples/sample/：SDK的使用示例。
+ sdk/：SDK共享的包，里面封装了最基础的通信功能。如果是HTTP服务，基本都是基于 net/http 包进行封装。
+@@ -31,5 +32,5 @@
+ ├── examples            # 示例代码存放目录
+ │   └── authz.go
+-├── README.md           # SDK使用文档
++├── README.md.html           # SDK使用文档
+ ├── sdk                 # 公共包，封装了SDK配置、API请求、认证等代码
+ │   ├── client.go
+
+--- Yvan: 专栏/Go 语言项目开发实战/35 效率神器：如何设计和实现一个命令行客户端工具？.md
++++ xixi: 专栏/Go 语言项目开发实战/35 效率神器：如何设计和实现一个命令行客户端工具？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 35 效率神器：如何设计和实现一个命令行客户端工具？
+@@ -44,5 +45,5 @@
+ 
+  Find more information at:
+-https://github.com/marmotedu/iam/blob/master/docs/guide/en-US/cmd/iamctl/iamctl.md
++https://github.com/marmotedu/iam/blob/master/docs/guide/en-US/cmd/iamctl/iamctl.md.html
+ 
+ Basic Commands:
+
+--- Yvan: 专栏/Go 语言项目开发实战/特别放送 IAM排障指南.md
++++ xixi: 专栏/Go 语言项目开发实战/特别放送 IAM排障指南.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 特别放送 IAM排障指南
+@@ -46,5 +47,5 @@
+    Loaded: loaded (/etc/systemd/system/iam-apiserver.service; enabled; vendor preset: disabled)
+    Active: activating (auto-restart) (Result: exit-code) since Thu 2021-09-09 13:47:56 CST; 2s ago
+-     Docs: https://github.com/marmotedu/iam/blob/master/init/README.md
++     Docs: https://github.com/marmotedu/iam/blob/master/init/README.md.html
+   Process: 119463 ExecStart=/opt/iam/bin/iam-apiserver --config=/etc/iam/iam-apiserver.yaml (code=exited, status=1/FAILURE)
+   Process: 119461 ExecStartPre=/usr/bin/mkdir -p /var/log/iam (code=exited, status=0/SUCCESS)
+@@ -227,5 +228,5 @@
+    Loaded: loaded (/etc/systemd/system/iam-apiserver.service; enabled; vendor preset: disabled)
+    Active: active (running) since Thu 2021-09-09 20:48:18 CST; 17s ago
+-     Docs: https://github.com/marmotedu/iam/blob/master/init/README.md
++     Docs: https://github.com/marmotedu/iam/blob/master/init/README.md.html
+   Process: 255648 ExecStartPre=/usr/bin/mkdir -p /var/log/iam (code=exited, status=0/SUCCESS)
+   Process: 255647 ExecStartPre=/usr/bin/mkdir -p /data/iam/iam-apiserver (code=exited, status=0/SUCCESS)
+
+--- Yvan: 专栏/Go 语言项目开发实战/结束语 如何让自己的 Go 研发之路走得更远？.md
++++ xixi: 专栏/Go 语言项目开发实战/结束语 如何让自己的 Go 研发之路走得更远？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 结束语 如何让自己的 Go 研发之路走得更远？
+@@ -68,5 +69,5 @@
+ 
+ 
+-执行完这三步，我们就从上图的第 1 行开始，根据 Repository 的描述判断当前 Repository 有没有可能是我们要找的包。如果有，就打开 Repository，阅读它的README.md 来进一步判断。如果判断出可能是我们要找的包，并且各方面都还可以，就 clone 下来，根据其 README.md 中的帮助文档，编写代码并测试其功能。
++执行完这三步，我们就从上图的第 1 行开始，根据 Repository 的描述判断当前 Repository 有没有可能是我们要找的包。如果有，就打开 Repository，阅读它的README.md.html 来进一步判断。如果判断出可能是我们要找的包，并且各方面都还可以，就 clone 下来，根据其 README.md.html 中的帮助文档，编写代码并测试其功能。
+ 研究完上一个 Repository 之后，我们继续根据排序，以相同的方法研究第 2 个 Repository，并以此类推，直到找到满意的包，或者GitHub Star 数小于某个预期值为止。用这样的方法，我们应该可以找到符合要求的优秀开源包，而且该开源包极有可能是“最”优秀的包。
+ 此外，GitHub 上的 awesome-go 项目也根据分类记录了很多包和工具，你也可以在这个项目中寻找。我的建议是优先从GitHub上找，再在 libs.garden 上找，最后再参考 awesome-go项目。
+
+--- Yvan: 专栏/JVM 核心技术 32 讲（完）/23 内存分析与相关工具上篇（内存布局与分析工具）.md
++++ xixi: 专栏/JVM 核心技术 32 讲（完）/23 内存分析与相关工具上篇（内存布局与分析工具）.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 23 内存分析与相关工具上篇（内存布局与分析工具）
+@@ -426,5 +427,5 @@
+ 使用 jconsole 选项通过 HotSpotDiagnosticMXBean 从运行时获得堆转储。请参考：jconsole(1) 以及 HotSpotDiagnosticMXBean 的接口描述：http://docs.oracle.com/javase/8/docs/jre/api/management/extension/com/sun/management/HotSpotDiagnosticMXBean.html。
+ 在虚拟机启动时如果指定了 -XX:+HeapDumpOnOutOfMemoryError 选项，则抛出 OutOfMemoryError 时，会自动执行堆转储。
+-使用 hprof 命令。请参考：性能分析工具——HPROF 简介：https://github.com/cncounter/translation/blob/master/tiemao*2017⁄20*hprof/20_hprof.md。
++使用 hprof 命令。请参考：性能分析工具——HPROF 简介：https://github.com/cncounter/translation/blob/master/tiemao*2017⁄20*hprof/20_hprof.md.html。
+ 
+ 4. Options 选项介绍
+
+--- Yvan: 专栏/JVM 核心技术 32 讲（完）/26 面临复杂问题时的几个高级工具：它山之石，可以攻玉.md
++++ xixi: 专栏/JVM 核心技术 32 讲（完）/26 面临复杂问题时的几个高级工具：它山之石，可以攻玉.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 26 面临复杂问题时的几个高级工具：它山之石，可以攻玉
+@@ -372,5 +373,5 @@
+ 性能分析工具——HPROF 简介：
+ 
+-https://github.com/cncounter/translation/blob/master/tiemao*2017⁄20*hprof/20_hprof.md
++https://github.com/cncounter/translation/blob/master/tiemao*2017⁄20*hprof/20_hprof.md.html
+ 
+ HPROF 参考文档：
+
+--- Yvan: 专栏/Jenkins持续交付和持续部署/03.Devops工具链.md
++++ xixi: 专栏/Jenkins持续交付和持续部署/03.Devops工具链.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 03.Devops工具链
+@@ -282,5 +283,5 @@
+ [master (root-commit) 8cd1730] Initial commit
+  6 files changed, 76 insertions(+)
+- create mode 100644 README.md
++ create mode 100644 README.md.html
+  create mode 100644 pom.xml
+  create mode 100644 src/main/webapp/.index.jsp.un~
+
+--- Yvan: 专栏/Kubernetes 从上手到实践/10 应用管理：初识 Helm.md
++++ xixi: 专栏/Kubernetes 从上手到实践/10 应用管理：初识 Helm.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 10 应用管理：初识 Helm
+@@ -17,5 +18,5 @@
+ linux-amd64/
+ linux-amd64/tiller
+-linux-amd64/README.md
++linux-amd64/README.md.html
+ linux-amd64/helm
+ linux-amd64/LICENSE
+@@ -24,5 +25,5 @@
+ ├── helm
+ ├── LICENSE
+-├── README.md
++├── README.md.html
+ └── tiller
+ 
+
+--- Yvan: 专栏/Kubernetes 实践入门指南/11 服务发现 DNS 的落地实践.md
++++ xixi: 专栏/Kubernetes 实践入门指南/11 服务发现 DNS 的落地实践.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 11 服务发现 DNS 的落地实践
+@@ -89,5 +90,5 @@
+ 参考：
+ 
+-https://github.com/coredns/deployment/blob/master/kubernetes/Scaling_CoreDNS.md
++https://github.com/coredns/deployment/blob/master/kubernetes/Scaling_CoreDNS.md.html
+ https://kuboard.cn/learning/k8s-intermediate/service/dns.html
+ 
+
+--- Yvan: 专栏/Kubernetes 实践入门指南/23 K8s 集群中存储对象灾备的落地实践.md
++++ xixi: 专栏/Kubernetes 实践入门指南/23 K8s 集群中存储对象灾备的落地实践.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 23 K8s 集群中存储对象灾备的落地实践
+@@ -313,5 +314,5 @@
+ 参考链接
+ 
+-https://github.com/rook/rook/blob/master/Documentation/ceph-disaster-recovery.md
++https://github.com/rook/rook/blob/master/Documentation/ceph-disaster-recovery.md.html
+ https://zh.wikipedia.org/wiki/Quorum_(%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F)
+ 
+
+--- Yvan: 专栏/Kubernetes入门实战课/32 实战演练：玩转Kubernetes（3）.md
++++ xixi: 专栏/Kubernetes入门实战课/32 实战演练：玩转Kubernetes（3）.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 32 实战演练：玩转Kubernetes（3）
+@@ -241,5 +242,5 @@
+ 访问Dashboard
+ 到这里，Dashboard的部署工作就基本完成了。为了能正常访问，我们还要为它创建一个用户，才能登录进Dashboard。
+-Dashboard的网站上有一个简单示例（https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md），我们直接拿来用就行：
++Dashboard的网站上有一个简单示例（https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md.html），我们直接拿来用就行：
+ apiVersion: v1
+ kind: ServiceAccount
+
+--- Yvan: 专栏/OpenResty从入门到实战/21 带你玩转时间、正则表达式等常用API.md
++++ xixi: 专栏/OpenResty从入门到实战/21 带你玩转时间、正则表达式等常用API.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 21 带你玩转时间、正则表达式等常用API
+@@ -8,6 +9,6 @@
+ ngx.re.split
+ 第一个是ngx.re.split。字符串切割是很常见的功能，OpenResty 也提供了对应的 API，但在社区的 QQ 交流群中，很多开发者都找不到这样的函数，只能选择自己手写。
+-为什么呢？其实， ngx.re.split 这个 API 并不在 lua-nginx-module 中，而是在 lua-resty-core 里面；并且它也不在 lua-resty-core 首页的文档中，而是在 lua-resty-core/lib/ngx/re.md 这个第三级目录的文档中出现的。多种原因，导致很多开发者完全不知道这个 API 的存在。
+-类似这种“藏在深闺无人识“的 API，还有我们前面提到过的 ngx_resp.add_header、enable_privileged_agent 等等。那么怎么来最快地解决这种问题呢？除了阅读 lua-resty-core 首页文档外，你还需要把 lua-resty-core/lib/ngx/ 这个目录下的 .md 格式的文档也通读一遍才行。
++为什么呢？其实， ngx.re.split 这个 API 并不在 lua-nginx-module 中，而是在 lua-resty-core 里面；并且它也不在 lua-resty-core 首页的文档中，而是在 lua-resty-core/lib/ngx/re.md.html 这个第三级目录的文档中出现的。多种原因，导致很多开发者完全不知道这个 API 的存在。
++类似这种“藏在深闺无人识“的 API，还有我们前面提到过的 ngx_resp.add_header、enable_privileged_agent 等等。那么怎么来最快地解决这种问题呢？除了阅读 lua-resty-core 首页文档外，你还需要把 lua-resty-core/lib/ngx/ 这个目录下的 .md.html 格式的文档也通读一遍才行。
+ 我们前面夸了很多 OpenResty 文档做得好的地方，不过，这一点上，也就是在一个页面能够查询到完整的 API 列表，确实还有很大的改进空间。
+ lua_regex_match_limit
+
+--- Yvan: 专栏/Serverless进阶实战课/08 运行时（下）：不同语言形态下的函数在容器中是如何执行的？.md
++++ xixi: 专栏/Serverless进阶实战课/08 运行时（下）：不同语言形态下的函数在容器中是如何执行的？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 08 运行时（下）：不同语言形态下的函数在容器中是如何执行的？
+@@ -130,5 +131,5 @@
+ │   ├── requirements.txt
+ │   └── server.py
+-├── readme.md
++├── readme.md.html
+ ├── s.yaml
+ └── s_en.yaml
+
+--- Yvan: 专栏/Tony Bai · Go语言第一课/03 配好环境：选择一种最适合你的Go安装方法.md
++++ xixi: 专栏/Tony Bai · Go语言第一课/03 配好环境：选择一种最适合你的Go安装方法.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 03 配好环境：选择一种最适合你的Go安装方法
+@@ -29,6 +30,6 @@
+ 执行完上面解压缩命令后，我们将在/usr/local下面看到名为go的目录，这个目录就是Go的安装目录，也是Go官方推荐的Go安装目录。我们执行下面命令可以查看该安装目录下的组成：
+ $ls -F /usr/local/go
+-AUTHORS          CONTRIBUTORS  PATENTS    SECURITY.md  api/  doc/         lib/   pkg/        src/
+-CONTRIBUTING.md  LICENSE       README.md  VERSION      bin/  favicon.ico  misc/  robots.txt  test/
++AUTHORS          CONTRIBUTORS  PATENTS    SECURITY.md.html  api/  doc/         lib/   pkg/        src/
++CONTRIBUTING.md.html  LICENSE       README.md.html  VERSION      bin/  favicon.ico  misc/  robots.txt  test/
+ 
+ 不过呢，为了可以在任意路径下使用go命令，我们需要将Go二进制文件所在路径加入到用户环境变量PATH中（以用户使用bash为例），具体操作是将下面这行环境变量设置语句添加到$HOME/.profile文件的末尾：
+
+--- Yvan: 专栏/Tony Bai · Go语言第一课/加餐 聊聊最近大热的Go泛型.md
++++ xixi: 专栏/Tony Bai · Go语言第一课/加餐 聊聊最近大热的Go泛型.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 加餐 聊聊最近大热的Go泛型
+@@ -299,5 +300,5 @@
+ 最后要和你特别说明一下，Go 1.18仅仅是Go泛型的起点，就像Go Module构建机制一样，Go泛型的成熟与稳定还需要几个Go发布版本的努力。而且我们这一讲中涉及到泛型的代码都需要你安装Go 1.18beta1或以上版本。
+ 思考题
+-Go泛型对于你来说估计还比较陌生，这里我也给你留了一个作业，那就是仔细阅读一遍Go泛型的技术方案：https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md
++Go泛型对于你来说估计还比较陌生，这里我也给你留了一个作业，那就是仔细阅读一遍Go泛型的技术方案：https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md.html
+ 如果你在阅读过程中有任何问题，欢迎在留言区提出。我是Tony Bai，我们下节课再见。
+ 
+
+--- Yvan: 专栏/Vim 实用技巧必知必会/拓展1 纯文本编辑：使用 Vim 书写中英文文档.md
++++ xixi: 专栏/Vim 实用技巧必知必会/拓展1 纯文本编辑：使用 Vim 书写中英文文档.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 拓展1 纯文本编辑：使用 Vim 书写中英文文档
+@@ -150,5 +151,5 @@
+ 本讲我们的配置文件有几处改动，对应的标签是 x1-unix 和 x1-windows。
+ 课后练习
+-请尝试写一个小小的英文 README.md，内容不限，可以从其他地方复制。要求是：
++请尝试写一个小小的英文 README.md.html，内容不限，可以从其他地方复制。要求是：
+ 
+ 内容除标题外至少三段，每段至少两行
+
+--- Yvan: 专栏/Web漏洞挖掘实战/30 HTTP Header安全标志：协议级别的安全支持.md
++++ xixi: 专栏/Web漏洞挖掘实战/30 HTTP Header安全标志：协议级别的安全支持.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 30 HTTP Header安全标志：协议级别的安全支持
+@@ -73,90 +74,35 @@
+ 下面，让我们继续学习X-Frame-Options安全标志的功能。
+ X-Frame-Options标志
+-X-Frame-Options响应头也是一个重要的HTTP Header安全标志，它用来配置是否允许一个页面可在 、、<embed> 或者 <object> 中展现设置的内容。</p>
++X-Frame-Options响应头也是一个重要的HTTP Header安全标志，它用来配置是否允许一个页面可在 、、<embed/> 或者 <object> 中展现设置的内容。</object>
++接下来，我们一起来看一个示例：
++X-Frame-Options: DENY
+ 
+-<p>接下来，我们一起来看一个示例：</p>
++在这个示例中，我们将它的值设为DENY，表示该页面不允许在frame等上述标签中展示任何内容。事实上，它还有两个可能取值SAMEORIGIN以及ALLOW-FROM uri。其中SAMEORIGIN代表仅允许在上述标签中展示与当前页面域名相同的内容，而ALLOW-FROM uri则代表仅允许在其中展示uri对应页面的内容。
++还记得我们在XSS学习中，曾今利用XSS攻击实现了广告的植入操作，产生的效果如下图所示：
+ 
+-<pre><code class="language-plain">X-Frame-Options: DENY
+-</code></pre>
+-
+-<p>在这个示例中，我们将它的值设为DENY，表示该页面不允许在frame等上述标签中展示任何内容。事实上，它还有两个可能取值SAMEORIGIN以及ALLOW-FROM uri。其中SAMEORIGIN代表仅允许在上述标签中展示与当前页面域名相同的内容，而ALLOW-FROM uri则代表仅允许在其中展示uri对应页面的内容。</p>
+-
+-<p>还记得我们在XSS学习中，曾今利用XSS攻击实现了广告的植入操作，产生的效果如下图所示：</p>
+-
+-<p><img src="assets/8ca231f9bbcc4f829c571f65af3fc9df.jpg" alt="图片" /></p>
+-
+-<p>如果Web应用在响应中配置了这一标签，那么就可以有效地抵御广告的植入。</p>
+-
+-<p>接下来，我们继续来学习另一个常用的HTTP协议响应头，即Access-Control-Allow-Origin，它可以用来进行资源的访问权限设置。</p>
+-
+-<h3 id="access-control-allow-origin标志">Access-Control-Allow-Origin标志</h3>
+-
+-<p>Access-Control-Allow-Origin标志指定了该响应的资源是否被允许与给定的origin共享。</p>
+-
+-<p>为了让你更好地理解，下面让我们一起来看一些示例：</p>
+-
+-<pre><code class="language-plain">Access-Control-Allow-Origin: *
++如果Web应用在响应中配置了这一标签，那么就可以有效地抵御广告的植入。
++接下来，我们继续来学习另一个常用的HTTP协议响应头，即Access-Control-Allow-Origin，它可以用来进行资源的访问权限设置。
++Access-Control-Allow-Origin标志
++Access-Control-Allow-Origin标志指定了该响应的资源是否被允许与给定的origin共享。
++为了让你更好地理解，下面让我们一起来看一些示例：
++Access-Control-Allow-Origin: *
+ # 或
+ Access-Control-Allow-Origin: https://mituan.zone
+-</code></pre>
+ 
+-<p>它有两种配置方式，第一种将它的值设为*，这代表允许所有域名访问当前响应的资源。第二种将它的值设为一个具体的uri，这代表仅允许该域名访问当前响应的资源。因此，<strong>Access-Control-Allow-Origin标志可以使网站之间安全地跨域获取资源。</strong></p>
++它有两种配置方式，第一种将它的值设为*，这代表允许所有域名访问当前响应的资源。第二种将它的值设为一个具体的uri，这代表仅允许该域名访问当前响应的资源。因此，Access-Control-Allow-Origin标志可以使网站之间安全地跨域获取资源。
++最后，我们来看一个相对熟悉一些的HTTP响应头Set-Cookie。
++Set-Cookie标志
++在上一讲中，我们学习了保持登陆状态的认证，事实上，它就是通过Set-Cookie来实现的。
++Set-Cookie标志不仅可以用来配置浏览器的Cookie信息，同时它还能对Cookie信息进行一些保护。下面，还是一起看一个示例：
++Set-Cookie: <cookie-name>=<cookie-value>; Secure; HttpOnly
+ 
+-<p>最后，我们来看一个相对熟悉一些的HTTP响应头Set-Cookie。</p>
++在这个示例中，我们写入了一个cookie的值，同时在后面加了两个配置项，Secure以及HttpOnly。其中Secure的作用是强制cookie只能在HTTPS环境下传递，而HttpOnly则可以禁止使用JavaScript去存取cookie。它们都可以有效地保护cookie信息，防止攻击者窃取cookie。
++总结
++在这一讲中，我们学习了HTTP Header对于Web提供的协议级别的安全支持。
++首先，我们回顾了HTTP协议的内容，并对请求报文的格式以及响应报文的格式等基础知识进行了学习与回顾。
++在学习基础知识的过程中，我们了解到在响应报文中，会存在一些HTTP Header信息。其中，有的HTTP Header内容可以对我们的Web应用进行保护。
++最后我们对其中常用的五个典型HTTP Header进行了学习。它们分别为HSTS标志、CSP标志、X-Frame-Options标志、Access-Control-Allow-Origin标志以及Set-Cookie标志。在学习过程中，我们了解了它们的作用，并通过示例理解了它们的配置方式。
++思考题
++你知道还有哪些HTTP Header可以对Web应用提供安全支持吗？
++欢迎在评论区留下你的思考。如果觉得今天的内容对你有所帮助的话，也欢迎你把课程分享给其他同事或朋友，我们共同学习进步！
+ 
+-<h3 id="set-cookie标志">Set-Cookie标志</h3>
+-
+-<p>在上一讲中，我们学习了保持登陆状态的认证，事实上，它就是通过Set-Cookie来实现的。</p>
+-
+-<p>Set-Cookie标志不仅可以用来配置浏览器的Cookie信息，同时它还能对Cookie信息进行一些保护。下面，还是一起看一个示例：</p>
+-
+-<pre><code class="language-plain">Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; Secure; HttpOnly
+-</code></pre>
+-
+-<p>在这个示例中，我们写入了一个cookie的值，同时在后面加了两个配置项，Secure以及HttpOnly。其中Secure的作用是强制cookie只能在HTTPS环境下传递，而HttpOnly则可以禁止使用JavaScript去存取cookie。它们都可以有效地保护cookie信息，防止攻击者窃取cookie。</p>
+-
+-<h2 id="总结">总结</h2>
+-
+-<p>在这一讲中，我们学习了HTTP Header对于Web提供的协议级别的安全支持。</p>
+-
+-<p>首先，我们回顾了HTTP协议的内容，并对请求报文的格式以及响应报文的格式等基础知识进行了学习与回顾。</p>
+-
+-<p>在学习基础知识的过程中，我们了解到在响应报文中，会存在一些HTTP Header信息。其中，有的HTTP Header内容可以对我们的Web应用进行保护。</p>
+-
+-<p>最后我们对其中常用的五个典型HTTP Header进行了学习。它们分别为HSTS标志、CSP标志、X-Frame-Options标志、Access-Control-Allow-Origin标志以及Set-Cookie标志。在学习过程中，我们了解了它们的作用，并通过示例理解了它们的配置方式。</p>
+-
+-<h2 id="思考题">思考题</h2>
+-
+-<p>你知道还有哪些HTTP Header可以对Web应用提供安全支持吗？</p>
+-
+-<p>欢迎在评论区留下你的思考。如果觉得今天的内容对你有所帮助的话，也欢迎你把课程分享给其他同事或朋友，我们共同学习进步！</p>
+-</div>
+-                        </div>
+-                        <div>
+-                            <div id="prePage" style="float: left">
+-
+-                            </div>
+-                            <div id="nextPage" style="float: right">
+-
+-                            </div>
+-                        </div>
+-
+-                    </div>
+-                </div>
+-            </div>
+-            <div class="copyright">
+-                <hr />
+-                <p>© 2019 - 2023 <a href="mailto:lll941107@gmail.com" target="_blank">Liangliang Lee</a>.
+-                    Powered by <a href="https://github.com/gin-gonic/gin" target="_blank">gin</a> and <a
+-                        href="https://github.com/kaiiiz/hexo-theme-book" target="_blank">hexo-theme-book</a>.</p>
+-            </div>
+-        </div>
+-        <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+-    </div>
+-</body>
+-
+-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+-
+-<script src="/static/index.js"></script>
+-
+-</html><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'8f12c5088c2a63f7',t:'MTczNDA1OTUxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/static/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+--- Yvan: 专栏/从0开始学微服务/34 Istio：Service Mesh的代表产品.md
++++ xixi: 专栏/从0开始学微服务/34 Istio：Service Mesh的代表产品.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 34 Istio：Service Mesh的代表产品
+@@ -183,5 +184,5 @@
+ 扩展阅读：
+ 
+-Envoy对外提供统一API的详细作用：https://github.com/envoyproxy/data-plane-api/blob/master/API_OVERVIEW.md
++Envoy对外提供统一API的详细作用：https://github.com/envoyproxy/data-plane-api/blob/master/API_OVERVIEW.md.html
+ 授权策略：https://istio.io/docs/concepts/security/#authentication-policies
+ 安全命名信息：https://istio.io/docs/concepts/security/#secure-naming
+
+--- Yvan: 专栏/前端工程化精讲-完/01  项目基石：前端脚手架工具探秘.md
++++ xixi: 专栏/前端工程化精讲-完/01  项目基石：前端脚手架工具探秘.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 01  项目基石：前端脚手架工具探秘
+@@ -30,5 +31,5 @@
+ 优化构建流程，针对开发/生产环境的不同特点进行各自优化。例如，开发环境更关注构建效率和调试体验，而生产环境更关注访问性能等。
+ 选择和调试辅助工具，例如代码检查工具和单元测试工具，安装相应依赖并调试配置文件。
+-最后是收尾工作，检查各主要环节的脚本是否工作正常，编写说明文档 README.md，将不需要纳入版本管理的文件目录记入 .gitignore 等。
++最后是收尾工作，检查各主要环节的脚本是否工作正常，编写说明文档 README.md.html，将不需要纳入版本管理的文件目录记入 .gitignore 等。
+ 
+ 正如下面简单的示例项目模板，经历了上面这些步骤后我们的项目目录下就新增了这些相关的文件：
+@@ -69,5 +70,5 @@
+ .gitignore           8) Git 忽略配置文件 
+ 
+-README.md            8) 默认文档文件
++README.md.html            8) 默认文档文件
+ 
+ 而通过脚手架工具，我们就能免去人工处理上的环节，轻松地搭建起项目的初始环境，直接进入到业务开发中。接下来我们就先来看一下前端领域的几个典型脚手架工具，了解这几个脚手架所代表的不同设计理念，接着我们会重点分析两个代表性脚手架工具包内的技术细节，以便在工作中更能得心应手地使用和优化。
+@@ -174,5 +175,5 @@
+ 为 create-react-app 准备的自定义模板在模式上较为简单。作为一个最简化的 CRA 模板，模板中包含如下必要文件：
+ 
+-README.md：用于在 npm 仓库中显示的模板说明。
++README.md.html：用于在 npm 仓库中显示的模板说明。
+ package.json：用于描述模板本身的元信息 （例如名称、运行脚本、依赖包名和版本等） 。
+ template.json：用于描述基于模板创建的项目中的 package.json 信息。
+@@ -182,5 +183,5 @@
+ cra-template-[template-name]/ 
+ 
+-  README.md (for npm) 
++  README.md.html (for npm) 
+ 
+   template.json 
+@@ -190,5 +191,5 @@
+   template/ 
+ 
+-    README.md (for projects created from this template) 
++    README.md.html (for projects created from this template) 
+ 
+     gitignore 
+@@ -209,5 +210,5 @@
+ [template-name]/ 
+ 
+-  README.md (for npm) 
++  README.md.html (for npm) 
+ 
+   meta.js or meta.json 
+
+--- Yvan: 专栏/容器实战高手课/加餐05 eBPF：怎么更加深入地查看内核中的函数？.md
++++ xixi: 专栏/容器实战高手课/加餐05 eBPF：怎么更加深入地查看内核中的函数？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 加餐05 eBPF：怎么更加深入地查看内核中的函数？
+@@ -46,5 +47,5 @@
+ # cd ebpf-kill-example/
+ # ls
+-docs  img  LICENSE  Makefile  README.md  src  test
++docs  img  LICENSE  Makefile  README.md.html  src  test
+ 
+ 这里你可以先看一下Makefile，请注意编译eBPF程序需要Clang/LLVM，以及由Linux内核源代码里的tools/lib/bpf中生成的libbpf.so库和相关的头文件。如果你的OS是Ubuntu，可以运行make deps;make kernel-src这个命令，准备好编译的环境。
+
+--- Yvan: 专栏/微服务质量保障 20 讲-完/13  测试技术篇：专项测试技术解决了哪些专项问题？.md
++++ xixi: 专栏/微服务质量保障 20 讲-完/13  测试技术篇：专项测试技术解决了哪些专项问题？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 13  测试技术篇：专项测试技术解决了哪些专项问题？
+@@ -77,5 +78,5 @@
+ 灾难恢复测试工具
+ Chaos Monkey：https://github.com/Netflix/SimianArmy/wiki/Chaos-Monkey
+-ChaosBlade：https://github.com/chaosblade-io/chaosblade/blob/master/README_CN.md
++ChaosBlade：https://github.com/chaosblade-io/chaosblade/blob/master/README_CN.md.html
+ 安全测试工具
+ SQLmap：http://sqlmap.org/
+
+--- Yvan: 专栏/深入浅出区块链/第19讲 上手搭建一条自己的智能合约.md
++++ xixi: 专栏/深入浅出区块链/第19讲 上手搭建一条自己的智能合约.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 第19讲 上手搭建一条自己的智能合约
+@@ -123,5 +124,5 @@
+  // ---------------------------------------------
+  // ERC Token Standard #20 Interface
+- // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md
++ // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md.html
+  // -------------------------------------------
+ contract ERC20Interface {
+
+--- Yvan: 专栏/深入浅出区块链/第23讲 联盟链和它的困境.md
++++ xixi: 专栏/深入浅出区块链/第23讲 联盟链和它的困境.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 第23讲 联盟链和它的困境
+@@ -113,5 +114,5 @@
+ https://github.com/hyperledger/burrow
+ https://github.com/hyperledger/iroha
+-https://github.com/hyperledger/indy-plenum/blob/master/docs/main.md
++https://github.com/hyperledger/indy-plenum/blob/master/docs/main.md.html
+ https://wiki.hyperledger.org/projects/indy
+ https://github.com/hyperledger/indy-node
+
+--- Yvan: 专栏/由浅入深吃透 Docker-完/06  最佳实践：如何在生产中编写最优 Dockerfile？.md
++++ xixi: 专栏/由浅入深吃透 Docker-完/06  最佳实践：如何在生产中编写最优 Dockerfile？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 06  最佳实践：如何在生产中编写最优 Dockerfile？
+@@ -40,6 +41,6 @@
+ 
+ 
+-*.md
+-匹配以 .md 为后缀的任意文件
++*.md.html
++匹配以 .md.html 为后缀的任意文件
+ 
+ 
+@@ -48,6 +49,6 @@
+ 
+ 
+-!README.md
+-! 表示排除忽略。 例如 .dockerignore 定义如下：  *.md !README.md  表示除了 README.md 文件外所有以 .md 结尾的文件。
++!README.md.html
++! 表示排除忽略。 例如 .dockerignore 定义如下：  *.md.html !README.md.html  表示除了 README.md.html 文件外所有以 .md.html 结尾的文件。
+ 
+ 
+
+--- Yvan: 专栏/由浅入深吃透 Docker-完/17  原理实践：自己动手使用 Golang 开发 Docker（上）.md
++++ xixi: 专栏/由浅入深吃透 Docker-完/17  原理实践：自己动手使用 Golang 开发 Docker（上）.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 17  原理实践：自己动手使用 Golang 开发 Docker（上）
+@@ -338,5 +339,5 @@
+ |-- main.go
+ 
+-|-- README.md
++|-- README.md.html
+ 
+ |-- runc
+
+--- Yvan: 专栏/由浅入深吃透 Docker-完/25  CICD：容器化后如何实现持续集成与交付？（下）.md
++++ xixi: 专栏/由浅入深吃透 Docker-完/25  CICD：容器化后如何实现持续集成与交付？（下）.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 25  CICD：容器化后如何实现持续集成与交付？（下）
+@@ -131,5 +132,5 @@
+ -rw-r--r--  1 root  root   243B Nov  3 22:03 Dockerfile
+ 
+--rw-r--r--  1 root  root    26B Nov  3 22:06 README.md
++-rw-r--r--  1 root  root    26B Nov  3 22:06 README.md.html
+ 
+ -rw-r--r--  1 root  root   441B Nov  3 22:03 main.go
+
+--- Yvan: 专栏/白话设计模式 28 讲（完）/12 构建模式：想要车还是庄园.md
++++ xixi: 专栏/白话设计模式 28 讲（完）/12 构建模式：想要车还是庄园.md
+@@ -1,4 +1,5 @@
+ 
++еӣ ж”¶еҲ°Googleзӣёе…ійҖҡзҹҘпјҢзҪ‘з«ҷе°ҶдјҡжӢ©жңҹе…ій—ӯгҖӮзӣёе…ійҖҡзҹҘеҶ…е®№
+ 
+-12 构建模式：想要车还是庄园
++12 жһ„е»әжЁЎејҸпјҡжғіиҰҒиҪҰиҝҳжҳҜеә„еӣӯ
+ 
+
+--- Yvan: 专栏/白话设计模式 28 讲（完）/18 外观模式：学妹别慌，学长帮你.md
++++ xixi: 专栏/白话设计模式 28 讲（完）/18 外观模式：学妹别慌，学长帮你.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 18 外观模式：学妹别慌，学长帮你
+@@ -192,38 +193,38 @@
+ def testCompression():
+     facade = CompressionFacade()
+-    facade.compress("E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md",
++    facade.compress("E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md.html",
+                     "E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你", "zip")
+     facade.decompress("E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你.zip",
+-                      "E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md")
++                      "E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md.html")
+     print()
+ 
+-    facade.compress("E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md",
++    facade.compress("E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md.html",
+                     "E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你", "rar")
+     facade.decompress("E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你.rar",
+-                      "E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md")
++                      "E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md.html")
+     print()
+ 
+-    facade.compress("E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md",
++    facade.compress("E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md.html",
+                     "E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你", "7z")
+     facade.decompress("E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你.7z",
+-                      "E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md")
++                      "E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md.html")
+     print()
+ 
+ 
+ 输出结果：
+-ZIP模块正在进行 'E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md' 文件的压缩......
++ZIP模块正在进行 'E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md.html' 文件的压缩......
+ 文件压缩成功，已保存至 'E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你.zip'
+ ZIP模块正在进行 'E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你.zip' 文件的解压......
+-文件解压成功，已保存至 'E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md'
+-
+-RAR模块正在进行 'E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md' 文件的压缩......
++文件解压成功，已保存至 'E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md.html'
++
++RAR模块正在进行 'E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md.html' 文件的压缩......
+ 文件压缩成功，已保存至 'E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你.rar'
+ RAR模块正在进行 'E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你.rar' 文件的解压......
+-文件解压成功，已保存至 'E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md'
+-
+-7Z模块正在进行 'E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md' 文件的压缩......
++文件解压成功，已保存至 'E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md.html'
++
++7Z模块正在进行 'E:\生活中的设计模式\生活中的外观模式——学妹别慌，学长帮你.md.html' 文件的压缩......
+ 文件压缩成功，已保存至 'E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你.7z'
+ 7Z模块正在进行 'E:\压缩文件\生活中的外观模式——学妹别慌，学长帮你.7z' 文件的解压......
+-文件解压成功，已保存至 'E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md'
++文件解压成功，已保存至 'E:\解析文件\生活中的外观模式——学妹别慌，学长帮你.md.html'
+ 
+ 
+
+--- Yvan: 专栏/许式伟的架构课/42 实战（二）：“画图”程序后端实战.md
++++ xixi: 专栏/许式伟的架构课/42 实战（二）：“画图”程序后端实战.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 42 实战（二）：“画图”程序后端实战
+@@ -186,5 +187,5 @@
+ 另一方面，我们基于 mongodb 完成了新的实现。我们对数据结构和算法作了详细的描述。要更完整了解实现细节，请重点阅读以下两个文件：
+ 
+-https://github.com/qiniu/qpaint/blob/v42/paintdom/README_IMPL.md
++https://github.com/qiniu/qpaint/blob/v42/paintdom/README_IMPL.md.html
+ https://github.com/qiniu/qpaint/blob/v42/paintdom/drawing.go
+ 
+
+--- Yvan: 专栏/许式伟的架构课/44 实战（四）：“画图”程序后端实战.md
++++ xixi: 专栏/许式伟的架构课/44 实战（四）：“画图”程序后端实战.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 44 实战（四）：“画图”程序后端实战
+@@ -80,5 +81,5 @@
+ 具体如何对接 dex，CoreOS 团队也写了一个详细的说明文档。如下：
+ 
+-https://github.com/xushiwei/dex/blob/master/Documentation/using-dex.md
++https://github.com/xushiwei/dex/blob/master/Documentation/using-dex.md.html
+ 
+ 有了这些 SDK 和 dex 的使用说明，具体 QPaint 业务怎么对接 dex，就比较简单了。我们这里就不详细展开，详细代码请参考：
+
+--- Yvan: 专栏/陈天 · Rust 编程第一课/03 初窥门径：从你的第一个Rust程序开始！.md
++++ xixi: 专栏/陈天 · Rust 编程第一课/03 初窥门径：从你的第一个Rust程序开始！.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 03 初窥门径：从你的第一个Rust程序开始！
+@@ -38,5 +39,5 @@
+ fn main() {
+   let url = "https://www.rust-lang.org/";
+-  let output = "rust.md";
++  let output = "rust.md.html";
+ 
+   println!("Fetching url: {}", url);
+@@ -55,5 +56,5 @@
+ Converted markdown has been saved in rust.md.
+ 
+-并且，在当前目录下，一个 rust.md 文件被创建出来了。打开一看，其内容就是 Rust 官网主页的内容。
++并且，在当前目录下，一个 rust.md.html 文件被创建出来了。打开一看，其内容就是 Rust 官网主页的内容。
+ Bingo！我们第一个 Rust 程序运行成功！
+ 从这段并不长的代码中，我们可以感受到 Rust 的一些基本特点：
+@@ -279,5 +280,5 @@
+ fn main() {
+   let url = "https://www.rust-lang.org/";
+-  let output = "rust.md";
++  let output = "rust.md.html";
+ 
+   println!("Fetching url: {}", url);
+@@ -296,5 +297,5 @@
+ fn main() -> Result<(), Box<dyn std::error::Error>> {
+     let url = "https://www.rust-lang.org/";
+-    let output = "rust.md";
++    let output = "rust.md.html";
+ 
+     println!("Fetching url: {}", url);
+@@ -342,5 +343,5 @@
+ 1.在上面的斐波那契数列的代码中，你也许注意到计算数列中下一个数的代码在三个函数中不断重复。这不符合 DRY（Don’t Repeat Yourself）原则。你可以写一个函数把它抽取出来么？
+ 2.在 scrape_url 的例子里，我们在代码中写死了要获取的 URL 和要输出的文件名，这太不灵活了。你能改进这个代码，从命令行参数中获取用户提供的信息来绑定 URL 和文件名么？类似这样：
+-cargo run -- https://www.rust-lang.org rust.md
++cargo run -- https://www.rust-lang.org rust.md.html
+ 
+ 提示一下，打印一下 std::env::args() 看看会发生什么？
+
+--- Yvan: 专栏/陈天 · Rust 编程第一课/15 数据结构：这些浓眉大眼的结构竟然都是智能指针？.md
++++ xixi: 专栏/陈天 · Rust 编程第一课/15 数据结构：这些浓眉大眼的结构竟然都是智能指针？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 15 数据结构：这些浓眉大眼的结构竟然都是智能指针？
+@@ -61,5 +62,5 @@
+     //
+     // For details, see:
+-    // https://github.com/rust-lang/rfcs/blob/master/text/0769-sound-generic-drop.md#phantom-data
++    // https://github.com/rust-lang/rfcs/blob/master/text/0769-sound-generic-drop.md.html#phantom-data
+     _marker: PhantomData<T>,
+ }
+
+--- Yvan: 专栏/陈天 · Rust 编程第一课/20 4 Steps ：如何更好地阅读Rust源码？.md
++++ xixi: 专栏/陈天 · Rust 编程第一课/20 4 Steps ：如何更好地阅读Rust源码？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 20 4 Steps ：如何更好地阅读Rust源码？
+@@ -63,5 +64,5 @@
+ Rust 几乎所有库的文档都在 docs.rs 下，比如 Bytes 的文档可以通过 docs.rs/bytes 访问：-
+ 
+-首先阅读 crate 的文档，这样可以快速了解这个 crate 是做什么的，就像阅读一本书的时候，可以从书的序和前言入手了解梗概。除此之外，我们还可以看一下源码根目录下的 README.md，作为补充资料。
++首先阅读 crate 的文档，这样可以快速了解这个 crate 是做什么的，就像阅读一本书的时候，可以从书的序和前言入手了解梗概。除此之外，我们还可以看一下源码根目录下的 README.md.html，作为补充资料。
+ 有了大致了解后，你就可以深入了解自己感兴趣的内容。我们就按照初学的顺序来看。
+ 对于 Bytes，我们看到它有两个 trait Buf/BufMut 以及两个数据结构 Bytes/BytesMut，没有 crate 级别的函数。接下来就是深入阅读代码了。
+
+--- Yvan: 专栏/陈天 · Rust 编程第一课/43 生产环境：真实世界下的一个Rust项目包含哪些要素？.md
++++ xixi: 专栏/陈天 · Rust 编程第一课/43 生产环境：真实世界下的一个Rust项目包含哪些要素？.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 43 生产环境：真实世界下的一个Rust项目包含哪些要素？
+@@ -10,5 +11,5 @@
+ 
+ 在构建应用程序或者服务的时候，我们要尽量把各个模块划分清楚，然后用不同的 crate 实现它们。这样，一来增量编译的效率更高（没有改动的 crate 无需重编），二来可以通过 crate 强制为模块划分边界，明确公开的接口和私有接口。
+-一般而言，除了代码仓库的根目录有 README.md 外，workspace 下的每个 crate 也最好要有 README.md 以及 examples，让使用者可以很清晰地理解如何使用这个 crate。如果你的项目的构建过程不是简单通过 cargo build 完成的，建议提供 Makefile 或者类似的脚本来自动化本地构建的流程。
++一般而言，除了代码仓库的根目录有 README.md.html 外，workspace 下的每个 crate 也最好要有 README.md.html 以及 examples，让使用者可以很清晰地理解如何使用这个 crate。如果你的项目的构建过程不是简单通过 cargo build 完成的，建议提供 Makefile 或者类似的脚本来自动化本地构建的流程。
+ 当我们往代码仓库里提交代码时，应该要在本地走一遍基本的检查，包括代码风格检查、编译检查、静态检查，以及单元测试，这样可以最大程度保证每个提交都是完备的，没有基本错误的代码。
+ 如果你使用 Git 来管理代码仓库，那么可以使用 pre-commit hook。一般来说，我们不必自己撰写 pre-commit hook 脚本，可以使用 pre-commit 这个工具。下面是我在 tyrchen/geektime-rust 中使用的 pre-commit 配置，供你参考：
+
+--- Yvan: 文章/分布式唯一 ID 解析.md
++++ xixi: 文章/分布式唯一 ID 解析.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 分布式唯一 ID 解析
+@@ -65,5 +66,5 @@
+ 
+ 百度 UidGenerator
+-原文：https://github.com/baidu/uid-generator/blob/master/README.zh_cn.md
++原文：https://github.com/baidu/uid-generator/blob/master/README.zh_cn.md.html
+ 基于 Snowflake
+ 
+
+--- Yvan: 文章/进阶：Dockerfile 高阶使用指南及镜像优化.md
++++ xixi: 文章/进阶：Dockerfile 高阶使用指南及镜像优化.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 进阶：Dockerfile 高阶使用指南及镜像优化
+@@ -110,5 +111,5 @@
+ drwxrwxr-x. 2 tao tao 4096 5月  15 06:54 docs
+ -rw-rw-r--. 1 tao tao 1992 5月  15 06:33 pom.xml
+--rw-rw-r--. 1 tao tao   89 5月  15 06:50 README.md
++-rw-rw-r--. 1 tao tao   89 5月  15 06:50 README.md.html
+ drwxrwxr-x. 4 tao tao 4096 5月  15 06:33 src
+ drwxrwxr-x. 9 tao tao 4096 5月  15 06:52 target
+
+--- Yvan: 文章/高效构建 Docker 镜像的最佳实践.md
++++ xixi: 文章/高效构建 Docker 镜像的最佳实践.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 高效构建 Docker 镜像的最佳实践
+@@ -425,5 +426,5 @@
+ drwxrwxr-x. 2 tao tao 4096 5月  15 06:54 docs
+ -rw-rw-r--. 1 tao tao 1992 5月  15 06:33 pom.xml
+--rw-rw-r--. 1 tao tao   89 5月  15 06:50 README.md
++-rw-rw-r--. 1 tao tao   89 5月  15 06:50 README.md.html
+ drwxrwxr-x. 4 tao tao 4096 5月  15 06:33 src
+ drwxrwxr-x. 9 tao tao 4096 5月  15 06:52 target
+
+--- Yvan: 极客时间/从0开始学微服务.md
++++ xixi: 极客时间/从0开始学微服务.md
+@@ -1,3 +1,4 @@
+ 
++因收到Google相关通知，网站将会择期关闭。相关通知内容
+ 
+ 从0开始学微服务
+@@ -2635,5 +2636,5 @@
+ 扩展阅读：
+ 
+-Envoy 对外提供统一 API 的详细作用：https://github.com/envoyproxy/data-plane-api/blob/master/API_OVERVIEW.md
++Envoy 对外提供统一 API 的详细作用：https://github.com/envoyproxy/data-plane-api/blob/master/API_OVERVIEW.md.html
+ 授权策略：https://istio.io/docs/concepts/security/#authentication-policies
+ 安全命名信息：https://istio.io/docs/concepts/security/#secure-naming

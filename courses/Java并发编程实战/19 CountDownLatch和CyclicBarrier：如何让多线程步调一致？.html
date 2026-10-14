@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>19 CountDownLatch和CyclicBarrier：如何让多线程步调一致？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/index.html">Java并发编程实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">50 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java并发编程实战</strong><ul><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/00%20%E5%AD%A6%E4%B9%A0%E6%94%BB%E7%95%A5%20%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E5%AD%A6%E5%A5%BD%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9F.html">00 学习攻略 如何才能学好并发编程？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BD%A0%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AD%A6%E4%B9%A0%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9F.html">00 开篇词 你为什么需要学习并发编程？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/01%20%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E5%8E%9F%E5%AD%90%E6%80%A7%E5%92%8C%E6%9C%89%E5%BA%8F%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8BBug%E7%9A%84%E6%BA%90%E5%A4%B4.html">01 可见性、原子性和有序性问题：并发编程Bug的源头</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/02%20Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%9A%E7%9C%8BJava%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8F%AF%E8%A7%81%E6%80%A7%E5%92%8C%E6%9C%89%E5%BA%8F%E6%80%A7%E9%97%AE%E9%A2%98.html">02 Java内存模型：看Java如何解决可见性和有序性问题</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/03%20%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E8%A7%A3%E5%86%B3%E5%8E%9F%E5%AD%90%E6%80%A7%E9%97%AE%E9%A2%98.html">03 互斥锁（上）：解决原子性问题</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/04%20%E4%BA%92%E6%96%A5%E9%94%81%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E4%B8%80%E6%8A%8A%E9%94%81%E4%BF%9D%E6%8A%A4%E5%A4%9A%E4%B8%AA%E8%B5%84%E6%BA%90%EF%BC%9F.html">04 互斥锁（下）：如何用一把锁保护多个资源？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/05%20%E4%B8%80%E4%B8%8D%E5%B0%8F%E5%BF%83%E5%B0%B1%E6%AD%BB%E9%94%81%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">05 一不小心就死锁了，怎么办？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/06%20%E7%94%A8%E2%80%9C%E7%AD%89%E5%BE%85-%E9%80%9A%E7%9F%A5%E2%80%9D%E6%9C%BA%E5%88%B6%E4%BC%98%E5%8C%96%E5%BE%AA%E7%8E%AF%E7%AD%89%E5%BE%85.html">06 用“等待-通知”机制优化循环等待</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/07%20%E5%AE%89%E5%85%A8%E6%80%A7%E3%80%81%E6%B4%BB%E8%B7%83%E6%80%A7%E4%BB%A5%E5%8F%8A%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98.html">07 安全性、活跃性以及性能问题</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/08%20%E7%AE%A1%E7%A8%8B%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%87%E8%83%BD%E9%92%A5%E5%8C%99.html">08 管程：并发编程的万能钥匙</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/09%20Java%E7%BA%BF%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AJava%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html">09 Java线程（上）：Java线程的生命周期</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/10%20Java%E7%BA%BF%E7%A8%8B%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%88%9B%E5%BB%BA%E5%A4%9A%E5%B0%91%E7%BA%BF%E7%A8%8B%E6%89%8D%E6%98%AF%E5%90%88%E9%80%82%E7%9A%84%EF%BC%9F.html">10 Java线程（中）：创建多少线程才是合适的？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/11%20Java%E7%BA%BF%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F.html">11 Java线程（下）：为什么局部变量是线程安全的？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/12%20%E5%A6%82%E4%BD%95%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%86%99%E5%A5%BD%E5%B9%B6%E5%8F%91%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">12 如何用面向对象思想写好并发程序？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/13%20%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">13 理论基础模块热点问题答疑</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/14%20Lock%E5%92%8CCondition%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%9A%90%E8%97%8F%E5%9C%A8%E5%B9%B6%E5%8F%91%E5%8C%85%E4%B8%AD%E7%9A%84%E7%AE%A1%E7%A8%8B.html">14 Lock和Condition（上）：隐藏在并发包中的管程</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/15%20Lock%E5%92%8CCondition%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ADubbo%E5%A6%82%E4%BD%95%E7%94%A8%E7%AE%A1%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E8%BD%AC%E5%90%8C%E6%AD%A5%EF%BC%9F.html">15 Lock和Condition（下）：Dubbo如何用管程实现异步转同步？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/16%20Semaphore%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E9%99%90%E6%B5%81%E5%99%A8%EF%BC%9F.html">16 Semaphore：如何快速实现一个限流器？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/17%20ReadWriteLock%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%8C%E5%A4%87%E7%9A%84%E7%BC%93%E5%AD%98%EF%BC%9F.html">17 ReadWriteLock：如何快速实现一个完备的缓存？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/18%20StampedLock%EF%BC%9A%E6%9C%89%E6%B2%A1%E6%9C%89%E6%AF%94%E8%AF%BB%E5%86%99%E9%94%81%E6%9B%B4%E5%BF%AB%E7%9A%84%E9%94%81%EF%BC%9F.html">18 StampedLock：有没有比读写锁更快的锁？</a></li><li><a class="active" aria-current="page" href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/19%20CountDownLatch%E5%92%8CCyclicBarrier%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%AD%A5%E8%B0%83%E4%B8%80%E8%87%B4%EF%BC%9F.html">19 CountDownLatch和CyclicBarrier：如何让多线程步调一致？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/20%20%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%EF%BC%9A%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E2%80%9C%E5%9D%91%E2%80%9D%E9%9C%80%E8%A6%81%E6%88%91%E4%BB%AC%E5%A1%AB%EF%BC%9F.html">20 并发容器：都有哪些“坑”需要我们填？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/21%20%E5%8E%9F%E5%AD%90%E7%B1%BB%EF%BC%9A%E6%97%A0%E9%94%81%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E5%85%B8%E8%8C%83.html">21 原子类：无锁工具类的典范</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/22%20Executor%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E6%AD%A3%E7%A1%AE%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">22 Executor与线程池：如何创建正确的线程池？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/23%20Future%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E6%9C%80%E4%BC%98%E7%9A%84%E2%80%9C%E7%83%A7%E6%B0%B4%E6%B3%A1%E8%8C%B6%E2%80%9D%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">23 Future：如何用多线程实现最优的“烧水泡茶”程序？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/24%20CompletableFuture%EF%BC%9A%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E6%B2%A1%E9%82%A3%E4%B9%88%E9%9A%BE.html">24 CompletableFuture：异步编程没那么难</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/25%20CompletionService%EF%BC%9A%E5%A6%82%E4%BD%95%E6%89%B9%E9%87%8F%E6%89%A7%E8%A1%8C%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%EF%BC%9F.html">25 CompletionService：如何批量执行异步任务？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/26%20Fork_Join%EF%BC%9A%E5%8D%95%E6%9C%BA%E7%89%88%E7%9A%84MapReduce.html">26 Fork_Join：单机版的MapReduce</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/27%20%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%E6%A8%A1%E5%9D%97%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">27 并发工具类模块热点问题答疑</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/28%20Immutability%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E4%B8%8D%E5%8F%98%E6%80%A7%E8%A7%A3%E5%86%B3%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98%EF%BC%9F.html">28 Immutability模式：如何利用不变性解决并发问题？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/29%20Copy-on-Write%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%8D%E6%98%AF%E5%BB%B6%E6%97%B6%E7%AD%96%E7%95%A5%E7%9A%84COW.html">29 Copy-on-Write模式：不是延时策略的COW</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/3%20%E4%B8%AA%E7%94%A8%E6%88%B7%E6%9D%A5%E4%BF%A1%20%E6%89%93%E5%BC%80%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%B9%B6%E5%8F%91%E4%B8%96%E7%95%8C.html">3 个用户来信 打开一个新的并发世界</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/30%20%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%B2%A1%E6%9C%89%E5%85%B1%E4%BA%AB%EF%BC%8C%E5%B0%B1%E6%B2%A1%E6%9C%89%E4%BC%A4%E5%AE%B3.html">30 线程本地存储模式：没有共享，就没有伤害</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/31%20Guarded%20Suspension%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%AD%89%E5%BE%85%E5%94%A4%E9%86%92%E6%9C%BA%E5%88%B6%E7%9A%84%E8%A7%84%E8%8C%83%E5%AE%9E%E7%8E%B0.html">31 Guarded Suspension模式：等待唤醒机制的规范实现</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/32%20Balking%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%86%8D%E8%B0%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html">32 Balking模式：再谈线程安全的单例模式</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/33%20Thread-Per-Message%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%9C%80%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E7%9A%84%E5%88%86%E5%B7%A5%E6%96%B9%E6%B3%95.html">33 Thread-Per-Message模式：最简单实用的分工方法</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/34%20Worker%20Thread%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E9%87%8D%E5%A4%8D%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">34 Worker Thread模式：如何避免重复创建线程？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/35%20%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E7%BB%88%E6%AD%A2%E7%BA%BF%E7%A8%8B%EF%BC%9F.html">35 两阶段终止模式：如何优雅地终止线程？</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/36%20%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%94%A8%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%80%9D%E6%83%B3%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87.html">36 生产者-消费者模式：用流水线思想提高效率</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/37%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A8%A1%E5%9D%97%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91.html">37 设计模式模块热点问题答疑</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/38%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E9%99%90%E6%B5%81%E5%99%A8Guava%20RateLimiter.html">38 案例分析（一）：高性能限流器Guava RateLimiter</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/39%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6Netty.html">39 案例分析（二）：高性能网络应用框架Netty</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/40%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97Disruptor.html">40 案例分析（三）：高性能队列Disruptor</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/41%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BD%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0HiKariCP.html">41 案例分析（四）：高性能数据库连接池HiKariCP</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/42%20Actor%E6%A8%A1%E5%9E%8B%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%8E%9F%E7%94%9F%E7%9A%84%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B.html">42 Actor模型：面向对象原生的并发模型</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/43%20%E8%BD%AF%E4%BB%B6%E4%BA%8B%E5%8A%A1%E5%86%85%E5%AD%98%EF%BC%9A%E5%80%9F%E9%89%B4%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%8F%E9%AA%8C.html">43 软件事务内存：借鉴数据库的并发经验</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/44%20%E5%8D%8F%E7%A8%8B%EF%BC%9A%E6%9B%B4%E8%BD%BB%E9%87%8F%E7%BA%A7%E7%9A%84%E7%BA%BF%E7%A8%8B.html">44 协程：更轻量级的线程</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/45%20CSP%E6%A8%A1%E5%9E%8B%EF%BC%9AGolang%E7%9A%84%E4%B8%BB%E5%8A%9B%E9%98%9F%E5%91%98.html">45 CSP模型：Golang的主力队员</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E7%94%A8%E6%88%B7%E6%9D%A5%E4%BF%A1%20%E7%9C%9F%E5%A5%BD%EF%BC%8C%E9%9D%A2%E8%AF%95%E8%80%83%E5%88%B0%E8%BF%99%E4%BA%9B%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%8C%E6%88%91%E9%83%BD%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%81.html">用户来信 真好，面试考到这些并发编程，我都答对了！</a></li><li><a href="/courses/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%8D%81%E5%B9%B4%E4%B9%8B%E5%90%8E%EF%BC%8C%E5%88%9D%E5%BF%83%E4%BE%9D%E6%97%A7.html">结束语 十年之后，初心依旧</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/19%20CountDownLatch%E5%92%8CCyclicBarrier%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%AD%A5%E8%B0%83%E4%B8%80%E8%87%B4%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="19 CountDownLatch和CyclicBarrier：如何让多线程步调一致？" id="title">19 CountDownLatch和CyclicBarrier：如何让多线程步调一致？</h1>
+<div><p>前几天老板突然匆匆忙忙过来，说对账系统最近越来越慢了，能不能快速优化一下。我了解了对账系统的业务后，发现还是挺简单的，用户通过在线商城下单，会生成电子订单，保存在订单库；之后物流会生成派送单给用户发货，派送单保存在派送单库。为了防止漏派送或者重复派送，对账系统每天还会校验是否存在异常订单。</p>
+<p>对账系统的处理逻辑很简单，你可以参考下面的对账系统流程图。目前对账系统的处理逻辑是首先查询订单，然后查询派送单，之后对比订单和派送单，将差异写入差异库。</p>
+<p><img alt="" src="/assets/981c38c58fc9061840167114.png"/></p>
+<p>对账系统流程图</p>
+<p>对账系统的代码抽象之后，也很简单，核心代码如下，就是在一个单线程里面循环查询订单、派送单，然后执行对账，最后将写入差异库。</p>
+<pre><code>while(存在未对账订单){
+  // 查询未对账订单
+  pos = getPOrders();
+  // 查询派送单
+  dos = getDOrders();
+  // 执行对账操作
+  diff = check(pos, dos);
+  // 差异写入差异库
+  save(diff);
+} 
+</code></pre>
+<h2 id="利用并行优化对账系统">利用并行优化对账系统</h2>
+<p>老板要我优化性能，那我就首先要找到这个对账系统的瓶颈所在。</p>
+<p>目前的对账系统，由于订单量和派送单量巨大，所以查询未对账订单getPOrders()和查询派送单getDOrders()相对较慢，那有没有办法快速优化一下呢？目前对账系统是单线程执行的，图形化后是下图这个样子。对于串行化的系统，优化性能首先想到的是能否<strong>利用多线程并行处理</strong>。</p>
+<p><img alt="" src="/assets/c78ce3ef1d5bdb9645933859.png"/></p>
+<p>对账系统单线程执行示意图</p>
+<p>所以，这里你应该能够看出来这个对账系统里的瓶颈：查询未对账订单getPOrders()和查询派送单getDOrders()是否可以并行处理呢？显然是可以的，因为这两个操作并没有先后顺序的依赖。这两个最耗时的操作并行之后，执行过程如下图所示。对比一下单线程的执行示意图，你会发现同等时间里，并行执行的吞吐量近乎单线程的2倍，优化效果还是相对明显的。</p>
+<p><img alt="" src="/assets/7c69e34eefe2126e69544dac.png"/></p>
+<p>对账系统并行执行示意图</p>
+<p>思路有了，下面我们再来看看如何用代码实现。在下面的代码中，我们创建了两个线程T1和T2，并行执行查询未对账订单getPOrders()和查询派送单getDOrders()这两个操作。在主线程中执行对账操作check()和差异写入save()两个操作。不过需要注意的是：主线程需要等待线程T1和T2执行完才能执行check()和save()这两个操作，为此我们通过调用T1.join()和T2.join()来实现等待，当T1和T2线程退出时，调用T1.join()和T2.join()的主线程就会从阻塞态被唤醒，从而执行之后的check()和save()。</p>
+<pre><code>while(存在未对账订单){
+  // 查询未对账订单
+  Thread T1 = new Thread(()-&gt;{
+    pos = getPOrders();
+  });
+  T1.start();
+  // 查询派送单
+  Thread T2 = new Thread(()-&gt;{
+    dos = getDOrders();
+  });
+  T2.start();
+  // 等待T1、T2结束
+  T1.join();
+  T2.join();
+  // 执行对账操作
+  diff = check(pos, dos);
+  // 差异写入差异库
+  save(diff);
+} 
+</code></pre>
+<h2 id="用countdownlatch实现线程等待">用CountDownLatch实现线程等待</h2>
+<p>经过上面的优化之后，基本上可以跟老板汇报收工了，但还是有点美中不足，相信你也发现了，while循环里面每次都会创建新的线程，而创建线程可是个耗时的操作。所以最好是创建出来的线程能够循环利用，估计这时你已经想到线程池了，是的，线程池就能解决这个问题。</p>
+<p>而下面的代码就是用线程池优化后的：我们首先创建了一个固定大小为2的线程池，之后在while循环里重复利用。一切看上去都很顺利，但是有个问题好像无解了，那就是主线程如何知道getPOrders()和getDOrders()这两个操作什么时候执行完。前面主线程通过调用线程T1和T2的join()方法来等待线程T1和T2退出，但是在线程池的方案里，线程根本就不会退出，所以join()方法已经失效了。</p>
+<pre><code>// 创建2个线程的线程池
+Executor executor = 
+  Executors.newFixedThreadPool(2);
+while(存在未对账订单){
+  // 查询未对账订单
+  executor.execute(()-&gt; {
+    pos = getPOrders();
+  });
+  // 查询派送单
+  executor.execute(()-&gt; {
+    dos = getDOrders();
+  });
+
+  /* ？？如何实现等待？？*/
+
+  // 执行对账操作
+  diff = check(pos, dos);
+  // 差异写入差异库
+  save(diff);
+}   
+</code></pre>
+<p>那如何解决这个问题呢？你可以开动脑筋想出很多办法，最直接的办法是弄一个计数器，初始值设置成2，当执行完<code>pos = getPOrders();</code>这个操作之后将计数器减1，执行完<code>dos = getDOrders();</code>之后也将计数器减1，在主线程里，等待计数器等于0；当计数器等于0时，说明这两个查询操作执行完了。等待计数器等于0其实就是一个条件变量，用管程实现起来也很简单。</p>
+<p>不过我并不建议你在实际项目中去实现上面的方案，因为Java并发包里已经提供了实现类似功能的工具类：<strong>CountDownLatch</strong>，我们直接使用就可以了。下面的代码示例中，在while循环里面，我们首先创建了一个CountDownLatch，计数器的初始值等于2，之后在<code>pos = getPOrders();</code>和<code>dos = getDOrders();</code>两条语句的后面对计数器执行减1操作，这个对计数器减1的操作是通过调用 <code>latch.countDown();</code> 来实现的。在主线程中，我们通过调用 <code>latch.await()</code> 来实现对计数器等于0的等待。</p>
+<pre><code>// 创建2个线程的线程池
+Executor executor = 
+  Executors.newFixedThreadPool(2);
+while(存在未对账订单){
+  // 计数器初始化为2
+  CountDownLatch latch = 
+    new CountDownLatch(2);
+  // 查询未对账订单
+  executor.execute(()-&gt; {
+    pos = getPOrders();
+    latch.countDown();
+  });
+  // 查询派送单
+  executor.execute(()-&gt; {
+    dos = getDOrders();
+    latch.countDown();
+  });
+
+  // 等待两个查询操作结束
+  latch.await();
+
+  // 执行对账操作
+  diff = check(pos, dos);
+  // 差异写入差异库
+  save(diff);
+}
+</code></pre>
+<h2 id="进一步优化性能">进一步优化性能</h2>
+<p>经过上面的重重优化之后，长出一口气，终于可以交付了。不过在交付之前还需要再次审视一番，看看还有没有优化的余地，仔细看还是有的。</p>
+<p>前面我们将getPOrders()和getDOrders()这两个查询操作并行了，但这两个查询操作和对账操作check()、save()之间还是串行的。很显然，这两个查询操作和对账操作也是可以并行的，也就是说，在执行对账操作的时候，可以同时去执行下一轮的查询操作，这个过程可以形象化地表述为下面这幅示意图。</p>
+<p><img alt="" src="/assets/ade8fab35ed4c7827baaae4c.png"/></p>
+<p>完全并行执行示意图</p>
+<p>那接下来我们再来思考一下如何实现这步优化，两次查询操作能够和对账操作并行，对账操作还依赖查询操作的结果，这明显有点生产者-消费者的意思，两次查询操作是生产者，对账操作是消费者。既然是生产者-消费者模型，那就需要有个队列，来保存生产者生产的数据，而消费者则从这个队列消费数据。</p>
+<p>不过针对对账这个项目，我设计了两个队列，并且两个队列的元素之间还有对应关系。具体如下图所示，订单查询操作将订单查询结果插入订单队列，派送单查询操作将派送单插入派送单队列，这两个队列的元素之间是有一一对应的关系的。两个队列的好处是，对账操作可以每次从订单队列出一个元素，从派送单队列出一个元素，然后对这两个元素执行对账操作，这样数据一定不会乱掉。</p>
+<p><img alt="" src="/assets/79280d15d820d7e26e2694ee.png"/></p>
+<p>双队列示意图</p>
+<p>下面再来看如何用双队列来实现完全的并行。一个最直接的想法是：一个线程T1执行订单的查询工作，一个线程T2执行派送单的查询工作，当线程T1和T2都各自生产完1条数据的时候，通知线程T3执行对账操作。这个想法虽看上去简单，但其实还隐藏着一个条件，那就是线程T1和线程T2的工作要步调一致，不能一个跑得太快，一个跑得太慢，只有这样才能做到各自生产完1条数据的时候，通知线程T3。</p>
+<p>下面这幅图形象地描述了上面的意图：线程T1和线程T2只有都生产完1条数据的时候，才能一起向下执行，也就是说，线程T1和线程T2要互相等待，步调要一致；同时当线程T1和T2都生产完一条数据的时候，还要能够通知线程T3执行对账操作。</p>
+<p><img alt="" src="/assets/de1c8638a1ad82054a1721af.png"/></p>
+<p>同步执行示意图</p>
+<h2 id="用cyclicbarrier实现线程同步">用CyclicBarrier实现线程同步</h2>
+<p>下面我们就来实现上面提到的方案。这个方案的难点有两个：一个是线程T1和T2要做到步调一致，另一个是要能够通知到线程T3。</p>
+<p>你依然可以利用一个计数器来解决这两个难点，计数器初始化为2，线程T1和T2生产完一条数据都将计数器减1，如果计数器大于0则线程T1或者T2等待。如果计数器等于0，则通知线程T3，并唤醒等待的线程T1或者T2，与此同时，将计数器重置为2，这样线程T1和线程T2生产下一条数据的时候就可以继续使用这个计数器了。</p>
+<p>同样，还是建议你不要在实际项目中这么做，因为Java并发包里也已经提供了相关的工具类：<strong>CyclicBarrier</strong>。在下面的代码中，我们首先创建了一个计数器初始值为2的CyclicBarrier，你需要注意的是创建CyclicBarrier的时候，我们还传入了一个回调函数，当计数器减到0的时候，会调用这个回调函数。</p>
+<p>线程T1负责查询订单，当查出一条时，调用 <code>barrier.await()</code> 来将计数器减1，同时等待计数器变成0；线程T2负责查询派送单，当查出一条时，也调用 <code>barrier.await()</code> 来将计数器减1，同时等待计数器变成0；当T1和T2都调用 <code>barrier.await()</code> 的时候，计数器会减到0，此时T1和T2就可以执行下一条语句了，同时会调用barrier的回调函数来执行对账操作。</p>
+<p>非常值得一提的是，CyclicBarrier的计数器有自动重置的功能，当减到0的时候，会自动重置你设置的初始值。这个功能用起来实在是太方便了。</p>
+<pre><code>// 订单队列
+Vector&lt;P&gt; pos;
+// 派送单队列
+Vector&lt;D&gt; dos;
+// 执行回调的线程池 
+Executor executor = 
+  Executors.newFixedThreadPool(1);
+final CyclicBarrier barrier =
+  new CyclicBarrier(2, ()-&gt;{
+    executor.execute(()-&gt;check());
+  });
+
+void check(){
+  P p = pos.remove(0);
+  D d = dos.remove(0);
+  // 执行对账操作
+  diff = check(p, d);
+  // 差异写入差异库
+  save(diff);
+}
+
+void checkAll(){
+  // 循环查询订单库
+  Thread T1 = new Thread(()-&gt;{
+    while(存在未对账订单){
+      // 查询订单库
+      pos.add(getPOrders());
+      // 等待
+      barrier.await();
+    }
+  });
+  T1.start();  
+  // 循环查询运单库
+  Thread T2 = new Thread(()-&gt;{
+    while(存在未对账订单){
+      // 查询运单库
+      dos.add(getDOrders());
+      // 等待
+      barrier.await();
+    }
+  });
+  T2.start();
+}
+</code></pre>
+<h2 id="总结">总结</h2>
+<p>CountDownLatch和CyclicBarrier是Java并发包提供的两个非常易用的线程同步工具类，这两个工具类用法的区别在这里还是有必要再强调一下：<strong>CountDownLatch主要用来解决一个线程等待多个线程的场景</strong>，可以类比旅游团团长要等待所有的游客到齐才能去下一个景点；而<strong>CyclicBarrier是一组线程之间互相等待</strong>，更像是几个驴友之间不离不弃。除此之外CountDownLatch的计数器是不能循环利用的，也就是说一旦计数器减到0，再有线程调用await()，该线程会直接通过。但<strong>CyclicBarrier的计数器是可以循环利用的</strong>，而且具备自动重置的功能，一旦计数器减到0会自动重置到你设置的初始值。除此之外，CyclicBarrier还可以设置回调函数，可以说是功能丰富。</p>
+<p>本章的示例代码中有两处用到了线程池，你现在只需要大概了解即可，因为线程池相关的知识咱们专栏后面还会有详细介绍。另外，线程池提供了Future特性，我们也可以利用Future特性来实现线程之间的等待，这个后面我们也会详细介绍。</p>
+<h2 id="课后思考">课后思考</h2>
+<p>本章最后的示例代码中，CyclicBarrier的回调函数我们使用了一个固定大小的线程池，你觉得是否有必要呢？</p>
+<p>欢迎在留言区与我分享你的想法，也欢迎你在留言区记录你的思考过程。感谢阅读，如果你觉得这篇文章对你有帮助的话，也欢迎把它分享给更多的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

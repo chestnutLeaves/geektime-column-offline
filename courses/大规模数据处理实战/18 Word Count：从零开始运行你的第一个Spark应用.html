@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>18 Word Count：从零开始运行你的第一个Spark应用 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/index.html">大规模数据处理实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>大规模数据处理实战</strong><ul><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%B8%A6%E4%BD%A0%E8%B5%B0%E4%B8%8A%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8B%E8%B7%AF.html">00 开篇词 从这里开始，带你走上硅谷一线系统架构师之路</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/01%20%E4%B8%BA%E4%BB%80%E4%B9%88MapReduce%E4%BC%9A%E8%A2%AB%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E5%85%AC%E5%8F%B8%E6%B7%98%E6%B1%B0%EF%BC%9F.html">01 为什么MapReduce会被硅谷一线公司淘汰？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/02%20MapReduce%E5%90%8E%E8%B0%81%E4%B8%BB%E6%B2%89%E6%B5%AE%EF%BC%9A%E6%80%8E%E6%A0%B7%E8%AE%BE%E8%AE%A1%E4%B8%8B%E4%B8%80%E4%BB%A3%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF%EF%BC%9F.html">02 MapReduce后谁主沉浮：怎样设计下一代数据处理技术？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/03%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9A%E6%80%8E%E6%A0%B7%E5%AE%9E%E7%8E%B0%E5%A4%A7%E5%9E%8B%E7%94%B5%E5%95%86%E7%83%AD%E9%94%80%E6%A6%9C%EF%BC%9F.html">03 大规模数据处理初体验：怎样实现大型电商热销榜？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/04%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%AD%A6%E4%BC%9A%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%AD%89%E7%BA%A7%E5%8D%8F%E8%AE%AESLA%E6%9D%A5%E8%AF%84%E4%BC%B0%E4%BD%A0%E7%9A%84%E7%B3%BB%E7%BB%9F.html">04 分布式系统（上）：学会用服务等级协议SLA来评估你的系统</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/05%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B8%8D%E5%BE%97%E4%B8%8D%E7%9F%A5%E7%9A%84%E4%B8%89%E5%A4%A7%E6%8C%87%E6%A0%87.html">05 分布式系统（下）：架构师不得不知的三大指标</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/06%20%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86%E6%89%B9%E5%A4%84%E7%90%86%E8%BF%98%E6%98%AF%E6%B5%81%E5%A4%84%E7%90%86%EF%BC%9F.html">06 如何区分批处理还是流处理？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/07%20Workflow%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%AE%A9%E4%BD%A0%E5%9C%A8%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E4%B8%96%E7%95%8C%E4%B8%AD%E5%90%9B%E4%B8%B4%E5%A4%A9%E4%B8%8B.html">07 Workflow设计模式：让你在大规模数据世界中君临天下</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/08%20%E5%8F%91%E5%B8%83_%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%B5%81%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80.html">08 发布_订阅模式：流处理架构中的瑞士军刀</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/09%20CAP%E5%AE%9A%E7%90%86%EF%BC%9A%E4%B8%89%E9%80%89%E4%BA%8C%EF%BC%8C%E6%9E%B6%E6%9E%84%E5%B8%88%E5%BF%85%E9%A1%BB%E5%AD%A6%E4%BC%9A%E7%9A%84%E5%8F%96%E8%88%8D.html">09 CAP定理：三选二，架构师必须学会的取舍</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/10%20Lambda%E6%9E%B6%E6%9E%84%EF%BC%9ATwitter%E4%BA%BF%E7%BA%A7%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%9E%B6%E6%9E%84%E8%83%8C%E5%90%8E%E7%9A%84%E5%80%9A%E5%A4%A9%E5%89%91.html">10 Lambda架构：Twitter亿级实时数据分析架构背后的倚天剑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/11%20Kappa%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%88%A9%E7%94%A8Kafka%E9%94%BB%E9%80%A0%E7%9A%84%E5%B1%A0%E9%BE%99%E5%88%80.html">11 Kappa架构：利用Kafka锻造的屠龙刀</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/12%20%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81Spark%EF%BC%9F.html">12 我们为什么需要Spark？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/13%20%E5%BC%B9%E6%80%A7%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%9ASpark%E5%A4%A7%E5%8E%A6%E7%9A%84%E5%9C%B0%E5%9F%BA%EF%BC%88%E4%B8%8A%EF%BC%89.html">13 弹性分布式数据集：Spark大厦的地基（上）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/14%20%E5%BC%B9%E6%80%A7%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%9ASpark%E5%A4%A7%E5%8E%A6%E7%9A%84%E5%9C%B0%E5%9F%BA%EF%BC%88%E4%B8%8B%EF%BC%89.html">14 弹性分布式数据集：Spark大厦的地基（下）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/15%20Spark%20SQL%EF%BC%9ASpark%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%88%A9%E5%99%A8.html">15 Spark SQL：Spark数据查询的利器</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/16%20Spark%20Streaming%EF%BC%9ASpark%E7%9A%84%E5%AE%9E%E6%97%B6%E6%B5%81%E8%AE%A1%E7%AE%97API.html">16 Spark Streaming：Spark的实时流计算API</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/17%20Structured%20Streaming%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8DataFrame%20API%E8%BF%9B%E8%A1%8C%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90_.html">17 Structured Streaming：如何用DataFrame API进行实时数据分析_</a></li><li><a class="active" aria-current="page" href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/18%20Word%20Count%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%BF%90%E8%A1%8C%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AASpark%E5%BA%94%E7%94%A8.html">18 Word Count：从零开始运行你的第一个Spark应用</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/19%20%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A4%84%E7%90%86%E5%8A%A0%E5%B7%9E%E6%88%BF%E5%B1%8B%E4%BF%A1%E6%81%AF%EF%BC%8C%E6%9E%84%E5%BB%BA%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">19 综合案例实战：处理加州房屋信息，构建线性回归模型</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/20%20%E6%B5%81%E5%A4%84%E7%90%86%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E5%88%86%E6%9E%90%E7%BA%BD%E7%BA%A6%E5%B8%82%E5%87%BA%E7%A7%9F%E8%BD%A6%E8%BD%BD%E5%AE%A2%E4%BF%A1%E6%81%AF.html">20 流处理案例实战：分析纽约市出租车载客信息</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/21%20%E6%B7%B1%E5%85%A5%E5%AF%B9%E6%AF%94Spark%E4%B8%8EFlink%EF%BC%9A%E5%B8%AE%E4%BD%A0%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%A4%E5%BC%80%E8%8A%B1.html">21 深入对比Spark与Flink：帮你系统设计两开花</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/22%20Apache%20Beam%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F.html">22 Apache Beam的前世今生</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/23%20%E7%AB%99%E5%9C%A8Google%E7%9A%84%E8%82%A9%E8%86%80%E4%B8%8A%E5%AD%A6%E4%B9%A0Beam%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.html">23 站在Google的肩膀上学习Beam编程模型</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/24%20PCollection%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Beam%E8%A6%81%E5%A6%82%E6%AD%A4%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E6%95%B0%E6%8D%AE%EF%BC%9F.html">24 PCollection：为什么Beam要如此抽象封装数据？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/25%20Transform%EF%BC%9ABeam%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95.html">25 Transform：Beam数据转换操作的抽象方法</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/26%20Pipeline%EF%BC%9ABeam%E5%A6%82%E4%BD%95%E6%8A%BD%E8%B1%A1%E5%A4%9A%E6%AD%A5%E9%AA%A4%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9F.html">26 Pipeline：Beam如何抽象多步骤的数据流水线？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/27%20Pipeline%20I_O_%20Beam%E6%95%B0%E6%8D%AE%E4%B8%AD%E8%BD%AC%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">27 Pipeline I_O_ Beam数据中转的设计模式</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%88%9B%E5%BB%BA%E5%A5%BD%E4%B8%80%E4%B8%AABeam%20Pipeline%EF%BC%9F.html">28 如何设计创建好一个Beam Pipeline？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/29%20%E5%A6%82%E4%BD%95%E6%B5%8B%E8%AF%95Beam%20Pipeline%EF%BC%9F.html">29 如何测试Beam Pipeline？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/30%20Apache%20Beam%E5%AE%9E%E6%88%98%E5%86%B2%E5%88%BA%EF%BC%9ABeam%E5%A6%82%E4%BD%95run%20everywhere_.html">30 Apache Beam实战冲刺：Beam如何run everywhere_</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/31%20WordCount%20Beam%20Pipeline%E5%AE%9E%E6%88%98.html">31 WordCount Beam Pipeline实战</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/32%20Beam%20Window%EF%BC%9A%E6%89%93%E9%80%9A%E6%B5%81%E5%A4%84%E7%90%86%E7%9A%84%E4%BB%BB%E7%9D%A3%E4%BA%8C%E8%84%89.html">32 Beam Window：打通流处理的任督二脉</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/33%20%E6%A8%AA%E7%9C%8B%E6%88%90%E5%B2%AD%E4%BE%A7%E6%88%90%E5%B3%B0%EF%BC%9A%E5%86%8D%E6%88%98Streaming%20WordCount.html">33 横看成岭侧成峰：再战Streaming WordCount</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/34%20Amazon%E7%83%AD%E9%94%80%E6%A6%9CBeam%20Pipeline%E5%AE%9E%E6%88%98.html">34 Amazon热销榜Beam Pipeline实战</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/35%20Facebook%E6%B8%B8%E6%88%8F%E5%AE%9E%E6%97%B6%E6%B5%81%E5%A4%84%E7%90%86Beam%20Pipeline%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8A%EF%BC%89.html">35 Facebook游戏实时流处理Beam Pipeline实战（上）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/36%20Facebook%E6%B8%B8%E6%88%8F%E5%AE%9E%E6%97%B6%E6%B5%81%E5%A4%84%E7%90%86Beam%20Pipeline%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8B%EF%BC%89.html">36 Facebook游戏实时流处理Beam Pipeline实战（下）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/37%205G%E6%97%B6%E4%BB%A3%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%89%A9%E8%81%94%E7%BD%91%E6%95%B0%E6%8D%AE.html">37 5G时代，如何处理超大规模物联网数据</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/38%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%9C%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%A6%82%E4%BD%95%E5%BA%94%E7%94%A8%EF%BC%9F.html">38 大规模数据处理在深度学习中如何应用？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/39%20%E4%BB%8ESQL%E5%88%B0Streaming%20SQL%EF%BC%9A%E7%AA%81%E7%A0%B4%E9%9D%99%E6%80%81%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%AC%A1%E5%85%83.html">39 从SQL到Streaming SQL：突破静态数据查询的次元</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/40%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9C%AA%E6%9D%A5%E4%B9%8B%E8%B7%AF.html">40 大规模数据处理未来之路</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%B8%80%E6%9C%9F%20%E5%AD%A6%E4%B9%A0%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%E5%9F%BA%E7%A1%80%EF%BC%9F.html">FAQ第一期 学习大规模数据处理需要什么基础？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%B8%89%E6%9C%9F%20Apache%20Beam%E5%9F%BA%E7%A1%80%E7%AD%94%E7%96%91.html">FAQ第三期 Apache Beam基础答疑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%BA%8C%E6%9C%9F%20Spark%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%E7%AD%94%E7%96%91.html">FAQ第二期 Spark案例实战答疑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/%E5%8A%A0%E6%B2%B9%E7%AB%99%20Practice%20makes%20perfect%EF%BC%81.html">加油站 Practice makes perfect！</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%B8%96%E9%97%B4%E6%89%80%E6%9C%89%E7%9A%84%E7%9B%B8%E9%81%87%EF%BC%8C%E9%83%BD%E6%98%AF%E4%B9%85%E5%88%AB%E9%87%8D%E9%80%A2.html">结束语 世间所有的相遇，都是久别重逢</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/18%20Word%20Count%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%BF%90%E8%A1%8C%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AASpark%E5%BA%94%E7%94%A8.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="18 Word Count：从零开始运行你的第一个Spark应用" id="title">18 Word Count：从零开始运行你的第一个Spark应用</h1>
+<div><p>你好，我是蔡元楠。</p>
+<p>今天我们来从零开始运行你的第一个Spark应用。</p>
+<p>我们先来回顾一下模块三的学习路径。</p>
+<p>首先，我们由浅入深地学习了Spark的基本数据结构RDD，了解了它这样设计的原因，以及它所支持的API。</p>
+<p>之后，我们又学习了Spark SQL的DataSet/DataFrame API，了解到它不仅提供类似于SQL query的接口，大大提高了开发者的工作效率，还集成了Catalyst优化器，可以提升程序的性能。</p>
+<p>这些API应对的都是批处理的场景。</p>
+<p>再之后，我们学习了Spark的流处理模块：Spark Streaming和Structured Streaming。两者都是基于微批处理（Micro batch processing）的思想，将流数据按时间间隔分割成小的数据块进行批处理，实时更新计算结果。</p>
+<p>其中Structured Streaming也是使用DataSet/DataFrame API，这套API在某种程度上统一了批处理和流处理，是当前Spark最流行的工具，我们必需要好好掌握。</p>
+<p>虽然学习了这么多API以及它们的应用，但是大部分同学还没有从零开始写一个完整的Spark程序，可能更没有运行Spark程序的经历。纸上谈兵并不能帮助我们在工作生活中用Spark解决实际问题。所以，今天我就和你一起做个小练习，从在本地安装Spark、配置环境开始，为你示范怎样一步步解决之前提到数次的统计词频（Word Count）的问题。</p>
+<p>通过今天的学习，你可以收获：</p>
+<ul>
+<li>怎样安装Spark以及其他相关的模块；</li>
+<li>知道什么是SparkContext、SparkSession；</li>
+<li>一个完整的Spark程序应该包含哪些东西；</li>
+<li>用RDD、DataFrame、Spark Streaming如何实现统计词频。</li>
+</ul>
+<p>这一讲中，我们使用的编程语言是Python，操作系统是Mac OS X。</p>
+<p>在这一讲以及之前文章的例子中，我们都是用Python作为开发语言。虽然原生的Spark是用Scala实现，但是在大数据处理领域中，我个人最喜欢的语言是Python。因为它非常简单易用，应用非常广泛，有很多的库可以方便我们开发。</p>
+<p>当然Scala也很棒，作为一个函数式编程语言，它很容易用链式表达对数据集进行各种处理，而且它的运行速度是最快的，感兴趣的同学可以去学习一下。</p>
+<p>虽然Spark还支持Java和R，但是我个人不推荐你使用。用Java写程序实在有些冗长，而且速度上没有优势。</p>
+<p>操作系统选Mac OS X是因为我个人喜欢使用Macbook，当然Linux/Ubuntu也很棒。</p>
+<h2 id="安装spark">安装Spark</h2>
+<p>首先，我们来简单介绍一下如何在本地安装Spark，以及用Python实现的Spark库——PySpark。</p>
+<p>在前面的文章中，我们了解过，Spark的job都是JVM（Java Virtual Machine）的进程，所以在安装运行Spark之前，我们需要确保已经安装Java Developer Kit（JDK）。在命令行终端中输入：</p>
+<pre><code>java -version
+</code></pre>
+<p>如果命令行输出了某个Java的版本，那么说明你已经有JDK或者JRE在本地。如果显示无法识别这个命令，那么说明你还没有安装JDK。这时，你可以去<a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Oracle的官网</a>去下载安装JDK，然后配置好环境变量。</p>
+<p>同样，我们需要确保Python也已经被安装在本地了。在命令行输入“Python”或者“Python3”，如果可以成功进入交互式的Python Shell，就说明已经安装了Python。否则，需要去<a href="https://www.python.org/downloads/" target="_blank">Python官网</a>下载安装Python。这里，我推荐你使用Python3而不是Python2。</p>
+<p>我们同样可以在本地预装好Hadoop。Spark可以脱离Hadoop运行，不过有时我们也需要依赖于HDFS和YARN。所以，这一步并不是必须的，你可以自行选择。</p>
+<p>接下来我们就可以安装Spark。首先去<a href="https://spark.apache.org/downloads.html" target="_blank">Spark官网</a>的下载界面。在第一个下拉菜单里选择最新的发布，第二个菜单最好选择与Hadoop 2.7兼容的版本。因为有时我们的Spark程序会依赖于HDFS和YARN，所以选择最新的Hadoop版本比较好。</p>
+<p><img alt="" src="/assets/c45adc23f50d62e748deda78.png"/></p>
+<p>下载好之后，解压缩Spark安装包，并且把它移动到/usr/local目录下，在终端中输入下面的代码。</p>
+<pre><code>$ tar -xzf ~/Dowmloads/spark-2.4.3-bin-hadoop2.7.tg
+$ mv spark-2.4.3-bin-hadoop2.7.tgz /usr/local/spark
+</code></pre>
+<p>经过上述步骤，从官网下载并安装Spark的文件，这样我们便完成了Spark的安装。但是，Spark也是要进行相应的环境变量配置的。你需要打开环境变量配置文件。</p>
+<pre><code>vim ~/.bash_profile
+</code></pre>
+<p>并在最后添加一段代码。</p>
+<pre><code>export SPARK_HOME=/usr/local/spark
+export PATH=$PATH:$SPARK_HOME/bin
+</code></pre>
+<p>这样，所需的步骤都做完之后，我们在命令行控制台输入PySpark，查看安装情况。如果出现下面的欢迎标志，就说明安装完毕了。</p>
+<pre><code>Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 2.4.3
+      /_/
+
+Using Python version 2.7.10 (default, Oct  6 2017 22:29:07)
+SparkSession available as 'spark'.
+&gt;&gt;&gt;
+</code></pre>
+<h2 id="基于rdd-api的word-count程序">基于RDD API的Word Count程序</h2>
+<p>配置好所需的开发环境之后，下一步就是写一个Python程序去统计词语频率。我们都知道这个程序的逻辑应该是如下图所示的。</p>
+<p><img alt="" src="/assets/ff6c0fdc57e3097f2757e2ad.jpg"/></p>
+<p>对于中间的先map再reduce的处理，我相信通过前面的学习，所有同学都可以用RDD或者DataFrame实现。</p>
+<p>但是，我们对于Spark程序的入口是什么、如何用它读取和写入文件，可能并没有了解太多。所以，接下来让我们先接触一下Spark程序的入口。</p>
+<p>在Spark 2.0之前，<strong>SparkContext</strong>是所有Spark任务的入口，它包含了Spark程序的基本设置，比如程序的名字、内存大小、并行处理的粒度等，Spark的驱动程序需要利用它来连接到集群。</p>
+<p>无论Spark集群有多少个节点做并行处理，每个程序只可以有唯一的SparkContext，它可以被SparkConf对象初始化。</p>
+<pre><code>conf = SparkConf().setAppName(appName).setMaster(master)
+sc = SparkContext(conf=conf)
+</code></pre>
+<p>这个appName参数是一个在集群UI上展示应用程序的名称，master参数是一个Spark、Mesos 或YARN的集群URL，对于本地运行，它可以被指定为“local”。</p>
+<p>在统计词频的例子中，我们需要通过SparkContext对象来读取输入文件，创建一个RDD，如下面的代码所示。</p>
+<pre><code>text_file = sc.textFile("file://…...") //替换成实际的本地文件路径。
+</code></pre>
+<p>这里的text_file是一个RDD，它里面的每一个数据代表原文本文件中的一行。</p>
+<p>在这些版本中，如果要使用Spark提供的其他库，比如SQL或Streaming，我们就需要为它们分别创建相应的context对象，才能调用相应的API，比如的DataFrame和DStream。</p>
+<pre><code>hc = HiveContext(sc)
+ssc = StreamingContext(sc)
+</code></pre>
+<p>在Spark 2.0之后，随着新的DataFrame/DataSet API的普及化，Spark引入了新的<strong>SparkSession</strong>对象作为所有Spark任务的入口。</p>
+<p>SparkSession不仅有SparkContext的所有功能，它还集成了所有Spark提供的API，比如DataFrame、Spark Streaming和Structured Streaming，我们再也不用为不同的功能分别定义Context。</p>
+<p>在统计词频的例子中，我们可以这样初始化SparkSession以及创建初始RDD。</p>
+<pre><code>spark = SparkSession
+       .builder
+       .appName(appName)
+       .getOrCreate()
+text_file = spark.read.text("file://….").rdd.map(lambda r: r[0])
+</code></pre>
+<p>由于SparkSession的普适性，我推荐你尽量使用它作为你们Spark程序的入口。随后的学习中，我们会逐渐了解怎样通过它调用DataFrame和Streaming API。</p>
+<p>让我们回到统计词频的例子。在创建好代表每一行文本的RDD之后，接下来我们便需要两个步骤。</p>
+<ol>
+<li>把每行的文本拆分成一个个词语；</li>
+<li>统计每个词语的频率。</li>
+</ol>
+<p>对于第一步，我们可以用flatMap去把行转换成词语。对于第二步，我们可以先把每个词语转换成（word, 1）的形式，然后用reduceByKey去把相同词语的次数相加起来。这样，就很容易写出下面的代码了。</p>
+<pre><code>counts = lines.flatMap(lambda x: x.split(' '))
+                  .map(lambda x: (x, 1))
+                  .reduceByKey(add)
+</code></pre>
+<p>这里counts就是一个包含每个词语的（word，count）pair的RDD。</p>
+<p>相信你还记得，只有当碰到action操作后，这些转换动作才会被执行。所以，接下来我们可以用collect操作把结果按数组的形式返回并输出。</p>
+<pre><code>output = counts.collect()
+for (word, count) in output:
+    print("%s: %i" % (word, count))
+spark.stop() // 停止SparkSession
+</code></pre>
+<h2 id="基于dataframe-api的word-count程序">基于DataFrame API的Word Count程序</h2>
+<p>讲完基于RDD API的Word Count程序，接下来让我们学习下怎样用DataFrame API来实现相同的效果。</p>
+<p>在DataFrame的世界中，我们可以把所有的词语放入一张表，表中的每一行代表一个词语，当然这个表只有一列。我们可以对这个表用一个groupBy()操作把所有相同的词语聚合起来，然后用count()来统计出每个group的数量。</p>
+<p>但是问题来了，虽然Scala和Java支持对DataFrame进行flatMap操作，但是Python并不支持。那么要怎样把包含多个词语的句子进行分割和拆分呢？这就要用到两个新的操作——explode和split。split是pyspark.sql.functions库提供的一个函数，它作用于DataFrame的某一列，可以把列中的字符串按某个分隔符分割成一个字符串数组。</p>
+<p>explode同样是pyspark.sql.functions库提供的一个函数，通俗点的翻译是“爆炸”，它也作用于DataFrame的某一列，可以为列中的数组或者map中每一个元素创建一个新的Row。</p>
+<p>由于之前代码中创建的df_lines这个DataFrame中，每一行只有一列，每一列都是一个包含很多词语的句子，我们可以先对这一列做split，生成一个新的列，列中每个元素是一个词语的数组；再对这个列做explode，可以把数组中的每个元素都生成一个新的Row。这样，就实现了类似的flatMap功能。这个过程可以用下面的三个表格说明。</p>
+<p><img alt="" src="/assets/08180ad70f01941e5f10e6f6.png"/></p>
+<p>接下来我们只需要对Word这一列做groupBy，就可以统计出每个词语出现的频率，代码如下。</p>
+<pre><code>from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+
+if __name__ == "__main__":
+   spark = SparkSession
+       .builder
+       .appName(‘WordCount’)
+       .getOrCreate()
+   lines = spark.read.text("sample.txt")
+   wordCounts = lines
+       .select(explode(split(lines.value, " "))
+       .alias("word"))
+       .groupBy("word")
+       .count()
+   wordCounts.show()
+   
+   spark.stop()
+</code></pre>
+<p>从这个例子，你可以很容易看出使用DataSet/DataFrame API的便利性——我们不需要创建（word, count）的pair来作为中间值，可以直接对数据做类似SQL的查询。</p>
+<h2 id="小结">小结</h2>
+<p>通过今天的学习，我们掌握了如何从零开始创建一个简单的Spark的应用程序，包括如何安装Spark、如何配置环境、Spark程序的基本结构等等。</p>
+<h2 id="实践题">实践题</h2>
+<p>希望你可以自己动手操作一下，这整个过程只需要跑通一次，以后就可以脱离纸上谈兵，真正去解决实际问题。</p>
+<p>欢迎你在留言中反馈自己动手操作的效果。</p>
+<p>如果你跑通了，可以在留言中打个卡。如果遇到了问题，也请你在文章中留言，与我和其他同学一起讨论。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

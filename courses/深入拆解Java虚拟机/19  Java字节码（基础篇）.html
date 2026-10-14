@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>19  Java字节码（基础篇） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/index.html">深入拆解Java虚拟机</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">39 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入拆解Java虚拟机</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E8%A6%81%E5%AD%A6%E4%B9%A0Java%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9F.html">00 开篇词  为什么我们要学习Java虚拟机？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/01%20%20Java%E4%BB%A3%E7%A0%81%E6%98%AF%E6%80%8E%E4%B9%88%E8%BF%90%E8%A1%8C%E7%9A%84%EF%BC%9F.html">01  Java代码是怎么运行的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/02%20%20Java%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B.html">02  Java的基本类型</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/03%20%20Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%AF%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BDJava%E7%B1%BB%E7%9A%84.html">03  Java虚拟机是如何加载Java类的</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/04%20%20JVM%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">04  JVM是如何执行方法调用的？（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/05%20%20JVM%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">05  JVM是如何执行方法调用的？（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/06%20%20JVM%E6%98%AF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8%E7%9A%84%EF%BC%9F.html">06  JVM是如何处理异常的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/07%20%20JVM%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%B0%84%E7%9A%84%EF%BC%9F.html">07  JVM是如何实现反射的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/08%20%20JVM%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0invokedynamic%E7%9A%84%EF%BC%9F%EF%BC%88%E4%B8%8A%EF%BC%89.html">08  JVM是怎么实现invokedynamic的？（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/09%20%20JVM%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0invokedynamic%E7%9A%84%EF%BC%9F%EF%BC%88%E4%B8%8B%EF%BC%89.html">09  JVM是怎么实现invokedynamic的？（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/10%20%20Java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.html">10  Java对象的内存布局</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/11%20%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%88%E4%B8%8A%EF%BC%89.html">11  垃圾回收（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/12%20%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%88%E4%B8%8B%EF%BC%89.html">12  垃圾回收（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/13%20%20Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html">13  Java内存模型</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/14%20%20Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0synchronized%E7%9A%84%EF%BC%9F.html">14  Java虚拟机是怎么实现synchronized的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/15%20%20Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B8%8EJava%E7%BC%96%E8%AF%91%E5%99%A8.html">15  Java语法糖与Java编译器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/16%20%20%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%EF%BC%88%E4%B8%8A%EF%BC%89.html">16  即时编译（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/17%20%20%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%EF%BC%88%E4%B8%8B%EF%BC%89.html">17  即时编译（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/18%20%20%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E4%B8%AD%E9%97%B4%E8%A1%A8%E8%BE%BE%E5%BD%A2%E5%BC%8F.html">18  即时编译器的中间表达形式</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/19%20%20Java%E5%AD%97%E8%8A%82%E7%A0%81%EF%BC%88%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%89.html">19  Java字节码（基础篇）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/20%20%20%E6%96%B9%E6%B3%95%E5%86%85%E8%81%94%EF%BC%88%E4%B8%8A%EF%BC%89.html">20  方法内联（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/21%20%20%E6%96%B9%E6%B3%95%E5%86%85%E8%81%94%EF%BC%88%E4%B8%8B%EF%BC%89.html">21  方法内联（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/22%20%20HotSpot%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84intrinsic.html">22  HotSpot虚拟机的intrinsic</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/23%20%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90.html">23  逃逸分析</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/24%20%20%E5%AD%97%E6%AE%B5%E8%AE%BF%E9%97%AE%E7%9B%B8%E5%85%B3%E4%BC%98%E5%8C%96.html">24  字段访问相关优化</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/25%20%20%E5%BE%AA%E7%8E%AF%E4%BC%98%E5%8C%96.html">25  循环优化</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/26%20%20%E5%90%91%E9%87%8F%E5%8C%96.html">26  向量化</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/27%20%20%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8.html">27  注解处理器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/28%20%20%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6JMH%EF%BC%88%E4%B8%8A%EF%BC%89.html">28  基准测试框架JMH（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/29%20%20%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6JMH%EF%BC%88%E4%B8%8B%EF%BC%89.html">29  基准测试框架JMH（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/30%20%20Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7%EF%BC%88%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%AF%87%EF%BC%89.html">30  Java虚拟机的监控及诊断工具（命令行篇）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/31%20%20Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7%EF%BC%88GUI%E7%AF%87%EF%BC%89.html">31  Java虚拟机的监控及诊断工具（GUI篇）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/32%20%20JNI%E7%9A%84%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6.html">32  JNI的运行机制</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/33%20%20Java%20Agent%E4%B8%8E%E5%AD%97%E8%8A%82%E7%A0%81%E6%B3%A8%E5%85%A5.html">33  Java Agent与字节码注入</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/34%20%20Graal%EF%BC%9A%E7%94%A8Java%E7%BC%96%E8%AF%91Java.html">34  Graal：用Java编译Java</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/35%20%20Truffle%EF%BC%9A%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%A1%86%E6%9E%B6.html">35  Truffle：语言实现框架</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/36%20%20SubstrateVM%EF%BC%9AAOT%E7%BC%96%E8%AF%91%E6%A1%86%E6%9E%B6.html">36  SubstrateVM：AOT编译框架</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%B0%BE%E5%A3%B0%E4%B8%A8%E9%81%93%E9%98%BB%E4%B8%94%E9%95%BF%EF%BC%8C%E5%8A%AA%E5%8A%9B%E5%8A%A0%E9%A4%90.html.html">尾声丨道阻且长，努力加餐.html</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%B7%A5%E5%85%B7%E7%AF%87%20%20%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D.html">工具篇  常用工具介绍</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/19%20%20Java%E5%AD%97%E8%8A%82%E7%A0%81%EF%BC%88%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="19  Java字节码（基础篇）" id="title">19  Java字节码（基础篇）</h1>
+<div><p>在前面的篇章中，有不少同学反馈对 Java 字节码并不是特别熟悉。那么今天我便来系统性地介绍一遍 Java 字节码。</p>
+<h2 id="操作数栈">操作数栈</h2>
+<p>我们知道，Java 字节码是 Java 虚拟机所使用的指令集。因此，它与 Java 虚拟机基于栈的计算模型是密不可分的。</p>
+<p>在解释执行过程中，每当为 Java 方法分配栈桢时，Java 虚拟机往往需要开辟一块额外的空间作为操作数栈，来存放计算的操作数以及返回结果。</p>
+<p>具体来说便是：执行每一条指令之前，Java 虚拟机要求该指令的操作数已被压入操作数栈中。在执行指令时，Java 虚拟机会将该指令所需的操作数弹出，并且将指令的结果重新压入栈中。</p>
+<p><img alt="img" src="/assets/b5e67f0c98305c0b6901079e.png"/></p>
+<p>以加法指令 iadd 为例。假设在执行该指令前，栈顶的两个元素分别为 int 值 1 和 int 值 2，那么 iadd 指令将弹出这两个 int，并将求得的和 int 值 3 压入栈中。</p>
+<p><img alt="img" src="/assets/9f2bf2ffe8fd3d4c338247e3.png"/></p>
+<p>由于 iadd 指令只消耗栈顶的两个元素，因此，对于离栈顶距离为 2 的元素，即图中的问号，iadd 指令并不关心它是否存在，更加不会对其进行修改。</p>
+<p>Java 字节码中有好几条指令是直接作用在操作数栈上的。最为常见的便是 dup： 复制栈顶元素，以及 pop：舍弃栈顶元素。</p>
+<p>dup 指令常用于复制 new 指令所生成的未经初始化的引用。例如在下面这段代码的 foo 方法中，当执行 new 指令时，Java 虚拟机将指向一块已分配的、未初始化的内存的引用压入操作数栈中。</p>
+<pre><code>  public void foo() {
+    Object o = new Object();
+  }
+  // 对应的字节码如下：
+  public void foo();
+    0  new java.lang.Object [3]
+    3  dup
+    4  invokespecial java.lang.Object() [8]
+    7  astore_1 [o]
+    8  return
+</code></pre>
+<p>接下来，我们需要以这个引用为调用者，调用其构造器，也就是上面字节码中的 invokespecial 指令。要注意，该指令将消耗操作数栈上的元素，作为它的调用者以及参数（不过 Object 的构造器不需要参数）。</p>
+<p>因此，我们需要利用 dup 指令复制一份 new 指令的结果，并用来调用构造器。当调用返回之后，操作数栈上仍有原本由 new 指令生成的引用，可用于接下来的操作（即偏移量为 7 的字节码，下面会介绍到）。</p>
+<p>pop 指令则常用于舍弃调用指令的返回结果。例如在下面这段代码的 foo 方法中，我将调用静态方法 bar，但是却不用其返回值。</p>
+<p>由于对应的 invokestatic 指令仍旧会将返回值压入 foo 方法的操作数栈中，因此 Java 虚拟机需要额外执行 pop 指令，将返回值舍弃。</p>
+<pre><code>  public static boolean bar() {
+    return false;
+  }
+ 
+  public void foo() {
+    bar();
+  }
+  // foo 方法对应的字节码如下：
+  public void foo();
+    0  invokestatic FooTest.bar() : boolean [24]
+    3  pop
+    4  return
+</code></pre>
+<p>需要注意的是，上述两条指令只能处理非 long 或者非 double 类型的值，这是因为 long 类型或者 double 类型的值，需要占据两个栈单元。当遇到这些值时，我们需要同时复制栈顶两个单元的 dup2 指令，以及弹出栈顶两个单元的 pop2 指令。</p>
+<p>除此之外，不算常见但也是直接作用于操作数栈的还有 swap 指令，它将交换栈顶两个元素的值。</p>
+<p>在 Java 字节码中，有一部分指令可以直接将常量加载到操作数栈上。以 int 类型为例，Java 虚拟机既可以通过 iconst 指令加载 -1 至 5 之间的 int 值，也可以通过 bipush、sipush 加载一个字节、两个字节所能代表的 int 值。</p>
+<p>Java 虚拟机还可以通过 ldc 加载常量池中的常量值，例如 ldc #18 将加载常量池中的第 18 项。</p>
+<p>这些常量包括 int 类型、long 类型、float 类型、double 类型、String 类型以及 Class 类型的常量。</p>
+<p><img alt="img" src="/assets/91f79a388db424983bf09ee8.jpg"/></p>
+<p><strong>常数加载指令表</strong></p>
+<p>正常情况下，操作数栈的压入弹出都是一条条指令完成的。唯一的例外情况是在抛异常时，Java 虚拟机会清除操作数栈上的所有内容，而后将异常实例压入操作数栈上。</p>
+<h2 id="局部变量区">局部变量区</h2>
+<p>Java 方法栈桢的另外一个重要组成部分则是局部变量区，字节码程序可以将计算的结果缓存在局部变量区之中。</p>
+<p>实际上，Java 虚拟机将局部变量区当成一个数组，依次存放 this 指针（仅非静态方法），所传入的参数，以及字节码中的局部变量。</p>
+<p>和操作数栈一样，long 类型以及 double 类型的值将占据两个单元，其余类型仅占据一个单元。</p>
+<pre><code>public void foo(long l, float f) {
+  {
+    int i = 0;
+  }
+  {
+    String s = "Hello, World";
+  }
+}
+</code></pre>
+<p>以上面这段代码中的 foo 方法为例，由于它是一个实例方法，因此局部变量数组的第 0 个单元存放着 this 指针。</p>
+<p>第一个参数为 long 类型，于是数组的 1、2 两个单元存放着所传入的 long 类型参数的值。第二个参数则是 float 类型，于是数组的第 3 个单元存放着所传入的 float 类型参数的值。</p>
+<p><img alt="img" src="/assets/6d8759d1a2e4cb1175b0e40f.png"/></p>
+<p>在方法体里的两个代码块中，我分别定义了两个局部变量 i 和 s。由于这两个局部变量的生命周期没有重合之处，因此，Java 编译器可以将它们编排至同一单元中。也就是说，局部变量数组的第 4 个单元将为 i 或者 s。</p>
+<p>存储在局部变量区的值，通常需要加载至操作数栈中，方能进行计算，得到计算结果后再存储至局部变量数组中。这些加载、存储指令是区分类型的。例如，int 类型的加载指令为 iload，存储指令为 istore。</p>
+<p><img alt="img" src="/assets/6f6bad261e48779ea61fdbb2.jpg"/>
+<strong>局部变量区访问指令表</strong></p>
+<p>局部变量数组的加载、存储指令都需要指明所加载单元的下标。举例来说，aload 0 指的是加载第 0 个单元所存储的引用，在前面示例中的 foo 方法里指的便是加载 this 指针。</p>
+<p>在我印象中，Java 字节码中唯一能够直接作用于局部变量区的指令是 iinc M N（M 为非负整数，N 为整数）。该指令指的是将局部变量数组的第 M 个单元中的 int 值增加 N，常用于 for 循环中自增量的更新。</p>
+<pre><code>  public void foo() {
+    for (int i = 100; i&gt;=0; i--) {}
+  }
+  // 对应的字节码如下：
+  public void foo();
+     0  bipush 100
+     2  istore_1 [i]
+     3  goto 9
+     6  iinc 1 -1 [i] // i--
+     9  iload_1 [i]
+    10  ifge 6
+    13  return
+</code></pre>
+<h2 id="综合示例">综合示例</h2>
+<p>下面我们来看一个综合的例子：</p>
+<pre><code>public static int bar(int i) {
+  return ((i + 1) - 2) * 3 / 4;
+}
+// 对应的字节码如下：
+Code:
+  stack=2, locals=1, args_size=1
+     0: iload_0
+     1: iconst_1
+     2: iadd
+     3: iconst_2
+     4: isub
+     5: iconst_3
+     6: imul
+     7: iconst_4
+     8: idiv
+     9: ireturn
+</code></pre>
+<p>这里我定义了一个 bar 方法。它将接收一个 int 类型的参数，进行一系列计算之后再返回。</p>
+<p>对应的字节码中的 stack=2, locals=1 代表该方法需要的操作数栈空间为 2，局部变量数组空间为 1。当调用 bar(5) 时，每条指令执行前后局部变量数组空间以及操作数栈的分布如下：</p>
+<p><img alt="img" src="/assets/8c18041bc13e08a166aa4220.png"/></p>
+<h2 id="java-字节码简介">Java 字节码简介</h2>
+<p>前面我已经介绍了加载常量指令、操作数栈专用指令以及局部变量区访问指令。下面我们来看看其他的类别。</p>
+<p>Java 相关指令，包括各类具备高层语义的字节码，即 new（后跟目标类，生成该类的未初始化的对象），instanceof（后跟目标类，判断栈顶元素是否为目标类 / 接口的实例。是则压入 1，否则压入 0），checkcast（后跟目标类，判断栈顶元素是否为目标类 / 接口的实例。如果不是便抛出异常），athrow（将栈顶异常抛出），以及 monitorenter（为栈顶对象加锁）和 monitorexit（为栈顶对象解锁）。</p>
+<p>此外，该类型的指令还包括字段访问指令，即静态字段访问指令 getstatic、putstatic，和实例字段访问指令 getfield、putfield。这四条指令均附带用以定位目标字段的信息，但所消耗的操作数栈元素皆不同。</p>
+<p><img alt="img" src="/assets/83841470c00e5b89e0258e0a.png"/></p>
+<p>以 putfield 为例，在上图中，它会把值 v 存储至对象 obj 的目标字段之中。</p>
+<p>方法调用指令，包括 invokestatic，invokespecial，invokevirtual，invokeinterface 以及 invokedynamic。这几条字节码我们已经反反复复提及了，就不再具体介绍各自的含义了。</p>
+<p>除 invokedynamic 外，其他的方法调用指令所消耗的操作数栈元素是根据调用类型以及目标方法描述符来确定的。在进行方法调用之前，程序需要依次压入调用者（invokestatic 不需要），以及各个参数。</p>
+<pre><code>  public int neg(int i) {
+    return -i;
+  }
+ 
+  public int foo(int i) {
+    return neg(neg(i));
+  }
+  // foo 方法对应的字节码如下：foo 方法对应的字节码如下：
+  public int foo(int i);
+    0  aload_0 [this]
+    1  aload_0 [this]
+    2  iload_1 [i]
+    3  invokevirtual FooTest.neg(int) : int [25]
+    6  invokevirtual FooTest.neg(int) : int [25]
+    9  ireturn
+</code></pre>
+<p>以上面这段代码为例，当调用 foo(2) 时，每条指令执行前后局部变量数组空间以及操作数栈的分布如下所示：</p>
+<p><img alt="img" src="/assets/b35667785d16c9029b3cd394.png"/></p>
+<p>数组相关指令，包括新建基本类型数组的 newarray，新建引用类型数组的 anewarray，生成多维数组的 multianewarray，以及求数组长度的 arraylength。另外，它还包括数组的加载指令以及存储指令。这些指令是区分类型的。例如，int 数组的加载指令为 iaload，存储指令为 iastore。</p>
+<p><img alt="img" src="/assets/450a10bc84186c0f4153314c.jpg"/></p>
+<p><strong>数组访问指令表</strong></p>
+<p>控制流指令，包括无条件跳转 goto，条件跳转指令，tableswitch 和 lookupswtich（前者针对密集的 cases，后者针对稀疏的 cases），返回指令，以及被废弃的 jsr，ret 指令。其中返回指令是区分类型的。例如，返回 int 值的指令为 ireturn。</p>
+<p><img alt="img" src="/assets/163f3b0d6f776bfb00ac7fbc.jpg"/></p>
+<p><strong>返回指令表</strong></p>
+<p>除返回指令外，其他的控制流指令均附带一个或者多个字节码偏移量，代表需要跳转到的位置。例如下面的 abs 方法中偏移量为 1 的条件跳转指令，当栈顶元素小于 0 时，跳转至偏移量为 6 的字节码。</p>
+<pre><code>  public int abs(int i) {
+    if (i &gt;= 0) {
+      return i;
+    }
+    return -i;
+  }
+  // 对应的字节码如下所示：
+  public int abs(int i);
+    0  iload_1 [i]
+    1  iflt 6
+    4  iload_1 [i]
+    5  ireturn
+    6  iload_1 [i]
+    7  ineg
+    8  ireturn
+</code></pre>
+<p>剩余的 Java 字节码几乎都和计算相关，这里就不再详细阐述了。</p>
+<h2 id="总结与实践">总结与实践</h2>
+<p>今天我简单介绍了各种类型的 Java 字节码。</p>
+<p>Java 方法的栈桢分为操作数栈和局部变量区。通常来说，程序需要将变量从局部变量区加载至操作数栈中，进行一番运算之后再存储回局部变量区中。</p>
+<p>Java 字节码可以划分为很多种类型，如加载常量指令，操作数栈专用指令，局部变量区访问指令，Java 相关指令，方法调用指令，数组相关指令，控制流指令，以及计算相关指令。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

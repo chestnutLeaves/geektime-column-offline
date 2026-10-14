@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>28  复杂问题简单化，代理帮你隐藏了多少底层细节？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/index.html">Dubbo源码解读与实战-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">50 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Dubbo源码解读与实战-完</strong><ul><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E6%B7%B1%E5%85%A5%E6%8E%8C%E6%8F%A1%20Dubbo%20%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8F%90%E5%8D%87%E4%BD%A0%E7%9A%84%E8%81%8C%E5%9C%BA%E7%AB%9E%E4%BA%89%E5%8A%9B.html">00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/01%20%20Dubbo%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%9A%E5%8D%83%E9%87%8C%E4%B9%8B%E8%A1%8C%EF%BC%8C%E5%A7%8B%E4%BA%8E%E8%B6%B3%E4%B8%8B.html">01  Dubbo 源码环境搭建：千里之行，始于足下</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/02%20Dubbo%20%E7%9A%84%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BA%BF%EF%BC%9A%E6%8A%93%E4%BD%8F%20URL%EF%BC%8C%E5%B0%B1%E7%90%86%E8%A7%A3%E4%BA%86%E5%8D%8A%E4%B8%AA%20Dubbo.html">02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/03%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8A%EF%BC%89.html">03  Dubbo SPI 精析，接口实现两极反转（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/04%20%20Dubbo%20SPI%20%E7%B2%BE%E6%9E%90%EF%BC%8C%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E4%B8%A4%E6%9E%81%E5%8F%8D%E8%BD%AC%EF%BC%88%E4%B8%8B%EF%BC%89.html">04  Dubbo SPI 精析，接口实现两极反转（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/05%20%20%E6%B5%B7%E9%87%8F%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E8%BD%AE%E6%90%9E%E5%AE%9A.html">05  海量定时任务，一个时间轮搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/06%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/07%20%20ZooKeeper%20%E4%B8%8E%20Curator%EF%BC%8C%E6%B1%82%E4%BD%A0%E5%88%AB%E7%94%A8%20ZkClient%20%E4%BA%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/08%20%20%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0.html">08  代理模式与常见实现</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/09%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">09  Netty 入门，用它做网络编程都说好（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/10%20%20Netty%20%E5%85%A5%E9%97%A8%EF%BC%8C%E7%94%A8%E5%AE%83%E5%81%9A%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E9%83%BD%E8%AF%B4%E5%A5%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">10  Netty 入门，用它做网络编程都说好（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/11%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">11  简易版 RPC 框架实现（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/12%20%20%E7%AE%80%E6%98%93%E7%89%88%20RPC%20%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">12  简易版 RPC 框架实现（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/13%20%20%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%EF%BC%9A%E9%99%8D%E4%BD%8E%20ZooKeeper%20%E5%8E%8B%E5%8A%9B%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5.html">13  本地缓存：降低 ZooKeeper 压力的一个常用手段</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/14%20%20%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%E6%98%AF%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BF%9D%E8%AF%81.html">14  重试机制是网络操作的基本保证</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/15%20%20ZooKeeper%20%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%AE%9E%E8%B7%B5.html">15  ZooKeeper 注册中心实现，官方推荐注册中心实践</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/16%20%20Dubbo%20Serialize%20%E5%B1%82%EF%BC%9A%E5%A4%9A%E7%A7%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AE%97%E6%B3%95%EF%BC%8C%E6%80%BB%E6%9C%89%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E4%BD%A0.html">16  Dubbo Serialize 层：多种序列化算法，总有一款适合你</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/17%20%20Dubbo%20Remoting%20%E5%B1%82%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E5%88%86%E6%9E%90%EF%BC%9A%E8%BF%99%E5%B1%85%E7%84%B6%E6%98%AF%E4%B8%80%E5%A5%97%E5%85%BC%E5%AE%B9%E6%89%80%E6%9C%89%20NIO%20%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%9F.html">17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/18%20%20Buffer%20%E7%BC%93%E5%86%B2%E5%8C%BA%EF%BC%9A%E6%88%91%E4%BB%AC%E4%B8%8D%E7%94%9F%E4%BA%A7%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AA%E6%98%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E6%90%AC%E8%BF%90%E5%B7%A5.html">18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/19%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8A%EF%BC%89.html">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/20%20%20Transporter%20%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%BC%96%E8%A7%A3%E7%A0%81%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%96%87%E6%89%93%E5%B0%BD%EF%BC%88%E4%B8%8B%EF%BC%89.html">20  Transporter 层核心实现：编解码与线程模型一文打尽（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/21%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/22%20%20Exchange%20%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%20Request-Response%20%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/23%20%20%E6%A0%B8%E5%BF%83%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D%EF%BC%8CRPC%20%E5%B1%82%E9%AA%A8%E6%9E%B6%E6%A2%B3%E7%90%86.html">23  核心接口介绍，RPC 层骨架梳理</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/24%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/25%20%20%E4%BB%8E%20Protocol%20%E8%B5%B7%E6%89%8B%EF%BC%8C%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/26%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8A%EF%BC%89.html">26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/27%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E7%9B%B4%E5%87%BB%20Dubbo%20%E2%80%9C%E5%BF%83%E8%84%8F%E2%80%9D%EF%BC%8C%E5%B8%A6%E4%BD%A0%E4%B8%80%E8%B5%B7%E6%8E%A2%E7%A7%98%20Invoker%EF%BC%88%E4%B8%8B%EF%BC%89.html">27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）</a></li><li><a class="active" aria-current="page" href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/28%20%20%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%AE%80%E5%8D%95%E5%8C%96%EF%BC%8C%E4%BB%A3%E7%90%86%E5%B8%AE%E4%BD%A0%E9%9A%90%E8%97%8F%E4%BA%86%E5%A4%9A%E5%B0%91%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82%EF%BC%9F.html">28  复杂问题简单化，代理帮你隐藏了多少底层细节？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/29%20%20%E5%8A%A0%E9%A4%90%EF%BC%9AHTTP%20%E5%8D%8F%E8%AE%AE%20%2B%20JSON-RPC%EF%BC%8CDubbo%20%E8%B7%A8%E8%AF%AD%E8%A8%80%E5%B0%B1%E6%98%AF%E5%A6%82%E6%AD%A4%E7%AE%80%E5%8D%95.html">29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/30%20%20Filter%20%E6%8E%A5%E5%8F%A3%EF%BC%8C%E6%89%A9%E5%B1%95%20Dubbo%20%E6%A1%86%E6%9E%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E6%89%8B%E6%AE%B5%E6%8C%87%E5%8C%97.html">30  Filter 接口，扩展 Dubbo 框架的常用手段指北</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/31%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E6%BD%9C%20Directory%20%E5%AE%9E%E7%8E%B0%EF%BC%8C%E6%8E%A2%E7%A7%98%E6%9C%8D%E5%8A%A1%E7%9B%AE%E5%BD%95%E7%8E%84%E6%9C%BA.html">31  加餐：深潜 Directory 实现，探秘服务目录玄机</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/32%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8A%EF%BC%89.html">32  路由机制：请求到底怎么走，它说了算（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/33%20%20%E8%B7%AF%E7%94%B1%E6%9C%BA%E5%88%B6%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8C%E5%AE%83%E8%AF%B4%E4%BA%86%E7%AE%97%EF%BC%88%E4%B8%8B%EF%BC%89.html">33  路由机制：请求到底怎么走，它说了算（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/34%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%88%9D%E6%8E%A2%20Dubbo%20%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">34  加餐：初探 Dubbo 动态配置的那些事儿</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/35%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8A%EF%BC%89.html">35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/36%20%20%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9A%E5%85%AC%E5%B9%B3%E5%85%AC%E6%AD%A3%E7%89%A9%E5%B0%BD%E5%85%B6%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%EF%BC%8C%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89%EF%BC%88%E4%B8%8B%EF%BC%89.html">36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/37%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8A%EF%BC%89.html">37  集群容错：一个好汉三个帮（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/38%20%20%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%B1%89%E4%B8%89%E4%B8%AA%E5%B8%AE%EF%BC%88%E4%B8%8B%EF%BC%89.html">38  集群容错：一个好汉三个帮（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/39%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E5%A4%9A%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%8D%E7%94%A8%E6%80%95%EF%BC%8CMerger%20%E5%90%88%E5%B9%B6%E5%99%A8%E6%9D%A5%E5%B8%AE%E5%BF%99.html">39  加餐：多个返回值不用怕，Merger 合并器来帮忙</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/40%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%A8%A1%E6%8B%9F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%EF%BC%8CMock%20%E6%9C%BA%E5%88%B6%E5%B8%AE%E4%BD%A0%E6%90%9E%E5%AE%9A.html">40  加餐：模拟远程调用，Mock 机制帮你搞定</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/41%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E4%B8%80%E9%94%AE%E9%80%9A%E5%85%B3%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E5%85%A8%E6%B5%81%E7%A8%8B.html">41  加餐：一键通关服务发布全流程</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/42%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E6%B5%81%E7%A8%8B%E5%85%A8%E8%A7%A3%E6%9E%90.html">42  加餐：服务引用流程全解析</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/43%20%20%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9A%E6%96%B0%E7%89%88%E6%9C%AC%E6%96%B0%E6%96%B9%E6%A1%88.html">43  服务自省设计方案：新版本新方案</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/44%20%20%E5%85%83%E6%95%B0%E6%8D%AE%E6%96%B9%E6%A1%88%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E6%95%B0%E6%8D%AE%E9%87%8F%E8%86%A8%E8%83%80%EF%BC%9F.html">44  元数据方案深度剖析，如何避免注册中心数据量膨胀？</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/45%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8A%EF%BC%89.html">45  加餐：深入服务自省方案中的服务发布订阅（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/46%20%20%E5%8A%A0%E9%A4%90%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%9C%8D%E5%8A%A1%E8%87%AA%E7%9C%81%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%EF%BC%88%E4%B8%8B%EF%BC%89.html">46  加餐：深入服务自省方案中的服务发布订阅（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/47%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8A%EF%BC%89.html">47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/48%20%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%8C%96%E9%85%8D%E7%BD%AE%20and%20%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%88%91%E9%83%BD%E8%A6%81%EF%BC%88%E4%B8%8B%EF%BC%89.html">48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）</a></li><li><a href="/courses/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/49%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E8%AE%A4%E7%9C%9F%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BC%A9%E5%B0%8F%E5%B7%AE%E8%B7%9D.html">49 结束语  认真学习，缩小差距</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Dubbo%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AE%9E%E6%88%98-%E5%AE%8C/28%20%20%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%AE%80%E5%8D%95%E5%8C%96%EF%BC%8C%E4%BB%A3%E7%90%86%E5%B8%AE%E4%BD%A0%E9%9A%90%E8%97%8F%E4%BA%86%E5%A4%9A%E5%B0%91%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="28  复杂问题简单化，代理帮你隐藏了多少底层细节？" id="title">28  复杂问题简单化，代理帮你隐藏了多少底层细节？</h1>
+<div><p>在前面介绍 DubboProtocol 的相关实现时，我们知道 Protocol 这一层以及后面介绍的 Cluster 层暴露出来的接口都是 Dubbo 内部的一些概念，业务层无法直接使用。为了让业务逻辑能够无缝使用 Dubbo，我们就需要将业务逻辑与 Dubbo 内部概念打通，这就用到了动态生成代理对象的功能。Proxy 层在 Dubbo 架构中的位置如下所示（虽然在架构图中 Proxy 层与 Protocol 层距离很远，但 Proxy 的具体代码实现就位于 dubbo-rpc-api 模块中）：</p>
+<p><img alt="Drawing 0.png" src="/assets/f97cf996a37ad3e7b836ea23.png"/></p>
+<p>Dubbo 架构中 Proxy 层的位置图</p>
+<p>在 Consumer 进行调用的时候，Dubbo 会通过<strong>动态代理</strong>将业务接口实现对象转化为相应的 Invoker 对象，然后在 Cluster 层、Protocol 层都会使用 Invoker。在 Provider 暴露服务的时候，也会有 Invoker 对象与业务接口实现对象之间的转换，这同样也是通过<strong>动态代理</strong>实现的。</p>
+<p>实现动态代理的常见方案有：JDK 动态代理、CGLib 动态代理和 Javassist 动态代理。这些方案的应用都还是比较广泛的，例如，Hibernate 底层使用了 Javassist 和 CGLib，Spring 使用了 CGLib 和 JDK 动态代理，MyBatis 底层使用了 JDK 动态代理和 Javassist。</p>
+<p>从性能方面看，Javassist 与 CGLib 的实现方式相差无几，两者都比 JDK 动态代理性能要高，具体高多少，这就要看具体的机器、JDK 版本、测试基准的具体实现等条件了。</p>
+<p><strong>Dubbo 提供了两种方式来实现代理，分别是 JDK 动态代理和 Javassist</strong>。我们可以在 proxy 这个包内，看到相应工厂类，如下图所示：</p>
+<p><img alt="Drawing 1.png" src="/assets/9878b3245681e8f32656af65.png"/></p>
+<p>ProxyFactory 核心实现的位置</p>
+<p>了解了 Proxy 存在的必要性以及 Dubbo 提供的两种代理生成方式之后，下面我们就开始对 Proxy 层的实现进行深入分析。</p>
+<h3 id="proxyfactory">ProxyFactory</h3>
+<p>关于 ProxyFactory 接口，我们在前面的第 23 课时中已经介绍过了，这里做一下简单回顾。ProxyFactory 是一个扩展接口，其中定义了<strong>两个核心方法：一个是 getProxy() 方法，为 Invoker 对象创建代理对象；另一个是 getInvoker() 方法，将代理对象反向封装成 Invoker 对象。</strong></p>
+<pre><code>@SPI("javassist")
+
+public interface ProxyFactory {
+
+    // 为传入的Invoker对象创建代理对象
+
+    @Adaptive({PROXY_KEY})
+
+    &lt;T&gt; T getProxy(Invoker&lt;T&gt; invoker) throws RpcException;
+
+    @Adaptive({PROXY_KEY})
+
+    &lt;T&gt; T getProxy(Invoker&lt;T&gt; invoker, boolean generic) throws RpcException;
+
+    // 将传入的代理对象封装成Invoker对象
+
+    @Adaptive({PROXY_KEY})
+
+    &lt;T&gt; Invoker&lt;T&gt; getInvoker(T proxy, Class&lt;T&gt; type, URL url) throws RpcException;
+
+}
+</code></pre>
+<p>看到 ProxyFactory 上的 @SPI 注解我们知道，其默认实现使用 Javassist 来创建代码对象。</p>
+<p><strong>AbstractProxyFactory 是代理工厂的抽象类</strong>，继承关系如下图所示：</p>
+<p><img alt="Drawing 2.png" src="/assets/2e471c039bf865484d9240d7.png"/></p>
+<p>AbstractProxyFactory 继承关系图</p>
+<h3 id="abstractproxyfactory">AbstractProxyFactory</h3>
+<p>AbstractProxyFactory 主要处理的是需要代理的接口，具体实现在 getProxy() 方法中：</p>
+<pre><code>public &lt;T&gt; T getProxy(Invoker&lt;T&gt; invoker, boolean generic) throws RpcException {
+
+    Set&lt;Class&lt;?&gt;&gt; interfaces = new HashSet&lt;&gt;();// 记录要代理的接口
+
+    // 获取URL中interfaces参数指定的接口
+
+    String config = invoker.getUrl().getParameter(INTERFACES);
+
+    if (config != null &amp;&amp; config.length() &gt; 0) {
+
+        // 按照逗号切分interfaces参数，得到接口集合
+
+        String[] types = COMMA_SPLIT_PATTERN.split(config);
+
+        for (String type : types) { // 记录这些接口信息
+
+            interfaces.add(ReflectUtils.forName(type));
+
+        }
+
+    }
+
+    if (generic) { // 针对泛化接口的处理
+
+        if (!GenericService.class.isAssignableFrom(invoker.getInterface())) {
+
+            interfaces.add(GenericService.class);
+
+        }
+
+        // 从URL中获取interface参数指定的接口
+
+        String realInterface = invoker.getUrl().getParameter(Constants.INTERFACE);
+
+        interfaces.add(ReflectUtils.forName(realInterface));
+
+    }
+
+    // 获取Invoker中type字段指定的接口
+
+    interfaces.add(invoker.getInterface());
+
+    // 添加EchoService、Destroyable两个默认接口
+
+    interfaces.addAll(Arrays.asList(INTERNAL_INTERFACES));
+
+    // 调用抽象的getProxy()重载方法
+
+    return getProxy(invoker, interfaces.toArray(new Class&lt;?&gt;[0]));
+
+}
+</code></pre>
+<p>AbstractProxyFactory 从多个地方获取需要代理的接口之后，会调用子类实现的 getProxy() 方法创建代理对象。</p>
+<p>JavassistProxyFactory 对 getProxy() 方法的实现比较简单，直接委托给了 dubbo-common 模块中的 Proxy 工具类进行代理类的生成。下面我们就来深入分析 Proxy 生成代理类的全流程。</p>
+<h3 id="proxy">Proxy</h3>
+<p><strong>在 dubbo-common 模块，Proxy 中的 getProxy() 方法提供了动态创建代理类的核心实现</strong>。这个创建代理类的流程比较长，为了便于你更好地理解，这里我们将其拆开，一步步进行分析。</p>
+<p>首先是查找 PROXY_CACHE_MAP 这个代理类缓存（new WeakHashMap<classloader, map<string,="" object="">&gt;() 类型），其中第一层 Key 是 ClassLoader 对象，第二层 Key 是上面整理得到的接口拼接而成的，Value 是被缓存的代理类的 WeakReference（弱引用）。</classloader,></p>
+<p>WeakReference（弱引用）的特性是：WeakReference 引用的对象生命周期是两次 GC 之间，也就是说当垃圾收集器扫描到只具有弱引用的对象时，无论当前内存空间是否足够，都会回收该对象。（由于垃圾收集器是一个优先级很低的线程，不一定会很快发现那些只具有弱引用的对象。）</p>
+<p>WeakReference 的特性决定了它特别适合用于数据可恢复的内存型缓存。查找缓存的结果有下面三个：</p>
+<ul>
+<li>如果缓存中查找不到任务信息，则会在缓存中添加一个 PENDING_GENERATION_MARKER 占位符，当前线程后续创建生成代理类并最终替换占位符。</li>
+<li>如果在缓存中查找到了 PENDING_GENERATION_MARKER 占位符，说明其他线程已经在生成相应的代理类了，当前线程会阻塞等待。</li>
+<li>如果缓存中查找到完整代理类，则会直接返回，不会再执行后续动态代理类的生成。</li>
+</ul>
+<p>下面是 Proxy.getProxy() 方法中对 PROXY_CACHE_MAP 缓存进行查询的相关代码片段：</p>
+<pre><code>public static Proxy getProxy(ClassLoader cl, Class&lt;?&gt;... ics) {
+
+    StringBuilder sb = new StringBuilder();
+
+    for (int i = 0; i &lt; ics.length; i++) { // 循环处理每个接口类
+
+        String itf = ics[i].getName();
+
+        if (!ics[i].isInterface()) { // 传入的必须是接口类，否则直接报错
+
+            throw new RuntimeException(itf + " is not a interface.");
+
+        }
+
+        // 加载接口类，加载失败则直接报错
+
+        Class&lt;?&gt; tmp = Class.forName(itf, false, cl);
+
+        if (tmp != ics[i]) {
+
+            throw new IllegalArgumentException("...");
+
+        }
+
+        sb.append(itf).append(';'); // 将接口类的完整名称用分号连接起来
+
+    }
+
+    // 接口列表将会作为第二层集合的Key
+
+    String key = sb.toString();
+
+    final Map&lt;String, Object&gt; cache;
+
+    synchronized (PROXY_CACHE_MAP) { // 加锁同步
+
+        cache = PROXY_CACHE_MAP.computeIfAbsent(cl, k -&gt; new HashMap&lt;&gt;());
+
+    }
+
+    Proxy proxy = null;
+
+    synchronized (cache) { // 加锁
+
+        do {
+
+            Object value = cache.get(key);
+
+            if (value instanceof Reference&lt;?&gt;) { // 获取到WeakReference
+
+                proxy = (Proxy) ((Reference&lt;?&gt;) value).get();
+
+                if (proxy != null) { // 查找到缓存的代理类
+
+                    return proxy;
+
+                }
+
+            }
+
+            if (value == PENDING_GENERATION_MARKER) { // 获取到占位符
+
+                cache.wait(); // 阻塞等待其他线程生成好代理类，并添加到缓存中
+
+            } else { // 设置占位符，由当前线程生成代理类
+
+                cache.put(key, PENDING_GENERATION_MARKER);
+
+                break; // 退出当前循环
+
+            }
+
+        }
+
+        while (true);
+
+    }
+
+    ... ... // 后续动态生成代理类的逻辑
+
+}
+</code></pre>
+<p>完成缓存的查找之后，下面我们再来看代理类的生成过程。</p>
+<p>第一步，调用 ClassGenerator.newInstance() 方法创建 ClassLoader 对应的 ClassPool。ClassGenerator 中封装了 Javassist 的基本操作，还定义了很多字段用来暂存代理类的信息，在其 toClass() 方法中会用这些暂存的信息来动态生成代理类。下面就来简单说明一下这些字段。</p>
+<ul>
+<li>mClassName（String 类型）：代理类的类名。</li>
+<li>mSuperClass（String 类型）：代理类父类的名称。</li>
+<li>mInterfaces（Set<code>&lt;String&gt;</code> 类型）：代理类实现的接口。</li>
+<li>mFields（List类型）：代理类中的字段。</li>
+<li>mConstructors（List<code>&lt;String&gt;</code>类型）：代理类中全部构造方法的信息，其中包括构造方法的具体实现。</li>
+<li>mMethods（List<code>&lt;String&gt;</code>类型）：代理类中全部方法的信息，其中包括方法的具体实现。</li>
+<li>mDefaultConstructor（boolean 类型）：标识是否为代理类生成的默认构造方法。</li>
+</ul>
+<p>在 ClassGenerator 的 toClass() 方法中，会根据上述字段用 Javassist 生成代理类，具体实现如下：</p>
+<pre><code>public Class&lt;?&gt; toClass(ClassLoader loader, ProtectionDomain pd) {
+
+    if (mCtc != null) {
+
+        mCtc.detach();
+
+    }
+
+    // 在代理类继承父类的时候，会将该id作为后缀编号，防止代理类重名
+
+    long id = CLASS_NAME_COUNTER.getAndIncrement(); 
+
+    CtClass ctcs = mSuperClass == null ? null : mPool.get(mSuperClass);
+
+    if (mClassName == null) { // 确定代理类的名称
+
+        mClassName = (mSuperClass == null || javassist.Modifier.isPublic(ctcs.getModifiers())
+
+                ? ClassGenerator.class.getName() : mSuperClass + "$sc") + id;
+
+    }
+
+    mCtc = mPool.makeClass(mClassName); // 创建CtClass，用来生成代理类
+
+    if (mSuperClass != null) { // 设置代理类的父类
+
+        mCtc.setSuperclass(ctcs);
+
+    }
+
+    // 设置代理类实现的接口，默认会添加DC这个接口
+
+    mCtc.addInterface(mPool.get(DC.class.getName())); 
+
+    if (mInterfaces != null) {
+
+        for (String cl : mInterfaces) {
+
+            mCtc.addInterface(mPool.get(cl));
+
+        }
+
+    }
+
+    if (mFields != null) { // 设置代理类的字段
+
+        for (String code : mFields) {
+
+            mCtc.addField(CtField.make(code, mCtc));
+
+        }
+
+    }
+
+    if (mMethods != null) { // 生成代理类的方法
+
+        for (String code : mMethods) {
+
+            if (code.charAt(0) == ':') {
+
+                mCtc.addMethod(CtNewMethod.copy(getCtMethod(mCopyMethods.get(code.substring(1))),
+
+                        code.substring(1, code.indexOf('(')), mCtc, null));
+
+            } else {
+
+                mCtc.addMethod(CtNewMethod.make(code, mCtc));
+
+            }
+
+        }
+
+    }
+
+    if (mDefaultConstructor) { // 生成默认的构造方法
+
+        mCtc.addConstructor(CtNewConstructor.defaultConstructor(mCtc));
+
+    }
+
+    if (mConstructors != null) { // 生成构造方法
+
+        for (String code : mConstructors) {
+
+            if (code.charAt(0) == ':') {
+
+                mCtc.addConstructor(CtNewConstructor
+
+                        .copy(getCtConstructor(mCopyConstructors.get(code.substring(1))), mCtc, null));
+
+            } else {
+
+                String[] sn = mCtc.getSimpleName().split("\\$+"); // inner class name include $.
+
+                mCtc.addConstructor(
+
+                        CtNewConstructor.make(code.replaceFirst(SIMPLE_NAME_TAG, sn[sn.length - 1]), mCtc));
+
+            }
+
+        }
+
+    }
+
+    return mCtc.toClass(loader, pd);
+
+}
+</code></pre>
+<p>第二步，从 PROXY_CLASS_COUNTER 字段（AtomicLong类型）中获取一个 id 值，作为代理类的后缀，这主要是为了避免类名重复发生冲突。</p>
+<p>第三步，遍历全部接口，获取每个接口中定义的方法，对每个方法进行如下处理：</p>
+<ol>
+<li>加入 worked 集合（Set<code>&lt;String&gt;</code> 类型）中，用来判重。</li>
+<li>将方法对应的 Method 对象添加到 methods 集合（List<code>&lt;Method&gt;</code> 类型）中。</li>
+<li>获取方法的参数类型以及返回类型，构建方法体以及 return 语句。</li>
+<li>将构造好的方法添加到 ClassGenerator 中的 mMethods 集合中进行缓存。</li>
+</ol>
+<p>相关代码片段如下所示：</p>
+<pre><code>long id = PROXY_CLASS_COUNTER.getAndIncrement();
+
+String pkg = null;
+
+ClassGenerator ccp = null, ccm = null;
+
+ccp = ClassGenerator.newInstance(cl);
+
+Set&lt;String&gt; worked = new HashSet&lt;&gt;()
+
+List&lt;Method&gt; methods = new ArrayList&gt;();
+
+for (int i = 0; i &lt; ics.length; i++) {
+
+    if (!Modifier.isPublic(ics[i].getModifiers())) {
+
+        String npkg = ics[i].getPackage().getName();
+
+        if (pkg == null) { // 如果接口不是public的，则需要保证所有接口在一个包下
+
+            pkg = npkg;
+
+        } else {
+
+            if (!pkg.equals(npkg)) {
+
+                throw new IllegalArgumentException("non-public interfaces from different packages");
+
+            }
+
+        }
+
+    }
+
+    ccp.addInterface(ics[i]); // 向ClassGenerator中添加接口
+
+    for (Method method : ics[i].getMethods()) { // 遍历接口中的每个方法
+
+        String desc = ReflectUtils.getDesc(method);
+
+        // 跳过已经重复方法以及static方法
+
+        if (worked.contains(desc) || Modifier.isStatic(method.getModifiers())) {
+
+            continue;
+
+        }
+
+        if (ics[i].isInterface() &amp;&amp; Modifier.isStatic(method.getModifiers())) {
+
+            continue;
+
+        }
+
+        worked.add(desc); // 将方法描述添加到worked这个Set集合中，进行去重
+
+        int ix = methods.size();
+
+        Class&lt;?&gt; rt = method.getReturnType(); // 获取方法的返回值
+
+        Class&lt;?&gt;[] pts = method.getParameterTypes(); // 获取方法的参数列表
+
+        // 创建方法体
+
+        StringBuilder code = new StringBuilder("Object[] args = new Object[").append(pts.length).append("];");
+
+        for (int j = 0; j &lt; pts.length; j++) {
+
+            code.append(" args[").append(j).append("] = ($w)$").append(j + 1).append(";");
+
+        }
+
+        code.append(" Object ret = handler.invoke(this, methods[").append(ix).append("], args);");
+
+        if (!Void.TYPE.equals(rt)) { // 生成return语句
+
+            code.append(" return ").append(asArgument(rt, "ret")).append(";");
+
+        }
+
+        // 将生成好的方法添加到ClassGenerator中缓存
+
+        methods.add(method);
+
+        ccp.addMethod(method.getName(), method.getModifiers(), rt, pts, method.getExceptionTypes(), code.toString());
+
+    }
+
+}
+</code></pre>
+<p>这里我们以 Demo 示例（即 dubbo-demo 模块中的 Demo）中的 sayHello() 方法为例，生成的方法如下所示：</p>
+<pre><code>public java.lang.String sayHello(java.lang.String arg0){
+
+  Object[] args = new Object[1]; 
+
+  args[0] = ($w)$1; 
+
+  // 这里通过InvocationHandler.invoke()方法调用目标方法
+
+  Object ret = handler.invoke(this, methods[3], args); 
+
+  return (java.lang.String)ret;
+
+}
+</code></pre>
+<p>这里的方法调用其实是：委托 InvocationHandler 对象的 invoke() 方法去调用真正的实例方法。</p>
+<p>第四步，开始创建代理实例类（ProxyInstance）和代理类。这里我们先创建代理实例类，需要向 ClassGenerator 中添加相应的信息，例如，类名、默认构造方法、字段、父类以及一个 newInstance() 方法，具体实现如下：</p>
+<pre><code>String pcn = pkg + ".proxy" + id; // 生成并设置代理类类名
+
+ccp.setClassName(pcn); 
+
+// 添加字段，一个是前面生成的methods集合，另一个是InvocationHandler对象
+
+ccp.addField("public static java.lang.reflect.Method[] methods;");
+
+ccp.addField("private " + InvocationHandler.class.getName() + " handler;");
+
+// 添加构造方法
+
+ccp.addConstructor(Modifier.PUBLIC, new Class&lt;?&gt;[]{InvocationHandler.class}, new Class&lt;?&gt;[0], "handler=$1;");
+
+ccp.addDefaultConstructor(); // 默认构造方法
+
+Class&lt;?&gt; clazz = ccp.toClass();
+
+clazz.getField("methods").set(null, methods.toArray(new Method[0]));
+</code></pre>
+<p>这里得到的代理实例类中每个方法的实现，都类似于上面提到的 sayHello() 方法的实现，即通过 InvocationHandler.invoke()方法调用目标方法。</p>
+<p>接下来创建代理类，它实现了 Proxy 接口，并实现了 newInstance() 方法，该方法会直接返回上面代理实例类的对象，相关代码片段如下：</p>
+<pre><code>String fcn = Proxy.class.getName() + id;
+
+ccm = ClassGenerator.newInstance(cl);
+
+ccm.setClassName(fcn);
+
+ccm.addDefaultConstructor(); // 默认构造方法
+
+ccm.setSuperClass(Proxy.class); // 实现Proxy接口
+
+// 实现newInstance()方法，返回上面创建的代理实例类的对象
+
+ccm.addMethod("public Object newInstance(" + InvocationHandler.class.getName() + " h){ return new " + pcn + "($1); }");
+
+Class&lt;?&gt; pc = ccm.toClass();
+
+proxy = (Proxy) pc.newInstance();
+</code></pre>
+<p>生成的代理类如下所示：</p>
+<pre><code>package com.apache.dubbo.common.bytecode;
+
+public class Proxy0 implements Proxy {
+
+    public void Proxy0() {}
+
+    public Object newInstance(InvocationHandler h){
+
+		return new proxy0(h);
+
+	}
+
+}
+</code></pre>
+<p>第五步，也就是最后一步，在 finally 代码块中，会释放 ClassGenerator 的相关资源，将生成的代理类添加到 PROXY_CACHE_MAP 缓存中保存，同时会唤醒所有阻塞在 PROXY_CACHE_MAP 缓存上的线程，重新检测需要的代理类是否已经生成完毕。相关代码片段如下：</p>
+<pre><code>if (ccp != null) { // 释放ClassGenerator的相关资源
+
+    ccp.release();
+
+}
+
+if (ccm != null) {
+
+    ccm.release();
+
+}
+
+synchronized (cache) { // 加锁
+
+    if (proxy == null) {
+
+        cache.remove(key);
+
+    } else { // 填充PROXY_CACHE_MAP缓存
+
+        cache.put(key, new WeakReference&lt;Proxy&gt;(proxy));
+
+    }
+
+    cache.notifyAll(); // 唤醒所有阻塞在PROXY_CACHE_MAP上的线程
+
+}
+</code></pre>
+<h3 id="getproxy-方法实现">getProxy() 方法实现</h3>
+<p>分析完 Proxy 使用 Javassist 生成代理类的完整流程之后，我们再回头看一下 JavassistProxyFactory 工厂的 getProxy() 方法实现。这里首先通过前面分析的 getProxy() 方法获取 Proxy 对象，然后调用 newInstance() 方法获取目标类的代理对象，具体如下所示：</p>
+<pre><code>public &lt;T&gt; T getProxy(Invoker&lt;T&gt; invoker, Class&lt;?&gt;[] interfaces) {
+
+    return (T) Proxy.getProxy(interfaces).newInstance(new InvokerInvocationHandler(invoker));
+
+}
+</code></pre>
+<p>相比之下，JdkProxyFactory 对 getProxy() 方法的实现就简单很多，直接使用 JDK 自带的 java.lang.reflect.Proxy 生成代理对象，你可以参考前面第 8 课时中 JDK 动态代理的基本使用方式以及原理：</p>
+<pre><code>public &lt;T&gt; T getProxy(Invoker&lt;T&gt; invoker, Class&lt;?&gt;[] interfaces) {
+
+    return (T) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), interfaces, new InvokerInvocationHandler(invoker));
+
+}
+</code></pre>
+<h3 id="invokerinvocationhandler">InvokerInvocationHandler</h3>
+<p>无论是 Javassist 还是 JDK 生成的代理类，都会将方法委托给 InvokerInvocationHandler 进行处理。InvokerInvocationHandler 中维护了一个 Invoker 对象，也是前面 getProxy() 方法传入的第一个参数，这个 Invoker 不是一个简单的 DubboInvoker 对象，而是在 DubboInvoker 之上经过一系列装饰器修饰的 Invoker 对象。</p>
+<p>在 InvokerInvocationHandler 的 invoke() 方法中，首先会针对特殊的方法进行处理，比如 toString()、$destroy() 等方法。之后，对于业务方法，会创建相应的 RpcInvocation 对象调用 Invoker.invoke() 方法发起 RPC 调用，具体实现如下：</p>
+<pre><code>public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+    // 对于Object中定义的方法，直接调用Invoker对象的相应方法即可
+
+    if (method.getDeclaringClass() == Object.class) {
+
+        return method.invoke(invoker, args);
+
+    }
+
+    String methodName = method.getName();
+
+    Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();
+
+    if (parameterTypes.length == 0) { // 对$destroy等方法的特殊处理
+
+        if ("$destroy".equals(methodName)) {
+
+            invoker.destroy();
+
+            return null;
+
+        }
+
+    }
+
+    ... // 省略其他特殊处理的方法
+
+    // 创建RpcInvocation对象，后面会作为远程RPC调用的参数
+
+    RpcInvocation rpcInvocation = new RpcInvocation(method, invoker.getInterface().getName(), args);
+
+    String serviceKey = invoker.getUrl().getServiceKey();
+
+    rpcInvocation.setTargetServiceUniqueName(serviceKey);
+
+    if (consumerModel != null) {
+
+        rpcInvocation.put(Constants.CONSUMER_MODEL, consumerModel);
+
+        rpcInvocation.put(Constants.METHOD_MODEL, consumerModel.getMethodModel(method));
+
+    }
+
+    // 调用invoke()方法发起远程调用，拿到AsyncRpcResult之后，调用recreate()方法获取响应结果(或是Future)
+
+    return invoker.invoke(rpcInvocation).recreate();
+
+}
+</code></pre>
+<h3 id="wrapper">Wrapper</h3>
+<p>Invoker 是 Dubbo 的核心模型。在 Dubbo 中，Provider 的业务层实现会被包装成一个 ProxyInvoker，然后这个 ProxyInvoker 还会被 Filter、Listener 以及其他装饰器包装。ProxyFactory 的 getInvoker 方法就是将业务接口实现封装成 ProxyInvoker 入口。</p>
+<p>我们先来看 JdkProxyFactory 中的实现。JdkProxyFactory 会创建一个匿名 AbstractProxyInvoker 的实现，其中的 doInvoke() 方法是通过 Java 原生的反射技术实现的，具体实现如下：</p>
+<pre><code>public &lt;T&gt; Invoker&lt;T&gt; getInvoker(T proxy, Class&lt;T&gt; type, URL url) {
+
+    return new AbstractProxyInvoker&lt;T&gt;(proxy, type, url) {
+
+        @Override
+
+        protected Object doInvoke(T proxy, String methodName,
+
+                Class&lt;?&gt;[] parameterTypes, Object[] arguments) throws Throwable {
+
+            // 使用反射方式查找methodName对应的方法，并进行调用
+
+            Method method = proxy.getClass().getMethod(methodName, parameterTypes);
+
+            return method.invoke(proxy, arguments);
+
+        }
+
+    };
+
+}
+</code></pre>
+<p>在前面两个课时中我们已经介绍了 Invoker 接口的一个重要实现分支—— AbstractInvoker 以及它的一个实现 DubboInvoker。AbstractProxyInvoker 是 Invoker 接口的另一个实现分支，继承关系如下图所示，其实现类都是 ProxyFactory 实现中的匿名内部类。</p>
+<p><img alt="Drawing 3.png" src="/assets/ee62d3c8540b9ddeeee9f90b.png"/></p>
+<p>在 AbstractProxyInvoker 实现的 invoke() 方法中，会将 doInvoke() 方法返回的结果封装成 CompletableFuture 对象，然后再封装成 AsyncRpcResult 对象返回，具体实现如下：</p>
+<pre><code>public Result invoke(Invocation invocation) throws RpcException {
+
+    // 执行doInvoke()方法，调用业务实现
+
+    Object value = doInvoke(proxy, invocation.getMethodName(), invocation.getParameterTypes(), invocation.getArguments());
+
+    // 将value值封装成CompletableFuture对象
+
+    CompletableFuture&lt;Object&gt; future = wrapWithFuture(value);
+
+    // 再次转换，转换为CompletableFuture&lt;AppResponse&gt;类型
+
+    CompletableFuture&lt;AppResponse&gt; appResponseFuture = future.handle((obj, t) -&gt; {
+
+        AppResponse result = new AppResponse();
+
+        if (t != null) {
+
+            if (t instanceof CompletionException) {
+
+                result.setException(t.getCause());
+
+            } else {
+
+                result.setException(t);
+
+            }
+
+        } else {
+
+            result.setValue(obj);
+
+        }
+
+        return result;
+
+    });
+
+    // 将CompletableFuture封装成AsyncRpcResult返回
+
+    return new AsyncRpcResult(appResponseFuture, invocation);
+
+}
+</code></pre>
+<p>了解了 AbstractProxyInvoker 以及 JdkProxyFactory 返回的实现之后，我们再来看 JavassistProxyFactory.getInvoker() 方法返回的实现。首先该方法会通过 Wrapper 创建一个包装类，然后创建一个实现了 AbstractProxyInvoker 的匿名内部类，其 doInvoker() 方法会直接委托给 Wrapper 对象的 InvokeMethod() 方法，具体实现如下：</p>
+<pre><code>public &lt;T&gt; Invoker&lt;T&gt; getInvoker(T proxy, Class&lt;T&gt; type, URL url) {
+
+    // 通过Wrapper创建一个包装类对象
+
+    final Wrapper wrapper = Wrapper.getWrapper(proxy.getClass().getName().indexOf('$') &lt; 0 ? proxy.getClass() : type);
+
+    // 创建一个实现了AbstractProxyInvoker的匿名内部类，其doInvoker()方法会直接委托给Wrapper对象的InvokeMethod()方法
+
+    return new AbstractProxyInvoker&lt;T&gt;(proxy, type, url) {
+
+        @Override
+
+        protected Object doInvoke(T proxy, String methodName,
+
+     Class&lt;?&gt;[] parameterTypes, Object[] arguments) throws Throwable {
+
+            return wrapper.invokeMethod(proxy, methodName, parameterTypes, arguments);
+
+        }
+
+    };
+
+}
+</code></pre>
+<p><strong>Wrapper 类本身是抽象类，是对 Java 类的一种包装</strong>。Wrapper 会从 Java 类中的字段和方法抽象出相应 propertyName 和 methodName，在需要调用一个字段或方法的时候，会根据传入的方法名和参数进行匹配，找到对应的字段和方法进行调用。</p>
+<p>Wrapper.getWrapper() 方法会根据不同的 Java 对象，使用 Javassist 生成一个相应的 Wrapper 实现对象。下面我们就来一起分析下 getWrapper() 方法实现：</p>
+<ul>
+<li>首先检测该 Java 类是否实现了 DC 这个标识接口，在前面介绍 Proxy 抽象类的时候，我们提到过这个接口；</li>
+<li>检测 WRAPPER_MAP 集合（Map<class<?>, Wrapper&gt; 类型）中是否缓存了对应的 Wrapper 对象，如果已缓存则直接返回，如果未缓存则调用 makeWrapper() 方法动态生成 Wrapper 实现类，以及相应的实例对象，并写入缓存中。</class<?></li>
+</ul>
+<p>makeWrapper() 方法的实现非常长，但是逻辑并不复杂，该方法会遍历传入的 Class 对象的所有 public 字段和 public 方法，构建组装 Wrapper 实现类需要的 Java 代码。具体实现有如下三个步骤。</p>
+<p>第一步，public 字段会构造相应的 getPropertyValue() 方法和 setPropertyValue() 方法。例如，有一个名为“name”的 public 字段，则会生成如下的代码：</p>
+<pre><code>// 生成的getPropertyValue()方法
+
+public Object getPropertyValue(Object o, String n){
+
+    DemoServiceImpl w; 
+
+    try{ 
+
+        w = ((DemoServiceImpl)$1); 
+
+    }catch(Throwable e){ 
+
+        throw new IllegalArgumentException(e); 
+
+    }
+
+    if( $2.equals(" if( $2.equals("name") ){
+
+        return ($w)w.name; 
+
+    }
+
+}
+
+// 生成的setPropertyValue()方法
+
+public void setPropertyValue(Object o, String n, Object v){ 
+
+    DemoServiceImpl w; 
+
+    try{
+
+         w = ((DemoServiceImpl)$1); 
+
+    }catch(Throwable e){ 
+
+        throw new IllegalArgumentException(e); 
+
+    } 
+
+    if( $2.equals("name") ){ 
+
+        w.name=(java.lang.String)$3; return; 
+
+    }
+
+}
+</code></pre>
+<p>第二步，处理 public 方法，这些 public 方法会添加到 invokeMethod 方法中。以 Demo 示例（即 dubbo-demo 模块中的 demo ）中的 DemoServiceImpl 为例，生成的 invokeMethod() 方法实现如下：</p>
+<pre><code>public Object invokeMethod(Object o, String n, Class[] p, Object[] v) throws java.lang.reflect.InvocationTargetException {
+
+    org.apache.dubbo.demo.provider.DemoServiceImpl w;
+
+    try {
+
+        w = ((org.apache.dubbo.demo.provider.DemoServiceImpl) $1);
+
+    } catch (Throwable e) {
+
+        throw new IllegalArgumentException(e);
+
+    }
+
+    try {
+
+        // 省略getter/setter方法
+
+        if ("sayHello".equals($2) &amp;&amp; $3.length == 1) {
+
+            return ($w) w.sayHello((java.lang.String) $4[0]);
+
+        }
+
+        if ("sayHelloAsync".equals($2) &amp;&amp; $3.length == 1) {
+
+            return ($w) w.sayHelloAsync((java.lang.String) $4[0]);
+
+        }
+
+    } catch (Throwable e) {
+
+        throw new java.lang.reflect.InvocationTargetException(e);
+
+    }
+
+    throw new NoSuchMethodException("Not found method");
+
+}
+</code></pre>
+<p>第三步，完成了上述 Wrapper 实现类相关信息的填充之后，makeWrapper() 方法会通过 ClassGenerator 创建 Wrapper 实现类，具体原理与前面 Proxy 创建代理类的流程类似，这里就不再赘述。</p>
+<h3 id="总结">总结</h3>
+<p>本课时主要介绍了 dubbo-rpc-api 模块中“代理”相关的内容。首先我们从 ProxyFactory.getProxy() 方法入手，详细介绍了 JDK 方式和 Javassist 方式创建动态代理类的底层原理，以及其中使用的 InvokerInvocationHandler 的实现。接下来我们又通过 ProxyFactory.getInvoker() 方法入手，重点讲解了 Wrapper 的生成过程和核心原理。</p>
+<p>下面这张简图很好地展示了 Dubbo 中 Proxy 和 Wrapper 的重要性：</p>
+<p><img alt="Dubbo_28的图（待替换）.png" src="/assets/a8583ddbade375089f64001a.png"/></p>
+<p>Proxy 和 Wrapper 远程调用简图</p>
+<p>Consumer 端的 Proxy 底层屏蔽了复杂的网络交互、集群策略以及 Dubbo 内部的 Invoker 等概念，提供给上层使用的是业务接口。Provider 端的 Wrapper 是将个性化的业务接口实现，统一转换成 Dubbo 内部的 Invoker 接口实现。正是由于 Proxy 和 Wrapper 这两个组件的存在，Dubbo 才能实现内部接口和业务接口的无缝转换。</p>
+<p>关于“代理”相关的内容，你若还有什么想法，欢迎你留言跟我分享。下一课时，我们会再做一个加餐，介绍 Dubbo 中支持的 HTTP 协议的相关内容。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

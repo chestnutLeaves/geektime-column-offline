@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>38 性能分析（上）：如何分析 Go 语言代码的性能？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/index.html">Go 语言项目开发实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">60 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Go 语言项目开发实战</strong><ul><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%200%20%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BC%81%E4%B8%9A%E7%BA%A7%20Go%20%E5%BA%94%E7%94%A8.html">00 开篇词 从 0 开始搭建一个企业级 Go 应用</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/01%20IAM%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0%EF%BC%9A%E6%88%91%E4%BB%AC%E8%A6%81%E5%AE%9E%E7%8E%B0%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%20Go%20%E9%A1%B9%E7%9B%AE%EF%BC%9F.html">01 IAM系统概述：我们要实现什么样的 Go 项目？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/02%20%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84%20Go%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%9F.html">02 环境准备：如何安装和配置一个基本的 Go 开发环境？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/03%20%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%EF%BC%9A%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%20IAM%20%E7%B3%BB%E7%BB%9F%EF%BC%9F.html">03 项目部署：如何快速部署 IAM 系统？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/04%20%E8%A7%84%E8%8C%83%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%9D%82%E4%B9%B1%E6%97%A0%E7%AB%A0%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%EF%BC%9F.html">04 规范设计（上）：项目开发杂乱无章，如何规范？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/05%20%E8%A7%84%E8%8C%83%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9Acommit%20%E4%BF%A1%E6%81%AF%E9%A3%8E%E6%A0%BC%E8%BF%A5%E5%BC%82%E3%80%81%E9%9A%BE%E4%BB%A5%E9%98%85%E8%AF%BB%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%EF%BC%9F.html">05 规范设计（下）：commit 信息风格迥异、难以阅读，如何规范？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/06%20%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E4%B8%80%E4%B8%AA%E5%8F%AF%E7%BB%B4%E6%8A%A4%E3%80%81%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%EF%BC%9F.html">06 目录结构设计：如何组织一个可维护、可扩展的代码目录？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/07%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%90%88%E7%90%86%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">07 工作流设计：如何设计合理的多人开发模式？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/08%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%20Go%20%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B%EF%BC%9F.html">08 研发流程设计（上）：如何设计 Go 项目的开发流程？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/09%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%BA%94%E7%94%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F.html">09 研发流程设计（下）：如何管理应用的生命周期？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/10%20%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%EF%BC%9A%E6%80%8E%E4%B9%88%E5%86%99%E5%87%BA%E4%BC%98%E9%9B%85%E7%9A%84%20Go%20%E9%A1%B9%E7%9B%AE%EF%BC%9F.html">10 设计方法：怎么写出优雅的 Go 项目？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/11%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0.html">11 设计模式：Go常用设计模式概述</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/12%20API%20%E9%A3%8E%E6%A0%BC%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1RESTful%20API%EF%BC%9F.html">12 API 风格（上）：如何设计RESTful API？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/13%20API%20%E9%A3%8E%E6%A0%BC%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ARPC%20API%E4%BB%8B%E7%BB%8D.html">13 API 风格（下）：RPC API介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/14%20%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84Makefile%EF%BC%9F.html">14 项目管理：如何编写高质量的Makefile？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/15%20%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E5%AE%9E%E6%88%98%EF%BC%9AIAM%E9%A1%B9%E7%9B%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E7%9A%84%EF%BC%9F.html">15 研发流程实战：IAM项目是如何进行研发流程管理的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/16%20%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%EF%BC%9F.html">16 代码检查：如何进行静态代码检查？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/17%20API%20%E6%96%87%E6%A1%A3%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%20Swagger%20API%20%E6%96%87%E6%A1%A3%20%EF%BC%9F.html">17 API 文档：如何生成 Swagger API 文档 ？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/18%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E5%A5%97%E7%A7%91%E5%AD%A6%E7%9A%84%E9%94%99%E8%AF%AF%E7%A0%81%EF%BC%9F.html">18 错误处理（上）：如何设计一套科学的错误码？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/19%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E9%94%99%E8%AF%AF%E5%8C%85%EF%BC%9F.html">19 错误处理（下）：如何设计错误包？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/20%20%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%97%A5%E5%BF%97%E5%8C%85%E5%B9%B6%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97%EF%BC%9F.html">20 日志处理（上）：如何设计日志包并记录日志？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/21%20%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BB%8E%200%20%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97%E5%8C%85.html">21 日志处理（下）：手把手教你从 0 编写一个日志包</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/22%20%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E4%B8%89%E5%89%91%E5%AE%A2%EF%BC%9APflag%E3%80%81Viper%E3%80%81Cobra%20%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html">22 应用构建三剑客：Pflag、Viper、Cobra 核心功能介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/23%20%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BC%98%E7%A7%80%E7%9A%84%E4%BC%81%E4%B8%9A%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6%EF%BC%9F.html">23 应用构建实战：如何构建一个优秀的企业应用框架？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/24%20Web%20%E6%9C%8D%E5%8A%A1%EF%BC%9AWeb%20%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">24 Web 服务：Web 服务核心功能有哪些，如何实现？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/25%20%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%EF%BC%9F.html">25 认证机制：应用程序如何进行访问认证？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/26%20IAM%E9%A1%B9%E7%9B%AE%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E8%AE%BF%E9%97%AE%E8%AE%A4%E8%AF%81%E5%8A%9F%E8%83%BD%E7%9A%84%EF%BC%9F.html">26 IAM项目是如何设计和实现访问认证功能的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/27%20%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%EF%BC%9A5%E5%A4%A7%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%B5%84%E6%BA%90%E6%8E%88%E6%9D%83%E7%9A%84%EF%BC%9F.html">27 权限模型：5大权限模型是如何进行资源授权的？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/28%20%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%80%9A%E8%BF%87iam-apiserver%E8%AE%BE%E8%AE%A1%EF%BC%8C%E7%9C%8BWeb%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9E%84%E5%BB%BA.html">28 控制流（上）：通过iam-apiserver设计，看Web服务的构建</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/29%20%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9Aiam-apiserver%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E8%AE%B2%E8%A7%A3.html">29 控制流（下）：iam-apiserver服务核心功能实现讲解</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/30%20ORM%EF%BC%9ACURD%20%E7%A5%9E%E5%99%A8%20GORM%20%E5%8C%85%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%9E%E6%88%98.html">30 ORM：CURD 神器 GORM 包介绍及实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/31%20%E6%95%B0%E6%8D%AE%E6%B5%81%EF%BC%9A%E9%80%9A%E8%BF%87iam-authz-server%E8%AE%BE%E8%AE%A1%EF%BC%8C%E7%9C%8B%E6%95%B0%E6%8D%AE%E6%B5%81%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1.html">31 数据流：通过iam-authz-server设计，看数据流服务的设计</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/32%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%A4%84%E7%90%86%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BA%A7%E7%94%9F%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F.html">32 数据处理：如何高效处理应用程序产生的数据？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/33%20%20SDK%20%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%87%BA%E4%B8%80%E4%B8%AA%E4%BC%98%E7%A7%80%E7%9A%84%20Go%20SDK%EF%BC%9F.html">33  SDK 设计（上）：如何设计出一个优秀的 Go SDK？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/34%20SDK%20%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AIAM%E9%A1%B9%E7%9B%AEGo%20SDK%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0.html">34 SDK 设计（下）：IAM项目Go SDK设计和实现</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/35%20%E6%95%88%E7%8E%87%E7%A5%9E%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7%EF%BC%9F.html">35 效率神器：如何设计和实现一个命令行客户端工具？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/36%20%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%20Go%20%E8%AF%AD%E8%A8%80%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%92%8C%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F.html">36 代码测试（上）：如何编写 Go 语言单元测试和性能测试用例？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/37%20%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%85%B6%E4%BB%96%E6%B5%8B%E8%AF%95%E7%B1%BB%E5%9E%8B%E5%8F%8A%20IAM%20%E6%B5%8B%E8%AF%95%E4%BB%8B%E7%BB%8D.html">37 代码测试（下）：Go 语言其他测试类型及 IAM 测试介绍</a></li><li><a class="active" aria-current="page" href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/38%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%20Go%20%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">38 性能分析（上）：如何分析 Go 语言代码的性能？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/39%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AAPI%20Server%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%92%8C%E8%B0%83%E4%BC%98%E5%AE%9E%E6%88%98.html">39 性能分析（下）：API Server性能测试和调优实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/40%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E3%80%81%E9%AB%98%E5%8F%AF%E7%94%A8%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D.html">40 软件部署实战（上）：部署方案及负载均衡、高可用组件介绍</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/41%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9AIAM%20%E7%B3%BB%E7%BB%9F%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">41 软件部署实战（中）：IAM 系统生产环境部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/42%20%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AIAM%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA%E3%80%81%E6%B0%B4%E5%B9%B3%E6%89%A9%E7%BC%A9%E5%AE%B9%E5%AE%9E%E6%88%98.html">42 软件部署实战（下）：IAM系统安全加固、水平扩缩容实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/43%20%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.html">43 技术演进（上）：虚拟化技术演进之路</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/44%20%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E5%92%8C%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.html">44 技术演进（下）：软件架构和应用生命周期技术演进之路</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/45%20%E5%9F%BA%E4%BA%8EKubernetes%E7%9A%84%E4%BA%91%E5%8E%9F%E7%94%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">45 基于Kubernetes的云原生架构设计</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/46%20%E5%A6%82%E4%BD%95%E5%88%B6%E4%BD%9CDocker%E9%95%9C%E5%83%8F%EF%BC%9F.html">46 如何制作Docker镜像？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/47%20%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99Kubernetes%E8%B5%84%E6%BA%90%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%EF%BC%9F.html">47 如何编写Kubernetes资源定义文件？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/48%20IAM%20%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">48 IAM 容器化部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/49%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AHelm%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html">49 服务编排（上）：Helm服务编排基础知识</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/50%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%9F%BA%E4%BA%8EHelm%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98.html">50 服务编排（下）：基于Helm的服务编排部署实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/51%20%E5%9F%BA%E4%BA%8E%20GitHub%20Actions%20%E7%9A%84%20CI%20%E5%AE%9E%E6%88%98.html">51 基于 GitHub Actions 的 CI 实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Go%20Modules%E4%BE%9D%E8%B5%96%E5%8C%85%E7%AE%A1%E7%90%86%E5%85%A8%E8%AE%B2.html">特别放送 Go Modules依赖包管理全讲</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20Go%20Modules%E5%AE%9E%E6%88%98.html">特别放送 Go Modules实战</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20IAM%E6%8E%92%E9%9A%9C%E6%8C%87%E5%8D%97.html">特别放送 IAM排障指南</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BD%9C%E4%B8%9A%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0.html">特别放送 分布式作业系统设计和实现</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%BB%99%E4%BD%A0%E4%B8%80%E4%BB%BDGo%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84Makefile%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95.html">特别放送 给你一份Go项目中最常用的Makefile核心语法</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E7%BB%99%E4%BD%A0%E4%B8%80%E4%BB%BD%E6%B8%85%E6%99%B0%E3%80%81%E5%8F%AF%E7%9B%B4%E6%8E%A5%E5%A5%97%E7%94%A8%E7%9A%84Go%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.html">特别放送 给你一份清晰、可直接套用的Go编码规范</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%9B%B4%E6%92%AD%E5%8A%A0%E9%A4%90%20%E5%A6%82%E4%BD%95%E4%BB%8E%E5%B0%8F%E7%99%BD%E8%BF%9B%E9%98%B6%E6%88%90%20Go%20%E8%AF%AD%E8%A8%80%E4%B8%93%E5%AE%B6%EF%BC%9F.html">直播加餐 如何从小白进阶成 Go 语言专家？</a></li><li><a href="/courses/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%A6%82%E4%BD%95%E8%AE%A9%E8%87%AA%E5%B7%B1%E7%9A%84%20Go%20%E7%A0%94%E5%8F%91%E4%B9%8B%E8%B7%AF%E8%B5%B0%E5%BE%97%E6%9B%B4%E8%BF%9C%EF%BC%9F.html">结束语 如何让自己的 Go 研发之路走得更远？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Go%20%E8%AF%AD%E8%A8%80%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/38%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%20Go%20%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="38 性能分析（上）：如何分析 Go 语言代码的性能？" id="title">38 性能分析（上）：如何分析 Go 语言代码的性能？</h1>
+<div><p>你好，我是孔令飞。</p>
+<p>作为开发人员，我们一般都局限在功能上的单元测试中，对一些性能上的细节往往不会太关注。但是，如果我们在上线的时候对项目的整体性能没有一个全面的了解，随着请求量越来越大，可能会出现各种各样的问题，比如CPU占用高、内存使用率高、请求延时高等。为了避免这些性能瓶颈，我们在开发的过程中需要通过一定的手段，来对程序进行性能分析。</p>
+<p>Go语言已经为开发者内置了很多性能调优、监控的工具和方法，这大大提升了我们profile分析的效率，借助这些工具，我们可以很方便地对Go程序进行性能分析。在Go语言开发中，开发者基本都是通过内置的<code>pprof</code>工具包来进行性能分析的。</p>
+<p>在进行性能分析时，我们会先借助一些工具和包，生成性能数据文件，然后再通过<code>pprof</code>工具分析性能数据文件，从而分析代码的性能。那么接下来，我们就分别来看下如何执行这两步操作。</p>
+<h2 id="生成性能数据文件">生成性能数据文件</h2>
+<p>要查看性能数据，需要先生成性能数据文件。生成性能数据文件有三种方法，分别是通过命令行、通过代码和通过<code>net/http/pprof</code>包。这些工具和包会分别生成CPU和内存性能数据。</p>
+<p>接下来，我们就来看下这三种方法分别是如何生成性能数据文件的。</p>
+<h3 id="通过命令行生成性能数据文件">通过命令行生成性能数据文件</h3>
+<p>我们可以使用<code>go test -cpuprofile</code>来生成性能测试数据。进入<a href="https://github.com/marmotedu/iam/tree/v1.0.8/internal/apiserver/service/v1" target="_blank">internal/apiserver/service/v1</a>目录，执行以下命令：</p>
+<pre><code class="language-bash">$ go test -bench=".*" -cpuprofile cpu.profile -memprofile mem.profile
+goos: linux
+goarch: amd64
+pkg: github.com/marmotedu/iam/internal/apiserver/service/v1
+cpu: AMD EPYC Processor
+BenchmarkListUser-8   	     280	   4283077 ns/op
+PASS
+ok  	github.com/marmotedu/iam/internal/apiserver/service/v1	1.798s
+</code></pre>
+<p>上面的命令会在当前目录下生成3个文件：</p>
+<ul>
+<li>v1.test，测试生成的二进制文件，进行性能分析时可以用来解析各种符号。</li>
+<li>cpu.profile，CPU性能数据文件。</li>
+<li>mem.profile，内存性能数据文件。</li>
+</ul>
+<h3 id="通过代码生成性能数据文件">通过代码生成性能数据文件</h3>
+<p>我们还可以使用代码来生成性能数据文件，例如<a href="https://github.com/marmotedu/gopractise-demo/blob/master/pprof/pprof.go" target="_blank">pprof.go</a>文件：</p>
+<pre><code class="language-go">package main
+
+import (
+	"os"
+	"runtime/pprof"
+)
+
+func main() {
+	cpuOut, _ := os.Create("cpu.out")
+	defer cpuOut.Close()
+	pprof.StartCPUProfile(cpuOut)
+	defer pprof.StopCPUProfile()
+
+	memOut, _ := os.Create("mem.out")
+	defer memOut.Close()
+	defer pprof.WriteHeapProfile(memOut)
+
+	Sum(3, 5)
+
+}
+
+func Sum(a, b int) int {
+	return a + b
+}
+</code></pre>
+<p>运行<code>pprof.go</code>文件：</p>
+<pre><code class="language-bash">$ go run pprof.go
+</code></pre>
+<p>运行<code>pprof.go</code>文件后，会在当前目录生成<code>cpu.profile</code>和<code>mem.profile</code>性能数据文件。</p>
+<h3 id="通过-net-http-pprof-生成性能数据文件">通过<code>net/http/pprof</code>生成性能数据文件</h3>
+<p>如果要分析HTTP Server的性能，我们可以使用<code>net/http/pprof</code>包来生成性能数据文件。</p>
+<p>IAM项目使用Gin框架作为HTTP引擎，所以IAM项目使用了<code>github.com/gin-contrib/pprof</code>包来启用HTTP性能分析。<code>github.com/gin-contrib/pprof</code>包是<code>net/http/pprof</code>的一个简单封装，通过封装使pprof的功能变成了一个Gin中间件，这样可以根据需要加载pprof中间件。</p>
+<p><code>github.com/gin-contrib/pprof</code>包中的<a href="https://github.com/gin-contrib/pprof/blob/v1.3.0/pprof.go" target="_blank">pprof.go</a>文件中有以下代码：</p>
+<pre><code class="language-go">func Register(r *gin.Engine, prefixOptions ...string) {
+    prefix := getPrefix(prefixOptions...)
+
+    prefixRouter := r.Group(prefix)
+    {
+        ...
+        prefixRouter.GET("/profile", pprofHandler(pprof.Profile))
+        ...
+    }
+}
+
+func pprofHandler(h http.HandlerFunc) gin.HandlerFunc {
+    handler := http.HandlerFunc(h)
+    return func(c *gin.Context) {
+        handler.ServeHTTP(c.Writer, c.Request)
+    }
+}
+</code></pre>
+<p>通过上面的代码，你可以看到<code>github.com/gin-contrib/pprof</code>包将<code>net/http/pprof.Profile</code>转换成了<code>gin.HandlerFunc</code>，也就是Gin中间件。</p>
+<p>要开启HTTP性能分析，只需要在代码中注册pprof提供的HTTP Handler即可（位于<a href="https://github.com/marmotedu/iam/blob/v1.0.8/internal/pkg/server/genericapiserver.go#L75-L77" target="_blank">internal/pkg/server/genericapiserver.go</a>文件中）：</p>
+<pre><code class="language-go">// install pprof handler
+if s.enableProfiling {
+    pprof.Register(s.Engine)
+}
+</code></pre>
+<p>上面的代码根据配置<code>--feature.profiling</code>来判断是否开启HTTP性能分析功能。我们开启完HTTP性能分析，启动HTTP服务iam-apiserver后，即可访问<code>http:// x.x.x.x:8080/debug/pprof</code>（<code>x.x.x.x</code>是Linux服务器的地址）来查看profiles信息。profiles信息如下图所示：</p>
+<p><img alt="图片" src="/assets/f9a0b80959d55c1c55fc0ee1.png"/></p>
+<p>我们可以通过以下命令，来获取CPU性能数据文件：</p>
+<pre><code class="language-bash">$ curl http://127.0.0.1:8080/debug/pprof/profile -o cpu.profile
+</code></pre>
+<p>执行完上面的命令后，需要等待30s，pprof会采集这30s内的性能数据，我们需要在这段时间内向服务器连续发送多次请求，请求的频度可以根据我们的场景来决定。30s之后，<code>/debug/pprof/profile</code>接口会生成CPU profile文件，被curl命令保存在当前目录下的cpu.profile文件中。</p>
+<p>同样的，我们可以执行以下命令来生成内存性能数据文件：</p>
+<pre><code class="language-bash">$ curl http://127.0.0.1:8080/debug/pprof/heap -o mem.profile
+</code></pre>
+<p>上面的命令会自动下载heap文件，并被curl命令保存在当前目录下的mem.profile文件中。</p>
+<p>我们可以使用<code>go tool pprof [mem|cpu].profile</code>命令来分析HTTP接口的CPU和内存性能。我们也可以使用命令<code>go tool pprof http://127.0.0.1:8080/debug/pprof/profile</code>，或者<code>go tool pprof http://127.0.0.1:8080/debug/pprof/heap</code>，来直接进入pprof工具的交互Shell中。<code>go tool pprof</code>会首先下载并保存CPU和内存性能数据文件，然后再分析这些文件。</p>
+<p>通过上面的三种方法，我们生成了cpu.profile和mem.profile，接下来我们就可以使用<code>go tool pprof</code>来分析这两个性能数据文件，进而分析我们程序的CPU和内存性能了。下面，我来具体讲讲性能分析的过程。</p>
+<h2 id="性能分析">性能分析</h2>
+<p>使用<code>go tool pprof</code>，来对性能进行分析的流程，你可以参考下图：</p>
+<p><img alt="图片" src="/assets/7b56a95f5b3f730165212369.jpg"/></p>
+<p>接下来，我先给你介绍下pprof工具，再介绍下如何生成性能数据，最后再分别介绍下CPU和内存性能分析方法。</p>
+<h3 id="pprof工具介绍">pprof工具介绍</h3>
+<p><a href="https://github.com/google/pprof" target="_blank">pprof</a>是一个Go程序性能分析工具，用它可以访问并分析性能数据文件，它还会根据我们的要求，提供高可读性的输出信息。Go在语言层面上集成了profile采样工具，只需在代码中简单地引入<code>runtime/pprof</code>或者<code>net/http/pprof</code>包，即可获取程序的profile文件，并通过profile文件来进行性能分析。</p>
+<p><code>net/http/pprof</code>基于<code>runtime/pprof</code>包进行封装，并在 HTTP 端口上暴露出来。</p>
+<h3 id="生成性能数据">生成性能数据</h3>
+<p>我们在做性能分析时，主要是对内存和CPU性能进行分析。为了分析内存和CPU的性能，我们需要先生成性能数据文件。在 IAM 源码中，也有包含性能测试的用例，下面我会借助 IAM 源码中的性能测试用例，来介绍如何分析程序的性能。</p>
+<p>进入<a href="https://github.com/marmotedu/iam/tree/v1.0.8/internal/apiserver/service/v1" target="_blank">internal/apiserver/service/v1</a>目录，user_test.go文件包含了性能测试函数 <a href="https://github.com/marmotedu/iam/blob/v1.0.8/internal/apiserver/service/v1/user_test.go#L27-L41" target="_blank">BenchmarkListUser</a>，执行以下命令来生成性能数据文件：</p>
+<pre><code class="language-bash">$ go test -benchtime=30s -benchmem -bench=".*" -cpuprofile cpu.profile -memprofile mem.profile
+goos: linux
+goarch: amd64
+pkg: github.com/marmotedu/iam/internal/apiserver/service/v1
+cpu: AMD EPYC Processor
+BenchmarkListUser-8   	     175	 204523677 ns/op	   15331 B/op	     268 allocs/op
+PASS
+ok  	github.com/marmotedu/iam/internal/apiserver/service/v1	56.514s
+</code></pre>
+<p>上面的命令会在当前目录下产生<code>cpu.profile</code>、<code>mem.profile</code>性能数据文件，以及<code>v1.test</code>二进制文件。接下来，我们基于<code>cpu.profile</code>、<code>mem.profile</code>、<code>v1.test</code>文件来分析代码的CPU和内存性能。为了获取足够的采样数据，我们将benchmark时间设置为<code>30s</code>。</p>
+<p>在做性能分析时，我们可以采取不同的手段来分析性能，比如分析采样图、分析火焰图，还可以使用<code>go tool pprof</code>交互模式，查看函数CPU和内存消耗数据。下面我会运用这些方法，来分析CPU性能和内存性能。</p>
+<h3 id="cpu性能分析">CPU性能分析</h3>
+<p>在默认情况下，Go语言的运行时系统会以100 Hz的的频率对CPU使用情况进行采样，也就是说每秒采样100次，每10毫秒采样一次。每次采样时，会记录正在运行的函数，并统计其运行时间，从而生成CPU性能数据。</p>
+<p>上面我们已经生成了CPU性能数据文件<code>cpu.profile</code>，接下来会运用上面提到的三种方法来分析该性能文件，优化性能。</p>
+<p><strong>方法一：分析采样图</strong></p>
+<p>要分析性能，最直观的方式当然是看图，所以首先我们需要生成采样图，生成过程可以分为两个步骤。</p>
+<p><strong>第一步</strong>，确保系统安装了<code>graphviz</code>：</p>
+<pre><code class="language-bash">$ sudo yum -y install graphviz.x86_64
+</code></pre>
+<p><strong>第二步</strong>，执行<code>go tool pprof</code>生成调用图：</p>
+<pre><code class="language-bash">$ go tool pprof -svg cpu.profile &gt; cpu.svg  # svg 格式
+$ go tool pprof -pdf cpu.profile &gt; cpu.pdf # pdf 格式
+$ go tool pprof -png cpu.profile &gt; cpu.png # png 格式
+</code></pre>
+<p>以上命令会生成<code>cpu.pdf</code>、<code>cpu.svg</code>和<code>cpu.png</code>文件，文件中绘制了函数调用关系以及其他采样数据。如下图所示：</p>
+<p><img alt="图片" src="/assets/f6b303934d4a87daa9efc725.png"/></p>
+<p>这张图片由有向线段和矩形组成。<strong>我们先来看有向线段的含义。</strong></p>
+<p>有向线段描述了函数的调用关系，矩形包含了CPU采样数据。从图中，我们看到没箭头的一端调用了有箭头的一端，可以知道<code>v1.(*userService).List</code>函数调用了<code>fake.(*policies).List</code>。</p>
+<p>线段旁边的数字<code>90ms</code>则说明，<code>v1.(*userService).List</code>调用<code>fake.(*policies).List</code>函数，在采样周期内，一共耗用了<code>90ms</code>。通过函数调用关系，我们可以知道某个函数调用了哪些函数，并且调用这些函数耗时多久。</p>
+<p>这里，我们再次解读下图中调用关系中的重要信息：</p>
+<p><img alt="图片" src="/assets/b1bdf2d248e80eca1a07f870.png"/></p>
+<p><code>runtime.schedule</code>的累积采样时间（140ms）中，有10ms来自于<code>runtime.goschedImpl</code>函数的直接调用，有70ms来自于<code>runtime.park_m</code>函数的直接调用。这些数据可以说明<code>runtime.schedule</code>函数分别被哪些函数调用，并且调用频率有多大。也因为这个原因，函数<code>runtime.goschedImpl</code>对函数<code>runtime.schedule</code>的调用时间必定小于等于函数<code>runtime.schedule</code>的累积采样时间。</p>
+<p><strong>我们再来看下矩形里的采样数据。</strong>这些矩形基本都包含了3类信息：</p>
+<ul>
+<li>函数名/方法名，该类信息包含了包名、结构体名、函数名/方法名，方便我们快速定位到函数/方法，例如<code>fake(*policies)List</code>说明是fake包，policies结构体的List方法。</li>
+<li>本地采样时间，以及它在采样总数中所占的比例。本地采样时间是指采样点落在该函数中的总时间。</li>
+<li>累积采样时间，以及它在采样总数中所占的比例。累积采样时间是指采样点落在该函数，以及被它直接或者间接调用的函数中的总时间。</li>
+</ul>
+<p>我们可以通过<code>OutDir</code>函数来解释本地采样时间和累积采样时间这两个概念。<code>OutDir</code>函数如下图所示：</p>
+<p><img alt="图片" src="/assets/8d1ed4bd76ec8eaa92e4fa7d.png"/></p>
+<p>整个函数的执行耗时，我们可以认为是累积采样时间，包含了白色部分的代码耗时和红色部分的函数调用耗时。白色部分的代码耗时，可以认为是本地采样时间。</p>
+<p>通过累积采样时间，我们可以知道函数的总调用时间，累积采样时间越大，说明调用它所花费的CPU时间越多。但你要注意，这并不一定说明这个函数本身是有问题的，也有可能是函数所调用的函数性能有瓶颈，这时候我们应该根据函数调用关系顺藤摸瓜，去寻找这个函数直接或间接调用的函数中最耗费CPU时间的那些。</p>
+<p>如果函数的本地采样时间很大，就说明这个函数自身耗时（除去调用其他函数的耗时）很大，这时候需要我们分析这个函数自身的代码，而不是这个函数直接或者间接调用函数的代码。</p>
+<p>采样图中，矩形框面积越大，说明这个函数的累积采样时间越大。那么，如果一个函数分析采样图中的矩形框面积很大，这时候我们就要认真分析了，因为很可能这个函数就有需要优化性能的地方。</p>
+<p><strong>方法二：分析火焰图</strong></p>
+<p>上面介绍的采样图，其实在分析性能的时候还不太直观，这里我们可以通过生成火焰图，来更直观地查看性能瓶颈。火焰图是由Brendan Gregg大师发明的专门用来把采样到的堆栈轨迹（Stack Trace）转化为直观图片显示的工具，因整张图看起来像一团跳动的火焰而得名。</p>
+<p><code>go tool pprof</code>提供了<code>-http</code>参数，可以使我们通过浏览器浏览采样图和火焰图。执行以下命令：</p>
+<pre><code class="language-bash">$ go tool pprof -http="0.0.0.0:8081" v1.test cpu.profile
+</code></pre>
+<p>然后访问<code>http://x.x.x.x:8081/</code>（<code>x.x.x.x</code>是执行<code>go tool pprof</code>命令所在服务器的IP地址），则会在浏览器显示各类采样视图数据，如下图所示：</p>
+<p><img alt="图片" src="/assets/d1d675ccf2010f26cb130fbc.png"/></p>
+<p>上面的UI页面提供了不同的采样数据视图：</p>
+<ul>
+<li>Top，类似于 linux top 的形式，从高到低排序。</li>
+<li>Graph，默认弹出来的就是该模式，也就是上一个图的那种带有调用关系的图。</li>
+<li>Flame Graph：pprof 火焰图。</li>
+<li>Peek：类似于 Top 也是从高到底的排序。</li>
+<li>Source：和交互命令式的那种一样，带有源码标注。</li>
+<li>Disassemble：显示所有的总量。</li>
+</ul>
+<p>接下来，我们主要来分析火焰图。在UI界面选择<strong>Flame Graph（VIEW -&gt; Flame Graph）</strong>，就会展示火焰图，如下图所示：</p>
+<p><img alt="图片" src="/assets/5b16d512eb8dbb65494435ff.png"/></p>
+<p>火焰图主要有下面这几个特征：</p>
+<ul>
+<li>每一列代表一个调用栈，每一个格子代表一个函数。</li>
+<li>纵轴展示了栈的深度，按照调用关系从上到下排列。最下面的格子代表采样时，正在占用CPU的函数。</li>
+<li>调用栈在横向会按照字母排序，并且同样的调用栈会做合并，所以一个格子的宽度越大，说明这个函数越可能是瓶颈。</li>
+<li>火焰图格子的颜色是随机的暖色调，方便区分各个调用信息。</li>
+</ul>
+<p>查看火焰图时，格子越宽的函数，就越可能存在性能问题，这时候，我们就可以分析该函数的代码，找出问题所在。</p>
+<p><strong>方法三：用</strong><code>go tool pprof</code><strong>交互模式查看详细数据</strong></p>
+<p>我们可以执行<code>go tool pprof</code>命令，来查看CPU的性能数据文件：</p>
+<pre><code class="language-bash">$ go tool pprof v1.test cpu.profile
+File: v1.test
+Type: cpu
+Time: Aug 17, 2021 at 2:17pm (CST)
+Duration: 56.48s, Total samples = 440ms ( 0.78%)
+Entering interactive mode (type "help" for commands, "o" for options)
+(pprof)
+</code></pre>
+<p><code>go tool pprof</code>输出了很多信息：</p>
+<ul>
+<li>File，二进制可执行文件名称。</li>
+<li>Type，采样文件的类型，例如cpu、mem等。</li>
+<li>Time，生成采样文件的时间。</li>
+<li>Duration，程序执行时间。上面的例子中，程序总执行时间为<code>37.43s</code>，采样时间为<code>42.37s</code>。采样程序在采样时，会自动分配采样任务给多个核心，所以总采样时间可能会大于总执行时间。</li>
+<li>(pprof)，命令行提示，表示当前在<code>go tool</code>的<code>pprof</code>工具命令行中，<code>go tool</code>还包括<code>cgo</code>、<code>doc</code>、<code>pprof</code>、<code>trace</code>等多种命令。</li>
+</ul>
+<p>执行<code>go tool pprof</code>命令后，会进入一个交互shell。在这个交互shell中，我们可以执行多个命令，最常用的命令有三个，如下表所示：</p>
+<p><img alt="图片" src="/assets/2d5746edf4fd3dc1d49e81fe.jpg"/></p>
+<p>我们在交互界面中执行<code>top</code>命令，可以查看性能样本数据：</p>
+<pre><code class="language-bash">(pprof) top
+Showing nodes accounting for 350ms, 79.55% of 440ms total
+Showing top 10 nodes out of 47
+      flat  flat%   sum%        cum   cum%
+     110ms 25.00% 25.00%      110ms 25.00%  runtime.futex
+      70ms 15.91% 40.91%       90ms 20.45%  github.com/marmotedu/iam/internal/apiserver/store/fake.(*policies).List
+      40ms  9.09% 50.00%       40ms  9.09%  runtime.epollwait
+      40ms  9.09% 59.09%      180ms 40.91%  runtime.findrunnable
+      30ms  6.82% 65.91%       30ms  6.82%  runtime.write1
+      20ms  4.55% 70.45%       30ms  6.82%  runtime.notesleep
+      10ms  2.27% 72.73%      100ms 22.73%  github.com/marmotedu/iam/internal/apiserver/service/v1.(*userService).List
+      10ms  2.27% 75.00%       10ms  2.27%  runtime.checkTimers
+      10ms  2.27% 77.27%       10ms  2.27%  runtime.doaddtimer
+      10ms  2.27% 79.55%       10ms  2.27%  runtime.mallocgc
+</code></pre>
+<p>上面的输出中，每一行表示一个函数的信息。pprof程序中最重要的命令就是topN，这个命令用来显示profile文件中最靠前的N个样本（sample），top命令会输出多行信息，每一行代表一个函数的采样数据，默认按<code>flat%</code>排序。输出中，各列含义如下：</p>
+<ul>
+<li>flat：采样点落在该函数中的总时间。</li>
+<li>flat%：采样点落在该函数中时间的百分比。</li>
+<li>sum%：前面所有行的flat%的累加值，也就是上一项的累积百分比。</li>
+<li>cum：采样点落在该函数中的，以及被它调用的函数中的总时间。</li>
+<li>cum%：采样点落在该函数中的，以及被它调用的函数中的总次数百分比。</li>
+<li>函数名。</li>
+</ul>
+<p>上面这些信息，可以告诉我们函数执行的时间和耗时排名，我们可以根据这些信息，来判断哪些函数可能有性能问题，或者哪些函数的性能可以进一步优化。</p>
+<p>这里想提示下，如果执行的是<code>go tool pprof mem.profile</code>，那么上面的各字段意义是类似的，只不过这次不是时间而是内存分配大小（字节）。</p>
+<p>执行<code>top</code>命令默认是按<code>flat%</code>排序的，在做性能分析时，我们需要先按照<code>cum</code>来排序，通过<code>cum</code>，我们可以直观地看到哪个函数总耗时最多，然后再参考该函数的本地采样时间和调用关系，来判断是该函数性能耗时多，还是它调用的函数耗时多。</p>
+<p>执行<code>top -cum</code>输出如下：</p>
+<pre><code class="language-bash">(pprof) top20 -cum
+Showing nodes accounting for 280ms, 63.64% of 440ms total
+Showing top 20 nodes out of 47
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%      320ms 72.73%  runtime.mcall
+         0     0%     0%      320ms 72.73%  runtime.park_m
+         0     0%     0%      280ms 63.64%  runtime.schedule
+      40ms  9.09%  9.09%      180ms 40.91%  runtime.findrunnable
+     110ms 25.00% 34.09%      110ms 25.00%  runtime.futex
+      10ms  2.27% 36.36%      100ms 22.73%  github.com/marmotedu/iam/internal/apiserver/service/v1.(*userService).List
+         0     0% 36.36%      100ms 22.73%  github.com/marmotedu/iam/internal/apiserver/service/v1.BenchmarkListUser
+         0     0% 36.36%      100ms 22.73%  runtime.futexwakeup
+         0     0% 36.36%      100ms 22.73%  runtime.notewakeup
+         0     0% 36.36%      100ms 22.73%  runtime.resetspinning
+         0     0% 36.36%      100ms 22.73%  runtime.startm
+         0     0% 36.36%      100ms 22.73%  runtime.wakep
+         0     0% 36.36%      100ms 22.73%  testing.(*B).launch
+         0     0% 36.36%      100ms 22.73%  testing.(*B).runN
+      70ms 15.91% 52.27%       90ms 20.45%  github.com/marmotedu/iam/internal/apiserver/store/fake.(*policies).List
+      10ms  2.27% 54.55%       50ms 11.36%  runtime.netpoll
+      40ms  9.09% 63.64%       40ms  9.09%  runtime.epollwait
+         0     0% 63.64%       40ms  9.09%  runtime.modtimer
+         0     0% 63.64%       40ms  9.09%  runtime.resetForSleep
+         0     0% 63.64%       40ms  9.09%  runtime.resettimer (inline)
+</code></pre>
+<p>从上面的输出可知，<code>v1.BenchmarkListUser</code>、<code>testing.(*B).launch</code>、<code>testing.(*B).runN</code>的本地采样时间占比分别为<code>0%</code>、<code>0%</code>、<code>0%</code>，但是三者的累积采样时间占比却比较高，分别为<code>22.73%</code>、<code>22.73%</code>、<code>22.73%</code>。</p>
+<p>本地采样时间占比很小，但是累积采样时间占比很高，说明这3个函数耗时多是因为调用了其他函数，它们自身几乎没有耗时。根据采样图，我们可以看到函数的调用关系，具体如下图所示：</p>
+<p><img alt="图片" src="/assets/10b3aae00ed7a66f1944c4e6.jpg"/></p>
+<p>从采样图中，可以知道最终<code>v1.BenchmarkListUser</code>调用了<code>v1.(*userService).List</code>函数。<code>v1.(*userService).List</code>函数是我们编写的函数，该函数的本地采样时间占比为<code>2.27%</code>，但是累积采样时间占比却高达<code>22.73%</code>，说明<code>v1.(*userService).List</code>调用其他函数耗用了大量的CPU时间。</p>
+<p>再观察采样图，可以看出<code>v1.(*userService).List</code>耗时久是因为调用了<code>fake.(*policies).List</code>函数。我们也可以通过<code>list</code>命令查看函数内部的耗时情况：</p>
+<p><img alt="图片" src="/assets/c4f036f128a7540b7dc890af.png"/></p>
+<p><code>list userService.*List</code>会列出<code>userService</code>结构体<code>List</code>方法内部代码的耗时情况，从上图也可以看到，<code>u.store.Policies().List</code>耗时最多。<code>fake.(*policies).List</code>的本地采样时间占比为<code>15.91%</code>，说明<code>fake.(*policies).List</code>函数本身可能存在瓶颈。走读<code>fake.(*policies).List</code>代码可知，该函数是查询数据库的函数，查询数据库会有延时。继续查看<code>v1.(*userService).List</code>代码，我们可以发现以下调用逻辑：</p>
+<pre><code class="language-go">func (u *userService) ListWithBadPerformance(ctx context.Context, opts metav1.ListOptions) (*v1.UserList, error) {
+    ...
+    for _, user := range users.Items {
+        policies, err := u.store.Policies().List(ctx, user.Name, metav1.ListOptions{})
+        ...
+        })
+    }
+    ...
+}
+</code></pre>
+<p>我们在<code>for</code>循环中，串行调用了<code>fake.(*policies).List</code>函数，每一次循环都会调用有延时的<code>fake.(*policies).List</code>函数。多次调用，<code>v1.(*userService).List</code>函数的耗时自然会累加起来。</p>
+<p>现在问题找到了，那我们怎么优化呢？你可以利用CPU多核特性，开启多个goroutine，这样我们的查询耗时就不是串行累加的，而是取决于最慢一次的<code>fake.(*policies).List</code>调用。优化后的<code>v1.(*userService).List</code>函数代码见<a href="https://github.com/marmotedu/iam/blob/v1.0.8/internal/apiserver/service/v1/user.go#L43-L110" target="_blank">internal/apiserver/service/v1/user.go</a>。用同样的性能测试用例，测试优化后的函数，结果如下：</p>
+<pre><code class="language-bash">$ go test -benchtime=30s -benchmem -bench=".*" -cpuprofile cpu.profile -memprofile mem.profile
+goos: linux
+goarch: amd64
+pkg: github.com/marmotedu/iam/internal/apiserver/service/v1
+cpu: AMD EPYC Processor
+BenchmarkListUser-8   	    8330	   4271131 ns/op	   26390 B/op	     484 allocs/op
+PASS
+ok  	github.com/marmotedu/iam/internal/apiserver/service/v1	36.179s
+</code></pre>
+<p>上面的代码中，ns/op为<code>4271131 ns/op</code>，可以看到和第一次的测试结果<code>204523677 ns/op</code>相比，性能提升了<code>97.91%</code>。</p>
+<p>这里注意下，为了方便你对照，我将优化前的<code>v1.(*userService).List</code>函数重命名为<code>v1.(*userService).ListWithBadPerformance</code>。</p>
+<h3 id="内存性能分析">内存性能分析</h3>
+<p>Go语言运行时，系统会对程序运行期间的所有堆内存分配进行记录。不管在采样的哪一时刻，也不管堆内存已用字节数是否有增长，只要有字节被分配且数量足够，分析器就会对它进行采样。</p>
+<p>内存性能分析方法和CPU性能分析方法比较类似，这里就不再重复介绍了。你可以借助前面生成的内存性能数据文件<code>mem.profile</code>自行分析。</p>
+<p>接下来，给你展示下内存优化前和优化后的效果。在<code>v1.(*userService).List</code>函数（位于<a href="https://github.com/marmotedu/iam/blob/v1.0.8/internal/apiserver/service/v1/user.go#L43-L110" target="_blank">internal/apiserver/service/v1/user.go</a>文件中）中，有以下代码：</p>
+<pre><code class="language-go">infos := make([]*v1.User, 0)
+for _, user := range users.Items {
+    info, _ := m.Load(user.ID)
+    infos = append(infos, info.(*v1.User))
+}
+</code></pre>
+<p>此时，我们运行<code>go test</code>命令，测试下内存性能，作为优化后的性能数据，进行对比：</p>
+<pre><code class="language-bash">$ go test -benchmem -bench=".*" -cpuprofile cpu.profile -memprofile mem.profile
+goos: linux
+goarch: amd64
+pkg: github.com/marmotedu/iam/internal/apiserver/service/v1
+cpu: AMD EPYC Processor
+BenchmarkListUser-8   	     278	   4284660 ns/op	   27101 B/op	     491 allocs/op
+PASS
+ok  	github.com/marmotedu/iam/internal/apiserver/service/v1	1.779s
+</code></pre>
+<p><code>B/op</code>和<code>allocs/op</code>分别为<code>27101 B/op</code>和<code>491 allocs/op</code>。</p>
+<p>我们通过分析代码，发现可以将<code>infos := make([]*v1.User, 0)</code>优化为<code>infos := make([]*v1.User, 0, len(users.Items))</code>，来减少Go切片的内存重新分配的次数。优化后的代码为：</p>
+<pre><code class="language-go">//infos := make([]*v1.User, 0)
+infos := make([]*v1.User, 0, len(users.Items))
+for _, user := range users.Items {
+    info, _ := m.Load(user.ID)
+    infos = append(infos, info.(*v1.User))
+}
+</code></pre>
+<p>再执行<code>go test</code>测试下性能：</p>
+<pre><code class="language-bash">$ go test -benchmem -bench=".*" -cpuprofile cpu.profile -memprofile mem.profile
+goos: linux
+goarch: amd64
+pkg: github.com/marmotedu/iam/internal/apiserver/service/v1
+cpu: AMD EPYC Processor
+BenchmarkListUser-8   	     276	   4318472 ns/op	   26457 B/op	     484 allocs/op
+PASS
+ok  	github.com/marmotedu/iam/internal/apiserver/service/v1	1.856s
+</code></pre>
+<p>优化后的<code>B/op</code>和<code>allocs/op</code>分别为<code>26457 B/op</code>和<code>484 allocs/op</code>。跟第一次的<code>27101 B/op</code>和<code>491 allocs/op</code>相比，内存分配次数更少，每次分配的内存也更少。</p>
+<p>我们可以执行<code>go tool pprof</code>命令，来查看CPU的性能数据文件：</p>
+<pre><code class="language-bash">$ go tool pprof v1.test mem.profile
+File: v1.test
+Type: alloc_space
+Time: Aug 17, 2021 at 8:33pm (CST)
+Entering interactive mode (type "help" for commands, "o" for options)
+(pprof)
+</code></pre>
+<p>该命令会进入一个交互界面，在交互界面中执行top命令，可以查看性能样本数据，例如：</p>
+<pre><code class="language-bash">(pprof) top
+Showing nodes accounting for 10347.32kB, 95.28% of 10859.34kB total
+Showing top 10 nodes out of 52
+      flat  flat%   sum%        cum   cum%
+ 3072.56kB 28.29% 28.29%  4096.64kB 37.72%  github.com/marmotedu/iam/internal/apiserver/service/v1.(*userService).List.func1
+ 1762.94kB 16.23% 44.53%  1762.94kB 16.23%  runtime/pprof.StartCPUProfile
+ 1024.52kB  9.43% 53.96%  1024.52kB  9.43%  go.uber.org/zap/buffer.NewPool.func1
+ 1024.08kB  9.43% 63.39%  1024.08kB  9.43%  time.Sleep
+  902.59kB  8.31% 71.70%   902.59kB  8.31%  compress/flate.NewWriter
+  512.20kB  4.72% 76.42%  1536.72kB 14.15%  github.com/marmotedu/iam/internal/apiserver/service/v1.(*userService).List
+  512.19kB  4.72% 81.14%   512.19kB  4.72%  runtime.malg
+  512.12kB  4.72% 85.85%   512.12kB  4.72%  regexp.makeOnePass
+  512.09kB  4.72% 90.57%   512.09kB  4.72%  github.com/marmotedu/iam/internal/apiserver/store/fake.FakeUsers
+  512.04kB  4.72% 95.28%   512.04kB  4.72%  runtime/pprof.allFrames
+</code></pre>
+<p>上面的内存性能数据，各字段的含义依次是：</p>
+<ul>
+<li>flat，采样点落在该函数中的总内存消耗。</li>
+<li>flat% ，采样点落在该函数中的百分比。</li>
+<li>sum% ，上一项的累积百分比。</li>
+<li>cum ，采样点落在该函数，以及被它调用的函数中的总内存消耗。</li>
+<li>cum%，采样点落在该函数，以及被它调用的函数中的总次数百分比。</li>
+<li>函数名。</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>在Go项目开发中，程序性能低下时，我们需要分析出问题所在的代码。Go语言提供的 <code>go tool pprof</code> 工具可以支持我们分析代码的性能。我们可以通过两步来分析代码的性能，分别是生成性能数据文件和分析性能数据文件。</p>
+<p>Go中可以用来生成性能数据文件的方式有三种：通过命令行生成性能数据文件、通过代码生成性能数据文件、通过 <code>net/http/pprof</code> 生成性能数据文件。</p>
+<p>生成性能数据文件之后，就可以使用 <code>go tool pprof</code> 工具来分析性能数据文件了。我们可以分别获取到CPU和内存的性能数据，通过分析就可以找到性能瓶颈。有3种分析性能数据文件的方式，分别是分析采样图、分析火焰图和用 <code>go tool pprof</code> 交互模式查看详细数据。因为火焰图直观高效，所以我建议你多使用火焰图来分析性能。</p>
+<h2 id="课后练习">课后练习</h2>
+<ol>
+<li>思考下，为什么“函数<code>runtime.goschedImpl</code>对函数<code>runtime.schedule</code>的调用时间必定小于等于函数<code>runtime.schedule</code>的累积采样时间”？</li>
+<li>你在Go项目开发中，还有哪些比较好的性能分析思路和方法？欢迎在留言区分享。</li>
+</ol>
+<p>欢迎你在留言区与我交流讨论，我们下一讲见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

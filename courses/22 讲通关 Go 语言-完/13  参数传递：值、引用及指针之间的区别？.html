@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>13  参数传递：值、引用及指针之间的区别？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/index.html">22 讲通关 Go 语言-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>22 讲通关 Go 语言-完</strong><ul><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20Go%20%E4%B8%BA%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E9%9C%80%E6%B1%82%E8%AE%BE%E8%AE%A1%EF%BC%8C%E5%B8%A6%E4%BD%A0%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E5%B7%A5%E4%BD%9C.html">00 开篇词  Go 为开发者的需求设计，带你实现高效工作</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/01%20%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%EF%BC%9A%E7%BC%96%E5%86%99%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%20Go%20%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F.html">01  基础入门：编写你的第一个 Go 语言程序</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/02%20%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%BD%A0%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">02  数据类型：你必须掌握的数据类型有哪些？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/03%20%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9Aif%E3%80%81for%E3%80%81switch%20%E9%80%BB%E8%BE%91%E8%AF%AD%E5%8F%A5%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">03  控制结构：if、for、switch 逻辑语句的那些事儿</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/04%20%20%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%20array%E3%80%81slice%20%E5%92%8C%20map%EF%BC%9F.html">04  集合类型：如何正确使用 array、slice 和 map？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/05%20%20%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">05  函数和方法：Go 语言中的函数和方法到底有什么不同？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/06%20%20struct%20%E5%92%8C%20interface%EF%BC%9A%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E6%8E%A5%E5%8F%A3%E9%83%BD%E5%AE%9E%E7%8E%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E5%8A%9F%E8%83%BD%EF%BC%9F.html">06  struct 和 interface：结构体与接口都实现了哪些功能？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/07%20%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20error%E3%80%81deferred%E3%80%81panic%20%E7%AD%89%E5%A4%84%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%9F.html">07  错误处理：如何通过 error、deferred、panic 等处理错误？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/08%20%20%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%EF%BC%9AGoroutines%20%E5%92%8C%20Channels%20%E7%9A%84%E5%A3%B0%E6%98%8E%E4%B8%8E%E4%BD%BF%E7%94%A8.html">08  并发基础：Goroutines 和 Channels 的声明与使用</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/09%20%20%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD%EF%BC%9Async%20%E5%8C%85%E8%AE%A9%E4%BD%A0%E5%AF%B9%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E5%BE%97%E5%BF%83%E5%BA%94%E6%89%8B.html">09  同步原语：sync 包让你对并发控制得心应手</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/10%20%20Context%EF%BC%9A%E4%BD%A0%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E7%A5%9E%E5%99%A8.html">10  Context：你必须掌握的多线程并发控制神器</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/11%20%20%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%94%A8%E7%9A%84%E9%AB%98%E6%95%88%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F.html">11  并发模式：Go 语言中即学即用的高效并发模式</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/12%20%20%E6%8C%87%E9%92%88%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%9C%A8%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88%EF%BC%9F.html">12  指针详解：在什么情况下应该使用指针？</a></li><li><a class="active" aria-current="page" href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/13%20%20%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%EF%BC%9A%E5%80%BC%E3%80%81%E5%BC%95%E7%94%A8%E5%8F%8A%E6%8C%87%E9%92%88%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F.html">13  参数传递：值、引用及指针之间的区别？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/14%20%20%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%EF%BC%9Anew%20%E8%BF%98%E6%98%AF%20make%EF%BC%9F%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E8%AF%A5%E7%94%A8%E8%B0%81%EF%BC%9F.html">14  内存分配：new 还是 make？什么情况下该用谁？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/15%20%20%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%8D%E5%B0%84%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E8%BD%AC%E6%8D%A2%EF%BC%9F.html">15  运行时反射：字符串和结构体之间如何转换？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/16%20%20%E9%9D%9E%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%EF%BC%9A%E8%AE%A9%E4%BD%A0%E6%97%A2%E7%88%B1%E5%8F%88%E6%81%A8%E7%9A%84%20unsafe.html">16  非类型安全：让你既爱又恨的 unsafe</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/17%20%20SliceHeader%EF%BC%9Aslice%20%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE%EF%BC%9F.html">17  SliceHeader：slice 如何高效处理数据？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/18%20%20%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%B5%8B%E8%AF%95%E4%BF%9D%E8%AF%81%E8%B4%A8%E9%87%8F%EF%BC%9F.html">18  质量保证：Go 语言如何通过测试保证质量？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/19%20%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%9F.html">19  性能优化：Go 语言如何进行代码检查和优化？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/20%20%20%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%EF%BC%9A%E6%A8%A1%E5%9D%97%E5%8C%96%E7%AE%A1%E7%90%86%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%A4%9F%E6%8F%90%E5%8D%87%E7%A0%94%E5%8F%91%E6%95%88%E8%83%BD%EF%BC%9F.html">20  协作开发：模块化管理为什么能够提升研发效能？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/21%20%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E7%8E%A9%E8%BD%AC%20RESTful%20API%20%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">21  网络编程：Go 语言如何玩转 RESTful API 服务？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/22%20%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20RPC%20%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/23%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E4%BD%A0%E7%9A%84%20Go%20%E8%AF%AD%E8%A8%80%E6%88%90%E9%95%BF%E4%B9%8B%E8%B7%AF.html">23 结束语  你的 Go 语言成长之路</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/13%20%20%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%EF%BC%9A%E5%80%BC%E3%80%81%E5%BC%95%E7%94%A8%E5%8F%8A%E6%8C%87%E9%92%88%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="13  参数传递：值、引用及指针之间的区别？" id="title">13  参数传递：值、引用及指针之间的区别？</h1>
+<div><p>上节课我留了一个思考题，关于指向接口的指针的思考。在[“第 6 讲| struct 和 interface：结构体与接口都实现了哪些功能？”]中，你已经知道了如何实现一个接口，并且也知道如果值接收者实现了接口，那么值的指针也就实现了该接口。现在我们再一起来复习一下接口实现的知识，然后再解答关于指向接口的指针的思考题。</p>
+<p>在下面的代码中，值类型 address 作为接收者实现了接口 fmt.Stringer，那么它的指针类型 *address 也就实现了接口 fmt.Stringer。</p>
+<p><strong><em>ch13/main.go</em></strong></p>
+<pre><code class="language-go">type address struct {
+   province string
+   city string
+}
+
+func (addr address) String()  string{
+   return fmt.Sprintf("the addr is %s%s",addr.province,addr.city)
+}
+</code></pre>
+<p>在下面的代码示例中，我定义了值类型的变量 add，然后把它和它的指针 &amp;add 都作为参数传给函数 printString，发现都是可以的，并且代码可以成功运行。这也证明了当值类型作为接收者实现了某接口时，它的指针类型也同样实现了该接口。</p>
+<p><strong><em>ch13/main.go</em></strong></p>
+<pre><code class="language-go">func main() {
+   add := address{province: "北京", city: "北京"}
+   printString(add)
+   printString(&amp;add)
+}
+
+func printString(s fmt.Stringer) {
+   fmt.Println(s.String())
+}
+</code></pre>
+<p>基于以上结论，我们继续分析，看是否可以定义一个指向接口的指针。如下所示：</p>
+<p><strong><em>ch13/main.go</em></strong></p>
+<pre><code class="language-go">var si fmt.Stringer =address{province: "上海",city: "上海"}
+printString(si)
+sip:=&amp;si
+printString(sip)
+</code></pre>
+<p>在这个示例中，因为类型 address 已经实现了接口 fmt.Stringer，所以它的值可以被赋予变量 si，而且 si 也可以作为参数传递给函数 printString。</p>
+<p>接着你可以使用 sip:=&amp;si 这样的操作获得一个指向接口的指针，这是没有问题的。不过最终你无法把指向接口的指针 sip 作为参数传递给函数 printString，Go 语言的编译器会提示你如下错误信息：</p>
+<pre><code class="language-log">./main.go:42:13: cannot use sip (type *fmt.Stringer) as type fmt.Stringer in argument to printString:
+	*fmt.Stringer is pointer to interface, not interface
+</code></pre>
+<p>于是可以总结为：虽然指向具体类型的指针可以实现一个接口，但是指向接口的指针永远不可能实现该接口。</p>
+<p>所以你几乎从不需要一个指向接口的指针，把它忘掉吧，不要让它在你的代码中出现。</p>
+<p>通过这个思考题，相信你也对 Go 语言的值类型、引用类型和指针等概念有了一定的了解，但可能也存在一些迷惑。这节课我将更深入地分析这些概念。</p>
+<h3 id="修改参数">修改参数</h3>
+<p>假设你定义了一个函数，并在函数里对参数进行修改，想让调用者可以通过参数获取你最新修改的值。我仍然以前面课程用到的 person 结构体举例，如下所示：</p>
+<p><strong><em>ch13/main.go</em></strong></p>
+<pre><code class="language-go">func main() {
+   p:=person{name: "张三",age: 18}
+   modifyPerson(p)
+   fmt.Println("person name:",p.name,",age:",p.age)
+}
+
+func modifyPerson(p person)  {
+   p.name = "李四"
+   p.age = 20
+}
+
+type person struct {
+   name string
+   age int
+}
+</code></pre>
+<p>在这个示例中，我期望通过 modifyPerson 函数把参数 p 中的 name 修改为李四，把 age 修改为 20 。代码没有错误，但是运行一下，你会看到如下打印输出：</p>
+<pre><code class="language-log">person name: 张三 ,age: 18
+</code></pre>
+<p>怎么还是张三与 18 呢？我换成指针参数试试，因为在上节课中我们已经知道可以通过指针修改指向的对象数据，如下所示：</p>
+<pre><code class="language-go">modifyPerson(&amp;p)
+func modifyPerson(p *person)  {
+   p.name = "李四"
+   p.age = 20
+}
+</code></pre>
+<p>这些代码用于满足指针参数的修改，把接收的参数改为指针参数，以及在调用 modifyPerson 函数时，通过&amp;取地址符传递一个指针。现在再运行程序，就可以看到期望的输出了，如下所示：</p>
+<pre><code class="language-log">person name: 李四 ,age: 20
+</code></pre>
+<h3 id="值类型">值类型</h3>
+<p>在上面的小节中，我定义的普通变量 p 是 person 类型的。在 Go 语言中，person 是一个值类型，而 &amp;p 获取的指针是 *person 类型的，即指针类型。那么为什么值类型在参数传递中无法修改呢？这也要从内存讲起。</p>
+<p>在上节课中，我们已经知道变量的值是存储在内存中的，而内存都有一个编号，称为内存地址。所以要想修改内存中的数据，就要找到这个内存地址。现在，我来对比值类型变量在函数内外的内存地址，如下所示：</p>
+<p><strong><em>ch13/main.go</em></strong></p>
+<pre><code class="language-go">func main() {
+   p:=person{name: "张三",age: 18}
+   fmt.Printf("main函数：p的内存地址为%p\n",&amp;p)
+   modifyPerson(p)
+   fmt.Println("person name:",p.name,",age:",p.age)
+}
+
+func modifyPerson(p person)  {
+   fmt.Printf("modifyPerson函数：p的内存地址为%p\n",&amp;p)
+   p.name = "李四"
+   p.age = 20
+}
+</code></pre>
+<p>其中，我把原来的示例代码做了更改，分别打印出在 main 函数中变量 p 的内存地址，以及在 modifyPerson 函数中参数 p 的内存地址。运行以上程序，可以看到如下结果：</p>
+<pre><code class="language-log">main函数：p的内存地址为0xc0000a6020
+modifyPerson函数：p的内存地址为0xc0000a6040
+person name: 张三 ,age: 18
+</code></pre>
+<p>你会发现它们的内存地址都不一样，这就意味着，在 modifyPerson 函数中修改的参数 p 和 main 函数中的变量 p 不是同一个，这也是我们在 modifyPerson 函数中修改参数 p，但是在 main 函数中打印后发现并没有修改的原因。</p>
+<p>导致这种结果的原因是 <strong>Go 语言中的函数传参都是值传递。</strong> 值传递指的是传递原来数据的一份拷贝，而不是原来的数据本身。</p>
+<p><img alt="go语言13金句.png" src="/assets/3ca51b6bb4203c4c0655659e.png"/></p>
+<p>（main 函数调用 modifyPerson 函数传参内存示意图）</p>
+<p>以 modifyPerson 函数来说，在调用 modifyPerson 函数传递变量 p 的时候，Go 语言会拷贝一个 p 放在一个新的内存中，这样新的 p 的内存地址就和原来不一样了，但是里面的 name 和 age 是一样的，还是张三和 18。这就是副本的意思，变量里的数据一样，但是存放的内存地址不一样。</p>
+<p>除了 struct 外，还有浮点型、整型、字符串、布尔、数组，这些都是值类型。</p>
+<h3 id="指针类型">指针类型</h3>
+<p>指针类型的变量保存的值就是数据对应的内存地址，所以在函数参数传递是传值的原则下，拷贝的值也是内存地址。现在对以上示例稍做修改，修改后的代码如下：</p>
+<pre><code class="language-go">func main() {
+   p:=person{name: "张三",age: 18}
+   fmt.Printf("main函数：p的内存地址为%p\n",&amp;p
+   modifyPerson(&amp;p)
+   fmt.Println("person name:",p.name,",age:",p.age)
+}
+
+func modifyPerson(p *person)  {
+   fmt.Printf("modifyPerson函数：p的内存地址为%p\n",p)
+   p.name = "李四"
+   p.age = 20
+}
+</code></pre>
+<p>运行这个示例，你会发现打印出的内存地址一致，并且数据也被修改成功了，如下所示：</p>
+<pre><code class="language-log">main函数：p的内存地址为0xc0000a6020
+modifyPerson函数：p的内存地址为0xc0000a6020
+person name: 李四 ,age: 20
+</code></pre>
+<p>所以指针类型的参数是永远可以修改原数据的，因为在参数传递时，传递的是内存地址。</p>
+<blockquote>
+<p>小提示：值传递的是指针，也是内存地址。通过内存地址可以找到原数据的那块内存，所以修改它也就等于修改了原数据。</p>
+</blockquote>
+<h3 id="引用类型">引用类型</h3>
+<p>下面要介绍的是引用类型，包括 map 和 chan。</p>
+<h4 id="map">map</h4>
+<p>对于上面的例子，假如我不使用自定义的 person 结构体和指针，能不能用 map 达到修改的目的呢？</p>
+<p>下面我来试验一下，如下所示：</p>
+<p><strong><em>ch13/main.go</em></strong></p>
+<pre><code>func main() {
+
+   m:=make(map[string]int)
+
+   m["飞雪无情"] = 18
+
+   fmt.Println("飞雪无情的年龄为",m["飞雪无情"])
+
+   modifyMap(m)
+
+   fmt.Println("飞雪无情的年龄为",m["飞雪无情"])
+
+}
+
+func modifyMap(p map[string]int)  {
+
+   p["飞雪无情"] =20
+
+}
+</code></pre>
+<p>我定义了一个 map[string]int 类型的变量 m，存储一个 Key 为飞雪无情、Value 为 18 的键值对，然后把这个变量 m 传递给函数 modifyMap。modifyMap 函数所做的事情就是把对应的值修改为 20。现在运行这段代码，通过打印输出来看是否修改成功，结果如下所示：</p>
+<pre><code>飞雪无情的年龄为 18
+
+飞雪无情的年龄为 20
+</code></pre>
+<p>确实修改成功了。你是不是有不少疑惑？没有使用指针，只是用了 map 类型的参数，按照 Go 语言值传递的原则，modifyMap 函数中的 map 是一个副本，怎么会修改成功呢？</p>
+<p>要想解答这个问题，就要从 make 这个 Go 语言内建的函数说起。在 Go 语言中，任何创建 map 的代码（不管是字面量还是 make 函数）最终调用的都是 runtime.makemap 函数。</p>
+<blockquote>
+<p>小提示：用字面量或者 make 函数的方式创建 map，并转换成 makemap 函数的调用，这个转换是 Go 语言编译器自动帮我们做的。</p>
+</blockquote>
+<p>从下面的代码可以看到，makemap 函数返回的是一个 *hmap 类型，也就是说返回的是一个指针，所以我们创建的 map 其实就是一个 *hmap。</p>
+<p><strong><em>src/runtime/map.go</em></strong></p>
+<pre><code>// makemap implements Go map creation for make(map[k]v, hint).
+
+func makemap(t *maptype, hint int, h *hmap) *hmap{
+
+  //省略无关代码
+
+}
+</code></pre>
+<p>因为 Go 语言的 map 类型本质上就是 *hmap，所以根据替换的原则，我刚刚定义的 modifyMap(p map) 函数其实就是 modifyMap(p *hmap)。这是不是和上一小节讲的指针类型的参数调用一样了？这也是通过 map 类型的参数可以修改原始数据的原因，因为它本质上就是个指针。</p>
+<p>为了进一步验证创建的 map 就是一个指针，我修改上述示例，打印 map 类型的变量和参数对应的内存地址，如下面的代码所示：</p>
+<pre><code>func main(){
+
+  //省略其他没有修改的代码
+
+  fmt.Printf("main函数：m的内存地址为%p\n",m)
+
+}
+
+func modifyMap(p map[string]int)  {
+
+   fmt.Printf("modifyMap函数：p的内存地址为%p\n",p)
+
+   //省略其他没有修改的代码
+
+}
+</code></pre>
+<p>例子中的两句打印代码是新增的，其他代码没有修改，这里就不再贴出来了。运行修改后的程序，你可以看到如下输出：</p>
+<pre><code>飞雪无情的年龄为 18
+
+main函数：m的内存地址为0xc000060180
+
+modifyMap函数：p的内存地址为0xc000060180
+
+飞雪无情的年龄为 20
+</code></pre>
+<p>从输出结果可以看到，它们的内存地址一模一样，所以才可以修改原始数据，得到年龄是 20 的结果。而且我在打印指针的时候，直接使用的是变量 m 和 p，并没有用到取地址符 &amp;，这是因为它们本来就是指针，所以就没有必要再使用 &amp; 取地址了。</p>
+<p>所以在这里，Go 语言通过 make 函数或字面量的包装为我们省去了指针的操作，让我们可以更容易地使用 map。其实就是语法糖，这是编程界的老传统了。</p>
+<blockquote>
+<p>注意：这里的 map 可以理解为引用类型，但是它本质上是个指针，只是可以叫作引用类型而已。在参数传递时，它还是值传递，并不是其他编程语言中所谓的引用传递。</p>
+</blockquote>
+<h4 id="chan">chan</h4>
+<p>还记得我们在 Go 语言并发模块中学的 channel 吗？它也可以理解为引用类型，而它本质上也是个指针。</p>
+<p>通过下面的源代码可以看到，所创建的 chan 其实是个 *hchan，所以它在参数传递中也和 map 一样。</p>
+<pre><code>func makechan(t *chantype, size int64) *hchan {
+
+    //省略无关代码
+
+}
+</code></pre>
+<p><strong>严格来说，Go 语言没有引用类型</strong>，但是我们可以把 map、chan 称为引用类型，这样便于理解。除了 map、chan 之外，Go 语言中的函数、接口、slice 切片都可以称为引用类型。</p>
+<blockquote>
+<p>小提示：指针类型也可以理解为是一种引用类型。</p>
+</blockquote>
+<h3 id="类型的零值">类型的零值</h3>
+<p>在 Go 语言中，定义变量要么通过声明、要么通过 make 和 new 函数，不一样的是 make 和 new 函数属于显式声明并初始化。如果我们声明的变量没有显式声明初始化，那么该变量的默认值就是对应类型的零值。</p>
+<p>从下面的表格可以看到，可以称为引用类型的零值都是 nil。</p>
+<p><img alt="112.png" src="/assets/eebfcbe0357970d5daaa4bd0.png"/></p>
+<p>(各种类型的零值)</p>
+<h3 id="总结">总结</h3>
+<p>在 Go 语言中，<strong>函数的参数传递只有值传递</strong>，而且传递的实参都是原始数据的一份拷贝。如果拷贝的内容是值类型的，那么在函数中就无法修改原始数据；如果拷贝的内容是指针（或者可以理解为引用类型 map、chan 等），那么就可以在函数中修改原始数据。</p>
+<p><img alt="Lark20201209-184447.png" src="/assets/2e5c9e6ff47c59f35624b9c5.png"/></p>
+<p>所以我们在创建一个函数的时候，要根据自己的真实需求决定参数的类型，以便更好地服务于我们的业务。</p>
+<p>这节课中，我讲解 chan 的时候没有举例，你自己可以自定义一个有 chan 参数的函数，作为练习题。</p>
+<p>下节课我将介绍“内存分配：new 还是 make？什么情况下该用谁？”记得来听课！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

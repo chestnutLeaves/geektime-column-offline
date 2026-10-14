@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>09｜属性编辑器：如何解除Web组件属性与编辑器的耦合？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/index.html">说透低代码</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">20 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>说透低代码</strong><ul><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/00%20%20%E5%BC%80%E7%AF%87%E8%AF%8D%EF%BD%9C%E6%8A%9B%E5%BC%80%E4%BA%89%E8%AE%BA%EF%BC%8C%E5%85%88%E6%9D%A5%E7%9C%8B%E7%9C%8B%E7%9C%9F%E6%AD%A3%E7%9A%84%E4%BD%8E%E4%BB%A3%E7%A0%81.html">00  开篇词｜抛开争论，先来看看真正的低代码</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/01%EF%BD%9C%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F.html">01｜低代码平台到底是什么样的？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/02%EF%BD%9C%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E5%BA%95%E6%98%AF%E9%93%B6%E5%BC%B9%EF%BC%8C%E8%BF%98%E6%98%AF%E8%A1%8C%E4%B8%9A%E6%AF%92%E7%98%A4%EF%BC%9F.html">02｜低代码到底是银弹，还是行业毒瘤？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/03%EF%BD%9C%E4%BD%8E%E4%BB%A3%E7%A0%81%E7%9A%84%E5%A4%A9%E8%8A%B1%E6%9D%BF%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%AE%8C%E5%A4%87%E7%9A%84%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%BA%94%E8%AF%A5%E5%85%B7%E5%A4%87%E5%93%AA%E4%BA%9B%E6%9D%A1%E4%BB%B6%EF%BC%9F.html">03｜低代码的天花板：一个完备的低代码平台应该具备哪些条件？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/04%EF%BD%9C%E6%BC%94%E8%BF%9B%E7%AD%96%E7%95%A5%EF%BC%9A%E5%85%88%E5%8F%91%E5%B1%95%E9%80%9A%E7%94%A8%E8%83%BD%E5%8A%9B%E8%BF%98%E6%98%AF%E5%85%88%E6%BB%A1%E8%B6%B3%E4%B8%9A%E5%8A%A1%E9%9C%80%E6%B1%82%EF%BC%9F.html">04｜演进策略：先发展通用能力还是先满足业务需求？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/05%EF%BD%9C%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%20%EF%BC%9A%E5%90%AF%E5%8A%A8%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E7%A0%94%E5%8F%91%E4%B9%8B%E5%89%8D%EF%BC%8C%E4%BD%A0%E9%9C%80%E8%A6%81%E6%9C%89%E4%BB%80%E4%B9%88%E5%AE%B6%E5%BA%95%EF%BC%9F.html">05｜基础设施 ：启动低代码平台研发之前，你需要有什么家底？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/06%EF%BD%9C%E8%B8%8F%E5%87%BA%E6%96%B0%E6%89%8B%E6%9D%91%E4%BE%BF%E9%81%AD%E9%81%87%E5%A4%A7Boss%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9E%B6%E6%9E%84%E4%BD%8E%E4%BB%A3%E7%A0%81%E7%9A%84%E5%BC%95%E6%93%8E%EF%BC%9F.html">06｜踏出新手村便遭遇大Boss：如何架构低代码的引擎？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/07%EF%BD%9C%E7%BB%93%E6%9E%84%E5%8C%96%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E6%B3%95%EF%BC%9A%E4%BB%A3%E7%A0%81%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81%EF%BC%9F.html">07｜结构化代码生成法：代码如何生成代码？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/08%EF%BD%9C%E5%B8%83%E5%B1%80%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E9%B1%BC%E5%92%8C%E7%86%8A%E6%8E%8C%E5%85%BC%E5%BE%97%EF%BC%9F.html">08｜布局编辑器：如何做到鱼和熊掌兼得？</a></li><li><a class="active" aria-current="page" href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/09%EF%BD%9C%E5%B1%9E%E6%80%A7%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E9%99%A4Web%E7%BB%84%E4%BB%B6%E5%B1%9E%E6%80%A7%E4%B8%8E%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E8%80%A6%E5%90%88%EF%BC%9F.html">09｜属性编辑器：如何解除Web组件属性与编辑器的耦合？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/10%20%20%E5%8F%AF%E8%A7%86%E5%8C%96%E7%BC%96%E7%A8%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9C%89%E6%95%88%E9%99%8D%E4%BD%8EApp%E5%89%8D%E5%90%8E%E7%AB%AF%E9%80%BB%E8%BE%91%E5%BC%80%E5%8F%91%E7%9A%84%E6%8A%80%E8%83%BD%E9%97%A8%E6%A7%9B%EF%BC%9F.html">10  可视化编程：如何有效降低App前后端逻辑开发的技能门槛？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/11%EF%BD%9C%E4%BA%A6%E6%95%8C%E4%BA%A6%E5%8F%8B%EF%BC%9ALow%20Code%E4%B8%8EPro%20Code%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8%E6%80%8E%E6%A0%B7%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">11｜亦敌亦友：Low Code与Pro Code混合使用怎样实现？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/12%20%20%E4%B8%9A%E5%8A%A1%E6%95%B0%E6%8D%AE%EF%BC%9A%E5%86%8D%E5%A5%BD%E7%9A%84App%EF%BC%8C%E6%B2%A1%E6%9C%89%E6%95%B0%E6%8D%AE%E4%B9%9F%E6%98%AF%E7%99%BD%E6%90%AD.html">12  业务数据：再好的App，没有数据也是白搭</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/13%EF%BD%9C%E5%A4%9A%E4%BA%BA%E5%8D%8F%E5%90%8C%E7%BC%96%E8%BE%91%EF%BC%9A%E9%87%8E%E7%99%BE%E5%90%88%E7%9A%84%E6%98%A5%E5%A4%A9%E4%B8%BA%E5%95%A5%E6%9D%A5%E5%BE%97%E8%BF%99%E4%B9%88%E6%99%9A%EF%BC%9F.html">13｜多人协同编辑：野百合的春天为啥来得这么晚？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/14%EF%BD%9C%E7%BC%96%E8%BE%91%E5%8E%86%E5%8F%B2%EF%BC%9A%E6%98%AF%E5%AF%B9Git%E5%81%9A%E6%94%B9%E9%80%A0%EF%BC%8C%E8%BF%98%E6%98%AF%E5%8F%A6%E8%BE%9F%E8%B9%8A%E5%BE%84%EF%BC%9F.html">14｜编辑历史：是对Git做改造，还是另辟蹊径？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/15%EF%BD%9C%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%BA%94%E8%AF%A5%E4%BC%98%E5%85%88%E8%A6%86%E7%9B%96%E5%BA%94%E7%94%A8%E7%A0%94%E5%8F%91%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%AD%E7%9A%84%E5%93%AA%E4%BA%9B%E5%8A%9F%E8%83%BD%EF%BC%9F.html">15｜低代码平台应该优先覆盖应用研发生命周期中的哪些功能？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/16%EF%BD%9C%E6%89%A9%E5%B1%95%E4%B8%8E%E5%AE%9A%E5%88%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%B9%B6%E5%BD%A2%E6%88%90%E7%94%9F%E6%80%81%E5%9C%88%EF%BC%9F.html">16｜扩展与定制：如何实现插件系统并形成生态圈？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/17%EF%BD%9C%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9C%89%E6%95%88%E5%8F%91%E7%8E%B0%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9F.html">17｜兼容性问题：如何有效发现兼容性问题？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/18%EF%BD%9C%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9C%89%E6%95%88%E8%A7%A3%E5%86%B3%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9F.html">18｜兼容性问题：如何有效解决兼容性问题？</a></li><li><a href="/courses/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%95%E6%9C%9B%EF%BD%9C%E4%BD%8E%E4%BB%A3%E7%A0%81%E4%B9%8B%E8%B7%AF%EF%BC%8C%E6%88%91%E4%BB%AC%E6%89%8D%E5%88%9A%E5%88%9A%E5%BC%80%E5%A7%8B.html">总结与展望｜低代码之路，我们才刚刚开始</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E8%AF%B4%E9%80%8F%E4%BD%8E%E4%BB%A3%E7%A0%81/09%EF%BD%9C%E5%B1%9E%E6%80%A7%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E9%99%A4Web%E7%BB%84%E4%BB%B6%E5%B1%9E%E6%80%A7%E4%B8%8E%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E8%80%A6%E5%90%88%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="09｜属性编辑器：如何解除Web组件属性与编辑器的耦合？" id="title">09｜属性编辑器：如何解除Web组件属性与编辑器的耦合？</h1>
+<div><p>今天这一讲，我会带你推开编译器协议层的大门，并在协议层中实现一个功能，这个功能将会解除低代码编辑器和组件之间的耦合。我这里放了一张架构图，当然今天我们会对这个图进行详细讲解，现在你只需要有个大概印象就可以了：</p>
+<p><img alt="" src="/assets/41aa4856faa81144897d4309.webp"/></p>
+<p>在开始之前，我想请你思考一下这个问题：<strong>低代码编译器（指代码生成器）是怎么知道自己应该如何使用一个组件的呢？</strong></p>
+<p>这个问题乍一想挺简单的，但是思考越深，你会发现它越难。因为我们人类是通过学习组件 API 的方式来使用组件的，但编译器没有智能，它能像人一样去学习组件的 API 吗？不仅如此，我们还希望编译器除了“学会”内置组件集的用法，还能“学会”外来的其他组件，这可能吗？</p>
+<h2 id="教会编译器使用组件">教会编译器使用组件</h2>
+<p>图文是人与人之间传递知识最好的方式，就像这个专栏一样，我把我的知识以图文形式记录下来，你通过图文来学习。但图文对代码（编译器实质就是一串代码）是极不友好的，对代码友好的“教材”至少需要包含这些特征：</p>
+<p>是指令式的：即这个“教材”必须是指出“怎么做”，而不是“做成啥”这种描述性的。</p>
+<p>那如何给编译器提供一份符合这些特征的“教材”呢？</p>
+<p>我们通过几个例子来逐步归纳。我在【第05 讲】讲低代码基础设施的时候，用到了一个表格的例子，我们以它为例。下面这些内容就是典型给人类阅读的 API 内容：</p>
+<pre><code class="language-html">// html
+&lt;jigsaw-table [data]="tableData"&gt;&lt;/jigsaw-table&gt;
+
+// script
+const tableData = new TableData();
+tableData.header = ['列1', '列2', '列3', '列4'];
+tableData.field = ['field1', 'field2', 'field3', 'field4'];
+tableData.data = [
+    ['cell11', 'cell12', 'cell13', 'cell14'], // 第1行
+    ['cell21', 'cell22', 'cell23', 'cell24'], // 第2行
+    ['cell31', 'cell32', 'cell33', 'cell34'], // 第3行
+    ['cell41', 'cell42', 'cell43', 'cell44'], // 第4行
+];
+</code></pre>
+<p>这份手册包含了这几个主要信息：</p>
+<ol>
+<li>HTML 模板的写法；</li>
+<li>表格通过 data 属性来接收输入数据；</li>
+<li>如何在脚本中创建一个 TableData 对象。</li>
+</ol>
+<p>而且你要注意到，这份教材完全是描述性的，也就是这份教程是在告诉读者你要做成啥样。</p>
+<p>如果把这份文档翻译成计算机教材，同时满足结构化和指令式，我们大概可以这样做：</p>
+<pre><code class="language-js">{
+  html: function() {
+    return `&lt;jigsaw-table [data]="tableData"&gt;&lt;/jigsaw-table&gt;`;
+  },
+  script: function() {
+    return `
+      const tableData = new TableData();
+      tableData.header = ['列1', '列2', '列3', '列4'];
+      tableData.field = ['field1', 'field2', 'field3', 'field4'];
+      tableData.data = [
+          ['cell11', 'cell12', 'cell13', 'cell14'], // 第1行
+          ['cell21', 'cell22', 'cell23', 'cell24'], // 第2行
+          ['cell31', 'cell32', 'cell33', 'cell34'], // 第3行
+          ['cell41', 'cell42', 'cell43', 'cell44'], // 第4行
+      ];
+    `;
+  }
+}
+</code></pre>
+<p>看起来开始有点样子了。但是这个“教材”所体现出的“表格通过 data 属性来接收输入数据”这个重要信息，好像有点问题，因为它在 HTML 函数里被写死了。写死 data 属性至少带来了两个问题：</p>
+<ul>
+<li>表格之外的其他组件，不一定有 data 属性，如果没有 data 属性，则生成的代码就错啦；</li>
+<li>表格的其他属性怎么办？</li>
+</ul>
+<p>看来，“教材”里不仅要包含 HTML 如何生成的信息，还需要包含属性如何生成的信息。所以，我们要把属性从 HTML 里单独拎出来，让它成为一个独立的函数。于是，这份教材就被改成了这样（没有变化的部分我省略了，后面的代码块也是这样）：</p>
+<pre><code class="language-js">{
+  html: function() {
+    const properties = this.properties();
+    return `&lt;jigsaw-table ${properties}&gt;&lt;/jigsaw-table&gt;`;
+  },
+  properties: function() {
+    return `[data]="tableData"`;
+  },
+  script: function() {
+    // ...
+  }
+}
+</code></pre>
+<p>这个版本最大的改进，就在于引进了 properties 函数，用来实现组件属性的动态创建。</p>
+<p>接下来，我们再把目光挪到 script 函数，是不是感觉越看越不对劲儿？script 函数里的内容，全都是在为 data 属性服务的啊。从内聚的角度来说，这段代码应该放 properties 函数更合适，但是这里直接挪过去了。也不对，properties 函数处理的是 HTML 的一部分，和脚本无关。</p>
+<p>这里，script 函数的位置之所以有争议，是因为 properties 函数身兼数职，它既要告诉编译器如何生成组件的一部分 HTML，又要告诉编译器如何生成对应的脚本。所以，问题就出在了 properties 的形式上了，它不应该是一个函数，而应该将它升级为一个类。</p>
+<p>要先说明一下，从这里开始，这一讲中剩下的示例脚本都是用 TypeScript 来编写的，因为 JavaScript 已经不够我用了。不过，如果你对 TypeScript 不熟悉没关系，只要有 ES6 基础，从字面上理解并加一点猜测，也是可以理解的。</p>
+<pre><code class="language-js">class Property {
+  property() {
+    return `[data]="tableData"`;
+  }
+  script() {
+    // ...
+  }
+}
+</code></pre>
+<p>注意，这里我命名 Property 类的时候，用了单数，而非复数。因为从语义上说，我只指望 Property 类处理好一个属性就可以了，多个属性的管理不是 Property 类的职责。</p>
+<p>相应地，那我们把前面那个包含 html 函数的对象，也改造为 TypeScript 类吧。改造后的关键代码如下：</p>
+<pre><code class="language-js">class SVD {
+  properties: Property[];
+  html() {
+    const prop = this.properties.map(p =&gt; p.property()).join(' ');
+    return `&lt;jigsaw-table ${prop}&gt;&lt;/jigsaw-table&gt;`;
+  }
+  script() {
+    return this.properties.map(p =&gt; p.script()).join('\n');
+  }
+}
+</code></pre>
+<p>我这里增加了一个叫 SVD 的类，它用作描述这份给编译器的“教材”的入口。SVD 有一个名为 properties 的属性，它是前面创建的 Property 类的数组。这样看起来就顺溜多了。</p>
+<p>此时，你可能会问一个问题：这份“教材”中有些内容是写死的，比如 jigsaw-table 这样的 selector，data 这样的属性等。</p>
+<p>是的，所以它还需要进一步改造，我们要让这些写死的内容彻底动态化。这个改进实际上非常简单，我们直接看改好后的“教材”就行了，它变成了下面这样。</p>
+<ul>
+<li>首先是 Property 类：</li>
+</ul>
+<pre><code class="language-js">class Property {
+  name = '';
+  value = '';
+  member = 'tableData';
+  property() {
+    return `[${this.name}]="${member}"`;
+  }
+  script() {
+    return `
+      const ${member} = new TableData();
+      ${member}.header = ${this.value.header};
+      ${member}.field = ${this.value.field};
+      ${member}.data = ${this.value.data};
+    `;
+  }
+}
+</code></pre>
+<ul>
+<li>然后是 SVD 类：</li>
+</ul>
+<pre><code class="language-js">class SVD {
+  properties: Property[];
+  selector = '';
+  html() {
+    const prop = this.properties.map(p =&gt; p.property()).join(' ');
+    return `&lt;${this.selector} ${prop}&gt;&lt;/${this.selector}&gt;`;
+  }
+  script() {
+    // ...
+  }
+}
+</code></pre>
+<blockquote>
+<p>提示：为了便于你理解关键信息，代码省略了所有的错误处理和其他细节。</p>
+</blockquote>
+<p>现在“教材”有了，接下来我们就要说说编译器如何“学习”了。</p>
+<p>估计你现在也看出来了，这里的“教材”就是 SVD 和 Property 等类的代码，那么相应地，“学习”就是学如何执行这些代码了：</p>
+<pre><code class="language-js">// 初始化2个类
+const dataProp = new Property();
+dataProp.name = 'data';
+dataProp.value = {
+    header: ['列1', '列2', '列3', '列4'],
+    field = ['field1', 'field2', 'field3', 'field4'],
+    data = [
+        ['cell11', 'cell12', 'cell13', 'cell14'], // 第1行
+        ['cell21', 'cell22', 'cell23', 'cell24'], // 第2行
+        // ...
+    ]
+}
+const tableSvd = new SVD();
+tableSvd.properties = [dataProp];
+tableSvd.selector = 'jigsaw-table';
+
+// 执行并得到代码
+const html = tableSvd.html(); // &lt;jigsaw-table ...&gt;&lt;/jigsaw-table&gt;
+const script = tableSvd.script(); // const tableData = new TableData...
+</code></pre>
+<p>你应该能看出来，这份“教材”在生成代码方面，实际上还比较粗糙，还有很多细节没解决，但作为示例来用是足够了。我们暂且不去纠结这些细节问题，而是继续从架构的角度讲演进和抽象。</p>
+<p>不过，我接下来要讲的内容会用到 OOP（面向对象编程）思想，所以在开始之前，请确保你能比较准确地理解类的继承、覆盖、多态、接口和实现等概念。</p>
+<p>到现在，这份“教材”中，表格只有一个 data 属性。显然表格不应该只有一个属性，现在我们假设表格有另一个名为 columns 的属性。这样一来，Property 类就会有问题了，因为很明显只用一个 Property 并不能很好地描述两个属性。一个非常合适的解决方案就是派生出 Property 的子类来处理多个属性，因此，Property 类可以改造成这样：</p>
+<pre><code class="language-js">abstract class Property {
+  // 这是一个抽象函数，只有声明，无法实现
+  abstract script();
+  
+  name = '';
+  value = '';
+  member = '';
+  property() {
+    return `[${this.name}]="${member}"`;
+  }
+}
+
+class DataProperty extends Property {
+  name = 'data';
+  member = 'tableData';
+  // 在子类中，script函数就知道如何实现了
+  script() {
+    // ...
+  }
+}
+
+class ColumnsProperty extends Property {
+  name = 'columns';
+  member = 'tableColumns';
+  // 各个子类需要生成不同的脚本
+  script() {
+    return `
+      const ${this.member} = [];
+      ...
+    `;
+  }
+}
+</code></pre>
+<p>你可以看到，我把 Property 类改成了 abstract（抽象）的了。因为从基类的角度看，它完全不知道如何去实现 script 这个函数，只有在具体的子类中才知道如何实现这个函数。所以我们派生了一个 DataProperty 子类用来描述表格的 data 属性，同时又派生了一个 ColumnsProperty 子类用来描述表格的 columns 属性。同理，表格其他的使用属性，也可以采用相似的方式来解决。</p>
+<p>那么相应地，我们调用的代码也需要做些调整了：</p>
+<pre><code class="language-js">const tableSvd = new SVD();
+tableSvd.selector = 'jigsaw-table';
+tableSvd.properties = [
+  new DataProperty(), new ColumnsProperty(), new XxxProperty()
+];
+</code></pre>
+<p>经过多个版本的演进，目前来看，这份“教材”终于可以很好地教会编译器如何使用 jigsaw-table 组件了。而且，我们还顺便对 Property 类做了一个重要的改进，通过派生子类的方式解决了冗余代码问题。后面，我们也可以把类似方法用到对所有组件的“教学”上。</p>
+<h2 id="学会使用任何组件">学会使用任何组件</h2>
+<p>不过，到现在，代码编译器也才学会了如何使用表格这一个组件，接下来我们要做的当然是教会它处理多个组件如何描述的问题了。</p>
+<p>我们采用和 Property 相似的方法，把 SVD 作为基类，用来描述组件中相同部分的逻辑，而各个组件特性部分的逻辑则放到子类中去，改造后的代码为：</p>
+<pre><code class="language-js">abstract class SVD {
+  properties: Property[];
+  selector = '';
+  // 能在基类里实现的方法都尽量在基类提供实现，这样子类直接复用就好了
+  html() {
+    // ...
+  }
+  // 和Property类似，基类里不知道如何实现的方法，都只声明，不实现
+  abstract script();
+}
+</code></pre>
+<p>那么，表格的教材也应该相应地调整为：</p>
+<pre><code class="language-js">class JigsawTable extends SVD {
+  properties: Property[] = [
+    new DataProperty(), new ColumnsProperty(), new XxxProperty()
+  ];
+  selector = 'jigsaw-table';
+  script() {
+    // ...
+  }
+}
+</code></pre>
+<p>此时如果再来一个其他组件，比如 select 组件，我们的代码编译器也可以轻松支持了。</p>
+<pre><code class="language-js">class JigsawSelect extends SVD {
+  properties: Property[] = [
+    new DataProperty(), new ValueProperty()
+  ];
+  selector = 'jigsaw-select';
+  script() {
+    // ...
+  }
+}
+</code></pre>
+<p>我们可以看到，教会编译器使用组件，只是我们对这份教材多次演进的一个次要目标，我们更主要的目的<strong>是从架构上调整教材，让它有一层抽象层和一层实现层</strong>。</p>
+<p>基于这样的层次架构，新来的任何组件，只要实现了抽象层中的方法，以及按需覆盖抽象层里的已有方法之后，编译就可以学会如何使用它了。</p>
+<p>不知道你有没有注意到，我所说的“任何组件”不仅包括了低代码内置组件集里的任何组件，更包括了其他未知来源的组件集里的组件。也就是说，以后业务团队要是问你，你的低代码平台能否不用内置组件集，而使用一套他们指定的组件集，你就可以很爽快地答复“没问题”了。这就是低代码平台通用能力的一种体现。</p>
+<p>当然，完全拒绝使用内置组件集的情形并不多见，但业务团队要求补充少量业务组件到低代码平台中来是一种非常常见的情形。</p>
+<p>业务团队往往会封装出若干非常适合他们内部使用的业务组件，虽然这些业务组件没啥通用性可言，但如果这些业务组件无法在低代码平台使用，就会大大降低他们的开发效率。再加上人人都有的敝帚自珍的情感，在这些团队中推广低代码平台的阻力将会巨大。反之，如果低代码编译器能通过某种方式学会使用这些业务组件，并将他们纳入到平台中使用，那推广起来就相对容易了。这样的情形在我推广 Awade 过程中，非常常见。</p>
+<h2 id="编译器-sdk">编译器 SDK</h2>
+<p>好了，前面做了这么多铺垫，这里终于可以来说说一个重要的知识点，如何提取编译器 SDK 了。我们前面花了九牛二虎之力，从架构上把编译器的教材分成了两层，其中有一个是抽象层，我把代码拎到一起：</p>
+<pre><code class="language-js">abstract class Property {
+  // 这是一个抽象函数，只有声明，无法实现
+  abstract script(): string;
+  
+  name: string = '';
+  value: string = '';
+  member: string = '';
+  property(): string {
+    // ...
+  }
+}
+abstract class SVD {
+  // 和Property类似，基类里不知道如何实现的方法，都只声明，不实现
+  abstract script(): string;
+  properties: Property[];
+  selector: string = '';
+  // 能在基类里实现的方法都尽量在基类提供实现，这样子类直接复用就好了
+  html(): string {
+    // ...
+  }
+}
+</code></pre>
+<p>这部分代码对任何已知和未知的组件来说，都是通用的。并且，任何要纳入到低代码平台的组件都需要继承这些基类，派生出描述具体某个组件如何使用的子类。</p>
+<p>那么这些子类应该由谁来实现呢？全部由平台团队来实现吗？业务团队能否参与进来？为了能让业务团队也参与进来实现这些子类，我们应该将这些基类代码从平台的代码仓库里独立出来，以 npm 包的形式发布出去。这样一来，平台团队也好，业务团队也罢，都可以通过 npm 拿到这个包，从而继承包里的基类来实现子类的开发了。</p>
+<p>没错，这样的一个 npm 包，就是低代码平台插件系统的 SDK 的一部分。这个包处于下图中蓝框中的“协议部分实现”这层中：</p>
+<p><img alt="" src="/assets/41aa4856faa81144897d4309.webp"/></p>
+<p>现在，再来看这张图，你会有更深的理解。编译器协议是抽象的，因为它只有一部分实现（参考前文的 Property 和 SVD 这两个抽象类），但抽象的基类完整地描述了生成代码会用到的所有 API 的定义。基于这份完整的 API 描述，我们就可以写出代码生成器的所有代码了，<strong>这份 API 描述就是图中所说的“编译器协议”</strong>。</p>
+<p>当然，此时的代码生成器是无法正确运行的，因为协议层中只实现了一部分函数，另一部分函数只有定义，没有实现。那么缺失的这部分实现由谁来补呢？这项工作可以由平台或业务团队任何一方来完成，平台团队负责实现内置组件，业务团队负责实现自定义组件。</p>
+<p>此外，SDK 还需要提供一个组件“教材”工厂，用来登记和生产各个组件的教材。教材工厂的实现比较简单，是一个典型的工厂模式，你可以参考这段代码：</p>
+<pre><code class="language-js">// 实际开发时就不会用“教材”这样的称谓了，awade将这部分命名为metadata
+class MetadataFactory {
+  // 用于登记组件教材，不熟悉TS的小伙伴，对Type&lt;SVD&gt;这个类型可能理解略费劲
+  // Type&lt;SVD&gt;这个类型代表着一个组件类（而非该类的实例）
+  register(selector: string, component: Type&lt;SVD&gt;): void;
+  // 用于获取组件教材类（而非组件实例），拿到组件类后，再new一下就可以得到实例
+  getMetadata(selector: string, rawSvd: object): Type&lt;SVD&gt;;
+}
+</code></pre>
+<p>这里你应该注意到，这个工厂将组件的 selector 作为组件的身份证了。把“教材”，即所有子类（JigsawTable / JigsawSelect / DataProperty / ColumnsProperty）都聚到另一个 npm 包，并调用工厂的 register 函数挨个在工厂里登记。</p>
+<p>不过，这里别忘了，我们还有一个组件集的 npm 包。把这些包都画到一个图上是这样的：</p>
+<p><img alt="" src="/assets/84449cc4d6254e59a59e345e.webp"/></p>
+<p>我们可以看到，“教材”、编辑器、代码生成器等模块都是低代码平台正常运行不可获取的重要部分，但图中它们三者之间却没有直接的耦合关系，相互隔离。这样的代码层次分明，职责明确，是一种非常好的关系结构：</p>
+<ul>
+<li>编辑器负责收集开发者的编排结果，并驱动代码生成器来生成代码；</li>
+<li>代码生成器则根据编辑器收集到的原始数据，从工厂中获取“教材”的实例，然后执行 script 函数获得代码；</li>
+<li>“教材”负责描述各个具体组件的代码应该如何生成。</li>
+</ul>
+<p>我们再看编辑器和组件（集）之间，你会发现它们之间没有任何关系，甚至连间接依赖都不存在。这非常违反直觉，是不是觉得很不可思议？编辑器的所见即所得功能，就是时时刻刻在动态渲染组件，但在代码的结构中，这两者之间却没有任何关系。</p>
+<p>我们千方百计地把组件和低代码核心模块编辑器分开的，根本目的就是为了达到下面这个图的效果：</p>
+<p><img alt="" src="/assets/35b1d1629be632259de8073d.webp"/></p>
+<p>这张图中，右边红框里的是业务团队自行定制的组件。你看，这不就是一个插件吗？左侧绿色框是内置组件集，它和右侧插件的结构是一致的，所以内置组件集的和插件提供的组件是平起平坐的，架构上，插件并不低人一等。</p>
+<h2 id="总结">总结</h2>
+<p>今天这讲，我们通过代码实例的演进，非常详细地说明了如何一步步解除低代码编辑器、代码生成器和组件三者之间的耦合关系。</p>
+<p>我们从一份给人类阅读的常见 API 手册出发，将它改造为具有结构化和指令式的特征的一份教材，这样做的目的是让教材更加适合计算机阅读。然后，针对组件的多个属性，我们抽取出了一个属性的基类 Property，把通用的代码提取到基类 Property 中。</p>
+<p>虽然组件属性基类并不知道如何生成代码，但我们做了一个非常重要的动作：在基类中定义了一个抽象的 script 函数，这个抽象函数的最大作用在于规定了组件属性的子类应该如何完成代码的生成。由此，虽然我们并没有完整实现组件属性基类，但是它却完整地定义了属性代码生成的流程。</p>
+<p>接下来，采用相同的方法，我们抽取出了 SVD 类作为组件的基类，并也定义了一个抽象函数，用于规定组件的子类该如何生成代码。</p>
+<p>到此，这一讲设定的目标就已经完成了，编辑器可以在基本无耦合的前提下调用组件的“教材”来生成正确的代码。但是我们并没有停下脚步，而是将这个方法进一步演进，做出了这个专栏迄今的第一个插件：<strong>业务组件</strong>。低代码编辑器在和业务组件完全没有耦合的情况下，通过插件，就可以知道如何正确地生成和渲染业务组件。而且，在这讲中，我们也首次实现了一条允许业务团队对通用型低代码平台做定制的通道。</p>
+<h2 id="思考题">思考题</h2>
+<p>你所在的团队有哪些功能适合内置到低代码平台作为通用组件来实现，哪些功能适合以成插件的形式集成到低代码平台中去？为什么？</p>
+<p>欢迎在留言区写下你的想法。我们下一讲再见。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

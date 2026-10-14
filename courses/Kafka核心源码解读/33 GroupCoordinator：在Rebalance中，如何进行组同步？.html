@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>33 GroupCoordinator：在Rebalance中，如何进行组同步？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/index.html">Kafka核心源码解读</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">42 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kafka核心源码解读</strong><ul><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E5%AF%BC%E8%AF%BB%20%E6%9E%84%E5%BB%BAKafka%E5%B7%A5%E7%A8%8B%E5%92%8C%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E3%80%81Scala%E8%AF%AD%E8%A8%80%E7%83%AD%E8%BA%AB.html">00 导读 构建Kafka工程和源码阅读环境、Scala语言热身</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E9%98%85%E8%AF%BB%E6%BA%90%E7%A0%81%EF%BC%8C%E9%80%90%E6%B8%90%E6%88%90%E4%BA%86%E8%81%8C%E4%B8%9A%E8%BF%9B%E9%98%B6%E9%81%93%E8%B7%AF%E4%B8%8A%E7%9A%84%E2%80%9C%E5%BF%85%E9%80%89%E9%A1%B9%E2%80%9D.html">00 开篇词  阅读源码，逐渐成了职业进阶道路上的“必选项”</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/00%20%E9%87%8D%E7%A3%85%E5%8A%A0%E9%A4%90%20%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8Scala%E8%AF%AD%E8%A8%80.html">00 重磅加餐 带你快速入门Scala语言</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/01%20%E6%97%A5%E5%BF%97%E6%AE%B5%EF%BC%9A%E4%BF%9D%E5%AD%98%E6%B6%88%E6%81%AF%E6%96%87%E4%BB%B6%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">01 日志段：保存消息文件的对象是怎么实现的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/02%20%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%97%A5%E5%BF%97%E7%A9%B6%E7%AB%9F%E6%98%AF%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BD%E6%97%A5%E5%BF%97%E6%AE%B5%E7%9A%84%EF%BC%9F.html">02 日志（上）：日志究竟是如何加载日志段的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/03%20%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82Log%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C.html">03 日志（下）：彻底搞懂Log对象的常见操作</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/04%20%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%94%B9%E8%BF%9B%E7%9A%84%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%E5%9C%A8Kafka%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BA%94%E7%94%A8.html">04 索引（上）：改进的二分查找算法在Kafka索引的应用</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/05%20%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E4%BD%8D%E7%A7%BB%E7%B4%A2%E5%BC%95%E5%92%8C%E6%97%B6%E9%97%B4%E6%88%B3%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">05 索引（下）：位移索引和时间戳索引的区别是什么？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/06%20%E8%AF%B7%E6%B1%82%E9%80%9A%E9%81%93%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0Kafka%E8%AF%B7%E6%B1%82%E9%98%9F%E5%88%97%EF%BC%9F.html">06 请求通道：如何实现Kafka请求队列？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/07%20SocketServer%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9AKafka%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E5%BA%94%E7%94%A8NIO%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E7%9A%84%EF%BC%9F.html">07 SocketServer（上）：Kafka到底是怎么应用NIO实现网络通信的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/08%20SocketServer%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E8%AF%B7%E6%B1%82%E8%BF%98%E8%A6%81%E5%8C%BA%E5%88%86%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%9F.html">08 SocketServer（中）：请求还要区分优先级？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/09%20SocketServer%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E5%85%A8%E6%B5%81%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html">09 SocketServer（下）：请求处理全流程源码分析</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/10%20KafkaApis%EF%BC%9AKafka%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E6%BA%90%E7%A0%81%E5%85%A5%E5%8F%A3%EF%BC%8C%E6%B2%A1%E6%9C%89%E4%B9%8B%E4%B8%80.html">10 KafkaApis：Kafka最重要的源码入口，没有之一</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/11%20Controller%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9AController%E9%83%BD%E4%BF%9D%E5%AD%98%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%9C%E8%A5%BF%EF%BC%9F%E6%9C%89%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81%EF%BC%9F.html">11 Controller元数据：Controller都保存有哪些东西？有几种状态？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/12%20ControllerChannelManager%EF%BC%9AController%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81%EF%BC%9F.html">12 ControllerChannelManager：Controller如何管理请求发送？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/13%20ControllerEventManager%EF%BC%9A%E5%8F%98%E8%BA%AB%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%90%8E%E7%9A%84Controller%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%BA%8B%E4%BB%B6%EF%BC%9F.html">13 ControllerEventManager：变身单线程后的Controller如何处理事件？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/14%20Controller%E9%80%89%E4%B8%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F.html">14 Controller选举是怎么实现的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/15%20%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Controller%E5%9C%A8Kafka%E9%9B%86%E7%BE%A4%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F.html">15 如何理解Controller在Kafka集群中的作用？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/16%20TopicDeletionManager%EF%BC%9A%20Topic%E6%98%AF%E6%80%8E%E4%B9%88%E8%A2%AB%E5%88%A0%E9%99%A4%E7%9A%84%EF%BC%9F.html">16 TopicDeletionManager： Topic是怎么被删除的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/17%20ReplicaStateMachine%EF%BC%9A%E6%8F%AD%E7%A7%98%E5%89%AF%E6%9C%AC%E7%8A%B6%E6%80%81%E6%9C%BA%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">17 ReplicaStateMachine：揭秘副本状态机实现原理</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/18%20PartitionStateMachine%EF%BC%9A%E5%88%86%E5%8C%BA%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F.html">18 PartitionStateMachine：分区状态转换如何实现？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/19%20TimingWheel%EF%BC%9A%E6%8E%A2%E7%A9%B6Kafka%E5%AE%9A%E6%97%B6%E5%99%A8%E8%83%8C%E5%90%8E%E7%9A%84%E9%AB%98%E6%95%88%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95.html">19 TimingWheel：探究Kafka定时器背后的高效时间轮算法</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/20%20DelayedOperation%EF%BC%9ABroker%E6%98%AF%E6%80%8E%E4%B9%88%E5%BB%B6%E6%97%B6%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84%EF%BC%9F.html">20 DelayedOperation：Broker是怎么延时处理请求的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/21%20AbstractFetcherThread%EF%BC%9A%E6%8B%89%E5%8F%96%E6%B6%88%E6%81%AF%E5%88%86%E5%87%A0%E6%AD%A5%EF%BC%9F.html">21 AbstractFetcherThread：拉取消息分几步？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/22%20ReplicaFetcherThread%EF%BC%9AFollower%E5%A6%82%E4%BD%95%E6%8B%89%E5%8F%96Leader%E6%B6%88%E6%81%AF%EF%BC%9F.html">22 ReplicaFetcherThread：Follower如何拉取Leader消息？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/23%20ReplicaManager%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%BF%85%E9%A1%BB%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E7%B1%BB%E5%AE%9A%E4%B9%89%E5%92%8C%E6%A0%B8%E5%BF%83%E5%AD%97%E6%AE%B5.html">23 ReplicaManager（上）：必须要掌握的副本管理类定义和核心字段</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/24%20ReplicaManager%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9A%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%AF%BB%E5%86%99%E5%89%AF%E6%9C%AC%E7%9A%84%EF%BC%9F.html">24 ReplicaManager（中）：副本管理器是如何读写副本的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/25%20ReplicaManager%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%89%AF%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%89%AF%E6%9C%AC%E7%9A%84%EF%BC%9F.html">25 ReplicaManager（下）：副本管理器是如何管理副本的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/26%20MetadataCache%EF%BC%9ABroker%E6%98%AF%E6%80%8E%E4%B9%88%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0%E5%85%83%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98%E7%9A%84%EF%BC%9F.html">26 MetadataCache：Broker是怎么异步更新元数据缓存的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/27%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9F.html">27 消费者组元数据（上）：消费者组都有哪些元数据？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/28%20%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9AKafka%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E8%BF%99%E4%BA%9B%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9F.html">28 消费者组元数据（下）：Kafka如何管理这些元数据？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/29%20GroupMetadataManager%EF%BC%9A%E7%BB%84%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%99%A8%E6%98%AF%E4%B8%AA%E4%BB%80%E4%B9%88%E4%B8%9C%E8%A5%BF%EF%BC%9F.html">29 GroupMetadataManager：组元数据管理器是个什么东西？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/30%20GroupMetadataManager%EF%BC%9A%E4%BD%8D%E7%A7%BB%E4%B8%BB%E9%A2%98%E4%BF%9D%E5%AD%98%E7%9A%84%E5%8F%AA%E6%98%AF%E4%BD%8D%E7%A7%BB%E5%90%97%EF%BC%9F.html">30 GroupMetadataManager：位移主题保存的只是位移吗？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/31%20GroupMetadataManager%EF%BC%9A%E6%9F%A5%E8%AF%A2%E4%BD%8D%E7%A7%BB%E6%97%B6%EF%BC%8C%E4%B8%8D%E7%94%A8%E8%AF%BB%E5%8F%96%E4%BD%8D%E7%A7%BB%E4%B8%BB%E9%A2%98%EF%BC%9F.html">31 GroupMetadataManager：查询位移时，不用读取位移主题？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/32%20GroupCoordinator%EF%BC%9A%E5%9C%A8Rebalance%E4%B8%AD%EF%BC%8CCoordinator%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%88%90%E5%91%98%E5%85%A5%E7%BB%84%EF%BC%9F.html">32 GroupCoordinator：在Rebalance中，Coordinator如何处理成员入组？</a></li><li><a class="active" aria-current="page" href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/33%20GroupCoordinator%EF%BC%9A%E5%9C%A8Rebalance%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%BB%84%E5%90%8C%E6%AD%A5%EF%BC%9F.html">33 GroupCoordinator：在Rebalance中，如何进行组同步？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%B8%80%EF%BC%89%E7%BB%8F%E5%85%B8%E7%9A%84Kafka%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">特别放送（一）经典的Kafka学习资料有哪些？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%B8%89%EF%BC%89%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%BA%A6%E8%BF%87%E6%97%A5%E5%B8%B8%E4%B8%80%E5%A4%A9%E7%9A%84%EF%BC%9F.html">特别放送（三）我是怎么度过日常一天的？</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%BA%8C%EF%BC%89%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%8F%82%E4%B8%8E%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E7%9A%84%E5%85%A8%E9%83%A8%E6%B5%81%E7%A8%8B.html">特别放送（二）一篇文章带你了解参与开源社区的全部流程</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E4%BA%94%EF%BC%89%20Kafka%20%E7%A4%BE%E5%8C%BA%E7%9A%84%E9%87%8D%E7%A3%85%E5%8A%9F%E8%83%BD%EF%BC%9A%E7%A7%BB%E9%99%A4%20ZooKeeper%20%E4%BE%9D%E8%B5%96.html">特别放送（五） Kafka 社区的重磅功能：移除 ZooKeeper 依赖</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%EF%BC%88%E5%9B%9B%EF%BC%8920%E9%81%93%E7%BB%8F%E5%85%B8%E7%9A%84Kafka%E9%9D%A2%E8%AF%95%E9%A2%98%E8%AF%A6%E8%A7%A3.html">特别放送（四）20道经典的Kafka面试题详解</a></li><li><a href="/courses/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%88%91%E4%BB%AC%E6%89%8D%E5%88%9A%E4%B8%8A%E8%B7%AF%E5%91%A2.html">结束语 源码学习，我们才刚上路呢</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kafka%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/33%20GroupCoordinator%EF%BC%9A%E5%9C%A8Rebalance%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%BB%84%E5%90%8C%E6%AD%A5%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="33 GroupCoordinator：在Rebalance中，如何进行组同步？" id="title">33 GroupCoordinator：在Rebalance中，如何进行组同步？</h1>
+<div><p>你好，我是胡夕。今天，我们继续学习消费者组Rebalance流程，这节课我们重点学习这个流程的第2大步，也就是组同步。</p>
+<p>组同步，也就是成员向Coordinator发送SyncGroupRequest请求，等待Coordinator发送分配方案。在GroupCoordinator类中，负责处理这个请求的入口方法就是handleSyncGroup。它进一步调用doSyncGroup方法完成组同步的逻辑。后者除了给成员下发分配方案之外，还需要在元数据缓存中注册组消息，以及把组状态变更为Stable。一旦完成了组同步操作，Rebalance宣告结束，消费者组开始正常工作。</p>
+<p>接下来，我们就来具体学习下组同步流程的实现逻辑。我们先从顶层的入口方法handleSyncGroup方法开始学习，<strong>该方法被KafkaApis类的handleSyncGroupRequest方法调用，用于处理消费者组成员发送的SyncGroupRequest请求</strong>。顺着这个入口方法，我们会不断深入，下沉到具体实现组同步逻辑的私有化方法doSyncGroup。</p>
+<h2 id="handlesyncgroup方法">handleSyncGroup方法</h2>
+<p>我们从handleSyncGroup的方法签名开始学习，代码如下：</p>
+<pre><code>def handleSyncGroup(
+  groupId: String,  // 消费者组名
+  generation: Int,  // 消费者组Generation号
+  memberId: String,  // 消费者组成员ID
+  protocolType: Option[String],  // 协议类型
+  protocolName: Option[String],  // 分区消费分配策略名称
+  groupInstanceId: Option[String],  // 静态成员Instance ID
+  groupAssignment: Map[String, Array[Byte]],  // 按照成员分组的分配方案
+  responseCallback: SyncCallback  // 回调函数
+  ): Unit = {
+  ......
+}
+</code></pre>
+<p>该方法总共定义了8个参数，你可以看下注释，了解它们的含义，我重点介绍6个比较关键的参数。</p>
+<ul>
+<li><strong>groupId</strong>：消费者组名，标识这个成员属于哪个消费者组。</li>
+<li><strong>generation</strong>：消费者组Generation号。Generation类似于任期的概念，标识了Coordinator负责为该消费者组处理的Rebalance次数。每当有新的Rebalance开启时，Generation都会自动加1。</li>
+<li><strong>memberId</strong>：消费者组成员ID。该字段由Coordinator根据一定的规则自动生成。具体的规则上节课我们已经学过了，我就不多说了。总体而言，成员ID的值不是由你直接指定的，但是你可以通过client.id参数，间接影响该字段的取值。</li>
+<li><strong>protocolType</strong>：标识协议类型的字段，这个字段可能的取值有两个：consumer和connect。对于普通的消费者组而言，这个字段的取值就是consumer，该字段是Option类型，因此，实际的取值是Some(“consumer”)；Kafka Connect组件中也会用到消费者组机制，那里的消费者组的取值就是connect。</li>
+<li><strong>protocolName</strong>：消费者组选定的分区消费分配策略名称。这里的选择方法，就是我们之前学到的GroupMetadata.selectProtocol方法。</li>
+<li><strong>groupAssignment</strong>：按照成员ID分组的分配方案。需要注意的是，<strong>只有Leader成员发送的SyncGroupRequest请求，才包含这个方案</strong>，因此，Coordinator在处理Leader成员的请求时，该字段才有值。</li>
+</ul>
+<p>你可能已经注意到了，protocolType和protocolName都是Option类型，这说明，它们的取值可能是None，即表示没有值。这是为什么呢？</p>
+<p>目前，这两个字段的取值，其实都是Coordinator帮助消费者组确定的，也就是在Rebalance流程的上一步加入组中确定的。</p>
+<p>如果成员成功加入组，那么，Coordinator会给这两个字段赋上正确的值，并封装进JoinGroupRequest的Response里，发送给消费者程序。一旦消费者拿到了Response中的数据，就提取出这两个字段的值，封装进SyncGroupRequest请求中，再次发送给Coordinator。</p>
+<p>如果成员没有成功加入组，那么，Coordinator会将这两个字段赋值成None，加到Response中。因此，在这里的handleSyncGroup方法中，它们的类型就是Option。</p>
+<p>说完了handleSyncGroup的方法签名，我们看下它的代码：</p>
+<pre><code>// 验证消费者状态及合法性 
+validateGroupStatus(groupId, ApiKeys.SYNC_GROUP) match {
+  // 如果未通过合法性检查，且错误原因是Coordinator正在加载
+  // 那么，封装REBALANCE_IN_PROGRESS异常，并调用回调函数返回
+  case Some(error) if error == Errors.COORDINATOR_LOAD_IN_PROGRESS =&gt;
+    responseCallback(SyncGroupResult(Errors.REBALANCE_IN_PROGRESS))
+  // 如果是其它错误，则封装对应错误，并调用回调函数返回
+  case Some(error) =&gt; responseCallback(SyncGroupResult(error))
+  case None =&gt;
+    // 获取消费者组元数据
+    groupManager.getGroup(groupId) match {
+      // 如果未找到，则封装UNKNOWN_MEMBER_ID异常，并调用回调函数返回
+      case None =&gt; 
+        responseCallback(SyncGroupResult(Errors.UNKNOWN_MEMBER_ID))
+      // 如果找到的话，则调用doSyncGroup方法执行组同步任务
+      case Some(group) =&gt; doSyncGroup(
+        group, generation, memberId, protocolType, protocolName,
+        groupInstanceId, groupAssignment, responseCallback)
+    }
+}
+</code></pre>
+<p>为了方便你理解，我画了一张流程图来说明此方法的主体逻辑。</p>
+<p><img alt="" src="/assets/68d074f1873e9cfd24b39e28.jpg"/></p>
+<p>handleSyncGroup方法首先会调用上一节课我们学习过的validateGroupStatus方法，校验消费者组状态及合法性。这些检查项包括：</p>
+<ol>
+<li>消费者组名不能为空；</li>
+<li>Coordinator组件处于运行状态；</li>
+<li>Coordinator组件当前没有执行加载过程；</li>
+<li>SyncGroupRequest请求发送给了正确的Coordinator组件。</li>
+</ol>
+<p>前两个检查项很容易理解，我重点解释一下最后两项的含义。</p>
+<p>当Coordinator变更到其他Broker上时，需要从内部位移主题中读取消息数据，并填充到内存上的消费者组元数据缓存，这就是所谓的加载。</p>
+<ul>
+<li>如果Coordinator变更了，那么，发送给老Coordinator所在Broker的请求就失效了，因为它没有通过第4个检查项，即发送给正确的Coordinator；</li>
+<li>如果发送给了正确的Coordinator，但此时Coordinator正在执行加载过程，那么，它就没有通过第3个检查项，因为Coordinator尚不能对外提供服务，要等加载完成之后才可以。</li>
+</ul>
+<p>代码对消费者组依次执行上面这4项校验，一旦发现有项目校验失败，validateGroupStatus方法就会将检查失败的原因作为结果返回。如果是因为Coordinator正在执行加载，就意味着<strong>本次Rebalance的所有状态都丢失了</strong>。这里的状态，指的是消费者组下的成员信息。那么，此时最安全的做法，是<strong>让消费者组重新从加入组开始</strong>，因此，代码会封装REBALANCE_IN_PROGRESS异常，然后调用回调函数返回。一旦消费者组成员接收到此异常，就会知道，它至少找到了正确的Coordinator，只需要重新开启Rebalance，而不需要在开启Rebalance之前，再大费周章地去定位Coordinator组件了。但如果是其它错误，就封装该错误，然后调用回调函数返回。</p>
+<p>倘若消费者组通过了以上校验，那么，代码就会获取该消费者组的元数据信息。如果找不到对应的元数据，就封装UNKNOWN_MEMBER_ID异常，之后调用回调函数返回；如果找到了元数据信息，就调用doSyncGroup方法执行真正的组同步逻辑。</p>
+<p>显然，接下来我们应该学习doSyncGroup方法的源码了，这才是真正实现组同步功能的地方。</p>
+<h2 id="dosyncgroup方法">doSyncGroup方法</h2>
+<p>doSyncGroup方法接收的输入参数，与它的调用方法handleSyncGroup如出一辙，所以这里我就不再展开讲了，我们重点关注一下它的源码实现。</p>
+<p>鉴于它的代码很长，我把它拆解成两个部分，并配以流程图进行介绍。</p>
+<ul>
+<li>第1部分：主要<strong>对消费者组做各种校验</strong>，如果没有通过校验，就封装对应的异常给回调函数；</li>
+<li>第2部分：<strong>根据不同的消费者组状态选择不同的执行逻辑</strong>。你需要特别关注一下，在CompletingRebalance状态下，代码是如何实现组同步的。</li>
+</ul>
+<p>我先给出第1部分的流程图，你可以先看一下，对这个流程有个整体的感知。</p>
+<p><img alt="" src="/assets/ba6a938ad87f525e99a1d882.jpg"/></p>
+<p>下面，我们来看这部分的代码：</p>
+<pre><code>if (group.is(Dead)) {
+ responseCallback(
+   SyncGroupResult(Errors.COORDINATOR_NOT_AVAILABLE))
+} else if (group.isStaticMemberFenced(memberId, groupInstanceId, "sync-group")) {
+  responseCallback(SyncGroupResult(Errors.FENCED_INSTANCE_ID))
+} else if (!group.has(memberId)) {
+  responseCallback(SyncGroupResult(Errors.UNKNOWN_MEMBER_ID))
+} else if (generationId != group.generationId) {
+  responseCallback(SyncGroupResult(Errors.ILLEGAL_GENERATION))
+} else if (protocolType.isDefined &amp;&amp; !group.protocolType.contains(protocolType.get)) {
+ responseCallback(SyncGroupResult(Errors.INCONSISTENT_GROUP_PROTOCOL))
+} else if (protocolName.isDefined &amp;&amp; !group.protocolName.contains(protocolName.get)) {
+ responseCallback(SyncGroupResult(Errors.INCONSISTENT_GROUP_PROTOCOL))
+} else {
+  // 第2部分源码......
+}
+</code></pre>
+<p>可以看到，代码非常工整，全是if-else类型的判断。</p>
+<p><strong>首先</strong>，这部分代码会判断消费者组的状态是否是Dead。如果是的话，就说明该组的元数据信息已经被其他线程从Coordinator中移除了，这很可能是因为Coordinator发生了变更。此时，最佳的做法是<strong>拒绝该成员的组同步操作</strong>，封装COORDINATOR_NOT_AVAILABLE异常，显式告知它去寻找最新Coordinator所在的Broker节点，然后再尝试重新加入组。</p>
+<p>接下来的isStaticMemberFenced方法判断是有关静态成员的，我们可以不用理会。</p>
+<p><strong>之后</strong>，代码判断memberId字段标识的成员是否属于这个消费者组。如果不属于的话，就封装UNKNOWN_MEMBER_ID异常，并调用回调函数返回；如果属于的话，则继续下面的判断。</p>
+<p><strong>再之后</strong>，代码<strong>判断成员的Generation是否和消费者组的相同</strong>。如果不同的话，则封装ILLEGAL_GENERATION异常给回调函数；如果相同的话，则继续下面的判断。</p>
+<p>接下来，代码<strong>判断成员和消费者组的协议类型是否一致</strong>。如果不一致，则封装INCONSISTENT_GROUP_PROTOCOL异常给回调函数；如果一致，就进行下一步。</p>
+<p><strong>最后</strong>，判断<strong>成员和消费者组的分区消费分配策略是否一致</strong>。如果不一致，同样封装INCONSISTENT_GROUP_PROTOCOL异常给回调函数。</p>
+<p>如果这些都一致，则顺利进入到第2部分。在开始之前，我依然用一张图来展示一下这里的实现逻辑。</p>
+<p><img alt="" src="/assets/c367e96b6d24e628a1ae4452.jpg"/></p>
+<p>进入到这部分之后，代码要做什么事情，完全<strong>取决于消费者组的当前状态</strong>。如果消费者组处于CompletingRebalance状态，这部分代码要做的事情就比较复杂，我们一会儿再说，现在先看除了这个状态之外的逻辑代码。</p>
+<pre><code>group.currentState match {
+  case Empty =&gt;
+    // 封装UNKNOWN_MEMBER_ID异常，调用回调函数返回
+    responseCallback(SyncGroupResult(Errors.UNKNOWN_MEMBER_ID))
+  case PreparingRebalance =&gt;
+    // 封装REBALANCE_IN_PROGRESS异常，调用回调函数返回
+    responseCallback(SyncGroupResult(Errors.REBALANCE_IN_PROGRESS))
+  case CompletingRebalance =&gt;
+    // 下面详细展开......
+  case Stable =&gt;
+    // 获取消费者组成员元数据
+    val memberMetadata = group.get(memberId)
+    // 封装组协议类型、分配策略、成员分配方案，调用回调函数返回
+    responseCallback(SyncGroupResult(group.protocolType, group.protocolName, memberMetadata.assignment, Errors.NONE))
+    // 设定成员下次心跳时间
+    completeAndScheduleNextHeartbeatExpiration(group, group.get(memberId))
+  case Dead =&gt;
+    // 抛出异常
+    throw new IllegalStateException(s"Reached unexpected condition for Dead group ${group.groupId}")
+}
+</code></pre>
+<p>如果消费者组的当前状态是Empty或PreparingRebalance，那么，代码会封装对应的异常给回调函数，供其调用。</p>
+<p>如果是Stable状态，则说明，此时消费者组已处于正常工作状态，无需进行组同步的操作。因此，在这种情况下，简单返回消费者组当前的分配方案给回调函数，供它后面发送给消费者组成员即可。</p>
+<p>如果是Dead状态，那就说明，这是一个异常的情况了，因为理论上，不应该为处于Dead状态的组执行组同步，因此，代码只能选择抛出IllegalStateException异常，让上层方法处理。</p>
+<p>如果这些状态都不是，那么，消费者组就只能处于CompletingRebalance状态，这也是执行组同步操作时消费者组最有可能处于的状态。因此，这部分的逻辑要复杂一些，我们看下代码：</p>
+<pre><code>// 为该消费者组成员设置组同步回调函数
+group.get(memberId).awaitingSyncCallback = responseCallback
+// 组Leader成员发送的SyncGroupRequest请求需要特殊处理
+if (group.isLeader(memberId)) {
+  info(s"Assignment received from leader for group ${group.groupId} for generation ${group.generationId}")
+  // 如果有成员没有被分配任何消费方案，则创建一个空的方案赋给它
+  val missing = group.allMembers.diff(groupAssignment.keySet)
+  val assignment = groupAssignment ++ missing.map(_ -&gt; Array.empty[Byte]).toMap
+
+  if (missing.nonEmpty) {
+    warn(s"Setting empty assignments for members $missing of ${group.groupId} for generation ${group.generationId}")
+  }
+  // 把消费者组信息保存在消费者组元数据中，并且将其写入到内部位移主题
+  groupManager.storeGroup(group, assignment, (error: Errors) =&gt; {
+    group.inLock {
+      // 如果组状态是CompletingRebalance以及成员和组的generationId相同
+      if (group.is(CompletingRebalance) &amp;&amp; generationId == group.generationId) {
+        // 如果有错误
+        if (error != Errors.NONE) {
+          // 清空分配方案并发送给所有成员
+          resetAndPropagateAssignmentError(group, error)
+          // 准备开启新一轮的Rebalance
+          maybePrepareRebalance(group, s"error when storing group assignment during SyncGroup (member: $memberId)")
+        // 如果没错误
+        } else {
+          // 在消费者组元数据中保存分配方案并发送给所有成员
+          setAndPropagateAssignment(group, assignment)
+          // 变更消费者组状态到Stable
+          group.transitionTo(Stable)
+        }
+      }
+    }
+  })
+  groupCompletedRebalanceSensor.record()
+}
+</code></pre>
+<p>第1步，为该消费者组成员设置组同步回调函数。我们总说回调函数，其实它的含义很简单，也就是将传递给回调函数的数据，通过Response的方式发送给消费者组成员。</p>
+<p>第2步，判断当前成员是否是消费者组的Leader成员。如果不是Leader成员，方法直接结束，因为，只有Leader成员的groupAssignment字段才携带了分配方案，其他成员是没有分配方案的；如果是Leader成员，则进入到下一步。</p>
+<p>第3步，为没有分配到任何分区的成员创建一个空的分配方案，并赋值给这些成员。这一步的主要目的，是构造一个统一格式的分配方案字段assignment。</p>
+<p>第4步，调用storeGroup方法，保存消费者组信息到消费者组元数据，同时写入到内部位移主题中。一旦完成这些动作，则进入到下一步。</p>
+<p>第5步，在组状态是CompletingRebalance，而且成员和组的Generation ID相同的情况下，就判断一下刚刚的storeGroup操作过程中是否出现过错误：</p>
+<ul>
+<li>如果有错误，则清空分配方案并发送给所有成员，同时准备开启新一轮的Rebalance；</li>
+<li>如果没有错误，则在消费者组元数据中保存分配方案，然后发送给所有成员，并将消费者组状态变更到Stable。</li>
+</ul>
+<p>倘若组状态不是CompletingRebalance，或者是成员和组的Generation ID不相同，这就说明，消费者组可能开启了新一轮的Rebalance，那么，此时就不能继续给成员发送分配方案。</p>
+<p>至此，CompletingRebalance状态下的组同步操作完成。总结一下，组同步操作完成了以下3件事情：</p>
+<ol>
+<li>将包含组成员分配方案的消费者组元数据，添加到消费者组元数据缓存以及内部位移主题中；</li>
+<li>将分配方案通过SyncGroupRequest响应的方式，下发给组下所有成员。</li>
+<li>将消费者组状态变更到Stable。</li>
+</ol>
+<p>我建议你对照着代码，自行寻找并阅读一下完成这3件事情的源码，这不仅有助于你复习下今天所学的内容，还可以帮你加深对源码的理解。阅读的时候，你思考一下，这些代码的含义是否真的如我所说。如果你有不一样的理解，欢迎写在留言区，我们可以开放式讨论。</p>
+<h2 id="总结">总结</h2>
+<p>今天，我们重点学习了Rebalance流程的第2步，也就是组同步。至此，关于Rebalance的完整流程，我们就全部学完了。</p>
+<p>Rebalance流程是Kafka提供的一个非常关键的消费者组功能。由于它非常重要，所以，社区在持续地对它进行着改进，包括引入增量式的Rebalance以及静态成员等。我们在这两节课学的Rebalance流程，是理解这些高级功能的基础。如果你不清楚Rebalance过程中的这些步骤都是做什么的，你就无法深入地掌握增量式Rebalance或静态成员机制所做的事情。</p>
+<p>因此，我建议你结合上节课的内容，好好学习一下消费者组的Rebalance，彻底弄明白一个消费者组成员是如何参与其中并最终完成Rebalance过程的。</p>
+<p>我们来回顾一下这节课的重点。</p>
+<ul>
+<li>组同步：成员向Coordinator发送SyncGroupRequest请求以获取分配方案。</li>
+<li>handleSyncGroup方法：接收KafkaApis发来的SyncGroupRequest请求体数据，执行组同步逻辑。</li>
+<li>doSyncGroup方法：真正执行组同步逻辑的方法，执行组元数据保存、分配方案下发以及状态变更操作。</li>
+</ul>
+<p><img alt="" src="/assets/92662b9b07b11da5479cf5cb.jpg"/></p>
+<p>讲到这里，Coordinator组件的源码，我就介绍完了。在这个模块中，我们基本上还是践行“自上而下+自下而上”的学习方式。我们先从最低层次的消费者组元数据类开始学习，逐渐上浮到它的管理器类GroupMetadataManager类以及顶层类GroupCoordinator类。接着，在学习Rebalance流程时，我们反其道而行之，先从GroupCoordinator类的入口方法进行拆解，又逐渐下沉到GroupMetadataManager和更底层的GroupMetadata以及MemberMetadata。</p>
+<p>如果你追随着课程的脚步一路走来，你就会发现，我经常采用这种方式讲解源码。我希望，你在日后的源码学习中，也可以多尝试运用这种方法。所谓择日不如撞日，我今天就给你推荐一个课后践行此道的绝佳例子。</p>
+<p>我建议你去阅读下clients工程中的实现消息、消息批次以及消息集合部分的源码，也就是Record、RecordBatch和Records这些接口和类的代码，去反复实践“自上而下”和“自下而上”这两种阅读方法。</p>
+<p>其实，这种方式不只适用于Kafka源码，在阅读其他框架的源码时，也可以采用这种方式。希望你可以不断总结经验，最终提炼出一套适合自己的学习模式。</p>
+<h2 id="课后讨论">课后讨论</h2>
+<p>Coordinator不会将所有消费者组的所有成员的分配方案下发给单个成员，这就是说，成员A看不到成员B的分区消费分配方案。那么，你能找出来，源码中的哪行语句做了这件事情吗？</p>
+<p>欢迎在留言区写下你的思考和答案，跟我交流讨论，也欢迎你把今天的内容分享给你的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

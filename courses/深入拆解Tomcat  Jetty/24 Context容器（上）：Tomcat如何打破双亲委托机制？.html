@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>24 Context容器（上）：Tomcat如何打破双亲委托机制？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/index.html">深入拆解Tomcat  Jetty</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">44 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入拆解Tomcat  Jetty</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20Java%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%88%90%E9%95%BF%EF%BC%9F.html">00 开篇词 Java程序员如何快速成长？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/01%20Web%E5%AE%B9%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84.html">01 Web容器学习路径</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/02%20HTTP%E5%8D%8F%E8%AE%AE%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A.html">02 HTTP协议必知必会</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/03%20%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84Servlet%E8%A7%84%E8%8C%83%E5%92%8CServlet%E5%AE%B9%E5%99%A8.html">03 你应该知道的Servlet规范和Servlet容器</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/04%20%E5%AE%9E%E6%88%98%EF%BC%9A%E7%BA%AF%E6%89%8B%E5%B7%A5%E6%89%93%E9%80%A0%E5%92%8C%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AAServlet.html">04 实战：纯手工打造和运行一个Servlet</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/05%20Tomcat%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%C2%A0%E8%BF%9E%E6%8E%A5%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F.html">05 Tomcat系统架构（上）： 连接器是如何设计的？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/06%20Tomcat%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E8%81%8A%E8%81%8A%E5%A4%9A%E5%B1%82%E5%AE%B9%E5%99%A8%E7%9A%84%E8%AE%BE%E8%AE%A1.html">06 Tomcat系统架构（下）：聊聊多层容器的设计</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/07%20Tomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%94%AE%E5%BC%8F%E5%90%AF%E5%81%9C%EF%BC%9F.html">07 Tomcat如何实现一键式启停？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/08%20Tomcat%E7%9A%84%E2%80%9C%E9%AB%98%E5%B1%82%E4%BB%AC%E2%80%9D%E9%83%BD%E8%B4%9F%E8%B4%A3%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F.html">08 Tomcat的“高层们”都负责做什么？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/09%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E6%9E%B6%E6%9E%84%E7%89%B9%E7%82%B9%E4%B9%8BConnector%E7%BB%84%E4%BB%B6.html">09 比较：Jetty架构特点之Connector组件</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/10%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E6%9E%B6%E6%9E%84%E7%89%B9%E7%82%B9%E4%B9%8BHandler%E7%BB%84%E4%BB%B6.html">10 比较：Jetty架构特点之Handler组件</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/11%20%E6%80%BB%E7%BB%93%EF%BC%9A%E4%BB%8ETomcat%E5%92%8CJetty%E4%B8%AD%E6%8F%90%E7%82%BC%E7%BB%84%E4%BB%B6%E5%8C%96%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83.html">11 总结：从Tomcat和Jetty中提炼组件化设计规范</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/12%20%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BC%98%E5%8C%96%E5%B9%B6%E6%8F%90%E9%AB%98Tomcat%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6.html">12 实战：优化并提高Tomcat启动速度</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/13%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%881%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E6%BA%90%E7%A0%81%EF%BC%9F.html">13 热点问题答疑（1）：如何学习源码？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/14%20NioEndpoint%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%9D%9E%E9%98%BB%E5%A1%9EI_O%EF%BC%9F.html">14 NioEndpoint组件：Tomcat如何实现非阻塞I_O？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/15%20Nio2Endpoint%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5I_O%EF%BC%9F.html">15 Nio2Endpoint组件：Tomcat如何实现异步I_O？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/16%20AprEndpoint%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%20APR%E6%8F%90%E9%AB%98I_O%E6%80%A7%E8%83%BD%E7%9A%84%E7%A7%98%E5%AF%86.html">16 AprEndpoint组件：Tomcat APR提高I_O性能的秘密</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/17%20Executor%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%89%A9%E5%B1%95Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F.html">17 Executor组件：Tomcat如何扩展Java线程池？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/18%20%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81WebSocket%EF%BC%9F.html">18 新特性：Tomcat如何支持WebSocket？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/19%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E7%9A%84%E7%BA%BF%E7%A8%8B%E7%AD%96%E7%95%A5EatWhatYouKill.html">19 比较：Jetty的线程策略EatWhatYouKill</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/20%20%E6%80%BB%E7%BB%93%EF%BC%9ATomcat%E5%92%8CJetty%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF.html">20 总结：Tomcat和Jetty中的对象池技术</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/21%20%E6%80%BB%E7%BB%93%EF%BC%9ATomcat%E5%92%8CJetty%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E3%80%81%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8B%E9%81%93.html">21 总结：Tomcat和Jetty的高性能、高并发之道</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/22%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%882%EF%BC%89%EF%BC%9A%E5%86%85%E6%A0%B8%E5%A6%82%E4%BD%95%E9%98%BB%E5%A1%9E%E4%B8%8E%E5%94%A4%E9%86%92%E8%BF%9B%E7%A8%8B%EF%BC%9F.html">22 热点问题答疑（2）：内核如何阻塞与唤醒进程？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/23%20Host%E5%AE%B9%E5%99%A8%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%83%AD%E9%83%A8%E7%BD%B2%E5%92%8C%E7%83%AD%E5%8A%A0%E8%BD%BD%EF%BC%9F.html">23 Host容器：Tomcat如何实现热部署和热加载？</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/24%20Context%E5%AE%B9%E5%99%A8%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%9C%BA%E5%88%B6%EF%BC%9F.html">24 Context容器（上）：Tomcat如何打破双亲委托机制？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/25%20Context%E5%AE%B9%E5%99%A8%EF%BC%88%E4%B8%AD%EF%BC%89%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E9%9A%94%E7%A6%BBWeb%E5%BA%94%E7%94%A8%EF%BC%9F.html">25 Context容器（中）：Tomcat如何隔离Web应用？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/26%20Context%E5%AE%B9%E5%99%A8%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0Servlet%E8%A7%84%E8%8C%83%EF%BC%9F.html">26 Context容器（下）：Tomcat如何实现Servlet规范？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/27%20%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E5%BC%82%E6%AD%A5Servlet%EF%BC%9F.html">27 新特性：Tomcat如何支持异步Servlet？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/28%20%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9ASpring%20Boot%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8C%E5%BC%8F%E7%9A%84Tomcat%E5%92%8CJetty%EF%BC%9F.html">28 新特性：Spring Boot如何使用内嵌式的Tomcat和Jetty？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/29%20%E6%AF%94%E8%BE%83%EF%BC%9AJetty%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%85%B7%E6%9C%89%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF%E7%9A%84%E8%B4%A3%E4%BB%BB%E9%93%BE%EF%BC%9F.html">29 比较：Jetty如何实现具有上下文信息的责任链？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/30%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%883%EF%BC%89%EF%BC%9ASpring%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">30 热点问题答疑（3）：Spring框架中的设计模式</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/31%20Logger%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%8F%8A%E5%AE%9E%E6%88%98.html">31 Logger组件：Tomcat的日志框架及实战</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/32%20Manager%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E7%9A%84Session%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90.html">32 Manager组件：Tomcat的Session管理机制解析</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/33%20Cluster%E7%BB%84%E4%BB%B6%EF%BC%9ATomcat%E7%9A%84%E9%9B%86%E7%BE%A4%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86.html">33 Cluster组件：Tomcat的集群通信原理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/34%20JVM%20GC%E5%8E%9F%E7%90%86%E5%8F%8A%E8%B0%83%E4%BC%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF.html">34 JVM GC原理及调优的基本思路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/35%20%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7Tomcat%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F.html">35 如何监控Tomcat的性能？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/36%20Tomcat%20I_O%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%B9%B6%E5%8F%91%E8%B0%83%E4%BC%98.html">36 Tomcat I_O和线程池的并发调优</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/37%20Tomcat%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90%E5%8F%8A%E8%B0%83%E4%BC%98.html">37 Tomcat内存溢出的原因分析及调优</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/38%20Tomcat%E6%8B%92%E7%BB%9D%E8%BF%9E%E6%8E%A5%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90%E5%8F%8A%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96.html">38 Tomcat拒绝连接原因分析及网络优化</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/39%20Tomcat%E8%BF%9B%E7%A8%8B%E5%8D%A0%E7%94%A8CPU%E8%BF%87%E9%AB%98%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">39 Tomcat进程占用CPU过高怎么办？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/40%20%E8%B0%88%E8%B0%88Jetty%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E7%9A%84%E6%80%9D%E8%B7%AF.html">40 谈谈Jetty性能调优的思路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/41%20%E7%83%AD%E7%82%B9%E9%97%AE%E9%A2%98%E7%AD%94%E7%96%91%EF%BC%884%EF%BC%89%EF%BC%9A%20Tomcat%E5%92%8CJetty%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%EF%BC%9F.html">41 热点问题答疑（4）： Tomcat和Jetty有哪些不同？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/%E7%89%B9%E5%88%AB%E6%94%BE%E9%80%81%20%E5%A6%82%E4%BD%95%E6%8C%81%E7%BB%AD%E4%BF%9D%E6%8C%81%E5%AF%B9%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%85%B4%E8%B6%A3%EF%BC%9F.html">特别放送 如何持续保持对学习的兴趣？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E9%9D%99%E4%B8%8B%E5%BF%83%E6%9D%A5%EF%BC%8C%E5%93%81%E5%91%B3%E7%BB%8F%E5%85%B8.html">结束语 静下心来，品味经典</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E6%8B%86%E8%A7%A3Tomcat%20%20Jetty/24%20Context%E5%AE%B9%E5%99%A8%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9ATomcat%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%9C%BA%E5%88%B6%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="24 Context容器（上）：Tomcat如何打破双亲委托机制？" id="title">24 Context容器（上）：Tomcat如何打破双亲委托机制？</h1>
+<div><p>相信我们平时在工作中都遇到过ClassNotFound异常，这个异常表示JVM在尝试加载某个类的时候失败了。想要解决这个问题，首先你需要知道什么是类加载，JVM是如何加载类的，以及为什么会出现ClassNotFound异常？弄懂上面这些问题之后，我们接着要思考Tomcat作为Web容器，它是如何加载和管理Web应用下的Servlet呢？</p>
+<p>Tomcat正是通过Context组件来加载管理Web应用的，所以今天我会详细分析Tomcat的类加载机制。但在这之前，我们有必要预习一下JVM的类加载机制，我会先回答一下一开始抛出来的问题，接着再谈谈Tomcat的类加载器如何打破Java的双亲委托机制。</p>
+<h2 id="jvm的类加载器">JVM的类加载器</h2>
+<p>Java的类加载，就是把字节码格式“.class”文件加载到JVM的<strong>方法区</strong>，并在JVM的<strong>堆区</strong>建立一个<code>java.lang.Class</code>对象的实例，用来封装Java类相关的数据和方法。那Class对象又是什么呢？你可以把它理解成业务类的模板，JVM根据这个模板来创建具体业务类对象实例。</p>
+<p>JVM并不是在启动时就把所有的“.class”文件都加载一遍，而是程序在运行过程中用到了这个类才去加载。JVM类加载是由类加载器来完成的，JDK提供一个抽象类ClassLoader，这个抽象类中定义了三个关键方法，理解清楚它们的作用和关系非常重要。</p>
+<pre><code>public abstract class ClassLoader {
+
+    //每个类加载器都有个父加载器
+    private final ClassLoader parent;
+    
+    public Class&lt;?&gt; loadClass(String name) {
+  
+        //查找一下这个类是不是已经加载过了
+        Class&lt;?&gt; c = findLoadedClass(name);
+        
+        //如果没有加载过
+        if( c == null ){
+          //先委托给父加载器去加载，注意这是个递归调用
+          if (parent != null) {
+              c = parent.loadClass(name);
+          }else {
+              // 如果父加载器为空，查找Bootstrap加载器是不是加载过了
+              c = findBootstrapClassOrNull(name);
+          }
+        }
+        // 如果父加载器没加载成功，调用自己的findClass去加载
+        if (c == null) {
+            c = findClass(name);
+        }
+        
+        return c；
+    }
+    
+    protected Class&lt;?&gt; findClass(String name){
+       //1. 根据传入的类名name，到在特定目录下去寻找类文件，把.class文件读入内存
+          ...
+          
+       //2. 调用defineClass将字节数组转成Class对象
+       return defineClass(buf, off, len)；
+    }
+    
+    // 将字节码数组解析成一个Class对象，用native方法实现
+    protected final Class&lt;?&gt; defineClass(byte[] b, int off, int len){
+       ...
+    }
+}
+</code></pre>
+<p>从上面的代码我们可以得到几个关键信息：</p>
+<ul>
+<li>JVM的类加载器是分层次的，它们有父子关系，每个类加载器都持有一个parent字段，指向父加载器。</li>
+<li>defineClass是个工具方法，它的职责是调用native方法把Java类的字节码解析成一个Class对象，所谓的native方法就是由C语言实现的方法，Java通过JNI机制调用。</li>
+<li>findClass方法的主要职责就是找到“.class”文件，可能来自文件系统或者网络，找到后把“.class”文件读到内存得到字节码数组，然后调用defineClass方法得到Class对象。</li>
+<li>loadClass是个public方法，说明它才是对外提供服务的接口，具体实现也比较清晰：首先检查这个类是不是已经被加载过了，如果加载过了直接返回，否则交给父加载器去加载。请你注意，这是一个递归调用，也就是说子加载器持有父加载器的引用，当一个类加载器需要加载一个Java类时，会先委托父加载器去加载，然后父加载器在自己的加载路径中搜索Java类，当父加载器在自己的加载范围内找不到时，才会交还给子加载器加载，这就是双亲委托机制。</li>
+</ul>
+<p>JDK中有哪些默认的类加载器？它们的本质区别是什么？为什么需要双亲委托机制？JDK中有3个类加载器，另外你也可以自定义类加载器，它们的关系如下图所示。</p>
+<p><img alt="" src="/assets/0916fb82c19786a0a15bef52.png"/></p>
+<ul>
+<li>BootstrapClassLoader是启动类加载器，由C语言实现，用来加载JVM启动时所需要的核心类，比如<code>rt.jar</code>、<code>resources.jar</code>等。</li>
+<li>ExtClassLoader是扩展类加载器，用来加载<code>\jre\lib\ext</code>目录下JAR包。</li>
+<li>AppClassLoader是系统类加载器，用来加载classpath下的类，应用程序默认用它来加载类。</li>
+<li>自定义类加载器，用来加载自定义路径下的类。</li>
+</ul>
+<p>这些类加载器的工作原理是一样的，区别是它们的加载路径不同，也就是说findClass这个方法查找的路径不同。双亲委托机制是为了保证一个Java类在JVM中是唯一的，假如你不小心写了一个与JRE核心类同名的类，比如Object类，双亲委托机制能保证加载的是JRE里的那个Object类，而不是你写的Object类。这是因为AppClassLoader在加载你的Object类时，会委托给ExtClassLoader去加载，而ExtClassLoader又会委托给BootstrapClassLoader，BootstrapClassLoader发现自己已经加载过了Object类，会直接返回，不会去加载你写的Object类。</p>
+<p>这里请你注意，类加载器的父子关系不是通过继承来实现的，比如AppClassLoader并不是ExtClassLoader的子类，而是说AppClassLoader的parent成员变量指向ExtClassLoader对象。同样的道理，如果你要自定义类加载器，不去继承AppClassLoader，而是继承ClassLoader抽象类，再重写findClass和loadClass方法即可，Tomcat就是通过自定义类加载器来实现自己的类加载逻辑。不知道你发现没有，如果你要打破双亲委托机制，就需要重写loadClass方法，因为loadClass的默认实现就是双亲委托机制。</p>
+<h2 id="tomcat的类加载器">Tomcat的类加载器</h2>
+<p>Tomcat的自定义类加载器WebAppClassLoader打破了双亲委托机制，它<strong>首先自己尝试去加载某个类，如果找不到再代理给父类加载器</strong>，其目的是优先加载Web应用自己定义的类。具体实现就是重写ClassLoader的两个方法：findClass和loadClass。</p>
+<p><strong>findClass方法</strong></p>
+<p>我们先来看看findClass方法的实现，为了方便理解和阅读，我去掉了一些细节：</p>
+<pre><code>public Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {
+    ...
+    
+    Class&lt;?&gt; clazz = null;
+    try {
+            //1. 先在Web应用目录下查找类 
+            clazz = findClassInternal(name);
+    }  catch (RuntimeException e) {
+           throw e;
+       }
+    
+    if (clazz == null) {
+    try {
+            //2. 如果在本地目录没有找到，交给父加载器去查找
+            clazz = super.findClass(name);
+    }  catch (RuntimeException e) {
+           throw e;
+       }
+    
+    //3. 如果父类也没找到，抛出ClassNotFoundException
+    if (clazz == null) {
+        throw new ClassNotFoundException(name);
+     }
+
+    return clazz;
+}
+</code></pre>
+<p>在findClass方法里，主要有三个步骤：</p>
+<ol>
+<li>先在Web应用本地目录下查找要加载的类。</li>
+<li>如果没有找到，交给父加载器去查找，它的父加载器就是上面提到的系统类加载器AppClassLoader。</li>
+<li>如何父加载器也没找到这个类，抛出ClassNotFound异常。</li>
+</ol>
+<p><strong>loadClass方法</strong></p>
+<p>接着我们再来看Tomcat类加载器的loadClass方法的实现，同样我也去掉了一些细节：</p>
+<pre><code>public Class&lt;?&gt; loadClass(String name, boolean resolve) throws ClassNotFoundException {
+
+    synchronized (getClassLoadingLock(name)) {
+ 
+        Class&lt;?&gt; clazz = null;
+
+        //1. 先在本地cache查找该类是否已经加载过
+        clazz = findLoadedClass0(name);
+        if (clazz != null) {
+            if (resolve)
+                resolveClass(clazz);
+            return clazz;
+        }
+
+        //2. 从系统类加载器的cache中查找是否加载过
+        clazz = findLoadedClass(name);
+        if (clazz != null) {
+            if (resolve)
+                resolveClass(clazz);
+            return clazz;
+        }
+
+        // 3. 尝试用ExtClassLoader类加载器类加载，为什么？
+        ClassLoader javaseLoader = getJavaseClassLoader();
+        try {
+            clazz = javaseLoader.loadClass(name);
+            if (clazz != null) {
+                if (resolve)
+                    resolveClass(clazz);
+                return clazz;
+            }
+        } catch (ClassNotFoundException e) {
+            // Ignore
+        }
+
+        // 4. 尝试在本地目录搜索class并加载
+        try {
+            clazz = findClass(name);
+            if (clazz != null) {
+                if (resolve)
+                    resolveClass(clazz);
+                return clazz;
+            }
+        } catch (ClassNotFoundException e) {
+            // Ignore
+        }
+
+        // 5. 尝试用系统类加载器(也就是AppClassLoader)来加载
+            try {
+                clazz = Class.forName(name, false, parent);
+                if (clazz != null) {
+                    if (resolve)
+                        resolveClass(clazz);
+                    return clazz;
+                }
+            } catch (ClassNotFoundException e) {
+                // Ignore
+            }
+       }
+    
+    //6. 上述过程都加载失败，抛出异常
+    throw new ClassNotFoundException(name);
+}
+</code></pre>
+<p>loadClass方法稍微复杂一点，主要有六个步骤：</p>
+<ol>
+<li>先在本地Cache查找该类是否已经加载过，也就是说Tomcat的类加载器是否已经加载过这个类。</li>
+<li>如果Tomcat类加载器没有加载过这个类，再看看系统类加载器是否加载过。</li>
+<li>如果都没有，就让<strong>ExtClassLoader</strong>去加载，这一步比较关键，目的<strong>防止Web应用自己的类覆盖JRE的核心类</strong>。因为Tomcat需要打破双亲委托机制，假如Web应用里自定义了一个叫Object的类，如果先加载这个Object类，就会覆盖JRE里面的那个Object类，这就是为什么Tomcat的类加载器会优先尝试用ExtClassLoader去加载，因为ExtClassLoader会委托给BootstrapClassLoader去加载，BootstrapClassLoader发现自己已经加载了Object类，直接返回给Tomcat的类加载器，这样Tomcat的类加载器就不会去加载Web应用下的Object类了，也就避免了覆盖JRE核心类的问题。</li>
+<li>如果ExtClassLoader加载器加载失败，也就是说JRE核心类中没有这类，那么就在本地Web应用目录下查找并加载。</li>
+<li>如果本地目录下没有这个类，说明不是Web应用自己定义的类，那么由系统类加载器去加载。这里请你注意，Web应用是通过<code>Class.forName</code>调用交给系统类加载器的，因为<code>Class.forName</code>的默认加载器就是系统类加载器。</li>
+<li>如果上述加载过程全部失败，抛出ClassNotFound异常。</li>
+</ol>
+<p>从上面的过程我们可以看到，Tomcat的类加载器打破了双亲委托机制，没有一上来就直接委托给父加载器，而是先在本地目录下加载，为了避免本地目录下的类覆盖JRE的核心类，先尝试用JVM扩展类加载器ExtClassLoader去加载。那为什么不先用系统类加载器AppClassLoader去加载？很显然，如果是这样的话，那就变成双亲委托机制了，这就是Tomcat类加载器的巧妙之处。</p>
+<h2 id="本期精华">本期精华</h2>
+<p>今天我介绍了JVM的类加载器原理和源码剖析，以及Tomcat的类加载器是如何打破双亲委托机制的，目的是为了优先加载Web应用目录下的类，然后再加载其他目录下的类，这也是Servlet规范的推荐做法。</p>
+<p>要打破双亲委托机制，需要继承ClassLoader抽象类，并且需要重写它的loadClass方法，因为ClassLoader的默认实现就是双亲委托。</p>
+<h2 id="课后思考">课后思考</h2>
+<p>如果你并不想打破双亲委托机制，但是又想定义自己的类加载器来加载特定目录下的类，你需要重写findClass和loadClass方法中的哪一个？还是两个都要重写？</p>
+<p>不知道今天的内容你消化得如何？如果还有疑问，请大胆的在留言区提问，也欢迎你把你的课后思考和心得记录下来，与我和其他同学一起讨论。如果你觉得今天有所收获，欢迎你把它分享给你的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>08 装饰模式：你想怎么穿就怎么穿 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">白话设计模式 28 讲（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">28 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>白话设计模式 28 讲（完）</strong><ul><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/00%20%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%90%AF%E7%A8%8B%E4%B9%8B%E5%89%8D%EF%BC%8C%E8%AF%B7%E4%B8%8D%E8%A6%81%E9%94%99%E8%BF%87%E6%88%91.html">00 生活中的设计模式：启程之前，请不要错过我</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E7%9B%91%E5%90%AC%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%9D%91%E7%88%B9%E7%9A%84%E7%83%AD%E6%B0%B4%E5%99%A8.html">01 监听模式：坑爹的热水器</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/02%20%E9%80%82%E9%85%8D%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%BA%AB%E9%AB%98%E4%B8%8D%E5%A4%9F%E9%9E%8B%E6%9D%A5%E5%87%91.html">02 适配模式：身高不够鞋来凑</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BA%BA%E4%B8%8E%E6%B0%B4%E7%9A%84%E4%B8%89%E6%80%81.html">03 状态模式：人与水的三态</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/04%20%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E6%98%AF%E6%88%91%E7%94%9F%E5%91%BD%E7%9A%84%E5%94%AF%E4%B8%80.html">04 单例模式：你是我生命的唯一</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/05%20%E8%81%8C%E8%B4%A3%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%88%91%E7%9A%84%E5%81%87%E6%9D%A1%E5%8E%BB%E5%93%AA%E4%BA%86.html">05 职责模式：我的假条去哪了</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/06%20%E4%B8%AD%E4%BB%8B%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%89%BE%E6%88%BF%E5%AD%90%E9%97%AE%E4%B8%AD%E4%BB%8B.html">06 中介模式：找房子问中介</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/07%20%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B8%AE%E6%88%91%E6%8B%BF%E4%B8%80%E4%B8%8B%E5%BF%AB%E9%80%92.html">07 代理模式：帮我拿一下快递</a></li><li><a class="active" aria-current="page" href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E7%A9%BF%E5%B0%B1%E6%80%8E%E4%B9%88%E7%A9%BF.html">08 装饰模式：你想怎么穿就怎么穿</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/09%20%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E8%A6%81%E6%8B%BF%E9%93%81%E8%BF%98%E6%98%AF%E6%91%A9%E5%8D%A1.html">09 工厂模式：你要拿铁还是摩卡</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/10%20%E8%BF%AD%E4%BB%A3%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%B0%B1%E6%98%AF%E4%BD%A0%E4%BA%86.html">10 迭代模式：下一个就是你了</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/11%20%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%87%AA%E5%B7%B1%E7%BB%84%E8%A3%85%E7%94%B5%E8%84%91.html">11 组合模式：自己组装电脑</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%83%B3%E8%A6%81%E8%BD%A6%E8%BF%98%E6%98%AF%E5%BA%84%E5%9B%AD.html">12 构建模式：想要车还是庄园</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E5%85%8B%E9%9A%86%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%BB%99%E4%BD%A0%E4%B8%80%E4%B8%AA%E5%88%86%E8%BA%AB%E6%9C%AF.html">13 克隆模式：给你一个分身术</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/14%20%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%80%8E%E4%B9%88%E6%9D%A5%E4%B8%8D%E9%87%8D%E8%A6%81%EF%BC%8C%E4%BA%BA%E5%88%B0%E5%B0%B1%E8%A1%8C.html">14 策略模式：怎么来不重要，人到就行</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/15%20%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A4%A7%E9%97%B8%E8%9F%B9%EF%BC%8C%E8%B5%B0%E8%B5%B7%EF%BC%81.html">15 命令模式：大闸蟹，走起！</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/16%20%E5%A4%87%E5%BF%98%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E7%83%82%E7%AC%94%E5%A4%B4.html">16 备忘模式：好记性不如烂笔头</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/17%20%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%EF%BC%9A%E9%A2%9C%E6%96%99%E5%BE%88%E8%B4%B5%E5%BF%85%E9%A1%BB%E5%85%85%E5%88%86%E5%88%A9%E7%94%A8.html">17 享元模式：颜料很贵必须充分利用</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/18%20%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%AD%A6%E5%A6%B9%E5%88%AB%E6%85%8C%EF%BC%8C%E5%AD%A6%E9%95%BF%E5%B8%AE%E4%BD%A0.html">18 外观模式：学妹别慌，学长帮你</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/19%20%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%80%E5%8D%83%E4%B8%AA%E8%AF%BB%E8%80%85%E4%B8%80%E5%8D%83%E4%B8%AA%E5%93%88%E5%A7%86%E9%9B%B7%E7%89%B9.html">19 访问模式：一千个读者一千个哈姆雷特</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/20%20%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%B8%8E%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%B8%8D%E8%A7%A3%E6%B8%8A%E6%BA%90.html">20 生活中的设计模式：与经典设计模式的不解渊源</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/21%20%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E9%82%A3%E4%BA%9B%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">21 生活中的设计模式：那些未完待续的设计模式</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/22%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E8%AF%BB%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%88%B6%E4%BD%9C%E4%B8%80%E6%9D%AF%E9%B2%9C%E7%BA%AF%E7%BB%86%E8%85%BB%E7%9A%84%E8%B1%86%E6%B5%86.html">22 深入解读过滤器模式：制作一杯鲜纯细腻的豆浆</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/23%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E8%AF%BB%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%8A%80%E6%9C%AF%EF%BC%9A%E5%85%B1%E4%BA%AB%E8%AE%A9%E7%94%9F%E6%B4%BB%E6%9B%B4%E4%BE%BF%E6%8D%B7.html">23 深入解读对象池技术：共享让生活更便捷</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/24%20%E6%B7%B1%E5%85%A5%E8%A7%A3%E8%AF%BB%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6%EF%BC%9A%E6%8A%8A%E4%BD%A0%E6%8A%80%E8%83%BD%E4%BA%AE%E5%87%BA%E6%9D%A5.html">24 深入解读回调机制：把你技能亮出来</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/25%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3.html">25 谈谈我对设计模式的理解</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/26%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E7%9A%84%E6%80%9D%E8%80%83.html">26 谈谈我对设计原则的思考</a></li><li><a href="/courses/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/27%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9%E9%A1%B9%E7%9B%AE%E9%87%8D%E6%9E%84%E7%9A%84%E7%9C%8B%E6%B3%95.html">27 谈谈我对项目重构的看法</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E7%99%BD%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%2028%20%E8%AE%B2%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%EF%BC%9A%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E7%A9%BF%E5%B0%B1%E6%80%8E%E4%B9%88%E7%A9%BF.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="08 装饰模式：你想怎么穿就怎么穿" id="title">08 装饰模式：你想怎么穿就怎么穿</h1>
+<div><p>故事剧情</p>
+<blockquote>
+<p>工作两年后，Tony 因为换工作而搬了一次家！这是一个4室1厅1卫1厨的户型，住了4户人家。恰巧这里住的都是年轻人，有男孩也有女孩，而 Tony 就是在这里遇上了自己喜欢的人，她叫 Jenny。Tony 和 Jenny 每天都低头不见抬头见，但 Tony 是一个程序猿，天生不善言辞、不懂着装，老被 Jenny 嫌弃：满脸猥琐，一副屌丝样！</p>
+<p>被嫌弃后，Tony 痛定思痛：一定要改善一下自己的形象，摆脱屌丝样！于是叫上自己的死党 Henry 去了五彩城……</p>
+<p>Tony 在这个大商城中兜兜转转，被各个商家教化着该怎样搭配衣服：衬衫要套在腰带里面，风衣不要系纽扣，领子要立起来……</p>
+<p>在反复试穿了一个晚上的衣服之后，终于找到一套还算凑合的行装：下面是一条卡其色休闲裤配一双深色休闲皮鞋，加一条银色针扣头的黑色腰带；上面是一件紫红色针织毛衣，内套一件白色衬衫；头上带一副方形黑框眼镜。整体行装虽不潮流，却透露出一种工作人士的成熟、稳健和大气！</p>
+</blockquote>
+<p><img alt="img" src="/assets/3a06cd1b4f659c46d2fe7295.jpg"/></p>
+<p>（图片来自网络）</p>
+<h3 id="用程序来模拟生活">用程序来模拟生活</h3>
+<p>Tony 是一个程序员，给自己搭配了一套着装：一条卡其色休闲裤、一双深色休闲皮鞋、一条银色针扣头的黑色腰带、一件紫红色针织毛衣、一件白色衬衫、一副方形黑框眼镜。但类似的着装也可以穿在其他的人身上，比如一个老师也可以这样穿：一双深色休闲皮鞋、一件白色衬衫、一副方形黑框眼镜。</p>
+<p>我们就用程序来模拟这样一个情景。</p>
+<p>源码示例：</p>
+<pre><code class="language-python">class Person:
+    "人"
+
+    def __init__(self, name):
+        self.__name = name
+
+    def getName(self):
+        return self.__name
+
+    def wear(self):
+        print("我的着装是：")
+
+class Engineer(Person):
+    "工程师"
+
+    def __init__(self, name, skill):
+        super().__init__(name)
+        self.__skill = skill
+
+    def getSkill(self):
+        return self.__skill
+
+    def wear(self):
+        print("我是" + self.getSkill() + "工程师" + self.getName())
+        super().wear()
+
+class Teacher(Person):
+    "教师"
+
+    def __init__(self, name, title):
+        super().__init__(name)
+        self.__title = title
+
+    def getTitle(self):
+        return self.__title
+
+    def wear(self):
+        print("我是" + self.getName() + self.getTitle())
+        super().wear()
+
+class ClothingDecorator(Person):
+    "服装装饰器"
+
+    def __init__(self, person):
+        self._decorated = person
+
+    def wear(self):
+        self._decorated.wear()
+
+class CasualPantDecorator(ClothingDecorator):
+    "休闲裤"
+
+    def __init__(self, person):
+        super().__init__(person)
+
+    def wear(self):
+        super().wear()
+        print("一条卡其色休闲裤")
+
+class BeltDecorator(ClothingDecorator):
+    "腰带"
+
+    def __init__(self, person):
+        super().__init__(person)
+
+    def wear(self):
+        super().wear()
+        print("一条银色针扣头的黑色腰带")
+
+class LeatherShoesDecorator(ClothingDecorator):
+    "皮鞋"
+
+    def __init__(self, person):
+        super().__init__(person)
+
+    def wear(self):
+        super().wear()
+        print("一双深色休闲皮鞋")
+
+class KnittedSweaterDecorator(ClothingDecorator):
+    "针织毛衣"
+
+    def __init__(self, person):
+        super().__init__(person)
+
+    def wear(self):
+        super().wear()
+        print("一件紫红色针织毛衣")
+
+class WhiteShirtDecorator(ClothingDecorator):
+    "白色衬衫"
+
+    def __init__(self, person):
+        super().__init__(person)
+
+    def wear(self):
+        super().wear()
+        print("一件白色衬衫")
+
+class GlassesDecorator(ClothingDecorator):
+    "眼镜"
+
+    def __init__(self, person):
+        super().__init__(person)
+
+    def wear(self):
+        super().wear()
+        print("一副方形黑框眼镜")
+
+</code></pre>
+<p>测试代码：</p>
+<pre><code class="language-python">def testDecorator():
+    tony = Engineer("Tony", "客户端")
+    pant = CasualPantDecorator(tony)
+    belt = BeltDecorator(pant)
+    shoes = LeatherShoesDecorator(belt)
+    shirt = WhiteShirtDecorator(shoes)
+    sweater = KnittedSweaterDecorator(shirt)
+    glasses = GlassesDecorator(sweater)
+    glasses.wear()
+
+    print()
+    decorateTeacher = GlassesDecorator(WhiteShirtDecorator(LeatherShoesDecorator(Teacher("wells", "教授"))))
+    decorateTeacher.wear()
+
+</code></pre>
+<p>上面的测试代码中：</p>
+<pre><code>decorateTeacher = GlassesDecorator(WhiteShirtDecorator(LeatherShoesDecorator(Teacher("wells", "教授"))))
+
+</code></pre>
+<p>这个写法，大家不要觉得奇怪，它其实就是将多个对象的创建过程合在了一起，其实是一种优雅的写法（是不是少了好几行代码？）。创建的 Teacher 对象又通过参数传给 LeatherShoesDecorator 的构造函数，而创建的 LeatherShoesDecorator 对象又通过参数传给 WhiteShirtDecorator 的构造函数，以此类推……</p>
+<p>输出结果：</p>
+<pre><code>我是客户端工程师Tony
+我的着装是：
+一条卡其色休闲裤
+一条银色针扣头的黑色腰带
+一双深色休闲皮鞋
+一件白色衬衫
+一件紫红色针织毛衣
+一副方形黑框眼镜
+
+我是wells教授
+我的着装是：
+一双深色休闲皮鞋
+一件白色衬衫
+一副方形黑框眼镜
+
+</code></pre>
+<h3 id="从剧情中思考装饰模式">从剧情中思考装饰模式</h3>
+<p>上面的示例中，Tony 为了改善自己的形象，整体换了个着装，改变了自己的气质，使自己看起来不再是那么猥琐的屌丝样。俗话说一个人帅不帅，得看三分长相七分打扮。同一个人，不一样的着装，给人一种完全不一样的感觉。我们可以任意搭配不同的衣服、围巾、裤子、鞋子、眼镜、帽子以达到不同的效果。不同的搭配，形成不同的风格，透露不同的气质。在这个追求个性与自由的时代，穿着的风格可谓是开放到了极致，真是你想怎么穿就怎么穿！如果你是去参加一个正式会议或演讲，可以穿一套标配西服；如果你是去大草原，想骑着骏马驰骋天地，便该穿上一套马服马裤马鞋；如果你是漫迷，去参加动漫节，亦可穿上 Cosplay 的衣服，让自己成为那个内心向往的主角；如果你是……</p>
+<p>这样一个时时刻刻发现在我们生活中的着装问题，就是程序中装饰模式的典型样例。</p>
+<h4 id="装饰模式">装饰模式</h4>
+<p><strong>装饰模式</strong>（Decorator Pattern）：动态地给一个对象增加一些额外的职责（Responsibility），就增加对象功能来说，装饰模式比生成子类实现更为灵活。</p>
+<p>就故事中这个示例来说，由结构庞大的子类继承关系转换成了结构紧凑的装饰关系：</p>
+<p><img alt="enter image description here" src="/assets/077295679699e6af4dc9a122.png"/></p>
+<p>继承关系：</p>
+<p><img alt="img" src="/assets/439d1b9b6e541fb2e31d48aa.png"/></p>
+<p>装饰关系</p>
+<h4 id="装饰模式的特点">装饰模式的特点</h4>
+<ol>
+<li><strong>可灵活地给一个对象增加职责或拓展功能</strong></li>
+</ol>
+<p>如上面的示例中，可任意地穿上自己想穿的衣服。不管穿上什么衣服，你还是那个你，但穿上不同的衣服你就会有不同的外表。</p>
+<ol>
+<li><strong>可增加任意多个装饰</strong></li>
+</ol>
+<p>你可以只穿一件衣服，也可以只穿一条裤子，也可以衣服和裤子各种搭配的穿，全随你意！</p>
+<ol>
+<li><strong>装饰的顺序不同，可能产生不同的效果</strong></li>
+</ol>
+<p>在上面的示例中，Tony 是针织毛衣穿在外面，白色衬衫穿在里面。当然，如果你愿意（或因为怕冷），也可以针织毛衣穿在里面，白色衬衫穿在外面。但两种着装穿出来的效果，给人的感觉肯定是完全不一样的，自己脑补一下，哈哈！</p>
+<p>使用装饰模式的方式，想要改变装饰的顺序，也是非常简单的。只要把测试代码稍微改动一下即可，如下：</p>
+<pre><code class="language-python">def testDecorator2():
+    tony = Engineer("Tony", "客户端")
+    pant = CasualPantDecorator(tony)
+    belt = BeltDecorator(pant)
+    shoes = LeatherShoesDecorator(belt)
+    sweater = KnittedSweaterDecorator(shoes)
+    shirt = WhiteShirtDecorator(sweater)
+    glasses = GlassesDecorator(shirt)
+    glasses.wear()
+
+</code></pre>
+<p>结果如下：</p>
+<pre><code>我是客户端工程师Tony
+我的着装是：
+一条卡其色休闲裤
+一条银色针扣头的黑色腰带
+一双深色休闲皮鞋
+一件紫红色针织毛衣
+一件白色衬衫
+一副方形黑框眼镜
+
+</code></pre>
+<h3 id="装饰模式的模型抽象">装饰模式的模型抽象</h3>
+<h4 id="类图">类图</h4>
+<p>通过上面的示例代码，我们知道了装饰模式的一个典型实现。我们再将其抽象成一个一般化的类图结构，如下：</p>
+<p><img alt="img" src="/assets/ee3ef5763c98806e1b06c0ba.png"/></p>
+<p>上图中的 Component 是一个抽象类，代表具有某中功能（function）的组件，ComponentImplA 和 ComponentImplB 分别是其具体的实现子类。Decorator 是 Component 装饰器，里面有一个 Component 的对象 decorated，这就是被装饰的对象，装饰器可为被装饰对象添加额外的功能或行为（addBehavior）。DecoratorImplA 和 DecoratorImplB 分别是两个具体的装饰器（实现子类）。</p>
+<p>这样一种模式很好地将装饰器与被装饰的对象进行解耦。</p>
+<h4 id="模型说明">模型说明</h4>
+<p><strong>装饰模式的优点：</strong></p>
+<ol>
+<li>使用装饰模式来实现扩展比继承更加灵活，它可以在不需要创造更多子类的情况下，将对象的功能加以扩展。</li>
+<li>可以动态地给一个对象附加更多的功能。</li>
+<li>可以用不同的装饰器进行多重装饰，装饰的顺序不同，可能产生不同的效果。</li>
+<li>装饰类和被装饰类可以独立发展，不会相互耦合；装饰模式相当于是继承的一个替代模式。</li>
+</ol>
+<p><strong>装饰模式的缺点：</strong></p>
+<ol>
+<li>与继承相比，用装饰的方式拓展功能更加容易出错，排错也更困难。对于多次装饰的对象，调试时寻找错误可能需要逐级排查，较为烦琐。</li>
+</ol>
+<h3 id="应用场景">应用场景</h3>
+<ol>
+<li>有大量独立的扩展，为支持每一种组合将产生大量的子类，使得子类数目呈爆炸性增长。</li>
+<li>需要动态地增加或撤销功能时。</li>
+<li>不能采用生成子类的方法进行扩充时，如类定义不能用于生成子类。</li>
+</ol>
+<p>装饰模式的应用场景非常广泛。如在实际项目开发中经常看到的过滤器，便可用装饰模式的方式去实现。如果你是 Java 程序员，对 IO 中的 FilterInputStream 和 FilterOutputStream 一定不陌生，它的实现其实就是一个装饰模式。FilterInputStream(FilterOutputStream) 就是一个装饰器，而 InputStream(OutputStream) 就是被装饰的对象。</p>
+<p>我们看一下创建对象过程：</p>
+<pre><code class="language-java">DataInputStream dataInputStream = new DataInputStream(new FileInputStream("C:/text.txt"));
+DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:/text.txt"));
+
+</code></pre>
+<p>这个写法与上面 Demo 中的</p>
+<pre><code>decorateTeacher = GlassesDecorator(WhiteShirtDecorator(LeatherShoesDecorator(Teacher("wells", "教授"))))
+
+</code></pre>
+<p>是不是很相似？都是一个对象套一个对象的方式进行创建。</p>
+<p>还有一个场景，如果你对图形图像处理有一定了解，就会知道对图像的处理其实就是对一个二维坐标像素数据的处理，如图像的灰度化、梯度化（锐化）、边缘化、二值化。这些操作顺序不同就会造成不同的效果，也是适合用装饰模式来进行封装。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

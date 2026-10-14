@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>17 应用流量的优雅无损切换实践 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/index.html">Kubernetes 实践入门指南</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">25 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kubernetes 实践入门指南</strong><ul><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/00%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E8%A6%81%E5%AD%A6%E4%B9%A0%20Kubernetes%20%E6%8A%80%E6%9C%AF.html">00 为什么我们要学习 Kubernetes 技术</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/01%20%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%20Kubernetes%20%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6.html">01 重新认识 Kubernetes 的核心组件</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/02%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Kubernets%20%E7%9A%84%E7%BC%96%E6%8E%92%E5%AF%B9%E8%B1%A1.html">02 深入理解 Kubernets 的编排对象</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/03%20DevOps%20%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">03 DevOps 场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/04%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8B%E8%90%BD%E5%9C%B0%20K8s%20%E7%9A%84%E5%9B%B0%E9%9A%BE%E5%88%86%E6%9E%90.html">04 微服务应用场景下落地 K8s 的困难分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/05%20%E8%A7%A3%E5%86%B3%20K8s%20%E8%90%BD%E5%9C%B0%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA%E6%8F%90%E7%82%BC.html">05 解决 K8s 落地难题的方法论提炼</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/06%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E6%A0%B8%E5%BF%83%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86%E6%8E%8C%E6%8F%A1.html">06 练习篇：K8s 核心实践知识掌握</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/07%20%E5%AE%B9%E5%99%A8%E5%BC%95%E6%93%8E%20containerd%20%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">07 容器引擎 containerd 落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/08%20K8s%20%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7%20kubeadm%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">08 K8s 集群安装工具 kubeadm 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/09%20%E5%8D%97%E5%8C%97%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20IPVS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">09 南北向流量组件 IPVS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/10%20%E4%B8%9C%E8%A5%BF%E5%90%91%E6%B5%81%E9%87%8F%E7%BB%84%E4%BB%B6%20Calico%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">10 东西向流量组件 Calico 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/11%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%20DNS%20%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">11 服务发现 DNS 的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/12%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">12 练习篇：K8s 集群配置测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/13%20%E7%90%86%E8%A7%A3%E5%AF%B9%E6%96%B9%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AF%B9%E8%B1%A1%20Ingress%20%E5%92%8C%20Service.html">13 理解对方暴露服务的对象 Ingress 和 Service</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/14%20%E5%BA%94%E7%94%A8%E7%BD%91%E5%85%B3%20OpenResty%20%E5%AF%B9%E6%8E%A5%20K8s%20%E5%AE%9E%E8%B7%B5.html">14 应用网关 OpenResty 对接 K8s 实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/15%20Service%20%E5%B1%82%E5%BC%95%E6%B5%81%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">15 Service 层引流技术实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/16%20Cilium%20%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">16 Cilium 容器网络的落地实践</a></li><li><a class="active" aria-current="page" href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/17%20%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E7%9A%84%E4%BC%98%E9%9B%85%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E5%AE%9E%E8%B7%B5.html">17 应用流量的优雅无损切换实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/18%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9A%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E6%8A%80%E6%9C%AF%E6%B5%8B%E9%AA%8C.html">18 练习篇：应用流量无损切换技术测验</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/19%20%E4%BD%BF%E7%94%A8%20Rook%20%E6%9E%84%E5%BB%BA%E7%94%9F%E4%BA%A7%E5%8F%AF%E7%94%A8%E5%AD%98%E5%82%A8%E7%8E%AF%E5%A2%83%E5%AE%9E%E8%B7%B5.html">19 使用 Rook 构建生产可用存储环境实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/20%20%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8%E7%9A%84%E9%BB%98%E8%AE%A4%E7%89%B9%E6%80%A7%E8%90%BD%E5%9C%B0%E5%88%86%E6%9E%90.html">20 有状态应用的默认特性落地分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/21%20%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20MySQL%20%E9%9B%86%E7%BE%A4%E5%B7%A5%E5%85%B7%20Vitess%20%E5%AE%9E%E8%B7%B5%E5%88%86%E6%9E%90.html">21 案例：分布式 MySQL 集群工具 Vitess 实践分析</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/22%20%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%20PV%E3%80%81PVC%E3%80%81Storage%20Classes%20%E7%9A%84%E7%AE%A1%E7%90%86%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">22 存储对象 PV、PVC、Storage Classes 的管理落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/23%20K8s%20%E9%9B%86%E7%BE%A4%E4%B8%AD%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E7%81%BE%E5%A4%87%E7%9A%84%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5.html">23 K8s 集群中存储对象灾备的落地实践</a></li><li><a href="/courses/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/24%20%E7%BB%83%E4%B9%A0%E7%AF%87%EF%BC%9AK8s%20%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%B5%8B%E9%AA%8C.html">24 练习篇：K8s 集群配置测验</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kubernetes%20%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/17%20%E5%BA%94%E7%94%A8%E6%B5%81%E9%87%8F%E7%9A%84%E4%BC%98%E9%9B%85%E6%97%A0%E6%8D%9F%E5%88%87%E6%8D%A2%E5%AE%9E%E8%B7%B5.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="17 应用流量的优雅无损切换实践" id="title">17 应用流量的优雅无损切换实践</h1>
+<div><p>Kubernetes 的部署基本上都是默认滚动式的，并且保证零宕机，但是它是有一个前置条件的。正是这个前置条件让零宕机部署表现为一个恼人的问题。为了实现 Kubernetes 真正的零宕机部署，不中断或不丢失任何一个运行中的请求，我们需要深入应用部署的运行细节并找到根源进行深入的根源分析。本篇的实践内容继承之前的知识体系，将更深入的总结零宕机部署方法。</p>
+<h3 id="刨根问底">刨根问底</h3>
+<h4 id="滚动更新"><strong>滚动更新</strong></h4>
+<p>我们首先来谈谈滚动更新的问题。根据默认情况，Kubernetes 部署会以滚动更新策略推动 Pod 容器版本更新。该策略的思想就是在执行更新的过程中，至少要保证部分老实例在此时是启动并运行的，这样就可以防止应用程序出现服务停止的情况了。在这个策略的执行过程中，新版的 Pod 启动成功并已经可以引流时才会关闭旧 Pod。</p>
+<p>Kubernetes 在更新过程中如何兼顾多个副本的具体运行方式提供了策略参数。根据我们配置的工作负载和可用的计算资源，滚动更新策略可以细调超额运行的 Pods（maxSurge）和多少不可用的 Pods （maxUnavailable）。例如，给定一个部署对象要求包含三个复制体，我们是应该立即创建三个新的 Pod，并等待所有的 Pod 启动，并终止除一个 Pod 之外的所有旧 Pod，还是逐一进行更新？下面的代码显示了一个名为 Demo 应用的 Deployment 对象，该应用采用默认的 RollingUpdate 升级策略，在更新过程中最多只能有一个超额运行的 Pods（maxSurge）并且没有不可用的 Pods。</p>
+<pre><code>kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: demo
+spec:
+  replicas: 3
+  template:
+    # with image docker.example.com/demo:1
+    # ...
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+
+</code></pre>
+<p><img alt="15-1-rolling-udpate.gif" src="/assets/fb692922a64caa7f8ee8a512.gif"/></p>
+<p>此部署对象将一次创建一个带有新版本的 Pod，等待 Pod 启动并准备好后触发其中一个旧 Pod 的终止，并继续进行下一个新 Pod，直到所有的副本都被更新。下面显示了 <code>kubectl get pods</code> 的输出和新旧 Pods 随时间的变化。</p>
+<pre><code>$ kubectl get pods
+NAME                             READY     STATUS             RESTARTS   AGE
+demo-5444dd6d45-hbvql   1/1       Running            0          3m
+demo-5444dd6d45-31f9a   1/1       Running            0          3m
+demo-5444dd6d45-fa1bc   1/1       Running            0          3m
+...
+
+demo-5444dd6d45-hbvql   1/1       Running            0          3m
+demo-5444dd6d45-31f9a   1/1       Running            0          3m
+demo-5444dd6d45-fa1bc   1/1       Running            0          3m
+demo-8dca50f432-bd431   0/1       ContainerCreating  0          12s
+...
+
+demo-5444dd6d45-hbvql   1/1       Running            0          4m
+demo-5444dd6d45-31f9a   1/1       Running            0          4m
+demo-5444dd6d45-fa1bc   0/1       Terminating        0          4m
+demo-8dca50f432-bd431   1/1       Running            0          1m
+...
+
+demo-5444dd6d45-hbvql   1/1       Running            0          5m
+demo-5444dd6d45-31f9a   1/1       Running            0          5m
+demo-8dca50f432-bd431   1/1       Running            0          1m
+demo-8dca50f432-ce9f1   0/1       ContainerCreating  0          10s
+...
+
+...
+
+demo-8dca50f432-bd431   1/1       Running            0          2m
+demo-8dca50f432-ce9f1   1/1       Running            0          1m
+demo-8dca50f432-491fa   1/1       Running            0          30s
+
+</code></pre>
+<h4 id="应用可用性的理想和现实之间的差距"><strong>应用可用性的理想和现实之间的差距</strong></h4>
+<p>通过上面的案例看执行效果可知，从旧版本到新版本的滚动更新看起来确实是平滑更新的。然而不希望发生的事情还是发生了，从旧版本到新版本的切换并不总是完美平滑的，也就是说应用程序可能会丢失一些客户端的请求。这是不可以接受的情况。</p>
+<p>为了真正测试当一个实例被退出服务时，请求是否会丢失。我们不得不对我们的服务进行压力测试并收集结果。我们感兴趣的主要一点是我们的传入的 HTTP 请求是否被正确处理，包括 HTTP 连接是否保持活着。</p>
+<p>这里可以使用简单的 Fortio 负载测试工具，用一连续的请求访问 Demo 的 HTTP 端点。例子种配置包括 50 个并发连接 /goroutine，每秒请求比率为 500，测试超时 60 秒。</p>
+<pre><code>fortio load -a -c 50 -qps 500 -t 60s "&lt;http://example.com/demo&gt;"
+
+</code></pre>
+<p>我们在进行滚动更新部署时同时运行这个测试，如下图报告所示，会有一些连接失败的请求：</p>
+<pre><code>Fortio 1.1.0 running at 500 queries per second, 4-&gt;4 procs, for 20s
+Starting at 500 qps with 50 thread(s) [gomax 4] for 20s : 200 calls each (total 10000)
+08:49:55 W http_client.go:673&gt; Parsed non ok code 502 (HTTP/1.1 502)
+[...]
+Code 200 : 9933 (99.3 %)
+Code 502 : 67 (0.7 %)
+Response Header Sizes : count 10000 avg 158.469 +/- 13.03 min 0 max 160 sum 1584692
+Response Body/Total Sizes : count 10000 avg 169.786 +/- 12.1 min 161 max 314 sum 1697861
+[...]
+
+</code></pre>
+<p>输出结果表明，并非所有的请求都被成功处理。</p>
+<h4 id="了解问题根源"><strong>了解问题根源</strong></h4>
+<p>现在需要搞清楚的问题是，Kubernetes 在滚动更新时将流量重新路由，从一个旧的 Pod 实例版本到新的 Pod 实例版本，到底发生了什么。让我们来看看 Kubernetes 是如何管理工作负载连接的。</p>
+<p>假设我们的客户端是直接从集群内部连接到 Demo 服务，通常会使用通过 Cluster DNS 解析的服务虚拟 IP，最后到 Pod 实例。这是通过 kube-proxy 来实现的，kube-proxy 运行在每个 Kubernetes 节点上并动态更新 iptables，让请求路由到 Pod 的 IP 地址。Kubernetes 会更新 Pods 状态中的 endpoints 对象，因此 demo 服务只包含准备处理流量的 Pods。</p>
+<p>还有一个情况，客户端流量是从 ingress 方式连接到 Pods 实例，它的连接方式不一样。滚动更新时应用请求会有不同的请求宕机行为。如 Nginx Ingress 是直接把 Pod IP 地址的 endpoints 对象观察起来，有变化时将重载 Nginx 实例，导致流量中断。</p>
+<p>当然我们应该需要知道的是，Kubernetes 的目标时在滚动更新过程中尽量减少服务中断。一旦一个新的 Pod 还活着并且准备提供服务时，Kubernetes 就会将一个旧的 Pod 从 Service 中移除，具体操作是将 Pod 的状态更新为 Terminating，将其从 endpoints 对象中移除，并发送一个 SIGTERM 。SIGTERM 会导致容器以一种优雅的方式（需要应用程序能正确处理）关闭，并且不接受任何新的连接。在 Pod 被驱逐出 endpoints 对象后，负载均衡器将把流量路由到剩余的（新的）对象上。注意此时，Pod 在负载均衡器注意到变化并更新其配置的时候，移出 endpoints 对象记录和重新刷新负载均衡配置是异步发生的，因此不能保证正确的执行顺序还可能会导致一些请求被路由到终止的 Pod，这就是在部署过程中造成应用可用性差的真实原因。</p>
+<h3 id="实现零故障部署">实现零故障部署</h3>
+<p>现在我们的目标就是如何增强我们的应用程序能力，让它以真正的零宕机更新版本。</p>
+<p>首先，实现这个目标的前提条件是我们的容器要能正确处理终止信号，即进程会在 SIGTERM 上优雅地关闭。如何实现可以网上查阅应用优雅关闭的最佳实践，这里不在赘述。</p>
+<p>下一步是加入就绪探针，检查我们的应用是否已经准备好处理流量。理想情况下，探针已经检查了需要预热的功能的状态，比如缓存或数据库初始化。</p>
+<p>为了解决 Pod terminations 目前没有阻塞和等待直到负载均衡器被重新配置的问题，包含一个 preStop 生命周期钩子。这个钩子会在容器终止之前被调用。生命周期钩子是同步的，因此必须在向容器发送最终终止信号之前完成。</p>
+<p>在下面的例子中，在 SIGTERM 信号终止应用进程之前使用 preStop 钩子来等待 120 秒，并且同时 Kubernetes 将从 endpoints 对象中移除 Pod。这样可以确保在生命周期钩子等待期间，负载均衡器可以正确的刷新配置。</p>
+<p>为了实现这个行为，在 demo 应用部署中定义一个 preStop 钩子如下：</p>
+<pre><code>kind: Deployment
+apiVersion: apps/v1beta1
+metadata:
+  name: demo
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+      - name: zero-downtime
+        image: docker.example.com/demo:1
+        livenessProbe:
+          # ...
+        readinessProbe:
+          # ...
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/bash", "-c", "sleep 120"]
+  strategy:
+    # ...
+
+</code></pre>
+<p>使用负载测试工具重新测试，发现失败的请求数为零，终于实现无损流量的更新。</p>
+<pre><code>Fortio 1.1.0 running at 500 queries per second, 4-&gt;4 procs, for 20s
+Starting at 500 qps with 50 thread(s) [gomax 4] for 20s : 200 calls each (total 10000)
+[...]
+Code 200 : 10000 (100.0 %)
+Response Header Sizes : count 10000 avg 159.530 +/- 0.706 min 154 max 160 sum 1595305
+Response Body/Total Sizes : count 10000 avg 168.852 +/- 2.52 min 161 max 171 sum 1688525
+[...]
+
+</code></pre>
+<h3 id="实践总结">实践总结</h3>
+<p>应用的滚动更新是流量平滑切换的原子操作基础。只有让 Kubernetes 能正确处理滚动更新，才有可能实现应用流量的无损更新。在此基础之上，通过部署多套 Ingress 资源来引入流量是可以解决平滑流量的切换的。另外，因为 Helm 支持部署一套应用的多个版本，通过版本的选择也是可以快速切换流量的。这样的技巧都是基于最底层的 Pod 能保证不中断请求才行。</p>
+<h3 id="参考资料">参考资料</h3>
+<ul>
+<li><a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/" target="_blank">https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/</a></li>
+</ul>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

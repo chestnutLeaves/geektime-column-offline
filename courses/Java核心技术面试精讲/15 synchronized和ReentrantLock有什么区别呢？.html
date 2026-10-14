@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>15 synchronized和ReentrantLock有什么区别呢？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/index.html">Java核心技术面试精讲</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">42 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Java核心技术面试精讲</strong><ul><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%A5%E9%9D%A2%E8%AF%95%E9%A2%98%E4%B8%BA%E5%88%87%E5%85%A5%E7%82%B9%EF%BC%8C%E6%9C%89%E6%95%88%E6%8F%90%E5%8D%87%E4%BD%A0%E7%9A%84Java%E5%86%85%E5%8A%9F.html">00 开篇词 以面试题为切入点，有效提升你的Java内功</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/01%20%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9Java%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F.html">01 谈谈你对Java平台的理解？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/02%20Exception%E5%92%8CError%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">02 Exception和Error有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/03%20%E8%B0%88%E8%B0%88final%E3%80%81finally%E3%80%81%20finalize%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">03 谈谈final、finally、 finalize有什么不同？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/04%20%E5%BC%BA%E5%BC%95%E7%94%A8%E3%80%81%E8%BD%AF%E5%BC%95%E7%94%A8%E3%80%81%E5%BC%B1%E5%BC%95%E7%94%A8%E3%80%81%E5%B9%BB%E8%B1%A1%E5%BC%95%E7%94%A8%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">04 强引用、软引用、弱引用、幻象引用有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/05%20String%E3%80%81StringBuffer%E3%80%81StringBuilder%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">05 String、StringBuffer、StringBuilder有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/06%20%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%98%AF%E5%9F%BA%E4%BA%8E%E4%BB%80%E4%B9%88%E5%8E%9F%E7%90%86%EF%BC%9F.html">06 动态代理是基于什么原理？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/07%20int%E5%92%8CInteger%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">07 int和Integer有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/08%20%E5%AF%B9%E6%AF%94Vector%E3%80%81ArrayList%E3%80%81LinkedList%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB%EF%BC%9F.html">08 对比Vector、ArrayList、LinkedList有何区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/09%20%E5%AF%B9%E6%AF%94Hashtable%E3%80%81HashMap%E3%80%81TreeMap%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">09 对比Hashtable、HashMap、TreeMap有什么不同？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/10%20%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%9B%86%E5%90%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84_%20ConcurrentHashMap%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%9F.html">10 如何保证集合是线程安全的_ ConcurrentHashMap如何实现高效地线程安全？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/11%20Java%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9BIO%E6%96%B9%E5%BC%8F%EF%BC%9F%20NIO%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%EF%BC%9F.html">11 Java提供了哪些IO方式？ NIO如何实现多路复用？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/12%20Java%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D%E6%96%B9%E5%BC%8F%EF%BC%9F%E5%93%AA%E4%B8%80%E7%A7%8D%E6%9C%80%E9%AB%98%E6%95%88%EF%BC%9F.html">12 Java有几种文件拷贝方式？哪一种最高效？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/13%20%E8%B0%88%E8%B0%88%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">13 谈谈接口和抽象类有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/14%20%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9F%A5%E9%81%93%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F.html">14 谈谈你知道的设计模式？</a></li><li><a class="active" aria-current="page" href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/15%20synchronized%E5%92%8CReentrantLock%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%91%A2%EF%BC%9F.html">15 synchronized和ReentrantLock有什么区别呢？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/16%20synchronized%E5%BA%95%E5%B1%82%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E9%94%81%E7%9A%84%E5%8D%87%E7%BA%A7%E3%80%81%E9%99%8D%E7%BA%A7%EF%BC%9F.html">16 synchronized底层如何实现？什么是锁的升级、降级？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/17%20%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E4%B8%A4%E6%AC%A1%E8%B0%83%E7%94%A8start%28%29%E6%96%B9%E6%B3%95%E4%BC%9A%E5%87%BA%E7%8E%B0%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%EF%BC%9F.html">17 一个线程两次调用start()方法会出现什么情况？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/18%20%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8BJava%E7%A8%8B%E5%BA%8F%E4%BC%9A%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%EF%BC%9F%E5%A6%82%E4%BD%95%E5%AE%9A%E4%BD%8D%E3%80%81%E4%BF%AE%E5%A4%8D%EF%BC%9F.html">18 什么情况下Java程序会产生死锁？如何定位、修复？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/19%20Java%E5%B9%B6%E5%8F%91%E5%8C%85%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB%EF%BC%9F.html">19 Java并发包提供了哪些并发工具类？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/20%20%E5%B9%B6%E5%8F%91%E5%8C%85%E4%B8%AD%E7%9A%84ConcurrentLinkedQueue%E5%92%8CLinkedBlockingQueue%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F.html">20 并发包中的ConcurrentLinkedQueue和LinkedBlockingQueue有什么区别？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/21%20Java%E5%B9%B6%E5%8F%91%E7%B1%BB%E5%BA%93%E6%8F%90%E4%BE%9B%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%EF%BC%9F%20%E5%88%86%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F.html">21 Java并发类库提供的线程池有哪几种？ 分别有什么特点？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/22%20AtomicInteger%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BA%A7%E5%93%81%E4%BB%A3%E7%A0%81%E4%B8%AD%E5%BA%94%E7%94%A8CAS%E6%93%8D%E4%BD%9C%EF%BC%9F.html">22 AtomicInteger底层实现原理是什么？如何在自己的产品代码中应用CAS操作？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/23%20%E8%AF%B7%E4%BB%8B%E7%BB%8D%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">23 请介绍类加载过程，什么是双亲委派模型？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/24%20%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AAJava%E7%B1%BB%EF%BC%9F.html">24 有哪些方法可以在运行时动态生成一个Java类？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/25%20%E8%B0%88%E8%B0%88JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E7%9A%84%E5%88%92%E5%88%86%EF%BC%8C%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%9F%9F%E5%8F%AF%E8%83%BD%E5%8F%91%E7%94%9FOutOfMemoryError_.html">25 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError_</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/26%20%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E5%92%8C%E8%AF%8A%E6%96%ADJVM%E5%A0%86%E5%86%85%E5%92%8C%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%EF%BC%9F.html">26 如何监控和诊断JVM堆内和堆外内存使用？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/27%20Java%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">27 Java常见的垃圾收集器有哪些？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/28%20%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9A%84GC%E8%B0%83%E4%BC%98%E6%80%9D%E8%B7%AF_.html">28 谈谈你的GC调优思路_</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/29%20Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84happen-before%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">29 Java内存模型中的happen-before是什么？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/30%20Java%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E5%9C%A8Docker%E7%AD%89%E5%AE%B9%E5%99%A8%E7%8E%AF%E5%A2%83%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E9%97%AE%E9%A2%98%EF%BC%9F.html">30 Java程序运行在Docker等容器环境有哪些新问题？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/31%20%E4%BD%A0%E4%BA%86%E8%A7%A3Java%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%E5%90%97%EF%BC%9F.html">31 你了解Java应用开发中的注入攻击吗？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/32%20%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E5%AE%89%E5%85%A8%E7%9A%84Java%E4%BB%A3%E7%A0%81%EF%BC%9F.html">32 如何写出安全的Java代码？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/33%20%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%87%BA%E7%8E%B0%E6%98%8E%E6%98%BE%E2%80%9C%E5%8F%98%E6%85%A2%E2%80%9D%EF%BC%8C%E8%B0%88%E8%B0%88%E4%BD%A0%E7%9A%84%E8%AF%8A%E6%96%AD%E6%80%9D%E8%B7%AF%EF%BC%9F.html">33 后台服务出现明显“变慢”，谈谈你的诊断思路？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/34%20%E6%9C%89%E4%BA%BA%E8%AF%B4%E2%80%9CLambda%E8%83%BD%E8%AE%A9Java%E7%A8%8B%E5%BA%8F%E6%85%A230%E5%80%8D%E2%80%9D%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%9F.html">34 有人说“Lambda能让Java程序慢30倍”，你怎么看？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/35%20JVM%E4%BC%98%E5%8C%96Java%E4%BB%A3%E7%A0%81%E6%97%B6%E9%83%BD%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.html">35 JVM优化Java代码时都做了什么？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/36%20%E8%B0%88%E8%B0%88MySQL%E6%94%AF%E6%8C%81%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%82%B2%E8%A7%82%E9%94%81%E5%92%8C%E4%B9%90%E8%A7%82%E9%94%81%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F.html">36 谈谈MySQL支持的事务隔离级别，以及悲观锁和乐观锁的原理和应用场景？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/37%20%E8%B0%88%E8%B0%88Spring%20Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F.html">37 谈谈Spring Bean的生命周期和作用域？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/38%20%E5%AF%B9%E6%AF%94Java%E6%A0%87%E5%87%86NIO%E7%B1%BB%E5%BA%93%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93Netty%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%9B%B4%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%90%97%EF%BC%9F.html">38 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/39%20%E8%B0%88%E8%B0%88%E5%B8%B8%E7%94%A8%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8FID%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88%EF%BC%9FSnowflake%E6%98%AF%E5%90%A6%E5%8F%97%E5%86%AC%E4%BB%A4%E6%97%B6%E5%88%87%E6%8D%A2%E5%BD%B1%E5%93%8D%EF%BC%9F.html">39 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/%E5%91%A8%E6%9C%AB%E7%A6%8F%E5%88%A9%20%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9Java%E5%AD%A6%E4%B9%A0%E5%92%8C%E9%9D%A2%E8%AF%95%E7%9A%84%E7%9C%8B%E6%B3%95.html">周末福利 谈谈我对Java学习和面试的看法</a></li><li><a href="/courses/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%80%E6%9C%AF%E6%B2%A1%E6%9C%89%E7%BB%88%E7%82%B9.html">结束语 技术没有终点</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%B2%BE%E8%AE%B2/15%20synchronized%E5%92%8CReentrantLock%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%91%A2%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="15 synchronized和ReentrantLock有什么区别呢？" id="title">15 synchronized和ReentrantLock有什么区别呢？</h1>
+<div><p>从今天开始，我们将进入Java并发学习阶段。软件并发已经成为现代软件开发的基础能力，而Java精心设计的高效并发机制，正是构建大规模应用的基础之一，所以考察并发基本功也成为各个公司面试Java工程师的必选项。</p>
+<p>今天我要问你的问题是， synchronized和ReentrantLock有什么区别？有人说synchronized最慢，这话靠谱吗？</p>
+<h2 id="典型回答">典型回答</h2>
+<p>synchronized是Java内建的同步机制，所以也有人称其为Intrinsic Locking，它提供了互斥的语义和可见性，当一个线程已经获取当前锁时，其他试图获取的线程只能等待或者阻塞在那里。</p>
+<p>在Java 5以前，synchronized是仅有的同步手段，在代码中， synchronized可以用来修饰方法，也可以使用在特定的代码块儿上，本质上synchronized方法等同于把方法全部语句用synchronized块包起来。</p>
+<p>ReentrantLock，通常翻译为再入锁，是Java 5提供的锁实现，它的语义和synchronized基本相同。再入锁通过代码直接调用lock()方法获取，代码书写也更加灵活。与此同时，ReentrantLock提供了很多实用的方法，能够实现很多synchronized无法做到的细节控制，比如可以控制fairness，也就是公平性，或者利用定义条件等。但是，编码中也需要注意，必须要明确调用unlock()方法释放，不然就会一直持有该锁。</p>
+<p>synchronized和ReentrantLock的性能不能一概而论，早期版本synchronized在很多场景下性能相差较大，在后续版本进行了较多改进，在低竞争场景中表现可能优于ReentrantLock。</p>
+<h2 id="考点分析">考点分析</h2>
+<p>今天的题目是考察并发编程的常见基础题，我给出的典型回答算是一个相对全面的总结。</p>
+<p>对于并发编程，不同公司或者面试官面试风格也不一样，有个别大厂喜欢一直追问你相关机制的扩展或者底层，有的喜欢从实用角度出发，所以你在准备并发编程方面需要一定的耐心。</p>
+<p>我认为，锁作为并发的基础工具之一，你至少需要掌握：</p>
+<ul>
+<li><p>理解什么是线程安全。</p></li>
+<li><p>synchronized、ReentrantLock等机制的基本使用与案例。</p></li>
+</ul>
+<p>更进一步，你还需要：</p>
+<ul>
+<li><p>掌握synchronized、ReentrantLock底层实现；理解锁膨胀、降级；理解偏斜锁、自旋锁、轻量级锁、重量级锁等概念。</p></li>
+<li><p>掌握并发包中java.util.concurrent.lock各种不同实现和案例分析。</p></li>
+</ul>
+<h2 id="知识扩展">知识扩展</h2>
+<p>专栏前面几期穿插了一些并发的概念，有同学反馈理解起来有点困难，尤其对一些并发相关概念比较陌生，所以在这一讲，我也对会一些基础的概念进行补充。</p>
+<p>首先，我们需要理解什么是线程安全。</p>
+<p>我建议阅读Brain Goetz等专家撰写的《Java并发编程实战》（Java Concurrency in Practice），虽然可能稍显学究，但不可否认这是一本非常系统和全面的Java并发编程书籍。按照其中的定义，线程安全是一个多线程环境下正确性的概念，也就是保证多线程环境下<strong>共享的</strong>、<strong>可修改的</strong>状态的正确性，这里的状态反映在程序中其实可以看作是数据。</p>
+<p>换个角度来看，如果状态不是共享的，或者不是可修改的，也就不存在线程安全问题，进而可以推理出保证线程安全的两个办法：</p>
+<ul>
+<li><p>封装：通过封装，我们可以将对象内部状态隐藏、保护起来。</p></li>
+<li><p>不可变：还记得我们在[专栏第3讲]强调的final和immutable吗，就是这个道理，Java语言目前还没有真正意义上的原生不可变，但是未来也许会引入。</p></li>
+</ul>
+<p>线程安全需要保证几个基本特性：</p>
+<ul>
+<li><p><strong>原子性</strong>，简单说就是相关操作不会中途被其他线程干扰，一般通过同步机制实现。</p></li>
+<li><p><strong>可见性</strong>，是一个线程修改了某个共享变量，其状态能够立即被其他线程知晓，通常被解释为将线程本地状态反映到主内存上，volatile就是负责保证可见性的。</p></li>
+<li><p><strong>有序性</strong>，是保证线程内串行语义，避免指令重排等。</p></li>
+</ul>
+<p>可能有点晦涩，那么我们看看下面的代码段，分析一下原子性需求体现在哪里。这个例子通过取两次数值然后进行对比，来模拟两次对共享状态的操作。</p>
+<p>你可以编译并执行，可以看到，仅仅是两个线程的低度并发，就非常容易碰到former和latter不相等的情况。这是因为，在两次取值的过程中，其他线程可能已经修改了sharedState。</p>
+<pre><code class="language-java">    public class ThreadSafeSample {
+    	public int sharedState;
+    	public void nonSafeAction() {
+        	while (sharedState &lt; 100000) {
+            	int former = sharedState++;
+            	int latter = sharedState;
+            	if (former != latter - 1) {
+                	System.out.printf("Observed data race, former is " +
+                        	former + ", " + "latter is " + latter);
+            	}
+        	}
+    	}
+    
+    	public static void main(String[] args) throws InterruptedException {
+        	ThreadSafeSample sample = new ThreadSafeSample();
+        	Thread threadA = new Thread(){
+            	public void run(){
+                	sample.nonSafeAction();
+            	}
+        	};
+        	Thread threadB = new Thread(){
+            	public void run(){
+                	sample.nonSafeAction();
+            	}
+     	   };
+        	threadA.start();
+        	threadB.start();
+        	threadA.join();
+        	threadB.join();
+    	}
+    }
+</code></pre>
+<p>下面是在我的电脑上的运行结果：</p>
+<pre><code>    C:\&gt;c:\jdk-9\bin\java ThreadSafeSample
+    Observed data race, former is 13097, latter is 13099
+</code></pre>
+<p>将两次赋值过程用synchronized保护起来，使用this作为互斥单元，就可以避免别的线程并发的去修改sharedState。</p>
+<pre><code class="language-java">    synchronized (this) {
+    	int former = sharedState ++;
+    	int latter = sharedState;
+    	// …
+    }
+</code></pre>
+<p>如果用javap反编译，可以看到类似片段，利用monitorenter/monitorexit对实现了同步的语义：</p>
+<pre><code>    11: astore_1
+    12: monitorenter
+    13: aload_0
+    14: dup
+    15: getfield  	#2              	// Field sharedState:I
+    18: dup_x1
+    …
+    56: monitorexit
+</code></pre>
+<p>我会在下一讲，对synchronized和其他锁实现的更多底层细节进行深入分析。</p>
+<p>代码中使用synchronized非常便利，如果用来修饰静态方法，其等同于利用下面代码将方法体囊括进来：</p>
+<pre><code class="language-java">    synchronized (ClassName.class) {}
+</code></pre>
+<p>再来看看ReentrantLock。你可能好奇什么是再入？它是表示当一个线程试图获取一个它已经获取的锁时，这个获取动作就自动成功，这是对锁获取粒度的一个概念，也就是锁的持有是以线程为单位而不是基于调用次数。Java锁实现强调再入性是为了和pthread的行为进行区分。</p>
+<p>再入锁可以设置公平性（fairness），我们可在创建再入锁时选择是否是公平的。</p>
+<pre><code class="language-java">    ReentrantLock fairLock = new ReentrantLock(true);
+</code></pre>
+<p>这里所谓的公平性是指在竞争场景中，当公平性为真时，会倾向于将锁赋予等待时间最久的线程。公平性是减少线程“饥饿”（个别线程长期等待锁，但始终无法获取）情况发生的一个办法。</p>
+<p>如果使用synchronized，我们根本<strong>无法进行</strong>公平性的选择，其永远是不公平的，这也是主流操作系统线程调度的选择。通用场景中，公平性未必有想象中的那么重要，Java默认的调度策略很少会导致 “饥饿”发生。与此同时，若要保证公平性则会引入额外开销，自然会导致一定的吞吐量下降。所以，我建议<strong>只有</strong>当你的程序确实有公平性需要的时候，才有必要指定它。</p>
+<p>我们再从日常编码的角度学习下再入锁。为保证锁释放，每一个lock()动作，我建议都立即对应一个try-catch-finally，典型的代码结构如下，这是个良好的习惯。</p>
+<pre><code class="language-java">    ReentrantLock fairLock = new ReentrantLock(true);// 这里是演示创建公平锁，一般情况不需要。
+    fairLock.lock();
+    try {
+    	// do something
+    } finally {
+     	fairLock.unlock();
+    }
+</code></pre>
+<p>ReentrantLock相比synchronized，因为可以像普通对象一样使用，所以可以利用其提供的各种便利方法，进行精细的同步操作，甚至是实现synchronized难以表达的用例，如：</p>
+<ul>
+<li><p>带超时的获取锁尝试。</p></li>
+<li><p>可以判断是否有线程，或者某个特定线程，在排队等待获取锁。</p></li>
+<li><p>可以响应中断请求。</p></li>
+<li><p>…</p></li>
+</ul>
+<p>这里我特别想强调<strong>条件变量</strong>（java.util.concurrent.Condition），如果说ReentrantLock是synchronized的替代选择，Condition则是将wait、notify、notifyAll等操作转化为相应的对象，将复杂而晦涩的同步操作转变为直观可控的对象行为。</p>
+<p>条件变量最为典型的应用场景就是标准类库中的ArrayBlockingQueue等。</p>
+<p>我们参考下面的源码，首先，通过再入锁获取条件变量：</p>
+<pre><code class="language-java">    /** Condition for waiting takes */
+    private final Condition notEmpty;
+    
+    /** Condition for waiting puts */
+    private final Condition notFull;
+     
+    public ArrayBlockingQueue(int capacity, boolean fair) {
+    	if (capacity &lt;= 0)
+        	throw new IllegalArgumentException();
+    	this.items = new Object[capacity];
+    	lock = new ReentrantLock(fair);
+    	notEmpty = lock.newCondition();
+    	notFull =  lock.newCondition();
+    }
+</code></pre>
+<p>两个条件变量是从<strong>同一再入锁</strong>创建出来，然后使用在特定操作中，如下面的take方法，判断和等待条件满足：</p>
+<pre><code class="language-java">    public E take() throws InterruptedException {
+    	final ReentrantLock lock = this.lock;
+    	lock.lockInterruptibly();
+    	try {
+        	while (count == 0)
+            	notEmpty.await();
+        	return dequeue();
+    	} finally {
+        	lock.unlock();
+    	}
+    }
+</code></pre>
+<p>当队列为空时，试图take的线程的正确行为应该是等待入队发生，而不是直接返回，这是BlockingQueue的语义，使用条件notEmpty就可以优雅地实现这一逻辑。</p>
+<p>那么，怎么保证入队触发后续take操作呢？请看enqueue实现：</p>
+<pre><code class="language-java">    private void enqueue(E e) {
+    	// assert lock.isHeldByCurrentThread();
+    	// assert lock.getHoldCount() == 1;
+    	// assert items[putIndex] == null;
+    	final Object[] items = this.items;
+    	items[putIndex] = e;
+    	if (++putIndex == items.length) putIndex = 0;
+    	count++;
+    	notEmpty.signal(); // 通知等待的线程，非空条件已经满足
+    }
+</code></pre>
+<p>通过signal/await的组合，完成了条件判断和通知等待线程，非常顺畅就完成了状态流转。注意，signal和await成对调用非常重要，不然假设只有await动作，线程会一直等待直到被打断（interrupt）。</p>
+<p>从性能角度，synchronized早期的实现比较低效，对比ReentrantLock，大多数场景性能都相差较大。但是在Java 6中对其进行了非常多的改进，可以参考性能<a href="https://dzone.com/articles/synchronized-vs-lock" target="_blank">对比</a>，在高竞争情况下，ReentrantLock仍然有一定优势。我在下一讲进行详细分析，会更有助于理解性能差异产生的内在原因。在大多数情况下，无需纠结于性能，还是考虑代码书写结构的便利性、可维护性等。</p>
+<p>今天，作为专栏进入并发阶段的第一讲，我介绍了什么是线程安全，对比和分析了synchronized和ReentrantLock，并针对条件变量等方面结合案例代码进行了介绍。下一讲，我将对锁的进阶内容进行源码和案例分析。</p>
+<h2 id="一课一练">一课一练</h2>
+<p>关于今天我们讨论的synchronized和ReentrantLock你做到心中有数了吗？思考一下，你使用过ReentrantLock中的哪些方法呢？分别解决什么问题？</p>
+<p>请你在留言区写写你对这个问题的思考，我会选出经过认真思考的留言，送给你一份学习鼓励金，欢迎你与我一起讨论。</p>
+<p>你的朋友是不是也在准备面试呢？你可以“请朋友读”，把今天的题目分享给好友，或许你能帮到他。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

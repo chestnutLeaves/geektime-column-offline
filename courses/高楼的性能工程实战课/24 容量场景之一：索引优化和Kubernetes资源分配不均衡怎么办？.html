@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>24 容量场景之一：索引优化和Kubernetes资源分配不均衡怎么办？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">高楼的性能工程实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">34 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>高楼的性能工程实战课</strong><ul><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E6%89%93%E7%A0%B4%E5%9B%9B%E5%A4%A7%E8%AE%A4%E7%9F%A5%E5%B1%80%E9%99%90%EF%BC%8C%E8%BF%9B%E9%98%B6%E9%AB%98%E7%BA%A7%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%B8%88.html">00 开篇词 打破四大认知局限，进阶高级性能工程师</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%88%E5%A4%9A%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E4%BA%BA%E5%91%98%E6%97%A0%E6%B3%95%E5%AF%B9%E6%80%A7%E8%83%BD%E7%BB%93%E6%9E%9C%E8%B4%9F%E8%B4%A3%EF%BC%9F.html">01 性能工程：为什么很多性能测试人员无法对性能结果负责？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5%EF%BC%9A%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E5%92%8C%E5%9C%BA%E6%99%AF%E7%9A%84%E7%A1%AE%E5%AE%9A.html">02 关键概念：性能指标和场景的确定</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E6%A0%B8%E5%BF%83%E5%88%86%E6%9E%90%E9%80%BB%E8%BE%91%EF%BC%9A%E6%89%80%E6%9C%89%E7%9A%84%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%8C%E9%9D%A0%E8%BF%99%E4%B8%83%E6%AD%A5%E9%83%BD%E8%83%BD%E6%90%9E%E5%AE%9A.html">03 核心分析逻辑：所有的性能分析，靠这七步都能搞定</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E6%9F%A5%E6%89%BE%E7%93%B6%E9%A2%88%E8%AF%81%E6%8D%AE%E9%93%BE%EF%BC%9F.html">04 如何构建性能分析决策树和查找瓶颈证据链？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E6%80%A7%E8%83%BD%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BD%A0%E7%9A%84%E6%96%B9%E6%A1%88%E6%98%AF%E5%90%A6%E8%BF%98%E5%81%9C%E7%95%99%E5%9C%A8%E5%BD%A2%E5%BC%8F%E4%B8%8A%EF%BC%9F.html">05 性能方案：你的方案是否还停留在形式上？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E5%A6%82%E4%BD%95%E6%8A%BD%E5%8F%96%E5%87%BA%E7%AC%A6%E5%90%88%E7%9C%9F%E5%AE%9E%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%9E%8B%EF%BC%9F.html">06 如何抽取出符合真实业务场景的业务模型？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E6%80%A7%E8%83%BD%E5%9C%BA%E6%99%AF%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%B0%E5%BA%95%E5%BA%94%E8%AF%A5%E5%81%9A%E6%88%90%E4%BB%80%E4%B9%88%E6%A0%B7%E5%AD%90%EF%BC%9F.html">07 性能场景的数据到底应该做成什么样子？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E5%B9%B6%E5%8F%91%E3%80%81%E5%9C%A8%E7%BA%BF%E5%92%8CTPS%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.html">08 并发、在线和TPS到底是什么关系？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%85%A8%E5%B1%80%E5%92%8C%E5%AE%9A%E5%90%91%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5%EF%BC%9F.html">09 如何设计全局和定向监控策略？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E8%AE%BE%E8%AE%A1%E5%9F%BA%E5%87%86%E5%9C%BA%E6%99%AF%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E5%93%AA%E4%BA%9B%E5%85%B3%E9%94%AE%E7%82%B9%EF%BC%9F.html">10 设计基准场景需要注意哪些关键点？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/11%20%E6%89%93%E5%BC%80%E9%A6%96%E9%A1%B5%E4%B9%8B%E4%B8%80%EF%BC%9A%E4%B8%80%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%8C%E5%B8%A6%E4%BD%A0%E6%90%9E%E6%87%82%E5%9F%BA%E7%A1%80%E7%A1%AC%E4%BB%B6%E8%AE%BE%E6%96%BD%E7%9A%84%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98.html">11 打开首页之一：一个案例，带你搞懂基础硬件设施的性能问题</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/12%20%E6%89%93%E5%BC%80%E9%A6%96%E9%A1%B5%E4%B9%8B%E4%BA%8C%EF%BC%9A%E5%A6%82%E4%BD%95%E5%B9%B3%E8%A1%A1%E5%88%A9%E7%94%A8%E7%A1%AC%E4%BB%B6%E8%B5%84%E6%BA%90%EF%BC%9F.html">12 打开首页之二：如何平衡利用硬件资源？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/13%20%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%EF%BC%9A%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84Block%E5%8E%9F%E5%9B%A0%EF%BC%9F.html">13 用户登录：怎么判断线程中的Block原因？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/14%20%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%BD%91%E7%BB%9C%E8%BD%AF%E4%B8%AD%E6%96%AD%E7%93%B6%E9%A2%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">14 用户信息查询：如何解决网络软中断瓶颈问题？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/15%20%E6%9F%A5%E8%AF%A2%E5%95%86%E5%93%81%EF%BC%9A%E8%B5%84%E6%BA%90%E4%B8%8D%E8%B6%B3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%80%A7%E8%83%BD%E8%A1%A8%E7%8E%B0%EF%BC%9F.html">15 查询商品：资源不足有哪些性能表现？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/16%20%E5%95%86%E5%93%81%E5%8A%A0%E5%85%A5%E8%B4%AD%E7%89%A9%E8%BD%A6%EF%BC%9ASQL%E4%BC%98%E5%8C%96%E5%92%8C%E5%8E%8B%E5%8A%9B%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E5%88%86%E6%9E%90.html">16 商品加入购物车：SQL优化和压力工具中的参数分析</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/17%20%E6%9F%A5%E8%AF%A2%E8%B4%AD%E7%89%A9%E8%BD%A6%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%93%BA%E5%BA%95%E5%8F%82%E6%95%B0%E4%B8%80%E5%AE%9A%E8%A6%81%E7%AC%A6%E5%90%88%E7%9C%9F%E5%AE%9E%E4%B8%9A%E5%8A%A1%E7%89%B9%E6%80%A7%EF%BC%9F.html">17 查询购物车：为什么铺底参数一定要符合真实业务特性？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/18%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%BF%A1%E6%81%AF%E7%A1%AE%E5%AE%9A%E8%AE%A2%E5%8D%95%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E5%8C%96%E9%80%BB%E8%BE%91%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%EF%BC%9F.html">18 购物车信息确定订单：为什么动态参数化逻辑非常重要？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/19%20%E7%94%9F%E6%88%90%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%E4%B9%8B%E4%B8%80%EF%BC%9A%E5%BA%94%E7%94%A8JDBC%E6%B1%A0%E4%BC%98%E5%8C%96%E5%92%8C%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%88%86%E6%9E%90.html">19 生成订单信息之一：应用JDBC池优化和内存溢出分析</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/20%20%E7%94%9F%E6%88%90%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%E4%B9%8B%E4%BA%8C%EF%BC%9A%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E5%A4%8D%E6%9D%82%EF%BC%8C%E6%80%8E%E4%B9%88%E5%81%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F.html">20 生成订单信息之二：业务逻辑复杂，怎么做性能优化？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/21%20%E6%94%AF%E4%BB%98%E5%89%8D%E6%9F%A5%E8%AF%A2%E8%AE%A2%E5%8D%95%E5%88%97%E8%A1%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%E4%BC%98%E5%8C%96%E4%B8%80%E4%B8%AA%E5%9B%BA%E5%AE%9A%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6%EF%BC%9F.html">21 支付前查询订单列表：如何分析优化一个固定的技术组件？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/22%20%E6%94%AF%E4%BB%98%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E8%A7%A3%E5%86%B3for%E5%BE%AA%E7%8E%AF%E4%BA%A7%E7%94%9F%E7%9A%84%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%9F.html">22 支付订单信息：如何高效解决for循环产生的内存溢出？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E5%86%B3%E5%AE%9A%E5%AE%B9%E9%87%8F%E5%9C%BA%E6%99%AF%E6%88%90%E8%B4%A5%E7%9A%84%E5%85%B3%E9%94%AE%E5%9B%A0%E7%B4%A0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">23 决定容量场景成败的关键因素有哪些？</a></li><li><a class="active" aria-current="page" href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E5%AE%B9%E9%87%8F%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%B8%80%EF%BC%9A%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%92%8CKubernetes%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E4%B8%8D%E5%9D%87%E8%A1%A1%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.html">24 容量场景之一：索引优化和Kubernetes资源分配不均衡怎么办？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/25%20%E5%AE%B9%E9%87%8F%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%BA%8C%EF%BC%9A%E7%BC%93%E5%AD%98%E5%AF%B9%E6%80%A7%E8%83%BD%E4%BC%9A%E6%9C%89%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9F.html">25 容量场景之二：缓存对性能会有什么样的影响？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/26%20%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%B8%80%EF%BC%9A%E6%80%8E%E6%A0%B7%E6%90%9E%E5%AE%9A%E4%B8%9A%E5%8A%A1%E7%A7%AF%E7%B4%AF%E9%87%8F%E4%BA%A7%E7%94%9F%E7%9A%84%E7%93%B6%E9%A2%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">26 稳定性场景之一：怎样搞定业务积累量产生的瓶颈问题？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%BA%8C%EF%BC%9A%E6%80%8E%E6%A0%B7%E6%90%9E%E5%AE%9A%E7%A3%81%E7%9B%98%E4%B8%8D%E8%B6%B3%E4%BA%A7%E7%94%9F%E7%9A%84%E7%93%B6%E9%A2%88%E9%97%AE%E9%A2%98%EF%BC%9F.html">27 稳定性场景之二：怎样搞定磁盘不足产生的瓶颈问题？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E5%BC%82%E5%B8%B8%E5%9C%BA%E6%99%AF%E7%9A%84%E8%8C%83%E5%9B%B4%E5%92%8C%E8%AE%BE%E8%AE%A1%E9%80%BB%E8%BE%91%EF%BC%9F.html">28 如何确定异常场景的范围和设计逻辑？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E5%BC%82%E5%B8%B8%E5%9C%BA%E6%99%AF%EF%BC%9A%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9F%E4%B8%8D%E5%90%8C%E7%BB%84%E4%BB%B6%E5%B1%82%E7%BA%A7%E7%9A%84%E5%BC%82%E5%B8%B8%EF%BC%9F.html">29 异常场景：如何模拟不同组件层级的异常？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E7%94%9F%E4%BA%A7%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%EF%BC%9F.html">30 如何确定生产系统配置？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E6%80%8E%E4%B9%88%E5%86%99%E5%87%BA%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84%E6%80%A7%E8%83%BD%E6%8A%A5%E5%91%8A%EF%BC%9F.html">31 怎么写出有价值的性能报告？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/%E6%88%91%E4%BB%AC%E8%BF%99%E4%B8%AA%E8%AF%BE%E7%A8%8B%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%98%AF%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%B5%B7%E6%9D%A5%E7%9A%84%EF%BC%9F.html">我们这个课程的系统是怎么搭建起来的？</a></li><li><a href="/courses/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E5%81%9A%E7%9C%9F%E6%AD%A3%E7%9A%84%E6%80%A7%E8%83%BD%E9%A1%B9%E7%9B%AE.html">结束语 做真正的性能项目</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E9%AB%98%E6%A5%BC%E7%9A%84%E6%80%A7%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%AF%BE/24%20%E5%AE%B9%E9%87%8F%E5%9C%BA%E6%99%AF%E4%B9%8B%E4%B8%80%EF%BC%9A%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%92%8CKubernetes%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E4%B8%8D%E5%9D%87%E8%A1%A1%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="24 容量场景之一：索引优化和Kubernetes资源分配不均衡怎么办？" id="title">24 容量场景之一：索引优化和Kubernetes资源分配不均衡怎么办？</h1>
+<div><p>你好，我是高楼。</p>
+<p>我们知道，做容量场景的目的是要回答“线上容量最大能达到多少”的问题，这就要求我们在设计和执行容量场景的时候要非常严谨。当然，这也意味着容量场景将是一个艰辛的过程。通过这节课，你就能深切地体会到。</p>
+<p>今天，我们重点来解决索引优化和Kubernetes调度不均衡的问题。关于索引优化，你可能会奇怪，基准场景都捊过一遍了，为啥还有要看索引的问题？是呀，确实让人疑惑。从这里就可以看出，容量场景和基准场景真的不太一样，因为这其中有业务相互影响的问题。</p>
+<p>而Kubernetes调度不均衡的问题将导致多个Pod运行在了同一个worker上，像这样的问题，我们不在容量场景中是看不到的，希望能对你处理类似问题有一个借鉴。</p>
+<p>此外，我们还将一起看看在压力稳定的情况下，响应时间不断攀升该怎么办。这种问题很常见，但是每次出现问题点都不太相同，这次你将看到一个具体的案例。</p>
+<p>好，我们开始吧！</p>
+<h2 id="场景运行数据">场景运行数据</h2>
+<h3 id="第一次运行">第一次运行</h3>
+<p>不得不承认，第一次来到容量场景，还真是心惊胆颤的。</p>
+<p>首先，我们小心翼翼地设置起容量场景的比例，也就是我们在<a href="https://time.geekbang.org/column/article/357539" target="_blank">第5讲</a>中提到的业务比例，再设置好相应的参数和关联。然后，我们把容量场景跑起来，得到了这样的信息：</p>
+<p><img alt="" src="/assets/8c6454eb25a4734e0ac42f83.png"/></p>
+<p>顿时就有一种满头包的感觉，有没有？！不过，“见招拆招，遇魔降魔”不就是我们的宗旨吗？既然有错，那咱们就先解决错误吧。</p>
+<p>我们先看下错误信息：</p>
+<p><img alt="" src="/assets/1e44700ef2bf952b706eae24.png"/></p>
+<p>看来是两个脚本有问题。我单独运行了这两个脚本之后，发现是参数化数据设置错了。因为之前每个接口都是单脚本运行的，而现在要连到一起跑，所以，参数化数据需要重新配置。这种简单的错误，我就不详细描述了，只要你细心一点，很快就能查到。</p>
+<p>修改了这个简单的脚本错误之后，我们再把容量场景跑起来：</p>
+<p><img alt="" src="/assets/89a601c6a32ed097707bb1b8.png"/></p>
+<p>先不管性能怎么样，你看，现在至少没有错误信息了，对不对？很好，我们接着来看容量场景中的其他问题。</p>
+<h3 id="第二次运行">第二次运行</h3>
+<p>解决了第一个问题之后，我们把场景运行一段时间，又看到了下面这样的场景运行数据：</p>
+<p><img alt="" src="/assets/69bd88234e41e8efc2df5f7b.png"/></p>
+<p>数据并没有太好看，还是有失败的地方。我们来看看是怎么一回事：</p>
+<p><img alt="" src="/assets/eaa4b353f4e15b55d289fef8.png"/></p>
+<p>从数据上来看，错误信息应该和脚本无关，是某个组件出现了问题，导致所有的脚本都不能正常运行了。</p>
+<p>通过查看全局监控的Pod界面，我们看到这样的现象：</p>
+<p><img alt="" src="/assets/9bb67ee86955149a8a88264d.png"/></p>
+<p>考虑到我们在前面分析中对ES的资源限制得比较狠（只有1C，因为不想让ES影响其他业务，这一点在<a href="https://time.geekbang.org/column/article/366020" target="_blank">第</a><a href="https://time.geekbang.org/column/article/366020" target="_blank">15</a><a href="https://time.geekbang.org/column/article/366020" target="_blank">讲</a>中已经有过分析），在前文中虽然我们通过对ES POD扩容提升了性能，但为了不影响后面的优化，我又给调回去去了。在这里，我们先把使用ES的业务，也就是查询商品给禁掉，再次运行起来容量场景。</p>
+<h3 id="第三次运行">第三次运行</h3>
+<p>我们来看第三次运行的结果：</p>
+<p><img alt="" src="/assets/47c811629bfa70216c449b48.png"/></p>
+<p>还是有少量的报错，我们先看错在哪里，再解决响应时间长的问题。</p>
+<p>这里我说明一点，对于报错，我们可以先看错误信息是什么，脚本有没有问题。但是，由于我们已经来到了容量场景，脚本如果有问题，就会在基准场景中体现出来了。所以，这时候我们去查应用的日志更为理智。</p>
+<p>于是，通过一层层地查日志，我们留意到了Cart信息：</p>
+<pre><code>2021-01-26 00:20:43.585 ERROR 1 --- [o-8086-exec-669] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is feign.RetryableException: timeout executing GET http://mall-member/sso/feign/info] with root cause
+java.net.SocketException: Socket closed
+</code></pre>
+<p>很显然，在Cart服务上，我们看到已经报远程调用（Feign调用）超时了，并且调用的是member服务。</p>
+<p>由于是Cart服务调用Member服务出的错，我们现在去看Member日志：</p>
+<pre><code>2021-01-26 00:20:46.094 ERROR 1 --- [o-8083-exec-308] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is feign.RetryableException: timeout executing POST http://mall-auth/oauth/token?password=123456&amp;grant_type=password&amp;client_secret=123456&amp;client_id=portal-app&amp;username=7dcmtest13657257045] with root cause
+java.net.SocketTimeoutException: timeout
+</code></pre>
+<p>你看，Member上显示的是读Auth出错。可是，当我再去看Auth服务时，发现Auth服务上空空如也，啥错也没有。</p>
+<p>根据我的经验，报错可能是由于一个瞬间问题导致的读超时，只有等它再次出现我们再去收拾了。</p>
+<p>因为对于错误信息，我们暂时还没查到具体是什么问题。所以，我们接着持续运行场景，我们看一下结果：</p>
+<p><img alt="" src="/assets/ff051991b08ffbae418b03a8.png"/></p>
+<p>你瞧，确实有少量报错。从整体上看，这只是少量的读超时问题。在性能测试中，有毛刺是很正常的情况。而且现在的部署结构中仍然有单点Java应用存在，这种情况也不可避免。</p>
+<p>不过，从上图中，我们能看到一个比较明显的问题，那就是TPS在不断下降，我们得先解决这个问题才行。</p>
+<h2 id="第一阶段分析">第一阶段分析</h2>
+<h3 id="定向监控分析">定向监控分析</h3>
+<p>虽然整体的TPS不高，但是我们面对的第一个问题仍然是：TPS会在压力持续之下不断下降。</p>
+<p>由于我们现在执行的是容量场景，包含了多个业务，所以我们得先知道是什么样的业务导致了像上图中那样的TPS趋势。而容量场景中的脚本都是接口串行的，因此，当一个脚本出现这种情况时，所有的业务都会慢下来，即使是那些本身不慢的业务，TPS也会受到影响。</p>
+<p>但是，对于没有问题的业务接口，它们的响应时间是不会受到影响的。那些响应时间变长的业务接口，自然就成了我们重点关注的对象了。</p>
+<p>通过一个一个的业务接口排查，我发现有三个业务的响应时间，随着场景的持续在不断增加：</p>
+<p><img alt="" src="/assets/6dc1811193fddcc84cd1c930.png"/>-
+<img alt="" src="/assets/a45709a7b67e4f743eddd1c9.png"/>-
+<img alt="" src="/assets/e4d545f71db64b70b9f0e750.png"/></p>
+<p>这三个业务分别是“支付前查询订单列表”、“支付订单信息”和“支付后查询订单详情”，但是在前面的基准场景的分析中，它们并没有出现这种现象，也就是说它们是在容量场景中新出现了问题。</p>
+<p>既然这几个业务的脚本都有这种现象，那我们就接着来分析时间具体慢在了哪里。我先从最简单的业务链路paySuccess（支付订单信息）接口查起。</p>
+<p>这个接口的架构图我们在<a href="https://time.geekbang.org/column/article/372274" target="_blank">第</a><a href="https://time.geekbang.org/column/article/372274" target="_blank">22</a><a href="https://time.geekbang.org/column/article/372274" target="_blank">讲</a>中已经讲过了，就是JMeter - Gateway - Order - Mysql（如果再加上其他的技术组件，架构图会更复杂一些。不过，我们现在还没有看到它们的影响，所以，我暂时不列在这里）。</p>
+<p>通过性能分析决策树的全局监控计数器逐层查看，我看到有一个SQL语句在不断变慢：</p>
+<pre><code>SELECT id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, STATUS, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration, payment_time, delivery_time, receive_time, comment_time, modify_timeFROM oms_orderWHERE (  delete_status = 0  AND member_id = 277673 )ORDER BY create_time DESCLIMIT 4, 1;
+</code></pre>
+<p>接着，我们进一步看看这个Select语句的索引：</p>
+<p><img alt="" src="/assets/146d770cf6a9628746cf0662.png"/></p>
+<p>咦，怎么有两个可能会用到的索引？具体查看一下，果然有两个索引，并且还是在同一个列上。</p>
+<p><img alt="" src="/assets/e423453bd6ae887328d2612e.png"/></p>
+<p>我们先删一个再说。不过，删索引并不是为了解决性能问题，我们只是顺手改一下而已。</p>
+<p>现在，索引上显示的数据很明确，随着容量场景的执行，这个SQL查的数据行数越来越多。既然这个Select语句越来越慢，那我们就去查一下根据它的条件产生的直方图是什么。我查到了这样的直方图：</p>
+<p><img alt="" src="/assets/c1ab997943a230d2fd3bed7d.png"/></p>
+<p>你看，一个用户下出现了很多个订单，应该是出现了集中插入订单数据的情况。因此，我们查一下在使用参数化的文件中，用户信息是不是也重复了。</p>
+<p><img alt="" src="/assets/0ee3e3933727219aa1e1b02b.png"/></p>
+<p>通过查找，我们看到在参数化文本中，确实有大量的重复数据。我们梳理一下业务脚本的参数化逻辑：</p>
+<p><img alt="" src="/assets/5cf82bd3355147ad02616173.jpg"/></p>
+<p>既然订单数据是重复的，那我们就反向追溯回去，肯定是购物车数据重复了；再接着往前追溯，应该是member_id在使用用户Token时出现了重复。在检查了所有的业务脚本之后，我们看到是获取用户参数脚本生成的Token：</p>
+<p><img alt="" src="/assets/f64cd7f1a0eef48ca446b6b6.png"/></p>
+<p>而这个脚本中的数据，使用的是这样的参数文件：</p>
+<p><img alt="" src="/assets/b84d2479c3f3d4ff0b2f4951.png"/></p>
+<p>这个参数文件中只有100条数据，而这100条数据中就有大量的重复member_ID。这样一来，问题就清楚了：原来是在造数据阶段，我们一开始使用的Member数据已经有了问题，从而导致了订单数据大量重复。</p>
+<p>问题的原因查清楚了，我们现在只有重新造数据了。这时候我们就要注意，必须使用不重复的member_id来造订单数据，并且在每一步中，检查一下生成的数据是否有重复的现象。</p>
+<p>经过一番折腾之后，TPS如下：</p>
+<p><img alt="" src="/assets/71b545e78e901dc3ca8a8033.png"/></p>
+<p>这个优化效果很好，我们通过解决参数化的重复问题，解决了同一个用户下产生大量订单的问题，进而解决了我们在前面看到的响应时间不断增加的问题。</p>
+<p>对于这样的参数化问题，其实难点就在于参数化是登录时做的，而在订单脚本中使用的参数，会用到登录脚本中产生的数据，但由于前面做的参数化出现了重复，导致后续的参数也重复了。对于这样的问题，我们需要耐心梳理参数化的数据来源。</p>
+<p>到这里，我们解决了响应时间不断增加的问题，不过，我们的优化还没结束。你看上图中响应时间的窗口，出现了有的接口响应时间较长、整体TPS并没有太高的现象，因此，我们还要进行第二阶段的分析。</p>
+<h2 id="第二阶段分析">第二阶段分析</h2>
+<p>根据我们的性能分析逻辑，下面我们要做的就是拆分响应时间和查看全局监控数据了，并且这两步都要做。</p>
+<p>相信你已经发现了，我们在分析的时候，有时候要拆分响应时间，有时候就直接看全局监控数据了。这是因为<strong>当我们能从全局监控数据中看到问题所在时，不用拆分响应时间就能往下分析</strong>，我们只需要按照分析七步法，接着往下走就可以了。</p>
+<p><strong>如果我们没有从全局监控数据中看到比较明显的资源消耗，同时，响应时间又在不断上升，那我们就必须拆分响应时间，来精准地判断。</strong></p>
+<h3 id="全局监控分析">全局监控分析</h3>
+<p>在查看了全局监控数据之后，数据库的资源如下所示：</p>
+<p><img alt="" src="/assets/d267660b5e1a8f2cbda8fa7e.png"/></p>
+<p>你看，worker-1的CPU资源使用率比较高，我们进到这个机器中看一下top：</p>
+<p><img alt="" src="/assets/8ff02031d42f4a2867536a61.png"/></p>
+<p>显然多个CPU使用率已经达到了100%，从process table中我们也能看到，CPU消耗最高的显然是MySQL进程。那下面的的分析逻辑就很清楚了（在<a href="https://time.geekbang.org/column/article/367285" target="_blank">第16讲</a>中已经详细描述过）。</p>
+<h3 id="定向监控分析-1">定向监控分析</h3>
+<p>这是一个典型的数据库CPU使用率高的问题，而且也相对比较简单。我们仍然是看MySQL的全局监控数据、查SQL、查执行计划和创建索引。有问题的SQL如下所示：</p>
+<p><img alt="" src="/assets/d74e82d4cbb9d595ff358960.png"/></p>
+<p>同样，type列的ALL告诉我们这个SQL是全表扫描。在相应的表上创建索引之后，执行计划如下：</p>
+<p><img alt="" src="/assets/3ffc027593cb1b57119ea4dd.png"/></p>
+<p>从type中的ref值来看，我们现在已经创建好索引了。</p>
+<p>接着我们把容量场景再执行起来，我们得到下面这张全局监控图：</p>
+<p><img alt="" src="/assets/8ff0b0e5769408c179b5272f.png"/></p>
+<p>可以看到，worker-1的CPU已经下去了。</p>
+<p>我们再来看一下场景的运行结果：</p>
+<p><img alt="" src="/assets/fd6d637c29eae8abd6b6e212.png"/></p>
+<p>嗯，效果还是不错的。索引能带来的作用就是这样，TPS会在我们增加索引之后，增加很多。这一点我在之前的课程中已经反复提到了，这里就不再详细说了。</p>
+<p>有人可能会问，不对呀，在之前的基准场景中为什么没有增加索引呢？之前的接口难道没有因为没增加索引出现瓶颈吗？</p>
+<p>对此，我其实也有这样的疑问。你想想，这个SQL是在生成订单时使用的，和优惠券相关，我删除了索引之后，又回去重新执行了生成订单的接口，发现TPS还是能达到之前基准场景的峰值。可见，这个SQL的问题在之前的场景中，确实没有表现出来，在混合场景中才会出现。</p>
+<p>在加了索引之后，我以为TPS可以正常一会了。可是没想到，第二天我在执行场景时，还是看到了不想看到的结果，具体问题我们在下一个阶段分析。</p>
+<p>这个项目就是这样，步步为坑。不过，也正是这种步步为坑的项目，才让我们有了更多的分析机会。下面我们就来看看到底出了什么问题。</p>
+<h2 id="第三阶段分析">第三阶段分析</h2>
+<h3 id="全局监控分析-1">全局监控分析</h3>
+<p>这就是在我持续执行容量场景之后，全局监控的结果：</p>
+<p><img alt="" src="/assets/e46cf760da8c6afd0ab46f20.png"/></p>
+<p>注意，这里不是说不需要拆分响应时间，而是我已经看过了响应时间的拆分数据，发现是Order服务上消耗的时间多。鉴于我们在前面的课程里已经做过多次响应时间的拆分，所以，我在这里就不再具体列出数据了。</p>
+<p>看到全局监控数据的第一个界面，我们就已经可以发现资源消耗比较高的节点了。从数据来看，worker-3的CPU使用率上来了达到了90%以上，worker-4的CPU使用率也上来了达到了70%以上，也就是说TPS会不断地掉下来。下面我带着你来分析一下。</p>
+<h3 id="定向监控分析-2">定向监控分析</h3>
+<p>我们进入到worker-3中，执行top，看看它上面都跑了哪些服务：</p>
+<pre><code>top - 23:21:36 up 11 days,  5:37,  5 users,  load average: 40.53, 49.79, 53.30
+Tasks: 335 total,   1 running, 332 sleeping,   2 stopped,   0 zombie
+%Cpu(s): 82.5 us,  8.7 sy,  0.0 ni, 3.0 id,  0.0 wa,  0.0 hi,  3.2 si,  2.6 st
+KiB Mem : 16265984 total,  2802952 free,  7089284 used,  6373748 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  8759980 avail Mem 
+
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                                                 
+26573 root      20   0 8930960 837008  15792 S  231.5  5.1 113:46.65 java -Dapp.id=svc-mall-order -javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.s+
+26973 root      20   0 8920512 810820  15776 S  173.7  5.0 112:24.54 java -Dapp.id=svc-mall-order -javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.s+
+24386 root      20   0 8864356 702676  15764 S  98.7  4.3 295:33.69 java -Dapp.id=svc-mall-portal -javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.+
+17778 root      20   0 8982272 803984  16888 S  97.4  4.9 375:15.37 java -Dapp.id=svc-mall-portal -javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.+
+ 1087 root      20   0 2574160 132160  31928 S  25.6  0.8   1637:21 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubern+
+25589 root      20   0 8839392 585348  15772 S  20.8  3.6 160:58.44 java -Dapp.id=svc-mall-auth -javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.se+
+ 1095 root      20   0  998512  86168  13100 S   6.5  0.5 837:37.56 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock                                  
+29226 root      20   0 8906120 881632  13700 S   5.8  5.4 760:36.91 java -Dapp.id=svc-mall-search -javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.+
+28206 root      20   0 7960552 341564  15700 S   4.9  2.1  66:28.23 java -Dapp.id=svc-mall-search -javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.+
+ 9844 root      20   0 1632416  47092  16676 S   2.9  0.3 559:35.51 calico-node -felix                                                                                      
+ 9646 polkitd   20   0 4327012  97744   4752 S   2.6  0.6  25:26.93 /usr/local/lib/erlang/
+</code></pre>
+<p>你看，杂七杂八的应用都弄到这一台机器上了，非常不符合正常的架构。</p>
+<p>我们在前面提到，在拆分响应时间的过程中，发现是Order服务消耗的时间多。而Order服务又是当前这个场景中最需要资源的应用，那我们就先把Auth、Portal之类的服务移走。</p>
+<p>移走了一些服务之后，我们先看看场景执行数据如何，再来决定是否需要再进行定向监控分析。</p>
+<p>为了确保我们瓶颈判断的方向正确，我们先来看一下全局监控数据：</p>
+<p><img alt="" src="/assets/571f5f6efda8800b0360e866.png"/></p>
+<p>再看一下场景运行数据：</p>
+<p><img alt="" src="/assets/6a9bf97b1bf4c9f02e6a86cd.png"/></p>
+<p>你看，TPS还挺正常的，对不对？看来我们不用再继续定向分析了。不过，这样的结果是不是真的正常了呢？我们的容量场景是不是可以结束了呢？欲知后事如何，且听下回分解。</p>
+<h2 id="总结">总结</h2>
+<p>我们这节课的分析过程还是挺坎坷的，光是场景运行就执行了三次，可见即便基准容量已经测试通过了，容量场景也没那么容易运行起来。</p>
+<p>在第一阶段的分析中，我们主要定位了在压力线程不变的情况下，TPS随时间增加而增加的问题。请你注意，<strong>压力不变时，TPS平稳才是正常的</strong>。</p>
+<p>在第二阶段分析中，我们定位了索引不合理的问题。这样的问题算是比较常见的，定位起来比较简单，优化起来也比较容易出效果。</p>
+<p>在第三阶段分析中，我们解决了资源使用过于集中的问题，其中，我做了资源的重新分配，并且也看起来挺正常了。</p>
+<p>对于资源的分配，我们要作出明确的判断。在Kubernetes中，资源的均衡分配很多时候都需要依赖Kubernetes的调度能力。而Kubernetes的调度是需要在调度的那个时刻来判断的，在压力持续的过程中，资源消耗并不一定合理，因此，我们需要在压力持续的过程中对Pod做出调整。</p>
+<h2 id="课后作业">课后作业</h2>
+<p>这就是今天的全部内容，最后给你留两个思考题吧：</p>
+<ol>
+<li>为什么在压力线程不变的情况下，TPS曲线下降、响应时间上升是不合理的？</li>
+<li>当资源使用过于集中的时候，如何定位Pod相互之间的影响？你有没有和这节课讲的不一样的招？</li>
+</ol>
+<p>记得在留言区和我讨论、交流你的想法，每一次思考都会让你更进一步。</p>
+<p>如果这节课让你有所收获，也欢迎你分享给你的朋友，共同学习进步。我们下一讲再见！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

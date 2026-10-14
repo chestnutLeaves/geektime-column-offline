@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04  MyBatis 反射工具箱：带你领略不一样的反射设计思路 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/index.html">深入剖析 MyBatis 核心原理-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>深入剖析 MyBatis 核心原理-完</strong><ul><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E9%A2%86%E7%95%A5%20MyBatis%20%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4%EF%BC%8C%E7%AA%81%E7%A0%B4%E6%8C%81%E4%B9%85%E5%8C%96%E6%8A%80%E6%9C%AF%E7%93%B6%E9%A2%88.html">00 开篇词  领略 MyBatis 设计思维，突破持久化技术瓶颈</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/01%20%20%E5%B8%B8%E8%A7%81%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6%E8%B5%8F%E6%9E%90%EF%BC%8C%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E8%AE%A9%E4%BD%A0%E9%80%89%E6%8B%A9%20MyBatis%EF%BC%9F.html">01  常见持久层框架赏析，到底是什么让你选择 MyBatis？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/02%20%20%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E6%8C%81%E4%B9%85%E5%B1%82%E7%A4%BA%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%8C20%20%E5%88%86%E9%92%9F%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%20MyBatis.html">02  订单系统持久层示例分析，20 分钟带你快速上手 MyBatis</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/03%20%20MyBatis%20%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90.html">03  MyBatis 源码环境搭建及整体架构解析</a></li><li><a class="active" aria-current="page" href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/04%20%20MyBatis%20%E5%8F%8D%E5%B0%84%E5%B7%A5%E5%85%B7%E7%AE%B1%EF%BC%9A%E5%B8%A6%E4%BD%A0%E9%A2%86%E7%95%A5%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E5%8F%8D%E5%B0%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF.html">04  MyBatis 反射工具箱：带你领略不一样的反射设计思路</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/05%20%20%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB%E5%9E%8B%E4%BD%93%E7%B3%BB%E4%B8%8E%20Java%20%E7%B1%BB%E5%9E%8B%E4%BD%93%E7%B3%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E2%80%9C%E7%88%B1%E6%81%A8%E6%83%85%E4%BB%87%E2%80%9D.html">05  数据库类型体系与 Java 类型体系之间的“爱恨情仇”</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/06%20%20%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%8D%83%E5%8D%83%E4%B8%87%EF%BC%8CMyBatis%20%E9%83%BD%E8%83%BD%E5%85%BC%E5%AE%B9%E7%9A%84%E7%A7%98%E5%AF%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F.html">06  日志框架千千万，MyBatis 都能兼容的秘密是什么？</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/07%20%20%E6%B7%B1%E5%85%A5%E6%95%B0%E6%8D%AE%E6%BA%90%E5%92%8C%E4%BA%8B%E5%8A%A1%EF%BC%8C%E6%8A%8A%E6%8F%A1%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%85%B3%E9%94%AE%E5%91%BD%E8%84%89.html">07  深入数据源和事务，把握持久化框架的两个关键命脉</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/08%20%20Mapper%20%E6%96%87%E4%BB%B6%E4%B8%8E%20Java%20%E6%8E%A5%E5%8F%A3%E7%9A%84%E4%BC%98%E9%9B%85%E6%98%A0%E5%B0%84%E4%B9%8B%E9%81%93.html">08  Mapper 文件与 Java 接口的优雅映射之道</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/09%20%20%E5%9F%BA%E4%BA%8E%20MyBatis%20%E7%BC%93%E5%AD%98%E5%88%86%E6%9E%90%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.html">09  基于 MyBatis 缓存分析装饰器模式的最佳实践</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/10%20%20%E9%B8%9F%E7%9E%B0%20MyBatis%20%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E6%8A%8A%E6%8F%A1%20MyBatis%20%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E8%84%89%E7%BB%9C%EF%BC%88%E4%B8%8A%EF%BC%89.html">10  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/11%20%20%E9%B8%9F%E7%9E%B0%20MyBatis%20%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E6%8A%8A%E6%8F%A1%20MyBatis%20%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E8%84%89%E7%BB%9C%EF%BC%88%E4%B8%8B%EF%BC%89.html">11  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/12%20%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E5%8A%A8%E6%80%81%20SQL%20%E8%AF%AD%E5%8F%A5%E8%A7%A3%E6%9E%90%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">12  深入分析动态 SQL 语句解析全流程（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/13%20%20%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%E5%8A%A8%E6%80%81%20SQL%20%E8%AF%AD%E5%8F%A5%E8%A7%A3%E6%9E%90%E5%85%A8%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">13  深入分析动态 SQL 语句解析全流程（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/14%20%20%E6%8E%A2%E7%A9%B6%20MyBatis%20%E7%BB%93%E6%9E%9C%E9%9B%86%E6%98%A0%E5%B0%84%E6%9C%BA%E5%88%B6%E8%83%8C%E5%90%8E%E7%9A%84%E7%A7%98%E5%AF%86%EF%BC%88%E4%B8%8A%EF%BC%89.html">14  探究 MyBatis 结果集映射机制背后的秘密（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/15%20%20%E6%8E%A2%E7%A9%B6%20MyBatis%20%E7%BB%93%E6%9E%9C%E9%9B%86%E6%98%A0%E5%B0%84%E6%9C%BA%E5%88%B6%E8%83%8C%E5%90%8E%E7%9A%84%E7%A7%98%E5%AF%86%EF%BC%88%E4%B8%8B%EF%BC%89.html">15  探究 MyBatis 结果集映射机制背后的秘密（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/16%20%20StatementHandler%EF%BC%9A%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A%E3%80%81SQL%20%E6%89%A7%E8%A1%8C%E5%92%8C%E7%BB%93%E6%9E%9C%E6%98%A0%E5%B0%84%E7%9A%84%E5%A5%A0%E5%9F%BA%E8%80%85.html">16  StatementHandler：参数绑定、SQL 执行和结果映射的奠基者</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/17%20%20Executor%20%E6%89%8D%E6%98%AF%E6%89%A7%E8%A1%8C%20SQL%20%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%B9%95%E5%90%8E%E6%8E%A8%E6%89%8B%EF%BC%88%E4%B8%8A%EF%BC%89.html">17  Executor 才是执行 SQL 语句的幕后推手（上）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/18%20%20Executor%20%E6%89%8D%E6%98%AF%E6%89%A7%E8%A1%8C%20SQL%20%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%B9%95%E5%90%8E%E6%8E%A8%E6%89%8B%EF%BC%88%E4%B8%8B%EF%BC%89.html">18  Executor 才是执行 SQL 语句的幕后推手（下）</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/19%20%20%E6%B7%B1%E5%85%A5%20MyBatis%20%E5%86%85%E6%A0%B8%E4%B8%8E%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E7%9A%84%E6%A1%A5%E6%A2%81%E2%80%94%E2%80%94%E6%8E%A5%E5%8F%A3%E5%B1%82.html">19  深入 MyBatis 内核与业务逻辑的桥梁——接口层</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/20%20%20%E6%8F%92%E4%BB%B6%E4%BD%93%E7%B3%BB%E8%AE%A9%20MyBatis%20%E4%B8%96%E7%95%8C%E6%9B%B4%E5%8A%A0%E7%B2%BE%E5%BD%A9.html">20  插件体系让 MyBatis 世界更加精彩</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/21%20%20%E6%B7%B1%E6%8C%96%20MyBatis%20%E4%B8%8E%20Spring%20%E9%9B%86%E6%88%90%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86.html">21  深挖 MyBatis 与 Spring 集成底层原理</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/22%20%20%E5%9F%BA%E4%BA%8E%20MyBatis%20%E7%9A%84%E8%A1%8D%E7%94%9F%E6%A1%86%E6%9E%B6%E4%B8%80%E8%A7%88.html">22  基于 MyBatis 的衍生框架一览</a></li><li><a href="/courses/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/23%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E4%BC%9A%E4%BD%BF%E7%94%A8%E5%8F%AA%E8%83%BD%E9%BB%98%E9%BB%98%E2%80%9C%E6%90%AC%E7%A0%96%E2%80%9D%EF%BC%8C%E6%87%82%E5%8E%9F%E7%90%86%E6%89%8D%E8%83%BD%E5%BF%AB%E9%80%9F%E6%99%8B%E5%8D%87.html">23 结束语  会使用只能默默“搬砖”，懂原理才能快速晋升</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%20MyBatis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86-%E5%AE%8C/04%20%20MyBatis%20%E5%8F%8D%E5%B0%84%E5%B7%A5%E5%85%B7%E7%AE%B1%EF%BC%9A%E5%B8%A6%E4%BD%A0%E9%A2%86%E7%95%A5%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E5%8F%8D%E5%B0%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="04  MyBatis 反射工具箱：带你领略不一样的反射设计思路" id="title">04  MyBatis 反射工具箱：带你领略不一样的反射设计思路</h1>
+<div><p><strong>反射是 Java 世界中非常强大、非常灵活的一种机制</strong>。在面向对象的 Java 语言中，我们只能按照 public、private 等关键字的规范去访问一个 Java 对象的属性和方法，但反射机制可以让我们在运行时拿到任何 Java 对象的属性或方法。</p>
+<p>有人说反射打破了类的封装性，破坏了我们的面向对象思维，我倒不这么认为。我觉得正是由于 Java 的反射机制，解决了很多面向对象无法解决的问题，才受到众多 Java 开源框架的青睐，也出现了有很多惊艳的反射实践，当然，这也包括 MyBatis 中的反射工具箱。</p>
+<p>凡事都有两面性，越是灵活、越是强大的工具，用起来的门槛就越高，反射亦如此。这也是写业务代码时，很少用到反射的原因。反过来说，如果必须要用反射解决业务问题的时候，就需要停下来思考我们的系统设计是不是有问题了。</p>
+<p><strong>为了降低反射使用门槛，MyBatis 内部封装了一个反射工具箱</strong>，其中包含了 MyBatis 自身常用的反射操作，MyBatis 其他模块只需要调用反射工具箱暴露的简洁 API 即可实现想要的反射功能。</p>
+<p>反射工具箱的具体代码实现位于 org.apache.ibatis.reflection 包中，下面我就带你一起深入分析该模块的核心实现。</p>
+<h3 id="reflector">Reflector</h3>
+<p><strong>Reflector 是 MyBatis 反射模块的基础</strong>。要使用反射模块操作一个 Class，都会先将该 Class 封装成一个 Reflector 对象，在 Reflector 中缓存 Class 的元数据信息，这可以提高反射执行的效率。</p>
+<h4 id="1-核心初始化流程">1. 核心初始化流程</h4>
+<p>既然是涉及反射操作，Reflector 必然要管理类的属性和方法，这些信息都记录在它的核心字段中，具体情况如下所示。</p>
+<ul>
+<li>type（Class&lt;?&gt; 类型）：该 Reflector 对象封装的 Class 类型。</li>
+<li>readablePropertyNames、writablePropertyNames（String[] 类型）：可读、可写属性的名称集合。</li>
+<li>getMethods、setMethods（Map<string, invoker=""> 类型）：可读、可写属性对应的 getter 方法和 setter 方法集合，key 是属性的名称，value 是一个 Invoker 对象。Invoker 是对 Method 对象的封装。</string,></li>
+<li>getTypes、setTypes（Map<string, class<?="">&gt; 类型）：属性对应的 getter 方法返回值以及 setter 方法的参数值类型，key 是属性名称，value 是方法的返回值类型或参数类型。</string,></li>
+<li>defaultConstructor（Constructor&lt;?&gt; 类型）：默认构造方法。</li>
+<li>caseInsensitivePropertyMap（Map<string, string=""> 类型）：所有属性名称的集合，记录到这个集合中的属性名称都是大写的。</string,></li>
+</ul>
+<p><strong>在我们构造一个 Reflector 对象的时候，传入一个 Class 对象，通过解析这个 Class 对象，即可填充上述核心字段</strong>，整个核心流程大致可描述为如下。</p>
+<ol>
+<li>用 type 字段记录传入的 Class 对象。</li>
+<li>通过反射拿到 Class 类的全部构造方法，并进行遍历，过滤得到唯一的无参构造方法来初始化 defaultConstructor 字段。这部分逻辑在 addDefaultConstructor() 方法中实现。</li>
+<li>读取 Class 类中的 getter方法，填充上面介绍的 getMethods 集合和 getTypes 集合。这部分逻辑在 addGetMethods() 方法中实现。</li>
+<li>读取 Class 类中的 setter 方法，填充上面介绍的 setMethods 集合和 setTypes 集合。这部分逻辑在 addSetMethods() 方法中实现。</li>
+<li>读取 Class 中没有 getter/setter 方法的字段，生成对应的 Invoker 对象，填充 getMethods 集合、getTypes 集合以及 setMethods 集合、setTypes 集合。这部分逻辑在 addFields() 方法中实现。</li>
+<li>根据前面三步构造的 getMethods/setMethods 集合的 keySet，初始化 readablePropertyNames、writablePropertyNames 集合。</li>
+<li>遍历构造的 readablePropertyNames、writablePropertyNames 集合，将其中的属性名称全部转化成大写并记录到 caseInsensitivePropertyMap 集合中。</li>
+</ol>
+<h4 id="2-核心方法解析">2. 核心方法解析</h4>
+<p>了解了初始化的核心流程之后，我们再继续深入分析其中涉及的方法，这些方法也是 Reflector 的核心方法。</p>
+<p>首先来看 addGetMethods() 方法和 addSetMethods() 方法，它们分别用来解析传入 Class 类中的 getter方法和 setter() 方法，两者的逻辑十分相似。这里，我们就以 addGetMethods() 方法为例深入分析，其主要包括如下三个核心步骤。</p>
+<p><strong>第一步，获取方法信息。</strong> 这里会调用 getClassMethods() 方法获取当前 Class 类的所有方法的唯一签名（注意一下，这里同时包含继承自父类以及接口的方法），以及每个方法对应的 Method 对象。</p>
+<p>在递归扫描父类以及父接口的过程中，会使用 Map<string, method=""> 集合记录遍历到的方法，实现去重的效果，其中 Key 是对应的方法签名，Value 为方法对应的 Method 对象。生成的方法签名的格式如下：</string,></p>
+<pre><code>返回值类型#方法名称:参数类型列表
+</code></pre>
+<p>例如，addGetMethods(Class) 方法的唯一签名是：</p>
+<pre><code>java.lang.String#addGetMethods:java.lang.Class
+</code></pre>
+<p>可见，<strong>这里生成的方法签名是包含返回值的，可以作为该方法全局唯一的标识</strong>。</p>
+<p><strong>第二步，按照 Java 的规范，从上一步返回的 Method 数组中查找 getter 方法，将其记录到 conflictingGetters 集合中</strong>。这里的 conflictingGetters 集合（HashMap<string, list="">()类型）中的 Key 为属性名称，Value 是该属性对应的 getter 方法集合。</string,></p>
+<p>为什么一个属性会查找到多个 getter 方法呢？这主要是由于类间继承导致的，在子类中我们可以覆盖父类的方法，覆盖不仅可以修改方法的具体实现，还可以修改方法的返回值，getter 方法也不例外，这就导致在第一步中产生了两个签名不同的方法。</p>
+<p><strong>第三步，解决方法签名冲突。</strong> 这里会调用 resolveGetterConflicts() 方法对这种 getter 方法的冲突进行处理，<strong>处理冲突的核心逻辑其实就是比较 getter 方法的返回值，优先选择返回值为子类的 getter 方法</strong>，例如：</p>
+<pre><code>// 该方法定义在SuperClazz类中
+
+public List getA(); 
+
+// 该方法定义在SubClazz类中，SubClazz继承了SuperClazz类
+
+public ArrayList getA();
+</code></pre>
+<p>可以看到，SubClazz.getA() 方法的返回值 ArrayList 是其父类 SuperClazz 中 getA() 方法返回值 List 的子类，所以这里选择 SubClazz 中定义的 getA() 方法作为 A 这个属性的 getter 方法。</p>
+<p>在 resolveGetterConflicts() 方法处理完上述 getter 方法冲突之后，会为每个 getter 方法创建对应的 MethodInvoker 对象，然后统一保存到 getMethods 集合中。同时，还会在 getTypes 集合中维护属性名称与对应 getter 方法返回值类型的映射。</p>
+<p>到这里了，addGetMethods() 的核心逻辑就分析清楚了。</p>
+<p>我们接下来回到 Reflector 的构造方法中，在通过 addGetMethods() 和 addSetMethods() 方法，完成 Class 类中 getter/setter 方法的处理之后，会继续调用 addFields() 方法处理没有 getter/setter 方法的字段。</p>
+<p>这里我们以处理没有 getter 方法的字段为例，addFields() 方法会为这些字段生成对应的 GetFieldInvoker 对象并记录到 getMethods 集合中，同时也会将属性名称和属性类型记录到 getTypes 集合中。处理没有 setter 方法的字段也是相同的逻辑。</p>
+<h4 id="3-invoker">3. Invoker</h4>
+<p>在 Reflector 对象的初始化过程中，所有属性的 getter/setter 方法都会被封装成 MethodInvoker 对象，没有 getter/setter 的字段也会生成对应的 Get/SetFieldInvoker 对象。下面我们就来看看这个 Invoker 接口的定义：</p>
+<pre><code>public interface Invoker {
+
+   // 调用底层封装的Method方法或是读写指定的字段
+
+   Object invoke(Object target, Object[] args);
+
+   Class&lt;?&gt; getType(); // 返回属性的类型
+
+}
+</code></pre>
+<p>Invoker 接口的继承关系如下图所示：</p>
+<p><img alt="Drawing 0.png" src="/assets/64b40be08b78fd963128d547.png"/></p>
+<p>Invoker 接口继承关系图</p>
+<p>其中，MethodInvoker 是通过反射方式执行底层封装的 Method 方法（例如，getter/setter 方法）完成属性读写效果的，Get/SetFieldInvoker 是通过反射方式读写底层封装的 Field 字段，进而实现属性读写效果的。</p>
+<h4 id="4-reflectorfactory">4. ReflectorFactory</h4>
+<p>通过上面的分析我们知道，Reflector 初始化过程会有一系列的反射操作，<strong>为了提升 Reflector 的初始化速度，MyBatis 提供了 ReflectorFactory 这个工厂接口对 Reflector 对象进行缓存</strong>，其中最核心的方法是用来获取 Reflector 对象的 findForClass() 方法。</p>
+<p>DefaultReflectorFactory 是 ReflectorFactory 接口的默认实现，它默认会在内存中维护一个 ConcurrentHashMap<class<?>, Reflector&gt; 集合（reflectorMap 字段）缓存其创建的所有 Reflector 对象。</class<?></p>
+<p>在其 findForClass() 方法实现中，首先会根据传入的 Class 类查询 reflectorMap 缓存，如果查找到对应的 Reflector 对象，则直接返回；否则创建相应的 Reflector 对象，并记录到 reflectorMap 中缓存，等待下次使用。</p>
+<h3 id="默认对象工厂">默认对象工厂</h3>
+<p><strong>ObjectFactory 是 MyBatis 中的反射工厂</strong>，其中提供了两个 create() 方法的重载，我们可以通过两个 create() 方法创建指定类型的对象。</p>
+<p>DefaultObjectFactory 是 ObjectFactory 接口的默认实现，其 create() 方法底层是通过调用 instantiateClass() 方法创建对象的。instantiateClass() 方法会通过反射的方式根据传入的参数列表，选择合适的构造函数实例化对象。</p>
+<p>除了使用 DefaultObjectFactory 这个默认实现之外，我们还可以在 mybatis-config.xml 配置文件中配置自定义 ObjectFactory 接口扩展实现 类（在 MyBatis 提供的测试类中，就包含了自定义的 ObjectFactory 实现，可以参考我们的<a href="https://github.com/xxxlxy2008/mybatis" target="_blank">源码</a>），完成自定义的功能扩展。</p>
+<h3 id="属性解析工具">属性解析工具</h3>
+<p>在前面《02 | 订单系统持久层示例分析，20 分钟带你快速上手 MyBatis》介绍的订单系统示例中，我们在 orderMap 这个 ResultMap 映射中，如果要配置 Order 与 OrderItem 的一对多关系，可以使用 <code>&lt;collection&gt;</code> 标签进行配置；如果 OrderItem 个数明确，可以直接使用数组下标索引方式（即 ordersItems[0]）填充 orderItems 集合。</p>
+<p>这里的 “.” 导航以及数组下标的解析，也都是在反射工具箱中完成的。下面我们就来介绍 reflection.property 包下的<strong>三个属性解析相关的工具类</strong>，在后面的 MetaClass、MetaObject 等工具类中，也都需要属性解析能力。</p>
+<ul>
+<li>PropertyTokenizer 工具类负责解析由“.”和“[]”构成的表达式。PropertyTokenizer 继承了 Iterator 接口，可以迭代处理嵌套多层表达式。</li>
+<li>PropertyCopier 是一个属性拷贝的工具类，提供了与 Spring 中 BeanUtils.copyProperties() 类似的功能，实现相同类型的两个对象之间的属性值拷贝，其核心方法是 copyBeanProperties() 方法。</li>
+<li>PropertyNamer 工具类提供的功能是转换方法名到属性名，以及检测一个方法名是否为 getter 或 setter 方法。</li>
+</ul>
+<h3 id="metaclass">MetaClass</h3>
+<p><strong>MetaClass 提供了获取类中属性描述信息的功能，底层依赖前面介绍的 Reflector</strong>，在 MetaClass 的构造方法中会将传入的 Class 封装成一个 Reflector 对象，并记录到 reflector 字段中，MetaClass 的后续属性查找都会使用到该 Reflector 对象。</p>
+<p>MetaClass 中的 findProperty() 方法是实现属性查找的核心方法，它主要处理了“.”导航的属性查找，该方法会用前文介绍的 PropertyTokenizer 解析传入的 name 表达式，该表达式可能通过“.”导航多层，例如，order.deliveryAddress.customer.name。</p>
+<p>MetaClass 会逐层处理这个表达式，首先通过 Order 类型对应的 Reflector 查找 deliveryAddress 属性，查找成功之后，根据 deliveryAddress 属性的类型（即 Address 类型）创建对应的 MetaClass 对象（以及底层的 Reflector 对象），再继续查找其中的 customer 属性，如此递归处理，直至最后查找到 Customer 中的 name 属性。这部分递归查找逻辑位于 <a href="https://github.com/xxxlxy2008/mybatis/blob/master/src/main/java/org/apache/ibatis/reflection/MetaClass.java#L171-L192" target="_blank">MetaClass.buildProperty() 方法</a>中。</p>
+<p>在上述 MetaClass 查找属性的过程中，还会调用 hasGetter() 和 hasSetter() 方法负责判断属性表达式中指定的属性是否有对应的 getter/setter 方法。这两个方法也是先通过 PropertyTokenizer 解析传入的 name 表达式，然后进行递归查询，在递归查询中会依赖 Reflector.hasGetter() 方法查找前文介绍的 getMethods 集合或 setMethods 集合，查找属性对应的 getter/setter 方法。</p>
+<p>MetaClass 中的其他方法实现也都<strong>大多是依赖 PropertyTokenizer 解析表达式，然后递归查找，查找过程会依赖 Reflector 的相关方法</strong>。</p>
+<h3 id="objectwrapper">ObjectWrapper</h3>
+<p><strong>MetaClass 中封装的是 Class 元信息，ObjectWrapper 封装的则是对象元信息</strong>。在 ObjectWrapper 中抽象了一个对象的属性信息，并提供了查询对象属性信息的相关方法，以及更新属性值的相关方法。</p>
+<p>ObjectWrapper 的实现类如下图所示：</p>
+<p><img alt="Drawing 1.png" src="/assets/b08c0b055e974188391596e0.png"/></p>
+<p>ObjectWrapper 继承关系图</p>
+<p><strong>BaseWrapper 是 ObjectWrapper 接口的抽象实现</strong>，其中只有一个 MetaObject 类型的字段。BaseWrapper 为子类实现了 resolveCollection()、getCollectionValue() 和 setCollectionValue() 三个针对集合对象的处理方法。其中，resolveCollection() 方法会将指定属性作为集合对象返回，底层依赖 MetaObject.getValue()方法实现（后面还会详细介绍）。getCollectionValue() 方法和 setCollectionValue() 方法会解析属性表达式的下标信息，然后获取/设置集合中的对应元素，这里解析属性表达式依然是依赖前面介绍的 PropertyTokenizer 工具类。</p>
+<p><strong>BeanWrapper 继承了 BaseWrapper 抽象类</strong>，底层除了封装了一个 JavaBean 对象之外，还封装了该 JavaBean 类型对应的 MetaClass 对象，以及从 BaseWrapper 继承下来的 MetaObject 对象。</p>
+<p>在 get() 方法和 set() 方法实现中，BeanWrapper 会根据传入的属性表达式，获取/设置相应的属性值。以 get() 方法为例，首先会判断表达式中是否含有数组下标，如果含有下标，会通过 resolveCollection() 和 getCollectionValue() 方法从集合中获取相应元素；如果不包含下标，则通过 MetaClass 查找属性名称在 Reflector.getMethods 集合中相应的 GetFieldInvoker，然后调用 Invoker.invoke() 方法读取属性值。</p>
+<p>BeanWrapper 中其他方法的实现也大都与 get() 方法和 set() 方法类似，依赖 MetaClass、MetaObject 完成相关对象中属性信息读写，这里就不再一一介绍，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/mybatis" target="_blank">源码</a>进行学习。</p>
+<p><strong>CollectionWrapper 是 ObjectWrapper 接口针对 Collection 集合的一个实现</strong>，其中封装了Collection<code>&lt;Object&gt;</code> 集合对象，只有 isCollection()、add()、addAll() 方法以及从 BaseWrapper 继承下来的方法是可用的，其他方法都会抛出 UnsupportedOperationException 异常。</p>
+<p><strong>MapWrapper 是针对 Map 类型的一个实现</strong>，这个实现就比较简单了，所以我就留给你自己去分析了，分析过程中可以参考下面将要介绍的 MetaObject。</p>
+<h3 id="metaobject">MetaObject</h3>
+<p>通过对 ObjectWrapper 的介绍我们了解到，ObjectWrapper 实现了读写对象属性值、检测getter/setter 等基础功能，在分析 BeanWrapper 等实现类时，我们可以看到其<strong>底层会依赖 MetaObject</strong>。在 MetaObject 中维护了一个 originalObject 字段指向被封装的 JavaBean 对象，还维护了该 JavaBean 对象对应的 ObjectWrapper 对象（objectWrapper 字段）。</p>
+<p>MetaObject 和 ObjectWrapper 中关于类级别的方法，例如，hasGetter() 方法、hasSetter() 方法、findProperty() 方法等，都是直接调用 MetaClass 或 ObjectWrapper 的对应方法实现的。其他关于对象级别的方法，都是与 ObjectWrapper 配合实现，例如 MetaObject.getValue()/setValue() 方法等。</p>
+<p>这里以 getValue() 方法为例，该方法首先根据 PropertyTokenizer 解析指定的属性表达式，如果该表达式是包含“.”导航的多级属性查询，则获取子表达式并为其对应的属性对象创建关联的 MetaObject 对象，继续递归调用 getValue() 方法，直至递归处理结束，递归出口会调用 ObjectWrapper.get() 方法获取最终的属性值。</p>
+<p>在 MetaObject 中，setValue() 方法的核心逻辑与 getValue() 方法基本类似，也是递归查找。但是，其中有一个不同之处需要你注意：如果需要设置的最终属性值不为空时，在递归查找 setter() 方法的过程中会调用 ObjectWrapper.instantiatePropertyValue() 方法初始化递归过程中碰到的任意空对象，但如果碰到为空的集合元素，则无法通过该方法初始化。ObjectWrapper.instantiatePropertyValue() 方法实际上是依赖 ObjectFactory 接口的 create()方法（默认实现是 DefaultObjectFactory ）创建相应类型的对象。</p>
+<p>了解了 MetaObject 和 BeanWrapper 配合使用的方式以及递归查找属性表达式指定的属性值的逻辑之后，MetaObject 剩余方法的实现就比较好分析了，这里我也就不再赘述了。</p>
+<h3 id="总结">总结</h3>
+<p>这一讲我们重点介绍了 MyBatis 中的反射工具箱。首先，我们介绍了反射工具箱中最核心、最底层的 Reflector 类的核心实现；接下来介绍了反射工具箱在 Reflector 基础之上提供的各种工具类，其中包括 ObjectFactory 工厂类、ObjectWrapper 包装类以及记录元数据的 MetaClass、MetaObject 等。它们彼此联系紧密，希望你在学习过程中能将它们的各个知识点串联起来，灵活运用。</p>
+<p>前面我们也说了，MapWrapper 是针对 Map 类型的一个实现，这个实现比较简单了，你可以试着去分析下。欢迎你在留言区分享你的分析过程。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

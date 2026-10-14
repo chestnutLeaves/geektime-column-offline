@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>14  内存分配：new 还是 make？什么情况下该用谁？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/index.html">22 讲通关 Go 语言-完</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>22 讲通关 Go 语言-完</strong><ul><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20Go%20%E4%B8%BA%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E9%9C%80%E6%B1%82%E8%AE%BE%E8%AE%A1%EF%BC%8C%E5%B8%A6%E4%BD%A0%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E5%B7%A5%E4%BD%9C.html">00 开篇词  Go 为开发者的需求设计，带你实现高效工作</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/01%20%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%EF%BC%9A%E7%BC%96%E5%86%99%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%20Go%20%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F.html">01  基础入门：编写你的第一个 Go 语言程序</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/02%20%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%BD%A0%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F.html">02  数据类型：你必须掌握的数据类型有哪些？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/03%20%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%EF%BC%9Aif%E3%80%81for%E3%80%81switch%20%E9%80%BB%E8%BE%91%E8%AF%AD%E5%8F%A5%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html">03  控制结构：if、for、switch 逻辑语句的那些事儿</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/04%20%20%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%20array%E3%80%81slice%20%E5%92%8C%20map%EF%BC%9F.html">04  集合类型：如何正确使用 array、slice 和 map？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/05%20%20%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F.html">05  函数和方法：Go 语言中的函数和方法到底有什么不同？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/06%20%20struct%20%E5%92%8C%20interface%EF%BC%9A%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E6%8E%A5%E5%8F%A3%E9%83%BD%E5%AE%9E%E7%8E%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E5%8A%9F%E8%83%BD%EF%BC%9F.html">06  struct 和 interface：结构体与接口都实现了哪些功能？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/07%20%20%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20error%E3%80%81deferred%E3%80%81panic%20%E7%AD%89%E5%A4%84%E7%90%86%E9%94%99%E8%AF%AF%EF%BC%9F.html">07  错误处理：如何通过 error、deferred、panic 等处理错误？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/08%20%20%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%EF%BC%9AGoroutines%20%E5%92%8C%20Channels%20%E7%9A%84%E5%A3%B0%E6%98%8E%E4%B8%8E%E4%BD%BF%E7%94%A8.html">08  并发基础：Goroutines 和 Channels 的声明与使用</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/09%20%20%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD%EF%BC%9Async%20%E5%8C%85%E8%AE%A9%E4%BD%A0%E5%AF%B9%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E5%BE%97%E5%BF%83%E5%BA%94%E6%89%8B.html">09  同步原语：sync 包让你对并发控制得心应手</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/10%20%20Context%EF%BC%9A%E4%BD%A0%E5%BF%85%E9%A1%BB%E6%8E%8C%E6%8F%A1%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E7%A5%9E%E5%99%A8.html">10  Context：你必须掌握的多线程并发控制神器</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/11%20%20%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8D%B3%E5%AD%A6%E5%8D%B3%E7%94%A8%E7%9A%84%E9%AB%98%E6%95%88%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F.html">11  并发模式：Go 语言中即学即用的高效并发模式</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/12%20%20%E6%8C%87%E9%92%88%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%9C%A8%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88%EF%BC%9F.html">12  指针详解：在什么情况下应该使用指针？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/13%20%20%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%EF%BC%9A%E5%80%BC%E3%80%81%E5%BC%95%E7%94%A8%E5%8F%8A%E6%8C%87%E9%92%88%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F.html">13  参数传递：值、引用及指针之间的区别？</a></li><li><a class="active" aria-current="page" href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/14%20%20%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%EF%BC%9Anew%20%E8%BF%98%E6%98%AF%20make%EF%BC%9F%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E8%AF%A5%E7%94%A8%E8%B0%81%EF%BC%9F.html">14  内存分配：new 还是 make？什么情况下该用谁？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/15%20%20%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%8D%E5%B0%84%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E8%BD%AC%E6%8D%A2%EF%BC%9F.html">15  运行时反射：字符串和结构体之间如何转换？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/16%20%20%E9%9D%9E%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%EF%BC%9A%E8%AE%A9%E4%BD%A0%E6%97%A2%E7%88%B1%E5%8F%88%E6%81%A8%E7%9A%84%20unsafe.html">16  非类型安全：让你既爱又恨的 unsafe</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/17%20%20SliceHeader%EF%BC%9Aslice%20%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE%EF%BC%9F.html">17  SliceHeader：slice 如何高效处理数据？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/18%20%20%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%B5%8B%E8%AF%95%E4%BF%9D%E8%AF%81%E8%B4%A8%E9%87%8F%EF%BC%9F.html">18  质量保证：Go 语言如何通过测试保证质量？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/19%20%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%9F.html">19  性能优化：Go 语言如何进行代码检查和优化？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/20%20%20%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91%EF%BC%9A%E6%A8%A1%E5%9D%97%E5%8C%96%E7%AE%A1%E7%90%86%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%A4%9F%E6%8F%90%E5%8D%87%E7%A0%94%E5%8F%91%E6%95%88%E8%83%BD%EF%BC%9F.html">20  协作开发：模块化管理为什么能够提升研发效能？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/21%20%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E7%8E%A9%E8%BD%AC%20RESTful%20API%20%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">21  网络编程：Go 语言如何玩转 RESTful API 服务？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/22%20%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%9AGo%20%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%20RPC%20%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？</a></li><li><a href="/courses/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/23%20%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E4%BD%A0%E7%9A%84%20Go%20%E8%AF%AD%E8%A8%80%E6%88%90%E9%95%BF%E4%B9%8B%E8%B7%AF.html">23 结束语  你的 Go 语言成长之路</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/22%20%E8%AE%B2%E9%80%9A%E5%85%B3%20Go%20%E8%AF%AD%E8%A8%80-%E5%AE%8C/14%20%20%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%EF%BC%9Anew%20%E8%BF%98%E6%98%AF%20make%EF%BC%9F%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E8%AF%A5%E7%94%A8%E8%B0%81%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="14  内存分配：new 还是 make？什么情况下该用谁？" id="title">14  内存分配：new 还是 make？什么情况下该用谁？</h1>
+<div><p>程序的运行都需要内存，比如像变量的创建、函数的调用、数据的计算等。所以在需要内存的时候就要申请内存，进行内存分配。在 C/C++ 这类语言中，内存是由开发者自己管理的，需要主动申请和释放，而在 Go 语言中则是由该语言自己管理的，开发者不用做太多干涉，只需要声明变量，Go 语言就会根据变量的类型自动分配相应的内存。</p>
+<p>Go 语言程序所管理的虚拟内存空间会被分为两部分：堆内存和栈内存。栈内存主要由 Go 语言来管理，开发者无法干涉太多，堆内存才是我们开发者发挥能力的舞台，因为程序的数据大部分分配在堆内存上，一个程序的大部分内存占用也是在堆内存上。</p>
+<blockquote>
+<p>小提示：我们常说的 Go 语言的内存垃圾回收是针对堆内存的垃圾回收。</p>
+</blockquote>
+<p>变量的声明、初始化就涉及内存的分配，比如声明变量会用到 var 关键字，如果要对变量初始化，就会用到 = 赋值运算符。除此之外还可以使用内置函数 new 和 make，这两个函数你在前面的课程中已经见过，它们的功能非常相似，但你可能还是比较迷惑，所以这节课我会基于内存分配，进而引出内置函数 new 和 make，为你讲解他们的不同，以及使用场景。</p>
+<h3 id="变量">变量</h3>
+<p>一个数据类型，在声明初始化后都会赋值给一个变量，变量存储了程序运行所需的数据。</p>
+<h4 id="变量的声明">变量的声明</h4>
+<p>和前面课程讲的一样，如果要单纯声明一个变量，可以通过 var 关键字，如下所示：</p>
+<pre><code>var s string
+</code></pre>
+<p>该示例只是声明了一个变量 s，类型为 string，并没有对它进行初始化，所以它的值为 string 的零值，也就是 ““（空字符串）。</p>
+<p>上节课你已经知道 string 其实是个值类型，现在我们来声明一个指针类型的变量试试，如下所示：</p>
+<pre><code>var sp *string
+</code></pre>
+<p>发现也是可以的，但是它同样没有被初始化，所以它的值是 *string 类型的零值，也就是 nil。</p>
+<h4 id="变量的赋值">变量的赋值</h4>
+<p>变量可以通过 = 运算符赋值，也就是修改变量的值。如果在声明一个变量的时候就给这个变量赋值，这种操作就称为变量的初始化。如果要对一个变量初始化，可以有三种办法。</p>
+<ol>
+<li>声明时直接初始化，比如 var s string = “飞雪无情”。</li>
+<li>声明后再进行初始化，比如 s=“飞雪无情”（假设已经声明变量 s）。</li>
+<li>使用 := 简单声明，比如 s:=“飞雪无情”。</li>
+</ol>
+<blockquote>
+<p>小提示：变量的初始化也是一种赋值，只不过它发生在变量声明的时候，时机最靠前。也就是说，当你获得这个变量时，它就已经被赋值了。</p>
+</blockquote>
+<p>现在我们就对上面示例中的变量 s 进行赋值，示例代码如下：</p>
+<p><strong><em>ch14/main.go</em></strong></p>
+<pre><code>func main() {
+
+   var s string
+
+   s = "张三"
+
+   fmt.Println(s)
+
+}
+</code></pre>
+<p>运行以上代码，可以正常打印出张三，说明值类型的变量没有初始化时，直接赋值是没有问题的。那么对于指针类型的变量呢？</p>
+<p>在下面的示例代码中，我声明了一个指针类型的变量 sp，然后把该变量的值修改为“飞雪无情”。</p>
+<p><strong><em>ch14/main.go</em></strong></p>
+<pre><code>func main() {
+
+   var sp *string
+
+   *sp = "飞雪无情"
+
+   fmt.Println(*sp)
+
+}
+</code></pre>
+<p>运行这些代码，你会看到如下错误信息：</p>
+<pre><code>panic: runtime error: invalid memory address or nil pointer dereference
+</code></pre>
+<p>这是因为指针类型的变量如果没有分配内存，就默认是零值 nil，它没有指向的内存，所以无法使用，强行使用就会得到以上 nil 指针错误。</p>
+<p>而对于值类型来说，即使只声明一个变量，没有对其初始化，该变量也会有分配好的内存。</p>
+<p>在下面的示例中，我声明了一个变量 s，并没有对其初始化，但是可以通过 &amp;s 获取它的内存地址。这其实是 Go 语言帮我们做的，可以直接使用。</p>
+<pre><code>func main() {
+
+   var s string
+
+   fmt.Printf("%p\n",&amp;s)
+
+}
+</code></pre>
+<p>还记得我们在讲并发的时候，使用 var wg sync.WaitGroup 声明的变量 wg 吗？现在你应该知道为什么不进行初始化也可以直接使用了吧？因为 sync.WaitGroup 是一个 struct 结构体，是一个值类型，Go 语言自动分配了内存，所以可以直接使用，不会报 nil 异常。</p>
+<p>于是可以得到结论：<strong>如果要对一个变量赋值，这个变量必须有对应的分配好的内存，这样才可以对这块内存操作，完成赋值的目的</strong>。</p>
+<blockquote>
+<p>小提示：其实不止赋值操作，对于指针变量，如果没有分配内存，取值操作一样会报 nil 异常，因为没有可以操作的内存。</p>
+</blockquote>
+<p>所以一个变量必须要经过声明、内存分配才能赋值，才可以在声明的时候进行初始化。指针类型在声明的时候，Go 语言并没有自动分配内存，所以不能对其进行赋值操作，这和值类型不一样。</p>
+<blockquote>
+<p>小提示：map 和 chan 也一样，因为它们本质上也是指针类型。</p>
+</blockquote>
+<h3 id="new-函数">new 函数</h3>
+<p>既然我们已经知道了声明的指针变量默认是没有分配内存的，那么给它分配一块就可以了。于是就需要今天的主角之一 new 函数出场了，对于上面的例子，可以使用 new 函数进行如下改造：</p>
+<p><strong><em>ch14/main.go</em></strong></p>
+<pre><code>func main() {
+
+   var sp *string
+
+   sp = new(string)//关键点
+
+   *sp = "飞雪无情"
+
+   fmt.Println(*sp)
+
+}
+</code></pre>
+<p>以上代码的关键点在于通过内置的 new 函数生成了一个 *string，并赋值给了变量 sp。现在再运行程序就正常了。</p>
+<p>内置函数 new 的作用是什么呢？可以通过它的源代码定义分析，如下所示：</p>
+<pre><code>// The new built-in function allocates memory. The first argument is a type,
+
+// not a value, and the value returned is a pointer to a newly
+
+// allocated zero value of that type.
+
+func new(Type) *Type
+</code></pre>
+<p>它的作用就是根据传入的类型申请一块内存，然后返回指向这块内存的指针，指针指向的数据就是该类型的零值。</p>
+<p>比如传入的类型是 string，那么返回的就是 string 指针，这个 string 指针指向的数据就是空字符串，如下所示：</p>
+<pre><code>   sp1 = new(string)
+
+   fmt.Println(*sp1)//打印空字符串,也就是string的零值。
+</code></pre>
+<p>通过 new 函数分配内存并返回指向该内存的指针后，就可以通过该指针对这块内存进行赋值、取值等操作。</p>
+<h3 id="变量初始化">变量初始化</h3>
+<p>当声明了一些类型的变量时，这些变量的零值并不能满足我们的要求，这时就需要在变量声明的同时进行赋值（修改变量的值），这个过程称为变量的初始化。</p>
+<p>下面的示例就是 string 类型的变量初始化，因为它的零值（空字符串）不能满足需要，所以需要在声明的时候就初始化为“飞雪无情”。</p>
+<pre><code>var s string = "飞雪无情"
+
+s1:="飞雪无情"
+</code></pre>
+<p>不止基础类型可以通过以上这种字面量的方式进行初始化，复合类型也可以，比如之前课程示例中的 person 结构体，如下所示：</p>
+<pre><code>type person struct {
+
+   name string
+
+   age int
+
+}
+
+func main() {
+
+   //字面量初始化
+
+   p:=person{name: "张三",age: 18}
+
+}
+</code></pre>
+<p>该示例代码就是在声明这个 p 变量的时候，把它的 name 初始化为张三，age 初始化为 18。</p>
+<h4 id="指针变量初始化">指针变量初始化</h4>
+<p>在上个小节中，你已经知道了 new 函数可以申请内存并返回一个指向该内存的指针，但是这块内存中数据的值默认是该类型的零值，在一些情况下并不满足业务需求。比如我想得到一个 *person 类型的指针，并且它的 name 是飞雪无情、age 是 20，但是 new 函数只有一个类型参数，并没有初始化值的参数，此时该怎么办呢？</p>
+<p>要达到这个目的，你可以自定义一个函数，对指针变量进行初始化，如下所示：</p>
+<p><strong><em>ch14/main.go</em></strong></p>
+<pre><code>func NewPerson() *person{
+
+   p:=new(person)
+
+   p.name = "飞雪无情"
+
+   p.age = 20
+
+   return p
+
+}
+</code></pre>
+<p>还记得前面课程讲的工厂函数吗？这个代码示例中的 NewPerson 函数就是工厂函数，除了使用 new 函数创建一个 person 指针外，还对它进行了赋值，也就是初始化。这样 NewPerson 函数的使用者就会得到一个 name 为飞雪无情、age 为 20 的 *person 类型的指针，通过 NewPerson 函数做一层包装，把内存分配（new 函数）和初始化（赋值）都完成了。</p>
+<p>下面的代码就是使用 NewPerson 函数的示例，它通过打印 *pp 指向的数据值，来验证 name 是否是飞雪无情，age 是否是 20。</p>
+<pre><code>pp:=NewPerson()
+
+fmt.Println("name为",pp.name,",age为",pp.age)
+</code></pre>
+<p>为了让自定义的工厂函数 NewPerson 更加通用，我把它改造一下，让它可以接受 name 和 age 参数，如下所示：</p>
+<p><strong><em>ch14/main.go</em></strong></p>
+<pre><code>pp:=NewPerson("飞雪无情",20)
+
+func NewPerson(name string,age int) *person{
+
+   p:=new(person)
+
+   p.name = name
+
+   p.age = age
+
+   return p
+
+}
+</code></pre>
+<p>这些代码的效果和刚刚的示例一样，但是 NewPerson 函数更通用，因为你可以传递不同的参数，构建出不同的 *person 变量。</p>
+<h4 id="make-函数">make 函数</h4>
+<p>铺垫了这么多，终于讲到今天的第二个主角 make 函数了。在上节课中你已经知道，在使用 make 函数创建 map 的时候，其实调用的是 makemap 函数，如下所示：</p>
+<p><strong><em>src/runtime/map.go</em></strong></p>
+<pre><code>// makemap implements Go map creation for make(map[k]v, hint).
+
+func makemap(t *maptype, hint int, h *hmap) *hmap{
+
+  //省略无关代码
+
+}
+</code></pre>
+<p>makemap 函数返回的是 *hmap 类型，而 hmap 是一个结构体，它的定义如下面的代码所示：</p>
+<p><strong><em>src/runtime/map.go</em></strong></p>
+<pre><code>// A header for a Go map.
+
+type hmap struct {
+
+   // Note: the format of the hmap is also encoded in cmd/compile/internal/gc/reflect.go.
+
+   // Make sure this stays in sync with the compiler's definition.
+
+   count     int // # live cells == size of map.  Must be first (used by len() builtin)
+
+   flags     uint8
+
+   B         uint8  // log_2 of # of buckets (can hold up to loadFactor * 2^B items)
+
+   noverflow uint16 // approximate number of overflow buckets; see incrnoverflow for details
+
+   hash0     uint32 // hash seed
+
+   buckets    unsafe.Pointer // array of 2^B Buckets. may be nil if count==0.
+
+   oldbuckets unsafe.Pointer // previous bucket array of half the size, non-nil only when growing
+
+   nevacuate  uintptr        // progress counter for evacuation (buckets less than this have been evacuated)
+
+   extra *mapextra // optional fields
+
+}
+</code></pre>
+<p>可以看到，我们平时使用的 map 关键字其实非常复杂，它包含 map 的大小 count、存储桶 buckets 等。要想使用这样的 hmap，不是简单地通过 new 函数返回一个 *hmap 就可以，还需要对其进行初始化，这就是 make 函数要做的事情，如下所示：</p>
+<pre><code>m:=make(map[string]int,10)
+</code></pre>
+<p>是不是发现 make 函数和上一小节中自定义的 NewPerson 函数很像？其实 make 函数就是 map 类型的工厂函数，它可以根据传递它的 K-V 键值对类型，创建不同类型的 map，同时可以初始化 map 的大小。</p>
+<blockquote>
+<p>小提示：make 函数不只是 map 类型的工厂函数，还是 chan、slice 的工厂函数。它同时可以用于 slice、chan 和 map 这三种类型的初始化。</p>
+</blockquote>
+<h3 id="总结">总结</h3>
+<p>通过这节课的讲解，相信你已经理解了函数 new 和 make 的区别，现在我再来总结一下。</p>
+<p>new 函数只用于分配内存，并且把内存清零，也就是返回一个指向对应类型零值的指针。new 函数一般用于需要显式地返回指针的情况，不是太常用。</p>
+<p>make 函数只用于 slice、chan 和 map 这三种内置类型的创建和初始化，因为这三种类型的结构比较复杂，比如 slice 要提前初始化好内部元素的类型，slice 的长度和容量等，这样才可以更好地使用它们。</p>
+<p>在这节课的最后，给你留一个练习题：使用 make 函数创建 slice，并且使用不同的长度和容量作为参数，看看它们的效果。</p>
+<p>下节课我将介绍“运行时反射：字符串和结构体之间如何转换？”记得来听课！</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

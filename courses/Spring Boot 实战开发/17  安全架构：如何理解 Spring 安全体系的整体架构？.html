@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>17  安全架构：如何理解 Spring 安全体系的整体架构？ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/index.html">Spring Boot 实战开发</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">26 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Spring Boot 实战开发</strong><ul><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0%20Spring%20Boot%EF%BC%9F.html">00 开篇词  从零开始：为什么要学习 Spring Boot？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/01%20%20%E5%AE%B6%E6%97%8F%E7%94%9F%E6%80%81%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3%20Spring%20%E5%AE%B6%E6%97%8F%E7%9A%84%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB%EF%BC%9F.html">01  家族生态：如何正确理解 Spring 家族的技术体系？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/02%20%20%E6%A1%88%E4%BE%8B%E9%A9%B1%E5%8A%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E5%89%96%E6%9E%90%E4%B8%80%E4%B8%AA%20Spring%20Web%20%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">02  案例驱动：如何剖析一个 Spring Web 应用程序？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/03%20%20%E5%A4%9A%E7%BB%B4%E9%85%8D%E7%BD%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Spring%20Boot%20%E4%B8%AD%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BD%93%E7%B3%BB%EF%BC%9F.html">03  多维配置：如何使用 Spring Boot 中的配置体系？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/04%20%20%E5%AE%9A%E5%88%B6%E9%85%8D%E7%BD%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%EF%BC%9F.html">04  定制配置：如何创建和管理自定义的配置信息？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/05%20%20%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3%20Spring%20Boot%20%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F.html">05  自动配置：如何正确理解 Spring Boot 自动配置实现原理？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/06%20%20%E5%9F%BA%E7%A1%80%E8%A7%84%E8%8C%83%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%20JDBC%20%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E8%A7%84%E8%8C%83%EF%BC%9F.html">06  基础规范：如何理解 JDBC 关系型数据库访问规范？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/07%20%20%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20JdbcTemplate%20%E8%AE%BF%E9%97%AE%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9F.html">07  数据访问：如何使用 JdbcTemplate 访问关系型数据库？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/08%20%20%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E5%89%96%E6%9E%90%20JdbcTemplate%20%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F.html">08  数据访问：如何剖析 JdbcTemplate 数据访问实现原理？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/09%20%20%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1%EF%BC%9ASpring%20Data%20%E5%A6%82%E4%BD%95%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E8%BF%87%E7%A8%8B%E8%BF%9B%E8%A1%8C%E7%BB%9F%E4%B8%80%E6%8A%BD%E8%B1%A1%EF%BC%9F.html">09  数据抽象：Spring Data 如何对数据访问过程进行统一抽象？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/10%20%20ORM%20%E9%9B%86%E6%88%90%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Spring%20Data%20JPA%20%E8%AE%BF%E9%97%AE%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9F.html">10  ORM 集成：如何使用 Spring Data JPA 访问关系型数据库？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/11%20%20%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%EF%BC%9A%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%20RESTful%20%E9%A3%8E%E6%A0%BC%E7%9A%84%20Web%20%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">11  服务发布：如何构建一个 RESTful 风格的 Web 服务？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/12%20%20%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20RestTemplate%20%E6%B6%88%E8%B4%B9%20RESTful%20%E6%9C%8D%E5%8A%A1%EF%BC%9F.html">12  服务调用：如何使用 RestTemplate 消费 RESTful 服务？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/13%20%20%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3%20RestTemplate%20%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F.html">13  服务调用：如何正确理解 RestTemplate 远程调用实现原理？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/14%20%20%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20KafkaTemplate%20%E9%9B%86%E6%88%90%20Kafka%EF%BC%9F.html">14  消息驱动：如何使用 KafkaTemplate 集成 Kafka？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/15%20%20%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20JmsTemplate%20%E9%9B%86%E6%88%90%20ActiveMQ%EF%BC%9F.html">15  消息驱动：如何使用 JmsTemplate 集成 ActiveMQ？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/16%20%20%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20RabbitTemplate%20%E9%9B%86%E6%88%90%20RabbitMQ%EF%BC%9F.html">16  消息驱动：如何使用 RabbitTemplate 集成 RabbitMQ？</a></li><li><a class="active" aria-current="page" href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/17%20%20%E5%AE%89%E5%85%A8%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%20Spring%20%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%EF%BC%9F.html">17  安全架构：如何理解 Spring 安全体系的整体架构？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/18%20%20%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20Spring%20Security%20%E6%9E%84%E5%BB%BA%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E4%BD%93%E7%B3%BB%EF%BC%9F.html">18  用户认证：如何基于 Spring Security 构建用户认证体系？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/19%20%20%E6%9C%8D%E5%8A%A1%E6%8E%88%E6%9D%83%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%20Spring%20Security%20%E7%A1%AE%E4%BF%9D%E8%AF%B7%E6%B1%82%E5%AE%89%E5%85%A8%E8%AE%BF%E9%97%AE%EF%BC%9F.html">19  服务授权：如何基于 Spring Security 确保请求安全访问？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/20%20%20%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Actuator%20%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%EF%BC%9F.html">20  服务监控：如何使用 Actuator 组件实现系统监控？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/21%20%20%E6%8C%87%E6%A0%87%E5%AE%9A%E5%88%B6%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87%E5%92%8C%20Actuator%20%E7%AB%AF%E7%82%B9%EF%BC%9F.html">21  指标定制：如何实现自定义度量指标和 Actuator 端点？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/22%20%20%E8%BF%90%E8%A1%8C%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Admin%20Server%20%E7%AE%A1%E7%90%86%20Spring%20%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%9F.html">22  运行管理：如何使用 Admin Server 管理 Spring 应用程序？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/23%20%20%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Spring%20%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E5%B1%82%E7%BB%84%E4%BB%B6%EF%BC%9F.html">23  数据测试：如何使用 Spring 测试数据访问层组件？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/24%20%20%E6%9C%8D%E5%8A%A1%E6%B5%8B%E8%AF%95%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Spring%20%E6%B5%8B%E8%AF%95%20Web%20%E6%9C%8D%E5%8A%A1%E5%B1%82%E7%BB%84%E4%BB%B6%EF%BC%9F.html">24  服务测试：如何使用 Spring 测试 Web 服务层组件？</a></li><li><a href="/courses/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%20%E4%BB%A5%E7%BB%88%E4%B8%BA%E5%A7%8B%EF%BC%9ASpring%20Boot%20%E6%80%BB%E7%BB%93%E5%92%8C%E5%B1%95%E6%9C%9B.html">结束语  以终为始：Spring Boot 总结和展望</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Spring%20Boot%20%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91/17%20%20%E5%AE%89%E5%85%A8%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%20Spring%20%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%EF%BC%9F.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="17  安全架构：如何理解 Spring 安全体系的整体架构？" id="title">17  安全架构：如何理解 Spring 安全体系的整体架构？</h1>
+<div><p>在设计 Web 应用程序时，一方面，因为开发人员缺乏对 Web 安全访问机制的认识，所以系统安全性是一个重要但又容易被忽略的话题。另一方面，因为系统涉及的技术体系非常复杂，所以系统安全性又是一个非常综合的话题。因此，这一讲我们将讨论一个全新的话题—— Spring 中与安全性相关的需求和实现方案。</p>
+<p>在 Spring 家族中，Spring Security 专门为开发人员提供了一个安全性开发框架，下面我们一起来看下Spring 中安全体系的整体架构。</p>
+<h3 id="web-应用程序的安全性需求">Web 应用程序的安全性需求</h3>
+<p>在软件系统中，我们把需要访问的内容定义为一种资源（Resource），而安全性设计的核心目标是对这些资源进行保护，以此确保外部请求对它们的访问安全受控。</p>
+<p>在一个 Web 应用程序中，我们把对外暴露的 RESTful 端点理解为资源，关于如何对 HTTP 端点这些资源进行安全性访问，业界存在一些常见的技术体系。</p>
+<p>在讲解这些技术体系之前，我们先来看看安全领域中非常常见但又容易混淆的两个概念：<strong>认证（Authentication）和授权（Authorization）。</strong></p>
+<p><strong>所谓认证</strong>，即首先需要明确“你是谁”这个问题，也就是说系统能针对每次访问请求判断出访问者是否具有合法的身份标识。</p>
+<p>一旦明确了 “你是谁”，我们就能判断出“你能做什么”，这个步骤就是<strong>授权</strong>。一般来说，通用的授权模型都是基于权限管理体系，即对资源、权限、角色和用户的进行组合处理的一种方案。</p>
+<p>当我们把认证与授权结合起来后，即先判断资源访问者的有效身份，然后确定其对这个资源进行访问的合法权限，整个过程就形成了对系统进行安全性管理的一种常见解决方案，如下图所示：</p>
+<p><img alt="Drawing 1.png" src="/assets/66cef6604a5ad9c63c7f856d.png"/></p>
+<p>基于认证和授权机制的资源访问安全性示意图</p>
+<p>上图就是一种通用方案，而在不同的应用场景及技术体系下，系统可以衍生出很多具体的实现策略，比如 Web 应用系统中的认证和授权模型虽然与上图类似，但是在具体设计和实现过程中有其特殊性。</p>
+<p>在 Web 应用体系中，因为认证这部分的需求相对比较明确，所以我们需要构建一套完整的存储体系来保存和维护用户信息，并且确保这些用户信息在处理请求的过程中能够得到合理利用。</p>
+<p>而授权的情况相对来说复杂些，比如对某个特定的 Web 应用程序而言，我们面临的第一个问题是如何判断一个 HTTP 请求具备访问自己的权限。解决完这个第一个问题后，就算这个请求具备访问该应用程序的权限，并不意味着它能够访问其所具有的所有 HTTP 端点，比如业务上的某些核心功能还是需要具备较高的权限才能访问，这就涉及我们需要解决的第二个问题——如何对访问的权限进行精细化管理？如下图所示：</p>
+<p><img alt="Drawing 3.png" src="/assets/87796978832cb4948d7e5883.png"/></p>
+<p>Web 应用程序访问授权效果示意图</p>
+<p>在上图中，假设该请求具备对 Web 应用程序的访问权限，但不具备访问应用程序中端点 1 的权限，如果想实现这种效果，一般我们的做法是引入角色体系：首先对不同的用户设置不同等级的角色（即角色等级不同对应的访问权限也不同），再把每个请求绑定到某个角色（即该请求具备了访问权限）。</p>
+<p>接下来我们把认证和授权进行结合，梳理出了 Web 应用程序访问场景下的安全性实现方案，如下图所示：</p>
+<p><img alt="Drawing 5.png" src="/assets/a5b08568fc078da0397aef82.png"/></p>
+<p>认证和授权整合示意图</p>
+<p>从上图我们可以看到，用户首先通过请求传递用户凭证完成用户认证，然后根据该用户信息中所具备的角色信息获取访问权限，最终完成对 HTTP 端点的访问授权。</p>
+<p>对一个 Web 应用程序进行安全性设计时，我们首先需要考虑认证和授权，因为它们是核心考虑点。在技术实现场景中，只要涉及用户认证，势必会涉及用户密码等敏感信息的加密。针对用户密码的场景，我们主要使用单向散列加密算法对敏感信息进行加密。</p>
+<p>关于单向散列加密算法，它常用于生成消息摘要（Message Digest），主要特点为单向不可逆和密文长度固定，同时具备“碰撞”少的优点，即明文的微小差异会导致生成的密文完全不同。其中，常见的单向散列加密实现算法为 MD5（Message Digest 5）和 SHA（Secure Hash Algorithm）。而在 JDK 自带的 MessageDigest 类中，因为它已经包含了这些算法的默认实现，所以我们直接调用方法即可。</p>
+<p>在日常开发过程中，对于密码进行加密的典型操作时序图如下所示：</p>
+<p><img alt="Drawing 3.png" src="/assets/eede953d44d5472241b31cf6.png"/></p>
+<p>单向散列加密与加盐机制</p>
+<p>上图中，我们引入了加盐（Salt）机制，进一步提升了加密数据的安全性。所谓加盐就是在初始化明文数据时，系统自动往明文中添加一些附加数据，然后再进行散列。</p>
+<p>目前，单向散列加密及加盐思想已被广泛用于系统登录过程中的密码生成和校验过程中，比如接下来我们将要引入的 Spring Security 框架。</p>
+<h3 id="spring-security-架构">Spring Security 架构</h3>
+<p>Spring Security 是 Spring 家族中历史比较悠久的一个框架，在 Spring Boot 出现之前，Spring Security 已经发展了很多年，尽管 Spring Security 的功能非常丰富，相比 Apache Shiro 这种轻量级的安全框架，它的优势就不那么明显了，加之应用程序中集成和配置 Spring Security 框架的过程比较复杂，因此它的发展过程并不是那么顺利。</p>
+<p>而正是随着 Spring Boot 的兴起，带动了 Spring Security 的发展。它专门针对 Spring Security 提供了一套完整的自动配置方案，使得开发人员可以零配置使用 Spring Security。</p>
+<p>这一讲我们先不对如何使用 Spring Security 框架展开说明，而是先从高层次梳理该框架对前面提到的各项安全性需求提供的架构设计。</p>
+<h4 id="spring-security-中的过滤器链">Spring Security 中的过滤器链</h4>
+<p>与业务中大多数处理 Web 请求的框架对比后，我们发现 Spring Security 中采用的是管道-过滤器（Pipe-Filter）架构模式，如下图所示：</p>
+<p><img alt="Drawing 8.png" src="/assets/9fa962c231b47232d3202110.png"/></p>
+<p>管道-过滤器架构模式示意图</p>
+<p>在上图中我们可以看到，处理业务逻辑的组件称为过滤器，而处理结果的相邻过滤器之间的连接件称为管道，它们构成了一组过滤器链，即 Spring Security 的核心。</p>
+<p>项目一旦启动，过滤器链将会实现自动配置，如下图所示：</p>
+<p><img alt="Drawing 10.png" src="/assets/b64927fa37800dbd5d569f18.png"/></p>
+<p>Spring Security 中的过滤器链</p>
+<p>在上图中，我们看到了 BasicAuthenticationFilter、UsernamePasswordAuthenticationFilter 等几个常见的 Filter，这些类可以直接或间接实现 Servlet 类中的 Filter 接口，并完成某一项具体的认证机制。例如，上图中的 BasicAuthenticationFilter 用来认证用户的身份，而 UsernamePasswordAuthenticationFilter 用来检查输入的用户名和密码，并根据认证结果来判断是否将结果传递给下一个过滤器。</p>
+<p>这里请注意，整个 Spring Security 过滤器链的末端是一个 FilterSecurityInterceptor，本质上它也是一个 Filter，但它与其他用于完成认证操作的 Filter 不同，因为它的核心功能是用来实现权限控制，即判定该请求是否能够访问目标 HTTP 端点。因为我们可以把 FilterSecurityInterceptor 对权限控制的粒度划分到方法级别，所以它能够满足前面提到的精细化访问控制。</p>
+<p>通过上述分析，我们知道了在 Spring Security 中，认证和授权这两个安全性需求主要通过一系列的过滤器进行实现。</p>
+<p>基于过滤器链，我们再来深入分析下 Spring Security 的核心类结构。</p>
+<h4 id="spring-security-中的核心类">Spring Security 中的核心类</h4>
+<p>我们先以最基础的 UsernamePasswordAuthenticationFilter 为例，该类的定义及核心方法 attemptAuthentication 如下代码所示。</p>
+<pre><code>public class UsernamePasswordAuthenticationFilter extends
+
+        AbstractAuthenticationProcessingFilter {
+
+ 
+
+    public Authentication attemptAuthentication(HttpServletRequest request,
+
+            HttpServletResponse response) throws AuthenticationException {
+
+        if (postOnly &amp;&amp; !request.getMethod().equals("POST")) {
+
+            throw new AuthenticationServiceException(
+
+                    "Authentication method not supported: " + request.getMethod());
+
+        }
+
+ 
+
+        String username = obtainUsername(request);
+
+        String password = obtainPassword(request);
+
+ 
+
+        if (username == null) {
+
+            username = "";
+
+        }
+
+ 
+
+        if (password == null) {
+
+            password = "";
+
+        }
+
+ 
+
+        username = username.trim();
+
+ 
+
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
+
+                username, password);
+
+ 
+
+        // Allow subclasses to set the "details" property
+
+        setDetails(request, authRequest);
+
+ 
+
+        return this.getAuthenticationManager().authenticate(authRequest);
+
+    }
+
+    …
+
+}
+</code></pre>
+<p>围绕上述方法，通过翻阅 Spring Security 源代码，我们引出了该框架中一系列核心类，并梳理了它们之间的交互结构，如下图所示：</p>
+<p><img alt="Lark20210112-182830.png" src="/assets/143a6d5a47250057f6696a27.png"/></p>
+<p>Spring Security 核心类图</p>
+<p>上图中的很多类，通过名称我们就能明白它的含义和作用。</p>
+<p>以位于左下角的 SecurityContextHolder 为例，它是一个典型的 Holder 类，存储了应用的安全上下文对象 SecurityContext，包含系统请求中最近使用的认证信息。这里我们大胆猜想它的内部肯定使用了 ThreadLocal 来确保线程访问的安全性。</p>
+<p>而正如 UsernamePasswordAuthenticationFilter 中的代码所示，一个 HTTP 请求到达系统后，将通过一系列的 Filter 完成用户认证，然后具体的工作交由 AuthenticationManager 完成，AuthenticationManager 成功验证后会返回填充好的 Authentication 实例。</p>
+<p>AuthenticationManager 是一个接口，在其实现 ProviderManager 类时会进一步依赖 AuthenticationProvider 接口完成具体的认证工作。</p>
+<p>而在 Spring Security 中存在一大批 AuthenticationProvider 接口的实现类，分别完成各种认证操作。在执行具体的认证工作时，Spring Security 势必会使用用户详细信息，上图位于右边的 UserDetailsService 服务就是用来对用户详细信息实现管理。</p>
+<p>关于上图中的很多其他核心类，我们将在后续的 18 讲《用户认证：如何基于Spring Security 构建用户认证体系？》中持续深入展开。</p>
+<h3 id="小结与预告">小结与预告</h3>
+<p>这一讲我们开始探讨 Web 应用程序的安全性，在这个领域中，因为认证和授权仍然是最基本的安全性控制手段，因此我们系统分析了认证和授权的解决方案，并引入了 Spring 家族中的 Spring Security 框架实现这一解决方案，同时对 Spring Security 的基本架构做了分析。</p>
+<p>介绍完认证和授权的基本概念之后，18 讲我们将基于 SpringCSS 案例系统详细介绍它们的实现过程，首先我们需要关注如何使用 Spring Security 框架完成对用户认证过程的管理。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

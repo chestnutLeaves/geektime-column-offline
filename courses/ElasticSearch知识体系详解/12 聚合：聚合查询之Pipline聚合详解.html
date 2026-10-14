@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12 聚合：聚合查询之Pipline聚合详解 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/index.html">ElasticSearch知识体系详解</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">21 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>ElasticSearch知识体系详解</strong><ul><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/01%20%E8%AE%A4%E7%9F%A5%EF%BC%9AElasticSearch%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">01 认知：ElasticSearch基础概念</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/02%20%E8%AE%A4%E7%9F%A5%EF%BC%9AElastic%20Stack%E7%94%9F%E6%80%81%E5%92%8C%E5%9C%BA%E6%99%AF%E6%96%B9%E6%A1%88.html">02 认知：Elastic Stack生态和场景方案</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/03%20%E5%AE%89%E8%A3%85%EF%BC%9AElasticSearch%E5%92%8CKibana%E5%AE%89%E8%A3%85.html">03 安装：ElasticSearch和Kibana安装</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/04%20%E5%85%A5%E9%97%A8%EF%BC%9A%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%81%9A%E5%90%88%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8.html">04 入门：查询和聚合的基础使用</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/05%20%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86%E8%AF%A6%E8%A7%A3.html">05 索引：索引管理详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/06%20%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%B4%A2%E5%BC%95%E6%A8%A1%E6%9D%BF%28Index%20Template%29%E8%AF%A6%E8%A7%A3.html">06 索引：索引模板(Index Template)详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/07%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8B%E5%A4%8D%E5%90%88%E6%9F%A5%E8%AF%A2%E8%AF%A6%E8%A7%A3.html">07 查询：DSL查询之复合查询详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/08%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8B%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E8%AF%A6%E8%A7%A3.html">08 查询：DSL查询之全文搜索详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/09%20%E6%9F%A5%E8%AF%A2%EF%BC%9ADSL%E6%9F%A5%E8%AF%A2%E4%B9%8BTerm%E8%AF%A6%E8%A7%A3.html">09 查询：DSL查询之Term详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/10%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BBucket%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">10 聚合：聚合查询之Bucket聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/11%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BMetric%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">11 聚合：聚合查询之Metric聚合详解</a></li><li><a class="active" aria-current="page" href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/12%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BPipline%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.html">12 聚合：聚合查询之Pipline聚合详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/13%20%E5%8E%9F%E7%90%86%EF%BC%9A%E4%BB%8E%E5%9B%BE%E8%A7%A3%E6%9E%84%E7%AD%91%E5%AF%B9ES%E5%8E%9F%E7%90%86%E7%9A%84%E5%88%9D%E6%AD%A5%E8%AE%A4%E7%9F%A5.html">13 原理：从图解构筑对ES原理的初步认知</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/14%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85%E5%92%8C%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84.html">14 原理：ES原理知识点补充和整体结构</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/15%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E4%B9%8B%E7%B4%A2%E5%BC%95%E6%96%87%E6%A1%A3%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3.html">15 原理：ES原理之索引文档流程详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/16%20%E5%8E%9F%E7%90%86%EF%BC%9AES%E5%8E%9F%E7%90%86%E4%B9%8B%E8%AF%BB%E5%8F%96%E6%96%87%E6%A1%A3%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3.html">16 原理：ES原理之读取文档流程详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/17%20%E4%BC%98%E5%8C%96%EF%BC%9AElasticSearch%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E8%AF%A6%E8%A7%A3.html">17 优化：ElasticSearch性能优化详解</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/18%20%E5%A4%A7%E5%8E%82%E5%AE%9E%E8%B7%B5%EF%BC%9A%E8%85%BE%E8%AE%AF%E4%B8%87%E4%BA%BF%E7%BA%A7%20Elasticsearch%20%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5.html">18 大厂实践：腾讯万亿级 Elasticsearch 技术实践</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/19%20%E8%B5%84%E6%96%99%EF%BC%9AAwesome%20Elasticsearch.html">19 资料：Awesome Elasticsearch</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/20%20WrapperQuery.html">20 WrapperQuery</a></li><li><a href="/courses/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/21%20%E5%A4%87%E4%BB%BD%E5%92%8C%E8%BF%81%E7%A7%BB.html">21 备份和迁移</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/ElasticSearch%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E8%AF%A6%E8%A7%A3/12%20%E8%81%9A%E5%90%88%EF%BC%9A%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2%E4%B9%8BPipline%E8%81%9A%E5%90%88%E8%AF%A6%E8%A7%A3.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="12 聚合：聚合查询之Pipline聚合详解" id="title">12 聚合：聚合查询之Pipline聚合详解</h1>
+<div><h2 id="如何理解pipeline聚合">如何理解pipeline聚合</h2>
+<blockquote>
+<p>如何理解管道聚合呢？最重要的是要站在设计者角度看这个功能的要实现的目的：让上一步的聚合结果成为下一个聚合的输入，这就是管道。</p>
+</blockquote>
+<h3 id="管道机制的常见场景">管道机制的常见场景</h3>
+<blockquote>
+<p>首先回顾下，Tomcat管道机制中向你介绍的常见的管道机制设计中的应用场景。</p>
+</blockquote>
+<h4 id="责任链模式">责任链模式</h4>
+<p>管道机制在设计模式上属于责任链模式，如果你不理解，请参看如下文章：</p>
+<p>责任链模式: 通过责任链模式, 你可以为某个请求创建一个对象链. 每个对象依序检查此请求并对其进行处理或者将它传给链中的下一个对象。</p>
+<h4 id="filterchain">FilterChain</h4>
+<p>在软件开发的常接触的责任链模式是FilterChain，它体现在很多软件设计中：</p>
+<ul>
+<li><strong>比如Spring Security框架中</strong></li>
+</ul>
+<p><img alt="img" src="/assets/7058f6e4e5d323137eaa4f84.jpg"/></p>
+<ul>
+<li><strong>比如HttpServletRequest处理的过滤器中</strong></li>
+</ul>
+<p>当一个request过来的时候，需要对这个request做一系列的加工，使用责任链模式可以使每个加工组件化，减少耦合。也可以使用在当一个request过来的时候，需要找到合适的加工方式。当一个加工方式不适合这个request的时候，传递到下一个加工方法，该加工方式再尝试对request加工。</p>
+<p>网上找了图，这里我们后文将通过Tomcat请求处理向你阐述。</p>
+<p><img alt="img" src="/assets/b5e5a2c88a660529ad903fa3.jpg"/></p>
+<h3 id="elasticsearch设计管道机制">ElasticSearch设计管道机制</h3>
+<p>简单而言：让上一步的聚合结果成为下一个聚合的输入，这就是管道。</p>
+<p>接下来，无非就是对不同类型的聚合有接口的支撑，比如：</p>
+<p><img alt="img" src="/assets/2e38f5b72bb8980941dff840.png"/></p>
+<blockquote>
+<p>第一个维度：管道聚合有很多不同<strong>类型</strong>，每种类型都与其他聚合计算不同的信息，但是可以将这些类型分为两类：</p>
+</blockquote>
+<ul>
+<li><strong>父级</strong> 父级聚合的输出提供了一组管道聚合，它可以计算新的存储桶或新的聚合以添加到现有存储桶中。</li>
+<li><strong>兄弟</strong> 同级聚合的输出提供的管道聚合，并且能够计算与该同级聚合处于同一级别的新聚合。</li>
+</ul>
+<blockquote>
+<p>第二个维度：根据<strong>功能设计</strong>的意图</p>
+</blockquote>
+<p>比如前置聚合可能是Bucket聚合，后置的可能是基于Metric聚合，那么它就可以成为一类管道</p>
+<p>进而引出了：<code>xxx bucket</code>(是不是很容易理解了 @pdai)</p>
+<ul>
+<li>Bucket聚合 -&gt; Metric聚合</li>
+</ul>
+<p>： bucket聚合的结果，成为下一步metric聚合的输入</p>
+<ul>
+<li>Average bucket</li>
+<li>Min bucket</li>
+<li>Max bucket</li>
+<li>Sum bucket</li>
+<li>Stats bucket</li>
+<li>Extended stats bucket</li>
+</ul>
+<p>对构建体系而言，理解上面的已经够了，其它的类型不过是锦上添花而言。</p>
+<h2 id="一些例子">一些例子</h2>
+<blockquote>
+<p>这里我们通过几个简单的例子看看即可，具体如果需要使用看看文档即可。@pdai</p>
+</blockquote>
+<h3 id="average-bucket-聚合">Average bucket 聚合</h3>
+<pre><code class="language-bash">POST _search
+{
+  "size": 0,
+  "aggs": {
+    "sales_per_month": {
+      "date_histogram": {
+        "field": "date",
+        "calendar_interval": "month"
+      },
+      "aggs": {
+        "sales": {
+          "sum": {
+            "field": "price"
+          }
+        }
+      }
+    },
+    "avg_monthly_sales": {
+// tag::avg-bucket-agg-syntax[]               
+      "avg_bucket": {
+        "buckets_path": "sales_per_month&gt;sales",
+        "gap_policy": "skip",
+        "format": "#,##0.00;(#,##0.00)"
+      }
+// end::avg-bucket-agg-syntax[]               
+    }
+  }
+}
+</code></pre>
+<ul>
+<li>嵌套的bucket聚合：聚合出按月价格的直方图</li>
+<li>Metic聚合：对上面的聚合再求平均值。</li>
+</ul>
+<p><strong>字段类型</strong>：</p>
+<ul>
+<li>buckets_path：指定聚合的名称，支持多级嵌套聚合。</li>
+<li>gap_policy 当管道聚合遇到不存在的值，有点类似于term等聚合的(missing)时所采取的策略，可选择值为：skip、insert_zeros。</li>
+<li>skip：此选项将丢失的数据视为bucket不存在。它将跳过桶并使用下一个可用值继续计算。</li>
+<li>format 用于格式化聚合桶的输出(key)。</li>
+</ul>
+<p>输出结果如下</p>
+<pre><code class="language-json">{
+  "took": 11,
+  "timed_out": false,
+  "_shards": ...,
+  "hits": ...,
+  "aggregations": {
+    "sales_per_month": {
+      "buckets": [
+        {
+          "key_as_string": "2015/01/01 00:00:00",
+          "key": 1420070400000,
+          "doc_count": 3,
+          "sales": {
+            "value": 550.0
+          }
+        },
+        {
+          "key_as_string": "2015/02/01 00:00:00",
+          "key": 1422748800000,
+          "doc_count": 2,
+          "sales": {
+            "value": 60.0
+          }
+        },
+        {
+          "key_as_string": "2015/03/01 00:00:00",
+          "key": 1425168000000,
+          "doc_count": 2,
+          "sales": {
+            "value": 375.0
+          }
+        }
+      ]
+    },
+    "avg_monthly_sales": {
+      "value": 328.33333333333333,
+      "value_as_string": "328.33"
+    }
+  }
+}
+</code></pre>
+<h3 id="stats-bucket-聚合">Stats bucket 聚合</h3>
+<p>进一步的stat bucket也很容易理解了</p>
+<pre><code class="language-bash">POST /sales/_search
+{
+  "size": 0,
+  "aggs": {
+    "sales_per_month": {
+      "date_histogram": {
+        "field": "date",
+        "calendar_interval": "month"
+      },
+      "aggs": {
+        "sales": {
+          "sum": {
+            "field": "price"
+          }
+        }
+      }
+    },
+    "stats_monthly_sales": {
+      "stats_bucket": {
+        "buckets_path": "sales_per_month&gt;sales" 
+      }
+    }
+  }
+}
+</code></pre>
+<p>返回</p>
+<pre><code class="language-bash">{
+   "took": 11,
+   "timed_out": false,
+   "_shards": ...,
+   "hits": ...,
+   "aggregations": {
+      "sales_per_month": {
+         "buckets": [
+            {
+               "key_as_string": "2015/01/01 00:00:00",
+               "key": 1420070400000,
+               "doc_count": 3,
+               "sales": {
+                  "value": 550.0
+               }
+            },
+            {
+               "key_as_string": "2015/02/01 00:00:00",
+               "key": 1422748800000,
+               "doc_count": 2,
+               "sales": {
+                  "value": 60.0
+               }
+            },
+            {
+               "key_as_string": "2015/03/01 00:00:00",
+               "key": 1425168000000,
+               "doc_count": 2,
+               "sales": {
+                  "value": 375.0
+               }
+            }
+         ]
+      },
+      "stats_monthly_sales": {
+         "count": 3,
+         "min": 60.0,
+         "max": 550.0,
+         "avg": 328.3333333333333,
+         "sum": 985.0
+      }
+   }
+}
+</code></pre>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline.html" target="_blank">https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline.html</a></p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

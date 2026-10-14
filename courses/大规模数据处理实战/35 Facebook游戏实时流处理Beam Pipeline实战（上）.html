@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>35 Facebook游戏实时流处理Beam Pipeline实战（上） · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/index.html">大规模数据处理实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>大规模数据处理实战</strong><ul><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%B8%A6%E4%BD%A0%E8%B5%B0%E4%B8%8A%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B9%8B%E8%B7%AF.html">00 开篇词 从这里开始，带你走上硅谷一线系统架构师之路</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/01%20%E4%B8%BA%E4%BB%80%E4%B9%88MapReduce%E4%BC%9A%E8%A2%AB%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E5%85%AC%E5%8F%B8%E6%B7%98%E6%B1%B0%EF%BC%9F.html">01 为什么MapReduce会被硅谷一线公司淘汰？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/02%20MapReduce%E5%90%8E%E8%B0%81%E4%B8%BB%E6%B2%89%E6%B5%AE%EF%BC%9A%E6%80%8E%E6%A0%B7%E8%AE%BE%E8%AE%A1%E4%B8%8B%E4%B8%80%E4%BB%A3%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF%EF%BC%9F.html">02 MapReduce后谁主沉浮：怎样设计下一代数据处理技术？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/03%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9A%E6%80%8E%E6%A0%B7%E5%AE%9E%E7%8E%B0%E5%A4%A7%E5%9E%8B%E7%94%B5%E5%95%86%E7%83%AD%E9%94%80%E6%A6%9C%EF%BC%9F.html">03 大规模数据处理初体验：怎样实现大型电商热销榜？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/04%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E5%AD%A6%E4%BC%9A%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%AD%89%E7%BA%A7%E5%8D%8F%E8%AE%AESLA%E6%9D%A5%E8%AF%84%E4%BC%B0%E4%BD%A0%E7%9A%84%E7%B3%BB%E7%BB%9F.html">04 分布式系统（上）：学会用服务等级协议SLA来评估你的系统</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/05%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E6%9E%B6%E6%9E%84%E5%B8%88%E4%B8%8D%E5%BE%97%E4%B8%8D%E7%9F%A5%E7%9A%84%E4%B8%89%E5%A4%A7%E6%8C%87%E6%A0%87.html">05 分布式系统（下）：架构师不得不知的三大指标</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/06%20%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86%E6%89%B9%E5%A4%84%E7%90%86%E8%BF%98%E6%98%AF%E6%B5%81%E5%A4%84%E7%90%86%EF%BC%9F.html">06 如何区分批处理还是流处理？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/07%20Workflow%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E8%AE%A9%E4%BD%A0%E5%9C%A8%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E4%B8%96%E7%95%8C%E4%B8%AD%E5%90%9B%E4%B8%B4%E5%A4%A9%E4%B8%8B.html">07 Workflow设计模式：让你在大规模数据世界中君临天下</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/08%20%E5%8F%91%E5%B8%83_%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%B5%81%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80.html">08 发布_订阅模式：流处理架构中的瑞士军刀</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/09%20CAP%E5%AE%9A%E7%90%86%EF%BC%9A%E4%B8%89%E9%80%89%E4%BA%8C%EF%BC%8C%E6%9E%B6%E6%9E%84%E5%B8%88%E5%BF%85%E9%A1%BB%E5%AD%A6%E4%BC%9A%E7%9A%84%E5%8F%96%E8%88%8D.html">09 CAP定理：三选二，架构师必须学会的取舍</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/10%20Lambda%E6%9E%B6%E6%9E%84%EF%BC%9ATwitter%E4%BA%BF%E7%BA%A7%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%9E%B6%E6%9E%84%E8%83%8C%E5%90%8E%E7%9A%84%E5%80%9A%E5%A4%A9%E5%89%91.html">10 Lambda架构：Twitter亿级实时数据分析架构背后的倚天剑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/11%20Kappa%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%88%A9%E7%94%A8Kafka%E9%94%BB%E9%80%A0%E7%9A%84%E5%B1%A0%E9%BE%99%E5%88%80.html">11 Kappa架构：利用Kafka锻造的屠龙刀</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/12%20%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81Spark%EF%BC%9F.html">12 我们为什么需要Spark？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/13%20%E5%BC%B9%E6%80%A7%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%9ASpark%E5%A4%A7%E5%8E%A6%E7%9A%84%E5%9C%B0%E5%9F%BA%EF%BC%88%E4%B8%8A%EF%BC%89.html">13 弹性分布式数据集：Spark大厦的地基（上）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/14%20%E5%BC%B9%E6%80%A7%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%9ASpark%E5%A4%A7%E5%8E%A6%E7%9A%84%E5%9C%B0%E5%9F%BA%EF%BC%88%E4%B8%8B%EF%BC%89.html">14 弹性分布式数据集：Spark大厦的地基（下）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/15%20Spark%20SQL%EF%BC%9ASpark%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%9A%84%E5%88%A9%E5%99%A8.html">15 Spark SQL：Spark数据查询的利器</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/16%20Spark%20Streaming%EF%BC%9ASpark%E7%9A%84%E5%AE%9E%E6%97%B6%E6%B5%81%E8%AE%A1%E7%AE%97API.html">16 Spark Streaming：Spark的实时流计算API</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/17%20Structured%20Streaming%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8DataFrame%20API%E8%BF%9B%E8%A1%8C%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90_.html">17 Structured Streaming：如何用DataFrame API进行实时数据分析_</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/18%20Word%20Count%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%BF%90%E8%A1%8C%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AASpark%E5%BA%94%E7%94%A8.html">18 Word Count：从零开始运行你的第一个Spark应用</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/19%20%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E5%A4%84%E7%90%86%E5%8A%A0%E5%B7%9E%E6%88%BF%E5%B1%8B%E4%BF%A1%E6%81%AF%EF%BC%8C%E6%9E%84%E5%BB%BA%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">19 综合案例实战：处理加州房屋信息，构建线性回归模型</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/20%20%E6%B5%81%E5%A4%84%E7%90%86%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%EF%BC%9A%E5%88%86%E6%9E%90%E7%BA%BD%E7%BA%A6%E5%B8%82%E5%87%BA%E7%A7%9F%E8%BD%A6%E8%BD%BD%E5%AE%A2%E4%BF%A1%E6%81%AF.html">20 流处理案例实战：分析纽约市出租车载客信息</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/21%20%E6%B7%B1%E5%85%A5%E5%AF%B9%E6%AF%94Spark%E4%B8%8EFlink%EF%BC%9A%E5%B8%AE%E4%BD%A0%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%A4%E5%BC%80%E8%8A%B1.html">21 深入对比Spark与Flink：帮你系统设计两开花</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/22%20Apache%20Beam%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F.html">22 Apache Beam的前世今生</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/23%20%E7%AB%99%E5%9C%A8Google%E7%9A%84%E8%82%A9%E8%86%80%E4%B8%8A%E5%AD%A6%E4%B9%A0Beam%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B.html">23 站在Google的肩膀上学习Beam编程模型</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/24%20PCollection%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88Beam%E8%A6%81%E5%A6%82%E6%AD%A4%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E6%95%B0%E6%8D%AE%EF%BC%9F.html">24 PCollection：为什么Beam要如此抽象封装数据？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/25%20Transform%EF%BC%9ABeam%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95.html">25 Transform：Beam数据转换操作的抽象方法</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/26%20Pipeline%EF%BC%9ABeam%E5%A6%82%E4%BD%95%E6%8A%BD%E8%B1%A1%E5%A4%9A%E6%AD%A5%E9%AA%A4%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%9F.html">26 Pipeline：Beam如何抽象多步骤的数据流水线？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/27%20Pipeline%20I_O_%20Beam%E6%95%B0%E6%8D%AE%E4%B8%AD%E8%BD%AC%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">27 Pipeline I_O_ Beam数据中转的设计模式</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%88%9B%E5%BB%BA%E5%A5%BD%E4%B8%80%E4%B8%AABeam%20Pipeline%EF%BC%9F.html">28 如何设计创建好一个Beam Pipeline？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/29%20%E5%A6%82%E4%BD%95%E6%B5%8B%E8%AF%95Beam%20Pipeline%EF%BC%9F.html">29 如何测试Beam Pipeline？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/30%20Apache%20Beam%E5%AE%9E%E6%88%98%E5%86%B2%E5%88%BA%EF%BC%9ABeam%E5%A6%82%E4%BD%95run%20everywhere_.html">30 Apache Beam实战冲刺：Beam如何run everywhere_</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/31%20WordCount%20Beam%20Pipeline%E5%AE%9E%E6%88%98.html">31 WordCount Beam Pipeline实战</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/32%20Beam%20Window%EF%BC%9A%E6%89%93%E9%80%9A%E6%B5%81%E5%A4%84%E7%90%86%E7%9A%84%E4%BB%BB%E7%9D%A3%E4%BA%8C%E8%84%89.html">32 Beam Window：打通流处理的任督二脉</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/33%20%E6%A8%AA%E7%9C%8B%E6%88%90%E5%B2%AD%E4%BE%A7%E6%88%90%E5%B3%B0%EF%BC%9A%E5%86%8D%E6%88%98Streaming%20WordCount.html">33 横看成岭侧成峰：再战Streaming WordCount</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/34%20Amazon%E7%83%AD%E9%94%80%E6%A6%9CBeam%20Pipeline%E5%AE%9E%E6%88%98.html">34 Amazon热销榜Beam Pipeline实战</a></li><li><a class="active" aria-current="page" href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/35%20Facebook%E6%B8%B8%E6%88%8F%E5%AE%9E%E6%97%B6%E6%B5%81%E5%A4%84%E7%90%86Beam%20Pipeline%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8A%EF%BC%89.html">35 Facebook游戏实时流处理Beam Pipeline实战（上）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/36%20Facebook%E6%B8%B8%E6%88%8F%E5%AE%9E%E6%97%B6%E6%B5%81%E5%A4%84%E7%90%86Beam%20Pipeline%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8B%EF%BC%89.html">36 Facebook游戏实时流处理Beam Pipeline实战（下）</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/37%205G%E6%97%B6%E4%BB%A3%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%89%A9%E8%81%94%E7%BD%91%E6%95%B0%E6%8D%AE.html">37 5G时代，如何处理超大规模物联网数据</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/38%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%9C%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%A6%82%E4%BD%95%E5%BA%94%E7%94%A8%EF%BC%9F.html">38 大规模数据处理在深度学习中如何应用？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/39%20%E4%BB%8ESQL%E5%88%B0Streaming%20SQL%EF%BC%9A%E7%AA%81%E7%A0%B4%E9%9D%99%E6%80%81%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%AC%A1%E5%85%83.html">39 从SQL到Streaming SQL：突破静态数据查询的次元</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/40%20%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%9C%AA%E6%9D%A5%E4%B9%8B%E8%B7%AF.html">40 大规模数据处理未来之路</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%B8%80%E6%9C%9F%20%E5%AD%A6%E4%B9%A0%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%9C%80%E8%A6%81%E4%BB%80%E4%B9%88%E5%9F%BA%E7%A1%80%EF%BC%9F.html">FAQ第一期 学习大规模数据处理需要什么基础？</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%B8%89%E6%9C%9F%20Apache%20Beam%E5%9F%BA%E7%A1%80%E7%AD%94%E7%96%91.html">FAQ第三期 Apache Beam基础答疑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/FAQ%E7%AC%AC%E4%BA%8C%E6%9C%9F%20Spark%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98%E7%AD%94%E7%96%91.html">FAQ第二期 Spark案例实战答疑</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/%E5%8A%A0%E6%B2%B9%E7%AB%99%20Practice%20makes%20perfect%EF%BC%81.html">加油站 Practice makes perfect！</a></li><li><a href="/courses/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E4%B8%96%E9%97%B4%E6%89%80%E6%9C%89%E7%9A%84%E7%9B%B8%E9%81%87%EF%BC%8C%E9%83%BD%E6%98%AF%E4%B9%85%E5%88%AB%E9%87%8D%E9%80%A2.html">结束语 世间所有的相遇，都是久别重逢</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%AE%9E%E6%88%98/35%20Facebook%E6%B8%B8%E6%88%8F%E5%AE%9E%E6%97%B6%E6%B5%81%E5%A4%84%E7%90%86Beam%20Pipeline%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%8A%EF%BC%89.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="35 Facebook游戏实时流处理Beam Pipeline实战（上）" id="title">35 Facebook游戏实时流处理Beam Pipeline实战（上）</h1>
+<div><p>你好，我是蔡元楠。</p>
+<p>今天我要与你分享的主题是“Facebook游戏实时流处理Beam Pipeline实战”。</p>
+<p>Facebook这个社交平台我相信你一定早有耳闻。它除了能够让用户发送消息给好友，分享自己的动态图片和视频之外，还通过自身的App Center管理着各式各样的小游戏。许多游戏开发商借助Facebook的好友邀请机制让自己的App火了一把。</p>
+<p>曾经有一段时间，在Facebook上有一款名为糖果传奇（Candy Crush Saga）的游戏风靡了整个北美。各个年龄层的玩家都会在空闲的时间拿出手机，过五关斩六将，希望尽快突破更多的关卡，并且获得高分。</p>
+<p><img alt="" src="/assets/4d1783a7fa4e6f8cd26952c7.png"/></p>
+<p>当然了，除了消除游戏本身带来的乐趣以外，可以在Facebook里和自己的好友进行积分排名比拼也是另外一个能吸引用户的地方。</p>
+<p><img alt="" src="/assets/97c77c086b41b97030600cca.png"/></p>
+<p>想要一个类似Facebook这样的好友间积分排行榜，你可以有很多种实现方式以及各种优化方法。那么，如果我们要利用Apache Beam的话，该怎样实现一个类似的游戏积分排行榜呢？</p>
+<p>今天我就来和你一起研究，要如何利用Apache Beam的数据流水线来实现一个我们自定义的简单游戏积分排行榜。</p>
+<p>为了简化整个游戏积分排行榜案例的说明，我们先来做几个方面的假设：</p>
+<ul>
+<li><strong>面向的群体</strong>：游戏积分排行榜针对的是全局每位用户以及每一个关卡，我们不需要担心如何在Beam的数据流水线中优化每个用户自身的好友积分列表。</li>
+<li><strong>更新时间</strong>：为了保持用户的粘性，我们设定这个游戏积分排行榜的数据每隔一周就会更新一次。也就是说如果一位用户在2019年7月15日成功通关了一次游戏并且分数是这周内自身的最高分，那么这次的最高分数将一直留在2019年7月15日至2019年7月21日这周的排行榜中。但是到了2019年7月22日后，这个分数将不会再出现，需要用户重新通关这个关卡后分数才会重新出现在新的一周游戏积分排行榜中。</li>
+<li><strong>积分排位</strong>：游戏积分排行榜需要显示出这个关卡中得分最高的前100位用户。</li>
+<li><strong>输入数据</strong>：每次用户通关后，这个App都会将用户自身的ID，通关游戏的时间（也就是事件时间）还有分数以CSV格式上传到服务器中，每个用户的游戏积分数据都可以从Google Cloud Bigtable中读取出来。</li>
+<li><strong>输出数据</strong>：最终这个游戏积分排行榜结果可以从一个文件中获得。也就是说，我们的Beam数据流水线需要将最终结果写入文件中。</li>
+</ul>
+<p>有了这些假设，我们就一起来由浅入深地看看有哪些执行方案。</p>
+<p>正如上一讲中所说，如果可以用简单的方法解决战斗，我们当然要避免将问题复杂化了。一种比较直观的做法就是使用crontab定时执行一个Beam数据流水线，将每周需要进行计算排名的开始时间点和结束时间点传入数据流水线中，过滤掉所有事件时间不在这个时间范围内的数据。</p>
+<p>那么，具体要怎么做呢？</p>
+<p>首先，我们先要定义一个类，来保存我们之前假设好用户上传的信息。</p>
+<p>Java</p>
+<pre><code>class UserScoreInfo {
+    String userId;
+    Double score;
+    Long eventTimestamp;
+
+    public UserScoreInfo(String userId, Double score, Long eventTimestamp) {
+      this.userId = userId;
+      this.score = score;
+      this.eventTimestamp = eventTimestamp;
+    }
+
+    public String getUserId() {
+      return this.userId;
+    }
+
+    public Double getScore() {
+      return this.score;
+    }
+
+    public Long getEventTimestamp() {
+      return this.eventTimestamp;
+    }
+  }
+</code></pre>
+<p>这个类十分简单，构造函数需要传入的是用户ID、游戏通关时的积分还有通关时间。</p>
+<p>有了这个类之后，整个数据流水线的逻辑就可以围绕着这个类来处理，步骤大致如下：</p>
+<ol>
+<li>从Google Cloud Bigtable中读取保存用户通关积分等信息的所有Bigtable Row出来，得到PCollection 。</li>
+<li>将PCollection 转换成我们定义好的类，成为PCollection 。</li>
+<li>根据我们传入的开始边界时间和结束边界时间过滤掉不属于这一周里数据，得到有效时间内的PCollection 。</li>
+<li>将PCollection转换成PCollection<kv<string, userscoreinfo="">&gt;，KV里面的Key就用户ID。</kv<string,></li>
+<li>自定义一个Composite Transform，其中包括三个步骤：利用Top Transform将每一个用户的最高分率选出来，得到PCollection<kv<string, list="">&gt;；将PCollection<kv<string, \="" list="">&gt;转换成为PCollection<kv<string, userscoreinfo="">&gt;；再次利用Top Transform将PCollection<kv<string, userscoreinfo="">&gt;中前100名高分用户筛选出来。</kv<string,></kv<string,></kv<string,></kv<string,></li>
+<li>将结果写入CSV格式的文件中，格式为“用户ID，分数”。</li>
+</ol>
+<p>在上面所描述的步骤中，第5步出现了一个叫Composite Transform的概念。</p>
+<p>那么，什么是Composite Transform呢？其实Composite Transform并不是指一个具体的Transform，而是指我们可以将多个不同的Transforms嵌套进一个类中，使得数据流水线更加模块化。具体做法是继承PTransform这个类，并且实现expand抽象方法来实现的。</p>
+<p>用我们实现过的WordsCount来举例，我们可以将整个WordsCount数据流水线模块化成一个Composite Transform，示例如下：</p>
+<p>Java</p>
+<pre><code>public static class WordsCount extends PTransform&lt;PCollection&lt;String&gt;,
+      PCollection&lt;KV&lt;String, Long&gt;&gt;&gt; {
+    @Override
+    public PCollection&lt;KV&lt;String, Long&gt;&gt; expand(PCollection&lt;String&gt; lines) {
+
+      PCollection&lt;String&gt; words = lines.apply(
+          ParDo.of(new ExtractWordsFn()));
+
+      PCollection&lt;KV&lt;String, Long&gt;&gt; wordsCount =
+          words.apply(Count.&lt;String&gt;perElement());
+
+      return wordsCount;
+    }
+  }
+</code></pre>
+<p>在上面这个例子中，输入的参数是每一行字符串PCollection ，输出结果是每一个单词对应出现的次数PCollection<kv<string, long="">。在实现expand这个抽象方法的时候，里面总共嵌套了两个不同的Transform，分别是一个ParDo用来提取每一行的单词，还有一个Count Transform统计单词出现的次数。</kv<string,></p>
+<p>所以在第5步中，我们也可以自己定义一个ExtractUserAndScore的Composite Transform来实现上面所描述的多个不同的Transforms。</p>
+<p>好了，为了事先知道游戏积分排行榜中开始的边界时间和结束的边界时间，我们还需要自己实现一个Options接口。方法是继承PipelineOptions这个接口，具体如下所示：</p>
+<p>Java</p>
+<pre><code>public interface Options extends PipelineOptions {
+    @Default.String("1970-01-01-00-00")
+    String getStartBoundary();
+
+    void setStartBoundary(String value);
+
+    @Default.String("2100-01-01-00-00")
+    String getEndBoundary();
+
+    void setEndBoundary(String value);
+  }
+</code></pre>
+<p>这样开始的边界时间和结束的边界时间就都可以通过Pipeline option的参数传入。</p>
+<p>例如，我们想要得到2019年7月15日至2019年7月21日这周的排行榜，那在运行数据流水线的时候，参数就可以按照“–startBoundary=2019-07-15-00-00 –etartBoundary=2019-07-21-00-00”传入了。</p>
+<p>整个数据流水线的大致逻辑如下：</p>
+<p>Java</p>
+<pre><code>final class LeaderBoard {
+  static class UserScoreInfo {
+    String userId;
+    Double score;
+    Long eventTimestamp;
+
+    public UserScoreInfo(String userId, Double score, Long eventTimestamp) {
+      this.userId = userId;
+      this.score = score;
+      this.eventTimestamp = eventTimestamp;
+    }
+
+    public String getUserId() {
+      return this.userId;
+    }
+
+    public Double getScore() {
+      return this.score;
+    }
+
+    public Long getEventTimestamp() {
+      return this.eventTimestamp;
+    }
+  }
+
+  private static DateTimeFormatter formatter =
+      DateTimeFormat.forPattern("yyyy-MM-dd-HH-mm")
+          .withZone(DateTimeZone.forTimeZone(TimeZone.getTimeZone("Asia/Shanghai")));
+
+  public static void main(String[] args) throws Exception {
+    Options options = PipelineOptionsFactory.fromArgs(args).withValidation().as(Options.class);
+    Pipeline pipeline = Pipeline.create(options);
+
+    final Instant startBoundary = new Instant(formatter.parseMillis(options.getStartBoundary()));
+    final Instant endBoundary = new Instant(formatter.parseMillis(options.getEndBoundary()));
+
+    pipeline
+        .apply(
+            BigtableIO.read()
+                .withProjectId(projectId)
+                .withInstanceId(instanceId)
+                .withTableId("ScoreTable"))
+        .apply("ConvertUserScoreInfo", ParDo.of(new ConvertUserScoreInfoFn()))
+        .apply(
+            "FilterStartTime",
+            Filter.by((UserScoreInfo info) -&gt; info.getTimestamp() &gt; startBoundary.getMillis()))
+        .apply(
+            "FilterEndTime",
+            Filter.by((UserScoreInfo info) -&gt; info.getTimestamp() &lt; endBoundary.getMillis()))
+        .apply("RetrieveTop100Players", new ExtractUserAndScore())
+        .apply(
+            FileIO.&lt;List&lt;String&gt;&gt;write()
+                .via(
+                    new CSVSink(Arrays.asList("userId", "score"))
+                        .to("filepath")
+                        .withPrefix("scoreboard")
+                        .withSuffix(".csv")));
+
+    pipeline.run().waitUntilFinish();
+  }
+}
+</code></pre>
+<p>其中，ConvertUserScoreInfoFn这个Transform代表着第2步转换操作，数据流水线中两个Filter Transform分别代表着第3和第4步。第5步“获得最高分的前100位用户”是由ExtractUserAndScore这个Composite Transform来完成的。</p>
+<p>你可以看到，不算上各种具体Transform的实现，整个数据流水线的逻辑框架大概用60行代码就可以表示出来。</p>
+<p>虽然这个批处理的方法可以用简单的逻辑得到最后我们想要的结果，不过其实它还存在着不少的不足之处。</p>
+<p>因为我们的批处理数据流水线使用crontab来定时运行，所以“运行数据流水线的时间间隔”以及“完成数据流水线”这之间的时间之和会给最终结果带来延迟。</p>
+<p>比如，我们定义crontab每隔30分钟来运行一次数据流水线，这个数据流水线大概需要5分钟完成，那在这35分钟期间用户上传到服务器的分数是无法反应到积分排行榜中的。</p>
+<p>那么，有没有能够缩小延时的办法呢？</p>
+<p>当然有，答案就是将输入数据作为无边界数据集读取进来，进行实时的数据处理。在这里面我们会运用的到第23讲所讲述到的窗口（Window）、触发器（Trigger）和累加模式（Accumulation）的概念。</p>
+<p>我将在下一讲中，与你具体分析怎样运用Beam的数据流水线实现一个实时输出的游戏积分排行榜。</p>
+<h2 id="小结">小结</h2>
+<p>今天我们一起展开讨论了自己实现一个简易游戏积分排行榜的过程。可以知道的是，我们可以使用Beam的数据流水线来完成这一任务。而在Beam数据流水线的实现方式中，我们又可以分成批处理的实现方式和即将在下一讲中展开讨论的实时流处理的方式。批处理虽然简单，但是存在着延时性高、无法快速更新积分排行榜的缺点。</p>
+<h2 id="思考题">思考题</h2>
+<p>在今天这一讲的最后，我提示了你在实时流处理中需要用到窗口、触发器和累加模式。那我们就先来做个预热，思考一下，在流处理中你会对这三种概念赋予什么值呢？</p>
+<p>欢迎你把答案写在留言区，与我和其他同学一起讨论。如果你觉得有所收获，也欢迎把文章分享给你的朋友。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

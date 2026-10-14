@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>17 更真实的云原生：实际搭建多节点的Kubernetes集群 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/index.html">Kubernetes入门实战课</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">38 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Kubernetes入门实战课</strong><ul><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E8%BF%8E%E9%9A%BE%E8%80%8C%E4%B8%8A%EF%BC%8C%E5%81%9A%E4%BA%91%E5%8E%9F%E7%94%9F%E6%97%B6%E4%BB%A3%E7%9A%84%E5%BC%84%E6%BD%AE%E5%84%BF.html">00 开篇词 迎难而上，做云原生时代的弄潮儿</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/00%20%E8%AF%BE%E5%89%8D%E5%87%86%E5%A4%87%20%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5%E6%89%8D%E6%98%AF%E6%9C%80%E5%A5%BD%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F.html">00 课前准备 动手实践才是最好的学习方式</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/01%20%E5%88%9D%E8%AF%86%E5%AE%B9%E5%99%A8%EF%BC%9A%E4%B8%87%E4%BA%8B%E5%BC%80%E5%A4%B4%E9%9A%BE.html">01 初识容器：万事开头难</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/02%20%E8%A2%AB%E9%9A%94%E7%A6%BB%E7%9A%84%E8%BF%9B%E7%A8%8B%EF%BC%9A%E4%B8%80%E8%B5%B7%E6%9D%A5%E7%9C%8B%E7%9C%8B%E5%AE%B9%E5%99%A8%E7%9A%84%E6%9C%AC%E8%B4%A8.html">02 被隔离的进程：一起来看看容器的本质</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/03%20%E5%AE%B9%E5%99%A8%E5%8C%96%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9A%E4%BC%9A%E4%BA%86%E8%BF%99%E4%BA%9B%E4%BD%A0%E5%B0%B1%E6%98%AFDocker%E9%AB%98%E6%89%8B.html">03 容器化的应用：会了这些你就是Docker高手</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/04%20%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E6%AD%A3%E7%A1%AE%E3%80%81%E9%AB%98%E6%95%88%E7%9A%84Dockerfile.html">04 创建容器镜像：如何编写正确、高效的Dockerfile</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/05%20%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%EF%BC%9A%E8%AF%A5%E6%80%8E%E6%A0%B7%E7%94%A8%E5%A5%BDDocker%20Hub%E8%BF%99%E4%B8%AA%E5%AE%9D%E8%97%8F.html">05 镜像仓库：该怎样用好Docker Hub这个宝藏</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/06%20%E6%89%93%E7%A0%B4%E6%AC%A1%E5%85%83%E5%A3%81%EF%BC%9A%E5%AE%B9%E5%99%A8%E8%AF%A5%E5%A6%82%E4%BD%95%E4%B8%8E%E5%A4%96%E7%95%8C%E4%BA%92%E8%81%94%E4%BA%92%E9%80%9A.html">06 打破次元壁：容器该如何与外界互联互通</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/07%20%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%EF%BC%9A%E7%8E%A9%E8%BD%ACDocker.html">07 实战演练：玩转Docker</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/08%20%E8%A7%86%E9%A2%91%EF%BC%9A%E5%85%A5%E9%97%A8%E7%AF%87%E5%AE%9E%E6%93%8D%E6%80%BB%E7%BB%93.html">08 视频：入门篇实操总结</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/09%20%E8%B5%B0%E8%BF%91%E4%BA%91%E5%8E%9F%E7%94%9F%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%E6%9C%AC%E6%9C%BA%E6%90%AD%E5%BB%BA%E5%B0%8F%E5%B7%A7%E5%AE%8C%E5%A4%87%E7%9A%84Kubernetes%E7%8E%AF%E5%A2%83.html">09 走近云原生：如何在本机搭建小巧完备的Kubernetes环境</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/10%20%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E8%BF%90%E7%BB%B4%E7%AE%A1%E7%90%86%EF%BC%9A%E6%8E%A2%E7%A9%B6Kubernetes%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6%E7%9A%84%E5%A5%A5%E7%A7%98.html">10 自动化的运维管理：探究Kubernetes工作机制的奥秘</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/11%20YAML%EF%BC%9AKubernetes%E4%B8%96%E7%95%8C%E9%87%8C%E7%9A%84%E9%80%9A%E7%94%A8%E8%AF%AD.html">11 YAML：Kubernetes世界里的通用语</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/12%20Pod%EF%BC%9A%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%BF%99%E4%B8%AAKubernetes%E9%87%8C%E6%9C%80%E6%A0%B8%E5%BF%83%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%9F.html">12 Pod：如何理解这个Kubernetes里最核心的概念？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/13%20Job_CronJob%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5%E7%94%A8Pod%E6%9D%A5%E5%A4%84%E7%90%86%E4%B8%9A%E5%8A%A1%EF%BC%9F.html">13 Job_CronJob：为什么不直接用Pod来处理业务？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/14%20ConfigMap_Secret%EF%BC%9A%E6%80%8E%E6%A0%B7%E9%85%8D%E7%BD%AE%E3%80%81%E5%AE%9A%E5%88%B6%E6%88%91%E7%9A%84%E5%BA%94%E7%94%A8.html">14 ConfigMap_Secret：怎样配置、定制我的应用</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/15%20%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%EF%BC%9A%E7%8E%A9%E8%BD%ACKubernetes%EF%BC%881%EF%BC%89.html">15 实战演练：玩转Kubernetes（1）</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/16%20%E8%A7%86%E9%A2%91%EF%BC%9A%E5%88%9D%E7%BA%A7%E7%AF%87%E5%AE%9E%E6%93%8D%E6%80%BB%E7%BB%93.html">16 视频：初级篇实操总结</a></li><li><a class="active" aria-current="page" href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/17%20%E6%9B%B4%E7%9C%9F%E5%AE%9E%E7%9A%84%E4%BA%91%E5%8E%9F%E7%94%9F%EF%BC%9A%E5%AE%9E%E9%99%85%E6%90%AD%E5%BB%BA%E5%A4%9A%E8%8A%82%E7%82%B9%E7%9A%84Kubernetes%E9%9B%86%E7%BE%A4.html">17 更真实的云原生：实际搭建多节点的Kubernetes集群</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/18%20Deployment%EF%BC%9A%E8%AE%A9%E5%BA%94%E7%94%A8%E6%B0%B8%E4%B8%8D%E5%AE%95%E6%9C%BA.html">18 Deployment：让应用永不宕机</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/19%20Daemonset%EF%BC%9A%E5%BF%A0%E5%AE%9E%E5%8F%AF%E9%9D%A0%E7%9A%84%E7%9C%8B%E9%97%A8%E7%8B%97.html">19 Daemonset：忠实可靠的看门狗</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/20%20Service%EF%BC%9A%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84%E5%BA%94%E5%AF%B9%E4%B9%8B%E9%81%93.html">20 Service：微服务架构的应对之道</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/21%20Ingress%EF%BC%9A%E9%9B%86%E7%BE%A4%E8%BF%9B%E5%87%BA%E6%B5%81%E9%87%8F%E7%9A%84%E6%80%BB%E7%AE%A1.html">21 Ingress：集群进出流量的总管</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/22%20%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%EF%BC%9A%E7%8E%A9%E8%BD%ACKubernetes%EF%BC%882%EF%BC%89.html">22 实战演练：玩转Kubernetes（2）</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/23%20%E8%A7%86%E9%A2%91%EF%BC%9A%E4%B8%AD%E7%BA%A7%E7%AF%87%E5%AE%9E%E6%93%8D%E6%80%BB%E7%BB%93.html">23 视频：中级篇实操总结</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/24%20PersistentVolume%EF%BC%9A%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96%E7%9A%84%E9%9A%BE%E9%A2%98%EF%BC%9F.html">24 PersistentVolume：怎么解决数据持久化的难题？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/25%20PersistentVolume%20%2B%20NFS%EF%BC%9A%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%EF%BC%9F.html">25 PersistentVolume + NFS：怎么使用网络共享存储？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/26%20StatefulSet%EF%BC%9A%E6%80%8E%E4%B9%88%E7%AE%A1%E7%90%86%E6%9C%89%E7%8A%B6%E6%80%81%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%9F.html">26 StatefulSet：怎么管理有状态的应用？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/27%20%E6%BB%9A%E5%8A%A8%E6%9B%B4%E6%96%B0%EF%BC%9A%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E5%B9%B3%E6%BB%91%E7%9A%84%E5%BA%94%E7%94%A8%E5%8D%87%E7%BA%A7%E9%99%8D%E7%BA%A7%EF%BC%9F.html">27 滚动更新：如何做到平滑的应用升级降级？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/28%20%E5%BA%94%E7%94%A8%E4%BF%9D%E9%9A%9C%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9Pod%E8%BF%90%E8%A1%8C%E5%BE%97%E6%9B%B4%E5%81%A5%E5%BA%B7%EF%BC%9F.html">28 应用保障：如何让Pod运行得更健康？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/29%20%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%90%8D%E5%AD%97%E7%A9%BA%E9%97%B4%E5%88%86%E9%9A%94%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%EF%BC%9F.html">29 集群管理：如何用名字空间分隔系统资源？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/30%20%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Metrics%20Server%E5%92%8CPrometheus%EF%BC%9F.html">30 系统监控：如何使用Metrics Server和Prometheus？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/31%20%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%EF%BC%9ACNI%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F%E5%8F%88%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F.html">31 网络通信：CNI是怎么回事？又是怎么工作的？</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/32%20%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%EF%BC%9A%E7%8E%A9%E8%BD%ACKubernetes%EF%BC%883%EF%BC%89.html">32 实战演练：玩转Kubernetes（3）</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/33%20%E8%A7%86%E9%A2%91%EF%BC%9A%E9%AB%98%E7%BA%A7%E7%AF%87%E5%AE%9E%E6%93%8D%E6%80%BB%E7%BB%93.html">33 视频：高级篇实操总结</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%90%20docker-compose%EF%BC%9A%E5%8D%95%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92%E5%B7%A5%E5%85%B7.html">加餐 docker-compose：单机环境下的容器编排工具</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/%E5%8A%A0%E9%A4%90%20%E8%B0%88%E8%B0%88Kong%20Ingress%20Controller.html">加餐 谈谈Kong Ingress Controller</a></li><li><a href="/courses/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%98%AF%E7%BB%88%E7%82%B9%EF%BC%8C%E6%9B%B4%E6%98%AF%E8%B5%B7%E7%82%B9.html">结束语 是终点，更是起点</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Kubernetes%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E8%AF%BE/17%20%E6%9B%B4%E7%9C%9F%E5%AE%9E%E7%9A%84%E4%BA%91%E5%8E%9F%E7%94%9F%EF%BC%9A%E5%AE%9E%E9%99%85%E6%90%AD%E5%BB%BA%E5%A4%9A%E8%8A%82%E7%82%B9%E7%9A%84Kubernetes%E9%9B%86%E7%BE%A4.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="17 更真实的云原生：实际搭建多节点的Kubernetes集群" id="title">17 更真实的云原生：实际搭建多节点的Kubernetes集群</h1>
+<div><p>你好，我是Chrono。</p>
+<p>到今天，你学习这个专栏的进度就已经过半了，在前面的“入门篇”我们了解了Docker和容器技术，在“初级篇”我们掌握了Kubernetes的基本对象、原理和操作方法，一路走下来收获很多。</p>
+<p>现在你应该对Kubernetes和容器编排有了一些初步的认识，那么接下来，让我们继续深入研究Kubernetes的其他API对象，也就是那些在Docker中不存在的但对云计算、集群管理至关重要的概念。</p>
+<p>不过在那之前，我们还需要有一个比minikube更真实的Kubernetes环境，它应该是一个多节点的Kubernetes集群，这样更贴近现实中的生产系统，能够让我们尽快地拥有实际的集群使用经验。</p>
+<p>所以在今天的这节课里，我们就来暂时忘掉minikube，改用kubeadm（<a href="https://kubernetes.io/zh/docs/reference/setup-tools/kubeadm/" target="_blank">https://kubernetes.io/zh/docs/reference/setup-tools/kubeadm/</a>）搭建出一个新的Kubernetes集群，一起来看看更真实的云原生环境。</p>
+<h2 id="什么是kubeadm">什么是kubeadm</h2>
+<p>前面的几节课里我们使用的都是minikube，它非常简单易用，不需要什么配置工作，就能够在单机环境里创建出一个功能完善的Kubernetes集群，给学习、开发、测试都带来了极大的便利。</p>
+<p>不过minikube还是太“迷你”了，方便的同时也隐藏了很多细节，离真正生产环境里的计算集群有一些差距，毕竟许多需求、任务只有在多节点的大集群里才能够遇到，相比起来，minikube真的只能算是一个“玩具”。</p>
+<p>那么，多节点的Kubernetes集群是怎么从无到有地创建出来的呢？</p>
+<p>[第10讲]说过Kubernetes是很多模块构成的，而实现核心功能的组件像apiserver、etcd、scheduler等本质上都是可执行文件，所以也可以采用和其他系统差不多的方式，使用Shell脚本或者Ansible等工具打包发布到服务器上。</p>
+<p>不过Kubernetes里的这些组件的配置和相互关系实在是太复杂了，用Shell、Ansible来部署的难度很高，需要具有相当专业的运维管理知识才能配置、搭建好集群，而且即使这样，搭建的过程也非常麻烦。</p>
+<p>为了简化Kubernetes的部署工作，让它能够更“接地气”，社区里就出现了一个专门用来在集群中安装Kubernetes的工具，名字就叫“<strong>kubeadm</strong>”，意思就是“Kubernetes管理员”。</p>
+<p><img alt="图片" src="/assets/c5e52ab3ca69369b1cc7ff24.jpg"/></p>
+<p>kubeadm，原理和minikube类似，也是用容器和镜像来封装Kubernetes的各种组件，但它的目标不是单机部署，而是要能够轻松地在集群环境里部署Kubernetes，并且让这个集群接近甚至达到生产级质量。</p>
+<p>而在保持这个高水准的同时，kubeadm还具有了和minikube一样的易用性，只要很少的几条命令，如 <code>init</code>、<code>join</code>、<code>upgrade</code>、<code>reset</code> 就能够完成Kubernetes集群的管理维护工作，这让它不仅适用于集群管理员，也适用于开发、测试人员。</p>
+<h2 id="实验环境的架构是什么样的">实验环境的架构是什么样的</h2>
+<p>在使用kubeadm搭建实验环境之前，我们先来看看集群的架构设计，也就是说要准备好集群所需的硬件设施。</p>
+<p>这里我画了一张系统架构图，图里一共有3台主机，当然它们都是使用虚拟机软件VirtualBox/VMWare虚拟出来的，下面我来详细说明一下：</p>
+<p><img alt="图片" src="/assets/a0d3ed97a0ad0b95616c6d25.jpg"/></p>
+<p>所谓的多节点集群，要求服务器应该有两台或者更多，为了简化我们只取最小值，所以这个Kubernetes集群就只有两台主机，一台是Master节点，另一台是Worker节点。当然，在完全掌握了kubeadm的用法之后，你可以在这个集群里添加更多的节点。</p>
+<p>Master节点需要运行apiserver、etcd、scheduler、controller-manager等组件，管理整个集群，所以对配置要求比较高，至少是2核CPU、4GB的内存。</p>
+<p><img alt="图片" src="/assets/1a427267f7caac245504fdcf.png"/></p>
+<p>而Worker节点没有管理工作，只运行业务应用，所以配置可以低一些，为了节省资源我给它分配了1核CPU和1GB的内存，可以说是低到不能再低了。</p>
+<p><img alt="图片" src="/assets/db3361eb2a07b7f93ba5c236.png"/></p>
+<p>基于模拟生产环境的考虑，在Kubernetes集群之外还需要有一台起辅助作用的服务器。</p>
+<p>它的名字叫Console，意思是控制台，我们要在上面安装命令行工具kubectl，所有对Kubernetes集群的管理命令都是从这台主机发出去的。这也比较符合实际情况，因为安全的原因，集群里的主机部署好之后应该尽量少直接登录上去操作。</p>
+<p>要提醒你的是，Console这台主机只是逻辑上的概念，不一定要是独立，你在实际安装部署的时候完全可以复用之前minikube的虚拟机，或者直接使用Master/Worker节点作为控制台。</p>
+<p>这3台主机共同组成了我们的实验环境，所以在配置的时候要注意它们的网络选项，必须是在同一个网段，你可以再回顾一下[课前准备]，保证它们使用的是同一个“Host-Only”（VirtualBox）或者“自定”（VMWare Fusion）网络。</p>
+<h2 id="安装前的准备工作">安装前的准备工作</h2>
+<p>不过有了架构图里的这些主机之后，我们还不能立即开始使用kubeadm安装Kubernetes，因为Kubernetes对系统有一些特殊要求，我们必须还要在Master和Worker节点上做一些准备。</p>
+<p>这些工作的详细信息你都可以在Kubernetes的官网上找到，但它们分散在不同的文档里，比较凌乱，所以我把它们整合到了这里，包括改主机名、改Docker配置、改网络设置、改交换分区这四步。</p>
+<p>第一，由于Kubernetes使用主机名来区分集群里的节点，所以每个节点的hostname必须不能重名。你需要修改“<strong>/etc/hostname</strong>”这个文件，把它改成容易辨识的名字，比如Master节点就叫 <code>master</code>，Worker节点就叫 <code>worker</code>：</p>
+<pre><code>sudo vi /etc/hostname
+</code></pre>
+<p>第二，虽然Kubernetes目前支持多种容器运行时，但Docker还是最方便最易用的一种，所以我们仍然继续使用Docker作为Kubernetes的底层支持，使用 <code>apt</code> 安装Docker Engine（可参考[第1讲]）。</p>
+<p>安装完成后需要你再对Docker的配置做一点修改，在“<strong>/etc/docker/daemon.json</strong>”里把cgroup的驱动程序改成 <code>systemd</code> ，然后重启Docker的守护进程，具体的操作我列在了下面：</p>
+<pre><code>cat &lt;&lt;EOF | sudo tee /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+
+sudo systemctl enable docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+</code></pre>
+<p>第三，为了让Kubernetes能够检查、转发网络流量，你需要修改iptables的配置，启用“br_netfilter”模块：</p>
+<pre><code>cat &lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+
+cat &lt;&lt;EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward=1 # better than modify /etc/sysctl.conf
+EOF
+
+sudo sysctl --system
+</code></pre>
+<p>第四，你需要修改“<strong>/etc/fstab</strong>”，关闭Linux的swap分区，提升Kubernetes的性能：</p>
+<pre><code>sudo swapoff -a
+sudo sed -ri '/\sswap\s/s/^#?/#/' /etc/fstab
+</code></pre>
+<p>完成之后，最好记得重启一下系统，然后给虚拟机拍个快照做备份，避免后续的操作失误导致重复劳动。</p>
+<h2 id="安装kubeadm">安装kubeadm</h2>
+<p>好，现在我们就要安装kubeadm了，在Master节点和Worker节点上都要做这一步。</p>
+<p>kubeadm可以直接从Google自己的软件仓库下载安装，但国内的网络不稳定，很难下载成功，需要改用其他的软件源，这里我选择了国内的某云厂商：</p>
+<pre><code>sudo apt install -y apt-transport-https ca-certificates curl
+
+curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -
+
+cat &lt;&lt;EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+EOF
+
+sudo apt update
+</code></pre>
+<p>更新了软件仓库，我们就可以用 <code>apt install</code> 获取kubeadm、kubelet和kubectl这三个安装必备工具了。apt默认会下载最新版本，但我们也可以指定版本号，比如使用和minikube相同的“1.23.3”：</p>
+<pre><code>sudo apt install -y kubeadm=1.23.3-00 kubelet=1.23.3-00 kubectl=1.23.3-00
+</code></pre>
+<p>安装完成之后，你可以用 <code>kubeadm version</code>、<code>kubectl version</code> 来验证版本是否正确：</p>
+<pre><code>kubeadm version
+kubectl version --client
+</code></pre>
+<p><img alt="图片" src="/assets/ba5ef478d3110e5afb5d4d39.png"/></p>
+<p>另外按照Kubernetes官网的要求，我们最好再使用命令 <code>apt-mark hold</code> ，锁定这三个软件的版本，避免意外升级导致版本错误：</p>
+<pre><code>sudo apt-mark hold kubeadm kubelet kubectl
+</code></pre>
+<h2 id="下载kubernetes组件镜像">下载Kubernetes组件镜像</h2>
+<p>前面我说过，kubeadm把apiserver、etcd、scheduler等组件都打包成了镜像，以容器的方式启动Kubernetes，但这些镜像不是放在Docker Hub上，而是放在Google自己的镜像仓库网站gcr.io，而它在国内的访问很困难，直接拉取镜像几乎是不可能的。</p>
+<p>所以我们需要采取一些变通措施，提前把镜像下载到本地。</p>
+<p>使用命令 <code>kubeadm config images list</code> 可以查看安装Kubernetes所需的镜像列表，参数 <code>--kubernetes-version</code> 可以指定版本号：</p>
+<pre><code>kubeadm config images list --kubernetes-version v1.23.3
+
+k8s.gcr.io/kube-apiserver:v1.23.3
+k8s.gcr.io/kube-controller-manager:v1.23.3
+k8s.gcr.io/kube-scheduler:v1.23.3
+k8s.gcr.io/kube-proxy:v1.23.3
+k8s.gcr.io/pause:3.6
+k8s.gcr.io/etcd:3.5.1-0
+k8s.gcr.io/coredns/coredns:v1.8.6
+</code></pre>
+<p>知道了镜像的名字和标签就好办了，我们有两种方法可以比较容易地获取这些镜像。</p>
+<p>第一种方法是利用minikube。因为minikube本身也打包了Kubernetes的组件镜像，所以完全可以从它的节点里把这些镜像导出之后再拷贝过来。</p>
+<p>具体做法也很简单，先启动minikube，然后 <code>minikube ssh</code> 登录进虚拟节点，用 <code>docker save -o</code> 命令把相应版本的镜像都保存下来，再用 <code>minikube cp</code> 拷贝到本地，剩下的事情就不用我多说了：</p>
+<p><img alt="图片" src="/assets/0f6fafab5b922c390a863837.png"/></p>
+<p>这种方法安全可靠，不过操作上麻烦了些，所以就有了第二种方法，从国内的镜像网站下载然后再用 <code>docker tag</code> 改名，能够使用Shell编程实现自动化：</p>
+<pre><code>repo=registry.aliyuncs.com/google_containers
+
+for name in `kubeadm config images list --kubernetes-version v1.23.3`; do
+
+    src_name=${name#k8s.gcr.io/}
+    src_name=${src_name#coredns/}
+
+    docker pull $repo/$src_name
+
+    docker tag $repo/$src_name $name
+    docker rmi $repo/$src_name
+done
+</code></pre>
+<p>第二种方法速度快，但也有隐患，万一网站不提供服务，或者改动了镜像就比较危险了。</p>
+<p>所以你可以把这两种方法结合起来，先用脚本从国内镜像仓库下载，然后再用minikube里的镜像做对比，只要IMAGE ID是一样就说明镜像是正确的。</p>
+<p>这张截图就是Kubernetes 1.23.3的镜像列表（amd64/arm64），你在安装时可以参考：</p>
+<p><img alt="图片" src="/assets/d95f89c3cf2678e4e9f09018.png" title="amd64"/></p>
+<p><img alt="图片" src="/assets/f432071a48725c6f51ff1179.png" title="arm64"/></p>
+<h2 id="安装master节点">安装Master节点</h2>
+<p>准备工作都做好了，现在就可以开始正式安装Kubernetes了，我们先从Master节点开始。</p>
+<p>kubeadm的用法非常简单，只需要一个命令 <code>kubeadm init</code> 就可以把组件在Master节点上运行起来，不过它还有很多参数用来调整集群的配置，你可以用 <code>-h</code> 查看。这里我只说一下我们实验环境用到的3个参数：</p>
+<ul>
+<li><strong>--pod-network-cidr</strong>，设置集群里Pod的IP地址段。</li>
+<li><strong>--apiserver-advertise-address</strong>，设置apiserver的IP地址，对于多网卡服务器来说很重要（比如VirtualBox虚拟机就用了两块网卡），可以指定apiserver在哪个网卡上对外提供服务。</li>
+<li><strong>--kubernetes-version</strong>，指定Kubernetes的版本号。</li>
+</ul>
+<p>下面的这个安装命令里，我指定了Pod的地址段是“10.10.0.0/16”，apiserver的服务地址是“192.168.10.210”，Kubernetes的版本号是“1.23.3”：</p>
+<pre><code>sudo kubeadm init \
+    --pod-network-cidr=10.10.0.0/16 \
+    --apiserver-advertise-address=192.168.10.210 \
+    --kubernetes-version=v1.23.3
+</code></pre>
+<p>因为我们已经提前把镜像下载到了本地，所以kubeadm的安装过程很快就完成了，它还会提示出接下来要做的工作：</p>
+<pre><code>To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+</code></pre>
+<p>意思是要在本地建立一个“<strong>.kube</strong>”目录，然后拷贝kubectl的配置文件，你只要原样拷贝粘贴就行。</p>
+<p>另外还有一个很重要的“<strong>kubeadm join</strong>”提示，其他节点要加入集群必须要用指令里的token和ca证书，所以这条命令务必拷贝后保存好：</p>
+<pre><code>Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.10.210:6443 --token tv9mkx.tw7it9vphe158e74 \
+	--discovery-token-ca-cert-hash sha256:e8721b8630d5b562e23c010c70559a6d3084f629abad6a2920e87855f8fb96f3
+</code></pre>
+<p>安装完成后，你就可以使用 <code>kubectl version</code>、<code>kubectl get node</code> 来检查Kubernetes的版本和集群的节点状态了：</p>
+<pre><code>kubectl version
+kubectl get node
+</code></pre>
+<p><img alt="图片" src="/assets/776322fc112dfcd2d46e80f5.png"/></p>
+<p>你会注意到Master节点的状态是“NotReady”，这是由于还缺少网络插件，集群的内部网络还没有正常运作。</p>
+<h2 id="安装flannel网络插件">安装Flannel网络插件</h2>
+<p>Kubernetes定义了CNI标准，有很多网络插件，这里我选择最常用的<strong>Flannel</strong>，可以在它的GitHub仓库里（<a href="https://github.com/flannel-io/flannel/" target="_blank">https://github.com/flannel-io/flannel/</a>）找到相关文档。</p>
+<p>它安装也很简单，只需要使用项目的“<strong>kube-flannel.yml</strong>”在Kubernetes里部署一下就好了。不过因为它应用了Kubernetes的网段地址，你需要修改文件里的“<strong>net-conf.json</strong>”字段，把 <code>Network</code> 改成刚才kubeadm的参数 <code>--pod-network-cidr</code> 设置的地址段。</p>
+<p>比如在这里，就要修改成“10.10.0.0/16”：</p>
+<pre><code>  net-conf.json: |
+    {
+      "Network": "10.10.0.0/16",
+      "Backend": {
+        "Type": "vxlan"
+      }
+    }
+</code></pre>
+<p>改好后，你就可以用 <code>kubectl apply</code> 来安装Flannel网络了：</p>
+<pre><code>kubectl apply -f kube-flannel.yml
+</code></pre>
+<p>稍等一小会，等镜像拉取下来并运行之后，你就可以执行 <code>kubectl get node</code> 来看节点状态：</p>
+<pre><code>kubectl get node
+</code></pre>
+<p><img alt="图片" src="/assets/b176a426c2b3c9c78d18f947.png"/></p>
+<p>这时你应该能够看到Master节点的状态是“Ready”，表明节点网络也工作正常了。</p>
+<h2 id="安装worker节点">安装Worker节点</h2>
+<p>如果你成功安装了Master节点，那么Worker节点的安装就简单多了，只需要用之前拷贝的那条 <code>kubeadm join</code> 命令就可以了，记得要用 <code>sudo</code> 来执行：</p>
+<pre><code>sudo \
+kubeadm join 192.168.10.210:6443 --token tv9mkx.tw7it9vphe158e74 \
+	--discovery-token-ca-cert-hash sha256:e8721b8630d5b562e23c010c70559a6d3084f629abad6a2920e87855f8fb96f3
+</code></pre>
+<p>它会连接Master节点，然后拉取镜像，安装网络插件，最后把节点加入集群。</p>
+<p>当然，这个过程中同样也会遇到拉取镜像的问题，你可以如法炮制，提前把镜像下载到Worker节点本地，这样安装过程中就不会再有障碍了。</p>
+<p>Worker节点安装完毕后，执行 <code>kubectl get node</code> ，就会看到两个节点都是“Ready”状态：</p>
+<p><img alt="图片" src="/assets/07812813af6ca94750e6db13.png"/></p>
+<p>现在让我们用 <code>kubectl run</code> ，运行Nginx来测试一下：</p>
+<pre><code>kubectl run ngx --image=nginx:alpine
+kubectl get pod -o wide
+</code></pre>
+<p><img alt="图片" src="/assets/64e7b0fab2546e2d3fee9e82.png"/></p>
+<p>会看到Pod运行在Worker节点上，IP地址是“10.10.1.2”，表明我们的Kubernetes集群部署成功。</p>
+<h2 id="小结">小结</h2>
+<p>好了，把Master节点和Worker节点都安装好，我们今天的任务就算是基本完成了。</p>
+<p>后面Console节点的部署工作更加简单，它只需要安装一个kubectl，然后复制“config”文件就行，你可以直接在Master节点上用“scp”远程拷贝，例如：</p>
+<pre><code>scp `which kubectl` <a class="__cf_email__" data-cfemail="fc9f948e939293bccdc5ced2cdcac4d2cdccd2ceccc4" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>:~/
+scp ~/.kube/config <a class="__cf_email__" data-cfemail="a3c0cbd1cccdcce3929a918d92959b8d92938d91939b" href="https://learn.lianglianglee.com/cdn-cgi/l/email-protection">[email protected]</a>:~/.kube
+</code></pre>
+<p>今天的过程多一些，要点我列在了下面：</p>
+<ol>
+<li>kubeadm是一个方便易用的Kubernetes工具，能够部署生产级别的Kubernetes集群。</li>
+<li>安装Kubernetes之前需要修改主机的配置，包括主机名、Docker配置、网络设置、交换分区等。</li>
+<li>Kubernetes的组件镜像存放在gcr.io，国内下载比较麻烦，可以考虑从minikube或者国内镜像网站获取。</li>
+<li>安装Master节点需要使用命令 <code>kubeadm init</code>，安装Worker节点需要使用命令 <code>kubeadm join</code>，还要部署Flannel等网络插件才能让集群正常工作。</li>
+</ol>
+<p>因为这些操作都是各种Linux命令，全手动敲下来确实很繁琐，所以我把这些步骤都做成了Shell脚本放在了GitHub上（<a href="https://github.com/chronolaw/k8s_study/tree/master/admin" target="_blank">https://github.com/chronolaw/k8s_study/tree/master/admin</a>），你可以下载后直接运行。</p>
+<h2 id="课下作业">课下作业</h2>
+<p>最后的课下作业是实际动手操作，请你多花费一些时间，用虚拟机创建出集群节点，再用kubeadm部署出这个多节点的Kubernetes环境，在接下来的“中级篇”和“高级篇”里我们就会在这个Kubernetes集群里做实验。</p>
+<p>安装部署过程中有任何疑问，欢迎在留言区留言，我会第一时间回复你。如果觉得有帮助，也欢迎分享给自己身边的朋友一起学习，下节课见。</p>
+<p><img alt="图片" src="/assets/be5fb7c2f5ce6bcec3485190.jpg"/></p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>13  子查询：放心地使用子查询功能吧！ · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/index.html">MySQL实战宝典</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">28 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>MySQL实战宝典</strong><ul><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%20%E4%BB%8E%E4%B8%9A%E5%8A%A1%E5%87%BA%E5%8F%91%EF%BC%8C%E5%BC%80%E5%90%AF%E6%B5%B7%E9%87%8F%20MySQL%20%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">00 开篇词  从业务出发，开启海量 MySQL 架构设计</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/01%20%20%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8B%EF%BC%9A%E9%81%BF%E5%85%8D%E8%87%AA%E5%A2%9E%E8%B8%A9%E5%9D%91.html">01  数字类型：避免自增踩坑</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/02%20%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B%EF%BC%9A%E4%B8%8D%E8%83%BD%E5%BF%BD%E7%95%A5%E7%9A%84%20COLLATION.html">02  字符串类型：不能忽略的 COLLATION</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/03%20%20%E6%97%A5%E6%9C%9F%E7%B1%BB%E5%9E%8B%EF%BC%9ATIMESTAMP%20%E5%8F%AF%E8%83%BD%E6%98%AF%E5%B7%A8%E5%9D%91.html">03  日期类型：TIMESTAMP 可能是巨坑</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/04%20%20%E9%9D%9E%E7%BB%93%E6%9E%84%E5%AD%98%E5%82%A8%EF%BC%9A%E7%94%A8%E5%A5%BD%20JSON%20%E8%BF%99%E5%BC%A0%E7%89%8C.html">04  非结构存储：用好 JSON 这张牌</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/05%20%20%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%BF%98%E8%AE%B0%E8%8C%83%E5%BC%8F%E5%87%86%E5%88%99.html">05  表结构设计：忘记范式准则</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/06%20%20%E8%A1%A8%E5%8E%8B%E7%BC%A9%EF%BC%9A%E4%B8%8D%E4%BB%85%E4%BB%85%E6%98%AF%E7%A9%BA%E9%97%B4%E5%8E%8B%E7%BC%A9.html">06  表压缩：不仅仅是空间压缩</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/07%20%20%E8%A1%A8%E7%9A%84%E8%AE%BF%E9%97%AE%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BD%A0%E8%AF%A5%E9%80%89%E6%8B%A9%20SQL%20%E8%BF%98%E6%98%AF%20NoSQL%EF%BC%9F.html">07  表的访问设计：你该选择 SQL 还是 NoSQL？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/08%20%20%E7%B4%A2%E5%BC%95%EF%BC%9A%E6%8E%92%E5%BA%8F%E7%9A%84%E8%89%BA%E6%9C%AF.html">08  索引：排序的艺术</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/09%20%20%E7%B4%A2%E5%BC%95%E7%BB%84%E7%BB%87%E8%A1%A8%EF%BC%9A%E4%B8%87%E7%89%A9%E7%9A%86%E7%B4%A2%E5%BC%95.html">09  索引组织表：万物皆索引</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/10%20%20%E7%BB%84%E5%90%88%E7%B4%A2%E5%BC%95%EF%BC%9A%E7%94%A8%E5%A5%BD%EF%BC%8C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%2010%20%E5%80%8D%EF%BC%81.html">10  组合索引：用好，性能提升 10 倍！</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/11%20%20%E7%B4%A2%E5%BC%95%E5%87%BA%E9%94%99%EF%BC%9A%E8%AF%B7%E7%90%86%E8%A7%A3%20CBO%20%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html">11  索引出错：请理解 CBO 的工作原理</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/12%20%20JOIN%20%E8%BF%9E%E6%8E%A5%EF%BC%9A%E5%88%B0%E5%BA%95%E8%83%BD%E4%B8%8D%E8%83%BD%E5%86%99%20JOIN%EF%BC%9F.html">12  JOIN 连接：到底能不能写 JOIN？</a></li><li><a class="active" aria-current="page" href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/13%20%20%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%9A%E6%94%BE%E5%BF%83%E5%9C%B0%E4%BD%BF%E7%94%A8%E5%AD%90%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD%E5%90%A7%EF%BC%81.html">13  子查询：放心地使用子查询功能吧！</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/14%20%20%E5%88%86%E5%8C%BA%E8%A1%A8%EF%BC%9A%E5%93%AA%E4%BA%9B%E5%9C%BA%E6%99%AF%E6%88%91%E4%B8%8D%E5%BB%BA%E8%AE%AE%E7%94%A8%E5%88%86%E5%8C%BA%E8%A1%A8%EF%BC%9F.html">14  分区表：哪些场景我不建议用分区表？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/15%20%20MySQL%20%E5%A4%8D%E5%88%B6%EF%BC%9A%E6%9C%80%E7%AE%80%E5%8D%95%E4%B9%9F%E6%9C%80%E5%AE%B9%E6%98%93%E9%85%8D%E7%BD%AE%E5%87%BA%E9%94%99.html">15  MySQL 复制：最简单也最容易配置出错</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/16%20%20%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A4%8D%E5%88%B6%E5%BB%B6%E8%BF%9F%EF%BC%9F%E5%85%B6%E5%AE%9E%E6%98%AF%E4%BD%A0%E7%94%A8%E9%94%99%E4%BA%86.html">16  读写分离设计：复制延迟？其实是你用错了</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/17%20%20%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BD%A0%E6%80%8E%E4%B9%88%E6%B4%BB%E7%94%A8%E4%B8%89%E5%A4%A7%E6%9E%B6%E6%9E%84%E6%96%B9%E6%A1%88%EF%BC%9F.html">17  高可用设计：你怎么活用三大架构方案？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/18%20%20%E9%87%91%E8%9E%8D%E7%BA%A7%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%BF%85%E4%B8%8D%E5%8F%AF%E5%B0%91%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A0%B8%E5%AF%B9.html">18  金融级高可用架构：必不可少的数据核对</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/19%20%20%E9%AB%98%E5%8F%AF%E7%94%A8%E5%A5%97%E4%BB%B6%EF%BC%9A%E9%80%89%E6%8B%A9%E8%BF%99%E4%B9%88%E5%A4%9A%EF%BC%8C%E4%BD%A0%E8%AF%A5%E5%A6%82%E4%BD%95%E9%80%89%EF%BC%9F.html">19  高可用套件：选择这么多，你该如何选？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/20%20%20InnoDB%20Cluster%EF%BC%9A%E6%94%B9%E5%8F%98%E5%8E%86%E5%8F%B2%E7%9A%84%E6%96%B0%E4%BA%A7%E5%93%81.html">20  InnoDB Cluster：改变历史的新产品</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/21%20%20%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%87%E4%BB%BD%EF%BC%9A%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%E4%B9%9F%E8%A6%81%E6%A3%80%E6%9F%A5%EF%BC%81.html">21  数据库备份：备份文件也要检查！</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/22%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%BD%BB%E5%BA%95%E7%90%86%E8%A7%A3%E4%BB%80%E4%B9%88%E5%8F%AB%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93.html">22  分布式数据库架构：彻底理解什么叫分布式数据库</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/23%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%9A%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%9C%B0%E5%B0%86%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%EF%BC%9F.html">23  分布式数据库表结构设计：如何正确地将数据分片？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/24%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95%E3%80%81%E5%85%A8%E5%B1%80%E7%B4%A2%E5%BC%95%E7%9A%84%E6%9C%80%E4%BD%B3%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5.html">24  分布式数据库索引设计：二级索引、全局索引的最佳设计实践</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/25%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B%EF%BC%9A%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%20or%20%E4%B8%AD%E9%97%B4%E4%BB%B6%20%EF%BC%9F.html">25  分布式数据库架构选型：分库分表 or 中间件 ？</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/26%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BE%E8%AE%A1%E4%B9%8B%E7%A6%85%EF%BC%9A%E5%85%A8%E9%93%BE%E8%B7%AF%E7%9A%84%E6%9D%A1%E5%B8%A6%E5%8C%96%E8%AE%BE%E8%AE%A1.html">26  分布式设计之禅：全链路的条带化设计</a></li><li><a href="/courses/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/27%20%20%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%9A%E6%88%91%E4%BB%AC%E5%88%B0%E5%BA%95%E8%A6%81%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%202PC%EF%BC%9F.html">27  分布式事务：我们到底要不要使用 2PC？</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/MySQL%E5%AE%9E%E6%88%98%E5%AE%9D%E5%85%B8/13%20%20%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%9A%E6%94%BE%E5%BF%83%E5%9C%B0%E4%BD%BF%E7%94%A8%E5%AD%90%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD%E5%90%A7%EF%BC%81.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="13  子查询：放心地使用子查询功能吧！" id="title">13  子查询：放心地使用子查询功能吧！</h1>
+<div><p>今天我想和你聊一聊“子查询”。</p>
+<p>上一讲，我提到了一种复杂的 SQL 情况，多表间的连接，以及怎么设计索引来提升 JOIN 的性能。</p>
+<p>除了多表连接之外，开发同学还会大量用子查询语句（subquery）。但是因为之前版本的MySQL 数据库对子查询优化有限，所以很多 OLTP 业务场合下，我们都要求在线业务尽可能不用子查询。</p>
+<p>然而，MySQL 8.0 版本中，子查询的优化得到大幅提升。所以从现在开始，<strong>放心大胆地在MySQL 中使用子查询吧！</strong></p>
+<h3 id="为什么开发同学这么喜欢写子查询">为什么开发同学这么喜欢写子查询？</h3>
+<p>我工作这么多年，发现相当多的开发同学喜欢写子查询，而不是传统的 JOIN 语句。举一个简单的例子，如果让开发同学“找出1993年，没有下过订单的客户数量”，大部分同学会用子查询来写这个需求，比如：</p>
+<pre><code>SELECT
+
+    COUNT(c_custkey) cnt
+
+FROM
+
+    customer
+
+WHERE
+
+    c_custkey NOT IN (
+
+        SELECT
+
+            o_custkey
+
+        FROM
+
+            orders
+
+        WHERE
+
+            o_orderdate &gt;=  '1993-01-01'
+
+            AND o_orderdate &lt;  '1994-01-01'
+
+	);
+</code></pre>
+<p>从中可以看到，子查询的逻辑非常清晰：通过 NOT IN 查询不在订单表的用户有哪些。</p>
+<p>不过上述查询是一个典型的 LEFT JOIN 问题（即在表 customer 存在，在表 orders 不存在的问题）。所以，这个问题如果用 LEFT JOIN 写，那么 SQL 如下所示：</p>
+<pre><code>SELECT
+
+    COUNT(c_custkey) cnt
+
+FROM
+
+    customer
+
+        LEFT JOIN
+
+    orders ON
+
+            customer.c_custkey = orders.o_custkey
+
+            AND o_orderdate &gt;= '1993-01-01'
+
+            AND o_orderdate &lt; '1994-01-01'
+
+WHERE
+
+    o_custkey IS NULL;
+</code></pre>
+<p>可以发现，虽然 LEFT JOIN 也能完成上述需求，但不容易理解，<strong>因为 LEFT JOIN 是一个代数关系，而子查询更偏向于人类的思维角度进行理解。</strong></p>
+<p>所以，大部分人都更倾向写子查询，即便是天天与数据库打交道的 DBA 。</p>
+<p>不过从优化器的角度看，LEFT JOIN 更易于理解，能进行传统 JOIN 的两表连接，而子查询则要求优化器聪明地将其转换为最优的 JOIN 连接。</p>
+<p>我们来看一下，在 MySQL 8.0 版本中，对于上述两条 SQL，最终的执行计划都是：</p>
+<p><img alt="Drawing 0.png" src="/assets/d248fe9c015806ea169ac4eb.png"/></p>
+<p>可以看到，不论是子查询还是 LEFT JOIN，最终都被转换成了 Nested Loop Join，所以上述两条 SQL 的执行时间是一样的。</p>
+<p>即，在 MySQL 8.0 中，优化器会自动地将 IN 子查询优化，优化为最佳的 JOIN 执行计划，这样一来，会显著的提升性能。</p>
+<h3 id="子查询-in-和-exists-哪个性能更好">子查询 IN 和 EXISTS，哪个性能更好？</h3>
+<p>除了“为什么开发同学都喜欢写子查询”，关于子查询，另一个经常被问到的问题是：“ IN 和EXISTS 哪个性能更好？”要回答这个问题，我们看一个例子。</p>
+<p>针对开篇的 NOT IN 子查询，你可以改写为 NOT EXISTS 子查询，重写后的 SQL 如下所示：</p>
+<pre><code>SELECT
+
+    COUNT(c_custkey) cnt
+
+FROM
+
+    customer
+
+WHERE
+
+    NOT EXISTS (
+
+        SELECT
+
+            1
+
+        FROM
+
+            orders
+
+        WHERE
+
+            o_orderdate &gt;=  '1993-01-01'
+
+            AND o_orderdate &lt;  '1994-01-01'
+
+            AND c_custkey = o_custkey
+
+    );
+</code></pre>
+<p>你要注意，千万不要盲目地相信网上的一些文章，有的说 IN 的性能更好，有的说 EXISTS 的子查询性能更好。你只关注 SQL 执行计划就可以，如果两者的执行计划一样，性能没有任何差别。</p>
+<p>接着说回来，对于上述 NOT EXISTS，它的执行计划如下图所示：</p>
+<p><img alt="Drawing 0.png" src="/assets/b1e094ce2bc23e87b2f2a675.png"/></p>
+<p>你可以看到，它和 NOT IN 的子查询执行计划一模一样，所以二者的性能也是一样的。讲完子查询的执行计划之后，接下来我们来看一下一种需要对子查询进行优化的 SQL：依赖子查询。</p>
+<h3 id="依赖子查询的优化">依赖子查询的优化</h3>
+<p>在 MySQL 8.0 版本之前，MySQL 对于子查询的优化并不充分。所以在子查询的执行计划中会看到 DEPENDENT SUBQUERY 的提示，这表示是一个依赖子查询，子查询需要依赖外部表的关联。</p>
+<p><strong>如果你看到这样的提示，就要警惕，</strong> 因为 DEPENDENT SUBQUERY 执行速度可能非常慢，大部分时候需要你手动把它转化成两张表之间的连接。</p>
+<p>我们以下面这条 SQL 为例：</p>
+<pre><code>SELECT
+
+    *
+
+FROM
+
+    orders
+
+WHERE
+
+    (o_clerk , o_orderdate) IN (
+
+        SELECT
+
+            o_clerk, MAX(o_orderdate)
+
+        FROM
+
+            orders
+
+        GROUP BY o_clerk);
+</code></pre>
+<p>上述 SQL 语句的子查询部分表示“计算出每个员工最后成交的订单时间”，然后最外层的 SQL表示返回订单的相关信息。</p>
+<p>这条 SQL 在最新的 MySQL 8.0 中，其执行计划如下所示：</p>
+<p><img alt="111.png" src="/assets/6939cd1c601c73dc4481c20b.png"/></p>
+<p>通过命令 EXPLAIN FORMAT=tree 输出执行计划，你可以看到，第 3 行有这样的提示：<strong><em>Select #2 (subquery in condition; run only once)</em></strong>。这表示子查询只执行了一次，然后把最终的结果保存起来了。</p>
+<p>执行计划的第 6 行<strong>Index lookup on <materialized_subquery></materialized_subquery></strong>，表示对表 orders 和子查询结果所得到的表进行 JOIN 连接，最后返回结果。</p>
+<p>所以，当前这个执行计划是对表 orders 做2次扫描，每次扫描约 5587618 条记录：</p>
+<ul>
+<li>第 1 次扫描，用于内部的子查询操作，计算出每个员工最后一次成交的时间；</li>
+<li>第 2 次表 oders 扫描，查询并返回每个员工的订单信息，即返回每个员工最后一笔成交的订单信息。</li>
+</ul>
+<p>最后，直接用命令 EXPLAIN 查看执行计划，如下图所示：</p>
+<p><img alt="Drawing 6.png" src="/assets/1329303d1d201d08482af2e8.png"/></p>
+<p>MySQL 8.0 版本执行过程</p>
+<p>如果是老版本的 MySQL 数据库，它的执行计划将会是依赖子查询，执行计划如下所示：</p>
+<p><img alt="Drawing 8.png" src="/assets/7669bf3f4585aed7175cc6ac.png"/></p>
+<p>老版本 MySQL 执行过程</p>
+<p>对比 MySQL 8.0，只是在第二行的 select_type 这里有所不同，一个是 SUBQUERY，一个是DEPENDENT SUBQUERY。</p>
+<p>接着通过命令 EXPLAIN FORMAT=tree 查看更详细的执行计划过程：</p>
+<p><img alt="Drawing 10.png" src="/assets/196455e4943052e37f6cc461.png"/></p>
+<p>可以发现，第 3 行的执行技术输出是：Select #2 (subquery in condition; dependent)，并不像先前的执行计划，提示只执行一次。另外，通过第 1 行也可以发现，这条 SQL 变成了 exists 子查询，每次和子查询进行关联。</p>
+<p>所以，上述执行计划其实表示：先查询每个员工的订单信息，接着对每条记录进行内部的子查询进行依赖判断。也就是说，先进行外表扫描，接着做依赖子查询的判断。<strong>所以，子查询执行了5587618，而不是1次！！！</strong></p>
+<p>所以，两者的执行计划，扫描次数的对比如下所示：</p>
+<p><img alt="图片1.png" src="/assets/a6ad9b48c1b1181f291ec98e.png"/></p>
+<p>对于依赖子查询的优化，就是要避免子查询由于需要对外部的依赖，而需要对子查询扫描多次的情况。所以可以通过<strong>派生表</strong>的方式，将外表和子查询的派生表进行连接，从而降低对于子查询表的扫描，从而提升 SQL 查询的性能。</p>
+<p>那么对于上面的这条 SQL ，可将其重写为：</p>
+<pre><code>SELECT * FROM orders o1,
+
+(
+
+    SELECT
+
+        o_clerk, MAX(o_orderdate)
+
+    FROM
+
+        orders
+
+    GROUP BY o_clerk
+
+) o2
+
+WHERE
+
+    o1.o_clerk = o2.o_clerk
+
+    AND o1.o_orderdate = o2.orderdate;
+</code></pre>
+<p>可以看到，我们将子查询改写为了派生表 o2，然后将表 o2 与外部表 orders 进行关联。关联的条件是：<strong><em>o1.o_clerk = o2.o_clerk AND o1.o_orderdate = o2.orderdate</em></strong>。
+通过上面的重写后，派生表 o2 对表 orders 进行了1次扫描，返回约 5587618 条记录。派生表o1 对表 orders 扫描 1 次，返回约 1792612 条记录。这与 8.0 的执行计划就非常相似了，其执行计划如下所示：</p>
+<p><img alt="Drawing 13.png" src="/assets/044d29ac538ccbe5d746ea05.png"/></p>
+<p>最后，来看下上述 SQL 的执行时间：</p>
+<p><img alt="Drawing 15.png" src="/assets/39ba6c5dd397b9a87a273ddd.png"/></p>
+<p>可以看到，经过 SQL 重写后，派生表的执行速度几乎与独立子查询一样。所以，<strong>若看到依赖子查询的执行计划，记得先进行 SQL 重写优化哦。</strong></p>
+<h3 id="总结">总结</h3>
+<p>这一讲，我们学习了 MySQL 子查询的优势、新版本 MySQL 8.0 对子查询的优化，以及老版本MySQL 下如何对子查询进行优化。希望你在学完今天的内容之后，可以不再受子查询编写的困惑，而是在各种场景下用好子查询。</p>
+<p>总结来看：</p>
+<ol>
+<li>子查询相比 JOIN 更易于人类理解，所以受众更广，使用更多；</li>
+<li>当前 MySQL 8.0 版本可以“毫无顾忌”地写子查询，对于子查询的优化已经相当完备；</li>
+<li>对于老版本的 MySQL，<strong>请 Review 所有子查询的SQL执行计划，</strong> 对于出现 DEPENDENT SUBQUERY 的提示，请务必即使进行优化，否则对业务将造成重大的性能影响；</li>
+<li>DEPENDENT SUBQUERY 的优化，一般是重写为派生表进行表连接。表连接的优化就是我们12讲所讲述的内容。</li>
+</ol>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

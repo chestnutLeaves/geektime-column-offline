@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>09 热更新一样更新服务的参数配置——分布式配置中心 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/index.html">SpringCloud微服务实战（完）</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">24 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>SpringCloud微服务实战（完）</strong><ul><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/00%20%E5%BC%80%E7%AF%87%E5%AF%BC%E8%AF%BB.html">00 开篇导读</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/01%20%E4%BB%A5%E7%9C%9F%E5%AE%9E%E2%80%9C%E5%95%86%E5%9C%BA%E5%81%9C%E8%BD%A6%E2%80%9D%E4%B8%9A%E5%8A%A1%E5%88%87%E5%85%A5%E2%80%94%E2%80%94%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90.html">01 以真实“商场停车”业务切入——需求分析</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/02%20%E5%85%B7%E8%B1%A1%E4%B8%9A%E5%8A%A1%E9%9C%80%E6%B1%82%E5%86%8D%E6%8A%BD%E8%B1%A1%E5%88%86%E8%A7%A3%E2%80%94%E2%80%94%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1.html">02 具象业务需求再抽象分解——系统设计</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/03%20%E7%AC%AC%E4%B8%80%E4%B8%AA%20Spring%20Boot%20%E5%AD%90%E6%9C%8D%E5%8A%A1%E2%80%94%E2%80%94%E4%BC%9A%E5%91%98%E6%9C%8D%E5%8A%A1.html">03 第一个 Spring Boot 子服务——会员服务</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/04%20%E5%A6%82%E4%BD%95%E7%BB%B4%E6%8A%A4%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3%E4%BE%9B%E5%A4%96%E9%83%A8%E8%B0%83%E7%94%A8%E2%80%94%E2%80%94%E5%9C%A8%E7%BA%BF%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3%E7%AE%A1%E7%90%86.html">04 如何维护接口文档供外部调用——在线接口文档管理</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/05%20%E8%AE%A4%E8%AF%86%20Spring%20Cloud%20%E4%B8%8E%20Spring%20Cloud%20Alibaba%20%E9%A1%B9%E7%9B%AE.html">05 认识 Spring Cloud 与 Spring Cloud Alibaba 项目</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/06%20%E6%9C%8D%E5%8A%A1%E5%A4%9A%E4%B8%8D%E6%98%93%E7%AE%A1%E7%90%86%E5%A6%82%E4%BD%95%E7%A0%B4%E2%80%94%E2%80%94%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0.html">06 服务多不易管理如何破——服务注册与发现</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/07%20%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8%E6%9C%AC%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%9D%97%E5%A4%96%E7%9A%84%E6%9C%8D%E5%8A%A1%E2%80%94%E2%80%94%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8.html">07 如何调用本业务模块外的服务——服务调用</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/08%20%E6%9C%8D%E5%8A%A1%E5%93%8D%E5%BA%94%E6%85%A2%E6%88%96%E6%9C%8D%E5%8A%A1%E4%B8%8D%E5%8F%AF%E7%94%A8%E6%80%8E%E4%B9%88%E5%8A%9E%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%A4%B1%E8%B4%A5%E4%B8%8E%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7.html">08 服务响应慢或服务不可用怎么办——快速失败与服务降级</a></li><li><a class="active" aria-current="page" href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/09%20%E7%83%AD%E6%9B%B4%E6%96%B0%E4%B8%80%E6%A0%B7%E6%9B%B4%E6%96%B0%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83.html">09 热更新一样更新服务的参数配置——分布式配置中心</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/10%20%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E8%AF%BB%E5%8F%96%E8%AE%A1%E8%B4%B9%E8%A7%84%E5%88%99%E7%AD%89%E7%83%AD%E6%95%B0%E6%8D%AE%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98.html">10 如何高效读取计费规则等热数据——分布式缓存</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/11%20%E5%A4%9A%E5%AE%9E%E4%BE%8B%E4%B8%8B%E7%9A%84%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E9%87%8D%E5%A4%8D%E6%89%A7%E8%A1%8C%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">11 多实例下的定时任务如何避免重复执行——分布式定时任务</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/12%20%E5%90%8C%E4%B8%80%E5%A5%97%E6%9C%8D%E5%8A%A1%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%E4%B8%8D%E5%90%8C%E7%BB%88%E7%AB%AF%E7%9A%84%E9%9C%80%E6%B1%82%E2%80%94%E2%80%94%E6%9C%8D%E5%8A%A1%E9%80%82%E9%85%8D.html">12 同一套服务如何应对不同终端的需求——服务适配</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/13%20%E9%87%87%E7%94%A8%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8%E6%96%B9%E5%BC%8F%E5%A4%84%E7%90%86%E6%89%A3%E8%B4%B9%E9%80%9A%E7%9F%A5%E2%80%94%E2%80%94%E9%9B%86%E6%88%90%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6.html">13 采用消息驱动方式处理扣费通知——集成消息中间件</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/14%20Spring%20Cloud%20%E4%B8%8E%20Dubbo%20%E5%86%B2%E7%AA%81%E5%90%97%E2%80%94%E2%80%94%E5%BC%BA%E5%BC%BA%E8%81%94%E5%90%88.html">14 Spring Cloud 与 Dubbo 冲突吗——强强联合</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/15%20%E7%A0%B4%E8%A7%A3%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%85%B1%E6%80%A7%E9%97%AE%E9%A2%98%E7%9A%84%E7%B9%81%E7%90%90%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F%E2%80%94%E2%80%94%E6%8E%A5%E5%85%A5%20API%20%E7%BD%91%E5%85%B3.html">15 破解服务中共性问题的繁琐处理方式——接入 API 网关</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/16%20%E6%9C%8D%E5%8A%A1%E5%8E%8B%E5%8A%9B%E5%A4%A7%E7%B3%BB%E7%BB%9F%E5%93%8D%E5%BA%94%E6%85%A2%E5%A6%82%E4%BD%95%E7%A0%B4%E2%80%94%E2%80%94%E7%BD%91%E5%85%B3%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6.html">16 服务压力大系统响应慢如何破——网关流量控制</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/17%20%E9%9B%86%E6%88%90%E7%BD%91%E5%85%B3%E5%90%8E%E6%80%8E%E4%B9%88%E5%81%9A%E5%AE%89%E5%85%A8%E9%AA%8C%E8%AF%81%E2%80%94%E2%80%94%E7%BB%9F%E4%B8%80%E9%89%B4%E6%9D%83.html">17 集成网关后怎么做安全验证——统一鉴权</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/18%20%E5%A4%9A%E6%A8%A1%E5%9D%97%E4%B8%8B%E7%9A%84%E6%8E%A5%E5%8F%A3%20API%20%E5%A6%82%E4%BD%95%E7%BB%9F%E4%B8%80%E7%AE%A1%E7%90%86%E2%80%94%E2%80%94%E8%81%9A%E5%90%88%20API.html">18 多模块下的接口 API 如何统一管理——聚合 API</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/19%20%E6%95%B0%E6%8D%AE%E5%88%86%E5%BA%93%E5%90%8E%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1.html">19 数据分库后如何确保数据完整性——分布式事务</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/20%20%E4%BC%98%E6%83%A0%E5%88%B8%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E8%B6%85%E5%85%91%E2%80%94%E2%80%94%E5%BC%95%E5%85%A5%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81.html">20 优惠券如何避免超兑——引入分布式锁</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/21%20%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E5%90%84%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%81%A5%E5%BA%B7%E7%8A%B6%E5%86%B5%E2%80%94%E2%80%94%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8%E7%9B%91%E6%8E%A7.html">21 如何查看各服务的健康状况——系统应用监控</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/22%20%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%B8%80%E6%AC%A1%E5%AE%8C%E6%95%B4%E7%9A%84%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B%E2%80%94%E2%80%94%E6%9C%8D%E5%8A%A1%E9%93%BE%E8%B7%AF%E8%B7%9F%E8%B8%AA.html">22 如何确定一次完整的请求过程——服务链路跟踪</a></li><li><a href="/courses/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/23%20%E7%BB%93%E6%9D%9F%E8%AF%AD.html">23 结束语</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%EF%BC%88%E5%AE%8C%EF%BC%89/09%20%E7%83%AD%E6%9B%B4%E6%96%B0%E4%B8%80%E6%A0%B7%E6%9B%B4%E6%96%B0%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="09 热更新一样更新服务的参数配置——分布式配置中心" id="title">09 热更新一样更新服务的参数配置——分布式配置中心</h1>
+<div><p>几乎每个项目中都涉及到配置参数或配置文件，如何避免硬编码，通过代码外的配置，来提高可变参数的安全性、时效性，弹性化配置显得尤其重要。本篇就带你一起聊聊软件项目的配置问题，特别是微服务架构风格下的配置问题。</p>
+<h3 id="参数配置的演变">参数配置的演变</h3>
+<p>早期软件开发时，当然也包括现在某些小伙伴开发时，存在硬编码的情况，将一些可变参数写死在代码中。弊端也显而易见，当参数变更时，必须重新构建编译代码，维护成本相当高。</p>
+<p>后来，业界形成规则，将一些可变参数抽取出来，形成多种格式的配置文件，如 properties、yml、json、xml 等等，将这些参数集中管理起来，发生变更时，只需要更新配置文件即可，不再需要重新编码代码、构建发布代码块，明显比硬编码强大太。弊端也有：</p>
+<ul>
+<li>关键信息暴露在配置文件中，安全性低。</li>
+<li>配置文件变更后，服务也面临重启的问题</li>
+</ul>
+<p>再接着出现了分布式配置，将配置参数从项目中解耦出来，项目使用时，及时向配置中心获取或配置中心变更时向项目中推送，优势很明显：</p>
+<ol>
+<li>省去了关键信息暴露的问题</li>
+<li>配置参数无须与代码模块耦合在一起，可以灵活的管理权限，安全性更高</li>
+<li>配置可以做到实时生效，对一些规则复杂的代码场景很有帮助</li>
+<li>面对多环境部署时，能够轻松应对</li>
+</ol>
+<p>微服务场景下，我们也更倾向于采用分布式配置中心的模式，来管理配置，当服务实例增多时，完全不用担心配置变得复杂。</p>
+<h3 id="开源组件介绍">开源组件介绍</h3>
+<p>Spring Cloud Config 就是 Spring Cloud 项目下的分布式配置组件，当然其自身是没有办法完成配置功能的，需要借助 Git 或 MQ 等组件来共同完成，复杂度略高。</p>
+<p>业内不少公司开源不少分布式配置组件，比如携程的 Apollo（阿波罗），淘宝的 Diamond，百度的 Disconf，360 的 QConf ，阿里的 Nacos 等等，也可以基于 Zookeeper 等组件进行开发完成，技术选型产品还是比较多的。</p>
+<p>本案例中采用 Nacos 作为选型，为什么选 Nacos ？首先是 Spring Cloud Alibaba 项目下的一员，与生态贴合紧密 。其次，Nacos 作为服务注册中心，已经在项目使用，它兼有配置中心的功能，无须额外引入第三方组件，增加系统复杂度，一个组件完成 Spring Cloud Config 和 Eureka 两个组件的功能。</p>
+<p>Nacos 在基础层面通过<code>DataId</code>和 <code>Group</code>来定位唯一的配置项，支持不同的配置格式，如 JSON , TEXT , YMAL 等等，不同的格式，遵从各自的语法规则即可。</p>
+<h3 id="nacos-配置管理">Nacos 配置管理</h3>
+<blockquote>
+<p>拿用户手机号绑定系统的功能为例，商场做促销活动，当天用户绑定手机号，并开通月卡，积分赠送翻倍，还有机会抽取活动大礼包，活动结束，恢复成原样。这是经常见到的玩法吧。</p>
+</blockquote>
+<p>在 parking-member 项目的 pom.xml 中增加 jar 引入，不过前期我们已经应用到了 nacos 的服务注册中心功能，已经被引入到项目中去。</p>
+<pre><code class="language-xml">        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-config&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+</code></pre>
+<p>下面就将将与 nacos 的连接配置进去，由于 Spring Boot 项目中存在两种配置文件，一种是 application 的配置，一种是 bootstrap 的配置，究竟配置在哪个文件中呢？我们先来看 bootstrap 与 application 有什么区别。</p>
+<p><img alt="img" src="/assets/c29e24bbc13d746ed7e6dd39.jpg"/></p>
+<p>(截图来源于官方文档：<a href="https://cloud.spring.io/spring-cloud-static/Greenwich.SR1/single/spring-cloud.html#_the_bootstrap_application_context" target="_blank">https://cloud.spring.io/spring-cloud-static/Greenwich.SR1/single/spring-cloud.html#*the*bootstrap*application*context</a>)</p>
+<p>nacos 与 spring-cloud-config 配置上保持一致，必须将采用 bootstrap.yml/properties 文件，优先加载该配置，填写在 application.properties/yml 中无效。</p>
+<p>bootstrap.properties</p>
+<pre><code class="language-properties">spring.cloud.nacos.config.server-addr=127.0.0.1:8848
+spring.profiles.active=dev
+spring.application.name=member-service
+spring.cloud.nacos.config.shared-data-ids=${spring.application.name}-${spring.profiles.active}.properties
+spring.cloud.nacos.config.refreshable-dataids=${spring.application.name}-${spring.profiles.active}.properties
+
+</code></pre>
+<p>此时采用 spring.application.name−spring.application.name−{spring.profiles.active}动态配置的原因，是为后期进行多环境构建做准备，当然也可以直接写死 nacos 配置文件，但这样更不利于扩展维护。refreshable-dataids 配置项为非选必须，但如果缺失，所有的 nacos 配置项将不会被自动刷新，必须采用另外的方式刷新配置项，才能正常应用到服务中。</p>
+<h4 id="代码中使用配置项">代码中使用配置项</h4>
+<p>打开会员绑定手机号的方法处，定义一个内部变量，接受配置中心的参数值。可以直接采用 Spring 的 [@Value ]方式取值即可，在 Controller 层或是 Service 层都可以使用，类中必须采用 [@RefreshScope ]注解，才能将值实时同步过来。</p>
+<p>在 nacos 中定义两个配置项 onoff*bindmobile 和 on*bindmobile_mulriple，分别代表一个开关和积分倍数。同时定义两个局部变量接受 nacos 中两个配置项的值。</p>
+<blockquote>
+<p>即使参数外部化配置后，代码中也必须预留出位置，供代码逻辑进行切换，也就是事先这个逻辑是预置进去的，是否执行逻辑，逻辑中相关分支等等，完全看配置参数的值。 比如注册时，往往会夹杂一些送积分、注册送优惠券及多大面额的优惠券，注册有机会抽奖等，等一个活动结束自动切换到另一个活动，如果事先未预置进去，代码是没有办法执行这个逻辑的。</p>
+</blockquote>
+<p>整体代码如下：</p>
+<pre><code class="language-java">    @Value("${onoff_bindmobile}")
+    private boolean onoffBindmobile;
+
+    @Value("${on_bindmobile_mulriple}")
+    private int onBindmobileMulriple;
+
+  @Override
+    public int bindMobile(String json) throws BusinessException{
+        Member member = JSONObject.parseObject(json, Member.class);
+        int rtn = memberMapper.insertSelective(member);
+
+        //invoke another service
+        if (rtn &gt; 0) {
+            MemberCard card = new MemberCard();
+            card.setMemberId(member.getId());
+      //判定开关是否打开
+            if (onoffBindmobile) {
+                //special logic
+                card.setCurQty("" +50 * onBindmobileMulriple);
+            }else {
+                //normal logic
+                card.setCurQty("50");
+            }
+
+            memberCardClient.addCard(JSONObject.toJSONString(card));
+            log.info("creata member card suc!");
+        }
+
+        return rtn;
+    }
+
+</code></pre>
+<h4 id="nacos-中配置参数项">Nacos 中配置参数项</h4>
+<p>bootstrap 配置文件中已经做了约定：配置项的 Key 与 Value 值的格式为 properties 文件，打开 nacos 控制台，进行”配置管理”-&gt;“配置列表”页面，点击右上角”新增”。</p>
+<p><img alt="img" src="/assets/1456fe7c384851657b92b950.jpg"/></p>
+<p>输入上文的约定的两个配置项，配置项可以应对多环境配置要求，在其它环境，建立对应的配置即可，输入 Data ID， 比如 member-service-prd.properties 或者 member-service-uat.properties，Group 采用默认值即可，当然如果需要分组的话，需要定义 Group 值，保存即可。</p>
+<blockquote>
+<p>配置项的 value 类型需要与代码中约定的一致，否则解析时会出错。</p>
+</blockquote>
+<p>若要变更配置项的值，修改后，发布即可，可以看到配置项的值是立即生效的。主要是借助于上文中提到的 [@RefreshScope ]注解，与 bootstrap 配置文件中 spring.cloud.nacos.config.refreshable-dataids 配置来完成的。如果缺失其中的一个，配置项生效只有重启应用，这与我们打造程序的易维护性、健壮性是相违背的。</p>
+<p>可以将相应的数据库连接、第三方应用接入的密钥、经常发生变更的参数项都填充到配置中心，借助配置中心自身的权限控制，可以确保敏感项不泄露，同时针对不同的部署环境也可以很好的做好配置隔离。</p>
+<p>至此，基于 Nacos 的配置中心配置完成，依照此配置，可以正常的迁移到其它服务中去。留下个思考题，在项目中采用类似 properties 文件的外部化配置，还是比较常见的，如何确保当中的关键信息不被泄漏呢，比如数据库的用户名、密码，第三方核心的 Key 等等。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

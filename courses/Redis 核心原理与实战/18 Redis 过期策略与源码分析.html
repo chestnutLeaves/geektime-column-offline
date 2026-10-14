@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>18 Redis 过期策略与源码分析 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Redis 核心原理与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">43 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Redis 核心原理与实战</strong><ul><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/01%20Redis%20%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84.html">01 Redis 是如何执行的</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/02%20Redis%20%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8.html">02 Redis 快速搭建与使用</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/03%20Redis%20%E6%8C%81%E4%B9%85%E5%8C%96%E2%80%94%E2%80%94RDB.html">03 Redis 持久化——RDB</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/04%20Redis%20%E6%8C%81%E4%B9%85%E5%8C%96%E2%80%94%E2%80%94AOF.html">04 Redis 持久化——AOF</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/05%20Redis%20%E6%8C%81%E4%B9%85%E5%8C%96%E2%80%94%E2%80%94%E6%B7%B7%E5%90%88%E6%8C%81%E4%B9%85%E5%8C%96.html">05 Redis 持久化——混合持久化</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/06%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">06 字符串使用与内部实现原理</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E9%99%84%E5%BD%95%EF%BC%9A%E6%9B%B4%E5%A4%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.html">07 附录：更多字符串操作命令</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E5%AD%97%E5%85%B8%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">08 字典使用与内部实现原理</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%E9%99%84%E5%BD%95%EF%BC%9A%E6%9B%B4%E5%A4%9A%E5%AD%97%E5%85%B8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.html">09 附录：更多字典操作命令</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%E5%88%97%E8%A1%A8%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">10 列表使用与内部实现原理</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E9%99%84%E5%BD%95%EF%BC%9A%E6%9B%B4%E5%A4%9A%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.html">11 附录：更多列表操作命令</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">12 集合使用与内部实现原理</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E9%99%84%E5%BD%95%EF%BC%9A%E6%9B%B4%E5%A4%9A%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.html">13 附录：更多集合操作命令</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html">14 有序集合使用与内部实现原理</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/15%20%E9%99%84%E5%BD%95%EF%BC%9A%E6%9B%B4%E5%A4%9A%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4.html">15 附录：更多有序集合操作命令</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/16%20Redis%20%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90.html">16 Redis 事务深入解析</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/17%20Redis%20%E9%94%AE%E5%80%BC%E8%BF%87%E6%9C%9F%E6%93%8D%E4%BD%9C.html">17 Redis 键值过期操作</a></li><li><a class="active" aria-current="page" href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/18%20Redis%20%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E4%B8%8E%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html">18 Redis 过期策略与源码分析</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/19%20Redis%20%E7%AE%A1%E9%81%93%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94Pipeline.html">19 Redis 管道技术——Pipeline</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E6%9F%A5%E8%AF%A2%E9%99%84%E8%BF%91%E7%9A%84%E4%BA%BA%E2%80%94%E2%80%94GEO.html">20 查询附近的人——GEO</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/21%20%E6%B8%B8%E6%A0%87%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%89%E2%80%94%E2%80%94Scan.html">21 游标迭代器（过滤器）——Scan</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E4%BC%98%E7%A7%80%E7%9A%84%E5%9F%BA%E6%95%B0%E7%BB%9F%E8%AE%A1%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94HyperLogLog.html">22 优秀的基数统计算法——HyperLogLog</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%AE%97%E6%B3%95.html">23 内存淘汰机制与算法</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/24%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E2%80%94%E2%80%94%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F.html">24 消息队列——发布订阅模式</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%85%B6%E4%BB%96%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F.html">25 消息队列的其他实现方式</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%BB%88%E6%9E%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E2%80%94%E2%80%94Stream%EF%BC%88%E4%B8%8A%EF%BC%89.html">26 消息队列终极解决方案——Stream（上）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%BB%88%E6%9E%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E2%80%94%E2%80%94Stream%EF%BC%88%E4%B8%8B%EF%BC%89.html">27 消息队列终极解决方案——Stream（下）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E8%AF%A6%E8%A7%A3%E4%B8%8E%E4%BB%A3%E7%A0%81.html">28 实战：分布式锁详解与代码</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90.html">29 实战：布隆过滤器安装与使用及原理分析</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E5%AE%8C%E6%95%B4%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95.html">30 完整案例：实现延迟队列的两种方法</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/31%20%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E6%A1%88%E4%BE%8B.html">31 实战：定时任务案例</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E5%AE%9E%E6%88%98%EF%BC%9ARediSearch%20%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E.html">32 实战：RediSearch 高性能的全文搜索引擎</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95.html">33 实战：Redis 性能测试</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/34%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E6%85%A2%E6%9F%A5%E8%AF%A2.html">34 实战：Redis 慢查询</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/35%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.html">35 实战：Redis 性能优化方案</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/36%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5.html">36 实战：Redis 主从同步</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/37%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%8A%EF%BC%89.html">37 实战：Redis哨兵模式（上）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/38%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%8B%EF%BC%89.html">38 实战：Redis 哨兵模式（下）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/39%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%8A%EF%BC%89.html">39 实战：Redis 集群模式（上）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E5%AE%9E%E6%88%98%EF%BC%9ARedis%20%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%8B%EF%BC%89.html">40 实战：Redis 集群模式（下）</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E6%A1%88%E4%BE%8B%EF%BC%9ARedis%20%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E5%92%8C%E7%9B%B8%E5%85%B3%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html">41 案例：Redis 问题汇总和相关解决方案</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E6%8A%80%E8%83%BD%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97.html">42 技能学习指南</a></li><li><a href="/courses/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/43%20%E5%8A%A0%E9%A4%90%EF%BC%9ARedis%20%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7.html">43 加餐：Redis 的可视化管理工具</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Redis%20%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/18%20Redis%20%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E4%B8%8E%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="18 Redis 过期策略与源码分析" id="title">18 Redis 过期策略与源码分析</h1>
+<div><p>在 Redis 中我们可以给一些元素设置过期时间，那当它过期之后 Redis 是如何处理这些过期键呢？</p>
+<h3 id="过期键执行流程">过期键执行流程</h3>
+<p>Redis 之所以能知道那些键值过期，是因为在 Redis 中维护了一个字典，存储了所有设置了过期时间的键值，我们称之为过期字典。</p>
+<p>过期键判断流程如下图所示：</p>
+<p><img alt="内存过期策略-过期键判断流程.png" src="/assets/31c6d5ebd959838e7be8c24b.png"/></p>
+<h3 id="过期键源码分析">过期键源码分析</h3>
+<p>过期键存储在 redisDb 结构中，源代码在 src/server.h 文件中：</p>
+<pre><code class="language-c">/* Redis database representation. There are multiple databases identified
+ * by integers from 0 (the default database) up to the max configured
+ * database. The database number is the 'id' field in the structure. */
+typedef struct redisDb {
+    dict *dict;                 /* 数据库键空间，存放着所有的键值对 */
+    dict *expires;              /* 键的过期时间 */
+    dict *blocking_keys;        /* Keys with clients waiting for data (BLPOP)*/
+    dict *ready_keys;           /* Blocked keys that received a PUSH */
+    dict *watched_keys;         /* WATCHED keys for MULTI/EXEC CAS */
+    int id;                     /* Database ID */
+    long long avg_ttl;          /* Average TTL, just for stats */
+    list *defrag_later;         /* List of key names to attempt to defrag one by one, gradually. */
+} redisDb;
+
+</code></pre>
+<blockquote>
+<p>小贴士：本文的所有源码都是基于 Redis 5。</p>
+</blockquote>
+<p>过期键数据结构如下图所示：</p>
+<p><img alt="微信截图_20191116185218.png" src="/assets/79e1335a1cc363d053917e24.png"/></p>
+<h3 id="过期策略">过期策略</h3>
+<p>Redis 会删除已过期的键值，以此来减少 Redis 的空间占用，但因为 Redis 本身是单线的，如果因为删除操作而影响主业务的执行就得不偿失了，为此 Redis 需要制定多个（过期）删除策略来保证糟糕的事情不会发生。</p>
+<p>常见的过期策略有以下三种：</p>
+<ul>
+<li>定时删除</li>
+<li>惰性删除</li>
+<li>定期删除</li>
+</ul>
+<p>下面分别来看每种策略有何不同。</p>
+<h4 id="定时删除"><strong>定时删除</strong></h4>
+<p>在设置键值过期时间时，创建一个定时事件，当过期时间到达时，由事件处理器自动执行键的删除操作。</p>
+<ul>
+<li><strong>优点：</strong>保证内存可以被尽快地释放。</li>
+<li><strong>缺点：</strong>在 Redis 高负载的情况下或有大量过期键需要同时处理时，会造成 Redis 服务器卡顿，影响主业务执行。</li>
+</ul>
+<h4 id="惰性删除"><strong>惰性删除</strong></h4>
+<p>不主动删除过期键，每次从数据库获取键值时判断是否过期，如果过期则删除键值，并返回 null。</p>
+<ul>
+<li><strong>优点：</strong>因为每次访问时，才会判断过期键，所以此策略只会使用很少的系统资源。</li>
+<li><strong>缺点：</strong>系统占用空间删除不及时，导致空间利用率降低，造成了一定的空间浪费。</li>
+</ul>
+<p><strong>源码解析</strong></p>
+<p>惰性删除的源码位于 src/db.c 文件的 expireIfNeeded 方法中，源码如下：</p>
+<pre><code class="language-c">int expireIfNeeded(redisDb *db, robj *key) {
+    // 判断键是否过期
+    if (!keyIsExpired(db,key)) return 0;
+    if (server.masterhost != NULL) return 1;
+    /* 删除过期键 */
+    // 增加过期键个数
+    server.stat_expiredkeys++;
+    // 传播键过期的消息
+    propagateExpire(db,key,server.lazyfree_lazy_expire);
+    notifyKeyspaceEvent(NOTIFY_EXPIRED,
+        "expired",key,db-&gt;id);
+    // server.lazyfree_lazy_expire 为 1 表示异步删除（懒空间释放），反之同步删除
+    return server.lazyfree_lazy_expire ? dbAsyncDelete(db,key) :
+                                         dbSyncDelete(db,key);
+}
+// 判断键是否过期
+int keyIsExpired(redisDb *db, robj *key) {
+    mstime_t when = getExpire(db,key);
+    if (when &lt; 0) return 0; /* No expire for this key */
+    /* Don't expire anything while loading. It will be done later. */
+    if (server.loading) return 0;
+    mstime_t now = server.lua_caller ? server.lua_time_start : mstime();
+    return now &gt; when;
+}
+// 获取键的过期时间
+long long getExpire(redisDb *db, robj *key) {
+    dictEntry *de;
+    /* No expire? return ASAP */
+    if (dictSize(db-&gt;expires) == 0 ||
+       (de = dictFind(db-&gt;expires,key-&gt;ptr)) == NULL) return -1;
+    /* The entry was found in the expire dict, this means it should also
+     * be present in the main dict (safety check). */
+    serverAssertWithInfo(NULL,key,dictFind(db-&gt;dict,key-&gt;ptr) != NULL);
+    return dictGetSignedIntegerVal(de);
+}
+
+</code></pre>
+<p>所有对数据库的读写命令在执行之前，都会调用 expireIfNeeded 方法判断键值是否过期，过期则会从数据库中删除，反之则不做任何处理。</p>
+<p>惰性删除执行流程，如下图所示：</p>
+<p><img alt="内存过期策略-惰性删除执行流程.png" src="/assets/49901f34ff484e3868caf590.png"/></p>
+<h4 id="定期删除"><strong>定期删除</strong></h4>
+<p>每隔一段时间检查一次数据库，随机删除一些过期键。</p>
+<p>Redis 默认每秒进行 10 次过期扫描，此配置可通过 Redis 的配置文件 redis.conf 进行配置，配置键为 hz 它的默认值是 <code>hz 10</code>。</p>
+<p>需要注意的是：Redis 每次扫描并不是遍历过期字典中的所有键，而是采用随机抽取判断并删除过期键的形式执行的。</p>
+<p><strong>定期删除流程</strong></p>
+<ol>
+<li>从过期字典中随机取出 20 个键；</li>
+<li>删除这 20 个键中过期的键；</li>
+<li>如果过期 key 的比例超过 25%，重复步骤 1。</li>
+</ol>
+<p>同时为了保证过期扫描不会出现循环过度，导致线程卡死现象，算法还增加了扫描时间的上限，默认不会超过 25ms。</p>
+<p>定期删除执行流程，如下图所示：</p>
+<p><img alt="内存过期策略-执行流程2.png" src="/assets/f454a6719a4e2107e46e7a15.png"/></p>
+<ul>
+<li><strong>优点：</strong>通过限制删除操作的时长和频率，来减少删除操作对 Redis 主业务的影响，同时也能删除一部分过期的数据减少了过期键对空间的无效占用。</li>
+<li><strong>缺点：</strong>内存清理方面没有定时删除效果好，同时没有惰性删除使用的系统资源少。</li>
+</ul>
+<p><strong>源码解析</strong></p>
+<p>定期删除的核心源码在 src/expire.c 文件下的 activeExpireCycle 方法中，源码如下：</p>
+<pre><code class="language-c">void activeExpireCycle(int type) {
+    static unsigned int current_db = 0; /* 上次定期删除遍历到的数据库ID */
+    static int timelimit_exit = 0;      /* Time limit hit in previous call? */
+    static long long last_fast_cycle = 0; /* 上一次执行快速定期删除的时间点 */
+    int j, iteration = 0;
+    int dbs_per_call = CRON_DBS_PER_CALL; // 每次定期删除，遍历的数据库的数量
+    long long start = ustime(), timelimit, elapsed;
+    if (clientsArePaused()) return;
+    if (type == ACTIVE_EXPIRE_CYCLE_FAST) {
+        if (!timelimit_exit) return;
+        // ACTIVE_EXPIRE_CYCLE_FAST_DURATION 是快速定期删除的执行时长
+        if (start &lt; last_fast_cycle + ACTIVE_EXPIRE_CYCLE_FAST_DURATION*2) return;
+        last_fast_cycle = start;
+    }
+    if (dbs_per_call &gt; server.dbnum || timelimit_exit)
+        dbs_per_call = server.dbnum;
+    // 慢速定期删除的执行时长
+    timelimit = 1000000*ACTIVE_EXPIRE_CYCLE_SLOW_TIME_PERC/server.hz/100;
+    timelimit_exit = 0;
+    if (timelimit &lt;= 0) timelimit = 1;
+    if (type == ACTIVE_EXPIRE_CYCLE_FAST)
+        timelimit = ACTIVE_EXPIRE_CYCLE_FAST_DURATION; /* 删除操作的执行时长 */
+    long total_sampled = 0;
+    long total_expired = 0;
+    for (j = 0; j &lt; dbs_per_call &amp;&amp; timelimit_exit == 0; j++) {
+        int expired;
+        redisDb *db = server.db+(current_db % server.dbnum);
+        current_db++;
+        do {
+            // .......
+            expired = 0;
+            ttl_sum = 0;
+            ttl_samples = 0;
+            // 每个数据库中检查的键的数量
+            if (num &gt; ACTIVE_EXPIRE_CYCLE_LOOKUPS_PER_LOOP)
+                num = ACTIVE_EXPIRE_CYCLE_LOOKUPS_PER_LOOP;
+            // 从数据库中随机选取 num 个键进行检查
+            while (num--) {
+                dictEntry *de;
+                long long ttl;
+                if ((de = dictGetRandomKey(db-&gt;expires)) == NULL) break;
+                ttl = dictGetSignedInteger
+                // 过期检查，并对过期键进行删除
+                if (activeExpireCycleTryExpire(db,de,now)) expired++;
+                if (ttl &gt; 0) {
+                    /* We want the average TTL of keys yet not expired. */
+                    ttl_sum += ttl;
+                    ttl_samples++;
+                }
+                total_sampled++;
+            }
+            total_expired += expired;
+            if (ttl_samples) {
+                long long avg_ttl = ttl_sum/ttl_samples;
+                if (db-&gt;avg_ttl == 0) db-&gt;avg_ttl = avg_ttl;
+                db-&gt;avg_ttl = (db-&gt;avg_ttl/50)*49 + (avg_ttl/50);
+            }
+            if ((iteration &amp; 0xf) == 0) { /* check once every 16 iterations. */
+                elapsed = ustime()-start;
+                if (elapsed &gt; timelimit) {
+                    timelimit_exit = 1;
+                    server.stat_expired_time_cap_reached_count++;
+                    break;
+                }
+            }
+            /* 每次检查只删除 ACTIVE_EXPIRE_CYCLE_LOOKUPS_PER_LOOP/4 个过期键 */
+        } while (expired &gt; ACTIVE_EXPIRE_CYCLE_LOOKUPS_PER_LOOP/4);
+    }
+    // .......
+}
+
+</code></pre>
+<p>activeExpireCycle 方法在规定的时间，分多次遍历各个数据库，从过期字典中随机检查一部分过期键的过期时间，删除其中的过期键。</p>
+<p>这个函数有两种执行模式，一个是快速模式一个是慢速模式，体现是代码中的 timelimit 变量，这个变量是用来约束此函数的运行时间的。快速模式下 timelimit 的值是固定的，等于预定义常量 ACTIVE_EXPIRE_CYCLE_FAST_DURATION，慢速模式下，这个变量的值是通过 1000000*ACTIVE_EXPIRE_CYCLE_SLOW_TIME_PERC/server.hz/100 计算的。</p>
+<h4 id="redis-使用的过期策略"><strong>Redis 使用的过期策略</strong></h4>
+<p>Redis 使用的是惰性删除加定期删除的过期策略。</p>
+<h3 id="小结">小结</h3>
+<p>通过本文可知 Redis 是通过设置过期字典的形式来判断过期键的，Redis 采用的是惰性删除和定期删除的形式删除过期键的，Redis 的定期删除策略并不会遍历删除每个过期键，而是采用随机抽取的方式删除过期键，同时为了保证过期扫描不影响 Redis 主业务，Redis 的定期删除策略中还提供了最大执行时间，以保证 Redis 正常并高效地运行。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>

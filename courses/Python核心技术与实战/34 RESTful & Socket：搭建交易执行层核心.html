@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>34 RESTful &amp; Socket：搭建交易执行层核心 · 技术阅读库</title><link rel="stylesheet" href="/static/site.css"><link rel="stylesheet" href="/static/reading-history.css"><script src="/static/reader.js" defer></script><script src="/static/reading-history.js" defer></script></head><body class="reading-page"><a class="skip-link" href="#main-content">跳到正文</a><header class="topbar"><a class="brand" href="/" aria-label="技术阅读库首页"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span><span>技术阅读库<small>专栏 · 文章 · 书籍</small></span></a><details class="library-switcher"><summary>书库导航<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><nav class="switcher-panel" aria-label="书库导航"><a class="switcher-link selected" data-section="courses" href="/"><span aria-hidden="true">▦</span>技术专栏</a><a class="switcher-link" data-section="articles" href="/articles/index.html"><span aria-hidden="true">≡</span>技术文章</a><a class="switcher-link" data-section="life" href="/relationships/index.html"><span aria-hidden="true">♡</span>生活文章</a><a class="switcher-link" data-section="pdf" href="/downloads/index.html"><span aria-hidden="true">▤</span>PDF 书籍</a><a class="switcher-about" href="/about.html">关于书库</a></nav></details></header><div class="workspace reading-layout"><aside class="sidebar reading-sidebar toc-sidebar"><a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">Python核心技术与实战</a></div><details class="chapter-directory" open><summary>专栏目录<span class="chapter-count">46 篇</span><span class="chapter-toggle" aria-hidden="true">⌄</span></summary><div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p><div class="chapter-links"><!-- chapter-navigation:start --><strong>Python核心技术与实战</strong><ul><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/00%20%E5%BC%80%E7%AF%87%E8%AF%8D%20%E4%BB%8E%E5%B7%A5%E7%A8%8B%E7%9A%84%E8%A7%92%E5%BA%A6%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python.html">00 开篇词 从工程的角度深入理解Python</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01%20%E5%A6%82%E4%BD%95%E9%80%90%E6%AD%A5%E7%AA%81%E7%A0%B4%EF%BC%8C%E6%88%90%E4%B8%BAPython%E9%AB%98%E6%89%8B%EF%BC%9F.html">01 如何逐步突破，成为Python高手？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02%20Jupyter%20Notebook%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%8E%B0%E4%BB%A3Python%E7%9A%84%E5%BF%85%E5%AD%A6%E6%8A%80%E6%9C%AF%EF%BC%9F.html">02 Jupyter Notebook为什么是现代Python的必学技术？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03%20%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%EF%BC%8C%E5%88%B0%E5%BA%95%E7%94%A8%E5%93%AA%E4%B8%80%E4%B8%AA%EF%BC%9F.html">03 列表和元组，到底用哪一个？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/04%20%E5%AD%97%E5%85%B8%E3%80%81%E9%9B%86%E5%90%88%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F.html">04 字典、集合，你真的了解吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/05%20%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2.html">05 深入浅出字符串</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/06%20Python%20%E2%80%9C%E9%BB%91%E7%AE%B1%E2%80%9D%EF%BC%9A%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA.html">06 Python “黑箱”：输入与输出</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/07%20%E4%BF%AE%E7%82%BC%E5%9F%BA%E6%9C%AC%E5%8A%9F%EF%BC%9A%E6%9D%A1%E4%BB%B6%E4%B8%8E%E5%BE%AA%E7%8E%AF.html">07 修炼基本功：条件与循环</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/08%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9A%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%9F.html">08 异常处理：如何提高程序的稳定性？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/09%20%E4%B8%8D%E5%8F%AF%E6%88%96%E7%BC%BA%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0.html">09 不可或缺的自定义函数</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/10%20%E7%AE%80%E7%BA%A6%E4%B8%8D%E7%AE%80%E5%8D%95%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0.html">10 简约不简单的匿名函数</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/11%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8A%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E7%B1%BB%E6%AF%94%E8%AF%B4%E8%B5%B7.html">11 面向对象（上）：从生活中的类比说起</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/12%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88%E4%B8%8B%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%9F.html">12 面向对象（下）：如何实现一个搜索引擎？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/13%20%E6%90%AD%E5%BB%BA%E7%A7%AF%E6%9C%A8%EF%BC%9APython%20%E6%A8%A1%E5%9D%97%E5%8C%96.html">13 搭建积木：Python 模块化</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/14%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84%E7%9A%84%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F.html">14 答疑（一）：列表和元组的内部实现是怎样的？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/15%20Python%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%AF%94%E8%BE%83%E3%80%81%E6%8B%B7%E8%B4%9D.html">15 Python对象的比较、拷贝</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/16%20%E5%80%BC%E4%BC%A0%E9%80%92%EF%BC%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92or%E5%85%B6%E4%BB%96%EF%BC%8CPython%E9%87%8C%E5%8F%82%E6%95%B0%E6%98%AF%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E7%9A%84%EF%BC%9F.html">16 值传递，引用传递or其他，Python里参数是如何传递的？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/17%20%E5%BC%BA%E5%A4%A7%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8.html">17 强大的装饰器</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/18%20metaclass%EF%BC%8C%E6%98%AF%E6%BD%98%E5%A4%9A%E6%8B%89%E9%AD%94%E7%9B%92%E8%BF%98%E6%98%AF%E9%98%BF%E6%8B%89%E4%B8%81%E7%A5%9E%E7%81%AF%EF%BC%9F.html">18 metaclass，是潘多拉魔盒还是阿拉丁神灯？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/19%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8.html">19 深入理解迭代器和生成器</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/20%20%E6%8F%AD%E7%A7%98%20Python%20%E5%8D%8F%E7%A8%8B.html">20 揭秘 Python 协程</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/21%20Python%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8BFutures.html">21 Python并发编程之Futures</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/22%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8BAsyncio.html">22 并发编程之Asyncio</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/23%20%E4%BD%A0%E7%9C%9F%E7%9A%84%E6%87%82Python%20GIL%EF%BC%88%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81%EF%BC%89%E5%90%97%EF%BC%9F.html">23 你真的懂Python GIL（全局解释器锁）吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/24%20%E5%B8%A6%E4%BD%A0%E8%A7%A3%E6%9E%90%20Python%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6.html">24 带你解析 Python 垃圾回收机制</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/25%20%E7%AD%94%E7%96%91%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9AGIL%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%E5%91%A2%EF%BC%9F.html">25 答疑（二）：GIL与多线程是什么关系呢？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/26%20%E6%B4%BB%E9%83%BD%E6%9D%A5%E4%B8%8D%E5%8F%8A%E5%B9%B2%E4%BA%86%EF%BC%8C%E8%BF%98%E6%9C%89%E7%A9%BA%E6%B3%A8%E6%84%8F%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%EF%BC%9F%EF%BC%81.html">26 活都来不及干了，还有空注意代码风格？！</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/27%20%E5%AD%A6%E4%BC%9A%E5%90%88%E7%90%86%E5%88%86%E8%A7%A3%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%8F%90%E9%AB%98%E4%BB%A3%E7%A0%81%E5%8F%AF%E8%AF%BB%E6%80%A7.html">27 学会合理分解代码，提高代码可读性</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/28%20%E5%A6%82%E4%BD%95%E5%90%88%E7%90%86%E5%88%A9%E7%94%A8assert%EF%BC%9F.html">28 如何合理利用assert？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/29%20%E5%B7%A7%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8%E5%92%8CWith%E8%AF%AD%E5%8F%A5%E7%B2%BE%E7%AE%80%E4%BB%A3%E7%A0%81.html">29 巧用上下文管理器和With语句精简代码</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/30%20%E7%9C%9F%E7%9A%84%E6%9C%89%E5%BF%85%E8%A6%81%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%90%97%EF%BC%9F.html">30 真的有必要写单元测试吗？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/31%20pdb%20%26%20cProfile%EF%BC%9A%E8%B0%83%E8%AF%95%E5%92%8C%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E7%9A%84%E6%B3%95%E5%AE%9D.html">31 pdb &amp; cProfile：调试和性能分析的法宝</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/32%20%E7%AD%94%E7%96%91%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F%EF%BC%9F.html">32 答疑（三）：如何选择合适的异常处理方式？</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/33%20%E5%B8%A6%E4%BD%A0%E5%88%9D%E6%8E%A2%E9%87%8F%E5%8C%96%E4%B8%96%E7%95%8C.html">33 带你初探量化世界</a></li><li><a class="active" aria-current="page" href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20RESTful%20%26%20Socket%EF%BC%9A%E6%90%AD%E5%BB%BA%E4%BA%A4%E6%98%93%E6%89%A7%E8%A1%8C%E5%B1%82%E6%A0%B8%E5%BF%83.html">34 RESTful &amp; Socket：搭建交易执行层核心</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/35%20RESTful%20%26%20Socket%EF%BC%9A%E8%A1%8C%E6%83%85%E6%95%B0%E6%8D%AE%E5%AF%B9%E6%8E%A5%E5%92%8C%E6%8A%93%E5%8F%96.html">35 RESTful &amp; Socket：行情数据对接和抓取</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/36%20Pandas%20%26%20Numpy%EF%BC%9A%E7%AD%96%E7%95%A5%E4%B8%8E%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F.html">36 Pandas &amp; Numpy：策略与回测系统</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/37%20Kafka%20%26%20ZMQ%EF%BC%9A%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E6%B5%81%E6%B0%B4%E7%BA%BF.html">37 Kafka &amp; ZMQ：自动化交易流水线</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/38%20MySQL%EF%BC%9A%E6%97%A5%E5%BF%97%E5%92%8C%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F.html">38 MySQL：日志和数据存储系统</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/39%20Django%EF%BC%9A%E6%90%AD%E5%BB%BA%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0.html">39 Django：搭建监控平台</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/40%20%E6%80%BB%E7%BB%93%EF%BC%9APython%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%A8%E6%99%AF.html">40 总结：Python中的数据结构与算法全景</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/41%20%E7%A1%85%E8%B0%B7%E4%B8%80%E7%BA%BF%E4%BA%92%E8%81%94%E7%BD%91%E5%85%AC%E5%8F%B8%E7%9A%84%E5%B7%A5%E4%BD%9C%E4%BD%93%E9%AA%8C.html">41 硅谷一线互联网公司的工作体验</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/42%20%E7%BB%86%E6%95%B0%E6%8A%80%E6%9C%AF%E7%A0%94%E5%8F%91%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">42 细数技术研发的注意事项</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/43%20Q%26A%EF%BC%9A%E8%81%8A%E4%B8%80%E8%81%8A%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95%E5%92%8C%E9%80%89%E6%8B%A9.html">43 Q&amp;A：聊一聊职业发展和选择</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E5%8A%A0%E9%A4%90%20%E5%B8%A6%E4%BD%A0%E4%B8%8A%E6%89%8BSWIG%EF%BC%9A%E4%B8%80%E4%BB%BD%E6%B8%85%E6%99%B0%E5%A5%BD%E7%94%A8%E7%9A%84SWIG%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97.html">加餐 带你上手SWIG：一份清晰好用的SWIG编程实践指南</a></li><li><a href="/courses/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/%E7%BB%93%E6%9D%9F%E8%AF%AD%20%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%A4%96%E7%9A%84%E5%87%A0%E7%82%B9%E6%88%90%E9%95%BF%E5%BB%BA%E8%AE%AE.html">结束语 技术之外的几点成长建议</a></li></ul><!-- chapter-navigation:end --></div></details></aside><main class="reading-main" id="main-content"><p class="origin">原始页面：<a href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Python%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/34%20RESTful%20%26%20Socket%EF%BC%9A%E6%90%AD%E5%BB%BA%E4%BA%A4%E6%98%93%E6%89%A7%E8%A1%8C%E5%B1%82%E6%A0%B8%E5%BF%83.md" rel="noreferrer">源站链接</a></p><div class="book-post">
+<p align="center" id="tip"></p>
+<h1 class="title" data-id="34 RESTful &amp; Socket：搭建交易执行层核心" id="title">34 RESTful &amp; Socket：搭建交易执行层核心</h1>
+<div><p>你好，我是景霄。</p>
+<p>上一节，我们简单介绍了量化交易的历史、严谨的定义和它的基本组成结构。有了这些高层次的基本知识，接下来我们就分模块，开始讲解量化交易系统中具体的部分。</p>
+<p>从这节课开始，我们将实打实地从代码出发，一步步设计出一套清晰完整、易于理解的量化交易系统。</p>
+<p>一个量化交易系统，可以说是一个黑箱。这个黑箱连接交易所获取到的数据，通过策略运算，然后再连接交易所进行下单操作。正如我们在输入输出那节课说的那样，黑箱的特性是输入和输出。每一个设计网络交互的同学，都需要在大脑中形成清晰的交互状态图：</p>
+<ul>
+<li>知道包是怎样在网络间传递的；</li>
+<li>知道每一个节点是如何处理不同的输入包，然后输出并分发给下一级的。</li>
+</ul>
+<p>在你搞不明白的时候，可以先在草稿纸上画出交互拓扑图，标注清楚每个节点的输入和输出格式，然后想清楚网络是怎么流动的。这一点，对网络编程至关重要。</p>
+<p>现在，我假设你对网络编程只有很基本的了解。所以接下来，我将先从 REST 的定义讲起，然后过渡到具体的交互方式——如何通过 Python 和交易所进行交互，从而执行下单、撤单、查询订单等网络交互方式。</p>
+<h2 id="rest-简介">REST 简介</h2>
+<p>什么是 REST API？什么是 Socket？有过网络编程经验的同学，一定对这两个词汇不陌生。</p>
+<p>REST的全称是表征层状态转移（REpresentational State Transfer），本意是指一种操作资源方法。不过，你不用纠结于这个绕口的名字。换种方式来说，REST的实质可以理解为：通过URL定位资源，用GET、POST、PUT、DELETE等动词来描述操作。而满足REST要求的接口，就被称为RESTful的接口。</p>
+<p>为了方便你更容易理解这些概念，这里我举个例子来类比。小明同学不是很聪明但很懂事，每天会在他的妈妈下班回来后给妈妈泡茶。刚开始，他的妈妈会发出这样的要求：</p>
+<blockquote>
+<p>用红色杯子，去厨房泡一杯放了糖的37.5度的普洱茶。</p>
+</blockquote>
+<p>可是小明同学不够聪明，很难理解这个定语很多的句子。于是，他妈妈为了让他更简单明白需要做的事情，把这个指令设计成了更简洁的样子：</p>
+<blockquote>
+<p>泡厨房的茶，要求如下：</p>
+<ol>
+<li>类型=普洱；</li>
+<li>杯子=红色；</li>
+<li>放糖=True；</li>
+<li>温度=37.5度。</li>
+</ol>
+</blockquote>
+<p>这里的“茶”就是资源，“<strong>厨房的茶</strong>”就是资源的地址（URI）；“<strong>泡</strong>”是动词；后面的要求，都是接口参数。这样的一个接口，就是小明提供的一个REST接口。</p>
+<p>如果小明是一台机器，那么解析这个请求就会非常容易；而我们作为维护者，查看小明的代码也很简单。当小明把这个接口暴露到网上时，这就是一个RESTful的接口。</p>
+<p>总的来说，RESTful接口通常以HTTP GET和POST形式出现。但并非所有的GET、POST请求接口，都是RESTful的接口。</p>
+<p>这话可能有些拗口，我们举个例子来看。上节课中，我们获取了Gemini交易所中，BTC对USD价格的ticker接口：</p>
+<pre><code>GET https://api.gemini.com/v1/pubticker/btcusd
+</code></pre>
+<p>这里的“GET”是动词，后边的URI是“Ticker”这个资源的地址。所以，这是一个RESTful的接口。</p>
+<p>但下面这样的接口，就不是一个严格的RESTful接口：</p>
+<pre><code>POST https://api.restful.cn/accounts/delete/:username
+</code></pre>
+<p>因为URI中包含动词“delete”（删除），所以这个URI并不是<strong>指向一个资源</strong>。如果要修改成严格的RESTful接口，我们可以把它改成下面这样：</p>
+<pre><code>DELETE https://api.rest.cn/accounts/:username
+</code></pre>
+<p>然后，我们带着这个观念去看Gemini的取消订单接口：</p>
+<pre><code>POST https://api.gemini.com/v1/order/cancel
+</code></pre>
+<p><img alt="" src="/assets/f536c39e3b4c6666d791ebd8.png"/></p>
+<p>你会发现，这个接口不够“RESTful”的地方有：</p>
+<ul>
+<li>动词设计不准确，接口使用“POST”而不是重用HTTP动词“DELETE”；</li>
+<li>URI里包含动词cancel；</li>
+<li>ID代表的订单是<strong>资源</strong>，但订单ID是放在<strong>参数列表</strong>而不是<strong>URI</strong>里的，因此URI并没有指向资源。</li>
+</ul>
+<p>所以严格来说，这不是一个RESTful的接口。</p>
+<p>此外，如果我们去检查Gemini的其他私有接口（Private，私有接口是指需要附加身份验证信息才能访问的接口），我们会发现，那些接口的设计都不是严格RESTful的。不仅如此，大部分的交易所，比如Bitmex、Bitfinex、OKCoin等等，它们提供的“REST接口”，也都不是严格RESTful的。这些接口之所以还能被称为“REST接口”，是因为他们大部分满足了REST接口的另一个重要要求：<strong>无状态</strong>。</p>
+<p>无状态的意思是，每个REST请求都是独立的，不需要服务器在会话（Session）中缓存中间状态来完成这个请求。简单来说，如果服务器A接收到请求的时候宕机了，而此时把这个请求发送给交易所的服务器B，也能继续完成，那么这个接口就是无状态的。</p>
+<p>这里，我再给你举一个简单的有状态的接口的例子。服务器要求，在客户端请求取消订单的时候，必须发送两次不一样的HTTP请求。并且，第一次发送让服务器“等待取消”；第二次发送“确认取消”。那么，就算这个接口满足了RESTful的动词、资源分离原则，也不是一个REST接口。</p>
+<p>当然，对于交易所的REST接口，你并不需要过于纠结“RESTful”这个概念，否则很容易就被这些名词给绕晕了。你只需要把握住最核心的一点：<strong>一个HTTP请求完成一次完整操作</strong>。</p>
+<h2 id="交易所-api-简介">交易所 API 简介</h2>
+<p>现在，你对 REST 和 Web Socket 应该有一个大致了解了吧。接下来，我们就开始做点有意思的事情。</p>
+<p>首先，我来介绍一下交易所是什么。区块链交易所是个撮合交易平台： 它兼容了传统撮合规则撮合引擎，将资金托管和交割方式替换为区块链。数字资产交易所，则是一个中心化的平台，通过 Web 页面或 PC、手机客户端的形式，让用户将数字资产充值到指定钱包地址（交易所创建的钱包），然后在平台挂买单、卖单以实现数字资产之间的兑换。</p>
+<p>通俗来说，交易所就是一个买和卖的菜市场。有人在摊位上大声喊着：“二斤羊肉啊，二斤羊肉，四斤牛肉来换！”这种人被称为 maker（挂单者）。有的人则游走于不同摊位，不动声色地掏出两斤牛肉，顺手拿走一斤羊肉。这种人被称为 taker（吃单者）。</p>
+<p>交易所存在的意义，一方面是为 maker 和 taker 提供足够的空间活动；另一方面，让一个名叫撮合引擎的玩意儿，尽可能地把单子撮合在一起，然后收取一定比例的保护费…啊不对，是手续费，从而保障游戏继续进行下去。</p>
+<p>市场显然是个很伟大的发明，这里我们就不进行更深入的哲学讨论了。</p>
+<p>然后，我再来介绍一个叫作 Gemini 的交易所。Gemini，双子星交易所，全球首个获得合法经营许可的、首个推出期货合约的、专注于撮合大宗交易的数字货币交易所。Gemini 位于纽约，是一家数字货币交易所和托管机构，允许客户交易和存储数字资产，并直接受纽约州金融服务部门（NYDFS）的监管。</p>
+<p>Gemini 的界面清晰，API 完整而易用，更重要的是，还提供了完整的测试网络，也就是说，功能和正常的 Gemini 完全一样。但是他家的交易采用虚拟币，非常方便从业者在平台上进行对接测试。</p>
+<p>另一个做得很好的交易所，是 Bitmex，他家的 API UI 界面和测试网络也是币圈一流。不过，鉴于这家是期货交易所，对于量化初学者来说有一定的门槛，我们还是选择 Gemini 更方便一些。</p>
+<p>在进入正题之前，我们最后再以比特币和美元之间的交易为例，介绍四个基本概念（orderbook 的概念这里就不介绍了，你也不用深究，你只需要知道比特币的价格是什么就行了）。</p>
+<ul>
+<li>买（buy）：用美元买入比特币的行为。</li>
+<li>卖（sell）：用比特币换取美元的行为。</li>
+<li>市价单（market order）：给交易所一个方向（买或者卖）和一个数量，交易所把给定数量的美元（或者比特币）换成比特币（或者美元）的单子。</li>
+<li>限价单（limit order）：给交易所一个价格、一个方向（买或者卖）和一个数量，交易所在价格达到给定价格的时候，把给定数量的美元（或者比特币）换成比特币（或者美元）的单子。</li>
+</ul>
+<p>这几个概念都不难懂。其中，市价单和限价单，最大的区别在于，限价单多了一个给定价格。如何理解这一点呢？我们可以来看下面这个例子。</p>
+<p>小明在某一天中午12:00:00，告诉交易所，我要用1000美元买比特币。交易所收到消息，在 12:00:01 回复小明，现在你的账户多了 0.099 个比特币，少了 1000 美元，交易成功。这是一个市价买单。</p>
+<p>而小强在某一天中午 11:59:00，告诉交易所，我要挂一个单子，数量为 0.1 比特币，1个比特币的价格为 10000 美元，低于这个价格不卖。交易所收到消息，在11:59:01 告诉小强，挂单成功，你的账户余额中 0.1 比特币的资金被冻结。又过了一分钟，交易所告诉小强，你的单子被完全执行了（fully executed），现在你的账户多了 1000 美元，少了 0.1 个比特币。这就是一个限价卖单。</p>
+<p>（这里肯定有人发现不对了：貌似少了一部分比特币，到底去哪儿了呢？嘿嘿，你不妨自己猜猜看。）</p>
+<p>显然，市价单，在交给交易所后，会立刻得到执行，当然执行价格也并不受你的控制。它很快，但是也非常不安全。而限价单，则限定了交易价格和数量，安全性相对高很多。缺点呢，自然就是如果市场朝相反方向走，你挂的单子可能没有任何人去接，也就变成了干吆喝却没人买。因为我没有讲解 orderbook，所以这里的说辞不完全严谨，但是对于初学者理解今天的内容，已经够用了。</p>
+<p>储备了这么久的基础知识，想必你已经跃跃欲试了吧？下面，我们正式进入正题，手把手教你使用API下单。</p>
+<h2 id="手把手教你使用-api-下单">手把手教你使用 API 下单</h2>
+<p>手动挂单显然太慢，也不符合量化交易的初衷。我们就来看看如何用代码实现自动化下单吧。</p>
+<p>第一步，你需要做的是，注册一个 Gemini Sandbox 账号。请放心，这个测试账号不需要你充值任何金额，注册后即送大量虚拟现金。这口吻是不是听着特像网游宣传语，接下来就是“快来贪玩蓝月里找我吧”？哈哈，不过这个设定确实如此，所以赶紧来注册一个吧。</p>
+<p>注册后，为了满足好奇，你可以先尝试着使用 Web 界面自行下单。不过，事实上，未解锁的情况下是无法正常下单的，因此这样尝试并没啥太大意义。</p>
+<p>所以第二步，我们需要来配置 API Key。菜单栏User Settings-&gt;API Settings，然后点 GENERATE A NEW ACCOUNT API KEY，记下 Key 和 Secret 这两串字符。因为窗口一旦消失，这两个信息就再也找不到了，需要你重新生成。</p>
+<p>配置到此结束。接下来，我们来看具体实现。</p>
+<p>先强调一点，在量化系统开发的时候，你的心中一定要有清晰的数据流图。下单逻辑是一个很简单的 RESTful 的过程，和你在网页操作的一样，构造你的请求订单、加密请求，然后 POST 给 gemini 交易所即可。</p>
+<p>不过，因为涉及到的知识点较多，带你一步一步从零来写代码显然不太现实。所以，我们采用“先读懂后记忆并使用”的方法来学，下面即为这段代码：</p>
+<pre><code>import requests
+import json
+import base64
+import hmac
+import hashlib
+import datetime
+import time
+
+base_url = "https://api.sandbox.gemini.com"
+endpoint = "/v1/order/new"
+url = base_url + endpoint
+
+gemini_api_key = "account-zmidXEwP72yLSSybXVvn"
+gemini_api_secret = "375b97HfE7E4tL8YaP3SJ239Pky9".encode()
+
+t = datetime.datetime.now()
+payload_nonce = str(int(time.mktime(t.timetuple())*1000))
+
+payload = {
+   "request": "/v1/order/new",
+   "nonce": payload_nonce,
+   "symbol": "btcusd",
+   "amount": "5",
+   "price": "3633.00",
+   "side": "buy",
+   "type": "exchange limit",
+   "options": ["maker-or-cancel"]
+}
+
+encoded_payload = json.dumps(payload).encode()
+b64 = base64.b64encode(encoded_payload)
+signature = hmac.new(gemini_api_secret, b64, hashlib.sha384).hexdigest()
+
+request_headers = {
+    'Content-Type': "text/plain",
+    'Content-Length': "0",
+    'X-GEMINI-APIKEY': gemini_api_key,
+    'X-GEMINI-PAYLOAD': b64,
+    'X-GEMINI-SIGNATURE': signature,
+    'Cache-Control': "no-cache"
+}
+
+response = requests.post(url,
+                         data=None,
+                         headers=request_headers)
+
+new_order = response.json()
+print(new_order)
+
+
+########## 输出 ##########
+
+{'order_id': '239088767', 'id': '239088767', 'symbol': 'btcusd', 'exchange': 'gemini', 'avg_execution_price': '0.00', 'side': 'buy', 'type': 'exchange limit', 'timestamp': '1561956976', 'timestampms': 1561956976535, 'is_live': True, 'is_cancelled': False, 'is_hidden': False, 'was_forced': False, 'executed_amount': '0', 'remaining_amount': '5', 'options': ['maker-or-cancel'], 'price': '3633.00', 'original_amount': '5'}
+</code></pre>
+<p>我们来深入看一下这段代码。</p>
+<p>RESTful 的 POST 请求，通过 <code>requests.post</code> 来实现。post 接受三个参数，url、data 和 headers。</p>
+<p>这里的 url 等价于 <code>https://api.sandbox.gemini.com/v1/order/new</code>，但是在代码中分两部分写。第一部分是交易所 API 地址；第二部分，以斜杠开头，用来表示统一的 API endpoint。我们也可以在其他交易所的 API 中看到类似的写法，两者连接在一起，就构成了最终的 url。</p>
+<p>而接下来大段命令的目的，是为了构造 request_headers。</p>
+<p>这里我简单说一下 HTTP request，这是互联网中基于 TCP 的基础协议。HTTP 协议是 Hyper Text Transfer Protocol（超文本传输协议）的缩写，用于从万维网（WWW:World Wide Web）服务器传输超文本到本地浏览器的传送协议。而 TCP（Transmission Control Protocol）则是面向连接的、可靠的、基于字节流的传输层通信协议。</p>
+<p>多提一句，如果你开发网络程序，建议利用闲暇时间认真读一读《计算机网络：自顶向下方法》这本书，它也是国内外计算机专业必修课中广泛采用的课本之一。一边学习，一边应用，对于初学者的能力提升是全面而充分的。</p>
+<p>回到 HTTP，它的主要特点是，连接简单、灵活，可以使用“简单请求，收到回复，然后断开连接”的方式，也是一种无状态的协议，因此充分符合 RESTful 的思想。</p>
+<p>HTTP 发送需要一个请求头（request header），也就是代码中的 request_headers，用 Python 的语言表示，就是一个 str 对 str 的字典。</p>
+<p>这个字典里，有一些字段有特殊用途， <code>'Content-Type': "text/plain"</code> 和 <code>'Content-Length': "0"</code> 描述 Content 的类型和长度，这里的 Content 对应于参数 data。但是 Gemini 这里的 request 的 data 没有任何用处，因此长度为 0。</p>
+<p>还有一些其他字段，例如 <code>'keep-alive'</code> 来表示连接是否可持续化等，你也可以适当注意一下。要知道，网络编程很多 bug 都会出现在不起眼的细节之处。</p>
+<p>继续往下走看代码。payload 是一个很重要的字典，它用来存储下单操作需要的所有的信息，也就是业务逻辑信息。这里我们可以下一个 limit buy，限价买单，价格为 3633 刀。</p>
+<p>另外，请注意 nonce，这是个很关键并且在网络通信中很常见的字段。</p>
+<p>因为网络通信是不可靠的，一个信息包有可能会丢失，也有可能重复发送，在金融操作中，这两者都会造成很严重的后果。丢包的话，我们重新发送就行了；但是重复的包，我们需要去重。虽然 TCP 在某种程度上可以保证，但为了在应用层面进一步减少错误发生的机会，Gemini 交易所要求所有的通信 payload 必须带有 nonce。</p>
+<p>nonce 是个单调递增的整数。当某个后来的请求的 nonce，比上一个成功收到的请求的 nouce 小或者相等的时候，Gemini 便会拒绝这次请求。这样一来，重复的包就不会被执行两次了。另一方面，这样也可以在一定程度上防止中间人攻击：</p>
+<ul>
+<li>一则是因为 nonce 的加入，使得加密后的同样订单的加密文本完全混乱；</li>
+<li>二则是因为，这会使得中间人无法通过“发送同样的包来构造重复订单”进行攻击。</li>
+</ul>
+<p>这样的设计思路是不是很巧妙呢？这就相当于每个包都增加了一个身份识别，可以极大地提高安全性。希望你也可以多注意，多思考一下这些巧妙的用法。</p>
+<p>接下来的代码就很清晰了。我们要对 payload 进行 base64 和 sha384 算法非对称加密，其中 gemini_api_secret 为私钥；而交易所存储着公钥，可以对你发送的请求进行解密。最后，代码再将加密后的请求封装到 request_headers 中，发送给交易所，并收到 response，这个订单就完成了。</p>
+<h2 id="总结">总结</h2>
+<p>这节课我们介绍了什么是 RESTful API，带你了解了交易所的 RESTful API 是如何工作的，以及如何通过 RESTful API 来下单。同时，我简单讲述了网络编程中的一些技巧操作，希望你在网络编程中要注意思考每一个细节，尽可能在写代码之前，对业务逻辑和具体的技术细节有足够清晰的认识。</p>
+<p>下一节，我们同样将从 Web Socket 的定义开始，讲解量化交易中数据模块的具体实现。</p>
+<h2 id="思考题">思考题</h2>
+<p>最后留一个思考题。今天的内容里，能不能使用 timestamp 代替 nonce？为什么？欢迎留言写下你的思考，也欢迎你把这篇文章分享出去。</p>
+</div>
+</div><footer class="reading-footer">内容来自 learn.lianglianglee.com 及公开备份，原作者署名与正文保留。<br><a href="/about.html">内容来源与整理说明 ↗</a></footer></main></div></body></html>
