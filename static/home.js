@@ -50,16 +50,16 @@
     if (category !== 'all') params.set('category', category);
     if (sortValue !== 'date') params.set('sort', sortValue);
     const search = params.toString();
-    history.replaceState(null, '', location.pathname + (search ? '?' + search : '') + location.hash);
+    history.replaceState(history.state, '', location.pathname + (search ? '?' + search : '') + location.hash);
   }
 
-  function restore() {
+  function restore(resetLimit = true) {
     const params = new URLSearchParams(location.search);
     input.value = params.get('q') || '';
     category = categories.some(button => button.dataset.category === params.get('category')) ? params.get('category') : 'all';
     // 旧版 default 和无效参数统一回到发布时间排序。
     sortValue = ['name', 'count'].includes(params.get('sort')) ? params.get('sort') : 'date';
-    visibleLimit = pageSize;
+    if (resetLimit) visibleLimit = pageSize;
     render();
   }
 
@@ -113,18 +113,18 @@
     const firstNew = filtered[visibleLimit];visibleLimit += pageSize;render();
     firstNew?.querySelector('.course-link').focus({preventScroll: true});
   });
-  document.querySelector('main').addEventListener('click', event => {
-    if (!event.target.closest('.course-link, .course-resume, .recent-link')) return;
-    // 仅记住本标签页的书库入口，返回时保留筛选条件，不保存阅读正文。
-    try {sessionStorage.setItem('library-course-return', location.pathname + location.search + '#library');} catch (_) { /* 禁用存储时正常跳转。 */ }
-  });
+  // 来源由 browse.js 统一记录，避免把总首页的最近阅读误写成专栏入口。
   document.addEventListener('keydown', event => {
     const typing = event.target.closest('input, textarea, select, [contenteditable]');
     if (event.key === '/' && !typing && !event.ctrlKey && !event.metaKey && !event.altKey) {event.preventDefault();closeSort();input.focus();}
     if (event.key === 'Escape' && document.activeElement === input) {input.value = '';visibleLimit = pageSize;render();}
     if (event.key === 'Escape' && !sortMenu.hidden) closeSort(true);
   });
-  window.addEventListener('popstate', restore);
+  window.addEventListener('popstate', () => restore());
+  window.addEventListener('pageshow', event => {
+    // 后退命中页面缓存时，以地址栏恢复筛选，并保留此前展开的卡片数量。
+    if (event.persisted) {closeSort();restore(false);}
+  });
   document.querySelectorAll('.toolbar, .quick-search, .category-section').forEach(element => {element.hidden = false;});
   restore();
 })();

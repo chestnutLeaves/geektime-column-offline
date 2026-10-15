@@ -4,7 +4,8 @@ import re
 from urllib.parse import unquote, urlsplit
 
 NAVIGATION = [
-    ('courses', '/', '技术专栏', '▦'),
+    ('home', '/', '首页', '⌂'),
+    ('courses', '/courses/index.html', '技术专栏', '▦'),
     ('articles', '/articles/index.html', '技术文章', '≡'),
     ('life', '/relationships/index.html', '生活文章', '♡'),
     ('pdf', '/downloads/index.html', 'PDF 书籍', '▤'),
@@ -25,8 +26,8 @@ def header_html(reading=False, active='courses'):
     return '<header class="topbar">' + brand + action + '</header>'
 
 
-def library_nav(active='courses'):
-    """四个一级入口在所有页面保持一致，以当前位置决定高亮。"""
+def library_nav(active='home'):
+    """首页和四个内容目录共用入口顺序，以当前位置决定高亮。"""
     links = []
     for key, url, label, icon in NAVIGATION:
         selected = ' selected' if key == active else ''
@@ -38,6 +39,8 @@ def library_nav(active='courses'):
 def active_section(value):
     """兼容源站路径、生成路径与页面标题，保留旧链接的导航归属。"""
     value = unquote(urlsplit(value or '').path).strip('/')
+    if value in ('', 'index.html'):
+        return 'home'
     if value.startswith(('articles', 'geektime', '文章', '极客时间', '技术文章')):
         return 'articles'
     if value.startswith(('relationships', '恋爱必修课', '生活文章')):
@@ -47,6 +50,25 @@ def active_section(value):
     if value.startswith(('about', '关于')):
         return ''
     return 'courses'
+
+
+def render_browse_page(title, content, active, sidebar_extra='', scripts=(), page_class=''):
+    """目录页统一使用浏览外壳，避免误用窄正文容器而使侧栏跳动。"""
+    extra_scripts = ''.join(f'<script src="/static/{html.escape(name, quote=True)}" defer></script>' for name in scripts)
+    footer = '<footer class="home-footer"><span>技术阅读库 · 知识常读常新</span><a href="/about.html">内容来源与整理说明</a></footer>'
+    return ('<!doctype html>\n<html lang="zh-CN"><head><meta charset="utf-8">'
+            '<meta name="viewport" content="width=device-width,initial-scale=1">'
+            '<meta name="description" content="技术专栏、技术文章、生活文章与 PDF 书籍，随时开始阅读。">'
+            '<title>' + html.escape(title) + ' · 技术阅读库</title>'
+            '<link rel="stylesheet" href="/static/home.css">'
+            '<link rel="stylesheet" href="/static/reading-history.css">'
+            '<script src="/static/browse.js" defer></script>'
+            '<script src="/static/reading-history.js" defer></script>' + extra_scripts + '</head>'
+            '<body class="browse-page ' + html.escape(page_class, quote=True) + '">'
+            '<a class="skip-link" href="#main-content">跳到内容</a>' + header_html(active=active)
+            + '<div class="workspace browse-layout"><aside class="sidebar home-sidebar" aria-label="浏览与筛选">'
+            + library_nav(active) + sidebar_extra + '</aside><main class="browse-main" id="main-content">'
+            + content + footer + '</main></div></body></html>')
 
 
 def render_page(title, content, navigation='', active='courses'):
@@ -60,7 +82,8 @@ def render_page(title, content, navigation='', active='courses'):
         first_link = re.search(r'href="([^"]+)"', navigation)
         overview = html.unescape(first_link.group(1)).rsplit('/', 1)[0] + '/index.html' if first_link else '/'
         chapter_count = len(re.findall(r'<li[ >]', navigation))
-        heading = '<a class="library-back return-to-library" href="/">← 返回书库</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="' + html.escape(overview, quote=True) + '">' + directory_name + '</a></div>'
+        entry = next((item for item in NAVIGATION if item[0] == active), NAVIGATION[0])
+        heading = '<a class="library-back return-to-library" href="' + entry[1] + '">← 返回' + entry[2] + '</a><div class="chapter-heading"><span>正在阅读</span><a class="course-overview" href="' + html.escape(overview, quote=True) + '">' + directory_name + '</a></div>'
         tools = '<div class="chapter-tools" hidden><label class="sr-only" for="chapter-search">筛选章节</label><input id="chapter-search" type="search" placeholder="筛选章节…" autocomplete="off"><button id="locate-current" type="button" hidden>定位当前</button></div><p class="chapter-empty" role="status" hidden>没有匹配的章节</p>'
         # 导航原始片段保留在固定边界内，后续刷新外壳不会重复嵌套控件。
         navigation = navigation.replace('class="active"', 'class="active" aria-current="page"') if 'aria-current="page"' not in navigation else navigation

@@ -38,7 +38,8 @@ def refresh(project):
     report_file = project / 'data/manifests/pages.jsonl'
     rows = [json.loads(line) for line in report_file.read_text(encoding='utf-8').splitlines() if line]
     article_rows = {row['target']: row for row in rows}
-    excluded = {'index.html', 'courses/index.html', 'articles/index.html', 'geektime/index.html', 'relationships/index.html', 'course-sources.html'}
+    # 浏览目录由 build_home 统一生成，不能按正文页的固定边界解析。
+    excluded = {'index.html', 'courses/index.html', 'articles/index.html', 'geektime/index.html', 'relationships/index.html', 'downloads/index.html', 'course-sources.html'}
     # 只遍历对外发布的网页，避免把模板、缓存或开发备份当成文章。
     targets = [path for path in iter_public_files(root) if path.suffix == '.html' and path.relative_to(root).as_posix() not in excluded]
     for number, target in enumerate(targets, 1):

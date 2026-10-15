@@ -8,15 +8,67 @@
       if (event.key === 'Escape' && switcher.open) {switcher.open = false;switcher.querySelector('summary').focus();}
     });
   }
-  try {
-    const saved = sessionStorage.getItem('library-course-return');
-    if (saved) {
-      const url = new URL(saved, location.origin);
-      if (url.origin === location.origin && ['/', '/courses/index.html'].includes(url.pathname)) {
-        document.querySelectorAll('.return-to-library, .switcher-link[data-section="courses"]').forEach(link => {link.href = url.pathname + url.search + url.hash;});
+  const returnKey = 'library-course-return';
+  const browsePaths = new Set(['/', '/courses/index.html', '/articles/index.html', '/geektime/index.html', '/relationships/index.html', '/downloads/index.html']);
+  const returnLabels = {
+    '/': '首页',
+    '/courses/index.html': '技术专栏',
+    '/articles/index.html': '技术文章',
+    '/geektime/index.html': '技术文章',
+    '/relationships/index.html': '生活文章',
+    '/downloads/index.html': 'PDF 书籍',
+  };
+  // 保存生成页的栏目入口，缓存页面恢复或来源失效时不能统一覆盖为首页。
+  const returnLinks = Array.from(document.querySelectorAll('.return-to-library')).map(link => ({
+    link, href: link.getAttribute('href'), text: link.textContent,
+  }));
+
+  function normalizeReturn(value) {
+    // 只接受本站浏览入口；存储内容不能把返回链接替换成外部网站或任意文件。
+    if (typeof value !== 'string' || !value.trim()) return null;
+    try {
+      const url = new URL(value, location.origin);
+      if (url.origin !== location.origin || url.username || url.password) return null;
+      if (url.pathname === '/index.html') url.pathname = '/';
+      // 旧版首页本身就是专栏目录，历史筛选地址迁移后仍应回到专栏。
+      if (url.pathname === '/' && (['q', 'category', 'sort'].some(key => url.searchParams.has(key)) || url.hash === '#library')) {
+        url.pathname = '/courses/index.html';
       }
-    }
-  } catch (_) { /* 存储不可用时保留标准书库链接。 */ }
+      if (!browsePaths.has(url.pathname)) return null;
+      return url;
+    } catch (_) { return null; }
+  }
+
+  function restoreReturnLinks() {
+    let source = null;
+    try {
+      const saved = sessionStorage.getItem(returnKey);
+      source = normalizeReturn(saved);
+      if (source) {
+        const migrated = source.pathname + source.search + source.hash;
+        if (migrated !== saved) sessionStorage.setItem(returnKey, migrated);
+      } else if (saved) {
+        sessionStorage.removeItem(returnKey);
+      }
+    } catch (_) { /* 存储不可用时保留生成页对应的栏目入口。 */ }
+    const returnTo = source ? source.pathname + source.search + source.hash : null;
+    returnLinks.forEach(({link, href, text}) => {
+      if (source) {
+        link.href = returnTo;
+        link.textContent = '← 返回' + returnLabels[source.pathname];
+      } else {
+        if (href === null) link.removeAttribute('href');
+        else link.setAttribute('href', href);
+        link.textContent = text;
+      }
+    });
+    // 返回来源与内容分类是两个动作：只有来源本身为专栏时，分类入口才沿用筛选。
+    const courses = source?.pathname === '/courses/index.html' ? returnTo : '/courses/index.html';
+    document.querySelectorAll('.switcher-link[data-section="courses"]').forEach(link => {link.href = courses;});
+  }
+
+  restoreReturnLinks();
+  window.addEventListener('pageshow', restoreReturnLinks);
 
   const directory = document.querySelector('.chapter-directory');
   if (!directory) return;

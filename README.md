@@ -114,12 +114,14 @@ python -m pip install -r requirements.txt
 | 修改内容 | 修改位置 | 后续操作 |
 | --- | --- | --- |
 | 作者、发布日期、资料来源 | `data/course-metadata.json` | 运行 `python scripts/build_home.py` |
-| 首页模板与布局结构 | `ui/home.html` | 运行 `python scripts/build_home.py` |
+| 首页、专栏列表与最近阅读模板 | `ui/home.html`、`ui/courses.html`、`ui/recent-reading.html` | 运行 `python scripts/build_home.py` |
 | 共用页头、导航、阅读页外壳 | `scripts/ui_common.py` | 运行 `python scripts/refresh_layout.py` |
 | 字体、颜色、间距等样式 | `static/` 中相应 CSS | 不需要 Python，刷新预览或发布修改后的 CSS |
 | 搜索、排序、最近阅读交互 | `static/` 中相应 JavaScript | 不需要 Python，刷新预览或发布修改后的 JavaScript |
 
-`build_home.py` 更新首页、文章目录和资料来源页，不重新转换文章正文。不要只修改生成后的卡片 HTML，否则下次生成时会被 JSON 和模板覆盖。
+`build_home.py` 更新首页、技术专栏目录、文章目录、PDF 目录和资料来源页，不重新转换文章正文。不要只修改生成后的卡片 HTML，否则下次生成时会被 JSON 和模板覆盖。
+
+首页是整个书库的概览，技术专栏列表位于 `/courses/index.html`。所有内容目录共用固定位置的导航；旧的首页专栏筛选链接会自动转到新专栏目录。
 
 `refresh_layout.py` 批量更新阅读页外壳，逐篇校验正文区域字节不变，并更新页面清单中的校验值。
 
@@ -170,7 +172,7 @@ lianglianglee-library/
 ├─ downloads/                 PDF 文件和下载页；PDF 通过 Git LFS 随仓库保存
 ├─ assets/                    文章图片与附件；通过 Git LFS 随仓库保存
 ├─ static/                    CSS、JavaScript，包括搜索、排序、最近阅读
-├─ ui/                        首页生成模板；不是部署必需文件
+├─ ui/                        首页、专栏列表与最近阅读模板；不是部署必需文件
 ├─ data/                      页面生成、核验、资源恢复所需的维护资料
 │  ├─ course-metadata.json    专栏作者、发布时间、来源等元数据
 │  ├─ manifests/             页面、资源、处理问题清单及校验值

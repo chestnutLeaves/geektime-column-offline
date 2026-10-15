@@ -1,48 +1,6 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="技术专栏、技术文章、生活文章与 PDF 书籍，随时开始阅读。">
-  <title>技术阅读库 · 技术专栏</title>
-  <link rel="stylesheet" href="/static/home.css">
-  <link rel="stylesheet" href="/static/reading-history.css">
-  <script src="/static/reading-history.js" defer></script>
-  <script src="/static/home.js" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#library">跳到技术专栏</a>
-  @@HEADER@@
-  <div class="workspace">
-    <aside class="sidebar home-sidebar" aria-label="浏览与筛选">
-      @@NAVIGATION@@
-      <div class="category-section" hidden>
-        <p class="nav-label">按技术方向探索</p>
-        <div class="category-list" role="group" aria-label="专栏技术方向">@@CATEGORY_BUTTONS@@</div>
-      </div>
-    </aside>
-    <main id="main-content">
-      <section class="hero" aria-labelledby="hero-title">
+<section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy"><h1 id="hero-title">每次打开，读懂一点。</h1><p class="hero-description">技术专栏、好文章与书籍，按你的节奏阅读。</p></div>
         <div class="collection-stats"><span><strong>@@COURSE_COUNT@@</strong> 个专栏</span><span><strong>@@ARTICLE_COUNT@@</strong> 篇内容</span><span><strong>@@PDF_COUNT@@</strong> 份 PDF</span></div>
       </section>
-      <section class="recent-reading" id="recent-reading" aria-labelledby="recent-title" hidden>
-        <div class="recent-heading"><h2 id="recent-title">最近阅读 <span id="recent-count"></span></h2><div class="recent-actions"><span>仅保存在此浏览器</span><button id="recent-clear" type="button">清空记录</button></div></div>
-        <div class="history-confirm" hidden><span>清空全部阅读记录和阅读位置？</span><button id="history-confirm-clear" type="button">确认清空</button><button id="history-cancel-clear" type="button">取消</button></div>
-        <ul class="recent-list" id="recent-list"></ul><button id="recent-more" class="recent-more" type="button" aria-expanded="false" aria-controls="recent-list" hidden>查看全部</button>
-      </section>
-      <p id="history-status" class="sr-only" role="status"></p>
-      <section class="library" id="library" aria-labelledby="library-title">
-        <div class="library-heading"><h2 id="library-title">技术专栏 <span id="result-count" aria-live="polite">@@COURSE_COUNT@@</span></h2><p class="library-hint">按发布时间从新到旧 · 未知时间排最后</p></div>
-        <div class="toolbar" hidden><div class="search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><label class="sr-only" for="course-search">搜索专栏名称、作者或年份</label><input id="course-search" type="search" placeholder="搜索专栏、作者或年份…" autocomplete="off"><kbd aria-hidden="true">/</kbd></div><div class="sort-field"><button id="course-sort" class="sort-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="sort-options" aria-label="排序：最新发布"><span class="sort-caption">排序</span><span id="sort-label">最新发布</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><div id="sort-options" class="sort-options" role="listbox" aria-label="专栏排序方式" hidden><button type="button" role="option" data-sort="date" data-label="最新发布" aria-selected="true" tabindex="-1"><span>最新发布<small>发布时间从新到旧</small></span><span class="sort-check" aria-hidden="true">✓</span></button><button type="button" role="option" data-sort="name" data-label="名称 A—Z" aria-selected="false" tabindex="-1"><span>名称 A—Z</span><span class="sort-check" aria-hidden="true">✓</span></button><button type="button" role="option" data-sort="count" data-label="文章数最多" aria-selected="false" tabindex="-1"><span>文章数最多</span><span class="sort-check" aria-hidden="true">✓</span></button></div></div></div>
-        <div class="quick-search" role="group" aria-label="常用专栏关键词" hidden><span>快速找到</span><button type="button" data-query="Java">Java</button><button type="button" data-query="Redis">Redis</button><button type="button" data-query="架构">架构设计</button><button type="button" data-query="Python">Python</button><button type="button" data-query="Go">Go</button><button class="clear-filters" id="clear-filters" type="button" hidden>清除筛选 ×</button></div>
-        <noscript><p class="no-script">以下展示全部专栏。启用 JavaScript 后可按名称、作者或年份搜索、按技术方向筛选。</p></noscript>
-        <div class="course-grid" id="course-grid">@@CARDS@@</div>
-        <div class="empty-state" id="empty-state" hidden><span aria-hidden="true">⌕</span><h3>还没找到这个专栏</h3><p>试试更短的关键词，或切换到全部方向。</p><button id="reset-search" type="button">查看全部专栏</button></div>
-        <div class="load-area" hidden><p id="shown-count"></p><button id="load-more" type="button">查看更多专栏 <span aria-hidden="true">↓</span></button></div>
-      </section>
-      <footer class="home-footer"><span>技术阅读库 · 知识常读常新</span><a href="/about.html">内容来源与整理说明 ↗</a></footer>
-    </main>
-  </div>
-</body>
-</html>
+@@RECENT@@
+@@OVERVIEW@@
