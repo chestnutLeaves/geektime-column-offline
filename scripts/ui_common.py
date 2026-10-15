@@ -54,6 +54,10 @@ def active_section(value):
 
 def render_browse_page(title, content, active, sidebar_extra='', scripts=(), page_class=''):
     """目录页统一使用浏览外壳，避免误用窄正文容器而使侧栏跳动。"""
+    # 点评按目录载入对应 JSON；不进入正文页，也不影响关闭脚本时的阅读入口。
+    reviews = active in ('courses', 'articles')
+    review_assets = '<link rel="stylesheet" href="/static/reviews.css"><script src="/static/reviews.js" defer></script>' if reviews else ''
+    review_source = f' data-review-source="/static/reviews/{active}.json"' if reviews else ''
     extra_scripts = ''.join(f'<script src="/static/{html.escape(name, quote=True)}" defer></script>' for name in scripts)
     footer = '<footer class="home-footer"><span>技术阅读库 · 知识常读常新</span><a href="/about.html">内容来源与整理说明</a></footer>'
     return ('<!doctype html>\n<html lang="zh-CN"><head><meta charset="utf-8">'
@@ -63,8 +67,8 @@ def render_browse_page(title, content, active, sidebar_extra='', scripts=(), pag
             '<link rel="stylesheet" href="/static/home.css">'
             '<link rel="stylesheet" href="/static/reading-history.css">'
             '<script src="/static/browse.js" defer></script>'
-            '<script src="/static/reading-history.js" defer></script>' + extra_scripts + '</head>'
-            '<body class="browse-page ' + html.escape(page_class, quote=True) + '">'
+            '<script src="/static/reading-history.js" defer></script>' + extra_scripts + review_assets + '</head>'
+            '<body class="browse-page ' + html.escape(page_class, quote=True) + '"' + review_source + '>'
             '<a class="skip-link" href="#main-content">跳到内容</a>' + header_html(active=active)
             + '<div class="workspace browse-layout"><aside class="sidebar home-sidebar" aria-label="浏览与筛选">'
             + library_nav(active) + sidebar_extra + '</aside><main class="browse-main" id="main-content">'

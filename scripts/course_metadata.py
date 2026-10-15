@@ -37,11 +37,13 @@ def course_card(course, metadata, category_label):
     url = '/' + quote(course['target'], safe='/')
     published = row.get('published_date') or row.get('published_month') or ''
     year_html = f'<time datetime="{published or year}">{year_text}</time>' if year else year_text
-    return (f'<article class="course-card" data-title="{title}" data-search="{search}" data-category="{course["category"]}" data-count="{course["count"]}" data-year="{year or 0}" data-published="{published}">'
+    review_key = escape('/' + course['target'], quote=True)
+    return (f'<article class="course-card" data-review-key="{review_key}" data-title="{title}" data-search="{search}" data-category="{course["category"]}" data-count="{course["count"]}" data-year="{year or 0}" data-published="{published}">'
             f'<a class="course-link" href="{url}"><span class="course-category">{category_label}</span><h2>{title}</h2>'
             f'<dl class="course-meta"><div><dt>{escape(author_label)}</dt><dd>{escape(authors)}</dd></div>'
             f'<div><dt>发布</dt><dd title="{escape(row.get("date_basis") or "尚未找到可靠的发布日期", quote=True)}">{year_html}</dd></div></dl></a>'
             f'<div class="card-bottom"><span><strong>{course["count"]}</strong> 篇文章</span>'
+            f'<button class="review-trigger" type="button" hidden aria-label="阅读点评：{title}" aria-haspopup="dialog" aria-expanded="false" aria-controls="reading-review">阅读点评</button>'
             f'<a class="metadata-link" href="/course-sources.html#course-{row["id"]}" aria-label="查看{title}的资料来源">资料来源</a></div></article>')
 
 

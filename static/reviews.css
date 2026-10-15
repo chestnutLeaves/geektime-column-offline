@@ -1,0 +1,48 @@
+/* 点评作为轻量阅读辅助；浮层挂在 body 下，避免被卡片裁切。 */
+.review-trigger {
+  appearance: none; border: 0; border-radius: 5px; background: transparent;
+  color: #365f4b; font: inherit; font-size: 14px; line-height: 1.5;
+  padding: 7px 9px; cursor: pointer; white-space: nowrap;
+}
+.review-trigger:hover, .review-trigger[aria-expanded="true"] { background: #eaf0e5; color: #244735; }
+.review-trigger:focus-visible, .review-popover button:focus-visible, .review-popover a:focus-visible,
+.review-popover summary:focus-visible { outline: 2px solid #527963; outline-offset: 3px; }
+.review-trigger[hidden], .review-popover[hidden] { display: none !important; }
+.course-card .card-bottom { gap: 4px; flex-wrap: wrap; }
+.course-card .review-trigger { margin-left: auto; }
+.browse-main .article-list li[data-review-key]:not([hidden]) { display: flex; align-items: center; gap: 12px; }
+.browse-main .article-list li[data-review-key] > a { flex: 1; min-width: 0; }
+.article-list .review-trigger { flex: none; margin-right: 2px; }
+.review-popover {
+  position: fixed; z-index: 80; width: min(410px, calc(100vw - 32px));
+  box-sizing: border-box; max-height: calc(100dvh - 32px); overflow: auto;
+  overscroll-behavior: contain; border: 1px solid #b6c6b1; border-radius: 12px;
+  background: #fcfdf9; box-shadow: 0 12px 40px #213c2826, 0 2px 8px #213c2810;
+  padding: 21px 23px; color: #2e4036; font-size: 15px; line-height: 1.75;
+}
+.review-popover-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.review-eyebrow { color: #60715d; font-size: 13px; letter-spacing: .05em; }
+.review-close { border: 0; background: transparent; color: #52694f; padding: 3px 8px; border-radius: 4px; font: inherit; cursor: pointer; }
+.review-close:hover { background: #eaf0e5; }
+.review-popover h2 { font-size: 18px; line-height: 1.5; margin: 8px 0 12px; font-weight: 650; color: #233b2f; overflow-wrap: anywhere; }
+.review-badges { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+.review-badge { display: inline-block; padding: 2px 9px; border-radius: 4px; font-size: 13px; line-height: 1.7; background: #e7efe2; color: #36553d; }
+.review-badge[data-tone="caution"] { background: #f2eddf; color: #776135; }
+.review-badge[data-tone="neutral"] { background: #edefeb; color: #626b61; }
+.review-popover p { margin: 0 0 12px; }
+.review-popover dl { margin: 0; }
+.review-popover dt { margin: 12px 0 3px; color: #4a624b; font-size: 13px; font-weight: 600; }
+.review-popover dd { margin: 0; }
+.review-evidence { border-top: 1px solid #dfe5d8; margin-top: 17px; padding-top: 12px; font-size: 13px; color: #64715f; }
+.review-evidence summary { cursor: pointer; color: #46644d; }
+.review-evidence p { margin: 9px 0; }
+.review-evidence ul { padding-left: 19px; margin: 8px 0; }
+.review-evidence li { margin: 5px 0; }
+.review-evidence a { color: #3b6651; overflow-wrap: anywhere; text-underline-offset: 3px; }
+.review-date { display: block; margin-top: 10px; color: #6c7867; font-size: 12px; }
+.review-retry { border: 1px solid #becdb6; background: #eaf0e5; border-radius: 5px; padding: 7px 13px; font: inherit; color: #365f4b; cursor: pointer; }
+@media (max-width: 600px) {
+  .review-popover { width: calc(100vw - 24px); max-height: min(75dvh, 620px); padding: 18px 20px; font-size: 15px; }
+  .browse-main .article-list li[data-review-key]:not([hidden]) { gap: 4px; }
+  .article-list .review-trigger { font-size: 13px; padding: 10px 5px; }
+}

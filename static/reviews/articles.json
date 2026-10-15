@@ -1,0 +1,2011 @@
+{
+  "schema_version": 1,
+  "kind": "articles",
+  "reviewed_at": "2026-10-15",
+  "reviewer": "AI 辅助点评",
+  "methodology": "结合文章标题、正文摘样与小标题作阅读导览；长篇合集未逐章精读，代码未逐段运行，图示未逐图核验。针对部分版本敏感主题查阅官方资料，其余评价是有范围限制的编辑判断，不代表原作者意见或完整技术审计。",
+  "references": {
+    "cms": {
+      "title": "Oracle JDK 15 迁移指南：已移除的 CMS",
+      "url": "https://docs.oracle.com/en/java/javase/15/migrate/",
+      "checked_at": "2026-10-15"
+    },
+    "docker": {
+      "title": "Docker 官方 BuildKit 文档",
+      "url": "https://docs.docker.com/build/buildkit/",
+      "checked_at": "2026-10-15"
+    },
+    "elastic": {
+      "title": "Elasticsearch 8.0 官方迁移说明",
+      "url": "https://www.elastic.co/guide/en/elasticsearch/reference/8.19/migrating-8.0.html",
+      "checked_at": "2026-10-15"
+    },
+    "java_threads": {
+      "title": "Oracle Java 21：虚拟线程",
+      "url": "https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html",
+      "checked_at": "2026-10-15"
+    },
+    "jvm": {
+      "title": "Oracle Java 21：Java 虚拟机指南",
+      "url": "https://docs.oracle.com/en/java/javase/21/vm/index.html",
+      "checked_at": "2026-10-15"
+    },
+    "kafka": {
+      "title": "Apache Kafka 4.0 发布说明：KRaft 架构",
+      "url": "https://kafka.apache.org/blog/2025/03/18/apache-kafka-4.0.0-release-announcement/",
+      "checked_at": "2026-10-15"
+    },
+    "kubernetes": {
+      "title": "Kubernetes 官方 API 弃用迁移指南",
+      "url": "https://kubernetes.io/docs/reference/using-api/deprecation-guide/",
+      "checked_at": "2026-10-15"
+    },
+    "mysql": {
+      "title": "MySQL 8.4 官方升级变更说明",
+      "url": "https://dev.mysql.com/doc/refman/8.4/en/upgrading-from-previous-series.html",
+      "checked_at": "2026-10-15"
+    },
+    "mysql_dictionary": {
+      "title": "MySQL 官方数据字典说明",
+      "url": "https://dev.mysql.com/doc/refman/8.4/en/data-dictionary.html",
+      "checked_at": "2026-10-15"
+    },
+    "mysql_locking": {
+      "title": "MySQL 官方 InnoDB 锁说明",
+      "url": "https://dev.mysql.com/doc/refman/8.4/en/innodb-locking.html",
+      "checked_at": "2026-10-15"
+    },
+    "otel": {
+      "title": "OpenTelemetry 官方信号模型",
+      "url": "https://opentelemetry.io/docs/concepts/signals/",
+      "checked_at": "2026-10-15"
+    },
+    "redis": {
+      "title": "Redis 官方版本管理指南",
+      "url": "https://redis.io/docs/latest/operate/oss_and_stack/install/version-mgmt/",
+      "checked_at": "2026-10-15"
+    },
+    "spring": {
+      "title": "Spring Boot 3.0 官方迁移指南",
+      "url": "https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide",
+      "checked_at": "2026-10-15"
+    }
+  },
+  "entries": [
+    {
+      "path": "/articles/AQS 万字图文全面解析.html",
+      "title": "AQS 万字图文全面解析",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "用图串联 AQS 队列与同步过程，适合理解锁的实现基础。",
+      "currency_note": "源码细节绑定 JDK，不应把内部字段与队列实现当作稳定 API。",
+      "reading_advice": "对照项目 JDK 跟踪一次获取、排队与唤醒过程。",
+      "reference_ids": [
+        "jvm"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/AQS 万字图文全面解析.html",
+          "title": "AQS 万字图文全面解析",
+          "sha256": "5e0c5a543ac22fdfb361841a63e257ce76ebc951e4ce3b9cce5652c93059efcd"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Docker 镜像构建原理及源码分析.html",
+      "title": "Docker 镜像构建原理及源码分析",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "适合了解镜像构建的历史实现与分层机制。",
+      "currency_note": "构建器源码路径可能与当前 BuildKit 不同，不能作为现行实现的唯一说明。",
+      "reading_advice": "先理解上下文和缓存，再比较当前构建器的工作方式。",
+      "reference_ids": [
+        "docker"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Docker 镜像构建原理及源码分析.html",
+          "title": "Docker 镜像构建原理及源码分析",
+          "sha256": "df56ecb166bb5a24ace438603e01a4b9701264b56aaf85cee5d30b5cb686b593"
+        }
+      ]
+    },
+    {
+      "path": "/articles/ElasticSearch 小白从入门到精通.html",
+      "title": "ElasticSearch 小白从入门到精通",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "可作搜索基础、查询和索引的入门提纲。",
+      "currency_note": "旧版本映射与接口需要迁移，标题“精通”不能代表覆盖生产运维。",
+      "reading_advice": "用当前环境复现实验，补充集群容量、升级与故障恢复。",
+      "reference_ids": [
+        "elastic"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/ElasticSearch 小白从入门到精通.html",
+          "title": "ElasticSearch 小白从入门到精通",
+          "sha256": "e81374e2c25cfda96d1b38c22341f69d1c0d82dbaafe7eed13c0b5a7370e7a32"
+        }
+      ]
+    },
+    {
+      "path": "/articles/JVM CPU Profiler技术原理及源码深度解析.html",
+      "title": "JVM CPU Profiler技术原理及源码深度解析",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "采样剖析的实现与限制有助于正确解读 Java CPU 火焰图。",
+      "currency_note": "采样工具、JVM 与操作系统版本会影响偏差和支持范围。",
+      "reading_advice": "先理解采样盲点，再用多种指标验证热点是否是真正瓶颈。",
+      "reference_ids": [
+        "jvm"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/JVM CPU Profiler技术原理及源码深度解析.html",
+          "title": "JVM CPU Profiler技术原理及源码深度解析",
+          "sha256": "da3becff993fd33be18b7e6a3deb3c0f7dc38e841abc7f3fb31f4af2704cd045"
+        }
+      ]
+    },
+    {
+      "path": "/articles/JVM 垃圾收集器.html",
+      "title": "JVM 垃圾收集器",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "可用作回顾垃圾收集器名词的起点，但不建议作为 GC 的权威入门。",
+      "currency_note": "开头对低优先级回收线程和触发时机的笼统描述容易误导，不同收集器行为并不一致。",
+      "reading_advice": "以目标 JDK 的 GC 文档和日志为准，逐项核对触发条件。",
+      "reference_ids": [
+        "jvm"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/JVM 垃圾收集器.html",
+          "title": "JVM 垃圾收集器",
+          "sha256": "ecba3c21c9df23d5f0e96595f1d7ad36e69c61ac83ffe501acf54d53718c9922"
+        }
+      ]
+    },
+    {
+      "path": "/articles/JVM 面试的 30 个知识点.html",
+      "title": "JVM 面试的 30 个知识点",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "问答形式适合 JVM 面试前快速检查知识缺口。",
+      "currency_note": "收集器、参数和实现细节有版本背景，不能直接背成当前结论。",
+      "reading_advice": "把每个答案关联到运行时版本，优先理解机制与实验结果。",
+      "reference_ids": [
+        "jvm"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/JVM 面试的 30 个知识点.html",
+          "title": "JVM 面试的 30 个知识点",
+          "sha256": "67b6e245dd28c8178c56fbfd412b440b3c0a25b9491ee6a609d301a5cd36d7c7"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Java IO 体系、线程模型大总结.html",
+      "title": "Java IO 体系、线程模型大总结",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "IO 与线程模型的整体梳理适合理清同步、异步和阻塞的区别。",
+      "currency_note": "抽象模型耐用，具体 Java API 与底层实现仍需区分。",
+      "reading_advice": "用一个客户端与服务端实验观察线程如何等待和处理事件。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/Java IO 体系、线程模型大总结.html",
+          "title": "Java IO 体系、线程模型大总结",
+          "sha256": "7b2d348c33ba688eca2d82af8e473f48a01603fa1e4a5cd71da8932fddb43aa6"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Java NIO浅析.html",
+      "title": "Java NIO浅析",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "Channel、Buffer 与 Selector 是理解 Java NIO 的合适切入点。",
+      "currency_note": "核心接口稳定，但示例不等于完整的高并发网络实现。",
+      "reading_advice": "补充半包、背压、连接关闭与异常处理后再用于项目。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/Java NIO浅析.html",
+          "title": "Java NIO浅析",
+          "sha256": "8820dbfdca224c1d751d782e64b2ec8ff40ac9a61892a955ead9e8cdea9310a3"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Java 面试题集锦（网络篇）.html",
+      "title": "Java 面试题集锦（网络篇）",
+      "recommendation": "selective",
+      "currency": "stable",
+      "summary": "适合用网络问答做复习提纲，定位协议基础的薄弱点。",
+      "currency_note": "问答常简化协议与实现差异，不能替代规范或抓包验证。",
+      "reading_advice": "挑不确定的问题做连接实验，而不是只记术语。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/Java 面试题集锦（网络篇）.html",
+          "title": "Java 面试题集锦（网络篇）",
+          "sha256": "faf31486c293dbd1ffd22cd67efab3196b1ac3c527e132ac91a9aaef45de7051"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Java-直接内存 DirectMemory 详解.html",
+      "title": "Java-直接内存 DirectMemory 详解",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "直接内存的分配与回收适合排查堆外内存问题。",
+      "currency_note": "限制参数、内部 API 与回收实现依赖 JDK 和框架版本。",
+      "reading_advice": "结合堆外指标、进程内存与实际分配路径验证原因。",
+      "reference_ids": [
+        "jvm"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Java-直接内存 DirectMemory 详解.html",
+          "title": "Java-直接内存 DirectMemory 详解",
+          "sha256": "650fa4b9d2d590c768a579f7a49e5b98b48bd00323765302f9459e2f1cb79cbc"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Java中9种常见的CMS GC问题分析与解决（上）.html",
+      "title": "Java中9种常见的CMS GC问题分析与解决（上）",
+      "recommendation": "reference",
+      "currency": "dated",
+      "summary": "CMS 故障案例适合维护仍使用它的旧 Java 系统。",
+      "currency_note": "CMS 已在 JDK 14 移除，不能将其参数和调优方案用于所有新 JDK。",
+      "reading_advice": "有旧系统故障再重点读；新项目优先学习实际使用的收集器。",
+      "reference_ids": [
+        "cms"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Java中9种常见的CMS GC问题分析与解决（上）.html",
+          "title": "Java中9种常见的CMS GC问题分析与解决（上）",
+          "sha256": "b267df5390296614f2d4dc1b624fdf7698fac242240ad1aa72dacbdea4a8b549"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Java中9种常见的CMS GC问题分析与解决（下）.html",
+      "title": "Java中9种常见的CMS GC问题分析与解决（下）",
+      "recommendation": "reference",
+      "currency": "dated",
+      "summary": "延续 CMS 的问题分析，对理解历史 GC 故障有价值。",
+      "currency_note": "CMS 属于已移除的收集器，案例中的操作具有明确版本边界。",
+      "reading_advice": "借鉴日志归因方法，具体修复只在相同运行时条件下验证。",
+      "reference_ids": [
+        "cms"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Java中9种常见的CMS GC问题分析与解决（下）.html",
+          "title": "Java中9种常见的CMS GC问题分析与解决（下）",
+          "sha256": "df73155332876e15d0b2f4d0fc74ef5110a2d7faa4c6026637ec99968aef1b4d"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Java中的SPI.html",
+      "title": "Java中的SPI",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "SPI 有助于理解 Java 服务发现与框架扩展的基础。",
+      "currency_note": "Java SPI 与各框架的扩展机制不是同一套约定。",
+      "reading_advice": "先运行最小 ServiceLoader 示例，再对照框架自己的加载流程。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/Java中的SPI.html",
+          "title": "Java中的SPI",
+          "sha256": "40ce2c8a81f43cd95a533c876b3fefa8bc2210a35f431bf2befde6bc9f3fc413"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Java中的ThreadLocal.html",
+      "title": "Java中的ThreadLocal",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "ThreadLocal 适合结合线程池理解上下文保存与清理问题。",
+      "currency_note": "不同线程模型的生命周期不同，不能把线程本地状态当请求级存储保证。",
+      "reading_advice": "用复用线程验证泄漏与串数据，并检查异步任务的上下文传播。",
+      "reference_ids": [
+        "java_threads"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Java中的ThreadLocal.html",
+          "title": "Java中的ThreadLocal",
+          "sha256": "2a87ccf72d21f18e25b2f628fa58a0819dd9ec8a928486f18d136c7307e51346"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Java线程池实现原理及其在美团业务中的实践.html",
+      "title": "Java线程池实现原理及其在美团业务中的实践",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "线程池参数、监控与业务实践值得后端开发者读。",
+      "currency_note": "美团场景和平台线程池经验有具体负载前提，不能直接套用池大小。",
+      "reading_advice": "先区分 CPU 与阻塞任务，再评估虚拟线程和限流边界。",
+      "reference_ids": [
+        "java_threads"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Java线程池实现原理及其在美团业务中的实践.html",
+          "title": "Java线程池实现原理及其在美团业务中的实践",
+          "sha256": "6f676c692ba3d3dbe230a6c2d47e879dc5be6b5ac5217e403d492e04a397f19e"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Java魔法类：Unsafe应用解析.html",
+      "title": "Java魔法类：Unsafe应用解析",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "Unsafe 案例有助于理解框架底层能力与风险。",
+      "currency_note": "内部 API 不是稳定的应用接口，运行时封装和可用性需核实。",
+      "reading_advice": "以机制学习为主，业务代码优先使用受支持的公共 API。",
+      "reference_ids": [
+        "jvm"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Java魔法类：Unsafe应用解析.html",
+          "title": "Java魔法类：Unsafe应用解析",
+          "sha256": "252431e950ccdc2aa1ca1293538489732ec80dc5efbd86ad83c1f77e98b1ab31"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Kafka 源码阅读笔记.html",
+      "title": "Kafka 源码阅读笔记",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "适合已有 Kafka 基础的读者追踪实现细节。",
+      "currency_note": "源码笔记绑定当时版本，控制面与管理方式不能外推到 Kafka 4。",
+      "reading_advice": "固定源码标签，再对照 KRaft 的演进理解差异。",
+      "reference_ids": [
+        "kafka"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Kafka 源码阅读笔记.html",
+          "title": "Kafka 源码阅读笔记",
+          "sha256": "d7ec2c4fb46074420a99b0cced96b1e795b946449a64d0969e53d2447e9bdd15"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Kafka、ActiveMQ、RabbitMQ、RocketMQ 区别以及高可用原理.html",
+      "title": "Kafka、ActiveMQ、RabbitMQ、RocketMQ 区别以及高可用原理",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "可作消息队列选型维度的初步清单。",
+      "currency_note": "吞吐、高可用与功能比较受版本和场景影响，旧横向排名不应直接决定选型。",
+      "reading_advice": "比较投递语义、故障恢复和运维成本，再用业务负载测试。",
+      "reference_ids": [
+        "kafka"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Kafka、ActiveMQ、RabbitMQ、RocketMQ 区别以及高可用原理.html",
+          "title": "Kafka、ActiveMQ、RabbitMQ、RocketMQ 区别以及高可用原理",
+          "sha256": "7d1dbf6af9b3f43f6f342ef62e2e01a36346705b695dc748be77471ef4fda4d2"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL · 引擎特性 · InnoDB Buffer Pool.html",
+      "title": "MySQL · 引擎特性 · InnoDB Buffer Pool",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "Buffer Pool 的组织与访问有助于理解 InnoDB 缓存和 I/O。",
+      "currency_note": "内部数据结构与参数随 MySQL 版本变化。",
+      "reading_advice": "结合命中率与磁盘指标读，按目标版本核对源码细节。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL · 引擎特性 · InnoDB Buffer Pool.html",
+          "title": "MySQL · 引擎特性 · InnoDB Buffer Pool",
+          "sha256": "a671b186e8edf56f13a8bb7b55027b60b6676b77f3879343c71a2f892916c7e2"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL · 引擎特性 · InnoDB IO子系统.html",
+      "title": "MySQL · 引擎特性 · InnoDB IO子系统",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "适合研究 InnoDB I/O 路径与历史实现。",
+      "currency_note": "正文涉及 MySQL 5.x 源码，线程与刷新实现不能直接对应新版本。",
+      "reading_advice": "先学习数据流，再选择匹配源码或做版本差异对照。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL · 引擎特性 · InnoDB IO子系统.html",
+          "title": "MySQL · 引擎特性 · InnoDB IO子系统",
+          "sha256": "3c44c3f222b8dcc1ddda63a2fa4ed14039d17ebb543682fa73dbe970727f3c0e"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL · 引擎特性 · InnoDB 事务系统.html",
+      "title": "MySQL · 引擎特性 · InnoDB 事务系统",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "InnoDB 事务系统适合深入理解事务状态与并发控制。",
+      "currency_note": "源码结构与管理细节存在版本差异。",
+      "reading_advice": "结合事务可见性实验阅读，区分逻辑保证与内部实现。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL · 引擎特性 · InnoDB 事务系统.html",
+          "title": "MySQL · 引擎特性 · InnoDB 事务系统",
+          "sha256": "f1bc0dfcb7c3658d66ded90db1049340675930703860f9325c2864c951ce26a1"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL · 引擎特性 · InnoDB 同步机制.html",
+      "title": "MySQL · 引擎特性 · InnoDB 同步机制",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "同步原语的讨论适合数据库内核与性能排障读者。",
+      "currency_note": "锁与等待实现绑定具体代码版本，不是稳定用户接口。",
+      "reading_advice": "先确认源码版本，再用等待指标定位相关竞争。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL · 引擎特性 · InnoDB 同步机制.html",
+          "title": "MySQL · 引擎特性 · InnoDB 同步机制",
+          "sha256": "5a14e6b55f6ff229e76b92a13aa24a20f36a3d996d6985ac456cabd3b8a07f76"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL · 引擎特性 · InnoDB 数据页解析.html",
+      "title": "MySQL · 引擎特性 · InnoDB 数据页解析",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "数据页结构能帮助理解索引、记录与存储布局。",
+      "currency_note": "页格式与功能选项需要对应 MySQL 版本和表配置。",
+      "reading_advice": "用测试库观察页面，不在生产数据文件上直接做实验。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL · 引擎特性 · InnoDB 数据页解析.html",
+          "title": "MySQL · 引擎特性 · InnoDB 数据页解析",
+          "sha256": "9589a4115db3b05d37c4fcc4aed6bc3e5757c2f059dcfb5501505bb9c220e0c3"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL · 引擎特性 · InnoDB崩溃恢复.html",
+      "title": "MySQL · 引擎特性 · InnoDB崩溃恢复",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "崩溃恢复适合连接日志机制与可靠性保证。",
+      "currency_note": "恢复流程的实现、参数与默认行为存在版本差异。",
+      "reading_advice": "配合可恢复的故障实验阅读，区分持久性承诺与特定配置。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL · 引擎特性 · InnoDB崩溃恢复.html",
+          "title": "MySQL · 引擎特性 · InnoDB崩溃恢复",
+          "sha256": "140dae41d07611404559750e69fe9c7944c528e9d24fc843976f050ee143ac74"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL · 引擎特性 · 临时表那些事儿.html",
+      "title": "MySQL · 引擎特性 · 临时表那些事儿",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "临时表有助于理解执行计划中额外的内存和磁盘成本。",
+      "currency_note": "临时表引擎与阈值变化明显，旧参数经验需重新核对。",
+      "reading_advice": "用当前版本执行计划和运行指标验证是否落盘。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL · 引擎特性 · 临时表那些事儿.html",
+          "title": "MySQL · 引擎特性 · 临时表那些事儿",
+          "sha256": "1fc362ed23a3db06c54af5d5e27222e47fc66e194d5ecfdfbe529dd3dacb9541"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 主从复制 半同步复制.html",
+      "title": "MySQL 主从复制 半同步复制",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "适合建立半同步复制的基本流程与等待位置概念。",
+      "currency_note": "文章使用 5.7 语境，插件、参数和故障行为需与实际版本对照。",
+      "reading_advice": "模拟超时与切换，明确半同步并不自动等于零丢失。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 主从复制 半同步复制.html",
+          "title": "MySQL 主从复制 半同步复制",
+          "sha256": "951af6189c21d8420774d26d25522d3ee7b3ac97a77d80da8d395167e4400f91"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 主从复制 基于GTID复制.html",
+      "title": "MySQL 主从复制 基于GTID复制",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "GTID 对复制定位与运维的作用值得理解。",
+      "currency_note": "参考资料偏 MySQL 5.7，配置命令及管理函数可能变化。",
+      "reading_advice": "先学 GTID 集合，再在目标版本验证切换与恢复流程。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 主从复制 基于GTID复制.html",
+          "title": "MySQL 主从复制 基于GTID复制",
+          "sha256": "800d3d91f564d4bf83f4930fdf153e59edd5c3c96ff8ae35d4dee20dd0ab5a88"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 主从复制.html",
+      "title": "MySQL 主从复制",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "主从复制基础适合入门了解数据传播与复制链路。",
+      "currency_note": "内容包含 5.7 时代语境，旧管理术语与配置不宜直接复制。",
+      "reading_advice": "在测试环境观察延迟、错误与重建，核对当前版本文档。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 主从复制.html",
+          "title": "MySQL 主从复制",
+          "sha256": "a53d302518739304c027b5f087bcdaa2223423646bf8d972fbb8aec9cba10953"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 事务日志(redo log和undo log).html",
+      "title": "MySQL 事务日志(redo log和undo log)",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "redo 与 undo 的区分对理解持久性和 MVCC 很重要。",
+      "currency_note": "物理布局、容量与管理方式可能随版本变化。",
+      "reading_advice": "先明确两类日志的职责，再通过事务与恢复实验验证。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 事务日志(redo log和undo log).html",
+          "title": "MySQL 事务日志(redo log和undo log)",
+          "sha256": "343034a43cf103b471c202421395b6dd3b604ec861188d2f56cf2fb7199aa80c"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 亿级别数据迁移实战代码分享.html",
+      "title": "MySQL 亿级别数据迁移实战代码分享",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "Spring Batch 数据迁移案例可帮助梳理大批量任务的拆分与执行。",
+      "currency_note": "“亿级”是特定环境经验，代码不能自动保证任意迁移完整性。",
+      "reading_advice": "先补齐断点、幂等、对账与回滚，再在副本数据上压测。",
+      "reference_ids": [
+        "spring"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 亿级别数据迁移实战代码分享.html",
+          "title": "MySQL 亿级别数据迁移实战代码分享",
+          "sha256": "007292d715b20227625f924e0e3464215f54c20b61bcced0aebe0728bfc4a8e6"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 从一条数据说起-InnoDB行存储数据结构.html",
+      "title": "MySQL 从一条数据说起-InnoDB行存储数据结构",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "从一条记录解释行存储适合建立 InnoDB 存储直觉。",
+      "currency_note": "行格式、字符集与版本会影响实际布局。",
+      "reading_advice": "固定表结构和行格式做实验，避免只记字节数。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 从一条数据说起-InnoDB行存储数据结构.html",
+          "title": "MySQL 从一条数据说起-InnoDB行存储数据结构",
+          "sha256": "94c0092e09cbfc0c13dedcfe6ef38b2cb4bee70a9f8c8d02aa999cdff5aa7320"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 地基基础：事务和锁的面纱.html",
+      "title": "MySQL 地基基础：事务和锁的面纱",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "事务与锁的关系适合业务开发者理解并发异常。",
+      "currency_note": "锁行为受隔离级别、索引和版本影响。",
+      "reading_advice": "用两个会话复现等待与死锁，再讨论优化。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 地基基础：事务和锁的面纱.html",
+          "title": "MySQL 地基基础：事务和锁的面纱",
+          "sha256": "14ad150ecb6d7968b249266a3d4713d32a2ea3be6992f84e1f8bf486731efad1"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 地基基础：数据字典.html",
+      "title": "MySQL 地基基础：数据字典",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "数据字典主题对理解数据库元信息有帮助。",
+      "currency_note": "旧文件布局不能代表 MySQL 8 的事务型数据字典。",
+      "reading_advice": "按版本区分实现，不据旧文章直接操作系统表或数据文件。",
+      "reference_ids": [
+        "mysql_dictionary"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 地基基础：数据字典.html",
+          "title": "MySQL 地基基础：数据字典",
+          "sha256": "3d2cb89030da1d4b568e11113f0772f2d343a65ebf0b41648f85db289bc47a44"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 地基基础：数据库字符集.html",
+      "title": "MySQL 地基基础：数据库字符集",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "字符集与排序规则是排查乱码和比较异常的实用基础。",
+      "currency_note": "默认值与可用排序规则随版本变化。",
+      "reading_advice": "检查连接、列与比较表达式三层配置，用真实字符串验证。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 地基基础：数据库字符集.html",
+          "title": "MySQL 地基基础：数据库字符集",
+          "sha256": "e9a205b4af126dccfb75f3d08ba3fae585dd6d9c074bab840da3b130c32ba14b"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 性能优化：碎片整理.html",
+      "title": "MySQL 性能优化：碎片整理",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "碎片整理可帮助理解空间回收与表维护的代价。",
+      "currency_note": "并非看到空闲空间就该重建；锁、磁盘与复制压力取决于版本和表大小。",
+      "reading_advice": "先确认性能或容量问题，再在副本评估维护窗口。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 性能优化：碎片整理.html",
+          "title": "MySQL 性能优化：碎片整理",
+          "sha256": "f9ee9fb467e302f9cfa1c18d98eb24b27385941adb9e4f2b0af4841684567a12"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 故障诊断：一个 ALTER TALBE 执行了很久，你慌不慌？.html",
+      "title": "MySQL 故障诊断：一个 ALTER TALBE 执行了很久，你慌不慌？",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "从长时间 ALTER 入手有助于学习 DDL 等待的定位路径。",
+      "currency_note": "在线 DDL 能力与锁行为存在版本差异。",
+      "reading_advice": "先定位阻塞事务与操作阶段，不在原因不明时盲目终止会话。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 故障诊断：一个 ALTER TALBE 执行了很久，你慌不慌？.html",
+          "title": "MySQL 故障诊断：一个 ALTER TALBE 执行了很久，你慌不慌？",
+          "sha256": "edd5b40dbef984c9ef718d3d4be1dfa368d27b60327cc7bb913573e49db5663b"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 故障诊断：如何在日志中轻松定位大事务.html",
+      "title": "MySQL 故障诊断：如何在日志中轻松定位大事务",
+      "recommendation": "uncertain",
+      "currency": "unknown",
+      "summary": "本地收录页只有标题，正文为空，暂时无法评价阅读价值。",
+      "currency_note": "缺少日志示例和正文依据，不能据此判断原文质量或时效性。",
+      "reading_advice": "先从源站或可靠备份补齐正文，再核对数据库版本并补充点评。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 故障诊断：如何在日志中轻松定位大事务.html",
+          "title": "MySQL 故障诊断：如何在日志中轻松定位大事务",
+          "sha256": "29d493fc6e5f0a78246fabcfab19717943a429d560be26ac230260557c3aa271"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 故障诊断：教你快速定位加锁的 SQL.html",
+      "title": "MySQL 故障诊断：教你快速定位加锁的 SQL",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "定位持锁 SQL 对排查事务阻塞很实用。",
+      "currency_note": "诊断表、视图与字段在不同 MySQL 版本中可能变化。",
+      "reading_advice": "先确认监控视图可用，再把锁等待与事务、会话关联起来。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 故障诊断：教你快速定位加锁的 SQL.html",
+          "title": "MySQL 故障诊断：教你快速定位加锁的 SQL",
+          "sha256": "238b294c2cf537599328f86dd91c3e61a89d49b70db037083271f461ba42cddb"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 日志详解.html",
+      "title": "MySQL 日志详解",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "适合梳理 MySQL 日志类型及其用途。",
+      "currency_note": "文中混有旧 MySQL 与 MariaDB 语境，参数不能跨产品照搬。",
+      "reading_advice": "先确认数据库产品和版本，再逐项核对日志配置。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 日志详解.html",
+          "title": "MySQL 日志详解",
+          "sha256": "5afa2a484f9ed4d2de42f01c9d66eb664e40d5acbf5c5a9daa213a77b06fd23e"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL 的半同步是什么？.html",
+      "title": "MySQL 的半同步是什么？",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "半同步复制的原理有助于分析延迟与可靠性之间的取舍。",
+      "currency_note": "实际保证受确认点、超时和切换过程影响。",
+      "reading_advice": "通过故障实验明确丢失窗口，不把“半同步”理解成完整强一致性。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL 的半同步是什么？.html",
+          "title": "MySQL 的半同步是什么？",
+          "sha256": "90d9a30249a4779c88ed37d921e0fedac5050d43c5317ce32ce2c8c8bd54dc7c"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL中的事务和MVCC.html",
+      "title": "MySQL中的事务和MVCC",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "事务与 MVCC 的联系适合理解快照读和并发访问。",
+      "currency_note": "抽象原理稳定，但不能只靠 MVCC 推断所有锁行为。",
+      "reading_advice": "结合隔离级别和两会话实验，区分快照读与当前读。",
+      "reference_ids": [
+        "mysql_locking"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL中的事务和MVCC.html",
+          "title": "MySQL中的事务和MVCC",
+          "sha256": "97399ff636d32daec0a1af785104fa054e62db5d00dfc31126df1696fb1474e0"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL事务_事务隔离级别详解.html",
+      "title": "MySQL事务_事务隔离级别详解",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "隔离级别适合从业务异常反推数据库并发语义。",
+      "currency_note": "SQL 标准描述与具体 InnoDB 行为需区分。",
+      "reading_advice": "实际复现脏读、不可重复读等现象，并检查索引与读方式。",
+      "reference_ids": [
+        "mysql_locking"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL事务_事务隔离级别详解.html",
+          "title": "MySQL事务_事务隔离级别详解",
+          "sha256": "fa440d8e359de83ed136894ebae65c83868f7d14156e49911bb995c1049d302b"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL优化：优化 select count().html",
+      "title": "MySQL优化：优化 select count()",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "COUNT 查询讨论适合纠正对计数成本的直觉。",
+      "currency_note": "优化器、引擎和索引选择会影响执行，不存在脱离条件的恒定排名。",
+      "reading_advice": "在真实表结构下看计划与耗时，先保证计数语义相同。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL优化：优化 select count().html",
+          "title": "MySQL优化：优化 select count()",
+          "sha256": "2ac1a2e70045c9149090c828f1ed37921162ec0e07d231eaa8c66bf949e77682"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL共享锁、排他锁、悲观锁、乐观锁.html",
+      "title": "MySQL共享锁、排他锁、悲观锁、乐观锁",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "可作锁名词对照，但部分概念需要校正后再使用。",
+      "currency_note": "开头将间隙锁与 Next-Key Lock 混同；官方定义中后者结合记录锁和间隙锁。",
+      "reading_advice": "以官方锁说明为准，再验证索引范围与隔离级别下的加锁行为。",
+      "reference_ids": [
+        "mysql_locking"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL共享锁、排他锁、悲观锁、乐观锁.html",
+          "title": "MySQL共享锁、排他锁、悲观锁、乐观锁",
+          "sha256": "fd57ead22b3f3dd3b8eb64f6c7282b22937a1865f2be557e06390301ae1da013"
+        }
+      ]
+    },
+    {
+      "path": "/articles/MySQL的MVCC（多版本并发控制）.html",
+      "title": "MySQL的MVCC（多版本并发控制）",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "MVCC 适合解释版本可见性与事务读行为。",
+      "currency_note": "原理耐用，但不同读方式和隔离级别不能混为一谈。",
+      "reading_advice": "用并发会话观察快照变化，补充 undo 与长事务的代价。",
+      "reference_ids": [
+        "mysql_locking"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/MySQL的MVCC（多版本并发控制）.html",
+          "title": "MySQL的MVCC（多版本并发控制）",
+          "sha256": "765fd0a81382b48d1f125f19a0f03a5fd8e33019eff8cf03230c6d5efed6441a"
+        }
+      ]
+    },
+    {
+      "path": "/articles/QingStor 对象存储架构设计及最佳实践.html",
+      "title": "QingStor 对象存储架构设计及最佳实践",
+      "recommendation": "recommended",
+      "currency": "contextual",
+      "summary": "对象存储的架构案例适合了解数据路径、扩展与可靠性设计。",
+      "currency_note": "这是特定产品与阶段的实现经验，不代表当前服务规格或成本。",
+      "reading_advice": "提炼一致性与故障恢复的取舍，不直接照搬规模配置。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/QingStor 对象存储架构设计及最佳实践.html",
+          "title": "QingStor 对象存储架构设计及最佳实践",
+          "sha256": "fb6e1b73bc5db978b593b368d09d0864229f57a70f8acc8e7660aa7178f41d06"
+        }
+      ]
+    },
+    {
+      "path": "/articles/RocketMQ 面试题集锦.html",
+      "title": "RocketMQ 面试题集锦",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "RocketMQ 问答适合快速检查常见概念。",
+      "currency_note": "架构、客户端与消息能力有版本差异，面试答案不构成运行保证。",
+      "reading_advice": "把顺序、重复与事务消息问题变成可验证实验。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/RocketMQ 面试题集锦.html",
+          "title": "RocketMQ 面试题集锦",
+          "sha256": "6d0129117fd16486cc3948a04b099cd709bb25fbd3af7774dba344b6295c93b9"
+        }
+      ]
+    },
+    {
+      "path": "/articles/SnowFlake 雪花算法生成分布式 ID.html",
+      "title": "SnowFlake 雪花算法生成分布式 ID",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "雪花算法的位分配与时间依赖值得理解。",
+      "currency_note": "算法本身稳定，但时钟回拨、节点标识冲突和容量边界不能省略。",
+      "reading_advice": "按自己的节点规模验证回拨与重启情形，再用于唯一 ID。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/SnowFlake 雪花算法生成分布式 ID.html",
+          "title": "SnowFlake 雪花算法生成分布式 ID",
+          "sha256": "d1d0969857e58f7af09f28f096d68cb4856857100a0b26627517ff12480946bd"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Spring Boot 2.x 结合 k8s 实现分布式微服务架构.html",
+      "title": "Spring Boot 2.x 结合 k8s 实现分布式微服务架构",
+      "recommendation": "selective",
+      "currency": "dated",
+      "summary": "可用于理解 Spring Boot 与 Kubernetes 的早期组合方式。",
+      "currency_note": "明确基于 Boot 2.x，框架基线及 Kubernetes API 都需要迁移核查。",
+      "reading_advice": "用目标版本新建最小项目，再迁移业务功能而非整体照搬配置。",
+      "reference_ids": [
+        "spring",
+        "kubernetes"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Spring Boot 2.x 结合 k8s 实现分布式微服务架构.html",
+          "title": "Spring Boot 2.x 结合 k8s 实现分布式微服务架构",
+          "sha256": "79a37d943863ad7f58750aab63bf4919612c6e3200352101dc9acc41992d85f4"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Spring Boot 教程：如何开发一个 starter.html",
+      "title": "Spring Boot 教程：如何开发一个 starter",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "starter 的职责与自动配置思路适合组件开发者阅读。",
+      "currency_note": "自动配置注册方式会随 Boot 版本变化，旧目录与配置约定需核对。",
+      "reading_advice": "按目标 Boot 版本实现条件装配，并验证启用、覆盖和缺少依赖的情况。",
+      "reference_ids": [
+        "spring"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Spring Boot 教程：如何开发一个 starter.html",
+          "title": "Spring Boot 教程：如何开发一个 starter",
+          "sha256": "51e371ecfabb2e794dc66ba2ce1f0cd608f01373001008d0416cd6ccf374ec85"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Spring MVC 原理.html",
+      "title": "Spring MVC 原理",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "MVC 请求链和职责划分适合理解 Spring Web 的基础。",
+      "currency_note": "内部类与 Servlet 生态存在版本差异，源码图不是所有版本的实际调用栈。",
+      "reading_advice": "用当前项目一次请求的调用栈验证关键扩展点。",
+      "reference_ids": [
+        "spring"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Spring MVC 原理.html",
+          "title": "Spring MVC 原理",
+          "sha256": "4b2fc1855bc8358d833c23912a91082172cc79be6b7c8f2e7e72423b71135212"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Spring MyBatis和Spring整合的奥秘.html",
+      "title": "Spring MyBatis和Spring整合的奥秘",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "MyBatis 与 Spring 的整合适合排查 Mapper 注册和代理问题。",
+      "currency_note": "正文明确使用 Spring 5.1.16 与 mybatis-spring 2.0.0，需要匹配版本阅读。",
+      "reading_advice": "先锁定依赖，再追踪扫描、工厂与注入链路。",
+      "reference_ids": [
+        "spring"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Spring MyBatis和Spring整合的奥秘.html",
+          "title": "Spring MyBatis和Spring整合的奥秘",
+          "sha256": "fd76bfbef642c2d9fce7194132927d02fd1ab566a25eb76a7347644bc5eafa30"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Spring 帮助你更好的理解Spring循环依赖.html",
+      "title": "Spring 帮助你更好的理解Spring循环依赖",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "循环依赖的分析有助于理解 Bean 生命周期和早期引用。",
+      "currency_note": "框架可处理的场景不等于应用应该依赖它，默认策略也可能不同。",
+      "reading_advice": "优先消除设计环，再按目标版本验证代理与构造注入的行为。",
+      "reference_ids": [
+        "spring"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Spring 帮助你更好的理解Spring循环依赖.html",
+          "title": "Spring 帮助你更好的理解Spring循环依赖",
+          "sha256": "62572d82e47dac7a66277513808fe1af025bb09a6f0ac28d3afa90ed28e1123c"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Spring 循环依赖及解决方式.html",
+      "title": "Spring 循环依赖及解决方式",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "适合梳理循环依赖现象与常见处理方向。",
+      "currency_note": "临时绕过方式可能隐藏模块耦合，不能当普遍修复方案。",
+      "reading_advice": "先明确依赖为什么成环，优先重新分配职责而非打开兼容开关。",
+      "reference_ids": [
+        "spring"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Spring 循环依赖及解决方式.html",
+          "title": "Spring 循环依赖及解决方式",
+          "sha256": "6ba7fdf10b06aac55aa072b2da5093528970f6501e941ef399dc9d217e9c0ca4"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Spring中眼花缭乱的BeanDefinition.html",
+      "title": "Spring中眼花缭乱的BeanDefinition",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "BeanDefinition 能帮助理解容器元信息与 Bean 创建的区别。",
+      "currency_note": "内部扩展点和处理顺序需对照框架版本。",
+      "reading_advice": "从一个简单 Bean 注册流程开始，再阅读复杂后处理器。",
+      "reference_ids": [
+        "spring"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/Spring中眼花缭乱的BeanDefinition.html",
+          "title": "Spring中眼花缭乱的BeanDefinition",
+          "sha256": "5ebc8db85116dafa6c115a81649d4d2a5662eb22b4ffce1b2a1bede85c371a4e"
+        }
+      ]
+    },
+    {
+      "path": "/articles/Vert.x 基础入门.html",
+      "title": "Vert.x 基础入门",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "事件循环与 Vert.x 基本组件适合认识另一种服务端编程模型。",
+      "currency_note": "API、语言支持和依赖组合可能变化。",
+      "reading_advice": "先跑通最小服务并检查阻塞调用，再按目标版本扩展。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/Vert.x 基础入门.html",
+          "title": "Vert.x 基础入门",
+          "sha256": "96ac3fb9784192a36c38dc124b4817460c19c616ed26b382c5c525f4aa70a991"
+        }
+      ]
+    },
+    {
+      "path": "/articles/eBay 的 Elasticsearch 性能调优实践.html",
+      "title": "eBay 的 Elasticsearch 性能调优实践",
+      "recommendation": "recommended",
+      "currency": "contextual",
+      "summary": "eBay 的调优案例适合学习如何围绕负载分析搜索瓶颈。",
+      "currency_note": "硬件、数据分布与 Elasticsearch 版本决定结果，参数不宜原样复制。",
+      "reading_advice": "复制测量方法而非最终参数，并核对新版索引与查询行为。",
+      "reference_ids": [
+        "elastic"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/eBay 的 Elasticsearch 性能调优实践.html",
+          "title": "eBay 的 Elasticsearch 性能调优实践",
+          "sha256": "a8244c617a8b3ef169229d963a43da2d7887807453bf5548b57a2c7e203d26e1"
+        }
+      ]
+    },
+    {
+      "path": "/articles/不可不说的Java“锁”事.html",
+      "title": "不可不说的Java“锁”事",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "锁的分类与应用有助于串联 Java 并发知识。",
+      "currency_note": "正文使用 JDK 8 等历史环境，内部实现与优化需按版本重看。",
+      "reading_advice": "先区分语义与实现，再用项目 JDK 验证竞争和性能。",
+      "reference_ids": [
+        "java_threads"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/不可不说的Java“锁”事.html",
+          "title": "不可不说的Java“锁”事",
+          "sha256": "5d9427ee39815889eb3106dfe5f6a15e0149fbdd29f78b8bde46b2f2d340a9ca"
+        }
+      ]
+    },
+    {
+      "path": "/articles/互联网并发限流实战.html",
+      "title": "互联网并发限流实战",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "限流策略适合建立保护系统容量的基本思路。",
+      "currency_note": "算法稳定，分布式计数、突发流量和失败策略仍需额外设计。",
+      "reading_advice": "明确限制对象和降级方式，用边界负载检验公平性与误杀。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/互联网并发限流实战.html",
+          "title": "互联网并发限流实战",
+          "sha256": "e14ad483de329d811ee5cd0f48da80e5528b02ecc686f29387c127e266dd6977"
+        }
+      ]
+    },
+    {
+      "path": "/articles/从ReentrantLock的实现看AQS的原理及应用.html",
+      "title": "从ReentrantLock的实现看AQS的原理及应用",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "沿 ReentrantLock 追踪 AQS 适合建立同步队列的具体认识。",
+      "currency_note": "源码实现受 JDK 版本影响，不能只按旧代码行号理解。",
+      "reading_advice": "匹配源码后推演竞争、取消与唤醒过程。",
+      "reference_ids": [
+        "jvm"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/从ReentrantLock的实现看AQS的原理及应用.html",
+          "title": "从ReentrantLock的实现看AQS的原理及应用",
+          "sha256": "0520c00c72143b00fa896139a8c05824a7edb2416d71f96b67387a61fe4d0712"
+        }
+      ]
+    },
+    {
+      "path": "/articles/从SpringCloud开始，聊微服务架构.html",
+      "title": "从SpringCloud开始，聊微服务架构",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "适合了解 Spring Cloud 组件与微服务概念之间的对应关系。",
+      "currency_note": "历史组件组合与默认推荐可能变化，微服务也不是所有项目的必选项。",
+      "reading_advice": "先识别组织与业务边界，再核对当前依赖矩阵。",
+      "reference_ids": [
+        "spring"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/从SpringCloud开始，聊微服务架构.html",
+          "title": "从SpringCloud开始，聊微服务架构",
+          "sha256": "c2b447b88f22d0ba69363e169a0b8475167282994a0e1c421e407841f75fc9c3"
+        }
+      ]
+    },
+    {
+      "path": "/articles/全面了解 JDK 线程池实现原理.html",
+      "title": "全面了解 JDK 线程池实现原理",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "线程池状态、任务队列与执行过程值得理解。",
+      "currency_note": "基于平台线程的经验不能无条件套到虚拟线程。",
+      "reading_advice": "结合拒绝、关闭与异常任务实验，按工作负载选择执行模型。",
+      "reference_ids": [
+        "java_threads"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/全面了解 JDK 线程池实现原理.html",
+          "title": "全面了解 JDK 线程池实现原理",
+          "sha256": "cc7d6db826d89e33e87e62baca14d8cf00e07ccd4f455db54cfbb1fb7c8aca43"
+        }
+      ]
+    },
+    {
+      "path": "/articles/分布式一致性理论与算法.html",
+      "title": "分布式一致性理论与算法",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "一致性理论可帮助梳理分布式系统的保证与限制。",
+      "currency_note": "基本理论耐用，但一致性、可用性与故障前提必须一起理解。",
+      "reading_advice": "把术语对应到具体执行历史，避免只背 CAP 三个字。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/分布式一致性理论与算法.html",
+          "title": "分布式一致性理论与算法",
+          "sha256": "36b987076e77f613163c70bef9dceca575c08e57597a9a9c52b9bad883dfd60f"
+        }
+      ]
+    },
+    {
+      "path": "/articles/分布式一致性算法 Raft.html",
+      "title": "分布式一致性算法 Raft",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "Raft 是学习日志复制与选主的良好入口。",
+      "currency_note": "算法思想稳定，生产实现还涉及持久化、快照和成员变更。",
+      "reading_advice": "画出故障时序或做模拟，再区分论文模型与工程实现。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/分布式一致性算法 Raft.html",
+          "title": "分布式一致性算法 Raft",
+          "sha256": "12c71d94ea4f74714666b5dee67e4cd4d22fb4c576522b040160f384a162a825"
+        }
+      ]
+    },
+    {
+      "path": "/articles/分布式唯一 ID 解析.html",
+      "title": "分布式唯一 ID 解析",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "唯一 ID 的方案对比适合选型前检查约束。",
+      "currency_note": "算法耐用，唯一性范围、排序性与故障恢复的要求各不相同。",
+      "reading_advice": "先定义跨机房、时钟和容量条件，再决定采用哪种方案。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/分布式唯一 ID 解析.html",
+          "title": "分布式唯一 ID 解析",
+          "sha256": "22854ce7cfacb43e129e73ab8a2c209c564937730099b68a1c8f800a5c39fd75"
+        }
+      ]
+    },
+    {
+      "path": "/articles/分布式链路追踪：集群管理设计.html",
+      "title": "分布式链路追踪：集群管理设计",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "追踪系统的集群管理案例适合理解控制面设计。",
+      "currency_note": "SkyWalking、Consul 等组件实现与部署方式可能变化。",
+      "reading_advice": "提炼发现与故障处理思路，再按当前可观测性组件核对接入。",
+      "reference_ids": [
+        "otel"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/分布式链路追踪：集群管理设计.html",
+          "title": "分布式链路追踪：集群管理设计",
+          "sha256": "f1b9f60d348bc6fe45655ff6d595ff53b1f1263f3c16a724804391ca42da89d0"
+        }
+      ]
+    },
+    {
+      "path": "/articles/动态代理种类及原理，你知道多少？.html",
+      "title": "动态代理种类及原理，你知道多少？",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "动态代理机制适合理解 AOP 与框架调用链。",
+      "currency_note": "类加载、模块封装和代码生成库兼容性需结合 JDK。",
+      "reading_advice": "分别写最小代理示例，检查方法、异常与类型边界。",
+      "reference_ids": [
+        "jvm"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/动态代理种类及原理，你知道多少？.html",
+          "title": "动态代理种类及原理，你知道多少？",
+          "sha256": "8b12d3ba2ae55a35bece1845d463f58a691888fcb04d834ca7c5a741177f5d08"
+        }
+      ]
+    },
+    {
+      "path": "/articles/响应式架构与 RxJava 在有赞零售的实践.html",
+      "title": "响应式架构与 RxJava 在有赞零售的实践",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "有赞的响应式案例有助于理解异步组合与业务协作。",
+      "currency_note": "RxJava 版本和服务场景影响 API 与收益，不能把响应式等同于自动提速。",
+      "reading_advice": "重点检查背压、线程切换与异常传播，再做负载比较。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/响应式架构与 RxJava 在有赞零售的实践.html",
+          "title": "响应式架构与 RxJava 在有赞零售的实践",
+          "sha256": "866bbf46687f2fe9235b5c0b3cf52bf6dcde143addccb573894f0de61c8cb893"
+        }
+      ]
+    },
+    {
+      "path": "/articles/大数据算法——布隆过滤器.html",
+      "title": "大数据算法——布隆过滤器",
+      "recommendation": "uncertain",
+      "currency": "unknown",
+      "summary": "本地收录页只有标题，正文为空，暂不给出确定推荐。",
+      "currency_note": "没有可审阅的算法讲解，无法据标题判断准确性、完整性或时效性。",
+      "reading_advice": "先从源站或可靠备份补齐正文，再检查误判率、删除限制等内容。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/大数据算法——布隆过滤器.html",
+          "title": "大数据算法——布隆过滤器",
+          "sha256": "30e13a7bfdcf9f31afb209a3faf3b14f8c4c83e385f9b9d43d2d4fc6d827354e"
+        }
+      ]
+    },
+    {
+      "path": "/articles/如何优雅地记录操作日志？.html",
+      "title": "如何优雅地记录操作日志？",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "AOP 与业务日志的组合适合思考如何记录有用的操作上下文。",
+      "currency_note": "Canal 等方案的集成细节需匹配版本，日志成功也不等于业务事务成功。",
+      "reading_advice": "明确审计字段、失败语义与敏感信息边界，再选实现方式。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/如何优雅地记录操作日志？.html",
+          "title": "如何优雅地记录操作日志？",
+          "sha256": "5251e9a95677e3644501424b7271dad5e755a4afb5825c071783d44a9a5c4709"
+        }
+      ]
+    },
+    {
+      "path": "/articles/如何设计一个亿级消息量的 IM 系统.html",
+      "title": "如何设计一个亿级消息量的 IM 系统",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "消息扇出、读写链路与 ID 设计适合学习 IM 的核心取舍。",
+      "currency_note": "“亿级”是场景描述，不能替代容量模型与故障验证。",
+      "reading_advice": "先定义送达、离线、顺序和重复语义，再评估架构成本。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/如何设计一个亿级消息量的 IM 系统.html",
+          "title": "如何设计一个亿级消息量的 IM 系统",
+          "sha256": "85d83f37ff6a41c0436447848c645cbf252b53474c9e4140ac207b4f058dccec"
+        }
+      ]
+    },
+    {
+      "path": "/articles/异步网络模型.html",
+      "title": "异步网络模型",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "几种 I/O 模型适合澄清异步与非阻塞的区别。",
+      "currency_note": "抽象图是教学简化，具体系统调用与框架实现可能不同。",
+      "reading_advice": "将模型映射到实际线程等待和数据复制路径。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/异步网络模型.html",
+          "title": "异步网络模型",
+          "sha256": "9a046c12daa2bad46df91f09c47903105d5a5c2693742d1b4b5cb4b1a7c53ab0"
+        }
+      ]
+    },
+    {
+      "path": "/articles/当我们在讨论CQRS时，我们在讨论些神马？.html",
+      "title": "当我们在讨论CQRS时，我们在讨论些神马？",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "CQRS 适合用于讨论读写模型何时需要分离。",
+      "currency_note": "模式长期有效，但额外同步和一致性成本不能忽略。",
+      "reading_advice": "先确认业务查询与写模型确有冲突，再考虑引入分离。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/当我们在讨论CQRS时，我们在讨论些神马？.html",
+          "title": "当我们在讨论CQRS时，我们在讨论些神马？",
+          "sha256": "c51a55b158c19cffa1b7ed9eabd2653bc1de6f2267286c9e7f3bbd56a150f62e"
+        }
+      ]
+    },
+    {
+      "path": "/articles/彻底理解 MySQL 的索引机制.html",
+      "title": "彻底理解 MySQL 的索引机制",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "索引机制适合连接数据结构与查询成本。",
+      "currency_note": "优化器与索引功能随版本演进，具体查询结论需复测。",
+      "reading_advice": "在实际表结构上看执行计划，用相同语义比较方案。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/彻底理解 MySQL 的索引机制.html",
+          "title": "彻底理解 MySQL 的索引机制",
+          "sha256": "ab7c7c0a5a9c3329a3fb209a5b54eb9577a55399b039dbaeae136a26026d5d0e"
+        }
+      ]
+    },
+    {
+      "path": "/articles/最全的 116 道 Redis 面试题解答.html",
+      "title": "最全的 116 道 Redis 面试题解答",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "大量问答适合作为 Redis 知识检查清单。",
+      "currency_note": "包括旧许可语境和版本能力，不能因题目多就当当前权威答案。",
+      "reading_advice": "先核对实际 Redis 版本，重点验证持久化、淘汰与故障行为。",
+      "reference_ids": [
+        "redis"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/最全的 116 道 Redis 面试题解答.html",
+          "title": "最全的 116 道 Redis 面试题解答",
+          "sha256": "0ad8228cba62d39ebf21e3de37bb44b88916bfae145dfbdd88cfecda3242d93c"
+        }
+      ]
+    },
+    {
+      "path": "/articles/有赞权限系统(SAM).html",
+      "title": "有赞权限系统(SAM)",
+      "recommendation": "recommended",
+      "currency": "contextual",
+      "summary": "SAM 权限系统案例适合理解多租户与 RBAC 的工程组织。",
+      "currency_note": "特定业务的权限模型不能直接作为其他系统的安全保证。",
+      "reading_advice": "先列出资源与授权边界，再验证越权和租户隔离。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/有赞权限系统(SAM).html",
+          "title": "有赞权限系统(SAM)",
+          "sha256": "644d3a65db1a3fd22442ada4fc0b47d479c1682dad91efdbb7011950415df6a9"
+        }
+      ]
+    },
+    {
+      "path": "/articles/有赞零售中台建设方法的探索与实践.html",
+      "title": "有赞零售中台建设方法的探索与实践",
+      "recommendation": "selective",
+      "currency": "contextual",
+      "summary": "零售中台案例适合了解能力复用与组织协作的思路。",
+      "currency_note": "建设收益依赖业务相似度和团队规模，中台并非通用答案。",
+      "reading_advice": "从具体重复能力出发，比较抽象成本与实际复用收益。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/有赞零售中台建设方法的探索与实践.html",
+          "title": "有赞零售中台建设方法的探索与实践",
+          "sha256": "3224e4450abf6dd2faabf34dcbd5f3499313d6c500618c6203c007bbe62d6bb8"
+        }
+      ]
+    },
+    {
+      "path": "/articles/服务注册与发现原理剖析（Eureka、Zookeeper、Nacos）.html",
+      "title": "服务注册与发现原理剖析（Eureka、Zookeeper、Nacos）",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "注册发现的比较适合建立服务治理基础。",
+      "currency_note": "Eureka、ZooKeeper、Nacos 的版本、部署模式与支持状态需另查。",
+      "reading_advice": "按故障时的发现行为和一致性需求选型，不只看功能清单。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/服务注册与发现原理剖析（Eureka、Zookeeper、Nacos）.html",
+          "title": "服务注册与发现原理剖析（Eureka、Zookeeper、Nacos）",
+          "sha256": "5571672714df74b83bec10d50c6897fe123faa621c368c4d19aeaaa83ba001a3"
+        }
+      ]
+    },
+    {
+      "path": "/articles/深入浅出Cache.html",
+      "title": "深入浅出Cache",
+      "recommendation": "recommended",
+      "currency": "contextual",
+      "summary": "缓存层次与访问模式仍值得读，适合理解为什么需要缓存。",
+      "currency_note": "Web 2.0 架构案例具有历史语境，不能直接代表现代系统配置。",
+      "reading_advice": "保留命中、失效与一致性的分析，按自身负载重新设计。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/深入浅出Cache.html",
+          "title": "深入浅出Cache",
+          "sha256": "4a9d1e0176cd6cf3d0ad1ac744c2d3d271417344677f86dea41985de5b93fc65"
+        }
+      ]
+    },
+    {
+      "path": "/articles/深入理解 MySQL 底层实现.html",
+      "title": "深入理解 MySQL 底层实现",
+      "recommendation": "selective",
+      "currency": "dated",
+      "summary": "可作了解旧 InnoDB 存储实现的背景读物。",
+      "currency_note": "开头的旧文件布局不能代表 MySQL 8 事务型数据字典，术语也需仔细核对。",
+      "reading_advice": "先分清版本，再与官方数据字典和存储说明交叉阅读。",
+      "reference_ids": [
+        "mysql_dictionary"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/深入理解 MySQL 底层实现.html",
+          "title": "深入理解 MySQL 底层实现",
+          "sha256": "b1aaf7894557ea18e770958002110fc7d8ea0a906778228c8b3dec446ca51e6c"
+        }
+      ]
+    },
+    {
+      "path": "/articles/漫画讲解 git rebase VS git merge.html",
+      "title": "漫画讲解 git rebase VS git merge",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "图示适合理解 rebase 与 merge 对提交历史的不同影响。",
+      "currency_note": "基本语义稳定，但示例不涵盖所有协作冲突与恢复场景。",
+      "reading_advice": "先在临时分支练习；重写已共享历史前遵循团队约定。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/漫画讲解 git rebase VS git merge.html",
+          "title": "漫画讲解 git rebase VS git merge",
+          "sha256": "455b91e2ad3537ed7984bdf4c255d2077b56209fd0f12d6157a48ed2a3c51c4e"
+        }
+      ]
+    },
+    {
+      "path": "/articles/生成浏览器唯一稳定 ID 的探索.html",
+      "title": "生成浏览器唯一稳定 ID 的探索",
+      "recommendation": "selective",
+      "currency": "contextual",
+      "summary": "适合了解浏览器标识方案的探索过程与局限。",
+      "currency_note": "“唯一稳定”不能作为可靠保证，隐私限制、清理数据和跨设备会改变结果。",
+      "reading_advice": "将标识视为有误差的辅助信号，不用它单独承担身份认证。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/生成浏览器唯一稳定 ID 的探索.html",
+          "title": "生成浏览器唯一稳定 ID 的探索",
+          "sha256": "aeea83d3008ea2c0291064df6f459f88e8c2e00c11c67c8cc9ff5903f86f8d4a"
+        }
+      ]
+    },
+    {
+      "path": "/articles/缓存 如何保证缓存与数据库的双写一致性？.html",
+      "title": "缓存 如何保证缓存与数据库的双写一致性？",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "双写时序的分析适合学习缓存与数据库为何难以保持一致。",
+      "currency_note": "常见修复策略都有失败窗口，不能将延迟删除等技巧视为严格保证。",
+      "reading_advice": "画出并发与故障时序，按允许的不一致窗口选择方案。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/缓存 如何保证缓存与数据库的双写一致性？.html",
+          "title": "缓存 如何保证缓存与数据库的双写一致性？",
+          "sha256": "d2a9cb7a80c8c03473b82bcd3d8ab48f6ee159b9bb99151395175879ba0db562"
+        }
+      ]
+    },
+    {
+      "path": "/articles/网易严选怎么做全链路监控的？.html",
+      "title": "网易严选怎么做全链路监控的？",
+      "recommendation": "selective",
+      "currency": "contextual",
+      "summary": "2018—2019 年的全链路监控案例适合学习组织监控信息的方法。",
+      "currency_note": "具体平台和接入方式具有时代背景。",
+      "reading_advice": "借鉴关联与排障思路，接入层参考当前 OpenTelemetry 体系。",
+      "reference_ids": [
+        "otel"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/网易严选怎么做全链路监控的？.html",
+          "title": "网易严选怎么做全链路监控的？",
+          "sha256": "d07ed8edcb4815080b0ea5d39dacf1279ff0cf08675d3491462900d18267d0a3"
+        }
+      ]
+    },
+    {
+      "path": "/articles/美团万亿级 KV 存储架构与实践.html",
+      "title": "美团万亿级 KV 存储架构与实践",
+      "recommendation": "recommended",
+      "currency": "contextual",
+      "summary": "美团大规模 KV 案例适合研究分层、扩展与可靠性取舍。",
+      "currency_note": "历史演讲的规模和成本条件不代表当前产品能力。",
+      "reading_advice": "关注工作负载与设计原因，不按“万亿级”标签直接复制架构。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/美团万亿级 KV 存储架构与实践.html",
+          "title": "美团万亿级 KV 存储架构与实践",
+          "sha256": "3a4888efbded7e272d78f659ec317176fd9d3e51b0f2717e4945b35d0d374d20"
+        }
+      ]
+    },
+    {
+      "path": "/articles/美团点评Kubernetes集群管理实践.html",
+      "title": "美团点评Kubernetes集群管理实践",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "Kubernetes 集群管理案例适合了解平台化运维的工程问题。",
+      "currency_note": "资源 API、组件与管理策略需与当前集群版本对照。",
+      "reading_advice": "提炼多集群与故障管理需求，再核对弃用 API 和安全配置。",
+      "reference_ids": [
+        "kubernetes"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/美团点评Kubernetes集群管理实践.html",
+          "title": "美团点评Kubernetes集群管理实践",
+          "sha256": "204f1349f85af21e5dc380573d17b1298890fcf24d4bbfcb1c74aba4aaea2228"
+        }
+      ]
+    },
+    {
+      "path": "/articles/美团百亿规模API网关服务Shepherd的设计与实现.html",
+      "title": "美团百亿规模API网关服务Shepherd的设计与实现",
+      "recommendation": "recommended",
+      "currency": "contextual",
+      "summary": "API 网关案例适合理解路由、治理与高流量入口的职责边界。",
+      "currency_note": "美团的规模和基础设施条件不能直接迁移到普通团队。",
+      "reading_advice": "先界定网关与业务职责，再验证延迟、隔离与降级策略。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/美团百亿规模API网关服务Shepherd的设计与实现.html",
+          "title": "美团百亿规模API网关服务Shepherd的设计与实现",
+          "sha256": "e780caacb3e567f9b089a0245848d15ccb958278329fe97e9f9b63ed510b7708"
+        }
+      ]
+    },
+    {
+      "path": "/articles/解读《阿里巴巴 Java 开发手册》背后的思考.html",
+      "title": "解读《阿里巴巴 Java 开发手册》背后的思考",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "解释规范背后的动机比单纯背规则更有价值，适合团队代码评审。",
+      "currency_note": "部分约定依赖语言和工具版本，规范也不是所有场景的绝对规则。",
+      "reading_advice": "用可读性、正确性与维护成本判断规则适用范围。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/解读《阿里巴巴 Java 开发手册》背后的思考.html",
+          "title": "解读《阿里巴巴 Java 开发手册》背后的思考",
+          "sha256": "716cf44ea67bd19889d1411723d23b32532040afc8da6a587c0545c38e2f98a0"
+        }
+      ]
+    },
+    {
+      "path": "/articles/认识 MySQL 和 Redis 的数据一致性问题.html",
+      "title": "认识 MySQL 和 Redis 的数据一致性问题",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "适合进一步区分缓存读写与数据库一致性目标。",
+      "currency_note": "一致性策略的保证依赖时序、失败和业务容忍度。",
+      "reading_advice": "先写出不变量与允许的陈旧时间，再决定更新与补偿方式。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/认识 MySQL 和 Redis 的数据一致性问题.html",
+          "title": "认识 MySQL 和 Redis 的数据一致性问题",
+          "sha256": "c01d6a9e069d5eb63df78f1b0688bcabb7bcaec7a5b4ee69f4436fd6b85c63e7"
+        }
+      ]
+    },
+    {
+      "path": "/articles/进阶：Dockerfile 高阶使用指南及镜像优化.html",
+      "title": "进阶：Dockerfile 高阶使用指南及镜像优化",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "BuildKit 与镜像优化适合已有 Docker 基础的人提升构建效率。",
+      "currency_note": "特性需要匹配构建器版本，缓存收益也取决于上下文与依赖变化。",
+      "reading_advice": "用实际项目测量缓存命中与镜像体积，检查构建秘密的处理。",
+      "reference_ids": [
+        "docker"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/进阶：Dockerfile 高阶使用指南及镜像优化.html",
+          "title": "进阶：Dockerfile 高阶使用指南及镜像优化",
+          "sha256": "ae466075d8f57c5d8d14a7362941ea0c7118c2eafc2a49eb1bec7f5523e704e4"
+        }
+      ]
+    },
+    {
+      "path": "/articles/铁总在用的高性能分布式缓存计算框架 Geode.html",
+      "title": "铁总在用的高性能分布式缓存计算框架 Geode",
+      "recommendation": "selective",
+      "currency": "contextual",
+      "summary": "Geode 的缓存与计算设计适合了解另一种分布式数据平台。",
+      "currency_note": "“铁总在用”等案例标签不能证明当前适用性，本轮未核验项目维护状态。",
+      "reading_advice": "有相关需求再研究，另核对维护、安全与运维成本。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/铁总在用的高性能分布式缓存计算框架 Geode.html",
+          "title": "铁总在用的高性能分布式缓存计算框架 Geode",
+          "sha256": "eddaa59a397d40e2e651e79d866d7f1333b6b1e0d21eab4311fc4490423f7b1b"
+        }
+      ]
+    },
+    {
+      "path": "/articles/阿里云PolarDB及其共享存储PolarFS技术实现分析（上）.html",
+      "title": "阿里云PolarDB及其共享存储PolarFS技术实现分析（上）",
+      "recommendation": "recommended",
+      "currency": "contextual",
+      "summary": "PolarDB 与共享存储的分析适合理解计算存储分离的设计动机。",
+      "currency_note": "这是历史技术分析，不能当作当前云产品内部实现或 SLA。",
+      "reading_advice": "关注复制、共享与故障恢复的取舍，产品能力另查当前说明。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/阿里云PolarDB及其共享存储PolarFS技术实现分析（上）.html",
+          "title": "阿里云PolarDB及其共享存储PolarFS技术实现分析（上）",
+          "sha256": "92ed7c8750beca1a0933117995b093cabb1e38e7ba8b80977448ec02e4e59182"
+        }
+      ]
+    },
+    {
+      "path": "/articles/阿里云PolarDB及其共享存储PolarFS技术实现分析（下）.html",
+      "title": "阿里云PolarDB及其共享存储PolarFS技术实现分析（下）",
+      "recommendation": "recommended",
+      "currency": "contextual",
+      "summary": "承接共享存储的技术分析，适合对数据库架构感兴趣的读者。",
+      "currency_note": "实现细节与性能数字有时间和环境边界。",
+      "reading_advice": "与上篇连读，区分公开机制、作者分析和产品当前能力。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/阿里云PolarDB及其共享存储PolarFS技术实现分析（下）.html",
+          "title": "阿里云PolarDB及其共享存储PolarFS技术实现分析（下）",
+          "sha256": "7192141429447fbd1767f7efc6233431197116df26637398ed0363ed6e2b12d0"
+        }
+      ]
+    },
+    {
+      "path": "/articles/面试最常被问的 Java 后端题.html",
+      "title": "面试最常被问的 Java 后端题",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "适合面试前快速检查 Java 后端知识覆盖面。",
+      "currency_note": "题库侧重点与技术版本会变化，背答案不能证明实际工程能力。",
+      "reading_advice": "把薄弱点变成实验与项目表达，核对版本敏感结论。",
+      "reference_ids": [
+        "jvm",
+        "spring"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/面试最常被问的 Java 后端题.html",
+          "title": "面试最常被问的 Java 后端题",
+          "sha256": "9884ce7ff301ebfbff5ca13b205df43bf1dbe6f057c02b929d8b8e033c5e3480"
+        }
+      ]
+    },
+    {
+      "path": "/articles/领域驱动设计在互联网业务开发中的实践.html",
+      "title": "领域驱动设计在互联网业务开发中的实践",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "互联网业务中的 DDD 案例适合将领域语言连接到工程实现。",
+      "currency_note": "建模思想耐用，但案例划分依赖特定业务。",
+      "reading_advice": "先理解业务不变量，再比较聚合与服务边界。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/领域驱动设计在互联网业务开发中的实践.html",
+          "title": "领域驱动设计在互联网业务开发中的实践",
+          "sha256": "388c383619d09250ee0854f4a241a41cfc6da2b5ba9dc27619c703820e7b95c7"
+        }
+      ]
+    },
+    {
+      "path": "/articles/领域驱动设计的菱形对称架构.html",
+      "title": "领域驱动设计的菱形对称架构",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "菱形对称架构提供了讨论依赖方向与业务边界的一种视角。",
+      "currency_note": "架构模式不是必须遵循的目录规范，额外层次也有成本。",
+      "reading_advice": "用真实变化场景验证隔离收益，再决定是否采用。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/articles/领域驱动设计的菱形对称架构.html",
+          "title": "领域驱动设计的菱形对称架构",
+          "sha256": "45f8b566bac721364cbc13a85c7fe7d85bc991ec781861e9a6d8d8ae5891417d"
+        }
+      ]
+    },
+    {
+      "path": "/articles/高效构建 Docker 镜像的最佳实践.html",
+      "title": "高效构建 Docker 镜像的最佳实践",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "镜像分层、缓存与构建组织适合改善日常 Docker 流程。",
+      "currency_note": "工具行为与构建功能在演进，旧示例需和 BuildKit 对照。",
+      "reading_advice": "测量重建时间与产物大小，检查缓存、可重复性及敏感文件。",
+      "reference_ids": [
+        "docker"
+      ],
+      "evidence": [
+        {
+          "path": "/articles/高效构建 Docker 镜像的最佳实践.html",
+          "title": "高效构建 Docker 镜像的最佳实践",
+          "sha256": "69b7ad600f918ebc56c70961129da3d20fa85ede7d1b0ad91909c698dcd7b11c"
+        }
+      ]
+    },
+    {
+      "path": "/geektime/Java基础36讲.html",
+      "title": "Java基础36讲",
+      "recommendation": "selective",
+      "currency": "mixed",
+      "summary": "长页面收录 Java 基础问答，适合搜索定位与离线连续阅读。",
+      "currency_note": "与专栏页内容重叠，JDK 和 GC 相关答案需按当前运行时复核。",
+      "reading_advice": "无需与同名专栏重复通读，按薄弱主题选择章节。",
+      "reference_ids": [
+        "jvm",
+        "java_threads"
+      ],
+      "evidence": [
+        {
+          "path": "/geektime/Java基础36讲.html",
+          "title": "Java基础36讲",
+          "sha256": "9e02c810f9c2d335b7331d2170718882cb55eb57b70fd7ab33ed63b5b8c5d1cc"
+        }
+      ]
+    },
+    {
+      "path": "/geektime/Java错误示例100讲.html",
+      "title": "Java错误示例100讲",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "错误案例合集适合查找 Java 业务中常见的锁、缓存与框架问题。",
+      "currency_note": "长页面不是更新版本，行为仍取决于案例使用的依赖。",
+      "reading_advice": "按实际问题搜索，复现触发条件后再采用修复方案。",
+      "reference_ids": [
+        "spring"
+      ],
+      "evidence": [
+        {
+          "path": "/geektime/Java错误示例100讲.html",
+          "title": "Java错误示例100讲",
+          "sha256": "0397311f3e2ebdc126dd895c67b610f10cb6a9db171c98ec2ff080821afcb459"
+        }
+      ]
+    },
+    {
+      "path": "/geektime/Linux性能优化.html",
+      "title": "Linux性能优化",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "Linux 性能合集便于连续学习 CPU、内存和 I/O 的诊断路径。",
+      "currency_note": "命令输出与容器、内核环境可能不同，方法比截图耐用。",
+      "reading_advice": "按一个完整故障场景练习，用相互印证的指标定位。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/geektime/Linux性能优化.html",
+          "title": "Linux性能优化",
+          "sha256": "c13ddd512b80a71df9446dd1d627088b3d250b3c220e957a499b36432d84cb81"
+        }
+      ]
+    },
+    {
+      "path": "/geektime/MySQL实战45讲.html",
+      "title": "MySQL实战45讲",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "MySQL 经典机制合集适合检索索引、事务与日志问题。",
+      "currency_note": "与专栏重叠，旧版本参数和优化器行为仍需更新核对。",
+      "reading_advice": "以目标版本做 SQL 实验，不把旧案例耗时直接当结论。",
+      "reference_ids": [
+        "mysql"
+      ],
+      "evidence": [
+        {
+          "path": "/geektime/MySQL实战45讲.html",
+          "title": "MySQL实战45讲",
+          "sha256": "26e72005fdd27690ac18223d2da49a2095423e2b5163e34bfea627b99d922df2"
+        }
+      ]
+    },
+    {
+      "path": "/geektime/从0开始学微服务.html",
+      "title": "从0开始学微服务",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "微服务合集适合梳理 RPC、治理与故障隔离的基本问题。",
+      "currency_note": "技术栈与组织背景有时间性，不能据此直接选择当前组件。",
+      "reading_advice": "按业务边界与故障需求阅读，再评估拆分成本。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/geektime/从0开始学微服务.html",
+          "title": "从0开始学微服务",
+          "sha256": "a28baac1d73340cae0c7a81d9cebf089520c44fea33bd9e7af9fea88f4ca3ea2"
+        }
+      ]
+    },
+    {
+      "path": "/geektime/代码精进之路.html",
+      "title": "代码精进之路",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "代码质量合集适合集中学习可读性、错误处理与设计改进。",
+      "currency_note": "原则比较稳定，但需要结合代码上下文判断。",
+      "reading_advice": "选真实代码做小步重构并验证行为，避免为形式增加复杂度。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/geektime/代码精进之路.html",
+          "title": "代码精进之路",
+          "sha256": "c3db3f798c9b42b02164842e54723665477b9505e8e98083a06c4fb96684aee1"
+        }
+      ]
+    },
+    {
+      "path": "/geektime/持续交付36讲.html",
+      "title": "持续交付36讲",
+      "recommendation": "recommended",
+      "currency": "mixed",
+      "summary": "持续交付合集适合梳理自动化与小步发布的整体过程。",
+      "currency_note": "工具示例与部署方式需更新，核心反馈与恢复思想仍有价值。",
+      "reading_advice": "优先落实可重复构建、发布验证和回滚，再逐步扩展流水线。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/geektime/持续交付36讲.html",
+          "title": "持续交付36讲",
+          "sha256": "5af1cd847c048a16035add6c874be5331fcd4a3e971c66cb8d797d29b7ed52e6"
+        }
+      ]
+    },
+    {
+      "path": "/geektime/程序员进阶攻略.html",
+      "title": "程序员进阶攻略",
+      "recommendation": "recommended",
+      "currency": "contextual",
+      "summary": "成长与沟通合集适合在职业阶段转换时查阅。",
+      "currency_note": "个人经验有环境背景，不是统一晋升或求职承诺。",
+      "reading_advice": "围绕自己的目标选择章节，将建议转成可检验的行动。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/geektime/程序员进阶攻略.html",
+          "title": "程序员进阶攻略",
+          "sha256": "79fab876ecd0d343a1112c51183e5b480555246aac5ed0d346de06cdeb98564f"
+        }
+      ]
+    },
+    {
+      "path": "/geektime/趣谈网络协议.html",
+      "title": "趣谈网络协议",
+      "recommendation": "recommended",
+      "currency": "stable",
+      "summary": "网络协议合集便于连贯阅读和全文检索，适合补全网络图景。",
+      "currency_note": "基础机制耐用，云产品和新协议能力需另补。",
+      "reading_advice": "结合抓包实践理解，避免只记类比而忽略协议边界。",
+      "reference_ids": [],
+      "evidence": [
+        {
+          "path": "/geektime/趣谈网络协议.html",
+          "title": "趣谈网络协议",
+          "sha256": "ea82ea10b17eb1f84a879b22f49a1bd0c26dadd8232448648d679e03d604f056"
+        }
+      ]
+    }
+  ]
+}

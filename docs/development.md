@@ -46,6 +46,39 @@
 
 维护后运行 `python scripts/build_home.py`。核对表原件副本保存在 `data/reviews/`，元数据与浏览器的个人阅读记录无关。
 
+## 阅读点评
+
+两份公开静态 JSON 独立维护，不写入文章正文或作者资料：
+
+- `static/reviews/courses.json`：技术专栏点评，按专栏入口路径关联。
+- `static/reviews/articles.json`：技术文章点评，包含单篇文章和长页面合集；旧 `geektime/index.html` 入口共用它。
+
+目录页通过 `static/reviews.js` 加载对应 JSON；悬停卡片或条目、键盘聚焦、点击“阅读点评”均可查看自定义浮层。手机点击按钮查看，标题链接仍直接进入阅读。Escape、关闭按钮、点击外部或页面滚动可关闭。加载失败时可重试，不阻断阅读。
+
+| 字段 | 维护规则 |
+| --- | --- |
+| `schema_version`、`kind` | 当前为 `1`；分类为 `courses` 或 `articles` |
+| `reviewed_at`、`reviewer`、`methodology` | 点评日期、署名及实际审阅范围；不能把摘样写成全文审计 |
+| `entries[].path`、`title` | 使用以 `/` 开头、未百分号编码的实际 HTML 路径及原目录标题；路径是关联键 |
+| `recommendation` | `recommended` 值得阅读、`selective` 按需阅读、`reference` 历史参考、`uncertain` 待核验 |
+| `currency` | `stable` 原理为主、`mixed` 部分需更新、`dated` 实操偏旧、`contextual` 时代背景、`unknown` 待核验 |
+| `summary`、`currency_note`、`reading_advice` | 阅读价值、时效判断、阅读建议，均为纯文本 |
+| `evidence` | 实际参考的站内正文路径、标题与正文区域 SHA-256；不包含导航和页脚 |
+| `reference_ids`、`references` | 条目引用的官方资料及核对日期；只支持 HTTPS 外部链接 |
+
+初版为 AI 辅助编辑判断，结合目录和正文摘样，部分版本敏感主题对照官方资料。没有逐章精读、逐图核验或逐段运行代码；《MySQL 故障诊断：如何在日志中轻松定位大事务》和《大数据算法——布隆过滤器》的本地页面仅有标题、正文为空，保留待核验状态。评级不是原作者观点，也不只按出版年份判定过时。
+
+**仅修改点评文案时不需要 Python，也不需要重新生成 HTML**，直接更新并部署 JSON 即可。浏览器使用 `cache: no-cache` 进行缓存再验证；若使用 CDN，发布后还需按自己的缓存策略刷新。已有页面保留本次载入数据，刷新页面后读取修改。Docker 将文件打入镜像，因此采用镜像部署时才需重新构建镜像。
+
+增删内容后同步补齐点评；修改正文后需重新审阅相关点评，再更新正文证据哈希。不要为了消除校验错误而直接批量改哈希。维护后可运行：
+
+```powershell
+python scripts/build_home.py
+python scripts/verify_reviews.py --project .
+```
+
+校验会检查完整覆盖、路径和标题匹配、证据归属、正文哈希、引用完整性及目录页关联。它不会代替人工判断点评是否正确，也不会在线重新核查资料。
+
 ## 完整重建
 
 仅当需要重新从原始仓库整理内容时使用以下流程。通常调整 UI、资料和阅读功能不需要执行。

@@ -29,7 +29,7 @@
   const empty = main.querySelector('#collection-empty');
   const items = Array.from(main.querySelectorAll('[data-browse-item]'));
   const groups = Array.from(main.querySelectorAll('section[data-browse-group]'));
-  const searchableItems = items.map(item => ({item, text: item.textContent.toLocaleLowerCase()}));
+  const searchableItems = items.map(item => ({item, text: (item.querySelector('.article-title') || item).textContent.toLocaleLowerCase()}));
   const canSearch = search && resultCount && empty;
 
   function filterCollection(updateAddress = false) {

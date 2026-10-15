@@ -124,13 +124,15 @@ def overview_content(courses, metadata, rows, pdfs):
     return '<section class="overview-section" aria-labelledby="overview-title"><div class="section-heading"><h2 id="overview-title">浏览书库</h2><p>选择一类内容，开始今天的阅读。</p></div><div class="overview-grid">' + ''.join(cards) + '</div></section>'
 
 
-def article_list(rows):
+def article_list(rows, reviews=False):
     """输出直接指向既有文章的列表，原文路径保持不变。"""
     items = []
     for number, row in enumerate(rows, 1):
         title = html.escape(PurePosixPath(row['source_path']).name.removesuffix('.md'))
         url = '/' + quote(row['target'], safe='/')
-        items.append(f'<li data-browse-item><a href="{url}"><span class="article-index">{number:02d}</span><span class="article-title">{title}</span><span class="article-arrow" aria-hidden="true">→</span></a></li>')
+        review_key = f' data-review-key="{html.escape("/" + row["target"], quote=True)}"' if reviews else ''
+        review_button = f'<button class="review-trigger" type="button" hidden aria-label="阅读点评：{title}" aria-haspopup="dialog" aria-expanded="false" aria-controls="reading-review">阅读点评</button>' if reviews else ''
+        items.append(f'<li data-browse-item{review_key}><a href="{url}"><span class="article-index">{number:02d}</span><span class="article-title">{title}</span></a>{review_button}</li>')
     return '<ul class="article-list">' + ''.join(items) + '</ul>'
 
 
@@ -146,8 +148,8 @@ def build_collections(project, rows, pdfs):
     technical = [row for row in rows if row['source_path'].startswith('文章/')]
     collections = [row for row in rows if row['source_path'].startswith('极客时间/')]
     life = [row for row in rows if row['source_path'].startswith('恋爱必修课/')]
-    groups = '<section data-browse-group><h2>单篇文章</h2>' + article_list(technical) + '</section>'
-    groups += '<section data-browse-group id="collections"><h2>专栏合集</h2><p class="collection-description">以下内容以一个长页面收录，可连续阅读。</p>' + article_list(collections) + '</section>'
+    groups = '<section data-browse-group><h2>单篇文章</h2>' + article_list(technical, reviews=True) + '</section>'
+    groups += '<section data-browse-group id="collections"><h2>专栏合集</h2><p class="collection-description">以下内容以一个长页面收录，可连续阅读。</p>' + article_list(collections, reviews=True) + '</section>'
     body = collection_content('技术文章', len(technical) + len(collections), f'{len(technical)} 篇独立文章，另收录 {len(collections)} 份专栏合集。', groups)
     technical_page = render_browse_page('技术文章', body, 'articles')
     for target in ['articles/index.html', 'geektime/index.html']:
@@ -159,7 +161,7 @@ def build_collections(project, rows, pdfs):
         title = html.escape(PurePosixPath(row['key']).name.removesuffix('.pdf'))
         url = '/' + quote(row['target'], safe='/')
         size = f'{row["size"] / 1024 / 1024:.1f} MB'
-        pdf_items.append(f'<li data-browse-item><a href="{url}" target="_blank" rel="noopener" title="在新标签页打开 PDF"><span class="article-index">{number:02d}</span><span class="article-title">{title}<small class="file-meta">PDF · {size}</small></span><span class="article-arrow" aria-hidden="true">↗</span></a></li>')
+        pdf_items.append(f'<li data-browse-item><a href="{url}" target="_blank" rel="noopener" title="在新标签页打开 PDF"><span class="article-index">{number:02d}</span><span class="article-title">{title}<small class="file-meta">PDF · {size}</small></span></a></li>')
     body = collection_content('PDF 书籍', len(pdfs), '点击书籍在新标签页打开 PDF，也可使用浏览器保存到本地。', '<section data-browse-group><ul class="article-list">' + ''.join(pdf_items) + '</ul></section>', '份 PDF')
     write_page(project, 'downloads/index.html', render_browse_page('PDF 书籍', body, 'pdf'))
 

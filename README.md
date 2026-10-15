@@ -49,6 +49,8 @@ git lfs fsck
 
 **以后更新网站：直接替换发布目录中的相应静态文件，不需要打包镜像。** 如果改的是作者 JSON 或页面模板，先按第三部分在开发电脑上生成 HTML，再上传生成结果。
 
+专栏与技术文章目录支持悬停、键盘聚焦或点击“阅读点评”，查看阅读价值、时效判断与阅读建议。点评分别保存在 `static/reviews/courses.json`、`static/reviews/articles.json`，随 `static/` 一起部署。**只改点评 JSON 无需 Python 或重新生成页面**；初版基于内容摘样与部分官方资料核对，审阅范围和依据可在浮层内展开查看。字段说明见[开发与维护](docs/development.md#阅读点评)。
+
 ## 二、Docker 打包部署
 
 此方式将 Nginx 和网站静态文件装在同一个镜像里。构建镜像和运行容器都不需要 Python；Windows 上使用 Docker Desktop 的 Linux 容器模式。
@@ -118,6 +120,7 @@ python -m pip install -r requirements.txt
 | 共用页头、导航、阅读页外壳 | `scripts/ui_common.py` | 运行 `python scripts/refresh_layout.py` |
 | 字体、颜色、间距等样式 | `static/` 中相应 CSS | 不需要 Python，刷新预览或发布修改后的 CSS |
 | 搜索、排序、最近阅读交互 | `static/` 中相应 JavaScript | 不需要 Python，刷新预览或发布修改后的 JavaScript |
+| 阅读点评 | `static/reviews/courses.json`、`static/reviews/articles.json` | 不需要 Python，发布 JSON 后刷新页面；可用 `python scripts/verify_reviews.py` 做离线校验 |
 
 `build_home.py` 更新首页、技术专栏目录、文章目录、PDF 目录和资料来源页，不重新转换文章正文。不要只修改生成后的卡片 HTML，否则下次生成时会被 JSON 和模板覆盖。
 
@@ -171,7 +174,8 @@ lianglianglee-library/
 ├─ relationships/             生活文章 HTML 与目录
 ├─ downloads/                 PDF 文件和下载页；PDF 通过 Git LFS 随仓库保存
 ├─ assets/                    文章图片与附件；通过 Git LFS 随仓库保存
-├─ static/                    CSS、JavaScript，包括搜索、排序、最近阅读
+├─ static/                    CSS、JavaScript，包括搜索、排序、最近阅读与点评浮层
+│  └─ reviews/               两份公开点评 JSON，浏览器直接读取，随网站部署
 ├─ ui/                        首页、专栏列表与最近阅读模板；不是部署必需文件
 ├─ data/                      页面生成、核验、资源恢复所需的维护资料
 │  ├─ course-metadata.json    专栏作者、发布时间、来源等元数据
