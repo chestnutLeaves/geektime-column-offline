@@ -1,6 +1,18 @@
 # 技术阅读库
 
-一个 HTML 静态阅读站，包含技术专栏、技术文章、生活文章、PDF，以及作者与发布时间筛选、搜索和最近阅读功能。
+一个基于 [learn.lianglianglee.com](https://learn.lianglianglee.com/) 内容归档整理的 HTML 静态阅读站，包含技术专栏、技术文章、生活文章和 PDF 书籍。
+
+本项目以以下两个 GitHub 公开备份仓库为基础，合并整理文章与附件，并结合部分源站页面进行核对与补充：
+
+| 来源                                                         | 在本项目中的作用                           |
+| ------------------------------------------------------------ | ------------------------------------------ |
+| [learn.lianglianglee.com](https://learn.lianglianglee.com/)  | 内容源站，用于来源追溯及部分页面核对、补充 |
+| [Yvan0329/lianglianglee](https://github.com/Yvan0329/lianglianglee) | 主要备份仓库，作为内容整理的主体来源       |
+| [xixiwenxuanhe/learn-liangliang](https://github.com/xixiwenxuanhe/learn-liangliang) | 补充备份仓库，用于差异比对和内容、资源补充 |
+
+在这些归档内容的基础上，本项目统一了 HTML 文件格式和目录结构，整理了图片、PDF 与站内链接，并新增统一的阅读界面、分类搜索、作者与发布时间资料、浏览器最近阅读记录，以及专栏和技术文章的阅读点评。
+
+实际采用的上游提交版本记录在 [data/upstream.json](data/upstream.json)，逐项来源保存在内容与资源清单中。当前整理仍有缺失和待核验项，未完成与源站全部内容的一比一在线核验，具体范围见[内容来源与校验](docs/provenance.md)。感谢源站整理者、备份仓库维护者及各位原作者；正文、图片与 PDF 的权利归各自作者或权利人，许可说明见 [NOTICE.md](NOTICE.md)。
 
 **部署只需要 HTML、CSS、JavaScript、图片和 PDF 等静态文件，以及 Nginx 等静态文件服务器。服务器不需要安装 Python、Node.js 或数据库。** Docker 是可选的部署方式；Python 只用于重新生成页面、维护检查和本地预览。
 
@@ -84,13 +96,13 @@ docker image save -o exports/lianglianglee-library.tar lianglianglee-library:loc
 
 在面板中导入镜像包，然后使用 `lianglianglee-library:local` 创建容器，设置：
 
-| 配置 | 值或说明 |
-| --- | --- |
-| 容器端口 | `80`，网站使用 HTTP |
-| 主机端口 | 例如 `8080`，映射为 `8080:80`；选择未占用端口 |
-| 重启策略 | `unless-stopped` |
-| 启动命令 | 使用镜像默认值 |
-| 网站目录挂载 | 不需要，文件已经包含在镜像中 |
+| 配置         | 值或说明                                      |
+| ------------ | --------------------------------------------- |
+| 容器端口     | `80`，网站使用 HTTP                           |
+| 主机端口     | 例如 `8080`，映射为 `8080:80`；选择未占用端口 |
+| 重启策略     | `unless-stopped`                              |
+| 启动命令     | 使用镜像默认值                                |
+| 网站目录挂载 | 不需要，文件已经包含在镜像中                  |
 
 也可以上传镜像包后，在 Linux 终端执行：
 
@@ -113,14 +125,14 @@ docker run -d --name lianglianglee-library --restart unless-stopped -p 8080:80 l
 python -m pip install -r requirements.txt
 ```
 
-| 修改内容 | 修改位置 | 后续操作 |
-| --- | --- | --- |
-| 作者、发布日期、资料来源 | `data/course-metadata.json` | 运行 `python scripts/build_home.py` |
-| 首页、专栏列表与最近阅读模板 | `ui/home.html`、`ui/courses.html`、`ui/recent-reading.html` | 运行 `python scripts/build_home.py` |
-| 共用页头、导航、阅读页外壳 | `scripts/ui_common.py` | 运行 `python scripts/refresh_layout.py` |
-| 字体、颜色、间距等样式 | `static/` 中相应 CSS | 不需要 Python，刷新预览或发布修改后的 CSS |
-| 搜索、排序、最近阅读交互 | `static/` 中相应 JavaScript | 不需要 Python，刷新预览或发布修改后的 JavaScript |
-| 阅读点评 | `static/reviews/courses.json`、`static/reviews/articles.json` | 不需要 Python，发布 JSON 后刷新页面；可用 `python scripts/verify_reviews.py` 做离线校验 |
+| 修改内容                     | 修改位置                                                     | 后续操作                                                     |
+| ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 作者、发布日期、资料来源     | `data/course-metadata.json`                                  | 运行 `python scripts/build_home.py`                          |
+| 首页、专栏列表与最近阅读模板 | `ui/home.html`、`ui/courses.html`、`ui/recent-reading.html`  | 运行 `python scripts/build_home.py`                          |
+| 共用页头、导航、阅读页外壳   | `scripts/ui_common.py`                                       | 运行 `python scripts/refresh_layout.py`                      |
+| 字体、颜色、间距等样式       | `static/` 中相应 CSS                                         | 不需要 Python，刷新预览或发布修改后的 CSS                    |
+| 搜索、排序、最近阅读交互     | `static/` 中相应 JavaScript                                  | 不需要 Python，刷新预览或发布修改后的 JavaScript             |
+| 阅读点评                     | `static/reviews/courses.json`、`static/reviews/articles.json` | 不需要 Python，发布 JSON 后刷新页面；可用 `python scripts/verify_reviews.py` 做离线校验 |
 
 `build_home.py` 更新首页、技术专栏目录、文章目录、PDF 目录和资料来源页，不重新转换文章正文。不要只修改生成后的卡片 HTML，否则下次生成时会被 JSON 和模板覆盖。
 
